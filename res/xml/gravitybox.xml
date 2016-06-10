@@ -202,6 +202,13 @@
                 android:entryValues="@array/ls_bleft_action_values"
                 android:defaultValue="DEFAULT" />
 
+            <com.ceco.marshmallow.gravitybox.preference.AppPickerPreference
+                android:key="pref_lockscreen_bleft_action_custom"
+                android:title="@string/pref_lockscreen_bleft_action_custom_title"
+                android:summary="@string/app_picker_none"
+                forceCustomIcon="true"
+                allowGravityBoxActions="false" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>

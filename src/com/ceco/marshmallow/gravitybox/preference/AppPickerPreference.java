@@ -114,6 +114,8 @@ public class AppPickerPreference extends DialogPreference
     private String mValue;
     private boolean mAllowUnlockAction;
     private boolean mLaunchesFromLockscreen;
+    private boolean mForceCustomIcon;
+    private boolean mAllowGravityBoxActions;
 
     private static LruCache<String, BitmapDrawable> sAppIconCache;
     static {
@@ -194,10 +196,13 @@ public class AppPickerPreference extends DialogPreference
         mPackageManager = mContext.getPackageManager();
         mMode = MODE_APP;
         mAppInfo = new AppInfo();
+        mAllowGravityBoxActions = true;
 
         if (attrs != null) {
             mIconPickerEnabled = attrs.getAttributeBooleanValue(null, "iconPickerEnabled", true);
             mNullItemEnabled = attrs.getAttributeBooleanValue(null, "nullItemEnabled", true);
+            mForceCustomIcon = attrs.getAttributeBooleanValue(null, "forceCustomIcon", false);
+            mAllowGravityBoxActions = attrs.getAttributeBooleanValue(null, "allowGravityBoxActions", true);
         }
 
         setDialogLayoutResource(R.layout.app_picker_preference);
@@ -470,6 +475,10 @@ public class AppPickerPreference extends DialogPreference
                 }
                 for(PackageInfo pi : packages) {
                     if (this.isCancelled()) break;
+                    if (mMode == MODE_SHORTCUT &&
+                            pi.packageName.equals(mContext.getPackageName()) &&
+                                    !mAllowGravityBoxActions)
+                        continue;
                     mainIntent.setPackage(pi.packageName);
                     List<ResolveInfo> activityList = mPackageManager.queryIntentActivities(mainIntent, 0);
                     for(ResolveInfo ri : activityList) {
@@ -616,6 +625,9 @@ public class AppPickerPreference extends DialogPreference
                         mResolveInfo.activityInfo.name);
                 mIntent.setComponent(cn);
                 mIntent.putExtra("mode", MODE_APP);
+                if (mForceCustomIcon) {
+                    mIntent.putExtra("iconResName", "ic_shortcut_help");
+                }
             }
         }
 
@@ -729,7 +741,9 @@ public class AppPickerPreference extends DialogPreference
                 mIntent.putExtra("prefLabel", mAppName);
             }
 
-            if (icon != null) {
+            if (mForceCustomIcon) {
+                mIntent.putExtra("iconResName", "ic_shortcut_help");
+            } else if (icon != null) {
                 mAppIcon = new BitmapDrawable(mResources, icon);
             }
 

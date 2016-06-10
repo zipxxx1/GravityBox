@@ -1780,6 +1780,7 @@
     <string name="pref_lockscreen_bleft_action_title">Bottom-left action</string>
     <string name="ls_bleft_action_default">Default</string>
     <string name="ls_bleft_action_phone">Phone</string>
+    <string name="pref_lockscreen_bleft_action_custom_title">Set bottom-left action</string>
 
     <!-- Lockscreen: Quick unlock PIN length -->
     <string name="pref_lockscreen_pin_length_title">PIN length</string>

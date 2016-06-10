@@ -18,6 +18,7 @@ package com.ceco.marshmallow.gravitybox;
 import com.ceco.marshmallow.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.marshmallow.gravitybox.managers.AppLauncher;
 import com.ceco.marshmallow.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 
@@ -78,7 +79,7 @@ public class ModLockscreen {
 
     private static enum DirectUnlock { OFF, STANDARD, SEE_THROUGH };
     private static enum UnlockPolicy { DEFAULT, NOTIF_NONE, NOTIF_ONGOING };
-    private static enum BottomAction { DEFAULT, PHONE };
+    private static enum BottomAction { DEFAULT, PHONE, CUSTOM };
 
     private static XSharedPreferences mPrefs;
     private static XSharedPreferences mQhPrefs;
@@ -97,6 +98,7 @@ public class ModLockscreen {
     private static TextView mCarrierTextView;
     private static KeyguardStateMonitor mKgMonitor;
     private static LockscreenPinScrambler mPinScrambler;
+    private static AppLauncher.AppInfo mLeftAction;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -113,6 +115,7 @@ public class ModLockscreen {
                  || action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED)) {
                 mPrefs.reload();
                 prepareCustomBackground();
+                prepareLeftAction();
                 if (DEBUG) log("Settings reloaded");
             } else if (action.equals(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED)) {
                 if (DEBUG_KIS) log("ACTION_KEYGUARD_IMAGE_UPDATED received");
@@ -187,6 +190,7 @@ public class ModLockscreen {
 
                     prepareCustomBackground();
                     prepareGestureDetector();
+                    prepareLeftAction();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
@@ -501,6 +505,30 @@ public class ModLockscreen {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                    "updateLeftAffordanceIcon", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mLeftAction != null) {
+                        ImageView v = (ImageView) XposedHelpers.getObjectField(
+                                param.thisObject, "mLeftAffordanceView");
+                        v.setImageDrawable(mLeftAction.getAppIcon());
+                        v.setContentDescription(mLeftAction.getAppName());
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                    "launchLeftAffordance", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mLeftAction != null) {
+                        SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -707,6 +735,20 @@ public class ModLockscreen {
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static void prepareLeftAction() {
+        BottomAction type = BottomAction.valueOf(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION, "DEFAULT"));
+        String action = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM, null);
+        if (type != BottomAction.CUSTOM || action == null || action.isEmpty()) {
+            mLeftAction = null;
+        } else if (SysUiManagers.AppLauncher != null &&
+                (mLeftAction == null || !mLeftAction.getValue().equals(action))) {
+            mLeftAction = SysUiManagers.AppLauncher.createAppInfo();
+            mLeftAction.setSizeDp(32);
+            mLeftAction.initAppInfo(action);
         }
     }
 }
