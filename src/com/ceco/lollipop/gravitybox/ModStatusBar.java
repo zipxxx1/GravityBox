@@ -86,6 +86,7 @@ public class ModStatusBar {
     private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
     public static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
+    private static final String CLASS_KG_AFFORDANCE_HELPER = "com.android.systemui.statusbar.phone.KeyguardAffordanceHelper";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
 
@@ -1105,6 +1106,35 @@ public class ModStatusBar {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if (mDt2sEnabled && mDisablePeek && mGestureDetector != null) {
                             mGestureDetector.onTouchEvent((MotionEvent)param.args[0]);
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+
+            // brightness control in lock screen
+            try {
+                XposedHelpers.findAndHookMethod(notifPanelViewClass, "onTouchEvent",
+                        MotionEvent.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mBrightnessControlEnabled) {
+                            View kgHeader = (View) XposedHelpers.getObjectField(
+                                    param.thisObject, "mKeyguardStatusBar");
+                            if (kgHeader.getVisibility() == View.VISIBLE) {
+                                brightnessControl((MotionEvent) param.args[0]);
+                            }
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(CLASS_KG_AFFORDANCE_HELPER,
+                        classLoader, "onTouchEvent", MotionEvent.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mJustPeeked) {
+                            param.setResult(false);
                         }
                     }
                 });
