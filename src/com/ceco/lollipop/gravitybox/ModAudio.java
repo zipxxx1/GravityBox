@@ -102,12 +102,6 @@ public class ModAudio {
                     mAudioService = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     if (context != null) {
-                        mHandleChangeVolume = new HandleChangeVolume(context);
-                        XposedHelpers.findAndHookMethod(classAudioService, "adjustMasterVolume", 
-                                int.class, int.class, String.class, mHandleChangeVolume);
-                        XposedHelpers.findAndHookMethod(classAudioService, "adjustSuggestedStreamVolume", 
-                                int.class, int.class, int.class, String.class, mHandleChangeVolume);
-
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED);
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_SWAP_KEYS_CHANGED);
@@ -115,6 +109,11 @@ public class ModAudio {
                         intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                         if (DEBUG) log("AudioService constructed. Broadcast receiver registered");
+
+                        mHandleChangeVolume = new HandleChangeVolume(context);
+                        XposedHelpers.findAndHookMethod(classAudioService, "adjustStreamVolume", 
+                                int.class, int.class, int.class, String.class, int.class,
+                                mHandleChangeVolume);
                     }
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS, false)) {
                         XposedHelpers.setIntField(param.thisObject, "mSafeMediaVolumeIndex", 150);
@@ -218,11 +217,11 @@ public class ModAudio {
         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
             if (mSwapVolumeKeys) {
                 try {
-                    if ((Integer) param.args[0] != 0) {
-                        if (DEBUG) log("Original direction = " + param.args[0]);
+                    if ((Integer) param.args[1] != 0) {
+                        if (DEBUG) log("Original direction = " + param.args[1]);
                         int orientation = getDirectionFromOrientation();
-                        param.args[0] = orientation * (Integer) param.args[0];
-                        if (DEBUG) log("Modified direction = " + param.args[0]);
+                        param.args[1] = orientation * (Integer) param.args[1];
+                        if (DEBUG) log("Modified direction = " + param.args[1]);
                     }
                 } catch (Throwable t) {
                     XposedBridge.log(t);
