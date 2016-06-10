@@ -1027,6 +1027,25 @@ public class ModStatusBar {
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }
+
+            // brightness control in lock screen
+            try {
+                XposedHelpers.findAndHookMethod(notifPanelViewClass, "onTouchEvent",
+                        MotionEvent.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mBrightnessControlEnabled) {
+                            View kgHeader = (View) XposedHelpers.getObjectField(
+                                    param.thisObject, "mKeyguardStatusBar");
+                            if (kgHeader.getVisibility() == View.VISIBLE) {
+                                brightnessControl((MotionEvent) param.args[0]);
+                            }
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
         catch (Throwable t) {
             XposedBridge.log(t);
