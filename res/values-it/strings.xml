@@ -1523,4 +1523,31 @@
     <string name="dt_display_mode_dm">Solo con Gestore Download di Android</string>
     <string name="dt_display_mode_pt">Quando viene mostrata una barra di avanzamento nella barra di stato</string>
 
+    <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">Shortcuts</string>
+    <string name="pref_lockscreen_shortcuts_summary">Permette di impostare shortcuts nella schermata di blocco</string>
+
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">Lancio sicuro</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Richiede doppio tap per lanciare i collegamenti
+impedendo di essere avviati accidentalmente.</string>
+
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">Tastierino PIN casuale</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Mescola casualmente i numeri del tastierino di inserimento del PIN.</string>
+
+    <!-- Lockscreen: Quick unlock PIN length -->
+    <string name="pref_lockscreen_pin_length_title">Lunghezza PIN</string>
+    <string name="pref_lockscreen_pin_length_summary">Lo sblocco rapido, per funzionare, necessita di conoscere la lunghezza esatta del PIN</string>
+
+    <!-- Lockscreen: doubletap to sleep -->
+    <string name="pref_lockscreen_dt2s_title">Sospensione doppio tap</string>
+
+    <!-- Lockscreen: Bottom-left action -->
+    <string name="pref_lockscreen_bleft_action_title">Azione bottone sinistra</string>
+    <string name="ls_bleft_action_default">Default</string>
+    <string name="ls_bleft_action_phone">Telefono</string>
+    <string name="pref_lockscreen_bleft_action_custom_title">Imposta azione bottone sinistra</string>
+
+
 </resources>
