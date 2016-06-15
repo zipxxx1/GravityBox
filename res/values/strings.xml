@@ -2006,4 +2006,8 @@
         Use in case your device is identified as running branded system despite it is
         actually running alternate AOSP-based system (requires reboot)</string>
 
+    <!-- Wireless charger plugged sound -->
+    <string name="pref_charger_plugged_sound_wireless_title">Wireless charging sound</string>
+    <string name="stock_wireless_sound">Stock wireless sound</string>
+
 </resources>

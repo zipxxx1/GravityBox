@@ -123,6 +123,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
     public static final String PREF_KEY_BATTERY_CHARGED_SOUND = "pref_battery_charged_sound2";
     public static final String PREF_KEY_CHARGER_PLUGGED_SOUND = "pref_charger_plugged_sound2";
+    public static final String PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS = "pref_charger_plugged_sound_wireless";
     public static final String PREF_KEY_CHARGER_UNPLUGGED_SOUND = "pref_charger_unplugged_sound";
     public static final String ACTION_PREF_BATTERY_SOUND_CHANGED = 
             "gravitybox.intent.action.BATTERY_SOUND_CHANGED";
@@ -917,7 +918,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     private static final List<String> ringToneKeys = new ArrayList<String>(Arrays.asList(
             PREF_KEY_BATTERY_CHARGED_SOUND,
             PREF_KEY_CHARGER_PLUGGED_SOUND,
-            PREF_KEY_CHARGER_UNPLUGGED_SOUND
+            PREF_KEY_CHARGER_UNPLUGGED_SOUND,
+            PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS
     ));
 
     private static final List<String> lockscreenKeys = new ArrayList<String>(Arrays.asList(
@@ -2349,10 +2351,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 RingtonePreference rtPref = (RingtonePreference) findPreference(rtKey);
                 String val = mPrefs.getString(rtKey, null);
                 if (val != null && !val.isEmpty()) {
-                    Uri uri = Uri.parse(val);
-                    Ringtone r = RingtoneManager.getRingtone(getActivity(), uri);
-                    if (r != null) {
-                        rtPref.setSummary(r.getTitle(getActivity()));
+                    if (rtKey.equals(PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS) &&
+                            val.equals("content://settings/system/notification_sound")) {
+                        rtPref.setSummary(R.string.stock_wireless_sound);
+                    } else {
+                        Uri uri = Uri.parse(val);
+                        Ringtone r = RingtoneManager.getRingtone(getActivity(), uri);
+                        if (r != null) {
+                            rtPref.setSummary(r.getTitle(getActivity()));
+                        }
                     }
                 } else {
                     rtPref.setSummary(R.string.lc_notif_sound_none);
@@ -2962,6 +2969,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_CHARGED);
                 intent.putExtra(EXTRA_BATTERY_SOUND_URI,
                         prefs.getString(PREF_KEY_BATTERY_CHARGED_SOUND, ""));
+            } else if (key.equals(PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS)) {
+                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_WIRELESS);
+                intent.putExtra(EXTRA_BATTERY_SOUND_URI, prefs.getString(key, ""));
             } else if (key.equals(PREF_KEY_CHARGER_PLUGGED_SOUND)) {
                 intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_PLUGGED);
