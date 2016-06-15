@@ -1678,6 +1678,14 @@
                 android:defaultValue="" />
 
             <RingtonePreference 
+                android:key="pref_charger_plugged_sound_wireless"
+                android:title="@string/pref_charger_plugged_sound_wireless_title"
+                android:ringtoneType="notification"
+                android:showDefault="true"
+                android:showSilent="true"
+                android:defaultValue="content://settings/system/notification_sound" />
+
+            <RingtonePreference 
                 android:key="pref_charger_unplugged_sound"
                 android:title="@string/pref_charger_unplugged_sound_title"
                 android:ringtoneType="notification"

@@ -16,6 +16,8 @@
 
 package com.ceco.lollipop.gravitybox;
 
+import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +41,7 @@ public class ModPower {
     private static final String TAG = "GB:ModPower";
     private static final String CLASS_PM_SERVICE = "com.android.server.power.PowerManagerService";
     private static final String CLASS_PM_HANDLER = "com.android.server.power.PowerManagerService$PowerManagerHandler";
+    private static final String CLASS_PM_NOTIFIER = "com.android.server.power.Notifier";
     private static final boolean DEBUG = false;
 
     private static final int MSG_WAKE_UP = 100;
@@ -55,6 +58,7 @@ public class ModPower {
     private static boolean mProxSensorCovered;
     private static WakeLock mWakeLock;
     private static boolean mIgnoreIncomingCall;
+    private static boolean mIsWirelessChargingSoundCustom;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -63,13 +67,20 @@ public class ModPower {
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
-                toggleWakeUpWithProximityFeature(intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false));
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL)) {
-                mIgnoreIncomingCall = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL, false);
+            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED)) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
+                    toggleWakeUpWithProximityFeature(intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false));
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL)) {
+                    mIgnoreIncomingCall = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL, false);
+                }
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED) &&
+                    intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1) == 
+                        BatteryInfoManager.SOUND_WIRELESS) {
+                updateIsWirelessChargingSoundCustom(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));
             }
         }
     };
@@ -93,6 +104,7 @@ public class ModPower {
                             GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false));
 
                     IntentFilter intentFilter = new IntentFilter(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                 }
             });
@@ -139,6 +151,27 @@ public class ModPower {
                         unregisterProxSensorListener();
                     } else if (msg.what == MSG_UNREGISTER_PROX_SENSOR_LISTENER) {
                         unregisterProxSensorListener();
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        // Wireless charging sound
+        try {
+            updateIsWirelessChargingSoundCustom(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS, null));
+
+            XposedHelpers.findAndHookMethod(CLASS_PM_NOTIFIER, classLoader,
+                    "playWirelessChargingStartedSound", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mIsWirelessChargingSoundCustom) {
+                        Object suspendBlocker = XposedHelpers.getObjectField(
+                                param.thisObject, "mSuspendBlocker");
+                        XposedHelpers.callMethod(suspendBlocker, "release");
+                        param.setResult(null);
                     }
                 }
             });
@@ -232,4 +265,11 @@ public class ModPower {
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {}
     };
+
+    private static void updateIsWirelessChargingSoundCustom(String value) {
+        mIsWirelessChargingSoundCustom = (value != null &&
+                !value.equals("content://settings/system/notification_sound"));
+        if (DEBUG) log("mIsWirelessChargingSoundCustom: " + mIsWirelessChargingSoundCustom + 
+                " [" + (value != null && value.isEmpty() ? "silent" : value) + "]");
+    }
 }

@@ -2018,4 +2018,8 @@
     <string name="pref_lockscreen_bleft_action_title">Bottom-left action</string>
     <string name="pref_lockscreen_bright_action_title">Bottom-right action</string>
 
+    <!-- Wireless charger plugged sound -->
+    <string name="pref_charger_plugged_sound_wireless_title">Wireless charging sound</string>
+    <string name="stock_wireless_sound">Stock wireless sound</string>
+
 </resources>

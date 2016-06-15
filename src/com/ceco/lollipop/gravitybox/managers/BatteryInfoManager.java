@@ -48,6 +48,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     public static final int SOUND_CHARGED = 0;
     public static final int SOUND_PLUGGED = 1;
     public static final int SOUND_UNPLUGGED = 2;
+    public static final int SOUND_WIRELESS = 3;
 
     public enum LowBatteryWarningPolicy { DEFAULT, NONINTRUSIVE, OFF };
 
@@ -109,7 +110,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         mContext = context;
         mBatteryData = new BatteryData();
         mListeners = new ArrayList<BatteryStatusListener>();
-        mSounds = new Uri[3];
+        mSounds = new Uri[4];
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mBatteryData.isPowerSaving = mPowerManager.isPowerSaveMode();
 
@@ -177,9 +178,9 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
             if (mBatteryData.powerSource != newPowerSource) {
                 if (newPowerSource == 0) {
                     playSound(SOUND_UNPLUGGED);
-                } else if (newPowerSource != BatteryManager.BATTERY_PLUGGED_WIRELESS
-                        && mBatteryData.powerSource == 0) {
-                    playSound(SOUND_PLUGGED);
+                } else if (mBatteryData.powerSource == 0) {
+                    playSound(newPowerSource == BatteryManager.BATTERY_PLUGGED_WIRELESS ?
+                                SOUND_WIRELESS : SOUND_PLUGGED);
                 }
             }
 
@@ -223,7 +224,8 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     public void setSound(int type, String uri) {
         if (type < 0 || type > (mSounds.length-1)) return;
 
-        if (uri == null || uri.isEmpty()) {
+        if (uri == null || uri.isEmpty() || (type == SOUND_WIRELESS && 
+                 uri.equals("content://settings/system/notification_sound"))) {
             mSounds[type] = null;
         } else {
             try {
