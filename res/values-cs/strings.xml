@@ -1735,6 +1735,7 @@
     <string name="pref_lockscreen_bleft_action_title">Levá-dolní akce</string>
     <string name="ls_bleft_action_default">Původní</string>
     <string name="ls_bleft_action_phone">Telefon</string>
+    <string name="pref_lockscreen_bleft_action_custom_title">Nastavit levou-dolní akci</string>
 
     <!-- Lockscreen: Quick unlock PIN length -->
     <string name="pref_lockscreen_pin_length_title">Délka PIN</string>
@@ -1923,5 +1924,15 @@
 
     <!-- Turn off -->
     <string name="turn_off">Vypnout</string>
+
+    <!-- Force AOSP -->
+    <string name="pref_force_aosp_title">Vynutit AOSP</string>
+    <string name="pref_force_aosp_summary">Považuje systém za AOSP. 
+        Použijte v případě pokud GravityBox identifikuje systém s nástavbou výrobce 
+        i přesto, že ve skutečnosti je AOSP.</string>
+
+    <!-- Wireless charger plugged sound -->
+    <string name="pref_charger_plugged_sound_wireless_title">Zvuk bezdrátového nabíjení</string>
+    <string name="stock_wireless_sound">Systémový zvuk bezdrátového nabíjení</string>
 
 </resources>
