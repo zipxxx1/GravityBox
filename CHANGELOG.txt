@@ -1,3 +1,13 @@
+Changelog 6.1.4 - 18/06/2016
+--------------------------------------
+- Lockscreen: Bottom-left action extended to support custom actions
+--- note that only icons from predefined list are supported
+- Statusbar: brightness control extended to work in lock screen
+- Media tweaks: improved reorient volume keys feature (e.g. works with YouTube now)
+- Power tweaks: added option for choosing wireless charging sound
+- Updated Russian translations (thanks to gaich)
+- Updated Italian translations (thanks to Fabb2303)
+
 Changelog 6.1.3 - 03/06/2016
 --------------------------------------
 - About: added option for forcing AOSP device identification
