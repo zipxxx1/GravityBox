@@ -255,6 +255,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_D2TS = "pref_lockscreen_dt2s";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
     public static final String PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE = "pref_lockscreen_pin_sramble";
+    public static final String PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM = "pref_lockscreen_bleft_action_custom";
+    public static final String PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM = "pref_lockscreen_bright_action_custom";
     public static final String ACTION_LOCKSCREEN_SETTINGS_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SETTINGS_CHANGED";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN_SHORTCUTS = "pref_cat_lockscreen_shortcuts";
@@ -947,7 +949,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_D2TS,
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
             PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR,
-            PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE
+            PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE,
+            PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM,
+            PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM
     ));
 
     private static final List<String> headsUpKeys = new ArrayList<String>(Arrays.asList(

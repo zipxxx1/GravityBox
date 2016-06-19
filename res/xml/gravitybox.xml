@@ -169,6 +169,20 @@
                 android:title="@string/pref_lockscreen_carrier_text_title"
                 android:defaultValue="" />
 
+            <com.ceco.lollipop.gravitybox.preference.AppPickerPreference
+                android:key="pref_lockscreen_bleft_action_custom"
+                android:title="@string/pref_lockscreen_bleft_action_title"
+                android:summary="@string/state_default"
+                forceCustomIcon="true"
+                allowGravityBoxActions="false" />
+
+            <com.ceco.lollipop.gravitybox.preference.AppPickerPreference
+                android:key="pref_lockscreen_bright_action_custom"
+                android:title="@string/pref_lockscreen_bright_action_title"
+                android:summary="@string/state_default"
+                forceCustomIcon="true"
+                allowGravityBoxActions="false" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>

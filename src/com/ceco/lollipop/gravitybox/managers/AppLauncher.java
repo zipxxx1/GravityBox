@@ -318,9 +318,11 @@ public class AppLauncher implements BroadcastSubReceiver {
         private int mResId;
         private Intent mIntent;
         private String mPkgName;
+        private int mSizeDp;
 
         public AppInfo(int resId) {
             mResId = resId;
+            mSizeDp = 50;
         }
 
         public int getResId() {
@@ -342,6 +344,10 @@ public class AppLauncher implements BroadcastSubReceiver {
 
         public void setAppIcon(Bitmap b) {
             mAppIcon = new BitmapDrawable(mResources, b);
+        }
+
+        public void setSizeDp(int sizeDp) {
+            mSizeDp = sizeDp;
         }
 
         public String getValue() {
@@ -415,7 +421,7 @@ public class AppLauncher implements BroadcastSubReceiver {
                     mAppName = mIntent.getStringExtra("label");
                 }
                 if (appIcon != null) {
-                    int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, 
+                    int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mSizeDp, 
                             mResources.getDisplayMetrics());
                     Bitmap scaledIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
                     mAppIcon = new BitmapDrawable(mResources, scaledIcon);

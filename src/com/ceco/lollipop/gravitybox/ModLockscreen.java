@@ -18,6 +18,7 @@ package com.ceco.lollipop.gravitybox;
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.lollipop.gravitybox.managers.AppLauncher;
 import com.ceco.lollipop.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
@@ -32,6 +33,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.os.Build;
 import android.os.Handler;
@@ -68,6 +70,7 @@ public class ModLockscreen {
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
     private static final String CLASS_ICC_STATE = "com.android.internal.telephony.IccCardConstants.State";
     private static final String CLASS_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
+    private static final String CLASS_KG_BOTTOM_AREA_VIEW = "com.android.systemui.statusbar.phone.KeyguardBottomAreaView";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
@@ -94,6 +97,10 @@ public class ModLockscreen {
     private static TextView mCarrierTextView;
     private static KeyguardStateMonitor mKgMonitor;
     private static LockscreenPinScrambler mPinScrambler;
+    private static AppLauncher.AppInfo mLeftAction;
+    private static AppLauncher.AppInfo mRightAction;
+    private static Drawable mLeftActionDrawableOrig;
+    private static Drawable mRightActionDrawableOrig;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -110,6 +117,7 @@ public class ModLockscreen {
                  || action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED)) {
                 mPrefs.reload();
                 prepareCustomBackground();
+                prepareBottomActions();
                 if (DEBUG) log("Settings reloaded");
             } else if (action.equals(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED)) {
                 if (DEBUG_KIS) log("ACTION_KEYGUARD_IMAGE_UPDATED received");
@@ -185,6 +193,7 @@ public class ModLockscreen {
 
                     prepareCustomBackground();
                     prepareGestureDetector();
+                    prepareBottomActions();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
@@ -485,6 +494,85 @@ public class ModLockscreen {
                     log("Unexpected carrier text implementation");
                 }
             }
+
+            // bottom actions
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                        "updateCameraVisibility", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        ImageView v = (ImageView) XposedHelpers.getObjectField(
+                                param.thisObject, "mCameraImageView");
+                        if (mRightAction != null) {
+                            v.setVisibility(View.VISIBLE);
+                            if (mRightActionDrawableOrig == null) {
+                                mRightActionDrawableOrig = v.getDrawable();
+                            }
+                            v.setImageDrawable(mRightAction.getAppIcon());
+                            v.setContentDescription(mRightAction.getAppName());
+                        } else if (mRightActionDrawableOrig != null) {
+                            v.setImageDrawable(mRightActionDrawableOrig);
+                            mRightActionDrawableOrig = null;
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                        "updatePhoneVisibility", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        ImageView v = (ImageView) XposedHelpers.getObjectField(
+                                param.thisObject, "mPhoneImageView");
+                        if (mLeftAction != null) {
+                            v.setVisibility(View.VISIBLE);
+                            if (mLeftActionDrawableOrig == null) {
+                                mLeftActionDrawableOrig = v.getDrawable();
+                            }
+                            v.setImageDrawable(mLeftAction.getAppIcon());
+                            v.setContentDescription(mLeftAction.getAppName());
+                        } else if (mLeftActionDrawableOrig != null) {
+                            v.setImageDrawable(mLeftActionDrawableOrig);
+                            mLeftActionDrawableOrig = null;
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                        "onVisibilityChanged", View.class, int.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (param.thisObject == param.args[0] &&
+                                (int)param.args[1] == View.VISIBLE &&
+                                (mLeftAction != null || mLeftActionDrawableOrig != null)) {
+                            XposedHelpers.callMethod(param.thisObject, "updatePhoneVisibility");
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                        "launchCamera", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mRightAction != null) {
+                            SysUiManagers.AppLauncher.startActivity(mContext, mRightAction.getIntent());
+                            param.setResult(null);
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                        "launchPhone", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mLeftAction != null) {
+                            SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
+                            param.setResult(null);
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -676,6 +764,35 @@ public class ModLockscreen {
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static void prepareBottomActions() {
+        prepareLeftAction(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM, null));
+        prepareRightAction(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM, null));
+    }
+
+    private static void prepareLeftAction(String action) {
+        if (action == null || action.isEmpty()) {
+            mLeftAction = null;
+        } else if (SysUiManagers.AppLauncher != null &&
+                (mLeftAction == null || !mLeftAction.getValue().equals(action))) {
+            mLeftAction = SysUiManagers.AppLauncher.createAppInfo();
+            mLeftAction.setSizeDp(32);
+            mLeftAction.initAppInfo(action);
+        }
+    }
+
+    private static void prepareRightAction(String action) {
+        if (action == null || action.isEmpty()) {
+            mRightAction = null;
+        } else if (SysUiManagers.AppLauncher != null &&
+                (mRightAction == null || !mRightAction.getValue().equals(action))) {
+            mRightAction = SysUiManagers.AppLauncher.createAppInfo();
+            mRightAction.setSizeDp(32);
+            mRightAction.initAppInfo(action);
         }
     }
 }
