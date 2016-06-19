@@ -1,3 +1,13 @@
+Changelog 5.4.3 - 19/06/2016
+--------------------------------------
+- Lockscreen: added options for choosing custom bottom actions
+--- note that only icons from predefined list are supported
+- Statusbar: brightness control extended to work in lock screen
+- Media tweaks: improved reorient volume keys feature (e.g. works with YouTube now)
+- Power tweaks: added option for choosing wireless charging sound
+- Fixed Power long-press torch on Motorola devices (Android 5.1 only)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 5.4.2 - 04/06/2016
 --------------------------------------
 - Navigation bar tweaks: 
