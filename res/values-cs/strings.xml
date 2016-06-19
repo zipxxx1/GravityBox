@@ -1935,4 +1935,28 @@
     <!-- Statusbar: Hide vibrate icon -->
     <string name="pref_sb_hide_vibrate_icon_title">Skrýt ikonu režimu vibrace</string>
 
+    <!-- Shortcut: Show toast option -->
+    <string name="shortcut_show_toast">Zobrazit stavovou zprávu</string>
+
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Styl ikony</string>
+    <string name="ncki_icon_style1">6 bodů</string>
+    <string name="ncki_icon_style2">3 body</string>
+    <string name="ncki_icon_style3">Průhledná</string>
+    <string name="ncki_icon_style4">Vlastní</string>
+    <string name="pref_navbar_custom_key_image_title">Nastavit vlastní ikonu</string>
+    <string name="custom_image_success">Vlastní ikona nastavena</string>
+    <string name="custom_image_failure">Nastavení vlastní ikony selhalo</string>
+
+    <!-- Key actions: allow volume rocker wake when music active -->
+    <string name="pref_volume_rocker_wake_allow_music_title">Povolit probuzení během hudby</string>
+
+    <!-- Lockscreen: Bottom-left action -->
+    <string name="pref_lockscreen_bleft_action_title">Levá-dolní akce</string>
+    <string name="pref_lockscreen_bright_action_title">Pravá-dolní akce</string>
+
+    <!-- Wireless charger plugged sound -->
+    <string name="pref_charger_plugged_sound_wireless_title">Zvuk bezdrátového nabíjení</string>
+    <string name="stock_wireless_sound">Systémový zvuk bezdrátového nabíjení</string>
+
 </resources>
