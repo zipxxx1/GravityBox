@@ -684,6 +684,7 @@
     <string name="pref_hwkey_lockscreen_torch_title">锁屏手电筒</string>
     <string name="hwkey_ls_torch_disabled">禁用</string>
     <string name="hwkey_ls_torch_home_longpress">长按主页键</string>
+    <string name="hwkey_ls_torch_power_longpress">长按电源键</string>
     
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">快速设置管理主开关（需要重新启动）</string>
@@ -1999,5 +2000,26 @@
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">显示状态消息</string>
+    
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">图标风格</string>
+    <string name="ncki_icon_style1">6-点</string>
+    <string name="ncki_icon_style2">3-点</string>
+    <string name="ncki_icon_style3">透明</string>
+    <string name="ncki_icon_style4">自定义</string>
+    <string name="pref_navbar_custom_key_image_title">设置自定图像</string>
+    <string name="custom_image_success">设置自定义图像</string>
+    <string name="custom_image_failure">设置自定图像失败</string>
+
+    <!-- Key actions: allow volume rocker wake when music active -->
+    <string name="pref_volume_rocker_wake_allow_music_title">激活的音乐允许唤醒</string>
+
+    <!-- Lockscreen: bottom actions -->
+    <string name="pref_lockscreen_bleft_action_title">左下动作</string>
+    <string name="pref_lockscreen_bright_action_title">右下动作</string>
+
+    <!-- Wireless charger plugged sound -->
+    <string name="pref_charger_plugged_sound_wireless_title">无线充电声音</string>
+    <string name="stock_wireless_sound">原厂声音</string>
 	
 </resources>
