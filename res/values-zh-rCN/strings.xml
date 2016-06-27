@@ -682,6 +682,7 @@
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">音量面板超时</string>
+	<string name="pref_volume_panel_timeout_summary">默认超时为零</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_silent">优先级</string>
@@ -1646,7 +1647,7 @@
     <string name="direct_unlock_see_through">看透</string>
 
     <!-- UNC: Notification visibility -->
-	<string name="pref_cat_lc_visibility_title">可见度</string>
+    <string name="pref_cat_lc_visibility_title">可见度</string>
     <string name="pref_lc_notif_visibility_title">可见性</string>
     <string name="pref_lc_notif_visibility_summary">指定锁屏通知可见性
         适用于"\隐藏敏感通知内容\"锁屏策略已激活</string>
@@ -1779,6 +1780,7 @@
     <string name="pref_lockscreen_bleft_action_title">左下动作</string>
     <string name="ls_bleft_action_default">默认</string>
     <string name="ls_bleft_action_phone">手机</string>
+    <string name="pref_lockscreen_bleft_action_custom_title">设置左下动作</string>
     
     <!-- Lockscreen: Quick unlock PIN length -->
     <string name="pref_lockscreen_pin_length_title">PIN长度</string>
@@ -1971,7 +1973,7 @@
     <string name="shortcut_show_toast">显示状态消息</string>
     
     <!-- Xperia tiles -->
-    <string name="qs_tile_xperia_sync">Xperia自动数据同步</string>
+    <string name="qs_tile_xperia_sync">Xperia数据自动同步</string>
     <string name="qs_tile_xperia_roaming">Xperia数据漫游</string>
     <string name="qs_tile_xperia_nfc">Xperia NFC</string>
     <string name="qs_tile_xperia_lte">Xperia LTE</string>
@@ -1989,13 +1991,23 @@
     <string name="ncki_icon_style3">透明</string>
     <string name="ncki_icon_style4">自定义</string>
     <string name="pref_navbar_custom_key_image_title">设置自定图像</string>
-    <string name="custom_image_success">定义图像设置</string>
+    <string name="custom_image_success">设置自定义图像</string>
     <string name="custom_image_failure">设置自定图像失败</string>
 
     <!-- Key actions: allow volume rocker wake when music active -->
     <string name="pref_volume_rocker_wake_allow_music_title">激活的音乐允许唤醒</string>
 
     <!-- Turn off -->
-    <string name="turn_off">关掉</string>
+    <string name="turn_off">关闭</string>
+    
+    <!-- Force AOSP -->
+    <string name="pref_force_aosp_title">强制AOSP</string>
+    <string name="pref_force_aosp_summary">让系统为AOSP
+        如果使用设备被标识为运行系统的品牌,尽管它是
+        实际运行修改基于AOSP系统(需要重新启动)</string>
+
+    <!-- Wireless charger plugged sound -->
+    <string name="pref_charger_plugged_sound_wireless_title">无线充电声音</string>
+    <string name="stock_wireless_sound">原厂声音</string>
     
 </resources>
