@@ -366,7 +366,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                             Constructor<?> c = hGroup.getClass().getConstructor(
                                     String.class, int[][].class, int[][].class, int[].class,
                                     int.class, int.class, int.class, int.class,
-                                    int.class, int.class, int.class, boolean.class, int[].class,
+                                    int.class, int.class, int.class, boolean.class, int.class,
                                     int[][].class, int[][].class, boolean.class, boolean.class,
                                     int[].class, int[].class, int[].class, int[].class,
                                     int[].class, int[].class, int[].class, int[].class,
@@ -385,7 +385,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                                     XposedHelpers.getIntField(hGroup, "mDataContentDescription"),
                                     sSbHpResId,
                                     XposedHelpers.getBooleanField(hGroup, "mIsWide"),
-                                    new int[] { sQsHpResId, sQsHpResId },
+                                    sQsHpResId,
                                     XposedHelpers.getObjectField(hGroup, "mMotoSBActivityAOSPLookup"),
                                     XposedHelpers.getObjectField(hGroup, "mMotoQSActivityAOSPLookup"),
                                     XposedHelpers.getBooleanField(hGroup, "mIsMotoUI"),
