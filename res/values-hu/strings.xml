@@ -18,7 +18,7 @@
 
     <string name="app_name">GravityBox [MM]</string>
 
-    <string name="battery_style_title">Akkumulátor állaptjelző stílusa</string>  
+    <string name="battery_style_title">Akkumulátor állapotjelző stílusa</string>  
     <string name="battery_style_stock">Gyári akkumulátor ikon</string>
     <string name="battery_style_circle">Kör akkumulátor ikon</string>
     <string name="battery_style_circle_percent">Kör akkumulátor ikon százalékkal</string>
@@ -177,7 +177,7 @@
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">Minimum fényerő szint</string>
-    <string name="pref_brightness_min_summary">Lehetővé teszi a minimum fényerő szint beállítását. A kézi fényerőbeállításra vonatkozik. (újraindítás szükséges)</string>
+    <string name="pref_brightness_min_summary">Lehetővé teszi a minimum fényerő szint beállítását. A kézi fényerő beállítására vonatkozik. (újraindítás szükséges)</string>
 
     <!--  Autobrightness levels -->
     <string name="pref_ab_title">Automatikus fényerő szintek</string>
@@ -209,7 +209,7 @@
 
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Média módosítások</string>
-    <string name="pref_cat_media_summary">Különböző beállításokat tartalmaz a média és audió rendszerhez</string>
+    <string name="pref_cat_media_summary">Különböző beállításokat tartalmaz a média és hangbeállítási rendszerhez</string>
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">Több zene hangerő léptetés</string>
@@ -337,7 +337,7 @@
     <string name="button_backlight_mode_disable">Gomb háttérvilágítás kikapcsolva</string>
     <string name="button_backlight_mode_always_on">Bekapcsolt kijelzőnél mindig bekapcsolva</string>
     <string name="pref_button_backlight_notifications_title">Gomb háttérvilágítás értesítések</string>
-    <string name="pref_button_backlight_notifications_summary">KÍSÉRLETI! Villogtatja a gomb háttérvilágítást értesítés érkezésekor. Abban az esetben használd, ha a készülékedből hiányzik az értesítési LED. Fogyaszhtatja az akkumulátort.</string>
+    <string name="pref_button_backlight_notifications_summary">KÍSÉRLETI! Villogtatja a gomb háttérvilágítást értesítés érkezésekor. Abban az esetben használd, ha a készülékedből hiányzik az értesítési LED. Fogyaszthatja az akkumulátort.</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Navigációs hardver gombok letiltása</string>
@@ -710,7 +710,7 @@
     <string name="pref_cat_launcher_tweaks_title">Indító módosítások</string>
     <string name="pref_cat_launcher_tweaks_summary">A gyári és a Google Now Indítóra vonatkozik</string>
     <string name="pref_cat_launcher_desktop_grid_title">Képernyőrács</string>
-    <string name="pref_launcher_desktop_grid_info_title">Alapértelmezettől eltérő értékek használata a widget-ek megjelenítésének és működésének összeomlását eredményezheti. Okosan használd. A változtatásokhoz a launcher újraindítása szükséges.</string>
+    <string name="pref_launcher_desktop_grid_info_title">Az alapértelmezettől eltérő értékek használata a modulok megjelenítésében problémát okozhat. Körültekintően használd. A változtatásokhoz a launcher újraindítása szükséges.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Sorok száma</string>
     <string name="pref_launcher_desktop_grid_cols_title">Oszlopok száma</string>
     <string name="desktop_grid_default">Alapértelmezett</string>
@@ -943,7 +943,7 @@
     <string name="wsc_hash_creation_failed">Hiba történt az alkalmazás specifikus hash kód létrehozásakor</string>
     <string name="wsc_parse_response_error">Hiba történt a web szolgáltatástól kapott adatok elemzése során</string>
     <string name="wsc_hash_invalid">A web szolgáltatás megtagadta a kommunikációt hash eltérés miatt. Ez általában akkor történik meg, ha nem hivatalos verziót futtat, vagy a Gravitybox APK harmadik fél által módosításra került.</string>
-    <string name="wsc_please_wait">Kérem vájon&#8230;</string>
+    <string name="wsc_please_wait">Kérem várjon&#8230;</string>
     <string name="wsc_error">Hiba történt a Web szolgáltatással való kommunikáció során: %s</string>
     <string name="wsc_task_cancelled">A web szolgáltatás működése törölve</string>
 
@@ -972,8 +972,8 @@
     
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Egyéb</string>
-    <string name="pref_launcher_resize_widget_title">Bármely widget átméretezése</string>
-    <string name="pref_launcher_resize_widget_summary">Átméretezi bármelyik widget-et bármely méretre a kezdőképernyőn (Indító alkalmazás újraindítása szükséges)</string>
+    <string name="pref_launcher_resize_widget_title">Bármely modul átméretezése</string>
+    <string name="pref_launcher_resize_widget_summary">Átméretezi bármelyik modult bármely méretre a kezdőképernyőn (Indító alkalmazás újraindítása szükséges)</string>
 
     <!-- Icon picker -->
     <string name="icon_picker_choose_icon_title">Ikon kiválasztása</string>
@@ -1078,7 +1078,7 @@
     <string name="scr_size_sd">SD (360x640px)</string>
     <string name="scr_size_hd">HD (720x1280px)</string>
     <string name="scr_size_full_hd">Full HD (1080x1920px)</string>
-    <string name="pref_screenrecord_bitrate_title">Video bitráta</string>
+    <string name="pref_screenrecord_bitrate_title">Videó bitráta</string>
     <string name="pref_screenrecord_timelimit_title">Időtartam limit</string>
     <string name="pref_screenrecord_rotate_title">Kép elforgatása</string>
     <string name="pref_screenrecord_rotate_summary">90 fokkal elforgatja a felvett anyagot</string>
@@ -1100,11 +1100,11 @@
 
     <!-- Mute volume adjust vibrate -->
     <string name="pref_volume_adjust_vibrate_mute_title">Hangerő beállításkori rezgés letiltása</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Letiltja a hangerőszabályzó gombokkal történő értesítési/csengőhang hangerő beállításakori rezgést</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Rezgés letiltása a hangerőszabályzó gombokkal történő értesítési/csengőhang beállításakor</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Gyári videóbeállítások használata</string>
-    <string name="pref_screenrecord_use_stock_summary">Ha engedélyezve van, akkor a gyári videóbeállítás lesz használva felvételkor. Abban az esetben használd, ha az alternatív videóbeállítások problémákat okoznak. Ne feledd, hogy a gyári videóbeállítás nem támogatja a hangfelvételet és a felvétel nem lehet hosszabb 3 percnél.</string>
+    <string name="pref_screenrecord_use_stock_summary">Ha engedélyezve van, akkor a gyári videóbeállítás lesz használva felvételkor. Abban az esetben használd, ha az alternatív videóbeállítások problémákat okoznak. Ne feledd, hogy a gyári videóbeállítás nem támogatja a hangfelvételt és a felvétel nem lehet hosszabb 3 percnél.</string>
 
     <!-- Clock settings master switch -->
     <string name="pref_sb_clock_masterswitch_summary">Állapotsáv óra beállítások ki-bekapcsolása (újraindítás szükséges)</string>
@@ -1338,7 +1338,7 @@
     <string name="cd_north_west">ÉNY</string>
 
     <!-- Pie: mirrored keys -->
-    <string name="pref_pie_control_mirrored_keys_title">Tükörfordított gombok</string>
+    <string name="pref_pie_control_mirrored_keys_title">Megfordított gombok</string>
 
     <!-- Pie: center trigger -->
     <string name="pref_pie_control_center_trigger_title">Kioldás középről</string>
@@ -1412,7 +1412,7 @@
     <string name="pref_charger_unplugged_sound_title">Töltő lecsatlakoztatás hang</string>
 
     <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Audió Profilok</string>
+    <string name="qs_tile_audio_profile">Hangprofilok</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">MTK specifikus javítások</string>
@@ -1472,7 +1472,7 @@
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">Gyors Felvétel csempe beállítások</string>
-    <string name="pref_quickrecord_quality_title">Audió minőség</string>
+    <string name="pref_quickrecord_quality_title">Hangminőség</string>
     <string name="qr_audio_quality_low">Alacsony (16kHz)</string>
     <string name="qr_audio_quality_medium">Közepes (22kHz)</string>
     <string name="qr_audio_quality_high">Magas (44kHz)</string>
@@ -1743,6 +1743,7 @@
     <string name="pref_lockscreen_bleft_action_title">Bal alsó művelet</string>
     <string name="ls_bleft_action_default">Alapértelmezett</string>
     <string name="ls_bleft_action_phone">Telefon</string>
+    <string name="pref_lockscreen_bleft_action_custom_title">Bal alsó művelet beállítása</string>
 
     <!-- Lockscreen: Quick unlock PIN length -->
     <string name="pref_lockscreen_pin_length_title">PIN hosszúság</string>
@@ -1854,11 +1855,11 @@
 
     <!-- UNC: Hide persistent notifications -->
     <string name="pref_lc_notif_hide_persistent_title">Állandó értesítések elrejtése</string>
-    <string name="pref_lc_notif_hide_persistent_summary">Elrejti az összes folyamatban lévő és egyéb nem törölhető értestéseket, ami ettől az alkalmazástól érkezik</string>
+    <string name="pref_lc_notif_hide_persistent_summary">Elrejti az összes folyamatban lévő és egyéb nem törölhető értesítét, ami ettől az alkalmazástól érkezik</string>
 
     <!-- Navbar: Auto-fade keys -->
     <string name="pref_navbar_autofade_keys_title">Gombok auto-úsztatása</string>
-    <string name="pref_navbar_autofade_keys_summary">Gombok automtaikus úsztatása meghatározott időkorlát lejárata után. Letiltáshoz állíts be 0-t.</string>
+    <string name="pref_navbar_autofade_keys_summary">Gombok automatikus úsztatása meghatározott időkorlát lejárata után. Letiltáshoz állíts be 0-t.</string>
     <string name="pref_navbar_autofade_show_keys_title">Gombok mutatása bekapcsolva</string>
     <string name="autofade_show_keys_navbar">Navigációs sáv érintésre</string>
     <string name="autofade_show_keys_screen">Képernyő érintésre</string>
@@ -1918,8 +1919,8 @@
     <string name="smart_radio_off">Okos rádiókapcsolat ki</string>
 
     <!-- Sync shortcut -->
-    <string name="sync_on">Szinkronicázió be</string>
-    <string name="sync_off">Szinkronicázió ki</string>
+    <string name="sync_on">Szinkronizáció be</string>
+    <string name="sync_off">Szinkronizáció ki</string>
 
     <!-- Hotspot shortcut -->
     <string name="hotspot_on">Hotspot be</string>
@@ -1958,5 +1959,14 @@
 
     <!-- Turn off -->
     <string name="turn_off">Kikapcsol</string>
+    
+    <!-- Force AOSP -->
+    <string name="pref_force_aosp_title">AOSP kényszerítés</string>
+    <string name="pref_force_aosp_summary">Rendszer kezelése AOSP-ként. 
+        Akkor használd, ha az eszközöd rendszere gyártóiként került azonosításra annak ellenére, hogy valójában alternatív AOSP-alapú rendszer (újraindítás szükséges)</string>
+
+    <!-- Wireless charger plugged sound -->
+    <string name="pref_charger_plugged_sound_wireless_title">Vezeték nélküli töltés hang</string>
+    <string name="stock_wireless_sound">Alapértelmezett hang</string>
     
 </resources>
