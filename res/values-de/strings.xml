@@ -76,7 +76,7 @@
     <string name="quick_settings_smart_radio_off">Netzautomatik aus</string>
     <string name="quick_settings_lock_screen_on">Bildschirmsperre an</string>
     <string name="quick_settings_lock_screen_off">Bildschirmsperre aus</string>
-	<string name="quick_settings_location_on">Standort an</string>
+   	<string name="quick_settings_location_on">Standort an</string>
     <string name="quick_settings_location_off">Standort aus</string>
     <string name="quick_settings_quiet_hours_off">Ruhestunden aus</string>
     <string name="quick_settings_quiet_hours_on">Ruhestunden an</string>
@@ -84,7 +84,7 @@
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Schnelleinstellungen in der Statusleiste</string>
-    <string name="quick_settings_summary">Ermöglicht das Anzeigen und Ausblenden von Schnelleinstelungen in der Statusleiste</string>
+    <string name="quick_settings_summary">Ermöglicht das Anzeigen und Ausblenden von Schnelleinstellungen in der Statusleiste</string>
     <string name="qs_tile_airplane_mode">Flugmodus</string>
     <string name="qs_tile_wifi">WLAN</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
@@ -571,7 +571,7 @@
     <string name="pref_cat_hwkey_recents_title">Multitasking-Taste</string>
     <string name="pref_cat_hwkey_volume_title">Lautstärketasten</string>
     <string name="pref_cat_hwkey_actions_others">Sonstiges</string>
-    <string name="pref_hwkey_longpress_title">Beim Gedrückthalten</string>
+    <string name="pref_hwkey_longpress_title">Beim gedrückt halten</string>
     <string name="pref_hwkey_singletap_title">Beim Antippen</string>
     <string name="pref_hwkey_doubletap_title">Bei Doppeltippen</string>
 
@@ -881,7 +881,7 @@
     <string name="pref_battery_charged_sound_title">Ton bei vollem Akku</string>
 
     <!-- Pie long-press actions -->
-    <string name="pref_cat_pie_long_press_title">Beim Gedrückthalten</string>
+    <string name="pref_cat_pie_long_press_title">Beim gedrückt halten</string>
     <string name="pref_pie_back_longpress_title">Zurück-Taste</string>
     <string name="pref_pie_home_longpress_title">Home-Taste</string>
     <string name="pref_pie_recents_longpress_title">Multitask-Taste</string>
@@ -954,7 +954,7 @@
     <string name="pref_pie_sysinfo_disable_title">Systeminfo deaktivieren</string>
 
     <!-- Pie: long press delay -->
-    <string name="pref_pie_longpress_delay_title">Verzögerung bei Gedrückthalten</string>
+    <string name="pref_pie_longpress_delay_title">Verzögerung bei gedrückt halten</string>
     <string name="pie_longpress_delay_default">Standard</string>
 
     <!-- GB Actions: Launcher drawer shortcut -->
@@ -1606,7 +1606,7 @@
 
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">Im Sperrbildschirm anzeigen</string>
-    <string name="pref_data_traffic_lockscreen_summary">Immer mittig im Sperbildschirm anzeigen</string>
+    <string name="pref_data_traffic_lockscreen_summary">Immer mittig im Sperrbildschirm anzeigen</string>
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Helligkeitsschieber verstecken</string>
@@ -1688,14 +1688,14 @@
         weiterhin Vibrationen auslösen.</string>
 
     <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Lösche Nur Sichtbare</string>
+    <string name="pref_recents_clear_all_visible_title">Lösche nur Sichtbare</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Doppeltippen um Standby zu aktivieren</string>
 
     <!-- Status bar: disable peek -->
     <string name="pref_statusbar_disable_peek_title">Kurzansicht deaktivieren</string>
-    <string name="pref_statusbar_disable_peek_summary">Statusleiste bei einzelnem antipen nicht öffnen</string>
+    <string name="pref_statusbar_disable_peek_summary">Statusleiste bei einzelnem Antippen nicht öffnen</string>
 
     <!-- Status bar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">Doppeltippen für Standby</string>
@@ -1736,7 +1736,7 @@
 
     <!-- Permission denial message -->
     <string name="permission_denied_msg">Sie haben einige Berechtigungen verweigert.
-        Bitte beachten Sie dass dadurch einige Funktionen nicht finktionieren.</string>
+        Bitte beachten Sie dass dadurch einige Funktionen nicht funktionieren.</string>
     <string name="permission_denied_hide_title">Nicht mehr anzeigen</string>
 
     <!-- Cellular tile Mobile data toggle -->
@@ -1761,7 +1761,7 @@
 
     <!-- Power: Camera vibration pattern -->
     <string name="pref_power_camera_vibrate_pattern_title">Kamera Vibrationsmuster</string>
-    <string name="pref_power_camera_vibrate_pattern_summary">Defniniert Vibrationsmuster in Form einer durch Kommas getrennten Liste
+    <string name="pref_power_camera_vibrate_pattern_summary">Definiert Vibrationsmuster in Form einer durch Kommas getrennten Liste
         von An/Aus-Paaren in Millisekunden für die Kamera wenn vom Powerbutton gestartet. Leer für Standard, 0 für deaktiviert.</string>
 
     <!-- QS: common quick mode option -->
@@ -1822,25 +1822,25 @@
 
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">Wach bleiben Kachel</string>
-    <string name="pref_sa_tile_enabled_modes_summary">Setzt welche Bildschirmtimouts von der Kachel verwendet werden</string>
-    <string name="pref_sa_tile_quick_mode_summary">Erlaubt zwichen ausgwählten Bildschirmtimeouts zu wechseln</string>
+    <string name="pref_sa_tile_enabled_modes_summary">Setzt welche Bildschirmtimeouts von der Kachel verwendet werden</string>
+    <string name="pref_sa_tile_quick_mode_summary">Erlaubt zwischen ausgewählten Bildschirmtimeouts zu wechseln</string>
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Regel für intelligentes Entsperren</string>
 
     <!-- BatteryPercentText position -->
-    <string name="pref_battery_percent_text_position_title">Position in der Satusleiste</string>
+    <string name="pref_battery_percent_text_position_title">Position in der Statusleiste</string>
     <string name="pref_battery_percent_text_position_summary">Benötigt Neustart</string>
     <string name="battery_percent_text_position_right">Rechts vom Batteriesymbol</string>
     <string name="battery_percent_text_position_left">Links vom Batteriesymbol</string>
 
     <!-- Disable Imprint vibrations -->
-    <string name="pref_imprint_vibe_disable_title">Spezieele Vibrationen deaktivieren</string>
+    <string name="pref_imprint_vibe_disable_title">Spezielle Vibrationen deaktivieren</string>
     <string name="imprint_vibe_disable_success">Bei erfolgreicher Authentifizierung</string>
     <string name="imprint_vibe_disable_error">Bei Authentifizierungsproblem</string>
 
     <!-- UNC: Vibrations replace mode -->
-    <string name="pref_lc_vibrate_replace_title">Originale Vir´bration ersetzen</string>
+    <string name="pref_lc_vibrate_replace_title">Originale Vibration ersetzen</string>
     <string name="pref_lc_vibrate_replace_summary">Überschriebene Vibration wird nur genutzt, falls die ursprüngliche Benachrichtigung Vibration hatte</string>
 
     <!-- UNC: Sound replace mode -->
@@ -1853,5 +1853,132 @@
 
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Skalierungskorrektur</string>
+    
+        <!-- MTK tiles: Timeout -->
+    <string name="qs_tile_timeout">Timeout</string>
 
+   <!-- UNC: Notification lock screen visibility -->
+    <string name="pref_lc_notif_visibility_ls_title">Sperrbildschirm Sichtbarkeit</string>
+    <string name="lc_notif_visibility_ls_default">Standard</string>
+    <string name="lc_notif_visibility_ls_clearable">Verstecke entfernbare Benachrichtigungen</string>
+    <string name="lc_notif_visibility_ls_persistent">Verstecke dauerhafte Benachrichtigungen</string>
+    <string name="lc_notif_visibility_ls_all">Verstecke alle Benachrichtigungen</string>
+    
+    <!-- UNC: Hide persistent notifications -->
+    <string name="pref_lc_notif_hide_persistent_title">Verstecke dauerhafte Benachrichtigungen</string>
+    <string name="pref_lc_notif_hide_persistent_summary">Verstecke alle dauerhaften und nicht entfernbaren Benachrichtungen dieser App</string>
+
+
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">Ausblenden der Tasten</string>
+    <string name="pref_navbar_autofade_keys_summary">Blendet die Tasten automatisch entprechend des Timeouts aus. Zum Deaktivieren auf 0 setzen.</string>
+    <string name="pref_navbar_autofade_show_keys_title">Anzeige der Tasten bei</string>
+    <string name="autofade_show_keys_navbar">Berühren der Navigationsleiste</string>
+    <string name="autofade_show_keys_screen">Berühren des Bildschirms</string>
+
+    <!-- QS: StayAwake tile Auto-reset -->
+    <string name="pref_sa_tile_auto_reset_title">Automatisches Zurücksetzen vom Timeout</string>
+    <string name="pref_sa_tile_auto_reset_summary">Setzt den Timeout automatisch auf den Standardwert wenn sich der Bildschirm abschaltet.</string>
+
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">Zufälliges Layout des PIN-Eingabefeldes</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Das Layout des PIN-Eingabefeldes wird beim Entsperren des Geräts in zufälliger Reihenfolge dargestellt</string>
+
+    <!-- UNC: LED DND -->
+    <string name="pref_lc_led_dnd_title">Nicht unterbrechen</string>
+    <string name="pref_lc_led_dnd_summary">Unterdrückt LED für gewählten Nicht unterbrechen Modus</string>
+    <string name="pref_lc_led_dnd_dialog_title">Wähle für welche Nicht unterbrechen Modi die LED ausgeschaltet bleiben soll</string>
+
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">WiFi ein</string>
+    <string name="wifi_off">WiFi aus</string>
+
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">Flugmodus ein</string>
+    <string name="airplane_mode_off">Flugmodus aus</string>
+
+    <!-- Autobrightness mode shortcut -->
+    <string name="autobrightness_on">Auto brightness on</string>
+    <string name="autobrightness_off">Auto brightness off</string>
+
+    <!-- Bluetooth shortcut -->
+    <string name="bluetooth_on">Bluetooth ein</string>
+    <string name="bluetooth_off">Bluetooth aus</string>
+
+    <!-- Expanded desktop shortcut -->
+    <string name="expanded_desktop_on">Erweiterter Desktop ein</string>
+    <string name="expanded_desktop_off">Erweiterter Desktop aus</string>
+
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">Mobile Daten ein</string>
+    <string name="mobile_data_off">Mobile Daten ausf</string>
+
+    <!-- NGC shortcut -->
+    <string name="nfc_on">NFC ein</string>
+    <string name="nfc_off">NFC aus</string>
+
+    <!-- Quiet hours shortcut -->
+    <string name="quiet_hours_on">Ruhestunden ein</string>
+    <string name="quiet_hours_off">Ruhestunden aus</string>
+    <string name="quiet_hours_auto">Ruhestunden auto</string>
+
+    <!-- Auto rotation shortcut -->
+    <string name="auto_rotation_on">Autorotation ein</string>
+    <string name="auto_rotation_off">Autorotation aus</string>
+
+    <!-- Smart radio shortcut -->
+    <string name="smart_radio_on">Netzautomatik ein</string>
+    <string name="smart_radio_off">Netzautomatik aus</string>
+
+    <!-- Sync shortcut -->
+    <string name="sync_on">Sync ein</string>
+    <string name="sync_off">Sync aus</string>
+
+    <!-- Hotspot shortcut -->
+    <string name="hotspot_on">Hotspot ein</string>
+    <string name="hotspot_off">Hotspot aus</string>
+
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">Verstecke Vibrationssymbol</string>
+
+    <!-- Shortcut: Show toast option -->
+    <string name="shortcut_show_toast">Zeige Statusnachricht</string>
+
+    <!-- Xperia tiles -->
+    <string name="qs_tile_xperia_sync">Xperia Auto-sync Daten</string>
+    <string name="qs_tile_xperia_roaming">Xperia Datenroaming</string>
+    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
+    <string name="qs_tile_xperia_lte">Xperia LTE</string>
+    <string name="qs_tile_xperia_datatraffic">Xperia Mobile Daten</string>
+    <string name="qs_tile_xperia_screenmirroring">Xperia Screen Mirroring</string>
+    <string name="qs_tile_xperia_throw">Xperia Throw</string>
+    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
+    <string name="qs_tile_xperia_tethering">Xperia Tethering</string>
+    <string name="qs_tile_xperia_detectusbdevice">Xperia USB-Gerät Erkennung</string>
+
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Stil des Symbols</string>
+    <string name="ncki_icon_style1">6 Punkte</string>
+    <string name="ncki_icon_style2">3 Punkte</string>
+    <string name="ncki_icon_style3">Transparent</string>
+    <string name="ncki_icon_style4">Eigenes</string>
+    <string name="pref_navbar_custom_key_image_title">Setze eigenes Bild</string>
+    <string name="custom_image_success">Benutzerdefiniertes Bild gesetzt</string>
+    <string name="custom_image_failure">Setzen des benutzerdefinierten Bildes fehlgeschlagen</string>
+
+    <!-- Key actions: allow volume rocker wake when music active -->
+    <string name="pref_volume_rocker_wake_allow_music_title">Erlauben wenn Musik abgespielt wird</string>
+
+    <!-- Turn off -->
+    <string name="turn_off">Ausschalten</string>
+
+    <!-- Force AOSP -->
+    <string name="pref_force_aosp_title">Erzwinge AOSP</string>
+    <string name="pref_force_aosp_summary">Behandle System als AOSP. 
+        Dies auswählen, wenn Ihr Gerät als ein angepasstes System erkannt wird, obwohl es mit einem alternativen AOSP-basierten System läuft (Neustart erforderlich)</string>
+
+    <!-- Wireless charger plugged sound -->
+    <string name="pref_charger_plugged_sound_wireless_title">Ton für drahtloses Laden</string>
+    <string name="stock_wireless_sound">Standardton für drahtlosen Laden</string>
+  
 </resources>
