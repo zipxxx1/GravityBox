@@ -15,6 +15,10 @@
 
 package com.ceco.lollipop.gravitybox;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
 
@@ -207,6 +211,15 @@ public class ModAudio {
     }
 
     private static class HandleChangeVolume extends XC_MethodHook {
+        private static List<String> sBlackList = new ArrayList<>(Arrays.asList(
+                "com.mxtech.videoplayer.ad"));
+
+        private static boolean isPkgInBlackList(String pkg) {
+            final boolean isInBlackList = sBlackList.contains(pkg);
+            if (DEBUG) log(pkg + " blacklisted: " + isInBlackList);
+            return isInBlackList;
+        }
+
         private WindowManager mWm;
 
         public HandleChangeVolume(Context context) {
@@ -215,7 +228,7 @@ public class ModAudio {
 
         @Override
         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-            if (mSwapVolumeKeys) {
+            if (mSwapVolumeKeys && !isPkgInBlackList((String)param.args[3])) {
                 try {
                     if ((Integer) param.args[1] != 0) {
                         if (DEBUG) log("Original direction = " + param.args[1]);
