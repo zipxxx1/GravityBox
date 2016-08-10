@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,6 +16,10 @@
 package com.ceco.kitkat.gravitybox;
 
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHours;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -204,6 +208,15 @@ public class ModAudio {
     }
 
     private static class HandleChangeVolume extends XC_MethodHook {
+        private static List<String> sBlackList = new ArrayList<>(Arrays.asList(
+                "com.mxtech.videoplayer.ad"));
+
+        private static boolean isPkgInBlackList(String pkg) {
+            final boolean isInBlackList = sBlackList.contains(pkg);
+            if (DEBUG) log(pkg + " blacklisted: " + isInBlackList);
+            return isInBlackList;
+        }
+
         private WindowManager mWm;
 
         public HandleChangeVolume(Context context) {
@@ -212,7 +225,7 @@ public class ModAudio {
 
         @Override
         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-            if (mSwapVolumeKeys) {
+            if (mSwapVolumeKeys && !isPkgInBlackList((String)param.args[3])) {
                 try {
                     if ((Integer) param.args[1] != 0) {
                         if (DEBUG) log("Original direction = " + param.args[1]);
