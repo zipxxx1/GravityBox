@@ -104,34 +104,36 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         final String[] batteryPercentTextIds = new String[] { "battery_level", "percentage", "battery_text" };
         Resources res = mContext.getResources();
         Resources gbRes = Utils.getGbContext(mContext).getResources();
-
-        // inject percent text if it doesn't exist
-        for (String bptId : batteryPercentTextIds) {
-            final int bptResId = res.getIdentifier(bptId, "id", PACKAGE_NAME);
-            if (bptResId != 0) {
-                View v = mContainer.findViewById(bptResId);
-                if (v != null && v instanceof TextView) {
-                    mPercentText = new StatusbarBatteryPercentage((TextView) v, mPrefs, this);
-                    if (DEBUG) log("Battery percent text found as: " + bptId);
-                    break;
+        
+        if (!Utils.hasLenovoCustomUI()) {
+            // inject percent text if it doesn't exist
+            for (String bptId : batteryPercentTextIds) {
+                final int bptResId = res.getIdentifier(bptId, "id", PACKAGE_NAME);
+                if (bptResId != 0) {
+                    View v = mContainer.findViewById(bptResId);
+                    if (v != null && v instanceof TextView) {
+                        mPercentText = new StatusbarBatteryPercentage((TextView) v, mPrefs, this);
+                        if (DEBUG) log("Battery percent text found as: " + bptId);
+                        break;
+                    }
                 }
             }
-        }
-        if (mPercentText == null) {
-            TextView percentTextView = new TextView(mContext);
-            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            percentTextView.setLayoutParams(lParams);
-            percentTextView.setPadding(
-                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
-                    0,
-                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_right),
-                    0);
-            percentTextView.setTextColor(Color.WHITE);
-            percentTextView.setVisibility(View.GONE);
-            mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
-            mSystemIcons.addView(mPercentText.getView(), mSystemIcons.getChildCount()-1);
-            if (DEBUG) log("Battery percent text injected");
+            if (mPercentText == null) {
+                TextView percentTextView = new TextView(mContext);
+                LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                percentTextView.setLayoutParams(lParams);
+                percentTextView.setPadding(
+                        gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
+                        0,
+                        gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_right),
+                        0);
+                percentTextView.setTextColor(Color.WHITE);
+                percentTextView.setVisibility(View.GONE);
+                mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
+                mSystemIcons.addView(mPercentText.getView(), mSystemIcons.getChildCount()-1);
+                if (DEBUG) log("Battery percent text injected");
+            }
         }
 
         // inject circle battery view
@@ -157,7 +159,8 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         }
 
         // reposition percent text
-        if (mContainerType == ContainerType.STATUSBAR && "RIGHT".equals(mPrefs.getString(
+        if (mPercentText != null && 
+                mContainerType == ContainerType.STATUSBAR && "RIGHT".equals(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"))) {
             View v = mPercentText.getView();
             v.setPadding(
@@ -256,20 +259,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                                     mPercentText.setVisibility(View.GONE);
                                 }
                             }
-                        }
-                    }
-                });
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
-            try {
-                XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
-                        int.class, boolean.class, boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (DEBUG) log(mContainerType + ": onBatteryLevelChanged");
-                        if (mPercentText != null) {
-                            mPercentText.update();
                         }
                     }
                 });

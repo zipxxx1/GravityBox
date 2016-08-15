@@ -103,6 +103,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int QUICK_PULLDOWN_RIGHT = 1;
     public static final int QUICK_PULLDOWN_LEFT = 2;
 
+    public static final String PREF_CAT_KEY_BATTERY_SETTINGS = "pref_cat_battery_settings";
+    public static final String PREF_CAT_KEY_BATTERY_PERCENT_TEXT = "pref_cat_battery_percent_text";
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR = "pref_battery_percent_text_statusbar";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_POSITION = "pref_battery_percent_text_position";
@@ -1722,6 +1724,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatMedia.removePreference(mPrefMusicVolumeStepsValue);
             }
 
+            // Remove Lenovo preferences
+            if (Utils.hasLenovoCustomUI()) {
+                PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_BATTERY_SETTINGS);
+                PreferenceScreen ps2 = (PreferenceScreen) findPreference(PREF_CAT_KEY_BATTERY_PERCENT_TEXT);
+                ps.removePreference(ps2);
+            }
+            
             // Remove actions for HW keys based on device features
             mPrefHwKeyMenuLongpress.setEntries(R.array.hwkey_action_entries);
             mPrefHwKeyMenuLongpress.setEntryValues(R.array.hwkey_action_values);

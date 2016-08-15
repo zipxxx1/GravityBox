@@ -232,7 +232,7 @@ public class Utils {
     public static boolean hasLenovoCustomUI() {
         if (mHasLenovoCustomUI != null) return mHasLenovoCustomUI;
 
-        File f = new File("/system/framework/lenovo-res.apk");
+        File f = new File("/system/framework/lenovo-res/lenovo-res.apk");
         mHasLenovoCustomUI = f.exists();
         return mHasLenovoCustomUI;
     }
