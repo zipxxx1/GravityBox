@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ceco.lollipop.gravitybox;
+package com.ceco.lollipop.gravitybox.telecom;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
