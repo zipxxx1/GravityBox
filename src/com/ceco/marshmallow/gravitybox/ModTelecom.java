@@ -15,8 +15,10 @@
 
 package com.ceco.marshmallow.gravitybox;
 
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 
+import com.ceco.marshmallow.gravitybox.telecom.CallFeatures;
 import com.ceco.marshmallow.gravitybox.telecom.MissedCallNotifier;
 
 public class ModTelecom {
@@ -28,13 +30,20 @@ public class ModTelecom {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static void init(final ClassLoader classLoader) {
+    public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         if (DEBUG) log("init");
 
         try {
             MissedCallNotifier.init(classLoader);
         } catch (Throwable t) {
             log("Error initializing MissedCallNotifier:");
+            XposedBridge.log(t);
+        }
+
+        try {
+            CallFeatures.init(prefs, classLoader);
+        } catch (Throwable t) {
+            log("Error initializing CallFeatures:");
             XposedBridge.log(t);
         }
     }
