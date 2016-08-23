@@ -17,30 +17,16 @@ package com.ceco.marshmallow.gravitybox;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 
 import android.app.Fragment;
-import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
-import android.os.Handler;
-import android.os.PowerManager;
-import android.os.Vibrator;
-import android.os.PowerManager.WakeLock;
-import android.telecom.Call;
-import android.telecom.TelecomManager;
 import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -54,149 +40,18 @@ public class ModDialer24 {
     private static final String CLASS_DIALTACTS_ACTIVITY = "com.android.dialer.app.DialtactsActivity";
     private static final String CLASS_DIALTACTS_ACTIVITY_GOOGLE = 
             "com.google.android.apps.dialer.extensions.GoogleDialtactsActivity";
-    private static final String CLASS_IN_CALL_SERVICE = "com.android.incallui.InCallServiceImpl";
     private static final String CLASS_CALL_BUTTON_FRAGMENT = "com.android.incallui.CallButtonFragment";
     private static final String CLASS_ANSWER_FRAGMENT = "bbw";
     private static final String CLASS_DIALPAD_FRAGMENT = "com.android.dialer.app.dialpad.DialpadFragment";
     private static final boolean DEBUG = false;
 
-    private static XSharedPreferences mPrefsPhone;
-    private static int mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
-    private static Set<String> mCallVibrations;
-    private static Context mContext;
-    private static SensorManager mSensorManager;
-    private static boolean mSensorListenerAttached = false;
-    private static Call mIncomingCall;
-    private static Call mOutgoingCall;
-    private static List<Call> mActiveCallList = new ArrayList<Call>();
-    private static Vibrator mVibrator;
-    private static Handler mHandler;
-    private static WakeLock mWakeLock;
     private static QuietHours mQuietHours;
-    private static CallStateListener mCallStateListener = new CallStateListener();
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static PhoneSensorEventListener mPhoneSensorEventListener = 
-            new PhoneSensorEventListener(new PhoneSensorEventListener.ActionHandler() {
-        @Override
-        public void onFaceUp() {
-            if (DEBUG) log("PhoneSensorEventListener.onFaceUp");
-            // do nothing
-        }
-
-        @Override
-        public void onFaceDown() {
-            if (DEBUG) log("PhoneSensorEventListener.onFaceDown");
-
-            try {
-                switch (mFlipAction) {
-                    case GravityBoxSettings.PHONE_FLIP_ACTION_MUTE:
-                        if (DEBUG) log("Muting call");
-                        silenceRinger();
-                        break;
-                    case GravityBoxSettings.PHONE_FLIP_ACTION_DISMISS:
-                        if (DEBUG) log("Rejecting call");
-                        rejectCall(mIncomingCall);
-                        break;
-                    case GravityBoxSettings.PHONE_FLIP_ACTION_NONE:
-                    default:
-                        // do nothing
-                }
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
-        }
-    });
-
-    private static void attachSensorListener() {
-        if (mSensorManager == null || 
-                mSensorListenerAttached ||
-                mFlipAction == GravityBoxSettings.PHONE_FLIP_ACTION_NONE) return;
-
-        mPhoneSensorEventListener.reset();
-        mSensorManager.registerListener(mPhoneSensorEventListener, 
-                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), 
-                SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorListenerAttached = true;
-
-        if (DEBUG) log("Sensor listener attached");
-    }
-
-    private static void detachSensorListener() {
-        if (mSensorManager == null || !mSensorListenerAttached) return;
-
-        mSensorManager.unregisterListener(mPhoneSensorEventListener);
-        mSensorListenerAttached = false;
-
-        if (DEBUG) log("Sensor listener detached");
-    }
-
-    private static void silenceRinger() {
-        try {
-            TelecomManager tm = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
-            tm.silenceRinger();
-        } catch(Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    private static void rejectCall(Call call) {
-        if (call == null) return;
-
-        try {
-            call.reject(false, null);
-            if (DEBUG) log("Call rejected");
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    private static void vibrate(int v1, int p1, int v2) {
-        if (mVibrator == null) return;
-
-        long[] pattern = new long[] { 0, v1, p1, v2 };
-        mVibrator.vibrate(pattern, -1);
-    }
-
-    private static Runnable mPeriodicVibrator = new Runnable() {
-        @Override
-        public void run() {
-            if (mWakeLock != null) {
-                if (mWakeLock.isHeld()) {
-                    mWakeLock.release();
-                }
-                mWakeLock.acquire(61000);
-                if (DEBUG) log("Partial Wake Lock timeout extended");
-            }
-            vibrate(50, 0, 0);
-            mHandler.postDelayed(this, 60000);
-        }
-    };
-
-    private static void refreshPhonePrefs() {
-        if (mPrefsPhone != null) {
-            mPrefsPhone.reload();
-            mCallVibrations = mPrefsPhone.getStringSet(
-                    GravityBoxSettings.PREF_KEY_CALL_VIBRATIONS, new HashSet<String>());
-            if (DEBUG) log("mCallVibrations = " + mCallVibrations.toString());
-
-            mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
-            try {
-                mFlipAction = Integer.valueOf(mPrefsPhone.getString(
-                        GravityBoxSettings.PREF_KEY_PHONE_FLIP, "0"));
-                if (DEBUG) log("mFlipAction = " + mFlipAction);
-            } catch (NumberFormatException e) {
-                XposedBridge.log(e);
-            }
-        }
-    }
-
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader, final String packageName) {
-        mPrefsPhone = prefs;
-
         try {
             final Class<?> classAnswerFragment = XposedHelpers.findClass(CLASS_ANSWER_FRAGMENT, classLoader);
             final Class<?> classCallButtonFragment = XposedHelpers.findClass(CLASS_CALL_BUTTON_FRAGMENT, classLoader); 
@@ -279,7 +134,7 @@ public class ModDialer24 {
             XposedHelpers.findAndHookMethod(classDialtactsActivity, "c", Intent.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    refreshPhonePrefs();
+                    prefs.reload();
                     if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_DIALER_SHOW_DIALPAD, false)) return;
 
                     final String realClassName = param.thisObject.getClass().getName();
@@ -295,53 +150,6 @@ public class ModDialer24 {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-
-        try {
-            Class<?> classInCallService = XposedHelpers.findClass(CLASS_IN_CALL_SERVICE, classLoader);
-
-            XposedBridge.hookAllMethods(classInCallService, "onBind", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    mContext = ((Service) param.thisObject).getApplicationContext();
-                    if (mSensorManager == null) {
-                        mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-                    }
-                    if (mVibrator == null) {
-                        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-                    }
-                    if (mHandler == null) {
-                        mHandler = new Handler();
-                    }
-                    if (mWakeLock == null) {
-                        PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-                        mWakeLock  = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-                    }
-                    if (DEBUG) log("InCallService.onBind()");
-                }
-            });
-
-            XposedBridge.hookAllMethods(classInCallService, "onCallAdded", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    refreshPhonePrefs();
-                    Call call = (Call) param.args[0];
-                    if (DEBUG) log("onCallAdded: state = " + call.getState());
-                    mCallStateListener.onStateChanged(call, call.getState());
-                    call.registerCallback(mCallStateListener);
-                }
-            });
-
-            XposedBridge.hookAllMethods(classInCallService, "onCallRemoved", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (DEBUG) log("onCallRemoved");
-                    Call call = (Call) param.args[0];
-                    call.unregisterCallback(mCallStateListener);
-                }
-            });
-        } catch(Throwable t) {
             XposedBridge.log(t);
         }
 
@@ -365,77 +173,6 @@ public class ModDialer24 {
             });
         } catch (Throwable t) {
             XposedBridge.log(t);
-        }
-    }
-
-    static class CallStateListener extends android.telecom.Call.Callback {
-        @Override
-        public void onStateChanged(Call call, int state) {
-            if (DEBUG) log("onStateChanged: " +
-                    "is our incoming call: " + (call == mIncomingCall) +
-                    "; is our outgoing call: " + (call == mOutgoingCall) +
-                    "; state=" + state);
-            // keep track of active calls
-            if (state == Call.STATE_ACTIVE && !mActiveCallList.contains(call)) {
-                mActiveCallList.add(call);
-            }
-            // flip actions for incoming call
-            if (state == Call.STATE_RINGING) {
-                if (mIncomingCall == null) {
-                    mIncomingCall = call;
-                    attachSensorListener();
-                }
-            } else if (call == mIncomingCall) {
-                mIncomingCall = null;
-                detachSensorListener();
-            }
-            // vibrate for waiting call
-            if (state == Call.STATE_RINGING && mActiveCallList.size() > 0 &&
-                    mCallVibrations.contains(GravityBoxSettings.CV_WAITING)) {
-                if (DEBUG) log("Vibrating for waiting incoming call");
-                vibrate(200, 300, 500);
-            }
-            // register outgoing call
-            if (state == Call.STATE_DIALING && mOutgoingCall == null) {
-                mOutgoingCall = call;
-            }
-            // vibrate on outgoing connected and periodic
-            if (state == Call.STATE_ACTIVE && call == mOutgoingCall) {
-                if (mCallVibrations.contains(GravityBoxSettings.CV_CONNECTED)) {
-                    if (DEBUG) log("Outgoing call connected; executing vibrate on call connected");
-                    vibrate(100, 0, 0);
-                }
-                if (mCallVibrations.contains(GravityBoxSettings.CV_PERIODIC) &&
-                        mHandler != null) {
-                    if (DEBUG) log("Outgoing call connected; starting periodic vibrations");
-                    mHandler.postDelayed(mPeriodicVibrator, 45000);
-                    if (mWakeLock != null) {
-                        mWakeLock.acquire(46000);
-                        if (DEBUG) log("Partial Wake Lock acquired");
-                    }
-                }
-            }
-            // handle call disconnected
-            if (state == Call.STATE_DISCONNECTED) {
-                if (mActiveCallList.contains(call)) {
-                    mActiveCallList.remove(call);
-                }
-                if (mCallVibrations.contains(GravityBoxSettings.CV_DISCONNECTED)) {
-                    if (DEBUG) log("Call disconnected; executing vibrate on call disconnected");
-                    vibrate(50, 100, 50);
-                }
-                if (call == mOutgoingCall) {
-                    if (DEBUG) log("Our outgoing call disconnected");
-                    mOutgoingCall = null;
-                    if (mHandler != null) {
-                        mHandler.removeCallbacks(mPeriodicVibrator);
-                    }
-                    if (mWakeLock != null && mWakeLock.isHeld()) {
-                        mWakeLock.release();
-                        if (DEBUG) log("Partial Wake Lock released");
-                    }
-                }
-            }
         }
     }
 }

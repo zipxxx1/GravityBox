@@ -72,7 +72,7 @@ public class StatusbarBattery implements IconManagerListener {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                log("Error hooking getFillColor(): " + t.getMessage());
             }
         }
     }
