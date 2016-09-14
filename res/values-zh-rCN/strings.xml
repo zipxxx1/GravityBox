@@ -1914,8 +1914,8 @@
     
     <!-- UNC: LED DND -->
     <string name="pref_lc_led_dnd_title">请勿打扰</string>
-    <string name="pref_lc_led_dnd_summary">禁止对LED选择请勿打扰模式</string>
-    <string name="pref_lc_led_dnd_dialog_title">选择不打扰模式以保持LED熄灭</string>
+    <string name="pref_lc_led_dnd_summary">为选择的勿扰模式关闭LED</string>
+    <string name="pref_lc_led_dnd_dialog_title">选择要在哪些勿扰模式下关闭LED</string>
 
     <!-- WiFi shortcut -->
     <string name="wifi_on">打开WiFi</string>
