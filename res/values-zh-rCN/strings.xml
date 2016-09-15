@@ -462,10 +462,10 @@
     <string name="pref_navbar_enable_title">启用虚拟按键</string>
     <string name="pref_navbar_enable_summary">需要重新启动</string>
     <string name="pref_navbar_height_title">虚拟按键高度</string>
-    <string name="pref_navbar_height_summary">应用于虚拟按键竖屏和纵向</string>
-    <string name="pref_navbar_height_landscape_summary">应用于虚拟按键横屏和纵向</string>
+    <string name="pref_navbar_height_summary">应用于设备竖屏时的水平导航栏</string>
+    <string name="pref_navbar_height_landscape_summary">应用于设备横屏时的水平导航栏</string>
     <string name="pref_navbar_width_title">虚拟按键宽度</string>
-    <string name="pref_navbar_width_summary">应用于虚拟按键横屏和横向</string>
+    <string name="pref_navbar_width_summary">应用于垂直导航栏</string>
     <string name="pref_navbar_menukey_title">总是显示菜单键</string>
     
     <!-- Screenshot in power menu -->
