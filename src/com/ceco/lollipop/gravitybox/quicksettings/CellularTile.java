@@ -4,6 +4,7 @@ import com.ceco.lollipop.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.PhoneWrapper;
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.Utils;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
@@ -49,7 +50,7 @@ public class CellularTile extends AospTile {
 
         mAospKey = aospKey;
 
-        if (isPrimary()) {
+        if (isPrimary() || Utils.isMotoXtDevice()) {
             mTm = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
         }
 
@@ -63,11 +64,16 @@ public class CellularTile extends AospTile {
     }
 
     private boolean isDataTypeIconVisible(Object state) {
+        boolean visible = false;
         try {
-            return (XposedHelpers.getIntField(state, "overlayIconId") != 0);
+            visible |= (XposedHelpers.getIntField(state, "overlayIconId") != 0);
         } catch (Throwable t) {
-            return false;
+            if (DEBUG) log("isDataTypeIconVisible: error getting overlayIconId state: " + t.getMessage());
         }
+        if (Utils.isMotoXtDevice()) {
+            visible |= mTm.isNetworkRoaming();
+        }
+        return visible;
     }
 
     private boolean isSignalNull(Object info) {
