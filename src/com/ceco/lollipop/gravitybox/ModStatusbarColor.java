@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,18 +15,13 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -42,7 +37,6 @@ import de.robv.android.xposed.callbacks.XCallback;
 public class ModStatusbarColor {
     private static final String TAG = "GB:ModStatusbarColor";
     public static final String PACKAGE_NAME = "com.android.systemui";
-    private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_STATUSBAR_ICON_VIEW = "com.android.systemui.statusbar.StatusBarIconView";
     private static final String CLASS_STATUSBAR_ICON = "com.android.internal.statusbar.StatusBarIcon";
@@ -51,57 +45,23 @@ public class ModStatusbarColor {
 
     public static final String ACTION_PHONE_STATUSBAR_VIEW_MADE = "gravitybox.intent.action.PHONE_STATUSBAR_VIEW_MADE";
 
-    private static View mPanelBar;
-    private static List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private static Object mPhoneStatusBar;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("received broadcast: " + intent.toString());
-
-            for (BroadcastSubReceiver bsr : mBroadcastSubReceivers) {
-                bsr.onBroadcastReceived(context, intent);
-            }
-        }
-    };
-
     // in process hooks
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
-            final Class<?> phoneStatusbarViewClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_VIEW, classLoader);
             final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
             final Class<?> statusbarIconViewClass = XposedHelpers.findClass(CLASS_STATUSBAR_ICON_VIEW, classLoader);
             final Class<?> sbTransitionsClass = XposedHelpers.findClass(CLASS_SB_TRANSITIONS, classLoader);
 
-            mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
-
-            XposedBridge.hookAllConstructors(phoneStatusbarViewClass, new XC_MethodHook() {
-
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    mPanelBar = (View) param.thisObject;
-
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_COLOR_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_DISABLE_ROAMING_INDICATORS_CHANGED);
-                    intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED);
-                    mPanelBar.getContext().registerReceiver(mBroadcastReceiver, intentFilter);
-                }
-            });
-
             XposedHelpers.findAndHookMethod(phoneStatusbarClass, 
                     "makeStatusBarView", new XC_MethodHook(XCallback.PRIORITY_LOWEST) {
-
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    prefs.reload();
                     mPhoneStatusBar = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
@@ -117,18 +77,16 @@ public class ModStatusbarColor {
             XposedHelpers.findAndHookMethod(statusbarIconViewClass, "getIcon",
                     CLASS_STATUSBAR_ICON, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (SysUiManagers.IconManager != null && SysUiManagers.IconManager.isColoringEnabled()) {
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (SysUiManagers.IconManager != null && SysUiManagers.IconManager.isColoringEnabled() &&
+                            XposedHelpers.getObjectField(param.thisObject, "mNotification") == null) {
                         final String iconPackage = 
                                 (String) XposedHelpers.getObjectField(param.args[0], "iconPackage");
                         if (DEBUG) log("statusbarIconView.getIcon: iconPackage=" + iconPackage);
-                        if (iconPackage == null || iconPackage.equals(PACKAGE_NAME)) {
-                            final int iconId = XposedHelpers.getIntField(param.args[0], "iconId");
-                            Drawable d = SysUiManagers.IconManager.getBasicIcon(iconId);
-                            if (d != null) {
-                                param.setResult(d);
-                                return;
-                            }
+                        Drawable d = getColoredDrawable(((View)param.thisObject).getContext(),
+                                iconPackage, XposedHelpers.getIntField(param.args[0], "iconId"));
+                        if (d != null) {
+                            param.setResult(d);
                         }
                     }
                 }
@@ -164,6 +122,28 @@ public class ModStatusbarColor {
         }
     };
 
+    private static Drawable getColoredDrawable(Context ctx, String pkg, int iconId) {
+        if (iconId == -1) return null;
+
+        Drawable d = null;
+        if (pkg == null || PACKAGE_NAME.equals(pkg)) {
+            d = SysUiManagers.IconManager.getBasicIcon(iconId);
+            if (d != null) {
+                return d;
+            }
+        }
+        d = ctx.getDrawable(iconId);
+        if (d != null) {
+            if (SysUiManagers.IconManager.isColoringEnabled()) {
+                d = SysUiManagers.IconManager.applyColorFilter(d.mutate(),
+                        PorterDuff.Mode.SRC_IN);
+            } else {
+                d.clearColorFilter();
+            }
+        }
+        return d;
+    }
+
     private static void updateStatusIcons(String statusIcons) {
         if (mPhoneStatusBar == null) return;
         try {
@@ -178,15 +158,10 @@ public class ModStatusbarColor {
                 if (sbIcon != null) {
                     final String iconPackage =
                             (String) XposedHelpers.getObjectField(sbIcon, "iconPackage");
-                    if (iconPackage == null || iconPackage.equals(PACKAGE_NAME)) {
-                        final int resId = XposedHelpers.getIntField(sbIcon, "iconId");
-                        Drawable d = null;
-                        if (SysUiManagers.IconManager != null) {
-                            d = SysUiManagers.IconManager.getBasicIcon(resId);
-                        }
-                        if (d != null) {
-                            v.setImageDrawable(d);
-                        }
+                    Drawable d = getColoredDrawable(v.getContext(), iconPackage,
+                            XposedHelpers.getIntField(sbIcon, "iconId"));
+                    if (d != null) {
+                        v.setImageDrawable(d);
                     }
                 }
             }
