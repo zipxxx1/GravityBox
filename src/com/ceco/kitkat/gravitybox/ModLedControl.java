@@ -257,9 +257,10 @@ public class ModLedControl {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, null, "enqueueNotificationWithTag",
-                    String.class, String.class, String.class, int.class, Notification.class, 
-                    int[].class, int.class, notifyHook);
+            XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, null,
+                    "enqueueNotificationInternal", String.class, String.class,
+                        int.class, int.class, String.class, int.class, Notification.class, 
+                        int[].class, int.class, notifyHook);
 
             XposedHelpers.findAndHookMethod(CLASS_STATUSBAR_MGR_SERVICE, null, "onPanelRevealed", 
                     new XC_MethodHook() {
@@ -304,7 +305,7 @@ public class ModLedControl {
                     return;
                 }
 
-                Notification n = (Notification) param.args[4];
+                Notification n = (Notification) param.args[6];
                 if (n.extras.containsKey("gbIgnoreNotification")) return;
 
                 final String pkgName = (String) param.args[0];
@@ -338,7 +339,7 @@ public class ModLedControl {
                         ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(param.thisObject, "mNotificationList");
                         synchronized (notifList) {
                             int index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
-                                    param.args[0], param.args[2], param.args[3], param.args[6]);
+                                    param.args[0], param.args[4], param.args[5], param.args[8]);
                             if (index >= 0) {
                                 Object oldNotif = notifList.get(index);
                                 if (oldNotif != null) {
@@ -348,7 +349,10 @@ public class ModLedControl {
                                 }
                             }
                         }
-                    } catch (Throwable t) { /* yet another vendor messing with the internals... */ }
+                    } catch (Throwable t) {
+                        /* yet another vendor messing with the internals... */
+                        if (DEBUG) XposedBridge.log(t);
+                    }
                 }
 
                 if (isOngoing && !ls.getOngoing() && !qhActive) {
@@ -462,7 +466,7 @@ public class ModLedControl {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
-                Notification n = (Notification) param.args[4];
+                Notification n = (Notification) param.args[6];
                 if (!n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) || !(mPm != null && 
                         !mPm.isScreenOn() && mKm.isKeyguardLocked()))
                     return;
