@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import java.lang.reflect.Constructor;
+
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
@@ -13,12 +15,34 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public abstract class QsTile extends BaseTile {
-    public static final String DUMMY_INTENT = "intent(dummy)";
-    public static final String CLASS_INTENT_TILE = "com.android.systemui.qs.tiles.IntentTile";
-
+    private static HostTileClassInfo sHostTileClassInfo;
     private static Class<?> sResourceIconClass;
 
+    public static class HostTileClassInfo {
+        public String className;
+        public String stateClassName;
+        public HostTileClassInfo(String cn, String scn) {
+            className = cn;
+            stateClassName = scn;
+        }
+    }
+
     protected State mState;
+
+    public static HostTileClassInfo getHostTileClassInfo(ClassLoader cl) {
+        if (sHostTileClassInfo == null) {
+            try {
+                sHostTileClassInfo = new HostTileClassInfo(
+                    XposedHelpers.findClass("com.android.systemui.qs.tiles.IntentTile", cl).getName(),
+                    XposedHelpers.findClass("com.android.systemui.qs.QSTile.State", cl).getName());
+            } catch (Throwable t) {
+                sHostTileClassInfo = new HostTileClassInfo(
+                    XposedHelpers.findClass("com.android.systemui.qs.tiles.AirplaneModeTile", cl).getName(),
+                    XposedHelpers.findClass("com.android.systemui.qs.QSTile.BooleanState", cl).getName());
+            }
+        }
+        return sHostTileClassInfo;
+    }
 
     public static QsTile create(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -83,13 +107,26 @@ public abstract class QsTile extends BaseTile {
 
         mState = new State(mKey, mEventDistributor.isResourceIconHooked());
 
-        mTile = XposedHelpers.callStaticMethod(XposedHelpers.findClass(
-                CLASS_INTENT_TILE, mContext.getClassLoader()),
-                "create", mHost, DUMMY_INTENT);
+        mTile = createTileObject();
         XposedHelpers.setAdditionalInstanceField(mTile, TILE_KEY_NAME, mKey);
 
         if (Build.VERSION.SDK_INT >= 22 && sResourceIconClass == null) {
             sResourceIconClass = getResourceIconClass(mContext.getClassLoader());
+        }
+    }
+
+    private Object createTileObject() throws Throwable {
+        String hostTileClassName = getHostTileClassInfo(mContext.getClassLoader()).className;
+        if (hostTileClassName.endsWith("AirplaneModeTile")) {
+            Constructor<?> c = XposedHelpers.findConstructorExact(hostTileClassName,
+                    mContext.getClassLoader(), XposedHelpers.findClass(
+                            "com.android.systemui.qs.QSTile.Host",
+                                mContext.getClassLoader()));
+            return c.newInstance(mHost);
+        } else {
+            return XposedHelpers.callStaticMethod(XposedHelpers.findClass(
+                    hostTileClassName, mContext.getClassLoader()),
+                    "create", mHost, "intent(dummy)");
         }
     }
 

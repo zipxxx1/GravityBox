@@ -12,6 +12,7 @@ import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.PhoneWrapper;
 import com.ceco.lollipop.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
+import com.ceco.lollipop.gravitybox.quicksettings.QsTile.HostTileClassInfo;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -134,39 +135,40 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
             mContext = (Context) XposedHelpers.callMethod(mHost, "getContext");
             ClassLoader cl = mContext.getClassLoader();
 
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl, "handleUpdateState",
-                    QsTile.CLASS_TILE_STATE, Object.class, new XC_MethodHook() {
+            final HostTileClassInfo hostTileClassInfo = QsTile.getHostTileClassInfo(cl);
+            XposedHelpers.findAndHookMethod(hostTileClassInfo.className, cl, "handleUpdateState",
+                    hostTileClassInfo.stateClassName, Object.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                    if (l != null) {
+                    if (l instanceof QsTile) {
                         l.handleUpdateState(param.args[0], param.args[1]);
                         param.setResult(null);
                     }
                 }
             });
 
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl, "handleClick",
+            XposedHelpers.findAndHookMethod(hostTileClassInfo.className, cl, "handleClick",
                     new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                    if (l != null) {
+                    if (l instanceof QsTile) {
                         l.handleClick();
                         param.setResult(null);
                     }
                 }
             });
 
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl, "setListening",
+            XposedHelpers.findAndHookMethod(hostTileClassInfo.className, cl, "setListening",
                     boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                    if (l != null) {
+                    if (l instanceof QsTile) {
                         l.setListening((boolean)param.args[0]);
                         param.setResult(null);
                     }
@@ -308,8 +310,10 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                         }
                     }
                 };
-                XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl,
+                if (hostTileClassInfo.className.endsWith("IntentTile")) {
+                    XposedHelpers.findAndHookMethod(hostTileClassInfo.className, cl,
                         "handleLongClick", longClickHook);
+                }
                 XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl,
                         "handleLongClick", longClickHook);
 
