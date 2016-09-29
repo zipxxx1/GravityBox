@@ -1,3 +1,29 @@
+Changelog 3.7.0 - 29/09/2016
+--------------------------------------
+- Lockscreen: added option for PIN scrambling
+- Statusbar tweaks:
+--- Battery: added option for battery percent text position in status bar
+--- Improved layout of circle battery 
+--- Added option for hiding vibrate icon 
+--- Ongoing notification blocker: include non-clearable notifications in general
+- Navigation bar tweaks:
+--- Added option for auto-fading soft keys
+--- Extended custom key icon style to allow transparent and custom icon
+- GB Actions extended:
+--- most of the toggle actions now have explicit on/off shortcuts available
+--- makes things easier for Tasker users
+--- provides feedback in form of toast when action gets executed (optional)
+- Ultimate notification control:
+--- adjusted LED on/off duration limits
+--- added options for Replace mode of overriden vibration/sound (turned on by default)
+----- applies overriden vibration/sound only in case original notification has vibration/sound
+----- prevents low priority notifications from vibrating/playing overriden sound 
+--- ActiveScreen: don't perform for low priority notifications
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Hungarian translations (thanks to benjoe1)
+
 Changelog 3.6.1 - 28/02/2016
 --------------------------------------
 - NetworkMode tile: redesigned for simplicity and flexibility:
