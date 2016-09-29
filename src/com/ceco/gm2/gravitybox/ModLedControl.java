@@ -408,6 +408,7 @@ public class ModLedControl {
                 if (ls.getEnabled()) {
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
+                            n.priority > Notification.PRIORITY_MIN &&
                             !qhActiveIncludingActiveScreen && !isOngoing && mPm != null && mKm.isKeyguardLocked()) {
                         extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
                                 ls.getActiveScreenMode().toString());
