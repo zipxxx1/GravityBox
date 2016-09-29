@@ -671,13 +671,13 @@ public class ModStatusBar {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final Object notif = param.args[1];
                     final String pkg = (String) XposedHelpers.getObjectField(notif, "pkg");
-                    final boolean ongoing = (Boolean) XposedHelpers.callMethod(notif, "isOngoing");
+                    final boolean clearable = (Boolean) XposedHelpers.callMethod(notif, "isClearable");
                     final int id = (Integer) XposedHelpers.getIntField(notif, "id");
                     final Notification n = (Notification) XposedHelpers.getObjectField(notif, "notification");
                     if (DEBUG) log ("addNotificationViews: pkg=" + pkg + "; id=" + id + 
-                                    "; iconId=" + n.icon + "; ongoing=" + ongoing);
+                                    "; iconId=" + n.icon + "; clearable=" + clearable);
 
-                    if (!ongoing) return;
+                    if (clearable) return;
 
                     // store if new
                     final String notifData = pkg + "," + n.icon;
