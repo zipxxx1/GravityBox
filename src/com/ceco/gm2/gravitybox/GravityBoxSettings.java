@@ -11,6 +11,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modifications copyright (C) 2016 Aire-One (Aire-One@xda ; Aire-One@github)
  */
 
 package com.ceco.gm2.gravitybox;
@@ -125,6 +127,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
     public static final int BATTERY_WARNING_POPUP = 1;
     public static final int BATTERY_WARNING_SOUND = 2;
+    public static final int BATTERY_WARNING_CUSTOMSOUND = 4; // 4 for checkes only if the first bit matches but should be 6 to check the whole bits
+    public static final String PREF_KEY_LOW_BATTERY_WARNING_CUSTOMSOUND = "pref_battery_warning_customsound";
     public static final String PREF_KEY_BATTERY_CHARGED_SOUND = "pref_battery_charged_sound2";
     public static final String PREF_KEY_CHARGER_PLUGGED_SOUND = "pref_charger_plugged_sound2";
     public static final String PREF_KEY_CHARGER_UNPLUGGED_SOUND = "pref_charger_unplugged_sound";
@@ -915,7 +919,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     private static final List<String> ringToneKeys = new ArrayList<String>(Arrays.asList(
             PREF_KEY_BATTERY_CHARGED_SOUND,
             PREF_KEY_CHARGER_PLUGGED_SOUND,
-            PREF_KEY_CHARGER_UNPLUGGED_SOUND
+            PREF_KEY_CHARGER_UNPLUGGED_SOUND,
+            PREF_KEY_LOW_BATTERY_WARNING_CUSTOMSOUND
     ));
 
     private static final List<String> lockscreenKeys = new ArrayList<String>(Arrays.asList(
@@ -1100,6 +1105,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefBatteryPercentStyle;
         private ListPreference mPrefBatteryPercentCharging;
         private ListPreference mLowBatteryWarning;
+        private RingtonePreference mPrefLowBatteryWarningCustomsound;
         private MultiSelectListPreference mSignalIconAutohide;
         private SharedPreferences mPrefs;
         private AlertDialog mDialog;
@@ -1329,6 +1335,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefBatteryPercentStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_STYLE);
             mPrefBatteryPercentCharging = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING);
             mLowBatteryWarning = (ListPreference) findPreference(PREF_KEY_LOW_BATTERY_WARNING_POLICY);
+            mPrefLowBatteryWarningCustomsound = (RingtonePreference) findPreference(PREF_KEY_LOW_BATTERY_WARNING_CUSTOMSOUND);
             mSignalIconAutohide = (MultiSelectListPreference) findPreference(PREF_KEY_SIGNAL_ICON_AUTOHIDE);
             mQuickSettings = (MultiSelectListPreference) findPreference(PREF_KEY_QUICK_SETTINGS);
             mStatusbarBgColor = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_BGCOLOR);
@@ -2052,6 +2059,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_LOW_BATTERY_WARNING_POLICY)) {
                 mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
+
+                final int val = Integer.parseInt(mLowBatteryWarning.getValue());
+                if(val == 6)
+                    mPrefLowBatteryWarningCustomsound.setEnabled(true);
+                else
+                    mPrefLowBatteryWarningCustomsound.setEnabled(false);
             }
 
             if (key == null || key.equals(PREF_KEY_SIGNAL_ICON_AUTOHIDE)) {
@@ -3217,6 +3230,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_UNPLUGGED);
                 intent.putExtra(EXTRA_BATTERY_SOUND_URI,
                         prefs.getString(PREF_KEY_CHARGER_UNPLUGGED_SOUND, ""));
+            } else if (key.equals(PREF_KEY_LOW_BATTERY_WARNING_CUSTOMSOUND)) {
+                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_LOWBATTERY);
+                intent.putExtra(EXTRA_BATTERY_SOUND_URI,
+                        prefs.getString(PREF_KEY_LOW_BATTERY_WARNING_CUSTOMSOUND, ""));
             } else if (key.equals(PREF_KEY_TRANS_VERIFICATION)) {
                 String transId = prefs.getString(key, null);
                 if (transId != null && !transId.trim().isEmpty()) {
