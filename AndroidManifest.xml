@@ -12,14 +12,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Modifications copyright (C) 2016 Aire-One (Aire-One@xda ; Aire-One@github)
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ceco.gm2.gravitybox"
     android:versionCode="132"
-    android:versionName="3.7.1" >
+    android:versionName="3.7.0" >
 
     <uses-sdk
         android:minSdkVersion="16"
