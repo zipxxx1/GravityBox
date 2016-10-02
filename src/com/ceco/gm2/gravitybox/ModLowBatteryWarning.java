@@ -11,16 +11,26 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modifications copyright (C) 2016 Aire-One (Aire-One@xda ; Aire-One@github)
  */
 
 package com.ceco.gm2.gravitybox;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+
+import android.app.Activity;
+import android.app.AndroidAppHelper;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.util.Log;
 
 import com.ceco.gm2.gravitybox.Utils.MethodState;
 
@@ -156,7 +166,7 @@ public class ModLowBatteryWarning {
         }
     }
 
-    static void init(final XSharedPreferences prefs, ClassLoader classLoader) {
+    static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             if (DEBUG) log("init");
 
@@ -182,10 +192,26 @@ public class ModLowBatteryWarning {
                     final int batteryWarningPolicy = Integer.valueOf(
                             prefs.getString(GravityBoxSettings.PREF_KEY_LOW_BATTERY_WARNING_POLICY, "3"));
                     final boolean playSound = ((batteryWarningPolicy & GravityBoxSettings.BATTERY_WARNING_SOUND) != 0);
+                    final boolean customSound = ((batteryWarningPolicy & GravityBoxSettings.BATTERY_WARNING_CUSTOMSOUND) != 0);
 
-                    if (DEBUG) log("playLowBatterySound called; playSound = " + playSound);
-                    
-                    if (!playSound)
+                    if (DEBUG) log("playLowBatterySound called; playSound = " + playSound + " ; customSound = " + customSound);
+
+                    if (customSound) {
+                        Uri sound = null;
+                        try {
+                            sound = Uri.parse(prefs.getString(GravityBoxSettings.PREF_KEY_LOW_BATTERY_WARNING_CUSTOMSOUND, ""));
+                            final Ringtone sfx = RingtoneManager.getRingtone(AndroidAppHelper.currentApplication(), sound); // any better way to get context ?
+                            if (sfx != null) {
+                                sfx.setStreamType(AudioManager.STREAM_NOTIFICATION);
+                                sfx.play();
+                            }
+                        } catch (Throwable t) {
+                            XposedBridge.log(t);
+                        }
+                        param.setResult(null);
+                    }
+
+                    if (!playSound || customSound)
                         param.setResult(null);
                 }
 
