@@ -1491,5 +1491,8 @@
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">隱藏啟動器圖示</string>
     <string name="pref_hide_launcher_icon_summary">可能需要重新啟動啟動器方能生效</string>
+    <string name="pref_lc_led_dnd_dialog_title">選擇要在哪些勿擾模式下關閉LED</string>
+    <string name="pref_lc_led_dnd_summary">爲選擇的勿擾模式關閉LED</string>
+    <string name="pref_lc_led_dnd_title">請勿打擾</string>
 
 </resources>
