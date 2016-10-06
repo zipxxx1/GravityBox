@@ -75,6 +75,12 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new XperiaTile(host, aospKey, tile, prefs, eventDistributor);
         }
 
+        // Moto
+        if (Utils.isMotoXtDevice() &&
+            MotoTile.MOTO_KEYS.contains(aospKey)) {
+            return new MotoTile(host, aospKey, tile, prefs, eventDistributor);
+        }
+
         return null;
     }
 

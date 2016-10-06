@@ -2010,4 +2010,7 @@
     <string name="pref_charger_plugged_sound_wireless_title">Wireless charging sound</string>
     <string name="stock_wireless_sound">Stock wireless sound</string>
 
+    <!-- QS: Moto Data tile -->
+    <string name="qs_tile_moto_data">Data (Moto)</string>
+
 </resources>
