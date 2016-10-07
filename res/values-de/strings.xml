@@ -803,7 +803,7 @@
     <string name="shortcut_nfc">NFC an/aus</string>
 
     <!-- Pie category summary -->
-    <string name="pie_control_summary">Enthält PIE-EInstellungen</string>
+    <string name="pie_control_summary">Enthält PIE-Einstellungen</string>
 
     <!-- Shortcut for Google Now -->
     <string name="shortcut_google_now">Google Now</string>
@@ -1675,7 +1675,7 @@
 
     <!-- Signal cluster: Disable exclamation marks -->
     <string name="pref_signal_cluster_dem_title">Deaktiviere Ausrufezeichen</string>
-    <string name="pref_signal_cluster_dem_summary">Erforder Neustart</string>
+    <string name="pref_signal_cluster_dem_summary">Neustart erforderlich</string>
 
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Ton-zu-Vibration Umwandlung deaktivieren</string>
