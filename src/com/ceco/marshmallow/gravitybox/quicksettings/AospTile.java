@@ -81,6 +81,9 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new MotoTile(host, aospKey, tile, prefs, eventDistributor);
         }
 
+        log("Unknown stock tile: key=" + aospKey + "; class=" +
+                (tile == null ? "null" : tile.getClass().getName()));
+
         return null;
     }
 
