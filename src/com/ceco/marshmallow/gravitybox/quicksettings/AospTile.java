@@ -140,7 +140,9 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
                     mTile.getClass().getName(), cl, "handleClick", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (onBeforeHandleClick()) {
+                    if (mKey.equals(XposedHelpers.getAdditionalInstanceField(
+                            param.thisObject, BaseTile.TILE_KEY_NAME)) &&
+                            onBeforeHandleClick()) {
                         param.setResult(null);
                     }
                 }
