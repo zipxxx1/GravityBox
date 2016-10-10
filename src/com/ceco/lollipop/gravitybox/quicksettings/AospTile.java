@@ -53,6 +53,9 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
         else if (MtkTimeoutTile.AOSP_KEY.equals(aospKey))
             return new MtkTimeoutTile(host, tile, prefs, eventDistributor);
 
+        log("Unknown stock tile: key=" + aospKey + "; class=" +
+                (tile == null ? "null" : tile.getClass().getName()));
+
         return null;
     }
 
