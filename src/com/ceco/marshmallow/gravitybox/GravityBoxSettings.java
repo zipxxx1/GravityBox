@@ -603,6 +603,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_SB_DT2S = "sbDt2s";
 
     public static final String PREF_CAT_KEY_PHONE_TELEPHONY = "pref_cat_phone_telephony";
+    public static final String PREF_CAT_KEY_PHONE_DIALER = "pref_cat_phone_dialer";
     public static final String PREF_CAT_KEY_PHONE_MESSAGING = "pref_cat_phone_messaging";
     public static final String PREF_CAT_KEY_PHONE_MOBILE_DATA = "pref_cat_phone_mobile_data";
 
@@ -1232,6 +1233,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefMusicVolumeSteps;
         private SeekBarPreference mPrefMusicVolumeStepsValue;
         private PreferenceCategory mPrefCatPhoneTelephony;
+        private PreferenceCategory mPrefCatPhoneDialer;
         private PreferenceCategory mPrefCatPhoneMessaging;
         private PreferenceCategory mPrefCatPhoneMobileData;
         private ListPreference mPrefQsNetworkModeSimSlot;
@@ -1489,6 +1491,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNavbarCustomKeyDoubletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP);
 
             mPrefCatPhoneTelephony = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_TELEPHONY);
+            mPrefCatPhoneDialer = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_DIALER);
             mPrefCatPhoneMessaging = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_MESSAGING);
             mPrefCatPhoneMobileData = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_MOBILE_DATA);
             mPrefCallVibrations = (MultiSelectListPreference) findPreference(PREF_KEY_CALL_VIBRATIONS);
@@ -1652,14 +1655,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 hasDialer |= Utils.isAppInstalled(getActivity(), pkg);
             }
             if (!hasDialer) {
-                Preference p = findPreference(PREF_KEY_CALLER_FULLSCREEN_PHOTO);
-                if (p != null) mPrefCatPhoneTelephony.removePreference(p);
-                p = findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE);
-                if (p != null) mPrefCatPhoneTelephony.removePreference(p);
-                p = findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO);
-                if (p != null) mPrefCatPhoneTelephony.removePreference(p);
-                p = findPreference(PREF_KEY_DIALER_SHOW_DIALPAD);
-                if (p != null) mPrefCatPhoneTelephony.removePreference(p);
+                mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
             }
 
             // Remove MTK specific preferences for non-MTK devices

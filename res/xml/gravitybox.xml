@@ -1834,6 +1834,12 @@
                 android:dialogTitle="@string/pref_increasing_ring_title"
                 gb:streamType="ring" />
 
+        </PreferenceCategory>
+
+        <PreferenceCategory
+            android:key="pref_cat_phone_dialer"
+            android:title="@string/pref_cat_phone_dialer_title">
+
             <CheckBoxPreference 
                 android:key="pref_caller_fullscreen_photo3"
                 android:title="@string/caller_fullscreen_photo_title"

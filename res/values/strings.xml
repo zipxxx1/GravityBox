@@ -2013,4 +2013,7 @@
     <!-- QS: Moto Data tile -->
     <string name="qs_tile_moto_data">Data (Moto)</string>
 
+    <!-- Dialer category -->
+    <string name="pref_cat_phone_dialer_title">Dialer</string>
+
 </resources>
