@@ -2021,5 +2021,8 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">无线充电声音</string>
     <string name="stock_wireless_sound">原厂声音</string>
-	
+
+    <!-- Dialer category -->
+    <string name="pref_cat_phone_dialer_title">拨号器</string>
+
 </resources>

@@ -2022,4 +2022,7 @@
     <string name="pref_charger_plugged_sound_wireless_title">Wireless charging sound</string>
     <string name="stock_wireless_sound">Stock wireless sound</string>
 
+    <!-- Dialer category -->
+    <string name="pref_cat_phone_dialer_title">Dialer</string>
+
 </resources>

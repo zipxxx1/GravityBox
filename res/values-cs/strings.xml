@@ -1959,4 +1959,7 @@
     <string name="pref_charger_plugged_sound_wireless_title">Zvuk bezdrátového nabíjení</string>
     <string name="stock_wireless_sound">Systémový zvuk bezdrátového nabíjení</string>
 
+    <!-- Dialer category -->
+    <string name="pref_cat_phone_dialer_title">Dialer</string>
+
 </resources>
