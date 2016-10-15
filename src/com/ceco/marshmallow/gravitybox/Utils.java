@@ -20,6 +20,7 @@ import de.robv.android.xposed.XposedHelpers;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
@@ -28,6 +29,11 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
@@ -420,6 +426,15 @@ public class Utils {
         }
     }
 
+    public static PackageInfo getPackageInfo(Context context, String appUri) {
+        try {
+            PackageManager pm = context.getPackageManager(); 
+            return pm.getPackageInfo(appUri, PackageManager.GET_ACTIVITIES);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static void copyFile(File source, File dest) throws IOException { 
         InputStream input = null; 
         OutputStream output = null; 
@@ -528,6 +543,29 @@ public class Utils {
 
         return maxEntry.getKey();
     }
+
+    public static Bitmap getCircleBitmap(Bitmap bitmap) {
+        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(output);
+
+        final int color = Color.RED;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawOval(rectF, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        bitmap.recycle();
+
+        return output;
+   }
 
     public static void performSoftReboot() {
         try {

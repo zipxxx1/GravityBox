@@ -1650,12 +1650,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             // remove Dialer features if Dialer package unavailable
-            boolean hasDialer = false;
+            PackageInfo pi = null;
             for (String pkg : ModDialer.PACKAGE_NAMES) {
-                hasDialer |= Utils.isAppInstalled(getActivity(), pkg);
+                pi = Utils.getPackageInfo(getActivity(), pkg);
+                if (pi != null) break;
             }
-            if (!hasDialer) {
+            if (pi == null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
+            } else if (pi.applicationInfo.targetSdkVersion == 25) {
+                Preference p = findPreference(PREF_KEY_CALLER_FULLSCREEN_PHOTO);
+                if (p != null) mPrefCatPhoneDialer.removePreference(p);
             }
 
             // Remove MTK specific preferences for non-MTK devices
