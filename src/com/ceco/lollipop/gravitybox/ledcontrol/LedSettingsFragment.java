@@ -65,6 +65,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_DEFAULT_SETTINGS = "pref_lc_default_settings";
     private static final String PREF_CAT_KEY_ACTIVE_SCREEN = "pref_cat_lc_active_screen";
     private static final String PREF_KEY_ACTIVE_SCREEN_MODE = "pref_lc_active_screen_mode";
+    private static final String PREF_KEY_ACTIVE_SCREEN_IGNORE_UPDATE = "pref_lc_active_screen_ignore_update";
     private static final String PREF_KEY_LED_MODE = "pref_lc_led_mode";
     private static final String PREF_CAT_KEY_QH = "pref_cat_lc_quiet_hours";
     private static final String PREF_KEY_QH_IGNORE = "pref_lc_qh_ignore";
@@ -101,6 +102,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private SwitchPreference mDefaultSettingsPref;
     private PreferenceCategory mActiveScreenCat;
     private ListPreference mActiveScreenModePref;
+    private CheckBoxPreference mActiveScreenIgnoreUpdatePref;
     private ListPreference mLedModePref;
     private PreferenceCategory mQhCat;
     private CheckBoxPreference mQhIgnorePref;
@@ -141,6 +143,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mActiveScreenCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_ACTIVE_SCREEN);
         mActiveScreenModePref = (ListPreference) findPreference(PREF_KEY_ACTIVE_SCREEN_MODE);
         mActiveScreenModePref.setOnPreferenceChangeListener(this);
+        mActiveScreenIgnoreUpdatePref = (CheckBoxPreference) findPreference(PREF_KEY_ACTIVE_SCREEN_IGNORE_UPDATE);
         mLedModePref = (ListPreference) findPreference(PREF_KEY_LED_MODE);
         mLedModePref.setOnPreferenceChangeListener(this);
         mQhCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_QH);
@@ -192,6 +195,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         } else {
             mActiveScreenModePref.setValue(ledSettings.getActiveScreenMode().toString());
             mActiveScreenModePref.setSummary(mActiveScreenModePref.getEntry());
+            mActiveScreenIgnoreUpdatePref.setChecked(ledSettings.getActiveScreenIgnoreUpdate());
         }
         mLedModePref.setValue(ledSettings.getLedMode().toString());
         updateLedModeDependentState();
@@ -305,6 +309,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected ActiveScreenMode getActiveScreenMode() {
         return ActiveScreenMode.valueOf(mActiveScreenModePref.getValue());
+    }
+
+    protected boolean getActiveScreenIgnoreUpdate() {
+        return mActiveScreenIgnoreUpdatePref.isChecked();
     }
 
     protected LedMode getLedMode() {

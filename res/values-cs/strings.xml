@@ -1967,4 +1967,9 @@
     <string name="pref_qs_brightness_icon_summary">Zobrazí ikonu indikující aktuální režim jasu. 
         Přepne adaptivní jas ťuknutím, otevře nastavení obrazovky dlouhým podržením.</string>
 
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">Ignorovat aktualizováno oznámení</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Nezobrazí aktivní obrazovku v případě, 
+        že je stávající oznámení aktualizováno</string>
+
 </resources>

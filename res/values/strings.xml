@@ -2030,4 +2030,9 @@
     <string name="pref_qs_brightness_icon_summary">Shows icon indicating current brightness mode. 
         Toggles adaptive brightness on single-press, opens display settings on long-press.</string>
 
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">Ignore updated notifications</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Won\'t perform Active screen when 
+        existing notification gets updated</string>
+
 </resources>
