@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -193,6 +193,7 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
         mLedSettings.setVibrateOverride(mPrefsFragment.getVibrateOverride());
         mLedSettings.setVibratePatternFromString(mPrefsFragment.getVibratePatternAsString());
         mLedSettings.setActiveScreenMode(mPrefsFragment.getActiveScreenMode());
+        mLedSettings.setActiveScreenIgnoreUpdate(mPrefsFragment.getActiveScreenIgnoreUpdate());
         mLedSettings.setLedMode(mPrefsFragment.getLedMode());
         mLedSettings.setQhIgnore(mPrefsFragment.getQhIgnore());
         mLedSettings.setQhIgnoreList(mPrefsFragment.getQhIgnoreList());

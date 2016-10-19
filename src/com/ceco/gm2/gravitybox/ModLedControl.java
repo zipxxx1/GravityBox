@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -274,6 +274,15 @@ public class ModLedControl {
 
                 if (pkgName.equals(PACKAGE_NAME_GRAVITYBOX) && id >= 2049) return;
 
+                Notification oldN = null;
+                if (Build.VERSION.SDK_INT == 16) {
+                    oldN = getOldNotification(param.args[0], param.args[1], param.args[2], 0);
+                } else if (Build.VERSION.SDK_INT == 17) {
+                    oldN = getOldNotification(param.args[0], param.args[1], param.args[2], param.args[5]);
+                } else if (Build.VERSION.SDK_INT == 18) {
+                    oldN = getOldNotification(param.args[0], param.args[2], param.args[3], param.args[6]);
+                }
+
                 LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
                 if (!ls.getEnabled()) {
                     // use default settings in case they are active
@@ -296,41 +305,18 @@ public class ModLedControl {
                     extras.putBoolean(NOTIF_EXTRA_PROGRESS_TRACKING, ls.getProgressTracking());
                 }
 
+                // whether to ignore ongoing notification
                 boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
                         (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);
                 // additional check if old notification had a foreground service flag set since it seems not to be propagated
                 // for updated notifications (until Notification gets processed by WorkerHandler which is too late for us)
-                if (!isOngoing) {
-                    try {
-                        ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(param.thisObject, "mNotificationList");
-                        synchronized (notifList) {
-                            int index = -1;
-                            if (Build.VERSION.SDK_INT == 16) { // 4.1
-                                index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
-                                            param.args[0], param.args[1], param.args[2]);
-                            } else if (Build.VERSION.SDK_INT == 17) { // 4.2
-                                index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
-                                        param.args[0], param.args[1], param.args[2], param.args[5]);
-                            } else { // 4.3
-                                index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
-                                        param.args[0], param.args[2], param.args[3], param.args[6]);
-                            }
-                            if (index >= 0) {
-                                Object oldNotif = notifList.get(index);
-                                if (oldNotif != null) {
-                                    Notification oldN = Build.VERSION.SDK_INT == 18 ?
-                                            (Notification) XposedHelpers.callMethod(oldNotif, "getNotification") :
-                                                (Notification) XposedHelpers.getObjectField(oldNotif, "notification");
-                                    if ((oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0) {
-                                        n.flags |= Notification.FLAG_FOREGROUND_SERVICE | 
-                                                Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
-                                        isOngoing = true;
-                                    }
-                                    if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
-                                }
-                            }
-                        }
-                    } catch (Throwable t) { /* yet another vendor messing with the internals... */ }
+                if (!isOngoing && oldN != null) {
+                    if ((oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0) {
+                        n.flags |= Notification.FLAG_FOREGROUND_SERVICE | 
+                                Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+                        isOngoing = true;
+                    }
+                    if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
                 }
 
                 if (isOngoing && !ls.getOngoing() && !qhActive) {
@@ -407,7 +393,8 @@ public class ModLedControl {
 
                 if (ls.getEnabled()) {
                     // active screen mode
-                    if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
+                    if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED &&
+                            !(ls.getActiveScreenIgnoreUpdate() && oldN != null) &&
                             n.priority > Notification.PRIORITY_MIN &&
                             !qhActiveIncludingActiveScreen && !isOngoing && mPm != null && mKm.isKeyguardLocked()) {
                         extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
@@ -451,6 +438,33 @@ public class ModLedControl {
             }
         }
     };
+
+    private static Notification getOldNotification(Object pkg, Object tag, Object id, Object userId) {
+        Notification oldNotif = null;
+        try {
+            ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(
+                    mNotifManagerService, "mNotificationList");
+            synchronized (notifList) {
+                int index = Build.VERSION.SDK_INT == 16 ? (Integer) XposedHelpers.callMethod(
+                        mNotifManagerService, "indexOfNotificationLocked", pkg, tag, id) :
+                            (Integer) XposedHelpers.callMethod(
+                                    mNotifManagerService, "indexOfNotificationLocked",
+                                        pkg, tag, id, userId);
+                            
+                if (index >= 0) {
+                    Object oldNotifRecord = notifList.get(index);
+                    oldNotif = Build.VERSION.SDK_INT == 18 ?
+                            (Notification) XposedHelpers.callMethod(oldNotifRecord, "getNotification") :
+                            (Notification) XposedHelpers.getObjectField(oldNotif, "notification");
+                }
+            }
+        } catch (Throwable t) {
+            log("Error in getOldNotification: " + t.getMessage());
+            if (DEBUG) XposedBridge.log(t);
+        }
+        if (DEBUG) log("getOldNotification: is old notification: " + (oldNotif != null));
+        return oldNotif;
+    }
 
     private static boolean isRingerModeVibrate() {
         try {
