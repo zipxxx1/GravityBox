@@ -594,7 +594,15 @@
                 android:key="pref_qs_hide_brightness"
                 android:title="@string/pref_qs_hide_brightness_title"
                 android:defaultValue="false"
-                android:dependency="pref_qs_management_enable" />
+                android:dependency="pref_qs_management_enable"
+                android:disableDependentsState="true" />
+
+            <CheckBoxPreference 
+                android:key="pref_qs_brightness_icon"
+                android:title="@string/pref_qs_brightness_icon_title"
+                android:summary="@string/pref_qs_brightness_icon_summary"
+                android:defaultValue="false"
+                android:dependency="pref_qs_hide_brightness" />
 
         </PreferenceScreen>
 

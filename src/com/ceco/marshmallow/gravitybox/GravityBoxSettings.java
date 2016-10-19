@@ -98,6 +98,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICK_PULLDOWN = "pref_quick_pulldown";
     public static final String PREF_KEY_QUICK_PULLDOWN_SIZE = "pref_quick_pulldown_size";
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS = "pref_qs_hide_brightness";
+    public static final String PREF_KEY_QS_BRIGHTNESS_ICON = "pref_qs_brightness_icon";
     public static final String PREF_KEY_QS_SCALE_CORRECTION = "pref_qs_scale_correction";
     public static final int QUICK_PULLDOWN_OFF = 0;
     public static final int QUICK_PULLDOWN_RIGHT = 1;
@@ -537,6 +538,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_QS_HIDE_ON_CHANGE = "qsHideOnChange";
     public static final String EXTRA_QS_TILE_LABEL_STYLE = "qsTileLabelStyle";
     public static final String EXTRA_QS_HIDE_BRIGHTNESS = "qsHideBrightness";
+    public static final String EXTRA_QS_BRIGHTNESS_ICON = "qsBrightnessIcon";
     public static final String EXTRA_QS_SCALE_CORRECTION = "qsScaleCorrection";
 
     public static final String ACTION_PREF_CLOCK_CHANGED = "gravitybox.intent.action.CENTER_CLOCK_CHANGED";
@@ -2468,6 +2470,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_HIDE_BRIGHTNESS, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_QS_BRIGHTNESS_ICON)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QS_BRIGHTNESS_ICON, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_ICON_COLOR_ENABLE,
