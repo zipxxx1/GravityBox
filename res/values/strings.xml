@@ -2025,4 +2025,9 @@
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Dialer</string>
 
+    <!-- QS: Brightness control -->
+    <string name="pref_qs_brightness_icon_title">Show brightness icon</string>
+    <string name="pref_qs_brightness_icon_summary">Shows icon indicating current brightness mode. 
+        Toggles adaptive brightness on single-press, opens display settings on long-press.</string>
+
 </resources>
