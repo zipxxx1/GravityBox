@@ -2002,4 +2002,8 @@
     <string name="custom_image_success">设置自定义图像</string>
     <string name="custom_image_failure">设置自定图像失败</string>
 
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">忽略更新通知</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">当有更新通知时不会激活屏幕</string>
+
 </resources>

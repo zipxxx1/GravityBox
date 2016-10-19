@@ -308,6 +308,7 @@ public class ModLedControl {
                 Notification n = (Notification) param.args[6];
                 if (n.extras.containsKey("gbIgnoreNotification")) return;
 
+                Notification oldN = getOldNotification(param.args[0], param.args[4], param.args[5], param.args[8]);
                 final String pkgName = (String) param.args[0];
 
                 LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
@@ -330,29 +331,14 @@ public class ModLedControl {
                     n.extras.putBoolean(NOTIF_EXTRA_PROGRESS_TRACKING, ls.getProgressTracking());
                 }
 
+                // whether to ignore ongoing notification
                 boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
                         (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);
                 // additional check if old notification had a foreground service flag set since it seems not to be propagated
                 // for updated notifications (until Notification gets processed by WorkerHandler which is too late for us)
-                if (!isOngoing) {
-                    try {
-                        ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(param.thisObject, "mNotificationList");
-                        synchronized (notifList) {
-                            int index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
-                                    param.args[0], param.args[4], param.args[5], param.args[8]);
-                            if (index >= 0) {
-                                Object oldNotif = notifList.get(index);
-                                if (oldNotif != null) {
-                                    Notification oldN = (Notification) XposedHelpers.callMethod(oldNotif, "getNotification");
-                                    isOngoing = (oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0;
-                                    if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
-                                }
-                            }
-                        }
-                    } catch (Throwable t) {
-                        /* yet another vendor messing with the internals... */
-                        if (DEBUG) XposedBridge.log(t);
-                    }
+                if (!isOngoing && oldN != null) {
+                    isOngoing = (oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0;
+                    if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
                 }
 
                 if (isOngoing && !ls.getOngoing() && !qhActive) {
@@ -440,6 +426,7 @@ public class ModLedControl {
                     }
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
+                            !(ls.getActiveScreenIgnoreUpdate() && oldN != null) &&
                             n.priority > Notification.PRIORITY_MIN &&
                             !qhActiveIncludingActiveScreen && !isOngoing && mPm != null && mKm.isKeyguardLocked()) {
                         n.extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
@@ -491,6 +478,28 @@ public class ModLedControl {
             }
         }
     };
+
+    private static Notification getOldNotification(Object pkg, Object tag, Object id, Object userId) {
+        Notification oldNotif = null;
+        try {
+            ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(
+                    mNotifManagerService, "mNotificationList");
+            synchronized (notifList) {
+                int index = (Integer) XposedHelpers.callMethod(
+                        mNotifManagerService, "indexOfNotificationLocked",
+                        pkg, tag, id, userId);
+                if (index >= 0) {
+                    Object oldNotifRecord = notifList.get(index);
+                    oldNotif = (Notification) XposedHelpers.callMethod(oldNotifRecord, "getNotification");
+                }
+            }
+        } catch (Throwable t) {
+            log("Error in getOldNotification: " + t.getMessage());
+            if (DEBUG) XposedBridge.log(t);
+        }
+        if (DEBUG) log("getOldNotification: is old notification: " + (oldNotif != null));
+        return oldNotif;
+    }
 
     private static XC_MethodHook cancelHook = new XC_MethodHook() {
         @Override

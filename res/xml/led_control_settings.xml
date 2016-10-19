@@ -163,6 +163,13 @@
             android:defaultValue="DO_NOTHING"
             android:persistent="false" />
 
+        <CheckBoxPreference
+            android:key="pref_lc_active_screen_ignore_update"
+            android:title="@string/pref_lc_active_screen_ignore_update_title"
+            android:summary="@string/pref_lc_active_screen_ignore_update_summary"
+            android:defaultValue="false"
+            android:persistent="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory 

@@ -2002,4 +2002,9 @@
     <string name="custom_image_success">Пользовательское установлено</string>
     <string name="custom_image_failure">Ошибка установки пользовательского</string>
 
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">Игнорировать обновлеённые уведомления</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Активный экран не будет срабатывать при 
+        обновлении существующих уведомлений</string>
+
 </resources>

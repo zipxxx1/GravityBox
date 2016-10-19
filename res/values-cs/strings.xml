@@ -1940,4 +1940,9 @@
     <string name="custom_image_success">Vlastní ikona nastavena</string>
     <string name="custom_image_failure">Nastavení vlastní ikony selhalo</string>
 
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">Ignorovat aktualizováno oznámení</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Nezobrazí aktivní obrazovku v případě, 
+        že je stávající oznámení aktualizováno</string>
+
 </resources>
