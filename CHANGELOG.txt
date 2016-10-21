@@ -1,3 +1,26 @@
+Changelog 6.1.6 - 21/10/2016
+--------------------------------------
+- QuickSettings:
+--- added option for showing brightness icon next to brightness slider
+------ toggles adaptive brightness on press / opens display settings on long-press
+--- added support for systems missing IntentTile
+--- added support for Moto Data tile
+--- fixed showing Cellular tile detail on devices that have more instances of Cellular tile (Moto)
+- StatusBar colors: extended to support all system icons
+- Battery settings: restrict Lenovo devices from using Percent text
+- Media tweaks: restrict MX player from utilizing swapped volume keys
+- Phone tweaks:
+--- moved telephony features from Dialer to system level
+------ flip action/call vibrations now independent of Dialer which potentially
+------ makes these features work on devices having alternative Dialer
+- Dialer tweaks: adjusted for compatibility with Google Dialer 4.1 and 5.1
+- Ultimate notification control:
+--- added option for ignoring active screen for updated notifications
+--- improved LED compatibility with Vernee Apollo Lite (thanks tomidix for testing)
+- Updated German translations (thanks to Basti1512)
+- Updated Chinese (Simplified) translations (thanks to liveasx,ipcjs)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 6.1.5 - 06/08/2016
 --------------------------------------
 - Phone tweaks: adjusted for compatibility with Google Phone app v4.0
