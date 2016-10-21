@@ -39,6 +39,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -95,6 +96,9 @@ public class ModLedControl {
     private static boolean mProximityWakeUpEnabled;
     private static boolean mScreenOnDueToActiveScreen;
     private static AudioManager mAudioManager;
+    private static Integer mDefaultNotificationLedColor;
+    private static Integer mDefaultNotificationLedOn;
+    private static Integer mDefaultNotificationLedOff;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -219,6 +223,19 @@ public class ModLedControl {
                 }
 
                 Notification n = (Notification) param.args[6];
+
+                if (Utils.isVerneeApolloLiteDevice()) {
+                    XposedHelpers.setIntField(param.thisObject, "mDefaultNotificationColor",
+                            ((n.defaults & Notification.DEFAULT_LIGHTS) != 0 ?
+                                    getDefaultNotificationLedColor() : n.ledARGB));
+                    XposedHelpers.setIntField(param.thisObject, "mDefaultNotificationLedOn",
+                            ((n.defaults & Notification.DEFAULT_LIGHTS) != 0 ?
+                                    getDefaultNotificationLedOn() : n.ledOnMS));
+                    XposedHelpers.setIntField(param.thisObject, "mDefaultNotificationLedOff",
+                            ((n.defaults & Notification.DEFAULT_LIGHTS) != 0 ?
+                                    getDefaultNotificationLedOff() : n.ledOffMS));
+                }
+
                 if (n.extras.containsKey("gbIgnoreNotification")) return;
 
                 Notification oldN = getOldNotification(param.args[0], param.args[4], param.args[5], param.args[8]);
@@ -269,11 +286,21 @@ public class ModLedControl {
                     n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
                 } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE &&
                         !(isOngoing && !ls.getOngoing())) {
-                    n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags |= Notification.FLAG_SHOW_LIGHTS;
-                    n.ledOnMS = ls.getLedOnMs();
-                    n.ledOffMS = ls.getLedOffMs();
-                    n.ledARGB = ls.getColor();
+                    if (Utils.isVerneeApolloLiteDevice()) {
+                        n.defaults |= Notification.DEFAULT_LIGHTS;
+                        XposedHelpers.setIntField(param.thisObject,
+                                "mDefaultNotificationColor", ls.getColor());
+                        XposedHelpers.setIntField(param.thisObject,
+                                "mDefaultNotificationLedOn", ls.getLedOnMs());
+                        XposedHelpers.setIntField(param.thisObject,
+                                "mDefaultNotificationLedOff", ls.getLedOffMs());
+                    } else {
+                        n.defaults &= ~Notification.DEFAULT_LIGHTS;
+                        n.ledOnMS = ls.getLedOnMs();
+                        n.ledOffMS = ls.getLedOffMs();
+                        n.ledARGB = ls.getColor();
+                    }
                 }
 
                 // vibration
@@ -383,6 +410,50 @@ public class ModLedControl {
         }
         if (DEBUG) log("getOldNotification: is old notification: " + (oldNotif != null));
         return oldNotif;
+    }
+
+    private static int getDefaultNotificationLedColor() {
+        if (mDefaultNotificationLedColor == null) {
+            mDefaultNotificationLedColor = getDefaultNotificationProp(
+                    "config_defaultNotificationColor", "color", 0xff000080);
+        }
+        return mDefaultNotificationLedColor;
+    }
+
+    private static int getDefaultNotificationLedOn() {
+        if (mDefaultNotificationLedOn == null) {
+            mDefaultNotificationLedOn = getDefaultNotificationProp(
+                    "config_defaultNotificationLedOn", "integer", 500);
+        }
+        return mDefaultNotificationLedOn;
+    }
+
+    private static int getDefaultNotificationLedOff() {
+        if (mDefaultNotificationLedOff == null) {
+            mDefaultNotificationLedOff = getDefaultNotificationProp(
+                    "config_defaultNotificationLedOff", "integer", 0);
+        }
+        return mDefaultNotificationLedOff;
+    }
+
+    @SuppressWarnings("deprecation")
+    private static int getDefaultNotificationProp(String resName, String resType, int defVal) {
+        int val = defVal;
+        try {
+            Context ctx = (Context) XposedHelpers.callMethod(
+                    mNotifManagerService, "getContext");
+            Resources res = ctx.getResources();
+            int resId = res.getIdentifier(resName, resType, "android");
+            if (resId != 0) {
+                switch (resType) {
+                    case "color": val = res.getColor(resId); break;
+                    case "integer": val = res.getInteger(resId); break;
+                }
+            }
+        } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t); 
+        }
+        return val;
     }
 
     private static XC_MethodHook applyZenModeHook = new XC_MethodHook() {

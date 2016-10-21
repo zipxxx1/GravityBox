@@ -1748,7 +1748,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 PreferenceScreen ps2 = (PreferenceScreen) findPreference(PREF_CAT_KEY_BATTERY_PERCENT_TEXT);
                 ps.removePreference(ps2);
             }
-            
+
+            // Remove Vernee Apollo Lite preferences
+            if (Utils.isVerneeApolloLiteDevice()) {
+                mPrefCatDisplay.removePreference(mPrefPulseNotificationDelay);
+            }
+
             // Remove actions for HW keys based on device features
             mPrefHwKeyMenuLongpress.setEntries(R.array.hwkey_action_entries);
             mPrefHwKeyMenuLongpress.setEntryValues(R.array.hwkey_action_values);

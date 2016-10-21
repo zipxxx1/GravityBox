@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
+import com.ceco.marshmallow.gravitybox.Utils;
 
 import android.app.Notification;
 import android.content.Context;
@@ -184,9 +185,9 @@ public class LedSettings {
         mPackageName = packageName;
         mEnabled = false;
         mOngoing = false;
-        mLedOnMs = 1000;
-        mLedOffMs = 5000;
-        mColor = 0xffffffff;
+        mLedOnMs = Utils.isVerneeApolloLiteDevice() ? 500 : 1000;
+        mLedOffMs = Utils.isVerneeApolloLiteDevice() ? 0 : 5000;
+        mColor = Utils.isVerneeApolloLiteDevice() ? 0xff201000 : 0xffffffff;
         mSoundOverride = false;
         mSoundUri = null;
         mSoundReplace = true;

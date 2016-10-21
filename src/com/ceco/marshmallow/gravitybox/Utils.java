@@ -94,7 +94,8 @@ public class Utils {
     private static Boolean mIsSamsumgRom = null;
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
-    
+    private static Boolean mIsVerneeApolloLiteDevice;
+
     // Device features
     private static Boolean mHasGeminiSupport = null;
     private static Boolean mHasTelephonySupport = null;
@@ -265,6 +266,14 @@ public class Utils {
 
         mIsSamsumgRom = (new File("/system/framework/twframework.jar").isFile());
         return mIsSamsumgRom;
+    }
+
+    public static boolean isVerneeApolloLiteDevice() {
+        if (mIsVerneeApolloLiteDevice != null) return mIsVerneeApolloLiteDevice;
+
+        mIsVerneeApolloLiteDevice = (Build.BRAND.equals("Vernee") &&
+                Build.MODEL.equals("Apollo Lite"));
+        return mIsVerneeApolloLiteDevice;
     }
 
     public static boolean hasGeminiSupport() {
