@@ -251,6 +251,19 @@ public class ModLedControl {
                 }
                 if (DEBUG) log(pkgName + ": " + ls.toString());
 
+                final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
+                final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
+                final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
+                final boolean qhActiveIncludingActiveScreen = qhActive &&
+                        !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
+
+                if (ls.getEnabled()) {
+                    n.extras.putBoolean(NOTIF_EXTRA_PROGRESS_TRACKING, ls.getProgressTracking());
+                    n.extras.putString(NOTIF_EXTRA_VISIBILITY_LS, ls.getVisibilityLs().toString());
+                    n.extras.putBoolean(NOTIF_EXTRA_HIDE_PERSISTENT, ls.getHidePersistent());
+                }
+
+                // whether to ignore ongoing notification
                 boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
                         (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);
                 // additional check if old notification had a foreground service flag set since it seems not to be propagated
@@ -259,22 +272,9 @@ public class ModLedControl {
                     isOngoing = (oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0;
                     if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
                 }
-
-                final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
-                final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
-                final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
-                final boolean qhActiveIncludingActiveScreen = qhActive &&
-                        !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
-
                 if (isOngoing && !ls.getOngoing() && !qhActive) {
                     if (DEBUG) log("Ongoing led control disabled. Ignoring.");
                     return;
-                }
-
-                if (ls.getEnabled()) {
-                    n.extras.putBoolean(NOTIF_EXTRA_PROGRESS_TRACKING, ls.getProgressTracking());
-                    n.extras.putString(NOTIF_EXTRA_VISIBILITY_LS, ls.getVisibilityLs().toString());
-                    n.extras.putBoolean(NOTIF_EXTRA_HIDE_PERSISTENT, ls.getHidePersistent());
                 }
 
                 // lights
