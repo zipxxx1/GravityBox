@@ -1978,4 +1978,9 @@
     <string name="pref_lc_active_screen_ignore_update_summary">Nezobrazí aktívnu obrazovku v prípade, ak 
         je existujúce oznámenie aktualizované</string>
 
+    <!-- UNC: LED: Ignore updated notifications -->
+    <string name="pref_lc_led_ignore_update_title">Ignorovať aktualizované oznámenia</string>
+    <string name="pref_lc_led_ignore_update_summary">Znovu nerozsvieti LED pre existujúce videné oznámenie, 
+        ktoré bolo aktualizované</string>
+
 </resources>

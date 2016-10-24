@@ -2034,4 +2034,8 @@
     <string name="pref_lc_active_screen_ignore_update_title">忽略更新通知</string>
     <string name="pref_lc_active_screen_ignore_update_summary">当有更新通知时不会激活屏幕</string>
 
+    <!-- UNC: LED: Ignore updated notifications -->
+    <string name="pref_lc_led_ignore_update_title">忽略更新通知</string>
+    <string name="pref_lc_led_ignore_update_summary">当用户更新时已经看过的通知不会再打开LED灯</string>
+
 </resources>

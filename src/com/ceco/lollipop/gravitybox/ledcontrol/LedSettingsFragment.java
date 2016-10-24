@@ -82,6 +82,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_DISABLE_SOUND_TO_VIBRATE = "pref_lc_sound_vibrate";
     private static final String PREF_KEY_HIDE_PERSISTENT = "pref_lc_notif_hide_persistent";
     private static final String PREF_KEY_LED_DND = "pref_lc_led_dnd";
+    private static final String PREF_KEY_LED_IGNORE_UPDATE = "pref_lc_led_ignore_update";
 
     private static final int REQ_PICK_SOUND = 101;
 
@@ -119,6 +120,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private CheckBoxPreference mDisableSoundToVibratePref;
     private CheckBoxPreference mHidePersistentPref;
     private MultiSelectListPreference mLedDndPref;
+    private CheckBoxPreference mLedIgnoreUpdatePref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -164,6 +166,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mDisableSoundToVibratePref = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_SOUND_TO_VIBRATE);
         mHidePersistentPref = (CheckBoxPreference) findPreference(PREF_KEY_HIDE_PERSISTENT);
         mLedDndPref = (MultiSelectListPreference) findPreference(PREF_KEY_LED_DND);
+        mLedIgnoreUpdatePref = (CheckBoxPreference) findPreference(PREF_KEY_LED_IGNORE_UPDATE);
     }
 
     protected void initialize(LedSettings ledSettings) {
@@ -229,6 +232,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mDisableSoundToVibratePref.setChecked(ledSettings.getSoundToVibrateDisabled());
         mHidePersistentPref.setChecked(ledSettings.getHidePersistent());
         mLedDndPref.setValues(new HashSet<>(Arrays.asList(ledSettings.getLedDnd().split(","))));
+        mLedIgnoreUpdatePref.setChecked(ledSettings.getLedIgnoreUpdate());
     }
 
     private void updateSoundPrefSummary() {
@@ -352,6 +356,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             buf += s;
         }
         return buf;
+    }
+
+    protected boolean getLedIgnoreUpdate() {
+        return mLedIgnoreUpdatePref.isChecked();
     }
 
     protected Visibility getVisibility() {
