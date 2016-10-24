@@ -238,7 +238,9 @@ public class ModLedControl {
 
                 if (n.extras.containsKey("gbIgnoreNotification")) return;
 
-                Notification oldN = getOldNotification(param.args[0], param.args[4], param.args[5], param.args[8]);
+                Object oldRecord = getOldNotificationRecord(param.args[0], param.args[4],
+                        param.args[5], param.args[8]);
+                Notification oldN = getNotificationFromRecord(oldRecord);
                 final String pkgName = (String) param.args[0];
 
                 LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
@@ -281,7 +283,8 @@ public class ModLedControl {
                 if (qhActiveIncludingLed || 
                         (ls.getEnabled() && !(isOngoing && !ls.getOngoing()) &&
                             (ls.getLedMode() == LedMode.OFF ||
-                             currentZenModeDisallowsLed(ls.getLedDnd())))) {
+                             currentZenModeDisallowsLed(ls.getLedDnd()) ||
+                             shouldIgnoreUpdatedNotificationLight(oldRecord, ls.getLedIgnoreUpdate())))) {
                     n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
                 } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE &&
@@ -390,8 +393,8 @@ public class ModLedControl {
         }
     };
 
-    private static Notification getOldNotification(Object pkg, Object tag, Object id, Object userId) {
-        Notification oldNotif = null;
+    private static Object getOldNotificationRecord(Object pkg, Object tag, Object id, Object userId) {
+        Object oldNotifRecord = null;
         try {
             ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(
                     mNotifManagerService, "mNotificationList");
@@ -400,16 +403,51 @@ public class ModLedControl {
                         mNotifManagerService, "indexOfNotificationLocked",
                         pkg, tag, id, userId);
                 if (index >= 0) {
-                    Object oldNotifRecord = notifList.get(index);
-                    oldNotif = (Notification) XposedHelpers.callMethod(oldNotifRecord, "getNotification");
+                    oldNotifRecord = notifList.get(index);
                 }
             }
         } catch (Throwable t) {
-            log("Error in getOldNotification: " + t.getMessage());
+            log("Error in getOldNotificationRecord: " + t.getMessage());
             if (DEBUG) XposedBridge.log(t);
         }
-        if (DEBUG) log("getOldNotification: is old notification: " + (oldNotif != null));
-        return oldNotif;
+        if (DEBUG) log("getOldNotificationRecord: has old record: " + (oldNotifRecord != null));
+        return oldNotifRecord;
+    }
+
+    private static Notification getNotificationFromRecord(Object record) {
+        Notification notif = null;
+        if (record != null) {
+            try {
+                notif = (Notification) XposedHelpers.callMethod(record, "getNotification");
+            } catch (Throwable t) {
+                log("Error in getNotificationFromRecord: " + t.getMessage());
+                if (DEBUG) XposedBridge.log(t);
+            }
+        }
+        return notif;
+    }
+
+    private static boolean notificationRecordHasLight(Object record) {
+        boolean hasLight = false;
+        if (record != null) {
+            try {
+                String key = (String) XposedHelpers.callMethod(record, "getKey");
+                List<?> lights = (List<?>) XposedHelpers.getObjectField(
+                        mNotifManagerService, "mLights");
+                hasLight = lights.contains(key);
+            } catch (Throwable t) {
+                log("Error in notificationRecordHasLight: " + t.getMessage());
+                if (DEBUG) XposedBridge.log(t);
+            }
+        }
+        if (DEBUG) log("notificationRecordHasLight: " + hasLight);
+        return hasLight;
+    }
+
+    private static boolean shouldIgnoreUpdatedNotificationLight(Object record, boolean ignore) {
+        boolean shouldIgnore = (ignore && record != null && !notificationRecordHasLight(record));
+        if (DEBUG) log("shouldIgnoreUpdatedNotificationLight: " + shouldIgnore);
+        return shouldIgnore;
     }
 
     private static int getDefaultNotificationLedColor() {

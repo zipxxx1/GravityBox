@@ -36,6 +36,13 @@
             android:defaultValue="@array/empty_array"
             android:persistent="false" />
 
+        <CheckBoxPreference
+            android:key="pref_lc_led_ignore_update"
+            android:title="@string/pref_lc_led_ignore_update_title"
+            android:summary="@string/pref_lc_led_ignore_update_summary"
+            android:defaultValue="false"
+            android:persistent="false" />
+
         <ListPreference
             android:key="pref_lc_led_mode"
             android:title="@string/pref_lc_led_mode_title"

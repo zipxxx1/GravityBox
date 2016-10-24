@@ -2026,4 +2026,9 @@
     <string name="pref_lc_active_screen_ignore_update_summary">Won\'t perform Active screen when 
         existing notification gets updated</string>
 
+    <!-- UNC: LED: Ignore updated notifications -->
+    <string name="pref_lc_led_ignore_update_title">Ignore updated notifications</string>
+    <string name="pref_lc_led_ignore_update_summary">Won\'t turn LED back on for existing notification
+        already seen by user when it gets updated</string>
+
 </resources>
