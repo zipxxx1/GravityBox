@@ -1,3 +1,10 @@
+Changelog 6.1.7 - 25/10/2016
+--------------------------------------
+- Ultimate notification control:
+--- fixed bug affecting options for Lockscreen visibility, Hide persistent, Progressbar tracking indtroduced in 6.1.6
+--- added option for ignoring LED for updated notifications
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 6.1.6 - 21/10/2016
 --------------------------------------
 - QuickSettings:
