@@ -969,7 +969,8 @@ public class ModStatusBar {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                log("Error setting up Disable peek hooks: " + t.getMessage());
+                if (DEBUG) XposedBridge.log(t);
             }
 
             // DT2S
