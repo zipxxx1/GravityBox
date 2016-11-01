@@ -130,7 +130,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_KG_UPDATE_MONITOR, cl,
+            XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, cl),
                     "handleFingerprintAuthenticated", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
