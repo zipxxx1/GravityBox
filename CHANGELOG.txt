@@ -1,3 +1,24 @@
+Changelog 5.4.4 - 01/11/2016
+--------------------------------------
+- QuickSettings:
+--- added option for showing brightness icon next to brightness slider
+------ toggles adaptive brightness on press / opens display settings on long-press
+--- added support for systems missing IntentTile
+--- CellularTile: don't show data off icon when roaming (Moto)
+--- CellularTile: fixed showing detail on devices that have more instances of Cellular tile (Moto)
+- StatusBar colors: extended to support all system icons
+- Media tweaks: restrict MX player from utilizing swapped volume keys
+- Phone tweaks:
+--- moved telephony features from Dialer to system level
+------ flip action/call vibrations now independent of Dialer which potentially
+------ makes these features work on devices having alternate Dialer
+- Ultimate notification control:
+--- added option for ignoring active screen for updated notifications
+--- added option for ignoring LED for updated notifications
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 5.4.3 - 19/06/2016
 --------------------------------------
 - Lockscreen: added options for choosing custom bottom actions
