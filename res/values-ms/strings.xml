@@ -1910,5 +1910,8 @@
     <string name="pref_lc_led_dnd_title">Tiada gangguan</string>
     <string name="pref_lc_led_dnd_summary">Sekat LED untuk mod tiada gangguan</string>
     <string name="pref_lc_led_dnd_dialog_title">Pilih jenis mod tiada gangguan untuk biarkan LED dimatikan</string>
-    
+
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Besarkan panel QuickSettings</string>
+
 </resources>

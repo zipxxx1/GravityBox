@@ -90,6 +90,7 @@ public class ModStatusBar {
 
     public static final String ACTION_START_SEARCH_ASSIST = "gravitybox.intent.action.START_SEARCH_ASSIST";
     public static final String ACTION_EXPAND_NOTIFICATIONS = "gravitybox.intent.action.EXPAND_NOTIFICATIONS";
+    public static final String ACTION_EXPAND_QUICKSETTINGS = "gravitybox.intent.action.EXPAND_QUICKSETTINGS";
 
     public static enum ContainerType { STATUSBAR, HEADER, KEYGUARD };
 
@@ -223,6 +224,8 @@ public class ModStatusBar {
                 startSearchAssist();
             } else if (intent.getAction().equals(ACTION_EXPAND_NOTIFICATIONS)) {
                 expandNotificationsPanel();
+            } else if (intent.getAction().equals(ACTION_EXPAND_QUICKSETTINGS)) {
+                expandNotificationsPanel(true);
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
                 mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
@@ -628,6 +631,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
                     intentFilter.addAction(ACTION_EXPAND_NOTIFICATIONS);
+                    intentFilter.addAction(ACTION_EXPAND_QUICKSETTINGS);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SYSTEM_ICON_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
@@ -1348,9 +1352,17 @@ public class ModStatusBar {
     }
 
     private static void expandNotificationsPanel() {
+        expandNotificationsPanel(false);
+    }
+
+    private static void expandNotificationsPanel(boolean withQs) {
         try {
             Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
             XposedHelpers.callMethod(notifPanel, "instantExpand");
+            if (withQs && XposedHelpers.getBooleanField(notifPanel, "mQsExpansionEnabled")) {
+                XposedHelpers.callMethod(notifPanel, "setQsExpansion",
+                        XposedHelpers.getIntField(notifPanel, "mQsMaxExpansionHeight"));
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

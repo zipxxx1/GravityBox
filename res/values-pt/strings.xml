@@ -1654,4 +1654,7 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="pref_signal_cluster_dem_title">Desativar exclamações</string>
     <string name="pref_signal_cluster_dem_summary">Necessário reiniciar</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Expandir painel de configurações rápidas</string>
+
 </resources>

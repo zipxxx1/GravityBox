@@ -1670,4 +1670,7 @@
     <string name="pref_statusbar_dt2s_title">Uśpienie podwójnym kliknięciem</string>
     <string name="pref_statusbar_dt2s_summary">Wymaga wyłączenia podglądu</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Rozwiń panel Szybkich Ustawień</string>
+
 </resources>

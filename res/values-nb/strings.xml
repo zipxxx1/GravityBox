@@ -1302,4 +1302,7 @@
     <!-- UNC: timeout for Alert only once -->
     <string name="pref_lc_notif_sound_only_once_timeout_title">Within time interval</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Expand QuickSettings panel</string>
+
 </resources>

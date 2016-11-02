@@ -142,6 +142,9 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
             case GravityBoxSettings.HWKEY_ACTION_EXPAND_NOTIFICATIONS:
                 intent = new Intent(ModStatusBar.ACTION_EXPAND_NOTIFICATIONS);
                 break;
+            case GravityBoxSettings.HWKEY_ACTION_EXPAND_QUICKSETTINGS:
+                intent = new Intent(ModStatusBar.ACTION_EXPAND_QUICKSETTINGS);
+                break;
             case GravityBoxSettings.HWKEY_ACTION_SCREENSHOT:
                 intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
                 break;

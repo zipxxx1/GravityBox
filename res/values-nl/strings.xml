@@ -1216,4 +1216,7 @@
     <string name="lc_led_mode_override">Overschrijven</string>
     <string name="lc_led_mode_off">Uit (geen licht)</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Expand QuickSettings panel</string>
+
 </resources>

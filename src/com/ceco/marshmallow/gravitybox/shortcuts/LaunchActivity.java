@@ -55,6 +55,8 @@ public class LaunchActivity extends Activity {
             ShowPowerMenuShortcut.launchAction(mContext, intent);
         } else if (action.equals(ExpandNotificationsShortcut.ACTION)) {
             ExpandNotificationsShortcut.launchAction(mContext, intent);
+        } else if (action.equals(ExpandQuicksettingsShortcut.ACTION)) {
+            ExpandQuicksettingsShortcut.launchAction(mContext, intent);
         } else if (action.equals(ExpandedDesktopShortcut.ACTION)) {
             ExpandedDesktopShortcut.launchAction(mContext, intent);
         } else if (action.equals(ScreenshotShortcut.ACTION)) {

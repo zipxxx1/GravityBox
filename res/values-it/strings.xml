@@ -1549,5 +1549,7 @@ impedendo di essere avviati accidentalmente.</string>
     <string name="ls_bleft_action_phone">Telefono</string>
     <string name="pref_lockscreen_bleft_action_custom_title">Imposta azione bottone sinistra</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Espandi pannello QuickSetting</string>
 
 </resources>

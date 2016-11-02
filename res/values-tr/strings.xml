@@ -1394,4 +1394,7 @@
     <string name="charging_led_emulated">Emulated</string>
     <string name="charging_led_disabled">Disabled</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Hızlı Ayarlar panelini aç</string>
+
 </resources>

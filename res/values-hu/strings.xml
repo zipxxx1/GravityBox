@@ -1968,5 +1968,8 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Vezeték nélküli töltés hang</string>
     <string name="stock_wireless_sound">Alapértelmezett hang</string>
-    
+
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Gyorsbeállítások panel kiterjesztése</string>
+
 </resources>

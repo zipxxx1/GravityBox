@@ -2025,4 +2025,7 @@
     <string name="pref_lc_active_screen_ignore_update_summary">Активный экран не будет срабатывать при 
         обновлении существующих уведомлений</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Развернуть панель быстрых настроек</string>
+
 </resources>

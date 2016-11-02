@@ -1212,6 +1212,8 @@ public class ModHwKeys {
             showGlobalActionsDialog();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_EXPAND_NOTIFICATIONS) {
             expandNotificationsPanel();
+        } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_EXPAND_QUICKSETTINGS) {
+            expandQsPanel();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_SCREENSHOT) {
             takeScreenshot();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_VOLUME_PANEL) {
@@ -1647,6 +1649,15 @@ public class ModHwKeys {
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
             log("Error executing expandNotificationsPanel(): " + t.getMessage());
+        }
+    }
+
+    private static void expandQsPanel() {
+        try {
+            Intent intent = new Intent(ModStatusBar.ACTION_EXPAND_QUICKSETTINGS);
+            mContext.sendBroadcast(intent);
+        } catch (Throwable t) {
+            log("Error executing expandQsPanel(): " + t.getMessage());
         }
     }
 

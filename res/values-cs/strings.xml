@@ -1956,4 +1956,7 @@
     <string name="pref_lc_led_ignore_update_summary">Znovu nerozsvítí LED pro stávající viděno oznámení, 
         které bylo aktualizováno</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Zobrazit panel nastavení</string>
+
 </resources>
