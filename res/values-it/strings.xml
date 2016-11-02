@@ -1589,4 +1589,7 @@
     <string name="dt_display_mode_dm">Solo con Gestore Download di Android</string>
     <string name="dt_display_mode_pt">Quando viene mostrata una barra di avanzamento nella barra di stato</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Espandi pannello QuickSetting</string>
+
 </resources>

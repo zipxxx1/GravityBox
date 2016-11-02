@@ -138,6 +138,7 @@ public class ShortcutActivity extends ListActivity {
             list.add(new ExpandNotificationsShortcut(mContext));
         }
         list.add(new ClearNotificationsShortcut(mContext));
+        list.add(new ExpandQuicksettingsShortcut(mContext));
         list.add(new ExpandedDesktopShortcut(mContext));
         list.add(new GoogleNowShortcut(mContext));
         list.add(new ScreenshotShortcut(mContext));

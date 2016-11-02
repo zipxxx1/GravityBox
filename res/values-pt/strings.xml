@@ -1731,4 +1731,7 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="pref_lc_led_priority_mode_title">Modo prioridade</string>
     <string name="pref_lc_led_priority_mode_summary">Permite o LED durante os modos silencioso e prioridade</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Expandir painel de configurações rápidas</string>
+
 </resources>

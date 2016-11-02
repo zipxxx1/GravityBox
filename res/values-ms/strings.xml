@@ -1787,4 +1787,7 @@
     <string name="pref_statusbar_dt2s_title">Sentuh 2 kali untuk matikan</string>
     <string name="pref_statusbar_dt2s_summary">Perlukan peek untuk tidak aktif</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Besarkan panel QuickSettings</string>
+
 </resources>

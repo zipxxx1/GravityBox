@@ -1522,4 +1522,7 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">Ocultar etiquetas de SIM</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Requiere reinicio</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Expandir panel de ajustes rápidos</string>
+
 </resources>

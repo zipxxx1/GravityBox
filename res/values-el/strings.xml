@@ -1069,4 +1069,7 @@
 
     <string name="delete">Διαγραφή</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Εμφάνιση πεδίου QuickSettings</string>
+
 </resources>

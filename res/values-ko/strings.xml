@@ -1405,4 +1405,7 @@
     <string name="pref_lc_led_priority_mode_title">우선 모드</string>
     <string name="pref_lc_led_priority_mode_summary">우선 모드 및 음소거 모드에서도 LED를 허용합니다.</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">퀵세팅 패널 확장</string>
+
 </resources>

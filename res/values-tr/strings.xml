@@ -1449,4 +1449,7 @@
         Long-press on heads up snooze icon opens custom timer dialog.</string>
     <string name="headsup_snooze_timer_set">Heads up default snooze timer set for %s</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Hızlı Ayarlar panelini aç</string>
+
 </resources>

@@ -974,4 +974,7 @@
     <string name="pref_launcher_resize_widget_title">שנה גודל של כל ווידג\'ט</string>
     <string name="pref_launcher_resize_widget_summary">שנה גודל של כל ווידג\'ט במסך הבית (דורש איתחול של לאונצ\'ר)</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">הרחב תפריט QuickSettings</string>
+
 </resources>

@@ -1558,4 +1558,7 @@
     <string name="pref_hide_launcher_icon_title">隱藏啟動器圖示</string>
     <string name="pref_hide_launcher_icon_summary">可能需要重新啟動啟動器才能生效</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">展開快速設定面板</string>
+
 </resources>

@@ -2000,4 +2000,7 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Показати повідомлення стану</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Розгорнути панель швидких налаштувань</string>
+
 </resources>

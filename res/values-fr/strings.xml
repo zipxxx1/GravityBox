@@ -1919,4 +1919,7 @@
     <string name="pref_lc_notif_hide_persistent_summary">Cache toutes les notifications entrantes et non-effaçables
         provenant de cette application</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Développer le panneau Paramètres Rapides</string>
+
 </resources>

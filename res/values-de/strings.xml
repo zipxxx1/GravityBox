@@ -1671,4 +1671,7 @@
     <string name="settings_restore_backup_obsolete">Ein Sicherung aus einer älteren Android-Version kann aufgrund großer Unterschiede im System nicht wiederhergestellt werden. 
         Es wird dringend empfohlen, GravityBox neu einzurichten.</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Schnelleinstellungenleiste erweitern</string>
+
 </resources>

@@ -1658,4 +1658,7 @@
     <string name="settings_restore_backup_obsolete">As definições guardadas numa versão antiga do Android não podem ser restauradas 
         devido a diversas diferenças do sistema operativo, sendo altamente recomendável configurar o GravityBox de raíz</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Expandir painel de definições rápidas</string>
+
 </resources>
