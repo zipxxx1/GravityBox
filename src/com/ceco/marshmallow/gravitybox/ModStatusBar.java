@@ -89,6 +89,7 @@ public class ModStatusBar {
     public static final String SETTING_ONGOING_NOTIFICATIONS = "gb_ongoing_notifications";
 
     public static final String ACTION_START_SEARCH_ASSIST = "gravitybox.intent.action.START_SEARCH_ASSIST";
+    public static final String ACTION_EXPAND_NOTIFICATIONS = "gravitybox.intent.action.EXPAND_NOTIFICATIONS";
 
     public static enum ContainerType { STATUSBAR, HEADER, KEYGUARD };
 
@@ -220,6 +221,8 @@ public class ModStatusBar {
                 }
             } else if (intent.getAction().equals(ACTION_START_SEARCH_ASSIST)) {
                 startSearchAssist();
+            } else if (intent.getAction().equals(ACTION_EXPAND_NOTIFICATIONS)) {
+                expandNotificationsPanel();
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
                 mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
@@ -624,6 +627,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
+                    intentFilter.addAction(ACTION_EXPAND_NOTIFICATIONS);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SYSTEM_ICON_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
@@ -1340,6 +1344,15 @@ public class ModStatusBar {
                 XposedBridge.log(t);
                 mCameraVp = null;
             }
+        }
+    }
+
+    private static void expandNotificationsPanel() {
+        try {
+            Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
+            XposedHelpers.callMethod(notifPanel, "instantExpand");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
     }
 }

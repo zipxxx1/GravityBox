@@ -85,7 +85,6 @@ public class ModHwKeys {
     public static final String ACTION_SHOW_POWER_MENU = "gravitybox.intent.action.SHOW_POWER_MENU";
     public static final String ACTION_TOGGLE_EXPANDED_DESKTOP = 
             "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP";
-    public static final String ACTION_EXPAND_NOTIFICATIONS = "gravitybox.intent.action.EXPAND_NOTIFICATIONS";
     public static final String ACTION_TOGGLE_TORCH = "gravitybox.intent.action.TOGGLE_TORCH";
     public static final String ACTION_SHOW_RECENT_APPS = "gravitybox.intent.action.SHOW_RECENT_APPS";
     public static final String ACTION_TOGGLE_ROTATION_LOCK = "gravitybox.intent.action.TOGGLE_ROTATION_LOCK";
@@ -344,8 +343,6 @@ public class ModHwKeys {
                 changeExpandedDesktopState(intent);
             } else if (action.equals(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING)) {
                 toggleScreenRecording();
-            } else if (action.equals(ACTION_EXPAND_NOTIFICATIONS) && mPhoneWindowManager != null) {
-                expandNotificationsPanel();
             } else if (action.equals(ACTION_TOGGLE_TORCH)) {
                 toggleTorch();
             } else if (action.equals(ACTION_SHOW_RECENT_APPS)) {
@@ -953,7 +950,6 @@ public class ModHwKeys {
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
             intentFilter.addAction(ACTION_TOGGLE_EXPANDED_DESKTOP);
             intentFilter.addAction(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING);
-            intentFilter.addAction(ACTION_EXPAND_NOTIFICATIONS);
             intentFilter.addAction(ACTION_TOGGLE_TORCH);
             intentFilter.addAction(ACTION_SHOW_RECENT_APPS);
             intentFilter.addAction(ACTION_TOGGLE_ROTATION_LOCK);
@@ -1647,8 +1643,8 @@ public class ModHwKeys {
 
     private static void expandNotificationsPanel() {
         try {
-            final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService"); 
-            XposedHelpers.callMethod(sbService, "expandNotificationsPanel");
+            Intent intent = new Intent(ModStatusBar.ACTION_EXPAND_NOTIFICATIONS);
+            mContext.sendBroadcast(intent);
         } catch (Throwable t) {
             log("Error executing expandNotificationsPanel(): " + t.getMessage());
         }

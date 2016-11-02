@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
 
 package com.ceco.marshmallow.gravitybox.shortcuts;
 
-import com.ceco.marshmallow.gravitybox.ModHwKeys;
+import com.ceco.marshmallow.gravitybox.ModStatusBar;
 import com.ceco.marshmallow.gravitybox.R;
 
 import android.content.Context;
@@ -24,7 +24,7 @@ import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
 
 public class ExpandNotificationsShortcut extends AShortcut {
-    protected static final String ACTION =  ModHwKeys.ACTION_EXPAND_NOTIFICATIONS;
+    protected static final String ACTION =  ModStatusBar.ACTION_EXPAND_NOTIFICATIONS;
 
     public ExpandNotificationsShortcut(Context context) {
         super(context);
@@ -37,7 +37,7 @@ public class ExpandNotificationsShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_notifications);
+        return mResources.getDrawable(R.drawable.shortcut_notifications, null);
     }
 
     @Override
