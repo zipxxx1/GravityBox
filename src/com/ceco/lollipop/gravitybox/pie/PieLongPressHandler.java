@@ -21,6 +21,7 @@ import java.util.Map;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModHwKeys;
 import com.ceco.lollipop.gravitybox.ModLauncher;
+import com.ceco.lollipop.gravitybox.ModStatusBar;
 import com.ceco.lollipop.gravitybox.ScreenRecordingService;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.pie.PieController.ButtonType;
@@ -139,7 +140,7 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
                 intent = new Intent(ModHwKeys.ACTION_SHOW_POWER_MENU);
                 break;
             case GravityBoxSettings.HWKEY_ACTION_EXPAND_NOTIFICATIONS:
-                intent = new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS);
+                intent = new Intent(ModStatusBar.ACTION_EXPAND_NOTIFICATIONS);
                 break;
             case GravityBoxSettings.HWKEY_ACTION_SCREENSHOT:
                 intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);

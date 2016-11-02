@@ -98,6 +98,7 @@ public class ModStatusBar {
     public static final String SETTING_ONGOING_NOTIFICATIONS = "gb_ongoing_notifications";
 
     public static final String ACTION_START_SEARCH_ASSIST = "gravitybox.intent.action.START_SEARCH_ASSIST";
+    public static final String ACTION_EXPAND_NOTIFICATIONS = "gravitybox.intent.action.EXPAND_NOTIFICATIONS";
 
     private static final String ACTION_DELETE_SCREENSHOT = "com.android.systemui.DELETE_SCREENSHOT";
     private static final String SCREENSHOT_URI = "com.android.systemui.SCREENSHOT_URI";
@@ -237,6 +238,8 @@ public class ModStatusBar {
                 }
             } else if (intent.getAction().equals(ACTION_START_SEARCH_ASSIST)) {
                 startSearchAssist();
+            } else if (intent.getAction().equals(ACTION_EXPAND_NOTIFICATIONS)) {
+                expandNotificationsPanel();
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
                 mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
@@ -666,6 +669,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
+                    intentFilter.addAction(ACTION_EXPAND_NOTIFICATIONS);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SYSTEM_ICON_CHANGED);
                     intentFilter.addAction(ACTION_DELETE_SCREENSHOT);
@@ -1437,6 +1441,15 @@ public class ModStatusBar {
             }
         } catch (ActivityNotFoundException e) {
             log("Error launching assigned app for long-press on clock: " + e.getMessage());
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void expandNotificationsPanel() {
+        try {
+            Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
+            XposedHelpers.callMethod(notifPanel, "expand");
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
