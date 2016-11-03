@@ -1,3 +1,23 @@
+Changelog 6.2.0 - 03/11/2016
+--------------------------------------
+- Fixed issue preventing module from working on some devices
+- Fixed battery percent text sign showing in lock screen even if disabled
+- Lockscreen tweaks:
+--- Imprint mode adjusted for compatibility with newer Android 6.0.1 releases
+- GravityBox Actions:
+--- expand notification panel instantly instead of slow animation
+--- brought back action for expanding quick settings panel
+- Introducing Fingerprint launcher (available within main settings screen):
+--- allows launching app/action using fingerprint sensor when screen is on
+    and device is unlocked
+--- provides 10 second time window when other app requests fingerprint
+    authentication during which user must take action before Launcher tries
+    recapturing sensor
+--- EXPERIMENTAL option for quick tap mode, which accepts
+    unrecognized fingerprints and quicker taps to launch app/action. Can
+    temporarily lock out sensor when too many subsequent auth failures occur
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 6.1.7 - 25/10/2016
 --------------------------------------
 - Ultimate notification control:
