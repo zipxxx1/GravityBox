@@ -2034,4 +2034,21 @@
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Expand QuickSettings panel</string>
 
+    <!-- Fingeprint launcher -->
+    <string name="pref_cat_fingerprint_launcher_title">Fingerprint launcher</string>
+    <string name="pref_cat_fingerprint_launcher_summary">Allows launching app or action using 
+        fingerprint sensor when screen is on and device is unlocked</string>
+    <string name="pref_fingerprint_launcher_enable_summary">Turns Fingerprint launcher feature 
+        on or off (requires reboot)</string>
+    <string name="pref_fingerprint_launcher_app_title">Choose app or action</string>
+    <string name="pref_fingerprint_launcher_ignore_auth_title">Quick tap mode</string>
+    <string name="pref_fingerprint_launcher_ignore_auth_summary">EXPERIMENTAL: Accepts unrecognized 
+        fingerprints and quicker taps. May cause temporary sensor lock out in case of too many subsequent 
+        auth failures.</string>
+    <string name="fingerprint_auth_failed">Authentication failed</string>
+    <string name="fingerprint_sensor_unavail">Fingerprint sensor became unavailable</string>
+    <string name="fingerprint_sensor_locked">Fingerprint sensor locked due to too many
+        authentication failures. Trying to restart in 35 seconds.</string>
+    <string name="fingerprint_no_app">No application/action assigned</string>
+
 </resources>

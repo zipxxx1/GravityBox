@@ -852,6 +852,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_FORCE_AOSP = "pref_force_aosp";
 
+    public static final String PREF_CAT_KEY_FINGERPRINT_LAUNCHER = "pref_cat_fingerprint_launcher";
+    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE = "pref_fingerprint_launcher_enable";
+    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_APP = "pref_fingerprint_launcher_app";
+    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_IGNORE_AUTH = "pref_fingerprint_launcher_ignore_auth";
+    public static final String ACTION_FPL_SETTINGS_CHANGED = "gravitybox.intent.action.FPL_SETTINGS_CHANGED";
+    public static final String EXTRA_FPL_APP = "fplApp";
+    public static final String EXTRA_FPL_IGNORE_AUTH = "fplIgnoreAuth";
+
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
     public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
@@ -895,7 +903,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SIGNAL_CLUSTER_DEM,
             PREF_KEY_SIGNAL_CLUSTER_DNTI,
             PREF_KEY_SIGNAL_CLUSTER_NOSIM,
-            PREF_KEY_BATTERY_PERCENT_TEXT_POSITION
+            PREF_KEY_BATTERY_PERCENT_TEXT_POSITION,
+            PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -967,6 +976,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public int uncTrialCountdown;
         public boolean hasMsimSupport;
         public int xposedBridgeVersion;
+        public boolean supportsFingerprint;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -995,6 +1005,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (data.containsKey("xposedBridgeVersion")) {
                 xposedBridgeVersion = data.getInt("xposedBridgeVersion");
+            }
+            if (data.containsKey("supportsFingerprint")) {
+                supportsFingerprint = data.getBoolean("supportsFingerprint");
             }
         }
     }
@@ -1755,6 +1768,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatDisplay.removePreference(mPrefPulseNotificationDelay);
             }
 
+            // Remove fingerprint related preferences
+            if (!sSystemProperties.supportsFingerprint) {
+                Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
+                if (p != null) mPrefCatLsOther.removePreference(p);
+                p = findPreference(PREF_KEY_IMPRINT_VIBE_DISABLE);
+                if (p != null) mPrefCatLsOther.removePreference(p);
+                p = findPreference(PREF_CAT_KEY_FINGERPRINT_LAUNCHER);
+                if (p != null) getPreferenceScreen().removePreference(p);
+            }
+
             // Remove actions for HW keys based on device features
             mPrefHwKeyMenuLongpress.setEntries(R.array.hwkey_action_entries);
             mPrefHwKeyMenuLongpress.setEntryValues(R.array.hwkey_action_values);
@@ -2304,7 +2327,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_IMPRINT_MODE)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
-                p.setSummary(p.getEntry());
+                if (p != null) p.setSummary(p.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_BLEFT_ACTION)) {
@@ -2323,14 +2346,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_IMPRINT_VIBE_DISABLE)) {
                 MultiSelectListPreference p = (MultiSelectListPreference) findPreference(PREF_KEY_IMPRINT_VIBE_DISABLE);
-                String summary = "";
-                Set<String> values = p.getValues() == null ? new HashSet<String>() : p.getValues();
-                if (values.contains("SUCCESS")) summary += getString(R.string.imprint_vibe_disable_success);
-                if (values.contains("ERROR")) {
-                    if (!summary.isEmpty()) summary += ", ";
-                    summary += getString(R.string.imprint_vibe_disable_error);
+                if (p != null) {
+                    String summary = "";
+                    Set<String> values = p.getValues() == null ? new HashSet<String>() : p.getValues();
+                    if (values.contains("SUCCESS")) summary += getString(R.string.imprint_vibe_disable_success);
+                    if (values.contains("ERROR")) {
+                        if (!summary.isEmpty()) summary += ", ";
+                        summary += getString(R.string.imprint_vibe_disable_error);
+                    }
+                    p.setSummary(summary);
                 }
-                p.setSummary(summary);
             }
 
             if (key == null || key.equals(PREF_KEY_NAVBAR_AUTOFADE_KEYS)) {
@@ -3258,6 +3283,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_QS_SCALE_CORRECTION)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_SCALE_CORRECTION, prefs.getInt(key, 0));
+            } else if (key.equals(PREF_KEY_FINGERPRINT_LAUNCHER_APP)) {
+                intent.setAction(ACTION_FPL_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_FPL_APP, prefs.getString(key, null));
+            } else if (key.equals(PREF_KEY_FINGERPRINT_LAUNCHER_IGNORE_AUTH)) {
+                intent.setAction(ACTION_FPL_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_FPL_IGNORE_AUTH, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

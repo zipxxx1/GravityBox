@@ -1964,4 +1964,20 @@
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Zobraziť panel nastavení</string>
 
+    <!-- Fingeprint launcher -->
+    <string name="pref_cat_fingerprint_launcher_title">Spúšťač snímača odtlačkov</string>
+    <string name="pref_cat_fingerprint_launcher_summary">Umožňuje spustiť aplikáciu alebo akciu použitím snímača odtlačkov 
+        pri zapnutej obrazovke a odomknutom zariadení</string>
+    <string name="pref_fingerprint_launcher_enable_summary">Zapne/vypne funkciu spúšťača snímača odtlačkov (vyžaduje reštart)</string>
+    <string name="pref_fingerprint_launcher_app_title">Aplikácia alebo akcia</string>
+    <string name="pref_fingerprint_launcher_ignore_auth_title">Režim rýchleho ťuknutia</string>
+    <string name="pref_fingerprint_launcher_ignore_auth_summary">EXPERIMENTÁLNE: akceptuje nerozpoznané 
+        odtlačky a rýchle ťuknutia. Môže spôsobiť dočasné zablokovanie snímača v prípade opakovaných 
+        zlyhaní autentifikácie.</string>
+    <string name="fingerprint_auth_failed">Autentifikácia zlyhala</string>
+    <string name="fingerprint_sensor_unavail">Snímač odtlačkov je momentálne nedostupný</string>
+    <string name="fingerprint_sensor_locked">Snímač odtlačkov je dočasne zablokovaný z dôvodu prekročenia počtu 
+        povolených zlyhaní autentifikácie. Spúšťač sa reštartuje o 35 sekúnd.</string>
+    <string name="fingerprint_no_app">Nie je priradená žiadna aplikácia/akcia</string>
+
 </resources>
