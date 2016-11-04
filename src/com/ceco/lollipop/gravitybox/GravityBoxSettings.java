@@ -34,6 +34,7 @@ import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager;
 import com.ceco.lollipop.gravitybox.preference.AppPickerPreference;
 import com.ceco.lollipop.gravitybox.preference.AutoBrightnessDialogPreference;
 import com.ceco.lollipop.gravitybox.preference.SeekBarPreference;
+import com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity;
 import com.ceco.lollipop.gravitybox.webserviceclient.RequestParams;
 import com.ceco.lollipop.gravitybox.webserviceclient.TransactionResult;
 import com.ceco.lollipop.gravitybox.webserviceclient.WebServiceClient;
@@ -3549,7 +3550,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
         public interface ShortcutHandler {
             Intent getCreateShortcutIntent();
-            void onHandleShortcut(Intent intent, String name, Bitmap icon);
+            void onHandleShortcut(Intent intent, String name,
+                    String localIconResName, Bitmap icon);
             void onShortcutCancelled();
         }
 
@@ -3657,26 +3659,34 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
             } else if (requestCode == REQ_OBTAIN_SHORTCUT && mShortcutHandler != null) {
                 if (resultCode == Activity.RESULT_OK) {
+                    String localIconResName = null;
                     Bitmap b = null;
                     Intent.ShortcutIconResource siRes = data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
+                    Intent shortcutIntent = data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
                     if (siRes != null) {
-                        try {
-                            final Context extContext = getActivity().createPackageContext(
-                                    siRes.packageName, Context.CONTEXT_IGNORE_SECURITY);
-                            final Resources extRes = extContext.getResources();
-                            final int drawableResId = extRes.getIdentifier(siRes.resourceName, "drawable", siRes.packageName);
-                            b = BitmapFactory.decodeResource(extRes, drawableResId);
-                        } catch (NameNotFoundException e) {
-                            //
+                        if (shortcutIntent != null &&
+                                ShortcutActivity.ACTION_LAUNCH_ACTION.equals(
+                                        shortcutIntent.getAction())) {
+                            localIconResName = siRes.resourceName;
+                        } else {
+                            try {
+                                final Context extContext = getActivity().createPackageContext(
+                                        siRes.packageName, Context.CONTEXT_IGNORE_SECURITY);
+                                final Resources extRes = extContext.getResources();
+                                final int drawableResId = extRes.getIdentifier(siRes.resourceName, "drawable", siRes.packageName);
+                                b = BitmapFactory.decodeResource(extRes, drawableResId);
+                            } catch (NameNotFoundException e) {
+                                //
+                            }
                         }
                     }
-                    if (b == null) {
+                    if (localIconResName == null && b == null) {
                         b = (Bitmap)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
                     }
 
-                    mShortcutHandler.onHandleShortcut(
-                            (Intent)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT),
-                            data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME), b);
+                    mShortcutHandler.onHandleShortcut(shortcutIntent,
+                            data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME),
+                            localIconResName, b);
                 } else {
                     mShortcutHandler.onShortcutCancelled();
                 }
