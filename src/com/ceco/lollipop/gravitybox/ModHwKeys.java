@@ -1640,6 +1640,7 @@ public class ModHwKeys {
     private static void expandNotificationsPanel() {
         try {
             Intent intent = new Intent(ModStatusBar.ACTION_EXPAND_NOTIFICATIONS);
+            intent.putExtra(AShortcut.EXTRA_ENABLE, true);
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
             log("Error executing expandNotificationsPanel(): " + t.getMessage());

@@ -1986,4 +1986,8 @@
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Zobraziť panel nastavení</string>
 
+    <!-- Action: toggle/expand/collapse notification panel -->
+    <string name="notification_panel_toggle">Prepnúť panel upozornení</string>
+    <string name="notification_panel_collapse">Skryť panel upozornení</string>
+
 </resources>

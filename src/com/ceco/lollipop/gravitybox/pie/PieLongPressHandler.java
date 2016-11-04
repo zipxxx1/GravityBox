@@ -25,6 +25,7 @@ import com.ceco.lollipop.gravitybox.ModStatusBar;
 import com.ceco.lollipop.gravitybox.ScreenRecordingService;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.pie.PieController.ButtonType;
+import com.ceco.lollipop.gravitybox.shortcuts.AShortcut;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -141,6 +142,7 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
                 break;
             case GravityBoxSettings.HWKEY_ACTION_EXPAND_NOTIFICATIONS:
                 intent = new Intent(ModStatusBar.ACTION_EXPAND_NOTIFICATIONS);
+                intent.putExtra(AShortcut.EXTRA_ENABLE, true);
                 break;
             case GravityBoxSettings.HWKEY_ACTION_EXPAND_QUICKSETTINGS:
                 intent = new Intent(ModStatusBar.ACTION_EXPAND_QUICKSETTINGS);

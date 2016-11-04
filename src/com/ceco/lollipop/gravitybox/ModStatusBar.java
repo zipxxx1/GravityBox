@@ -24,6 +24,7 @@ import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.quicksettings.QsQuickPulldownHandler;
+import com.ceco.lollipop.gravitybox.shortcuts.AShortcut;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -240,9 +241,9 @@ public class ModStatusBar {
             } else if (intent.getAction().equals(ACTION_START_SEARCH_ASSIST)) {
                 startSearchAssist();
             } else if (intent.getAction().equals(ACTION_EXPAND_NOTIFICATIONS)) {
-                expandNotificationsPanel();
+                setNotificationPanelState(intent);
             } else if (intent.getAction().equals(ACTION_EXPAND_QUICKSETTINGS)) {
-                expandNotificationsPanel(true);
+                setNotificationPanelState(intent, true);
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
                 mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
@@ -1450,22 +1451,41 @@ public class ModStatusBar {
         }
     }
 
-    private static void expandNotificationsPanel() {
-        expandNotificationsPanel(false);
+    private static void setNotificationPanelState(Intent intent) {
+        setNotificationPanelState(intent, false);
     }
 
-    private static void expandNotificationsPanel(boolean withQs) {
+    private static void setNotificationPanelState(Intent intent, boolean withQs) {
         try {
-            Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
-            if (!(boolean)XposedHelpers.callMethod(notifPanel, "isFullyExpanded")) {
-                if (withQs && XposedHelpers.getBooleanField(notifPanel, "mQsExpansionEnabled")) {
-                    XposedHelpers.setBooleanField(notifPanel,
-                            QsQuickPulldownHandler.getQsExpandFieldName(), true);
+            if (!intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
+                if ((boolean) XposedHelpers.callMethod(notifPanel, "isFullyCollapsed")) {
+                    expandNotificationPanel(withQs);
+                } else {
+                    collapseNotificationPanel();
                 }
-                XposedHelpers.callMethod(notifPanel, "expand");
+            } else {
+                if (intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false)) {
+                    expandNotificationPanel(withQs);
+                } else {
+                    collapseNotificationPanel();
+                }
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
+    }
+
+    private static void expandNotificationPanel(boolean withQs) {
+        Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
+        if (withQs && XposedHelpers.getBooleanField(notifPanel, "mQsExpansionEnabled")) {
+            XposedHelpers.setBooleanField(notifPanel,
+                    QsQuickPulldownHandler.getQsExpandFieldName(), true);
+        }
+        XposedHelpers.callMethod(notifPanel, "expand");
+    }
+
+    private static void collapseNotificationPanel() {
+        XposedHelpers.callMethod(mPhoneStatusBar, "animateCollapsePanels");
     }
 }
