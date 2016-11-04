@@ -15,15 +15,18 @@
 
 package com.ceco.marshmallow.gravitybox.shortcuts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ceco.marshmallow.gravitybox.ModStatusBar;
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.adapters.IIconListAdapterItem;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
 
-public class ExpandNotificationsShortcut extends AShortcut {
+public class ExpandNotificationsShortcut extends AMultiShortcut {
     protected static final String ACTION =  ModStatusBar.ACTION_EXPAND_NOTIFICATIONS;
 
     public ExpandNotificationsShortcut(Context context) {
@@ -32,7 +35,7 @@ public class ExpandNotificationsShortcut extends AShortcut {
 
     @Override
     public String getText() {
-        return mContext.getString(R.string.hwkey_action_expand_notifications);
+        return mContext.getString(R.string.notification_panel_toggle);
     }
 
     @Override
@@ -51,12 +54,31 @@ public class ExpandNotificationsShortcut extends AShortcut {
     }
 
     @Override
-    protected ShortcutIconResource getIconResource() {
-        return ShortcutIconResource.fromContext(mContext, R.drawable.shortcut_notifications);
+    protected List<IIconListAdapterItem> getShortcutList() {
+        final List<IIconListAdapterItem> list = new ArrayList<>();
+        list.add(new ShortcutItem(mContext, R.string.notification_panel_toggle,
+                R.drawable.shortcut_notifications, null));
+        list.add(new ShortcutItem(mContext, R.string.hwkey_action_expand_notifications,
+                R.drawable.shortcut_notifications_expand, new ExtraDelegate() {
+                @Override
+                public void addExtraTo(Intent intent) {
+                    intent.putExtra(EXTRA_ENABLE, true);
+                }
+        }));
+        list.add(new ShortcutItem(mContext, R.string.notification_panel_collapse,
+                R.drawable.shortcut_notifications_collapse, new ExtraDelegate() {
+                @Override
+                public void addExtraTo(Intent intent) {
+                    intent.putExtra(EXTRA_ENABLE, false);
+                }
+        }));
+
+        return list;
     }
 
     public static void launchAction(Context context, Intent intent) {
         Intent launchIntent = new Intent(ACTION);
+        launchIntent.putExtras(intent.getExtras());
         context.sendBroadcast(launchIntent);
     }
 }

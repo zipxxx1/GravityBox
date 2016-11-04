@@ -780,7 +780,7 @@
 
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Show power menu</string>
-    <string name="hwkey_action_expand_notifications">Expand notifications panel</string>
+    <string name="hwkey_action_expand_notifications">Expand notification panel</string>
 
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">GravityBox Actions</string>
@@ -2049,5 +2049,9 @@
     <string name="pref_cat_fingerprint_launcher_fingers_title">Per-finger actions</string>
     <string name="finger">Finger</string>
     <string name="pref_cat_fingerprint_launcher_quick_tap_title">Quick tap action</string>
+
+    <!-- Action: toggle/expand/collapse notification panel -->
+    <string name="notification_panel_toggle">Toggle notification panel</string>
+    <string name="notification_panel_collapse">Collapse notification panel</string>
 
 </resources>

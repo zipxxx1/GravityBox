@@ -1974,4 +1974,8 @@
     <string name="finger">Prst</string>
     <string name="pref_cat_fingerprint_launcher_quick_tap_title">Akce rychlého ťuknutí</string>
 
+    <!-- Action: toggle/expand/collapse notification panel -->
+    <string name="notification_panel_toggle">Přepnout panel upozornění</string>
+    <string name="notification_panel_collapse">Skrýt panel upozornění</string>
+
 </resources>
