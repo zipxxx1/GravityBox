@@ -26,10 +26,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.Utils;
+import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings.PrefsFragment;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings.PrefsFragment.IconPickHandler;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings.PrefsFragment.ShortcutHandler;
@@ -142,6 +144,14 @@ public class AppPickerPreference extends DialogPreference
                     Map<String, ?> keys = prefs.getAll();
                     for (Map.Entry<String, ?> entry : keys.entrySet()) {
                         Object val = entry.getValue();
+                        if (entry.getKey().startsWith(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_FINGER)) {
+                            Set<String> set = (Set<String>) entry.getValue();
+                            for (String item : set) {
+                                if (item.startsWith("app:")) {
+                                    val = item.split(":", 2)[1];
+                                }
+                            }
+                        }
                         if ((val instanceof String) && ((String)val).contains("#Intent")) {
                             try {
                                 Intent intent = Intent.parseUri((String)val, 0);
