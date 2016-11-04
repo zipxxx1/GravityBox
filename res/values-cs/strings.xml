@@ -1978,4 +1978,8 @@
     <string name="notification_panel_toggle">Přepnout panel upozornění</string>
     <string name="notification_panel_collapse">Skrýt panel upozornění</string>
 
+    <!-- Action: toggle/expand/collapse QS panel -->
+    <string name="qs_panel_toggle">Přepnout panel nastavení</string>
+    <string name="qs_panel_collapse">Skrýt panel nastavení</string>
+
 </resources>

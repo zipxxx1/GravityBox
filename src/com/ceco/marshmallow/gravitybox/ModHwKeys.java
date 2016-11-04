@@ -1656,6 +1656,7 @@ public class ModHwKeys {
     private static void expandQsPanel() {
         try {
             Intent intent = new Intent(ModStatusBar.ACTION_EXPAND_QUICKSETTINGS);
+            intent.putExtra(AShortcut.EXTRA_ENABLE, true);
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
             log("Error executing expandQsPanel(): " + t.getMessage());
