@@ -855,10 +855,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_FINGERPRINT_LAUNCHER = "pref_cat_fingerprint_launcher";
     public static final String PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE = "pref_fingerprint_launcher_enable";
     public static final String PREF_KEY_FINGERPRINT_LAUNCHER_APP = "pref_fingerprint_launcher_app";
-    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_IGNORE_AUTH = "pref_fingerprint_launcher_ignore_auth";
+    public static final String PREF_CAT_KEY_FINGERPRINT_LAUNCHER_FINGERS = "pref_cat_fingerprint_launcher_fingers";
+    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_FINGER = "pref_fingerprint_launcher_finger";
     public static final String ACTION_FPL_SETTINGS_CHANGED = "gravitybox.intent.action.FPL_SETTINGS_CHANGED";
+    public static final String EXTRA_FPL_FINGER_ID = "fplFingerId";
     public static final String EXTRA_FPL_APP = "fplApp";
-    public static final String EXTRA_FPL_IGNORE_AUTH = "fplIgnoreAuth";
 
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
@@ -977,6 +978,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public boolean hasMsimSupport;
         public int xposedBridgeVersion;
         public boolean supportsFingerprint;
+        public int[] fingerprintIds;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -1008,6 +1010,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (data.containsKey("supportsFingerprint")) {
                 supportsFingerprint = data.getBoolean("supportsFingerprint");
+            }
+            if (data.containsKey("fingerprintIds")) {
+                fingerprintIds = data.getIntArray("fingerprintIds");
             }
         }
     }
@@ -1845,8 +1850,59 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefPieAppLongpress.setEntries(actionEntries);
             mPrefPieAppLongpress.setEntryValues(actionEntryValues);
 
+            if (sSystemProperties.fingerprintIds != null) {
+                initFingerprintLauncher();
+            }
             setDefaultValues();
             checkPermissions();
+        }
+
+        private void initFingerprintLauncher() {
+            PreferenceCategory catFingers = (PreferenceCategory) findPreference(
+                    PREF_CAT_KEY_FINGERPRINT_LAUNCHER_FINGERS);
+            for (int i = 0; i < sSystemProperties.fingerprintIds.length; i++) {
+                AppPickerPreference appPref = new AppPickerPreference(getActivity(), null);
+                String key = PREF_KEY_FINGERPRINT_LAUNCHER_FINGER + String.valueOf(i);
+                appPref.setKey(key);
+                appPref.setTitle(String.format("%s %d",
+                        getActivity().getString(R.string.finger), i + 1));
+                appPref.setDialogTitle(appPref.getTitle());
+                appPref.setDefaultSummary(getActivity().getString(R.string.app_picker_none));
+                appPref.setSummary(getActivity().getString(R.string.app_picker_none));
+                appPref.setPersistent(false);
+                appPref.setIconPickerEnabled(false);
+                String fingerId = String.valueOf(sSystemProperties.fingerprintIds[i]);
+                appPref.getExtraData().putString("fingerId", fingerId);
+                catFingers.addPreference(appPref);
+                Set<String> currentSet = mPrefs.getStringSet(key, null);
+                if (currentSet != null) {
+                    String currentFingerId = null, currentApp = null;
+                    for (String val : currentSet) {
+                        String[] data = val.split(":", 2);
+                        if ("fingerId".equals(data[0])) {
+                            currentFingerId = data[1];
+                        } else if ("app".equals(data[0])) {
+                            currentApp = data[1];
+                        }
+                    }
+                    if (!fingerId.equals(currentFingerId)) {
+                        Set<String> newSet = new HashSet<>();
+                        newSet.add("fingerId:" + fingerId);
+                        if (currentApp != null) {
+                            newSet.add("app:" + currentApp);
+                        }
+                        mPrefs.edit().putStringSet(key, newSet).commit();
+                        Intent intent = new Intent(ACTION_FPL_SETTINGS_CHANGED);
+                        intent.putExtra(EXTRA_FPL_FINGER_ID, fingerId);
+                        intent.putExtra(EXTRA_FPL_APP, currentApp);
+                        getActivity().sendBroadcast(intent);
+                    }
+                    if (currentApp != null) {
+                        appPref.setValue(currentApp);
+                    }
+                }
+                appPref.setOnPreferenceChangeListener(this);
+            }
         }
 
         private void checkPermissions() {
@@ -3286,9 +3342,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_FINGERPRINT_LAUNCHER_APP)) {
                 intent.setAction(ACTION_FPL_SETTINGS_CHANGED);
                 intent.putExtra(EXTRA_FPL_APP, prefs.getString(key, null));
-            } else if (key.equals(PREF_KEY_FINGERPRINT_LAUNCHER_IGNORE_AUTH)) {
-                intent.setAction(ACTION_FPL_SETTINGS_CHANGED);
-                intent.putExtra(EXTRA_FPL_IGNORE_AUTH, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
@@ -3320,6 +3373,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                             Toast.LENGTH_SHORT).show();
                     return false;
                 }
+            } else if (pref.getKey().startsWith(PREF_KEY_FINGERPRINT_LAUNCHER_FINGER)) {
+                AppPickerPreference appPref = (AppPickerPreference) pref;
+                Set<String> newSet = new HashSet<>();
+                String fingerId = appPref.getExtraData().getString("fingerId");
+                newSet.add("fingerId:" + fingerId);
+                if (newValue != null) {
+                    newSet.add("app:" + newValue);
+                }
+                mPrefs.edit().putStringSet(pref.getKey(), newSet).commit();
+                Intent intent = new Intent(ACTION_FPL_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_FPL_FINGER_ID, fingerId);
+                intent.putExtra(EXTRA_FPL_APP, String.valueOf(newValue));
+                getActivity().sendBroadcast(intent);
             }
             return true;
         }

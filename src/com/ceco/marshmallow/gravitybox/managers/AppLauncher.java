@@ -376,6 +376,10 @@ public class AppLauncher implements BroadcastSubReceiver {
         }
 
         public void initAppInfo(String value) {
+            initAppInfo(value, true);
+        }
+
+        public void initAppInfo(String value, boolean loadLabelAndIcon) {
             mValue = value;
             if (mValue == null) {
                 reset();
@@ -391,41 +395,44 @@ public class AppLauncher implements BroadcastSubReceiver {
                 if (mIntent.getComponent() != null) {
                     mPkgName = mIntent.getComponent().getPackageName();
                 }
-                final int mode = mIntent.getIntExtra("mode", AppPickerPreference.MODE_APP);
 
-                Bitmap appIcon = null;
-                final int iconResId = mIntent.getStringExtra("iconResName") != null ?
-                        mGbResources.getIdentifier(mIntent.getStringExtra("iconResName"),
-                        "drawable", mGbContext.getPackageName()) : 0;
-                if (iconResId != 0) {
-                    appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
-                } else if (mIntent.hasExtra("icon")) {
-                    final String appIconPath = mIntent.getStringExtra("icon");
-                    if (appIconPath != null) {
-                        File f = new File(appIconPath);
-                        if (f.exists() && f.canRead()) {
-                            FileInputStream fis = new FileInputStream(f);
-                            appIcon = BitmapFactory.decodeStream(fis);
-                            fis.close();
+                if (loadLabelAndIcon) {
+                    final int mode = mIntent.getIntExtra("mode", AppPickerPreference.MODE_APP);
+                    Bitmap appIcon = null;
+                    final int iconResId = mIntent.getStringExtra("iconResName") != null ?
+                            mGbResources.getIdentifier(mIntent.getStringExtra("iconResName"),
+                            "drawable", mGbContext.getPackageName()) : 0;
+                    if (iconResId != 0) {
+                        appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                    } else if (mIntent.hasExtra("icon")) {
+                        final String appIconPath = mIntent.getStringExtra("icon");
+                        if (appIconPath != null) {
+                            File f = new File(appIconPath);
+                            if (f.exists() && f.canRead()) {
+                                FileInputStream fis = new FileInputStream(f);
+                                appIcon = BitmapFactory.decodeStream(fis);
+                                fis.close();
+                            }
                         }
                     }
+
+                    if (mode == AppPickerPreference.MODE_APP) {
+                        ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
+                        mAppName = ai.loadLabel(mPm).toString();
+                        if (appIcon == null) {
+                            appIcon = Utils.drawableToBitmap(ai.loadIcon(mPm));
+                        }
+                    } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
+                        mAppName = mIntent.getStringExtra("label");
+                    }
+                    if (appIcon != null) {
+                        int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mSizeDp, 
+                                mResources.getDisplayMetrics());
+                        Bitmap scaledIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
+                        mAppIcon = new BitmapDrawable(mResources, scaledIcon);
+                    }
                 }
 
-                if (mode == AppPickerPreference.MODE_APP) {
-                    ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
-                    mAppName = ai.loadLabel(mPm).toString();
-                    if (appIcon == null) {
-                        appIcon = Utils.drawableToBitmap(ai.loadIcon(mPm));
-                    }
-                } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
-                    mAppName = mIntent.getStringExtra("label");
-                }
-                if (appIcon != null) {
-                    int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mSizeDp, 
-                            mResources.getDisplayMetrics());
-                    Bitmap scaledIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
-                    mAppIcon = new BitmapDrawable(mResources, scaledIcon);
-                }
                 if (DEBUG) log("AppInfo initialized for: " + getAppName() + " [" + mPkgName + "]");
             } catch (NameNotFoundException e) {
                 log("App not found: " + mIntent);

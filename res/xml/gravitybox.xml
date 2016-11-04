@@ -2293,19 +2293,28 @@
             android:summary="@string/pref_fingerprint_launcher_enable_summary"
             android:defaultValue="false" />
 
-        <com.ceco.marshmallow.gravitybox.preference.AppPickerPreference 
-            android:key="pref_fingerprint_launcher_app"
-            android:title="@string/pref_fingerprint_launcher_app_title"
-            android:summary="@string/app_picker_none"
-            iconPickerEnabled="false" 
-            android:dependency="pref_fingerprint_launcher_enable" />
+        <PreferenceCategory
+            android:key="pref_cat_fingerprint_launcher_fingers"
+            android:title="@string/pref_cat_fingerprint_launcher_fingers_title"
+            android:dependency="pref_fingerprint_launcher_enable" >
 
-        <CheckBoxPreference 
-            android:key="pref_fingerprint_launcher_ignore_auth"
-            android:title="@string/pref_fingerprint_launcher_ignore_auth_title"
-            android:summary="@string/pref_fingerprint_launcher_ignore_auth_summary"
-            android:defaultValue="false"
-            android:dependency="pref_fingerprint_launcher_enable" />
+            <!-- generated dynamically at runtime -->
+
+        </PreferenceCategory>
+
+        <PreferenceCategory
+            android:key="pref_cat_fingerprint_launcher_quick_tap"
+            android:title="@string/pref_cat_fingerprint_launcher_quick_tap_title"
+            android:dependency="pref_fingerprint_launcher_enable" >
+
+            <com.ceco.marshmallow.gravitybox.preference.AppPickerPreference 
+                android:key="pref_fingerprint_launcher_app"
+                android:title="@string/pref_fingerprint_launcher_app_title"
+                android:summary="@string/app_picker_none"
+                iconPickerEnabled="false" />
+
+        </PreferenceCategory>
+
 
     </PreferenceScreen>
 

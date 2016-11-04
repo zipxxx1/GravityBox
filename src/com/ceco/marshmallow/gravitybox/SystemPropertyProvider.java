@@ -134,6 +134,10 @@ public class SystemPropertyProvider {
                                     data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
                                     data.putInt("xposedBridgeVersion", XposedBridge.XPOSED_BRIDGE_VERSION);
                                     data.putBoolean("supportsFingerprint", supportsFingerprint(context));
+                                    if (SysUiManagers.FingerprintLauncher != null) {
+                                        data.putIntArray("fingerprintIds",
+                                                SysUiManagers.FingerprintLauncher.getEnrolledFingerprintIds());
+                                    }
                                     if (DEBUG) {
                                         log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
                                         log("isTablet: " + data.getBoolean("isTablet"));
@@ -145,6 +149,9 @@ public class SystemPropertyProvider {
                                         log("hasMsimSupport: " + data.getBoolean("hasMsimSupport"));
                                         log("xposedBridgeVersion: " + data.getInt("xposedBridgeVersion"));
                                         log("supportsFingerprint: " + data.getBoolean("supportsFingerprint"));
+                                        if (data.containsKey("fingerprintIds")) {
+                                            log("fingerprintIds: " + data.getIntArray("fingerprintIds"));
+                                        }
                                     }
                                     receiver.send(RESULT_SYSTEM_PROPERTIES, data);
                                 } else if (intent.getAction().equals(ACTION_REGISTER_UUID) && 

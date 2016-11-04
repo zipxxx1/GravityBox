@@ -15,6 +15,10 @@
 package com.ceco.marshmallow.gravitybox.managers;
 
 import java.security.KeyStore;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -30,31 +34,65 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.AuthenticationResult;
 import android.hardware.fingerprint.FingerprintManager.CryptoObject;
+import android.os.Binder;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.widget.Toast;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 
 public class FingerprintLauncher implements BroadcastSubReceiver {
     private static final String TAG = "GB:FingerprintLauncher";
     private static final boolean DEBUG = false;
     private static final String KEY_NAME = "gravitybox.fingeprint.launcher";
+    private static final String CLASS_FP_SERVICE_WRAPPER = 
+            "com.android.server.fingerprint.FingerprintService.FingerprintServiceWrapper";
+    private static final String UID_SYSTEM_UI = "android.uid.systemui";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    // Fingerprint service
+    public static final void initAndroid(final ClassLoader classLoader) {
+        if (DEBUG) log("service init");
+
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_FP_SERVICE_WRAPPER, classLoader,
+                    "isRestricted", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    Object service = XposedHelpers.getSurroundingThis(param.thisObject);
+                    Context ctx = (Context) XposedHelpers.getObjectField(service, "mContext");
+                    String pkg = ctx.getPackageManager().getNameForUid(Binder.getCallingUid());
+                    if (pkg != null) {
+                        if (pkg.contains(":")) {
+                            pkg = pkg.split(":")[0];
+                        }
+                        if (DEBUG) log("service: isRestricted: pkg=" + pkg);
+                        if (UID_SYSTEM_UI.equals(pkg)) {
+                            param.setResult(false);
+                        }
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    // SystemUI
     private Context mContext;
     private Context mGbContext;
     private XSharedPreferences mPrefs;
     private FingerprintManager mFpManager;
     private FingerprintHandler mFpHandler;
-    private boolean mIgnoreAuth;
-    private String mApp;
-    private AppInfo mAppInfo;
+    private String mQuickApp;
+    private Map<String,String> mFingerAppMap;
 
     public FingerprintLauncher(Context ctx, XSharedPreferences prefs) throws Throwable {
         if (ctx == null)
@@ -63,12 +101,11 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         mContext = ctx;
         mGbContext = Utils.getGbContext(mContext);
         mPrefs = prefs;
-        mAppInfo = SysUiManagers.AppLauncher.createAppInfo();
 
-        mIgnoreAuth = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_IGNORE_AUTH, false);
-        mApp = mPrefs.getString(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_APP, null);
+        mQuickApp = mPrefs.getString(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_APP, null);
 
         initFingerprintManager();
+        initFingerAppMap(prefs);
     }
 
     private void initFingerprintManager() throws Throwable {
@@ -99,6 +136,35 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         if (DEBUG) log("Fingeprint manager initialized");
     }
 
+    private void initFingerAppMap(XSharedPreferences prefs) {
+        mFingerAppMap = new HashMap<>();
+        int[] ids = getEnrolledFingerprintIds();
+        if (ids != null) {
+            for (int i = 0; i < ids.length; i++) {
+                String key = GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_FINGER +
+                        String.valueOf(i);
+                String[] data = parseFingerPrefSet(prefs.getStringSet(key, null));
+                if (data[0] != null) {
+                    mFingerAppMap.put(data[0], data[1]);
+                }
+            }
+        }
+    }
+
+    private String[] parseFingerPrefSet(Set<String> set) {
+        String[] retVal = new String[2];
+        if (set == null) return retVal;
+        for (String val : set) {
+            String[] data = val.split(":", 2);
+            if ("fingerId".equals(data[0])) {
+                retVal[0] = data[1];
+            } else if ("app".equals(data[0])) {
+                retVal[1] = data[1];
+            }
+        }
+        return retVal;
+    }
+
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
@@ -107,11 +173,12 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
             onUserPresentChanged(true);
         } else if (intent.getAction().equals(GravityBoxSettings.ACTION_FPL_SETTINGS_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_FPL_APP)) {
-                mApp = intent.getStringExtra(GravityBoxSettings.EXTRA_FPL_APP);
-                mAppInfo.initAppInfo(mApp);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_FPL_IGNORE_AUTH)) {
-                mIgnoreAuth = intent.getBooleanExtra(GravityBoxSettings.EXTRA_FPL_IGNORE_AUTH, false);
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_FPL_FINGER_ID)) {
+                    mFingerAppMap.put(intent.getStringExtra(GravityBoxSettings.EXTRA_FPL_FINGER_ID),
+                            intent.getStringExtra(GravityBoxSettings.EXTRA_FPL_APP));
+                } else {
+                    mQuickApp = intent.getStringExtra(GravityBoxSettings.EXTRA_FPL_APP);
+                }
             }
         }
     }
@@ -125,14 +192,19 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         }
     }
 
-    private void startActivity() {
+    private void startActivity(String fingerId) {
         if (DEBUG) log("starting activity");
         try {
-            if (mAppInfo.getValue() == null && mApp != null) {
-                mAppInfo.initAppInfo(mApp);
+            AppInfo appInfo = SysUiManagers.AppLauncher.createAppInfo();
+            if (fingerId != null) {
+                if (mFingerAppMap.containsKey(fingerId)) {
+                    appInfo.initAppInfo(mFingerAppMap.get(fingerId), false);
+                }
+            } else {
+                appInfo.initAppInfo(mQuickApp, false);
             }
-            if (mAppInfo.getIntent() != null) {
-                SysUiManagers.AppLauncher.startActivity(mContext, mAppInfo.getIntent());
+            if (appInfo.getIntent() != null) {
+                SysUiManagers.AppLauncher.startActivity(mContext, appInfo.getIntent());
             } else {
                 Toast.makeText(mContext, String.format("%s\n%s",
                         TAG, mGbContext.getString(R.string.fingerprint_no_app)),
@@ -212,8 +284,8 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
             if (DEBUG) log("onAuthenticationHelp: " + helpMsgId + " - " + helpString);
 
-            if (mIgnoreAuth) {
-                startActivity();
+            if (helpMsgId == FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST) {
+                startActivity(null);
             } else {
                 Toast.makeText(mContext, TAG + "\n" + helpString,Toast.LENGTH_SHORT).show();
             }
@@ -223,19 +295,46 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         public void onAuthenticationFailed() {
             if (DEBUG) log("onAuthenticationFailed");
 
-            if (mIgnoreAuth) {
-                startActivity();
-            } else {
-                Toast.makeText(mContext, String.format("%s\n%s",
-                        TAG, mGbContext.getString(R.string.fingerprint_auth_failed)),
-                            Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(mContext, String.format("%s\n%s",
+                    TAG, mGbContext.getString(R.string.fingerprint_auth_failed)),
+                        Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onAuthenticationSucceeded(AuthenticationResult result) {
-            startActivity();
+            startActivity(getFingerIdFromResult(result));
             restartListeningDelayed(1000);
         }
+
+        private String getFingerIdFromResult(Object result) {
+            String id = null;
+            try {
+                Object fp = XposedHelpers.callMethod(result, "getFingerprint");
+                if (fp != null) {
+                    id = String.valueOf(XposedHelpers.callMethod(fp, "getFingerId"));
+                    if (DEBUG) log("getFingerPrintIdFromResult: id=" + id);
+                }
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+            return id;
+        }
+    }
+
+    public int[] getEnrolledFingerprintIds() {
+        int[] ids = null;
+        try {
+            List<?> fpList = (List<?>) XposedHelpers.callMethod(mFpManager,
+                    "getEnrolledFingerprints", Utils.getCurrentUser());
+            if (fpList.size() > 0) {
+                ids = new int[fpList.size()];
+                for (int i = 0; i < fpList.size(); i++) {
+                    ids[i] = (int) XposedHelpers.callMethod(fpList.get(i), "getFingerId");
+                }
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+        return ids;
     }
 }

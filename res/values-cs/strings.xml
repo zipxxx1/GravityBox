@@ -1965,14 +1965,13 @@
         při zapnuté obrazovce a odemčeném zařízení</string>
     <string name="pref_fingerprint_launcher_enable_summary">Zapne/vypne funkci spouštěče snímače otisků (vyžaduje restart)</string>
     <string name="pref_fingerprint_launcher_app_title">Aplikace nebo akce</string>
-    <string name="pref_fingerprint_launcher_ignore_auth_title">Režim rychlého ťuknutí</string>
-    <string name="pref_fingerprint_launcher_ignore_auth_summary">EXPERIMENTÁLNÍ: akceptuje nerozpoznané
-         otisky a rychlé klepnutí. Může způsobit dočasné zablokování snímače v případě opakovaných
-         selhání autentizace.</string>
     <string name="fingerprint_auth_failed">Autentifikace selhala</string>
     <string name="fingerprint_sensor_unavail">Snímač otisků je momentálně nedostupný</string>
     <string name="fingerprint_sensor_locked">Snímač otisků je dočasně zablokován z důvodu překročení počtu 
         povolených selhání autentizace. Spouštěč se restartuje o 35 sekund.</string>
     <string name="fingerprint_no_app">Není přiřazena žádná aplikace/akce</string>
+    <string name="pref_cat_fingerprint_launcher_fingers_title">Akce známých otisků</string>
+    <string name="finger">Prst</string>
+    <string name="pref_cat_fingerprint_launcher_quick_tap_title">Akce rychlého ťuknutí</string>
 
 </resources>

@@ -57,6 +57,7 @@ import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -116,6 +117,7 @@ public class AppPickerPreference extends DialogPreference
     private boolean mLaunchesFromLockscreen;
     private boolean mForceCustomIcon;
     private boolean mAllowGravityBoxActions;
+    private Bundle mExtraData;
 
     private static LruCache<String, BitmapDrawable> sAppIconCache;
     static {
@@ -307,6 +309,17 @@ public class AppPickerPreference extends DialogPreference
 
     public void setLaunchesFromLockscreen(boolean value) {
         mLaunchesFromLockscreen = value;
+    }
+
+    public void setIconPickerEnabled(boolean value) {
+        mIconPickerEnabled = value;
+    }
+
+    public Bundle getExtraData() {
+        if (mExtraData == null) {
+            mExtraData = new Bundle();
+        }
+        return mExtraData;
     }
 
     @Override
@@ -516,6 +529,9 @@ public class AppPickerPreference extends DialogPreference
     }
 
     public void setValue(String value){
+        if (!callChangeListener(value))
+            return;
+
         mValue = value;
         mAppInfo = getAppInfoFromValue(value);
         setSummary(mAppInfo.name);

@@ -15,6 +15,8 @@
 
 package com.ceco.marshmallow.gravitybox;
 
+import com.ceco.marshmallow.gravitybox.managers.FingerprintLauncher;
+
 import android.os.Build;
 import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -129,6 +131,9 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModTrustManager.initAndroid(prefs, lpparam.classLoader);
             ModPowerMenu.initAndroid(prefs, lpparam.classLoader);
             ModFingerprint.initAndroid(prefs, lpparam.classLoader);
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE, false)) {
+                FingerprintLauncher.initAndroid(lpparam.classLoader);
+            }
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {
