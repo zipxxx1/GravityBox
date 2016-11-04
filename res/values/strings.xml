@@ -2047,4 +2047,8 @@
     <string name="notification_panel_toggle">Toggle notification panel</string>
     <string name="notification_panel_collapse">Collapse notification panel</string>
 
+    <!-- Action: toggle/expand/collapse QS panel -->
+    <string name="qs_panel_toggle">Toggle QuickSettings panel</string>
+    <string name="qs_panel_collapse">Collapse QuickSettings panel</string>
+
 </resources>
