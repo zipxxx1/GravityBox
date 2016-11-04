@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -701,7 +701,7 @@ public class AppPickerPreference extends DialogPreference
         }
 
         @Override
-        public void onHandleShortcut(Intent intent, String name, Bitmap icon) {
+        public void onHandleShortcut(Intent intent, String name, String localIconResName, Bitmap icon) {
             if (intent == null) {
                 Toast.makeText(mContext, R.string.app_picker_shortcut_null_intent, Toast.LENGTH_LONG).show();
                 return;
@@ -712,9 +712,8 @@ public class AppPickerPreference extends DialogPreference
 
             // generate label
             if (name != null) {
-                mAppName  += ": " + name;
                 mIntent.putExtra("label", name);
-                mIntent.putExtra("prefLabel", mAppName);
+                mIntent.putExtra("prefLabel", mAppName + ": " + name);
             } else {
                 mIntent.putExtra("label", mAppName);
                 mIntent.putExtra("prefLabel", mAppName);
@@ -724,8 +723,9 @@ public class AppPickerPreference extends DialogPreference
                 mAppIcon = new BitmapDrawable(mResources, icon);
             }
 
-            // process icon
-            if (mAppIcon != null) {
+            if (localIconResName != null) {
+                mIntent.putExtra("iconResName", localIconResName);
+            } else if (icon != null) {
                 try {
                     final Context context = AppPickerPreference.this.mContext;
                     final String dir = context.getFilesDir() + "/app_picker";
@@ -736,9 +736,7 @@ public class AppPickerPreference extends DialogPreference
                     d.setExecutable(true, false);
                     File f = new File(fileName);
                     FileOutputStream fos = new FileOutputStream(f);
-                    final boolean iconSaved = icon == null ?
-                            mAppIcon.getBitmap().compress(CompressFormat.PNG, 100, fos) :
-                                icon.compress(CompressFormat.PNG, 100, fos);
+                    final boolean iconSaved = icon.compress(CompressFormat.PNG, 100, fos);
                     if (iconSaved) {
                         mIntent.putExtra("icon", f.getAbsolutePath());
                         f.setReadable(true, false);
