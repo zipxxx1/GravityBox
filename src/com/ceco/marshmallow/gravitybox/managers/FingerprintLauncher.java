@@ -93,6 +93,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
     private FingerprintHandler mFpHandler;
     private String mQuickApp;
     private Map<String,String> mFingerAppMap;
+    private boolean mIsPaused;
 
     public FingerprintLauncher(Context ctx, XSharedPreferences prefs) throws Throwable {
         if (ctx == null)
@@ -180,15 +181,29 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
                     mQuickApp = intent.getStringExtra(GravityBoxSettings.EXTRA_FPL_APP);
                 }
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_FPL_PAUSE)) {
+                pause();
+            }
         }
     }
 
     private void onUserPresentChanged(boolean present) {
         if (DEBUG) log("onUserPresentChanged: present=" + present);
         if (present) {
-            mFpHandler.startListening();
+            mIsPaused = false;
+            mFpHandler.startListeningDelayed(500);
         } else {
             mFpHandler.stopListening();
+        }
+    }
+
+    private void pause() {
+        if (!mIsPaused) {
+            mIsPaused = true;
+            mFpHandler.stopListening();
+            Toast.makeText(mContext, String.format("%s\n%s",
+                    TAG, mGbContext.getString(R.string.fingerprint_launcher_paused)),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -226,13 +241,17 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         }
 
         private void startListening() {
+            if (mCancellationSignal != null) {
+                if (DEBUG) log("Already listening");
+                return;
+            }
             mCancellationSignal = new CancellationSignal();
             mFpManager.authenticate(mCryptoObject, mCancellationSignal, 0, this, null);
             if (DEBUG) log("FingerprintHandler: listening started");
         }
 
         private void stopListening() {
-            mHandler.removeCallbacks(mRestartListeningRunnable);
+            mHandler.removeCallbacks(mStartListeningRunnable);
             if (mCancellationSignal != null && !mCancellationSignal.isCanceled()) {
                 mCancellationSignal.cancel();
                 if (DEBUG) log("FingerprintHandler: listening stopped");
@@ -240,14 +259,18 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
             mCancellationSignal = null;
         }
 
+        private void startListeningDelayed(long delayMs) {
+            mHandler.postDelayed(mStartListeningRunnable, delayMs);
+        }
+
         private void restartListeningDelayed(long delayMs) {
             if (DEBUG) log("Restarting listening in " + delayMs + "ms");
 
             stopListening();
-            mHandler.postDelayed(mRestartListeningRunnable, delayMs);
+            mHandler.postDelayed(mStartListeningRunnable, delayMs);
         }
 
-        private Runnable mRestartListeningRunnable = new Runnable() {
+        private Runnable mStartListeningRunnable = new Runnable() {
             @Override
             public void run() {
                 startListening();
@@ -257,6 +280,9 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         @Override
         public void onAuthenticationError(int errMsgId, CharSequence errString) {
             if (DEBUG) log("onAuthenticationError: " + errMsgId + " - " + errString);
+
+            if (mIsPaused)
+                return;
 
             switch (errMsgId) {
                 case FingerprintManager.FINGERPRINT_ERROR_HW_UNAVAILABLE:

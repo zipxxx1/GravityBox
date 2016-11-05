@@ -1978,6 +1978,10 @@
     <string name="pref_cat_fingerprint_launcher_fingers_title">Akcie rozpoznaných odtlačkov</string>
     <string name="finger">Prst</string>
     <string name="pref_cat_fingerprint_launcher_quick_tap_title">Akcia rýchleho ťuknutia</string>
+    <string name="pref_fingerprint_launcher_pause_title">Pozastaviť</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Pozastaví spúšťač do nasledujúceho vypnutia/zapnutia obrazovky. 
+        Použite v prípade ak iná aplikácia potrebuje prístup k snímaču na dlhšiu dobu, napr. počas registrácie odtlačkov.</string>
+    <string name="fingerprint_launcher_paused">Spúšťač bol pozastavený do nasledujúceho vypnutia/zapnutia obrazovky</string>
 
     <!-- Action: toggle/expand/collapse notification panel -->
     <string name="notification_panel_toggle">Prepnúť panel upozornení</string>

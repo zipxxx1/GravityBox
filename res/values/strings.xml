@@ -2049,6 +2049,10 @@
     <string name="pref_cat_fingerprint_launcher_fingers_title">Per-finger actions</string>
     <string name="finger">Finger</string>
     <string name="pref_cat_fingerprint_launcher_quick_tap_title">Quick tap action</string>
+    <string name="pref_fingerprint_launcher_pause_title">Pause</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Pauses launcher until next screen off/on cycle. 
+        Use in case other app needs sensor for a longer time period, e.g. during fingerprint enrollment.</string>
+    <string name="fingerprint_launcher_paused">Launcher has been paused until next screen off/on cycle</string>
 
     <!-- Action: toggle/expand/collapse notification panel -->
     <string name="notification_panel_toggle">Toggle notification panel</string>

@@ -1973,6 +1973,10 @@
     <string name="pref_cat_fingerprint_launcher_fingers_title">Akce známých otisků</string>
     <string name="finger">Prst</string>
     <string name="pref_cat_fingerprint_launcher_quick_tap_title">Akce rychlého ťuknutí</string>
+    <string name="pref_fingerprint_launcher_pause_title">Pozastavit</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Pozastaví spouštěč do následujícího vypnutí/zapnutí displeje. 
+        Použijte v případě pokud jiná aplikace potřebuje přístup k čidlu na delší dobu, např. během registrace otisků.</string>
+    <string name="fingerprint_launcher_paused">Spouštěč byl pozastaven do následujícího vypnutí/zapnutí displeje</string>
 
     <!-- Action: toggle/expand/collapse notification panel -->
     <string name="notification_panel_toggle">Přepnout panel upozornění</string>

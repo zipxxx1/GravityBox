@@ -855,12 +855,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_CAT_KEY_FINGERPRINT_LAUNCHER = "pref_cat_fingerprint_launcher";
     public static final String PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE = "pref_fingerprint_launcher_enable";
+    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_PAUSE = "pref_fingerprint_launcher_pause";
     public static final String PREF_KEY_FINGERPRINT_LAUNCHER_APP = "pref_fingerprint_launcher_app";
     public static final String PREF_CAT_KEY_FINGERPRINT_LAUNCHER_FINGERS = "pref_cat_fingerprint_launcher_fingers";
     public static final String PREF_KEY_FINGERPRINT_LAUNCHER_FINGER = "pref_fingerprint_launcher_finger";
     public static final String ACTION_FPL_SETTINGS_CHANGED = "gravitybox.intent.action.FPL_SETTINGS_CHANGED";
     public static final String EXTRA_FPL_FINGER_ID = "fplFingerId";
     public static final String EXTRA_FPL_APP = "fplApp";
+    public static final String EXTRA_FPL_PAUSE = "fplPause";
 
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
@@ -3542,6 +3544,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 } else if (file.exists()) {
                     file.delete();
                 }
+            } else if (PREF_KEY_FINGERPRINT_LAUNCHER_PAUSE.equals(pref.getKey())) {
+                Intent fplPauseIntent = new Intent(ACTION_FPL_SETTINGS_CHANGED);
+                fplPauseIntent.putExtra(EXTRA_FPL_PAUSE, true);
+                getActivity().sendBroadcast(fplPauseIntent);
             }
 
 //            else if (PREF_KEY_HEADS_UP_SNOOZE_RESET.equals(pref.getKey())) {
