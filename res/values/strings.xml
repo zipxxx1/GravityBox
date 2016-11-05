@@ -2053,6 +2053,8 @@
     <string name="pref_fingerprint_launcher_pause_summary">Pauses launcher until next screen off/on cycle. 
         Use in case other app needs sensor for a longer time period, e.g. during fingerprint enrollment.</string>
     <string name="fingerprint_launcher_paused">Launcher has been paused until next screen off/on cycle</string>
+    <string name="pref_fingerprint_launcher_show_toast_title">Show status messages</string>
+    <string name="pref_fingerprint_launcher_show_toast_summary">Whether to show status messages in form of a toast</string>
 
     <!-- Action: toggle/expand/collapse notification panel -->
     <string name="notification_panel_toggle">Toggle notification panel</string>

@@ -1982,6 +1982,8 @@
     <string name="pref_fingerprint_launcher_pause_summary">Pozastaví spúšťač do nasledujúceho vypnutia/zapnutia obrazovky. 
         Použite v prípade ak iná aplikácia potrebuje prístup k snímaču na dlhšiu dobu, napr. počas registrácie odtlačkov.</string>
     <string name="fingerprint_launcher_paused">Spúšťač bol pozastavený do nasledujúceho vypnutia/zapnutia obrazovky</string>
+    <string name="pref_fingerprint_launcher_show_toast_title">Stavové správy</string>
+    <string name="pref_fingerprint_launcher_show_toast_summary">Povolí zobrazovanie stavových správ</string>
 
     <!-- Action: toggle/expand/collapse notification panel -->
     <string name="notification_panel_toggle">Prepnúť panel upozornení</string>

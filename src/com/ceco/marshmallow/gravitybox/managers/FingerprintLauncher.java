@@ -94,6 +94,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
     private String mQuickApp;
     private Map<String,String> mFingerAppMap;
     private boolean mIsPaused;
+    private boolean mShowToast;
 
     public FingerprintLauncher(Context ctx, XSharedPreferences prefs) throws Throwable {
         if (ctx == null)
@@ -104,6 +105,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         mPrefs = prefs;
 
         mQuickApp = mPrefs.getString(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_APP, null);
+        mShowToast = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_SHOW_TOAST, true);
 
         initFingerprintManager();
         initFingerAppMap(prefs);
@@ -184,6 +186,9 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_FPL_PAUSE)) {
                 pause();
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_FPL_SHOW_TOAST)) {
+                mShowToast = intent.getBooleanExtra(GravityBoxSettings.EXTRA_FPL_SHOW_TOAST, true);
+            }
         }
     }
 
@@ -201,9 +206,11 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         if (!mIsPaused) {
             mIsPaused = true;
             mFpHandler.stopListening();
-            Toast.makeText(mContext, String.format("%s\n%s",
+            if (mShowToast) {
+                Toast.makeText(mContext, String.format("%s\n%s",
                     TAG, mGbContext.getString(R.string.fingerprint_launcher_paused)),
                     Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -220,7 +227,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
             }
             if (appInfo.getIntent() != null) {
                 SysUiManagers.AppLauncher.startActivity(mContext, appInfo.getIntent());
-            } else {
+            } else if (mShowToast) {
                 Toast.makeText(mContext, String.format("%s\n%s",
                         TAG, mGbContext.getString(R.string.fingerprint_no_app)),
                         Toast.LENGTH_SHORT).show();
@@ -287,9 +294,11 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
             switch (errMsgId) {
                 case FingerprintManager.FINGERPRINT_ERROR_HW_UNAVAILABLE:
                 case FingerprintManager.FINGERPRINT_ERROR_CANCELED:
-                    Toast.makeText(mContext, String.format("%s\n%s",
+                    if (mShowToast) {
+                        Toast.makeText(mContext, String.format("%s\n%s",
                             TAG, mGbContext.getString(R.string.fingerprint_sensor_unavail)),
                             Toast.LENGTH_SHORT).show();
+                    }
                     restartListeningDelayed(10000);
                     break;
                 case FingerprintManager.FINGERPRINT_ERROR_UNABLE_TO_PROCESS:
@@ -312,7 +321,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
 
             if (helpMsgId == FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST) {
                 startActivity(null);
-            } else {
+            } else if (mShowToast) {
                 Toast.makeText(mContext, TAG + "\n" + helpString,Toast.LENGTH_SHORT).show();
             }
         }
@@ -321,9 +330,11 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         public void onAuthenticationFailed() {
             if (DEBUG) log("onAuthenticationFailed");
 
-            Toast.makeText(mContext, String.format("%s\n%s",
+            if (mShowToast) {
+                Toast.makeText(mContext, String.format("%s\n%s",
                     TAG, mGbContext.getString(R.string.fingerprint_auth_failed)),
                         Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override

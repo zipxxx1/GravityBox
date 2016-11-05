@@ -2300,6 +2300,13 @@
             android:persistent="false"
             android:dependency="pref_fingerprint_launcher_enable" />
 
+        <CheckBoxPreference 
+            android:key="pref_fingerprint_launcher_show_toast"
+            android:title="@string/pref_fingerprint_launcher_show_toast_title"
+            android:summary="@string/pref_fingerprint_launcher_show_toast_summary"
+            android:defaultValue="true"
+            android:dependency="pref_fingerprint_launcher_enable" />
+
         <PreferenceCategory
             android:key="pref_cat_fingerprint_launcher_fingers"
             android:title="@string/pref_cat_fingerprint_launcher_fingers_title"
