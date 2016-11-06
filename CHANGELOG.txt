@@ -1,3 +1,17 @@
+Changelog 6.2.1 - 06/11/2016
+--------------------------------------
+- Fingerprint launcher extended:
+--- allows per-finger actions - each enrolled fingerprint can have own action
+--- allows quick tap (or swipe) action (experience depends on hardware capabilities)
+--- added command to pause launcher until next screen off/on cycle
+------ useful in case other app needs sensor for a longer time period, e.g. during fingerprint enrollment
+--- made status messages (toasts) optional
+--- improved reliability
+- GravityBox Actions:
+--- added explicit expand/collapse notification panel actions
+--- added explicit expand/collapse QS panel actions
+- Updated Turkish translations (thanks to Fatih Firinci)
+
 Changelog 6.2.0 - 03/11/2016
 --------------------------------------
 - Fixed issue preventing module from working on some devices
