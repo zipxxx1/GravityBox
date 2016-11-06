@@ -101,6 +101,7 @@ public class ModNavigationBar {
     private static int mBarModeOriginal;
     private static int mAutofadeTimeoutMs;
     private static String mAutofadeShowKeysPolicy;
+    private static BarModeHandler mBarModeHandler;
 
     // Navbar dimensions
     private static int mNavbarHeight;
@@ -296,6 +297,7 @@ public class ModNavigationBar {
             final Class<?> navbarTransitionsClass = XposedHelpers.findClass(CLASS_NAVBAR_TRANSITIONS, classLoader);
             final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
 
+            mBarModeHandler = new BarModeHandler();
             mAlwaysShowMenukey = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_MENUKEY, false);
             mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
@@ -707,7 +709,7 @@ public class ModNavigationBar {
         }
     }
 
-    private static Handler mBarModeHandler = new Handler() {
+    private static class BarModeHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == MSG_LIGHTS_OUT) {
