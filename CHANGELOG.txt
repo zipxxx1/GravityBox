@@ -1,3 +1,12 @@
+Changelog 5.4.5 - 06/11/2016
+--------------------------------------
+- Fixed issue preventing module from working on some devices
+- Fixed ExceptionInInitializerError showing in xposed log
+- GravityBox Actions: 
+--- brought back action for expanding quick settings panel
+--- added explicit expand/collapse notification panel actions
+--- added explicit expand/collapse QS panel actions
+
 Changelog 5.4.4 - 01/11/2016
 --------------------------------------
 - QuickSettings:
