@@ -1379,10 +1379,15 @@ public class ModStatusBar {
 
     private static void expandNotificationPanel(boolean withQs) {
         Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
-        XposedHelpers.callMethod(notifPanel, "instantExpand");
-        if (withQs && XposedHelpers.getBooleanField(notifPanel, "mQsExpansionEnabled")) {
-            XposedHelpers.callMethod(notifPanel, "setQsExpansion",
-                    XposedHelpers.getIntField(notifPanel, "mQsMaxExpansionHeight"));
+        try {
+            XposedHelpers.callMethod(notifPanel, "instantExpand");
+            if (withQs && XposedHelpers.getBooleanField(notifPanel, "mQsExpansionEnabled")) {
+                XposedHelpers.callMethod(notifPanel, "setQsExpansion",
+                        XposedHelpers.getIntField(notifPanel, "mQsMaxExpansionHeight"));
+            }
+        } catch (Throwable t) {
+            // fallback to alt method
+            XposedHelpers.callMethod(notifPanel, withQs ? "expandWithQs" : "expand");
         }
     }
 
