@@ -2037,4 +2037,12 @@
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Развернуть панель быстрых настроек</string>
 
+    <!-- Action: toggle/expand/collapse notification panel -->
+    <string name="notification_panel_toggle">Включить панель уведомлений</string>
+    <string name="notification_panel_collapse">Свернуть панель уведомлений</string>
+
+    <!-- Action: toggle/expand/collapse QS panel -->
+    <string name="qs_panel_toggle">Включить панель быстрых настроек</string>
+    <string name="qs_panel_collapse">Свернуть панель быстрых настроек</string>
+
 </resources>
