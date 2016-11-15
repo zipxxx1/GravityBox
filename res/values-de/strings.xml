@@ -274,6 +274,7 @@
     <string name="quick_pulldown_off">Aus</string>
     <string name="quick_pulldown_right">Rechts</string>
     <string name="quick_pulldown_left">Links</string>
+    <string name="quick_pulldown_both">Beide</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Farbe der Statusleiste</string>
@@ -661,6 +662,7 @@
     <string name="pref_hwkey_lockscreen_torch_title">Taschenlampe im Sperrbildschirm</string>
     <string name="hwkey_ls_torch_disabled">Deaktiviert</string>
     <string name="hwkey_ls_torch_home_longpress">Bei Gedrückthalten der Home-Taste</string>
+    <string name="hwkey_ls_torch_power_longpress">Bei Gedrückthalten der Power-Taste</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Anpassung der Schnelleinstellungen aktivieren/deaktivieren(Neustart erforderlich)</string>
@@ -676,6 +678,7 @@
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Timeout der Lautstärkeanzeige</string>
+    <string name="pref_volume_panel_timeout_summary">Wähle 0ms für Standardeinstellung</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_silent">Stumm</string>
@@ -1626,7 +1629,8 @@
     <string name="direct_unlock_see_through">Transparent</string>
 
     <!-- UNC: Notification visibility -->
-    <string name="pref_lc_notif_visibility_title">Sichtbarkeit</string>
+    <string name="pref_cat_lc_visibility_title">Sichtbarkeit</string>
+    <string name="pref_lc_notif_visibility_title">Sichtbarkeit Inhalte</string>
     <string name="pref_lc_notif_visibility_summary">Setzt Benachrichtigungssichtbarkeit im gesicherten Sperrbildschirm.
         Nur wirksam wenn \"Sensitive Inhalte verstecken\" aktiv ist</string>
     <string name="lc_notif_visibility_default">Standard</string>
