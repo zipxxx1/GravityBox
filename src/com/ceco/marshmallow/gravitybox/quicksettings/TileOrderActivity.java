@@ -263,6 +263,8 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             return false;
         if (key.equals("aosp_tile_hotspot") && Utils.isXperiaDevice())
             return false;
+        if (key.startsWith("moto_tile") && !Utils.isMotoXtDevice())
+            return false;
 
         return true;
     }

@@ -34,6 +34,7 @@ import com.ceco.marshmallow.gravitybox.managers.BatteryInfoManager;
 import com.ceco.marshmallow.gravitybox.preference.AppPickerPreference;
 import com.ceco.marshmallow.gravitybox.preference.AutoBrightnessDialogPreference;
 import com.ceco.marshmallow.gravitybox.preference.SeekBarPreference;
+import com.ceco.marshmallow.gravitybox.shortcuts.ShortcutActivity;
 import com.ceco.marshmallow.gravitybox.webserviceclient.RequestParams;
 import com.ceco.marshmallow.gravitybox.webserviceclient.TransactionResult;
 import com.ceco.marshmallow.gravitybox.webserviceclient.WebServiceClient;
@@ -98,6 +99,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICK_PULLDOWN = "pref_quick_pulldown";
     public static final String PREF_KEY_QUICK_PULLDOWN_SIZE = "pref_quick_pulldown_size";
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS = "pref_qs_hide_brightness";
+    public static final String PREF_KEY_QS_BRIGHTNESS_ICON = "pref_qs_brightness_icon";
     public static final String PREF_KEY_QS_SCALE_CORRECTION = "pref_qs_scale_correction";
     public static final int QUICK_PULLDOWN_OFF = 0;
     public static final int QUICK_PULLDOWN_RIGHT = 1;
@@ -371,6 +373,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int HWKEY_ACTION_AUTO_ROTATION = 16;
     public static final int HWKEY_ACTION_SHOW_POWER_MENU = 17;
     public static final int HWKEY_ACTION_EXPAND_NOTIFICATIONS = 18;
+    public static final int HWKEY_ACTION_EXPAND_QUICKSETTINGS = 19;
     public static final int HWKEY_ACTION_SCREENSHOT = 20;
     public static final int HWKEY_ACTION_VOLUME_PANEL = 21;
     public static final int HWKEY_ACTION_LAUNCHER_DRAWER = 22;
@@ -537,6 +540,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_QS_HIDE_ON_CHANGE = "qsHideOnChange";
     public static final String EXTRA_QS_TILE_LABEL_STYLE = "qsTileLabelStyle";
     public static final String EXTRA_QS_HIDE_BRIGHTNESS = "qsHideBrightness";
+    public static final String EXTRA_QS_BRIGHTNESS_ICON = "qsBrightnessIcon";
     public static final String EXTRA_QS_SCALE_CORRECTION = "qsScaleCorrection";
 
     public static final String ACTION_PREF_CLOCK_CHANGED = "gravitybox.intent.action.CENTER_CLOCK_CHANGED";
@@ -603,6 +607,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_SB_DT2S = "sbDt2s";
 
     public static final String PREF_CAT_KEY_PHONE_TELEPHONY = "pref_cat_phone_telephony";
+    public static final String PREF_CAT_KEY_PHONE_DIALER = "pref_cat_phone_dialer";
     public static final String PREF_CAT_KEY_PHONE_MESSAGING = "pref_cat_phone_messaging";
     public static final String PREF_CAT_KEY_PHONE_MOBILE_DATA = "pref_cat_phone_mobile_data";
 
@@ -848,6 +853,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_FORCE_AOSP = "pref_force_aosp";
 
+    public static final String PREF_CAT_KEY_FINGERPRINT_LAUNCHER = "pref_cat_fingerprint_launcher";
+    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE = "pref_fingerprint_launcher_enable";
+    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_PAUSE = "pref_fingerprint_launcher_pause";
+    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_SHOW_TOAST = "pref_fingerprint_launcher_show_toast";
+    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_APP = "pref_fingerprint_launcher_app";
+    public static final String PREF_CAT_KEY_FINGERPRINT_LAUNCHER_FINGERS = "pref_cat_fingerprint_launcher_fingers";
+    public static final String PREF_KEY_FINGERPRINT_LAUNCHER_FINGER = "pref_fingerprint_launcher_finger";
+    public static final String ACTION_FPL_SETTINGS_CHANGED = "gravitybox.intent.action.FPL_SETTINGS_CHANGED";
+    public static final String EXTRA_FPL_FINGER_ID = "fplFingerId";
+    public static final String EXTRA_FPL_APP = "fplApp";
+    public static final String EXTRA_FPL_PAUSE = "fplPause";
+    public static final String EXTRA_FPL_SHOW_TOAST = "fplShowToast";
+
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
     public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
@@ -891,7 +909,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SIGNAL_CLUSTER_DEM,
             PREF_KEY_SIGNAL_CLUSTER_DNTI,
             PREF_KEY_SIGNAL_CLUSTER_NOSIM,
-            PREF_KEY_BATTERY_PERCENT_TEXT_POSITION
+            PREF_KEY_BATTERY_PERCENT_TEXT_POSITION,
+            PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -963,6 +982,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public int uncTrialCountdown;
         public boolean hasMsimSupport;
         public int xposedBridgeVersion;
+        public boolean supportsFingerprint;
+        public int[] fingerprintIds;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -991,6 +1012,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (data.containsKey("xposedBridgeVersion")) {
                 xposedBridgeVersion = data.getInt("xposedBridgeVersion");
+            }
+            if (data.containsKey("supportsFingerprint")) {
+                supportsFingerprint = data.getBoolean("supportsFingerprint");
+            }
+            if (data.containsKey("fingerprintIds")) {
+                fingerprintIds = data.getIntArray("fingerprintIds");
             }
         }
     }
@@ -1232,6 +1259,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefMusicVolumeSteps;
         private SeekBarPreference mPrefMusicVolumeStepsValue;
         private PreferenceCategory mPrefCatPhoneTelephony;
+        private PreferenceCategory mPrefCatPhoneDialer;
         private PreferenceCategory mPrefCatPhoneMessaging;
         private PreferenceCategory mPrefCatPhoneMobileData;
         private ListPreference mPrefQsNetworkModeSimSlot;
@@ -1489,6 +1517,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNavbarCustomKeyDoubletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP);
 
             mPrefCatPhoneTelephony = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_TELEPHONY);
+            mPrefCatPhoneDialer = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_DIALER);
             mPrefCatPhoneMessaging = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_MESSAGING);
             mPrefCatPhoneMobileData = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_MOBILE_DATA);
             mPrefCallVibrations = (MultiSelectListPreference) findPreference(PREF_KEY_CALL_VIBRATIONS);
@@ -1647,19 +1676,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             // remove Dialer features if Dialer package unavailable
-            boolean hasDialer = false;
+            PackageInfo pi = null;
             for (String pkg : ModDialer.PACKAGE_NAMES) {
-                hasDialer |= Utils.isAppInstalled(getActivity(), pkg);
+                pi = Utils.getPackageInfo(getActivity(), pkg);
+                if (pi != null) break;
             }
-            if (!hasDialer) {
+            if (pi == null) {
+                mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
+            } else if (pi.applicationInfo.targetSdkVersion == 25) {
                 Preference p = findPreference(PREF_KEY_CALLER_FULLSCREEN_PHOTO);
-                if (p != null) mPrefCatPhoneTelephony.removePreference(p);
-                p = findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE);
-                if (p != null) mPrefCatPhoneTelephony.removePreference(p);
-                p = findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO);
-                if (p != null) mPrefCatPhoneTelephony.removePreference(p);
-                p = findPreference(PREF_KEY_DIALER_SHOW_DIALPAD);
-                if (p != null) mPrefCatPhoneTelephony.removePreference(p);
+                if (p != null) mPrefCatPhoneDialer.removePreference(p);
             }
 
             // Remove MTK specific preferences for non-MTK devices
@@ -1746,7 +1772,22 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 PreferenceScreen ps2 = (PreferenceScreen) findPreference(PREF_CAT_KEY_BATTERY_PERCENT_TEXT);
                 ps.removePreference(ps2);
             }
-            
+
+            // Remove Vernee Apollo Lite preferences
+            if (Utils.isVerneeApolloLiteDevice()) {
+                mPrefCatDisplay.removePreference(mPrefPulseNotificationDelay);
+            }
+
+            // Remove fingerprint related preferences
+            if (!sSystemProperties.supportsFingerprint) {
+                Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
+                if (p != null) mPrefCatLsOther.removePreference(p);
+                p = findPreference(PREF_KEY_IMPRINT_VIBE_DISABLE);
+                if (p != null) mPrefCatLsOther.removePreference(p);
+                p = findPreference(PREF_CAT_KEY_FINGERPRINT_LAUNCHER);
+                if (p != null) getPreferenceScreen().removePreference(p);
+            }
+
             // Remove actions for HW keys based on device features
             mPrefHwKeyMenuLongpress.setEntries(R.array.hwkey_action_entries);
             mPrefHwKeyMenuLongpress.setEntryValues(R.array.hwkey_action_values);
@@ -1814,8 +1855,59 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefPieAppLongpress.setEntries(actionEntries);
             mPrefPieAppLongpress.setEntryValues(actionEntryValues);
 
+            if (sSystemProperties.fingerprintIds != null) {
+                initFingerprintLauncher();
+            }
             setDefaultValues();
             checkPermissions();
+        }
+
+        private void initFingerprintLauncher() {
+            PreferenceCategory catFingers = (PreferenceCategory) findPreference(
+                    PREF_CAT_KEY_FINGERPRINT_LAUNCHER_FINGERS);
+            for (int i = 0; i < sSystemProperties.fingerprintIds.length; i++) {
+                AppPickerPreference appPref = new AppPickerPreference(getActivity(), null);
+                String key = PREF_KEY_FINGERPRINT_LAUNCHER_FINGER + String.valueOf(i);
+                appPref.setKey(key);
+                appPref.setTitle(String.format("%s %d",
+                        getActivity().getString(R.string.finger), i + 1));
+                appPref.setDialogTitle(appPref.getTitle());
+                appPref.setDefaultSummary(getActivity().getString(R.string.app_picker_none));
+                appPref.setSummary(getActivity().getString(R.string.app_picker_none));
+                appPref.setPersistent(false);
+                appPref.setIconPickerEnabled(false);
+                String fingerId = String.valueOf(sSystemProperties.fingerprintIds[i]);
+                appPref.getExtraData().putString("fingerId", fingerId);
+                catFingers.addPreference(appPref);
+                Set<String> currentSet = mPrefs.getStringSet(key, null);
+                if (currentSet != null) {
+                    String currentFingerId = null, currentApp = null;
+                    for (String val : currentSet) {
+                        String[] data = val.split(":", 2);
+                        if ("fingerId".equals(data[0])) {
+                            currentFingerId = data[1];
+                        } else if ("app".equals(data[0])) {
+                            currentApp = data[1];
+                        }
+                    }
+                    if (!fingerId.equals(currentFingerId)) {
+                        Set<String> newSet = new HashSet<>();
+                        newSet.add("fingerId:" + fingerId);
+                        if (currentApp != null) {
+                            newSet.add("app:" + currentApp);
+                        }
+                        mPrefs.edit().putStringSet(key, newSet).commit();
+                        Intent intent = new Intent(ACTION_FPL_SETTINGS_CHANGED);
+                        intent.putExtra(EXTRA_FPL_FINGER_ID, fingerId);
+                        intent.putExtra(EXTRA_FPL_APP, currentApp);
+                        getActivity().sendBroadcast(intent);
+                    }
+                    if (currentApp != null) {
+                        appPref.setValue(currentApp);
+                    }
+                }
+                appPref.setOnPreferenceChangeListener(this);
+            }
         }
 
         private void checkPermissions() {
@@ -2296,7 +2388,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_IMPRINT_MODE)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
-                p.setSummary(p.getEntry());
+                if (p != null) p.setSummary(p.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_BLEFT_ACTION)) {
@@ -2315,14 +2407,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_IMPRINT_VIBE_DISABLE)) {
                 MultiSelectListPreference p = (MultiSelectListPreference) findPreference(PREF_KEY_IMPRINT_VIBE_DISABLE);
-                String summary = "";
-                Set<String> values = p.getValues() == null ? new HashSet<String>() : p.getValues();
-                if (values.contains("SUCCESS")) summary += getString(R.string.imprint_vibe_disable_success);
-                if (values.contains("ERROR")) {
-                    if (!summary.isEmpty()) summary += ", ";
-                    summary += getString(R.string.imprint_vibe_disable_error);
+                if (p != null) {
+                    String summary = "";
+                    Set<String> values = p.getValues() == null ? new HashSet<String>() : p.getValues();
+                    if (values.contains("SUCCESS")) summary += getString(R.string.imprint_vibe_disable_success);
+                    if (values.contains("ERROR")) {
+                        if (!summary.isEmpty()) summary += ", ";
+                        summary += getString(R.string.imprint_vibe_disable_error);
+                    }
+                    p.setSummary(summary);
                 }
-                p.setSummary(summary);
             }
 
             if (key == null || key.equals(PREF_KEY_NAVBAR_AUTOFADE_KEYS)) {
@@ -2468,6 +2562,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_HIDE_BRIGHTNESS, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_QS_BRIGHTNESS_ICON)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QS_BRIGHTNESS_ICON, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_ICON_COLOR_ENABLE,
@@ -3247,6 +3344,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_QS_SCALE_CORRECTION)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_SCALE_CORRECTION, prefs.getInt(key, 0));
+            } else if (key.equals(PREF_KEY_FINGERPRINT_LAUNCHER_APP)) {
+                intent.setAction(ACTION_FPL_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_FPL_APP, prefs.getString(key, null));
+            } else if (key.equals(PREF_KEY_FINGERPRINT_LAUNCHER_SHOW_TOAST)) {
+                intent.setAction(ACTION_FPL_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_FPL_SHOW_TOAST, prefs.getBoolean(key, true));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
@@ -3278,6 +3381,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                             Toast.LENGTH_SHORT).show();
                     return false;
                 }
+            } else if (pref.getKey().startsWith(PREF_KEY_FINGERPRINT_LAUNCHER_FINGER)) {
+                AppPickerPreference appPref = (AppPickerPreference) pref;
+                Set<String> newSet = new HashSet<>();
+                String fingerId = appPref.getExtraData().getString("fingerId");
+                newSet.add("fingerId:" + fingerId);
+                if (newValue != null) {
+                    newSet.add("app:" + newValue);
+                }
+                mPrefs.edit().putStringSet(pref.getKey(), newSet).commit();
+                Intent intent = new Intent(ACTION_FPL_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_FPL_FINGER_ID, fingerId);
+                intent.putExtra(EXTRA_FPL_APP, String.valueOf(newValue));
+                getActivity().sendBroadcast(intent);
             }
             return true;
         }
@@ -3433,6 +3549,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 } else if (file.exists()) {
                     file.delete();
                 }
+            } else if (PREF_KEY_FINGERPRINT_LAUNCHER_PAUSE.equals(pref.getKey())) {
+                Intent fplPauseIntent = new Intent(ACTION_FPL_SETTINGS_CHANGED);
+                fplPauseIntent.putExtra(EXTRA_FPL_PAUSE, true);
+                getActivity().sendBroadcast(fplPauseIntent);
             }
 
 //            else if (PREF_KEY_HEADS_UP_SNOOZE_RESET.equals(pref.getKey())) {
@@ -3566,7 +3686,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
         public interface ShortcutHandler {
             Intent getCreateShortcutIntent();
-            void onHandleShortcut(Intent intent, String name, Bitmap icon);
+            void onHandleShortcut(Intent intent, String name,
+                    String localIconResName, Bitmap icon);
             void onShortcutCancelled();
         }
 
@@ -3674,26 +3795,34 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
             } else if (requestCode == REQ_OBTAIN_SHORTCUT && mShortcutHandler != null) {
                 if (resultCode == Activity.RESULT_OK) {
+                    String localIconResName = null;
                     Bitmap b = null;
                     Intent.ShortcutIconResource siRes = data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
+                    Intent shortcutIntent = data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
                     if (siRes != null) {
-                        try {
-                            final Context extContext = getActivity().createPackageContext(
-                                    siRes.packageName, Context.CONTEXT_IGNORE_SECURITY);
-                            final Resources extRes = extContext.getResources();
-                            final int drawableResId = extRes.getIdentifier(siRes.resourceName, "drawable", siRes.packageName);
-                            b = BitmapFactory.decodeResource(extRes, drawableResId);
-                        } catch (NameNotFoundException e) {
-                            //
+                        if (shortcutIntent != null &&
+                                ShortcutActivity.ACTION_LAUNCH_ACTION.equals(
+                                        shortcutIntent.getAction())) {
+                            localIconResName = siRes.resourceName;
+                        } else {
+                            try {
+                                final Context extContext = getActivity().createPackageContext(
+                                        siRes.packageName, Context.CONTEXT_IGNORE_SECURITY);
+                                final Resources extRes = extContext.getResources();
+                                final int drawableResId = extRes.getIdentifier(siRes.resourceName, "drawable", siRes.packageName);
+                                b = BitmapFactory.decodeResource(extRes, drawableResId);
+                            } catch (NameNotFoundException e) {
+                                //
+                            }
                         }
                     }
-                    if (b == null) {
+                    if (localIconResName == null && b == null) {
                         b = (Bitmap)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
                     }
 
-                    mShortcutHandler.onHandleShortcut(
-                            (Intent)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT),
-                            data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME), b);
+                    mShortcutHandler.onHandleShortcut(shortcutIntent,
+                            data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME),
+                            localIconResName, b);
                 } else {
                     mShortcutHandler.onShortcutCancelled();
                 }

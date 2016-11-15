@@ -144,6 +144,8 @@
         <item>@string/qs_tile_xperia_volte</item>
         <item>@string/qs_tile_xperia_tethering</item>
         <item>@string/qs_tile_xperia_detectusbdevice</item>
+        <!-- Moto -->
+        <item>@string/qs_tile_moto_data</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
@@ -200,6 +202,8 @@
         <item>xperia_tile_volte</item>
         <item>xperia_tile_tethering</item>
         <item>xperia_tile_detectusbdevice</item>
+        <!-- Moto -->
+        <item>moto_tile_data</item>
     </string-array>
 
     <string-array name="qs_tile_default_values" translatable="false">
@@ -250,6 +254,7 @@
         <item>@string/hwkey_action_auto_rotation</item>
         <item>@string/hwkey_action_show_power_menu</item>
         <item>@string/hwkey_action_expand_notifications</item>
+        <item>@string/hwkey_action_expand_quicksettings</item>
         <item>@string/hwkey_action_volume_panel</item>
         <item>@string/hwkey_action_custom</item>
     </string-array>
@@ -275,6 +280,7 @@
         <item>16</item>
         <item>17</item>
         <item>18</item>
+        <item>19</item>
         <item>21</item>
         <item>25</item>
     </string-array>

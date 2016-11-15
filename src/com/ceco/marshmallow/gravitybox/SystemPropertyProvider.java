@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.provider.Settings;
@@ -59,6 +60,16 @@ public class SystemPropertyProvider {
     public static int getSystemConfigInteger(Resources res, String name) {
         final int resId = res.getIdentifier(name, "integer", "android");
         return (resId == 0 ? -1 : res.getInteger(resId));
+    }
+
+    public static boolean supportsFingerprint(Context ctx) {
+        try {
+            FingerprintManager fpm = (FingerprintManager) ctx.getSystemService(Context.FINGERPRINT_SERVICE);
+            return (fpm != null && fpm.isHardwareDetected());
+        } catch (Throwable t) {
+            log("Error checkin for fingerprint support: " + t.getMessage());
+            return false;
+        }
     }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
@@ -122,6 +133,11 @@ public class SystemPropertyProvider {
                                             SETTING_UNC_TRIAL_COUNTDOWN, 50));
                                     data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
                                     data.putInt("xposedBridgeVersion", XposedBridge.XPOSED_BRIDGE_VERSION);
+                                    data.putBoolean("supportsFingerprint", supportsFingerprint(context));
+                                    if (SysUiManagers.FingerprintLauncher != null) {
+                                        data.putIntArray("fingerprintIds",
+                                                SysUiManagers.FingerprintLauncher.getEnrolledFingerprintIds());
+                                    }
                                     if (DEBUG) {
                                         log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
                                         log("isTablet: " + data.getBoolean("isTablet"));
@@ -132,6 +148,10 @@ public class SystemPropertyProvider {
                                         log("uncTrialCountdown: " + data.getInt("uncTrialCountdown"));
                                         log("hasMsimSupport: " + data.getBoolean("hasMsimSupport"));
                                         log("xposedBridgeVersion: " + data.getInt("xposedBridgeVersion"));
+                                        log("supportsFingerprint: " + data.getBoolean("supportsFingerprint"));
+                                        if (data.containsKey("fingerprintIds")) {
+                                            log("fingerprintIds: " + data.getIntArray("fingerprintIds"));
+                                        }
                                     }
                                     receiver.send(RESULT_SYSTEM_PROPERTIES, data);
                                 } else if (intent.getAction().equals(ACTION_REGISTER_UUID) && 

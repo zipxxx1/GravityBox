@@ -19,6 +19,7 @@ public class SysUiManagers {
     public static StatusbarQuietHoursManager QuietHoursManager;
     public static AppLauncher AppLauncher;
     public static KeyguardStateMonitor KeyguardMonitor;
+    public static FingerprintLauncher FingerprintLauncher;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -60,6 +61,15 @@ public class SysUiManagers {
             XposedBridge.log(t);
         }
 
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE, false)) {
+            try {
+                FingerprintLauncher = new FingerprintLauncher(context, prefs);
+            } catch (Throwable t) {
+                log("Error creating FingerprintLauncher: ");
+                XposedBridge.log(t);
+            }
+        }
+
         IntentFilter intentFilter = new IntentFilter();
         // battery info manager
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
@@ -84,6 +94,13 @@ public class SysUiManagers {
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
         intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
+
+        // FingerprintLauncher
+        if (FingerprintLauncher != null) {
+            intentFilter.addAction(Intent.ACTION_USER_PRESENT);
+            intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+            intentFilter.addAction(GravityBoxSettings.ACTION_FPL_SETTINGS_CHANGED);
+        }
 
         context.registerReceiver(sBroadcastReceiver, intentFilter);
     }
@@ -115,6 +132,9 @@ public class SysUiManagers {
             }
             if (KeyguardMonitor != null) {
                 KeyguardMonitor.onBroadcastReceived(context, intent);
+            }
+            if (FingerprintLauncher != null) {
+                FingerprintLauncher.onBroadcastReceived(context, intent);
             }
         }
     };

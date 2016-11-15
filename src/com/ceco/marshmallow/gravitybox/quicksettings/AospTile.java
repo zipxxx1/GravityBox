@@ -75,6 +75,15 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new XperiaTile(host, aospKey, tile, prefs, eventDistributor);
         }
 
+        // Moto
+        if (Utils.isMotoXtDevice() &&
+            MotoTile.MOTO_KEYS.contains(aospKey)) {
+            return new MotoTile(host, aospKey, tile, prefs, eventDistributor);
+        }
+
+        log("Unknown stock tile: key=" + aospKey + "; class=" +
+                (tile == null ? "null" : tile.getClass().getName()));
+
         return null;
     }
 
@@ -134,7 +143,9 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
                     mTile.getClass().getName(), cl, "handleClick", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (onBeforeHandleClick()) {
+                    if (mKey.equals(XposedHelpers.getAdditionalInstanceField(
+                            param.thisObject, BaseTile.TILE_KEY_NAME)) &&
+                            onBeforeHandleClick()) {
                         param.setResult(null);
                     }
                 }

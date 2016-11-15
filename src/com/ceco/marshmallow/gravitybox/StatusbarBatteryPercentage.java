@@ -175,10 +175,16 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
         update();
     }
 
+    public void updateText() {
+        if (mBatteryData != null) {
+            mPercentage.setText(mBatteryData.level + mPercentSign);
+        }
+    }
+
     public void update() {
         if (mBatteryData == null) return;
 
-        mPercentage.setText(mBatteryData.level + mPercentSign);
+        updateText();
 
         if (mBatteryData.charging && mBatteryData.level < 100) {
             if (mChargingStyle == CHARGING_STYLE_STATIC) {

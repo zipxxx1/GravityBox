@@ -17,9 +17,12 @@ package com.ceco.marshmallow.gravitybox;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -36,13 +39,9 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModDialer24 {
     private static final String TAG = "GB:ModDialer24";
 
-    private static final String CLASS_CALL_CARD_FRAGMENT = "ayv";
     private static final String CLASS_DIALTACTS_ACTIVITY = "com.android.dialer.app.DialtactsActivity";
     private static final String CLASS_DIALTACTS_ACTIVITY_GOOGLE = 
             "com.google.android.apps.dialer.extensions.GoogleDialtactsActivity";
-    private static final String CLASS_CALL_BUTTON_FRAGMENT = "com.android.incallui.CallButtonFragment";
-    private static final String CLASS_ANSWER_FRAGMENT = "bbw";
-    private static final String CLASS_DIALPAD_FRAGMENT = "com.android.dialer.app.dialpad.DialpadFragment";
     private static final boolean DEBUG = false;
 
     private static QuietHours mQuietHours;
@@ -51,12 +50,157 @@ public class ModDialer24 {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    static class ClassInfo {
+        Class<?> clazz;
+        Map<String,String> methods;
+        Object extra;
+        ClassInfo(Class<?> cls) {
+            clazz = cls;
+            methods = new HashMap<>();
+        }
+    }
+
+    private static ClassInfo resolveCallCardFragment(ClassLoader cl) {
+        ClassInfo info = null;
+        String[] CLASS_NAMES = new String[] { "com.android.incallui.CallCardFragment", "ayv" };
+        String[] METHOD_NAMES = new String[] { "setDrawableToImageView" };
+        for (String className : CLASS_NAMES) {
+            Class<?> clazz = XposedHelpers.findClassIfExists(className, cl);
+            if (clazz == null || !Fragment.class.isAssignableFrom(clazz))
+                continue;
+            info = new ClassInfo(clazz);
+            for (String methodName : METHOD_NAMES) {
+                if (methodName.equals("setDrawableToImageView")) {
+                    for (String realMethodName : new String[] { methodName, "b" }) {
+                        Method m = XposedHelpers.findMethodExactIfExists(clazz, realMethodName,
+                            Drawable.class);
+                        if (m != null) {
+                            info.methods.put(methodName, realMethodName);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return info;
+    }
+
+    private static ClassInfo resolveAnswerFragment(ClassLoader cl) {
+        ClassInfo info = null;
+        String[] CLASS_NAMES = new String[] { "com.android.incallui.AnswerFragment", "bbw", "bbx" };
+        String[] METHOD_NAMES = new String[] { "onShowAnswerUi" };
+        for (String className : CLASS_NAMES) {
+            Class<?> clazz = XposedHelpers.findClassIfExists(className, cl);
+            if (clazz == null || !Fragment.class.isAssignableFrom(clazz))
+                continue;
+            info = new ClassInfo(clazz);
+            for (String methodName : METHOD_NAMES) {
+                if (methodName.equals("onShowAnswerUi")) {
+                    for (String realMethodName : new String[] { methodName, "a" }) {
+                        Method m = XposedHelpers.findMethodExactIfExists(clazz, realMethodName,
+                            boolean.class);
+                        if (m != null) {
+                            info.methods.put(methodName, realMethodName);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return info;
+    }
+
+    private static ClassInfo resolveCallButtonFragment(ClassLoader cl) {
+        ClassInfo info = null;
+        String[] CLASS_NAMES = new String[] { "com.android.incallui.CallButtonFragment" };
+        String[] METHOD_NAMES = new String[] { "setEnabled" };
+        for (String className : CLASS_NAMES) {
+            Class<?> clazz = XposedHelpers.findClassIfExists(className, cl);
+            if (clazz == null || !Fragment.class.isAssignableFrom(clazz))
+                continue;
+            info = new ClassInfo(clazz);
+            for (String methodName : METHOD_NAMES) {
+                if (methodName.equals("setEnabled")) {
+                    for (String realMethodName : new String[] { methodName, "a" }) {
+                        Method m = XposedHelpers.findMethodExactIfExists(clazz, realMethodName,
+                            boolean.class);
+                        if (m != null) {
+                            info.methods.put(methodName, realMethodName);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return info;
+    }
+
+    private static ClassInfo resolveDialtactsActivity(ClassLoader cl) {
+        ClassInfo info = null;
+        String[] CLASS_NAMES = new String[] { CLASS_DIALTACTS_ACTIVITY };
+        String[] METHOD_NAMES = new String[] { "displayFragment" };
+        for (String className : CLASS_NAMES) {
+            Class<?> clazz = XposedHelpers.findClassIfExists(className, cl);
+            if (clazz == null || !Activity.class.isAssignableFrom(clazz))
+                continue;
+            info = new ClassInfo(clazz);
+            for (String methodName : METHOD_NAMES) {
+                if (methodName.equals("displayFragment")) {
+                    for (String realMethodName : new String[] { methodName, "c" }) {
+                        Method m = XposedHelpers.findMethodExactIfExists(clazz, realMethodName,
+                            Intent.class);
+                        if (m != null) {
+                            info.methods.put(methodName, realMethodName);
+                            if (realMethodName.equals(methodName)) {
+                                info.extra = "showDialpadFragment";
+                            } else {
+                                info.extra = "b";
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return info;
+    }
+
+    private static ClassInfo resolveDialpadFragment(ClassLoader cl) {
+        ClassInfo info = null;
+        String[] CLASS_NAMES = new String[] { "com.android.dialer.app.dialpad.DialpadFragment" };
+        String[] METHOD_NAMES = new String[] { "onResume", "playTone" };
+        for (String className : CLASS_NAMES) {
+            Class<?> clazz = XposedHelpers.findClassIfExists(className, cl);
+            if (clazz == null || !Fragment.class.isAssignableFrom(clazz))
+                continue;
+            info = new ClassInfo(clazz);
+            for (String methodName : METHOD_NAMES) {
+                Method m = null;
+                if (methodName.equals("onResume")) {
+                    m = XposedHelpers.findMethodExactIfExists(clazz, methodName);
+                } else if (methodName.equals("playTone")) {
+                    for (String realMethodName : new String[] { methodName, "a" }) {
+                        m = XposedHelpers.findMethodExactIfExists(clazz, realMethodName,
+                            int.class, int.class);
+                        if (m != null) break;
+                    }
+                }
+                if (m != null) {
+                    info.methods.put(methodName, m.getName());
+                }
+            }
+        }
+        return info;
+    }
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader, final String packageName) {
         try {
-            final Class<?> classAnswerFragment = XposedHelpers.findClass(CLASS_ANSWER_FRAGMENT, classLoader);
-            final Class<?> classCallButtonFragment = XposedHelpers.findClass(CLASS_CALL_BUTTON_FRAGMENT, classLoader); 
+            final ClassInfo classInfoAnswerFragment = resolveAnswerFragment(classLoader);
+            final ClassInfo classInfoCallButtonFragment = resolveCallButtonFragment(classLoader); 
 
-            XposedHelpers.findAndHookMethod(classCallButtonFragment, "a", boolean.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(classInfoCallButtonFragment.clazz,
+                    classInfoCallButtonFragment.methods.get("setEnabled"),
+                    boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final View view = ((Fragment)param.thisObject).getView();
@@ -68,7 +212,9 @@ public class ModDialer24 {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classAnswerFragment, "a", boolean.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(classInfoAnswerFragment.clazz,
+                    classInfoAnswerFragment.methods.get("onShowAnswerUi"),
+                    boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (!(Boolean) param.args[0]) return;
@@ -89,7 +235,7 @@ public class ModDialer24 {
         }
 
         try {
-            final Class<?> classCallCardFragment = XposedHelpers.findClass(CLASS_CALL_CARD_FRAGMENT, classLoader);
+            final ClassInfo classInfoCallCardFragment = resolveCallCardFragment(classLoader);
 
             XC_MethodHook unknownCallerHook = new XC_MethodHook() {
                 @Override
@@ -122,16 +268,19 @@ public class ModDialer24 {
                     }
                 }
             };
-            XposedHelpers.findAndHookMethod(classCallCardFragment, "b",
+            XposedHelpers.findAndHookMethod(classInfoCallCardFragment.clazz,
+                    classInfoCallCardFragment.methods.get("setDrawableToImageView"),
                     Drawable.class, unknownCallerHook);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
 
         try {
-            final Class<?> classDialtactsActivity = XposedHelpers.findClass(CLASS_DIALTACTS_ACTIVITY, classLoader);
+            final ClassInfo classInfoDialtactsActivity = resolveDialtactsActivity(classLoader);
 
-            XposedHelpers.findAndHookMethod(classDialtactsActivity, "c", Intent.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(classInfoDialtactsActivity.clazz,
+                    classInfoDialtactsActivity.methods.get("displayFragment"),
+                    Intent.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     prefs.reload();
@@ -139,11 +288,13 @@ public class ModDialer24 {
 
                     final String realClassName = param.thisObject.getClass().getName();
                     if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY)) {
-                        XposedHelpers.callMethod(param.thisObject, "b", false);
+                        XposedHelpers.callMethod(param.thisObject,
+                                classInfoDialtactsActivity.extra.toString(), false);
                         if (DEBUG) log("showDialpadFragment() called within " + realClassName);
                     } else if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY_GOOGLE)) {
                         final Class<?> superc = param.thisObject.getClass().getSuperclass();
-                        Method m = XposedHelpers.findMethodExact(superc, "b", boolean.class);
+                        Method m = XposedHelpers.findMethodExact(superc,
+                                classInfoDialtactsActivity.extra.toString(), boolean.class);
                         m.invoke(param.thisObject, false);
                         if (DEBUG) log("showDialpadFragment() called within " + realClassName);
                     }
@@ -154,7 +305,10 @@ public class ModDialer24 {
         }
 
         try {
-            XposedHelpers.findAndHookMethod(CLASS_DIALPAD_FRAGMENT, classLoader, "onResume", new XC_MethodHook() {
+            final ClassInfo classInfoDialpadFragment = resolveDialpadFragment(classLoader);
+
+            XposedHelpers.findAndHookMethod(classInfoDialpadFragment.clazz,
+                    classInfoDialpadFragment.methods.get("onResume"), new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param2) throws Throwable {
                     XSharedPreferences qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
@@ -162,7 +316,8 @@ public class ModDialer24 {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_DIALPAD_FRAGMENT, classLoader, "a",
+            XposedHelpers.findAndHookMethod(classInfoDialpadFragment.clazz,
+                    classInfoDialpadFragment.methods.get("playTone"),
                     int.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

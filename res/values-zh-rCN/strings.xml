@@ -2002,12 +2002,66 @@
     
     <!-- Force AOSP -->
     <string name="pref_force_aosp_title">强制AOSP</string>
-    <string name="pref_force_aosp_summary">让系统为AOSP
-        如果使用设备被标识为运行系统的品牌,尽管它是
-        实际运行修改基于AOSP系统(需要重新启动)</string>
+    <string name="pref_force_aosp_summary">将系统视为AOSP
+        在您的设备被识别为运行品牌系统的情况下使用
+	尽管它实际上运行修改基于AOSP的系统(需要重新启动)</string>
 
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">无线充电声音</string>
     <string name="stock_wireless_sound">原厂声音</string>
-    
+	
+    <!-- QS: Moto Data tile -->
+    <string name="qs_tile_moto_data">数据(Moto)</string>
+
+    <!-- Dialer category -->
+    <string name="pref_cat_phone_dialer_title">拨号器</string>
+
+    <!-- QS: Brightness control -->
+    <string name="pref_qs_brightness_icon_title">显示亮度图标</string>
+    <string name="pref_qs_brightness_icon_summary">显示当前亮度模式图标
+        单击切换自适应亮度,长按时打开显示设置</string>
+
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">忽略更新通知</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">当有更新通知时不会激活屏幕</string>
+	
+	
+    <!-- UNC: LED: Ignore updated notifications -->
+    <string name="pref_lc_led_ignore_update_title">忽略更新通知</string>
+    <string name="pref_lc_led_ignore_update_summary">当用户更新时已经看过的通知不会再打开LED灯</string>
+
+	
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">展开快速设置面板</string>
+	
+    <!-- Fingeprint launcher -->
+    <string name="pref_cat_fingerprint_launcher_title">指纹启动器</string>
+    <string name="pref_cat_fingerprint_launcher_summary">允许在屏幕打开且设备未锁定时使用指纹传感器启动应用或操作</string>
+	
+    <string name="pref_fingerprint_launcher_enable_summary">打开或关闭指纹启动器功能(需要重新启动)</string>
+	
+    <string name="pref_fingerprint_launcher_app_title">选择应用或操作</string>
+    <string name="fingerprint_auth_failed">验证失败</string>
+    <string name="fingerprint_sensor_unavail">指纹传感器不可用</string>
+    <string name="fingerprint_sensor_locked">由于认证失败过多指纹传感器已锁定
+         在35秒内尝试重新启动</string>
+    <string name="fingerprint_no_app">未分配应用程序操作</string>
+    <string name="pref_cat_fingerprint_launcher_fingers_title">每个手指动作</string>
+    <string name="finger">手指</string>
+    <string name="pref_cat_fingerprint_launcher_quick_tap_title">快速敲击动作</string>
+    <string name="pref_fingerprint_launcher_pause_title">暂停</string>
+    <string name="pref_fingerprint_launcher_pause_summary">暂停启动,直到下一个屏幕关闭/开启循环
+         用于其它应用需要传感器较长时间,例如在指纹登记期间</string>
+    <string name="fingerprint_launcher_paused">启动器已暂停,直到下一个屏幕关闭/打开循环</string>
+    <string name="pref_fingerprint_launcher_show_toast_title">显示状态消息</string>
+    <string name="pref_fingerprint_launcher_show_toast_summary">是否以Toast消息框形式显示状态消息</string>
+	
+    <!-- Action: toggle/expand/collapse notification panel -->
+    <string name="notification_panel_toggle">切换通知面板</string>
+    <string name="notification_panel_collapse">折叠通知面板</string>
+
+    <!-- Action: toggle/expand/collapse QS panel -->
+    <string name="qs_panel_toggle">切换快速设置面板</string>
+    <string name="qs_panel_collapse">折叠快速设置面板</string>
+
 </resources>

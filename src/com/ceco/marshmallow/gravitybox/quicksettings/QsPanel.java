@@ -21,12 +21,17 @@ import java.util.List;
 
 import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
+import com.ceco.marshmallow.gravitybox.ModHwKeys;
+import com.ceco.marshmallow.gravitybox.ModQsTiles;
+import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.Utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -37,6 +42,7 @@ public class QsPanel implements BroadcastSubReceiver {
     private static final boolean DEBUG = false;
 
     private static final String CLASS_QS_PANEL = "com.android.systemui.qs.QSPanel";
+    private static final String CLASS_BRIGHTNESS_CTRL = "com.android.systemui.settings.BrightnessController";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -48,6 +54,8 @@ public class QsPanel implements BroadcastSubReceiver {
     private int mScaleCorrection;
     private View mBrightnessSlider;
     private boolean mHideBrightness;
+    private boolean mBrightnessIconEnabled;
+    private ImageView mBrightnessIcon;
 
     public QsPanel(XSharedPreferences prefs, ClassLoader classLoader) {
         mPrefs = prefs;
@@ -62,8 +70,10 @@ public class QsPanel implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0"));
         mScaleCorrection = mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0);
         mHideBrightness = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS, false);
+        mBrightnessIconEnabled = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BRIGHTNESS_ICON, false);
         if (DEBUG) log("initPreferences: mNumColumns=" + mNumColumns +
-                "; mHideBrightness=" + mHideBrightness);
+                "; mHideBrightness=" + mHideBrightness +
+                "; mBrightnessIconEnabled=" + mBrightnessIconEnabled);
     }
 
     public void setEventDistributor(QsTileEventDistributor eventDistributor) {
@@ -99,6 +109,11 @@ public class QsPanel implements BroadcastSubReceiver {
                 updateResources();
                 if (DEBUG) log("onBroadcastReceived: mHideBrightness=" + mHideBrightness);
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_BRIGHTNESS_ICON)) {
+                mBrightnessIconEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_QS_BRIGHTNESS_ICON, false);
+                if (DEBUG) log("onBroadcastReceived: mBrightnessIconEnabled=" + mBrightnessIconEnabled);
+            }
         } 
     }
 
@@ -125,6 +140,29 @@ public class QsPanel implements BroadcastSubReceiver {
         }
         return mBrightnessSlider;
     }
+
+    private View.OnClickListener mBrightnessIconOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(ModHwKeys.ACTION_TOGGLE_AUTO_BRIGHTNESS);
+            v.getContext().sendBroadcast(intent);
+        }
+    };
+
+    private View.OnLongClickListener mBrightnessIconOnLongClick = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            try {
+                Intent intent = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
+                Object host = XposedHelpers.getObjectField(mQsPanel, "mHost");
+                XposedHelpers.callMethod(host, "startActivityDismissingKeyguard", intent);
+                return true;
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+                return false;
+            }
+        }
+    };
 
     private int getDualTileCount() {
         int count = 0;
@@ -213,6 +251,41 @@ public class QsPanel implements BroadcastSubReceiver {
                     // invalidate if changes made
                     if (shouldInvalidate) {
                         mQsPanel.postInvalidate();
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_BRIGHTNESS_CTRL, classLoader,
+                    "updateIcon", boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (DEBUG) log("BrightnessController: updateIcon");
+                    ImageView icon = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mIcon");
+                    if (icon != null) {
+                        if (mBrightnessIcon == null) {
+                            mBrightnessIcon = icon;
+                            icon.setOnClickListener(mBrightnessIconOnClick);
+                            icon.setOnLongClickListener(mBrightnessIconOnLongClick);
+                            icon.setBackground(Utils.getGbContext(
+                                    mBrightnessIcon.getContext()).getDrawable(
+                                            R.drawable.ripple));
+                        }
+                        if (mBrightnessIconEnabled && !mHideBrightness) {
+                            boolean automatic = (boolean) param.args[0];
+                            int resId = icon.getResources().getIdentifier(
+                                    (automatic ? "ic_qs_brightness_auto_on" : "ic_qs_brightness_auto_off"),
+                                    "drawable", ModQsTiles.PACKAGE_NAME);
+                            if (resId != 0) {
+                                icon.setImageResource(resId);
+                            }
+                            icon.setVisibility(View.VISIBLE);
+                        } else {
+                            icon.setVisibility(View.GONE);
+                        }
                     }
                 }
             });

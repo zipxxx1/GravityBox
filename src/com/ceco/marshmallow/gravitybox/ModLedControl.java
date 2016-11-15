@@ -39,6 +39,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -95,6 +96,9 @@ public class ModLedControl {
     private static boolean mProximityWakeUpEnabled;
     private static boolean mScreenOnDueToActiveScreen;
     private static AudioManager mAudioManager;
+    private static Integer mDefaultNotificationLedColor;
+    private static Integer mDefaultNotificationLedOn;
+    private static Integer mDefaultNotificationLedOff;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -219,8 +223,24 @@ public class ModLedControl {
                 }
 
                 Notification n = (Notification) param.args[6];
+
+                if (Utils.isVerneeApolloLiteDevice()) {
+                    XposedHelpers.setIntField(param.thisObject, "mDefaultNotificationColor",
+                            ((n.defaults & Notification.DEFAULT_LIGHTS) != 0 ?
+                                    getDefaultNotificationLedColor() : n.ledARGB));
+                    XposedHelpers.setIntField(param.thisObject, "mDefaultNotificationLedOn",
+                            ((n.defaults & Notification.DEFAULT_LIGHTS) != 0 ?
+                                    getDefaultNotificationLedOn() : n.ledOnMS));
+                    XposedHelpers.setIntField(param.thisObject, "mDefaultNotificationLedOff",
+                            ((n.defaults & Notification.DEFAULT_LIGHTS) != 0 ?
+                                    getDefaultNotificationLedOff() : n.ledOffMS));
+                }
+
                 if (n.extras.containsKey("gbIgnoreNotification")) return;
 
+                Object oldRecord = getOldNotificationRecord(param.args[0], param.args[4],
+                        param.args[5], param.args[8]);
+                Notification oldN = getNotificationFromRecord(oldRecord);
                 final String pkgName = (String) param.args[0];
 
                 LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
@@ -245,31 +265,15 @@ public class ModLedControl {
                     n.extras.putBoolean(NOTIF_EXTRA_HIDE_PERSISTENT, ls.getHidePersistent());
                 }
 
+                // whether to ignore ongoing notification
                 boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
                         (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);
                 // additional check if old notification had a foreground service flag set since it seems not to be propagated
                 // for updated notifications (until Notification gets processed by WorkerHandler which is too late for us)
-                if (!isOngoing) {
-                    try {
-                        ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(param.thisObject, "mNotificationList");
-                        synchronized (notifList) {
-                            int index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
-                                    param.args[0], param.args[4], param.args[5], param.args[8]);
-                            if (index >= 0) {
-                                Object oldNotif = notifList.get(index);
-                                if (oldNotif != null) {
-                                    Notification oldN = (Notification) XposedHelpers.callMethod(oldNotif, "getNotification");
-                                    isOngoing = (oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0;
-                                    if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
-                                }
-                            }
-                        }
-                    } catch (Throwable t) { 
-                        /* yet another vendor messing with the internals... */
-                        if (DEBUG) XposedBridge.log(t);
-                    }
+                if (!isOngoing && oldN != null) {
+                    isOngoing = (oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0;
+                    if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
                 }
-
                 if (isOngoing && !ls.getOngoing() && !qhActive) {
                     if (DEBUG) log("Ongoing led control disabled. Ignoring.");
                     return;
@@ -279,16 +283,27 @@ public class ModLedControl {
                 if (qhActiveIncludingLed || 
                         (ls.getEnabled() && !(isOngoing && !ls.getOngoing()) &&
                             (ls.getLedMode() == LedMode.OFF ||
-                             currentZenModeDisallowsLed(ls.getLedDnd())))) {
+                             currentZenModeDisallowsLed(ls.getLedDnd()) ||
+                             shouldIgnoreUpdatedNotificationLight(oldRecord, ls.getLedIgnoreUpdate())))) {
                     n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
                 } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE &&
                         !(isOngoing && !ls.getOngoing())) {
-                    n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags |= Notification.FLAG_SHOW_LIGHTS;
-                    n.ledOnMS = ls.getLedOnMs();
-                    n.ledOffMS = ls.getLedOffMs();
-                    n.ledARGB = ls.getColor();
+                    if (Utils.isVerneeApolloLiteDevice()) {
+                        n.defaults |= Notification.DEFAULT_LIGHTS;
+                        XposedHelpers.setIntField(param.thisObject,
+                                "mDefaultNotificationColor", ls.getColor());
+                        XposedHelpers.setIntField(param.thisObject,
+                                "mDefaultNotificationLedOn", ls.getLedOnMs());
+                        XposedHelpers.setIntField(param.thisObject,
+                                "mDefaultNotificationLedOff", ls.getLedOffMs());
+                    } else {
+                        n.defaults &= ~Notification.DEFAULT_LIGHTS;
+                        n.ledOnMS = ls.getLedOnMs();
+                        n.ledOffMS = ls.getLedOffMs();
+                        n.ledARGB = ls.getColor();
+                    }
                 }
 
                 // vibration
@@ -355,6 +370,7 @@ public class ModLedControl {
                     }
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
+                            !(ls.getActiveScreenIgnoreUpdate() && oldN != null) &&
                             n.priority > Notification.PRIORITY_MIN &&
                             ls.getVisibilityLs() != VisibilityLs.CLEARABLE &&
                             ls.getVisibilityLs() != VisibilityLs.ALL &&
@@ -376,6 +392,107 @@ public class ModLedControl {
             }
         }
     };
+
+    private static Object getOldNotificationRecord(Object pkg, Object tag, Object id, Object userId) {
+        Object oldNotifRecord = null;
+        try {
+            ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(
+                    mNotifManagerService, "mNotificationList");
+            synchronized (notifList) {
+                int index = (Integer) XposedHelpers.callMethod(
+                        mNotifManagerService, "indexOfNotificationLocked",
+                        pkg, tag, id, userId);
+                if (index >= 0) {
+                    oldNotifRecord = notifList.get(index);
+                }
+            }
+        } catch (Throwable t) {
+            log("Error in getOldNotificationRecord: " + t.getMessage());
+            if (DEBUG) XposedBridge.log(t);
+        }
+        if (DEBUG) log("getOldNotificationRecord: has old record: " + (oldNotifRecord != null));
+        return oldNotifRecord;
+    }
+
+    private static Notification getNotificationFromRecord(Object record) {
+        Notification notif = null;
+        if (record != null) {
+            try {
+                notif = (Notification) XposedHelpers.callMethod(record, "getNotification");
+            } catch (Throwable t) {
+                log("Error in getNotificationFromRecord: " + t.getMessage());
+                if (DEBUG) XposedBridge.log(t);
+            }
+        }
+        return notif;
+    }
+
+    private static boolean notificationRecordHasLight(Object record) {
+        boolean hasLight = false;
+        if (record != null) {
+            try {
+                String key = (String) XposedHelpers.callMethod(record, "getKey");
+                List<?> lights = (List<?>) XposedHelpers.getObjectField(
+                        mNotifManagerService, "mLights");
+                hasLight = lights.contains(key);
+            } catch (Throwable t) {
+                log("Error in notificationRecordHasLight: " + t.getMessage());
+                if (DEBUG) XposedBridge.log(t);
+            }
+        }
+        if (DEBUG) log("notificationRecordHasLight: " + hasLight);
+        return hasLight;
+    }
+
+    private static boolean shouldIgnoreUpdatedNotificationLight(Object record, boolean ignore) {
+        boolean shouldIgnore = (ignore && record != null && !notificationRecordHasLight(record));
+        if (DEBUG) log("shouldIgnoreUpdatedNotificationLight: " + shouldIgnore);
+        return shouldIgnore;
+    }
+
+    private static int getDefaultNotificationLedColor() {
+        if (mDefaultNotificationLedColor == null) {
+            mDefaultNotificationLedColor = getDefaultNotificationProp(
+                    "config_defaultNotificationColor", "color", 0xff000080);
+        }
+        return mDefaultNotificationLedColor;
+    }
+
+    private static int getDefaultNotificationLedOn() {
+        if (mDefaultNotificationLedOn == null) {
+            mDefaultNotificationLedOn = getDefaultNotificationProp(
+                    "config_defaultNotificationLedOn", "integer", 500);
+        }
+        return mDefaultNotificationLedOn;
+    }
+
+    private static int getDefaultNotificationLedOff() {
+        if (mDefaultNotificationLedOff == null) {
+            mDefaultNotificationLedOff = getDefaultNotificationProp(
+                    "config_defaultNotificationLedOff", "integer", 0);
+        }
+        return mDefaultNotificationLedOff;
+    }
+
+    @SuppressWarnings("deprecation")
+    private static int getDefaultNotificationProp(String resName, String resType, int defVal) {
+        int val = defVal;
+        try {
+            Context ctx = (Context) XposedHelpers.callMethod(
+                    mNotifManagerService, "getContext");
+            Resources res = ctx.getResources();
+            int resId = res.getIdentifier(resName, resType, "android");
+            if (resId != 0) {
+                switch (resType) {
+                    case "color": val = res.getColor(resId); break;
+                    case "integer": val = res.getInteger(resId); break;
+                }
+            }
+        } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t); 
+        }
+        return val;
+    }
 
     private static XC_MethodHook applyZenModeHook = new XC_MethodHook() {
         @SuppressWarnings("deprecation")

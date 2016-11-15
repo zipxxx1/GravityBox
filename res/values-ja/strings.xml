@@ -1328,4 +1328,8 @@
     <string name="pref_data_traffic_lockscreen_summary">ロック画面で常に中央に表示</string>
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">明るさスライダーを隠す</string>
+
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">クイック設定を開く</string>
+
 </resources>

@@ -26,10 +26,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.Utils;
+import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings.PrefsFragment;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings.PrefsFragment.IconPickHandler;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings.PrefsFragment.ShortcutHandler;
@@ -57,6 +59,7 @@ import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -116,6 +119,7 @@ public class AppPickerPreference extends DialogPreference
     private boolean mLaunchesFromLockscreen;
     private boolean mForceCustomIcon;
     private boolean mAllowGravityBoxActions;
+    private Bundle mExtraData;
 
     private static LruCache<String, BitmapDrawable> sAppIconCache;
     static {
@@ -140,6 +144,14 @@ public class AppPickerPreference extends DialogPreference
                     Map<String, ?> keys = prefs.getAll();
                     for (Map.Entry<String, ?> entry : keys.entrySet()) {
                         Object val = entry.getValue();
+                        if (entry.getKey().startsWith(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_FINGER)) {
+                            Set<String> set = (Set<String>) entry.getValue();
+                            for (String item : set) {
+                                if (item.startsWith("app:")) {
+                                    val = item.split(":", 2)[1];
+                                }
+                            }
+                        }
                         if ((val instanceof String) && ((String)val).contains("#Intent")) {
                             try {
                                 Intent intent = Intent.parseUri((String)val, 0);
@@ -307,6 +319,17 @@ public class AppPickerPreference extends DialogPreference
 
     public void setLaunchesFromLockscreen(boolean value) {
         mLaunchesFromLockscreen = value;
+    }
+
+    public void setIconPickerEnabled(boolean value) {
+        mIconPickerEnabled = value;
+    }
+
+    public Bundle getExtraData() {
+        if (mExtraData == null) {
+            mExtraData = new Bundle();
+        }
+        return mExtraData;
     }
 
     @Override
@@ -516,6 +539,9 @@ public class AppPickerPreference extends DialogPreference
     }
 
     public void setValue(String value){
+        if (!callChangeListener(value))
+            return;
+
         mValue = value;
         mAppInfo = getAppInfoFromValue(value);
         setSummary(mAppInfo.name);
@@ -722,7 +748,7 @@ public class AppPickerPreference extends DialogPreference
         }
 
         @Override
-        public void onHandleShortcut(Intent intent, String name, Bitmap icon) {
+        public void onHandleShortcut(Intent intent, String name, String localIconResName, Bitmap icon) {
             if (intent == null) {
                 Toast.makeText(mContext, R.string.app_picker_shortcut_null_intent, Toast.LENGTH_LONG).show();
                 return;
@@ -733,22 +759,19 @@ public class AppPickerPreference extends DialogPreference
 
             // generate label
             if (name != null) {
-                mAppName  += ": " + name;
                 mIntent.putExtra("label", name);
-                mIntent.putExtra("prefLabel", mAppName);
+                mIntent.putExtra("prefLabel", mAppName + ": " + name);
             } else {
                 mIntent.putExtra("label", mAppName);
                 mIntent.putExtra("prefLabel", mAppName);
             }
 
+            // process icon
             if (mForceCustomIcon) {
                 mIntent.putExtra("iconResName", "ic_shortcut_help");
+            } else if (localIconResName != null) {
+                mIntent.putExtra("iconResName", localIconResName);
             } else if (icon != null) {
-                mAppIcon = new BitmapDrawable(mResources, icon);
-            }
-
-            // process icon
-            if (mAppIcon != null) {
                 try {
                     final Context context = AppPickerPreference.this.mContext;
                     final String dir = context.getFilesDir() + "/app_picker";
@@ -759,9 +782,7 @@ public class AppPickerPreference extends DialogPreference
                     d.setExecutable(true, false);
                     File f = new File(fileName);
                     FileOutputStream fos = new FileOutputStream(f);
-                    final boolean iconSaved = icon == null ?
-                            mAppIcon.getBitmap().compress(CompressFormat.PNG, 100, fos) :
-                                icon.compress(CompressFormat.PNG, 100, fos);
+                    final boolean iconSaved = icon.compress(CompressFormat.PNG, 100, fos);
                     if (iconSaved) {
                         mIntent.putExtra("icon", f.getAbsolutePath());
                         f.setReadable(true, false);

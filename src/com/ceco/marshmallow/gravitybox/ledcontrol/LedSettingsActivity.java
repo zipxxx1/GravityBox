@@ -204,6 +204,7 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
         mLedSettings.setVibrateOverride(mPrefsFragment.getVibrateOverride());
         mLedSettings.setVibratePatternFromString(mPrefsFragment.getVibratePatternAsString());
         mLedSettings.setActiveScreenMode(mPrefsFragment.getActiveScreenMode());
+        mLedSettings.setActiveScreenIgnoreUpdate(mPrefsFragment.getActiveScreenIgnoreUpdate());
         mLedSettings.setLedMode(mPrefsFragment.getLedMode());
         mLedSettings.setQhIgnore(mPrefsFragment.getQhIgnore());
         mLedSettings.setQhIgnoreList(mPrefsFragment.getQhIgnoreList());
@@ -218,6 +219,7 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
         mLedSettings.setSoundReplace(mPrefsFragment.getSoundReplace());
         mLedSettings.setHidePersistent(mPrefsFragment.getHidePersistent());
         mLedSettings.setLedDnd(mPrefsFragment.getLedDnd());
+        mLedSettings.setLedIgnoreUpdate(mPrefsFragment.getLedIgnoreUpdate());
         mLedSettings.serialize();
         Intent intent = new Intent();
         intent.putExtra(EXTRA_PACKAGE_NAME, mLedSettings.getPackageName());

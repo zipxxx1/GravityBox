@@ -1,3 +1,67 @@
+Changelog 6.2.1 - 06/11/2016
+--------------------------------------
+- Fingerprint launcher extended:
+--- allows per-finger actions - each enrolled fingerprint can have own action
+--- allows quick tap (or swipe) action (experience depends on hardware capabilities)
+--- added command to pause launcher until next screen off/on cycle
+------ useful in case other app needs sensor for a longer time period, e.g. during fingerprint enrollment
+--- made status messages (toasts) optional
+--- improved reliability
+- GravityBox Actions:
+--- added explicit expand/collapse notification panel actions
+--- added explicit expand/collapse QS panel actions
+- Updated Turkish translations (thanks to Fatih Firinci)
+
+Changelog 6.2.0 - 03/11/2016
+--------------------------------------
+- Fixed issue preventing module from working on some devices
+- Fixed battery percent text sign showing in lock screen even if disabled
+- Lockscreen tweaks:
+--- Imprint mode adjusted for compatibility with newer Android 6.0.1 releases
+- GravityBox Actions:
+--- expand notification panel instantly instead of slow animation
+--- brought back action for expanding quick settings panel
+- Introducing Fingerprint launcher (available within main settings screen):
+--- allows launching app/action using fingerprint sensor when screen is on
+    and device is unlocked
+--- provides 10 second time window when other app requests fingerprint
+    authentication during which user must take action before Launcher tries
+    recapturing sensor
+--- EXPERIMENTAL option for quick tap mode, which accepts
+    unrecognized fingerprints and quicker taps to launch app/action. Can
+    temporarily lock out sensor when too many subsequent auth failures occur
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
+Changelog 6.1.7 - 25/10/2016
+--------------------------------------
+- Ultimate notification control:
+--- fixed bug affecting options for Lockscreen visibility, Hide persistent, Progressbar tracking indtroduced in 6.1.6
+--- added option for ignoring LED for updated notifications
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
+Changelog 6.1.6 - 21/10/2016
+--------------------------------------
+- QuickSettings:
+--- added option for showing brightness icon next to brightness slider
+------ toggles adaptive brightness on press / opens display settings on long-press
+--- added support for systems missing IntentTile
+--- added support for Moto Data tile
+--- fixed showing Cellular tile detail on devices that have more instances of Cellular tile (Moto)
+- StatusBar colors: extended to support all system icons
+- Battery settings: restrict Lenovo devices from using Percent text
+- Media tweaks: restrict MX player from utilizing swapped volume keys
+- Phone tweaks:
+--- moved telephony features from Dialer to system level
+------ flip action/call vibrations now independent of Dialer which potentially
+------ makes these features work on devices having alternative Dialer
+- Dialer tweaks: adjusted for compatibility with Google Dialer 4.1 and 5.1
+- Ultimate notification control:
+--- added option for ignoring active screen for updated notifications
+--- improved LED compatibility with Vernee Apollo Lite (thanks tomidix for testing)
+- Updated German translations (thanks to Basti1512)
+- Updated Chinese (Simplified) translations (thanks to liveasx,ipcjs)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 6.1.5 - 06/08/2016
 --------------------------------------
 - Phone tweaks: adjusted for compatibility with Google Phone app v4.0

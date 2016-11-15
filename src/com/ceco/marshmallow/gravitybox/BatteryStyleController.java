@@ -205,12 +205,12 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             if (mPercentText != null) {
                 switch (mContainerType) {
                     case STATUSBAR:
-                        if (Utils.isMtkDevice()) {
-                            mPercentText.update();
+                        if (mBatteryPercentTextEnabledSb || mMtkPercentTextEnabled) {
+                            mPercentText.setVisibility(View.VISIBLE);
+                            mPercentText.updateText();
+                        } else {
+                            mPercentText.setVisibility(View.GONE);
                         }
-                        mPercentText.setVisibility(
-                                (mBatteryPercentTextEnabledSb || mMtkPercentTextEnabled) ?
-                                        View.VISIBLE : View.GONE);
                         break;
                     case KEYGUARD:
                     case HEADER:
@@ -241,6 +241,19 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         }
 
         if (mContainerType == ContainerType.KEYGUARD || mContainerType == ContainerType.HEADER) {
+            try {
+                XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
+                        int.class, boolean.class, boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mPercentText != null) {
+                            mPercentText.updateText();
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
             try {
                 XposedHelpers.findAndHookMethod(mContainer.getClass(),
                         "updateVisibilities", new XC_MethodHook() {

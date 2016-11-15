@@ -780,7 +780,7 @@
 
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Show power menu</string>
-    <string name="hwkey_action_expand_notifications">Expand notifications panel</string>
+    <string name="hwkey_action_expand_notifications">Expand notification panel</string>
 
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">GravityBox Actions</string>
@@ -2009,5 +2009,59 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Wireless charging sound</string>
     <string name="stock_wireless_sound">Stock wireless sound</string>
+
+    <!-- QS: Moto Data tile -->
+    <string name="qs_tile_moto_data">Data (Moto)</string>
+
+    <!-- Dialer category -->
+    <string name="pref_cat_phone_dialer_title">Dialer</string>
+
+    <!-- QS: Brightness control -->
+    <string name="pref_qs_brightness_icon_title">Show brightness icon</string>
+    <string name="pref_qs_brightness_icon_summary">Shows icon indicating current brightness mode. 
+        Toggles adaptive brightness on single-press, opens display settings on long-press.</string>
+
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">Ignore updated notifications</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Won\'t perform Active screen when 
+        existing notification gets updated</string>
+
+    <!-- UNC: LED: Ignore updated notifications -->
+    <string name="pref_lc_led_ignore_update_title">Ignore updated notifications</string>
+    <string name="pref_lc_led_ignore_update_summary">Won\'t turn LED back on for existing notification
+        already seen by user when it gets updated</string>
+
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Expand QuickSettings panel</string>
+
+    <!-- Fingeprint launcher -->
+    <string name="pref_cat_fingerprint_launcher_title">Fingerprint launcher</string>
+    <string name="pref_cat_fingerprint_launcher_summary">Allows launching app or action using 
+        fingerprint sensor when screen is on and device is unlocked</string>
+    <string name="pref_fingerprint_launcher_enable_summary">Turns Fingerprint launcher feature 
+        on or off (requires reboot)</string>
+    <string name="pref_fingerprint_launcher_app_title">Choose app or action</string>
+    <string name="fingerprint_auth_failed">Authentication failed</string>
+    <string name="fingerprint_sensor_unavail">Fingerprint sensor became unavailable</string>
+    <string name="fingerprint_sensor_locked">Fingerprint sensor locked due to too many
+        authentication failures. Trying to restart in 35 seconds.</string>
+    <string name="fingerprint_no_app">No application/action assigned</string>
+    <string name="pref_cat_fingerprint_launcher_fingers_title">Per-finger actions</string>
+    <string name="finger">Finger</string>
+    <string name="pref_cat_fingerprint_launcher_quick_tap_title">Quick tap action</string>
+    <string name="pref_fingerprint_launcher_pause_title">Pause</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Pauses launcher until next screen off/on cycle. 
+        Use in case other app needs sensor for a longer time period, e.g. during fingerprint enrollment.</string>
+    <string name="fingerprint_launcher_paused">Launcher has been paused until next screen off/on cycle</string>
+    <string name="pref_fingerprint_launcher_show_toast_title">Show status messages</string>
+    <string name="pref_fingerprint_launcher_show_toast_summary">Whether to show status messages in form of a toast</string>
+
+    <!-- Action: toggle/expand/collapse notification panel -->
+    <string name="notification_panel_toggle">Toggle notification panel</string>
+    <string name="notification_panel_collapse">Collapse notification panel</string>
+
+    <!-- Action: toggle/expand/collapse QS panel -->
+    <string name="qs_panel_toggle">Toggle QuickSettings panel</string>
+    <string name="qs_panel_collapse">Collapse QuickSettings panel</string>
 
 </resources>

@@ -22,6 +22,7 @@ import java.util.List;
 import com.ceco.marshmallow.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 import com.ceco.marshmallow.gravitybox.quicksettings.QsQuickPulldownHandler;
+import com.ceco.marshmallow.gravitybox.shortcuts.AShortcut;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -89,6 +90,8 @@ public class ModStatusBar {
     public static final String SETTING_ONGOING_NOTIFICATIONS = "gb_ongoing_notifications";
 
     public static final String ACTION_START_SEARCH_ASSIST = "gravitybox.intent.action.START_SEARCH_ASSIST";
+    public static final String ACTION_EXPAND_NOTIFICATIONS = "gravitybox.intent.action.EXPAND_NOTIFICATIONS";
+    public static final String ACTION_EXPAND_QUICKSETTINGS = "gravitybox.intent.action.EXPAND_QUICKSETTINGS";
 
     public static enum ContainerType { STATUSBAR, HEADER, KEYGUARD };
 
@@ -220,6 +223,10 @@ public class ModStatusBar {
                 }
             } else if (intent.getAction().equals(ACTION_START_SEARCH_ASSIST)) {
                 startSearchAssist();
+            } else if (intent.getAction().equals(ACTION_EXPAND_NOTIFICATIONS)) {
+                setNotificationPanelState(intent);
+            } else if (intent.getAction().equals(ACTION_EXPAND_QUICKSETTINGS)) {
+                setNotificationPanelState(intent, true);
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
                 mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
@@ -624,6 +631,8 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
+                    intentFilter.addAction(ACTION_EXPAND_NOTIFICATIONS);
+                    intentFilter.addAction(ACTION_EXPAND_QUICKSETTINGS);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SYSTEM_ICON_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
@@ -969,7 +978,8 @@ public class ModStatusBar {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                log("Error setting up Disable peek hooks: " + t.getMessage());
+                if (DEBUG) XposedBridge.log(t);
             }
 
             // DT2S
@@ -1340,5 +1350,48 @@ public class ModStatusBar {
                 mCameraVp = null;
             }
         }
+    }
+
+    private static void setNotificationPanelState(Intent intent) {
+        setNotificationPanelState(intent, false);
+    }
+
+    private static void setNotificationPanelState(Intent intent, boolean withQs) {
+        try {
+            if (!intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
+                if ((boolean) XposedHelpers.callMethod(notifPanel, "isFullyCollapsed")) {
+                    expandNotificationPanel(withQs);
+                } else {
+                    collapseNotificationPanel();
+                }
+            } else {
+                if (intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false)) {
+                    expandNotificationPanel(withQs);
+                } else {
+                    collapseNotificationPanel();
+                }
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void expandNotificationPanel(boolean withQs) {
+        Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
+        try {
+            XposedHelpers.callMethod(notifPanel, "instantExpand");
+            if (withQs && XposedHelpers.getBooleanField(notifPanel, "mQsExpansionEnabled")) {
+                XposedHelpers.callMethod(notifPanel, "setQsExpansion",
+                        XposedHelpers.getIntField(notifPanel, "mQsMaxExpansionHeight"));
+            }
+        } catch (Throwable t) {
+            // fallback to alt method
+            XposedHelpers.callMethod(notifPanel, withQs ? "expandWithQs" : "expand");
+        }
+    }
+
+    private static void collapseNotificationPanel() {
+        XposedHelpers.callMethod(mPhoneStatusBar, "postAnimateCollapsePanels");
     }
 }

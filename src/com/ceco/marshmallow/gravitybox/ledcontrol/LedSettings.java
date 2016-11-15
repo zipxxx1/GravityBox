@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
+import com.ceco.marshmallow.gravitybox.Utils;
 
 import android.app.Notification;
 import android.content.Context;
@@ -70,6 +71,7 @@ public class LedSettings {
     private String mVibratePatternStr;
     private long[] mVibratePattern;
     private ActiveScreenMode mActiveScreenMode;
+    private boolean mActiveScreenIgnoreUpdate;
     private LedMode mLedMode;
     private boolean mQhIgnore;
     private String mQhIgnoreList;
@@ -82,6 +84,7 @@ public class LedSettings {
     private boolean mSoundToVibrateDisabled;
     private boolean mHidePersistent;
     private String mLedDnd;
+    private boolean mLedIgnoreUpdate;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -143,6 +146,8 @@ public class LedSettings {
             } else if (data[0].equals("activeScreenMode")) {
                 if ("HEADS_UP".equals(data[1])) data[1] = "DO_NOTHING";
                 ls.setActiveScreenMode(ActiveScreenMode.valueOf(data[1]));
+            } else if (data[0].equals("activeScreenIgnoreUpdate")) {
+                ls.setActiveScreenIgnoreUpdate(Boolean.valueOf(data[1]));
             } else if (data[0].equals("ledMode")) {
                 ls.setLedMode(LedMode.valueOf(data[1]));
             } else if (data[0].equals("qhIgnore")) {
@@ -171,6 +176,8 @@ public class LedSettings {
                 ls.setHidePersistent(Boolean.valueOf(data[1]));
             } else if (data[0].equals("ledDnd")) {
                 ls.setLedDnd(data[1]);
+            } else if (data[0].equals("ledIgnoreUpdate")) {
+                ls.setLedIgnoreUpdate(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -181,9 +188,9 @@ public class LedSettings {
         mPackageName = packageName;
         mEnabled = false;
         mOngoing = false;
-        mLedOnMs = 1000;
-        mLedOffMs = 5000;
-        mColor = 0xffffffff;
+        mLedOnMs = Utils.isVerneeApolloLiteDevice() ? 500 : 1000;
+        mLedOffMs = Utils.isVerneeApolloLiteDevice() ? 0 : 5000;
+        mColor = Utils.isVerneeApolloLiteDevice() ? 0xff201000 : 0xffffffff;
         mSoundOverride = false;
         mSoundUri = null;
         mSoundReplace = true;
@@ -195,6 +202,7 @@ public class LedSettings {
         mVibratePattern = null;
         mVibrateReplace = true;
         mActiveScreenMode = ActiveScreenMode.DISABLED;
+        mActiveScreenIgnoreUpdate = false;
         mLedMode = LedMode.OVERRIDE;
         mQhIgnore = false;
         mQhIgnoreList = null;
@@ -207,6 +215,7 @@ public class LedSettings {
         mSoundToVibrateDisabled = false;
         mHidePersistent = false;
         mLedDnd = "";
+        mLedIgnoreUpdate = false;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -368,6 +377,10 @@ public class LedSettings {
         mActiveScreenMode = mode;
     }
 
+    protected void setActiveScreenIgnoreUpdate(boolean ignore) {
+        mActiveScreenIgnoreUpdate = ignore;
+    }
+
     protected void setLedMode(LedMode ledMode) {
         mLedMode = ledMode;
     }
@@ -440,6 +453,10 @@ public class LedSettings {
         mLedDnd = value;
     }
 
+    protected void setLedIgnoreUpdate(boolean ignore) {
+        mLedIgnoreUpdate = ignore;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -508,6 +525,10 @@ public class LedSettings {
         return mActiveScreenMode;
     }
 
+    public boolean getActiveScreenIgnoreUpdate() {
+        return mActiveScreenIgnoreUpdate;
+    }
+
     public LedMode getLedMode() {
         return mLedMode;
     }
@@ -556,6 +577,10 @@ public class LedSettings {
         return mLedDnd;
     }
 
+    public boolean getLedIgnoreUpdate() {
+        return mLedIgnoreUpdate;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -576,6 +601,7 @@ public class LedSettings {
                 dataSet.add("vibratePattern:" + mVibratePatternStr);
             }
             dataSet.add("activeScreenMode:" + mActiveScreenMode);
+            dataSet.add("activeScreenIgnoreUpdate:" + mActiveScreenIgnoreUpdate);
             dataSet.add("ledMode:" + mLedMode);
             dataSet.add("qhIgnore:" + mQhIgnore);
             if (mQhIgnoreList != null) {
@@ -592,6 +618,7 @@ public class LedSettings {
             dataSet.add("soundReplace:" + mSoundReplace);
             dataSet.add("hidePersistent:" + mHidePersistent);
             dataSet.add("ledDnd:" + mLedDnd);
+            dataSet.add("ledIgnoreUpdate:" + mLedIgnoreUpdate);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

@@ -66,6 +66,7 @@ public class CallFeatures {
 
     private CallFeatures(XSharedPreferences prefs, ClassLoader classLoader) throws Throwable {
         mPrefs = prefs;
+        refreshPrefs();
         createHooks(classLoader);
     }
 

@@ -1752,4 +1752,7 @@
     <string name="permission_denied_msg">Usted ha decidido negar algunos de los permisos.
          Tenga en cuenta que esto evitará que funcionen características relacionadas.</string>
 
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Expandir panel de ajustes rápidos</string>
+
 </resources>

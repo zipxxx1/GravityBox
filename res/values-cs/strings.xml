@@ -1935,4 +1935,57 @@
     <string name="pref_charger_plugged_sound_wireless_title">Zvuk bezdrátového nabíjení</string>
     <string name="stock_wireless_sound">Systémový zvuk bezdrátového nabíjení</string>
 
+    <!-- QS: Moto Data tile -->
+    <string name="qs_tile_moto_data">Dáta (Moto)</string>
+
+    <!-- Dialer category -->
+    <string name="pref_cat_phone_dialer_title">Dialer</string>
+
+    <!-- QS: Brightness control -->
+    <string name="pref_qs_brightness_icon_title">Zobrazit ikonu jasu</string>
+    <string name="pref_qs_brightness_icon_summary">Zobrazí ikonu indikující aktuální režim jasu. 
+        Přepne adaptivní jas ťuknutím, otevře nastavení obrazovky dlouhým podržením.</string>
+
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">Ignorovat aktualizováno oznámení</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Nezobrazí aktivní obrazovku v případě, 
+        že je stávající oznámení aktualizováno</string>
+
+    <!-- UNC: LED: Ignore updated notifications -->
+    <string name="pref_lc_led_ignore_update_title">Ignorovat aktualizováno oznámení</string>
+    <string name="pref_lc_led_ignore_update_summary">Znovu nerozsvítí LED pro stávající viděno oznámení, 
+        které bylo aktualizováno</string>
+
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Zobrazit panel nastavení</string>
+
+    <!-- Fingeprint launcher -->
+    <string name="pref_cat_fingerprint_launcher_title">Spouštěč snímače otisků</string>
+    <string name="pref_cat_fingerprint_launcher_summary">Umožňuje spustit aplikaci nebo akci použitím snímače otisků 
+        při zapnuté obrazovce a odemčeném zařízení</string>
+    <string name="pref_fingerprint_launcher_enable_summary">Zapne/vypne funkci spouštěče snímače otisků (vyžaduje restart)</string>
+    <string name="pref_fingerprint_launcher_app_title">Aplikace nebo akce</string>
+    <string name="fingerprint_auth_failed">Autentifikace selhala</string>
+    <string name="fingerprint_sensor_unavail">Snímač otisků je momentálně nedostupný</string>
+    <string name="fingerprint_sensor_locked">Snímač otisků je dočasně zablokován z důvodu překročení počtu 
+        povolených selhání autentizace. Spouštěč se restartuje o 35 sekund.</string>
+    <string name="fingerprint_no_app">Není přiřazena žádná aplikace/akce</string>
+    <string name="pref_cat_fingerprint_launcher_fingers_title">Akce známých otisků</string>
+    <string name="finger">Prst</string>
+    <string name="pref_cat_fingerprint_launcher_quick_tap_title">Akce rychlého ťuknutí</string>
+    <string name="pref_fingerprint_launcher_pause_title">Pozastavit</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Pozastaví spouštěč do následujícího vypnutí/zapnutí displeje. 
+        Použijte v případě pokud jiná aplikace potřebuje přístup k čidlu na delší dobu, např. během registrace otisků.</string>
+    <string name="fingerprint_launcher_paused">Spouštěč byl pozastaven do následujícího vypnutí/zapnutí displeje</string>
+    <string name="pref_fingerprint_launcher_show_toast_title">Stavové zprávy</string>
+    <string name="pref_fingerprint_launcher_show_toast_summary">Povolí zobrazování stavových zpráv</string>
+
+    <!-- Action: toggle/expand/collapse notification panel -->
+    <string name="notification_panel_toggle">Přepnout panel upozornění</string>
+    <string name="notification_panel_collapse">Skrýt panel upozornění</string>
+
+    <!-- Action: toggle/expand/collapse QS panel -->
+    <string name="qs_panel_toggle">Přepnout panel nastavení</string>
+    <string name="qs_panel_collapse">Skrýt panel nastavení</string>
+
 </resources>

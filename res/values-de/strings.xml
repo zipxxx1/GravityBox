@@ -1985,5 +1985,8 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Ton für drahtloses Laden</string>
     <string name="stock_wireless_sound">Standardton für drahtlosen Laden</string>
-  
+
+    <!-- HW Key Actions: expand quick settings -->
+    <string name="hwkey_action_expand_quicksettings">Schnelleinstellungenleiste erweitern</string>
+
 </resources>
