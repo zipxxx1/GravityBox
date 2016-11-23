@@ -1903,8 +1903,8 @@
     <string name="airplane_mode_off">Flugmodus aus</string>
 
     <!-- Autobrightness mode shortcut -->
-    <string name="autobrightness_on">Auto brightness on</string>
-    <string name="autobrightness_off">Auto brightness off</string>
+    <string name="autobrightness_on">Automatische Helligkeitssteuerung ein</string>
+    <string name="autobrightness_off">Automatische Helligkeitssteuerung aus</string>
 
     <!-- Bluetooth shortcut -->
     <string name="bluetooth_on">Bluetooth ein</string>
@@ -1986,7 +1986,58 @@
     <string name="pref_charger_plugged_sound_wireless_title">Ton für drahtloses Laden</string>
     <string name="stock_wireless_sound">Standardton für drahtlosen Laden</string>
 
+    <!-- QS: Moto Data tile -->
+    <string name="qs_tile_moto_data">Daten (Moto)</string>
+
+        <!-- Dialer category -->
+    <string name="pref_cat_phone_dialer_title">Dialer</string>
+
+    <!-- QS: Brightness control -->
+    <string name="pref_qs_brightness_icon_title">Zeige Helligkeitssymbol</string>
+    <string name="pref_qs_brightness_icon_summary">Zeige Symbol des aktuellen Helligkeitsmodus. 
+        Wechselt die adaptive Helligkeitssteuerung bei einfachen Tippen, öffnet die Displayeinstellungen bei langem Tippen.</string>
+
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">Ignoriere aktualisierte Benachrichtigungen</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Startet den Aktiv-Bildschirm nicht bei 
+        Aktualisierung einer vorhandenen Nachricht</string>
+
+    <!-- UNC: LED: Ignore updated notifications -->
+    <string name="pref_lc_led_ignore_update_title">Ignoriere aktualisierte Benachrichtigungen</string>
+    <string name="pref_lc_led_ignore_update_summary">Schaltet die LED nicht ein bei einer Aktualisierung 
+        einer bereits gelesenen Benachrichtigung</string>
+
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Schnelleinstellungenleiste erweitern</string>
+
+    <!-- Fingeprint launcher -->
+    <string name="pref_cat_fingerprint_launcher_title">Fingerabdruck Launcher</string>
+    <string name="pref_cat_fingerprint_launcher_summary">Erlaubt den Start einer App oder Aktion mithilfe
+        des Fingerabdruck-Sensors, wenn der Bildschirm eingeschaltet  und das Gerät entsperrt ist</string>
+    <string name="pref_fingerprint_launcher_enable_summary">Schaltet Fingerabdruck-Starter Funktion  
+        ein oder aus (erfordert Neustart)</string>
+    <string name="pref_fingerprint_launcher_app_title">Wähle App oder Aktion</string>
+    <string name="fingerprint_auth_failed">Authentifizierung fehlgeschlagen</string>
+    <string name="fingerprint_sensor_unavail">Fingerabdruck-Sensor nicht verfügbar</string>
+    <string name="fingerprint_sensor_locked">Fingerabdruck-Sensor gesperrt aufgrund von zu vielen
+        Authentifizierungsfehlern. Bitte nochmals in 35 Sekunden versuchen.</string>
+    <string name="fingerprint_no_app">Keine Applikation/Aktion zugeordnet</string>
+    <string name="pref_cat_fingerprint_launcher_fingers_title">Aktion pro Finger</string>
+    <string name="finger">Finger</string>
+    <string name="pref_cat_fingerprint_launcher_quick_tap_title">Schnellklick Aktion</string>
+    <string name="pref_fingerprint_launcher_pause_title">Pause</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Pausiert Fingerabdruck-Starter bis zum nächsten Aus-und Einschalten des Bildschirms. 
+        Bitte benutzen, falls eine andere App den Sensor für einen längeren Zeitraum benötigt, z.B. während der Anmeldung per Fingerabdruck.</string>
+    <string name="fingerprint_launcher_paused">Fingerabdruck-Starter wurde pausiert bis zum nächsten Aus-und Einschalten des Bildschirms</string>
+    <string name="pref_fingerprint_launcher_show_toast_title">Zeige Statusnachrichten</string>
+    <string name="pref_fingerprint_launcher_show_toast_summary">Modus zur Darstellung von Statusnachrichten</string>
+
+    <!-- Action: toggle/expand/collapse notification panel -->
+    <string name="notification_panel_toggle">Zeige/verstecke Benachrichtungsleiste</string>
+    <string name="notification_panel_collapse">Verstecke Benachrichtungsleiste</string>
+
+    <!-- Action: toggle/expand/collapse QS panel -->
+    <string name="qs_panel_toggle">Zeige/verstecke Schnelleinstellungsleiste</string>
+    <string name="qs_panel_collapse">Verstecke Schnelleinstellungsleiste</string>
 
 </resources>
