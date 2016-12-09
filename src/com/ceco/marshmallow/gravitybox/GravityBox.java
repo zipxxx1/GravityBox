@@ -48,6 +48,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         XposedBridge.log("GB:Is MTK device: " + Utils.isMtkDevice());
         XposedBridge.log("GB:Is Xperia device: " + Utils.isXperiaDevice());
         XposedBridge.log("GB:Is Moto XT device: " + Utils.isMotoXtDevice());
+        XposedBridge.log("GB:Is OnePlus3T device: " + Utils.isOnePlus3TDevice());
         XposedBridge.log("GB:Has Lenovo custom UI: " + Utils.hasLenovoCustomUI());
         if (Utils.hasLenovoCustomUI()) {
             XposedBridge.log("GB:Lenovo UI is VIBE: " + Utils.hasLenovoVibeUI());

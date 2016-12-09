@@ -1778,6 +1778,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatDisplay.removePreference(mPrefPulseNotificationDelay);
             }
 
+            // Remove OnePlus3T preferences
+            if (Utils.isOnePlus3TDevice(true)) {
+                Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
+                if (p != null) mPrefCatLsOther.removePreference(p);
+            }
+
             // Remove fingerprint related preferences
             if (!sSystemProperties.supportsFingerprint) {
                 Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);

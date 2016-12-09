@@ -95,6 +95,7 @@ public class Utils {
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     private static Boolean mIsVerneeApolloLiteDevice;
+    private static Boolean mIsOnePlus3TDevice = null;
 
     // Device features
     private static Boolean mHasGeminiSupport = null;
@@ -274,6 +275,18 @@ public class Utils {
         mIsVerneeApolloLiteDevice = (Build.BRAND.equals("Vernee") &&
                 Build.MODEL.equals("Apollo Lite"));
         return mIsVerneeApolloLiteDevice;
+    }
+
+    public static boolean isOnePlus3TDevice() {
+        return isOnePlus3TDevice(false);
+    }
+
+    public static boolean isOnePlus3TDevice(boolean checkAospFlag) {
+        if (mIsOnePlus3TDevice == null) {
+            mIsOnePlus3TDevice = "ONEPLUS A3003".equals(Build.MODEL);
+        }
+        return (checkAospFlag ? (mIsOnePlus3TDevice && !isAospForced()) :
+            mIsOnePlus3TDevice);
     }
 
     public static boolean hasGeminiSupport() {

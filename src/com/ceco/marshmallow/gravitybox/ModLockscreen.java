@@ -15,6 +15,9 @@
 
 package com.ceco.marshmallow.gravitybox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ceco.marshmallow.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
@@ -63,6 +66,7 @@ public class ModLockscreen {
     private static final String CLASS_KG_PASSWORD_VIEW = CLASS_PATH + ".KeyguardPasswordView";
     private static final String CLASS_KG_PIN_VIEW = CLASS_PATH + ".KeyguardPINView";
     private static final String CLASS_KG_PASSWORD_TEXT_VIEW = CLASS_PATH + ".PasswordTextView";
+    private static final String CLASS_KG_PASSWORD_TEXT_VIEW_PIN = CLASS_PATH + ".PasswordTextViewForPin";
     private static final String CLASS_KGVIEW_MEDIATOR = "com.android.systemui.keyguard.KeyguardViewMediator";
     private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
     private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
@@ -95,7 +99,7 @@ public class ModLockscreen {
     private static UnlockPolicy mSmartUnlockPolicy;
     private static DismissKeyguardHandler mDismissKeyguardHandler;
     private static GestureDetector mGestureDetector;
-    private static TextView mCarrierTextView;
+    private static List<TextView> mCarrierTextViews = new ArrayList<>();
     private static KeyguardStateMonitor mKgMonitor;
     private static LockscreenPinScrambler mPinScrambler;
     private static AppLauncher.AppInfo mLeftAction;
@@ -359,6 +363,23 @@ public class ModLockscreen {
                 }
             });
 
+            if (Utils.isOnePlus3TDevice(true)) {
+                XposedHelpers.findAndHookMethod(CLASS_KG_PASSWORD_TEXT_VIEW_PIN, classLoader,
+                        "append", char.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (!mPrefs.getBoolean(
+                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) return;
+                        Object pinView = XposedHelpers.getAdditionalInstanceField(param.thisObject, "gbPINView");
+                        if (pinView != null) {
+                            if (DEBUG) log("quickUnlock: OnePlus3T PasswordTextViewForPin");
+                            String entry = (String) XposedHelpers.getObjectField(param.thisObject, "mText");
+                            doQuickUnlock(pinView, entry);
+                        }
+                    }
+                });
+            }
+
             XposedHelpers.findAndHookMethod(lockPatternViewClass, "onDraw", Canvas.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
@@ -441,8 +462,8 @@ public class ModLockscreen {
                             "id", PACKAGE_NAME);
                     if (containerId == 0) {
                         // fallback to AOSP container
-                        containerId = res.getIdentifier("keyguard_clock_container",
-                                "id", PACKAGE_NAME);
+                        containerId = res.getIdentifier(Utils.isOnePlus3TDevice(true) ? "clock_view" :
+                                "keyguard_clock_container", "id", PACKAGE_NAME);
                     }
                     if (containerId != 0) {
                         ViewGroup container = (ViewGroup) kgStatusView.findViewById(containerId);
@@ -471,16 +492,15 @@ public class ModLockscreen {
             if (!Utils.isXperiaDevice()) {
                 XC_MethodHook carrierTextHook = new XC_MethodHook() {
                     @Override
-                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                         String text = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, "");
-                        if (mCarrierTextView == null) {
-                            mCarrierTextView = (TextView) param.thisObject;
+                        if (!mCarrierTextViews.contains(param.thisObject)) {
+                            mCarrierTextViews.add((TextView) param.thisObject);
                         } 
                         if (text.isEmpty()) {
                             return;
                         } else {
-                            mCarrierTextView.setText(text.trim().isEmpty() ? "" : text);
-                            param.setResult(null);
+                            ((TextView)param.thisObject).setText(text.trim().isEmpty() ? "" : text);
                         }
                     }
                 };
@@ -726,15 +746,16 @@ public class ModLockscreen {
     }
 
     private static void updateCarrierText() {
-        if (mCarrierTextView == null) return;
-        try {
-            if (Utils.isSamsungRom()) {
-                XposedHelpers.callMethod(mCarrierTextView, "updateCarrierText", (Intent) null);
-            } else {
-                XposedHelpers.callMethod(mCarrierTextView, "updateCarrierText");
+        for (TextView tv : mCarrierTextViews) {
+            try {
+                if (Utils.isSamsungRom()) {
+                    XposedHelpers.callMethod(tv, "updateCarrierText", (Intent) null);
+                } else {
+                    XposedHelpers.callMethod(tv, "updateCarrierText");
+                }
+            } catch (Throwable t) {
+                XposedBridge.log(t);
             }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
         }
     }
 
