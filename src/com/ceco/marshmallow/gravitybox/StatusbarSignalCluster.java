@@ -42,7 +42,6 @@ import android.content.res.XModuleResources;
 import android.content.res.XResources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -70,7 +69,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected Resources mResources;
     protected Resources mGbResources;
     protected Field mFldWifiGroup;
-    private Field mFldMobileGroup;
     private List<String> mErrorsLogged = new ArrayList<String>();
     protected boolean mNetworkTypeIndicatorsDisabled;
 
@@ -184,7 +182,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                !Utils.isMtkDevice()) {
+                !Utils.isMtkDevice() && !Utils.isOnePlus3TDevice(true)) {
 
             sQsHpResId = XResources.getFakeResId(modRes, R.drawable.ic_qs_signal_hp);
             sSbHpResId = XResources.getFakeResId(modRes, R.drawable.stat_sys_data_fully_connected_hp);
@@ -221,7 +219,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         mGbResources = Utils.getGbContext(mView.getContext()).getResources();
 
         mFldWifiGroup = resolveField("mWifiGroup", "mWifiViewGroup");
-        mFldMobileGroup = resolveField("mMobileGroup", "mMobileViewGroup");
 
         initPreferences();
         createHooks();
@@ -289,7 +286,9 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     }
                 });
             } catch (Throwable t) {
-                log("Error hooking getOrInflateState: " + t.getMessage());
+                if (!Utils.isOnePlus3TDevice(true)) {
+                    log("Error hooking getOrInflateState: " + t.getMessage());
+                }
             }
 
             if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_NOSIM, false) &&
@@ -301,13 +300,26 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                         if (v != null) v.setVisibility(View.GONE);
                     }
                     XposedHelpers.setBooleanField(mView, "mNoSimsVisible", false);
-                    XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
-                            boolean.class, new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            param.args[0] = false;
-                        }
-                    });
+                    if (Utils.isOnePlus3TDevice(true)) {
+                        XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
+                                boolean.class, new XC_MethodHook() {
+                            @Override
+                            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                View v = (View) XposedHelpers.getObjectField(mView, "mMobileSignalGroup");
+                                if (v != null) v.setVisibility(
+                                        (boolean)param.args[0] ? View.GONE : View.VISIBLE);
+                            }
+                        });
+                    } else {
+                        XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
+                                boolean.class, new XC_MethodHook() {
+                            @Override
+                            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                log("setNoSIms called");
+                                param.args[0] = false;
+                            }
+                        });
+                    }
                 } catch (Throwable t) {
                     log("Error hooking setNoSims: " + t.getMessage());
                 }
@@ -345,7 +357,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
 
         if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                !Utils.isFalconAsiaDs() && !Utils.isMtkDevice()) {
+                !Utils.isFalconAsiaDs() && !Utils.isMtkDevice() && !Utils.isOnePlus3TDevice(true)) {
             try {
                 final Class<?> mobileNetworkCtrlClass = Utils.isMotoXtDevice() ?
                         XposedHelpers.findClass(
@@ -515,7 +527,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     protected void initPreferences() { 
-        mDataActivityEnabled = mContainerType != ContainerType.HEADER && 
+        mDataActivityEnabled = mContainerType != ContainerType.HEADER &&
+                !Utils.isOnePlus3TDevice(true) &&
                 sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
 
         mBatteryStyle = Integer.valueOf(sPrefs.getString(

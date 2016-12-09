@@ -1782,6 +1782,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (Utils.isOnePlus3TDevice(true)) {
                 Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
                 if (p != null) mPrefCatLsOther.removePreference(p);
+                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
+                mPrefCatSignalCluster.removePreference(mPrefSbDaColor);
+                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
             }
 
             // Remove fingerprint related preferences
