@@ -210,6 +210,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK = "pref_clock_longpress_link";
     public static final String PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH = "pref_sb_clock_masterswitch";
     public static final String PREF_KEY_ALARM_ICON_HIDE = "pref_alarm_icon_hide";
+    public static final String PREF_CAT_KEY_CLOCK_SETTINGS = "pref_cat_clock_settings";
+    public static final String PREF_CAT_KEY_NOTIF_PANEL_CLOCK = "pref_cat_notif_panel_clock";
 
     public static final String PREF_CAT_KEY_ABOUT = "pref_cat_about";
     public static final String PREF_KEY_ABOUT_GRAVITYBOX = "pref_about_gb";
@@ -1787,6 +1789,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColor);
                 p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
                 if (p != null) mPrefCatSignalCluster.removePreference(p);
+                PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_CLOCK_SETTINGS);
+                p = findPreference(PREF_CAT_KEY_NOTIF_PANEL_CLOCK);
+                if (p != null) ps.removePreference(p);
             }
 
             // Remove fingerprint related preferences

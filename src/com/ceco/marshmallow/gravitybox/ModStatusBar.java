@@ -134,6 +134,7 @@ public class ModStatusBar {
     private static GestureDetector mGestureDetector;
     private static boolean mDt2sEnabled;
     private static long[] mCameraVp;
+    private static boolean mIsOnePlus3TDevice;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -340,6 +341,9 @@ public class ModStatusBar {
     }
 
     private static void prepareHeaderTimeView() {
+        if (mIsOnePlus3TDevice)
+            return;
+
         try {
             Object header = XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
             View timeView = (View) XposedHelpers.getObjectField(header,
@@ -541,6 +545,7 @@ public class ModStatusBar {
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
+            mIsOnePlus3TDevice = Utils.isOnePlus3TDevice(true);
 
             final Class<?> phoneStatusBarClass =
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
@@ -967,16 +972,18 @@ public class ModStatusBar {
                         }
                     }
                 });
-                XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
-                        "instantExpand", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mDisablePeek) {
-                            XposedHelpers.setBooleanField(param.thisObject,
-                                    QsQuickPulldownHandler.getQsExpandFieldName(), false);
+                if (!mIsOnePlus3TDevice) {
+                    XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
+                            "instantExpand", new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if (mDisablePeek) {
+                                XposedHelpers.setBooleanField(param.thisObject,
+                                        QsQuickPulldownHandler.getQsExpandFieldName(), false);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             } catch (Throwable t) {
                 log("Error setting up Disable peek hooks: " + t.getMessage());
                 if (DEBUG) XposedBridge.log(t);
@@ -1264,9 +1271,10 @@ public class ModStatusBar {
             final int x = (int) event.getRawX();
             final int y = (int) event.getRawY();
             Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneStatusBar, "mHandler");
-            int statusBarHeaderHeight = 
+            int statusBarHeaderHeight = mIsOnePlus3TDevice ?
+                    (int)XposedHelpers.callMethod(mHeader, "getCollapsedHeight") :
                     XposedHelpers.getIntField(mHeader, "mCollapsedHeight");
-    
+
             if (action == MotionEvent.ACTION_DOWN) {
                 if (y < statusBarHeaderHeight) {
                     mLinger = 0;
@@ -1387,7 +1395,13 @@ public class ModStatusBar {
             }
         } catch (Throwable t) {
             // fallback to alt method
-            XposedHelpers.callMethod(notifPanel, withQs ? "expandWithQs" : "expand");
+            if (withQs) {
+                XposedHelpers.callMethod(notifPanel, "expandWithQs");
+            } else if (mIsOnePlus3TDevice) {
+                XposedHelpers.callMethod(notifPanel, "expand", true);
+            } else {
+                XposedHelpers.callMethod(notifPanel, "expand");
+            }
         }
     }
 
