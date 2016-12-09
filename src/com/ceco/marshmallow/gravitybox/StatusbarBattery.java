@@ -98,7 +98,7 @@ public class StatusbarBattery implements IconManagerListener {
     }
 
     public void setShowPercentage(boolean showPercentage) {
-        if (mBattery != null) {
+        if (mBattery != null && !Utils.isOnePlus3TDevice(true)) {
             try {
                 XposedHelpers.setBooleanField(mBattery, "mShowPercent", showPercentage);
                 mBattery.invalidate();

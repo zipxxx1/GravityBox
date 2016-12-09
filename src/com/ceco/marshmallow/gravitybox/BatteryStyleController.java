@@ -118,7 +118,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 }
             }
-            if (mPercentText == null) {
+            if (mPercentText == null || Utils.isOnePlus3TDevice(true)) {
                 TextView percentTextView = new TextView(mContext);
                 LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -131,7 +131,8 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 percentTextView.setTextColor(Color.WHITE);
                 percentTextView.setVisibility(View.GONE);
                 mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
-                mSystemIcons.addView(mPercentText.getView(), mSystemIcons.getChildCount()-1);
+                int offset = Utils.isOnePlus3TDevice(true) ? 2 : 1;
+                mSystemIcons.addView(mPercentText.getView(), mSystemIcons.getChildCount()-offset);
                 if (DEBUG) log("Battery percent text injected");
             }
         }
@@ -141,14 +142,15 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lParams.gravity = Gravity.CENTER_VERTICAL;
+        lParams.setMarginStart(gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left));
+        lParams.setMarginEnd(Utils.isOnePlus3TDevice(true) ?
+                 gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right_op3t) :
+                 gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right));
         mCircleBattery.setLayoutParams(lParams);
-        mCircleBattery.setPadding(
-                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left),
-                0,
-                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right),
-                0);
         mCircleBattery.setVisibility(View.GONE);
-        mSystemIcons.addView(mCircleBattery);
+        int pos = Utils.isOnePlus3TDevice(true) ?
+                mSystemIcons.getChildCount()-1 : mSystemIcons.getChildCount();
+        mSystemIcons.addView(mCircleBattery, pos);
         if (DEBUG) log("CmCircleBattery injected");
 
         // find battery
@@ -164,13 +166,17 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"))) {
             View v = mPercentText.getView();
             v.setPadding(
+                    Utils.isOnePlus3TDevice(true) ? 0 :
                     gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_right),
                     0,
-                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
+                    Utils.isOnePlus3TDevice(true) ?
+                     gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left_op3t) :
+                     gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
                     0);
             ViewGroup vg = (ViewGroup) v.getParent();
             vg.removeView(v);
-            vg.addView(v);
+            pos = Utils.isOnePlus3TDevice(true) ? vg.getChildCount()-1 : vg.getChildCount();
+            vg.addView(v, pos);
         }
     }
 
