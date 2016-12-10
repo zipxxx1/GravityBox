@@ -110,6 +110,7 @@ public class ModExpandedDesktop {
     private static Method mRequestTransientBars = null;
     private static Method mUpdateSystemBarsLw = null;
     private static Method mUpdateSystemUiVisibilityLw = null;
+    private static Method mShouldUseOutsets = null;
     private static NavbarDimensions mNavbarDimensions;
     private static Class<?> mClsScreenShapeHelper;
 
@@ -298,6 +299,14 @@ public class ModExpandedDesktop {
             mUpdateSystemUiVisibilityLw.setAccessible(true);
         } catch (NoSuchMethodException e) {
             log("could not find updateSystemUiVisibilityLw method");
+        }
+
+        try {
+            mShouldUseOutsets = classPhoneWindowManager.getDeclaredMethod(
+                    "shouldUseOutsets", WindowManager.LayoutParams.class, int.class);
+            mShouldUseOutsets.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find shouldUseOutsets method");
         }
     }
 
@@ -984,8 +993,8 @@ public class ModExpandedDesktop {
                 final int systemUiVisibility = updateSystemUiVisibilityFlagsForExpandedDesktop(attrs.systemUiVisibility|
                         XposedHelpers.getIntField(attrs, "subtreeSystemUiVisibility"));
 
-                final boolean useOutsets = outOutsets != null && (boolean) XposedHelpers.callMethod(
-                        param.thisObject, "shouldUseOutsets", attrs, fl);
+                final boolean useOutsets = outOutsets != null && 
+                        (boolean) mShouldUseOutsets.invoke(param.thisObject, attrs, fl);
                 if (useOutsets) {
                     int outset = (int) XposedHelpers.callStaticMethod(mClsScreenShapeHelper,
                             "getWindowOutsetBottomPx", mContext.getResources());
