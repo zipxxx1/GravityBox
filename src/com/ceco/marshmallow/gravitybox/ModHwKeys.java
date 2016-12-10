@@ -74,6 +74,7 @@ import de.robv.android.xposed.callbacks.XCallback;
 public class ModHwKeys {
     private static final String TAG = "GB:ModHwKeys";
     private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.server.policy.PhoneWindowManager";
+    private static final String CLASS_PHONE_WINDOW_MANAGER_OEM = "com.android.server.policy.OemPhoneWindowManager";
     private static final String CLASS_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
@@ -523,12 +524,18 @@ public class ModHwKeys {
             mHeadsetUri[1] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_PLUG, null);
 
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
+            Class<?> classPhoneWindowManagerOem = null;
+            if (Utils.isOnePlus3TDevice(true)) {
+                classPhoneWindowManagerOem = XposedHelpers.findClass(
+                        CLASS_PHONE_WINDOW_MANAGER_OEM, classLoader);
+            }
             initReflections(classPhoneWindowManager);
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "init",
                 Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS, phoneWindowManagerInitHook);
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "interceptKeyBeforeQueueing", 
+            XposedHelpers.findAndHookMethod(classPhoneWindowManagerOem != null ?
+                    classPhoneWindowManagerOem : classPhoneWindowManager, "interceptKeyBeforeQueueing", 
                     KeyEvent.class, int.class, new XC_MethodHook(XCallback.PRIORITY_HIGHEST) {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -648,7 +655,8 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "interceptKeyBeforeDispatching", 
+            XposedHelpers.findAndHookMethod(classPhoneWindowManagerOem != null ?
+                    classPhoneWindowManagerOem : classPhoneWindowManager, "interceptKeyBeforeDispatching", 
                     CLASS_WINDOW_STATE, KeyEvent.class, int.class, new XC_MethodHook() {
 
                 @Override
@@ -847,7 +855,8 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, 
+            XposedHelpers.findAndHookMethod(classPhoneWindowManagerOem != null ?
+                    classPhoneWindowManagerOem : classPhoneWindowManager, 
                     "readConfigurationDependentBehaviors", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -905,8 +914,10 @@ public class ModHwKeys {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mPostponeWakeUpOnPowerKeyUpEventTime > 0) {
-                        XposedHelpers.callMethod(param.thisObject, "wakeUpFromPowerKey",
-                                mPostponeWakeUpOnPowerKeyUpEventTime);
+                        Method m = classPhoneWindowManager.getDeclaredMethod(
+                                "wakeUpFromPowerKey", long.class);
+                        m.setAccessible(true);
+                        m.invoke(param.thisObject, mPostponeWakeUpOnPowerKeyUpEventTime);
                         mPostponeWakeUpOnPowerKeyUpEventTime = 0;
                     }
                 }
