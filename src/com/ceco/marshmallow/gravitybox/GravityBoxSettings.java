@@ -1792,6 +1792,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_CLOCK_SETTINGS);
                 p = findPreference(PREF_CAT_KEY_NOTIF_PANEL_CLOCK);
                 if (p != null) ps.removePreference(p);
+                p = findPreference(PREF_KEY_NAVBAR_SWAP_KEYS);
+                if (p != null) mPrefCatNavbarKeys.removePreference(p);
             }
 
             // Remove fingerprint related preferences
