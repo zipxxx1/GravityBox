@@ -107,6 +107,8 @@ public class LaunchActivity extends Activity {
             ClearNotificationsShortcut.launchAction(mContext, intent);
         } else if (action.equals(AutoBrightnessShortcut.ACTION)) {
             AutoBrightnessShortcut.launchAction(mContext, intent);
+        } else if (action.equals(GoHomeShortcut.ACTION)) {
+            GoHomeShortcut.launchAction(mContext, intent);
         }
     }
 }

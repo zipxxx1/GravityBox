@@ -34,6 +34,7 @@ import com.ceco.marshmallow.gravitybox.managers.BatteryInfoManager;
 import com.ceco.marshmallow.gravitybox.preference.AppPickerPreference;
 import com.ceco.marshmallow.gravitybox.preference.AutoBrightnessDialogPreference;
 import com.ceco.marshmallow.gravitybox.preference.SeekBarPreference;
+import com.ceco.marshmallow.gravitybox.shortcuts.GoHomeShortcut;
 import com.ceco.marshmallow.gravitybox.shortcuts.ShortcutActivity;
 import com.ceco.marshmallow.gravitybox.webserviceclient.RequestParams;
 import com.ceco.marshmallow.gravitybox.webserviceclient.TransactionResult;
@@ -1926,6 +1927,17 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     }
                 }
                 appPref.setOnPreferenceChangeListener(this);
+            }
+
+            // set default quick tap as Go Home for OP3T
+            if (Utils.isOnePlus3TDevice() &&
+                    mPrefs.getString(PREF_KEY_FINGERPRINT_LAUNCHER_APP, null) == null) {
+                AppPickerPreference appp = (AppPickerPreference)
+                        findPreference(PREF_KEY_FINGERPRINT_LAUNCHER_APP);
+                appp.setValue(GoHomeShortcut.ACTION_DEFAULT_URI);
+                Intent intent = new Intent(ACTION_FPL_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_FPL_APP, appp.getValue());
+                getActivity().sendBroadcast(intent);
             }
         }
 

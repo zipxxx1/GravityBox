@@ -133,6 +133,9 @@ public class ShortcutActivity extends ListActivity {
         if (mAllowUnlockAction) {
             list.add(new UnlockShortcut(mContext));
         }
+        if (!mLaunchesFromLockscreen) {
+            list.add(new GoHomeShortcut(mContext));
+        }
         list.add(new ShowPowerMenuShortcut(mContext));
         if (!mLaunchesFromLockscreen) {
             list.add(new ExpandNotificationsShortcut(mContext));

@@ -108,6 +108,7 @@ public class ModHwKeys {
     public static final String EXTRA_SHOW_TOUCHES = "showTouches";
     public static final String ACTION_UPDATE_WIFI_CONFIG = "gravitybox.intent.action.UPDATE_WIFI_CONFIG";
     public static final String EXTRA_WIFI_CONFIG_LIST = "wifiConfigList";
+    public static final String ACTION_GO_HOME = "gravitybox.intent.action.GO_HOME";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
     public static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
@@ -403,6 +404,8 @@ public class ModHwKeys {
                 ArrayList<WifiConfiguration> wcl =
                         intent.getParcelableArrayListExtra(EXTRA_WIFI_CONFIG_LIST);
                 updateWifiConfig(wcl, (ResultReceiver)intent.getParcelableExtra("receiver"));
+            } else if (action.equals(ACTION_GO_HOME)) {
+                injectKey(KeyEvent.KEYCODE_HOME);
             }
         }
     };
@@ -982,6 +985,7 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_TOGGLE_AUTO_BRIGHTNESS);
             intentFilter.addAction(ACTION_TOGGLE_SHOW_TOUCHES);
             intentFilter.addAction(ACTION_UPDATE_WIFI_CONFIG);
+            intentFilter.addAction(ACTION_GO_HOME);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
