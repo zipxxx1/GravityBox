@@ -1794,6 +1794,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 if (p != null) ps.removePreference(p);
                 p = findPreference(PREF_KEY_NAVBAR_SWAP_KEYS);
                 if (p != null) mPrefCatNavbarKeys.removePreference(p);
+                mPrefCatPower.removePreference(mPrefCatPowerMenu);
             }
 
             // Remove fingerprint related preferences
