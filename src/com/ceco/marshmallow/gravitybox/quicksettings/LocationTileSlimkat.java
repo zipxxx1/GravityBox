@@ -75,7 +75,8 @@ public class LocationTileSlimkat extends QsTile {
 
     @Override
     public void initPreferences() {
-        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCATION_TILE_QUICK_MODE, false);
+        mQuickMode = Utils.isOnePlus3TDevice(true) ? true :
+                mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCATION_TILE_QUICK_MODE, false);
 
         super.initPreferences();
     }
@@ -271,7 +272,7 @@ public class LocationTileSlimkat extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (supportsDualTargets()) {
+        if (supportsDualTargets() || Utils.isOnePlus3TDevice(true)) {
             startSettingsActivity(LOCATION_SETTINGS_INTENT);
         } else if (mQuickMode) {
             showDetail(true);

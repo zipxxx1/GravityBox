@@ -1,5 +1,7 @@
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import com.ceco.marshmallow.gravitybox.Utils;
+
 import android.content.ComponentName;
 import android.content.Intent;
 import de.robv.android.xposed.XC_MethodHook;
@@ -44,6 +46,9 @@ public class HotspotTile extends AospTile {
     }
 
     private void createHooks() {
+        if (Utils.isOnePlus3TDevice(true))
+            return;
+
         try {
             mLongClickHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                     mContext.getClassLoader(), "handleLongClick", new XC_MethodHook() {

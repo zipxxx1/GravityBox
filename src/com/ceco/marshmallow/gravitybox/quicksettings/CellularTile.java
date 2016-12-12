@@ -4,6 +4,7 @@ import com.ceco.marshmallow.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.PhoneWrapper;
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.Utils;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
@@ -106,9 +107,11 @@ public class CellularTile extends AospTile {
     protected void initPreferences() {
         super.initPreferences();
 
-        mDataOffIconEnabled = mPrefs.getBoolean(
+        mDataOffIconEnabled = !Utils.isOnePlus3TDevice(true) &&
+                mPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_CELL_TILE_DATA_OFF_ICON, false);
-        mDataToggle = DataToggle.valueOf(mPrefs.getString(
+        mDataToggle = Utils.isOnePlus3TDevice(true) ? DataToggle.valueOf("DISABLED") :
+                DataToggle.valueOf(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_CELL_TILE_DATA_TOGGLE, "DISABLED"));
     }
 
@@ -137,7 +140,7 @@ public class CellularTile extends AospTile {
     public void onCreateTileView(View tileView) throws Throwable {
         super.onCreateTileView(tileView);
 
-        if (isPrimary() && hasField(tileView, "mIconFrame")) {
+        if (isPrimary() && hasField(tileView, "mIconFrame") && !Utils.isOnePlus3TDevice(true)) {
             mDataOffView = new ImageView(mContext);
             mDataOffView.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_mobile_data_off));
             mDataOffView.setVisibility(View.GONE);
@@ -220,6 +223,9 @@ public class CellularTile extends AospTile {
 
     @Override
     protected boolean onBeforeHandleClick() {
+        if (Utils.isOnePlus3TDevice(true))
+            return false;
+
         if (mClickHookBlocked) {
             mClickHookBlocked = false;
             return false;

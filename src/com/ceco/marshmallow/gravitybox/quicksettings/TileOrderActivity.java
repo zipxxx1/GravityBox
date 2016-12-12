@@ -123,10 +123,11 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             miSecured.setEnabled(!locked && !"gb_tile_lock_screen".equals(key));
         }
         private boolean supportsDualMode() {
-            return "aosp_tile_cell".equals(key) ||
+            return !Utils.isOnePlus3TDevice(true) &&
+                    ("aosp_tile_cell".equals(key) ||
                     "aosp_tile_wifi".equals(key) ||
                     "aosp_tile_bluetooth".equals(key) ||
-                    "gb_tile_gps_slimkat".equals(key);
+                    "gb_tile_gps_slimkat".equals(key));
         }
     }
 
@@ -264,6 +265,11 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         if (key.equals("aosp_tile_hotspot") && Utils.isXperiaDevice())
             return false;
         if (key.startsWith("moto_tile") && !Utils.isMotoXtDevice())
+            return false;
+        if (key.startsWith("op3t_tile") && !Utils.isOnePlus3TDevice(true))
+            return false;
+        if ((key.equals("gb_tile_battery") || key.equals("aosp_tile_dnd")) && 
+                Utils.isOnePlus3TDevice(true))
             return false;
 
         return true;

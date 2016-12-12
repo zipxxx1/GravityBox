@@ -187,6 +187,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_STATUSBAR_QS = "pref_cat_statusbar_qs";
     public static final String PREF_CAT_KEY_QS_TILE_SETTINGS = "pref_cat_qs_tile_settings";
     public static final String PREF_CAT_KEY_QS_NM_TILE_SETTINGS = "pref_cat_qs_nm_tile_settings";
+    public static final String PREF_CAT_KEY_QS_DND_TILE_SETTINGS = "pref_cat_qs_dnd_tile";
+    public static final String PREF_CAT_KEY_QS_LOCATION_TILE_SETTINGS = "pref_cat_qs_location_tile";
+    public static final String PREF_CAT_KEY_QS_RM_TILE_SETTINGS = "pref_cat_qs_rm_tile";
+    public static final String PREF_CAT_KEY_QS_SA_TILE_SETTINGS = "pref_cat_qs_sa_tile";
     public static final String PREF_CAT_KEY_STATUSBAR_COLORS = "pref_cat_statusbar_colors";
     public static final String PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE = "pref_statusbar_icon_color_enable";
     public static final String PREF_KEY_STATUSBAR_ICON_COLOR = "pref_statusbar_icon_color";
@@ -1796,6 +1800,31 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 p = findPreference(PREF_KEY_NAVBAR_SWAP_KEYS);
                 if (p != null) mPrefCatNavbarKeys.removePreference(p);
                 mPrefCatPower.removePreference(mPrefCatPowerMenu);
+                p = findPreference(PREF_CAT_KEY_BATTERY_TILE);
+                if (p != null) mPrefCatQsTileSettings.removePreference(p);
+                mPrefCatQsTileSettings.removePreference(mPrefCatCellTile);
+                p = findPreference(PREF_CAT_KEY_QS_DND_TILE_SETTINGS);
+                if (p != null) mPrefCatQsTileSettings.removePreference(p);
+                p = findPreference(PREF_CAT_KEY_QS_LOCATION_TILE_SETTINGS);
+                if (p != null) mPrefCatQsTileSettings.removePreference(p);
+                p = findPreference(PREF_KEY_NM_TILE_QUICK_MODE);
+                if (p != null) mPrefCatQsNmTileSettings.removePreference(p);
+                ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_RM_TILE_SETTINGS);
+                p = findPreference(PREF_KEY_RINGER_MODE_TILE_QUICK_MODE);
+                if (p != null) ps.removePreference(p);
+                ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_SA_TILE_SETTINGS);
+                p = findPreference(PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE);
+                if (p != null) ps.removePreference(p);
+                p = findPreference(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW);
+                if (p != null) mPrefCatStatusbarQs.removePreference(p);
+                p = findPreference(PREF_KEY_QS_SCALE_CORRECTION);
+                if (p != null) mPrefCatStatusbarQs.removePreference(p);
+                p = findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
+                if (p != null) mPrefCatStatusbarQs.removePreference(p);
+                p = findPreference(PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS);
+                if (p != null) mPrefCatStatusbarQs.removePreference(p);
+                p = findPreference(PREF_KEY_QS_BRIGHTNESS_ICON);
+                if (p != null) mPrefCatStatusbarQs.removePreference(p);
             }
 
             // Remove fingerprint related preferences
@@ -2414,7 +2443,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_CELL_TILE_DATA_TOGGLE)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_CELL_TILE_DATA_TOGGLE);
-                p.setSummary(p.getEntry());
+                if (p != null) p.setSummary(p.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_IMPRINT_MODE)) {
@@ -2431,9 +2460,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_DND_TILE_DURATION_MODE)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_DND_TILE_DURATION_MODE);
-                p.setSummary(p.getEntry());
-                Preference dp = findPreference(PREF_KEY_DND_TILE_DURATION);
-                dp.setEnabled(p.isEnabled() && "CUSTOM".equals(p.getValue()));
+                if (p != null) {
+                    p.setSummary(p.getEntry());
+                    Preference dp = findPreference(PREF_KEY_DND_TILE_DURATION);
+                    dp.setEnabled(p.isEnabled() && "CUSTOM".equals(p.getValue()));
+                }
             }
 
             if (key == null || key.equals(PREF_KEY_IMPRINT_VIBE_DISABLE)) {

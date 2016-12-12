@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModQsTiles;
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.annotation.SuppressLint;
@@ -132,7 +133,8 @@ public class StayAwakeTile extends QsTile {
         if (DEBUG) log(getKey() + ": initPreferences: modes=" + modes);
         updateSettings(modes);
 
-        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE, false);
+        mQuickMode = Utils.isOnePlus3TDevice(true) ? true :
+                mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE, false);
         mAutoReset = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_AUTO_RESET, false);
     }
 

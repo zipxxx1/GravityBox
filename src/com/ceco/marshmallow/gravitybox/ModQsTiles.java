@@ -9,7 +9,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.ceco.marshmallow.gravitybox.quicksettings.AospTile;
+import com.ceco.marshmallow.gravitybox.quicksettings.OnePlus3TTile;
 import com.ceco.marshmallow.gravitybox.quicksettings.QsPanel;
+import com.ceco.marshmallow.gravitybox.quicksettings.QsPanelQuick;
 import com.ceco.marshmallow.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.marshmallow.gravitybox.quicksettings.QsTile;
 import com.ceco.marshmallow.gravitybox.quicksettings.QsTileEventDistributor;
@@ -72,6 +74,8 @@ public class ModQsTiles {
     private static QsTileEventDistributor mEventDistributor;
     private static QsQuickPulldownHandler mQuickPulldownHandler;
     private static QsPanel mQsPanel;
+    private static QsPanelQuick mQsPanelQuick;
+    private static Map<String,Object> mTiles = new HashMap<>();
 
     public static void initResources(final InitPackageResourcesParam resparam) {
         XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
@@ -90,20 +94,27 @@ public class ModQsTiles {
 
             Class<?> classTileHost = XposedHelpers.findClass(CLASS_TILE_HOST, classLoader);
             mQsPanel = new QsPanel(prefs, classLoader);
-            
+            if (Utils.isOnePlus3TDevice(true)) {
+                mQsPanelQuick = new QsPanelQuick(prefs, classLoader);
+            }
+
             XposedHelpers.findAndHookMethod(classTileHost, "onTuningChanged",
                     String.class, String.class, new XC_MethodHook() {
                 @SuppressWarnings("unchecked")
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (!TILES_SETTING.equals(param.args[0])) return;
+                    if (Utils.isOnePlus3TDevice(true)) {
+                        param.args[1] = OnePlus3TTile.ALL_TILES;
+                    }
 
                     if (mEventDistributor != null) {
+                        for (Object tile : mTiles.values()) {
+                            XposedHelpers.callMethod(tile, "handleDestroy");
+                        }
+                        mTiles.clear();
                         Map<String, Object> tileMap = (Map<String, Object>)
                                 XposedHelpers.getObjectField(param.thisObject, "mTiles");
-                        for (Entry<String,Object> entry : tileMap.entrySet()) {
-                            XposedHelpers.callMethod(entry.getValue(), "handleDestroy");
-                        }
                         tileMap.clear();
                         ((List<?>)XposedHelpers.getObjectField(param.thisObject, "mTileSpecs")).clear();
                     }
@@ -129,15 +140,16 @@ public class ModQsTiles {
                         AospTile aospTile = AospTile.create(param.thisObject, entry.getValue(), 
                                 entry.getKey(), prefs, mEventDistributor);
                         if (aospTile != null) {
+                            mTiles.put(aospTile.getKey(), aospTile.getTile());
                             gbTileMap.put(aospTile.getKey(), aospTile);
                         }
                     }
 
                     // prepare GB tiles
                     for (String key : GB_TILE_KEYS) {
-                        QsTile tile = QsTile.create(param.thisObject, key, prefs,
-                                mEventDistributor);
+                        QsTile tile = QsTile.create(param.thisObject, key, prefs, mEventDistributor);
                         if (tile != null) {
+                            mTiles.put(key, tile.getTile());
                             gbTileMap.put(key, tile);
                         }
                     }
@@ -186,9 +198,16 @@ public class ModQsTiles {
                     tileMap.clear();
                     tileMap.putAll(orderedMap);
 
-                    Object cb = XposedHelpers.getObjectField(param.thisObject, "mCallback");
-                    if (cb != null) {
-                        XposedHelpers.callMethod(cb, "onTilesChanged");
+                    if (Utils.isOnePlus3TDevice(true)) {
+                        List<?> cbs = (List<?>) XposedHelpers.getObjectField(param.thisObject, "mCallbacks");
+                        for (int i = 0; i < cbs.size(); i++) {
+                            XposedHelpers.callMethod(cbs.get(i), "onTilesChanged");
+                        }
+                    } else {
+                        Object cb = XposedHelpers.getObjectField(param.thisObject, "mCallback");
+                        if (cb != null) {
+                            XposedHelpers.callMethod(cb, "onTilesChanged");
+                        }
                     }
 
                     if (DEBUG) log("Tiles created");

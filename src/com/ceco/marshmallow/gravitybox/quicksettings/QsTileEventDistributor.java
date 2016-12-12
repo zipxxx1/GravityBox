@@ -192,6 +192,29 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
+            if (Utils.isOnePlus3TDevice(true)) {
+                XposedHelpers.findAndHookMethod(BaseTile.CLASS_RESOURCE_ICON, cl,
+                        "getInvisibleDrawable", Context.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        final QsEventListener l = mListeners.get(XposedHelpers
+                                .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                        if (l instanceof QsTile) {
+                            param.setResult(l.getResourceIconDrawable());
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl,
+                        "handleStateChanged", BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        boolean visible = XposedHelpers.getBooleanField(param.args[0], "visible");
+                        ((View)param.thisObject).setVisibility(visible ? View.VISIBLE : View.GONE);
+                    }
+                });
+            }
+
             XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "createTileView",
                     Context.class, new XC_MethodHook() {
                 @Override
@@ -265,7 +288,9 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 try {
                     XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "hasDualTargetsDetails", dtHook);
                 } catch (Throwable t2) {
-                    log("Your system does not seem to support standard AOSP tile dual mode");
+                    if (!Utils.isOnePlus3TDevice(true)) {
+                        log("Your system does not seem to support standard AOSP tile dual mode");
+                    }
                 }
             }
 
@@ -282,31 +307,33 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "recreateLabel",
-                    new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                    if (l != null) {
-                        l.onRecreateLabel((View)param.thisObject);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "createIcon",
-                    new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(mCreateTileViewTileKey);
-                    if (l != null) {
-                        View icon = l.onCreateIcon();
-                        if (icon != null) {
-                            param.setResult(icon);
+            if (!Utils.isOnePlus3TDevice(true)) {
+                XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "recreateLabel",
+                        new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        final QsEventListener l = mListeners.get(XposedHelpers
+                                .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                        if (l != null) {
+                            l.onRecreateLabel((View)param.thisObject);
                         }
                     }
-                }
-            });
+                });
+
+                XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "createIcon",
+                        new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        final QsEventListener l = mListeners.get(mCreateTileViewTileKey);
+                        if (l != null) {
+                            View icon = l.onCreateIcon();
+                            if (icon != null) {
+                                param.setResult(icon);
+                            }
+                        }
+                    }
+                });
+            }
 
             XC_MethodHook sdHook = new XC_MethodHook() {
                 @Override
@@ -326,7 +353,9 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                     XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "setDual",
                             boolean.class, boolean.class, sdHook);
                 } catch (Throwable t2) {
-                    log("Your system does not seem to support standard AOSP tile dual mode");
+                    if (!Utils.isOnePlus3TDevice(true)) {
+                        log("Your system does not seem to support standard AOSP tile dual mode");
+                    }
                 }
             }
 
@@ -344,8 +373,10 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 XposedHelpers.findAndHookMethod(hostTileClassInfo.className, cl,
                         "handleLongClick", longClickHook);
             }
-            XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl,
-                    "handleLongClick", longClickHook);
+            if (!Utils.isOnePlus3TDevice(true)) {
+                XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl,
+                        "handleLongClick", longClickHook);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

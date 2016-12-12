@@ -1,6 +1,9 @@
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
 import de.robv.android.xposed.XC_MethodHook.Unhook;
+
+import com.ceco.marshmallow.gravitybox.Utils;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -36,6 +39,9 @@ public class ColorInversionTile extends AospTile {
     }
 
     private void createHooks() {
+        if (Utils.isOnePlus3TDevice(true))
+            return;
+
         try {
             mLongClickHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                     mContext.getClassLoader(), "handleLongClick", new XC_MethodHook() {

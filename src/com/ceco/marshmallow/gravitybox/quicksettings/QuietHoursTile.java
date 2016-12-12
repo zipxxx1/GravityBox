@@ -83,25 +83,25 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        if (mQh == null) return;
-
-        switch (mQh.mode) {
-            case ON: 
-                mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_on);
-                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_on);
-                break;
-            case OFF:
-                mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_off);
-                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_off);
-                break;
-            case AUTO:
-                mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_auto);
-                mState.icon = mQh.quietHoursActive() ?
-                        mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_on) : 
-                            mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_off);
-                break;
+        if (mQh != null) {
+            switch (mQh.mode) {
+                case ON: 
+                    mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_on);
+                    mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_on);
+                    break;
+                case OFF:
+                    mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_off);
+                    mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_off);
+                    break;
+                case AUTO:
+                    mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_auto);
+                    mState.icon = mQh.quietHoursActive() ?
+                            mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_on) : 
+                                mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_off);
+                    break;
+            }
+            mState.visible = shouldShow();
         }
-        mState.visible = shouldShow();
 
         super.handleUpdateState(state, arg);
     }

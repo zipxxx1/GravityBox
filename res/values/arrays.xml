@@ -146,6 +146,12 @@
         <item>@string/qs_tile_xperia_detectusbdevice</item>
         <!-- Moto -->
         <item>@string/qs_tile_moto_data</item>
+        <!-- OP3T -->
+        <item>@string/qs_tile_op3t_night_mode</item>
+        <item>@string/qs_tile_op3t_buttons</item>
+        <item>@string/qs_tile_op3t_vpn</item>
+        <item>@string/qs_tile_op3t_dataswitch</item>
+        <item>@string/qs_tile_op3t_powersaving</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
@@ -204,6 +210,12 @@
         <item>xperia_tile_detectusbdevice</item>
         <!-- Moto -->
         <item>moto_tile_data</item>
+        <!-- OP3T -->
+        <item>op3t_tile_night</item>
+        <item>op3t_tile_buttons</item>
+        <item>op3t_tile_vpn</item>
+        <item>op3t_tile_dataswitch</item>
+        <item>op3t_tile_powersaving</item>
     </string-array>
 
     <string-array name="qs_tile_default_values" translatable="false">

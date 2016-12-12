@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
+import com.ceco.marshmallow.gravitybox.Utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -146,7 +147,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                     !hasNotifications(o) : !hasClearableNotifications(o);
         }
 
-        if (XposedHelpers.getBooleanField(o, "mQsExpanded")) {
+        if (XposedHelpers.getBooleanField(o, "mQsExpanded") && !Utils.isOnePlus3TDevice(true)) {
             Object scv = XposedHelpers.getObjectField(o, "mScrollView");
             return ((boolean)XposedHelpers.callMethod(scv, "isScrolledToBottom") && yDiff < 0) && 
                     (boolean)XposedHelpers.callMethod(o, "isInQsArea", x, y);

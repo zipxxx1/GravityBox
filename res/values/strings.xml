@@ -2064,4 +2064,11 @@
     <string name="qs_panel_toggle">Toggle QuickSettings panel</string>
     <string name="qs_panel_collapse">Collapse QuickSettings panel</string>
 
+    <!-- QS: OP3T tiles -->
+    <string name="qs_tile_op3t_night_mode">OP3T Night mode</string>
+    <string name="qs_tile_op3t_buttons">OP3T Buttons</string>
+    <string name="qs_tile_op3t_vpn">OP3T VPN</string>
+    <string name="qs_tile_op3t_dataswitch">OP3T Data switch</string>
+    <string name="qs_tile_op3t_powersaving">OP3T Power saving</string>
+
 </resources>

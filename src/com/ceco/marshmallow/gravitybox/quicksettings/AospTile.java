@@ -81,6 +81,12 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new MotoTile(host, aospKey, tile, prefs, eventDistributor);
         }
 
+        // OnePlus3T
+        if (Utils.isOnePlus3TDevice(true) &&
+            OnePlus3TTile.OP3T_KEYS.contains(aospKey)) {
+            return new OnePlus3TTile(host, aospKey, tile, prefs, eventDistributor);
+        }
+
         log("Unknown stock tile: key=" + aospKey + "; class=" +
                 (tile == null ? "null" : tile.getClass().getName()));
 

@@ -5,6 +5,9 @@ import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+
+import com.ceco.marshmallow.gravitybox.Utils;
+
 import android.content.Context;
 import android.provider.Settings;
 import android.view.View;
@@ -74,7 +77,9 @@ public class WifiTile extends AospTile {
                 mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                         mContext.getClassLoader(), "hasDualTargetsDetails", dtHook);
             } catch (Throwable t2) {
-                log(getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
+                if (!Utils.isOnePlus3TDevice(true)) {
+                    log(getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
+                }
             }
         }
     }

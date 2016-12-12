@@ -1,5 +1,7 @@
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import com.ceco.marshmallow.gravitybox.Utils;
+
 import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -56,7 +58,9 @@ public class BluetoothTile extends AospTile {
                 mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                         mContext.getClassLoader(), "hasDualTargetsDetails", dtHook);
             } catch (Throwable t2) {
-                log(getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
+                if (!Utils.isOnePlus3TDevice(true)) {
+                    log(getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
+                }
             }
         }
     }

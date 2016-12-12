@@ -68,6 +68,7 @@ public class PhoneWrapper {
 
     private static Class<?> mClsPhoneFactory;
     private static Class<?> mPhoneBaseClass;
+    private static Class<?> mPhoneProxyClass;
     private static Class<?> mSystemProperties;
     private static Context mContext;
     private static int mSimSlot = 0;
@@ -127,6 +128,14 @@ public class PhoneWrapper {
         return XposedHelpers.findClass("com.android.internal.telephony.PhoneBase", null);
     }
 
+    private static Class<?> getPhoneProxyClass() {
+        try {
+            return XposedHelpers.findClass("com.android.internal.telephony.PhoneProxy", null);
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
     private static Class<?> getTelephonyManagerClass() {
         return XposedHelpers.findClass("android.telephony.TelephonyManager", null);
     }
@@ -157,6 +166,7 @@ public class PhoneWrapper {
         try {
             mClsPhoneFactory = getPhoneFactoryClass();
             mPhoneBaseClass = getPhoneBaseClass();
+            mPhoneProxyClass = getPhoneProxyClass();
             mSystemProperties = XposedHelpers.findClass("android.os.SystemProperties", null);
 
             mSimSlot = 0;
@@ -178,8 +188,7 @@ public class PhoneWrapper {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(mPhoneBaseClass, "setPreferredNetworkType",
-                    int.class, Message.class, new XC_MethodHook() {
+            XC_MethodHook spntHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     int phoneId = XposedHelpers.getIntField(param.thisObject, "mPhoneId");
@@ -187,7 +196,13 @@ public class PhoneWrapper {
                             "; phoneId=" + phoneId);
                     broadcastCurrentNetworkType(phoneId, (int)param.args[0], null);
                 }
-            });
+            };
+            XposedHelpers.findAndHookMethod(mPhoneBaseClass, "setPreferredNetworkType",
+                    int.class, Message.class, spntHook);
+            if (mPhoneProxyClass != null) {
+                XposedHelpers.findAndHookMethod(mPhoneProxyClass, "setPreferredNetworkType",
+                        int.class, Message.class, spntHook);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

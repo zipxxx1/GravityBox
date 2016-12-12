@@ -60,8 +60,10 @@ public class QsPanel implements BroadcastSubReceiver {
     public QsPanel(XSharedPreferences prefs, ClassLoader classLoader) {
         mPrefs = prefs;
 
-        initPreferences();
-        createHooks(classLoader);
+        if (!Utils.isOnePlus3TDevice(true)) {
+            initPreferences();
+            createHooks(classLoader);
+        }
         if (DEBUG) log("QsPanel wrapper created");
     }
 
@@ -118,6 +120,9 @@ public class QsPanel implements BroadcastSubReceiver {
     }
 
     public static float getScalingFactor(int numColumns, int correctionPercent) {
+        if (Utils.isOnePlus3TDevice(true))
+            return 1;
+
         float correction = (float)correctionPercent / 100f;
         switch (numColumns) {
             default:

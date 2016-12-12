@@ -163,7 +163,7 @@ public abstract class QsTile extends BaseTile {
     public static class State {
         public boolean visible;
         public Drawable icon;
-        public String label;
+        public String label = "";
         public boolean autoMirrorDrawable = true;
 
         private String mKey;

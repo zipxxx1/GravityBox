@@ -26,6 +26,7 @@ import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModQsTiles;
 import com.ceco.marshmallow.gravitybox.PhoneWrapper;
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.annotation.SuppressLint;
@@ -84,7 +85,6 @@ public class NetworkModeTile extends QsTile {
     private boolean mIsMsim;
     private int mSimSlot = 0;
     private boolean mIsReceiving;
-    private boolean mInitialState;
     private List<NetworkMode> mModeList = new ArrayList<>();
     private Object mDetailAdapter;
     private boolean mQuickMode;
@@ -94,7 +94,6 @@ public class NetworkModeTile extends QsTile {
         super(host, key, prefs, eventDistributor);
 
         mIsMsim = PhoneWrapper.hasMsimSupport();
-        mInitialState = true;
     }
 
     @Override
@@ -113,7 +112,8 @@ public class NetworkModeTile extends QsTile {
         if (DEBUG) log(getKey() + ": onPreferenceInitialize: modes=" + Arrays.toString(modes));
         setEnabledModes(modes);
 
-        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_NM_TILE_QUICK_MODE, false);
+        mQuickMode = Utils.isOnePlus3TDevice(true) ? true :
+                mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_NM_TILE_QUICK_MODE, false);
 
         if (mIsMsim) {
             try {
@@ -198,16 +198,15 @@ public class NetworkModeTile extends QsTile {
     public void setListening(boolean listening) {
         if (DEBUG) log(getKey() + ": setListening(" + listening + ")");
         if (listening && mEnabled) {
+            if (mIsReceiving)
+                return;
             if (DEBUG) log(getKey() + ": mNetworkType=" + mNetworkType + "; DefaultNetworkType=" + 
                     PhoneWrapper.getDefaultNetworkType());
             mIsReceiving = true;
-            if (mInitialState) {
-                mInitialState = false;
-                Intent intent = new Intent(PhoneWrapper.ACTION_GET_CURRENT_NETWORK_TYPE);
-                intent.putExtra(PhoneWrapper.EXTRA_PHONE_ID, mSimSlot);
-                intent.putExtra(PhoneWrapper.EXTRA_RECEIVER_TAG, TAG);
-                mContext.sendBroadcast(intent);
-            }
+            Intent intent = new Intent(PhoneWrapper.ACTION_GET_CURRENT_NETWORK_TYPE);
+            intent.putExtra(PhoneWrapper.EXTRA_PHONE_ID, mSimSlot);
+            intent.putExtra(PhoneWrapper.EXTRA_RECEIVER_TAG, TAG);
+            mContext.sendBroadcast(intent);
         } else {
             mIsReceiving = false;
         }
@@ -280,7 +279,7 @@ public class NetworkModeTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (mQuickMode) {
+        if (mQuickMode && !Utils.isOnePlus3TDevice(true)) {
             showDetail(true);
         } else if (mIsMsim) {
             Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
