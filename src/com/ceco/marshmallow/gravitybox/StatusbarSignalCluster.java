@@ -315,7 +315,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                                 boolean.class, new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                log("setNoSIms called");
                                 param.args[0] = false;
                             }
                         });
