@@ -1,3 +1,12 @@
+Changelog 6.3.0 - 06/11/2016
+--------------------------------------
+- Adjusted for compatibility with OxygenOS 3.5 (OnePlus 3T)
+--- visit support thread at XDA for more info
+- Fixed action for expanding notification panel not working on some devices
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated German translations (thanks to Basti1512)
+
 Changelog 6.2.1 - 06/11/2016
 --------------------------------------
 - Fingerprint launcher extended:
