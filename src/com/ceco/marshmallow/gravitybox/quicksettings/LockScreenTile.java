@@ -42,9 +42,11 @@ public class LockScreenTile extends QsTile {
     public void handleUpdateState(Object state, Object arg) {
         mState.visible = true;
         if (mKgMonitor.isKeyguardDisabled()) {
+            mState.booleanValue = false;
             mState.label = mGbContext.getString(R.string.quick_settings_lock_screen_off);
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_lock_screen_off);
         } else {
+            mState.booleanValue = true;
             mState.label = mGbContext.getString(R.string.quick_settings_lock_screen_on);
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_lock_screen_on);
         }

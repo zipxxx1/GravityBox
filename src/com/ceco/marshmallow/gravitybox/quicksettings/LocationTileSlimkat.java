@@ -237,6 +237,7 @@ public class LocationTileSlimkat extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.booleanValue = true;
         mState.visible = true;
         int locationMode = getLocationMode();
         switch (locationMode) {
@@ -251,6 +252,7 @@ public class LocationTileSlimkat extends QsTile {
                 break;
             case Settings.Secure.LOCATION_MODE_OFF:
                 mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_location_off);
+                mState.booleanValue = false;
                 break;
         }
         mState.label = getModeLabel(locationMode);

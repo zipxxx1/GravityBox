@@ -86,6 +86,7 @@ public class SyncTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.visible = true;
+        mState.booleanValue = mSyncState;
         if (mSyncState) {
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_sync_on);
             mState.label = mGbContext.getString(R.string.quick_settings_sync_on);

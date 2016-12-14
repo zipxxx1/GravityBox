@@ -100,6 +100,7 @@ public class ExpandedDesktopTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.visible = true;
+        mState.booleanValue = mExpanded;
         if (mExpanded) {
             mState.label = mGbContext.getString(R.string.quick_settings_expanded_desktop_expanded);
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_expanded_desktop_on);

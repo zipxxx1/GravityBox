@@ -165,6 +165,7 @@ public abstract class QsTile extends BaseTile {
         public Drawable icon;
         public String label = "";
         public boolean autoMirrorDrawable = true;
+        public boolean booleanValue = true;
 
         private String mKey;
 
@@ -177,6 +178,7 @@ public abstract class QsTile extends BaseTile {
             XposedHelpers.setObjectField(state, "icon", getResourceIcon());
             XposedHelpers.setObjectField(state, "label", label);
             XposedHelpers.setBooleanField(state, "autoMirrorDrawable", autoMirrorDrawable);
+            XposedHelpers.setBooleanField(state, "value", booleanValue);
         }
 
         private Object getResourceIcon() {

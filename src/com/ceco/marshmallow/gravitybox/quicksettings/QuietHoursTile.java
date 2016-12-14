@@ -86,16 +86,19 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
         if (mQh != null) {
             switch (mQh.mode) {
                 case ON: 
+                    mState.booleanValue = true;
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_on);
                     mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_on);
                     break;
                 case OFF:
+                    mState.booleanValue = false;
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_off);
                     mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_off);
                     break;
                 case AUTO:
+                    mState.booleanValue = mQh.quietHoursActive();
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_auto);
-                    mState.icon = mQh.quietHoursActive() ?
+                    mState.icon = mState.booleanValue ?
                             mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_on) : 
                                 mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_off);
                     break;

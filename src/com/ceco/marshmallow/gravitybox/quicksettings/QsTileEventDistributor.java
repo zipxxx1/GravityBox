@@ -1,5 +1,6 @@
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -138,9 +139,22 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         try {
             if (DEBUG) log("Creating hooks");
             mContext = (Context) XposedHelpers.callMethod(mHost, "getContext");
-            ClassLoader cl = mContext.getClassLoader();
+            final ClassLoader cl = mContext.getClassLoader();
 
             final HostTileClassInfo hostTileClassInfo = QsTile.getHostTileClassInfo(cl);
+
+            if (hostTileClassInfo.className.endsWith("IntentTile")) {
+                XposedHelpers.findAndHookMethod(hostTileClassInfo.className, cl, "newTileState",
+                        new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        Constructor<?> c = XposedHelpers.findConstructorExact(
+                                "com.android.systemui.qs.QSTile.BooleanState", cl);
+                        param.setResult(c.newInstance());
+                    }
+                });
+            }
+
             XposedHelpers.findAndHookMethod(hostTileClassInfo.className, cl, "handleUpdateState",
                     hostTileClassInfo.stateClassName, Object.class, new XC_MethodHook() {
                 @Override

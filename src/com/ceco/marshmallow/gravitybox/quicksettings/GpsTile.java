@@ -96,6 +96,7 @@ public class GpsTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.visible = true;
+        mState.booleanValue = mGpsEnabled;
         if (mGpsEnabled) {
             mState.label = mGpsFixed ? mGbContext.getString(R.string.qs_tile_gps_locked) :
                     mGbContext.getString(R.string.qs_tile_gps_enabled);

@@ -111,8 +111,10 @@ public class UsbTetherTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.booleanValue = false;
         if (mUsbConnected) {
             if (mUsbTethered) {
+                mState.booleanValue = true;
                 mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_usb_tether_on);
                 mState.label = mGbContext.getString(R.string.quick_settings_usb_tether_on);
             } else {

@@ -122,8 +122,10 @@ public class NfcTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.visible = true;
+        mState.booleanValue = false;
         switch (mNfcState) {
         case ConnectivityServiceWrapper.NFC_STATE_ON:
+            mState.booleanValue = true;
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_nfc_on);
             mState.label = mGbContext.getString(R.string.quick_settings_nfc_on);
             break;
