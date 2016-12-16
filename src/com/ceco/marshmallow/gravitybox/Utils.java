@@ -283,7 +283,10 @@ public class Utils {
 
     public static boolean isOnePlus3TDevice(boolean checkAospFlag) {
         if (mIsOnePlus3TDevice == null) {
-            mIsOnePlus3TDevice = "ONEPLUS A3003".equals(Build.MODEL);
+            mIsOnePlus3TDevice = Build.DISPLAY != null && (
+                    Build.DISPLAY.startsWith("ONEPLUS A3000_28_") ||
+                    Build.DISPLAY.startsWith("ONEPLUS A3003_28_") ||
+                    Build.DISPLAY.startsWith("ONEPLUS A3010_28_"));
         }
         return (checkAospFlag ? (mIsOnePlus3TDevice && !isAospForced()) :
             mIsOnePlus3TDevice);
