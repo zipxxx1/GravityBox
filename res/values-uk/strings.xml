@@ -1547,6 +1547,7 @@
     <string name="quick_settings_compass_off">Компас вимк</string>
     <string name="quick_settings_compass_init">Ініціалізація&#8230;</string>
 
+
     <!-- Cardinal directions -->
     <string name="cd_north">Пн</string>
     <string name="cd_north_east">Пн-Сх</string>
@@ -1990,5 +1991,15 @@
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Показати повідомлення стану</string>
+
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Icon style</string>
+    <string name="ncki_icon_style1">6 крапок</string>
+    <string name="ncki_icon_style2">3 крапки</string>
+    <string name="ncki_icon_style3">Прозорий</string>
+    <string name="ncki_icon_style4">Інший</string>
+    <string name="pref_navbar_custom_key_image_title">Встановити зображення</string>
+    <string name="custom_image_success">Користувацьке зображення</string>
+    <string name="custom_image_failure">Помилка встановлення зображення</string>
 
 </resources>
