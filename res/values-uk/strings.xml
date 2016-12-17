@@ -684,6 +684,7 @@
     <string name="pref_hwkey_lockscreen_torch_title">Ліхтарик на екрані блокування</string>
     <string name="hwkey_ls_torch_disabled">Вимкнено</string>
     <string name="hwkey_ls_torch_home_longpress">При утриманні «Додому»</string>
+    <string name="hwkey_ls_torch_power_longpress">При утриманні «Живлення»</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Увімкнення швидких налаштувань\n(необхідне перезавантаження)</string>
@@ -2000,7 +2001,54 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Показати повідомлення стану</string>
 
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Стиль піктограми</string>
+    <string name="ncki_icon_style1">6 крапок</string>
+    <string name="ncki_icon_style2">3 крапки</string>
+    <string name="ncki_icon_style3">Прозорий</string>
+    <string name="ncki_icon_style4">Інший</string>
+    <string name="pref_navbar_custom_key_image_title">Встановити зображення</string>
+    <string name="custom_image_success">Користувацьке зображення</string>
+    <string name="custom_image_failure">Помилка встановлення зображення</string>
+
+    <!-- Key actions: allow volume rocker wake when music active -->
+    <string name="pref_volume_rocker_wake_allow_music_title">Дозволити пробудження при активній музиці</string>
+
+    <!-- Lockscreen: bottom actions -->
+    <string name="pref_lockscreen_bleft_action_title">Дія зліва знизу</string>
+    <string name="pref_lockscreen_bright_action_title">Дія зправа знизу</string>
+
+    <!-- Wireless charger plugged sound -->
+    <string name="pref_charger_plugged_sound_wireless_title">Звук бездротової зарядки</string>
+    <string name="stock_wireless_sound">Стоковий звук бездротової зарядки</string>
+
+    <!-- Dialer category -->
+    <string name="pref_cat_phone_dialer_title">Набір номеру</string>
+
+    <!-- QS: Brightness control -->
+    <string name="pref_qs_brightness_icon_title">Показати піктограму яскравості</string>
+    <string name="pref_qs_brightness_icon_summary">Показує піктограму з поточним режимом яскравості. 
+        Дотик перемикає стан адаптивної яскравості, утримування - відкриває налаштування.</string>
+
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">Ігнорувати оновлені сповіщення</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Активний екран не буде спрацьовувати при 
+        оновлені існуючих сповіщень</string>
+
+    <!-- UNC: LED: Ignore updated notifications -->
+    <string name="pref_lc_led_ignore_update_title">Ігнорувати оновлені сповіщення</string>
+    <string name="pref_lc_led_ignore_update_summary">Світлодіод не буде спрацьовувати при 
+        оновлені існуючих сповіщень</string>
+
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Розгорнути панель швидких налаштувань</string>
+
+    <!-- Action: toggle/expand/collapse notification panel -->
+    <string name="notification_panel_toggle">Перемкнути панель сповіщень</string>
+    <string name="notification_panel_collapse">Згорнути панель сповіщень</string>
+
+    <!-- Action: toggle/expand/collapse QS panel -->
+    <string name="qs_panel_toggle">Перемкнути панель швидких налаштувань</string>
+    <string name="qs_panel_collapse">Згорнути панель швидких налаштувань</string>
 
 </resources>
