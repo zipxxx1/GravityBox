@@ -12,6 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modifications copyright (C) 2016 Aire-One (Aire-One@xda ; Aire-One@github)
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -34,6 +36,9 @@
     <string name="low_battery_warning_popup">Тільки повідомлення</string>
     <string name="low_battery_warning_sound">Тільки звук</string>
     <string name="low_battery_warning_off">Не попереджати</string>
+    <string name="low_battery_warning_customsound">Користувацький звук (Тільки звук)</string>
+    <string name="low_battery_select_customsound_title">Користувацький звук низького заряду</string>
+    <string name="low_battery_select_customsound_summary">Необхідно обрати користувацький звук для попередження про низький заряд</string>
 
     <string name="reboot_required">Зміни набудуть чинності після перезавантаження</string>
 
@@ -1852,5 +1857,15 @@
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Показати повідомлення стану</string>
+
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Icon style</string>
+    <string name="ncki_icon_style1">6 крапок</string>
+    <string name="ncki_icon_style2">3 крапки</string>
+    <string name="ncki_icon_style3">Прозорий</string>
+    <string name="ncki_icon_style4">Інший</string>
+    <string name="pref_navbar_custom_key_image_title">Встановити зображення</string>
+    <string name="custom_image_success">Користувацьке зображення</string>
+    <string name="custom_image_failure">Помилка встановлення зображення</string>
 
 </resources>
