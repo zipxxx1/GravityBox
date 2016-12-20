@@ -54,6 +54,8 @@ import android.os.ResultReceiver;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.view.HapticFeedbackConstants;
+import android.view.InputDevice;
+import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 import android.widget.Toast;
@@ -163,6 +165,7 @@ public class ModHwKeys {
     private static PowerManager mPowerManager;
     private static Boolean mSupportLongPressPowerWhenNonInteractiveOrig;
     private static long mPostponeWakeUpOnPowerKeyUpEventTime = 0;
+    private static boolean mIsOnePlus3TDevice;
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui",
@@ -430,6 +433,7 @@ public class ModHwKeys {
     public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
+            mIsOnePlus3TDevice = Utils.isOnePlus3TDevice(true);
 
             Map<HwKeyTrigger, HwKeyAction> map = new HashMap<HwKeyTrigger, HwKeyAction>();
             map.put(HwKeyTrigger.MENU_SINGLETAP, new HwKeyAction(0, null));
@@ -549,7 +553,21 @@ public class ModHwKeys {
                     boolean isFromSystem = (event.getFlags() & KeyEvent.FLAG_FROM_SYSTEM) != 0;
                     Handler handler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
                     if (DEBUG) log("interceptKeyBeforeQueueing: keyCode=" + keyCode +
-                            "; action=" + event.getAction() + "; repeatCount=" + event.getRepeatCount());
+                            "; action=" + event.getAction() + "; repeatCount=" + event.getRepeatCount() +
+                            "; flags=0x" + Integer.toHexString(event.getFlags()) +
+                            "; source=" + event.getSource());
+
+                    if (event.getSource() == InputDevice.SOURCE_UNKNOWN) {
+                        // ignore unknow source events, e.g. synthetic events injected from GB itself
+                        if (DEBUG) log("interceptKeyBeforeQueueing: ignoring event from unknown source");
+                        if (mIsOnePlus3TDevice) {
+                            // mangle OP3T key event to allow pass-through and to avoid double-vibrations
+                            event = KeyEvent.changeFlags(event, event.getFlags() | KeyEvent.FLAG_VIRTUAL_HARD_KEY);
+                            event.setSource(InputDevice.SOURCE_KEYBOARD);
+                            param.args[0] = event;
+                        }
+                        return;
+                    }
 
                     if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
                         if (!down) {
@@ -664,16 +682,26 @@ public class ModHwKeys {
 
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if ((Boolean) XposedHelpers.callMethod(mPhoneWindowManager, "keyguardOn")) return;
+                    if ((Boolean) XposedHelpers.callMethod(mPhoneWindowManager, "keyguardOn"))
+                        return;
 
                     KeyEvent event = (KeyEvent) param.args[1];
                     int keyCode = event.getKeyCode();
                     boolean down = event.getAction() == KeyEvent.ACTION_DOWN;
                     boolean isFromSystem = (event.getFlags() & KeyEvent.FLAG_FROM_SYSTEM) != 0;
-                    Handler mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
                     if (DEBUG) log("interceptKeyBeforeDispatching: keyCode=" + keyCode +
                             "; isInjected=" + (((Integer)param.args[2] & 0x01000000) != 0) +
-                            "; fromSystem=" + isFromSystem);
+                            "; fromSystem=" + isFromSystem +
+                            "; flags=" + Integer.toHexString(event.getFlags()) +
+                            "; source=" + event.getSource());
+
+                    if (event.getSource() == InputDevice.SOURCE_UNKNOWN) {
+                        // ignore unknow source events, e.g. events injected from GB itself
+                        if (DEBUG) log("interceptKeyBeforeDispatching: ignoring event from unknown source");
+                        return;
+                    }
+
+                    Handler mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
 
                     if (keyCode == KeyEvent.KEYCODE_MENU && isFromSystem && !isTaskLocked() &&
                         (hasAction(HwKey.MENU) || !areHwKeysEnabled())) {
@@ -1099,7 +1127,7 @@ public class ModHwKeys {
             // for long-press action
             if (!mCustomKeyPressed) {
                 if (DEBUG) log("Custom key double tap timed out and key not pressed; injecting key");
-                injectKey(KeyEvent.KEYCODE_SOFT_LEFT);
+                performAction(HwKeyTrigger.CUSTOM_SINGLETAP);
             }
         }
     };
@@ -1472,12 +1500,15 @@ public class ModHwKeys {
                     final long eventTime = SystemClock.uptimeMillis();
                     final InputManager inputManager = (InputManager)
                             mContext.getSystemService(Context.INPUT_SERVICE);
+                    int flags = KeyEvent.FLAG_FROM_SYSTEM;
                     XposedHelpers.callMethod(inputManager, "injectInputEvent",
                             new KeyEvent(eventTime - 50, eventTime - 50, KeyEvent.ACTION_DOWN, 
-                                    keyCode, 0), 0);
+                                    keyCode, 0, 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags,
+                                    InputDevice.SOURCE_UNKNOWN), 0);
                     XposedHelpers.callMethod(inputManager, "injectInputEvent",
                             new KeyEvent(eventTime - 50, eventTime - 25, KeyEvent.ACTION_UP, 
-                                    keyCode, 0), 0);
+                                    keyCode, 0, 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags,
+                                    InputDevice.SOURCE_UNKNOWN), 0);
                 } catch (Throwable t) {
                         XposedBridge.log(t);
                 }

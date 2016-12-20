@@ -40,6 +40,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.view.HapticFeedbackConstants;
+import android.view.InputDevice;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -256,13 +257,13 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                     final InputManager inputManager = (InputManager)
                             XposedHelpers.callStaticMethod(InputManager.class, "getInstance");
 
-                    int flags = KeyEvent.FLAG_FROM_SYSTEM | KeyEvent.FLAG_VIRTUAL_HARD_KEY;
+                    int flags = KeyEvent.FLAG_FROM_SYSTEM;
                     XposedHelpers.callMethod(inputManager, "injectInputEvent",
                             new KeyEvent(eventTime - 50, eventTime - 50, KeyEvent.ACTION_DOWN, m.arg1, 0,
-                                    0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags), 0);
+                                    0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags, InputDevice.SOURCE_UNKNOWN), 0);
                     XposedHelpers.callMethod(inputManager, "injectInputEvent",
                             new KeyEvent(eventTime - 50, eventTime - 25, KeyEvent.ACTION_UP, m.arg1, 0,
-                                    0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags), 0);
+                                    0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags, InputDevice.SOURCE_UNKNOWN), 0);
 
                     break;
             }
