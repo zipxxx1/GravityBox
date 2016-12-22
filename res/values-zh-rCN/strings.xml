@@ -2063,5 +2063,12 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">切换快速设置面板</string>
     <string name="qs_panel_collapse">折叠快速设置面板</string>
+	
+    <!-- QS: OP3T tiles -->
+    <string name="qs_tile_op3t_night_mode">一加3T夜间模式</string>
+    <string name="qs_tile_op3t_buttons">一加3T按钮</string>
+    <string name="qs_tile_op3t_vpn">一加3T VPN</string>
+    <string name="qs_tile_op3t_dataswitch">一加3T数据开关</string>
+    <string name="qs_tile_op3t_powersaving">一加3T省电</string>
 
 </resources>
