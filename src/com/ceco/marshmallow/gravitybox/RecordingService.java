@@ -132,7 +132,7 @@ public class RecordingService extends Service {
             }
         }
         String fileName = "AUDIO_" + new SimpleDateFormat(
-                "yyyyMMdd_HHmmss", Locale.US).format(new Date()) + ".3gp";
+                "yyyyMMdd_HHmmss", Locale.US).format(new Date()) + ".mp4";
         return (outputDir.getAbsolutePath() + "/" + fileName);
     }
 
@@ -142,10 +142,10 @@ public class RecordingService extends Service {
         try {
             mRecorder = new MediaRecorder();
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
             mRecorder.setOutputFile(audioFileName);
             mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-            mRecorder.setAudioEncodingBitRate(16);
+            mRecorder.setAudioEncodingBitRate(96000);
             mRecorder.setAudioSamplingRate(mSamplingRate);
             mRecorder.setOnErrorListener(mOnErrorListener);
             mRecorder.prepare();
