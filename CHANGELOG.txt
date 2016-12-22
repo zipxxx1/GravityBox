@@ -1,3 +1,12 @@
+Changelog 6.3.1 - 22/12/2016
+--------------------------------------
+- OnePlus3T adjustments:
+--- improved identification of OP3T devices running OOS 3.5
+--- GravityBox tiles now follow display theme color accent
+--- Key actions: fixed double haptic-feedback on capacitive keys
+- Improved audio quality of QuickRecording tile
+- Updated Ukrainian translations (thanks to burunduk)
+
 Changelog 6.3.0 - 12/12/2016
 --------------------------------------
 - Adjusted for compatibility with OxygenOS 3.5 (OnePlus 3T)
