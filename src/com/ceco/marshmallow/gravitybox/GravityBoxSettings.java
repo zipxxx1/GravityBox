@@ -1785,8 +1785,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatDisplay.removePreference(mPrefPulseNotificationDelay);
             }
 
-            // Remove OnePlus3T preferences
-            if (Utils.isOnePlus3TDevice(true)) {
+            // Remove OxygenOS 3.5 preferences
+            if (Utils.isOxygenOs35Rom()) {
                 Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
                 if (p != null) mPrefCatLsOther.removePreference(p);
                 p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY);
@@ -1958,8 +1958,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 appPref.setOnPreferenceChangeListener(this);
             }
 
-            // set default quick tap as Go Home for OP3T
-            if (Utils.isOnePlus3TDevice() &&
+            // set default quick tap as Go Home for OOS 3.5
+            if (Utils.isOxygenOs35Rom() &&
                     mPrefs.getString(PREF_KEY_FINGERPRINT_LAUNCHER_APP, null) == null) {
                 AppPickerPreference appp = (AppPickerPreference)
                         findPreference(PREF_KEY_FINGERPRINT_LAUNCHER_APP);

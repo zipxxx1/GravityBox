@@ -147,7 +147,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                     !hasNotifications(o) : !hasClearableNotifications(o);
         }
 
-        if (XposedHelpers.getBooleanField(o, "mQsExpanded") && !Utils.isOnePlus3TDevice(true)) {
+        if (XposedHelpers.getBooleanField(o, "mQsExpanded") && !Utils.isOxygenOs35Rom()) {
             Object scv = XposedHelpers.getObjectField(o, "mScrollView");
             return ((boolean)XposedHelpers.callMethod(scv, "isScrolledToBottom") && yDiff < 0) && 
                     (boolean)XposedHelpers.callMethod(o, "isInQsArea", x, y);

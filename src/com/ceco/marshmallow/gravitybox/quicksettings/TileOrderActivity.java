@@ -123,7 +123,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             miSecured.setEnabled(!locked && !"gb_tile_lock_screen".equals(key));
         }
         private boolean supportsDualMode() {
-            return !Utils.isOnePlus3TDevice(true) &&
+            return !Utils.isOxygenOs35Rom() &&
                     ("aosp_tile_cell".equals(key) ||
                     "aosp_tile_wifi".equals(key) ||
                     "aosp_tile_bluetooth".equals(key) ||
@@ -266,10 +266,10 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             return false;
         if (key.startsWith("moto_tile") && !Utils.isMotoXtDevice())
             return false;
-        if (key.startsWith("op3t_tile") && !Utils.isOnePlus3TDevice(true))
+        if (key.startsWith("op3t_tile") && !Utils.isOxygenOs35Rom())
             return false;
         if ((key.equals("gb_tile_battery") || key.equals("aosp_tile_dnd")) && 
-                Utils.isOnePlus3TDevice(true))
+                Utils.isOxygenOs35Rom())
             return false;
 
         return true;

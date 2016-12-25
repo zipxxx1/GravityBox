@@ -206,7 +206,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            if (Utils.isOnePlus3TDevice(true)) {
+            if (Utils.isOxygenOs35Rom()) {
                 XposedHelpers.findAndHookMethod(BaseTile.CLASS_RESOURCE_ICON, cl,
                         "getInvisibleDrawable", Context.class, new XC_MethodHook() {
                     @Override
@@ -302,7 +302,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 try {
                     XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "hasDualTargetsDetails", dtHook);
                 } catch (Throwable t2) {
-                    if (!Utils.isOnePlus3TDevice(true)) {
+                    if (!Utils.isOxygenOs35Rom()) {
                         log("Your system does not seem to support standard AOSP tile dual mode");
                     }
                 }
@@ -321,7 +321,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            if (!Utils.isOnePlus3TDevice(true)) {
+            if (!Utils.isOxygenOs35Rom()) {
                 XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "recreateLabel",
                         new XC_MethodHook() {
                     @Override
@@ -367,7 +367,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                     XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "setDual",
                             boolean.class, boolean.class, sdHook);
                 } catch (Throwable t2) {
-                    if (!Utils.isOnePlus3TDevice(true)) {
+                    if (!Utils.isOxygenOs35Rom()) {
                         log("Your system does not seem to support standard AOSP tile dual mode");
                     }
                 }
@@ -387,7 +387,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 XposedHelpers.findAndHookMethod(hostTileClassInfo.className, cl,
                         "handleLongClick", longClickHook);
             }
-            if (!Utils.isOnePlus3TDevice(true)) {
+            if (!Utils.isOxygenOs35Rom()) {
                 XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl,
                         "handleLongClick", longClickHook);
             }

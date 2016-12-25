@@ -106,7 +106,7 @@ public abstract class BaseTile implements QsEventListener {
         List<String> dualTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_DUAL,
                         "aosp_tile_wifi,aosp_tile_bluetooth").split(",")));
-        mDualMode = dualTiles.contains(mKey) && !Utils.isOnePlus3TDevice(true);
+        mDualMode = dualTiles.contains(mKey) && !Utils.isOxygenOs35Rom();
 
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
     }

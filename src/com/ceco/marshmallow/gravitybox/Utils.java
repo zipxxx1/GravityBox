@@ -95,7 +95,7 @@ public class Utils {
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     private static Boolean mIsVerneeApolloLiteDevice;
-    private static Boolean mIsOnePlus3TDevice = null;
+    private static Boolean mIsOxygenOs35Rom = null;
 
     // Device features
     private static Boolean mHasGeminiSupport = null;
@@ -277,19 +277,20 @@ public class Utils {
         return mIsVerneeApolloLiteDevice;
     }
 
-    public static boolean isOnePlus3TDevice() {
-        return isOnePlus3TDevice(false);
-    }
-
-    public static boolean isOnePlus3TDevice(boolean checkAospFlag) {
-        if (mIsOnePlus3TDevice == null) {
-            mIsOnePlus3TDevice = Build.DISPLAY != null && (
-                    Build.DISPLAY.startsWith("ONEPLUS A3000_28_") ||
-                    Build.DISPLAY.startsWith("ONEPLUS A3003_28_") ||
-                    Build.DISPLAY.startsWith("ONEPLUS A3010_28_"));
+    public static boolean isOxygenOs35Rom() {
+        if (mIsOxygenOs35Rom == null) {
+            mIsOxygenOs35Rom = Build.DISPLAY != null && (
+                    Build.DISPLAY.contains("A3000_28_") || // OP3T
+                    Build.DISPLAY.contains("A3003_28_") || // OP3T
+                    Build.DISPLAY.contains("A3010_28_") || // OP3T
+                    Build.DISPLAY.contains("A3000_16_") || // OP3
+                    Build.DISPLAY.contains("A3003_16_") || // OP3
+                    Build.DISPLAY.contains("A3005_16_") || // OP3
+                    Build.DISPLAY.contains("A2001_24_") || // OP2
+                    Build.DISPLAY.contains("A2003_24_") || // OP2
+                    Build.DISPLAY.contains("A2005_24_"));  // OP2
         }
-        return (checkAospFlag ? (mIsOnePlus3TDevice && !isAospForced()) :
-            mIsOnePlus3TDevice);
+        return mIsOxygenOs35Rom;
     }
 
     public static boolean hasGeminiSupport() {

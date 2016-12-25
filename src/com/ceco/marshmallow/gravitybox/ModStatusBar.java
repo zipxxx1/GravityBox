@@ -134,7 +134,6 @@ public class ModStatusBar {
     private static GestureDetector mGestureDetector;
     private static boolean mDt2sEnabled;
     private static long[] mCameraVp;
-    private static boolean mIsOnePlus3TDevice;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -341,7 +340,7 @@ public class ModStatusBar {
     }
 
     private static void prepareHeaderTimeView() {
-        if (mIsOnePlus3TDevice)
+        if (Utils.isOxygenOs35Rom())
             return;
 
         try {
@@ -545,7 +544,6 @@ public class ModStatusBar {
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
-            mIsOnePlus3TDevice = Utils.isOnePlus3TDevice(true);
 
             final Class<?> phoneStatusBarClass =
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
@@ -972,7 +970,7 @@ public class ModStatusBar {
                         }
                     }
                 });
-                if (!mIsOnePlus3TDevice) {
+                if (!Utils.isOxygenOs35Rom()) {
                     XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
                             "instantExpand", new XC_MethodHook() {
                         @Override
@@ -1271,7 +1269,7 @@ public class ModStatusBar {
             final int x = (int) event.getRawX();
             final int y = (int) event.getRawY();
             Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneStatusBar, "mHandler");
-            int statusBarHeaderHeight = mIsOnePlus3TDevice ?
+            int statusBarHeaderHeight = Utils.isOxygenOs35Rom() ?
                     (int)XposedHelpers.callMethod(mHeader, "getCollapsedHeight") :
                     XposedHelpers.getIntField(mHeader, "mCollapsedHeight");
 
@@ -1397,7 +1395,7 @@ public class ModStatusBar {
             // fallback to alt method
             if (withQs) {
                 XposedHelpers.callMethod(notifPanel, "expandWithQs");
-            } else if (mIsOnePlus3TDevice) {
+            } else if (Utils.isOxygenOs35Rom()) {
                 XposedHelpers.callMethod(notifPanel, "expand", true);
             } else {
                 XposedHelpers.callMethod(notifPanel, "expand");

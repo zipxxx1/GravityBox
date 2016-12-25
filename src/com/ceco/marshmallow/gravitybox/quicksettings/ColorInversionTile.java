@@ -39,7 +39,7 @@ public class ColorInversionTile extends AospTile {
     }
 
     private void createHooks() {
-        if (Utils.isOnePlus3TDevice(true))
+        if (Utils.isOxygenOs35Rom())
             return;
 
         try {

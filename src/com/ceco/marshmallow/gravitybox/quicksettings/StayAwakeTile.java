@@ -133,7 +133,7 @@ public class StayAwakeTile extends QsTile {
         if (DEBUG) log(getKey() + ": initPreferences: modes=" + modes);
         updateSettings(modes);
 
-        mQuickMode = Utils.isOnePlus3TDevice(true) ? true :
+        mQuickMode = Utils.isOxygenOs35Rom() ? true :
                 mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE, false);
         mAutoReset = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_AUTO_RESET, false);
     }

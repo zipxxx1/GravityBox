@@ -94,7 +94,7 @@ public class ModQsTiles {
 
             Class<?> classTileHost = XposedHelpers.findClass(CLASS_TILE_HOST, classLoader);
             mQsPanel = new QsPanel(prefs, classLoader);
-            if (Utils.isOnePlus3TDevice(true)) {
+            if (Utils.isOxygenOs35Rom()) {
                 mQsPanelQuick = new QsPanelQuick(prefs, classLoader);
             }
 
@@ -104,7 +104,7 @@ public class ModQsTiles {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (!TILES_SETTING.equals(param.args[0])) return;
-                    if (Utils.isOnePlus3TDevice(true)) {
+                    if (Utils.isOxygenOs35Rom()) {
                         param.args[1] = OnePlus3TTile.ALL_TILES;
                     }
 
@@ -198,7 +198,7 @@ public class ModQsTiles {
                     tileMap.clear();
                     tileMap.putAll(orderedMap);
 
-                    if (Utils.isOnePlus3TDevice(true)) {
+                    if (Utils.isOxygenOs35Rom()) {
                         List<?> cbs = (List<?>) XposedHelpers.getObjectField(param.thisObject, "mCallbacks");
                         for (int i = 0; i < cbs.size(); i++) {
                             XposedHelpers.callMethod(cbs.get(i), "onTilesChanged");

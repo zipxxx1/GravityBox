@@ -363,7 +363,7 @@ public class ModLockscreen {
                 }
             });
 
-            if (Utils.isOnePlus3TDevice(true)) {
+            if (Utils.isOxygenOs35Rom()) {
                 XposedHelpers.findAndHookMethod(CLASS_KG_PASSWORD_TEXT_VIEW_PIN, classLoader,
                         "append", char.class, new XC_MethodHook() {
                     @Override
@@ -462,7 +462,7 @@ public class ModLockscreen {
                             "id", PACKAGE_NAME);
                     if (containerId == 0) {
                         // fallback to AOSP container
-                        containerId = res.getIdentifier(Utils.isOnePlus3TDevice(true) ? "clock_view" :
+                        containerId = res.getIdentifier(Utils.isOxygenOs35Rom() ? "clock_view" :
                                 "keyguard_clock_container", "id", PACKAGE_NAME);
                     }
                     if (containerId != 0) {

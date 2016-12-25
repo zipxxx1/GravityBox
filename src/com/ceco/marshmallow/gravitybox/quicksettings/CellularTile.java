@@ -107,10 +107,10 @@ public class CellularTile extends AospTile {
     protected void initPreferences() {
         super.initPreferences();
 
-        mDataOffIconEnabled = !Utils.isOnePlus3TDevice(true) &&
+        mDataOffIconEnabled = !Utils.isOxygenOs35Rom() &&
                 mPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_CELL_TILE_DATA_OFF_ICON, false);
-        mDataToggle = Utils.isOnePlus3TDevice(true) ? DataToggle.valueOf("DISABLED") :
+        mDataToggle = Utils.isOxygenOs35Rom() ? DataToggle.valueOf("DISABLED") :
                 DataToggle.valueOf(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_CELL_TILE_DATA_TOGGLE, "DISABLED"));
     }
@@ -140,7 +140,7 @@ public class CellularTile extends AospTile {
     public void onCreateTileView(View tileView) throws Throwable {
         super.onCreateTileView(tileView);
 
-        if (isPrimary() && hasField(tileView, "mIconFrame") && !Utils.isOnePlus3TDevice(true)) {
+        if (isPrimary() && hasField(tileView, "mIconFrame") && !Utils.isOxygenOs35Rom()) {
             mDataOffView = new ImageView(mContext);
             mDataOffView.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_mobile_data_off));
             mDataOffView.setVisibility(View.GONE);
@@ -223,7 +223,7 @@ public class CellularTile extends AospTile {
 
     @Override
     protected boolean onBeforeHandleClick() {
-        if (Utils.isOnePlus3TDevice(true))
+        if (Utils.isOxygenOs35Rom())
             return false;
 
         if (mClickHookBlocked) {

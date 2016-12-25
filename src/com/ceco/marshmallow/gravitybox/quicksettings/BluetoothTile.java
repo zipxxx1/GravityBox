@@ -58,7 +58,7 @@ public class BluetoothTile extends AospTile {
                 mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                         mContext.getClassLoader(), "hasDualTargetsDetails", dtHook);
             } catch (Throwable t2) {
-                if (!Utils.isOnePlus3TDevice(true)) {
+                if (!Utils.isOxygenOs35Rom()) {
                     log(getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
                 }
             }

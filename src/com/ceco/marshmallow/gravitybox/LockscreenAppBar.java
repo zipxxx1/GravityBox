@@ -125,7 +125,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
             }
         }
         mRootView.setVisibility(atLeastOneVisible ? View.VISIBLE : View.GONE);
-        if (Utils.isOnePlus3TDevice(true)) {
+        if (Utils.isOxygenOs35Rom()) {
             mContainer.getChildAt(mContainer.getChildCount()-2).setVisibility(
                     mRootView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
         }

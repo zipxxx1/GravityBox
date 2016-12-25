@@ -165,7 +165,6 @@ public class ModHwKeys {
     private static PowerManager mPowerManager;
     private static Boolean mSupportLongPressPowerWhenNonInteractiveOrig;
     private static long mPostponeWakeUpOnPowerKeyUpEventTime = 0;
-    private static boolean mIsOnePlus3TDevice;
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui",
@@ -433,7 +432,6 @@ public class ModHwKeys {
     public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
-            mIsOnePlus3TDevice = Utils.isOnePlus3TDevice(true);
 
             Map<HwKeyTrigger, HwKeyAction> map = new HashMap<HwKeyTrigger, HwKeyAction>();
             map.put(HwKeyTrigger.MENU_SINGLETAP, new HwKeyAction(0, null));
@@ -532,7 +530,7 @@ public class ModHwKeys {
 
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
             Class<?> classPhoneWindowManagerOem = null;
-            if (Utils.isOnePlus3TDevice(true)) {
+            if (Utils.isOxygenOs35Rom()) {
                 classPhoneWindowManagerOem = XposedHelpers.findClass(
                         CLASS_PHONE_WINDOW_MANAGER_OEM, classLoader);
             }
@@ -560,8 +558,8 @@ public class ModHwKeys {
                     if (event.getSource() == InputDevice.SOURCE_UNKNOWN) {
                         // ignore unknow source events, e.g. synthetic events injected from GB itself
                         if (DEBUG) log("interceptKeyBeforeQueueing: ignoring event from unknown source");
-                        if (mIsOnePlus3TDevice) {
-                            // mangle OP3T key event to allow pass-through and to avoid double-vibrations
+                        if (Utils.isOxygenOs35Rom()) {
+                            // mangle OOS3.5 key event to allow pass-through and to avoid double-vibrations
                             event = KeyEvent.changeFlags(event, event.getFlags() | KeyEvent.FLAG_VIRTUAL_HARD_KEY);
                             event.setSource(InputDevice.SOURCE_KEYBOARD);
                             param.args[0] = event;

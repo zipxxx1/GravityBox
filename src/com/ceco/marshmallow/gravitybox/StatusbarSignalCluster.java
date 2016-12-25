@@ -182,7 +182,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                !Utils.isMtkDevice() && !Utils.isOnePlus3TDevice(true)) {
+                !Utils.isMtkDevice() && !Utils.isOxygenOs35Rom()) {
 
             sQsHpResId = XResources.getFakeResId(modRes, R.drawable.ic_qs_signal_hp);
             sSbHpResId = XResources.getFakeResId(modRes, R.drawable.stat_sys_data_fully_connected_hp);
@@ -286,7 +286,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     }
                 });
             } catch (Throwable t) {
-                if (!Utils.isOnePlus3TDevice(true)) {
+                if (!Utils.isOxygenOs35Rom()) {
                     log("Error hooking getOrInflateState: " + t.getMessage());
                 }
             }
@@ -300,7 +300,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                         if (v != null) v.setVisibility(View.GONE);
                     }
                     XposedHelpers.setBooleanField(mView, "mNoSimsVisible", false);
-                    if (Utils.isOnePlus3TDevice(true)) {
+                    if (Utils.isOxygenOs35Rom()) {
                         XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
                                 boolean.class, new XC_MethodHook() {
                             @Override
@@ -356,7 +356,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
 
         if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                !Utils.isFalconAsiaDs() && !Utils.isMtkDevice() && !Utils.isOnePlus3TDevice(true)) {
+                !Utils.isFalconAsiaDs() && !Utils.isMtkDevice() && !Utils.isOxygenOs35Rom()) {
             try {
                 final Class<?> mobileNetworkCtrlClass = Utils.isMotoXtDevice() ?
                         XposedHelpers.findClass(
@@ -527,7 +527,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     protected void initPreferences() { 
         mDataActivityEnabled = mContainerType != ContainerType.HEADER &&
-                !Utils.isOnePlus3TDevice(true) &&
+                !Utils.isOxygenOs35Rom() &&
                 sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
 
         mBatteryStyle = Integer.valueOf(sPrefs.getString(

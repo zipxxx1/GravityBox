@@ -82,7 +82,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
         }
 
         // OnePlus3T
-        if (Utils.isOnePlus3TDevice(true) &&
+        if (Utils.isOxygenOs35Rom() &&
             OnePlus3TTile.OP3T_KEYS.contains(aospKey)) {
             return new OnePlus3TTile(host, aospKey, tile, prefs, eventDistributor);
         }
