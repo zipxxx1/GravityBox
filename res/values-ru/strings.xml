@@ -2062,5 +2062,12 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">Включить панель быстрых настроек</string>
     <string name="qs_panel_collapse">Свернуть панель быстрых настроек</string>
+	
+    <!-- QS: OP3T tiles -->
+    <string name="qs_tile_op3t_night_mode">OP3T ночной режим</string>
+    <string name="qs_tile_op3t_buttons">OP3T кнопки</string>
+    <string name="qs_tile_op3t_vpn">OP3T VPN</string>
+    <string name="qs_tile_op3t_dataswitch">OP3T переключ. данных</string>
+    <string name="qs_tile_op3t_powersaving">OP3T энергосбережение</string>
 
 </resources>
