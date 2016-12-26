@@ -279,16 +279,7 @@ public class Utils {
 
     public static boolean isOxygenOs35Rom() {
         if (mIsOxygenOs35Rom == null) {
-            mIsOxygenOs35Rom = Build.DISPLAY != null && (
-                    Build.DISPLAY.contains("A3000_28_") || // OP3T
-                    Build.DISPLAY.contains("A3003_28_") || // OP3T
-                    Build.DISPLAY.contains("A3010_28_") || // OP3T
-                    Build.DISPLAY.contains("A3000_16_") || // OP3
-                    Build.DISPLAY.contains("A3003_16_") || // OP3
-                    Build.DISPLAY.contains("A3005_16_") || // OP3
-                    Build.DISPLAY.contains("A2001_24_") || // OP2
-                    Build.DISPLAY.contains("A2003_24_") || // OP2
-                    Build.DISPLAY.contains("A2005_24_"));  // OP2
+            mIsOxygenOs35Rom = SystemProp.get("ro.oxygen.version", "0").startsWith("3.5");
         }
         return mIsOxygenOs35Rom;
     }

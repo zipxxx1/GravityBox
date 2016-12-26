@@ -991,6 +991,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public int xposedBridgeVersion;
         public boolean supportsFingerprint;
         public int[] fingerprintIds;
+        public boolean isOxygenOs35Rom;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -1025,6 +1026,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (data.containsKey("fingerprintIds")) {
                 fingerprintIds = data.getIntArray("fingerprintIds");
+            }
+            if (data.containsKey("isOxygenOs35Rom")) {
+                isOxygenOs35Rom = data.getBoolean("isOxygenOs35Rom");
             }
         }
     }
@@ -1786,7 +1790,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             // Remove OxygenOS 3.5 preferences
-            if (Utils.isOxygenOs35Rom()) {
+            if (sSystemProperties.isOxygenOs35Rom) {
                 Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
                 if (p != null) mPrefCatLsOther.removePreference(p);
                 p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY);
@@ -1959,7 +1963,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             // set default quick tap as Go Home for OOS 3.5
-            if (Utils.isOxygenOs35Rom() &&
+            if (sSystemProperties.isOxygenOs35Rom &&
                     mPrefs.getString(PREF_KEY_FINGERPRINT_LAUNCHER_APP, null) == null) {
                 AppPickerPreference appp = (AppPickerPreference)
                         findPreference(PREF_KEY_FINGERPRINT_LAUNCHER_APP);
