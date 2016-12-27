@@ -19,6 +19,8 @@ import java.util.Collection;
 import java.util.List;
 
 import com.ceco.marshmallow.gravitybox.GravityBox;
+import com.ceco.marshmallow.gravitybox.PhoneWrapper;
+import com.ceco.marshmallow.gravitybox.Utils;
 
 import android.content.Intent;
 import android.view.View;
@@ -80,6 +82,10 @@ public class QsPanelQuick {
                             public void onClick(View v) {
                                 Intent i = new Intent();
                                 i.setClassName(GravityBox.PACKAGE_NAME, TileOrderActivity.class.getName());
+                                i.putExtra(TileOrderActivity.EXTRA_HAS_MSIM_SUPPORT,
+                                        PhoneWrapper.hasMsimSupport());
+                                i.putExtra(TileOrderActivity.EXTRA_IS_OOS_35_ROM,
+                                        Utils.isOxygenOs35Rom());
                                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 try {
                                     Object starter = XposedHelpers.getObjectField(

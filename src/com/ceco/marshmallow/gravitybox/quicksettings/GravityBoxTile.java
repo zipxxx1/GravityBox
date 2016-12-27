@@ -17,7 +17,9 @@ package com.ceco.marshmallow.gravitybox.quicksettings;
 
 import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
+import com.ceco.marshmallow.gravitybox.PhoneWrapper;
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.Intent;
@@ -56,6 +58,8 @@ public class GravityBoxTile extends QsTile {
     public boolean handleLongClick() {
         Intent i = new Intent();
         i.setClassName(GravityBox.PACKAGE_NAME, TileOrderActivity.class.getName());
+        i.putExtra(TileOrderActivity.EXTRA_HAS_MSIM_SUPPORT, PhoneWrapper.hasMsimSupport());
+        i.putExtra(TileOrderActivity.EXTRA_IS_OOS_35_ROM, Utils.isOxygenOs35Rom());
         startSettingsActivity(i);
         return true;
     }

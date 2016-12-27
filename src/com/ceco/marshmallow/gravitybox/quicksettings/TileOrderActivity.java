@@ -56,6 +56,8 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     public static final String PREF_KEY_TILE_SECURED = "pref_qs_tile_secured";
     public static final String PREF_KEY_TILE_DUAL = "pref_qs_tile_dual";
     public static final String EXTRA_QS_ORDER_CHANGED = "qsTileOrderChanged";
+    public static final String EXTRA_HAS_MSIM_SUPPORT = "qsHasMsimSupport";
+    public static final String EXTRA_IS_OOS_35_ROM = "qsIsOxygenOs35Rom";
 
     private ListView mTileList;
     private TileAdapter mTileAdapter;
@@ -67,7 +69,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     private Button mBtnSave;
     private Button mBtnCancel;
 
-    static class TileInfo {
+    class TileInfo {
         String key;
         String name;
         boolean enabled;
@@ -123,7 +125,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             miSecured.setEnabled(!locked && !"gb_tile_lock_screen".equals(key));
         }
         private boolean supportsDualMode() {
-            return !Utils.isOxygenOs35Rom() &&
+            return !isOxygenOs35Rom() &&
                     ("aosp_tile_cell".equals(key) ||
                     "aosp_tile_wifi".equals(key) ||
                     "aosp_tile_bluetooth".equals(key) ||
@@ -167,6 +169,24 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         } else {
             updateDefaultTileList();
         }
+    }
+
+    private boolean isOxygenOs35Rom() {
+        if (GravityBoxSettings.sSystemProperties != null)
+            return GravityBoxSettings.sSystemProperties.isOxygenOs35Rom;
+        else if (getIntent() != null && getIntent().hasExtra(EXTRA_IS_OOS_35_ROM))
+            return getIntent().getBooleanExtra(EXTRA_IS_OOS_35_ROM, false);
+        else
+            return false;
+    }
+
+    private boolean hasMsimSupport() {
+        if (GravityBoxSettings.sSystemProperties != null)
+            return GravityBoxSettings.sSystemProperties.hasMsimSupport;
+        else if (getIntent() != null && getIntent().hasExtra(EXTRA_HAS_MSIM_SUPPORT))
+            return getIntent().getBooleanExtra(EXTRA_HAS_MSIM_SUPPORT, false);
+        else
+            return false;
     }
 
     public static String getDefaultTileList(Context gbContext) {
@@ -248,9 +268,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             return false;
         if (key.equals("gb_tile_compass") && !Utils.hasCompass(mContext))
             return false;
-        if (key.equals("aosp_tile_cell2") && (!Utils.isMotoXtDevice() || 
-                (GravityBoxSettings.sSystemProperties != null &&
-                !GravityBoxSettings.sSystemProperties.hasMsimSupport)))
+        if (key.equals("aosp_tile_cell2") && (!Utils.isMotoXtDevice() || !hasMsimSupport()))
             return false;
         if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")
                 || key.equals("mtk_tile_hotknot") || key.equals("mtk_tile_timeout")) &&
@@ -266,10 +284,10 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             return false;
         if (key.startsWith("moto_tile") && !Utils.isMotoXtDevice())
             return false;
-        if (key.startsWith("op3t_tile") && !Utils.isOxygenOs35Rom())
+        if (key.startsWith("op3t_tile") && !isOxygenOs35Rom())
             return false;
         if ((key.equals("gb_tile_battery") || key.equals("aosp_tile_dnd")) && 
-                Utils.isOxygenOs35Rom())
+                isOxygenOs35Rom())
             return false;
 
         return true;
