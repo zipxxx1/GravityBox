@@ -279,7 +279,12 @@ public class Utils {
 
     public static boolean isOxygenOs35Rom() {
         if (mIsOxygenOs35Rom == null) {
-            mIsOxygenOs35Rom = SystemProp.get("ro.oxygen.version", "0").startsWith("3.5");
+            String version = SystemProp.get("ro.oxygen.version", "0");
+            mIsOxygenOs35Rom = (version.startsWith("3.5") ||
+                    version.startsWith("OP3_O2_Open_4") ||
+                    version.startsWith("OP3_O2_Open_5") ||
+                    version.startsWith("OP3_O2_Open_6") ||
+                    version.startsWith("OP3_O2_Open_7"));
         }
         return mIsOxygenOs35Rom;
     }
