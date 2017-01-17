@@ -319,7 +319,9 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
             if (DEBUG) log("onAuthenticationHelp: " + helpMsgId + " - " + helpString);
 
-            if (helpMsgId == FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST) {
+            if (helpMsgId == FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST ||
+                    helpMsgId == FingerprintManager.FINGERPRINT_ACQUIRED_INSUFFICIENT ||
+                    helpMsgId == FingerprintManager.FINGERPRINT_ACQUIRED_PARTIAL) {
                 startActivity(null);
             } else if (mShowToast) {
                 Toast.makeText(mContext, TAG + "\n" + helpString,Toast.LENGTH_SHORT).show();
