@@ -209,7 +209,7 @@ public class ModAudio {
 
     private static class HandleChangeVolume extends XC_MethodHook {
         private static List<String> sBlackList = new ArrayList<>(Arrays.asList(
-                "com.mxtech.videoplayer.ad"));
+                "com.mxtech.videoplayer.ad", "com.mxtech.videoplayer.pro"));
 
         private static boolean isPkgInBlackList(String pkg) {
             final boolean isInBlackList = sBlackList.contains(pkg);
