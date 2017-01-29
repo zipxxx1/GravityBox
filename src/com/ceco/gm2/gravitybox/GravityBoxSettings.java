@@ -3230,11 +3230,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_UNPLUGGED);
                 intent.putExtra(EXTRA_BATTERY_SOUND_URI,
                         prefs.getString(PREF_KEY_CHARGER_UNPLUGGED_SOUND, ""));
-            } else if (key.equals(PREF_KEY_LOW_BATTERY_WARNING_CUSTOMSOUND)) {
-                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_LOWBATTERY);
-                intent.putExtra(EXTRA_BATTERY_SOUND_URI,
-                        prefs.getString(PREF_KEY_LOW_BATTERY_WARNING_CUSTOMSOUND, ""));
             } else if (key.equals(PREF_KEY_TRANS_VERIFICATION)) {
                 String transId = prefs.getString(key, null);
                 if (transId != null && !transId.trim().isEmpty()) {
