@@ -1,3 +1,17 @@
+/*
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.ceco.lollipop.gravitybox.managers;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
@@ -18,6 +32,7 @@ public class SysUiManagers {
     public static StatusbarQuietHoursManager QuietHoursManager;
     public static AppLauncher AppLauncher;
     public static KeyguardStateMonitor KeyguardMonitor;
+    public static NotificationDataMonitor NotifDataMonitor;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -56,6 +71,13 @@ public class SysUiManagers {
             AppLauncher = new AppLauncher(context, prefs);
         } catch (Throwable t) {
             log("Error creating AppLauncher: ");
+            XposedBridge.log(t);
+        }
+
+        try {
+            NotifDataMonitor = new NotificationDataMonitor(context);
+        } catch (Throwable t) {
+            log("Error creating NotificationDataMonitor: ");
             XposedBridge.log(t);
         }
 

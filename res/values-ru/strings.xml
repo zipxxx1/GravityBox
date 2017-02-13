@@ -2045,4 +2045,8 @@
     <string name="qs_panel_toggle">Включить панель быстрых настроек</string>
     <string name="qs_panel_collapse">Свернуть панель быстрых настроек</string>
 
+    <!-- Lockscreen shorcuts: Show badges -->
+    <string name="pref_lockscreen_shortcuts_show_badges_title">Показать значки</string>
+    <string name="pref_lockscreen_shortcuts_show_badges_summary">Показать значки с отображением счётчика уведомлений</string>
+
 </resources>

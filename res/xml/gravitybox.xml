@@ -92,6 +92,12 @@
                     android:summary="@string/pref_lockscreen_shortcuts_safe_launch_summary"
                     android:defaultValue="false" />
 
+                <CheckBoxPreference 
+                    android:key="pref_lockscreen_shortcuts_show_badges"
+                    android:title="@string/pref_lockscreen_shortcuts_show_badges_title"
+                    android:summary="@string/pref_lockscreen_shortcuts_show_badges_summary"
+                    android:defaultValue="false" />
+
                 <!-- will be populated at runtime -->
 
             </PreferenceScreen>

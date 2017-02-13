@@ -2051,4 +2051,8 @@
     <string name="qs_panel_toggle">Toggle QuickSettings panel</string>
     <string name="qs_panel_collapse">Collapse QuickSettings panel</string>
 
+    <!-- Lockscreen shorcuts: Show badges -->
+    <string name="pref_lockscreen_shortcuts_show_badges_title">Show badges</string>
+    <string name="pref_lockscreen_shortcuts_show_badges_summary">Shows badges containing notification count</string>
+
 </resources>
