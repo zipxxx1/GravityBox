@@ -2071,4 +2071,8 @@
     <string name="qs_tile_op3t_dataswitch">OP3T Data switch</string>
     <string name="qs_tile_op3t_powersaving">OP3T Power saving</string>
 
+    <!-- Lockscreen shorcuts: Show badges -->
+    <string name="pref_lockscreen_shortcuts_show_badges_title">Show badges</string>
+    <string name="pref_lockscreen_shortcuts_show_badges_summary">Shows badges containing notification count</string>
+
 </resources>

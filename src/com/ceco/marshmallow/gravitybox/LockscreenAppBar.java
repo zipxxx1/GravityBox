@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,6 +16,7 @@
 package com.ceco.marshmallow.gravitybox;
 
 import java.io.File;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,16 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.service.notification.StatusBarNotification;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +43,7 @@ import android.widget.ImageView;
 
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.managers.KeyguardStateMonitor;
+import com.ceco.marshmallow.gravitybox.managers.NotificationDataMonitor;
 import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 import com.ceco.marshmallow.gravitybox.preference.AppPickerPreference;
 import com.ceco.marshmallow.gravitybox.shortcuts.ShortcutActivity;
@@ -42,7 +52,8 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
+public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
+                                         NotificationDataMonitor.Listener {
     private static final String TAG = "GB:LockscreenAppBar";
     private static final boolean DEBUG = false;
 
@@ -59,9 +70,11 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
     private ViewGroup mRootView;
     private XSharedPreferences mPrefs;
     private boolean mSafeLaunchEnabled;
+    private boolean mShowBadges;
     private AppInfo mPendingAction;
     private Handler mHandler;
     private KeyguardStateMonitor mKgMonitor;
+    private NotificationDataMonitor mNdMonitor;
 
     public LockscreenAppBar(Context ctx, Context gbCtx, ViewGroup container,
             Object statusBar, XSharedPreferences prefs) {
@@ -74,8 +87,16 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
         mHandler = new Handler();
         mSafeLaunchEnabled = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHORTCUT_SAFE_LAUNCH, false);
+        mShowBadges = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHORTCUT_SHOW_BADGES, false);
+
+        mNdMonitor = SysUiManagers.NotifDataMonitor;
+        if (mNdMonitor != null) {
+            mNdMonitor.registerListener(this);
+        }
 
         initAppSlots();
+
         mKgMonitor = SysUiManagers.KeyguardMonitor;
         mKgMonitor.registerListener(this);
     }
@@ -102,6 +123,11 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
 
     public void setSafeLaunchEnabled(boolean enabled) {
         mSafeLaunchEnabled = enabled;
+    }
+
+    public void setShowBadges(boolean showBadges) {
+        mShowBadges = showBadges;
+        onNotificationDataChanged(null);
     }
 
     public void updateAppSlot(int slot, String value) {
@@ -136,6 +162,19 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
         for (AppInfo ai : mAppSlots) {
             if (ai.isUnsafeAction()) {
                 ai.setVisible(!mKgMonitor.isLocked());
+            }
+        }
+    }
+
+    @Override
+    public void onNotificationDataChanged(final StatusBarNotification sbn) {
+        for (AppInfo ai : mAppSlots) {
+            if (ai.getPackageName() == null)
+                continue;
+
+            if (sbn == null || sbn.getPackageName() == null ||
+                    sbn.getPackageName().equals(ai.getPackageName())) {
+                ai.updateIcon();
             }
         }
     }
@@ -177,6 +216,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
         private Intent mIntent;
         private Resources mResources;
         private ImageView mView;
+        private Drawable mIcon;
 
         public AppInfo(int resId) {
             mResources = mGbContext.getResources();
@@ -187,6 +227,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
 
         private void reset() {
             mIntent = null;
+            mIcon = null;
             mView.setImageDrawable(null);
             mView.setVisibility(View.GONE);
         }
@@ -198,7 +239,6 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
             }
 
             try {
-                Drawable icon = null;
                 mIntent = Intent.parseUri(value, 0);
                 if (!mIntent.hasExtra("mode")) {
                     reset();
@@ -210,26 +250,27 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
                         mResources.getIdentifier(mIntent.getStringExtra("iconResName"),
                         "drawable", mGbContext.getPackageName()) : 0;
                 if (iconResId != 0) {
-                    icon = mResources.getDrawable(iconResId);
+                    mIcon = mResources.getDrawable(iconResId, null);
                 } else {
                     final String appIconPath = mIntent.getStringExtra("icon");
                     if (appIconPath != null) {
                         File f = new File(appIconPath);
                         if (f.exists() && f.canRead()) {
-                            icon = Drawable.createFromPath(f.getAbsolutePath());
+                            mIcon = Drawable.createFromPath(f.getAbsolutePath());
                         }
                     }
                 }
 
-                if (icon == null) {
+                if (mIcon == null) {
                     if (mode == AppPickerPreference.MODE_APP) {
                         ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
-                        icon = ai.loadIcon(mPm);
+                        mIcon = ai.loadIcon(mPm);
                     } else {
-                        icon = mResources.getDrawable(android.R.drawable.ic_menu_help);
+                        mIcon = mResources.getDrawable(android.R.drawable.ic_menu_help, null);
                     }
                 }
-                mView.setImageDrawable(icon);
+
+                updateIcon();
                 mView.setVisibility(View.VISIBLE);
                 if (DEBUG) log("AppInfo initialized for: " + mIntent);
             } catch (NameNotFoundException e) {
@@ -239,6 +280,74 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener {
                 log("Unexpected error: " + e.getMessage());
                 reset();
             }
+        }
+
+        private String getPackageName() {
+            if (mIntent != null && mIntent.getComponent() != null &&
+                    mIntent.getComponent().getPackageName() != null) {
+                return mIntent.getComponent().getPackageName();
+            }
+            return null;
+        }
+
+        public void updateIcon() {
+            if (mIcon == null || mIntent == null) return;
+
+            Drawable d = mIcon;
+
+            final int mode = mIntent.getIntExtra("mode", AppPickerPreference.MODE_APP);
+            if (mShowBadges && mode == AppPickerPreference.MODE_APP && mNdMonitor != null) {
+                int count = mNdMonitor.getNotifCountFor(getPackageName());
+                if (count > 0) {
+                    d = createBadgeDrawable(d, count);
+                }
+            }
+
+            mView.setImageDrawable(d);
+        }
+
+        private Drawable createBadgeDrawable(Drawable d, int count) {
+            if (d == null) return null;
+
+            NumberFormat f = NumberFormat.getIntegerInstance();
+            String countStr = count > 99 ? "99+" : f.format(count);
+
+            Bitmap b = Utils.drawableToBitmap(d);
+            b = b.copy(Bitmap.Config.ARGB_8888, true);
+            Canvas c = new Canvas(b);
+
+            Paint p = new Paint();
+            p.setTextAlign(Paint.Align.CENTER);
+            p.setColor(Color.WHITE);
+            p.setAntiAlias(true);
+            p.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10,
+                    mResources.getDisplayMetrics()));
+
+            Drawable bg = mResources.getDrawable(R.drawable.ic_notification_overlay, null);
+
+            final int w = b.getWidth();
+            final int h = b.getHeight();
+            final Rect r = new Rect();
+            p.getTextBounds(countStr, 0, countStr.length(), r);
+            final int tw = r.right - r.left;
+            final int th = r.bottom - r.top;
+            bg.getPadding(r);
+            int dw = r.left + tw + r.right;
+            if (dw < bg.getMinimumWidth()) {
+                dw = bg.getMinimumWidth();
+            }
+            int x = w-r.right-((dw-r.right-r.left)/2);
+            int dh = r.top + th + r.bottom;
+            if (dh < bg.getMinimumHeight()) {
+                dh = bg.getMinimumHeight();
+            }
+            int y = h-r.bottom-((dh-r.top-th-r.bottom)/2);
+            bg.setBounds(w-dw, h-dh, w, h);
+
+            bg.draw(c);
+            c.drawText(countStr, x, y, p);
+
+            return new BitmapDrawable(mResources, b);
         }
 
         public boolean isUnsafeAction() {

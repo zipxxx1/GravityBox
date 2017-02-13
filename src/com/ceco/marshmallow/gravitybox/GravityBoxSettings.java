@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -277,10 +277,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             "pref_lockscreen_shortcut0", "pref_lockscreen_shortcut1", "pref_lockscreen_shortcut2",
             "pref_lockscreen_shortcut3", "pref_lockscreen_shortcut4", "pref_lockscreen_shortcut5"));
     public static final String PREF_KEY_LOCKSCREEN_SHORTCUT_SAFE_LAUNCH = "pref_lockscreen_shortcuts_safe_launch";
+    public static final String PREF_KEY_LOCKSCREEN_SHORTCUT_SHOW_BADGES = "pref_lockscreen_shortcuts_show_badges";
     public static final String ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SHORTCUT_CHANGED";
     public static final String EXTRA_LS_SHORTCUT_SLOT = "lockscreenShortcutSlot";
     public static final String EXTRA_LS_SHORTCUT_VALUE = "lockscreenShortcutValue";
     public static final String EXTRA_LS_SAFE_LAUNCH = "lockscreenShortcutSafeLaunch";
+    public static final String EXTRA_LS_SHOW_BADGES = "lockscreenShortcutShowBadges";
 
     public static final String PREF_CAT_KEY_POWER = "pref_cat_power";
     public static final String PREF_CAT_KEY_POWER_MENU = "pref_cat_power_menu";
@@ -3330,6 +3332,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_LOCKSCREEN_SHORTCUT_SAFE_LAUNCH)) {
                 intent.setAction(ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
                 intent.putExtra(EXTRA_LS_SAFE_LAUNCH, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_LOCKSCREEN_SHORTCUT_SHOW_BADGES)) {
+                intent.setAction(ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
+                intent.putExtra(EXTRA_LS_SHOW_BADGES, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_BATTERY_TILE_PERCENTAGE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_TILE_PERCENTAGE, prefs.getBoolean(key, false));
