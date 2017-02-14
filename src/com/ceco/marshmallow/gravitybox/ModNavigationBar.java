@@ -442,7 +442,8 @@ public class ModNavigationBar {
 
                     updateRecentsKeyCode();
 
-                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_SWAP_KEYS, false)) {
+                    if (!Utils.isOxygenOs35Rom() &&
+                            prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_SWAP_KEYS, false)) {
                         swapBackAndRecents();
                     }
 
