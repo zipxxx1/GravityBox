@@ -2049,4 +2049,7 @@
     <string name="pref_lockscreen_shortcuts_show_badges_title">Показать значки</string>
     <string name="pref_lockscreen_shortcuts_show_badges_summary">Показать значки с отображением счётчика уведомлений</string>
 
+    <!-- Clock: Show seconds -->
+    <string name="pref_statusbar_clock_show_seconds_title">Показать секунды</string>
+
 </resources>

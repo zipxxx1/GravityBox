@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -690,6 +690,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED);
                     intentFilter.addAction(Intent.ACTION_SCREEN_ON);
                     intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+                    intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
                     if (Utils.isMtkDevice()) {
                         intentFilter.addAction(BatteryStyleController.ACTION_MTK_BATTERY_PERCENTAGE_SWITCH);
                     }
