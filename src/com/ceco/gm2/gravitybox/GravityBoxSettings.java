@@ -200,6 +200,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY = "pref_statusbar_color_skip_battery";
     public static final String PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE = "pref_statusbar_signal_color_mode";
     public static final String PREF_KEY_STATUSBAR_CENTER_CLOCK = "pref_statusbar_center_clock";
+    public static final String PREF_KEY_STATUSBAR_CLOCK_SHOW_SECONDS = "pref_statusbar_clock_show_seconds";
     public static final String PREF_KEY_STATUSBAR_CLOCK_DOW = "pref_statusbar_clock_dow2";
     public static final String PREF_KEY_STATUSBAR_CLOCK_DATE = "pref_statusbar_clock_date2";
     public static final int DOW_DISABLED = 0;
@@ -567,6 +568,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String ACTION_PREF_CLOCK_CHANGED = "gravitybox.intent.action.CENTER_CLOCK_CHANGED";
     public static final String EXTRA_CENTER_CLOCK = "centerClock";
+    public static final String EXTRA_CLOCK_SHOW_SECONDS = "clockShowSeconds";
     public static final String EXTRA_CLOCK_DOW = "clockDow";
     public static final String EXTRA_CLOCK_DOW_SIZE = "clockDowSize";
     public static final String EXTRA_CLOCK_DATE = "clockDate";
@@ -2692,6 +2694,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_CENTER_CLOCK, 
                         prefs.getBoolean(PREF_KEY_STATUSBAR_CENTER_CLOCK, false));
+            } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_SHOW_SECONDS)) {
+                intent.setAction(ACTION_PREF_CLOCK_CHANGED);
+                intent.putExtra(EXTRA_CLOCK_SHOW_SECONDS, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_DOW)) {
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_CLOCK_DOW, Integer.valueOf(

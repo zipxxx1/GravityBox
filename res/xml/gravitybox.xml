@@ -882,6 +882,12 @@
                     android:defaultValue="false"
                     android:dependency="pref_clock_hide" />
 
+                <CheckBoxPreference 
+                    android:key="pref_statusbar_clock_show_seconds"
+                    android:title="@string/pref_statusbar_clock_show_seconds_title"
+                    android:defaultValue="false"
+                    android:dependency="pref_clock_hide" />
+
                 <ListPreference 
                     android:key="pref_statusbar_clock_date2"
                     android:title="@string/pref_statusbar_clock_date_title"
