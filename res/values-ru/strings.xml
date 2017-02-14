@@ -1504,6 +1504,7 @@
     <string name="pref_charging_led_title">Индикация зарядки</string>
     <string name="charging_led_default">По умолчанию</string>
     <string name="charging_led_emulated">Эмуляция</string>
+    <string name="charging_led_constant">Постоянно (необходима поддержка драйвера светодиода)</string>
     <string name="charging_led_disabled">Отключено</string>
     
     <!-- Heads up snooze timer -->
