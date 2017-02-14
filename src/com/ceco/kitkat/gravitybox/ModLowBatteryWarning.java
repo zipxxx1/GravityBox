@@ -37,7 +37,7 @@ public class ModLowBatteryWarning {
     private static final String CLASS_BATTERY_SERVICE_LED = "com.android.server.BatteryService$Led";
     public static final boolean DEBUG = false;
 
-    public static enum ChargingLed { DEFAULT, EMULATED, DISABLED };
+    public static enum ChargingLed { DEFAULT, EMULATED, CONSTANT, DISABLED };
 
     private static ThreadLocal<MethodState> mUpdateLightsMethodState;
     private static Object mBatteryLed;

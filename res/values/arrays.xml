@@ -1104,12 +1104,14 @@
     <string-array name="charging_led_entries" translatable="false">
         <item>@string/charging_led_default</item>
         <item>@string/charging_led_emulated</item>
+        <item>@string/charging_led_constant</item>
         <item>@string/charging_led_disabled</item>
     </string-array>
 
     <string-array name="charging_led_values" translatable="false">
         <item>DEFAULT</item>
         <item>EMULATED</item>
+        <item>CONSTANT</item>
         <item>DISABLED</item>
     </string-array>
 

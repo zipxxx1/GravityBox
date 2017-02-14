@@ -133,7 +133,7 @@ public class ModDisplay {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_BLED_CHARGING)) {
                 ChargingLed cg = ChargingLed.valueOf(intent.getStringExtra(GravityBoxSettings.EXTRA_BLED_CHARGING));
-                if (cg == ChargingLed.EMULATED) {
+                if (cg == ChargingLed.EMULATED || cg == ChargingLed.CONSTANT) {
                     resetLight(LIGHT_ID_BATTERY);
                 }
                 mChargingLed = cg;
@@ -147,7 +147,8 @@ public class ModDisplay {
                 if (mCharging != charging || mBatteryLevel != level) {
                     mCharging = charging;
                     mBatteryLevel = level;
-                    if (mChargingLed == ChargingLed.EMULATED && !mPendingNotif) {
+                    if ((mChargingLed == ChargingLed.EMULATED || mChargingLed == ChargingLed.CONSTANT) &&
+                            !mPendingNotif) {
                         resetLight(LIGHT_ID_NOTIFICATIONS);
                     }
                 }
@@ -401,18 +402,20 @@ public class ModDisplay {
                             mWakeLock = null;
                         }
 
-                        if (!mPendingNotif && mChargingLed == ChargingLed.EMULATED && mCharging) {
+                        if (!mPendingNotif && mCharging &&
+                                (mChargingLed == ChargingLed.EMULATED || mChargingLed == ChargingLed.CONSTANT)) {
                             int cappedLevel = Math.min(Math.max(mBatteryLevel, 15), 90);
                             float hue = (cappedLevel - 15) * 1.6f;
                             param.args[0] = Color.HSVToColor(0xff, new float[]{ hue, 1.f, 1.f });
                             param.args[1] = 1;
-                            param.args[2] = 10000;
-                            param.args[3] = 1;
+                            param.args[2] = mChargingLed == ChargingLed.CONSTANT ? Integer.MAX_VALUE : 10000;
+                            param.args[3] = mChargingLed == ChargingLed.CONSTANT ? 0 : 1;
                             param.args[4] = 0;
                         }
                     }
 
-                    if (id == LIGHT_ID_BATTERY && mChargingLed == ChargingLed.EMULATED) {
+                    if (id == LIGHT_ID_BATTERY && 
+                            (mChargingLed == ChargingLed.EMULATED || mChargingLed == ChargingLed.CONSTANT)) {
                         param.setResult(null);
                     }
                 }

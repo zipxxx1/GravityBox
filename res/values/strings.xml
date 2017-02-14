@@ -1705,6 +1705,7 @@
     <string name="pref_charging_led_title">Battery charging LED</string>
     <string name="charging_led_default">Default</string>
     <string name="charging_led_emulated">Emulated</string>
+    <string name="charging_led_constant">Constant (requires LED driver support)</string>
     <string name="charging_led_disabled">Disabled</string>
 
     <!-- Heads up snooze timer -->
