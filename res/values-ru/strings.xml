@@ -2007,4 +2007,7 @@
     <string name="pref_lc_active_screen_ignore_update_summary">Активный экран не будет срабатывать при 
         обновлении существующих уведомлений</string>
 
+    <!-- Clock: Show seconds -->
+    <string name="pref_statusbar_clock_show_seconds_title">Показать секунды</string>
+
 </resources>
