@@ -31,11 +31,15 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.format.DateFormat;
 import android.text.style.RelativeSizeSpan;
+import android.view.Display;
 import android.view.View;
+import android.view.View.OnAttachStateChangeListener;
 import android.widget.TextView;
 
 public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver {
@@ -51,6 +55,9 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
     private boolean mClockHidden;
     private float mDowSize;
     private float mAmPmSize;
+    private boolean mShowSeconds;
+    private SimpleDateFormat mSecondsFormat;
+    private Handler mSecondsHandler;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -64,6 +71,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         mClockHidden = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_HIDE, false);
         mDowSize = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_DOW_SIZE, 70) / 100f;
         mAmPmSize = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_AMPM_SIZE, 70) / 100f;
+        mShowSeconds = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_SHOW_SECONDS, false);
     }
 
     public TextView getClock() {
@@ -91,6 +99,18 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
             mClock.setVisibility(View.GONE);
         }
 
+        // update seconds handler when attached state changes
+        mClock.addOnAttachStateChangeListener(new OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {
+                updateSecondsHandler();
+            }
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                updateSecondsHandler();
+            }
+        });
+
         hookGetSmallTime();
     }
 
@@ -102,9 +122,33 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         }
     }
 
+    private void updateSecondsHandler() {
+        if (mClock == null) return;
+
+        if (mShowSeconds && mClock.getDisplay() != null) {
+            mSecondsHandler = new Handler();
+            if (mClock.getDisplay().getState() == Display.STATE_ON && !mClockHidden) {
+                mSecondsHandler.postAtTime(mSecondTick,
+                        SystemClock.uptimeMillis() / 1000 * 1000 + 1000);
+            }
+        } else if (mSecondsHandler != null) {
+            mSecondsHandler.removeCallbacks(mSecondTick);
+            mSecondsHandler = null;
+            updateClock();
+        }
+    }
+
     public void setClockVisibility(boolean show) {
         if (mClock != null) {
             mClock.setVisibility(show && !mClockHidden ? View.VISIBLE : View.GONE);
+            if (mClock.getVisibility() == View.VISIBLE) { 
+                if (mSecondsHandler != null) {
+                    mSecondsHandler.postAtTime(mSecondTick,
+                            SystemClock.uptimeMillis() / 1000 * 1000 + 1000);
+                }
+            } else if (mSecondsHandler != null) {
+                mSecondsHandler.removeCallbacks(mSecondTick);
+            }
         }
     }
 
@@ -136,8 +180,19 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                     Object sbClock = XposedHelpers.getAdditionalInstanceField(param.thisObject, "sbClock");
                     if (DEBUG) log("Is statusbar clock: " + (sbClock == null ? "false" : "true"));
                     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+                    boolean is24 = DateFormat.is24HourFormat(mClock.getContext());
                     String clockText = param.getResult().toString();
                     if (DEBUG) log("Original clockText: '" + clockText + "'");
+                    // generate fresh base time text if seconds enabled
+                    if (mShowSeconds) {
+                        if (mSecondsFormat == null) {
+                            mSecondsFormat = new SimpleDateFormat(
+                                    DateFormat.getBestDateTimePattern(
+                                    Locale.getDefault(), is24 ? "Hms" : "hms"));
+                        }
+                        clockText = mSecondsFormat.format(calendar.getTime());
+                        if (DEBUG) log("New clock text with seconds: " + clockText);
+                    }
                     String amPm = calendar.getDisplayName(
                             Calendar.AM_PM, Calendar.SHORT, Locale.getDefault());
                     if (DEBUG) log("Locale specific AM/PM string: '" + amPm + "'");
@@ -147,9 +202,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                         clockText = clockText.replace(amPm, "").trim();
                         if (DEBUG) log("AM/PM removed. New clockText: '" + clockText + "'");
                         amPmIndex = -1;
-                    } else if (!mAmPmHide 
-                                && !DateFormat.is24HourFormat(mClock.getContext()) 
-                                && amPmIndex == -1) {
+                    } else if (!mAmPmHide && !is24 && amPmIndex == -1) {
                         // insert AM/PM if missing
                         if(Locale.getDefault().equals(Locale.TAIWAN) || Locale.getDefault().equals(Locale.CHINA)) {
                             clockText = amPm + " " + clockText;
@@ -211,6 +264,14 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         }
     }
 
+    private final Runnable mSecondTick = new Runnable() {
+        @Override
+        public void run() {
+            updateClock();
+            mSecondsHandler.postAtTime(this, SystemClock.uptimeMillis() / 1000 * 1000 + 1000);
+        }
+    };
+
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         if (mClock != null && (flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
@@ -250,6 +311,24 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                 mClockShowDate = intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_DATE);
                 updateClock();
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_SHOW_SECONDS)) {
+                mShowSeconds = intent.getBooleanExtra(GravityBoxSettings.EXTRA_CLOCK_SHOW_SECONDS, false);
+                updateSecondsHandler();
+            }
+        }
+        if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+            if (mSecondsHandler != null && !mClockHidden) {
+                mSecondsHandler.postAtTime(mSecondTick,
+                        SystemClock.uptimeMillis() / 1000 * 1000 + 1000);
+            }
+        }
+        if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+            if (mSecondsHandler != null) {
+                mSecondsHandler.removeCallbacks(mSecondTick);
+            }
+        }
+        if (intent.getAction().equals(Intent.ACTION_CONFIGURATION_CHANGED)) {
+            mSecondsFormat = null;
         }
     }
 }

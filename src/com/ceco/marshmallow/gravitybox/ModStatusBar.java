@@ -650,6 +650,7 @@ public class ModStatusBar {
                     intentFilter.addAction(Intent.ACTION_SCREEN_ON);
                     intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
+                    intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
                     if (Utils.isMtkDevice()) {
                         intentFilter.addAction(BatteryStyleController.ACTION_MTK_BATTERY_PERCENTAGE_SWITCH);
                     }
