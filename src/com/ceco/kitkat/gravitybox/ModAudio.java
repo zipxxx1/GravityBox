@@ -39,9 +39,6 @@ public class ModAudio {
     private static final String CLASS_AUDIO_SERVICE = "android.media.AudioService";
     private static final boolean DEBUG = false;
 
-    private static final int STREAM_MUSIC = 3;
-    private static final int DEFAULT_STREAM_TYPE_OVERRIDE_DELAY_MS = 5000;
-
     private static boolean mSafeMediaVolumeEnabled;
     private static boolean mVolForceMusicControl;
     private static boolean mSwapVolumeKeys;
@@ -87,9 +84,10 @@ public class ModAudio {
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS, false)) {
                         int[] maxStreamVolume = (int[])
                                 XposedHelpers.getStaticObjectField(classAudioService, "MAX_STREAM_VOLUME");
-                        maxStreamVolume[STREAM_MUSIC] = prefs.getInt(
+                        maxStreamVolume[AudioManager.STREAM_MUSIC] = prefs.getInt(
                                 GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS_VALUE, 30);
-                        if (DEBUG) log("MAX_STREAM_VOLUME for music stream set to " + maxStreamVolume[STREAM_MUSIC]);
+                        if (DEBUG) log("MAX_STREAM_VOLUME for music stream set to " + 
+                                maxStreamVolume[AudioManager.STREAM_MUSIC]);
                     }
                 }
 
@@ -168,25 +166,13 @@ public class ModAudio {
             XposedHelpers.findAndHookMethod(classAudioService, "getActiveStreamType",
                     int.class, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mVolForceMusicControl &&
-                            (Integer) param.args[0] == AudioManager.USE_DEFAULT_STREAM_TYPE) {
-                        final boolean voiceCapable = XposedHelpers.getBooleanField(
-                                param.thisObject, "mVoiceCapable");
-                        final boolean isInComm = (Boolean) XposedHelpers.callMethod(
-                                param.thisObject, "isInCommunication");
-                        final boolean activeMusic = (Boolean) XposedHelpers.callMethod(
-                                param.thisObject, "isAfMusicActiveRecently",
-                                DEFAULT_STREAM_TYPE_OVERRIDE_DELAY_MS);
-                        final Object mediaFocusControl = XposedHelpers.getObjectField(
-                                param.thisObject, "mMediaFocusControl");
-                        final boolean isRemoteMusic = (Boolean) XposedHelpers.callMethod(
-                                mediaFocusControl, "checkUpdateRemoteStateIfActive",
-                                    STREAM_MUSIC);
-
-                        if (voiceCapable && !isInComm && !activeMusic && !isRemoteMusic) {
-                            param.setResult(STREAM_MUSIC);
-                            if (DEBUG) log("getActiveStreamType: Forcing music stream");
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mVolForceMusicControl) {
+                        int activeStreamType = (int) param.getResult();
+                        if (activeStreamType == AudioManager.STREAM_RING ||
+                                activeStreamType == AudioManager.STREAM_NOTIFICATION) {
+                            param.setResult(AudioManager.STREAM_MUSIC);
+                            if (DEBUG) log("getActiveStreamType: Forcing STREAM_MUSIC");
                         }
                     }
                 }
