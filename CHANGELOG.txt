@@ -1,3 +1,14 @@
+Changelog 6.3.3 - 18/02/2017
+--------------------------------------
+- Lockscreen shortcuts: added option for showing notification count badges
+- Statusbar clock: added option for showing seconds
+- Power tweaks: added Constant battery charging LED mode (requires LED driver support)
+- Media tweaks:
+--- improved Force music volume control option
+--- restrict MX player pro from utilizing swapped volume keys (thanks to Forever-Young)
+- Fingeprint Launcher: improved quick tap/swipe detection on some devices
+- Updated Russian translations (thanks to gaich)
+
 Changelog 6.3.2 - 25/12/2016
 --------------------------------------
 - Added support for additional OP devices running OOS 3.5
