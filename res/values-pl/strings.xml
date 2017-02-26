@@ -1262,8 +1262,7 @@
     <string name="battery_style_circle_dashed_percent">Przerywane koło z procentami</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Dziękujemy za wsparcie. Funkcje premium zostaną odblokowane po ponownym uruchomieniu GravityBox. 
-        GravityBox pozostanie odblokowany w przypadku odinstalowania unlockera po upływie terminu zwrotu.</string>
+    <string name="premium_unlocked_message">Dziękujemy za wsparcie. Funkcje premium zostaną odblokowane po ponownym uruchomieniu GravityBox.</string>
     <string name="pref_about_get_unlocker_title">Pobierz GB Unlocker</string>
     <string name="pref_about_get_unlocker_summary">Nie posiadasz PayPal? Wystarczy kliknąć tutaj, aby pobrać ze sklepu Google Play aplikację do odblokowania funkcji premium GravityBox.</string>
 

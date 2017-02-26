@@ -1293,8 +1293,7 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="battery_style_circle_dashed_percent">Çizgili yuvarlak yüzdeli pil göstergesi</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Desteğiniz için teşekkürler. Ücretli özellikler sistem yeniden başlatıldıktan sonra açılacaktır. 
-        Unlocker\'ı iade süresi dolduktan sonra kaldırmanız GravityBox\'ı kilidi açık tutmaya devam ettirecektir.</string>
+    <string name="premium_unlocked_message">Desteğiniz için teşekkürler. Ücretli özellikler sistem yeniden başlatıldıktan sonra açılacaktır.</string>
     <string name="pref_about_get_unlocker_title">Kilidi aç</string>
     <string name="pref_about_get_unlocker_summary">PayPal hesabınız yok mu? Buraya dokunup Play Store uygulamasını indirerek ücretli özelliklerin kilidi açabilirsiniz.</string>
 

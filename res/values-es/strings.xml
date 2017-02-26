@@ -1305,8 +1305,7 @@
     <string name="battery_style_circle_dashed_percent">Batería circular punteada con porcentaje</string>
     
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Gracias por tu aportación. Las características Premium se desbloquearán tras reiniciar GravityBox. 
-        Asegúrate de mantener la app "GravityBox Unlocker" instalada durante al menos 120 minutos.</string>
+    <string name="premium_unlocked_message">Gracias por tu aportación. Las características Premium se desbloquearán tras reiniciar GravityBox.</string>
     <string name="pref_about_get_unlocker_title">Obtener "GravityBox Unlocker"</string>
     <string name="pref_about_get_unlocker_summary">¿No usas PayPal? Pulsa aquí para obtener el desbloqueador de características premium desde la Play Store.</string>
 
