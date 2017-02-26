@@ -1,3 +1,9 @@
+Changelog 6.3.4 - 26/02/2017
+--------------------------------------
+- preparations for upcoming changes in Google Play refund policy
+- all upcoming GravityBox versions will allow premium features only while Unlocker is installed
+- PayPal method is preserved but requires reactivation using valid transaction ID
+
 Changelog 6.3.3 - 18/02/2017
 --------------------------------------
 - Lockscreen shortcuts: added option for showing notification count badges
