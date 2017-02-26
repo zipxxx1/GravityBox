@@ -645,4 +645,9 @@
     <string name="lc_active_screen_mode_nothing">Sadece ekranı aç</string>
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
 
+    <!-- Premium feature unlock via unlocker app -->
+    <string name="premium_unlocked_message">Desteğiniz için teşekkürler. Ücretli özellikler sistem yeniden başlatıldıktan sonra açılacaktır.</string>
+    <string name="pref_about_get_unlocker_title">Kilidi aç</string>
+    <string name="pref_about_get_unlocker_summary">"PayPal hesabınız yok mu? Buraya dokunup Play Store uygulamasını indirerek kilidi açabilirsiniz."</string>
+
 </resources>

@@ -1467,10 +1467,9 @@
     <string name="battery_style_circle_dashed_percent">Gestrichelt rund mit Prozentwert</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Danke für Ihre Unterstützung. Premium Funktionen werden freigeschaltet, nachdem GravityBox neugestartet wurde. 
-        Stellen Sie sicher, dass GravityBox Unlocker für mindestens 120 Minuten installiert bleibt.</string>
-    <string name="pref_about_get_unlocker_title">Erhalte Unlocker</string>
-    <string name="pref_about_get_unlocker_summary">Sie haben kein PayPal? Klicken Sie einfach hier um die GravityBox Premium Funktionen über den PlayStore freizuschalten.</string>
+    <string name="premium_unlocked_message">Danke für Ihre Unterstützung. Die Premiumfunktionen werden freigeschaltet nachdem GravityBox neugestartet wurde.</string>
+    <string name="pref_about_get_unlocker_title">Unlocker erwerben</string>
+    <string name="pref_about_get_unlocker_summary">Sie haben kein PayPal-Konto? Klicken Sie hier um die Premiumfunktionen über den Play Store freizuschalten.</string>
 
     <!-- Navbar custom key: alternate icon -->
     <string name="pref_navbar_custom_key_icon_title">Verwende alternatives Symbol</string>

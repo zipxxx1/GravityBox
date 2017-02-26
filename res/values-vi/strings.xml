@@ -1477,4 +1477,9 @@ Dưới đây là công-tắc tổng. Sau khi bật, bạn có thể tuỳ chỉ
     <string name="pref_force_ltr_direction_title">Luôn hiển thị từ trái sang phải</string>
     <string name="pref_force_ltr_direction_summary">Hiển thị bố cục từ trái sang phải đối với cả ngôn ngữ phải sang trái (cần khởi động lại)</string>
 
+    <!-- Premium feature unlock via unlocker app -->
+    <string name="premium_unlocked_message">Cảm ơn sự ủng hộ của bạn. Tính năng Premium sẽ được mở khóa sau khi khởi động lại hệ thống.</string>
+    <string name="pref_about_get_unlocker_title">Tải Unlocker</string>
+    <string name="pref_about_get_unlocker_summary">Chưa có PayPal? Bấm vào đây để tải GravityBox Premium thông qua CH Play.</string>
+
 </resources>

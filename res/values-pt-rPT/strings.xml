@@ -1482,8 +1482,7 @@
     <string name="battery_style_circle_dashed_percent">Indicador de bateria circular e tracejado com percentagem</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Obrigado pelo suporte. As funcionalidades avançadas serão desbloqueadas após reiniciar o sistema. 
-        As funcionalidade avançadas do Gravitybox permanecerão desbloqueadas, caso opte por desinstalar a aplicação de desbloqueio após expirar o período experimental.</string>
+    <string name="premium_unlocked_message">Obrigado pelo suporte. As funcionalidades avançadas serão desbloqueadas após reiniciar o sistema.</string>
     <string name="pref_about_get_unlocker_title">Obter desbloqueador</string>
     <string name="pref_about_get_unlocker_summary">Não tem PayPal? Carregue aqui para obter a aplicação de desbloqueio das funcionalidades avançadas do GravityBox a partir da Play Store.</string>
 
