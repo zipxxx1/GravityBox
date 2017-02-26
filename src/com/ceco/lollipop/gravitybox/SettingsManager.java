@@ -269,16 +269,4 @@ public class SettingsManager {
     public void resetUuid() {
         resetUuid(null);
     }
-
-    public long getUnlockerTimestamp() {
-        String prefsName = mContext.getPackageName() + "_preferences";
-        SharedPreferences prefs = mContext.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
-        return prefs.getLong("gb_unlocker_tstamp", 0);
-    }
-
-    public void setUnlockerTimestamp(long ms) {
-        String prefsName = mContext.getPackageName() + "_preferences";
-        SharedPreferences prefs = mContext.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
-        prefs.edit().putLong("gb_unlocker_tstamp", ms).commit();
-    }
 }

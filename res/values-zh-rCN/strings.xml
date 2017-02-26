@@ -1346,8 +1346,7 @@
     <string name="battery_style_circle_dashed_percent">虚线圆圈电池含百分比</string>
     
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">感谢您的支持，GravityBox高级功能将在重新启动后解锁
-        退款期限到期后GravityBox将会卸载解锁器并锁定</string>
+    <string name="premium_unlocked_message">感谢您的支持，GravityBox高级功能将在重新启动后解锁</string>
     <string name="pref_about_get_unlocker_title">获取解锁器</string>
     <string name="pref_about_get_unlocker_summary">没有PayPal？只需点击这里从Google Play市场购买GravityBox解锁器来解锁高级功能</string>
 

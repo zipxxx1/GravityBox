@@ -42,7 +42,9 @@ public class SystemPropertyProvider {
     public static final String ACTION_REGISTER_UUID = 
             "gravitybox.intent.action.ACTION_REGISTER_UUID";
     public static final String EXTRA_UUID = "uuid";
+    public static final String EXTRA_UUID_TYPE = "uuidType";
     private static final String SETTING_GRAVITYBOX_UUID = "gravitybox_uuid";
+    private static final String SETTING_GRAVITYBOX_UUID_TYPE = "gravitybox_uuid_type";
     private static final String SETTING_UNC_TRIAL_COUNTDOWN = "gravitybox_unc_trial_countdown";
 
     private static String mSettingsUuid;
@@ -118,6 +120,8 @@ public class SystemPropertyProvider {
                                     data.putBoolean("uuidRegistered", (mSettingsUuid != null &&
                                             mSettingsUuid.equals(Settings.System.getString(
                                                     cr, SETTING_GRAVITYBOX_UUID))));
+                                    data.putString("uuidType", Settings.System.getString(
+                                            cr, SETTING_GRAVITYBOX_UUID_TYPE));
                                     data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
                                             SETTING_UNC_TRIAL_COUNTDOWN, 50));
                                     data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
@@ -129,6 +133,7 @@ public class SystemPropertyProvider {
                                         log("unplugTurnsOnScreen: " + data.getBoolean("unplugTurnsOnScreen"));
                                         log("defaultNotificationLedOff: " + data.getInt("defaultNotificationLedOff"));
                                         log("uuidRegistered: " + data.getBoolean("uuidRegistered"));
+                                        log("uuidType: " + data.getString("uuidType"));
                                         log("uncTrialCountdown: " + data.getInt("uncTrialCountdown"));
                                         log("hasMsimSupport: " + data.getBoolean("hasMsimSupport"));
                                         log("xposedBridgeVersion: " + data.getInt("xposedBridgeVersion"));
@@ -136,8 +141,11 @@ public class SystemPropertyProvider {
                                     receiver.send(RESULT_SYSTEM_PROPERTIES, data);
                                 } else if (intent.getAction().equals(ACTION_REGISTER_UUID) && 
                                             intent.hasExtra(EXTRA_UUID) && 
-                                            intent.getStringExtra(EXTRA_UUID).equals(mSettingsUuid)) {
+                                            intent.getStringExtra(EXTRA_UUID).equals(mSettingsUuid) &&
+                                            intent.hasExtra(EXTRA_UUID_TYPE)) {
                                     Settings.System.putString(cr, SETTING_GRAVITYBOX_UUID, mSettingsUuid);
+                                    Settings.System.putString(cr, SETTING_GRAVITYBOX_UUID_TYPE,
+                                            intent.getStringExtra(EXTRA_UUID_TYPE));
                                 }
                             }
                         }, intentFilter);

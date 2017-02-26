@@ -1344,8 +1344,7 @@
     <string name="battery_style_circle_dashed_percent">Vòng tròn không kín với phần trăm</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Cảm ơn sự ủng hộ của bạn. Tính năng Premium sẽ được mở khóa sau khi khởi động lại hệ thống. 
-        Gỡ cài đặt unlocker sau khi hết thời gian hoàn phí sẽ giữ GravityBox được mở khóa.</string>
+    <string name="premium_unlocked_message">Cảm ơn sự ủng hộ của bạn. Tính năng Premium sẽ được mở khóa sau khi khởi động lại hệ thống.</string>
     <string name="pref_about_get_unlocker_title">Tải Unlocker</string>
     <string name="pref_about_get_unlocker_summary">Chưa có PayPal? Bấm vào đây để tải GravityBox Premium thông qua CH Play.</string>
 

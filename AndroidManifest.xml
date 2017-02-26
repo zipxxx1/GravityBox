@@ -42,6 +42,7 @@
         android:name="gravitybox.permission.UNLOCK"
         android:label="Permission to unlock GravityBox premium features"
         android:protectionLevel="signature" />
+    <uses-permission android:name="gravitybox.permission.UNLOCK" />
 
     <application
         android:name="com.ceco.lollipop.gravitybox.GravityBoxApplication"
@@ -191,6 +192,7 @@
             android:permission="gravitybox.permission.UNLOCK">
             <intent-filter>
                  <action android:name="gravitybox.intent.action.UNLOCK" />
+                 <action android:name="gravitybox.intent.action.CHECK_POLICY" />
             </intent-filter>
         </receiver>
 

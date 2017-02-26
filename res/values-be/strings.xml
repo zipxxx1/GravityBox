@@ -1342,8 +1342,7 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="battery_style_circle_dashed_percent">Кола з кропак і адсоткамі</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Дзякуй за Вашу падтрымку. Прэміум-функцыі будуць разблакаваны пасля перазагрузкі сістэмы.
-Пры выдаленні ключа пасля заканчэння перыяду звароту аплаты, разблакоўка функцый GravityBox захаваецца.</string>
+    <string name="premium_unlocked_message">Дзякуй за Вашу падтрымку. Прэміум-функцыі будуць разблакаваны пасля перазагрузкі сістэмы.</string>
     <string name="pref_about_get_unlocker_title">Атрымаць ключ разблакоўкі</string>
     <string name="pref_about_get_unlocker_summary">Няма рахунка ў PayPal? Проста націсніце тут для атрымання ключа разблакоўкі прэміум-функцый GravityBox з Play Store.</string>
 

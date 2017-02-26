@@ -1319,8 +1319,7 @@
     <string name="battery_style_circle_dashed_percent">虛線圓形電量指示器 (包含電量百分比)</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">感謝您的支持。當重新啟動 GravityBox 後進階功能將會被解鎖。
-      請注意，安裝 GravityBox 解鎖器後可能要 120 分鐘才能順利解鎖全部功能。</string>
+    <string name="premium_unlocked_message">感謝您的支持。當重新啟動 GravityBox 後進階功能將會被解鎖。</string>
     <string name="pref_about_get_unlocker_title">取得 GravityBox 解鎖器</string>
     <string name="pref_about_get_unlocker_summary">沒有 PayPal 帳號？請按此到 Play 商店購買 GravityBox 解鎖器來解鎖所有進階功能</string>
 

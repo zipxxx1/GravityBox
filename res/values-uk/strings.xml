@@ -1346,7 +1346,7 @@
     <string name="battery_style_circle_dashed_percent">Коло з крапок та відсотками</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Дякуємо за вашу підтримку. Розширені функції будуть розблоковані після перезавантаження системи. При видалені ключа після закінчення терміну повернення оплати, розблокування функцій GravityBox залишиться.</string>
+    <string name="premium_unlocked_message">Дякуємо за вашу підтримку. Розширені функції будуть розблоковані після перезавантаження системи.</string>
 
     <string name="pref_about_get_unlocker_title">Отримати ключ розблокування</string>
     <string name="pref_about_get_unlocker_summary">Немає рахунку в PayPal? Просто натисніть тут для отримання ключа розблокування розширених функцій з Play Store.</string>

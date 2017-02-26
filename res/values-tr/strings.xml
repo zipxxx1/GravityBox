@@ -1287,7 +1287,7 @@
     <string name="battery_style_circle_dashed_percent">Çizgili yuvarlak yüzdeli pil göstergesi</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Desteğiniz için teşekkür ederiz. GravityBox yeniden başlatıldığında kilit açılacaktır. GravityBox Unlocker uygulamasının en az 20 dakika yüklü olduğundan emin olun.</string>
+    <string name="premium_unlocked_message">Desteğiniz için teşekkürler. Ücretli özellikler sistem yeniden başlatıldıktan sonra açılacaktır.</string>
     <string name="pref_about_get_unlocker_title">Kilidi aç</string>
     <string name="pref_about_get_unlocker_summary">PayPal hesabın yok mu? Buraya basarak Play Store uygulamasını indirerek kilidi açabilirsiniz.</string>
 

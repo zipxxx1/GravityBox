@@ -1075,8 +1075,7 @@
     <string name="battery_style_circle_dashed">점선 원 배터리</string>
     <string name="battery_style_circle_dashed_percent">점선 원 배터리 (퍼센트 표시)</string>
 
-    <string name="premium_unlocked_message">지원해주셔서 감사드립니다! 모든 프리미엄 기능은 재시작 후에 사용 가능합니다.
-        환불 가능 시간이 지난 후 Unlocker를 삭제하여도 GravityBox의 프리미엄 기능은 사용 가능합니다.</string>
+    <string name="premium_unlocked_message">지원해주셔서 감사드립니다! 모든 프리미엄 기능은 재시작 후에 사용 가능합니다.</string>
     <string name="pref_about_get_unlocker_title">Unlocker 얻기</string>
     <string name="pref_about_get_unlocker_summary">PayPal 계정이 없으신가요? 여기를 눌러 플레이 스토어에서 GravityBox 프리미엄 기능 Unlocker를 구매하세요!</string>
 

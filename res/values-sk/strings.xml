@@ -1318,8 +1318,7 @@
     <string name="battery_style_circle_dashed_percent">Čiarkovaný kruh s percentami</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Ďakujeme za podporu. Prémiové funkcie budú odomknuté po reštartovaní systému. 
-        GravityBox ostane odomknutý v prípade odinštalovania odomykacej aplikácie po vypršaní doby jej refundácie.</string>
+    <string name="premium_unlocked_message">Ďakujeme za podporu. Prémiové funkcie budú odomknuté po reštartovaní systému.</string>
     <string name="pref_about_get_unlocker_title">Získať odomykaciu aplikáciu</string>
     <string name="pref_about_get_unlocker_summary">Nemáte PayPal? Jednoducho ťuknite sem pre získanie odomykacej aplikácie prémiových funkcií z obchodu Play.</string>
 
