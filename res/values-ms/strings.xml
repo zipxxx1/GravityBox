@@ -1385,4 +1385,9 @@
     <string name="pref_lockscreen_pin_sramble_title">PIN campuran</string>
     <string name="pref_lockscreen_pin_sramble_summary">Campur susunan PIN ketika membuka peranti</string>
 
+    <!-- Premium feature unlock via unlocker app -->
+    <string name="premium_unlocked_message">Terima kasih atas sokongan anda. Modifikasi Premium akan dibuka selepas sistem di restart.</string>
+    <string name="pref_about_get_unlocker_title">Dapatkan kunci premium</string>
+    <string name="pref_about_get_unlocker_summary">Tiada PayPal? sentuh disini untuk dapatkan di playstore.</string>
+
 </resources>

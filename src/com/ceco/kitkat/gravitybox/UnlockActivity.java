@@ -15,16 +15,32 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 
 public class UnlockActivity extends Activity implements GravityBoxResultReceiver.Receiver {
     private static final String PKG_UNLOCKER = "com.ceco.gravitybox.unlocker";
+    private static final String ACTION_UNLOCK = "gravitybox.intent.action.UNLOCK";
+    private static final String ACTION_CHECK_POLICY = "gravitybox.intent.action.CHECK_POLICY";
+
+    protected interface CheckPolicyHandler {
+        void onPolicyResult(boolean ok);
+    }
+    private static CheckPolicyHandler sCheckPolicyHandler; 
 
     private GravityBoxResultReceiver mReceiver;
     private Handler mHandler;
     private Dialog mAlertDialog;
     private ProgressDialog mProgressDialog;
+
+    private static Runnable sCheckPolicyExpired = new Runnable() {
+        @Override
+        public void run() {
+            if (sCheckPolicyHandler != null) {
+                sCheckPolicyHandler.onPolicyResult(false);
+                sCheckPolicyHandler = null;
+            }
+        }
+    };
 
     private Runnable mGetSystemPropertiesTimeout = new Runnable() {
         @Override
@@ -88,12 +104,12 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
             mHandler = null;
         }
         dismissProgressDialog();
-        Log.d("GravityBox", "result received: resultCode=" + resultCode);
         if (resultCode == SystemPropertyProvider.RESULT_SYSTEM_PROPERTIES) {
             dismissProgressDialog();
             Intent intent = new Intent(SystemPropertyProvider.ACTION_REGISTER_UUID);
             intent.putExtra(SystemPropertyProvider.EXTRA_UUID,
                     SettingsManager.getInstance(this).getOrCreateUuid());
+            intent.putExtra(SystemPropertyProvider.EXTRA_UUID_TYPE, "Unlocker");
             sendBroadcast(intent);
             AlertDialog.Builder builder = new AlertDialog.Builder(
                     new ContextThemeWrapper(UnlockActivity.this, android.R.style.Theme_Holo_Dialog))
@@ -130,12 +146,19 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
     public static class UnlockReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getParcelableExtra("receiver") instanceof ResultReceiver) {
-                ((ResultReceiver)intent.getParcelableExtra("receiver")).send(0, null);
+            if (intent.getAction().equals(ACTION_UNLOCK)) {
+                if (intent.getParcelableExtra("receiver") instanceof ResultReceiver) {
+                    ((ResultReceiver)intent.getParcelableExtra("receiver")).send(0, null);
+                }
+                Intent i = new Intent(context, UnlockActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
+            } else if (intent.getAction().equals(ACTION_CHECK_POLICY)) {
+                if (sCheckPolicyHandler != null) {
+                    sCheckPolicyHandler.onPolicyResult(true);
+                    sCheckPolicyHandler = null;
+                }
             }
-            Intent i = new Intent(context, UnlockActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
         }
     }
 
@@ -148,12 +171,11 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
 
             if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED) &&
                     !intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) {
-                SettingsManager.getInstance(context).setUnlockerTimestamp(System.currentTimeMillis());
                 maybeRunUnlocker(context);
             }
 
             if (intent.getAction().equals(Intent.ACTION_PACKAGE_FULLY_REMOVED)) {
-                checkPolicyOk(context);
+                SettingsManager.getInstance(context).resetUuid();
             }
         }
     }
@@ -161,7 +183,7 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
     protected static void maybeRunUnlocker(Context context) {
         try {
             Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setPackage("com.ceco.gravitybox.unlocker");
+            intent.setPackage(PKG_UNLOCKER);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         } catch (Exception e) { 
@@ -169,26 +191,18 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
         }
     }
 
-    @SuppressWarnings("unused")
-    protected static boolean checkPolicyOk(Context context) {
-        boolean unlockerInstalled = true;
+    protected static void checkPolicyOk(Context context, CheckPolicyHandler handler) {
+        sCheckPolicyHandler = handler;
         try {
             PackageInfo pkgInfo = context.getPackageManager()
                     .getPackageInfo(PKG_UNLOCKER, 0);
+            new Handler().postDelayed(sCheckPolicyExpired, 2000);
+            Intent intent = new Intent(ACTION_CHECK_POLICY);
+            intent.setPackage(pkgInfo.packageName);
+            context.sendBroadcast(intent);
         } catch (NameNotFoundException e) {
-            unlockerInstalled = false;
+            sCheckPolicyHandler.onPolicyResult(false);
+            sCheckPolicyHandler = null;
         }
-
-        if (!unlockerInstalled) {
-            long addedMs = SettingsManager.getInstance(context).getUnlockerTimestamp();
-            long removedMs = System.currentTimeMillis();
-            if ((removedMs - addedMs) < 7200000) {
-                Log.d("GravityBox", "Unlocker uninstalled too early");
-                SettingsManager.getInstance(context).resetUuid();
-                return false;
-            }
-        }
-
-        return true;
     }
 }

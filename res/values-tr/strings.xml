@@ -954,7 +954,7 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="pref_data_traffic_active_mobile_only_title">Sadece mobil veri</string>
     <string name="battery_style_circle_dashed">Çizgili yuvarlak gösterge</string>
     <string name="battery_style_circle_dashed_percent">Çizgili yuvarlak yüzdeli pil göstergesi</string>
-    <string name="premium_unlocked_message">Desteğiniz için teşekkürler. GravityBox yeniden başlatıldığında kilit açılacaktır.</string>
+    <string name="premium_unlocked_message">Desteğiniz için teşekkürler. Ücretli özellikler sistem yeniden başlatıldıktan sonra açılacaktır.</string>
     <string name="pref_about_get_unlocker_title">Kilidi aç</string>
     <string name="pref_about_get_unlocker_summary">"PayPal hesabınız yok mu? Buraya dokunup Play Store uygulamasını indirerek kilidi açabilirsiniz."</string>
     <string name="pref_navbar_custom_key_icon_title">Alternatif simge kullan</string>

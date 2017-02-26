@@ -1240,8 +1240,7 @@
     <string name="battery_style_circle_dashed">サークルアイコン(破線)</string>
     <string name="battery_style_circle_dashed_percent">サークルアイコン(破線)＋％</string>
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">サポートしてくださりありがとうございます。GravityBoxを再起動するとプレミアム機能が使えるようになります。
-        GravityBox Unlockerを120分以上インストールしたままにしてください。</string>
+    <string name="premium_unlocked_message">サポートしてくださりありがとうございます。GravityBoxを再起動するとプレミアム機能が使えるようになります。</string>
     <string name="pref_about_get_unlocker_title">Unlockerを入手</string>
     <string name="pref_about_get_unlocker_summary">PayPalが嫌いですか? ここをタップするとGravityBoxのプレミアム機能を使えるようにするUnlockerをPlayストアでダウンロードできます。</string>
     <!-- Navbar custom key: alternate icon -->

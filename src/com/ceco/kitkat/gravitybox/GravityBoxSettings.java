@@ -1000,6 +1000,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public boolean unplugTurnsOnScreen;
         public int defaultNotificationLedOff;
         public boolean uuidRegistered;
+        public String uuidType;
         public int uncTrialCountdown;
         public boolean hasMsimSupport;
 
@@ -1021,6 +1022,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (data.containsKey("uuidRegistered")) {
                 uuidRegistered = data.getBoolean("uuidRegistered");
+            }
+            if (data.containsKey("uuidType")) {
+                uuidType = data.getString("uuidType");
             }
             if (data.containsKey("uncTrialCountdown")) {
                 uncTrialCountdown = data.getInt("uncTrialCountdown");
@@ -2100,26 +2104,31 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefPulseNotificationDelay.setValue(delay);
             }
 
-            if (!sSystemProperties.uuidRegistered ||
-                    !UnlockActivity.checkPolicyOk(getActivity())) {
-                mPrefBackup.setEnabled(false);
-                mPrefBackup.setSummary(R.string.wsc_trans_required_summary);
-                mPrefRestore.setEnabled(false);
-                mPrefRestore.setSummary(R.string.wsc_trans_required_summary);
-                if (sSystemProperties.uncTrialCountdown == 0) {
-                    mPrefLedControl.setEnabled(false);
-                    mPrefLedControl.setSummary(String.format("%s (%s)", mPrefLedControl.getSummary(),
-                        getString(R.string.wsc_trans_required_summary)));
-                    LedSettings.lockUnc(getActivity(), true);
+            restrictFeatures();
+            if (sSystemProperties.uuidRegistered) {
+                if ("PayPal".equals(sSystemProperties.uuidType)) {
+                    unrestrictFeatures();
+                } else {
+                    UnlockActivity.checkPolicyOk(getActivity(), new UnlockActivity.CheckPolicyHandler() {
+                        @Override
+                        public void onPolicyResult(boolean ok) {
+                            if (ok) {
+                                unrestrictFeatures();
+                                mPrefs.edit().putInt("policy_counter", 0).commit();
+                            } else {
+                                int cnt = mPrefs.getInt("policy_counter", 0) + 1;
+                                if (cnt > 3) {
+                                    SettingsManager.getInstance(getActivity()).resetUuid();
+                                } else {
+                                    mPrefs.edit().putInt("policy_counter", cnt).commit();
+                                    unrestrictFeatures();
+                                }
+                            }
+                        }
+                    });
                 }
-                mPrefs.edit().putString(PREF_KEY_TRANS_VERIFICATION, null).commit();
-                mPrefTransVerification.setText(null);
-                mPrefTransVerification.getEditText().setText(null);
-                UnlockActivity.maybeRunUnlocker(getActivity());
             } else {
-                LedSettings.lockUnc(getActivity(), false);
-                mPrefCatAbout.removePreference(mPrefTransVerification);
-                mPrefCatAbout.removePreference(mPrefAboutUnlocker);
+                UnlockActivity.maybeRunUnlocker(getActivity());
             }
 
             // fix for potential invalid alpha value stored for data activity indicator color introduced in v2.9.9
@@ -2131,6 +2140,34 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             WebServiceClient.getAppSignatureHash(getActivity());
+        }
+
+        private void restrictFeatures() {
+            mPrefBackup.setEnabled(false);
+            mPrefBackup.setSummary(R.string.wsc_trans_required_summary);
+            mPrefRestore.setEnabled(false);
+            mPrefRestore.setSummary(R.string.wsc_trans_required_summary);
+            if (sSystemProperties.uncTrialCountdown == 0) {
+                mPrefLedControl.setEnabled(false);
+                mPrefLedControl.setSummary(String.format("%s (%s)", mPrefLedControl.getSummary(),
+                    getString(R.string.wsc_trans_required_summary)));
+                LedSettings.lockUnc(getActivity(), true);
+            }
+            mPrefs.edit().putString(PREF_KEY_TRANS_VERIFICATION, null).commit();
+            mPrefTransVerification.setText(null);
+            mPrefTransVerification.getEditText().setText(null);
+        }
+
+        private void unrestrictFeatures() {
+            mPrefBackup.setEnabled(true);
+            mPrefBackup.setSummary(null);
+            mPrefRestore.setEnabled(true);
+            mPrefRestore.setSummary(null);
+            mPrefLedControl.setEnabled(true);
+            mPrefLedControl.setSummary(R.string.pref_led_control_summary);
+            LedSettings.lockUnc(getActivity(), false);
+            mPrefCatAbout.removePreference(mPrefTransVerification);
+            mPrefCatAbout.removePreference(mPrefAboutUnlocker);
         }
 
         private void updatePreferences(String key) {
@@ -3912,6 +3949,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                                         Intent intent = new Intent(SystemPropertyProvider.ACTION_REGISTER_UUID);
                                         intent.putExtra(SystemPropertyProvider.EXTRA_UUID,
                                                 SettingsManager.getInstance(getActivity()).getOrCreateUuid());
+                                        intent.putExtra(SystemPropertyProvider.EXTRA_UUID_TYPE, "PayPal");
                                         getActivity().sendBroadcast(intent);
                                         getActivity().finish();
                                     }

@@ -1496,7 +1496,7 @@
     <string name="battery_style_circle_dashed_percent">Szaggatott kör akkumulátor százalékkal</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Köszönöm a támogatást. A prémium funkciók a rendszer újraindítása után kerülnek feloldásra. A feloldó (unlocker) visszatérítési határidő lejárta utáni eltávolítása esetén a Gravitybox prémium funkciói feloldott állapotban maradnak.</string>
+    <string name="premium_unlocked_message">Köszönöm a támogatást. A prémium funkciók a rendszer újraindítása után kerülnek feloldásra.</string>
     <string name="pref_about_get_unlocker_title">Feloldó beszerzése</string>
     <string name="pref_about_get_unlocker_summary">Nincs PayPal fiókja? Csak érintsen ide a GravityBox prémium funkciók feloldójának a Play Áruházból való beszerzéséhez</string>
 

@@ -528,4 +528,9 @@
     <string name="pref_qs_tile_order_title">Tiêu đề ghi</string>
     <string name="pref_qs_tile_order_summary">Cho phép gán tiêu đề ghi âm trong quicksetting</string>
 
+    <!-- Premium feature unlock via unlocker app -->
+    <string name="premium_unlocked_message">Cảm ơn sự ủng hộ của bạn. Tính năng Premium sẽ được mở khóa sau khi khởi động lại hệ thống.</string>
+    <string name="pref_about_get_unlocker_title">Tải Unlocker</string>
+    <string name="pref_about_get_unlocker_summary">Chưa có PayPal? Bấm vào đây để tải GravityBox Premium thông qua CH Play.</string>
+
 </resources>
