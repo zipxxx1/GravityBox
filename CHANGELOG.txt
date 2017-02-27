@@ -1,3 +1,19 @@
+Changelog 5.4.6 - 27/02/2017
+--------------------------------------
+- Lockscreen shortcuts: added option for showing notification count badges
+- Statusbar clock: added option for showing seconds
+- Power tweaks: added Constant battery charging LED mode (requires LED driver support)
+- Media tweaks:
+--- improved Force music volume control option
+--- restrict MX player pro from utilizing swapped volume keys (thanks to Forever-Young)
+- Improved audio quality of QuickRecording tile
+- Adjusted for compatibility with GravityBox Unlocker v1.4
+--- all upcoming GravityBox versions will allow premium features only while Unlocker remains installed
+--- PayPal method is preserved but requires reactivation using valid transaction ID
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Updated Ukrainian translations (thanks to burunduk)
+
 Changelog 5.4.5 - 06/11/2016
 --------------------------------------
 - Fixed issue preventing module from working on some devices
