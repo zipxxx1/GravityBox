@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,6 +30,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -133,10 +134,8 @@ public class ModStatusbarColor {
 
             XposedHelpers.findAndHookMethod(phoneStatusbarClass, 
                     "makeStatusBarView", new XC_MethodHook(XCallback.PRIORITY_LOWEST) {
-
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    prefs.reload();
                     mPhoneStatusBar = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
@@ -175,18 +174,16 @@ public class ModStatusbarColor {
             XposedHelpers.findAndHookMethod(statusbarIconViewClass, "getIcon",
                     CLASS_STATUSBAR_ICON, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (SysUiManagers.IconManager != null && SysUiManagers.IconManager.isColoringEnabled()) {
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (SysUiManagers.IconManager != null && SysUiManagers.IconManager.isColoringEnabled() &&
+                            XposedHelpers.getObjectField(param.thisObject, "mNotification") == null) {
                         final String iconPackage = 
                                 (String) XposedHelpers.getObjectField(param.args[0], "iconPackage");
                         if (DEBUG) log("statusbarIconView.getIcon: iconPackage=" + iconPackage);
-                        if (iconPackage == null || iconPackage.equals(PACKAGE_NAME)) {
-                            final int iconId = XposedHelpers.getIntField(param.args[0], "iconId");
-                            Drawable d = SysUiManagers.IconManager.getBasicIcon(iconId);
-                            if (d != null) {
-                                param.setResult(d);
-                                return;
-                            }
+                        Drawable d = getColoredDrawable(((View)param.thisObject).getContext(),
+                                iconPackage, XposedHelpers.getIntField(param.args[0], "iconId"));
+                        if (d != null) {
+                            param.setResult(d);
                         }
                     }
                 }
@@ -265,6 +262,28 @@ public class ModStatusbarColor {
         }
     };
 
+    private static Drawable getColoredDrawable(Context ctx, String pkg, int iconId) {
+        if (iconId == -1) return null;
+
+        Drawable d = null;
+        if (pkg == null || PACKAGE_NAME.equals(pkg)) {
+            d = SysUiManagers.IconManager.getBasicIcon(iconId);
+            if (d != null) {
+                return d;
+            }
+        }
+        d = ctx.getResources().getDrawable(iconId);
+        if (d != null) {
+            if (SysUiManagers.IconManager.isColoringEnabled()) {
+                d = SysUiManagers.IconManager.applyColorFilter(d.mutate(),
+                        PorterDuff.Mode.SRC_IN);
+            } else {
+                d.clearColorFilter();
+            }
+        }
+        return d;
+    }
+
     private static void updateStatusIcons() {
         if (mPhoneStatusBar == null) return;
         try {
@@ -279,15 +298,10 @@ public class ModStatusbarColor {
                 if (sbIcon != null) {
                     final String iconPackage =
                             (String) XposedHelpers.getObjectField(sbIcon, "iconPackage");
-                    if (iconPackage == null || iconPackage.equals(PACKAGE_NAME)) {
-                        final int resId = XposedHelpers.getIntField(sbIcon, "iconId");
-                        Drawable d = null;
-                        if (SysUiManagers.IconManager != null) {
-                            d = SysUiManagers.IconManager.getBasicIcon(resId);
-                        }
-                        if (d != null) {
-                            v.setImageDrawable(d);
-                        }
+                    Drawable d = getColoredDrawable(v.getContext(), iconPackage,
+                            XposedHelpers.getIntField(sbIcon, "iconId"));
+                    if (d != null) {
+                        v.setImageDrawable(d);
                     }
                 }
             }
