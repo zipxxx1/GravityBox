@@ -17,6 +17,7 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
+import com.ceco.lollipop.gravitybox.PhoneWrapper;
 import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -56,6 +57,7 @@ public class GravityBoxTile extends QsTile {
     public boolean handleLongClick() {
         Intent i = new Intent();
         i.setClassName(GravityBox.PACKAGE_NAME, TileOrderActivity.class.getName());
+        i.putExtra(TileOrderActivity.EXTRA_HAS_MSIM_SUPPORT, PhoneWrapper.hasMsimSupport());
         startSettingsActivity(i);
         return true;
     }

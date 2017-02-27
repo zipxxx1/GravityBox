@@ -56,6 +56,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     public static final String PREF_KEY_TILE_SECURED = "pref_qs_tile_secured";
     public static final String PREF_KEY_TILE_DUAL = "pref_qs_tile_dual";
     public static final String EXTRA_QS_ORDER_CHANGED = "qsTileOrderChanged";
+    public static final String EXTRA_HAS_MSIM_SUPPORT = "qsHasMsimSupport";
 
     private ListView mTileList;
     private TileAdapter mTileAdapter;
@@ -168,6 +169,15 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         }
     }
 
+    private boolean hasMsimSupport() {
+        if (GravityBoxSettings.sSystemProperties != null)
+            return GravityBoxSettings.sSystemProperties.hasMsimSupport;
+        else if (getIntent() != null && getIntent().hasExtra(EXTRA_HAS_MSIM_SUPPORT))
+            return getIntent().getBooleanExtra(EXTRA_HAS_MSIM_SUPPORT, false);
+        else
+            return false;
+    }
+
     public static String getDefaultTileList(Context gbContext) {
         try {
             return Utils.join(gbContext.getResources().getStringArray(
@@ -244,9 +254,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             return false;
         if (key.equals("gb_tile_compass") && !Utils.hasCompass(mContext))
             return false;
-        if (key.equals("aosp_tile_cell2") && (!Utils.isMotoXtDevice() || 
-                (GravityBoxSettings.sSystemProperties != null &&
-                !GravityBoxSettings.sSystemProperties.hasMsimSupport)))
+        if (key.equals("aosp_tile_cell2") && (!Utils.isMotoXtDevice() || !hasMsimSupport()))
             return false;
         if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")
                 || key.equals("mtk_tile_hotknot") || key.equals("mtk_tile_timeout")) &&
