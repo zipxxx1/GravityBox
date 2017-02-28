@@ -455,7 +455,7 @@ public class ModLedControl {
                     Object oldNotifRecord = notifList.get(index);
                     oldNotif = Build.VERSION.SDK_INT == 18 ?
                             (Notification) XposedHelpers.callMethod(oldNotifRecord, "getNotification") :
-                            (Notification) XposedHelpers.getObjectField(oldNotif, "notification");
+                            (Notification) XposedHelpers.getObjectField(oldNotifRecord, "notification");
                 }
             }
         } catch (Throwable t) {
