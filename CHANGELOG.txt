@@ -1,3 +1,24 @@
+Changelog 3.7.1 - 28/02/2017
+--------------------------------------
+- QuickSettings: improved audio quality of QuickRecording tile
+- Statusbar clock: added option for showing seconds
+- StatusBar colors: extended to support all system icons
+- Power tweaks:
+--- added Constant battery charging LED mode (requires LED driver support)
+--- added option for custom low battery warning sound (thanks to Aire-One)
+- Media tweaks:
+--- added slider for custom music volume steps
+--- improved Reorient volume keys feature
+--- improved Force music volume control option
+- Ultimate notification control:
+--- added option for ignoring active screen for updated notifications
+- Adjusted for compatibility with GravityBox Unlocker v1.4
+--- allows premium features only while Unlocker remains installed
+--- PayPal method is preserved (may require reactivation using valid transaction ID)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Updated Ukrainian translations (thanks to burunduk)
+
 Changelog 3.7.0 - 29/09/2016
 --------------------------------------
 - Lockscreen: added option for PIN scrambling
