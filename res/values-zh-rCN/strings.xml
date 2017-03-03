@@ -1504,6 +1504,7 @@
     <string name="pref_charging_led_title">电池充电指示灯</string>
     <string name="charging_led_default">默认</string>
     <string name="charging_led_emulated">仿真</string>
+    <string name="charging_led_constant">不变(需要LED驱动支持)</string>
     <string name="charging_led_disabled">禁用</string>
 
     <!-- Heads up snooze timer -->
@@ -2049,5 +2050,12 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">切换快速设置面板</string>
     <string name="qs_panel_collapse">折叠快速设置面板</string>
+
+    <!-- Lockscreen shorcuts: Show badges -->
+    <string name="pref_lockscreen_shortcuts_show_badges_title">显示标记</string>
+    <string name="pref_lockscreen_shortcuts_show_badges_summary">显示包含通知计数标记</string>
+
+    <!-- Clock: Show seconds -->
+    <string name="pref_statusbar_clock_show_seconds_title">显示秒数</string>
 
 </resources>
