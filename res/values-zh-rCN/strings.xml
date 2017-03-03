@@ -1611,6 +1611,7 @@
     <string name="pref_charging_led_title">电池充电指示灯</string>
     <string name="charging_led_default">默认</string>
     <string name="charging_led_emulated">仿真</string>
+    <string name="charging_led_constant">不变(需要LED驱动支持)</string>
     <string name="charging_led_disabled">禁用</string>
 
     <!-- Quiet hours week days -->
@@ -1750,7 +1751,7 @@
     <string name="pref_lc_sound_vibrate_summary">通知关闭时防止振动,只在铃声模式时才振动</string>
 
 	
-   <!-- UNC: QuietHours: mute system level vibrations -->
+    <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">静音设备振动</string>
     <string name="pref_lc_qh_mute_system_vibe_summary">关闭所有系统级振动
 	包括在此设备上的通知振动,配对Android Wear设备上的通知仍然可以
@@ -1870,5 +1871,9 @@
     <!-- UNC: Active screen: Ignore updated notifications -->
     <string name="pref_lc_active_screen_ignore_update_title">忽略更新通知</string>
     <string name="pref_lc_active_screen_ignore_update_summary">当有更新通知时不会激活屏幕</string>
+	
+	
+    <!-- Clock: Show seconds -->
+    <string name="pref_statusbar_clock_show_seconds_title">显示秒数</string>
 
 </resources>
