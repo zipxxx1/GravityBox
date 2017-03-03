@@ -1454,7 +1454,7 @@
     <string name="pref_charging_led_title">电池充电指示灯</string>
     <string name="charging_led_default">默认</string>
     <string name="charging_led_emulated">仿真</string>
-	<string name="charging_led_constant">不变(需要LED驱动支持)</string>
+    <string name="charging_led_constant">不变(需要LED驱动支持)</string>
     <string name="charging_led_disabled">禁用</string>
 
     <!-- Quiet hours week days -->
