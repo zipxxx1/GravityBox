@@ -1704,6 +1704,7 @@
     <string name="pref_charging_led_title">电池充电指示灯</string>
     <string name="charging_led_default">默认</string>
     <string name="charging_led_emulated">仿真</string>
+    <string name="charging_led_constant">不变(需要LED驱动支持)</string>
     <string name="charging_led_disabled">禁用</string>
 
     <!-- Heads up snooze timer -->
@@ -2004,5 +2005,9 @@
     <!-- UNC: Active screen: Ignore updated notifications -->
     <string name="pref_lc_active_screen_ignore_update_title">忽略更新通知</string>
     <string name="pref_lc_active_screen_ignore_update_summary">当有更新通知时不会激活屏幕</string>
+	
+
+    <!-- Clock: Show seconds -->
+    <string name="pref_statusbar_clock_show_seconds_title">显示秒数</string>
 
 </resources>
