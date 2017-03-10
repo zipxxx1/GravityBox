@@ -516,7 +516,8 @@ public class ModStatusBar {
                 default: break;
             }
             if (container != null) {
-                ProgressBarView pbView = new ProgressBarView(containerType, container, mPrefs);
+                ProgressBarView pbView = new ProgressBarView(
+                        containerType, container, mPrefs, mProgressBarCtrl);
                 mProgressBarCtrl.registerListener(pbView);
                 mStateChangeListeners.add(pbView);
             }
@@ -603,7 +604,7 @@ public class ModStatusBar {
                     mHeader = XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
                     mStatusBarView = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStatusBarView");
                     mContext = (Context) XposedHelpers.getObjectField(mPhoneStatusBar, "mContext");
-                    mProgressBarCtrl = new ProgressBarController(mPrefs);
+                    mProgressBarCtrl = new ProgressBarController(mContext, mPrefs);
                     mBroadcastSubReceivers.add(mProgressBarCtrl);
 
                     if (SysUiManagers.AppLauncher != null) {

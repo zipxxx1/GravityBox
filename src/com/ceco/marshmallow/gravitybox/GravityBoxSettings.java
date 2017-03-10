@@ -782,12 +782,18 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED = "pref_statusbar_download_progress_centered";
     public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS = "pref_statusbar_download_progress_thickness";
     public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN = "pref_statusbar_download_progress_margin";
+    public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_ENABLE = "pref_statusbar_download_progress_sound_enable";
+    public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND = "pref_statusbar_download_progress_sound";
+    public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_SCREEN_OFF = "pref_statusbar_download_progress_sound_screen_off";
     public static final String ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED = "gravitybox.intent.action.STATUSBAR_DOWNLOAD_PROGRESS_CHANGED";
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED = "sbDownloadProgressEnabled";
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED = "sbDownloadProgressAnimated";
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED = "sbDownloadProgressCentered";
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS = "sbDownloadProgressThickness";
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN = "sbDownloadProgressMargin";
+    public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_ENABLE = "sbDownloadProgressSoundEnable";
+    public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND = "sbDownloadProgressSound";
+    public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_SCREEN_OFF = "sbDownloadProgressSoundScreenOff";
 
     public static final String PREF_KEY_QUICKRECORD_QUALITY = "pref_quickrecord_quality";
     public static final String PREF_KEY_QUICKRECORD_AUTOSTOP = "pref_quickrecord_autostop";
@@ -951,7 +957,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_BATTERY_CHARGED_SOUND,
             PREF_KEY_CHARGER_PLUGGED_SOUND,
             PREF_KEY_CHARGER_UNPLUGGED_SOUND,
-            PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS
+            PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS,
+            PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND
     ));
 
     private static final List<String> lockscreenKeys = new ArrayList<String>(Arrays.asList(
@@ -3280,6 +3287,17 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN, prefs.getInt(key, 0));
+            } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_ENABLE)) {
+                    intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
+                    intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_ENABLE, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND)) {
+                intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
+                intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND,
+                        prefs.getString(key, "content://settings/system/notification_sound"));
+            } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_SCREEN_OFF)) {
+                intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
+                intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_SCREEN_OFF,
+                        prefs.getBoolean(key, false));
             } else if (lockscreenKeys.contains(key)) {
                 intent.setAction(ACTION_LOCKSCREEN_SETTINGS_CHANGED);
             } else if (headsUpKeys.contains(key)) {
