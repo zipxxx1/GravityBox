@@ -1077,6 +1077,34 @@
                 android:title="@string/pref_statusbar_download_progress_animated_title"
                 android:defaultValue="true" />
 
+            <PreferenceCategory
+                android:key="pref_cat_statusbar_download_progress_sounds"
+                android:title="@string/pref_cat_statusbar_download_progress_sounds_title">
+
+                <CheckBoxPreference
+                    android:key="pref_statusbar_download_progress_sound_enable"
+                    android:title="@string/pref_statusbar_download_progress_sound_enable_title"
+                    android:summary="@string/pref_statusbar_download_progress_sound_enable_summary"
+                    android:defaultValue="false" />
+
+                <RingtonePreference 
+                    android:key="pref_statusbar_download_progress_sound"
+                    android:title="@string/pref_statusbar_download_progress_sound_title"
+                    android:ringtoneType="notification"
+                    android:showDefault="true"
+                    android:showSilent="false"
+                    android:defaultValue="content://settings/system/notification_sound"
+                    android:dependency="pref_statusbar_download_progress_sound_enable" />
+
+                <CheckBoxPreference
+                    android:key="pref_statusbar_download_progress_sound_screen_off"
+                    android:title="@string/pref_statusbar_download_progress_sound_screen_off_title"
+                    android:summary="@string/pref_statusbar_download_progress_sound_screen_off_summary"
+                    android:defaultValue="false"
+                    android:dependency="pref_statusbar_download_progress_sound_enable" />
+
+            </PreferenceCategory>
+
         </PreferenceScreen>
 
         <ListPreference 

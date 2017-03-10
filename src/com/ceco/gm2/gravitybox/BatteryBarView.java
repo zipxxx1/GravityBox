@@ -223,18 +223,23 @@ public class BatteryBarView extends View implements IconManagerListener,
     }
 
     @Override
-    public void onProgressTrackingStarted(boolean isBluetooth, Mode mode) {
-        if ((mode == Mode.TOP && mPosition == Position.TOP) ||
-                (mode == Mode.BOTTOM && mPosition == Position.BOTTOM)) {
-            mHiddenByProgressBar = true;
-            update();
-        }
+    public void onProgressTrackingStarted(Mode mode) {
+        onProgressModeChanged(mode);
     }
 
     @Override
     public void onProgressTrackingStopped() {
         if (mHiddenByProgressBar) {
             mHiddenByProgressBar = false;
+            update();
+        }
+    }
+
+    @Override
+    public void onProgressModeChanged(Mode mode) {
+        if ((mode == Mode.TOP && mPosition == Position.TOP) ||
+                (mode == Mode.BOTTOM && mPosition == Position.BOTTOM)) {
+            mHiddenByProgressBar = true;
             update();
         }
     }

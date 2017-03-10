@@ -1793,4 +1793,12 @@
     <string name="pref_statusbar_download_progress_thickness_title">Hrúbka</string>
     <string name="pref_statusbar_download_progress_margin_title">Okraj hrany</string>
 
+    <!-- ProgressBar: Sounds -->
+    <string name="pref_cat_statusbar_download_progress_sounds_title">Zvuk</string>
+    <string name="pref_statusbar_download_progress_sound_enable_title">Povoliť zvuk</string>
+    <string name="pref_statusbar_download_progress_sound_enable_summary">Prehrá upozornenie v prípade ukončenia alebo prerušenia prenosu</string>
+    <string name="pref_statusbar_download_progress_sound_title">Vybrať zvuk</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_title">Len pri vypnutej obrazovke</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_summary">Prehrá upozornenie len v prípade vypnutej obrazovky</string>
+
 </resources>

@@ -1854,4 +1854,12 @@
     <string name="pref_statusbar_download_progress_thickness_title">Vastagság</string>
     <string name="pref_statusbar_download_progress_margin_title">Szegély margó</string>
 
+    <!-- ProgressBar: Sounds -->
+    <string name="pref_cat_statusbar_download_progress_sounds_title">Hangok</string>
+    <string name="pref_statusbar_download_progress_sound_enable_title">Hang engedélyezése</string>
+    <string name="pref_statusbar_download_progress_sound_enable_summary">Értesítési hang lejátszása, ha a letöltés befejeződött vagy megszakadt</string>
+    <string name="pref_statusbar_download_progress_sound_title">Hang kiválasztása</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_title">Csak kikapcsolt képernyőnél</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_summary">Értesítési hang lejátszása csak kikapocsolt képernyő esetén</string>
+
 </resources>

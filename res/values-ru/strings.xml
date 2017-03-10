@@ -1883,4 +1883,12 @@
     <string name="pref_statusbar_download_progress_thickness_title">Толщина</string>
     <string name="pref_statusbar_download_progress_margin_title">Отступ от края</string>
 
+    <!-- ProgressBar: Sounds -->
+    <string name="pref_cat_statusbar_download_progress_sounds_title">Звуки</string>
+    <string name="pref_statusbar_download_progress_sound_enable_title">Включить звук</string>
+    <string name="pref_statusbar_download_progress_sound_enable_summary">Воспроизведение звука уведомления по окончании или при прерывании операции</string>
+    <string name="pref_statusbar_download_progress_sound_title">Выбрать звук</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_title">Только при выкл. экране</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_summary">Воспроизведение звука уведомления только при выключенном экране</string>
+
 </resources>

@@ -1883,4 +1883,12 @@
     <string name="pref_statusbar_download_progress_thickness_title">Thickness</string>
     <string name="pref_statusbar_download_progress_margin_title">Edge margin</string>
 
+    <!-- ProgressBar: Sounds -->
+    <string name="pref_cat_statusbar_download_progress_sounds_title">Sounds</string>
+    <string name="pref_statusbar_download_progress_sound_enable_title">Enable sound</string>
+    <string name="pref_statusbar_download_progress_sound_enable_summary">Plays notification sound when transfer is finished or interrupted</string>
+    <string name="pref_statusbar_download_progress_sound_title">Choose sound</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_title">Only when screen is off</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_summary">Plays notification sound only when screen is off</string>
+
 </resources>
