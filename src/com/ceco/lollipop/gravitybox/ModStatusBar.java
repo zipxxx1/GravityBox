@@ -546,7 +546,8 @@ public class ModStatusBar {
                 default: break;
             }
             if (container != null) {
-                ProgressBarView pbView = new ProgressBarView(containerType, container, mPrefs);
+                ProgressBarView pbView = new ProgressBarView(
+                        containerType, container, mPrefs, mProgressBarCtrl);
                 mProgressBarCtrl.registerListener(pbView);
                 mStateChangeListeners.add(pbView);
             }
@@ -642,7 +643,7 @@ public class ModStatusBar {
                     mAnimPushUpOut = res.getIdentifier("push_up_out", "anim", "android");
                     mAnimPushDownIn = res.getIdentifier("push_down_in", "anim", "android");
                     mAnimFadeIn = res.getIdentifier("fade_in", "anim", "android");
-                    mProgressBarCtrl = new ProgressBarController(mPrefs);
+                    mProgressBarCtrl = new ProgressBarController(mContext, mPrefs);
                     mBroadcastSubReceivers.add(mProgressBarCtrl);
 
                     if (SysUiManagers.AppLauncher != null) {

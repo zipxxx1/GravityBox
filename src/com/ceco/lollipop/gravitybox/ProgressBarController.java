@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,13 +18,22 @@ package com.ceco.lollipop.gravitybox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.PowerManager;
 import android.service.notification.StatusBarNotification;
 import android.widget.RemoteViews;
 import de.robv.android.xposed.XSharedPreferences;
@@ -34,6 +43,9 @@ import de.robv.android.xposed.XposedHelpers;
 public class ProgressBarController implements BroadcastSubReceiver {
     private static final String TAG = "GB:ProgressBarController";
     private static final boolean DEBUG = false;
+
+    private static final long MAX_IDLE_TIME = 10000; // ms
+    private static final int IDLE_CHECK_FREQUENCY = 5000; // ms
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -46,38 +58,84 @@ public class ProgressBarController implements BroadcastSubReceiver {
     ));
 
     public interface ProgressStateListener {
-        void onProgressTrackingStarted(boolean isBluetooth, Mode mode);
+        void onProgressAdded(ProgressInfo pi);
         void onProgressUpdated(ProgressInfo pInfo);
+        void onProgressRemoved(String id);
+        void onProgressTrackingStarted(Mode mode);
         void onProgressTrackingStopped();
-        void onModeChanged(Mode mode);
-        void onPreferencesChanged(Intent intent);
+        void onProgressModeChanged(Mode mode);
+        void onProgressPreferencesChanged(Intent intent);
     }
 
     public class ProgressInfo {
+        String id;
         boolean hasProgressBar;
         int progress;
         int max;
+        long lastUpdatedMs;
 
-        public ProgressInfo(boolean hasProgressBar, int progress, int max) {
+        public ProgressInfo(String id, boolean hasProgressBar, int progress, int max) {
+            this.id = id;
             this.hasProgressBar = hasProgressBar;
             this.progress = progress;
             this.max = max;
+            this.lastUpdatedMs = System.currentTimeMillis();
         }
 
         public float getFraction() {
             return (max > 0 ? ((float)progress/(float)max) : 0f);
         }
+
+        boolean isIdle() {
+            long idleTime = (System.currentTimeMillis() - this.lastUpdatedMs);
+            if (DEBUG) log("ProgressInfo: '" + this.id + 
+                    "' is idle for " + idleTime + "ms");
+            return (idleTime > MAX_IDLE_TIME);
+        }
     }
 
     public enum Mode { OFF, TOP, BOTTOM };
 
-    private String mId;
+    private Context mContext;
     private List<ProgressStateListener> mListeners;
     private Mode mMode;
+    private Map<String, ProgressInfo> mProgressList;
+    private boolean mSoundEnabled;
+    private String mSoundUri;
+    private boolean mSoundWhenScreenOffOnly;
+    private PowerManager mPowerManager;
+    private Handler mHandler;
 
-    public ProgressBarController(XSharedPreferences prefs) {
+    private Runnable mRemoveIdleRunnable = new Runnable() {
+        @Override
+        public void run() {
+            synchronized (mProgressList) {
+                List<String> toRemove = new ArrayList<>();
+                for (ProgressInfo pi : mProgressList.values())
+                    if (pi.isIdle()) toRemove.add(pi.id);
+                for (String id : toRemove)
+                    removeProgress(id, false);
+                if (mProgressList.size() > 0) {
+                    mHandler.postDelayed(this, IDLE_CHECK_FREQUENCY);
+                }
+            }
+        }
+    };
+
+    public ProgressBarController(Context ctx, XSharedPreferences prefs) {
+        mContext = ctx;
         mListeners = new ArrayList<ProgressStateListener>();
+        mProgressList = new LinkedHashMap<String, ProgressInfo>();
+
         mMode = Mode.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"));
+        mSoundEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_ENABLE, false);
+        mSoundUri = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND,
+                "content://settings/system/notification_sound");
+        mSoundWhenScreenOffOnly = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_SCREEN_OFF, false);
+
+        mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        mHandler = new Handler();
     }
 
     public void registerListener(ProgressStateListener listener) {
@@ -98,10 +156,26 @@ public class ProgressBarController implements BroadcastSubReceiver {
         }
     }
 
-    private void notifyProgressStarted(boolean isBluetooth) {
+    private void notifyProgressTrackingStarted() {
         synchronized (mListeners) {
             for (ProgressStateListener l : mListeners) {
-                l.onProgressTrackingStarted(isBluetooth, mMode);
+                l.onProgressTrackingStarted(mMode);
+            }
+        }
+    }
+
+    private void notifyProgressTrackingStopped() {
+        synchronized (mListeners) {
+            for (ProgressStateListener l : mListeners) {
+                l.onProgressTrackingStopped();
+            }
+        }
+    }
+
+    private void notifyProgressAdded(ProgressInfo pi) {
+        synchronized (mListeners) {
+            for (ProgressStateListener l : mListeners) {
+                l.onProgressAdded(pi);
             }
         }
     }
@@ -114,10 +188,10 @@ public class ProgressBarController implements BroadcastSubReceiver {
         }
     }
 
-    private void notifyProgressStopped() {
+    private void notifyProgressRemoved(String id) {
         synchronized (mListeners) {
             for (ProgressStateListener l : mListeners) {
-                l.onProgressTrackingStopped();
+                l.onProgressRemoved(id);
             }
         }
     }
@@ -125,7 +199,7 @@ public class ProgressBarController implements BroadcastSubReceiver {
     private void notifyModeChanged() {
         synchronized (mListeners) {
             for (ProgressStateListener l : mListeners) {
-                l.onModeChanged(mMode);
+                l.onProgressModeChanged(mMode);
             }
         }
     }
@@ -133,76 +207,133 @@ public class ProgressBarController implements BroadcastSubReceiver {
     private void notifyPreferencesChanged(Intent intent) {
         synchronized (mListeners) {
             for (ProgressStateListener l : mListeners) {
-                l.onPreferencesChanged(intent);
+                l.onProgressPreferencesChanged(intent);
             }
         }
+    }
+
+    private void addProgress(ProgressInfo pi) {
+        synchronized (mProgressList) {
+            if (!mProgressList.containsKey(pi.id)) {
+                mProgressList.put(pi.id, pi);
+                if (DEBUG) log("addProgress: added progress for '" + pi.id + "'");
+                if (mProgressList.size() == 1) {
+                    notifyProgressTrackingStarted();
+                    resetIdleChecker();
+                }
+                notifyProgressAdded(pi);
+            } else if (DEBUG) {
+                log("addProgress: progress for '" + pi.id + "' already exists");
+            }
+        }
+    }
+
+    private void removeProgress(String id, boolean allowSound) {
+        synchronized (mProgressList) {
+            if (id == null) {
+                mProgressList.clear();
+                if (DEBUG) log("removeProgress: all cleared");
+            } else if (mProgressList.containsKey(id)) {
+                mProgressList.remove(id);
+                notifyProgressRemoved(id);
+                if (DEBUG) log("removeProgress: removed progress for '" + id + "'");
+                if (allowSound) maybePlaySound();
+            }
+            if (mProgressList.size() == 0) {
+                notifyProgressTrackingStopped();
+                resetIdleChecker();
+            }
+        }
+    }
+
+    private void updateProgress(String id, int max, int progress) {
+        ProgressInfo pi = mProgressList.get(id);
+        if (pi != null) {
+            pi.max = max;
+            pi.progress = progress;
+            pi.lastUpdatedMs = System.currentTimeMillis();
+            if (DEBUG) {
+                log("updateProgress: updated progress for '" + id + "': " +
+                        "max=" + max + "; progress=" + progress);
+            }
+            notifyProgressUpdated(pi);
+        }
+    }
+
+    private void resetIdleChecker() {
+        mHandler.removeCallbacks(mRemoveIdleRunnable);
+        if (mProgressList.size() > 0) {
+            mHandler.postDelayed(mRemoveIdleRunnable, IDLE_CHECK_FREQUENCY);
+        }
+    }
+
+    public Map<String, ProgressInfo> getList() {
+        return Collections.unmodifiableMap(mProgressList);
     }
 
     public void onNotificationAdded(StatusBarNotification statusBarNotif) {
         if (mMode == Mode.OFF) return;
 
-        if (!verifyNotification(statusBarNotif)) {
+        ProgressInfo pi = verifyNotification(statusBarNotif);
+        if (pi == null) {
             if (DEBUG) log("onNotificationAdded: ignoring unsupported notification");
             return;
         }
 
-        if (mId != null) {
-            if (DEBUG) log("onNotificationAdded: another download already registered");
-            return;
-        }
-
-        mId = getIdentifier(statusBarNotif);
-        if (mId != null) {
-            if (DEBUG) log("starting progress for " + mId);
-            startTracking();
-            updateProgress(statusBarNotif);
-        }
+        addProgress(pi);
     }
 
     public void onNotificationUpdated(StatusBarNotification statusBarNotif) {
         if (mMode == Mode.OFF) return;
 
-        if (mId == null) {
-            // treat it as if it was added, e.g. to show progress in case
-            // feature has been enabled during already ongoing download
-            onNotificationAdded(statusBarNotif);
+        ProgressInfo pi = verifyNotification(statusBarNotif);
+        if (pi == null) {
+            String id = getIdentifier(statusBarNotif);
+            if (id != null && mProgressList.containsKey(id)) {
+                removeProgress(id, true);
+                if (DEBUG) log("onNotificationUpdated: removing no longer " +
+                        "supported notification for '" + id + "'");
+            } else if (DEBUG) {
+                log("onNotificationUpdated: ignoring unsupported notification");
+            }
             return;
         }
 
-        if (mId.equals(getIdentifier(statusBarNotif))) {
-            // if notification became clearable, stop tracking immediately
-            if (statusBarNotif.isClearable()) {
-                if (DEBUG) log("onNotificationUpdated: notification became clearable - stopping tracking");
-                stopTracking();
-            } else {
-                if (DEBUG) log("updating progress for " + mId);
-                updateProgress(statusBarNotif);
-            }
+        if (!mProgressList.containsKey(pi.id)) {
+            // treat it as if it was added, e.g. to show progress in case
+            // feature has been enabled during already ongoing download
+            addProgress(pi);
+        } else {
+            updateProgress(pi.id, pi.max, pi.progress);
         }
     }
 
     public void onNotificationRemoved(StatusBarNotification statusBarNotif) {
         if (mMode == Mode.OFF) return;
 
-        if (mId == null) {
-            if (DEBUG) log("onNotificationRemoved: no download registered");
-            return;
-        } else if (mId.equals(getIdentifier(statusBarNotif))) {
-            if (DEBUG) log("finishing progress for " + mId);
-            stopTracking();
+        String id = getIdentifier(statusBarNotif);
+        if (id != null && mProgressList.containsKey(id)) {
+            removeProgress(id, true);
         }
     }
 
-    private boolean verifyNotification(StatusBarNotification statusBarNotif) {
-        if (statusBarNotif == null || statusBarNotif.isClearable()) {
-            return false;
-        }
+    private ProgressInfo verifyNotification(StatusBarNotification statusBarNotif) {
+        if (statusBarNotif == null)
+            return null;
+
+        String id = getIdentifier(statusBarNotif);
+        if (id == null)
+            return null;
 
         Notification n = statusBarNotif.getNotification();
-        return (n != null && 
+        if (n != null && 
                (SUPPORTED_PACKAGES.contains(statusBarNotif.getPackageName()) ||
-                n.extras.getBoolean(ModLedControl.NOTIF_EXTRA_PROGRESS_TRACKING)) &&
-                getProgressInfo(n).hasProgressBar);
+                n.extras.getBoolean(ModLedControl.NOTIF_EXTRA_PROGRESS_TRACKING))) {
+            ProgressInfo pi = getProgressInfo(id, n);
+            if (pi != null && pi.hasProgressBar)
+                return pi;
+        }
+        return null;
     }
 
     private String getIdentifier(StatusBarNotification statusBarNotif) {
@@ -220,27 +351,10 @@ public class ProgressBarController implements BroadcastSubReceiver {
         return null;
     }
 
-    private void startTracking() {
-        notifyProgressStarted(mId.startsWith(SUPPORTED_PACKAGES.get(1)) ||
-                mId.startsWith(SUPPORTED_PACKAGES.get(2)));
-    }
+    private ProgressInfo getProgressInfo(String id, Notification n) {
+        if (id == null || n == null) return null;
 
-    private void updateProgress(StatusBarNotification statusBarNotif) {
-        if (statusBarNotif != null) {
-            ProgressInfo pInfo = getProgressInfo(statusBarNotif.getNotification());
-            if (DEBUG) log("updateProgress: newScaleX=" + pInfo.getFraction());
-            notifyProgressUpdated(pInfo);
-        }
-    }
-
-    private void stopTracking() {
-        mId = null;
-        notifyProgressStopped();
-    }
-
-    private ProgressInfo getProgressInfo(Notification n) {
-        ProgressInfo pInfo = new ProgressInfo(false, 0, 0);
-        if (n == null) return pInfo;
+        ProgressInfo pInfo = new ProgressInfo(id, false, 0, 0);
 
         // We have to extract the information from the content view
         RemoteViews views = n.bigContentView;
@@ -287,6 +401,25 @@ public class ProgressBarController implements BroadcastSubReceiver {
         return pInfo;
     }
 
+    private void maybePlaySound() {
+        if (mSoundEnabled &&
+                (!mPowerManager.isInteractive() || !mSoundWhenScreenOffOnly)) {
+            try {
+                final Ringtone sfx = RingtoneManager.getRingtone(mContext,
+                        Uri.parse(mSoundUri));
+                if (sfx != null) {
+                    AudioAttributes attrs = new AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                            .build();
+                    sfx.setAudioAttributes(attrs);
+                    sfx.play();
+                }
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+        }
+    }
+
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED)) {
@@ -295,8 +428,17 @@ public class ProgressBarController implements BroadcastSubReceiver {
                         GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED));
                 notifyModeChanged();
                 if (mMode == Mode.OFF) {
-                    stopTracking();
+                    removeProgress(null, false);
                 }
+            } else if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_ENABLE)) {
+                mSoundEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_ENABLE, false);
+            } else if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND)) {
+                mSoundUri = intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND);
+            } else if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_SCREEN_OFF)) {
+                mSoundWhenScreenOffOnly = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_SCREEN_OFF, false);
             } else {
                 notifyPreferencesChanged(intent);
             }

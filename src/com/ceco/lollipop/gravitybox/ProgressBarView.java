@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,8 @@ import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.IconManagerLis
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Intent;
@@ -48,7 +50,8 @@ public class ProgressBarView extends View implements
     private static final String TAG = "GB:ProgressBarView";
     private static final boolean DEBUG = false;
 
-    private static final int ANIM_DURATION = 400;
+    private static final int ANIM_DURATION = 400; // ms
+    private static final int INDEX_CYCLER_FREQUENCY = 5000; // ms
 
     private Mode mMode;
     private boolean mAnimated;
@@ -58,15 +61,19 @@ public class ProgressBarView extends View implements
     private int mEdgeMarginPx;
     private int mStatusBarState;
     private ContainerType mContainerType;
+    private ProgressBarController mCtrl;
+    private int mCurrentIndex = 0;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public ProgressBarView(ContainerType containerType, ViewGroup container, XSharedPreferences prefs) {
+    public ProgressBarView(ContainerType containerType, ViewGroup container,
+            XSharedPreferences prefs, ProgressBarController ctrl) {
         super(container.getContext());
 
         mContainerType = containerType;
+        mCtrl = ctrl;
 
         mAnimated = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED, true);
         mCentered = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED, false);
@@ -112,7 +119,7 @@ public class ProgressBarView extends View implements
     }
 
     @Override
-    public void onProgressTrackingStarted(boolean isBluetooth, Mode mode) {
+    public void onProgressTrackingStarted(Mode mode) {
         mMode = mode;
         updatePosition();
         if (DEBUG) log("onProgressTrackingStarted: " + mContainerType +
@@ -120,46 +127,93 @@ public class ProgressBarView extends View implements
     }
 
     @Override
+    public void onProgressAdded(ProgressInfo pi) {
+        resetIndexCycler(mCtrl.getList().size()-1);
+        updateProgressView(true);
+    }
+
+    @Override
     public void onProgressUpdated(ProgressInfo pInfo) {
-        if (isValidStatusBarState()) {
-            if (getVisibility() != View.VISIBLE) {
-                setVisibility(View.VISIBLE);
-            }
-            if (mAnimated) {
-                animateScaleXTo(pInfo.getFraction());
-            } else {
-                setScaleX(pInfo.getFraction());
-            }
-        } else {
-            if (getVisibility() != View.GONE) {
-                setVisibility(View.GONE);
-            }
-            setScaleX(pInfo.getFraction());
-            if (DEBUG) log("onProgressUpdated: " + mContainerType + "; "
-                    + "invalid status bar state (" + mStatusBarState + ")");
+        if (pInfo.id.equals(getCurrentId())) {
+            updateProgressView(false);
         }
     }
 
     @Override
-    public void onProgressTrackingStopped() {
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (mAnimator.isStarted()) {
-                    mAnimator.end();
-                }
-                setScaleX(0f);
-                setVisibility(View.GONE);
-            }
-        }, ANIM_DURATION + 100);
+    public void onProgressRemoved(String id) {
+        resetIndexCycler(0);
+        updateProgressView(true);
     }
 
     @Override
-    public void onModeChanged(Mode mode) {
+    public void onProgressTrackingStopped() {
+        resetIndexCycler(0);
+        updateProgressView(false);
+    }
+
+    @Override
+    public void onProgressModeChanged(Mode mode) {
         mMode = mode;
         updatePosition();
         if (DEBUG) log("onModeChanged: " + mContainerType +
                 "; mMode=" + mMode);
+    }
+
+    private Runnable mIndexCyclerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            final int oldIndex = mCurrentIndex++;
+            if (mCurrentIndex >= mCtrl.getList().size()) mCurrentIndex = 0;
+            if (DEBUG) log("IndexCycler: oldIndex=" + oldIndex + "; " +
+                    "mCurrentIndex=" + mCurrentIndex);
+            if (mCurrentIndex != oldIndex) {
+                updateProgressView(true);
+            }
+
+            if (mCtrl.getList().size() > 0) {
+                ProgressBarView.this.postDelayed(this, INDEX_CYCLER_FREQUENCY);
+            }
+        }
+    };
+
+    private String getCurrentId() {
+        return (mCurrentIndex < mCtrl.getList().size() ? 
+                ((ProgressInfo)mCtrl.getList().values().toArray()[mCurrentIndex]).id :
+                null);
+    }
+
+    private void resetIndexCycler(int toIndex) {
+        removeCallbacks(mIndexCyclerRunnable);
+        mCurrentIndex = toIndex;
+        if (mCtrl.getList().size() > 0 && isValidStatusBarState()) {
+            postDelayed(mIndexCyclerRunnable, INDEX_CYCLER_FREQUENCY);
+        }
+    }
+
+    private void updateProgressView(boolean fadeOutAndIn) {
+        clearAnimation();
+        if (isValidStatusBarState() && !mCtrl.getList().isEmpty()) {
+            ProgressInfo pi = (ProgressInfo) mCtrl.getList().values().toArray()[mCurrentIndex];
+            float newScaleX = pi.getFraction();
+            if (DEBUG) log("updateProgressView: id='" + 
+                    pi.id + "'; newScaleX=" + newScaleX);
+            if (getVisibility() != View.VISIBLE) {
+                fadeIn(newScaleX);
+            } else if (fadeOutAndIn) {
+                fadeOutAndIn(newScaleX);
+            } else if (mAnimated) {
+                animateScaleXTo(newScaleX);
+            } else {
+                setScaleX(newScaleX);
+            }
+        } else {
+            if (mAnimator.isStarted()) {
+                mAnimator.end();
+            }
+            if (getVisibility() == View.VISIBLE) {
+                fadeOut();
+            }
+        }
     }
 
     private void animateScaleXTo(float newScaleX) {
@@ -169,6 +223,46 @@ public class ProgressBarView extends View implements
         mAnimator.setValues(PropertyValuesHolder.ofFloat("scaleX", getScaleX(), newScaleX));
         mAnimator.start();
         if (DEBUG) log("Animating to new scaleX: " + newScaleX);
+    }
+
+    private void fadeOutAndIn(final float newScaleX) {
+        animate()
+            .alpha(0f)
+            .setDuration(ANIM_DURATION / 2)
+            .setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    ProgressBarView.this.setScaleX(newScaleX);
+                    ProgressBarView.this.animate()
+                        .alpha(1f)
+                        .setDuration(ANIM_DURATION / 2)
+                        .setListener(null);
+                }
+            });
+    }
+
+    private void fadeIn(final float newScaleX) {
+        setAlpha(0f);
+        setScaleX(newScaleX);
+        setVisibility(View.VISIBLE);
+        animate()
+            .alpha(1f)
+            .setDuration(ANIM_DURATION)
+            .setListener(null);
+    }
+
+    private void fadeOut() {
+        animate()
+            .alpha(0f)
+            .setDuration(ANIM_DURATION)
+            .setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    ProgressBarView.this.setScaleX(0f);
+                    ProgressBarView.this.setVisibility(View.GONE);
+                    ProgressBarView.this.setAlpha(1f);
+                }
+            });
     }
 
     private void updatePosition() {
@@ -221,14 +315,17 @@ public class ProgressBarView extends View implements
     public void onStatusBarStateChanged(int oldState, int newState) {
         if (mStatusBarState != newState) {
             mStatusBarState = newState;
-            if (!isValidStatusBarState()) {
+            resetIndexCycler(mCurrentIndex);
+            if (isValidStatusBarState()) {
+                updateProgressView(false);
+            } else {
                 setVisibility(View.GONE);
             }
         }
     }
 
     @Override
-    public void onPreferencesChanged(Intent intent) {
+    public void onProgressPreferencesChanged(Intent intent) {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED)) {
                 mAnimated = intent.getBooleanExtra(
