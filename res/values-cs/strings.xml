@@ -1944,4 +1944,12 @@
     <string name="pref_lc_active_screen_ignore_update_summary">Nezobrazí aktivní obrazovku v případě, 
         že je stávající oznámení aktualizováno</string>
 
+    <!-- ProgressBar: Sounds -->
+    <string name="pref_cat_statusbar_download_progress_sounds_title">Zvuk</string>
+    <string name="pref_statusbar_download_progress_sound_enable_title">Povolit zvuk</string>
+    <string name="pref_statusbar_download_progress_sound_enable_summary">Přehraje upozornění v případě ukončení nebo přerušení přenosu</string>
+    <string name="pref_statusbar_download_progress_sound_title">Vybrat zvuk</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_title">Jen při vypnuté obrazovce</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_summary">Přehraje upozornění pouze v případě vypnuté obrazovky</string>
+
 </resources>

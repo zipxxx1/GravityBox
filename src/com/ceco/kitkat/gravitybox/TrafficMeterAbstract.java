@@ -275,9 +275,8 @@ public abstract class TrafficMeterAbstract extends TextView
     }
 
     @Override
-    public void onProgressTrackingStarted(boolean isBluetooth,
-            StatusbarDownloadProgressView.Mode mode) {
-        mIsTrackingProgress = !isBluetooth;
+    public void onProgressTrackingStarted(StatusbarDownloadProgressView.Mode mode) {
+        mIsTrackingProgress = true;
         if (mDisplayMode == DisplayMode.PROGRESS_TRACKING) {
             updateState();
         }
@@ -290,6 +289,9 @@ public abstract class TrafficMeterAbstract extends TextView
             updateState();
         }
     }
+
+    @Override
+    public void onProgressModeChanged(StatusbarDownloadProgressView.Mode mode) { }
 
     protected abstract void onInitialize(XSharedPreferences prefs) throws Throwable;
     protected abstract void onPreferenceChanged(Intent intent);

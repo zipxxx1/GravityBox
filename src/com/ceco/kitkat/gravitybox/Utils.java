@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.XResources;
 import android.graphics.Bitmap;
@@ -43,6 +44,7 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -558,6 +560,15 @@ public class Utils {
         } catch (Throwable t) {
             XposedBridge.log("Error showing toast: " + t.getMessage());
         }
+    }
+
+    public static boolean isRTL(Configuration config) {
+        return (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL);
+    }
+
+    public static boolean isRTL(Context ctx) {
+        Configuration config = ctx.getResources().getConfiguration();
+        return isRTL(config);
     }
 
     static class SystemProp extends Utils {
