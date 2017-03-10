@@ -1454,6 +1454,7 @@
     <string name="pref_charging_led_title">电池充电指示灯</string>
     <string name="charging_led_default">默认</string>
     <string name="charging_led_emulated">仿真</string>
+    <string name="charging_led_constant">不变(需要LED驱动支持)</string>
     <string name="charging_led_disabled">禁用</string>
 
     <!-- Quiet hours week days -->
@@ -2043,14 +2044,14 @@
     <string name="fingerprint_auth_failed">验证失败</string>
     <string name="fingerprint_sensor_unavail">指纹传感器不可用</string>
     <string name="fingerprint_sensor_locked">由于认证失败过多指纹传感器已锁定
-         在35秒内尝试重新启动</string>
+         在35秒内尝试重新启动</string>
     <string name="fingerprint_no_app">未分配应用程序操作</string>
     <string name="pref_cat_fingerprint_launcher_fingers_title">每个手指动作</string>
     <string name="finger">手指</string>
     <string name="pref_cat_fingerprint_launcher_quick_tap_title">快速敲击动作</string>
     <string name="pref_fingerprint_launcher_pause_title">暂停</string>
     <string name="pref_fingerprint_launcher_pause_summary">暂停启动,直到下一个屏幕关闭/开启循环
-         用于其它应用需要传感器较长时间,例如在指纹登记期间</string>
+         用于其它应用需要传感器较长时间,例如在指纹登记期间</string>
     <string name="fingerprint_launcher_paused">启动器已暂停,直到下一个屏幕关闭/打开循环</string>
     <string name="pref_fingerprint_launcher_show_toast_title">显示状态消息</string>
     <string name="pref_fingerprint_launcher_show_toast_summary">是否以Toast消息框形式显示状态消息</string>
@@ -2069,5 +2070,12 @@
     <string name="qs_tile_op3t_vpn">一加3T VPN</string>
     <string name="qs_tile_op3t_dataswitch">一加3T数据开关</string>
     <string name="qs_tile_op3t_powersaving">一加3T省电</string>
+	
+    <!-- Lockscreen shorcuts: Show badges -->
+    <string name="pref_lockscreen_shortcuts_show_badges_title">显示标记</string>
+    <string name="pref_lockscreen_shortcuts_show_badges_summary">显示包含通知计数标记</string>
+
+    <!-- Clock: Show seconds -->
+    <string name="pref_statusbar_clock_show_seconds_title">显示秒数</string>
 
 </resources>
