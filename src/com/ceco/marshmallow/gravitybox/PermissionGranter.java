@@ -17,6 +17,7 @@ package com.ceco.marshmallow.gravitybox;
 
 import java.util.List;
 
+import android.Manifest.permission;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -43,16 +44,15 @@ public class PermissionGranter {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final String pkgName = (String) XposedHelpers.getObjectField(param.args[0], "packageName");
+                    final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
+                    final Object ps = XposedHelpers.callMethod(extras, "getPermissionsState");
+                    final List<String> grantedPerms =
+                            (List<String>) XposedHelpers.getObjectField(param.args[0], "requestedPermissions");
+                    final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
+                    final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
 
                     // GravityBox
                     if (GravityBox.PACKAGE_NAME.equals(pkgName)) {
-                        final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
-                        final Object ps = XposedHelpers.callMethod(extras, "getPermissionsState");
-                        final List<String> grantedPerms =
-                                (List<String>) XposedHelpers.getObjectField(param.args[0], "requestedPermissions");
-                        final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
-                        final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
-
                         // Add android.permission.ACCESS_SURFACE_FLINGER needed by screen recorder
                         if (!(boolean)XposedHelpers.callMethod(ps,"hasInstallPermission", PERM_ACCESS_SURFACE_FLINGER)) {
                             final Object pAccessSurfaceFlinger = XposedHelpers.callMethod(permissions, "get",
@@ -66,6 +66,16 @@ public class PermissionGranter {
                             for (Object perm : grantedPerms) {
                                 log(pkgName + ": " + perm);
                             }
+                        }
+                    }
+
+                    // SystemUI
+                    if (ModStatusBar.PACKAGE_NAME.equals(pkgName)) {
+                        // Add android.permission.READ_CALL_LOG needed by LockscreenAppBar to show badge for missed calls
+                        if (!grantedPerms.contains(permission.READ_CALL_LOG)) {
+                            final Object p = XposedHelpers.callMethod(permissions, "get",
+                                    permission.READ_CALL_LOG);
+                            XposedHelpers.callMethod(ps, "grantInstallPermission", p);
                         }
                     }
                 }
