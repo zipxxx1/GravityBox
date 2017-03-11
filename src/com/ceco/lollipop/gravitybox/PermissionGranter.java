@@ -17,6 +17,7 @@ package com.ceco.lollipop.gravitybox;
 
 import java.util.Set;
 
+import android.Manifest.permission;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -122,7 +123,7 @@ public class PermissionGranter {
                         final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
                         final Object sharedUser = XposedHelpers.getObjectField(extras, "sharedUser");
                         final Set<String> grantedPerms =
-                                (Set<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
+                                (Set<String>) XposedHelpers.getObjectField(sharedUser, "grantedPermissions");
                         final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
                         final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
 
@@ -131,6 +132,18 @@ public class PermissionGranter {
                             final Object pCns = XposedHelpers.callMethod(permissions, "get",
                                     PERM_CHANGE_NETWORK_STATE);
                             grantedPerms.add(PERM_CHANGE_NETWORK_STATE);
+                            int[] gpGids = (int[]) XposedHelpers.getObjectField(sharedUser, "gids");
+                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCns, "gids");
+                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
+                                    "appendInts", gpGids, bpGids);
+
+                            if (DEBUG) log(pkgName + ": Permission added: " + pCns);
+                        }
+                        // Add READ_CALL_LOG needed by LockscreenAppBar to show badge for missed calls
+                        if (!grantedPerms.contains(permission.READ_CALL_LOG)) {
+                            final Object pCns = XposedHelpers.callMethod(permissions, "get",
+                                    permission.READ_CALL_LOG);
+                            grantedPerms.add(permission.READ_CALL_LOG);
                             int[] gpGids = (int[]) XposedHelpers.getObjectField(sharedUser, "gids");
                             int[] bpGids = (int[]) XposedHelpers.getObjectField(pCns, "gids");
                             gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 

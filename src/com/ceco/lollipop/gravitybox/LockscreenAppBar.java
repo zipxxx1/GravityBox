@@ -21,11 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -34,7 +36,9 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.provider.CallLog;
 import android.service.notification.StatusBarNotification;
+import android.telecom.TelecomManager;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +78,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
     private Handler mHandler;
     private KeyguardStateMonitor mKgMonitor;
     private NotificationDataMonitor mNdMonitor;
+    private String mDialerPkgName;
 
     public LockscreenAppBar(Context ctx, Context gbCtx, ViewGroup container,
             Object statusBar, XSharedPreferences prefs) {
@@ -158,6 +163,9 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             if (ai.isUnsafeAction()) {
                 ai.setVisible(!mKgMonitor.isLocked());
             }
+            if (ModTelecom.PACKAGE_NAME.equals(ai.getPackageName())) {
+                ai.updateIcon();
+            }
         }
     }
 
@@ -194,6 +202,32 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }
+        }
+    }
+
+    private String getDialerPackageName() {
+        if (mDialerPkgName == null) {
+            try {
+                TelecomManager tm = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
+                mDialerPkgName = ((ComponentName) XposedHelpers.callMethod(tm, "getDefaultPhoneApp"))
+                        .getPackageName();
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+        }
+        return mDialerPkgName;
+    }
+
+    private int getMissedCallCount() {
+        try {
+            String[] selection = { CallLog.Calls.TYPE };
+            String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE +
+                    " AND " + CallLog.Calls.NEW + "=1";
+            Cursor c = mContext.getContentResolver().query(CallLog.Calls.CONTENT_URI, selection, where, null, null);
+            return c.getCount();
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return 0;
         }
     }
 
@@ -282,7 +316,9 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
         private String getPackageName() {
             if (mIntent != null && mIntent.getComponent() != null &&
                     mIntent.getComponent().getPackageName() != null) {
-                return mIntent.getComponent().getPackageName();
+                final String pkgName = mIntent.getComponent().getPackageName();
+                return (pkgName.equals(getDialerPackageName()) ?
+                        ModTelecom.PACKAGE_NAME : pkgName);
             }
             return null;
         }
@@ -293,14 +329,25 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             Drawable d = mIcon;
 
             final int mode = mIntent.getIntExtra("mode", AppPickerPreference.MODE_APP);
-            if (mShowBadges && mode == AppPickerPreference.MODE_APP && mNdMonitor != null) {
-                int count = mNdMonitor.getNotifCountFor(getPackageName());
+            if (mShowBadges && mode == AppPickerPreference.MODE_APP) {
+                int count = getNotifCount();
                 if (count > 0) {
                     d = createBadgeDrawable(d, count);
                 }
             }
 
             mView.setImageDrawable(d);
+        }
+
+        private int getNotifCount() {
+            final String pkgName = getPackageName();
+            if (ModTelecom.PACKAGE_NAME.equals(pkgName)) {
+                return getMissedCallCount();
+            } else if (mNdMonitor != null) {
+                return mNdMonitor.getNotifCountFor(pkgName);
+            } else {
+                return 0;
+            }
         }
 
         private Drawable createBadgeDrawable(Drawable d, int count) {
