@@ -1416,6 +1416,7 @@
     <string name="pref_charging_led_title">Režim LED nabíjení</string>
     <string name="charging_led_default">Původní</string>
     <string name="charging_led_emulated">Emulovaný</string>
+    <string name="charging_led_constant">Konstantní (vyžaduje podporu LED ovladače)</string>
     <string name="charging_led_disabled">Vypnutý</string>
 
     <!-- Quiet hours week days -->
@@ -1986,6 +1987,13 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">Přepnout panel nastavení</string>
     <string name="qs_panel_collapse">Skrýt panel nastavení</string>
+
+    <!-- Lockscreen shorcuts: Show badges -->
+    <string name="pref_lockscreen_shortcuts_show_badges_title">Počet oznámení</string>
+    <string name="pref_lockscreen_shortcuts_show_badges_summary">Zobrazí počet aktuálních oznámení</string>
+
+    <!-- Clock: Show seconds -->
+    <string name="pref_statusbar_clock_show_seconds_title">Zobrazit sekundy</string>
 
     <!-- ProgressBar: Sounds -->
     <string name="pref_cat_statusbar_download_progress_sounds_title">Zvuk</string>
