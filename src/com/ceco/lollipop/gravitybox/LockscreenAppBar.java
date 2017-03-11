@@ -210,11 +210,13 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
     private final class AppInfo implements View.OnClickListener {
         private Intent mIntent;
         private Resources mResources;
+        private Resources mGbResources;
         private ImageView mView;
         private Drawable mIcon;
 
         public AppInfo(int resId) {
-            mResources = mGbContext.getResources();
+            mResources = mContext.getResources();
+            mGbResources = mGbContext.getResources();
             mView = (ImageView) mRootView.findViewById(resId);
             mView.setVisibility(View.GONE);
             mView.setOnClickListener(this);
@@ -228,8 +230,8 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
         }
 
         public void initAppInfo(String value) {
+            reset();
             if (value == null) {
-                reset();
                 return;
             }
 
@@ -242,10 +244,10 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
                 final int mode = mIntent.getIntExtra("mode", AppPickerPreference.MODE_APP);
 
                 final int iconResId = mIntent.getStringExtra("iconResName") != null ?
-                        mResources.getIdentifier(mIntent.getStringExtra("iconResName"),
+                        mGbResources.getIdentifier(mIntent.getStringExtra("iconResName"),
                         "drawable", mGbContext.getPackageName()) : 0;
                 if (iconResId != 0) {
-                    mIcon = mResources.getDrawable(iconResId, null);
+                    mIcon = mGbResources.getDrawable(iconResId, null);
                 } else {
                     final String appIconPath = mIntent.getStringExtra("icon");
                     if (appIconPath != null) {
@@ -318,7 +320,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             p.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10,
                     mResources.getDisplayMetrics()));
 
-            Drawable bg = mResources.getDrawable(R.drawable.ic_notification_overlay, null);
+            Drawable bg = mGbResources.getDrawable(R.drawable.ic_notification_overlay, null);
 
             final int w = b.getWidth();
             final int h = b.getHeight();
@@ -336,6 +338,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             if (dh < bg.getMinimumHeight()) {
                 dh = bg.getMinimumHeight();
             }
+            if (dw < dh) dw = dh;
             int y = h-r.bottom-((dh-r.top-th-r.bottom)/2);
             bg.setBounds(w-dw, h-dh, w, h);
 
