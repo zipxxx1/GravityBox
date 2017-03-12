@@ -1,3 +1,18 @@
+Changelog 6.3.5 - 12/03/2017
+--------------------------------------
+- Download Progress Bar: implemented extensions from SBDP module
+--- added support for multiple concurrent progress bar notifications
+--- keeps track of all available progress bar notifications and switches between them
+--- added support for clearable notifications containing progress bar
+--- added logic for auto-hiding progress of idle notifications
+--- added option for sound notification
+--- added option for playing sound only when screen is off
+- Lockscreen shortcuts:
+--- improved notification badge layout
+--- added support for missed call count showing for default dialer app
+--- fixed bug in icon not being updated when changing app
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 6.3.4 - 26/02/2017
 --------------------------------------
 - preparations for upcoming changes in Google Play refund policy
