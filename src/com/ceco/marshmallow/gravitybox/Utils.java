@@ -94,7 +94,7 @@ public class Utils {
     private static Boolean mIsSamsumgRom = null;
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
-    private static Boolean mIsVerneeApolloLiteDevice;
+    private static Boolean mIsVerneeApolloDevice;
     private static Boolean mIsOxygenOs35Rom = null;
 
     // Device features
@@ -269,12 +269,12 @@ public class Utils {
         return mIsSamsumgRom;
     }
 
-    public static boolean isVerneeApolloLiteDevice() {
-        if (mIsVerneeApolloLiteDevice != null) return mIsVerneeApolloLiteDevice;
+    public static boolean isVerneeApolloDevice() {
+        if (mIsVerneeApolloDevice != null) return mIsVerneeApolloDevice;
 
-        mIsVerneeApolloLiteDevice = (Build.BRAND.equals("Vernee") &&
-                Build.MODEL.equals("Apollo Lite"));
-        return mIsVerneeApolloLiteDevice;
+        mIsVerneeApolloDevice = (Build.BRAND.equalsIgnoreCase("vernee") &&
+                Build.MODEL.toLowerCase().contains("apollo"));
+        return mIsVerneeApolloDevice;
     }
 
     public static boolean isOxygenOs35Rom() {

@@ -1800,7 +1800,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             // Remove Vernee Apollo Lite preferences
-            if (Utils.isVerneeApolloLiteDevice()) {
+            if (Utils.isVerneeApolloDevice()) {
                 mPrefCatDisplay.removePreference(mPrefPulseNotificationDelay);
             }
 

@@ -224,7 +224,7 @@ public class ModLedControl {
 
                 Notification n = (Notification) param.args[6];
 
-                if (Utils.isVerneeApolloLiteDevice()) {
+                if (Utils.isVerneeApolloDevice()) {
                     XposedHelpers.setIntField(param.thisObject, "mDefaultNotificationColor",
                             ((n.defaults & Notification.DEFAULT_LIGHTS) != 0 ?
                                     getDefaultNotificationLedColor() : n.ledARGB));
@@ -290,7 +290,7 @@ public class ModLedControl {
                 } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE &&
                         !(isOngoing && !ls.getOngoing())) {
                     n.flags |= Notification.FLAG_SHOW_LIGHTS;
-                    if (Utils.isVerneeApolloLiteDevice()) {
+                    if (Utils.isVerneeApolloDevice()) {
                         n.defaults |= Notification.DEFAULT_LIGHTS;
                         XposedHelpers.setIntField(param.thisObject,
                                 "mDefaultNotificationColor", ls.getColor());

@@ -188,9 +188,9 @@ public class LedSettings {
         mPackageName = packageName;
         mEnabled = false;
         mOngoing = false;
-        mLedOnMs = Utils.isVerneeApolloLiteDevice() ? 500 : 1000;
-        mLedOffMs = Utils.isVerneeApolloLiteDevice() ? 0 : 5000;
-        mColor = Utils.isVerneeApolloLiteDevice() ? 0xff201000 : 0xffffffff;
+        mLedOnMs = Utils.isVerneeApolloDevice() ? 500 : 1000;
+        mLedOffMs = Utils.isVerneeApolloDevice() ? 0 : 5000;
+        mColor = Utils.isVerneeApolloDevice() ? 0xff201000 : 0xffffffff;
         mSoundOverride = false;
         mSoundUri = null;
         mSoundReplace = true;
