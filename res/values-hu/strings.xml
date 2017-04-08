@@ -1439,6 +1439,7 @@
     <string name="pref_charging_led_title">Akkumulátor töltés LED</string>
     <string name="charging_led_default">Alapértelmezett</string>
     <string name="charging_led_emulated">Emulált</string>
+    <string name="charging_led_constant">Folyamatos (LED driver támogatás szükséges)</string>
     <string name="charging_led_disabled">Letiltva</string>
 
     <!-- Quiet hours week days -->
@@ -1968,8 +1969,76 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Vezeték nélküli töltés hang</string>
     <string name="stock_wireless_sound">Alapértelmezett hang</string>
+	
+    <!-- QS: Moto Data tile -->
+    <string name="qs_tile_moto_data">Adat (Moto)</string>
+	
+    <!-- Dialer category -->
+    <string name="pref_cat_phone_dialer_title">Tárcsázó</string>
+	
+    <!-- QS: Brightness control -->
+    <string name="pref_qs_brightness_icon_title">Fényerő ikon megjelenítése</string>
+    <string name="pref_qs_brightness_icon_summary">Megjeleníti az aktuális fényerő módra vonatkozó ikont. Ki-bekapcsolja az adaptív fényerőt egyszeri érintésre, megnyitja a képernyő beállításait hosszú érintésre.</string>
 
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">Frissített értesítések figyelmen kívül hagyása</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Nem kapcsolódik be az Aktív Képernyő meglévő értesítések frissítésekor</string>
+	
+    <!-- UNC: LED: Ignore updated notifications -->
+    <string name="pref_lc_led_ignore_update_title">Frissített értesítések figyelmen kívül hagyása</string>
+    <string name="pref_lc_led_ignore_update_summary">Nem kapcsolódik be a LED a meglévő értesítés frissítésekor, ha az értesítés a felhasználó által már korábban megtekintésre került</string>	
+	
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Gyorsbeállítások panel kiterjesztése</string>
+	
+    <!-- Fingeprint launcher -->
+    <string name="pref_cat_fingerprint_launcher_title">Ujjlenyomat indító</string>
+    <string name="pref_cat_fingerprint_launcher_summary">Lehetővé teszi alkalmazás vagy művelet indítását az ujjlenyomat érzékelő használatával, bekapcsolt képernyőnél és feloldott eszköznél</string>
+    <string name="pref_fingerprint_launcher_enable_summary">Ujjlenyomat indító funkció ki- és bekapcsolása (újraindítás szükséges)</string>
+    <string name="pref_fingerprint_launcher_app_title">Alkalmazás vagy művelet választása</string>
+    <string name="pref_fingerprint_launcher_ignore_auth_title">Gyors érintés mód</string>
+    <string name="pref_fingerprint_launcher_ignore_auth_summary">KÍSÉRLETI: Elfogadja a fel nem ismert ujjlenyomatokat és gyorsabb érintéseket. Átmeneti érzékelő lezárást eredményezhet túl sok újabb hitelesítési hiba esetén.</string>
+    <string name="fingerprint_auth_failed">Hitelesítés sikertelen</string>
+    <string name="fingerprint_sensor_unavail">Az ujjlenyomat érzékelő elérhetetlenné vált</string>
+    <string name="fingerprint_sensor_locked">Az ujjlenyomat érzékelő lezárásra került a túl sok sikertelen hitelesítési próbálkozás miatt. Próbáld meg újra 35 másodperc múlva.</string>
+    <string name="fingerprint_no_app">Nincs hozzárendelve alkalmazás/művelet</string>
+    <string name="pref_cat_fingerprint_launcher_fingers_title">Ujjankénti műveletek</string>
+    <string name="finger">Ujj</string>
+    <string name="pref_cat_fingerprint_launcher_quick_tap_title">Gyors érintés művelet</string>
+	<string name="pref_fingerprint_launcher_pause_title">Szüneteltet</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Szünetelteti az indítót a következő képernyő ki-bekapcsolásig. Akkor használd, ha más alkalmazásoknak hosszabb ideig szüksége van a szenzorra, pl. ujjlenyomat rögzítése.</string>
+    <string name="fingerprint_launcher_paused">Az indító szüneteltetésre kerül a következő képernyő ki-bekapcsolási ciklusig.</string>
+    <string name="pref_fingerprint_launcher_show_toast_title">Állapot üzenetek megjelenítése</string>
+    <string name="pref_fingerprint_launcher_show_toast_summary">Állapot üzenet megjelenítése felugró üzenetként</string>
+
+    <!-- Action: toggle/expand/collapse notification panel -->
+    <string name="notification_panel_toggle">Értesítési panel ki-bekapcsolása</string>
+    <string name="notification_panel_collapse">Értesítési panel összecsukása</string>
+
+    <!-- Action: toggle/expand/collapse QS panel -->
+    <string name="qs_panel_toggle">Gyorsbeállítások panel ki-bekapcsolása</string>
+    <string name="qs_panel_collapse">Gyorsbeállítások panel összecsukása</string>
+
+    <!-- QS: OP3T tiles -->
+    <string name="qs_tile_op3t_night_mode">OP3T Éjszakai mód</string>
+    <string name="qs_tile_op3t_buttons">OP3T Gombok</string>
+    <string name="qs_tile_op3t_vpn">OP3T VPN</string>
+    <string name="qs_tile_op3t_dataswitch">OP3T Adat kapcsoló</string>
+    <string name="qs_tile_op3t_powersaving">OP3T Energiatakarékosság</string>
+
+    <!-- Lockscreen shorcuts: Show badges -->
+    <string name="pref_lockscreen_shortcuts_show_badges_title">Számláló mutatása</string>
+    <string name="pref_lockscreen_shortcuts_show_badges_summary">Értesítések számának mutatása</string>
+	
+    <!-- Clock: Show seconds -->
+    <string name="pref_statusbar_clock_show_seconds_title">Másodpercek megjelenítése</string>
+
+    <!-- ProgressBar: Sounds -->
+    <string name="pref_cat_statusbar_download_progress_sounds_title">Hangok</string>
+    <string name="pref_statusbar_download_progress_sound_enable_title">Hang engedélyezése</string>
+    <string name="pref_statusbar_download_progress_sound_enable_summary">Értesítési hang lejátszása, ha a letöltés befejeződött vagy megszakadt</string>
+    <string name="pref_statusbar_download_progress_sound_title">Hang kiválasztása</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_title">Csak kikapcsolt képernyőnél</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_summary">Értesítési hang lejátszása csak kikapocsolt képernyő esetén</string>
 
 </resources>
