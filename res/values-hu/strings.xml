@@ -1687,6 +1687,7 @@
     <string name="pref_charging_led_title">Akkumulátor töltés LED</string>
     <string name="charging_led_default">Alapértelmezett</string>
     <string name="charging_led_emulated">Emulált</string>
+    <string name="charging_led_constant">Folyamatos (LED driver támogatás szükséges)</string>
     <string name="charging_led_disabled">Letiltva</string>
 
     <!-- Heads up snooze timer -->
@@ -1969,5 +1970,12 @@
     <string name="pref_navbar_custom_key_image_title">Egyéni kép beállítása</string>
     <string name="custom_image_success">Egyéni kép beállítva</string>
     <string name="custom_image_failure">Nem sikerült beállítani az egyéni képet</string>
+	
+    <!-- UNC: Active screen: Ignore updated notifications -->
+    <string name="pref_lc_active_screen_ignore_update_title">Frissített értesítések figyelmen kívül hagyása</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Nem kapcsolódik be az Aktív Képernyő meglévő értesítések frissítésekor</string>
+	
+    <!-- Clock: Show seconds -->
+    <string name="pref_statusbar_clock_show_seconds_title">Másodpercek megjelenítése</string>
 
 </resources>
