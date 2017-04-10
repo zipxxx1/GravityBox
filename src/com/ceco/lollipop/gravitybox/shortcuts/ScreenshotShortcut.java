@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
 
 public class ScreenshotShortcut extends AShortcut {
     protected static final String ACTION =  ModHwKeys.ACTION_SCREENSHOT;

@@ -48,6 +48,7 @@ public class ScreenshotTile extends QsTile {
     public void handleClick() {
         collapsePanels();
         Intent intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
+        intent.putExtra(ModHwKeys.EXTRA_SCREENSHOT_DELAY_MS, 1000L);
         mContext.sendBroadcast(intent);
         super.handleClick();
     }
