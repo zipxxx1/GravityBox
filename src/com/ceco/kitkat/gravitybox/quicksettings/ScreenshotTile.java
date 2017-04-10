@@ -39,6 +39,7 @@ public class ScreenshotTile extends BasicTile {
             public void onClick(View v) {
                 collapsePanels();
                 Intent intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
+                intent.putExtra(ModHwKeys.EXTRA_SCREENSHOT_DELAY_MS, 1000L);
                 mContext.sendBroadcast(intent);
             }
         };

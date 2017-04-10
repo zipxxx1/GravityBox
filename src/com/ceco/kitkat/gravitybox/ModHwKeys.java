@@ -79,6 +79,7 @@ public class ModHwKeys {
     private static final int FLAG_WAKE = 0x00000001;
     private static final int FLAG_WAKE_DROPPED = 0x00000002;
     public static final String ACTION_SCREENSHOT = "gravitybox.intent.action.SCREENSHOT";
+    public static final String EXTRA_SCREENSHOT_DELAY_MS = "screenshotDelayMs";
     public static final String ACTION_SHOW_POWER_MENU = "gravitybox.intent.action.SHOW_POWER_MENU";
     public static final String ACTION_TOGGLE_EXPANDED_DESKTOP = 
             "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP";
@@ -308,7 +309,7 @@ public class ModHwKeys {
                     mPieMode = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_ENABLE, 0);
                 }
             } else if (action.equals(ACTION_SCREENSHOT) && mPhoneWindowManager != null) {
-                takeScreenshot();
+                takeScreenshot(intent.getLongExtra(EXTRA_SCREENSHOT_DELAY_MS, 200L));
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED)) {
                 final boolean allowAllRotations = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_ALLOW_ALL_ROTATIONS, false);
@@ -1201,7 +1202,7 @@ public class ModHwKeys {
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_EXPAND_QUICKSETTINGS) {
             expandSettingsPanel();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_SCREENSHOT) {
-            takeScreenshot();
+            takeScreenshot(200L);
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_VOLUME_PANEL) {
             showVolumePanel();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_LAUNCHER_DRAWER) {
@@ -1547,7 +1548,7 @@ public class ModHwKeys {
 
     private static final Object mScreenshotLock = new Object();
     private static ServiceConnection mScreenshotConnection = null;  
-    private static void takeScreenshot() {
+    private static void takeScreenshot(final long delayMs) {
         final Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
         if (handler == null) return;
 
@@ -1593,7 +1594,7 @@ public class ModHwKeys {
                                     XposedBridge.log(e);
                                 }
                             }
-                        }, 1000);
+                        }, delayMs);
                     }  
                 }  
                 @Override  
