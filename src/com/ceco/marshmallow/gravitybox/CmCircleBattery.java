@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2012 Sven Dawitz for the CyanogenMod Project
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -349,7 +349,8 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
             setColor(colorInfo.coloringEnabled ?
                     colorInfo.iconColor[0] : colorInfo.defaultIconColor);
-        } else if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+        } else if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0 &&
+                mController.getContainerType() == ContainerType.STATUSBAR) {
             setColor(colorInfo.iconTint);
         }
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
