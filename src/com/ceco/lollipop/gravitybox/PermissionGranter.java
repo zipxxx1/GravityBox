@@ -151,6 +151,18 @@ public class PermissionGranter {
 
                             if (DEBUG) log(pkgName + ": Permission added: " + pCns);
                         }
+                        // Add ACCESS_FINE_LOCATION needed by GpsStatusMonitor
+                        if (!grantedPerms.contains(permission.ACCESS_FINE_LOCATION)) {
+                            final Object pCns = XposedHelpers.callMethod(permissions, "get",
+                                    permission.ACCESS_FINE_LOCATION);
+                            grantedPerms.add(permission.ACCESS_FINE_LOCATION);
+                            int[] gpGids = (int[]) XposedHelpers.getObjectField(sharedUser, "gids");
+                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCns, "gids");
+                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
+                                    "appendInts", gpGids, bpGids);
+
+                            if (DEBUG) log(pkgName + ": Permission added: " + pCns);
+                        }
 
                         if (DEBUG) {
                             log("List of permissions: ");
