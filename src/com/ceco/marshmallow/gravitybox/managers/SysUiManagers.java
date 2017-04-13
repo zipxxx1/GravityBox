@@ -24,6 +24,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.LocationManager;
 
 public class SysUiManagers {
     private static final String TAG = "GB:SysUiManagers";
@@ -35,6 +36,7 @@ public class SysUiManagers {
     public static KeyguardStateMonitor KeyguardMonitor;
     public static FingerprintLauncher FingerprintLauncher;
     public static NotificationDataMonitor NotifDataMonitor;
+    public static GpsStatusMonitor GpsMonitor;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -92,6 +94,13 @@ public class SysUiManagers {
             XposedBridge.log(t);
         }
 
+        try {
+            GpsMonitor = new GpsStatusMonitor(context);
+        } catch (Throwable t) {
+            log("Error creating GpsStatusMonitor: ");
+            XposedBridge.log(t);
+        }
+
         IntentFilter intentFilter = new IntentFilter();
         // battery info manager
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
@@ -122,6 +131,11 @@ public class SysUiManagers {
             intentFilter.addAction(Intent.ACTION_USER_PRESENT);
             intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
             intentFilter.addAction(GravityBoxSettings.ACTION_FPL_SETTINGS_CHANGED);
+        }
+
+        // GpsStatusMonitor
+        if (GpsMonitor != null) {
+            intentFilter.addAction(LocationManager.MODE_CHANGED_ACTION);
         }
 
         context.registerReceiver(sBroadcastReceiver, intentFilter);
@@ -157,6 +171,9 @@ public class SysUiManagers {
             }
             if (FingerprintLauncher != null) {
                 FingerprintLauncher.onBroadcastReceived(context, intent);
+            }
+            if (GpsMonitor != null) {
+                GpsMonitor.onBroadcastReceived(context, intent);
             }
         }
     };

@@ -77,6 +77,12 @@ public class PermissionGranter {
                                     permission.READ_CALL_LOG);
                             XposedHelpers.callMethod(ps, "grantInstallPermission", p);
                         }
+                        // Add ACCESS_FINE_LOCATION needed by GpsStatusMonitor
+                        if (!grantedPerms.contains(permission.ACCESS_FINE_LOCATION)) {
+                            final Object p = XposedHelpers.callMethod(permissions, "get",
+                                    permission.ACCESS_FINE_LOCATION);
+                            XposedHelpers.callMethod(ps, "grantInstallPermission", p);
+                        }
                     }
                 }
             });
