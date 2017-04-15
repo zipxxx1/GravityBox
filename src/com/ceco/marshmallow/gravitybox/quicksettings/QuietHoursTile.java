@@ -17,6 +17,7 @@ package com.ceco.marshmallow.gravitybox.quicksettings;
 
 import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
@@ -69,7 +70,11 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
 
         switch (mQh.mode) {
             case ON:
-                SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.OFF);
+                if (Utils.isAppInstalled(mContext, QuietHours.PKG_WEARABLE_APP)) {
+                    SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.WEAR);
+                } else {
+                    SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.OFF);
+                }
                 break;
             case AUTO:
                 SysUiManagers.QuietHoursManager.setMode(mQh.quietHoursActive() ? 
@@ -77,6 +82,9 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
                 break;
             case OFF:
                 SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.ON);
+                break;
+            case WEAR:
+                SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.OFF);
                 break;
         }
     }
@@ -94,6 +102,11 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
                     mState.booleanValue = false;
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_off);
                     mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_off);
+                    break;
+                case WEAR:
+                    mState.booleanValue = true;
+                    mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_wear);
+                    mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_wear);
                     break;
                 case AUTO:
                     mState.booleanValue = mQh.quietHoursActive();

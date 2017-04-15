@@ -36,7 +36,8 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class QuietHours {
-    public enum Mode { ON, OFF, AUTO };
+    public static final String PKG_WEARABLE_APP = "com.google.android.wearable.app";
+    public enum Mode { ON, OFF, AUTO, WEAR };
 
     public static final class SystemSound {
         public static final String DIALPAD = "dialpad";
@@ -83,6 +84,10 @@ public class QuietHours {
     public boolean quietHoursActive(LedSettings ls, Notification n, boolean userPresent) {
         if (uncLocked || !enabled) return false;
 
+        if (mode == Mode.WEAR) {
+            return true;
+        }
+
         if (ls.getEnabled() && ls.getQhIgnore()) {
             if (ls.getQhIgnoreList() == null || ls.getQhIgnoreList().trim().isEmpty()) {
                 if (ModLedControl.DEBUG) ModLedControl.log("QH ignored for all notifications");
@@ -111,7 +116,7 @@ public class QuietHours {
         if (uncLocked || !enabled) return false;
 
         if (mode != Mode.AUTO) {
-            return (mode == Mode.ON ? true : false);
+            return (mode == Mode.ON || mode == Mode.WEAR);
         }
 
         Calendar c = new GregorianCalendar();

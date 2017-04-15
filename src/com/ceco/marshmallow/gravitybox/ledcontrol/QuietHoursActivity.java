@@ -25,6 +25,7 @@ import java.util.TreeSet;
 
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.Utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -73,7 +74,11 @@ public class QuietHoursActivity extends Activity {
                 switch (qh.mode) {
                     default:
                     case ON:
-                        qhMode = QuietHours.Mode.OFF;
+                        if (Utils.isAppInstalled(context, QuietHours.PKG_WEARABLE_APP)) {
+                            qhMode = QuietHours.Mode.WEAR;
+                        } else {
+                            qhMode = QuietHours.Mode.OFF;
+                        }
                         break;
                     case AUTO:
                         qhMode = qh.quietHoursActive() ? 
@@ -81,6 +86,9 @@ public class QuietHoursActivity extends Activity {
                         break;
                     case OFF:
                         qhMode = QuietHours.Mode.ON;
+                        break;
+                    case WEAR:
+                        qhMode = QuietHours.Mode.OFF;
                         break;
                 }
             }
@@ -99,6 +107,7 @@ public class QuietHoursActivity extends Activity {
             case ON: return R.string.quiet_hours_on;
             case OFF: return R.string.quiet_hours_off;
             case AUTO: return R.string.quiet_hours_auto;
+            case WEAR: return R.string.quiet_hours_wear;
             default: return 0;
         }
     }
