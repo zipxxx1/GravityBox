@@ -20,6 +20,7 @@ import java.util.List;
 
 import com.ceco.lollipop.gravitybox.ModHwKeys;
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
@@ -81,6 +82,16 @@ public class QuietHoursShortcut extends AMultiShortcut {
                                 QuietHours.Mode.OFF.toString());
                     }
                 }));
+        if (Utils.isAppInstalled(mContext, QuietHours.PKG_WEARABLE_APP)) {
+            list.add(new ShortcutItem(mContext, R.string.quiet_hours_wear,
+                    R.drawable.shortcut_quiet_hours_wear, new ExtraDelegate() {
+                        @Override
+                        public void addExtraTo(Intent intent) {
+                            intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
+                                    QuietHours.Mode.WEAR.toString());
+                        }
+                    }));
+        }
         list.add(new ShortcutItem(mContext, R.string.quiet_hours_auto, 
                 R.drawable.shortcut_quiet_hours_auto, new ExtraDelegate() {
                     @Override
