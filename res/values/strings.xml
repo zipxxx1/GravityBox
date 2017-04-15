@@ -2086,4 +2086,9 @@
     <string name="pref_statusbar_download_progress_sound_screen_off_title">Only when screen is off</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_summary">Plays notification sound only when screen is off</string>
 
+    <!-- Unlocker policy check feedback -->
+    <string name="msg_unlocker_missing">Unable to contact GravityBox Unlocker to perform license check</string>
+    <string name="msg_unlocker_old">Your version of GravityBox Unlocker seems to be outdated. Please update.</string>
+    <string name="msg_unlocker_error">Unexpected error while contacting GravityBox Unlocker</string>
+
 </resources>
