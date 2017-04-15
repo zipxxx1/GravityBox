@@ -89,6 +89,7 @@
     <string name="quick_settings_quiet_hours_off">静音时段已关闭</string>
     <string name="quick_settings_quiet_hours_on">静音时段已开启</string>
     <string name="quick_settings_quiet_hours_auto">自动静音时段</string>
+    <string name="quick_settings_quiet_hours_wear">穿戴模式</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">状态栏快速设置</string>
@@ -1969,6 +1970,7 @@
     <string name="quiet_hours_on">打开静音时段</string>
     <string name="quiet_hours_off">关闭静音时段</string>
     <string name="quiet_hours_auto">自动静音时段</string>
+    <string name="quiet_hours_wear">穿戴模式</string>
 
     <!-- Auto rotation shortcut -->
     <string name="auto_rotation_on">打开自动旋转</string>

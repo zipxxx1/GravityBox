@@ -89,6 +89,7 @@
     <string name="quick_settings_quiet_hours_off">Quiet Hours Off</string>
     <string name="quick_settings_quiet_hours_on">Quiet Hours On</string>
     <string name="quick_settings_quiet_hours_auto">Quiet Hours Auto</string>
+    <string name="quick_settings_quiet_hours_wear">Wear Mode</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Statusbar QuickSettings tiles</string>
@@ -1969,6 +1970,7 @@
     <string name="quiet_hours_on">Quiet hours on</string>
     <string name="quiet_hours_off">Quiet hours off</string>
     <string name="quiet_hours_auto">Quiet hours auto</string>
+    <string name="quiet_hours_wear">Wear mode</string>
 
     <!-- Auto rotation shortcut -->
     <string name="auto_rotation_on">Auto rotation on</string>

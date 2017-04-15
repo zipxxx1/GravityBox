@@ -323,7 +323,8 @@ public class ModLedControl {
 
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
-                final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
+                final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe &&
+                        mQuietHours.mode != QuietHours.Mode.WEAR;
                 final boolean qhActiveIncludingActiveScreen = qhActive &&
                         !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
 
@@ -523,7 +524,8 @@ public class ModLedControl {
     private static XC_MethodHook startVibrationHook = new XC_MethodHook() {
         @Override
         protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-            if (mQuietHours.quietHoursActive() && mQuietHours.muteSystemVibe) {
+            if (mQuietHours.quietHoursActive() && (mQuietHours.muteSystemVibe ||
+                    mQuietHours.mode == QuietHours.Mode.WEAR)) {
                 if (DEBUG) log("startVibrationLocked: system level vibration suppressed");
                 param.setResult(null);
             }

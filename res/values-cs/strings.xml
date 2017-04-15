@@ -72,6 +72,7 @@
     <string name="quick_settings_quiet_hours_off">Tiché hodiny vyp</string>
     <string name="quick_settings_quiet_hours_on">Tiché hodiny zap</string>
     <string name="quick_settings_quiet_hours_auto">Tiché hodiny auto</string>
+    <string name="quick_settings_quiet_hours_wear">Wear režim</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Dlaždice QuickSettings panelu</string>
@@ -1906,6 +1907,7 @@
     <string name="quiet_hours_on">Zapnutí tichých hodin</string>
     <string name="quiet_hours_off">Vypnutí tichých hodin</string>
     <string name="quiet_hours_auto">Automatické tiché hodiny</string>
+    <string name="quiet_hours_wear">Wear režim</string>
 
     <!-- Auto rotation shortcut -->
     <string name="auto_rotation_on">Zapnutí auto rotace</string>
