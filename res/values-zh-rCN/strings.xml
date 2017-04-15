@@ -2018,4 +2018,9 @@
     <string name="pref_statusbar_download_progress_sound_screen_off_title">仅屏幕关闭时</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_summary">仅在屏幕关闭时播放通知声音</string>
 
+    <!-- Unlocker policy check feedback -->
+    <string name="msg_unlocker_missing">无法连接到GravityBox解锁器进行许可证检查</string>
+    <string name="msg_unlocker_old">您的GravityBox解锁器版本似乎已经过期了,请更新!</string>
+    <string name="msg_unlocker_error">连接GravityBox解锁器时发生意外错误</string>
+
 </resources>

@@ -6,9 +6,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
@@ -16,31 +18,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.view.ContextThemeWrapper;
+import android.widget.Toast;
 
 public class UnlockActivity extends Activity implements GravityBoxResultReceiver.Receiver {
     private static final String PKG_UNLOCKER = "com.ceco.gravitybox.unlocker";
     private static final String ACTION_UNLOCK = "gravitybox.intent.action.UNLOCK";
     private static final String ACTION_CHECK_POLICY = "gravitybox.intent.action.CHECK_POLICY";
+    private static final String PERMISSION_UNLOCK = "gravitybox.permission.UNLOCK";
 
     protected interface CheckPolicyHandler {
         void onPolicyResult(boolean ok);
-    }
-    private static CheckPolicyHandler sCheckPolicyHandler; 
+    } 
 
     private GravityBoxResultReceiver mReceiver;
     private Handler mHandler;
     private Dialog mAlertDialog;
     private ProgressDialog mProgressDialog;
-
-    private static Runnable sCheckPolicyExpired = new Runnable() {
-        @Override
-        public void run() {
-            if (sCheckPolicyHandler != null) {
-                sCheckPolicyHandler.onPolicyResult(false);
-                sCheckPolicyHandler = null;
-            }
-        }
-    };
 
     private Runnable mGetSystemPropertiesTimeout = new Runnable() {
         @Override
@@ -153,11 +146,6 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
                 Intent i = new Intent(context, UnlockActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
-            } else if (intent.getAction().equals(ACTION_CHECK_POLICY)) {
-                if (sCheckPolicyHandler != null) {
-                    sCheckPolicyHandler.onPolicyResult(true);
-                    sCheckPolicyHandler = null;
-                }
             }
         }
     }
@@ -182,27 +170,92 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
 
     protected static void maybeRunUnlocker(Context context) {
         try {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setPackage(PKG_UNLOCKER);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            PackageInfo pkgInfo = context.getPackageManager()
+                    .getPackageInfo(PKG_UNLOCKER, 0);
+            if (pkgInfo.versionCode < 16) {
+                Toast.makeText(context, context.getString(R.string.msg_unlocker_old),
+                        Toast.LENGTH_LONG).show();
+            } else {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setPackage(PKG_UNLOCKER);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
         } catch (Exception e) { 
             //e.printStackTrace();
         }
     }
 
-    protected static void checkPolicyOk(Context context, CheckPolicyHandler handler) {
-        sCheckPolicyHandler = handler;
+    private static class CheckPolicyReceiver extends BroadcastReceiver {
+        private Context mContext;
+        private Handler mHandler;
+        private CheckPolicyHandler mPolicyHandler;
+        private boolean mIsRegistered;
+
+        private Runnable mExpiredRunnable = new Runnable() {
+            @Override
+            public void run() {
+                unregister();
+                mPolicyHandler.onPolicyResult(false);
+            }
+        };
+
+        CheckPolicyReceiver(Context context, CheckPolicyHandler policyHandler) {
+            mContext = context;
+            mPolicyHandler = policyHandler;
+            mHandler = new Handler();
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mHandler.removeCallbacks(mExpiredRunnable);
+            mPolicyHandler.onPolicyResult(true);
+            unregister();
+        }
+
+        private void register() {
+            mContext.registerReceiver(this, new IntentFilter(ACTION_CHECK_POLICY),
+                    PERMISSION_UNLOCK, null);
+            mIsRegistered = true;
+            mHandler.postDelayed(mExpiredRunnable, 3000);
+        }
+
+        private void unregister() {
+            if (mIsRegistered) {
+                mContext.unregisterReceiver(this);
+                mIsRegistered = false;
+            }
+        }
+    };
+
+    protected static void checkPolicyOk(final Context context, final CheckPolicyHandler policyHandler) {
+        final CheckPolicyReceiver receiver = new CheckPolicyReceiver(context, policyHandler);;
         try {
             PackageInfo pkgInfo = context.getPackageManager()
                     .getPackageInfo(PKG_UNLOCKER, 0);
-            new Handler().postDelayed(sCheckPolicyExpired, 2000);
+            if (pkgInfo.versionCode < 16) {
+                policyHandler.onPolicyResult(false);
+                Toast.makeText(context, context.getString(R.string.msg_unlocker_old),
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
             Intent intent = new Intent(ACTION_CHECK_POLICY);
-            intent.setPackage(pkgInfo.packageName);
-            context.sendBroadcast(intent);
-        } catch (NameNotFoundException e) {
-            sCheckPolicyHandler.onPolicyResult(false);
-            sCheckPolicyHandler = null;
+            intent.setComponent(new ComponentName(pkgInfo.packageName,
+                    pkgInfo.packageName+".CheckPolicyService"));
+            receiver.register();
+            context.startService(intent);
+        } catch (NameNotFoundException nnfe) {
+            policyHandler.onPolicyResult(false);
+            Toast.makeText(context, context.getString(R.string.msg_unlocker_missing),
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            receiver.unregister();
+            policyHandler.onPolicyResult(false);
+            Toast.makeText(context,
+                    String.format("%s: %s",
+                    context.getString(R.string.msg_unlocker_error),
+                    e.getMessage()),
+                    Toast.LENGTH_LONG).show();
         }
     }
 }

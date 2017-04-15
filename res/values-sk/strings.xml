@@ -1958,4 +1958,9 @@
     <string name="pref_statusbar_download_progress_sound_screen_off_title">Len pri vypnutej obrazovke</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_summary">Prehrá upozornenie len v prípade vypnutej obrazovky</string>
 
+    <!-- Unlocker policy check feedback -->
+    <string name="msg_unlocker_missing">Nebolo možné kontaktovať GravityBox Unlocker pre overenie licencie</string>
+    <string name="msg_unlocker_old">Vaša verzia GravityBox Unlocker nie je aktuálna. Aktualizujte ju, prosím.</string>
+    <string name="msg_unlocker_error">Neočakávaná chyba pri pokuse kontaktovať GravityBox Unlocker</string>
+
 </resources>
