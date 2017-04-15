@@ -1891,4 +1891,9 @@
     <string name="pref_statusbar_download_progress_sound_screen_off_title">Только при выкл. экране</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_summary">Воспроизведение звука уведомления только при выключенном экране</string>
 
+    <!-- Unlocker policy check feedback -->
+    <string name="msg_unlocker_missing">Невозможно связаться с GravityBox Unlocker для проверки лицензии</string>
+    <string name="msg_unlocker_old">Похоже, что Ваша версия GravityBox Unlocker устарела. Пожалуйста, обновите её.</string>
+    <string name="msg_unlocker_error">Неожиданная ошибка при обращении к GravityBox Unlocker</string>
+
 </resources>
