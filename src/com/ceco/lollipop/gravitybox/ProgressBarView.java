@@ -28,8 +28,6 @@ import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.IconManagerLis
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Intent;
@@ -115,7 +113,8 @@ public class ProgressBarView extends View implements
     @Override
     public void onSizeChanged(int w, int h, int oldw, int oldh) {
         if (DEBUG) log("w=" + w + "; h=" + h);
-        setPivotX(mCentered ? w/2f : 0f);
+        setPivotX(mCentered ? getWidth()/2f : 
+            Utils.isRTL(getContext()) ? getWidth() : 0f);
     }
 
     @Override
@@ -193,6 +192,9 @@ public class ProgressBarView extends View implements
     private void updateProgressView(boolean fadeOutAndIn) {
         clearAnimation();
         if (isValidStatusBarState() && !mCtrl.getList().isEmpty()) {
+            if (mAnimator.isStarted()) {
+                mAnimator.cancel();
+            }
             ProgressInfo pi = (ProgressInfo) mCtrl.getList().values().toArray()[mCurrentIndex];
             float newScaleX = pi.getFraction();
             if (DEBUG) log("updateProgressView: id='" + 
@@ -207,6 +209,7 @@ public class ProgressBarView extends View implements
                 setScaleX(newScaleX);
             }
         } else {
+            removeCallbacks(mIndexCyclerRunnable);
             if (mAnimator.isStarted()) {
                 mAnimator.end();
             }
@@ -229,14 +232,13 @@ public class ProgressBarView extends View implements
         animate()
             .alpha(0f)
             .setDuration(ANIM_DURATION / 2)
-            .setListener(new AnimatorListenerAdapter() {
+            .withEndAction(new Runnable() {
                 @Override
-                public void onAnimationEnd(Animator animation) {
-                    ProgressBarView.this.setScaleX(newScaleX);
-                    ProgressBarView.this.animate()
+                public void run() {
+                    setScaleX(newScaleX);
+                    animate()
                         .alpha(1f)
-                        .setDuration(ANIM_DURATION / 2)
-                        .setListener(null);
+                        .setDuration(ANIM_DURATION / 2);
                 }
             });
     }
@@ -247,20 +249,19 @@ public class ProgressBarView extends View implements
         setVisibility(View.VISIBLE);
         animate()
             .alpha(1f)
-            .setDuration(ANIM_DURATION)
-            .setListener(null);
+            .setDuration(ANIM_DURATION);
     }
 
     private void fadeOut() {
         animate()
             .alpha(0f)
             .setDuration(ANIM_DURATION)
-            .setListener(new AnimatorListenerAdapter() {
+            .withEndAction(new Runnable() {
                 @Override
-                public void onAnimationEnd(Animator animation) {
-                    ProgressBarView.this.setScaleX(0f);
-                    ProgressBarView.this.setVisibility(View.GONE);
-                    ProgressBarView.this.setAlpha(1f);
+                public void run() {
+                    setVisibility(View.GONE);
+                    setScaleX(0f);
+                    setAlpha(1f);
                 }
             });
     }
@@ -334,7 +335,8 @@ public class ProgressBarView extends View implements
             if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED)) {
                 mCentered = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED, false);
-                setPivotX(mCentered ? getWidth()/2f : 0f);
+                setPivotX(mCentered ? getWidth()/2f : 
+                    Utils.isRTL(getContext()) ? getWidth() : 0f);
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS)) {
                 mHeightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
