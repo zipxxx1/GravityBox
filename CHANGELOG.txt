@@ -1,3 +1,31 @@
+Changelog 5.4.7 - 16/04/2017
+--------------------------------------
+- QuickSettings management:
+--- Improved GPS tile (CM style) with proper location fix indication
+- Download Progress Bar: implemented extensions from SBDP module
+--- added support for multiple concurrent progress bar notifications
+--- keeps track of all available progress bar notifications and switches between them
+--- added support for clearable notifications containing progress bar
+--- added logic for auto-hiding progress of idle notifications
+--- added option for sound notification
+--- added option for playing sound only when screen is off
+- Lockscreen shortcuts:
+--- improved notification badge layout
+--- added support for missed call count showing for default dialer app
+--- fixed bug in icon not being updated when changing app
+- QuietHours: implemented Wear mode
+--- available only when Android Wear app is installed
+--- mutes notification sounds and device-wide vibrations while preserving vibrations on a paired watch
+--- can be toggled from QuietHours tile or via dedicated GravityBox Action 
+- Made screenshot faster by introducing dynamic context-aware delay
+- Adjusted for compatibility with the latest GravityBox Unlocker v1.4.2
+--- improved reliability of license validation
+--- !!! won't work with older versions of the Unlocker !!!
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Turkish translations (thanks to FatihFIRINCI)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Persian translations (thanks to Masoud.ser)
+
 Changelog 5.4.6 - 27/02/2017
 --------------------------------------
 - Lockscreen shortcuts: added option for showing notification count badges
