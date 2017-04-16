@@ -410,6 +410,7 @@ public class ProgressBarController implements BroadcastSubReceiver {
                 if (sfx != null) {
                     AudioAttributes attrs = new AudioAttributes.Builder()
                             .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                             .build();
                     sfx.setAudioAttributes(attrs);
                     sfx.play();
