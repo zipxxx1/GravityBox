@@ -239,6 +239,12 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
         try {
             PackageInfo pkgInfo = context.getPackageManager()
                     .getPackageInfo(PKG_UNLOCKER, 0);
+            if (pkgInfo.versionCode <= 12) {
+                policyHandler.onPolicyResult(false);
+                Toast.makeText(context, context.getString(R.string.msg_unlocker_old),
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
             Intent intent = new Intent(ACTION_CHECK_POLICY);
             intent.setComponent(new ComponentName(pkgInfo.packageName,
                     pkgInfo.packageName+".CheckPolicyService"));
@@ -247,11 +253,6 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
         } catch (NameNotFoundException nnfe) {
             policyHandler.onPolicyResult(false);
             Toast.makeText(context, context.getString(R.string.msg_unlocker_missing),
-                    Toast.LENGTH_LONG).show();
-        } catch (SecurityException se) {
-            receiver.unregister();
-            policyHandler.onPolicyResult(false);
-            Toast.makeText(context, context.getString(R.string.msg_unlocker_old),
                     Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             receiver.unregister();
