@@ -64,6 +64,7 @@
     <string name="quick_settings_quiet_hours_off">Tiché hodiny vyp</string>
     <string name="quick_settings_quiet_hours_on">Tiché hodiny zap</string>
     <string name="quick_settings_quiet_hours_auto">Tiché hodiny auto</string>
+    <string name="quick_settings_quiet_hours_wear">Wear režim</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Dlaždice QuickSettings panelu</string>
@@ -1886,6 +1887,7 @@
     <string name="quiet_hours_on">Zapnutí tichých hodin</string>
     <string name="quiet_hours_off">Vypnutí tichých hodin</string>
     <string name="quiet_hours_auto">Automatické tiché hodiny</string>
+    <string name="quiet_hours_wear">Wear režim</string>
 
     <!-- Auto rotation shortcut -->
     <string name="auto_rotation_on">Zapnutí auto rotace</string>
@@ -2002,5 +2004,10 @@
     <string name="pref_statusbar_download_progress_sound_title">Vybrat zvuk</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_title">Jen při vypnuté obrazovce</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_summary">Přehraje upozornění pouze v případě vypnuté obrazovky</string>
+
+    <!-- Unlocker policy check feedback -->
+    <string name="msg_unlocker_missing">Nebylo možné kontaktovat GravityBox Unlocker pro ověření licence</string>
+    <string name="msg_unlocker_old">Vaše verze GravityBox Unlocker není aktuální. Aktualizujte ji, prosím.</string>
+    <string name="msg_unlocker_error">Neočekávaná chyba při pokusu kontaktovat GravityBox Unlocker</string>
 
 </resources>
