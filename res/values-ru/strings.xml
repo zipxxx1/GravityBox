@@ -81,6 +81,7 @@
     <string name="quick_settings_quiet_hours_off">Тихий час выкл</string>
     <string name="quick_settings_quiet_hours_on">Тихий час вкл</string>
     <string name="quick_settings_quiet_hours_auto">Тихий час авто</string>
+    <string name="quick_settings_quiet_hours_wear">Режим Wear</string>
     
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Плитки быстрых настроек</string>
@@ -1948,6 +1949,7 @@
     <string name="quiet_hours_on">Тихий час вкл</string>
     <string name="quiet_hours_off">Тихий час выкл</string>
     <string name="quiet_hours_auto">Тихий час авто</string>
+    <string name="quiet_hours_wear">Режим Wear</string>
 
     <!-- Auto rotation shortcut -->
     <string name="auto_rotation_on">Автоповорот вкл</string>
@@ -2084,5 +2086,10 @@
     <string name="pref_statusbar_download_progress_sound_title">Выбрать звук</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_title">Только при выкл. экране</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_summary">Воспроизведение звука уведомления только при выключенном экране</string>
+
+    <!-- Unlocker policy check feedback -->
+    <string name="msg_unlocker_missing">Невозможно связаться с GravityBox Unlocker для проверки лицензии</string>
+    <string name="msg_unlocker_old">Похоже, что Ваша версия GravityBox Unlocker устарела. Пожалуйста, обновите её.</string>
+    <string name="msg_unlocker_error">Неожиданная ошибка при обращении к GravityBox Unlocker</string>
 
 </resources>
