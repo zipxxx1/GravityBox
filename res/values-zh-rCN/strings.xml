@@ -571,7 +571,7 @@
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">启用亮度控制</string>
-    <string name="pref_statusbar_brightness_summary">启用状态栏调整亮度（需要禁用自动亮度）</string>
+    <string name="pref_statusbar_brightness_summary">按住状态栏左右滑动调整亮度(需要禁用自动亮度)</string>
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">电话</string>
