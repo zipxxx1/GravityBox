@@ -167,6 +167,9 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             if (ai.isUnsafeAction()) {
                 ai.setVisible(!mKgMonitor.isLocked());
             }
+            if (ModTelecom.PACKAGE_NAME.equals(ai.getPackageName())) {
+                ai.updateIcon();
+            }
         }
     }
 
