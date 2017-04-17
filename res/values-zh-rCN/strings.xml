@@ -81,6 +81,7 @@
     <string name="quick_settings_quiet_hours_off">静音时段已关闭</string>
     <string name="quick_settings_quiet_hours_on">静音时段已开启</string>
     <string name="quick_settings_quiet_hours_auto">自动静音时段</string>
+    <string name="quick_settings_quiet_hours_wear">穿戴模式</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">状态栏快速设置</string>
@@ -473,7 +474,7 @@
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">启用亮度控制</string>
-    <string name="pref_statusbar_brightness_summary">启用状态栏调整亮度（需要禁用自动亮度）</string>
+    <string name="pref_statusbar_brightness_summary">按住状态栏左右滑动调整亮度(需要禁用自动亮度)</string>
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">电话</string>
@@ -682,7 +683,7 @@
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">音量面板超时</string>
-	<string name="pref_volume_panel_timeout_summary">默认超时为零</string>
+    <string name="pref_volume_panel_timeout_summary">默认超时为零</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_silent">优先级</string>
@@ -1949,6 +1950,7 @@
     <string name="quiet_hours_on">打开静音时段</string>
     <string name="quiet_hours_off">关闭静音时段</string>
     <string name="quiet_hours_auto">自动静音时段</string>
+    <string name="quiet_hours_wear">穿戴模式</string>
 
     <!-- Auto rotation shortcut -->
     <string name="auto_rotation_on">打开自动旋转</string>
@@ -2085,5 +2087,10 @@
     <string name="pref_statusbar_download_progress_sound_title">选择声音</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_title">仅屏幕关闭时</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_summary">仅在屏幕关闭时播放通知声音</string>
+	
+    <!-- Unlocker policy check feedback -->
+    <string name="msg_unlocker_missing">无法连接到GravityBox解锁器进行许可证检查</string>
+    <string name="msg_unlocker_old">您的GravityBox解锁器版本似乎已经过期了,请更新!</string>
+    <string name="msg_unlocker_error">连接GravityBox解锁器时发生意外错误</string>
 
 </resources>
