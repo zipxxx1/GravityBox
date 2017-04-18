@@ -37,6 +37,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -83,7 +84,6 @@ public class ModLockscreen {
 
     private static enum DirectUnlock { OFF, STANDARD, SEE_THROUGH };
     private static enum UnlockPolicy { DEFAULT, NOTIF_NONE, NOTIF_ONGOING };
-    private static enum BottomAction { DEFAULT, PHONE, CUSTOM };
 
     private static XSharedPreferences mPrefs;
     private static XSharedPreferences mQhPrefs;
@@ -103,6 +103,9 @@ public class ModLockscreen {
     private static KeyguardStateMonitor mKgMonitor;
     private static LockscreenPinScrambler mPinScrambler;
     private static AppLauncher.AppInfo mLeftAction;
+    private static AppLauncher.AppInfo mRightAction;
+    private static Drawable mLeftActionDrawableOrig;
+    private static Drawable mRightActionDrawableOrig;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -119,7 +122,7 @@ public class ModLockscreen {
                  || action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED)) {
                 mPrefs.reload();
                 prepareCustomBackground();
-                prepareLeftAction();
+                prepareBottomActions();
                 if (DEBUG) log("Settings reloaded");
             } else if (action.equals(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED)) {
                 if (DEBUG_KIS) log("ACTION_KEYGUARD_IMAGE_UPDATED received");
@@ -198,7 +201,7 @@ public class ModLockscreen {
 
                     prepareCustomBackground();
                     prepareGestureDetector();
-                    prepareLeftAction();
+                    prepareBottomActions();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
@@ -518,41 +521,85 @@ public class ModLockscreen {
                 }
             }
 
-            XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                    "canLaunchVoiceAssist", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (BottomAction.valueOf(mPrefs.getString(
-                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION, "DEFAULT")) ==
-                                BottomAction.PHONE) {
-                        param.setResult(false);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                    "updateLeftAffordanceIcon", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mLeftAction != null) {
+            // bottom actions
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                        "updateLeftAffordanceIcon", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                         ImageView v = (ImageView) XposedHelpers.getObjectField(
                                 param.thisObject, "mLeftAffordanceView");
-                        v.setImageDrawable(mLeftAction.getAppIcon());
-                        v.setContentDescription(mLeftAction.getAppName());
+                        if (mLeftAction != null) {
+                            v.setVisibility(View.VISIBLE);
+                            if (mLeftActionDrawableOrig == null) {
+                                mLeftActionDrawableOrig = v.getDrawable();
+                            }
+                            v.setImageDrawable(mLeftAction.getAppIcon());
+                            v.setContentDescription(mLeftAction.getAppName());
+                        } else if (mLeftActionDrawableOrig != null) {
+                            v.setImageDrawable(mLeftActionDrawableOrig);
+                            mLeftActionDrawableOrig = null;
+                        }
                     }
-                }
-            });
+                });
+    
+                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                        "launchLeftAffordance", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mLeftAction != null) {
+                            SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
+                            param.setResult(null);
+                        }
+                    }
+                });
+    
+                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                        "updateCameraVisibility", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        ImageView v = (ImageView) XposedHelpers.getObjectField(
+                                param.thisObject, "mCameraImageView");
+                        if (mRightAction != null) {
+                            v.setVisibility(View.VISIBLE);
+                            if (mRightActionDrawableOrig == null) {
+                                mRightActionDrawableOrig = v.getDrawable();
+                            }
+                            v.setImageDrawable(mRightAction.getAppIcon());
+                            v.setContentDescription(mRightAction.getAppName());
+                        } else if (mRightActionDrawableOrig != null) {
+                            v.setImageDrawable(mRightActionDrawableOrig);
+                            mRightActionDrawableOrig = null;
+                        }
+                    }
+                });
 
-            XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                    "launchLeftAffordance", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mLeftAction != null) {
-                        SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
-                        param.setResult(null);
+                XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_KG_BOTTOM_AREA_VIEW, classLoader),
+                        "launchCamera", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mRightAction != null) {
+                            SysUiManagers.AppLauncher.startActivity(mContext, mRightAction.getIntent());
+                            param.setResult(null);
+                        }
                     }
-                }
-            });
+                });
+
+                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                        "onVisibilityChanged", View.class, int.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (param.thisObject == param.args[0] &&
+                                (int)param.args[1] == View.VISIBLE &&
+                                (mLeftAction != null || mLeftActionDrawableOrig != null)) {
+                            XposedHelpers.callMethod(param.thisObject, "updateLeftAffordanceIcon");
+                        }
+                    }
+                });
+
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -763,17 +810,32 @@ public class ModLockscreen {
         }
     }
 
-    private static void prepareLeftAction() {
-        BottomAction type = BottomAction.valueOf(mPrefs.getString(
-                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION, "DEFAULT"));
-        String action = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM, null);
-        if (type != BottomAction.CUSTOM || action == null || action.isEmpty()) {
+    private static void prepareBottomActions() {
+        prepareLeftAction(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM, null));
+        prepareRightAction(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM, null));
+    }
+
+    private static void prepareLeftAction(String action) {
+        if (action == null || action.isEmpty()) {
             mLeftAction = null;
         } else if (SysUiManagers.AppLauncher != null &&
-                (mLeftAction == null || !action.equals(mLeftAction.getValue()))) {
+                (mLeftAction == null || !mLeftAction.getValue().equals(action))) {
             mLeftAction = SysUiManagers.AppLauncher.createAppInfo();
             mLeftAction.setSizeDp(32);
             mLeftAction.initAppInfo(action);
+        }
+    }
+
+    private static void prepareRightAction(String action) {
+        if (action == null || action.isEmpty()) {
+            mRightAction = null;
+        } else if (SysUiManagers.AppLauncher != null &&
+                (mRightAction == null || !mRightAction.getValue().equals(action))) {
+            mRightAction = SysUiManagers.AppLauncher.createAppInfo();
+            mRightAction.setSizeDp(32);
+            mRightAction.initAppInfo(action);
         }
     }
 }

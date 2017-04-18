@@ -1764,7 +1764,5 @@
 
     <!-- Lockscreen: Bottom-left action -->
     <string name="pref_lockscreen_bleft_action_title">Hành động dưới cùng bên trái</string>
-    <string name="ls_bleft_action_default">Mặc định</string>
-    <string name="ls_bleft_action_phone">Điện thoại</string>
 
 </resources>

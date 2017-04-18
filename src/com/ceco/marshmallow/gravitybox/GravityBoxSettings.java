@@ -268,8 +268,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_IMPRINT_VIBE_DISABLE = "pref_imprint_vibe_disable";
     public static final String PREF_KEY_LOCKSCREEN_D2TS = "pref_lockscreen_dt2s";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
-    public static final String PREF_KEY_LOCKSCREEN_BLEFT_ACTION = "pref_lockscreen_bleft_action";
     public static final String PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM = "pref_lockscreen_bleft_action_custom";
+    public static final String PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM = "pref_lockscreen_bright_action_custom";
     public static final String PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE = "pref_lockscreen_pin_sramble";
     public static final String ACTION_LOCKSCREEN_SETTINGS_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SETTINGS_CHANGED";
 
@@ -977,8 +977,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_D2TS,
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
             PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR,
-            PREF_KEY_LOCKSCREEN_BLEFT_ACTION,
             PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM,
+            PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM,
             PREF_KEY_IMPRINT_VIBE_DISABLE,
             PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE
     ));
@@ -2501,13 +2501,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_IMPRINT_MODE)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
                 if (p != null) p.setSummary(p.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_BLEFT_ACTION)) {
-                ListPreference p = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_BLEFT_ACTION);
-                p.setSummary(p.getEntry());
-                Preference p2 = findPreference(PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM);
-                p2.setEnabled("CUSTOM".equals(p.getValue()));
             }
 
             if (key == null || key.equals(PREF_KEY_DND_TILE_DURATION_MODE)) {

@@ -1739,9 +1739,7 @@
 
     <!-- Lockscreen: Bottom-left action -->
     <string name="pref_lockscreen_bleft_action_title">Ľavá-dolná akcia</string>
-    <string name="ls_bleft_action_default">Pôvodná</string>
-    <string name="ls_bleft_action_phone">Telefón</string>
-    <string name="pref_lockscreen_bleft_action_custom_title">Nastaviť ľavú-dolnú akciu</string>
+    <string name="pref_lockscreen_bright_action_title">Pravá-dolná akcia</string>
 
     <!-- Lockscreen: Quick unlock PIN length -->
     <string name="pref_lockscreen_pin_length_title">Dĺžka PIN</string>

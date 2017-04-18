@@ -1094,9 +1094,6 @@
 <string name="imprint_mode_default">بیدار کردن و قفل گشایی(پیشفرض)</string>
 <string name="imprint_mode_wake_only">فقط بیدار کردن</string>
 <string name="pref_lockscreen_bleft_action_title">دکمه چپ</string>
-<string name="ls_bleft_action_default">پیشفرض</string>
-<string name="ls_bleft_action_phone">تلفن</string>
-<string name="pref_lockscreen_bleft_action_custom_title">تنظیم عمل دکمه چپ</string>
 <string name="pref_lockscreen_pin_length_title">تعداد کارکتر پین</string>
 <string name="pref_lockscreen_pin_length_summary">قفل‌گشایی سریع نیازمند تعیین تعداد دقیق کارکتر پین ورودی شما برای کارکرد صحیح می باشد</string>
 <string name="pref_power_camera_vibrate_pattern_title">الگوی لرزشی دوربین</string>

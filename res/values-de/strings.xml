@@ -1755,9 +1755,7 @@
 
     <!-- Lockscreen: Bottom-left action -->
     <string name="pref_lockscreen_bleft_action_title">Aktion links unten</string>
-    <string name="ls_bleft_action_default">Standard</string>
-    <string name="ls_bleft_action_phone">Telefon</string>
-    <string name="pref_lockscreen_bleft_action_custom_title">Setze Aktion für links unten</string>
+    <string name="pref_lockscreen_bright_action_title">Aktion recht unten</string>
 
     <!-- Lockscreen: Quick unlock PIN length -->
     <string name="pref_lockscreen_pin_length_title">Pinlänge</string>

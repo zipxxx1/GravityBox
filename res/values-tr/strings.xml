@@ -1088,9 +1088,7 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="imprint_mode_default">Uyan ve kilidi aç (varsayılan)</string>
     <string name="imprint_mode_wake_only">Sadece uyan</string>
     <string name="pref_lockscreen_bleft_action_title">Sol alt hareketi</string>
-    <string name="ls_bleft_action_default">Varsayılan</string>
-    <string name="ls_bleft_action_phone">Telefon</string>
-    <string name="pref_lockscreen_bleft_action_custom_title">Sol alt hareketini ayarla</string>
+    <string name="pref_lockscreen_bright_action_title">Sağ alt hareketi</string>
     <string name="pref_lockscreen_pin_length_title">PIN uzunluğu</string>
     <string name="pref_lockscreen_pin_length_summary">Hızlı kilit açmanın güvenilir bir şekilde çalışması için PIN kodunuzun tam uzunluğunu bilmek gerekir</string>
     <string name="pref_power_camera_vibrate_pattern_title">Kamera titreşim modeli</string>

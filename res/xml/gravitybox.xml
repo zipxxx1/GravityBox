@@ -201,17 +201,17 @@
                 android:title="@string/pref_lockscreen_carrier_text_title"
                 android:defaultValue="" />
 
-            <ListPreference 
-                android:key="pref_lockscreen_bleft_action"
-                android:title="@string/pref_lockscreen_bleft_action_title"
-                android:entries="@array/ls_bleft_action_entries"
-                android:entryValues="@array/ls_bleft_action_values"
-                android:defaultValue="DEFAULT" />
-
             <com.ceco.marshmallow.gravitybox.preference.AppPickerPreference
                 android:key="pref_lockscreen_bleft_action_custom"
-                android:title="@string/pref_lockscreen_bleft_action_custom_title"
-                android:summary="@string/app_picker_none"
+                android:title="@string/pref_lockscreen_bleft_action_title"
+                android:summary="@string/state_default"
+                forceCustomIcon="true"
+                allowGravityBoxActions="false" />
+
+            <com.ceco.marshmallow.gravitybox.preference.AppPickerPreference
+                android:key="pref_lockscreen_bright_action_custom"
+                android:title="@string/pref_lockscreen_bright_action_title"
+                android:summary="@string/state_default"
                 forceCustomIcon="true"
                 allowGravityBoxActions="false" />
 
