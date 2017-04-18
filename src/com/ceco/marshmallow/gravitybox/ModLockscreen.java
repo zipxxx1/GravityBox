@@ -16,7 +16,9 @@
 package com.ceco.marshmallow.gravitybox;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.ceco.marshmallow.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
@@ -106,6 +108,8 @@ public class ModLockscreen {
     private static AppLauncher.AppInfo mRightAction;
     private static Drawable mLeftActionDrawableOrig;
     private static Drawable mRightActionDrawableOrig;
+    private static boolean mLeftActionHidden;
+    private static boolean mRightActionHidden;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -529,7 +533,9 @@ public class ModLockscreen {
                     protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                         ImageView v = (ImageView) XposedHelpers.getObjectField(
                                 param.thisObject, "mLeftAffordanceView");
-                        if (mLeftAction != null) {
+                        if (mLeftActionHidden) {
+                            v.setVisibility(View.GONE);
+                        } else if (mLeftAction != null) {
                             v.setVisibility(View.VISIBLE);
                             if (mLeftActionDrawableOrig == null) {
                                 mLeftActionDrawableOrig = v.getDrawable();
@@ -560,7 +566,9 @@ public class ModLockscreen {
                     protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                         ImageView v = (ImageView) XposedHelpers.getObjectField(
                                 param.thisObject, "mCameraImageView");
-                        if (mRightAction != null) {
+                        if (mRightActionHidden) {
+                            v.setVisibility(View.GONE);
+                        } else if (mRightAction != null) {
                             v.setVisibility(View.VISIBLE);
                             if (mRightActionDrawableOrig == null) {
                                 mRightActionDrawableOrig = v.getDrawable();
@@ -811,9 +819,14 @@ public class ModLockscreen {
     }
 
     private static void prepareBottomActions() {
-        prepareLeftAction(mPrefs.getString(
+        Set<String> hiddenActions = mPrefs.getStringSet(
+                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE,
+                new HashSet<String>());
+        mLeftActionHidden = hiddenActions.contains("LEFT");
+        mRightActionHidden = hiddenActions.contains("RIGHT");
+        prepareLeftAction(mLeftActionHidden ? null : mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM, null));
-        prepareRightAction(mPrefs.getString(
+        prepareRightAction(mRightActionHidden ? null :  mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM, null));
     }
 

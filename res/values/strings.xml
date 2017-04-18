@@ -2091,4 +2091,9 @@
     <string name="msg_unlocker_old">Your version of GravityBox Unlocker seems to be outdated. Please update.</string>
     <string name="msg_unlocker_error">Unexpected error while contacting GravityBox Unlocker</string>
 
+    <!-- Lockscreen: hide bottom actions -->
+    <string name="pref_lockscreen_bottom_actions_hide_title">Hide bottom actions</string>
+    <string name="bottom_action_left">Hide left action</string>
+    <string name="bottom_action_right">Hide right action</string>
+
 </resources>

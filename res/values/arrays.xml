@@ -1311,4 +1311,14 @@
         <item>CUSTOM</item>
     </string-array>
 
+    <string-array name="ls_bottom_action_entries" translatable="false">
+        <item>@string/bottom_action_left</item>
+        <item>@string/bottom_action_right</item>
+    </string-array>
+
+    <string-array name="ls_bottom_action_values" translatable="false">
+        <item>LEFT</item>
+        <item>RIGHT</item>
+    </string-array>
+
 </resources>

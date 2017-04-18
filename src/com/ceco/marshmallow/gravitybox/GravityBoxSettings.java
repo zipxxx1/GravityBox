@@ -270,6 +270,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
     public static final String PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM = "pref_lockscreen_bleft_action_custom";
     public static final String PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM = "pref_lockscreen_bright_action_custom";
+    public static final String PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE = "pref_lockscreen_bottom_actions_hide";
     public static final String PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE = "pref_lockscreen_pin_sramble";
     public static final String ACTION_LOCKSCREEN_SETTINGS_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SETTINGS_CHANGED";
 
@@ -979,6 +980,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR,
             PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM,
             PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM,
+            PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE,
             PREF_KEY_IMPRINT_VIBE_DISABLE,
             PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE
     ));
@@ -2548,6 +2550,24 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_FORCE_AOSP)) {
                 CheckBoxPreference p = (CheckBoxPreference) findPreference(PREF_KEY_FORCE_AOSP);
                 p.setChecked(Utils.isAospForced());
+            }
+
+            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE)) {
+                MultiSelectListPreference p = (MultiSelectListPreference) findPreference(PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE);
+                if (p != null) {
+                    String summary = "";
+                    Set<String> values = p.getValues() == null ? new HashSet<String>() : p.getValues();
+                    if (values.contains("LEFT")) summary += getString(R.string.bottom_action_left);
+                    if (values.contains("RIGHT")) {
+                        if (!summary.isEmpty()) summary += ", ";
+                        summary += getString(R.string.bottom_action_right);
+                    }
+                    p.setSummary(summary);
+                    Preference p2 = findPreference(PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM);
+                    if (p2 != null) p2.setEnabled(!values.contains("LEFT"));
+                    p2 = findPreference(PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM);
+                    if (p2 != null) p2.setEnabled(!values.contains("RIGHT"));
+                }
             }
 
             for (String caKey : customAppKeys) {

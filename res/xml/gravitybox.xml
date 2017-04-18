@@ -201,6 +201,13 @@
                 android:title="@string/pref_lockscreen_carrier_text_title"
                 android:defaultValue="" />
 
+            <MultiSelectListPreference 
+                android:key="pref_lockscreen_bottom_actions_hide"
+                android:title="@string/pref_lockscreen_bottom_actions_hide_title"
+                android:entries="@array/ls_bottom_action_entries"
+                android:entryValues="@array/ls_bottom_action_values"
+                android:defaultValue="@array/empty_array" />
+
             <com.ceco.marshmallow.gravitybox.preference.AppPickerPreference
                 android:key="pref_lockscreen_bleft_action_custom"
                 android:title="@string/pref_lockscreen_bleft_action_title"
