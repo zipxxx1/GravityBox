@@ -1842,10 +1842,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 if (p != null) mPrefCatStatusbarQs.removePreference(p);
                 p = findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
                 if (p != null) mPrefCatStatusbarQs.removePreference(p);
-                p = findPreference(PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS);
-                if (p != null) mPrefCatStatusbarQs.removePreference(p);
-                p = findPreference(PREF_KEY_QS_BRIGHTNESS_ICON);
-                if (p != null) mPrefCatStatusbarQs.removePreference(p);
             }
 
             // Remove fingerprint related preferences

@@ -60,17 +60,16 @@ public class QsPanel implements BroadcastSubReceiver {
     public QsPanel(XSharedPreferences prefs, ClassLoader classLoader) {
         mPrefs = prefs;
 
-        if (!Utils.isOxygenOs35Rom()) {
-            initPreferences();
-            createHooks(classLoader);
-        }
+        initPreferences();
+        createHooks(classLoader);
+
         if (DEBUG) log("QsPanel wrapper created");
     }
 
     private void initPreferences() {
-        mNumColumns = Integer.valueOf(mPrefs.getString(
+        mNumColumns = Utils.isOxygenOs35Rom() ? 0 : Integer.valueOf(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0"));
-        mScaleCorrection = mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0);
+        mScaleCorrection =Utils.isOxygenOs35Rom() ? 0 : mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0);
         mHideBrightness = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS, false);
         mBrightnessIconEnabled = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BRIGHTNESS_ICON, false);
         if (DEBUG) log("initPreferences: mNumColumns=" + mNumColumns +
@@ -138,10 +137,14 @@ public class QsPanel implements BroadcastSubReceiver {
         if (mBrightnessSlider != null) return mBrightnessSlider;
 
         ViewGroup bv = (ViewGroup)XposedHelpers.getObjectField(mQsPanel, "mBrightnessView");
-        int resId = mQsPanel.getResources().getIdentifier("brightness_slider", "id",
-                mQsPanel.getContext().getPackageName());
-        if (resId != 0) {
-            mBrightnessSlider = bv.findViewById(resId);
+        if (Utils.isOxygenOs35Rom()) {
+            mBrightnessSlider = bv;
+        } else {
+            int resId = mQsPanel.getResources().getIdentifier("brightness_slider", "id",
+                    mQsPanel.getContext().getPackageName());
+            if (resId != 0) {
+                mBrightnessSlider = bv.findViewById(resId);
+            }
         }
         return mBrightnessSlider;
     }
@@ -170,6 +173,9 @@ public class QsPanel implements BroadcastSubReceiver {
     };
 
     private int getDualTileCount() {
+        if (Utils.isOxygenOs35Rom())
+            return 0;
+
         int count = 0;
         List<String> dualTiles = new ArrayList<>();
         List<String> enabledTiles = new ArrayList<>();
@@ -238,7 +244,7 @@ public class QsPanel implements BroadcastSubReceiver {
 
                     final int dualTileCount = getDualTileCount();
                     // reduce size of the first row if there aren't any dual tiles
-                    if (dualTileCount == 0) {
+                    if (dualTileCount == 0 && !Utils.isOxygenOs35Rom()) {
                         XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight",
                                 XposedHelpers.getIntField(mQsPanel, "mCellHeight"));
                         XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth",
