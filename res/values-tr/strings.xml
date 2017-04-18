@@ -1249,4 +1249,10 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_lockscreen_shortcuts_show_badges_title">Rozetleri göster</string>
     <string name="pref_lockscreen_shortcuts_show_badges_summary">Bildirim sayısını içeren rozetleri gösterir</string>
     <string name="pref_statusbar_clock_show_seconds_title">Saniyeyi göster</string>
+
+    <!-- Lockscreen: hide bottom actions -->
+    <string name="pref_lockscreen_bottom_actions_hide_title">Alt eylemleri gizle</string>
+    <string name="bottom_action_left">Sol eylemi gizle</string>
+    <string name="bottom_action_right">Sağ eylemi gizle</string>
+
 </resources>

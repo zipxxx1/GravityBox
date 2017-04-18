@@ -2002,4 +2002,9 @@
     <string name="msg_unlocker_old">Vaše verze GravityBox Unlocker není aktuální. Aktualizujte ji, prosím.</string>
     <string name="msg_unlocker_error">Neočekávaná chyba při pokusu kontaktovat GravityBox Unlocker</string>
 
+    <!-- Lockscreen: hide bottom actions -->
+    <string name="pref_lockscreen_bottom_actions_hide_title">Skrýt dolní akce</string>
+    <string name="bottom_action_left">Skrýt levou akci</string>
+    <string name="bottom_action_right">Skrýt pravou akci</string>
+
 </resources>

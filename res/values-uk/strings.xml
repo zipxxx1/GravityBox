@@ -2028,4 +2028,9 @@
     <string name="msg_unlocker_old">Ваша версія GravityBox Unlocker застаріла. Будь ласка, оновіть.</string>
     <string name="msg_unlocker_error">Трапилась невідома помилка під час зв\'язку із GravityBox Unlocker</string>
 
+    <!-- Lockscreen: hide bottom actions -->
+    <string name="pref_lockscreen_bottom_actions_hide_title">Приховати нижні дії</string>
+    <string name="bottom_action_left">Приховати ліву дію</string>
+    <string name="bottom_action_right">Приховати праву дію</string>
+
 </resources>

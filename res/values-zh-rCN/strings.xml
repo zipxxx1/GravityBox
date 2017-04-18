@@ -2073,4 +2073,9 @@
     <string name="msg_unlocker_old">您的GravityBox解锁器版本似乎已经过期了,请更新!</string>
     <string name="msg_unlocker_error">连接GravityBox解锁器时发生意外错误</string>
 
+    <!-- Lockscreen: hide bottom actions -->
+    <string name="pref_lockscreen_bottom_actions_hide_title">隐藏底部动作</string>
+    <string name="bottom_action_left">隐藏左侧动作</string>
+    <string name="bottom_action_right">隐藏右侧动作</string>
+
 </resources>
