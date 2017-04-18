@@ -197,7 +197,7 @@ public class ModDialer25 {
                     classInfoCallCardFragment.methods.get("a"),
                     unknownCallerHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            log("callCardFragment: incompatible version of Dialer app");
         }
 
         try {
@@ -226,7 +226,7 @@ public class ModDialer25 {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            log("bae: incompatible version of Dialer app");
         }
 
         try {
@@ -255,7 +255,7 @@ public class ModDialer25 {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            log("DialtactsActivity: incompatible version of Dialer app");
         }
 
         try {
@@ -281,7 +281,7 @@ public class ModDialer25 {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            log("DialpadFragment: incompatible version of Dialer app");
         }
     }
 }
