@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 The SlimRoms Project
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,13 +16,8 @@
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
 import android.annotation.SuppressLint;
-import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.location.LocationManager;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,12 +36,12 @@ import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModStatusBar;
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.Utils;
+import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
+import com.ceco.marshmallow.gravitybox.managers.GpsStatusMonitor;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 
-public class LocationTileSlimkat extends QsTile {
+public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.Listener {
 
     private static final Intent LOCATION_SETTINGS_INTENT = 
             new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -57,7 +52,6 @@ public class LocationTileSlimkat extends QsTile {
         Settings.Secure.LOCATION_MODE_HIGH_ACCURACY
     };
 
-    private boolean mIsReceiving;
     private int mLastActiveMode;
     private Object mDetailAdapter;
     private List<Integer> mLocationList = new ArrayList<Integer>();
@@ -92,41 +86,26 @@ public class LocationTileSlimkat extends QsTile {
         super.onBroadcastReceived(context, intent);
     }
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(LocationManager.MODE_CHANGED_ACTION) || 
-                    action.equals(LocationManager.PROVIDERS_CHANGED_ACTION)) {
-               locationSettingsChanged();
-            }
+    private void registerListener() {
+        if (SysUiManagers.GpsMonitor != null) {
+            SysUiManagers.GpsMonitor.registerListener(this);
+            if (DEBUG) log(getKey() + ": Location Status Listener registered");
         }
-    };
-
-    private void registerLocationManagerReceiver() {
-        if (mIsReceiving) return;
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(LocationManager.MODE_CHANGED_ACTION);
-        intentFilter.addAction(LocationManager.PROVIDERS_CHANGED_ACTION);
-        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
-        mIsReceiving = true;
-        if (DEBUG) log(getKey() + ": Location manager registered");
     }
 
-    private void unregisterLocationManagerReceiver() {
-        if (mIsReceiving) {
-            mContext.unregisterReceiver(mBroadcastReceiver);
-            mIsReceiving = false;
-            if (DEBUG) log(getKey() + ": Location manager unregistered");
+    private void unregisterListener() {
+        if (SysUiManagers.GpsMonitor != null) {
+            SysUiManagers.GpsMonitor.unregisterListener(this);
+            if (DEBUG) log(getKey() + ": Location Status Listener unregistered");
         }
     }
 
     @Override
     public void setListening(boolean listening) {
         if (listening && mEnabled) {
-            registerLocationManagerReceiver();
+            registerListener();
         } else {
-            unregisterLocationManagerReceiver();
+            unregisterListener();
         }
     }
 
@@ -135,32 +114,13 @@ public class LocationTileSlimkat extends QsTile {
     }
 
     private int getLocationMode() {
-        try {
-            int currentUserId = Utils.getCurrentUser();
-            if (isUserLocationRestricted(currentUserId)) {
-                return Settings.Secure.LOCATION_MODE_OFF;
-            }
-            final ContentResolver cr = mContext.getContentResolver();
-            return (int) XposedHelpers.callStaticMethod(Settings.Secure.class, "getIntForUser",
-                    cr, Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF, currentUserId);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-            return Settings.Secure.LOCATION_MODE_OFF;
-        }
+        return (SysUiManagers.GpsMonitor == null ? 0 :
+            SysUiManagers.GpsMonitor.getLocationMode());
     }
 
     private void setLocationMode(int mode) {
-        try {
-            int currentUserId = Utils.getCurrentUser();
-            if (isUserLocationRestricted(currentUserId)) {
-                return;
-            }
-            final ContentResolver cr = mContext.getContentResolver();
-            XposedHelpers.callStaticMethod(Settings.Secure.class,
-                    "putIntForUser", cr, Settings.Secure.LOCATION_MODE,
-                    mode, currentUserId);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
+        if (SysUiManagers.GpsMonitor != null) {
+            SysUiManagers.GpsMonitor.setLocationMode(mode);
         }
     }
 
@@ -182,58 +142,29 @@ public class LocationTileSlimkat extends QsTile {
         }
     }
 
-    private boolean setLocationEnabled(boolean enabled) {
-        int currentUserId = Utils.getCurrentUser();
-        if (isUserLocationRestricted(currentUserId)) {
-            return false;
-        }
-        final ContentResolver cr = mContext.getContentResolver();
-
-        // Store last active mode if we are switching off
-        // so we can restore it at the next enable
-        if(!enabled) {
-            mLastActiveMode = getLocationMode();
-        }
-
-        int mode = enabled ? mLastActiveMode : Settings.Secure.LOCATION_MODE_OFF;
-        return (boolean) XposedHelpers.callStaticMethod(Settings.Secure.class, "putIntForUser",
-                cr, Settings.Secure.LOCATION_MODE, mode, currentUserId);
-    }
-
-    private boolean isUserLocationRestricted(int userId) {
-        try {
-            final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-            return (boolean) XposedHelpers.callMethod(um, "hasUserRestriction",
-                    UserManager.DISALLOW_SHARE_LOCATION,
-                    Utils.getUserHandle(userId));
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-            return false;
+    private void setLocationEnabled(boolean enabled) {
+        if (SysUiManagers.GpsMonitor != null) {
+            // Store last active mode if we are switching off
+            // so we can restore it at the next enable
+            if(!enabled) {
+                mLastActiveMode = getLocationMode();
+            }
+            final int mode = enabled ? mLastActiveMode : Settings.Secure.LOCATION_MODE_OFF;
+            SysUiManagers.GpsMonitor.setLocationMode(mode);
         }
     }
 
-    private void locationSettingsChanged() {
-        if (DEBUG) {
-            log(getKey() + ": mLocationEnabled = " + isLocationEnabled() + 
-                    "; mLocationMode = " + getLocationMode());
-        }
+    @Override
+    public void onLocationModeChanged(int mode) {
+        if (DEBUG) log(getKey() + ": onLocationModeChanged: mode=" + mode);
         refreshState();
     }
 
-    private String getModeLabel(int currentState) {
-        switch (currentState) {
-            case Settings.Secure.LOCATION_MODE_OFF:
-                return mGbContext.getString(R.string.quick_settings_location_off);
-            case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
-                return mGbContext.getString(R.string.location_mode_battery_saving);
-            case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
-                return mGbContext.getString(R.string.location_mode_device_only);
-            case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
-                return mGbContext.getString(R.string.location_mode_high_accuracy);
-            default:
-                return mGbContext.getString(R.string.qs_tile_gps);
-         }
-    }
+    @Override
+    public void onGpsEnabledChanged(boolean gpsEnabled) { }
+
+    @Override
+    public void onGpsFixChanged(boolean gpsFixed) { }
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
@@ -255,7 +186,7 @@ public class LocationTileSlimkat extends QsTile {
                 mState.booleanValue = false;
                 break;
         }
-        mState.label = getModeLabel(locationMode);
+        mState.label = GpsStatusMonitor.getModeLabel(mContext, locationMode);
 
         super.handleUpdateState(state, arg);
     }
@@ -323,7 +254,7 @@ public class LocationTileSlimkat extends QsTile {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             CheckedTextView label = (CheckedTextView) inflater.inflate(
                     android.R.layout.simple_list_item_single_choice, parent, false);
-            label.setText(getModeLabel(getItem(position)));
+            label.setText(GpsStatusMonitor.getModeLabel(mContext, getItem(position)));
             return label;
         }
     }
@@ -356,7 +287,7 @@ public class LocationTileSlimkat extends QsTile {
             if (mDetails == null) {
                 mDetails = QsDetailItemsList.create(context, parent);
                 mDetails.setEmptyState(R.drawable.ic_qs_location_off,
-                        getModeLabel(Settings.Secure.LOCATION_MODE_OFF));
+                        GpsStatusMonitor.getModeLabel(mContext, Settings.Secure.LOCATION_MODE_OFF));
                 mAdapter = new AdvancedLocationAdapter(context);
                 mDetails.setAdapter(mAdapter);
     
