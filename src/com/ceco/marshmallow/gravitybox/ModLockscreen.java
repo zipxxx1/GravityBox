@@ -78,6 +78,7 @@ public class ModLockscreen {
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
     private static final String CLASS_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
     private static final String CLASS_KG_BOTTOM_AREA_VIEW = "com.android.systemui.statusbar.phone.KeyguardBottomAreaView";
+    private static final String CLASS_SCRIM_CONTROLLER = "com.android.systemui.statusbar.phone.ScrimController";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
@@ -605,6 +606,28 @@ public class ModLockscreen {
                     }
                 });
 
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+
+            // Direct unlock see through transparency level
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_SCRIM_CONTROLLER, classLoader,
+                        "updateScrimKeyguard", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mDirectUnlock == DirectUnlock.SEE_THROUGH &&
+                            !(XposedHelpers.getBooleanField(param.thisObject, "mExpanding") &&
+                              XposedHelpers.getBooleanField(param.thisObject, "mDarkenWhileDragging")) &&
+                            XposedHelpers.getBooleanField(param.thisObject, "mBouncerShowing")) {
+                            float alpha = 1 - (float)mPrefs.getInt(GravityBoxSettings
+                                    .PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL, 75) / 100f;
+                            XposedHelpers.callMethod(param.thisObject, "setScrimInFrontColor", alpha);
+                            XposedHelpers.callMethod(param.thisObject, "setScrimBehindColor", 0f);
+                            param.setResult(null);
+                        }
+                    }
+                });
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }
