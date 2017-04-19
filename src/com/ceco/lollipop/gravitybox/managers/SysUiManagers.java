@@ -83,11 +83,13 @@ public class SysUiManagers {
             XposedBridge.log(t);
         }
 
-        try {
-            GpsMonitor = new GpsStatusMonitor(context);
-        } catch (Throwable t) {
-            log("Error creating GpsStatusMonitor: ");
-            XposedBridge.log(t);
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, false)) {
+            try {
+                GpsMonitor = new GpsStatusMonitor(context);
+            } catch (Throwable t) {
+                log("Error creating GpsStatusMonitor: ");
+                XposedBridge.log(t);
+            }
         }
 
         IntentFilter intentFilter = new IntentFilter();

@@ -46,6 +46,9 @@ public class GpsTile extends QsTile implements GpsStatusMonitor.Listener {
     }
 
     @Override
+    public void onLocationModeChanged(int mode) { }
+
+    @Override
     public void onGpsEnabledChanged(boolean gpsEnabled) {
         mGpsEnabled = gpsEnabled;
         refreshState();

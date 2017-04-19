@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
+import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.Utils;
 
 import android.content.ContentResolver;
@@ -39,11 +40,13 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
     }
 
     public interface Listener {
+        void onLocationModeChanged(int mode);
         void onGpsEnabledChanged(boolean gpsEnabled);
         void onGpsFixChanged(boolean gpsFixed);
     }
 
     private Context mContext;
+    private int mLocationMode;
     private boolean mGpsEnabled;
     private boolean mGpsFixed;
     private boolean mGpsStatusTrackingActive;
@@ -85,9 +88,13 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
     public void onBroadcastReceived(Context context, Intent intent) {
         if (intent.getAction().equals(LocationManager.MODE_CHANGED_ACTION)) {
             final boolean oldGpsEnabled = mGpsEnabled;
-            final int mode = getLocationMode();
-            mGpsEnabled = mode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY ||
-                              mode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY;
+            final int oldLocationMode = mLocationMode;
+            mLocationMode = getLocationModeFromSettings();
+            if (mLocationMode != oldLocationMode) {
+                notifyLocationModeChanged();
+            }
+            mGpsEnabled = mLocationMode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY ||
+                    mLocationMode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY;
             if (mGpsEnabled != oldGpsEnabled) {
                 notifyGpsEnabledChanged();
                 if (mGpsEnabled) {
@@ -100,7 +107,7 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
                     }
                 }
             }
-            if (DEBUG) log("MODE_CHANGED_ACTION received: mode=" + mode + "; " +
+            if (DEBUG) log("MODE_CHANGED_ACTION received: mode=" + mLocationMode + "; " +
                     "mGpsEnabled=" + mGpsEnabled);
         }
     }
@@ -120,6 +127,10 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
         }
     }
 
+    public int getLocationMode() {
+        return mLocationMode;
+    }
+
     public boolean isGpsEnabled() {
         return mGpsEnabled;
     }
@@ -128,13 +139,11 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
         return mGpsFixed;
     }
 
-    public void setGpsEnabled(boolean enabled) {
+    public void setLocationMode(int mode) {
         final int currentUserId = Utils.getCurrentUser();
         if (!isUserLocationRestricted(currentUserId)) {
             try {
                 final ContentResolver cr = mContext.getContentResolver();
-                final int mode = enabled ? Settings.Secure.LOCATION_MODE_HIGH_ACCURACY :
-                    Settings.Secure.LOCATION_MODE_BATTERY_SAVING;
                 XposedHelpers.callStaticMethod(Settings.Secure.class, "putIntForUser",
                         cr, Settings.Secure.LOCATION_MODE, mode, currentUserId);
             } catch (Throwable t) {
@@ -143,7 +152,13 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
         }
     }
 
-    private int getLocationMode() {
+    public void setGpsEnabled(boolean enabled) {
+        final int mode = enabled ? Settings.Secure.LOCATION_MODE_HIGH_ACCURACY :
+            Settings.Secure.LOCATION_MODE_BATTERY_SAVING;
+        setLocationMode(mode);
+    }
+
+    private int getLocationModeFromSettings() {
         try {
             final int currentUserId = Utils.getCurrentUser();
             final ContentResolver cr = mContext.getContentResolver();
@@ -166,6 +181,14 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
         } catch (Throwable t) {
             XposedBridge.log(t);
             return false;
+        }
+    }
+
+    private void notifyLocationModeChanged() {
+        synchronized (mListeners) {
+            for (Listener l : mListeners) {
+                l.onLocationModeChanged(mLocationMode);
+            }
         }
     }
 
@@ -200,6 +223,26 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
             if (mListeners.contains(l)) {
                 mListeners.remove(l);
             }
+        }
+    }
+
+    public static String getModeLabel(Context ctx, int currentState) {
+        try {
+            Context gbContext = Utils.getGbContext(ctx);
+            switch (currentState) {
+                case Settings.Secure.LOCATION_MODE_OFF:
+                    return gbContext.getString(R.string.quick_settings_location_off);
+                case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
+                    return gbContext.getString(R.string.location_mode_battery_saving);
+                case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
+                    return gbContext.getString(R.string.location_mode_device_only);
+                case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
+                    return gbContext.getString(R.string.location_mode_high_accuracy);
+                default:
+                    return gbContext.getString(R.string.qs_tile_gps);
+             }
+        } catch (Throwable e) {
+            return String.valueOf(currentState);
         }
     }
 }
