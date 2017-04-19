@@ -1,3 +1,28 @@
+Changelog 6.3.6 - 19/04/2017
+--------------------------------------
+- Lockscreen tweaks:
+--- Added option for custom bottom-right action
+--- Added option for hiding bottom actions
+--- Added option for Direct Unlock See Through transparency level
+- QuickSettings management:
+--- Reintroduced brightness slider options on OOS 3.5
+--- Improved GPS tile (CM style) with proper location fix indication
+- Ultimate Notification Control:
+--- Adjusted form compatibility with Vernee Apollo
+--- QuietHours: implemented Wear mode:
+------ mutes notification sounds and device-wide vibrations while preserving vibrations on a paired watch
+------ can be toggled from QuietHours tile or via dedicated GravityBox Action
+------ available only when Android Wear app is installed 
+- CircleBattery: fixed icon tint in status bar header
+- Made screenshot faster by introducing dynamic context-aware delay
+- Adjusted for compatibility with the latest GravityBox Unlocker v1.4.2
+--- improved reliability of license validation
+--- !!! won't work with older versions of the Unlocker !!!
+- Updated Russian translations (thanks to gaich)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 6.3.5 - 12/03/2017
 --------------------------------------
 - Download Progress Bar: implemented extensions from SBDP module
