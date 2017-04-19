@@ -2078,4 +2078,7 @@
     <string name="bottom_action_left">隐藏左侧动作</string>
     <string name="bottom_action_right">隐藏右侧动作</string>
 
+    <!-- Lockscreen: Direct unlock see through transparency level -->
+    <string name="pref_lockscreen_direct_unlock_trans_level_title">透过透明度</string>
+
 </resources>

@@ -144,6 +144,16 @@
                 android:entryValues="@array/direct_unlock_values"
                 android:defaultValue="OFF" />
 
+            <com.ceco.lollipop.gravitybox.preference.SeekBarPreference
+                android:key="pref_lockscreen_direct_unlock_trans_level"
+                android:title="@string/pref_lockscreen_direct_unlock_trans_level_title"
+                minimum="0"
+                maximum="100"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="%" 
+                android:defaultValue="25" />
+
             <ListPreference 
                 android:key="pref_lockscreen_direct_unlock_policy"
                 android:title="@string/pref_lockscreen_direct_unlock_policy_title"

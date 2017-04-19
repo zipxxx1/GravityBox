@@ -2007,4 +2007,7 @@
     <string name="bottom_action_left">Skrýt levou akci</string>
     <string name="bottom_action_right">Skrýt pravou akci</string>
 
+    <!-- Lockscreen: Direct unlock see through transparency level -->
+    <string name="pref_lockscreen_direct_unlock_trans_level_title">Úroveň průhlednosti</string>
+
 </resources>

@@ -1255,4 +1255,7 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="bottom_action_left">Sol eylemi gizle</string>
     <string name="bottom_action_right">Sağ eylemi gizle</string>
 
+    <!-- Lockscreen: Direct unlock see through transparency level -->
+    <string name="pref_lockscreen_direct_unlock_trans_level_title">Şeffaf gör</string>
+
 </resources>
