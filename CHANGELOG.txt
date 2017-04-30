@@ -1,3 +1,23 @@
+Changelog 3.7.2 - 30/04/2017
+--------------------------------------
+- Download Progress Bar: implemented extensions from SBDP module
+--- added option for progress bar animation
+--- added option for centered progress bar
+--- added option for progress bar thickness
+--- added option for edge margin
+--- added support for multiple concurrent progress bar notifications
+--- keeps track of all available progress bar notifications and switches between them
+--- added support for clearable notifications containing progress bar
+--- added logic for auto-hiding progress of idle notifications
+--- added option for sound notification
+--- added option for playing sound only when screen is off
+- Made screenshot faster by introducing dynamic context-aware delay
+- Adjusted for compatibility with the latest GravityBox Unlocker v1.4.3
+--- improved reliability of license validation
+--- !!! won't work with older versions of the Unlocker !!!
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Hungarian translations (thanks to benjoe1)
+
 Changelog 3.7.1 - 28/02/2017
 --------------------------------------
 - QuickSettings: improved audio quality of QuickRecording tile
