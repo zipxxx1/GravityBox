@@ -255,8 +255,9 @@ public class ModLedControl {
 
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
-                final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe &&
-                        mQuietHours.mode != QuietHours.Mode.WEAR;
+                final boolean qhActiveIncludingVibe = qhActive && (
+                        (mQuietHours.mode != QuietHours.Mode.WEAR && mQuietHours.muteVibe) ||
+                        (mQuietHours.mode == QuietHours.Mode.WEAR && mUserPresent));
                 final boolean qhActiveIncludingActiveScreen = qhActive &&
                         !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
 
