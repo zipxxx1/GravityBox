@@ -2021,4 +2021,16 @@
     <!-- Lockscreen: Direct unlock see through transparency level -->
     <string name="pref_lockscreen_direct_unlock_trans_level_title">Úroveň priehľadnosti</string>
 
+    <!-- Subscription manager -->
+    <string name="sm_choose_voice_sub">Vyberte predvolenú SIM pre hovory</string>
+    <string name="sm_choose_sms_sub">Vyberte predvolenú SIM pre správy</string>
+    <string name="sm_choose_data_sub">Vyberte predvolenú SIM pre mobilné dáta</string>
+    <string name="sm_sub_change_voice_failed">Nepodarilo sa nastaviť predvolenú SIM pre hovory</string>
+    <string name="sm_sub_change_sms_failed">Nepodarilo sa nastaviť predvolenú SIM pre správy</string>
+    <string name="sm_sub_change_data_failed">Nepodarilo sa nastaviť predvolenú SIM pre mobilné dáta</string>
+    <string name="sm_sub_change_voice_ok">Predvolená SIM pre hovory bola nastavená na:</string>
+    <string name="sm_sub_change_sms_ok">Predvolená SIM pre správy bola nastavená na:</string>
+    <string name="sm_sub_change_data_ok">Predvolená SIM pre mobilné dáta bola nastavená na:</string>
+    <string name="sm_voice_ask">Vždy sa opýtať</string>
+
 </resources>

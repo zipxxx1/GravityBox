@@ -2099,4 +2099,16 @@
     <!-- Lockscreen: Direct unlock see through transparency level -->
     <string name="pref_lockscreen_direct_unlock_trans_level_title">See through transparency</string>
 
+    <!-- Subscription manager -->
+    <string name="sm_choose_voice_sub">Choose default SIM for calls</string>
+    <string name="sm_choose_sms_sub">Choose default SIM for messaging</string>
+    <string name="sm_choose_data_sub">Choose default SIM for cellular data</string>
+    <string name="sm_sub_change_voice_failed">Failed to set default SIM for calls</string>
+    <string name="sm_sub_change_sms_failed">Failed to set default SIM for messaging</string>
+    <string name="sm_sub_change_data_failed">Failed to set default SIM for cellular data</string>
+    <string name="sm_sub_change_voice_ok">Default SIM for calls set to:</string>
+    <string name="sm_sub_change_sms_ok">Default SIM for messaging set to:</string>
+    <string name="sm_sub_change_data_ok">Default SIM for cellular data set to:</string>
+    <string name="sm_voice_ask">Ask every time</string>
+
 </resources>

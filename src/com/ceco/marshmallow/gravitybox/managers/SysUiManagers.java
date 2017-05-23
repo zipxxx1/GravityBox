@@ -18,6 +18,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
+import com.ceco.marshmallow.gravitybox.PhoneWrapper;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
 
 import android.content.BroadcastReceiver;
@@ -37,6 +38,7 @@ public class SysUiManagers {
     public static FingerprintLauncher FingerprintLauncher;
     public static NotificationDataMonitor NotifDataMonitor;
     public static GpsStatusMonitor GpsMonitor;
+    public static SubscriptionManager SubscriptionMgr;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -103,6 +105,15 @@ public class SysUiManagers {
             }
         }
 
+        if (PhoneWrapper.hasMsimSupport()) {
+            try {
+                SubscriptionMgr = new SubscriptionManager(context);
+            } catch (Throwable t) {
+                log("Error creating SubscriptionManager: ");
+                XposedBridge.log(t);
+            }
+        }
+
         IntentFilter intentFilter = new IntentFilter();
         // battery info manager
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
@@ -138,6 +149,12 @@ public class SysUiManagers {
         // GpsStatusMonitor
         if (GpsMonitor != null) {
             intentFilter.addAction(LocationManager.MODE_CHANGED_ACTION);
+        }
+
+        // SubscriptionManager
+        if (SubscriptionMgr != null) {
+            intentFilter.addAction(SubscriptionManager.ACTION_CHANGE_DEFAULT_SIM_SLOT);
+            intentFilter.addAction(SubscriptionManager.ACTION_GET_DEFAULT_SIM_SLOT);
         }
 
         context.registerReceiver(sBroadcastReceiver, intentFilter);
@@ -176,6 +193,9 @@ public class SysUiManagers {
             }
             if (GpsMonitor != null) {
                 GpsMonitor.onBroadcastReceived(context, intent);
+            }
+            if (SubscriptionMgr != null) {
+                SubscriptionMgr.onBroadcastReceived(context, intent);
             }
         }
     };

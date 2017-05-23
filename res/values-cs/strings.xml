@@ -2016,4 +2016,16 @@
     <!-- Lockscreen: Direct unlock see through transparency level -->
     <string name="pref_lockscreen_direct_unlock_trans_level_title">Úroveň průhlednosti</string>
 
+    <!-- Subscription manager -->
+    <string name="sm_choose_voice_sub">Vyberte výchozí SIM pro hovory</string>
+    <string name="sm_choose_sms_sub">Vyberte výchozí SIM pro zprávy</string>
+    <string name="sm_choose_data_sub">Vyberte výchozí SIM pro mobilní data</string>
+    <string name="sm_sub_change_voice_failed">Nelze nastavit výchozí SIM pro hovory</string>
+    <string name="sm_sub_change_sms_failed">Nelze nastavit výchozí SIM pro zprávy</string>
+    <string name="sm_sub_change_data_failed">Nelze nastavit výchozí SIM pro mobilní data</string>
+    <string name="sm_sub_change_voice_ok">Výchozí SIM pro hovory byla nastavena na:</string>
+    <string name="sm_sub_change_sms_ok">Výchozí SIM pro zprávy byla nastavena na:</string>
+    <string name="sm_sub_change_data_ok">Výchozí SIM pro mobilní data byla nastavena na:</string>
+    <string name="sm_voice_ask">Vždy se zeptat</string>
+
 </resources>
