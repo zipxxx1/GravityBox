@@ -51,6 +51,8 @@ public class ModQsTiles {
             "gb_tile_quickrecord",
             "gb_tile_quickapp",
             "gb_tile_quickapp2",
+            "gb_tile_quickapp3",
+            "gb_tile_quickapp4",
             "gb_tile_expanded_desktop",
             "gb_tile_screenshot",
             "gb_tile_gravitybox",

@@ -68,6 +68,10 @@ public abstract class QsTile extends BaseTile {
             return new QuickAppTile(host, key, prefs, eventDistributor, 1);
         else if (key.equals("gb_tile_quickapp2"))
             return new QuickAppTile(host, key, prefs, eventDistributor, 2);
+        else if (key.equals("gb_tile_quickapp3"))
+            return new QuickAppTile(host, key, prefs, eventDistributor, 3);
+        else if (key.equals("gb_tile_quickapp4"))
+            return new QuickAppTile(host, key, prefs, eventDistributor, 4);
         else if (key.equals("gb_tile_quickrecord"))
             return new QuickRecordTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_quiet_hours") &&

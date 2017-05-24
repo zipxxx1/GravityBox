@@ -507,8 +507,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICKAPP_SLOT2_2 = "pref_quickapp_slot2_2";
     public static final String PREF_KEY_QUICKAPP_SLOT3_2 = "pref_quickapp_slot3_2";
     public static final String PREF_KEY_QUICKAPP_SLOT4_2 = "pref_quickapp_slot4_2";
+    public static final String PREF_KEY_QUICKAPP_DEFAULT_3 = "pref_quickapp_default_3";
+    public static final String PREF_KEY_QUICKAPP_SLOT1_3 = "pref_quickapp_slot1_3";
+    public static final String PREF_KEY_QUICKAPP_SLOT2_3 = "pref_quickapp_slot2_3";
+    public static final String PREF_KEY_QUICKAPP_SLOT3_3 = "pref_quickapp_slot3_3";
+    public static final String PREF_KEY_QUICKAPP_SLOT4_3 = "pref_quickapp_slot4_3";
+    public static final String PREF_KEY_QUICKAPP_DEFAULT_4 = "pref_quickapp_default_4";
+    public static final String PREF_KEY_QUICKAPP_SLOT1_4 = "pref_quickapp_slot1_4";
+    public static final String PREF_KEY_QUICKAPP_SLOT2_4 = "pref_quickapp_slot2_4";
+    public static final String PREF_KEY_QUICKAPP_SLOT3_4 = "pref_quickapp_slot3_4";
+    public static final String PREF_KEY_QUICKAPP_SLOT4_4 = "pref_quickapp_slot4_4";
     public static final String ACTION_PREF_QUICKAPP_CHANGED = "gravitybox.intent.action.QUICKAPP_CHANGED";
     public static final String ACTION_PREF_QUICKAPP_CHANGED_2 = "gravitybox.intent.action.QUICKAPP_CHANGED_2";
+    public static final String ACTION_PREF_QUICKAPP_CHANGED_3 = "gravitybox.intent.action.QUICKAPP_CHANGED_3";
+    public static final String ACTION_PREF_QUICKAPP_CHANGED_4 = "gravitybox.intent.action.QUICKAPP_CHANGED_4";
     public static final String EXTRA_QUICKAPP_DEFAULT = "quickAppDefault";
     public static final String EXTRA_QUICKAPP_SLOT1 = "quickAppSlot1";
     public static final String EXTRA_QUICKAPP_SLOT2 = "quickAppSlot2";
@@ -3018,6 +3030,36 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_QUICKAPP_SLOT4_2)) {
                 intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_2);
                 intent.putExtra(EXTRA_QUICKAPP_SLOT4, prefs.getString(PREF_KEY_QUICKAPP_SLOT4_2, null));
+            } else if (key.equals(PREF_KEY_QUICKAPP_DEFAULT_3)) {
+                intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_3);
+                intent.putExtra(EXTRA_QUICKAPP_DEFAULT, prefs.getString(PREF_KEY_QUICKAPP_DEFAULT_3, null));
+            } else if (key.equals(PREF_KEY_QUICKAPP_SLOT1_3)) {
+                intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_3);
+                intent.putExtra(EXTRA_QUICKAPP_SLOT1, prefs.getString(PREF_KEY_QUICKAPP_SLOT1_3, null));
+            } else if (key.equals(PREF_KEY_QUICKAPP_SLOT2_3)) {
+                intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_3);
+                intent.putExtra(EXTRA_QUICKAPP_SLOT2, prefs.getString(PREF_KEY_QUICKAPP_SLOT2_3, null));
+            } else if (key.equals(PREF_KEY_QUICKAPP_SLOT3_3)) {
+                intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_3);
+                intent.putExtra(EXTRA_QUICKAPP_SLOT3, prefs.getString(PREF_KEY_QUICKAPP_SLOT3_3, null));
+            } else if (key.equals(PREF_KEY_QUICKAPP_SLOT4_3)) {
+                intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_3);
+                intent.putExtra(EXTRA_QUICKAPP_SLOT4, prefs.getString(PREF_KEY_QUICKAPP_SLOT4_3, null));                
+            } else if (key.equals(PREF_KEY_QUICKAPP_DEFAULT_4)) {
+                intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_4);
+                intent.putExtra(EXTRA_QUICKAPP_DEFAULT, prefs.getString(PREF_KEY_QUICKAPP_DEFAULT_4, null));
+            } else if (key.equals(PREF_KEY_QUICKAPP_SLOT1_4)) {
+                intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_4);
+                intent.putExtra(EXTRA_QUICKAPP_SLOT1, prefs.getString(PREF_KEY_QUICKAPP_SLOT1_4, null));
+            } else if (key.equals(PREF_KEY_QUICKAPP_SLOT2_4)) {
+                intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_4);
+                intent.putExtra(EXTRA_QUICKAPP_SLOT2, prefs.getString(PREF_KEY_QUICKAPP_SLOT2_4, null));
+            } else if (key.equals(PREF_KEY_QUICKAPP_SLOT3_4)) {
+                intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_4);
+                intent.putExtra(EXTRA_QUICKAPP_SLOT3, prefs.getString(PREF_KEY_QUICKAPP_SLOT3_4, null));
+            } else if (key.equals(PREF_KEY_QUICKAPP_SLOT4_4)) {
+                intent.setAction(ACTION_PREF_QUICKAPP_CHANGED_4);
+                intent.putExtra(EXTRA_QUICKAPP_SLOT4, prefs.getString(PREF_KEY_QUICKAPP_SLOT4_4, null));
             } else if (key.equals(PREF_KEY_EXPANDED_DESKTOP)) {
                 intent.setAction(ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
                 intent.putExtra(EXTRA_ED_MODE, Integer.valueOf(
