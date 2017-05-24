@@ -1258,4 +1258,10 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <!-- Lockscreen: Direct unlock see through transparency level -->
     <string name="pref_lockscreen_direct_unlock_trans_level_title">Şeffaf gör</string>
 
+    <!-- QuickApp Tile #3 and #4 -->
+    <string name="pref_cat_quickapp_tile_3_title">Hızlı Uygulama karesi 3 ayarları</string>
+    <string name="qs_tile_quickapp_3">Hızlı Uygulama 3</string>
+    <string name="pref_cat_quickapp_tile_4_title">Hızlı Uygulama karesi 4 ayarları</string>
+    <string name="qs_tile_quickapp_4">Hızlı Uygulama 4</string>
+
 </resources>

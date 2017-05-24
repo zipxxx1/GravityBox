@@ -2081,4 +2081,10 @@
     <!-- Lockscreen: Direct unlock see through transparency level -->
     <string name="pref_lockscreen_direct_unlock_trans_level_title">透过透明度</string>
 
+    <!-- QuickApp Tile #3 and #4 -->
+    <string name="pref_cat_quickapp_tile_3_title">快速应用磁贴3设置</string>
+    <string name="qs_tile_quickapp_3">快速应用3</string>
+    <string name="pref_cat_quickapp_tile_4_title">快速应用磁贴4设置</string>
+    <string name="qs_tile_quickapp_4">快速应用4</string>
+
 </resources>

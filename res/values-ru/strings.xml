@@ -2075,4 +2075,10 @@
     <!-- Lockscreen: Direct unlock see through transparency level -->
     <string name="pref_lockscreen_direct_unlock_trans_level_title">Просмотр через прозрачность</string>
 
+    <!-- QuickApp Tile #3 and #4 -->
+    <string name="pref_cat_quickapp_tile_3_title">Плитка быстрого запуска 3</string>
+    <string name="qs_tile_quickapp_3">Быстрый запуск 3</string>
+    <string name="pref_cat_quickapp_tile_4_title">Плитка быстрого запуска 4</string>
+    <string name="qs_tile_quickapp_4">Быстрый запуск 4</string>
+
 </resources>
