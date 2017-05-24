@@ -48,6 +48,7 @@ import android.os.UserHandle;
 import android.os.Vibrator;
 import android.renderscript.Allocation;
 import android.renderscript.Allocation.MipmapControl;
+import android.telecom.TelecomManager;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
@@ -108,6 +109,7 @@ public class Utils {
     private static Boolean mHasNfc = null;
     private static Boolean mHasCompass;
     private static Boolean mHasProximitySensor = null;
+    private static String mDefaultDialerPkgName = null;
 
     // GB Context
     private static Context mGbContext;
@@ -686,6 +688,18 @@ public class Utils {
     public static boolean isRTL(Context ctx) {
         Configuration config = ctx.getResources().getConfiguration();
         return isRTL(config);
+    }
+
+    public static String getDefaultDialerPackageName(Context ctx) {
+        if (mDefaultDialerPkgName == null) {
+            try {
+                TelecomManager tm = (TelecomManager) ctx.getSystemService(Context.TELECOM_SERVICE);
+                mDefaultDialerPkgName = tm.getDefaultDialerPackage();
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+        }
+        return mDefaultDialerPkgName;
     }
 
     static class SystemProp extends Utils {

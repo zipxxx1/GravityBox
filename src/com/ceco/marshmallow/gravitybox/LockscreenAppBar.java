@@ -37,7 +37,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.service.notification.StatusBarNotification;
-import android.telecom.TelecomManager;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,7 +77,6 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
     private Handler mHandler;
     private KeyguardStateMonitor mKgMonitor;
     private NotificationDataMonitor mNdMonitor;
-    private String mDialerPkgName;
 
     public LockscreenAppBar(Context ctx, Context gbCtx, ViewGroup container,
             Object statusBar, XSharedPreferences prefs) {
@@ -209,18 +207,6 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
         }
     }
 
-    private String getDialerPackageName() {
-        if (mDialerPkgName == null) {
-            try {
-                TelecomManager tm = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
-                mDialerPkgName = tm.getDefaultDialerPackage();
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
-        }
-        return mDialerPkgName;
-    }
-
     private int getMissedCallCount() {
         try {
             String[] selection = { CallLog.Calls.TYPE };
@@ -320,7 +306,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             if (mIntent != null && mIntent.getComponent() != null &&
                     mIntent.getComponent().getPackageName() != null) {
                 final String pkgName = mIntent.getComponent().getPackageName();
-                return (pkgName.equals(getDialerPackageName()) ?
+                return (pkgName.equals(Utils.getDefaultDialerPackageName(mContext)) ?
                         ModTelecom.PACKAGE_NAME : pkgName);
             }
             return null;

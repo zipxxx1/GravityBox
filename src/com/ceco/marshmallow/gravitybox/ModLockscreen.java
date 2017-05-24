@@ -861,6 +861,11 @@ public class ModLockscreen {
             mLeftAction = SysUiManagers.AppLauncher.createAppInfo();
             mLeftAction.setSizeDp(32);
             mLeftAction.initAppInfo(action);
+            String pkg = mLeftAction.getPackageName();
+            if (pkg != null && pkg.equals(Utils.getDefaultDialerPackageName(mContext))) {
+                mLeftAction.setAppIcon(tryGetStockPhoneIcon(
+                        mLeftAction.getAppIcon()));
+            }
         }
     }
 
@@ -872,6 +877,22 @@ public class ModLockscreen {
             mRightAction = SysUiManagers.AppLauncher.createAppInfo();
             mRightAction.setSizeDp(32);
             mRightAction.initAppInfo(action);
+            String pkg = mRightAction.getPackageName();
+            if (pkg != null && pkg.equals(Utils.getDefaultDialerPackageName(mContext))) {
+                mRightAction.setAppIcon(tryGetStockPhoneIcon(
+                        mRightAction.getAppIcon()));
+            }
+        }
+    }
+
+    private static Drawable tryGetStockPhoneIcon(Drawable def) {
+        try {
+            int resId = mContext.getResources().getIdentifier(
+                    "ic_phone_24dp", "drawable", PACKAGE_NAME);
+            return (resId == 0 ? def : mContext.getDrawable(resId));
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return def;
         }
     }
 }
