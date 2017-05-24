@@ -109,6 +109,8 @@ public class LaunchActivity extends Activity {
             AutoBrightnessShortcut.launchAction(mContext, intent);
         } else if (action.equals(GoHomeShortcut.ACTION)) {
             GoHomeShortcut.launchAction(mContext, intent);
+        } else if (action.equals(SimSettingsShortcut.ACTION)) {
+            SimSettingsShortcut.launchAction(mContext, intent);
         }
     }
 }

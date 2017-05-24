@@ -59,7 +59,8 @@ public class ShortcutActivity extends ListActivity {
             NfcShortcut.ACTION,
             LocationModeShortcut.ACTION,
             SmartRadioShortcut.ACTION,
-            AirplaneModeShortcut.ACTION
+            AirplaneModeShortcut.ACTION,
+            SimSettingsShortcut.ACTION
     ));
 
     public static boolean isActionSafe(String action) {
@@ -153,6 +154,9 @@ public class ShortcutActivity extends ListActivity {
         list.add(new WifiShortcut(mContext));
         list.add(new WifiApShortcut(mContext));
         if (!Utils.isWifiOnly(mContext)) {
+            if (!mLaunchesFromLockscreen) {
+                list.add(new SimSettingsShortcut(mContext));
+            }
             list.add(new MobileDataShortcut(mContext));
             list.add(new NetworkModeShortcut(mContext));
             list.add(new SmartRadioShortcut(mContext));

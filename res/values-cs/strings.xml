@@ -2028,4 +2028,17 @@
     <string name="sm_sub_change_data_ok">Výchozí SIM pro mobilní data byla nastavena na:</string>
     <string name="sm_voice_ask">Vždy se zeptat</string>
 
+    <!-- GB Actions: SIM settings -->
+    <string name="shortcut_sm_title">SIM nastavení</string>
+    <string name="shortcut_sm_voice_sim_1">SIM 1 pro hovory</string>
+    <string name="shortcut_sm_voice_sim_2">SIM 2 pro hovory</string>
+    <string name="shortcut_sm_voice_sim_ask">Zeptat se při vytáčení</string>
+    <string name="shortcut_sm_voice_sim_ui">Vybrat SIM pro hovory</string>
+    <string name="shortcut_sm_sms_sim_1">SIM 1 pro SMS</string>
+    <string name="shortcut_sm_sms_sim_2">SIM 2 pro SMS</string>
+    <string name="shortcut_sm_sms_sim_ui">Vybrat SIM pro SMS</string>
+    <string name="shortcut_sm_data_sim_1">SIM 1 pro data</string>
+    <string name="shortcut_sm_data_sim_2">SIM 2 pro data</string>
+    <string name="shortcut_sm_data_sim_ui">Vybrat SIM pro data</string>
+
 </resources>

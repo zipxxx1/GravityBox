@@ -2033,4 +2033,17 @@
     <string name="sm_sub_change_data_ok">Predvolená SIM pre mobilné dáta bola nastavená na:</string>
     <string name="sm_voice_ask">Vždy sa opýtať</string>
 
+    <!-- GB Actions: SIM settings -->
+    <string name="shortcut_sm_title">SIM nastavenia</string>
+    <string name="shortcut_sm_voice_sim_1">SIM 1 pre hovory</string>
+    <string name="shortcut_sm_voice_sim_2">SIM 2 pre hovory</string>
+    <string name="shortcut_sm_voice_sim_ask">Spýtať sa pri vytáčaní</string>
+    <string name="shortcut_sm_voice_sim_ui">Vybrať SIM pre hovory</string>
+    <string name="shortcut_sm_sms_sim_1">SIM 1 pre SMS</string>
+    <string name="shortcut_sm_sms_sim_2">SIM 2 pre SMS</string>
+    <string name="shortcut_sm_sms_sim_ui">Vybrať SIM pre SMS</string>
+    <string name="shortcut_sm_data_sim_1">SIM 1 pre dáta</string>
+    <string name="shortcut_sm_data_sim_2">SIM 2 pre dáta</string>
+    <string name="shortcut_sm_data_sim_ui">Vybrať SIM pre dáta</string>
+
 </resources>

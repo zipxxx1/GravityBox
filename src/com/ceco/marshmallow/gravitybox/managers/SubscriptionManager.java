@@ -24,6 +24,7 @@ import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.marshmallow.gravitybox.adapters.IconListAdapter;
+import com.ceco.marshmallow.gravitybox.shortcuts.AShortcut;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -96,12 +97,13 @@ public class SubscriptionManager implements BroadcastSubReceiver {
                     return;
 
                 final SubType subType = (SubType) msg.obj;
+                final boolean showToast = (msg.arg2 == 1);
                 if (subType == SubType.VOICE && msg.arg1 == 2) {
-                    changeDefaultSub(subType, -1);
+                    changeDefaultSub(subType, -1, showToast);
                 } else if (msg.arg1 < 0 || msg.arg1 > 1) {
-                    changeDefaultSub(subType);
+                    changeDefaultSub(subType, showToast);
                 } else {
-                    changeDefaultSub(subType, msg.arg1);
+                    changeDefaultSub(subType, msg.arg1, showToast);
                 }
             } else if (msg.what == MSG_HANDLE_REPORT) {
                 sendReportingIntent();
@@ -117,7 +119,7 @@ public class SubscriptionManager implements BroadcastSubReceiver {
         }
     }
 
-    public void changeDefaultSub(final SubType subType, final int simSlot) {
+    public void changeDefaultSub(final SubType subType, final int simSlot, final boolean showToast) {
         boolean result;
         SubscriptionInfo si = mSubMgr.getActiveSubscriptionInfoForSimSlotIndex(simSlot);
         if (subType == SubType.VOICE) {
@@ -129,12 +131,14 @@ public class SubscriptionManager implements BroadcastSubReceiver {
         } else {
             result = setDefaultSubscription(subType, si);
         }
-        final String msg = result ? getChangeOkMsg(subType, getSubDisplayName(si)) :
-            getChangeFailedMsg(subType);
-        Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
+        if (showToast || !result) {
+            final String msg = result ? getChangeOkMsg(subType, getSubDisplayName(si)) :
+                getChangeFailedMsg(subType);
+            Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
+        }
     }
 
-    public void changeDefaultSub(final SubType subType) {
+    public void changeDefaultSub(final SubType subType, final boolean showToast) {
         final IconListAdapter arrayAdapter = new IconListAdapter(
                 mContext, getSubItemList(subType));
         AlertDialog d = new AlertDialog.Builder(mContext)
@@ -147,7 +151,7 @@ public class SubscriptionManager implements BroadcastSubReceiver {
                         dialog.dismiss();
                         int simSlot = item.getSubInfo() == null ? -1 :
                             item.getSubInfo().getSimSlotIndex();
-                        changeDefaultSub(subType, simSlot);
+                        changeDefaultSub(subType, simSlot, showToast);
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, null)
@@ -298,7 +302,8 @@ public class SubscriptionManager implements BroadcastSubReceiver {
         Message msg = null;
         if (intent.getAction().equals(ACTION_CHANGE_DEFAULT_SIM_SLOT)) {
             msg = obtainMessageFor(intent.getStringExtra(EXTRA_SUB_TYPE),
-                    intent.getIntExtra(EXTRA_SIM_SLOT, -1));
+                    intent.getIntExtra(EXTRA_SIM_SLOT, -1),
+                    intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, true));
         } else if (intent.getAction().equals(ACTION_GET_DEFAULT_SIM_SLOT)) {
             msg = mHandler.obtainMessage(MSG_HANDLE_REPORT);
         }
@@ -307,7 +312,7 @@ public class SubscriptionManager implements BroadcastSubReceiver {
         }
     }
 
-    private Message obtainMessageFor(String subTypeStr, int simSlot) {
+    private Message obtainMessageFor(String subTypeStr, int simSlot, boolean showToast) {
         if (subTypeStr == null)
             return null;
 
@@ -315,7 +320,8 @@ public class SubscriptionManager implements BroadcastSubReceiver {
         if (subType == null)
             return null;
 
-        return mHandler.obtainMessage(MSG_HANDLE_SUB_CHANGE, simSlot, 0, subType);
+        return mHandler.obtainMessage(MSG_HANDLE_SUB_CHANGE,
+                simSlot, (showToast ? 1 : 0), subType);
     }
 
     private String getDialogTitleFor(final SubType subType) {

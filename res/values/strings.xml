@@ -2111,4 +2111,17 @@
     <string name="sm_sub_change_data_ok">Default SIM for cellular data set to:</string>
     <string name="sm_voice_ask">Ask every time</string>
 
+    <!-- GB Actions: SIM settings -->
+    <string name="shortcut_sm_title">SIM settings</string>
+    <string name="shortcut_sm_voice_sim_1">SIM 1 for calls</string>
+    <string name="shortcut_sm_voice_sim_2">SIM 2 for calls</string>
+    <string name="shortcut_sm_voice_sim_ask">Ask when placing a call</string>
+    <string name="shortcut_sm_voice_sim_ui">Choose SIM for calls</string>
+    <string name="shortcut_sm_sms_sim_1">SIM 1 for SMS</string>
+    <string name="shortcut_sm_sms_sim_2">SIM 2 for SMS</string>
+    <string name="shortcut_sm_sms_sim_ui">Choose SIM for SMS</string>
+    <string name="shortcut_sm_data_sim_1">SIM 1 for data</string>
+    <string name="shortcut_sm_data_sim_2">SIM 2 for data</string>
+    <string name="shortcut_sm_data_sim_ui">Choose SIM for data</string>
+
 </resources>
