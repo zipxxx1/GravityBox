@@ -2087,4 +2087,10 @@
     <string name="pref_cat_quickapp_tile_4_title">QuickApp tile 4 settings</string>
     <string name="qs_tile_quickapp_4">Quick App 4</string>
 
+    <!-- QS Bluetooth Tethering tile -->
+    <string name="qs_tile_bt_tethering">Bluetooth Tethering</string>
+    <string name="qs_tile_bt_tethering_on">Tethering On</string>
+    <string name="qs_tile_bt_tethering_off">Tethering Off</string>
+    <string name="qs_tile_bt_tethering_error">Error</string>
+
 </resources>

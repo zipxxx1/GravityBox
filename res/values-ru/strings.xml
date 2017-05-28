@@ -2081,4 +2081,10 @@
     <string name="pref_cat_quickapp_tile_4_title">Плитка быстрого запуска 4</string>
     <string name="qs_tile_quickapp_4">Быстрый запуск 4</string>
 
+    <!-- QS Bluetooth Tethering tile -->
+    <string name="qs_tile_bt_tethering">Раздача Bluetooth</string>
+    <string name="qs_tile_bt_tethering_on">Раздача вкл</string>
+    <string name="qs_tile_bt_tethering_off">Раздача выкл</string>
+    <string name="qs_tile_bt_tethering_error">Ошибка</string>
+
 </resources>

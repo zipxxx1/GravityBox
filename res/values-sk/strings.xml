@@ -2016,4 +2016,10 @@
     <!-- Lockscreen: Direct unlock see through transparency level -->
     <string name="pref_lockscreen_direct_unlock_trans_level_title">Úroveň priehľadnosti</string>
 
+    <!-- QS Bluetooth Tethering tile -->
+    <string name="qs_tile_bt_tethering">Bluetooth Tethering</string>
+    <string name="qs_tile_bt_tethering_on">Tethering zap</string>
+    <string name="qs_tile_bt_tethering_off">Tethering vyp</string>
+    <string name="qs_tile_bt_tethering_error">Chyba</string>
+
 </resources>

@@ -2042,4 +2042,10 @@
     <string name="pref_cat_quickapp_tile_4_title">Плитка QuickApp 4 налаштування</string>
     <string name="qs_tile_quickapp_4">Quick App 4</string>
 
+    <!-- QS Bluetooth Tethering tile -->
+    <string name="qs_tile_bt_tethering">Роздача по Bluetooth</string>
+    <string name="qs_tile_bt_tethering_on">Роздачу увімкнуто</string>
+    <string name="qs_tile_bt_tethering_off">Роздачу вимкнуто</string>
+    <string name="qs_tile_bt_tethering_error">Помилка</string>
+
 </resources>
