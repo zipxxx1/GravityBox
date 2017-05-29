@@ -1,3 +1,20 @@
+Changelog 6.3.7 - 29/05/2017
+--------------------------------------
+- Lockscreen tweaks: use stock icon for bottom action in case of Phone app
+- QuickSettings management:
+--- added another 2 QuickApp tiles
+--- added Bluetooth Tethering tile
+- GravityBox Actions: added SIM settings shortcuts (dual SIM only)
+--- allows quick changing default SIM for calls/messages/cellular data
+--- allows automation apps to change SIM settings based on user-defined conditions
+--- supports interactive shortcuts (shows dialog for choosing SIM)
+--- supports direct change shortcuts (without user interaction)
+- Dialer tweaks:
+--- show dialpad feature adjusted for compatibility with the latest Google Dialer
+--- removed no longer supported unknown caller photo feature for SDK25 Google Dialer
+- Quiet Hours Wear Mode: don't vibrate watch when user present on a phone
+- Updated Russian translations (thanks to gaich)
+
 Changelog 6.3.6 - 19/04/2017
 --------------------------------------
 - Lockscreen tweaks:
