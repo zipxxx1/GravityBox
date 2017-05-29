@@ -1728,6 +1728,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (pi.applicationInfo.targetSdkVersion == 25) {
                 Preference p = findPreference(PREF_KEY_CALLER_FULLSCREEN_PHOTO);
                 if (p != null) mPrefCatPhoneDialer.removePreference(p);
+                mPrefCatPhoneDialer.removePreference(mPrefCallerUnknownPhotoEnable);
+                mPrefCatPhoneDialer.removePreference(mPrefCallerUnknownPhoto);
             }
 
             // Remove MTK specific preferences for non-MTK devices

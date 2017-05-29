@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,7 +15,6 @@
 
 package com.ceco.marshmallow.gravitybox;
 
-import java.io.File;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,15 +23,7 @@ import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -61,28 +52,6 @@ public class ModDialer25 {
             clazz = cls;
             methods = new HashMap<>();
         }
-    }
-
-    private static ClassInfo resolveCallCardFragment(ClassLoader cl) {
-        ClassInfo info = null;
-        String[] CLASS_NAMES = new String[] { "bfz" };
-        String[] METHOD_NAMES = new String[] { "a" };
-        for (String className : CLASS_NAMES) {
-            Class<?> clazz = XposedHelpers.findClassIfExists(className, cl);
-            info = new ClassInfo(clazz);
-            for (String methodName : METHOD_NAMES) {
-                if (methodName.equals("a")) {
-                    for (String realMethodName : new String[] { methodName }) {
-                        Method m = XposedHelpers.findMethodExactIfExists(clazz, realMethodName);
-                        if (m != null) {
-                            info.methods.put(methodName, realMethodName);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return info;
     }
 
     private static ClassInfo resolveDialtactsActivity(ClassLoader cl) {
@@ -145,18 +114,6 @@ public class ModDialer25 {
         return info;
     }
 
-    private static Drawable getUnknownCallerDrawable(Context ctx) throws Throwable {
-        final String path = Utils.getGbContext(ctx).getFilesDir() + "/caller_photo";
-        File f = new File(path);
-        if (f.exists() && f.canRead()) {
-            Bitmap b = BitmapFactory.decodeFile(path);
-            if (b != null) {
-                return new BitmapDrawable(ctx.getResources(), Utils.getCircleBitmap(b));
-            }
-        }
-        return null;
-    }
-
     private static void reloadPrefs(XSharedPreferences prefs) {
         if ((System.currentTimeMillis() - mPrefsReloadedTstamp) > 10000) {
             if (DEBUG) log("Reloading preferences");
@@ -166,71 +123,6 @@ public class ModDialer25 {
     }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader, final String packageName) {
-        try {
-            final ClassInfo classInfoCallCardFragment = resolveCallCardFragment(classLoader);
-
-            XC_MethodHook unknownCallerHook = new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    reloadPrefs(prefs);
-                    if (!prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE, false)) return;
-
-                    ImageView iv = (ImageView) XposedHelpers.getObjectField(param.thisObject, "f");
-                    if (iv == null || !(iv.getDrawable() instanceof LayerDrawable))
-                        return;
-
-                    final Resources res = iv.getResources();
-                    String resName = "product_logo_avatar_anonymous_color_120";
-                    Drawable picUnknown = res.getDrawable(res.getIdentifier(resName, "drawable",
-                            packageName), null);
-
-                    Drawable d = ((LayerDrawable) iv.getDrawable()).getDrawable(0);
-                    if (d != null && picUnknown.getConstantState().equals(d.getConstantState())) {
-                        Drawable newD = getUnknownCallerDrawable(iv.getContext());
-                        if (newD != null) {
-                            ((LayerDrawable) iv.getDrawable()).setDrawable(0, newD); 
-                            if (DEBUG) log("Unknow caller photo set");
-                        }
-                    }
-                }
-            };
-            XposedHelpers.findAndHookMethod(classInfoCallCardFragment.clazz,
-                    classInfoCallCardFragment.methods.get("a"),
-                    unknownCallerHook);
-        } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
-        }
-
-        try {
-            XposedHelpers.findAndHookMethod("bae", classLoader, "a",
-                    Drawable.class, Bitmap.class, Object.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    reloadPrefs(prefs);
-                    if (!prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE, false)) return;
-
-                    final Context ctx = (Context) XposedHelpers.getObjectField(param.thisObject, "b");
-                    final Resources res = ctx.getResources();
-                    String resName = "img_no_image_automirrored";
-                    Drawable picUnknown = res.getDrawable(res.getIdentifier(resName, "drawable",
-                            packageName), null);
-
-                    Drawable d = (Drawable) param.args[0];
-                    if (d == null || picUnknown.getConstantState().equals(d.getConstantState())) {
-                        Drawable newD = getUnknownCallerDrawable(ctx);
-                        if (newD != null) {
-                            param.args[0] = newD;
-                            if (DEBUG) log("Unknow incoming caller photo set");
-                        }
-                    }
-                }
-            });
-        } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
-        }
-
         try {
             final ClassInfo classInfoDialtactsActivity = resolveDialtactsActivity(classLoader);
 
