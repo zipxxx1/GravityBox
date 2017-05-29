@@ -96,15 +96,17 @@ public class ModDialer25 {
             info = new ClassInfo(clazz);
             for (String methodName : METHOD_NAMES) {
                 if (methodName.equals("displayFragment")) {
-                    for (String realMethodName : new String[] { methodName, "c" }) {
+                    for (String realMethodName : new String[] { methodName, "c", "b" }) {
                         Method m = XposedHelpers.findMethodExactIfExists(clazz, realMethodName,
                             Intent.class);
                         if (m != null) {
                             info.methods.put(methodName, realMethodName);
                             if (realMethodName.equals(methodName)) {
                                 info.extra = "showDialpadFragment";
-                            } else {
+                            } else if (realMethodName.equals("c")) {
                                 info.extra = "b";
+                            } else {
+                                info.extra = "c";
                             }
                             break;
                         }
@@ -197,7 +199,7 @@ public class ModDialer25 {
                     classInfoCallCardFragment.methods.get("a"),
                     unknownCallerHook);
         } catch (Throwable t) {
-            log("callCardFragment: incompatible version of Dialer app");
+            if (DEBUG) XposedBridge.log(t);
         }
 
         try {
@@ -226,7 +228,7 @@ public class ModDialer25 {
                 }
             });
         } catch (Throwable t) {
-            log("bae: incompatible version of Dialer app");
+            if (DEBUG) XposedBridge.log(t);
         }
 
         try {
@@ -256,6 +258,7 @@ public class ModDialer25 {
             });
         } catch (Throwable t) {
             log("DialtactsActivity: incompatible version of Dialer app");
+            if (DEBUG) XposedBridge.log(t);
         }
 
         try {
@@ -282,6 +285,7 @@ public class ModDialer25 {
             });
         } catch (Throwable t) {
             log("DialpadFragment: incompatible version of Dialer app");
+            if (DEBUG) XposedBridge.log(t);
         }
     }
 }
