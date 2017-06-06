@@ -2090,5 +2090,50 @@
     <string name="msg_unlocker_missing">无法连接到GravityBox解锁器进行许可证检查</string>
     <string name="msg_unlocker_old">您的GravityBox解锁器版本似乎已经过期了,请更新!</string>
     <string name="msg_unlocker_error">连接GravityBox解锁器时发生意外错误</string>
+    
+    <!-- Lockscreen: hide bottom actions -->
+    <string name="pref_lockscreen_bottom_actions_hide_title">隐藏底部动作</string>
+    <string name="bottom_action_left">隐藏左侧动作</string>
+    <string name="bottom_action_right">隐藏右侧动作</string>
+
+    <!-- Lockscreen: Direct unlock see through transparency level -->
+    <string name="pref_lockscreen_direct_unlock_trans_level_title">透过透明度</string>
+
+    <!-- Subscription manager -->
+    <string name="sm_choose_voice_sub">为通话选择默认SIM卡</string>
+    <string name="sm_choose_sms_sub">为短信选择默认SIM卡</string>
+    <string name="sm_choose_data_sub">为数据选择默认SIM卡</string>
+    <string name="sm_sub_change_voice_failed">为通话设置默认SIM卡失败</string>
+    <string name="sm_sub_change_sms_failed">为短信设置默认SIM卡失败</string>
+    <string name="sm_sub_change_data_failed">为数据设置默认SIM卡失败</string>
+    <string name="sm_sub_change_voice_ok">呼叫设置为默认SIM卡:</string>
+    <string name="sm_sub_change_sms_ok">短信设置为默认SIM卡:</string>
+    <string name="sm_sub_change_data_ok">数据设置为默认SIM卡:</string>
+    <string name="sm_voice_ask">每次都问</string>
+
+    <!-- GB Actions: SIM settings -->
+    <string name="shortcut_sm_title">SIM设置</string>
+    <string name="shortcut_sm_voice_sim_1">SIM1作为呼叫</string>
+    <string name="shortcut_sm_voice_sim_2">SIM2作为呼叫</string>
+    <string name="shortcut_sm_voice_sim_ask">拨打电话时询问</string>
+    <string name="shortcut_sm_voice_sim_ui">选择SIM卡作为拨打电话</string>
+    <string name="shortcut_sm_sms_sim_1">SIM1作为短信</string>
+    <string name="shortcut_sm_sms_sim_2">SIM2作为短信</string>
+    <string name="shortcut_sm_sms_sim_ui">选择SIM卡作为短信</string>
+    <string name="shortcut_sm_data_sim_1">SIM1作为数据</string>
+    <string name="shortcut_sm_data_sim_2">SIM2作为数据</string>
+    <string name="shortcut_sm_data_sim_ui">选择SIM卡作为数据</string>
+
+    <!-- QuickApp Tile #3 and #4 -->
+    <string name="pref_cat_quickapp_tile_3_title">快速应用瓷砖3设置</string>
+    <string name="qs_tile_quickapp_3">快速应用3</string>
+    <string name="pref_cat_quickapp_tile_4_title">快速应用瓷砖4设置</string>
+    <string name="qs_tile_quickapp_4">快速应用4</string>
+
+    <!-- QS Bluetooth Tethering tile -->
+    <string name="qs_tile_bt_tethering">蓝牙共享</string>
+    <string name="qs_tile_bt_tethering_on">共享开</string>
+    <string name="qs_tile_bt_tethering_off">共享关</string>
+    <string name="qs_tile_bt_tethering_error">错误</string>
 
 </resources>
