@@ -513,11 +513,9 @@
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Blocare notificări în curs</string>
     <string name="pref_ongoing_notifications_summary">Permite blocarea notificărilor selectate în curs</string>
-    <string name="ongoing_notif_info">Lista va fi populată în mod automat pentru fiecare notificare în curs.
-        Apoi, puteți decide dacă doriți să blocați notificarea în curs de desfășurare data viitoare. Utilizați cu prudență.</string>
+    <string name="ongoing_notif_info">Lista va fi populată în mod automat pentru fiecare notificare în curs. Apoi, puteți decide dacă doriți să blocați notificarea în curs de desfășurare data viitoare. Utilizați cu prudență.</string>
     <string name="ongoing_notif_reset_list">Resetați lista</string>
-    <string name="ongoing_notif_reset_alert">Sigur doriți să resetați lista?
-        Aceasta va șterge lista curentă și va debloca toate notificările în curs blocate anterior.</string>
+    <string name="ongoing_notif_reset_alert">Sigur doriți să resetați lista? Aceasta va șterge lista curentă și va debloca toate notificările în curs blocate anterior.</string>
     <string name="ongoing_notif_list_empty">(lista este goală)</string>
 
     <!-- Quick unlock -->
@@ -615,8 +613,7 @@
     <string name="caller_unkown_photo_result_not_successful">Fotografia nu s-a schimbat</string>
 
     <!-- Minimum screen brightness warning -->
-    <string name="screen_brightness_min_warning">Este posibil ca ecranul să nu aibă valori mai mici de 20. Dacă ecranul nu se aprinde,
-        țineți apăsat tasta Volume+ timp de cel puțin 7 secunde pentru a reseta luminozitatea și apoi reglaţi luminozitatea minimă utilizând valori mai mari.</string>
+    <string name="screen_brightness_min_warning">Este posibil ca ecranul să nu aibă valori mai mici de 20. Dacă ecranul nu se aprinde, țineți apăsat tasta Volume+ timp de cel puțin 7 secunde pentru a reseta luminozitatea și apoi reglaţi luminozitatea minimă utilizând valori mai mari.</string>
 
     <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">General</string>
@@ -657,8 +654,7 @@
     <string name="pref_about_gplus_summary">Atingeți pentru a vizita comunitatea GravityBox Google+</string>
 
     <!-- HW Keys Navigation Bar warning -->
-    <string name="hwkey_navbar_warning">Pentru a permite activarea acțiunilor pentru bara de navigare, 
-        este necesar să înlocuiți setările prestabilite ale sistemului în meniul de configurare a barei de navigare</string>
+    <string name="hwkey_navbar_warning">Pentru a permite activarea acțiunilor pentru bara de navigare, este necesar să înlocuiți setările prestabilite ale sistemului în meniul de configurare a barei de navigare</string>
 
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Lanternă în ecranul de blocare</string>
@@ -868,8 +864,7 @@
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Nedefinit</string>
     <string name="pref_cat_smart_radio_title">Radio inteligent</string>
-    <string name="pref_smart_radio_enable_summary">Aceasta va schimba automat radioul în modul de economisire a energiei definit de utilizator sau în modul normal,
-        în funcție de starea conexiunilor mobile și a conexiunilor WiFi (necesită repornire)</string>
+    <string name="pref_smart_radio_enable_summary">Aceasta va schimba automat radioul în modul de economisire a energiei definit de utilizator sau în modul normal, în funcție de starea conexiunilor mobile și a conexiunilor WiFi (necesită repornire)</string>
     <string name="pref_smart_radio_normal_mode_title">Mod de rețea normal</string>
     <string name="pref_smart_radio_power_saving_mode_title">Mod de rețea de economisire a energiei</string>
     <string name="pref_smart_radio_screen_off_title">Când ecranul se închide</string>
@@ -925,8 +920,7 @@
 
     <!-- Smart radio: independent delay for screen off power save event -->
     <string name="pref_smart_radio_screen_off_delay_title">Întârziere economisire a energiei</string>
-    <string name="pref_smart_radio_screen_off_delay_summary">Întârzie trecerea la modul de economisire a energiei când ecranul se oprește.
-        Suprascrie întârzierea modificării modului implicit de rețea dacă valoarea este diferită de zero.</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Întârzie trecerea la modul de economisire a energiei când ecranul se oprește. Suprascrie întârzierea modificării modului implicit de rețea dacă valoarea este diferită de zero.</string>
 
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">Setări de rezervă</string>
@@ -943,8 +937,7 @@
     <!-- Web service client strings -->
     <string name="wsc_hash_creation_failed">Eroare la generarea unui cod de hash specific aplicației</string>
     <string name="wsc_parse_response_error">Eroare la analizarea datelor obținute de la serviciul web</string>
-    <string name="wsc_hash_invalid">Serviciul Web a refuzat să comunice din cauza nepotrivirii hash. Acest lucru se întâmplă
-        de obicei în cazul în care executați o versiune neoficială sau APK GravityBox a fost modificat de către terțe părți.</string>
+    <string name="wsc_hash_invalid">Serviciul Web a refuzat să comunice din cauza nepotrivirii hash. Acest lucru se întâmplă de obicei în cazul în care executați o versiune neoficială sau APK GravityBox a fost modificat de către terțe părți.</string>
     <string name="wsc_please_wait">Aşteaptaţi…</string>
     <string name="wsc_error">Eroare la comunicarea cu serviciul Web: %s</string>
     <string name="wsc_task_cancelled">Serviciul Web a fost anulat</string>
@@ -1106,8 +1099,7 @@
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Utilizați binarul stoc</string>
-    <string name="pref_screenrecord_use_stock_summary">Când este activată, pentru înregistrare se folosește binarul stoc.
-        Utilizați în cazul în care binarul alternativ cauzează probleme. Rețineți că binarul stoc nu acceptă înregistrări mai mari de 3 minute.</string>
+    <string name="pref_screenrecord_use_stock_summary">Când este activată, pentru înregistrare se folosește binarul stoc. Utilizați în cazul în care binarul alternativ cauzează probleme. Rețineți că binarul stoc nu acceptă înregistrări mai mari de 3 minute.</string>
 
     <!-- Clock settings master switch -->
     <string name="pref_sb_clock_masterswitch_summary">Comută setările pentru ceasul din bara de stare (necesită repornire)</string>
@@ -1147,57 +1139,57 @@
     <string name="pref_cat_qs_nm_tile_settings_title">Setările dalei Mod de rețea</string>
 
     <!-- Led control -->
-    <string name="pref_led_control_title">Control final al notificărilor</string>
+    <string name="pref_led_control_title">Gestionare notificări</string>
     <string name="pref_led_control_summary">Permite controlul luminilor de notificare, sunetelor și vibrațiilor în funcție de aplicație</string>
-    <string name="lc_please_wait">Te rog asteapta…</string>
-    <string name="lc_disabled">Controlul notificării este dezactivat</string>
+    <string name="lc_please_wait">Aşteaptaţi&#8230</string>
+    <string name="lc_disabled">Controlul notificărilor este dezactivat</string>
     <string name="pref_lc_led_color_title">Culoare LED</string>
-    <string name="pref_lc_led_time_on_title">LED Durata de funcționare</string>
-    <string name="pref_lc_led_time_off_title">Durata dezactivării LED-ului</string>
+    <string name="pref_lc_led_time_on_title">Durata LED pornit</string>
+    <string name="pref_lc_led_time_off_title">Durata LED oprit</string>
     <string name="pref_lc_ongoing_title">În curs de desfășurare</string>
     <string name="pref_lc_ongoing_summary">Se aplică, de asemenea, la notificările în curs, când este activată</string>
-    <string name="lc_btn_preview">previzualizare</string>
+    <string name="lc_btn_preview">Previzualizare</string>
     <string name="lc_btn_save">Salvați</string>
-    <string name="lc_item_summary_on">Pe</string>
-    <string name="lc_item_summary_off">de pe</string>
+    <string name="lc_item_summary_on">Pornit</string>
+    <string name="lc_item_summary_off">Oprit</string>
     <string name="lc_item_summary_ongoing">În curs de desfășurare</string>
     <string name="lc_preview_notif_title">Controlul notificărilor GravityBox</string>
     <string name="lc_preview_notif_text">Testați pentru %s</string>
     <string name="lc_activity_menu_show_all">Afișați toate elementele</string>
     <string name="lc_activity_menu_show_active">Afișați elementele active</string>
     <string name="pref_cat_lc_lights_title">Lumini</string>
-    <string name="pref_cat_lc_other_title">Alte setari</string>
+    <string name="pref_cat_lc_other_title">Alte setări</string>
     <string name="pref_cat_lc_sounds_title">Sunete</string>
-    <string name="pref_cat_lc_vibrations_title">vibraţiile</string>
+    <string name="pref_cat_lc_vibrations_title">Vibraţii</string>
     <string name="pref_lc_notif_sound_override_title">Suprascrieți sunetul de notificare</string>
     <string name="pref_lc_notif_sound_title">Sunet de notificare</string>
-    <string name="lc_notif_sound_none">Nici un sunet</string>
-    <string name="pref_lc_notif_sound_only_once_title">Alerta o singură dată</string>
-    <string name="pref_lc_notif_sound_only_once_summary">Când este activată, sunetul și / sau vibrațiile nu vor fi redate în cazul în care notificarea există deja</string>
+    <string name="lc_notif_sound_none">Niciun sunet</string>
+    <string name="pref_lc_notif_sound_only_once_title">Alertează o singură dată</string>
+    <string name="pref_lc_notif_sound_only_once_summary">Când este activată, sunetul și/sau vibrațiile nu vor fi redate în cazul în care notificarea există deja</string>
     <string name="pref_lc_notif_insistent_title">Insistent</string>
     <string name="pref_lc_notif_insistent_summary">Când este activată, sunetul va fi repetat până când notificarea este anulată sau fereastra de notificare este deschisă</string>
     <string name="pref_lc_vibrate_override_title">Înlocuiți vibrațiile</string>
     <string name="pref_lc_vibrate_pattern_title">Modelul vibrațiilor</string>
-    <string name="pref_lc_vibrate_pattern_summary">Liste separate de liste de perechi de durată / decalare în milisecunde. Setați la 0 pentru a dezactiva vibrațiile.</string>
-    <string name="lc_vibrate_pattern_invalid">Formatul nevalid al modelului de vibrații</string>
+    <string name="pref_lc_vibrate_pattern_summary">Liste separate prin virgule de perechi de durată pornit/oprit în milisecunde. Setați la 0 pentru a dezactiva vibrațiile.</string>
+    <string name="lc_vibrate_pattern_invalid">Format nevalid al modelului de vibrații</string>
 
     <!-- Omni data traffic monitor inactivity threshold -->
-    <string name="pref_data_traffic_omni_autohide_threshold_title">Gradul de inactivitate</string>
+    <string name="pref_data_traffic_omni_autohide_threshold_title">Pragul de inactivitate</string>
 
     <!-- Icon Picker: additional icons -->
-    <string name="shortcuts_icon_picker_chrome">Crom</string>
+    <string name="shortcuts_icon_picker_chrome">Chrome</string>
     <string name="shortcuts_icon_picker_spotify">Spotify</string>
 
     <!-- Virtual keys vibrate pattern -->
-    <string name="pref_virtual_key_vibrate_pattern_title">Modelul vibrațiilor cheii virtuale</string>
-    <string name="pref_virtual_key_vibrate_pattern_summary">Liste separate de liste de perechi de durată / decalare în milisecunde. Lăsați goală pentru modelul de vibrații implicit.</string>
+    <string name="pref_virtual_key_vibrate_pattern_title">Modelul vibrațiilor tastei virtuale</string>
+    <string name="pref_virtual_key_vibrate_pattern_summary">Liste separate prin virgule de perechi de durată pornit/oprit în milisecunde. Lăsați gol pentru modelul de vibrații implicit.</string>
 
     <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Afișați eroarea de model</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Afișați traseul roșu atunci când este introdus un model greșit</string>
+    <string name="pref_lockscreen_show_pattern_error_title">Afișare eroare de model</string>
+    <string name="pref_lockscreen_show_pattern_error_summary">Afișare traseu roșu atunci când este introdus un model greșit</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">Această funcție este în modul de încercare. Dacă vi se pare utilă, puteți continua să o utilizați după deblocarea caracteristicilor premium. Perioada de încercare se termină după restabilirea %d .</string>
+    <string name="trial_info">Această funcție este în modul de încercare. Dacă vi se pare utilă, puteți continua să o utilizați după deblocarea caracteristicilor premium. Perioada de încercare se termină după %d reporniri.</string>
 
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">Setări implicite</string>
@@ -1206,71 +1198,68 @@
     <string name="lc_settings_menu_reset">Resetați la valorile implicite</string>
 
     <!-- Notification control: Active screen -->
-    <string name="lc_active_screen">Ecran activ</string>
-    <string name="lc_active_screen_info">Funcția Ecran activ se activează automat de fiecare dată când apare o nouă notificare. Rețineți că Ecranul activ necesită activarea ecranului de blocare. \ NComutatorul de mai jos este un comutator principal. După ce este activată, configurația suplimentară se poate realiza pe bază de aplicații</string>
-    <string name="lc_active_screen_switch_title">Activați ecranul activ</string>
+    <string name="lc_active_screen">Pornire ecran</string>
+    <string name="lc_active_screen_info">Funcția Pornire ecran se activează automat de fiecare dată când apare o nouă notificare. Rețineți că Pornire ecranul necesită activarea ecranului de blocare.\nComutatorul de mai jos este un comutator principal. După ce este activată, configurația suplimentară se poate realiza pe bază de aplicații</string>
+    <string name="lc_active_screen_switch_title">Activați Pornire ecran</string>
 
     <!-- Notification control: Quiet hours -->
-    <string name="lc_quiet_hours">Timpul liniștit</string>
-    <string name="pref_lc_qh_enabled_title">Activează orele liniștite</string>
-    <string name="pref_lc_qh_enabled_summary">Dezactivează sunetele / vibrațiile și LED-ul opțional pentru toate notificările care ajung în intervalul de timp definit</string>
-    <string name="pref_lc_qh_start_title">Timpul de începere</string>
+    <string name="lc_quiet_hours">Ore de linişte</string>
+    <string name="pref_lc_qh_enabled_title">Activează orele de liniște</string>
+    <string name="pref_lc_qh_enabled_summary">Dezactivează sunetele/vibrațiile și LED-ul opțional pentru toate notificările care ajung în intervalul de timp definit</string>
+    <string name="pref_lc_qh_start_title">Ora de începere</string>
     <string name="pref_lc_qh_end_title">Ora de terminare</string>
-    <string name="pref_lc_qh_mute_led_title">Anulează lumina</string>
+    <string name="pref_lc_qh_mute_led_title">dezactivare lumini</string>
 
     <!-- Notification control: LED mode -->
     <string name="pref_lc_led_mode_title">Mod LED</string>
     <string name="lc_led_mode_original">Original (din aplicație)</string>
-    <string name="lc_led_mode_override">Trece peste</string>
+    <string name="lc_led_mode_override">Setat</string>
     <string name="lc_led_mode_off">Oprit (fără lumini)</string>
 
     <!-- Notification control: Quiet hours statusbar icon -->
-    <string name="pref_lc_qh_statusbar_icon_title">Bara de stare de stare</string>
-    <string name="pref_lc_qh_statusbar_icon_summary">Afișează pictograma în bara de stare în timpul orelor liniștite</string>
+    <string name="pref_lc_qh_statusbar_icon_title">Pictogramă în bara de stare</string>
+    <string name="pref_lc_qh_statusbar_icon_summary">Afișează pictograma în bara de stare în timpul orelor de liniște</string>
 
     <!-- Battey percent text: charging color -->
-    <string name="battery_percent_text_charging_color_title">Încărcarea culorilor</string>
+    <string name="battery_percent_text_charging_color_title">Culoare încărcare</string>
 
     <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">Zilele saptamanii</string>
+    <string name="pref_lc_qh_cat_weekdays_title">Zilele săptămânii</string>
     <string name="pref_lc_qh_cat_weekend_title">Sfârșit de săptămână</string>
 
-    <!-- Force English locale -->
-    <string name="pref_force_english_locale_title">Force English locale</string>
-
     <!-- UNC Quiet Hours: ignore on per-app basis -->
-    <string name="pref_lc_qh_ignore_title">Ignorați orele liniștite</string>
+    <string name="pref_lc_qh_ignore_title">Ignorați orele de liniște</string>
     <string name="pref_lc_qh_ignore_list_title">Pentru cuvinte cheie specifice</string>
-    <string name="pref_lc_qh_ignore_list_summary">Lista de cuvinte cheie separate pentru lista de cuvinte pentru a ignora orele linistite. Lăsați goală pentru toate notificările.</string>
+    <string name="pref_lc_qh_ignore_list_summary">Lista de cuvinte cheie separate prin virgulă pentru a ignora orele de linişte. Lăsați goală pentru toate notificările.</string>
 
     <!-- GB Actions: Quiet hours shortcut -->
-    <string name="shortcut_quiet_hours_toggle">Schimbați orele liniștite</string>
+    <string name="shortcut_quiet_hours_toggle">Schimbați orele de liniște</string>
 
     <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">Activați indicatorul H +</string>
+    <string name="pref_signal_cluster_hplus_title">Activați indicatorul H+</string>
     <string name="pref_signal_cluster_hplus_summary">Necesită repornire</string>
 
     <!-- Signal cluster: LTE/4G indicator style -->
     <string name="pref_signal_cluster_lte_style_title">Stilul indicatorului LTE</string>
-    <string name="sc_lte_style_default">Defectiune de sistem</string>
+    <string name="sc_lte_style_default">Implicit</string>
     <string name="sc_lte_style_lte">LTE</string>
     <string name="sc_lte_style_4g">4G</string>
 
     <!-- GB Actions: toggle airplane mode -->
-    <string name="shortcut_airplane_mode">Treceți în modul avion</string>
+    <string name="shortcut_airplane_mode">Comutare Mod avion</string>
 
     <!-- Statusbar BT icon visibility -->
-    <string name="pref_sb_bt_visibility_title">Vizibilitatea iconiței Bluetooth</string>
+    <string name="pref_sb_bt_visibility_title">Vizibilitatea pictogramei Bluetooth</string>
     <string name="sb_bt_default">Atunci când BT este activat (implicit)</string>
-    <string name="sb_bt_connected">Când este conectat BT</string>
-    <string name="sb_bt_hidden">Ascuns</string>
+    <string name="sb_bt_connected">Atunci când BT este conectat</string>
+    <string name="sb_bt_hidden">Ascunsă</string>
 
     <!-- Increasing ringtone volume -->
-    <string name="pref_increasing_ring_title">Cronograf în ascensiune</string>
-    <string name="increasing_ring_enable">Permite</string>
-    <string name="increasing_ring_min_volume_title">Ton de pornire volum</string>
-    <string name="increasing_ring_volume_notice">Observație: \ nDacă volumul de pornire este setat mai mare decât volumul soneriei, tonul de apel va fi redat utilizând volumul soneriei.</string>
-    <string name="increasing_ring_ramp_up_duration_title">Durată de răsturnare</string>
+    <string name="pref_increasing_ring_title">Ton de apel ascendent</string>
+    <string name="increasing_ring_enable">Pornit</string>
+    <string name="increasing_ring_min_volume_title">Volum de pornire</string>
+    <string name="increasing_ring_volume_notice">Observație:\nDacă volumul de pornire este setat mai mare decât volumul soneriei, tonul de apel va fi redat utilizând volumul soneriei.</string>
+    <string name="increasing_ring_ramp_up_duration_title">Durată de creştere</string>
     <string name="increasing_ring_interval_0">5 secunde</string>
     <string name="increasing_ring_interval_1">10 secunde</string>
     <string name="increasing_ring_interval_2">15 secunde</string>
@@ -1292,26 +1281,26 @@
     <string name="shortcut_ringer_mode">Setați modul soneriei</string>
 
     <!-- Data traffic monitor: Only for mobile data -->
-    <string name="pref_data_traffic_active_mobile_only_title">Datele mobile numai</string>
+    <string name="pref_data_traffic_active_mobile_only_title">Doar date mobile</string>
 
     <!-- Dashed circle battery style -->
-    <string name="battery_style_circle_dashed">Bateria cu cerc spart</string>
-    <string name="battery_style_circle_dashed_percent">Bateria cu cerc spart cu procentaj</string>
+    <string name="battery_style_circle_dashed">Cerc din puncte</string>
+    <string name="battery_style_circle_dashed_percent">Cerc din puncte cu procentaj</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Iti multumesc pentru sprijin. Funcțiile premium vor fi deblocate după ce sistemul va fi repornit.</string>
+    <string name="premium_unlocked_message">Îţi multumesc pentru sprijin. Funcțiile premium vor fi deblocate după ce sistemul va fi repornit.</string>
     <string name="pref_about_get_unlocker_title">Obțineți deblocator</string>
     <string name="pref_about_get_unlocker_summary">Nu aveți PayPal? Pur și simplu atingeți aici pentru a obține caracteristica de deblocare a caracteristicilor premium GravityBox din Magazinul Play.</string>
 
     <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Utilizați pictograma alternativă</string>
+    <string name="pref_navbar_custom_key_icon_title">Utilizați pictogramă alternativă</string>
 
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ignorați disponibilitatea datelor mobile</string>
     <string name="pref_smart_radio_mda_ignore_summary">Comută la modul normal chiar dacă datele mobile în prezent nu sunt disponibile</string>
 
     <!-- GB Actions: Toggle sync -->
-    <string name="shortcut_sync">Comutaţi sincronizarea</string>
+    <string name="shortcut_sync">Comutare sincronizare</string>
 
     <!-- UNC: timeout for Alert only once -->
     <string name="pref_lc_notif_sound_only_once_timeout_title">În intervalul de timp</string>
@@ -1320,7 +1309,7 @@
     <string name="pref_statusbar_clock_date_title">Afișați data</string>
 
     <!-- Delete -->
-    <string name="delete">Șterge</string>
+    <string name="delete">Ștergere</string>
 
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">Selecția pictogramelor anulată de aplicația vizată</string>
@@ -1344,22 +1333,22 @@
     <string name="pref_pie_control_mirrored_keys_title">Taste oglindite</string>
 
     <!-- Pie: center trigger -->
-    <string name="pref_pie_control_center_trigger_title">Centrul de declanșare</string>
-    <string name="pref_pie_control_center_trigger_summary">Declanșează placinta numai atunci când scutură din centrul marginii ecranului</string>
+    <string name="pref_pie_control_center_trigger_title">Declanșare de la centru</string>
+    <string name="pref_pie_control_center_trigger_summary">Declanșează evantaiul doar la glisarea din centrul marginii ecranului</string>
 
     <!-- Statusbar clock: date format options -->
-    <string name="clock_date_disabled">invalid</string>
-    <string name="clock_date_localized">Formatul de date bazat pe localizare</string>
-    <string name="clock_date_format_1">Formatul datei: zz ​​/ lm</string>
-    <string name="clock_date_format_2">Formatul datei: MM / dd</string>
+    <string name="clock_date_disabled">Dezactivat</string>
+    <string name="clock_date_localized">Formatul datei bazat pe setările locale</string>
+    <string name="clock_date_format_1">Formatul datei: dd​/MM</string>
+    <string name="clock_date_format_2">Formatul datei: MM/dd</string>
     <string name="clock_date_format_3">Formatul datei: d MMM</string>
     <string name="clock_date_format_4">Formatul datei: MMM d</string>
     <string name="clock_date_format_5">Formatul datei: d</string>
 
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">Acțiuni pentru căști</string>
-    <string name="pref_headset_action_plug_title">Pe setul cu cască conectat</string>
-    <string name="pref_headset_action_unplug_title">Pe căștile deconectate</string>
+    <string name="pref_headset_action_plug_title">La conectarea căştilor</string>
+    <string name="pref_headset_action_unplug_title">La deconectarea căştilor</string>
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Dezactivați vibrațiile de notificare</string>
@@ -1374,36 +1363,33 @@
     <string name="lc_heads_up_default">Mod implicit</string>
     <string name="lc_heads_up_always">Mereu</string>
     <string name="lc_heads_up_immersive">Când bara de stare este ascunsă</string>
-    <string name="lc_heads_up_off">de pe</string>
+    <string name="lc_heads_up_off">Oprit</string>
 
     <!-- Statusbar: notification heads up category -->
-    <string name="pref_cat_notif_heads_up_title">Notificările se îndreaptă spre cap</string>
-    <string name="pref_heads_up_master_switch_summary">Activează funcția extinsă de heads up. Când este activată, opțiunile suplimentare pe aplicație devin disponibile în cadrul controlului de notificare Ultimate. (Necesită repornire)</string>
+    <string name="pref_cat_notif_heads_up_title">Notificări Heads up</string>
+    <string name="pref_heads_up_master_switch_summary">Activează funcția extinsă Heads up. Când este activată, opțiunile suplimentare per aplicație devin disponibile în cadrul Gestiunii notificărilor. (Necesită repornire)</string>
     <string name="pref_heads_up_timeout_title">Pauză</string>
-    <string name="pref_heads_up_timeout_summary">Pentru cât timp să afișați fereastra de notificare. 0 = persistent.</string>
+    <string name="pref_heads_up_timeout_summary">Pentru cât timp se afișează fereastra de notificare. 0=permanent.</string>
 
     <!-- UNC HeadsUp category + additional options -->
-    <string name="pref_cat_lc_heads_up_title">Atenție</string>
+    <string name="pref_cat_lc_heads_up_title">Heads up</string>
     <string name="pref_lc_headsup_dnd_title">Nu deranja</string>
-    <string name="pref_lc_headsup_dnd_summary">Nu va afișa niciun heads-up în timp ce această aplicație se află în prim-plan</string>
+    <string name="pref_lc_headsup_dnd_summary">Nu se va afișa niciun heads-up în timp ce această aplicație se află în prim-plan</string>
 
     <!-- UNC Active Screen Mode -->
-    <string name="pref_lc_active_screen_mode_title">Mod ecran activ</string>
-    <string name="lc_active_screen_mode_disabled">invalid</string>
+    <string name="pref_lc_active_screen_mode_title">Mod Pornire ecran</string>
+    <string name="lc_active_screen_mode_disabled">Dezactivat</string>
     <string name="lc_active_screen_mode_nothing">Porniți numai ecranul</string>
 
     <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Parcurgeți ecranul</string>
+    <string name="qs_tile_remote_display">Proiectare ecran</string>
 
     <!-- UNC: main screen -->
-    <string name="pref_unc_default_settings_title">@ string / lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Gestionează setările implicite ale notificărilor pentru toate aplicațiile care nu au activat setările proprii pentru fiecare aplicație</string>
-    <string name="pref_unc_perapp_settings_title">Setările per-app</string>
+    <string name="pref_unc_perapp_settings_title">Setări per aplicaţie</string>
     <string name="pref_unc_perapp_settings_summary">Gestionează setările notificărilor în funcție de aplicație, înlocuind setările implicite</string>
-    <string name="pref_unc_active_screen_title">@ String / lc_active_screen</string>
-    <string name="pref_unc_active_screen_summary">Gestionează setările comune pentru funcția Ecran activ</string>
-    <string name="pref_unc_quiet_hours_title">@ string / lc_quiet_hours</string>
-    <string name="pref_unc_quiet_hours_summary">Gestionează ora nelimitată pentru notificări</string>
+    <string name="pref_unc_active_screen_summary">Gestionează setările comune pentru funcția Pornire ecran</string>
+    <string name="pref_unc_quiet_hours_summary">Gestionează orele de linişte pentru notificări</string>
 
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Acțiune personalizată</string>
@@ -1412,10 +1398,10 @@
     <string name="qs_tile_data_usage_2">Celular 2</string>
 
     <!-- Charger unplugged sound -->
-    <string name="pref_charger_unplugged_sound_title">Încărcătorul a deconectat sunetul</string>
+    <string name="pref_charger_unplugged_sound_title">Sunet de deconectare a încărcătorului</string>
 
     <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Profilul audio</string>
+    <string name="qs_tile_audio_profile">Profil audio</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Modificări specifice MTK</string>
@@ -1426,8 +1412,8 @@
     <string name="pref_mtk_fix_dev_opts_summary">Deblochează opțiunile avansate pentru dezvoltatori (necesită repornire)</string>
 
     <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Fixați setările de vorbire</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Deblochează setările pentru căutarea vocală și textul în vorbire în limbă și intrare (necesită repornire)</string>
+    <string name="pref_mtk_fix_tts_settings_title">Corectare setări de vorbire</string>
+    <string name="pref_mtk_fix_tts_settings_summary">Deblochează setările pentru Căutarea vocală și Text în vorbire în Limbă și introducere text (necesită repornire)</string>
 
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Alegeți imaginea utilizând</string>
@@ -1435,34 +1421,34 @@
     <string name="imgpick_crop_error">Eroare la decuparea imaginii</string>
 
     <!-- Proximity wake -->
-    <string name="pref_power_proximity_wake_title">Proba de trezire</string>
-    <string name="pref_power_proximity_wake_summary">Utilizați senzorul de proximitate pentru a vă ajuta să decideți dacă doriți să vă treziți dispozitivul</string>
+    <string name="pref_power_proximity_wake_title">Trezire cu senzorul de proximitate</string>
+    <string name="pref_power_proximity_wake_summary">Utilizați senzorul de proximitate pentru a ajuta la decizia de trezire a dispozitivului</string>
 
     <!-- Battery Charging LED -->
-    <string name="pref_charging_led_title">Indicator de încărcare a bateriei</string>
-    <string name="charging_led_default">Mod implicit</string>
-    <string name="charging_led_emulated">emulat</string>
+    <string name="pref_charging_led_title">LED încărcare baterie</string>
+    <string name="charging_led_default">Implicit</string>
+    <string name="charging_led_emulated">Emulat</string>
     <string name="charging_led_constant">Constant (necesită suport pentru LED-uri)</string>
-    <string name="charging_led_disabled">invalid</string>
+    <string name="charging_led_disabled">Dezactivat</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Setați zilele săptămânii</string>
 
     <!-- QuietHours: mute system sounds -->
-    <string name="pref_lc_qh_mute_system_sounds_title">Sunetul sonor al sistemului</string>
-    <string name="system_sound_dialpad">Dulapuri cu tastatură</string>
-    <string name="system_sound_touch">Atinge sunetele</string>
-    <string name="system_sound_screen_lock">Ecranul de blocare a ecranului</string>
+    <string name="pref_lc_qh_mute_system_sounds_title">Dezactivare sunete sistem</string>
+    <string name="system_sound_dialpad">Tonuri tastatură numerică</string>
+    <string name="system_sound_touch">Sunete la atingere</string>
+    <string name="system_sound_screen_lock">Sunet la blocarea ecranului</string>
     <string name="system_sound_charger">Sunetul încărcătorului GravityBox</string>
-    <string name="system_sound_ringer">Tonerul telefonului</string>
+    <string name="system_sound_ringer">Ton de apel</string>
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorați pentru apelurile primite</string>
 
     <!-- Status bar: show download progress -->
     <string name="pref_statusbar_download_progress_title">Bara de progres</string>
-    <string name="pref_statusbar_download_progress_summary">Afișează bara de progres în bara de stare pentru Managerul de descărcări Android standard, transferurile bluetooth și alte aplicații care au activat urmărirea bara de progres în Control final al notificărilor</string>
-    <string name="sb_download_progress_off">invalid</string>
+    <string name="pref_statusbar_download_progress_summary">Afișează bara de progres în bara de stare pentru Managerul de descărcări Android standard, transferurile bluetooth și alte aplicații care au activat urmărirea barei de progres în Gestiune notificări</string>
+    <string name="sb_download_progress_off">Dezactivat</string>
     <string name="sb_download_progress_top">Marginea superioară</string>
     <string name="sb_download_progress_bottom">Marginea de jos</string>
 
@@ -1471,133 +1457,133 @@
     <string name="pref_signal_cluster_hide_sim_labels_summary">Necesită repornire</string>
 
     <!-- Power menu: expanded desktop in power menu -->
-    <string name="pref_powermenu_expanded_desktop_title">Extensie desktop în meniul de alimentare</string>
+    <string name="pref_powermenu_expanded_desktop_title">Extindere desktop în meniul de alimentare</string>
     <string name="pref_powermenu_expanded_desktop_summary">Asigurați-vă că este disponibilă o metodă alternativă de dezactivare a desktopului extins!</string>
 
     <!-- QuickRecord tile settings -->
-    <string name="pref_cat_quickrecord_tile_title">Setările pentru plăcile QuickRecord</string>
+    <string name="pref_cat_quickrecord_tile_title">Setările pentru dalele Înregistrare rapidă</string>
     <string name="pref_quickrecord_quality_title">Calitate audio</string>
-    <string name="qr_audio_quality_low">Scăzut (16 kHz)</string>
-    <string name="qr_audio_quality_medium">Mediu (22 kHz)</string>
+    <string name="qr_audio_quality_low">Scăzută (16 kHz)</string>
+    <string name="qr_audio_quality_medium">Medie (22 kHz)</string>
     <string name="qr_audio_quality_high">Înaltă (44 kHz)</string>
     <string name="pref_quickrecord_autostop_title">Înregistrare automată</string>
-    <string name="pref_quickrecord_autostop_summary">Încetează înregistrarea automat după o anumită perioadă de timp. Setați la 0 pentru a dezactiva.</string>
+    <string name="pref_quickrecord_autostop_summary">Opreşte înregistrarea automat după o anumită perioadă de timp. Setați la 0 pentru a dezactiva.</string>
 
     <!-- Clear notifications shortcut -->
-    <string name="shortcut_clear_notifications">Eliminați notificările</string>
+    <string name="shortcut_clear_notifications">Înlăturare notificări</string>
 
     <!-- Toggle auto brightness shortcut -->
-    <string name="shortcut_auto_brightness">Comutați la luminozitatea automată</string>
+    <string name="shortcut_auto_brightness">Comutare luminozitate automată</string>
 
     <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Schimb de mesaje</string>
+    <string name="pref_cat_phone_messaging_title">Mesagerie</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">AVERTIZARE</string>
-    <string name="compat_warning_message">PENTRU UTILIZAREA NUMAI DEPOZITE DE EDITARE ANDROID UNMODIFICAT SAU DISPOZITIVE DE EDITARE GOOGLE PLAY! \ N \ nNu se folosesc alte ROM-uri de mare amploare, cum ar fi Touchwiz, Sense, Xperia, precum și pe orice ROM personalizat, și nu pot avea rezultate neașteptate. Continuați, apoi confirmați-vă pe propriul dvs. risc și fără a vă aștepta vreun sprijin. Pentru informații mai detaliate despre compatibilitate, consultați &lt;a href=\"http://forum.xda-developers.com/showthread.php?t=3251148\"&gt; firul de asistență la XDA &lt;/a&gt;.</string>
-    <string name="compat_warning_ok_stage1">O.K. Am înțeles.</string>
-    <string name="compat_warning_ok_stage2">Am reusit!</string>
+    <string name="compat_warning_message">PENTRU UTILIZAREA NUMAI PE ANDROID NEMODIFICAT SAU PE DISPOZITIVE GOOGLE PLAY!\n\nUtilizarea pe alte ROM-uri, cum ar fi Touchwiz, Sense, Xperia, precum și pe orice ROM personalizat, nu este susţinut şi poate cauza rezultate neașteptate. \n\nDacă continuați, o faceţi pe propriul dvs. risc și fără a vă aștepta la vreun suport. Pentru informații mai detaliate despre compatibilitate, consultați <a href="http://forum.xda-developers.com/showthread.php?t=3251148">Forumul de asistență XDA</a>.</string>
+    <string name="compat_warning_ok_stage1">OK. Am înțeles.</string>
+    <string name="compat_warning_ok_stage2">Am înțeles!</string>
 
     <!-- UNC Active screen: Pocket mode -->
     <string name="pref_unc_as_pocket_mode_title">Modul de buzunar</string>
     <string name="pref_unc_as_pocket_mode_summary">Nu se va activa ecranul când senzorul de proximitate este acoperit (de exemplu, când dispozitivul este în buzunar)</string>
-    <string name="pref_unc_as_pocket_mode_summary_overriden">Această opțiune este în prezent suprascrisă de funcția de avertizare Proximity în Power tweaks</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Această opțiune este în prezent suprascrisă de caracteristica de trezire Proximity în Setări alimentare</string>
 
     <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Mod de stânga</string>
-    <string name="pref_navbar_left_handed_summary">EXPERIMENTAL! Localizează bara verticală de navigare în partea stângă a ecranului în modul peisaj (necesită repornire)</string>
+    <string name="pref_navbar_left_handed_title">Pentru stângaci</string>
+    <string name="pref_navbar_left_handed_summary">EXPERIMENTAL! Poziţionează bara verticală de navigare în partea stângă a ecranului în modul peisaj (necesită repornire)</string>
 
     <!-- Hide launcher icon -->
-    <string name="pref_hide_launcher_icon_title">Ascundeți pictograma lansatorului</string>
+    <string name="pref_hide_launcher_icon_title">Ascundeți pictograma în lansator</string>
     <string name="pref_hide_launcher_icon_summary">Poate necesita repornirea lansatorului</string>
 
     <!-- Smart Radio: Adaptive delay for delayed power save -->
-    <string name="pref_smart_radio_adaptive_delay_title">Adaptivă întârziere</string>
-    <string name="pref_smart_radio_adaptive_delay_summary">Prelungește automat întârzierea în cazul în care traficul actual de date mobil depășește pragul definit (setat la 0 pentru a dezactiva)</string>
+    <string name="pref_smart_radio_adaptive_delay_title">Întârziere adaptivă</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">Prelungește automat întârzierea în cazul în care traficul actual de date mobil depășește pragul definit (Setaţi la 0 pentru a dezactiva)</string>
 
     <!-- UNC: Progress bar tracking -->
     <string name="pref_lc_progress_tracking_title">Urmărirea barei de progres</string>
-    <string name="pref_lc_progress_tracking_summary">Afișează bara de progres din bara de stare pentru notificările în desfășurare care conțin bara de progres. Necesită funcția de barieră de progres în blocurile de stare să fie activată.</string>
+    <string name="pref_lc_progress_tracking_summary">Afișează bara de progres în bara de stare pentru notificările în desfășurare care conțin bara de progres. Necesită activarea caracteristicii Bară de progres în Setările barei de stare.</string>
 
     <!-- Data traffic monitor: display mode -->
-    <string name="pref_data_traffic_display_mode_title">Modul de afișare</string>
+    <string name="pref_data_traffic_display_mode_title">Mod de afișare</string>
     <string name="dt_display_mode_always">Întotdeauna (când este disponibilă o conexiune la rețea)</string>
     <string name="dt_display_mode_dm">Numai pentru Managerul de descărcări Android</string>
-    <string name="dt_display_mode_pt">Când se afișează bara de progres din bara de stare</string>
+    <string name="dt_display_mode_pt">Când se afișează bara de progres în bara de stare</string>
 
     <!-- Wi-Fi priority -->
     <string name="pref_wifi_priority_title">Prioritate Wi-Fi</string>
-    <string name="pref_wifi_priority_summary">Specifică prioritatea rețelelor Wi-Fi</string>
+    <string name="pref_wifi_priority_summary">Specificaţi prioritatea rețelelor Wi-Fi</string>
 
     <!-- Battery bar -->
-    <string name="pref_cat_battery_bar_title">Bara de baterie</string>
+    <string name="pref_cat_battery_bar_title">Bară baterie</string>
     <string name="pref_battery_bar_show_title">Afișați bara bateriei</string>
     <string name="pref_battery_bar_position_title">Poziţie</string>
     <string name="bbar_position_top">Marginea superioară</string>
     <string name="bbar_position_bottom">Marginea de jos</string>
-    <string name="pref_battery_bar_margin_title">Marginea marginii</string>
+    <string name="pref_battery_bar_margin_title">Distanţa de la margine</string>
     <string name="pref_battery_bar_thickness_title">Grosime</string>
-    <string name="pref_battery_bar_charge_anim_title">Încărcarea animației</string>
+    <string name="pref_battery_bar_charge_anim_title">Animaţie de încărcare</string>
     <string name="pref_battery_bar_dynacolor_title">Culoare dinamică</string>
     <string name="pref_battery_bar_dynacolor_summary">Determină automat culoarea din nivelul curent al bateriei</string>
     <string name="pref_battery_bar_color_title">Culoare</string>
-    <string name="pref_battery_bar_color_low_title">Culoare slabă a bateriei</string>
+    <string name="pref_battery_bar_color_low_title">Culoare bateriei descărcată</string>
     <string name="pref_battery_bar_color_critical_title">Culoare baterie critică</string>
     <string name="pref_battery_bar_centered_title">Centrat</string>
-    <string name="pref_battery_bar_color_charging_title">Încărcarea culorilor</string>
+    <string name="pref_battery_bar_color_charging_title">Culoare încărcare</string>
 
     <!-- Status bar: progress bar -->
-    <string name="pref_statusbar_download_progress_mode_title">mod</string>
+    <string name="pref_statusbar_download_progress_mode_title">Mod</string>
     <string name="pref_statusbar_download_progress_animated_title">Animat</string>
     <string name="pref_statusbar_download_progress_centered_title">Centrat</string>
     <string name="pref_statusbar_download_progress_thickness_title">Grosime</string>
-    <string name="pref_statusbar_download_progress_margin_title">Marginea marginii</string>
+    <string name="pref_statusbar_download_progress_margin_title">Distanţa de la margine</string>
 
     <!-- Key actions: single-tap for menu button -->
-    <string name="hwkey_menu_singletap_dialog_title">Tasta de meniu cu o singură atingere</string>
+    <string name="hwkey_menu_singletap_dialog_title">Acţiune la o singură atingere a butonului Meniu</string>
 
     <!-- Key actions: single-tap for back button -->
-    <string name="hwkey_back_singletap_dialog_title">Înapoi acțiune cheie cu un singur buton</string>
+    <string name="hwkey_back_singletap_dialog_title">Acţiune la o singură atingere a butonului Înapoi</string>
 
     <!-- Key actions: double-tap for recents button -->
-    <string name="hwkey_recents_doubletap_dialog_title">Recită acțiunea dublă atingere</string>
+    <string name="hwkey_recents_doubletap_dialog_title">Acţiune la atingere dublă a butonului Recente</string>
 
     <!-- Tri state pref -->
-    <string name="state_default">Mod implicit</string>
+    <string name="state_default">Implicit</string>
     <string name="state_enabled">Activat</string>
-    <string name="state_disabled">invalid</string>
+    <string name="state_disabled">Dezactivat</string>
 
     <!-- Battery style: Stock battery with percentage -->
     <string name="battery_style_stock_percent">Baterie stoc cu procentaj</string>
 
     <!-- Battery percent text -->
-    <string name="battery_percent_text_statusbar_title">Afișați în bara de stare</string>
+    <string name="battery_percent_text_statusbar_title">Afișare în bara de stare</string>
     <string name="battery_percent_text_statusbar_summary">Afișează textul bateriei procentuale în bara de stare standard (când dispozitivul este deblocat)</string>
-    <string name="battery_percent_text_keyguard_title">Modul de protecție prin tastatură</string>
+    <string name="battery_percent_text_keyguard_title">Ecran blocat</string>
     <string name="battery_percent_text_keyguard_summary">Specifică comportamentul procentului de text în bara de stare a ecranului de blocare</string>
     <string name="keyguard_percent_text_default">Implicit (în timpul încărcării)</string>
-    <string name="keyguard_percent_text_show_always">Arata intotdeauna</string>
+    <string name="keyguard_percent_text_show_always">Arată întotdeauna</string>
     <string name="keyguard_percent_text_hide">Ascunde</string>
-    <string name="battery_percent_text_header_hide_title">Ascundeți în antetul barei de stare</string>
-    <string name="battery_percent_text_size_default">Mod implicit</string>
+    <string name="battery_percent_text_header_hide_title">Ascunde în antetul barei de stare</string>
+    <string name="battery_percent_text_size_default">Implicit</string>
 
     <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Folosiți icoane mai mari</string>
+    <string name="pref_navbar_larger_icons_title">Pictograme mai mari</string>
     <string name="pref_navbar_larger_icons_summary">Necesită repornire</string>
 
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Permiteți repornirea soft</string>
-    <string name="pref_reboot_allow_softreboot_summary">Rețineți că repornirea soft poate cauza probleme neașteptate de scurgere a bateriei sau de instabilitate. Cea mai bună practică este să utilizați întotdeauna repornirea normală.</string>
+    <string name="pref_reboot_allow_softreboot_summary">Rețineți că repornirea soft poate cauza probleme neașteptate de descărcare a bateriei sau de instabilitate. Cea mai bună practică este să utilizați întotdeauna repornirea normală.</string>
 
     <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Search bar visibility</string>
-    <string name="recents_searchbar_default">Mod implicit</string>
+    <string name="pref_recents_searchbar_title">Vizibilitatea barei de căutare</string>
+    <string name="recents_searchbar_default">Implicit</string>
     <string name="recents_searchbar_hide_keep_space">Ascundeți și păstrați spațiu</string>
     <string name="recents_searchbar_hide_remove_space">Ascundeți și eliminați spațiul</string>
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATENŢIE</string>
-    <string name="gb_new_package_dialog_message">GravityBox pentru Lollipop a fost instalat. Înainte ca noua versiune să poată fi utilizată, veche trebuie dezinstalată. Apăsați OK pentru a începe procesul de dezinstalare. După dezinstalare, nu uitați să activați modulul nou în Instalator Xposed și REBOOT IMMEDIATELLY.</string>
+    <string name="gb_new_package_dialog_message">GravityBox pentru Lollipop a fost instalat. Înainte ca noua versiune să poată fi utilizată, vechea versine trebuie dezinstalată. Apăsați OK pentru a începe procesul de dezinstalare. După dezinstalare, nu uitați să activați modulul nou în Xposed Installer și REPORNIRE IMEDIATĂ.</string>
 
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">Backup-ul realizat în versiunea mai veche a Android nu poate fi restabilit datorită diferențelor extinse ale sistemului de operare. Se recomandă foarte mult să configurați GravityBox de la zero.</string>
@@ -1614,29 +1600,29 @@
     <string name="pref_signal_cluster_narrow_summary">Reduce distanța între pictogramele de semnal</string>
 
     <!-- Navigation bar: hide IME switcher -->
-    <string name="pref_navbar_hide_ime_title">Ascunde comutatorul IME</string>
+    <string name="pref_navbar_hide_ime_title">Ascunde pictograma selectorului metodei de introdicere</string>
 
     <!-- Lockscreen: direct unlock -->
     <string name="pref_lockscreen_direct_unlock_title">Deblocare directă</string>
-    <string name="pref_lockscreen_direct_unlock_summary">Afișează provocarea de securitate direct atunci când ecranul se aprinde</string>
-    <string name="direct_unlock_off">de pe</string>
+    <string name="pref_lockscreen_direct_unlock_summary">Afișează metoda de deblocare direct atunci când ecranul se aprinde</string>
+    <string name="direct_unlock_off">Oprit</string>
     <string name="direct_unlock_standard">Standard</string>
-    <string name="direct_unlock_see_through">A vedea printre</string>
+    <string name="direct_unlock_see_through">Trasparent</string>
 
     <!-- UNC: Notification visibility -->
     <string name="pref_cat_lc_visibility_title">Vizibilitate</string>
     <string name="pref_lc_notif_visibility_title">Vizibilitatea conținutului</string>
-    <string name="pref_lc_notif_visibility_summary">Specifică vizibilitatea conținutului de notificare în ecranul de blocare securizat. Aplică numai când politica ecranului de blocare a conținutului sensibil de afișare este activă</string>
-    <string name="lc_notif_visibility_default">Mod implicit</string>
+    <string name="pref_lc_notif_visibility_summary">Specifică vizibilitatea conținutului de notificare în ecranul de blocare securizat. Se aplică numai când politica ecranului de blocare a conținutului sensibil de afișare este activă</string>
+    <string name="lc_notif_visibility_default">Implicit</string>
     <string name="lc_notif_visibility_public">Afișați tot conținutul</string>
     <string name="lc_notif_visibility_private">Ascundeți conținutul sensibil</string>
-    <string name="lc_notif_visibility_secret">Ascundeți notificarea</string>
+    <string name="lc_notif_visibility_secret">Ascundeți notificările</string>
 
     <!-- Cellular tile settings -->
-    <string name="pref_cat_qs_cell_tile_title">Setările plăcilor celulare</string>
+    <string name="pref_cat_qs_cell_tile_title">Setările dalelor celulare</string>
 
     <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Pictograma dezactivată de date</string>
+    <string name="pref_cell_tile_data_off_icon_title">Pictograma date dezactivate</string>
     <string name="pref_cell_tile_data_off_icon_summary">Afișează pictograma atunci când datele mobile sunt dezactivate</string>
 
     <!-- Lockscreen: app shortcuts -->
@@ -1645,66 +1631,66 @@
 
     <!-- Lockscreen: app shortcuts safe launch -->
     <string name="pref_lockscreen_shortcuts_safe_launch_title">Lansare sigură</string>
-    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Necesită atingerea de două ori pentru a lansa comenzi rapide care să împiedice lansarea accidentală a acestora, de exemplu, în timp ce dispozitivul este în buzunar</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Necesită atingerea de două ori pentru a lansa comenzile rapide, ceea ce împiedică lansarea accidentală a acestora, de exemplu, în timp ce dispozitivul este în buzunar</string>
 
     <!-- Lockscreen Smart unlock -->
-    <string name="pref_lockscreen_smart_unlock_title">Dezactivați inteligent</string>
+    <string name="pref_lockscreen_smart_unlock_title">Deblocare inteligentă</string>
     <string name="pref_lockscreen_smart_unlock_summary">Se deblochează automat atunci când politica curentă de blocare inteligentă detectează condiții de încredere</string>
 
     <!--  WiFi trusted networks -->
     <string name="wifi_trusted_info">Încredere în Smart Lock</string>
 
     <!-- QS: Battery tile settings -->
-    <string name="pref_cat_qs_battery_tile_title">Setările plăcii de baterie</string>
-    <string name="pref_battery_tile_percentage_title">Afișați procentajul</string>
+    <string name="pref_cat_qs_battery_tile_title">Setările dalei baterie</string>
+    <string name="pref_battery_tile_percentage_title">Afișare procentaj</string>
     <string name="pref_battery_tile_saver_indicate_title">Indicator economizor de baterie</string>
     <string name="pref_battery_tile_saver_indicate_summary">Utilizează aceeași culoare ca barele de sistem pentru a indica faptul că modul de economisire a bateriei este activ</string>
     <string name="pref_battery_tile_temp_unit_title">Unitate de temperatură</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
     <string name="pref_battery_tile_swap_actions_title">Schimbați acțiunile</string>
-    <string name="pref_battery_tile_swap_actions_summary">Schimbă acțiunile de tip single-press / long-press</string>
+    <string name="pref_battery_tile_swap_actions_summary">Schimbă acțiunile apăsare scurtă/apăsare lungă</string>
 
     <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Dezactivați indicația economizorului de baterie</string>
-    <string name="pref_battery_saver_indication_disable_summary">Dezactivează culoarea portocalie a barelor de sistem atunci când economizorul de baterie este activ</string>
+    <string name="pref_battery_saver_indication_disable_title">Dezactivați indicația economisirii de energie</string>
+    <string name="pref_battery_saver_indication_disable_summary">Dezactivează culoarea portocalie a barelor de sistem atunci când economisirea energiei este activă</string>
 
     <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Dezactivați semnele de exclamare</string>
+    <string name="pref_signal_cluster_dem_title">Dezactivare semne de exclamare</string>
     <string name="pref_signal_cluster_dem_summary">Necesită repornire</string>
 
     <!-- UNC: Disable sound to vibrate conversion -->
-    <string name="pref_lc_sound_vibrate_title">Dezactivați conversia sunetului la vibrații</string>
-    <string name="pref_lc_sound_vibrate_summary">Împiedică notificările cu vibrații oprite să nu fie forțate să vibreze în timpul modului soneriei cu vibrații</string>
+    <string name="pref_lc_sound_vibrate_title">Dezactivare conversie sunet în vibrații</string>
+    <string name="pref_lc_sound_vibrate_summary">Împiedică notificările cu vibrații oprite să fie forțate să vibreze în timpul modului Doar vibrații</string>
 
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Dezactivați vibrațiile dispozitivului</string>
-    <string name="pref_lc_qh_mute_system_vibe_summary">Dezactivează TOATE vibrațiile la nivel de sistem, inclusiv vibrațiile de notificare pe acest dispozitiv. Notificările privind dispozitivul Wear Android asociat pot vibra în continuare în cazul în care vibrațiile de notificare sunt activate.
+    <string name="pref_lc_qh_mute_system_vibe_summary">Dezactivează TOATE vibrațiile la nivel de sistem, inclusiv vibrațiile de notificare pe acest dispozitiv. Notificările pe dispozitivul Wear Android asociat pot vibra în continuare în cazul în care vibrațiile de notificare sunt activate.
     </string>
 
     <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Clar vizibil numai</string>
+    <string name="pref_recents_clear_all_visible_title">Eliminaţi doar pe cele vizibile</string>
 
     <!-- Lockscreen: doubletap to sleep -->
-    <string name="pref_lockscreen_dt2s_title">Atingeți de două ori pentru a adormi</string>
+    <string name="pref_lockscreen_dt2s_title">Atingeți de două ori pentru a închide ecranul</string>
 
     <!-- Status bar: disable peek -->
-    <string name="pref_statusbar_disable_peek_title">Dezactivați privirea</string>
-    <string name="pref_statusbar_disable_peek_summary">Nu se va extinde bara de stare pe touch-one</string>
+    <string name="pref_statusbar_disable_peek_title">Dezactivare \"Aruncă o privire\"</string>
+    <string name="pref_statusbar_disable_peek_summary">Nu se va extinde bara de stare la o singură apăsare</string>
 
     <!-- Status bar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Atingeți de două ori pentru a adormi</string>
-    <string name="pref_statusbar_dt2s_summary">Necesită ca peek să fie dezactivat</string>
+    <string name="pref_statusbar_dt2s_title">Atingeți de două ori pentru a opri ecranul</string>
+    <string name="pref_statusbar_dt2s_summary">Necesită ca \"Aruncă o privire\" să fie dezactivat</string>
 
     <!-- Pie trigger indicator -->
     <string name="pref_pie_control_trigind_title">Indicator declanșator</string>
     <string name="pref_pie_control_trigind_color_title">Culoarea indicatorului de declanșare</string>
 
     <!-- WiFi tile settings -->
-    <string name="pref_cat_qs_wifi_tile_title">Setări pentru plăcile WiFi</string>
+    <string name="pref_cat_qs_wifi_tile_title">Setări pentru dala WiFi</string>
 
     <!-- Bluetooth tile settings -->
-    <string name="pref_cat_qs_bt_tile_title">Setările plăcii BlueTooth</string>
+    <string name="pref_cat_qs_bt_tile_title">Setările dalei Bluetooth</string>
 
     <!-- MTK tiles: HotKnot -->
     <string name="qs_tile_hotknot">HotKnot</string>
@@ -1719,11 +1705,11 @@
 
     <!-- QS: tile options menu -->
     <string name="menu_tile_dual">Mod dual</string>
-    <string name="menu_tile_locked">Afișați în ecranul de blocare</string>
+    <string name="menu_tile_locked">Afișează în ecranul de blocare</string>
     <string name="menu_tile_locked_only">Doar în ecranul de blocare</string>
-    <string name="menu_tile_secured">Afișați ecranul de blocare securizat</string>
-    <string name="tile_hidden_locked">Ascuns de ecranul de blocare</string>
-    <string name="tile_hidden_secured">Ascuns de ecranul de blocare securizat</string>
+    <string name="menu_tile_secured">Afișează în ecranul de blocare securizat</string>
+    <string name="tile_hidden_locked">Ascuns în ecranul de blocare</string>
+    <string name="tile_hidden_secured">Ascuns în ecranul de blocare securizat</string>
     <string name="tile_shown_locked_only">Afișează numai în ecranul de blocare</string>
 
     <!-- Lockscreen: Direct unlock policy -->
@@ -1731,42 +1717,42 @@
 
     <!-- Permission denial message -->
     <string name="permission_denied_msg">Ați decis să renunțați la unele dintre permisiuni. Rețineți că acest lucru va împiedica funcționarea funcțiilor asociate.</string>
-    <string name="permission_denied_hide_title">Nu mai afișați din nou</string>
+    <string name="permission_denied_hide_title">Nu mai afișa din nou</string>
 
     <!-- Cellular tile Mobile data toggle -->
-    <string name="pref_cell_tile_data_toggle_title">Comutare de date mobile</string>
-    <string name="tile_data_toggle_disabled">invalid</string>
+    <string name="pref_cell_tile_data_toggle_title">Comutare date mobile</string>
+    <string name="tile_data_toggle_disabled">Dezactivat</string>
     <string name="tile_data_toggle_singlepress">La o singură apăsare</string>
     <string name="tile_data_toggle_longpress">La apăsare lungă</string>
 
     <!-- Lockscreen: Imprint mode -->
-    <string name="pref_lockscreen_imprint_mode_title">Modul de imprimare</string>
-    <string name="imprint_mode_default">Wake and deblock (implicit)</string>
-    <string name="imprint_mode_wake_only">Treziți numai</string>
+    <string name="pref_lockscreen_imprint_mode_title">Amprentă</string>
+    <string name="imprint_mode_default">Trezire şi deblocare (implicit)</string>
+    <string name="imprint_mode_wake_only">Doar trezire</string>
 
     <!-- Lockscreen: Bottom-left action -->
-    <string name="pref_lockscreen_bleft_action_title">Acțiunea din stânga-stânga</string>
-    <string name="pref_lockscreen_bright_action_title">Acțiunea de jos-dreapta</string>
+    <string name="pref_lockscreen_bleft_action_title">Comanda rapidă din stânga-jos</string>
+    <string name="pref_lockscreen_bright_action_title">Comanda rapidă din dreapta-jos</string>
 
     <!-- Lockscreen: Quick unlock PIN length -->
-    <string name="pref_lockscreen_pin_length_title">PIN lungime</string>
+    <string name="pref_lockscreen_pin_length_title">Lungime PIN</string>
     <string name="pref_lockscreen_pin_length_summary">Deblocarea rapidă trebuie să cunoască lungimea exactă a codului PIN pentru a funcționa în mod fiabil</string>
 
     <!-- Power: Camera vibration pattern -->
     <string name="pref_power_camera_vibrate_pattern_title">Modelul de vibrații al camerei</string>
-    <string name="pref_power_camera_vibrate_pattern_summary">Definește modelul de vibrație sub formă de listă separată de virgulă a perechilor de durată / decalare în milisecunde pentru camera lansată de la tasta de pornire. Lăsați goală pentru implicit. Setați la 0 pentru a dezactiva vibrațiile.</string>
+    <string name="pref_power_camera_vibrate_pattern_summary">Definește modelul de vibrație sub formă de listă separată prin virgulă a perechilor de durată pornit/oprit în milisecunde, pentru camera lansată de tasta de alimentare. Lăsați goală pentru implicit. Setați la 0 pentru a dezactiva vibrațiile.</string>
 
     <!-- QS: common quick mode option -->
     <string name="pref_tile_quick_mode_title">Activați modul rapid</string>
-    <string name="pref_tile_enabled_modes_title">Modurile activate</string>
+    <string name="pref_tile_enabled_modes_title">Moduri activate</string>
 
     <!-- DND tile settings -->
-    <string name="pref_cat_qs_dnd_tile_title">Nu deranjați setările plăcilor</string>
-    <string name="pref_dnd_tile_quick_mode_summary">Permite ciclismul prin modurile de alegere care nu au fost modificate pe un singur tip de tigla</string>
-    <string name="pref_dnd_tile_enabled_modes_summary">Seturi care nu deranjează modurile de trecere prin ciclu</string>
-    <string name="dnd_tile_em_priority">Numai pe prioritate</string>
+    <string name="pref_cat_qs_dnd_tile_title">Setările dalei Nu deranjați</string>
+    <string name="pref_dnd_tile_quick_mode_summary">Permite comutarea între modurile alese Nu deranjați la o singură apăsare pe dală</string>
+    <string name="pref_dnd_tile_enabled_modes_summary">Setaţi modurile Nu deranjaţi care vor fi comutate</string>
+    <string name="dnd_tile_em_priority">Numai prioritate</string>
     <string name="dnd_tile_em_alarms">Numai alarme</string>
-    <string name="dnd_tile_em_silence">Total tăcere</string>
+    <string name="dnd_tile_em_silence">Total silenţios</string>
     <string name="pref_dnd_tile_duration_mode_title">Durată predefinită</string>
     <string name="dnd_tile_dm_manual">Până la oprirea manuală</string>
     <string name="dnd_tile_dm_alarm">Până la următoarea alarmă</string>
@@ -1774,48 +1760,48 @@
     <string name="pref_dnd_tile_duration_title">Setați durata personalizată</string>
 
     <!-- Location tile (Slimkat) settings -->
-    <string name="pref_cat_qs_location_tile_title">Setările plăcii de amplasare (SlimKat)</string>
-    <string name="pref_location_tile_quick_mode_summary">Permite ciclismul prin modurile de localizare pe o singură apăsare</string>
+    <string name="pref_cat_qs_location_tile_title">Setările dalei de locaţie (SlimKat)</string>
+    <string name="pref_location_tile_quick_mode_summary">Permite comutarea între modurile de localizare printr-o singură apăsare</string>
 
     <!-- Cellular network modes -->
-    <string name="network_mode_0">GSM / WCDMA preferat (3G / 2G)</string>
+    <string name="network_mode_0">GSM/WCDMA preferat (3G/2G)</string>
     <string name="network_mode_1">Numai GSM (2G)</string>
     <string name="network_mode_2">Numai WCDMA (3G)</string>
-    <string name="network_mode_3">GSM / WCDMA auto (2G / 3G)</string>
-    <string name="network_mode_4">CDMA / EvDo auto (2G / 3G)</string>
+    <string name="network_mode_3">GSM/WCDMA auto (2G/3G)</string>
+    <string name="network_mode_4">CDMA/EvDo auto (2G/3G)</string>
     <string name="network_mode_5">Numai CDMA (2G)</string>
     <string name="network_mode_6">Numai EvDo (3G)</string>
-    <string name="network_mode_7">Global (2G / 3G)</string>
-    <string name="network_mode_8">LTE CDMA (4G / 2G / 3G)</string>
-    <string name="network_mode_9">LTE GSM (4G / 2G / 3G)</string>
-    <string name="network_mode_10">LTE Global (4G / 2G / 3G)</string>
+    <string name="network_mode_7">Global (2G/3G)</string>
+    <string name="network_mode_8">LTE CDMA (4G/2G/3G)</string>
+    <string name="network_mode_9">LTE GSM (4G/2G/3G)</string>
+    <string name="network_mode_10">LTE Global (4G/2G/3G)</string>
     <string name="network_mode_11">Numai LTE (4G)</string>
-    <string name="network_mode_12">LTE / WCDMA (4G / 3G)</string>
+    <string name="network_mode_12">LTE/WCDMA (4G/3G)</string>
     <string name="network_mode_13">Numai TD-SCDMA (3G)</string>
-    <string name="network_mode_14">TD-SCDMA / WCDMA (3G)</string>
-    <string name="network_mode_15">TD-SCDMA / LTE (4G / 3G)</string>
-    <string name="network_mode_16">TD-SCDMA / GSM (2G / 3G)</string>
-    <string name="network_mode_17">TD-SCDMA / LTE / GSM (4G / 2G / 3G)</string>
-    <string name="network_mode_18">TD-SCDMA / WCDMA / GSM (2G / 3G)</string>
-    <string name="network_mode_19">TD-SCDMA / LTE / WCDMA (4G / 3G)</string>
-    <string name="network_mode_20">TD-SCDMA / LTE / GSM / WCDMA (4G / 2G / 3G)</string>
-    <string name="network_mode_21">TD-SCDMA Global (2G / 3G)</string>
-    <string name="network_mode_22">TD-SCDMA LTE Global (4G / 2G / 3G)</string>
+    <string name="network_mode_14">TD-SCDMA/WCDMA (3G)</string>
+    <string name="network_mode_15">TD-SCDMA/LTE (4G/3G)</string>
+    <string name="network_mode_16">TD-SCDMA/GSM (2G/3G)</string>
+    <string name="network_mode_17">TD-SCDMA/LTE/GSM (4G/2G/3G)</string>
+    <string name="network_mode_18">TD-SCDMA/WCDMA/GSM (2G/3G)</string>
+    <string name="network_mode_19">TD-SCDMA/LTE/WCDMA (4G/3G)</string>
+    <string name="network_mode_20">TD-SCDMA/LTE/GSM/WCDMA (4G/2G/3G)</string>
+    <string name="network_mode_21">TD-SCDMA Global (2G/3G)</string>
+    <string name="network_mode_22">TD-SCDMA LTE Global (4G/2G/3G)</string>
     <string name="network_mode_unknown">Necunoscut</string>
 
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">Definește ce moduri de rețea ar trebui să fie suportate</string>
-    <string name="pref_nm_tile_quick_mode_summary">Permite ciclismul prin modurile de rețea selectate pe o singură apăsare</string>
+    <string name="pref_nm_tile_quick_mode_summary">Permite comutarea între modurile de rețea selectate printr-o singură apăsare</string>
 
     <!-- Ringer mode tile settings -->
-    <string name="pref_cat_qs_rm_tile_title">Setările pentru plăcile de mod Ringer</string>
-    <string name="pref_rm_tile_enabled_modes_summary">Definește ce moduri de apeluri trebuie să fie suportate</string>
-    <string name="pref_rm_tile_quick_mode_summary">Permite ciclismul prin modurile soneriei selectate pe o singură apăsare</string>
+    <string name="pref_cat_qs_rm_tile_title">Setările pentru dala Mod sonerie</string>
+    <string name="pref_rm_tile_enabled_modes_summary">Definește ce moduri de sonerie trebuie să fie suportate</string>
+    <string name="pref_rm_tile_quick_mode_summary">Permite comutarea între modurile soneriei selectate printr-o singură apăsare</string>
 
     <!-- Stay awake tile settings -->
-    <string name="pref_cat_qs_sa_tile_title">Păstrați setările de țigări treaz</string>
-    <string name="pref_sa_tile_enabled_modes_summary">Definește ce ecran trebuie să fie suportat</string>
-    <string name="pref_sa_tile_quick_mode_summary">Permite ciclului de navigare prin expirarea ecranului selectat pe un singur apăsați</string>
+    <string name="pref_cat_qs_sa_tile_title">Setările dalei Activ permanent</string>
+    <string name="pref_sa_tile_enabled_modes_summary">Definește durata de expirare a ecranului</string>
+    <string name="pref_sa_tile_quick_mode_summary">Permite comutarea între modurile de expirare a ecranului selectate printr-o singură apăsare</string>
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Politica de deblocare inteligentă</string>
@@ -1827,32 +1813,32 @@
     <string name="battery_percent_text_position_left">Lângă pictograma bateriei</string>
 
     <!-- Disable Imprint vibrations -->
-    <string name="pref_imprint_vibe_disable_title">Dezactivați vibrațiile imprimate</string>
+    <string name="pref_imprint_vibe_disable_title">Dezactivați vibrațiile amprentei</string>
     <string name="imprint_vibe_disable_success">La autentificarea cu succes</string>
     <string name="imprint_vibe_disable_error">La eroarea de autentificare</string>
 
     <!-- UNC: Vibrations replace mode -->
-    <string name="pref_lc_vibrate_replace_title">Înlocuiți vibrațiile originale</string>
-    <string name="pref_lc_vibrate_replace_summary">Aplică vibrații suprasolicitate numai în cazul în care notificarea originală are vibrații</string>
+    <string name="pref_lc_vibrate_replace_title">Înlocuire vibrații originale</string>
+    <string name="pref_lc_vibrate_replace_summary">Aplică înlocuirea vibrațiilor numai în cazul în care notificarea originală are vibrații</string>
 
     <!-- UNC: Sound replace mode -->
-    <string name="pref_lc_sound_replace_title">Înlocuiți sunetul original</string>
-    <string name="pref_lc_sound_replace_summary">Aplică sunet suprasolicitat numai în cazul în care notificarea originală are sunet</string>
+    <string name="pref_lc_sound_replace_title">Înlocuire sunet original</string>
+    <string name="pref_lc_sound_replace_summary">Aplică înlocuirea sunetului numai în cazul în care notificarea originală are sunet</string>
 
     <!-- Battery tile options -->
-    <string name="pref_battery_tile_temp_title">Afișați temperatura</string>
-    <string name="pref_battery_tile_voltage_title">Afișați tensiunea</string>
+    <string name="pref_battery_tile_temp_title">Afișare temperatură</string>
+    <string name="pref_battery_tile_voltage_title">Afișare tensiune</string>
 
     <!-- QS: Scale correction -->
-    <string name="pref_qs_scale_correction_title">Corectarea scalei</string>
+    <string name="pref_qs_scale_correction_title">Corectare scală</string>
 
     <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">Pauză</string>
+    <string name="qs_tile_timeout">Expirare</string>
 
     <!-- UNC: Notification lock screen visibility -->
-    <string name="pref_lc_notif_visibility_ls_title">Blocarea vizibilității ecranului</string>
-    <string name="lc_notif_visibility_ls_default">Mod implicit</string>
-    <string name="lc_notif_visibility_ls_clearable">Ascundeți notificările clarificabile</string>
+    <string name="pref_lc_notif_visibility_ls_title">Vizibilitate blocare ecran</string>
+    <string name="lc_notif_visibility_ls_default">Implicit</string>
+    <string name="lc_notif_visibility_ls_clearable">Ascundeți notificările ce pot fi eliminate</string>
     <string name="lc_notif_visibility_ls_persistent">Ascundeți notificările persistente</string>
     <string name="lc_notif_visibility_ls_all">Ascundeți toate notificările</string>
 
@@ -1861,77 +1847,77 @@
     <string name="pref_lc_notif_hide_persistent_summary">Ascunde toate notificările în curs și celelalte notificări care nu pot fi șterse din această aplicație</string>
 
     <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Clapete automate</string>
-    <string name="pref_navbar_autofade_keys_summary">Fade automat tastele după expirarea timpului. Setați la 0 pentru a dezactiva.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Arătați cheile pe</string>
-    <string name="autofade_show_keys_navbar">Bara de navigare atinge</string>
-    <string name="autofade_show_keys_screen">Ecran tactil</string>
+    <string name="pref_navbar_autofade_keys_title">Acundere taste automat</string>
+    <string name="pref_navbar_autofade_keys_summary">Ascunderea automată a tastelor după expirarea timpului. Setați la 0 pentru a dezactiva.</string>
+    <string name="pref_navbar_autofade_show_keys_title">Afişare taste la</string>
+    <string name="autofade_show_keys_navbar">Atingerea barei de navigare</string>
+    <string name="autofade_show_keys_screen">Atingerea ecranului</string>
 
     <!-- QS: StayAwake tile Auto-reset -->
-    <string name="pref_sa_tile_auto_reset_title">Auto-reset</string>
-    <string name="pref_sa_tile_auto_reset_summary">Setează automat intervalul de timp prestabilit al ecranului atunci când ecranul se oprește</string>
+    <string name="pref_sa_tile_auto_reset_title">Autoresetare</string>
+    <string name="pref_sa_tile_auto_reset_summary">Setează durata de expirare implicită a ecranului în mod automat atunci când ecranul se oprește</string>
 
     <!-- Lockscreen: PIN scramble -->
-    <string name="pref_lockscreen_pin_sramble_title">Codul PIN</string>
-    <string name="pref_lockscreen_pin_sramble_summary">Scanează codul PIN atunci când deblochează dispozitivul</string>
+    <string name="pref_lockscreen_pin_sramble_title">Amestecare PIN</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Amestecă codul PIN la deblocarea dispozitivului</string>
 
     <!-- UNC: LED DND -->
-    <string name="pref_lc_led_dnd_title">Nu deranja</string>
-    <string name="pref_lc_led_dnd_summary">Suprimă LED-ul pentru modurile \"Nu deranjați\"</string>
-    <string name="pref_lc_led_dnd_dialog_title">Alegeți pentru care nu deranjați modurile pentru a menține LED-ul oprit</string>
+    <string name="pref_lc_led_dnd_title">Nu deranjaţi</string>
+    <string name="pref_lc_led_dnd_summary">Suprimă LED-ul pentru modurile selectate \"Nu deranjați\"</string>
+    <string name="pref_lc_led_dnd_dialog_title">Alegeți pentru ce moduri \"Nu deranjați\" se menține LED-ul oprit</string>
 
     <!-- WiFi shortcut -->
-    <string name="wifi_on">WiFi conectat</string>
-    <string name="wifi_off">WiFi dezactivat</string>
+    <string name="wifi_on">WiFi pornit</string>
+    <string name="wifi_off">WiFi oprit</string>
 
     <!-- Airplane mode shortcut -->
-    <string name="airplane_mode_on">Modul Avion activat</string>
+    <string name="airplane_mode_on">Modul avion pornit</string>
     <string name="airplane_mode_off">Modul avionul oprit</string>
 
     <!-- Autobrightness mode shortcut -->
-    <string name="autobrightness_on">Luminozitatea automată este activă</string>
-    <string name="autobrightness_off">Luminozitatea automată este dezactivată</string>
+    <string name="autobrightness_on">Luminozitatea automată este pornită</string>
+    <string name="autobrightness_off">Luminozitatea automată este oprită</string>
 
     <!-- Bluetooth shortcut -->
-    <string name="bluetooth_on">Bluetooth activat</string>
-    <string name="bluetooth_off">Bluetooth dezactivat</string>
+    <string name="bluetooth_on">Bluetooth pornit</string>
+    <string name="bluetooth_off">Bluetooth oprit</string>
 
     <!-- Expanded desktop shortcut -->
-    <string name="expanded_desktop_on">A expirat spațiul de lucru pe desktop</string>
-    <string name="expanded_desktop_off">Extindeți desktopul oprit</string>
+    <string name="expanded_desktop_on">Desktop extins activat</string>
+    <string name="expanded_desktop_off">Desktop extins dezactivat</string>
 
     <!-- Mobile data shortcut -->
-    <string name="mobile_data_on">Date despre mobil pe</string>
-    <string name="mobile_data_off">Datele mobile sunt dezactivate</string>
+    <string name="mobile_data_on">Date mobile activate</string>
+    <string name="mobile_data_off">Datele mobile dezactivate</string>
 
     <!-- NGC shortcut -->
-    <string name="nfc_on">NFC activat</string>
+    <string name="nfc_on">NFC pornit</string>
     <string name="nfc_off">NFC oprit</string>
 
     <!-- Quiet hours shortcut -->
-    <string name="quiet_hours_on">Timp liniștit</string>
-    <string name="quiet_hours_off">S-au lăsat ore libere</string>
-    <string name="quiet_hours_auto">Timp de lucru liniștit</string>
-    <string name="quiet_hours_wear">Modul de uzură</string>
+    <string name="quiet_hours_on">Ore de linişte activate</string>
+    <string name="quiet_hours_off">Ore de linişte dezactivate</string>
+    <string name="quiet_hours_auto">Ore de linişte automate</string>
+    <string name="quiet_hours_wear">Modul Android Wear</string>
 
     <!-- Auto rotation shortcut -->
-    <string name="auto_rotation_on">Rotirea automată este activată</string>
-    <string name="auto_rotation_off">Rotirea automată este dezactivată</string>
+    <string name="auto_rotation_on">Rotire automată activată</string>
+    <string name="auto_rotation_off">Rotire automată dezactivată</string>
 
     <!-- Smart radio shortcut -->
-    <string name="smart_radio_on">Smart radio pornit</string>
-    <string name="smart_radio_off">Smart radio dezactivat</string>
+    <string name="smart_radio_on">Radio inteligent pornit</string>
+    <string name="smart_radio_off">Radio inteligent oprit</string>
 
     <!-- Sync shortcut -->
-    <string name="sync_on">Sincronizată</string>
-    <string name="sync_off">Sincronizați-vă</string>
+    <string name="sync_on">Sincronizare pornită</string>
+    <string name="sync_off">Sincronizare oprită</string>
 
     <!-- Hotspot shortcut -->
-    <string name="hotspot_on">Hotspot pe</string>
+    <string name="hotspot_on">Hotspot pornit</string>
     <string name="hotspot_off">Hotspot oprit</string>
 
     <!-- Statusbar: Hide vibrate icon -->
-    <string name="pref_sb_hide_vibrate_icon_title">Ascundeți pictograma vibratoare</string>
+    <string name="pref_sb_hide_vibrate_icon_title">Ascundeți pictograma vibrare</string>
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Afișați mesajul de stare</string>
@@ -2006,8 +1992,8 @@
     <string name="finger">Deget</string>
     <string name="pref_cat_fingerprint_launcher_quick_tap_title">Atingeți rapid acțiunea</string>
     <string name="pref_fingerprint_launcher_pause_title">Pauză</string>
-    <string name="pref_fingerprint_launcher_pause_summary">Întrerupe lansatorul până la oprirea / deschiderea ecranului următor. Utilizați aplicația în cazul în care o altă aplicație are nevoie de senzor pentru o perioadă mai lungă de timp, de exemplu, în timpul înregistrării amprentelor digitale.</string>
-    <string name="fingerprint_launcher_paused">Lansatorul a fost întrerupt până la oprirea / deschiderea ecranului următor</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Întrerupe lansatorul până la oprirea/deschiderea ecranului următor. Utilizați aplicația în cazul în care o altă aplicație are nevoie de senzor pentru o perioadă mai lungă de timp, de exemplu, în timpul înregistrării amprentelor digitale.</string>
+    <string name="fingerprint_launcher_paused">Lansatorul a fost întrerupt până la oprirea/deschiderea ecranului următor</string>
     <string name="pref_fingerprint_launcher_show_toast_title">Afișați mesaje de stare</string>
     <string name="pref_fingerprint_launcher_show_toast_summary">Fie pentru a afișa mesaje de stare sub formă de pâine prăjită</string>
 
@@ -2027,8 +2013,8 @@
     <string name="qs_tile_op3t_powersaving">OP3T Economie de energie</string>
 
     <!-- Lockscreen shorcuts: Show badges -->
-    <string name="pref_lockscreen_shortcuts_show_badges_title">Arătați insigne</string>
-    <string name="pref_lockscreen_shortcuts_show_badges_summary">Afișează insigne care conțin număr de notificări</string>
+    <string name="pref_lockscreen_shortcuts_show_badges_title">Afişare insigne</string>
+    <string name="pref_lockscreen_shortcuts_show_badges_summary">Afișează insigne care conțin numărul de notificări</string>
 
     <!-- Clock: Show seconds -->
     <string name="pref_statusbar_clock_show_seconds_title">Afișați secunde</string>
@@ -2043,16 +2029,16 @@
 
     <!-- Unlocker policy check feedback -->
     <string name="msg_unlocker_missing">Imposibil de contactat GravityBox Unlocker pentru a efectua verificarea licenței</string>
-    <string name="msg_unlocker_old">Versiunea dvs. de GravityBox Unlocker pare a fi depășită. Te rog actualizează.</string>
+    <string name="msg_unlocker_old">Versiunea dvs. de GravityBox Unlocker pare a fi depășită. Actualizaţi.</string>
     <string name="msg_unlocker_error">Eroare neașteptată la contactarea GravityBox Unlocker</string>
 
     <!-- Lockscreen: hide bottom actions -->
-    <string name="pref_lockscreen_bottom_actions_hide_title">Ascundeți acțiunile de jos</string>
-    <string name="bottom_action_left">Ascundeți acțiunea din stânga</string>
-    <string name="bottom_action_right">Ascundeți acțiunea potrivită</string>
+    <string name="pref_lockscreen_bottom_actions_hide_title">Ascundeți comenzile rapide de jos</string>
+    <string name="bottom_action_left">Ascundeți comanda rapidă din stânga</string>
+    <string name="bottom_action_right">Ascundeți comanda rapidă din dreapta</string>
 
     <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Vezi prin transparență</string>
+    <string name="pref_lockscreen_direct_unlock_trans_level_title">Vizualizare prin transparență</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Alegeți SIM-ul implicit pentru apeluri</string>
