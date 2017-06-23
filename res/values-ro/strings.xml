@@ -732,46 +732,47 @@
     <string name="pref_cat_battery_settings_title">"Setările bateriei"</string>
 
     <!-- Cursor control in navigation bar -->
-    <string name="pref_navbar_cursor_control_title">"Clape de control cursor"</string>
-    <string name="pref_navbar_cursor_control_summary">"Permite tastele de control cursor în bara de navigare în timp ce tastatura se afișează"</string>
+    <string name="pref_navbar_cursor_control_title">"Taste control cursor"</string>
+    <string name="pref_navbar_cursor_control_summary">"Activează tastele de control ale cursorului în bara de navigare în timp ce tastatura se afișează"</string>
 
     <!-- Volume rocker wake -->
-    <string name="pref_volume_rocker_wake_title">"Trezirea volumului rocker"</string>
-    <string name="volume_rocker_wake_default">"Defectiune de sistem"</string>
+    <string name="pref_volume_rocker_wake_title">"Trezire cu butoanele de volum"</string>
+    <string name="volume_rocker_wake_default">"Implicit"</string>
     <string name="volume_rocker_wake_enabled">"Activat"</string>
-    <string name="volume_rocker_wake_disabled">"invalid"</string>
+    <string name="volume_rocker_wake_disabled">"Dezactivat"</string>
 
     <!-- Advanced reboot menu: require confirmation -->
-    <string name="pref_reboot_confirm_required_title">"Solicitați confirmarea de repornire"</string>
+    <string name="pref_reboot_confirm_required_title">"Solicită confirmarea repornirii"</string>
 
     <!-- Tiles: Hide on change -->
-    <string name="pref_qs_hide_on_change_title">"Ascundeți pe schimbare"</string>
-    <string name="pref_qs_hide_on_change_summary">"Colaborează automat bara de stare pe tigla cu un singur clic. Se aplică la plăci simple cu 2 stări."</string>
+    <string name="pref_qs_hide_on_change_title">"Ascunde la schimbare"</string>
+    <string name="pref_qs_hide_on_change_summary">"Restrânge automat bara de stare la apăsarea unei dale.
+        Se aplică la dale simple cu 2 stări."</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">"Meniu de alimentare"</string>
-    <string name="pref_cat_power_other_title">"Alte"</string>
+    <string name="pref_cat_power_other_title">"Altele"</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">"Permiteți repornirea pe lockscreen"</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">"Permite repornirea în blocarea ecranului"</string>
 
     <!-- Data traffic monitor enhancements -->
-    <string name="pref_data_traffic_inactivity_mode_title">"Modul de inactivitate"</string>
-    <string name="inactivity_mode_default">"Mod implicit"</string>
-    <string name="inactivity_mode_hide">"Ascundeți pe inactivitate"</string>
-    <string name="inactivity_mode_summary">"Afișați rezumatul și ascundeți-l pe inactivitate"</string>
+    <string name="pref_data_traffic_inactivity_mode_title">"Mod inactivitate"</string>
+    <string name="inactivity_mode_default">"Implicit"</string>
+    <string name="inactivity_mode_hide">"Ascundeți la inactivitate"</string>
+    <string name="inactivity_mode_summary">"Afișați rezumatul și ascundeți la inactivitate"</string>
 
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">"Setări ale tastelor personalizate"</string>
-    <string name="pref_navbar_custom_key_enable_title">"Activați cheia personalizată"</string>
+    <string name="pref_navbar_custom_key_enable_title">"Activați tasta personalizată"</string>
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">"Setările clusterului de semnal"</string>
-    <string name="pref_signal_cluster_data_activity_title">"Activați activitatea de date"</string>
+    <string name="pref_signal_cluster_data_activity_title">"Activați activitatea datelor"</string>
     <string name="pref_signal_cluster_data_activity_summary">"Indică activitatea de date pe pictogramele mobile și WiFi (necesită repornire)"</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
-    <string name="hwkey_action_auto_rotation">"Comutați rotația automată"</string>
+    <string name="hwkey_action_auto_rotation">"Comutați rotirea automată"</string>
     <string name="hwkey_action_auto_rotation_enabled">"Rotirea automată este activată"</string>
     <string name="hwkey_action_auto_rotation_disabled">"Rotirea automată este dezactivată"</string>
 
@@ -799,66 +800,66 @@
 
     <!-- Location mode shortcut -->
     <string name="shortcut_location_mode">"Setați modul de localizare"</string>
-    <string name="location_mode_high_accuracy">"Precizie mare"</string>
-    <string name="location_mode_battery_saving">"Economie de baterie"</string>
+    <string name="location_mode_high_accuracy">"Precizie ridicată"</string>
+    <string name="location_mode_battery_saving">"Economisire baterie"</string>
     <string name="location_mode_device_only">"Doar dispozitiv"</string>
-    <string name="location_mode_off">"Locația este oprită"</string>
+    <string name="location_mode_off">"Locație oprită"</string>
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">"Comutați NFC"</string>
 
     <!-- Pie category summary -->
-    <string name="pie_control_summary">"Conține setările legate de plăcintă"</string>
+    <string name="pie_control_summary">"Conține setările legate de Evantai"</string>
 
     <!-- Shortcut for Google Now -->
     <string name="shortcut_google_now">"Google Now"</string>
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">"Opacitatea fundalului"</string>
-    <string name="pref_lockscreen_bg_opacity_summary">"Se aplică doar imaginii de fundal și a artei albumului"</string>
+    <string name="pref_lockscreen_bg_opacity_summary">"Se aplică doar imaginii de fundal și a copertei albumului"</string>
 
     <!-- GB Actions: Media control shorctut -->
-    <string name="shortcut_media_control">"Controlul media"</string>
-    <string name="shortcut_media_play_pause">"Redare / pauză"</string>
+    <string name="shortcut_media_control">"Control media"</string>
+    <string name="shortcut_media_play_pause">"Redare/pauză"</string>
     <string name="shortcut_media_previous">"Anterior"</string>
-    <string name="shortcut_media_next">"Următor →"</string>
+    <string name="shortcut_media_next">"Următor"</string>
 
     <!-- Battery percent text: charging indication -->
     <string name="battery_percent_text_charging_title">"Indicație de încărcare"</string>
-    <string name="bpt_charging_none">"Nici unul"</string>
-    <string name="bpt_charging_static">"Static"</string>
-    <string name="bpt_charging_animated">"Animat"</string>
+    <string name="bpt_charging_none">"Niciuna"</string>
+    <string name="bpt_charging_static">"Statică"</string>
+    <string name="bpt_charging_animated">"Animată"</string>
 
     <!-- QuickApp Tile #2 -->
-    <string name="pref_cat_quickapp_tile_2_title">"Setările QuickApp tile 2"</string>
+    <string name="pref_cat_quickapp_tile_2_title">"Setări Aplicaţie rapidă dala 2"</string>
     <string name="qs_tile_quickapp_2">"Aplicație rapidă 2"</string>
 
     <!-- Force music volume control -->
     <string name="pref_vol_force_music_control_title">"Forțați controlul volumului media"</string>
-    <string name="pref_vol_force_music_control_summary">"Când este activată, tastele de volum controlează volumul media în loc de volumul soneriei"</string>
+    <string name="pref_vol_force_music_control_summary">"Când este activat, tastele de volum controlează volumul media în loc de volumul soneriei"</string>
 
     <!-- Misc tweaks: category for recents panel related tweaks -->
-    <string name="pref_cat_misc_recents_panel_title">"Panoul recente"</string>
+    <string name="pref_cat_misc_recents_panel_title">"Panou recente"</string>
 
     <!-- Misc tweaks: category for other settings -->
-    <string name="pref_cat_misc_other_title">"Alte setari"</string>
+    <string name="pref_cat_misc_other_title">"Alte setări"</string>
 
     <!-- Disable fullscreen keyboard -->
-    <string name="pref_ime_fullscreen_disable_title">"Dezactivați tastatura ecran complet"</string>
+    <string name="pref_ime_fullscreen_disable_title">"Dezactivați tastatura în ecran complet"</string>
 
     <!-- Torch auto-off -->
-    <string name="pref_torch_auto_off_title">"Autofiletorul este oprit"</string>
-    <string name="pref_torch_auto_off_summary">"Opreste torta dupa o anumita perioada de timp. Setați la 0 pentru a dezactiva (nu se recomandă)"</string>
+    <string name="pref_torch_auto_off_title">"Oprire automată lanternă"</string>
+    <string name="pref_torch_auto_off_summary">"Opreşte lanterna după o anumită perioadă de timp. Setați la 0 pentru a dezactiva (nu se recomandă)"</string>
 
     <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">"Reorientați tastele de volum"</string>
+    <string name="pref_vol_swap_keys_title">"Reorientare taste de volum"</string>
     <string name="pref_vol_swap_keys_summary">"Schimbați tastele de volum atunci când ecranul este rotit"</string>
 
     <!-- Lockscreen: custom background blur effect -->
-    <string name="pref_lockscreen_bg_blur_effect_title">"Blur efect"</string>
+    <string name="pref_lockscreen_bg_blur_effect_title">"Efect blurare"</string>
 
     <!-- Force overflow menu button -->
-    <string name="pref_force_overflow_menu_button_title">"Butonul de meniu pentru supratensiune"</string>
+    <string name="pref_force_overflow_menu_button_title">"Afişare a 3 puncte pentru meniu"</string>
     <string name="pref_force_overflow_menu_button_summary">"Necesită repornire"</string>
 
     <!-- Navbar custom key: swap with menu key -->
@@ -866,51 +867,52 @@
 
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">"Nedefinit"</string>
-    <string name="pref_cat_smart_radio_title">"Smart radio"</string>
-    <string name="pref_smart_radio_enable_summary">"Aceasta va schimba automat radioul în modul de economisire a energiei definit de utilizator sau în modul normal, în funcție de starea conexiunilor mobile și a conexiunilor WiFi (necesită repornire)"</string>
+    <string name="pref_cat_smart_radio_title">"Radio inteligent"</string>
+    <string name="pref_smart_radio_enable_summary">"Aceasta va schimba automat radioul în modul de economisire a energiei definit de utilizator sau în modul normal,
+        în funcție de starea conexiunilor mobile și a conexiunilor WiFi (necesită repornire)"</string>
     <string name="pref_smart_radio_normal_mode_title">"Mod de rețea normal"</string>
     <string name="pref_smart_radio_power_saving_mode_title">"Mod de rețea de economisire a energiei"</string>
-    <string name="pref_smart_radio_screen_off_title">"Când ecranul se oprește"</string>
-    <string name="pref_smart_radio_screen_off_summary">"Activează modul de economisire a energiei când ecranul se oprește, indiferent dacă datele mobile sunt activate sau dezactivate"</string>
+    <string name="pref_smart_radio_screen_off_title">"Când ecranul se închide"</string>
+    <string name="pref_smart_radio_screen_off_summary">"Activează modul de economisire a energiei când ecranul se închide, indiferent dacă datele mobile sunt activate sau dezactivate"</string>
     <string name="pref_smart_radio_ignore_locked_title">"Ignorați când este blocat"</string>
-    <string name="pref_smart_radio_ignore_locked_summary">"Când ecranul se activează, modul de economisire a energiei nu va fi dezactivat până când tastatura nu este deblocată"</string>
+    <string name="pref_smart_radio_ignore_locked_summary">"Când ecranul se activează, modul de economisire a energiei nu va fi dezactivat până când dispozitivul nu este deblocat"</string>
     <string name="pref_smart_radio_mode_change_delay_title">"Modificarea întârzierii modului de rețea"</string>
     <string name="pref_smart_radio_mode_change_delay_summary">"Întârzie modificarea modului de rețea cu un număr specificat de secunde"</string>
 
     <!-- Lockscreen: custom carrier text -->
-    <string name="pref_lockscreen_carrier_text_title">"Textul operatorului de transport personalizat"</string>
-    <string name="carrier_text_default">"Mod implicit"</string>
+    <string name="pref_lockscreen_carrier_text_title">"Text personalizat al operatorului"</string>
+    <string name="carrier_text_default">"Implicit"</string>
     <string name="carrier_text_empty">"Gol"</string>
 
     <!-- Battery charged sound -->
-    <string name="pref_battery_charged_sound_title">"Baterie încărcată cu baterie"</string>
+    <string name="pref_battery_charged_sound_title">"Sunet baterie încărcată"</string>
 
     <!-- Pie long-press actions -->
-    <string name="pref_cat_pie_long_press_title">"Acționați acțiuni îndelungate"</string>
-    <string name="pref_pie_back_longpress_title">"Cheia înapoi"</string>
-    <string name="pref_pie_home_longpress_title">"Cheia de la domiciliu"</string>
-    <string name="pref_pie_recents_longpress_title">"Cheie recente"</string>
-    <string name="pref_pie_search_longpress_title">"Tasta de căutare"</string>
-    <string name="pref_pie_menu_longpress_title">"Tasta de meniu"</string>
-    <string name="pref_pie_app_longpress_title">"Tasta lansatorului de aplicații"</string>
+    <string name="pref_cat_pie_long_press_title">"Acțiune apăsare lungă"</string>
+    <string name="pref_pie_back_longpress_title">"Butonul Înapoi"</string>
+    <string name="pref_pie_home_longpress_title">"Butonul Acasă"</string>
+    <string name="pref_pie_recents_longpress_title">"Butonul Recente"</string>
+    <string name="pref_pie_search_longpress_title">"Butonul Căutare"</string>
+    <string name="pref_pie_menu_longpress_title">"Butonul Meniu"</string>
+    <string name="pref_pie_app_longpress_title">"Tasta Lansatorului de aplicații"</string>
 
     <!-- Translucent decor options -->
-    <string name="pref_translucent_decor_title">"Decorul translucid"</string>
-    <string name="pref_translucent_decor_default">"Defectiune de sistem"</string>
+    <string name="pref_translucent_decor_title">"Decor translucid"</string>
+    <string name="pref_translucent_decor_default">"Implicit"</string>
     <string name="pref_translucent_decor_enabled">"Activat"</string>
-    <string name="pref_translucent_decor_disabled">"invalid"</string>
+    <string name="pref_translucent_decor_disabled">"Dezactivat"</string>
 
     <!-- Pulse notification delay -->
-    <string name="pref_pulse_notification_delay_title">"Întârziere în notificarea impulsului"</string>
+    <string name="pref_pulse_notification_delay_title">"Întârzierea pulsării de notificare"</string>
     <string name="pref_pulse_notification_delay_summary">"Necesită repornire"</string>
 
     <!-- Powe menu: disable on lockscreen -->
-    <string name="pref_powermenu_disable_on_lockscreen_title">"Dezactivați meniul de alimentare din ecranul de blocare"</string>
+    <string name="pref_powermenu_disable_on_lockscreen_title">"Dezactivați meniul de alimentare în ecranul de blocare"</string>
 
     <!-- Extended force overflow menu button option -->
-    <string name="overflow_menu_default">"Defectiune de sistem"</string>
-    <string name="overflow_menu_enabled">"Activați forța"</string>
-    <string name="overflow_menu_disabled">"Forța dezactivează"</string>
+    <string name="overflow_menu_default">"Implicit"</string>
+    <string name="overflow_menu_enabled">"Activați forțat"</string>
+    <string name="overflow_menu_disabled">"Dezactivaţi forţat"</string>
 
     <!-- Key Action: Take screenshot -->
     <string name="hwkey_action_screenshot">"Faceți captură de ecran"</string>
@@ -919,22 +921,23 @@
     <string name="hwkey_action_volume_panel">"Afișați panoul de volum"</string>
 
     <!-- Blur effect intensity -->
-    <string name="pref_lockscreen_bg_blur_intensity_title">"Blur efect intensitate"</string>
+    <string name="pref_lockscreen_bg_blur_intensity_title">"Intensitate efect blurare"</string>
 
     <!-- Smart radio: independent delay for screen off power save event -->
-    <string name="pref_smart_radio_screen_off_delay_title">"Întârziere de economisire a energiei"</string>
-    <string name="pref_smart_radio_screen_off_delay_summary">"Întârzierile trec la modul de economisire a energiei când ecranul se oprește. Suprascrie întârzierea modificării modului implicit de rețea dacă valoarea este diferită de zero."</string>
+    <string name="pref_smart_radio_screen_off_delay_title">"Întârziere economisire a energiei"</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">"Întârzie trecerea la modul de economisire a energiei când ecranul se oprește.
+        Suprascrie întârzierea modificării modului implicit de rețea dacă valoarea este diferită de zero."</string>
 
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">"Setări de rezervă"</string>
-    <string name="pref_settings_restore_title">"Restaurați setările"</string>
-    <string name="settings_backup_failed">"Backup nu a reușit"</string>
+    <string name="pref_settings_restore_title">"Restabiliţi setările"</string>
+    <string name="settings_backup_failed">"rezervare nereușită"</string>
     <string name="settings_backup_no_prefs">"Fișierul de preferințe nu a fost găsit"</string>
-    <string name="settings_backup_success">"Backup reușit"</string>
-    <string name="settings_restore_no_backup">"Nu există copii de rezervă pentru a fi restaurate"</string>
-    <string name="settings_restore_confirm">"Preferințele dvs. actuale vor fi înlocuite. Esti sigur?"</string>
+    <string name="settings_backup_success">"rezervare reușită"</string>
+    <string name="settings_restore_no_backup">"Nu există copii de rezervă pentru a fi restabilite"</string>
+    <string name="settings_restore_confirm">"Preferințele dvs. actuale vor fi înlocuite. Sunteţi sigur?"</string>
     <string name="settings_restore_failed">"Restabilirea nu a reușit"</string>
-    <string name="settings_restore_success">"Restaurați cu succes"</string>
+    <string name="settings_restore_success">"Restabilire cu succes"</string>
     <string name="settings_restore_reboot">"Vă rugăm să reporniți dispozitivul"</string>
 
     <!-- Web service client strings -->
@@ -960,7 +963,7 @@
 
     <!-- Pie: long press delay -->
     <string name="pref_pie_longpress_delay_title">"Întârzierea apăsării lungi"</string>
-    <string name="pie_longpress_delay_default">"Defectiune de sistem"</string>
+    <string name="pie_longpress_delay_default">"Implicit"</string>
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">"Sertar de lansare"</string>
@@ -975,25 +978,25 @@
 
     <!-- Icon picker -->
     <string name="icon_picker_choose_icon_title">"Alegeți pictograma"</string>
-    <string name="shortcuts_icon_picker_alarm">"Alarma"</string>
+    <string name="shortcuts_icon_picker_alarm">"Alarmă"</string>
     <string name="shortcuts_icon_picker_andy">"Andy"</string>
     <string name="shortcuts_icon_picker_battery">"Baterie"</string>
     <string name="shortcuts_icon_picker_browser">"Browser"</string>
     <string name="shortcuts_icon_picker_calendar">"Calendar"</string>
-    <string name="shortcuts_icon_picker_camera">"aparat foto"</string>
-    <string name="shortcuts_icon_picker_cloud">"Nor"</string>
-    <string name="shortcuts_icon_picker_contact">"a lua legatura"</string>
-    <string name="shortcuts_icon_picker_directdial">"Apelare directa"</string>
+    <string name="shortcuts_icon_picker_camera">"Cameră"</string>
+    <string name="shortcuts_icon_picker_cloud">"Cloud"</string>
+    <string name="shortcuts_icon_picker_contact">"Contact"</string>
+    <string name="shortcuts_icon_picker_directdial">"Apel direct"</string>
     <string name="shortcuts_icon_picker_directmessage">"Mesaj direct"</string>
-    <string name="shortcuts_icon_picker_drive">"Conduce"</string>
-    <string name="shortcuts_icon_picker_dropbox">"dropbox"</string>
+    <string name="shortcuts_icon_picker_drive">"Condus"</string>
+    <string name="shortcuts_icon_picker_dropbox">"Dropbox"</string>
     <string name="shortcuts_icon_picker_email">"E-mail"</string>
-    <string name="shortcuts_icon_picker_email2">"Trimiteți un e-mail alternativ"</string>
+    <string name="shortcuts_icon_picker_email2">"E-mail alternativ"</string>
     <string name="shortcuts_icon_picker_evernote">"Evernote"</string>
     <string name="shortcuts_icon_picker_facebook">"Facebook"</string>
     <string name="shortcuts_icon_picker_favorite">"Favorit"</string>
-    <string name="shortcuts_icon_picker_file_browser">"Browser de fișiere"</string>
-    <string name="shortcuts_icon_picker_file_browser2">"File Browser Alternate"</string>
+    <string name="shortcuts_icon_picker_file_browser">"Manager de fișiere"</string>
+    <string name="shortcuts_icon_picker_file_browser2">"Manager de fișiere alternativ"</string>
     <string name="shortcuts_icon_picker_fitness">"Fitness"</string>
     <string name="shortcuts_icon_picker_gallery">"Galerie"</string>
     <string name="shortcuts_icon_picker_gears">"Gears"</string>
@@ -1002,10 +1005,10 @@
     <string name="shortcuts_icon_picker_gtalk">"Hangouts"</string>
     <string name="shortcuts_icon_picker_help">"Ajutor"</string>
     <string name="shortcuts_icon_picker_joystick">"Joystick"</string>
-    <string name="shortcuts_icon_picker_key">"Taste / Conturi"</string>
+    <string name="shortcuts_icon_picker_key">"Taste/Conturi"</string>
     <string name="shortcuts_icon_picker_laptop">"Laptop"</string>
-    <string name="shortcuts_icon_picker_notes">"notițe"</string>
-    <string name="shortcuts_icon_picker_luggage">"Voiaj"</string>
+    <string name="shortcuts_icon_picker_notes">"Note"</string>
+    <string name="shortcuts_icon_picker_luggage">"Călătorii"</string>
     <string name="shortcuts_icon_picker_maps">"Hărți"</string>
     <string name="shortcuts_icon_picker_market">"Piaţă"</string>
     <string name="shortcuts_icon_picker_movie">"Filme"</string>
@@ -1013,8 +1016,8 @@
     <string name="shortcuts_icon_picker_nav">"Navigare"</string>
     <string name="shortcuts_icon_picker_phone">"Telefon"</string>
     <string name="shortcuts_icon_picker_package">"Pachet"</string>
-    <string name="shortcuts_icon_picker_pinterest">"pinterest"</string>
-    <string name="shortcuts_icon_picker_play">"a juca"</string>
+    <string name="shortcuts_icon_picker_pinterest">"Pinterest"</string>
+    <string name="shortcuts_icon_picker_play">"Redare"</string>
     <string name="shortcuts_icon_picker_pocket">"Buzunar"</string>
     <string name="shortcuts_icon_picker_quicksettings">"Setări rapide"</string>
     <string name="shortcuts_icon_picker_rss">"RSS Feed"</string>
@@ -1024,14 +1027,14 @@
     <string name="shortcuts_icon_picker_tasks">"Sarcini"</string>
     <string name="shortcuts_icon_picker_terminal">"Terminal"</string>
     <string name="shortcuts_icon_picker_transit">"Tranzit"</string>
-    <string name="shortcuts_icon_picker_tv">"televizor"</string>
-    <string name="shortcuts_icon_picker_twitter">"Stare de nervozitate"</string>
-    <string name="shortcuts_icon_picker_unlock">"descuia"</string>
+    <string name="shortcuts_icon_picker_tv">"TV"</string>
+    <string name="shortcuts_icon_picker_twitter">"Twitter"</string>
+    <string name="shortcuts_icon_picker_unlock">"Deblocare"</string>
 
     <!-- Quick settings: Auto-switch extended -->
-    <string name="qs_auto_switch_disabled">"invalid"</string>
+    <string name="qs_auto_switch_disabled">"Dezactivat"</string>
     <string name="qs_auto_switch_mode1">"Când nu există nicio notificare"</string>
-    <string name="qs_auto_switch_mode2">"Când nu există notificări clare"</string>
+    <string name="qs_auto_switch_mode2">"Când nu există notificări permanente"</string>
 
     <!-- Notification drawer: expand all notifications -->
     <string name="pref_notif_expand_all_title">"Extindeți toate notificările"</string>
@@ -1039,15 +1042,15 @@
 
     <!-- Animation scales -->
     <string name="animation_scale0">"Animație dezactivată"</string>
-    <string name="animation_scale1">"Scală de animație .25x"</string>
-    <string name="animation_scale2">"Scală de animație .5x"</string>
-    <string name="animation_scale3">"Scală de animație 1x"</string>
-    <string name="animation_scale4">"Scală de animație 1,5x"</string>
-    <string name="animation_scale5">"Scală de animație 2x"</string>
-    <string name="animation_scale6">"Scală de animație 5x"</string>
-    <string name="animation_scale7">"Scală de animație 10x"</string>
-    <string name="animation_scale8">"Scală de animație .75x"</string>
-    <string name="animation_scale9">"Scală de animație 1,25x"</string>
+    <string name="animation_scale1">"Scară de animație .25x"</string>
+    <string name="animation_scale2">"Scară de animație .5x"</string>
+    <string name="animation_scale3">"Scară de animație 1x"</string>
+    <string name="animation_scale4">"Scară de animație 1,5x"</string>
+    <string name="animation_scale5">"Scară de animație 2x"</string>
+    <string name="animation_scale6">"Scară de animație 5x"</string>
+    <string name="animation_scale7">"Scară de animație 10x"</string>
+    <string name="animation_scale8">"Scară de animație .75x"</string>
+    <string name="animation_scale9">"Scară de animație 1,25x"</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">"Eticheta stilului de etichetă"</string>
@@ -1066,7 +1069,7 @@
     <string name="stay_awake_5m">"5m"</string>
     <string name="stay_awake_10m">"10m"</string>
     <string name="stay_awake_30m">"30m"</string>
-    <string name="stay_awake_on">"Stai treaz"</string>
+    <string name="stay_awake_on">"Activ permanent"</string>
 
     <!-- Screen recording options -->
     <string name="pref_cat_screenrecord_options_title">"Înregistrare pe ecran"</string>
@@ -2076,15 +2079,15 @@
     <string name="shortcut_sm_data_sim_ui">"Alegeți SIM pentru date"</string>
 
     <!-- QuickApp Tile #3 and #4 -->
-    <string name="pref_cat_quickapp_tile_3_title">"Setările pentru dala 3 QuickApp"</string>
+    <string name="pref_cat_quickapp_tile_3_title">"Setări Aplicaţie rapidă dala 3"</string>
     <string name="qs_tile_quickapp_3">"Aplicația rapidă 3"</string>
-    <string name="pref_cat_quickapp_tile_4_title">"Setările QuickApp 4"</string>
+    <string name="pref_cat_quickapp_tile_4_title">"Setări Aplicaţie rapidă dala 4"</string>
     <string name="qs_tile_quickapp_4">"Aplicația rapidă 4"</string>
 
     <!-- QS Bluetooth Tethering tile -->
-    <string name="qs_tile_bt_tethering">"Bluetooth Tethering"</string>
-    <string name="qs_tile_bt_tethering_on">"Tethering On"</string>
-    <string name="qs_tile_bt_tethering_off">"Tethering Off"</string>
+    <string name="qs_tile_bt_tethering">"Tethering Bluetooth"</string>
+    <string name="qs_tile_bt_tethering_on">"Tethering pornit"</string>
+    <string name="qs_tile_bt_tethering_off">"Tethering oprit"</string>
     <string name="qs_tile_bt_tethering_error">"Eroare"</string>
 
 </resources>
