@@ -15,7 +15,7 @@
 
     <string name="app_name">GravityBox [MM]</string>
 
-    <string name="battery_style_title">Indicatorul stilului bateriei</string>	
+    <string name="battery_style_title">Indicatorul stilului bateriei</string>
     <string name="battery_style_stock">Stoc</string>
     <string name="battery_style_circle">Baterie circulară</string>
     <string name="battery_style_circle_percent">Cerc cu procentaj</string>
@@ -29,7 +29,7 @@
     <string name="low_battery_warning_nonintrusive">Non-intruziv</string>
     <string name="low_battery_warning_off">Dezactivat</string>
 
-    <string name="reboot_required">Schimbarea va fi aplicată după repornire</string>
+    <string name="reboot_required">Modificarea va fi aplicată după repornire</string>
 
     <string name="poweroff_advanced_title">Meniul repornire avansat</string>
     <string name="poweroff_advanced_summary">Activează meniul de repornire avansată cu opțiuni pentru a reporni în recuperare</string>
@@ -51,8 +51,8 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sincronizare activată</string>
     <string name="quick_settings_sync_off">Sincronizare dezactivată</string>
-    <string name="quick_settings_torch_on">Lanterna este aprinsă</string>
-    <string name="quick_settings_torch_off">Lanterna este oprită</string>
+    <string name="quick_settings_torch_on">Lanternă pornită</string>
+    <string name="quick_settings_torch_off">Lanternă oprită</string>
     <string name="quick_settings_qr_playing">Redare…</string>
     <string name="quick_settings_qr_recording">Înregistrare…</string>
     <string name="quick_settings_qr_recorded">Înregistrat</string>
@@ -78,7 +78,7 @@
     <string name="quick_settings_quiet_hours_off">Ore de linişte oprite</string>
     <string name="quick_settings_quiet_hours_on">Ore de linişte pornite</string>
     <string name="quick_settings_quiet_hours_auto">Ore de linişte automate</string>
-    <string name="quick_settings_quiet_hours_wear">Mod purtare</string>
+    <string name="quick_settings_quiet_hours_wear">Mod Android Wear</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Bară de stare</string>
@@ -220,9 +220,9 @@
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Acțiunile butoanelor de navigare</string>
     <string name="pref_cat_hwkey_actions_summary">Permite setarea acțiunilor personalizate pentru botoanele de navigare (hardware și software)</string>
-    <string name="hwkey_menu_longpress_dialog_title">Acţiune la apăsarea lungă a tastei Meniu</string>
-    <string name="hwkey_menu_doubletap_dialog_title">Acţiune la apăsarea dublă a tastei Meniu</string>
-    <string name="hwkey_back_longpress_dialog_title">Acţiune la apăsarea lungă a tastei Înapoi</string>
+    <string name="hwkey_menu_longpress_dialog_title">Acţiune la apăsarea lungă a butonului Meniu</string>
+    <string name="hwkey_menu_doubletap_dialog_title">Acţiune la apăsarea dublă a butonului Meniu</string>
+    <string name="hwkey_back_longpress_dialog_title">Acţiune la apăsarea lungă a butonului Înapoi</string>
     <string name="hwkey_action_default">Implicit</string>
     <string name="hwkey_action_search">Căutare</string>
     <string name="hwkey_action_voice_search">Căutare vocală</string>
@@ -395,7 +395,7 @@
     <string name="pref_alarm_icon_hide_title">Ascundeți pictograma de alarmă</string>
 
     <!-- Screen dim level -->
-    <string name="pref_screen_dim_level_title">Nivelul de atenuare luminozităţii ecranului</string>
+    <string name="pref_screen_dim_level_title">Nivelul de atenuare a luminozităţii ecranului</string>
     <string name="pref_screen_dim_level_summary">Nivelul de luminozitate pentru starea întunecată - când ecranul este pe punctul de a fi oprit (necesită repornire)</string>
 
     <!-- Device type -->
@@ -1289,7 +1289,7 @@
 
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">Îţi multumesc pentru sprijin. Funcțiile premium vor fi deblocate după ce sistemul va fi repornit.</string>
-    <string name="pref_about_get_unlocker_title">Obțineți deblocator</string>
+    <string name="pref_about_get_unlocker_title">Obțineți GB Unlocker</string>
     <string name="pref_about_get_unlocker_summary">Nu aveți PayPal? Pur și simplu atingeți aici pentru a obține caracteristica de deblocare a caracteristicilor premium GravityBox din Magazinul Play.</string>
 
     <!-- Navbar custom key: alternate icon -->
@@ -1924,18 +1924,18 @@
 
     <!-- Xperia tiles -->
     <string name="qs_tile_xperia_sync">Xperia Auto-sincronizare date</string>
-    <string name="qs_tile_xperia_roaming">Xperia Data roaming</string>
+    <string name="qs_tile_xperia_roaming">Xperia roaming de date</string>
     <string name="qs_tile_xperia_nfc">Xperia NFC</string>
     <string name="qs_tile_xperia_lte">Xperia LTE</string>
-    <string name="qs_tile_xperia_datatraffic">Datele Xperia Mobile</string>
-    <string name="qs_tile_xperia_screenmirroring">Xperia Screen mirroring</string>
-    <string name="qs_tile_xperia_throw">Xperia Arunca</string>
+    <string name="qs_tile_xperia_datatraffic">Date mobile Xperia</string>
+    <string name="qs_tile_xperia_screenmirroring">Xperia difuzare ecran</string>
+    <string name="qs_tile_xperia_throw">Xperia Throw</string>
     <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
     <string name="qs_tile_xperia_tethering">Xperia Tethering</string>
-    <string name="qs_tile_xperia_detectusbdevice">Xperia Detect device USB</string>
+    <string name="qs_tile_xperia_detectusbdevice">Xperia Detectare dispozitiv USB</string>
 
     <!-- Navbar custom key icon style -->
-    <string name="pref_navbar_custom_key_icon_style_title">Stil de stil</string>
+    <string name="pref_navbar_custom_key_icon_style_title">Stil pictogramă</string>
     <string name="ncki_icon_style1">6 puncte</string>
     <string name="ncki_icon_style2">3 puncte</string>
     <string name="ncki_icon_style3">Transparent</string>
@@ -1945,28 +1945,28 @@
     <string name="custom_image_failure">Setarea imaginii personalizate a eșuat</string>
 
     <!-- Key actions: allow volume rocker wake when music active -->
-    <string name="pref_volume_rocker_wake_allow_music_title">Permiteți trezirea când muzica este activă</string>
+    <string name="pref_volume_rocker_wake_allow_music_title">Permite trezirea când este redată muzica</string>
 
     <!-- Turn off -->
     <string name="turn_off">Opriți</string>
 
     <!-- Force AOSP -->
-    <string name="pref_force_aosp_title">Forța AOSP</string>
+    <string name="pref_force_aosp_title">Forțare AOSP</string>
     <string name="pref_force_aosp_summary">Tratează sistemul ca AOSP. Utilizați în cazul în care dispozitivul dvs. este identificat ca fiind un sistem de marcă care rulează, în ciuda faptului că acesta rulează de fapt sistem alternativ bazat pe AOSP (necesită repornire)</string>
 
     <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Sunet de încărcare fără fir</string>
-    <string name="stock_wireless_sound">Baterie fără fir</string>
+    <string name="pref_charger_plugged_sound_wireless_title">Sunet încărcător fără fir</string>
+    <string name="stock_wireless_sound">Sunet stoc</string>
 
     <!-- QS: Moto Data tile -->
     <string name="qs_tile_moto_data">Date (Moto)</string>
 
     <!-- Dialer category -->
-    <string name="pref_cat_phone_dialer_title">Dialer</string>
+    <string name="pref_cat_phone_dialer_title">Taste numerice</string>
 
     <!-- QS: Brightness control -->
     <string name="pref_qs_brightness_icon_title">Afișați pictograma luminozității</string>
-    <string name="pref_qs_brightness_icon_summary">Afișează pictograma care indică modul luminos curent. Comută luminozitatea adaptivă la apăsarea unică, deschide setările de afișare la apăsarea lungă.</string>
+    <string name="pref_qs_brightness_icon_summary">Afișează pictograma care indică modul luminozităţii curente. Comută luminozitatea adaptivă la o apăsare, deschide setările de afișare la o apăsare lungă.</string>
 
     <!-- UNC: Active screen: Ignore updated notifications -->
     <string name="pref_lc_active_screen_ignore_update_title">Ignorați notificările actualizate</string>
@@ -1977,47 +1977,47 @@
     <string name="pref_lc_led_ignore_update_summary">Nu va activa LED-ul pentru notificarea existentă deja văzută de utilizator atunci când este actualizată</string>
 
     <!-- HW Key Actions: expand quick settings -->
-    <string name="hwkey_action_expand_quicksettings">Extindeți panoul QuickSettings</string>
+    <string name="hwkey_action_expand_quicksettings">Extindere panou Setări rapide</string>
 
     <!-- Fingeprint launcher -->
-    <string name="pref_cat_fingerprint_launcher_title">Amortizor de amprentă</string>
-    <string name="pref_cat_fingerprint_launcher_summary">Permite lansarea aplicației sau acțiunii utilizând senzorul de amprentă digitală atunci când ecranul este pornit și dispozitivul este deblocat</string>
-    <string name="pref_fingerprint_launcher_enable_summary">Activează sau dezactivează funcția de lansare a amprentelor digitale (necesită repornire)</string>
+    <string name="pref_cat_fingerprint_launcher_title">Lansator de amprentă</string>
+    <string name="pref_cat_fingerprint_launcher_summary">Permite lansarea aplicației sau acțiunii utilizând senzorul de amprentă atunci când ecranul este pornit și dispozitivul este deblocat</string>
+    <string name="pref_fingerprint_launcher_enable_summary">Activează sau dezactivează funcția de lansare cu senzorul de amprentă (necesită repornire)</string>
     <string name="pref_fingerprint_launcher_app_title">Alegeți o aplicație sau o acțiune</string>
-    <string name="fingerprint_auth_failed">Autentificare esuata</string>
-    <string name="fingerprint_sensor_unavail">Senzorul de amprentă digitală a devenit indisponibil</string>
-    <string name="fingerprint_sensor_locked">Senzorul de amprentă digitală este blocat din cauza prea multor erori de autentificare. Încercarea de a reporni în 35 de secunde.</string>
-    <string name="fingerprint_no_app">Nu a fost atribuită nicio acțiune / acțiune</string>
-    <string name="pref_cat_fingerprint_launcher_fingers_title">Acțiuni pe deget</string>
+    <string name="fingerprint_auth_failed">Autentificare eşuată</string>
+    <string name="fingerprint_sensor_unavail">Senzorul de amprentă a devenit indisponibil</string>
+    <string name="fingerprint_sensor_locked">Senzorul de amprentă este blocat din cauza prea multor erori de autentificare. Încercare de a reporni în 35 de secunde.</string>
+    <string name="fingerprint_no_app">Nu a fost atribuită nicio aplicaţie/acțiune</string>
+    <string name="pref_cat_fingerprint_launcher_fingers_title">Acțiuni per deget</string>
     <string name="finger">Deget</string>
-    <string name="pref_cat_fingerprint_launcher_quick_tap_title">Atingeți rapid acțiunea</string>
+    <string name="pref_cat_fingerprint_launcher_quick_tap_title">Acțiunea la atingere rapidă</string>
     <string name="pref_fingerprint_launcher_pause_title">Pauză</string>
-    <string name="pref_fingerprint_launcher_pause_summary">Întrerupe lansatorul până la oprirea/deschiderea ecranului următor. Utilizați aplicația în cazul în care o altă aplicație are nevoie de senzor pentru o perioadă mai lungă de timp, de exemplu, în timpul înregistrării amprentelor digitale.</string>
-    <string name="fingerprint_launcher_paused">Lansatorul a fost întrerupt până la oprirea/deschiderea ecranului următor</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Întrerupe lansatorul până la oprirea/deschiderea următoare a ecranului. Utilizați în cazul în care o altă aplicație are nevoie de senzor pentru o perioadă mai lungă de timp, de exemplu, în timpul înregistrării amprentelor digitale.</string>
+    <string name="fingerprint_launcher_paused">Lansatorul a fost întrerupt până la oprirea/deschiderea următoare a ecranului</string>
     <string name="pref_fingerprint_launcher_show_toast_title">Afișați mesaje de stare</string>
-    <string name="pref_fingerprint_launcher_show_toast_summary">Fie pentru a afișa mesaje de stare sub formă de pâine prăjită</string>
+    <string name="pref_fingerprint_launcher_show_toast_summary">Afișează mesaje de stare sub formă de toast-uri</string>
 
     <!-- Action: toggle/expand/collapse notification panel -->
-    <string name="notification_panel_toggle">Comutați panoul de notificări</string>
-    <string name="notification_panel_collapse">Reduceți panoul de notificare</string>
+    <string name="notification_panel_toggle">Comutare panou de notificări</string>
+    <string name="notification_panel_collapse">Restrângere panou de notificări</string>
 
     <!-- Action: toggle/expand/collapse QS panel -->
-    <string name="qs_panel_toggle">Comutați panoul QuickSettings</string>
-    <string name="qs_panel_collapse">Reduceți panoul QuickSettings</string>
+    <string name="qs_panel_toggle">Comutare panou Setări rapide</string>
+    <string name="qs_panel_collapse">Restrângere panou Setări rapide</string>
 
     <!-- QS: OP3T tiles -->
-    <string name="qs_tile_op3t_night_mode">OP3T Modul de noapte</string>
+    <string name="qs_tile_op3t_night_mode">Modul de noapte OP3T</string>
     <string name="qs_tile_op3t_buttons">Butoane OP3T</string>
-    <string name="qs_tile_op3t_vpn">OPN VPN</string>
+    <string name="qs_tile_op3t_vpn">OP3T VPN</string>
     <string name="qs_tile_op3t_dataswitch">Comutator de date OP3T</string>
-    <string name="qs_tile_op3t_powersaving">OP3T Economie de energie</string>
+    <string name="qs_tile_op3t_powersaving">Economisire energie OP3T</string>
 
     <!-- Lockscreen shorcuts: Show badges -->
     <string name="pref_lockscreen_shortcuts_show_badges_title">Afişare insigne</string>
     <string name="pref_lockscreen_shortcuts_show_badges_summary">Afișează insigne care conțin numărul de notificări</string>
 
     <!-- Clock: Show seconds -->
-    <string name="pref_statusbar_clock_show_seconds_title">Afișați secunde</string>
+    <string name="pref_statusbar_clock_show_seconds_title">Afișare secunde</string>
 
     <!-- ProgressBar: Sounds -->
     <string name="pref_cat_statusbar_download_progress_sounds_title">Sunete</string>
