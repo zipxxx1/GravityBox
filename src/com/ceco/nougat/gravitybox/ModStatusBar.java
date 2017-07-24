@@ -344,9 +344,9 @@ public class ModStatusBar {
             return;
 
         try {
-            Object header = XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
-            View timeView = (View) XposedHelpers.getObjectField(header,
-                    Utils.isSamsungRom() ? "mDate" : "mTime");
+            ViewGroup header = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
+            int resId = mContext.getResources().getIdentifier("clock", "id", PACKAGE_NAME);
+            View timeView = header.findViewById(resId);
             if (timeView != null) {
                 timeView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -586,11 +586,11 @@ public class ModStatusBar {
             XposedHelpers.findAndHookMethod(phoneStatusBarPolicyClass, "updateAlarm", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    Object sbService = XposedHelpers.getObjectField(param.thisObject, "mService");
-                    if (sbService != null) {
+                    Object iconCtrl = XposedHelpers.getObjectField(param.thisObject, "mIconController");
+                    if (iconCtrl != null) {
                         AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
                         boolean alarmSet = (alarmManager.getNextAlarmClock() != null);
-                        XposedHelpers.callMethod(sbService, "setIconVisibility", "alarm_clock",
+                        XposedHelpers.callMethod(iconCtrl, "setIconVisibility", "alarm_clock",
                                 (alarmSet && !mAlarmHide));
                     }
                 }
@@ -974,7 +974,7 @@ public class ModStatusBar {
                 });
                 if (!Utils.isOxygenOs35Rom()) {
                     XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
-                            "instantExpand", new XC_MethodHook() {
+                            "expand", boolean.class, new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             if (mDisablePeek) {

@@ -33,7 +33,7 @@ public class SystemIconController implements BroadcastSubReceiver {
     private enum BtMode { DEFAULT, CONNECTED, HIDDEN };
 
     private Object mSbPolicy;
-    private Object mSbService;
+    private Object mIconCtrl;
     private Context mContext;
     private BtMode mBtMode;
     private boolean mHideVibrateIcon;
@@ -58,7 +58,7 @@ public class SystemIconController implements BroadcastSubReceiver {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     mSbPolicy = param.thisObject;
-                    mSbService = XposedHelpers.getObjectField(param.thisObject, "mService");
+                    mIconCtrl = XposedHelpers.getObjectField(param.thisObject, "mIconController");
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     if (DEBUG) log ("Phone statusbar policy created");
                 }
@@ -86,9 +86,7 @@ public class SystemIconController implements BroadcastSubReceiver {
                     "updateVolumeZen", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mHideVibrateIcon) {
-                        hideVibrateIcon();
-                    }
+                    updateVibrateIcon();
                 }
             });
         } catch (Throwable t) {
@@ -97,7 +95,7 @@ public class SystemIconController implements BroadcastSubReceiver {
     }
 
     private void updateBtIconVisibility() {
-        if (mSbService == null || mBtMode == null) return;
+        if (mIconCtrl == null || mBtMode == null) return;
 
         try {
             BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -114,19 +112,19 @@ public class SystemIconController implements BroadcastSubReceiver {
                 }
                 if (DEBUG) log("updateBtIconVisibility: enabled=" + enabled + "; connected=" + connected +
                         "; visible=" + visible);
-                XposedHelpers.callMethod(mSbService, "setIconVisibility", "bluetooth", visible);
+                XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "bluetooth", visible);
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    private void hideVibrateIcon() {
-        if (mSbService == null || mContext == null) return;
+    private void updateVibrateIcon() {
+        if (mIconCtrl == null || mContext == null) return;
         try {
             AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
             if (am.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
-                XposedHelpers.callMethod(mSbService, "setIconVisibility", "volume", false);
+                XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "volume", !mHideVibrateIcon);
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
