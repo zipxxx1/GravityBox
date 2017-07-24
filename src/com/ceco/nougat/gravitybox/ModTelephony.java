@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,7 +19,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
@@ -29,11 +28,11 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModTelephony {
     private static final String TAG = "GB:ModTelephony";
 
-    private static final String CLASS_GSM_SERVICE_STATE_TRACKER = 
-            "com.android.internal.telephony.gsm.GsmServiceStateTracker";
+    private static final String CLASS_SERVICE_STATE_TRACKER = 
+            "com.android.internal.telephony.ServiceStateTracker";
     private static final String CLASS_SERVICE_STATE = "android.telephony.ServiceState";
     private static final String CLASS_SERVICE_STATE_EXT = "com.mediatek.op.telephony.ServiceStateExt";
-    private static final String CLASS_PHONE_BASE = "com.android.internal.telephony.PhoneBase";
+    private static final String CLASS_PHONE_BASE = "com.android.internal.telephony.Phone";
     private static final boolean DEBUG = false;
 
     private static void log(String msg) {
@@ -57,12 +56,12 @@ public class ModTelephony {
 
     public static void initZygote(final XSharedPreferences prefs) {
         try {
-            final Class<?> classGsmServiceStateTracker = 
-                    XposedHelpers.findClass(CLASS_GSM_SERVICE_STATE_TRACKER, null);
+            final Class<?> classServiceStateTracker = 
+                    XposedHelpers.findClass(CLASS_SERVICE_STATE_TRACKER, null);
 
             mNationalRoamingEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NATIONAL_ROAMING, false);
 
-            XposedBridge.hookAllConstructors(classGsmServiceStateTracker, new XC_MethodHook() {
+            XposedBridge.hookAllConstructors(classServiceStateTracker, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Object phone = XposedHelpers.getObjectField(param.thisObject, "mPhone");
@@ -71,7 +70,7 @@ public class ModTelephony {
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_TELEPHONY_CHANGED);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
-                        if (DEBUG) log("GsmServiceStateTracker constructed; broadcast receiver registered");
+                        if (DEBUG) log("ServiceStateTracker constructed; broadcast receiver registered");
                     }
                 }
             });
@@ -86,7 +85,7 @@ public class ModTelephony {
                     }
                 });
             } else {
-                XposedHelpers.findAndHookMethod(classGsmServiceStateTracker, "isOperatorConsideredNonRoaming",
+                XposedHelpers.findAndHookMethod(classServiceStateTracker, "isOperatorConsideredNonRoaming",
                         CLASS_SERVICE_STATE, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -99,7 +98,7 @@ public class ModTelephony {
                     }
                 });
 
-                XposedHelpers.findAndHookMethod(classGsmServiceStateTracker, "isOperatorConsideredRoaming",
+                XposedHelpers.findAndHookMethod(classServiceStateTracker, "isOperatorConsideredRoaming",
                         CLASS_SERVICE_STATE, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
