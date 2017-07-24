@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GravityBox [MM]</string>
     <string name="battery_style_title">Pil göstergesi stili</string>
     <string name="battery_style_stock">Stok pil göstergesi</string>
     <string name="battery_style_circle">Yuvarlak pil göstergesi</string>
@@ -414,7 +413,7 @@
     <string name="pref_status_icon_style_title">Durum çubuğu simgesi stili</string>
     <string name="pref_status_icon_style_summary">Sessiz, titreşim, alarm gibi durum çubuğu simgelerine uygulanır</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Marshmallow</string>
+    <string name="icon_style_kk">Stock</string>
     <string name="hwkey_back_doubletap_dialog_title">Geri tuşu çift dokunuş hareketi</string>
     <string name="hwkey_action_home">Ana ekrana dön</string>
     <string name="hwkey_action_back">Geri git</string>

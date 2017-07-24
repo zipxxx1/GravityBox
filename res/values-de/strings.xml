@@ -16,8 +16,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [MM]</string>
-
     <string name="battery_style_title">Stil der Akkuanzeige</string>        
     <string name="battery_style_stock">Standard</string>
     <string name="battery_style_circle">Rund</string>
@@ -639,7 +637,7 @@
     <string name="pref_status_icon_style_title">Statussymbole anpassen</string>
     <string name="pref_status_icon_style_summary">Stil der Symbole in der Statusleiste anpassen (z.B stumm, vibrieren, Wecker, etc.)</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Marshmallow</string>
+    <string name="icon_style_kk">Stock</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Zurück-Taste doppelt antippen</string>

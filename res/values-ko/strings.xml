@@ -508,7 +508,7 @@
     <string name="pref_status_icon_style_title">상단바 아이콘 스타일</string>
     <string name="pref_status_icon_style_summary">상단바의 주요 아이콘들의 스타일을 바꿉니다.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Marshmallow</string>
+    <string name="icon_style_kk">Stock</string>
 
     <string name="hwkey_back_doubletap_dialog_title">뒤로 가기 키 두 번 터치 액션</string>
 
@@ -883,7 +883,7 @@
     <string name="pref_volume_adjust_vibrate_mute_summary">알림 / 벨소리를 조절할 때 피드백되는 진동을 비활성화 합니다.</string>
 
     <string name="pref_screenrecord_use_stock_title">순정 바이너리 사용</string>
-    <string name="pref_screenrecord_use_stock_summary">활성화하면, 화면 녹화 시 Marshmallow 순정 바이너리를 사용하여 녹화합니다.  
+    <string name="pref_screenrecord_use_stock_summary">활성화하면, 화면 녹화 시 Nougat 순정 바이너리를 사용하여 녹화합니다.  
         대체 바이너리가 문제를 일으킬 때 사용하세요. 순정 바이너리는 오디오를 녹화할 수 없고, 3분 이상 녹화가 불가능합니다.</string>
 
     <string name="pref_sb_clock_masterswitch_summary">상단바 시계 설정 활성화 여부 (재시작 필요)</string>

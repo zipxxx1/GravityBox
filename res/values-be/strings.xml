@@ -16,8 +16,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [MM]</string>
-
     <string name="battery_style_title">Стыль індыкатара батарэі</string>	
     <string name="battery_style_stock">Па змаўчанні</string>
     <string name="battery_style_circle">Кола</string>
@@ -640,7 +638,7 @@
     <string name="pref_status_icon_style_title">Стыль значкоў радка стану</string>
     <string name="pref_status_icon_style_summary">Ужываецца да ўсіх значкоў радка стану: бязгучны, вібрацыя, будзільнік і г.д.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Marshmallow</string>
+    <string name="icon_style_kk">Stock</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Падвойны націск "Назад"</string>

@@ -6,7 +6,6 @@
 <string name="url_gplus">https://plus.google.com/communities/100769200378960963264</string>
 <string name="url_web_service">http://gravitybox.ceco.sk.eu.org/service.php</string>
 <string name="url_gravitybox_unlocker">https://play.google.com/store/apps/details?id=com.ceco.gravitybox.unlocker</string>
-<string name="app_name">جعبه جذاب (MM)</string>
 <string name="battery_style_title">سبک نشانگر باطری</string>
 <string name="battery_style_stock">نشانگر باطری پیشفرض</string>
 <string name="battery_style_circle">نشانگر حلقوی باطری</string>
@@ -420,7 +419,7 @@
 <string name="pref_status_icon_style_title">سبک آیکون وضعیت</string>
 <string name="pref_status_icon_style_summary">اعمال کردن بر روی آیکون‌های سایلنت ، ویبره ، آلارم و غیره</string>
 <string name="icon_style_jb">جلی‌بین</string>
-<string name="icon_style_kk">مارشمالو</string>
+<string name="icon_style_kk">Stock</string>
 <string name="hwkey_back_doubletap_dialog_title">عمل کلید بازگشت با دو لمس متوالی</string>
 <string name="hwkey_action_home">رفتن به صفحه خانگی</string>
 <string name="hwkey_action_back">بازگشت</string>

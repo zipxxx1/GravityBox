@@ -13,8 +13,6 @@
  * limitations under the License.
 --><resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [MM]</string>
-
     <string name="battery_style_title">Indicatorul stilului bateriei</string>
     <string name="battery_style_stock">Stoc</string>
     <string name="battery_style_circle">Baterie circulară</string>
@@ -637,7 +635,7 @@
     <string name="pref_status_icon_style_title">Stilul pictogramelor de stare</string>
     <string name="pref_status_icon_style_summary">Se aplică pictogramelor de stare cum ar fi silenţios, vibrație, alarmă etc.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Marshmallow</string>
+    <string name="icon_style_kk">Stock</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Acțiune la apăsarea dublă a butonului Înapoi</string>
