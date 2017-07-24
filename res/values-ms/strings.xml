@@ -1642,7 +1642,6 @@
     <string name="direct_unlock_see_through">Tembus</string>
 
     <!-- UNC: Notification visibility -->
-    <string name="pref_cat_notif_visibility_title">Penampakan</string>
     <string name="pref_lc_notif_visibility_title">Penampakan kandungan</string>
     <string name="pref_lc_notif_visibility_summary">Khaskan penampakan notifikasi pada skrin kunci. 
         Hanya apabila \"sembunyi notifikasi sensitif\" polisi skrin kunci aktif</string>

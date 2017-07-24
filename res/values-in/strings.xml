@@ -62,7 +62,6 @@
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Diperluas</string>
     <string name="quick_settings_stay_awake_on">Tetap menyala hidup</string>
-    <string name="quick_settings_stay_awake_off">Tetap menyala mati</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Kotak-kotak QuickSettings Statusbar</string>
