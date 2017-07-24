@@ -97,8 +97,7 @@ public class KeyguardImageService extends Service {
     public void onCreate() {
         super.onCreate();
         mKisImageFile = new File(getFilesDir() + "/kis_image.png");
-        final String prefsName = getPackageName() + "_preferences";
-        mPrefs = getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
+        mPrefs = SettingsManager.getInstance(this).getMainPrefs();
     }
 
     @Override

@@ -19,9 +19,10 @@ import java.io.File;
 
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
+import com.ceco.nougat.gravitybox.SettingsManager;
+import com.ceco.nougat.gravitybox.WorldReadablePrefs;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -44,7 +45,7 @@ public class ActiveScreenActivity extends Activity {
     }
 
     public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
-        private SharedPreferences mPrefs;
+        private WorldReadablePrefs mPrefs;
         private CheckBoxPreference mPrefPocketMode;
 
         @Override
@@ -52,8 +53,7 @@ public class ActiveScreenActivity extends Activity {
             super.onCreate(savedInstanceState);
 
             getPreferenceManager().setSharedPreferencesName("ledcontrol");
-            getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
-            mPrefs = getPreferenceManager().getSharedPreferences();
+            mPrefs = SettingsManager.getInstance(getActivity()).getLedControlPrefs();
 
             addPreferencesFromResource(R.xml.led_control_active_screen_settings);
 
@@ -85,7 +85,7 @@ public class ActiveScreenActivity extends Activity {
             if (LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED.equals(key)) {
                 intent.putExtra(LedSettings.EXTRA_UNC_AS_ENABLED, prefs.getBoolean(key, false));
             }
-            prefs.edit().commit();
+            mPrefs.edit().commit();
             getActivity().sendBroadcast(intent);
             updateSummaries();
         }

@@ -196,8 +196,7 @@ public class ScreenRecordingService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        final String prefsName = getPackageName() + "_preferences";
-        mPrefs = getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
+        mPrefs = SettingsManager.getInstance(this).getMainPrefs();
 
         mHandler = new Handler() {
             public void handleMessage(Message msg) {

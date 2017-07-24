@@ -34,6 +34,9 @@ public class SettingsManager {
 
     private static Context mContext;
     private static SettingsManager mInstance;
+    private WorldReadablePrefs mPrefsMain;
+    private WorldReadablePrefs mPrefsLedControl;
+    private WorldReadablePrefs mPrefsQuietHours;
 
     private SettingsManager(Context context) {
         mContext = context;
@@ -255,8 +258,7 @@ public class SettingsManager {
     }
 
     public String getOrCreateUuid() {
-        final String prefsName = mContext.getPackageName() + "_preferences";
-        SharedPreferences prefs = mContext.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
+        SharedPreferences prefs = getMainPrefs();
         String uuid = prefs.getString("settings_uuid", null);
         if (uuid == null) {
             uuid = UUID.randomUUID().toString();
@@ -266,8 +268,7 @@ public class SettingsManager {
     }
 
     public void resetUuid(String uuid) {
-        String prefsName = mContext.getPackageName() + "_preferences";
-        SharedPreferences prefs = mContext.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
+        SharedPreferences prefs = getMainPrefs();
         prefs.edit().putString("settings_uuid", uuid).commit();
     }
 
@@ -279,13 +280,61 @@ public class SettingsManager {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                mContext.getFilesDir().setExecutable(true, false);
-                mContext.getFilesDir().setReadable(true, false);
-                File sharedPrefsFolder = new File(mContext.getFilesDir().getAbsolutePath()
-                        + "/../shared_prefs");
-                sharedPrefsFolder.setExecutable(true, false);
-                sharedPrefsFolder.setReadable(true, false);
+                // main dir
+                File pkgFolder = new File(mContext.getFilesDir() + "/..");
+                if (pkgFolder.exists()) {
+                    pkgFolder.setExecutable(true, false);
+                    pkgFolder.setReadable(true, false);
+                }
+                // files dir
+                File filesFolder = mContext.getFilesDir();
+                if (filesFolder.exists()) {
+                    filesFolder.setExecutable(true, false);
+                    filesFolder.setReadable(true, false);
+                    for (File f : filesFolder.listFiles()) {
+                        f.setExecutable(true, false);
+                        f.setReadable(true, false);
+                    }
+                }
+                // app picker
+                File appPickerFolder = new File(mContext.getFilesDir() + "/app_picker");
+                if (appPickerFolder.exists()) {
+                    appPickerFolder.setExecutable(true, false);
+                    appPickerFolder.setReadable(true, false);
+                    for (File f : appPickerFolder.listFiles()) {
+                        f.setExecutable(true, false);
+                        f.setReadable(true, false);
+                    }
+                }
             }
         });
+    }
+
+    public WorldReadablePrefs getMainPrefs() {
+        if (mPrefsMain == null) {
+            mPrefsMain =  new WorldReadablePrefs(mContext,
+                    mContext.getPackageName() + "_preferences");
+        } else {
+            mPrefsMain.fixPermissions();
+        }
+        return mPrefsMain;
+    }
+
+    public WorldReadablePrefs getLedControlPrefs() {
+        if (mPrefsLedControl == null) {
+            mPrefsLedControl = new WorldReadablePrefs(mContext, "ledcontrol");
+        } else {
+            mPrefsLedControl.fixPermissions();
+        }
+        return mPrefsLedControl; 
+    }
+
+    public WorldReadablePrefs getQuietHoursPrefs() {
+        if (mPrefsQuietHours == null) {
+            mPrefsQuietHours = new WorldReadablePrefs(mContext, "quiet_hours");
+        } else {
+            mPrefsQuietHours.fixPermissions();
+        }
+        return mPrefsQuietHours;
     }
 }

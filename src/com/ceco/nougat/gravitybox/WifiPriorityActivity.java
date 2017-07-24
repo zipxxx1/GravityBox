@@ -93,8 +93,7 @@ public class WifiPriorityActivity extends ListActivity implements GravityBoxResu
         setContentView(R.layout.wifi_network_priority);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
-        String prefsName = getPackageName() + "_preferences";
-        mPrefs = getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
+        mPrefs = SettingsManager.getInstance(this).getMainPrefs();
 
         // Set the touchable listview
         mNetworksListView = (TouchInterceptor)getListView();

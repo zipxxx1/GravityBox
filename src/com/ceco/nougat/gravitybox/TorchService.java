@@ -118,8 +118,7 @@ public class TorchService extends Service {
                 getString(R.string.turn_off), stopIntent).build());
         mTorchNotif = builder.build();
 
-        SharedPreferences prefs = getSharedPreferences(getPackageName() + "_preferences",
-                Context.MODE_WORLD_READABLE);
+        SharedPreferences prefs = SettingsManager.getInstance(this).getMainPrefs();
         mTorchTimeout = prefs.getInt(GravityBoxSettings.PREF_KEY_TORCH_AUTO_OFF, 10)*60*1000;
         mHandler = new Handler();
 

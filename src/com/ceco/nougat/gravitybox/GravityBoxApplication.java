@@ -17,7 +17,6 @@ package com.ceco.nougat.gravitybox;
 import java.util.Locale;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -30,8 +29,7 @@ public class GravityBoxApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        SharedPreferences prefs = getSharedPreferences(getPackageName() + "_preferences", 
-                Context.MODE_WORLD_READABLE);
+        SharedPreferences prefs = SettingsManager.getInstance(this).getMainPrefs();
         Resources res = getBaseContext().getResources();
         Configuration config = res.getConfiguration();
         boolean forceEng = prefs.getBoolean(GravityBoxSettings.PREF_KEY_FORCE_ENGLISH_LOCALE, false);

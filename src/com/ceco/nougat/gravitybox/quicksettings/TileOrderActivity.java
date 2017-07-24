@@ -24,6 +24,7 @@ import java.util.Map;
 
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
+import com.ceco.nougat.gravitybox.SettingsManager;
 import com.ceco.nougat.gravitybox.TouchInterceptor;
 import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings;
@@ -145,8 +146,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
 
         mContext = this;
         mResources = mContext.getResources();
-        final String prefsName = mContext.getPackageName() + "_preferences";
-        mPrefs = mContext.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
+        mPrefs = SettingsManager.getInstance(mContext).getMainPrefs();
 
         mBtnSave = (Button) findViewById(R.id.btnSave);
         mBtnSave.setOnClickListener(this);

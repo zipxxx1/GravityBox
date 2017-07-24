@@ -25,6 +25,7 @@ import java.util.TreeSet;
 
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
+import com.ceco.nougat.gravitybox.SettingsManager;
 import com.ceco.nougat.gravitybox.Utils;
 
 import android.app.Activity;
@@ -61,7 +62,7 @@ public class QuietHoursActivity extends Activity {
 
     public static QuietHours.Mode setQuietHoursMode(final Context context, String mode) {
         try {
-            SharedPreferences prefs = context.getSharedPreferences("quiet_hours", Context.MODE_WORLD_READABLE);
+            SharedPreferences prefs = SettingsManager.getInstance(context).getQuietHoursPrefs();
             QuietHours qh = new QuietHours(prefs);
             if (qh.uncLocked || !qh.enabled) {
                 return null;
@@ -136,8 +137,7 @@ public class QuietHoursActivity extends Activity {
             super.onCreate(savedInstanceState);
 
             getPreferenceManager().setSharedPreferencesName("quiet_hours");
-            getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
-            mPrefs = getPreferenceManager().getSharedPreferences();
+            mPrefs = SettingsManager.getInstance(getActivity()).getQuietHoursPrefs();
 
             addPreferencesFromResource(R.xml.led_control_quiet_hours_settings);
             setupWeekDaysPref();
@@ -207,7 +207,7 @@ public class QuietHoursActivity extends Activity {
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
             updateSummaries();
             Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
-            prefs.edit().commit();
+            mPrefs.edit().commit();
             getActivity().sendBroadcast(intent);
         }
     }

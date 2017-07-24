@@ -31,6 +31,7 @@ import java.util.UUID;
 
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
+import com.ceco.nougat.gravitybox.SettingsManager;
 import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.GravityBoxSettings.PrefsFragment;
 import com.ceco.nougat.gravitybox.GravityBoxSettings.PrefsFragment.IconPickHandler;
@@ -138,8 +139,7 @@ public class AppPickerPreference extends DialogPreference
             protected Void doInBackground(Void... params) {
                 try {
                     List<String> usedFileNameList = new ArrayList<String>();
-                    final String prefsName = context.getPackageName() + "_preferences";
-                    SharedPreferences prefs = context.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
+                    SharedPreferences prefs = SettingsManager.getInstance(context).getMainPrefs();
                     // populate list of used icon files
                     Map<String, ?> keys = prefs.getAll();
                     for (Map.Entry<String, ?> entry : keys.entrySet()) {
@@ -433,7 +433,8 @@ public class AppPickerPreference extends DialogPreference
                     }
                     fos.close();
                     setValue(intent.toUri(0));
-                    sPrefsFragment.onSharedPreferenceChanged(getSharedPreferences(), getKey());
+                    sPrefsFragment.onSharedPreferenceChanged(
+                            SettingsManager.getInstance(mContext).getMainPrefs(), getKey());
                 } catch (Exception e) {
                     Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
@@ -573,7 +574,8 @@ public class AppPickerPreference extends DialogPreference
                     public void onShortcutCreated(ShortcutItem sir) {
                         setValue(sir.getValue());
                         // we have to call this explicitly for some yet unknown reason...
-                        sPrefsFragment.onSharedPreferenceChanged(getSharedPreferences(), getKey());
+                        sPrefsFragment.onSharedPreferenceChanged(
+                                SettingsManager.getInstance(mContext).getMainPrefs(), getKey());
                         getDialog().dismiss();
                     }
                 });

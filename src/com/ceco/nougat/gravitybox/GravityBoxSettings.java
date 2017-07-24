@@ -1200,7 +1200,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefBatteryPercentStyle;
         private ListPreference mPrefBatteryPercentCharging;
         private ListPreference mLowBatteryWarning;
-        private SharedPreferences mPrefs;
+        private WorldReadablePrefs mPrefs;
         private AlertDialog mDialog;
         private PreferenceScreen mPrefCatAbout;
         private Preference mPrefAboutGb;
@@ -1377,17 +1377,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefBatteryTileTempUnit;
         private EditTextPreference mPrefPowerCameraVp;
 
-        @SuppressWarnings("deprecation")
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            // this is important because although the handler classes that read these settings
-            // are in the same package, they are executed in the context of the hooked package
-            getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
+            mPrefs = SettingsManager.getInstance(getActivity()).getMainPrefs();
             addPreferencesFromResource(R.xml.gravitybox);
 
-            mPrefs = getPreferenceScreen().getSharedPreferences();
             AppPickerPreference.sPrefsFragment = this;
             AppPickerPreference.cleanupAsync(getActivity());
 
@@ -3556,6 +3552,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (rebootKeys.contains(key))
                 Toast.makeText(getActivity(), getString(R.string.reboot_required), Toast.LENGTH_SHORT).show();
+
+            mPrefs.fixPermissions();
         }
 
         @Override
