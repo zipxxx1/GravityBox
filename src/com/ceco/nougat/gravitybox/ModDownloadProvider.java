@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.ceco.nougat.gravitybox;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.SparseArray;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -27,7 +28,7 @@ public class ModDownloadProvider {
     private static final String TAG = "GB:ModDownloadProvider";
     public static final String PACKAGE_NAME = "com.android.providers.downloads";
 
-    private static final String CLASS_DOWNLOAD_SERVICE = "com.android.providers.downloads.DownloadService";
+    private static final String CLASS_DOWNLOAD_JOB_SERVICE = "com.android.providers.downloads.DownloadJobService";
     private static final boolean DEBUG = false;
 
     public static final String ACTION_DOWNLOAD_STATE_CHANGED = "gravitybox.intent.action.DOWNLOAD_STATE_CHANGED";
@@ -41,12 +42,14 @@ public class ModDownloadProvider {
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
-            final Class<?> classDownloadService = XposedHelpers.findClass(CLASS_DOWNLOAD_SERVICE, classLoader);
+            final Class<?> classDownloadJobService = XposedHelpers.findClass(CLASS_DOWNLOAD_JOB_SERVICE, classLoader);
 
-            XposedHelpers.findAndHookMethod(classDownloadService, "updateLocked", new XC_MethodHook() {
+            XC_MethodHook jobStartStopHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    final boolean isActive = (Boolean) param.getResult();
+                    SparseArray<?> activeThreads = (SparseArray<?>) XposedHelpers.getObjectField(
+                            param.thisObject, "mActiveThreads");
+                    final boolean isActive = activeThreads.size() > 0;
                     if (mIsActive != isActive) { 
                         mIsActive = isActive;
                         if (DEBUG) log("Download state changed; active=" + mIsActive);
@@ -56,7 +59,9 @@ public class ModDownloadProvider {
                         context.sendBroadcast(intent);
                     }
                 }
-            });
+            };
+            XposedBridge.hookAllMethods(classDownloadJobService, "onStartJob", jobStartStopHook);
+            XposedBridge.hookAllMethods(classDownloadJobService, "onStopJob", jobStartStopHook);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
