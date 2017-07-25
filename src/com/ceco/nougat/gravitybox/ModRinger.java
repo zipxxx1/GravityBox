@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.Ringtone;
-import android.net.Uri;
 import android.os.Handler;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -91,15 +90,18 @@ public class ModRinger {
             final XSharedPreferences qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
             qhPrefs.makeWorldReadable();
             final Class<?> clsRingtonePlayer = XposedHelpers.findClass(CLASS_RINGTONE_PLAYER, classLoader);
+            final Class<?> clsTelecomServiceImpl = XposedHelpers.findClass(
+                    "com.android.server.telecom.TelecomServiceImpl", classLoader);
 
             Method mtdHandlePlay = null;
             try {
-                mtdHandlePlay = clsRingtonePlayer.getDeclaredMethod("handlePlay", Uri.class);
+                mtdHandlePlay = clsRingtonePlayer.getDeclaredMethod("handlePlay", 
+                        XposedHelpers.findClass("com.android.internal.os.SomeArgs", classLoader));
                 if (DEBUG) log("handlePlay found");
             } catch (NoSuchMethodException nme) {
                 try {
                     mtdHandlePlay = clsRingtonePlayer.getDeclaredMethod("access$000",
-                            clsRingtonePlayer, Uri.class);
+                            clsRingtonePlayer, XposedHelpers.findClass("com.android.internal.os.SomeArgs", classLoader));
                     if (DEBUG) log("handlePlay found as access$000");
                 } catch (NoSuchMethodException nme2) { }
             }
@@ -113,15 +115,22 @@ public class ModRinger {
                     GravityBoxSettings.PREF_KEY_INCREASING_RING, null));
             if (DEBUG) log(mRingerConfig.toString());
 
-            XposedBridge.hookAllConstructors(clsRingtonePlayer, new XC_MethodHook() {
+            XposedBridge.hookAllConstructors(clsTelecomServiceImpl, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    mAsyncRinger = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(IncreasingRingPreference.ACTION_INCREASING_RING_CHANGED);
                     context.registerReceiver(mBroadcastReceiver, intentFilter);
-                    if (DEBUG) log("Ringtone player created; broadcast receiver registered");
+                    if (DEBUG) log("TelecomServiceImpl created; broadcast receiver registered");
+                }
+            });
+
+            XposedBridge.hookAllConstructors(clsRingtonePlayer, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    mAsyncRinger = param.thisObject;
+                    if (DEBUG) log("Ringtone player created");
                 }
             });
 
@@ -176,9 +185,9 @@ public class ModRinger {
             player = XposedHelpers.getObjectField(mRingtone, "mRemotePlayer");
             if (player != null) {
                 try {
-                    XposedHelpers.callMethod(player, "setVolume",
+                    XposedHelpers.callMethod(player, "setPlaybackProperties",
                             XposedHelpers.getObjectField(mRingtone, "mRemoteToken"),
-                            volume);
+                            volume, false);
                 } catch (Throwable t) {
                     
                 }
