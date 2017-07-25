@@ -1261,7 +1261,6 @@
     <string name="keyguard_percent_text_default">기본 (충전 시에만 표시)</string>
     <string name="keyguard_percent_text_show_always">항상 표시</string>
     <string name="keyguard_percent_text_hide">숨기기</string>
-    <string name="battery_percent_text_header_hide_title">상단바 헤더에 있는 배터리 잔량 퍼센트 항목을 숨깁니다.</string>
     <string name="battery_percent_text_size_default">기본 크기</string>
 
     <string name="pref_navbar_larger_icons_title">더 큰 아이콘 사용</string>

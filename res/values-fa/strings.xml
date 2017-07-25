@@ -995,7 +995,6 @@
 <string name="keyguard_percent_text_default">پیشفرض(در حال شارژ)</string>
 <string name="keyguard_percent_text_show_always">همیشه نمایش بده</string>
 <string name="keyguard_percent_text_hide">پنهان</string>
-<string name="battery_percent_text_header_hide_title">پنهان‌سازی بروی نوار وضعیت</string>
 <string name="battery_percent_text_size_default">پیشفرض</string>
 <string name="pref_navbar_larger_icons_title">استفاده از آیکون‌های بزرگ</string>
 <string name="pref_navbar_larger_icons_summary">نیازمند راه‌اندازی مجدد</string>

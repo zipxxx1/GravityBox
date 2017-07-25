@@ -1565,7 +1565,6 @@
     <string name="keyguard_percent_text_default">Pôvodné (počas nabíjania)</string>
     <string name="keyguard_percent_text_show_always">Vždy zobraziť</string>
     <string name="keyguard_percent_text_hide">Skryť</string>
-    <string name="battery_percent_text_header_hide_title">Skryť v hlavičke stavovej lišty</string>
     <string name="battery_percent_text_size_default">Pôvodná</string>
 
     <!-- Navigation bar: use larger icons -->

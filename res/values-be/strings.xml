@@ -1586,7 +1586,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="keyguard_percent_text_default">Па змаўчанні (падчас зарадкі)</string>
     <string name="keyguard_percent_text_show_always">Адлюстроўваць заўсёды</string>
     <string name="keyguard_percent_text_hide">Схаваць</string>
-    <string name="battery_percent_text_header_hide_title">Схаваць у радку стану</string>
     <string name="battery_percent_text_size_default">Па змаўчанні</string>
 
     <!-- Navigation bar: use larger icons -->

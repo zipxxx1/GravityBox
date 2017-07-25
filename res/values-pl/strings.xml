@@ -1545,7 +1545,6 @@
     <string name="keyguard_percent_text_default">Domyślnie (podczas ładowania)</string>
     <string name="keyguard_percent_text_show_always">Zawsze pokazuj</string>
     <string name="keyguard_percent_text_hide">Ukryj</string>
-    <string name="battery_percent_text_header_hide_title">Ukryj w nagłówku paska stanu</string>
     <string name="battery_percent_text_size_default">Domyślny</string>
 
     <!-- Navigation bar: use larger icons -->

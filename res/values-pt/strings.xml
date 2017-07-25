@@ -1545,7 +1545,6 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="keyguard_percent_text_default">Padrão (enquanto estiver carregando)</string>
     <string name="keyguard_percent_text_show_always">Sempre mostrar</string>
     <string name="keyguard_percent_text_hide">Ocultar</string>
-    <string name="battery_percent_text_header_hide_title">Ocultar no cabeçalho da barra de status</string>
     <string name="battery_percent_text_size_default">Padrão</string>
 
     <!-- Navigation bar: use larger icons -->

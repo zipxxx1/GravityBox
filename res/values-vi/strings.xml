@@ -1589,7 +1589,6 @@
     <string name="keyguard_percent_text_default">Mặc định (khi đang sạc)</string>
     <string name="keyguard_percent_text_show_always">Luôn hiện</string>
     <string name="keyguard_percent_text_hide">Ẩn</string>
-    <string name="battery_percent_text_header_hide_title">Ẩn ở đầu thanh trạng thái</string>
     <string name="battery_percent_text_size_default">Mặc định</string>
 
     <!-- Navigation bar: use larger icons -->

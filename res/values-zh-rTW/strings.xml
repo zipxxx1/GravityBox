@@ -1523,7 +1523,6 @@
     <string name="keyguard_percent_text_default">預設(當充電時)</string>
     <string name="keyguard_percent_text_show_always">允許顯示</string>
     <string name="keyguard_percent_text_hide">隱藏</string>
-    <string name="battery_percent_text_header_hide_title">隱藏狀態列標題</string>
     <string name="battery_percent_text_size_default">預設</string>
 
     <!-- Status bar: disable peek -->

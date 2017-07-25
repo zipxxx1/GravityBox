@@ -1596,7 +1596,6 @@
     <string name="keyguard_percent_text_default">默认(当充电时)</string>
     <string name="keyguard_percent_text_show_always">允许显示</string>
     <string name="keyguard_percent_text_hide">隐藏</string>
-    <string name="battery_percent_text_header_hide_title">隐藏状态栏标题</string>
     <string name="battery_percent_text_size_default">默认</string>
 
     <!-- Navigation bar: use larger icons -->

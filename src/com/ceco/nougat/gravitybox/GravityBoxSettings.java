@@ -111,7 +111,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR = "pref_battery_percent_text_statusbar";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_POSITION = "pref_battery_percent_text_position";
-    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_HEADER_HIDE = "pref_battery_percent_text_header_hide";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD = "pref_battery_percent_text_keyguard";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_SIZE = "pref_battery_percent_text_size";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STYLE = "pref_battery_percent_text_style";
@@ -535,7 +534,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED =
             "gravitybox.intent.action.BATTERY_PERCENT_TEXT_CHANGED";
     public static final String EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR = "batteryPercentTextSb";
-    public static final String EXTRA_BATTERY_PERCENT_TEXT_HEADER_HIDE = "batteryPercentTextHeaderHide";
     public static final String EXTRA_BATTERY_PERCENT_TEXT_KEYGUARD = "batteryPercentTextKg";
     public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED =
             "gravitybox.intent.action.BATTERY_PERCENT_TEXT_SIZE_CHANGED";
@@ -2650,9 +2648,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR)) {
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, prefs.getBoolean(key, false));
-            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_HEADER_HIDE)) {
-                intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_HEADER_HIDE, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD)) {
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_KEYGUARD, prefs.getString(key, "DEFAULT"));

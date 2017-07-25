@@ -902,11 +902,6 @@
                     android:entryValues="@array/battery_percent_text_position_values"
                     android:defaultValue="RIGHT" />
 
-                <CheckBoxPreference 
-                    android:key="pref_battery_percent_text_header_hide"
-                    android:title="@string/battery_percent_text_header_hide_title"
-                    android:defaultValue="false" />
-
                 <ListPreference 
                     android:key="pref_battery_percent_text_keyguard"
                     android:title="@string/battery_percent_text_keyguard_title"

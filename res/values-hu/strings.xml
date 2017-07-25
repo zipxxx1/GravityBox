@@ -1573,7 +1573,6 @@
     <string name="keyguard_percent_text_default">Alapértelmezett (töltés közben)</string>
     <string name="keyguard_percent_text_show_always">Mindig mutat</string>
     <string name="keyguard_percent_text_hide">Elrejt</string>
-    <string name="battery_percent_text_header_hide_title">Elrejtés az állapotsáv fejlécen</string>
     <string name="battery_percent_text_size_default">Alapértelmezett</string>
 
     <!-- Navigation bar: use larger icons -->

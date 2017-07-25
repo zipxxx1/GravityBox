@@ -1592,7 +1592,6 @@
     <string name="keyguard_percent_text_default">Tetapan asal (ketika cas)</string>
     <string name="keyguard_percent_text_show_always">Sentiasa tunjuk</string>
     <string name="keyguard_percent_text_hide">Sembunyi</string>
-    <string name="battery_percent_text_header_hide_title">Sembunyi di atas bar status</string>
     <string name="battery_percent_text_size_default">Tetapan asal</string>
 
     <!-- Navigation bar: use larger icons -->

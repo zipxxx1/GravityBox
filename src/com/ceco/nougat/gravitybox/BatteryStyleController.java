@@ -39,7 +39,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private static final String TAG = "GB:BatteryStyleController";
     public static final String PACKAGE_NAME = "com.android.systemui";
     public static final String CLASS_BATTERY_CONTROLLER = 
-            "com.android.systemui.statusbar.policy.BatteryController";
+            "com.android.systemui.statusbar.policy.BatteryControllerImpl";
     private static final boolean DEBUG = false;
 
     public static final String ACTION_MTK_BATTERY_PERCENTAGE_SWITCH = 
@@ -56,7 +56,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private XSharedPreferences mPrefs;
     private int mBatteryStyle;
     private boolean mBatteryPercentTextEnabledSb;
-    private boolean mBatteryPercentTextHeaderHide;
     private KeyguardMode mBatteryPercentTextKgMode;
     private boolean mMtkPercentTextEnabled;
     private StatusbarBatteryPercentage mPercentText;
@@ -89,8 +88,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
         mBatteryPercentTextEnabledSb = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false);
-        mBatteryPercentTextHeaderHide = prefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_HEADER_HIDE, false);
         mBatteryPercentTextKgMode = KeyguardMode.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD, "DEFAULT"));
         mMtkPercentTextEnabled = Utils.isMtkDevice() ?
@@ -219,9 +216,9 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                         }
                         break;
                     case KEYGUARD:
-                    case HEADER:
                         XposedHelpers.callMethod(mContainer, "updateVisibilities");
                         break;
+                    default: break;
                 }
             }
         } catch (Throwable t) {
@@ -246,7 +243,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             }
         }
 
-        if (mContainerType == ContainerType.KEYGUARD || mContainerType == ContainerType.HEADER) {
+        if (mContainerType == ContainerType.KEYGUARD) {
             try {
                 XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
                         int.class, boolean.class, boolean.class, new XC_MethodHook() {
@@ -267,16 +264,10 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if (DEBUG) log(mContainerType + ": updateVisibilities");
                         if (mPercentText != null) {
-                            if (mContainerType == ContainerType.KEYGUARD) {
-                                if (mBatteryPercentTextKgMode == KeyguardMode.ALWAYS_SHOW) {
-                                    mPercentText.setVisibility(View.VISIBLE);
-                                } else if (mBatteryPercentTextKgMode == KeyguardMode.HIDDEN) {
-                                    mPercentText.setVisibility(View.GONE);
-                                }
-                            } else if (mContainerType == ContainerType.HEADER) {
-                                if (mBatteryPercentTextHeaderHide) {
-                                    mPercentText.setVisibility(View.GONE);
-                                }
+                            if (mBatteryPercentTextKgMode == KeyguardMode.ALWAYS_SHOW) {
+                                mPercentText.setVisibility(View.VISIBLE);
+                            } else if (mBatteryPercentTextKgMode == KeyguardMode.HIDDEN) {
+                                mPercentText.setVisibility(View.GONE);
                             }
                         }
                     }
@@ -322,11 +313,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 mBatteryPercentTextEnabledSb = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, false);
                 if (DEBUG) log("mBatteryPercentTextEnabledSb changed to: " + mBatteryPercentTextEnabledSb);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_HEADER_HIDE)) {
-                mBatteryPercentTextHeaderHide = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_HEADER_HIDE, false);
-                if (DEBUG) log("mBatteryPercentTextHeaderHide changed to: " + mBatteryPercentTextHeaderHide);
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_KEYGUARD)) {
                 mBatteryPercentTextKgMode = KeyguardMode.valueOf(intent.getStringExtra(

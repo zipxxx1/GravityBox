@@ -1590,7 +1590,6 @@
     <string name="keyguard_percent_text_default">Predeterminado (mientras carga)</string>
     <string name="keyguard_percent_text_show_always">Mostrar siempre</string>
     <string name="keyguard_percent_text_hide">Oculto</string>
-    <string name="battery_percent_text_header_hide_title">Oculto en la cabecera de la barra de estado</string>
     <string name="battery_percent_text_size_default">Predeterminado</string>
 
     <!-- Navigation bar: use larger icons -->

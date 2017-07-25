@@ -1595,7 +1595,6 @@
     <string name="keyguard_percent_text_default">Типово (під час заряду)</string>
     <string name="keyguard_percent_text_show_always">Показувати завжди</string>
     <string name="keyguard_percent_text_hide">Приховати</string>
-    <string name="battery_percent_text_header_hide_title">Приховати в панелі стану</string>
     <string name="battery_percent_text_size_default">Типово</string>
 
     <!-- Navigation bar: use larger icons -->

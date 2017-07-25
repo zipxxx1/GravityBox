@@ -436,14 +436,11 @@ public class ModStatusBar {
                 case STATUSBAR:
                     container = (ViewGroup) mStatusBarView;
                     break;
-                case HEADER:
-                    container = (ViewGroup) XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mHeader");
-                    break;
                 case KEYGUARD:
                     container = (ViewGroup) XposedHelpers.getObjectField(
                             mPhoneStatusBar, "mKeyguardStatusBar");
                     break;
+                default: break;
             }
             if (container != null) {
                 BatteryStyleController bsc = new BatteryStyleController(
@@ -619,7 +616,6 @@ public class ModStatusBar {
                     prepareSignalCluster(ContainerType.HEADER);
                     prepareSignalCluster(ContainerType.KEYGUARD);
                     prepareBatteryStyle(ContainerType.STATUSBAR);
-                    prepareBatteryStyle(ContainerType.HEADER);
                     prepareBatteryStyle(ContainerType.KEYGUARD);
                     prepareQuietHoursIcon(ContainerType.STATUSBAR);
                     prepareQuietHoursIcon(ContainerType.KEYGUARD);

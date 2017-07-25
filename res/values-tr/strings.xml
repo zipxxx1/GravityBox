@@ -996,7 +996,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="keyguard_percent_text_default">Varsayılan (şarj olurken)</string>
     <string name="keyguard_percent_text_show_always">Her zaman göster</string>
     <string name="keyguard_percent_text_hide">Gizle</string>
-    <string name="battery_percent_text_header_hide_title">Durum çubuğu başlığında gizle</string>
     <string name="battery_percent_text_size_default">Varsayılan</string>
     <string name="pref_navbar_larger_icons_title">Büyük simgeler kullan</string>
     <string name="pref_navbar_larger_icons_summary">Yeniden başlatma gerektirir</string>

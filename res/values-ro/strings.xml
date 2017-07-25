@@ -1562,7 +1562,6 @@
     <string name="keyguard_percent_text_default">Implicit (în timpul încărcării)</string>
     <string name="keyguard_percent_text_show_always">Arată întotdeauna</string>
     <string name="keyguard_percent_text_hide">Ascunde</string>
-    <string name="battery_percent_text_header_hide_title">Ascunde în antetul barei de stare</string>
     <string name="battery_percent_text_size_default">Implicit</string>
 
     <!-- Navigation bar: use larger icons -->
