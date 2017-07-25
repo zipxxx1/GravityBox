@@ -151,6 +151,10 @@ public class ModLockscreen {
                                 GravityBoxSettings.EXTRA_LS_SHOW_BADGES, false));
                     }
                 }
+            } else if (action.equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)) {
+                if (mAppBar != null)
+                    mAppBar.initAppSlots();
+                prepareBottomActions();
             }
         }
     };
@@ -206,7 +210,6 @@ public class ModLockscreen {
 
                     prepareCustomBackground();
                     prepareGestureDetector();
-                    prepareBottomActions();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
@@ -214,6 +217,7 @@ public class ModLockscreen {
                     intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
+                    intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("Keyguard mediator constructed");
                 }
