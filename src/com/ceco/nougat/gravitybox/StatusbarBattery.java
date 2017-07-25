@@ -25,16 +25,19 @@ import com.ceco.nougat.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.nougat.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 public class StatusbarBattery implements IconManagerListener {
     private static final String TAG = "GB:StatusbarBattery";
+    private static final boolean DEBUG = false;
 
     private View mBattery;
     private int mDefaultColor;
     private int mDefaultFrameColor;
     private int mFrameAlpha;
     private int mDefaultChargeColor;
+    private Drawable mDrawable;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -44,12 +47,12 @@ public class StatusbarBattery implements IconManagerListener {
         mBattery = batteryView;
         createHooks();
         try {
-            final int[] colors = (int[]) XposedHelpers.getObjectField(mBattery, "mColors");
+            final int[] colors = (int[]) XposedHelpers.getObjectField(getDrawable(), "mColors");
             mDefaultColor = colors[colors.length-1];
-            final Paint framePaint = (Paint) XposedHelpers.getObjectField(mBattery, "mFramePaint");
+            final Paint framePaint = (Paint) XposedHelpers.getObjectField(getDrawable(), "mFramePaint");
             mDefaultFrameColor = framePaint.getColor();
             mFrameAlpha = framePaint.getAlpha();
-            mDefaultChargeColor = XposedHelpers.getIntField(mBattery, "mChargeColor");
+            mDefaultChargeColor = XposedHelpers.getIntField(getDrawable(), "mChargeColor");
         } catch (Throwable t) {
             log("Error backing up original colors: " + t.getMessage());
         }
@@ -58,10 +61,21 @@ public class StatusbarBattery implements IconManagerListener {
         }
     }
 
-    private void createHooks() {
-        if (!Utils.isXperiaDevice()) {
+    private Drawable getDrawable() {
+        if (mDrawable == null) {
             try {
-                XposedHelpers.findAndHookMethod(mBattery.getClass(), "getFillColor",
+                mDrawable = (Drawable) XposedHelpers.getObjectField(mBattery, "mDrawable");
+            } catch (Throwable t) {
+                if (DEBUG) XposedBridge.log(t);
+            }
+        }
+        return mDrawable;
+    }
+
+    private void createHooks() {
+        if (!Utils.isXperiaDevice() && getDrawable() != null) {
+            try {
+                XposedHelpers.findAndHookMethod(getDrawable().getClass(), "getFillColor",
                         float.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -82,15 +96,15 @@ public class StatusbarBattery implements IconManagerListener {
     }
 
     public void setColors(int mainColor, int frameColor, int chargeColor) {
-        if (mBattery != null) {
+        if (mBattery != null && getDrawable() != null) {
             try {
-                final int[] colors = (int[]) XposedHelpers.getObjectField(mBattery, "mColors");
+                final int[] colors = (int[]) XposedHelpers.getObjectField(getDrawable(), "mColors");
                 colors[colors.length-1] = mainColor;
-                final Paint framePaint = (Paint) XposedHelpers.getObjectField(mBattery, "mFramePaint");
+                final Paint framePaint = (Paint) XposedHelpers.getObjectField(getDrawable(), "mFramePaint");
                 framePaint.setColor(frameColor);
                 framePaint.setAlpha(mFrameAlpha);
-                XposedHelpers.setIntField(mBattery, "mChargeColor", chargeColor);
-                XposedHelpers.setIntField(mBattery, "mIconTint", mainColor);
+                XposedHelpers.setIntField(getDrawable(), "mChargeColor", chargeColor);
+                XposedHelpers.setIntField(getDrawable(), "mIconTint", mainColor);
             } catch (Throwable t) {
                 log("Error setting colors: " + t.getMessage());
             }
@@ -98,9 +112,9 @@ public class StatusbarBattery implements IconManagerListener {
     }
 
     public void setShowPercentage(boolean showPercentage) {
-        if (mBattery != null && !Utils.isOxygenOs35Rom()) {
+        if (mBattery != null && getDrawable() != null && !Utils.isOxygenOs35Rom()) {
             try {
-                XposedHelpers.setBooleanField(mBattery, "mShowPercent", showPercentage);
+                XposedHelpers.setBooleanField(getDrawable(), "mShowPercent", showPercentage);
                 mBattery.invalidate();
             } catch (Throwable t) {
                 log("Error setting percentage: " + t.getMessage());
