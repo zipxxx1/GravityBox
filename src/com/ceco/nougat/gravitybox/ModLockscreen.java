@@ -220,7 +220,7 @@ public class ModLockscreen {
             });
 
             XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR, classLoader,
-                    "updateMediaMetaData", boolean.class, new XC_MethodHook() {
+                    "updateMediaMetaData", boolean.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mPhoneStatusBar == null) {
@@ -718,7 +718,7 @@ public class ModLockscreen {
                     final Object lockPatternUtils = XposedHelpers.getObjectField(securityView, "mLockPatternUtils");
                     final Object lockSettings = XposedHelpers.callMethod(lockPatternUtils, "getLockSettings");
                     final int userId = mKgMonitor.getCurrentUserId();
-                    final Object response = XposedHelpers.callMethod(lockSettings, "checkPassword", entry, userId);
+                    final Object response = XposedHelpers.callMethod(lockSettings, "checkPassword", entry, userId, null);
                     final int code = (int)XposedHelpers.callMethod(response, "getResponseCode");
                     if (code == 0) {
                         final Object callback = XposedHelpers.getObjectField(securityView, "mCallback");
@@ -726,7 +726,7 @@ public class ModLockscreen {
                             @Override
                             public void run() {
                                 try {
-                                    XposedHelpers.callMethod(callback, "reportUnlockAttempt", true, userId);
+                                    XposedHelpers.callMethod(callback, "reportUnlockAttempt", userId, true, 0);
                                     XposedHelpers.callMethod(callback, "dismiss", true);
                                 } catch (Throwable t) {
                                     log("Error dimissing keyguard: " + t.getMessage());
@@ -778,7 +778,7 @@ public class ModLockscreen {
             String kisImageFile = mGbContext.getFilesDir() + "/kis_image.png";
             mCustomBg = BitmapFactory.decodeFile(kisImageFile);
             if (refresh && mPhoneStatusBar != null) {
-                XposedHelpers.callMethod(mPhoneStatusBar, "updateMediaMetaData", false);
+                XposedHelpers.callMethod(mPhoneStatusBar, "updateMediaMetaData", false, false);
             }
             if (DEBUG_KIS) log("setLastScreenBackground: Last screen background updated");
         } catch (Throwable t) {

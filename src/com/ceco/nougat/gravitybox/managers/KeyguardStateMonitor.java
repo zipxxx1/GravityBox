@@ -230,7 +230,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
     public void dismissKeyguard() {
         if (mMediator != null) {
             try {
-                XposedHelpers.callMethod(mMediator, "dismiss");
+                XposedHelpers.callMethod(mMediator, "dismiss", false);
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }

@@ -20,6 +20,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.StrictMode;
 
 public class GravityBoxApplication extends Application {
 
@@ -39,6 +40,9 @@ public class GravityBoxApplication extends Application {
             config.locale = mLocale;
             res.updateConfiguration(config, res.getDisplayMetrics());
         }
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
     }
 
     @Override

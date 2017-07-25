@@ -286,6 +286,12 @@ public class SettingsManager {
                     pkgFolder.setExecutable(true, false);
                     pkgFolder.setReadable(true, false);
                 }
+                // cache dir
+                File cacheFolder = mContext.getCacheDir();
+                if (cacheFolder.exists()) {
+                    cacheFolder.setExecutable(true, false);
+                    cacheFolder.setReadable(true, false);
+                }
                 // files dir
                 File filesFolder = mContext.getFilesDir();
                 if (filesFolder.exists()) {
