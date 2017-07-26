@@ -72,6 +72,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModInputMethod.initZygote(prefs);
         PhoneWrapper.initZygote(prefs);
         ModTelephony.initZygote(prefs);
+        ProgressBarController.initZygote(prefs);
 
         // MTK (deprecated)
 //        if (Utils.isMtkDevice()) {
@@ -120,7 +121,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             XposedBridge.log("GB:Is AOSP forced: " + Utils.isAospForced());
             ModVolumeKeySkipTrack.initAndroid(prefs, lpparam.classLoader);
             ModHwKeys.initAndroid(prefs, lpparam.classLoader);
-            ModExpandedDesktop.initAndroid(prefs, lpparam.classLoader);
+            // TODO: exp. desktop
+            //ModExpandedDesktop.initAndroid(prefs, lpparam.classLoader);
             ModAudio.initAndroid(prefs, lpparam.classLoader);
             PermissionGranter.initAndroid(lpparam.classLoader);
             ModLowBatteryWarning.initAndroid(prefs, lpparam.classLoader);
@@ -159,7 +161,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         }
 
         if (lpparam.packageName.equals(ModClearAllRecents.PACKAGE_NAME)) {
-            ModClearAllRecents.init(prefs, lpparam.classLoader);
+            // TODO: clear all recents
+            //ModClearAllRecents.init(prefs, lpparam.classLoader);
         }
 
         if (ModDialer.PACKAGE_NAMES.contains(lpparam.packageName)) {

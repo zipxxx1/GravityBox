@@ -36,6 +36,7 @@ import android.os.Parcelable;
 import android.os.PowerManager;
 import android.service.notification.StatusBarNotification;
 import android.widget.RemoteViews;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -136,6 +137,35 @@ public class ProgressBarController implements BroadcastSubReceiver {
 
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mHandler = new Handler();
+    }
+
+    public static void initZygote(final XSharedPreferences prefs) {
+        // Content views for apps targeting SDK24+ are not populated so we force them to
+        try {
+            XposedHelpers.findAndHookMethod(Notification.Builder.class, "build", new XC_MethodHook() {
+                @SuppressWarnings("deprecation")
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!"OFF".equals(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"))) {
+                        Object style = XposedHelpers.getObjectField(param.thisObject, "mStyle");
+                        if (style == null || !(boolean)XposedHelpers.callMethod(style, "displayCustomViewInline")) {
+                            Notification n = (Notification) XposedHelpers.getObjectField(param.thisObject, "mN");
+                            if (n.contentView == null) {
+                                n.contentView = (RemoteViews) XposedHelpers.callMethod(
+                                        param.thisObject, "createContentView");
+                            }
+                            if (n.bigContentView == null) {
+                                n.bigContentView = (RemoteViews) XposedHelpers.callMethod(
+                                        param.thisObject, "createBigContentView");
+                            }
+                            if (DEBUG) log("Content views created for " + n);
+                        }
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            log("builder hook: error populating content views");
+        }
     }
 
     public void registerListener(ProgressStateListener listener) {
