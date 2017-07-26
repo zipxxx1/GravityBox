@@ -351,7 +351,6 @@
     <string name="recent_clear_top_right">Jobbra fent</string>
     <string name="recent_clear_bottom_left">Balra lent</string>
     <string name="recent_clear_bottom_right">Jobbra lent</string>
-    <string name="recent_clear_navigation_bar">Navigációs sávon (Navigációs sáv módosítások engedélyezése szükséges)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Felső szegély beállítása</string>
@@ -1497,10 +1496,6 @@
     <string name="pref_unc_as_pocket_mode_title">Zsebben hordás mód</string>
     <string name="pref_unc_as_pocket_mode_summary">A képernyő nem fog bekapcsolódni, ha a közelség érzékelő takarva van(pl. ha a készülék zsebben van)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Ezt az opciót jelenleg az Energia beállítások menüben lévő Ébresztés közelség érzékelővel funkció felülírja</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Balkezes mód</string>
-    <string name="pref_navbar_left_handed_summary">KÍSÉRLETI! Függőleges navigációs sávot helyez el a képernyő bal szélén fekvő tájolásnál (újraindítás szükséges)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Indító ikon elrejtése</string>

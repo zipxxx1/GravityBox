@@ -1201,9 +1201,6 @@
     <string name="pref_unc_as_pocket_mode_summary">근접 센서가 사방으로 둘러쌓여 있을 때 화면을 켜지 않습니다. (기기를 주머니에다가 넣을 때 등)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">전원 설정의 근접 센서로 화면 켜기 기능에 의해 값이 덮어씌여졌습니다.</string>
 
-    <string name="pref_navbar_left_handed_title">왼손 모드</string>
-    <string name="pref_navbar_left_handed_summary">실험적 기능입니다! 기기를 가로로 기울였을 때 네비게이션 바의 위치를 오른쪽이 아닌 왼쪽으로 배치시킵니다.</string>
-
     <string name="pref_hide_launcher_icon_title">앱 런처 아이콘 숨기기</string>
     <string name="pref_hide_launcher_icon_summary">홈 런처 앱을 재시작해야 할 수도 있습니다.</string>
 

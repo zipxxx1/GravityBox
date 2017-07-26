@@ -342,7 +342,6 @@
     <string name="recent_clear_top_right">右上角</string>
     <string name="recent_clear_bottom_left">左下角</string>
     <string name="recent_clear_bottom_right">右下角</string>
-    <string name="recent_clear_navigation_bar">導航列 (需要先啟用導航列選項) </string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">調整頂部邊距</string>
@@ -1506,10 +1505,6 @@
     <string name="pref_unc_as_pocket_mode_title">口袋模式</string>
     <string name="pref_unc_as_pocket_mode_summary">當距離感應器被覆蓋時 (例如當裝置被放在口袋中) 不會喚醒螢幕</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">本選項會被 [電源選項] > [距離感應器喚醒] 選項覆寫</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">左手模式</string>
-    <string name="pref_navbar_left_handed_summary">請注意! 這是實驗性功能! 當裝置橫置時把垂直導航列置於左方 (需要重新啟動)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">隱藏啟動器圖示</string>

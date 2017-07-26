@@ -166,7 +166,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int RECENT_CLEAR_TOP_RIGHT = 53;
     public static final int RECENT_CLEAR_BOTTOM_LEFT = 83;
     public static final int RECENT_CLEAR_BOTTOM_RIGHT = 85;
-    public static final int RECENT_CLEAR_NAVIGATION_BAR = 1;
     public static final String ACTION_PREF_RECENTS_CHANGED = "gravitybox.intent.action.RECENTS_CHANGED";
     public static final String EXTRA_RECENTS_CLEAR_ALL = "recentsClearAll";
     public static final String EXTRA_RECENTS_CLEAR_ALL_VISIBLE = "recentsClearAllVisible";
@@ -583,7 +582,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_NAVBAR_DIMEN = "pref_cat_navbar_dimen";
     public static final String PREF_KEY_NAVBAR_OVERRIDE = "pref_navbar_override";
     public static final String PREF_KEY_NAVBAR_ENABLE = "pref_navbar_enable";
-    public static final String PREF_KEY_NAVBAR_LEFT_HANDED = "pref_navbar_left_handed";
     public static final String PREF_KEY_NAVBAR_HEIGHT = "pref_navbar_height";
     public static final String PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE = "pref_navbar_height_landscape";
     public static final String PREF_KEY_NAVBAR_WIDTH = "pref_navbar_width";
@@ -933,7 +931,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_MTK_FIX_DEV_OPTS,
             PREF_KEY_MTK_FIX_TTS_SETTINGS,
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
-            PREF_KEY_NAVBAR_LEFT_HANDED,
             PREF_KEY_SAFE_MEDIA_VOLUME,
             PREF_KEY_SIGNAL_CLUSTER_DEM,
             PREF_KEY_SIGNAL_CLUSTER_DNTI,

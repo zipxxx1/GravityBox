@@ -350,7 +350,6 @@
     <string name="recent_clear_top_right">Superior derecha</string>
     <string name="recent_clear_bottom_left">Inferior izquierda</string>
     <string name="recent_clear_bottom_right">Inferior derecha</string>
-    <string name="recent_clear_navigation_bar">Barra de navegación (requiere activar los ajustes de la barra de navegación)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ajustar margen superior</string>
@@ -1512,10 +1511,6 @@
     <string name="pref_unc_as_pocket_mode_title">Modo bolsillo</string>
     <string name="pref_unc_as_pocket_mode_summary">No encender la pantalla cuando el dispositivo está cubierto (por ejemplo cuando el dispositivo está en el bolsillo)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Esta opción actualmente sustituirá la función despertador de proximidad en ajustes de encendido</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Modo zurdo</string>
-    <string name="pref_navbar_left_handed_summary">¡EXPERIMENTAL! Coloca la barra de navegación vertical en el lado izquierdo de la pantalla en modo horizontal (requiere reiniciar)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Ocultar icono del lanzador</string>

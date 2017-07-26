@@ -293,7 +293,6 @@
     <string name="recent_clear_top_right">右上</string>
     <string name="recent_clear_bottom_left">左下</string>
     <string name="recent_clear_bottom_right">右下</string>
-    <string name="recent_clear_navigation_bar">ナビバー(ナビバー設定も有効にしてください)</string>
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">ボタン上の余白</string>
     <!-- AppPickerPreference -->
@@ -1235,9 +1234,6 @@
     <string name="pref_unc_as_pocket_mode_title">ポケットモード</string>
     <string name="pref_unc_as_pocket_mode_summary">近接センサーが覆われているとき画面をオンにしないようにします。 (例: 端末がポケットの中にあるとき)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">このオプションは電源設定の「近接センサーで起動」によって上書きされています。</string>
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">左利きモード</string>
-    <string name="pref_navbar_left_handed_summary">実験的です! 横向きの時、縦向きのナビバーを画面の左側に表示します。 (要再起動)</string>
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">ホームアプリアイコンを隠す</string>
     <string name="pref_hide_launcher_icon_summary">ホームアプリの再起動が必要な場合があります。</string>

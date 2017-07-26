@@ -238,7 +238,6 @@
 <string name="recent_clear_top_right">بالا راست</string>
 <string name="recent_clear_bottom_left">پایین چپ</string>
 <string name="recent_clear_bottom_right">پایین راست</string>
-<string name="recent_clear_navigation_bar">نوار ناوبری (نیازمند فعال بودن ترفندهای نوار ناوبری)</string>
 <string name="pref_recent_clear_margin_top_title">تنظیم حاشیه بالا</string>
 <string name="app_picker_search">جستجو</string>
 <string name="app_picker_none">(انتخاب نشده)</string>
@@ -947,8 +946,6 @@
 <string name="pref_unc_as_pocket_mode_title">حالت قرار داشتن دستگاه در جیب</string>
 <string name="pref_unc_as_pocket_mode_summary">صفحه نمایش هنگام پوشیده بودن سنسور حرکت روشن نخواهد شد(بعنوان مثال هنگام قرار داشتن دستگاه درون جیب)</string>
 <string name="pref_unc_as_pocket_mode_summary_overriden">این گزینه در حال حاضر توسط ویژگی بیدارشدن با سنسور حرکت در ترفندهای پاور لغو شده است</string>
-<string name="pref_navbar_left_handed_title">حالت چپ دست</string>
-<string name="pref_navbar_left_handed_summary">آزمایشی! نمایش نوار پیمایش عمودی در سمت چپ صفحه نمایش هنگام قرار گرفتن دستگاه در حالت افقی (نیازمند راه اندازی مجدد)</string>
 <string name="pref_hide_launcher_icon_title">پنهان‌سازی آیکون برنامه در لانچر</string>
 <string name="pref_hide_launcher_icon_summary">ممکن است نیاز به راه اندازی مجدد لانچر باشد</string>
 <string name="pref_smart_radio_adaptive_delay_title">تاخیر تطبیقی</string>

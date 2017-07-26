@@ -351,7 +351,6 @@
     <string name="recent_clear_top_right">右上角</string>
     <string name="recent_clear_bottom_left">左下角</string>
     <string name="recent_clear_bottom_right">右下角</string>
-    <string name="recent_clear_navigation_bar">虚拟键（需要启用虚拟键调整）</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">调整顶部边距</string>
@@ -1518,10 +1517,6 @@
     <string name="pref_unc_as_pocket_mode_title">口袋模式</string>
     <string name="pref_unc_as_pocket_mode_summary">当距离传感器被遮挡时不会唤醒屏幕（例如当设备在口袋里）</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">在电源调整项中的接近唤醒功能会被覆盖</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">左手模式</string>
-    <string name="pref_navbar_left_handed_summary">实验功能！当设备在横向模式下屏幕的左侧将会垂直显示虚拟按键（需要重新启动）</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">隐藏桌面图标</string>

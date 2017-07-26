@@ -350,7 +350,6 @@
     <string name="recent_clear_top_right">Kanan atas</string>
     <string name="recent_clear_bottom_left">Kiri bawah</string>
     <string name="recent_clear_bottom_right">Kanan bawah</string>
-    <string name="recent_clear_navigation_bar">Bar navigasi (modifikasi bar navigasi perlu diaktifkan)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Set ukuran atas</string>
@@ -1514,10 +1513,6 @@
     <string name="pref_unc_as_pocket_mode_title">Mod poket</string>
     <string name="pref_unc_as_pocket_mode_summary">Skrin tidak akan hidup jika sensor jarak ditutup</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Tetapan ini tersedia di modifikasi kuasa</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Mod tangan kiri</string>
-    <string name="pref_navbar_left_handed_summary">PERCUBAAN! bar navigasi akan berada di bawah ketika mod lanskap (perlukan reboot)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Sembunyi ikon</string>

@@ -238,7 +238,6 @@
     <string name="recent_clear_top_right">Sağ üst</string>
     <string name="recent_clear_bottom_left">Sol alt</string>
     <string name="recent_clear_bottom_right">Sağ alt</string>
-    <string name="recent_clear_navigation_bar">Gezinme çubuğu (Gezinme çubuğu iyileştirmeleri etkinleştirilmelidir)</string>
     <string name="pref_recent_clear_margin_top_title">Üst boşluk ayarı</string>
     <string name="app_picker_search">Arama</string>
     <string name="app_picker_none">(Hiçbiri)</string>
@@ -948,8 +947,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_unc_as_pocket_mode_title">Cep modu</string>
     <string name="pref_unc_as_pocket_mode_summary">Yakınlık sensörü kapandığında ekran açılmaz (örneğin cihaz cepteyken)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Bu seçenek şu anda Güç iyileştirmelerindeki Yakınlık sensörüyle uyandırma özelliği tarafından geçersiz kılındı</string>
-    <string name="pref_navbar_left_handed_title">Solak modu</string>
-    <string name="pref_navbar_left_handed_summary">DENEYSEL! Yatay modda ekranın sol tarafına dikey gezinti çubuğu yerleştirir (yeniden başlatma gerektirir)</string>
     <string name="pref_hide_launcher_icon_title">Başlatıcı simgesini gizle</string>
     <string name="pref_hide_launcher_icon_summary">Başlatıcıyı yeniden başlatmak gerekebilir</string>
     <string name="pref_smart_radio_adaptive_delay_title">Uyarlamalı gecikme</string>

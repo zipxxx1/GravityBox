@@ -331,7 +331,6 @@
     <string name="recent_clear_top_right">Vpravo hore</string>
     <string name="recent_clear_bottom_left">Vľavo dole</string>
     <string name="recent_clear_bottom_right">Vpravo dole</string>
-    <string name="recent_clear_navigation_bar">Navigačná lišta (vyžaduje zapnuté nastavenia navigačnej lišty)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Prispôsobiť horný okraj</string>
@@ -1486,10 +1485,6 @@
     <string name="pref_unc_as_pocket_mode_title">Použiť senzor priblíženia</string>
     <string name="pref_unc_as_pocket_mode_summary">Nezapne obrazovku, ak je senzor priblíženia zakrytý (napr. ak je zariadenie vo vrecku)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Toto nastavenie je momentálne obídené funkciou nechceného prebudenia v nastaveniach napájania</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Režim pre ľavákov</string>
-    <string name="pref_navbar_left_handed_summary">EXPERIMENTÁLNE! Umiestni vertikálnu navigačnú lištu na ľavú stranu obrazovky v režime na šírku (vyžaduje reštart)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Skryť ikonu v spúšťači aplikácií</string>

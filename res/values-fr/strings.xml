@@ -350,7 +350,6 @@
     <string name="recent_clear_top_right">En haut à droite</string>
     <string name="recent_clear_bottom_left">En bas à gauche</string>
     <string name="recent_clear_bottom_right">En bas à droite</string>
-    <string name="recent_clear_navigation_bar">Barre de navigation (nécessite d\'activer les modifications de la barre de navigation dans GB)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ajuster la marge supérieure</string>
@@ -1514,10 +1513,6 @@
     <string name="pref_unc_as_pocket_mode_title">Mode poche</string>
     <string name="pref_unc_as_pocket_mode_summary">L\'écran ne s\'allumera pas lorsque le capteur de proximité est couvert (ex: lorsque l\'appareil est dans la poche)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Cette option est actuellement remplacée par l\'option "sortie de veille et proximité" dans les modifications énergie</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Mode gaucher</string>
-    <string name="pref_navbar_left_handed_summary">EXPÉRIMENTAL! Place la barre de navigation verticale à gauche en affichage mode paysage (redémarrage nécessaire)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Masquer l\'icône du lanceur</string>

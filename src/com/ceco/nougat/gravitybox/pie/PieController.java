@@ -123,8 +123,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private boolean mSysinfoDisabled;
     private int mLongpressDelay;
     private Drawable mRecentIcon;
-    private Drawable mRecentAltIcon;
-    private boolean mRecentAlt = false;
     private boolean mMirroredKeys;
 
     private static void log(String message) {
@@ -323,7 +321,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                 "ic_sysbar_back_ime", "drawable", PACKAGE_NAME), null).mutate();
         mRecentIcon = res.getDrawable(res.getIdentifier(
                 "ic_sysbar_recent", "drawable", PACKAGE_NAME), null).mutate();
-        mRecentAltIcon = mGbResources.getDrawable(R.drawable.ic_sysbar_recent_clear, null).mutate();
 
         try {
             mBaseStatusBarClass = XposedHelpers.findClass(CLASS_BASE_STATUSBAR, mContext.getClassLoader());
@@ -607,10 +604,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                 injectKeyDelayed(KeyEvent.KEYCODE_MENU);
                 break;
             case RECENT:
-                if (mRecentAlt) {
-                    Intent intent = new Intent(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_SINGLETAP);
-                    mContext.sendBroadcast(intent);
-                } else if (mStatusBar != null && mBaseStatusBarClass != null) {
+                if (mStatusBar != null && mBaseStatusBarClass != null) {
                     try {
                         Method m = mBaseStatusBarClass.getDeclaredMethod("toggleRecentApps");
                         m.setAccessible(true);
@@ -656,20 +650,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private void showAppLauncher() {
         if (SysUiManagers.AppLauncher != null) {
             SysUiManagers.AppLauncher.showDialog();
-        }
-    }
-
-    public void setRecentAlt(boolean recentAlt) {
-        if (mRecentAlt == recentAlt) return;
-
-        PieItem recentBtn = findItem(ButtonType.RECENT);
-        if (recentBtn == null) return;
-
-        mRecentAlt = recentAlt;
-        if (mRecentAlt) {
-            recentBtn.setImageDrawable(mRecentAltIcon);
-        } else {
-            recentBtn.setImageDrawable(mRecentIcon);
         }
     }
 
@@ -747,11 +727,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         if (mRecentIcon != null) {
             mRecentIcon.setColorFilter(null);
             mRecentIcon.setColorFilter(mColorInfo.fgColor, Mode.SRC_ATOP);
-        }
-
-        if (mRecentAltIcon != null) {
-            mRecentAltIcon.setColorFilter(null);
-            mRecentAltIcon.setColorFilter(mColorInfo.fgColor, Mode.SRC_ATOP);
         }
 
         if (mNavigationSlice != null) {

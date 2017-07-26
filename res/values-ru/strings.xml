@@ -351,7 +351,6 @@
     <string name="recent_clear_top_right">Сверху справа</string>
     <string name="recent_clear_bottom_left">Снизу слева</string>
     <string name="recent_clear_bottom_right">Снизу справа</string>
-    <string name="recent_clear_navigation_bar">Панель навигации (необходимо включение настроек панели навигации)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Настроить отступ сверху</string>
@@ -1517,10 +1516,6 @@
     <string name="pref_unc_as_pocket_mode_title">Режим кармана</string>
     <string name="pref_unc_as_pocket_mode_summary">Экран не включится, если датчик приближения закрыт (например, когда устройство находится в кармане)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Данная опция переопределяется функцией пробуждения при приближении в настройках питания</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Режим левой руки</string>
-    <string name="pref_navbar_left_handed_summary">ЭКПЕРИМЕНТ! Размещение вертикальной нав. панели по левой стороне экрана в ландшафтном режиме (необходима перезагрузка)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Скрыть значок из меню</string>

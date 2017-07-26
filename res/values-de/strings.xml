@@ -350,7 +350,6 @@
     <string name="recent_clear_top_right">Oben rechts</string>
     <string name="recent_clear_bottom_left">Unten links</string>
     <string name="recent_clear_bottom_right">Unten rechts</string>
-    <string name="recent_clear_navigation_bar">In Navigationsleiste (Nur bei aktiver Änderung der Navigationsleiste)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Oberen Rand festlegen</string>
@@ -1501,10 +1500,6 @@
     <string name="pref_unc_as_pocket_mode_title">Taschenmodus</string>
     <string name="pref_unc_as_pocket_mode_summary">Bildschirm nicht aktivieren, wenn der Näherungssensor bedeckt ist (zum Beispiel durch eine Hosentasche)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Diese Option kann von der Einstellung \'Aufwachen durch Näherung\' überschrieben werden.</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Linkshändermodus</string>
-    <string name="pref_navbar_left_handed_summary">EXPERIMENTELL! Im Querformat die Navigationsleiste am linken Bildschirmrand platzieren (Neustart erforderlich)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Launcher-Symbol verbergen</string>

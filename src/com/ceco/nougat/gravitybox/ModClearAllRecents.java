@@ -69,7 +69,6 @@ public class ModClearAllRecents {
     private static int mButtonGravity;
     private static int mMarginTopPx;
     private static int mMarginBottomPx;
-    private static boolean mNavbarLeftHanded;
     private static ViewGroup mRecentsView;
     private static SearchBarState mSearchBarState;
     private static SearchBarState mSearchBarStatePrev;
@@ -153,9 +152,6 @@ public class ModClearAllRecents {
 
             mButtonGravity = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL, "0"));
             mRamBarGravity = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_RAMBAR, "0"));
-            mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false) &&
-                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
-                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
             mSearchBarState = SearchBarState.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_RECENTS_SEARCH_BAR, "DEFAULT"));
             mClearAllUseAltIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL_ICON_ALT, false);
@@ -303,9 +299,6 @@ public class ModClearAllRecents {
                             mRamUsageBar.setVisibility(View.GONE);
                         }
                     }
-                    if (mButtonGravity == GravityBoxSettings.RECENT_CLEAR_NAVIGATION_BAR && hasTasks) {
-                        setRecentsClearAll(true, (Context)param.thisObject);
-                    }
                     if (mSearchBarState != SearchBarState.DEFAULT) {
                         XposedHelpers.callMethod(mRecentsView, "setSearchBarVisibility", View.GONE);
                         if (mSearchBarState == SearchBarState.HIDE_REMOVE_SPACE) {
@@ -329,13 +322,6 @@ public class ModClearAllRecents {
                         }
                         mSearchBarStatePrev = mSearchBarState;
                     }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(recentActivityClass, "onStop", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    setRecentsClearAll(false, (Context)param.thisObject);
                 }
             });
 
@@ -404,11 +390,6 @@ public class ModClearAllRecents {
         }
     };
 
-    private static void setRecentsClearAll(Boolean show, Context context) {
-        ModNavigationBar.setRecentAlt(show);
-        ModPieControls.setRecentAlt(show);
-    }
-
     @SuppressWarnings("deprecation")
     private static void updateButtonImage() {
         if (mRecentsClearButton == null) return;
@@ -427,8 +408,8 @@ public class ModClearAllRecents {
     }
 
     private static void updateButtonLayout() {
-        if (mRecentsClearButton == null || mButtonGravity == GravityBoxSettings.RECENT_CLEAR_OFF || 
-                mButtonGravity == GravityBoxSettings.RECENT_CLEAR_NAVIGATION_BAR) return;
+        if (mRecentsClearButton == null || mButtonGravity == GravityBoxSettings.RECENT_CLEAR_OFF)
+            return;
 
         final Context context = mRecentsClearButton.getContext();
         final Resources res = mRecentsClearButton.getResources();
@@ -437,21 +418,17 @@ public class ModClearAllRecents {
                 (FrameLayout.LayoutParams) mRecentsClearButton.getLayoutParams();
         lparams.gravity = mButtonGravity;
         if (mButtonGravity == 51 || mButtonGravity == 53) { 
-            int gravityForNavbarPosition = mNavbarLeftHanded ? 51 : 53;
-            int marginRight = (mButtonGravity == gravityForNavbarPosition && 
+            int marginRight = (mButtonGravity == 53 && 
                     orientation == Configuration.ORIENTATION_LANDSCAPE && 
                     Utils.isPhoneUI(context)) ? mMarginBottomPx : 0;
-            lparams.setMargins(mNavbarLeftHanded ? marginRight : 0, mMarginTopPx,
-                    !mNavbarLeftHanded ? marginRight : 0, 0);
+            lparams.setMargins(0, mMarginTopPx, marginRight, 0);
         } else {
-            int gravityForNavbarPosition = mNavbarLeftHanded ? 83 : 85;
             int marginBottom = (orientation == Configuration.ORIENTATION_PORTRAIT || 
                                     !Utils.isPhoneUI(context)) ? mMarginBottomPx : 0;
-            int marginRight = (mButtonGravity == gravityForNavbarPosition && 
+            int marginRight = (mButtonGravity == 85 && 
                     orientation == Configuration.ORIENTATION_LANDSCAPE && 
                     Utils.isPhoneUI(context)) ? mMarginBottomPx : 0;
-            lparams.setMargins(mNavbarLeftHanded ? marginRight : 0, 0, 
-                    !mNavbarLeftHanded ? marginRight : 0, marginBottom);
+            lparams.setMargins(0, 0, marginRight, marginBottom);
         }
         mRecentsClearButton.setLayoutParams(lparams);
         if (DEBUG) log("Clear all recents button layout updated");
@@ -474,9 +451,9 @@ public class ModClearAllRecents {
         final int marginBottom = (!rbOnTop && (orientation == Configuration.ORIENTATION_PORTRAIT ||
                                                 !Utils.isPhoneUI(context))) ? mMarginBottomPx : 0;
         final int marginLeft = orientation == Configuration.ORIENTATION_LANDSCAPE && 
-                Utils.isPhoneUI(context) & mNavbarLeftHanded ? mMarginBottomPx : 0;
+                Utils.isPhoneUI(context) ? mMarginBottomPx : 0;
         final int marginRight = orientation == Configuration.ORIENTATION_LANDSCAPE && 
-                Utils.isPhoneUI(context) & !mNavbarLeftHanded ? mMarginBottomPx : 0;
+                Utils.isPhoneUI(context) ? mMarginBottomPx : 0;
 
         FrameLayout.LayoutParams flp = (FrameLayout.LayoutParams) mRamUsageBar.getLayoutParams();
         flp.gravity = mRamBarGravity;

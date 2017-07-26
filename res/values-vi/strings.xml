@@ -350,7 +350,6 @@
     <string name="recent_clear_top_right">Trên cùng bên phải</string>
     <string name="recent_clear_bottom_left">Dưới cùng bên trái</string>
     <string name="recent_clear_bottom_right">Dưới cùng bên phải</string>
-    <string name="recent_clear_navigation_bar">Ở trên thanh điều hướng (Tinh chỉnh thanh điều hướng phải đang bật)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Căn chỉnh lề trên</string>
@@ -1511,10 +1510,6 @@
     <string name="pref_unc_as_pocket_mode_title">Chế độ bỏ túi</string>
     <string name="pref_unc_as_pocket_mode_summary">Không bật màn hình sáng khi che cảm biến tiệm cận (ví dụ khi điện thoại bỏ trong túi)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Tùy chọn này hiện tại bị ghi đè bởi tính năng Bật màn hình bằng cảm biến trong  Tinh chỉnh nguồn</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Chế độ tay trái</string>
-    <string name="pref_navbar_left_handed_summary">THỬ NGHIỆM! Đặt thanh điều hướng dọc ở bên trái màn hình khi màn hình xoay ngang (cần khởi động lại)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Ẩn biểu tượng launcher</string>

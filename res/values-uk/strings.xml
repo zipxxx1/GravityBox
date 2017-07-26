@@ -350,7 +350,6 @@
     <string name="recent_clear_top_right">Зверху праворуч</string>
     <string name="recent_clear_bottom_left">Знизу ліворуч</string>
     <string name="recent_clear_bottom_right">Знизу праворуч</string>
-    <string name="recent_clear_navigation_bar">Панель навігації (потрібно включення налаштувань панелі навігації)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Налаштувати відступ зверху</string>
@@ -1517,10 +1516,6 @@
     <string name="pref_unc_as_pocket_mode_title">Кишеньковий режим</string>
     <string name="pref_unc_as_pocket_mode_summary">Екран не вмикається, коли датчик наближення закритий (наприклад коли пристрій знаходиться в кишені)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Цей параметр перепризначається функцією пробудження при наближені в налаштуваннях живлення</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Режим для лівші</string>
-    <string name="pref_navbar_left_handed_summary">Експеримент! Розміщення вертикальної навігаційної панелі по лівій стороні екрану в ландшафтному режимі\n(необхідне перезавантаження)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Приховати значок з меню</string>

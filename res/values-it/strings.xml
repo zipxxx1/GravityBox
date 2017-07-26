@@ -342,7 +342,6 @@
     <string name="recent_clear_top_right">Alto destra</string>
     <string name="recent_clear_bottom_left">Basso sinistra</string>
     <string name="recent_clear_bottom_right">Basso destra</string>
-    <string name="recent_clear_navigation_bar">Barra di navigazione (richiede ottimizzazioni Barra di navigazione attive)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Margine superiore</string>
@@ -1495,10 +1494,6 @@
     <string name="pref_unc_as_pocket_mode_title">Modalità tasca</string>
     <string name="pref_unc_as_pocket_mode_summary">Lo schermo non verrà acceso se i sensori di prossimità sono coperti (es. quando il dispositivo è in tasca)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Questa opzione è al momento disabilitata da Risveglia con sensori di prossimità nel menu spegnimento</string>
-
-    <!-- Navbar: Left handed mode -->
-    <string name="pref_navbar_left_handed_title">Modalità mancino</string>
-    <string name="pref_navbar_left_handed_summary">SPERIMENTALE! Mostra la barra di navigazione in modalità orizzontale sul lato sinistro dello schermo (richiede riavvio)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Nascondi icona launcher</string>
