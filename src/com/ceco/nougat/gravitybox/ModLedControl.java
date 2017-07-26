@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -725,7 +725,7 @@ public class ModLedControl {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "shouldInterrupt",
+            XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "shouldPeek",
                     CLASS_NOTIF_DATA_ENTRY, StatusBarNotification.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -747,10 +747,6 @@ public class ModLedControl {
                     if (shouldNotDisturb(context)) {
                         if (DEBUG) log("shouldInterrupt: NO due to DND app in the foreground");
                         showHeadsUp = false;
-                    // disable when panels are disabled
-                    } else if (!(Boolean) XposedHelpers.callMethod(param.thisObject, "panelsEnabled")) {
-                        if (DEBUG) log("shouldInterrupt: NO due to panels being disabled");
-                        showHeadsUp = false;
                     // get desired mode set by UNC or use default
                     } else {
                         HeadsUpMode mode = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_MODE) ?
@@ -764,13 +760,14 @@ public class ModLedControl {
                                 showHeadsUp = (Boolean) param.getResult();
                                 break;
                             case ALWAYS: 
-                                showHeadsUp = isHeadsUpAllowed(sbn, context);
+                                showHeadsUp = isHeadsUpAllowed(param.args[0], sbn, context);
                                 break;
                             case OFF: 
                                 showHeadsUp = false; 
                                 break;
                             case IMMERSIVE:
-                                showHeadsUp = isStatusBarHidden(statusBarWindowState) && isHeadsUpAllowed(sbn, context);
+                                showHeadsUp = isStatusBarHidden(statusBarWindowState) &&
+                                                isHeadsUpAllowed(param.args[0], sbn, context);
                                 break;
                         }
                     }
@@ -808,24 +805,76 @@ public class ModLedControl {
         }
     }
 
-    private static boolean keyguardAllowsHeadsUp(Context context) {
-        boolean isShowingAndNotOccluded;
-        boolean isInputRestricted;
-        Object kgViewManager = XposedHelpers.getObjectField(mStatusBar, "mStatusBarKeyguardViewManager");
-        isShowingAndNotOccluded = ((boolean)XposedHelpers.callMethod(kgViewManager, "isShowing") &&
-                !(boolean)XposedHelpers.callMethod(kgViewManager, "isOccluded"));
-        isInputRestricted = (boolean)XposedHelpers.callMethod(kgViewManager, "isInputRestricted");
-        return (!isShowingAndNotOccluded && !isInputRestricted);
+    private static boolean keyguardAllowsHeadsUp(StatusBarNotification sbn) {
+        if (sbn.getNotification().fullScreenIntent == null) {
+            return true;
+        } else {
+            boolean isShowingAndNotOccluded;
+            Object kgViewManager = XposedHelpers.getObjectField(mStatusBar, "mStatusBarKeyguardViewManager");
+            isShowingAndNotOccluded = ((boolean)XposedHelpers.callMethod(kgViewManager, "isShowing") &&
+                    !(boolean)XposedHelpers.callMethod(kgViewManager, "isOccluded"));
+            return !isShowingAndNotOccluded;
+        }
     }
 
-    private static boolean isHeadsUpAllowed(StatusBarNotification sbn, Context context) {
-        if (context == null) return false;
+    private static boolean isDeviceInVrMode() {
+        try {
+            return (boolean) XposedHelpers.callMethod(mStatusBar, "isDeviceInVrMode");
+        } catch (Throwable t) {
+            log("Error in isDeviceInVrMode()");
+            return false;
+        }
+    }
 
-        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        Notification n = sbn.getNotification();
-        return (pm.isInteractive() &&
-                keyguardAllowsHeadsUp(context) &&
-                (!sbn.isOngoing() || n.fullScreenIntent != null || (n.extras.getInt("headsup", 0) != 0)));
+    private static boolean isFilteredNotification(StatusBarNotification sbn) {
+        try {
+            Object notifData = XposedHelpers.getObjectField(mStatusBar, "mNotificationData");
+            return (boolean) XposedHelpers.callMethod(notifData, "shouldFilterOut", sbn);
+        } catch (Throwable t) {
+            log("Error in isFilteredNotification()");
+            return false;
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private static boolean isDeviceInUse(Context ctx) {
+        PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
+        boolean inUse = pm.isScreenOn();
+        try {
+            Object dm = XposedHelpers.getObjectField(mStatusBar, "mDreamManager");
+            inUse &= !(boolean)XposedHelpers.callMethod(dm, "isDreaming");
+        } catch (Throwable t) { /* ignore */ }
+        return inUse;
+    }
+
+    private static boolean hasJustLaunchedFullScreenIntent(Object entry) {
+        try {
+            return (boolean) XposedHelpers.callMethod(entry, "hasJustLaunchedFullScreenIntent");
+        } catch (Throwable t) {
+            log("Error in hasJustLaunchedFullScreenIntent()");
+            return false;
+        }
+    }
+
+    private static boolean isSnoozedPackage(StatusBarNotification sbn) {
+        try {
+            return (boolean) XposedHelpers.callMethod(mStatusBar, "isSnoozedPackage", sbn);
+        } catch (Throwable t) {
+            log("Error in isSnoozedPackage()");
+            return false;
+        }
+    }
+
+    private static boolean isHeadsUpAllowed(Object entry, StatusBarNotification sbn, Context context) {
+        if (entry == null || sbn == null || context == null) return false;
+
+        return (!sbn.isOngoing() &&
+                !isDeviceInVrMode() &&
+                !isFilteredNotification(sbn) &&
+                isDeviceInUse(context) &&
+                !hasJustLaunchedFullScreenIntent(entry) &&
+                !isSnoozedPackage(sbn) &&
+                keyguardAllowsHeadsUp(sbn));
     }
 
     private static boolean isStatusBarHidden(int statusBarWindowState) {
