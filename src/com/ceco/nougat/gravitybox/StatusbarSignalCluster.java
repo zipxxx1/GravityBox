@@ -121,13 +121,13 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 activityView.setTag("gbDataActivity");
                 container.addView(activityView);
                 if (type == SignalType.WIFI) {
-                    imageDataIn = mGbResources.getDrawable(R.drawable.stat_sys_wifi_in);
-                    imageDataOut = mGbResources.getDrawable(R.drawable.stat_sys_wifi_out);
-                    imageDataInOut = mGbResources.getDrawable(R.drawable.stat_sys_wifi_inout);
+                    imageDataIn = mGbResources.getDrawable(R.drawable.stat_sys_wifi_in, null);
+                    imageDataOut = mGbResources.getDrawable(R.drawable.stat_sys_wifi_out, null);
+                    imageDataInOut = mGbResources.getDrawable(R.drawable.stat_sys_wifi_inout, null);
                 } else if (type == SignalType.MOBILE) {
-                    imageDataIn = mGbResources.getDrawable(R.drawable.stat_sys_signal_in);
-                    imageDataOut = mGbResources.getDrawable(R.drawable.stat_sys_signal_out);
-                    imageDataInOut = mGbResources.getDrawable(R.drawable.stat_sys_signal_inout);
+                    imageDataIn = mGbResources.getDrawable(R.drawable.stat_sys_signal_in, null);
+                    imageDataOut = mGbResources.getDrawable(R.drawable.stat_sys_signal_out, null);
+                    imageDataInOut = mGbResources.getDrawable(R.drawable.stat_sys_signal_inout, null);
                 }
                 updateDataActivityColor();
             }

@@ -401,14 +401,11 @@ public class ModStatusBar {
                 case STATUSBAR:
                     container = (ViewGroup) mStatusBarView;
                     break;
-                case HEADER:
-                    container = (ViewGroup) XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mHeader");
-                    break;
                 case KEYGUARD:
                     container = (ViewGroup) XposedHelpers.getObjectField(
                             mPhoneStatusBar, "mKeyguardStatusBar");
                     break;
+                default: break;
             }
             if (container != null && scResId != 0) {
                 LinearLayout view = (LinearLayout) container.findViewById(scResId);
@@ -613,7 +610,6 @@ public class ModStatusBar {
                     prepareBrightnessControl();
                     prepareTrafficMeter();
                     prepareSignalCluster(ContainerType.STATUSBAR);
-                    prepareSignalCluster(ContainerType.HEADER);
                     prepareSignalCluster(ContainerType.KEYGUARD);
                     prepareBatteryStyle(ContainerType.STATUSBAR);
                     prepareBatteryStyle(ContainerType.KEYGUARD);
