@@ -1693,11 +1693,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.isAppInstalled(getActivity(), APP_MESSAGING) && mPrefCatPhoneMessaging != null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
             }
-            if (!(Utils.isAppInstalled(getActivity(), APP_GOOGLE_NOW) &&
-                    Utils.isAppInstalled(getActivity(), APP_GOOGLE_HOME) ||
-                    Utils.isAppInstalled(getActivity(), APP_STOCK_LAUNCHER))) {
+            // TODO: launcher tweaks? probably not...
+            //if (!(Utils.isAppInstalled(getActivity(), APP_GOOGLE_NOW) &&
+            //        Utils.isAppInstalled(getActivity(), APP_GOOGLE_HOME) ||
+            //        Utils.isAppInstalled(getActivity(), APP_STOCK_LAUNCHER))) {
                 getPreferenceScreen().removePreference(mPrefCatLauncherTweaks);
-            }
+            //}
             if (Utils.isWifiOnly(getActivity())) {
                 // Remove preferences that don't apply to wifi-only devices
                 getPreferenceScreen().removePreference(mPrefCatPhone);
