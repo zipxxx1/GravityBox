@@ -479,9 +479,10 @@ public class ModHwKeys {
                 setActionFor(HwKeyTrigger.RECENTS_SINGLETAP, Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP+"_custom", null));
-                setActionFor(HwKeyTrigger.RECENTS_LONGPRESS, Integer.valueOf(
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
+                // TODO: recents key long-press
+                //setActionFor(HwKeyTrigger.RECENTS_LONGPRESS, Integer.valueOf(
+                //        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
+                //        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
                 setActionFor(HwKeyTrigger.RECENTS_DOUBLETAP, Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP+"_custom", null));

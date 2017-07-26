@@ -2303,12 +2303,14 @@
                 android:title="@string/pref_hwkey_singletap_title"
                 android:dialogTitle="@string/hwkey_recents_singletap_dialog_title"
                 android:defaultValue="0"/>
-            
+
+            <!--
             <ListPreference
                 android:key="pref_hwkey_recents_longpress"
                 android:title="@string/pref_hwkey_longpress_title"
                 android:dialogTitle="@string/hwkey_recents_longpress_dialog_title"
                 android:defaultValue="0"/>
+            -->
 
             <ListPreference
                 android:key="pref_hwkey_recents_doubletap"
