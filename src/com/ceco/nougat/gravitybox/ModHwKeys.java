@@ -1406,14 +1406,7 @@ public class ModHwKeys {
 
     private static void toggleRecentApps() {
         try {
-            XposedHelpers.callMethod(mPhoneWindowManager, "sendCloseSystemWindows", 
-                    SYSTEM_DIALOG_REASON_RECENT_APPS);
-        } catch (Throwable t) {
-            log("Error executing sendCloseSystemWindows(SYSTEM_DIALOG_REASON_RECENT_APPS): " + t.getMessage());
-        }
-        try {
-            final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService"); 
-            XposedHelpers.callMethod(sbService, "toggleRecentApps");
+            XposedHelpers.callMethod(mPhoneWindowManager, "toggleRecentApps");
         } catch (Throwable t) {
             log("Error executing toggleRecentApps(): " + t.getMessage());
         }
