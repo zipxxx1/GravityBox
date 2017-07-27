@@ -176,7 +176,7 @@ public class AppLauncher implements BroadcastSubReceiver {
                 }
                 LayoutInflater inflater = LayoutInflater.from(mGbContext);
                 mAppView = inflater.inflate(R.layout.navbar_app_dialog, null);
-                mDialog = new Dialog(mContext, android.R.style.Theme_Material_Dialog_NoActionBar);
+                mDialog = new Dialog(mContext, android.R.style.Theme_Material_Light_Dialog_NoActionBar);
                 mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 mDialog.setContentView(mAppView);
                 mDialog.setCanceledOnTouchOutside(true);
