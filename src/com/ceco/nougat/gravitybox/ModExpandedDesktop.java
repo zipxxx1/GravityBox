@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -34,7 +34,6 @@ import android.view.View;
 import android.view.WindowManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
-import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -46,26 +45,31 @@ public class ModExpandedDesktop {
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
     private static final String CLASS_POLICY_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
     private static final String CLASS_SCREEN_SHAPE_HELPER = "com.android.internal.util.ScreenShapeHelper";
+    private static final String CLASS_POLICY_CONTROL = "com.android.server.policy.PolicyControl";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
 
     public static final String SETTING_EXPANDED_DESKTOP_STATE = "gravitybox_expanded_desktop_state";
 
+    @SuppressWarnings("unused")
     private static class ViewConst {
         static final int SYSTEM_UI_FLAG_IMMERSIVE = 0x00000800;
         static final int SYSTEM_UI_FLAG_IMMERSIVE_STICKY = 0x00001000;
         static final int NAVIGATION_BAR_TRANSLUCENT = 0x80000000;
         static final int NAVIGATION_BAR_TRANSIENT = 0x08000000;
+        static final int NAVIGATION_BAR_TRANSPARENT = 0x00008000;
         static final int STATUS_BAR_TRANSIENT = 0x04000000;
         static final int STATUS_BAR_TRANSLUCENT = 0x40000000;
+        static final int STATUS_BAR_TRANSPARENT = 0x0000008;
         static final int SYSTEM_UI_FLAG_LOW_PROFILE = 0x00000001;
         static final int SYSTEM_UI_FLAG_HIDE_NAVIGATION = 0x00000002;
         static final int SYSTEM_UI_FLAG_FULLSCREEN = 0x00000004;
         static final int SYSTEM_UI_CLEARABLE_FLAGS =
                 SYSTEM_UI_FLAG_LOW_PROFILE | SYSTEM_UI_FLAG_HIDE_NAVIGATION
                     | SYSTEM_UI_FLAG_FULLSCREEN;
-        static final int SYSTEM_UI_TRANSPARENT = 0x00008000;
+        static final int SYSTEM_UI_TRANSPARENT =
+                NAVIGATION_BAR_TRANSPARENT | STATUS_BAR_TRANSPARENT;
     }
 
     private static class WmLp {
@@ -75,6 +79,15 @@ public class ModExpandedDesktop {
         static final int FLAG_LAYOUT_IN_OVERSCAN = 0x02000000;
         static final int PRIVATE_FLAG_KEYGUARD = 0x00000400;
     }
+
+    private static class NavBarPosition {
+        static final int NAV_BAR_BOTTOM = 0;
+        static final int NAV_BAR_RIGHT = 1;
+        static final int NAV_BAR_LEFT = 2;
+    }
+
+    private static final int HOME_STACK_ID = 0;
+    private static final int DOCKED_STACK_ID = 3;
 
     private static class NavbarDimensions {
         int wPort, hPort, hLand;
@@ -94,7 +107,6 @@ public class ModExpandedDesktop {
     private static float mNavbarHeightScaleFactor = 1;
     private static float mNavbarHeightLandscapeScaleFactor = 1;
     private static float mNavbarWidthScaleFactor = 1;
-    private static boolean mClearedBecauseOfForceShow;
     private static Unhook mGetSystemUiVisibilityHook;
     private static List<String> mLoggedErrors = new ArrayList<String>();
     private static Method mAreTranslucentBarsAllowed = null;
@@ -306,6 +318,7 @@ public class ModExpandedDesktop {
     public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
+            final Class<?> classPolicyControl = XposedHelpers.findClass(CLASS_POLICY_CONTROL, classLoader);
             mClsScreenShapeHelper = XposedHelpers.findClass(CLASS_SCREEN_SHAPE_HELPER, classLoader);
             initReflections(classPhoneWindowManager);
 
@@ -383,311 +396,263 @@ public class ModExpandedDesktop {
             }
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "getInsetHintLw",
-                    WindowManager.LayoutParams.class, int.class,
+                    WindowManager.LayoutParams.class, Rect.class,
+                    int.class, int.class, int.class,
                     Rect.class, Rect.class, Rect.class, getInsetHintReplacement);
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "beginLayoutLw",
-                    boolean.class, int.class, int.class, int.class, new XC_MethodReplacement() {
+            XposedBridge.hookAllMethods(classPhoneWindowManager, "layoutNavigationBar", new XC_MethodHook() {
                 @Override
-                protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (DEBUG_LAYOUT) log("beginLayoutLw");
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     try {
                         if (!isImmersiveModeActive()) {
-                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                            return;
                         }
 
-                        boolean isDefaultDisplay = (Boolean) param.args[0];
-                        int displayWidth = (Integer) param.args[1];
-                        int displayHeight = (Integer) param.args[2];
-                        int displayRotation = (Integer) param.args[3];
-                        final int overscanLeft, overscanTop, overscanRight, overscanBottom;
-                        int val;
-                        if (isDefaultDisplay) {
-                            switch (displayRotation) {
-                                case Surface.ROTATION_90:
-                                    overscanLeft = getInt("mOverscanTop");
-                                    overscanTop = getInt("mOverscanRight");
-                                    overscanRight = getInt("mOverscanBottom");
-                                    overscanBottom = getInt("mOverscanLeft");
-                                    break;
-                                case Surface.ROTATION_180:
-                                    overscanLeft = getInt("mOverscanRight");
-                                    overscanTop = getInt("mOverscanBottom");
-                                    overscanRight = getInt("mOverscanLeft");
-                                    overscanBottom = getInt("mOverscanTop");
-                                    break;
-                                case Surface.ROTATION_270:
-                                    overscanLeft = getInt("mOverscanBottom");
-                                    overscanTop = getInt("mOverscanLeft");
-                                    overscanRight = getInt("mOverscanTop");
-                                    overscanBottom = getInt("mOverscanRight");
-                                    break;
-                                default:
-                                    overscanLeft = getInt("mOverscanLeft");
-                                    overscanTop = getInt("mOverscanTop");
-                                    overscanRight = getInt("mOverscanRight");
-                                    overscanBottom = getInt("mOverscanBottom");
-                                    break;
-                            }
-                        } else {
-                            overscanLeft = 0;
-                            overscanTop = 0;
-                            overscanRight = 0;
-                            overscanBottom = 0;
+                        final int sysui = getInt("mLastSystemUiFlags");
+                        boolean immersiveSticky = (sysui & ViewConst.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) != 0;
+
+                        int displayWidth = (int)param.args[0];
+                        int displayHeight = (int)param.args[1];
+                        int displayRotation = (int)param.args[2];
+                        int uiMode = (int)param.args[3];
+                        int overscanLeft = (int)param.args[4];
+                        int overscanRight = (int)param.args[5];
+                        int overscanBottom = (int)param.args[6];
+                        Rect dcf = (Rect)param.args[7];
+                        boolean navVisible = (boolean)param.args[8];
+                        boolean navTranslucent = (sysui & 
+                                (ViewConst.NAVIGATION_BAR_TRANSLUCENT | ViewConst.NAVIGATION_BAR_TRANSPARENT)) != 0;
+                        navTranslucent &= !immersiveSticky || 
+                                mExpandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE_STATUSBAR;  // transient trumps translucent
+                        if (!isKeyguardShowing()) {
+                            navTranslucent &= (Boolean) mAreTranslucentBarsAllowed.invoke(param.thisObject);
                         }
-                        setInt("mOverscanScreenLeft", 0); setInt("mRestrictedOverscanScreenLeft", 0);
-                        setInt("mOverscanScreenTop", 0); setInt("mRestrictedOverscanScreenTop", 0);
-                        setInt("mOverscanScreenWidth", displayWidth); setInt("mRestrictedOverscanScreenWidth", displayWidth);
-                        setInt("mOverscanScreenHeight", displayHeight); setInt("mRestrictedOverscanScreenHeight", displayHeight);
-                        setInt("mSystemLeft", 0);
-                        setInt("mSystemTop", 0);
-                        setInt("mSystemRight", displayWidth);
-                        setInt("mSystemBottom", displayHeight);
-                        setInt("mUnrestrictedScreenLeft", overscanLeft);
-                        setInt("mUnrestrictedScreenTop", overscanTop);
-                        setInt("mUnrestrictedScreenWidth", displayWidth - overscanLeft - overscanRight);
-                        setInt("mUnrestrictedScreenHeight", displayHeight - overscanTop - overscanBottom);
-                        setInt("mRestrictedScreenLeft", overscanLeft);
-                        setInt("mRestrictedScreenTop", overscanTop);
-                        setInt("mRestrictedScreenWidth", displayWidth - overscanLeft - overscanRight);
-                        XposedHelpers.setIntField(getObj("mSystemGestures"), "screenWidth", displayWidth - overscanLeft - overscanRight);
-                        setInt("mRestrictedScreenHeight", displayHeight - overscanTop - overscanBottom);
-                        XposedHelpers.setIntField(getObj("mSystemGestures"), "screenHeight", displayHeight - overscanTop - overscanBottom);
-                        setInt("mDockLeft", overscanLeft); setInt("mContentLeft", overscanLeft); setInt("mStableLeft", overscanLeft);
-                        setInt("mStableFullscreenLeft", overscanLeft); setInt("mCurLeft", overscanLeft);
-                        setInt("mVoiceContentLeft", overscanLeft);
-                        setInt("mDockTop", overscanTop); setInt("mContentTop", overscanTop); setInt("mStableTop", overscanTop);
-                        setInt("mStableFullscreenTop", overscanTop); setInt("mCurTop", overscanTop);
-                        setInt("mVoiceContentTop", overscanTop);
-                        val = displayWidth - overscanRight;
-                        setInt("mDockRight", val); setInt("mContentRight", val); setInt("mStableRight", val);
-                        setInt("mStableFullscreenRight", val); setInt("mCurRight", val);
-                        setInt("mVoiceContentRight", val);
-                        val = displayHeight - overscanBottom;
-                        setInt("mDockBottom", val); setInt("mContentBottom", val); setInt("mStableBottom", val); 
-                        setInt("mStableFullscreenBottom", val); setInt("mCurBottom", val);
-                        setInt("mVoiceContentBottom", val);
-                        setInt("mDockLayer", 0x10000000);
-                        setInt("mStatusBarLayer", -1);
+                        boolean navAllowedHidden = (boolean) param.args[10];
+                        boolean statusBarExpandedNotKeyguard = (boolean) param.args[11];
 
-                        // start with the current dock rect, which will be (0,0,displayWidth,displayHeight)
-                        final Rect pf = getRect("mTmpParentFrame");
-                        final Rect df = getRect("mTmpDisplayFrame");
-                        final Rect of = getRect("mTmpOverscanFrame");
-                        final Rect vf = getRect("mTmpVisibleFrame");
-                        final Rect dcf = getRect("mTmpDecorFrame");
-                        pf.left = df.left = of.left = vf.left = getInt("mDockLeft");
-                        pf.top = df.top = of.top = vf.top = getInt("mDockTop");
-                        pf.right = df.right = of.right = vf.right = getInt("mDockRight");
-                        pf.bottom = df.bottom = of.bottom = vf.bottom = getInt("mDockBottom");
-                        dcf.setEmpty();  // Decor frame N/A for system bars.
-
-                        if (isDefaultDisplay) {
-                            // For purposes of putting out fake window up to steal focus, we will
-                            // drive nav being hidden only by whether it is requested.
-                            final int sysui = getInt("mLastSystemUiFlags");
-                            boolean navVisible = (sysui & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
-                            boolean navTranslucent = (sysui & 
-                                    (ViewConst.NAVIGATION_BAR_TRANSLUCENT | ViewConst.SYSTEM_UI_TRANSPARENT)) != 0;
-                            boolean immersive = (sysui & ViewConst.SYSTEM_UI_FLAG_IMMERSIVE) != 0;
-                            boolean immersiveSticky = (sysui & ViewConst.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) != 0;
-                            boolean navAllowedHidden = immersive || immersiveSticky;
-                            navTranslucent &= !immersiveSticky || 
-                                    mExpandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE_STATUSBAR;  // transient trumps translucent
-                            if (!isKeyguardShowing()) {
-                                navTranslucent &= (Boolean) mAreTranslucentBarsAllowed.invoke(param.thisObject);
-                            }
-
-                            // When the navigation bar isn't visible, we put up a fake
-                            // input window to catch all touch events.  This way we can
-                            // detect when the user presses anywhere to bring back the nav
-                            // bar and ensure the application doesn't see the event.
-                            if (navVisible || navAllowedHidden) {
-                                if (getObj("mInputConsumer") != null) {
-                                    XposedHelpers.callMethod(getObj("mInputConsumer"), "dismiss");
-                                    setObj("mInputConsumer", null);
+                        Object navBar = getObj("mNavigationBar");
+                        if (navBar != null) {
+                            Object navBarCtrl = getObj("mNavigationBarController");
+                            boolean transientNavBarShowing = (Boolean) XposedHelpers.callMethod(navBarCtrl, "isTransientShowing");
+                            // Force the navigation bar to its appropriate place and
+                            // size.  We need to do this directly, instead of relying on
+                            // it to bubble up from the nav bar, because this needs to
+                            // change atomically with screen rotations.
+                            final int position = (int)XposedHelpers.callMethod(param.thisObject, "navigationBarPosition",
+                                    displayWidth, displayHeight, displayRotation);
+                            setInt("mNavigationBarPosition", position);
+                            if (position == NavBarPosition.NAV_BAR_BOTTOM) {
+                                // It's a system nav bar or a portrait screen; nav bar goes on bottom.
+                                int top = displayHeight - overscanBottom
+                                        - (int)XposedHelpers.callMethod(param.thisObject, "getNavigationBarHeight",
+                                                displayRotation, uiMode);
+                                getRect("mTmpNavigationFrame").set(0, top, displayWidth, displayHeight - overscanBottom);
+                                int val = getRect("mTmpNavigationFrame").top;
+                                setInt("mStableBottom", val);
+                                if (!isNavbarImmersive()) {
+                                    setInt("mStableFullscreenBottom", val);
                                 }
-                            } else if (getObj("mInputConsumer") == null) {
-                                Object wmF = getObj("mWindowManagerFuncs");
-                                Handler h = (Handler) getObj("mHandler");
-                                setObj("mInputConsumer", XposedHelpers.callMethod(wmF, "addInputConsumer",
-                                        h.getLooper(), getObj("mHideNavInputEventReceiverFactory")));
-                            }
-
-                            // For purposes of positioning and showing the nav bar, if we have
-                            // decided that it can't be hidden (because of the screen aspect ratio),
-                            // then take that into account.
-                            navVisible |= !(Boolean) mCanHideNavigationBar.invoke(param.thisObject);
-
-                            boolean updateSysUiVisibility = false;
-                            Object navBar = getObj("mNavigationBar");
-                            if (navBar != null) {
-                                Object navBarCtrl = getObj("mNavigationBarController");
-                                boolean transientNavBarShowing = (Boolean) XposedHelpers.callMethod(navBarCtrl, "isTransientShowing");
-                                // Force the navigation bar to its appropriate place and
-                                // size.  We need to do this directly, instead of relying on
-                                // it to bubble up from the nav bar, because this needs to
-                                // change atomically with screen rotations.
-                                setBool("mNavigationBarOnBottom", (!getBool("mNavigationBarCanMove") || displayWidth < displayHeight));
-                                if (getBool("mNavigationBarOnBottom")) {
-                                    // It's a system nav bar or a portrait screen; nav bar goes on bottom.
-                                    int top = displayHeight - overscanBottom
-                                            - getIntArray("mNavigationBarHeightForRotationDefault")[displayRotation];
-                                    getRect("mTmpNavigationFrame").set(0, top, displayWidth, displayHeight - overscanBottom);
-                                    val = getRect("mTmpNavigationFrame").top;
-                                    setInt("mStableBottom", val);
-                                    if (!isNavbarImmersive()) {
-                                        setInt("mStableFullscreenBottom", val);
-                                    }
-                                    if (transientNavBarShowing
-                                            || (navVisible && isNavbarImmersive())) {
-                                        XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
-                                    } else if (navVisible) {
-                                        XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
-                                        setInt("mDockBottom", val);
-                                        setInt("mRestrictedScreenHeight", getInt("mDockBottom") - getInt("mRestrictedScreenTop"));
-                                        setInt("mRestrictedOverscanScreenHeight", getInt("mDockBottom") - getInt("mRestrictedOverscanScreenTop"));
-                                    } else {
-                                        // We currently want to hide the navigation UI.
-                                        XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", false);
-                                    }
-                                    if (navVisible && !navTranslucent && !(Boolean)XposedHelpers.callMethod(navBar, "isAnimatingLw")
-                                            && !(Boolean)XposedHelpers.callMethod(navBarCtrl, "wasRecentlyTranslucent")) {
-                                        // If the opaque nav bar is currently requested to be visible,
-                                        // and not in the process of animating on or off, then
-                                        // we can tell the app that it is covered by it.
-                                        setInt("mSystemBottom", val);
-                                    }
+                                if (transientNavBarShowing
+                                        || (navVisible && isNavbarImmersive())) {
+                                    XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
+                                } else if (navVisible) {
+                                    XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
+                                    setInt("mDockBottom", val);
+                                    setInt("mRestrictedScreenHeight", getInt("mDockBottom") - getInt("mRestrictedScreenTop"));
+                                    setInt("mRestrictedOverscanScreenHeight", getInt("mDockBottom") - getInt("mRestrictedOverscanScreenTop"));
                                 } else {
-                                    // Landscape screen; nav bar goes to the right.
-                                    int left = displayWidth - overscanRight
-                                            - getIntArray("mNavigationBarWidthForRotationDefault")[displayRotation];
-                                    getRect("mTmpNavigationFrame").set(left, 0, displayWidth - overscanRight, displayHeight);
-                                    val = getRect("mTmpNavigationFrame").left;
-                                    setInt("mStableRight", val);
-                                    if (!isNavbarImmersive()) {
-                                        setInt("mStableFullscreenRight", val);
-                                    }
-                                    if (transientNavBarShowing
-                                            || (navVisible && isNavbarImmersive())) {
-                                        XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
-                                    } else if (navVisible) {
-                                        XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
-                                        setInt("mDockRight", val);
-                                        setInt("mRestrictedScreenWidth", getInt("mDockRight") - getInt("mRestrictedScreenLeft"));
-                                        setInt("mRestrictedOverscanScreenWidth", getInt("mDockRight") - getInt("mRestrictedOverscanScreenLeft"));
-                                    } else {
-                                        // We currently want to hide the navigation UI.
-                                        XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", false);
-                                    }
-                                    if (navVisible && !navTranslucent && !(Boolean)XposedHelpers.callMethod(navBar, "isAnimatingLw")
-                                            && !(Boolean)XposedHelpers.callMethod(navBarCtrl, "wasRecentlyTranslucent")) {
-                                        // If the nav bar is currently requested to be visible,
-                                        // and not in the process of animating on or off, then
-                                        // we can tell the app that it is covered by it.
-                                        setInt("mSystemRight", val);
-                                    }
+                                    // We currently want to hide the navigation UI - unless we expanded the status bar.
+                                    XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", statusBarExpandedNotKeyguard);
                                 }
-                                // Make sure the content and current rectangles are updated to
-                                // account for the restrictions from the navigation bar.
-                                val = getInt("mDockTop");
+                                if (navVisible && !navTranslucent && !navAllowedHidden && 
+                                        !(Boolean)XposedHelpers.callMethod(navBar, "isAnimatingLw")
+                                        && !(Boolean)XposedHelpers.callMethod(navBarCtrl, "wasRecentlyTranslucent")) {
+                                    // If the opaque nav bar is currently requested to be visible,
+                                    // and not in the process of animating on or off, then
+                                    // we can tell the app that it is covered by it.
+                                    setInt("mSystemBottom", val);
+                                }
+                            } else if (position == NavBarPosition.NAV_BAR_RIGHT) {
+                                // Landscape screen; nav bar goes to the right.
+                                int left = displayWidth - overscanRight
+                                        - (int)XposedHelpers.callMethod(param.thisObject, "getNavigationBarWidth",
+                                                displayRotation, uiMode);
+                                getRect("mTmpNavigationFrame").set(left, 0, displayWidth - overscanRight, displayHeight);
+                                int val = getRect("mTmpNavigationFrame").left;
+                                setInt("mStableRight", val);
+                                if (!isNavbarImmersive()) {
+                                    setInt("mStableFullscreenRight", val);
+                                }
+                                if (transientNavBarShowing
+                                        || (navVisible && isNavbarImmersive())) {
+                                    XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
+                                } else if (navVisible) {
+                                    XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
+                                    setInt("mDockRight", val);
+                                    setInt("mRestrictedScreenWidth", getInt("mDockRight") - getInt("mRestrictedScreenLeft"));
+                                    setInt("mRestrictedOverscanScreenWidth", getInt("mDockRight") - getInt("mRestrictedOverscanScreenLeft"));
+                                } else {
+                                    // We currently want to hide the navigation UI - unless we expanded the status bar.
+                                    XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", statusBarExpandedNotKeyguard);
+                                }
+                                if (navVisible && !navTranslucent && !navAllowedHidden &&
+                                        !(Boolean)XposedHelpers.callMethod(navBar, "isAnimatingLw")
+                                        && !(Boolean)XposedHelpers.callMethod(navBarCtrl, "wasRecentlyTranslucent")) {
+                                    // If the nav bar is currently requested to be visible,
+                                    // and not in the process of animating on or off, then
+                                    // we can tell the app that it is covered by it.
+                                    setInt("mSystemRight", val);
+                                }
+                            } else if (position == NavBarPosition.NAV_BAR_LEFT) {
+                                // Seascape screen; nav bar goes to the left.
+                                int right  = overscanLeft +
+                                        - (int)XposedHelpers.callMethod(param.thisObject, "getNavigationBarWidth",
+                                                displayRotation, uiMode);
+                                getRect("mTmpNavigationFrame").set(overscanLeft, 0, right, displayHeight);
+                                int val = getRect("mTmpNavigationFrame").right;
+                                setInt("mStableLeft", val);
+                                if (!isNavbarImmersive()) {
+                                    setInt("mStableFullscreenLeft", val);
+                                }
+                                if (transientNavBarShowing
+                                        || (navVisible && isNavbarImmersive())) {
+                                    XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
+                                } else if (navVisible) {
+                                    XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
+                                    setInt("mDockLeft", val);
+                                    setInt("mRestrictedScreenLeft", val);
+                                    setInt("mRestrictedScreenWidth", getInt("mDockRight") - getInt("mRestrictedScreenLeft"));
+                                    setInt("mRestrictedOverscanScreenWidth", getInt("mDockRight") - getInt("mRestrictedOverscanScreenLeft"));
+                                } else {
+                                    // We currently want to hide the navigation UI - unless we expanded the status bar.
+                                    XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", statusBarExpandedNotKeyguard);
+                                }
+                                if (navVisible && !navTranslucent && !navAllowedHidden &&
+                                        !(Boolean)XposedHelpers.callMethod(navBar, "isAnimatingLw")
+                                        && !(Boolean)XposedHelpers.callMethod(navBarCtrl, "wasRecentlyTranslucent")) {
+                                    // If the nav bar is currently requested to be visible,
+                                    // and not in the process of animating on or off, then
+                                    // we can tell the app that it is covered by it.
+                                    setInt("mSystemLeft", val);
+                                }
+                            }
+                            // Make sure the content and current rectangles are updated to
+                            // account for the restrictions from the navigation bar.
+                            int val = getInt("mDockTop");
+                            setInt("mContentTop", val); setInt("mCurTop", val); setInt("mVoiceContentTop", val);
+                            val = getInt("mDockBottom");
+                            setInt("mContentBottom", val); setInt("mCurBottom", val); setInt("mVoiceContentBottom", val);
+                            val = getInt("mDockLeft");
+                            setInt("mContentLeft", val); setInt("mCurLeft", val); setInt("mVoiceContentLeft", val);
+                            val = getInt("mDockRight");
+                            setInt("mContentRight", val); setInt("mCurRight", val); setInt("mVoiceContentRight",val);
+                            setInt("mStatusBarLayer", (Integer)XposedHelpers.callMethod(navBar, "getSurfaceLayer"));
+                            // And compute the final frame.
+                            Object nf = getObj("mTmpNavigationFrame");
+                            XposedHelpers.callMethod(navBar, "computeFrameLw", nf, nf, nf, nf, nf, dcf, nf, nf);
+                            if (DEBUG_LAYOUT) log("mNavigationBar frame: " + nf);
+                            if ((Boolean)XposedHelpers.callMethod(navBarCtrl, "checkHiddenLw")) {
+                                param.setResult(true);
+                            }
+                        }
+                        param.setResult(false);
+                        if (DEBUG_LAYOUT) log(String.format("mDock rect: (%d,%d - %d,%d)",
+                                getInt("mDockLeft"), getInt("mDockTop"), getInt("mDockRight"), getInt("mDockBottom")));
+                    } catch (Throwable t) {
+                        logAndMute(param.method.getName(), t);
+                    }
+                }
+            });
+
+            XposedBridge.hookAllMethods(classPhoneWindowManager, "layoutStatusBar", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    try {
+                        if (!isImmersiveModeActive()) {
+                            return;
+                        }
+
+                        Rect pf = (Rect)param.args[0];
+                        Rect df = (Rect)param.args[1];
+                        Rect of = (Rect)param.args[2];
+                        Rect vf = (Rect)param.args[3];
+                        Rect dcf = (Rect)param.args[4];
+                        int sysui = (int)param.args[5];
+                        boolean isKeyguardShowing = (boolean) param.args[6];
+
+                        // decide where the status bar goes ahead of time
+                        Object statusBar = getObj("mStatusBar");
+                        if (statusBar != null) {
+                            // apply any navigation bar insets
+                            pf.left = df.left = of.left = getInt("mUnrestrictedScreenLeft");
+                            pf.top = df.top = of.top = getInt("mUnrestrictedScreenTop");
+                            pf.right = df.right = of.right = getInt("mUnrestrictedScreenWidth") + getInt("mUnrestrictedScreenLeft");
+                            pf.bottom = df.bottom = of.bottom = getInt("mUnrestrictedScreenHeight")
+                                    + getInt("mUnrestrictedScreenTop");
+                            vf.left = getInt("mStableLeft");
+                            vf.top = getInt("mStableTop");
+                            vf.right = getInt("mStableRight");
+                            vf.bottom = getInt("mStableBottom");
+
+                            setInt("mStatusBarLayer", (Integer)XposedHelpers.callMethod(statusBar, "getSurfaceLayer"));
+
+                            // Let the status bar determine its size.
+                            XposedHelpers.callMethod(statusBar, "computeFrameLw", pf, df, vf, vf, vf, dcf, vf, vf);
+
+                            // For layout, the status bar is always at the top with our fixed height.
+                            setInt("mStableTop", getInt("mUnrestrictedScreenTop") + getInt("mStatusBarHeight"));
+
+                            boolean statusBarTransient = (sysui & ViewConst.STATUS_BAR_TRANSIENT) != 0;
+                            boolean statusBarTranslucent = (sysui & 
+                                    (ViewConst.STATUS_BAR_TRANSLUCENT | ViewConst.STATUS_BAR_TRANSPARENT)) != 0;
+                            if (!isKeyguardShowing) {
+                                statusBarTranslucent &= (Boolean) mAreTranslucentBarsAllowed.invoke(param.thisObject);
+                            }
+
+                            // If the status bar is hidden, we don't want to cause
+                            // windows behind it to scroll.
+                            if ((Boolean)XposedHelpers.callMethod(statusBar, "isVisibleLw") && !statusBarTransient
+                                    && !isStatusbarImmersive()) {
+                                // Status bar may go away, so the screen area it occupies
+                                // is available to apps but just covering them when the
+                                // status bar is visible.
+                                setInt("mDockTop", getInt("mUnrestrictedScreenTop") + getInt("mStatusBarHeight"));
+
+                                int val = getInt("mDockTop");
                                 setInt("mContentTop", val); setInt("mCurTop", val); setInt("mVoiceContentTop", val);
                                 val = getInt("mDockBottom");
                                 setInt("mContentBottom", val); setInt("mCurBottom", val); setInt("mVoiceContentBottom", val);
                                 val = getInt("mDockLeft");
                                 setInt("mContentLeft", val); setInt("mCurLeft", val); setInt("mVoiceContentLeft", val);
                                 val = getInt("mDockRight");
-                                setInt("mContentRight", val); setInt("mCurRight", val); setInt("mVoiceContentRight",val);
-                                setInt("mStatusBarLayer", (Integer)XposedHelpers.callMethod(navBar, "getSurfaceLayer"));
-                                // And compute the final frame.
-                                Object nf = getObj("mTmpNavigationFrame");
-                                XposedHelpers.callMethod(navBar, "computeFrameLw", nf, nf, nf, nf, nf, dcf, nf, nf);
-                                if (DEBUG_LAYOUT) log("mNavigationBar frame: " + nf);
-                                if ((Boolean)XposedHelpers.callMethod(navBarCtrl, "checkHiddenLw")) {
-                                    updateSysUiVisibility = true;
-                                }
+                                setInt("mContentRight", val); setInt("mCurRight", val); setInt("mVoiceContentRight", val);
+
+                                if (DEBUG_LAYOUT) log("Status bar: " +
+                                    String.format(
+                                        "dock=[%d,%d][%d,%d] content=[%d,%d][%d,%d] cur=[%d,%d][%d,%d]",
+                                        getInt("mDockLeft"), getInt("mDockTop"), getInt("mDockRight"), getInt("mDockBottom"),
+                                                getInt("mContentLeft"), getInt("mContentTop"), 
+                                                getInt("mContentRight"), getInt("mContentBottom"),
+                                                getInt("mCurLeft"), getInt("mCurTop"), getInt("mCurRight"), getInt("mCurBottom")));
                             }
-                            if (DEBUG_LAYOUT) log(String.format("mDock rect: (%d,%d - %d,%d)",
-                                    getInt("mDockLeft"), getInt("mDockTop"), getInt("mDockRight"), getInt("mDockBottom")));
-
-                            // decide where the status bar goes ahead of time
-                            Object statusBar = getObj("mStatusBar");
-                            if (statusBar != null) {
-                                // apply any navigation bar insets
-                                pf.left = df.left = of.left = getInt("mUnrestrictedScreenLeft");
-                                pf.top = df.top = of.top = getInt("mUnrestrictedScreenTop");
-                                pf.right = df.right = of.right = getInt("mUnrestrictedScreenWidth") + getInt("mUnrestrictedScreenLeft");
-                                pf.bottom = df.bottom = of.bottom = getInt("mUnrestrictedScreenHeight")
-                                        + getInt("mUnrestrictedScreenTop");
-                                vf.left = getInt("mStableLeft");
-                                vf.top = getInt("mStableTop");
-                                vf.right = getInt("mStableRight");
-                                vf.bottom = getInt("mStableBottom");
-
-                                setInt("mStatusBarLayer", (Integer)XposedHelpers.callMethod(statusBar, "getSurfaceLayer"));
-
-                                // Let the status bar determine its size.
-                                XposedHelpers.callMethod(statusBar, "computeFrameLw", pf, df, vf, vf, vf, dcf, vf, vf);
-
-                                // For layout, the status bar is always at the top with our fixed height.
-                                setInt("mStableTop", getInt("mUnrestrictedScreenTop") + getInt("mStatusBarHeight"));
-
-                                boolean statusBarTransient = (sysui & ViewConst.STATUS_BAR_TRANSIENT) != 0;
-                                boolean statusBarTranslucent = (sysui & 
-                                        (ViewConst.STATUS_BAR_TRANSLUCENT | ViewConst.SYSTEM_UI_TRANSPARENT)) != 0;
-                                if (!isKeyguardShowing()) {
-                                    statusBarTranslucent &= (Boolean) mAreTranslucentBarsAllowed.invoke(param.thisObject);
-                                }
-
-                                // If the status bar is hidden, we don't want to cause
-                                // windows behind it to scroll.
-                                if ((Boolean)XposedHelpers.callMethod(statusBar, "isVisibleLw") && !statusBarTransient
-                                        && !isStatusbarImmersive()) {
-                                    // Status bar may go away, so the screen area it occupies
-                                    // is available to apps but just covering them when the
-                                    // status bar is visible.
-                                    setInt("mDockTop", getInt("mUnrestrictedScreenTop") + getInt("mStatusBarHeight"));
-
-                                    val = getInt("mDockTop");
-                                    setInt("mContentTop", val); setInt("mCurTop", val); setInt("mVoiceContentTop", val);
-                                    val = getInt("mDockBottom");
-                                    setInt("mContentBottom", val); setInt("mCurBottom", val); setInt("mVoiceContentBottom", val);
-                                    val = getInt("mDockLeft");
-                                    setInt("mContentLeft", val); setInt("mCurLeft", val); setInt("mVoiceContentLeft", val);
-                                    val = getInt("mDockRight");
-                                    setInt("mContentRight", val); setInt("mCurRight", val); setInt("mVoiceContentRight", val);
-
-                                    if (DEBUG_LAYOUT) log("Status bar: " +
-                                        String.format(
-                                            "dock=[%d,%d][%d,%d] content=[%d,%d][%d,%d] cur=[%d,%d][%d,%d]",
-                                            getInt("mDockLeft"), getInt("mDockTop"), getInt("mDockRight"), getInt("mDockBottom"),
-                                                    getInt("mContentLeft"), getInt("mContentTop"), 
-                                                    getInt("mContentRight"), getInt("mContentBottom"),
-                                                    getInt("mCurLeft"), getInt("mCurTop"), getInt("mCurRight"), getInt("mCurBottom")));
-                                }
-                                Object sbCtrl = getObj("mStatusBarController");
-                                if ((Boolean)XposedHelpers.callMethod(statusBar, "isVisibleLw") && 
-                                        !(Boolean)XposedHelpers.callMethod(statusBar, "isAnimatingLw")
-                                        && !statusBarTransient && !statusBarTranslucent
-                                        && !(Boolean) XposedHelpers.callMethod(sbCtrl, "wasRecentlyTranslucent")
-                                        && !isStatusbarImmersive()) {
-                                    // If the opaque status bar is currently requested to be visible,
-                                    // and not in the process of animating on or off, then
-                                    // we can tell the app that it is covered by it.
-                                    setInt("mSystemTop", getInt("mUnrestrictedScreenTop") + getInt("mStatusBarHeight"));
-                                }
-                                if ((Boolean)XposedHelpers.callMethod(sbCtrl, "checkHiddenLw")) {
-                                    updateSysUiVisibility = true;
-                                }
+                            Object sbCtrl = getObj("mStatusBarController");
+                            if ((Boolean)XposedHelpers.callMethod(statusBar, "isVisibleLw") && 
+                                    !(Boolean)XposedHelpers.callMethod(statusBar, "isAnimatingLw")
+                                    && !statusBarTransient && !statusBarTranslucent
+                                    && !(Boolean) XposedHelpers.callMethod(sbCtrl, "wasRecentlyTranslucent")
+                                    && !isStatusbarImmersive()) {
+                                // If the opaque status bar is currently requested to be visible,
+                                // and not in the process of animating on or off, then
+                                // we can tell the app that it is covered by it.
+                                setInt("mSystemTop", getInt("mUnrestrictedScreenTop") + getInt("mStatusBarHeight"));
                             }
-                            if (updateSysUiVisibility) {
-                                mUpdateSystemUiVisibilityLw.invoke(param.thisObject);
+                            if ((Boolean)XposedHelpers.callMethod(sbCtrl, "checkHiddenLw")) {
+                                param.setResult(true);
                             }
                         }
-                        return null;
-                    } catch(Throwable t) {
+                        param.setResult(false);
+                    } catch (Throwable t) {
                         logAndMute(param.method.getName(), t);
-                        return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                     }
                 }
             });
@@ -761,23 +726,36 @@ public class ModExpandedDesktop {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "updateSystemUiVisibilityLw", new XC_MethodReplacement() {
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "updateSystemUiVisibilityLw", new XC_MethodHook() {
                 @Override
-                protected Object replaceHookedMethod(final MethodHookParam param) throws Throwable {
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (DEBUG_LAYOUT) log("updateSystemUiVisibilityLw");
                     try {
                         if (!isImmersiveModeActive()) {
-                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                            return;
                         }
 
                         // If there is no window focused, there will be nobody to handle the events
                         // anyway, so just hang on in whatever state we're in until things settle down.
-                        final Object win = getObj("mFocusedWindow") != null ? 
+                        Object winCandidate = getObj("mFocusedWindow") != null ? 
                                 getObj("mFocusedWindow") : getObj("mTopFullscreenOpaqueWindowState");
-                        if (win == null) {
-                            return 0;
+                        if (winCandidate == null) {
+                            param.setResult(0);
+                            return;
                         }
-                        Object winAttrs = XposedHelpers.callMethod(win, "getAttrs");
+                        Object winAttrs = XposedHelpers.callMethod(winCandidate, "getAttrs");
+
+                        if (XposedHelpers.getObjectField(winAttrs, "token") ==
+                                XposedHelpers.callMethod(getObj("mImmersiveModeConfirmation"), "getWindowToken")) {
+                            boolean isStatusBarKg = (boolean) XposedHelpers.callMethod(param.thisObject, "isStatusBarKeyguard");
+                            winCandidate = isStatusBarKg ? getObj("mStatusBar") : getObj("mTopFullscreenOpaqueWindowState");
+                            if (winCandidate == null) {
+                                param.setResult(0);
+                                return;
+                            }
+                        }
+                        final Object win = winCandidate;
+
                         final int privateFlags = XposedHelpers.getIntField(winAttrs, "privateFlags");
                         final int windowType = XposedHelpers.getIntField(winAttrs, "type");
                         if ((privateFlags & WmLp.PRIVATE_FLAG_KEYGUARD) != 0 && 
@@ -788,22 +766,25 @@ public class ModExpandedDesktop {
                             // shown while the top window was displayed, so we want to ignore
                             // it here because this is just a very transient change and it
                             // will quickly lose focus once it correctly gets hidden.
-                            return 0;
+                            param.setResult(0);
+                            return;
                         }
 
-                        int tmpVisibility = (Integer) XposedHelpers.callMethod(win, "getSystemUiVisibility")
+                        
+                        int tmpVisibility = (Integer) XposedHelpers.callStaticMethod(
+                                classPolicyControl, "getSystemUiVisibility", win, null)
                                 & ~getInt("mResettingSystemUiFlags")
                                 & ~getInt("mForceClearedSystemUiFlags");
                         tmpVisibility = updateSystemUiVisibilityFlagsForExpandedDesktop(tmpVisibility);
                         final boolean subWindowInExpandedMode = isNavbarImmersive()
                                 && (windowType >= WindowManager.LayoutParams.FIRST_SUB_WINDOW
                                         && windowType <= WindowManager.LayoutParams.LAST_SUB_WINDOW);
-                        final boolean wasCleared = mClearedBecauseOfForceShow;
-                                
+
                         if (getBool("mForcingShowNavBar") && 
                                 ((Integer)XposedHelpers.callMethod(win, "getSurfaceLayer") < getInt("mForcingShowNavBarLayer")
                                         || subWindowInExpandedMode)) {
-                            int clearableFlags = ViewConst.SYSTEM_UI_CLEARABLE_FLAGS;
+                            int clearableFlags = (int) XposedHelpers.callStaticMethod(
+                                    classPolicyControl, "adjustClearableFlags", win, ViewConst.SYSTEM_UI_CLEARABLE_FLAGS);
                             if (isStatusbarImmersive()) {
                                 clearableFlags &= ~View.SYSTEM_UI_FLAG_FULLSCREEN;
                             }
@@ -811,42 +792,51 @@ public class ModExpandedDesktop {
                                 clearableFlags |= ViewConst.NAVIGATION_BAR_TRANSLUCENT;
                             }
                             tmpVisibility &= ~clearableFlags;
-                            mClearedBecauseOfForceShow = true;
-                        } else {
-                            mClearedBecauseOfForceShow = false;
                         }
+
+                        final int fullscreenVisibility = (int)XposedHelpers.callMethod(param.thisObject,
+                                "updateLightStatusBarLw",0, getObj("mTopFullscreenOpaqueWindowState"),
+                                getObj("mTopFullscreenOpaqueOrDimmingWindowState"));
+                        final int dockedVisibility = (int)XposedHelpers.callMethod(param.thisObject,
+                                "updateLightStatusBarLw",0, getObj("mTopDockedOpaqueWindowState"),
+                                getObj("mTopDockedOpaqueOrDimmingWindowState"));
+                        XposedHelpers.callMethod(getObj("mWindowManagerFuncs"), "getStackBounds",
+                                HOME_STACK_ID, getObj("mNonDockedStackBounds"));
+                        XposedHelpers.callMethod(getObj("mWindowManagerFuncs"), "getStackBounds",
+                                DOCKED_STACK_ID, getObj("mDockedStackBounds"));
+
                         int visibility = (Integer) mUpdateSystemBarsLw.invoke(param.thisObject,
                                 win, getInt("mLastSystemUiFlags"), tmpVisibility);
                         final int diff = visibility ^ getInt("mLastSystemUiFlags");
+                        final int fullscreenDiff = fullscreenVisibility ^ getInt("mLastFullscreenStackSysUiFlags");
+                        final int dockedDiff = dockedVisibility ^ getInt("mLastDockedStackSysUiFlags");
                         final boolean needsMenu = (Boolean) XposedHelpers.callMethod(win, "getNeedsMenuLw",
                                 getObj("mTopFullscreenOpaqueWindowState"));
-                        if (diff == 0 && getBool("mLastFocusNeedsMenu") == needsMenu
-                                && getObj("mFocusedApp") == XposedHelpers.callMethod(win, "getAppToken")) {
-                            return 0;
-                        }
-                        if (wasCleared && !mClearedBecauseOfForceShow
-                                && (visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) != 0) {
-                            Object navBarCtrl = getObj("mNavigationBarController");
-                            XposedHelpers.callMethod(navBarCtrl, "showTransient");
-                            visibility |= ViewConst.NAVIGATION_BAR_TRANSIENT;
-                            Object wmFuncs = getObj("mWindowManagerFuncs");
-                            int lastSbVis = XposedHelpers.getIntField(wmFuncs, "mLastStatusBarVisibility") |
-                                    ViewConst.NAVIGATION_BAR_TRANSIENT;
-                            XposedHelpers.setIntField(wmFuncs, "mLastStatusBarVisibility", lastSbVis);
+                        if (diff == 0 && fullscreenDiff == 0 && dockedDiff == 0 && getBool("mLastFocusNeedsMenu") == needsMenu
+                                && getObj("mFocusedApp") == XposedHelpers.callMethod(win, "getAppToken")
+                                && getObj("mLastNonDockedStackBounds").equals(getObj("mNonDockedStackBounds"))
+                                && getObj("mLastDockedStackBounds").equals(getObj("mDockedStackBounds"))) {
+                            param.setResult(0);
+                            return;
                         }
                         final int visibility2 = visibility;
                         setInt("mLastSystemUiFlags", visibility);
+                        setInt("mLastFullscreenStackSysUiFlags", fullscreenVisibility);
+                        setInt("mLastDockedStackSysUiFlags", dockedVisibility);
                         setBool("mLastFocusNeedsMenu", needsMenu);
                         setObj("mFocusedApp", XposedHelpers.callMethod(win, "getAppToken"));
+                        final Rect fullscreenStackBounds = new Rect((Rect) getObj("mNonDockedStackBounds"));
+                        final Rect dockedStackBounds = new Rect((Rect) getObj("mDockedStackBounds"));
                         Handler h = (Handler) getObj("mHandler");
                         h.post(new Runnable() {
                             @Override
                             public void run() {
                                 try {
-                                    Object statusbar = XposedHelpers.callMethod(param.thisObject, "getStatusBarService");
+                                    Object statusbar = XposedHelpers.callMethod(param.thisObject, "getStatusBarManagerInternal");
                                     if (statusbar != null) {
                                         XposedHelpers.callMethod(statusbar, "setSystemUiVisibility",
-                                                visibility2, 0xffffffff, win.toString());
+                                                visibility2, fullscreenVisibility, dockedVisibility,
+                                                0xffffffff, fullscreenStackBounds, dockedStackBounds, win.toString());
                                         XposedHelpers.callMethod(statusbar, "topAppWindowChanged", needsMenu);
                                     }
                                 } catch (Throwable t) {
@@ -855,10 +845,11 @@ public class ModExpandedDesktop {
                                 }
                             }
                         });
-                        return diff;
+                        param.setResult(diff);
+                        return;
                     } catch(Throwable t) {
                         logAndMute(param.method.getName(), t);
-                        return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                        return;
                     }
                 }
             });
@@ -880,20 +871,23 @@ public class ModExpandedDesktop {
     }
 
     // hooks
-    private static XC_MethodReplacement getInsetHintReplacement = new XC_MethodReplacement() {
+    private static XC_MethodHook getInsetHintReplacement = new XC_MethodHook() {
         @Override
-        protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
             if (DEBUG_LAYOUT) log("getContentInsetHintLw");
             try {
                 if (!isImmersiveModeActive()) {
-                    return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                    return;
                 }
 
                 WindowManager.LayoutParams attrs = (WindowManager.LayoutParams) param.args[0];
-                final int displayRotation = (int) param.args[1];
-                Rect contentInset = (Rect) param.args[2];
-                Rect stableInset = (Rect) param.args[3];
-                Rect outOutsets = (Rect) param.args[4];
+                Rect taskBounds = (Rect) param.args[1];
+                final int displayRotation = (int) param.args[2];
+                final int displayWidth = (int) param.args[3];
+                final int displayHeight = (int) param.args[4];
+                Rect contentInset = (Rect) param.args[5];
+                Rect stableInset = (Rect) param.args[6];
+                Rect outOutsets = (Rect) param.args[7];
 
                 final int fl = updateWindowManagerVisibilityFlagsForExpandedDesktop(attrs.flags);
                 final int systemUiVisibility = updateSystemUiVisibilityFlagsForExpandedDesktop(attrs.systemUiVisibility|
@@ -948,22 +942,24 @@ public class ModExpandedDesktop {
                                 availRight - getInt("mCurRight"), availBottom - getInt("mCurBottom"));
                     }
 
-                    if (stableInset != null) {
-                        stableInset.set(getInt("mStableLeft"), getInt("mStableTop"),
-                                availRight - getInt("mStableRight"),
-                                availBottom - getInt("mStableBottom"));
-                    }
+                    stableInset.set(getInt("mStableLeft"), getInt("mStableTop"),
+                            availRight - getInt("mStableRight"),
+                            availBottom - getInt("mStableBottom"));
 
-                    return null;
+                    if (taskBounds != null) {
+                        XposedHelpers.callMethod(param.thisObject, "calculateRelevantTaskInsets",
+                                taskBounds, contentInset, displayWidth, displayHeight);
+                        XposedHelpers.callMethod(param.thisObject, "calculateRelevantTaskInsets",
+                                taskBounds, stableInset, displayWidth, displayHeight);
+                    }
+                    param.setResult(getBool("mForceShowSystemBars"));
+                    return;
                 }
                 contentInset.setEmpty();
-                if (stableInset != null) {
-                    stableInset.setEmpty();
-                }
-                return null;
+                stableInset.setEmpty();
+                param.setResult(getBool("mForceShowSystemBars"));
             } catch(Throwable t) {
                 logAndMute(param.method.getName(), t);
-                return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
             }
         }
     };
