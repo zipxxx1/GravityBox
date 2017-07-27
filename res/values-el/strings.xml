@@ -47,8 +47,6 @@
     <string name="vol_key_cursor_control_on">Πλήκτρο έντασης Πάνω/Κάτω μετακινεί τον δρομέα Αριστερά/Δεξιά</string>
     <string name="vol_key_cursor_control_on_reverse">Πλήκτρο έντασης Πάνω/Κάτω μετακινεί τον δρομέα Δεξιά/Αριστερά</string>
 
-    <string name="recents_clear_all_title">Εκκαθάριση όλων των πρόσφατων εργασιών</string>
-
     <string name="important">Σημαντικό</string>
 
     <string name="caller_fullscreen_photo_title">Εικόνα καλούντος σε πλήρη οθόνη</string>
@@ -329,13 +327,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Χρήση θέματος Dark</string>
     <string name="pref_gb_theme_dark_summary">Αλλάζει το GB UI σε θέμα Dark αντί για Light</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Ανενεργό</string>
-    <string name="recent_clear_top_left">Πάνω αριστερά</string>
-    <string name="recent_clear_top_right">Πάνω δεξιά</string>
-    <string name="recent_clear_bottom_left">Κάτω αριστερά</string>
-    <string name="recent_clear_bottom_right">Κάτω δεξιά</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ρύθμιση πάνω ορίου</string>

@@ -43,8 +43,6 @@
     <string name="vol_key_cursor_control_on">Гучнасць угору/уніз для перасоўвання курсора налева/направа</string>
     <string name="vol_key_cursor_control_on_reverse">Гучнасць угору/уніз для перасоўвання курсора направа/налева</string>
 
-    <string name="recents_clear_all_title">Зачыніць усе бягучыя заданні</string>
-
     <string name="important">Важна</string>
 
     <string name="caller_fullscreen_photo_title">Фота выкліку на ўвесь экран</string>
@@ -341,13 +339,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Выкарыстоўваць цёмную тэму</string>
     <string name="pref_gb_theme_dark_summary">Пераключэнне тэмы інтэрфейсу GravityBox са светлай на цёмную</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Вымкнута</string>
-    <string name="recent_clear_top_left">Зверху злева</string>
-    <string name="recent_clear_top_right">Зверху справа</string>
-    <string name="recent_clear_bottom_left">Знізу злева</string>
-    <string name="recent_clear_bottom_right">Знізу справа</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Наладзіць водступ зверху</string>
@@ -1304,9 +1295,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="pref_about_get_unlocker_title">Атрымаць ключ разблакоўкі</string>
     <string name="pref_about_get_unlocker_summary">Няма рахунка ў PayPal? Проста націсніце тут для атрымання ключа разблакоўкі прэміум-функцый GravityBox з Play Store.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Альтэрнатыўны значок</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ігнараваць даступнасць мабільных дадзеных</string>
     <string name="pref_smart_radio_mda_ignore_summary">Пераключэнне ў звычайны рэжым, нават калі мабільныя дадзеныя ў цяперашні момант недаступныя</string>
@@ -1592,12 +1580,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="pref_reboot_allow_softreboot_summary">Майце на ўвазе, што мяккая перазагрузка можа выклікаць 
 падвышаны выдатак батарэі ці нестабільнасць. Лепш скарыстаць звычайную перазагрузку.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Бачнасць панэлі пошуку</string>
-    <string name="recents_searchbar_default">Па змаўчанні</string>
-    <string name="recents_searchbar_hide_keep_space">Схаваць і пакінуць месца</string>
-    <string name="recents_searchbar_hide_remove_space">Схаваць і прыбраць месца</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">УВАГА</string>
     <string name="gb_new_package_dialog_message">Выяўлены ўсталяваны GravityBox для Lollipop. 
@@ -1687,9 +1669,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="pref_lc_sound_vibrate_title">Адключыць канверсію гуку ў вібрацыю</string>
     <string name="pref_lc_sound_vibrate_summary">Прадухіленне вібрацыі паведамленняў з раней адключанай
 вібрацыяй пры выбары рэжыме тэлефанавання \"Толькі вібрацыя\"</string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Ачысціць толькі бачныя</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Падвойны націск для сну</string>

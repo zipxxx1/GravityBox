@@ -154,26 +154,18 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int VOL_KEY_CURSOR_CONTROL_ON = 1;
     public static final int VOL_KEY_CURSOR_CONTROL_ON_REVERSE = 2;
 
-    public static final String PREF_KEY_RECENTS_CLEAR_ALL = "pref_recents_clear_all2";
-    public static final String PREF_KEY_RECENTS_CLEAR_ALL_VISIBLE = "pref_recents_clear_all_visible";
-    public static final String PREF_KEY_RECENTS_CLEAR_ALL_ICON_ALT = "pref_recents_clear_all_icon_alt";
     public static final String PREF_KEY_RAMBAR = "pref_rambar";
     public static final String PREF_KEY_RECENTS_CLEAR_MARGIN_TOP = "pref_recent_clear_margin_top";
     public static final String PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM = "pref_recent_clear_margin_bottom";
-    public static final String PREF_KEY_RECENTS_SEARCH_BAR = "pref_recents_searchbar";
     public static final int RECENT_CLEAR_OFF = 0;
     public static final int RECENT_CLEAR_TOP_LEFT = 51;
     public static final int RECENT_CLEAR_TOP_RIGHT = 53;
     public static final int RECENT_CLEAR_BOTTOM_LEFT = 83;
     public static final int RECENT_CLEAR_BOTTOM_RIGHT = 85;
     public static final String ACTION_PREF_RECENTS_CHANGED = "gravitybox.intent.action.RECENTS_CHANGED";
-    public static final String EXTRA_RECENTS_CLEAR_ALL = "recentsClearAll";
-    public static final String EXTRA_RECENTS_CLEAR_ALL_VISIBLE = "recentsClearAllVisible";
-    public static final String EXTRA_RECENTS_CLEAR_ALL_ICON_ALT = "recentsClearAllIconAlt";
     public static final String EXTRA_RECENTS_RAMBAR = "recentsRambar";
     public static final String EXTRA_RECENTS_MARGIN_TOP = "recentsMarginTop";
     public static final String EXTRA_RECENTS_MARGIN_BOTTOM = "recentsMarginBottom";
-    public static final String EXTRA_RECENTS_SEARCH_BAR = "recentsSearchBar";
 
     public static final String PREF_CAT_KEY_PHONE = "pref_cat_phone";
     public static final String PREF_KEY_CALLER_FULLSCREEN_PHOTO = "pref_caller_fullscreen_photo3";
@@ -389,7 +381,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int HWKEY_ACTION_LAUNCHER_DRAWER = 22;
     public static final int HWKEY_ACTION_INAPP_SEARCH = 24;
     public static final int HWKEY_ACTION_CUSTOM_APP = 25;
-    public static final int HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP = 101;
     public static final int HWKEY_DOUBLETAP_SPEED_DEFAULT = 400;
     public static final int HWKEY_KILL_DELAY_DEFAULT = 1000;
     public static final int HWKEY_TORCH_DISABLED = 0;
@@ -1274,9 +1265,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefPieAppLongpress;
         private ListPreference mPrefPieLongpressDelay;
         private CheckBoxPreference mPrefGbThemeDark;
-        private ListPreference mPrefRecentClear;
         private ListPreference mPrefRambar;
-        private ListPreference mPrefRecentSearchBar;
         private PreferenceScreen mPrefCatPhone;
         private SeekBarPreference mPrefBrightnessMin;
         private SeekBarPreference mPrefScreenDimLevel;
@@ -1514,9 +1503,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             File file = new File(getActivity().getFilesDir() + "/" + FILE_THEME_DARK_FLAG);
             mPrefGbThemeDark.setChecked(file.exists());
 
-            mPrefRecentClear = (ListPreference) findPreference(PREF_KEY_RECENTS_CLEAR_ALL);
             mPrefRambar = (ListPreference) findPreference(PREF_KEY_RAMBAR);
-            mPrefRecentSearchBar = (ListPreference) findPreference(PREF_KEY_RECENTS_SEARCH_BAR);
 
             mPrefCatPhone = (PreferenceScreen) findPreference(PREF_CAT_KEY_PHONE);
 
@@ -2257,16 +2244,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefPieEnabled.setSummary(mPrefPieEnabled.getEntry());
             }
 
-            if (key == null || key.equals(PREF_KEY_RECENTS_CLEAR_ALL)) {
-                mPrefRecentClear.setSummary(mPrefRecentClear.getEntry());
-            }
-
             if (key == null || key.equals(PREF_KEY_RAMBAR)) {
                 mPrefRambar.setSummary(mPrefRambar.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_RECENTS_SEARCH_BAR)) {
-                mPrefRecentSearchBar.setSummary(mPrefRecentSearchBar.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_EXPANDED_DESKTOP)) {
@@ -3402,16 +3381,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
                 intent.putExtra(EXTRA_BBAR_COLOR_CHARGING, prefs.getInt(key, 
                         getResources().getInteger(R.integer.COLOR_GREEN)));
-            } else if (key.equals(PREF_KEY_RECENTS_CLEAR_ALL)) {
-                intent.setAction(ACTION_PREF_RECENTS_CHANGED);
-                intent.putExtra(EXTRA_RECENTS_CLEAR_ALL, 
-                        Integer.valueOf(prefs.getString(key, "0")));
-            } else if (key.equals(PREF_KEY_RECENTS_CLEAR_ALL_VISIBLE)) {
-                intent.setAction(ACTION_PREF_RECENTS_CHANGED);
-                intent.putExtra(EXTRA_RECENTS_CLEAR_ALL_VISIBLE, prefs.getBoolean(key, false)); 
-            } else if (key.equals(PREF_KEY_RECENTS_CLEAR_ALL_ICON_ALT)) {
-                intent.setAction(ACTION_PREF_RECENTS_CHANGED);
-                intent.putExtra(EXTRA_RECENTS_CLEAR_ALL_ICON_ALT, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_RAMBAR)) {
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
                 intent.putExtra(EXTRA_RECENTS_RAMBAR, 
@@ -3422,9 +3391,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM)) {
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
                 intent.putExtra(EXTRA_RECENTS_MARGIN_BOTTOM, prefs.getInt(key, 50));
-            } else if (key.equals(PREF_KEY_RECENTS_SEARCH_BAR)) {
-                intent.setAction(ACTION_PREF_RECENTS_CHANGED);
-                intent.putExtra(EXTRA_RECENTS_SEARCH_BAR, prefs.getString(key, "DEFAULT"));
             } else if (key.equals(PREF_KEY_SIGNAL_CLUSTER_NARROW)) {
                 intent.setAction(ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
                 intent.putExtra(EXTRA_SC_NARROW, prefs.getBoolean(key, false));

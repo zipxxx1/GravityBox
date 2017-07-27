@@ -21,7 +21,6 @@
     <string name="vol_key_cursor_control_off">Kapalı</string>
     <string name="vol_key_cursor_control_on">Ses yukarı/aşağı tuşu imleci sola/sağa taşır</string>
     <string name="vol_key_cursor_control_on_reverse">Ses yukarı/aşağı tuşu imleci sağa/sola taşır</string>
-    <string name="recents_clear_all_title">Son görevlerin tümünü temizle</string>
     <string name="important">Önemli</string>
     <string name="caller_fullscreen_photo_title">Tam ekran arayan fotoğrafı</string>
     <string name="quick_settings_sync_on">Senk Açık</string>
@@ -233,11 +232,6 @@
     <string name="pref_hwkeys_disable_summary">Pasta dilimi kontrolleri etkinken tuşlarda tek tıklamayı devre dışı bırakır</string>
     <string name="pref_gb_theme_dark_title">Koyu temayı kullan</string>
     <string name="pref_gb_theme_dark_summary">Arayüzde Koyu temayı etkinleştirir</string>
-    <string name="recent_clear_off">Kapalı</string>
-    <string name="recent_clear_top_left">Sol üst</string>
-    <string name="recent_clear_top_right">Sağ üst</string>
-    <string name="recent_clear_bottom_left">Sol alt</string>
-    <string name="recent_clear_bottom_right">Sağ alt</string>
     <string name="pref_recent_clear_margin_top_title">Üst boşluk ayarı</string>
     <string name="app_picker_search">Arama</string>
     <string name="app_picker_none">(Hiçbiri)</string>
@@ -829,7 +823,6 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="premium_unlocked_message">Desteğiniz için teşekkürler. Ücretli özellikler sistem yeniden başlatıldıktan sonra açılacaktır.</string>
     <string name="pref_about_get_unlocker_title">Kilidi aç</string>
     <string name="pref_about_get_unlocker_summary">PayPal hesabınız yok mu? Buraya dokunup Play Store uygulamasını indirerek ücretli özelliklerin kilidi açabilirsiniz.</string>
-    <string name="pref_navbar_custom_key_icon_title">Alternatif simge kullan</string>
     <string name="pref_smart_radio_mda_ignore_title">Mobil veri durumunu yoksay</string>
     <string name="pref_smart_radio_mda_ignore_summary">Mobil veri o anda kullanılamıyor olsa bile normal moda geçer</string>
     <string name="shortcut_sync">Senkronizasyon</string>
@@ -998,10 +991,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_navbar_larger_icons_summary">Yeniden başlatma gerektirir</string>
     <string name="pref_reboot_allow_softreboot_title">Hızlı yeniden başlatmaya izin ver</string>
     <string name="pref_reboot_allow_softreboot_summary">Hızlı yeniden başlatmanın beklenmedik pil tüketimine veya kararsızlık sorunlarına neden olabileceğini unutmayın. En iyi yöntem daima normal yeniden başlatmayı kullanmaktır.</string>
-    <string name="pref_recents_searchbar_title">Arama çubuğu görünürlüğü</string>
-    <string name="recents_searchbar_default">Varsayılan</string>
-    <string name="recents_searchbar_hide_keep_space">Gizle ve boşluğu koru</string>
-    <string name="recents_searchbar_hide_remove_space">Gizle ve boşluğu kaldır</string>
     <string name="gb_new_package_dialog_title">DİKKAT</string>
     <string name="gb_new_package_dialog_message">"Eski paket adıyla yüklü GravityBox bulundu. Yeni paket kullanılmadan önce eskisinin kaldırılması gerekiyor. Kaldırmayı başlatmak için Tamam'a basın. Kaldırıldıktan sonra, Xposed Yükleyiciden yeni modülü etkinleştirin ve HEMEN YENİDEN BAŞLATIN."</string>
     <string name="settings_restore_backup_obsolete">"Android'in eski sürümünde yapılan yedekleme, büyük işletim sistemi farklılıkları nedeniyle geri alınamaz. Şiddetle GravityBox'ı sıfırdan yeniden ayarlamanız önerilir."</string>
@@ -1050,7 +1039,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_lc_sound_vibrate_summary">Sadece titreşim modu sırasında titremeye zorunda olmaktan kapalı titreşimleri olan bildirimleri önler</string>
     <string name="pref_lc_qh_mute_system_vibe_title">Cihaz titreşimlerini kapat</string>
     <string name="pref_lc_qh_mute_system_vibe_summary">BU cihazdaki bildirim titreşimleri de dahil olmak üzere, sistem düzeyindeki TÜM titreşimleri kapatır. Eşleştirilmiş Android Wear cihazda bildirim titreşimleri etkin durumda ise hala bildirimler titreyebilir.</string>
-    <string name="pref_recents_clear_all_visible_title">Sadece görünenleri temizle</string>
     <string name="pref_lockscreen_dt2s_title">Çift tıkla uyut</string>
     <string name="pref_statusbar_disable_peek_title">Göz atmayı devre dışı bırak</string>
     <string name="pref_statusbar_disable_peek_summary">Tek tıklamayla durum çubuğu genişletilemez</string>

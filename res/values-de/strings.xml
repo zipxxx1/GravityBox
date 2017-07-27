@@ -43,8 +43,6 @@
     <string name="vol_key_cursor_control_on">Lautstärketasten hoch/runter bewegen den Textcursor nach links/rechts</string>
     <string name="vol_key_cursor_control_on_reverse">Lautstärketasten hoch/runter bewegen den Textcursor nach rechts/links</string>
 
-    <string name="recents_clear_all_title">Zuletzt geöffnete Apps schließen</string>
-
     <string name="important">Wichtig</string>
 
     <string name="caller_fullscreen_photo_title">Anruferfoto im Vollbild</string>
@@ -343,13 +341,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Dunkles Thema verwenden</string>
     <string name="pref_gb_theme_dark_summary">Dunkles Thema für GravityBox verwenden</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Aus</string>
-    <string name="recent_clear_top_left">Oben links</string>
-    <string name="recent_clear_top_right">Oben rechts</string>
-    <string name="recent_clear_bottom_left">Unten links</string>
-    <string name="recent_clear_bottom_right">Unten rechts</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Oberen Rand festlegen</string>
@@ -1298,9 +1289,6 @@
     <string name="pref_about_get_unlocker_title">Unlocker erwerben</string>
     <string name="pref_about_get_unlocker_summary">Sie haben kein PayPal-Konto? Klicken Sie hier um die Premiumfunktionen über den Play Store freizuschalten.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Alternatives Symbol verwenden</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Verfügbarkeit mobiler Daten ignorieren</string>
     <string name="pref_smart_radio_mda_ignore_summary">Zum Normalmodus wechseln, auch wenn mobile Daten momentan nicht verfügbar sind</string>
@@ -1582,12 +1570,6 @@
     <string name="pref_reboot_allow_softreboot_title">Software-Neustart erlauben</string>
     <string name="pref_reboot_allow_softreboot_summary">Ein Software-Neustart kann erhöhten Stromverbrauch und Stabilitätsverlust verursachen. Der reguläre Neustart wird daher empfohlen.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Sichtbarkeit der Suchleiste</string>
-    <string name="recents_searchbar_default">Standard</string>
-    <string name="recents_searchbar_hide_keep_space">Verbergen und Platz behalten</string>
-    <string name="recents_searchbar_hide_remove_space">Verbergen und Platz freigeben</string>
-
 	 <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ACHTUNG</string>
     <string name="gb_new_package_dialog_message">GravityBox für Lollipop wurde gefunden.
@@ -1681,9 +1663,6 @@
     <string name="pref_lc_qh_mute_system_vibe_summary">ALLE Systemvibrationen deaktivieren,
         eingeschlossen Benachrichtigungsvibrationen auf DIESEM Gerät. Benachrichtigunen auf verbundenen Smartwatches können
         weiterhin Vibrationen auslösen.</string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Lösche nur Sichtbare</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Doppeltippen um Standby zu aktivieren</string>

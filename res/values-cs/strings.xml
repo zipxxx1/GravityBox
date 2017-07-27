@@ -26,8 +26,6 @@
     <string name="vol_key_cursor_control_on">Tlačítko nahoru/dolů pohybuje kurzorem doleva/doprava</string>
     <string name="vol_key_cursor_control_on_reverse">Tlačítko nahoru/dolů pohybuje kurzorem doprava/doleva</string>
 
-    <string name="recents_clear_all_title">Ukončení aktuálních aplikací</string>
-
     <string name="important">Důležité</string>
 
     <string name="caller_fullscreen_photo_title">Foto volajícího na celou obrazovku</string>
@@ -323,13 +321,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Použít tmavé téma</string>
     <string name="pref_gb_theme_dark_summary">Přepne GB UI na tmavé téma</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Vypnuto</string>
-    <string name="recent_clear_top_left">Vlevo nahoře</string>
-    <string name="recent_clear_top_right">Vpravo nahoře</string>
-    <string name="recent_clear_bottom_left">Vlevo dole</string>
-    <string name="recent_clear_bottom_right">Vpravo dole</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Přizpůsobit horní okraj</string>
@@ -1276,9 +1267,6 @@
     <string name="pref_about_get_unlocker_title">Získat odemykací aplikaci</string>
     <string name="pref_about_get_unlocker_summary">Nemáte PayPal? Jednoduše klepněte sem pro získání odemykací aplikace prémiových funkcí z obchodu Play.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Použít alternativní ikonu</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ignorovat dostupnost mobilních dat</string>
     <string name="pref_smart_radio_mda_ignore_summary">Přepne do normálního režimu bez ohledu na dostupnost mobilních dat</string>
@@ -1566,12 +1554,6 @@
     <string name="pref_reboot_allow_softreboot_summary">Pozor, softwarový restart může způsobovat neočekávané 
         problémy stability, které mohou vést k nežádoucí spotřebě baterie. Doporučuje se vždy použít plný restart.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Viditelnost lišty vyhledávání</string>
-    <string name="recents_searchbar_default">Původní</string>
-    <string name="recents_searchbar_hide_keep_space">Skrýt a zachovat prostor</string>
-    <string name="recents_searchbar_hide_remove_space">Skrýt včetně prostoru</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">POZOR</string>
     <string name="gb_new_package_dialog_message">Byla nalezena předcházející verze GravityBox pro Lollipop. 
@@ -1663,9 +1645,6 @@
     <string name="pref_lc_sound_vibrate_title">Vypnout konverzi zvuku na vibrace</string>
     <string name="pref_lc_sound_vibrate_summary">Zabrání oznámením, které mají vibrace vypnuté, vibrovat
         v režimu vypnutého vyzvánění</string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Jen viditelné</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Uspat dvojitým klepnutím</string>

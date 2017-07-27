@@ -102,7 +102,6 @@ public class ModHwKeys {
     public static final String ACTION_LAUNCH_APP = "gravitybox.intent.action.LAUNCH_APP";
     public static final String ACTION_SHOW_VOLUME_PANEL = "gravitybox.intent.action.SHOW_VOLUME_PANEL";
     public static final String ACTION_TOGGLE_AUTO_BRIGHTNESS = "gravitybox.intent.action.TOGGLE_AUTO_BRIGHTNESS";
-    public static final String ACTION_RECENTS_CLEAR_ALL_SINGLETAP = "gravitybox.intent.action.ACTION_RECENTS_CLEARALL";
     public static final String ACTION_TOGGLE_QUIET_HOURS = "gravitybox.intent.action.ACTION_TOGGLE_QUIET_HOURS";
     public static final String ACTION_INAPP_SEARCH = "gravitybox.intent.action.INAPP_SEARCH";
     public static final String ACTION_SET_RINGER_MODE = "gravitybox.intent.action.SET_RINGER_MODE";
@@ -1263,8 +1262,6 @@ public class ModHwKeys {
             showVolumePanel();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_LAUNCHER_DRAWER) {
             showLauncherDrawer();
-        } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP) {
-            clearAllRecents();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_INAPP_SEARCH) {
             injectKey(KeyEvent.KEYCODE_SEARCH);
         }
@@ -1723,16 +1720,6 @@ public class ModHwKeys {
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
             log("Error executing showLauncherDrawer: " + t.getMessage());
-        }
-    }
-
-    private static void clearAllRecents() {
-        try {
-            Intent intent;
-            intent = new Intent(ACTION_RECENTS_CLEAR_ALL_SINGLETAP);
-            mContext.sendBroadcast(intent);
-        } catch (Throwable t) {
-            log("Error executing clearAllRecents(): " + t.getMessage());
         }
     }
 

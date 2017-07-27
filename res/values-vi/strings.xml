@@ -43,8 +43,6 @@
     <string name="vol_key_cursor_control_on">Tăng/giảm âm lượng di chuyển trỏ sang trái/phải</string>
     <string name="vol_key_cursor_control_on_reverse">Tăng/giảm âm lượng di chuyển trỏ sang phải/trái</string>
 
-    <string name="recents_clear_all_title">Nút đóng các tác vụ đang chạy</string>
-
     <string name="important">Quan trọng</string>
 
     <string name="caller_fullscreen_photo_title">Ảnh người gọi toàn màn hình</string>
@@ -343,13 +341,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Sử dụng giao diện tối</string>
     <string name="pref_gb_theme_dark_summary">Chuyển giao diện GB sang giao diện tối</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Ẩn</string>
-    <string name="recent_clear_top_left">Trên cùng bên trái</string>
-    <string name="recent_clear_top_right">Trên cùng bên phải</string>
-    <string name="recent_clear_bottom_left">Dưới cùng bên trái</string>
-    <string name="recent_clear_bottom_right">Dưới cùng bên phải</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Căn chỉnh lề trên</string>
@@ -1306,9 +1297,6 @@
     <string name="pref_about_get_unlocker_title">Tải Unlocker</string>
     <string name="pref_about_get_unlocker_summary">Chưa có PayPal? Bấm vào đây để tải GravityBox Premium thông qua CH Play.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Dùng biểu tượng thay thế</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Bỏ qua dữ liệu di động khả dụng</string>
     <string name="pref_smart_radio_mda_ignore_summary">Chuyển sang chế độ bình thường kể cả khi dữ liệu di động không khả dụng</string>
@@ -1595,12 +1583,6 @@
     <string name="pref_reboot_allow_softreboot_summary">Chú ý rằng khởi động lại nhanh có thể gây ra 
         vấn đề hao pin hoặc dùng không ẩn định. Cách tốt nhất là sử dụng khởi động lại bình thường.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Hiển thị thanh tìm kiếm</string>
-    <string name="recents_searchbar_default">Mặc định</string>
-    <string name="recents_searchbar_hide_keep_space">Ẩn và giữ chỗ trống</string>
-    <string name="recents_searchbar_hide_remove_space">Ẩn và bỏ chỗ trống</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">CHÚ Ý</string>
     <string name="gb_new_package_dialog_message">GravityBox cho Lollipop đã được cài đặt. 
@@ -1690,9 +1672,6 @@
     <string name="pref_lc_sound_vibrate_title">Tắt âm để chuyển sang rung</string>
     <string name="pref_lc_sound_vibrate_summary">Ngăn các thông báo đã tắt rung khỏi 
         bị buộc rung trong c.độ chuông báo chỉ rung</string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Chỉ xóa có thể trông thấy</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Bấm đúp để tắt màn hình</string>

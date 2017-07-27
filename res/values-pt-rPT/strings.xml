@@ -26,8 +26,6 @@
     <string name="vol_key_cursor_control_on">Teclas Volume +/- movem o cursor para a esquerda/direita</string>
     <string name="vol_key_cursor_control_on_reverse">Teclas Volume +/- movem o cursor para a direita/esquerda</string>
 
-    <string name="recents_clear_all_title">Limpar todas as aplicações recentes</string>
-
     <string name="important">Importante</string>
 
     <string name="caller_fullscreen_photo_title">Imagem do contato em ecrã completo</string>
@@ -322,13 +320,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Utilizar tema escuro</string>
     <string name="pref_gb_theme_dark_summary">Altera a interface de utilizador da aplicação GB para o tema escuro em vez do tema claro</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Desativado</string>
-    <string name="recent_clear_top_left">Canto superior esquerdo</string>
-    <string name="recent_clear_top_right">Canto superior direito</string>
-    <string name="recent_clear_bottom_left">Canto inferior esquerdo</string>
-    <string name="recent_clear_bottom_right">Canto inferior direito</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ajustar margem superior</string>
@@ -1273,9 +1264,6 @@
     <string name="pref_about_get_unlocker_title">Obter desbloqueador</string>
     <string name="pref_about_get_unlocker_summary">Não tem PayPal? Carregue aqui para obter a aplicação de desbloqueio das funcionalidades avançadas do GravityBox a partir da Play Store.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Usar ícone alternativo</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ignorar disponibilidade de dados móveis</string>
     <string name="pref_smart_radio_mda_ignore_summary">Comuta para o modo normal mesmo quando a ligação de dados móveis está indisponível</string>
@@ -1559,12 +1547,6 @@
     <string name="pref_reboot_allow_softreboot_title">Permitir reinício rápido</string>
     <string name="pref_reboot_allow_softreboot_summary">De notar que o reinício rápido pode causar problemas de instabilidade ou 
         consumo de bateria inesperado, sendo recomendável utilizar o modo normal</string>
-
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Visibilidade da barra de pesquisa</string>
-    <string name="recents_searchbar_default">Padrão</string>
-    <string name="recents_searchbar_hide_keep_space">Ocultar e reservar o espaço</string>
-    <string name="recents_searchbar_hide_remove_space">Ocultar e remover o espaço</string>
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATENÇÃO</string>

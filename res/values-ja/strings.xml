@@ -35,7 +35,6 @@
     <string name="vol_key_cursor_control_off">無効</string>
     <string name="vol_key_cursor_control_on">音量キー上/下で左/右に移動</string>
     <string name="vol_key_cursor_control_on_reverse">音量キー上/下で右/左に移動</string>
-    <string name="recents_clear_all_title">「全てのアプリを終了」ボタン</string>
     <string name="important">重要</string>
     <string name="caller_fullscreen_photo_title">発信者の写真を全画面表示</string>
     <!-- QuickSettings strings -->
@@ -287,12 +286,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">ダークテーマを使用</string>
     <string name="pref_gb_theme_dark_summary">GravityBoxのUIをダークテーマに変更します。</string>
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">オフ</string>
-    <string name="recent_clear_top_left">左上</string>
-    <string name="recent_clear_top_right">右上</string>
-    <string name="recent_clear_bottom_left">左下</string>
-    <string name="recent_clear_bottom_right">右下</string>
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">ボタン上の余白</string>
     <!-- AppPickerPreference -->
@@ -1074,8 +1067,6 @@
     <string name="premium_unlocked_message">サポートしてくださりありがとうございます。GravityBoxを再起動するとプレミアム機能が使えるようになります。</string>
     <string name="pref_about_get_unlocker_title">Unlockerを入手</string>
     <string name="pref_about_get_unlocker_summary">PayPalが嫌いですか? ここをタップするとGravityBoxのプレミアム機能を使えるようにするUnlockerをPlayストアでダウンロードできます。</string>
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">別のアイコンを使う</string>
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">データ通信接続の可否を無視</string>
     <string name="pref_smart_radio_mda_ignore_summary">モバイルデータ通信に接続できなくても通常モードに切り替えます。</string>
@@ -1303,11 +1294,6 @@
     <string name="pref_reboot_allow_softreboot_title">ソフトリブートを許可する</string>
     <string name="pref_reboot_allow_softreboot_summary">注意: ソフトリブートは
 バッテリーの異常消費や不安定な動作を引き起こす可能性があります。通常の再起動を使う方がおすすめです。</string>
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">検索バーの表示</string>
-    <string name="recents_searchbar_default">デフォルト</string>
-    <string name="recents_searchbar_hide_keep_space">非表示 (スペースはそのまま)</string>
-    <string name="recents_searchbar_hide_remove_space">非表示 (スペースも削除)</string>
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">注意</string>
     <string name="gb_new_package_dialog_message">Marshmallow向けGravityBoxがインストールされています。

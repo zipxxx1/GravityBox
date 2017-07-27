@@ -21,7 +21,6 @@
 <string name="vol_key_cursor_control_off">غیر فعال</string>
 <string name="vol_key_cursor_control_on">دکمه بالا و پایین مکان‌نما را به چپ و راست حرکت میدهد</string>
 <string name="vol_key_cursor_control_on_reverse">دکمه بالا و پایین مکان‌نما را به راست و چپ حرکت میدهد</string>
-<string name="recents_clear_all_title">مکان قرارگیری آیکون پاک‌سازی تمام پنجره‌های اخیر</string>
 <string name="important">مهم</string>
 <string name="caller_fullscreen_photo_title">نمایش تمام‌صفحه تصویر تماس‌ گیرنده</string>
 <string name="quick_settings_sync_on">همگام‌سازی</string>
@@ -233,11 +232,6 @@
 <string name="pref_hwkeys_disable_summary">غیرفعالسازی تک لمسی دکمه‌ها هنگام فعال بودن Pie</string>
 <string name="pref_gb_theme_dark_title">استفاده از پوسته تیره</string>
 <string name="pref_gb_theme_dark_summary">سوئیچ به GB UI برای استفاده از تم تیره</string>
-<string name="recent_clear_off">خاموش</string>
-<string name="recent_clear_top_left">بالا چپ</string>
-<string name="recent_clear_top_right">بالا راست</string>
-<string name="recent_clear_bottom_left">پایین چپ</string>
-<string name="recent_clear_bottom_right">پایین راست</string>
 <string name="pref_recent_clear_margin_top_title">تنظیم حاشیه بالا</string>
 <string name="app_picker_search">جستجو</string>
 <string name="app_picker_none">(انتخاب نشده)</string>
@@ -828,7 +822,6 @@
 <string name="battery_style_circle_dashed_percent">نشانگر حلقوی سایه‌دار باطری با درصد شارژ</string>
 <string name="pref_about_get_unlocker_title">دریافت قفل‌گشا</string>
 <string name="pref_about_get_unlocker_summary">"Don't have PayPal? Simply touch here to get GravityBox premium feature unlocker from the Play Store."</string>
-<string name="pref_navbar_custom_key_icon_title">استفاده از آیکون‌ جایگزین</string>
 <string name="pref_smart_radio_mda_ignore_title">نادیده‌گرفتن دسترسی به داده‌های تلفن همراه</string>
 <string name="pref_smart_radio_mda_ignore_summary">سوئیچ به حالت نرمال زمانیکه داده‌های همراه در دسترس نبودن</string>
 <string name="shortcut_sync">همگام‌سازی</string>
@@ -997,10 +990,6 @@
 <string name="pref_navbar_larger_icons_summary">نیازمند راه‌اندازی مجدد</string>
 <string name="pref_reboot_allow_softreboot_title">راه‌اندازی نرم</string>
 <string name="pref_reboot_allow_softreboot_summary">توجه داشته باشید که راه اندازی مجدد نرم سبب تخلیه بیشتر باطری و یا بی‌ثباتی و مسائل غیرمنتظره میشود. بهترین راه همیشه استفاده از راه‌اندازی مجدد سیستم بصورت عادی ست.</string>
-<string name="pref_recents_searchbar_title">نمایش نوار جستجو</string>
-<string name="recents_searchbar_default">پیشفرض</string>
-<string name="recents_searchbar_hide_keep_space">پنهان‌سازی و حفظ فضا</string>
-<string name="recents_searchbar_hide_remove_space">پنهان‌سازی و حذف فضا</string>
 <string name="gb_new_package_dialog_title">توجه</string>
 <string name="gb_new_package_dialog_message">GravityBox for Lollipop found installed. Before new version can be used, old one has to be uninstalled. Press OK to start uninstallation process. After uninstallation, do not forget to activate new module in Xposed Installer and REBOOT IMMEDIATELLY.</string>
 <string name="settings_restore_backup_obsolete">پشتیبان ایجاد شده در نسخه های قدیمی آندروید نمی تواند با توجه به تفاوت گسترده سیستم عامل ترمیم شود.توصیه می‌شود جعبه جذاب از ابتدا پیکربندی شود</string>
@@ -1049,7 +1038,6 @@
 <string name="pref_lc_sound_vibrate_summary">Prevents notifications having vibrations turned off from being forced to vibrate during vibrate-only ringer mode</string>
 <string name="pref_lc_qh_mute_system_vibe_title">غیرفعالسازی لرزش دستگاه</string>
 <string name="pref_lc_qh_mute_system_vibe_summary">همه لرزش‌های اعلان دستگاه خاموش شود.اعلانات دستگاه‌های جفت شده در صورت فعال شدن میتواند لرزش داشته باشند</string>
-<string name="pref_recents_clear_all_visible_title">فقط پاک‌سازی موارد قابل رویت</string>
 <string name="pref_lockscreen_dt2s_title">بخواب بردن دستگاه با دو لمس متوالی بروی صفحه‌قفل</string>
 <string name="pref_statusbar_disable_peek_title">غیرفعالسازی نگاه پنهانی</string>
 <string name="pref_statusbar_disable_peek_summary">عدم گسترش نوار وضعیت هنگام لمس</string>

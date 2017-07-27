@@ -43,8 +43,6 @@
     <string name="vol_key_cursor_control_on">Volumen arriba/abajo mueve el cursor a izquierda/derecha</string>
     <string name="vol_key_cursor_control_on_reverse">Volumen arriba/abajo mueve el cursor a derecha/izquierda</string>
 
-    <string name="recents_clear_all_title">Eliminar tareas recientes</string>
-
     <string name="important">Importante</string>
 
     <string name="caller_fullscreen_photo_title">Foto del llamante a pantalla completa</string>
@@ -343,13 +341,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Usar tema oscuro</string>
     <string name="pref_gb_theme_dark_summary">Cambiar la interfaz de GravityBox a colores oscuros</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Desactivado</string>
-    <string name="recent_clear_top_left">Superior izquierda</string>
-    <string name="recent_clear_top_right">Superior derecha</string>
-    <string name="recent_clear_bottom_left">Inferior izquierda</string>
-    <string name="recent_clear_bottom_right">Inferior derecha</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ajustar margen superior</string>
@@ -1306,9 +1297,6 @@
     <string name="pref_about_get_unlocker_title">Obtener "GravityBox Unlocker"</string>
     <string name="pref_about_get_unlocker_summary">¿No usas PayPal? Pulsa aquí para obtener el desbloqueador de características premium desde la Play Store.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Usar icono alternativo</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ignorar disponibilidad de datos móviles</string>
     <string name="pref_smart_radio_mda_ignore_summary">Cambia al modo normal aunque los datos móviles estén actualmente no disponibles</string>
@@ -1596,12 +1584,6 @@
     <string name="pref_reboot_allow_softreboot_summary">Tenga en cuenta que el reinicio por software puede causar
         descarga de la batería o inestabilidad problemas inesperados. La mejor práctica es utilizar siempre reinicio normal.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Visibilidad de la barra de búsqueda</string>
-    <string name="recents_searchbar_default">Predeterminado</string>
-    <string name="recents_searchbar_hide_keep_space">Ocultar y respetar espacio</string>
-    <string name="recents_searchbar_hide_remove_space">Ocultar y eliminar espacio</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATENCIÓN</string>
     <string name="gb_new_package_dialog_message">GravityBox para Lollipop se encuentra instalada.
@@ -1691,9 +1673,6 @@
     <string name="pref_lc_sound_vibrate_title">Desactivar sonido a la conversión de vibraciones</string>
     <string name="pref_lc_sound_vibrate_summary">Evita las notificaciones que tienen vibraciones 
          a vibrar sólo durante el modo de timbre</string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Limpiar solo visibles</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Doble toque para apagar pantalla</string>

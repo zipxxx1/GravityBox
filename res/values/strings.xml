@@ -45,8 +45,6 @@
     <string name="vol_key_cursor_control_on">Volume up/down moves cursor left/right</string>
     <string name="vol_key_cursor_control_on_reverse">Volume up/down moves cursor right/left</string>
 
-    <string name="recents_clear_all_title">Clear all recent tasks</string>
-
     <string name="important">Important</string>
 
     <string name="caller_fullscreen_photo_title">Fullscreen caller photo</string>
@@ -346,13 +344,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Use dark theme</string>
     <string name="pref_gb_theme_dark_summary">Switches GB UI to use dark theme</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Off</string>
-    <string name="recent_clear_top_left">Top left</string>
-    <string name="recent_clear_top_right">Top right</string>
-    <string name="recent_clear_bottom_left">Bottom left</string>
-    <string name="recent_clear_bottom_right">Bottom right</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Adjust top margin</string>
@@ -1311,9 +1302,6 @@
     <string name="pref_about_get_unlocker_title">Get unlocker</string>
     <string name="pref_about_get_unlocker_summary">Don\'t have PayPal? Simply touch here to get GravityBox premium feature unlocker from the Play Store.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Use alternate icon</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ignore mobile data availability</string>
     <string name="pref_smart_radio_mda_ignore_summary">Switches to normal mode even if mobile data is currently unavailable</string>
@@ -1604,12 +1592,6 @@
     <string name="pref_reboot_allow_softreboot_summary">Note that soft reboot can cause 
         unexpected battery drain or instability issues. Best practice is to always use normal reboot.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Search bar visibility</string>
-    <string name="recents_searchbar_default">Default</string>
-    <string name="recents_searchbar_hide_keep_space">Hide and keep space</string>
-    <string name="recents_searchbar_hide_remove_space">Hide and remove space</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATTENTION</string>
     <string name="gb_new_package_dialog_message">GravityBox for Lollipop found installed. 
@@ -1707,9 +1689,6 @@
         including notification vibrations on THIS device. Notifications on paired Android Wear device can
         still vibrate in case notification vibrations are enabled.
     </string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Clear visible only</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Double-tap to sleep</string>

@@ -26,8 +26,6 @@
     <string name="vol_key_cursor_control_on">Głośność góra/dół porusza w lewo/prawo</string>
     <string name="vol_key_cursor_control_on_reverse">Głośność góra/dół porusza w prawo/lewo</string>
 
-    <string name="recents_clear_all_title">Wyczyść wszystkie zadania</string>
-
     <string name="important">Ważne</string>
 
     <string name="caller_fullscreen_photo_title">Fotografia dzwoniącego na pełnym ekranie</string>
@@ -319,13 +317,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Użyj ciemnego motywu</string>
     <string name="pref_gb_theme_dark_summary">Przełącza GB UI na ciemny motyw zamiast jasnego</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Wyłącz</string>
-    <string name="recent_clear_top_left">Górny Lewy</string>
-    <string name="recent_clear_top_right">Górny Prawy</string>
-    <string name="recent_clear_bottom_left">Dolny Lewy</string>
-    <string name="recent_clear_bottom_right">Dolny Prawy</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ustaw górny margines</string>
@@ -1263,9 +1254,6 @@
     <string name="pref_about_get_unlocker_title">Pobierz GB Unlocker</string>
     <string name="pref_about_get_unlocker_summary">Nie posiadasz PayPal? Wystarczy kliknąć tutaj, aby pobrać ze sklepu Google Play aplikację do odblokowania funkcji premium GravityBox.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Użyj alternatywnej ikony</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ignoruj dostępność danych mobilnych</string>
     <string name="pref_smart_radio_mda_ignore_summary">Przełączenie do trybu normalnego niezależnie od dostępności danych mobilnych</string>
@@ -1551,12 +1539,6 @@
     <string name="pref_reboot_allow_softreboot_summary">Należy pamiętać, że miękki restart może powodować 
         nieoczekiwane problemy ze stabilnością lub szybszym rozładowaniem baterii. Najlepszym rozwiązaniem jest używanie normalnego restartu.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Widoczność paska wyszukiwania</string>
-    <string name="recents_searchbar_default">Domyślna</string>
-    <string name="recents_searchbar_hide_keep_space">Ukryj i rezerwuj miejsce</string>
-    <string name="recents_searchbar_hide_remove_space">Ukryj i zwolnij miejsce</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">UWAGA</string>
     <string name="gb_new_package_dialog_message">Znaleziono zainstalowany GravityBox dla systemu Lollipop. 
@@ -1646,9 +1628,6 @@
     <string name="pref_lc_sound_vibrate_title">Wyłącz konwersję dźwięku na wibracje</string>
     <string name="pref_lc_sound_vibrate_summary">Zapobiega wibracjom dla powiadomień które mają wyłączony tryb wibracji
         gdy tryb dzwonka jest ustawiony na same wibracje</string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Tylko wyraźnie widoczny</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Uśpienie podwójnym kliknięciem</string>

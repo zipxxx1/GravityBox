@@ -43,8 +43,6 @@
     <string name="vol_key_cursor_control_on">Громкость вверх/вниз для перемещения курсора влево/вправо</string>
     <string name="vol_key_cursor_control_on_reverse">Громкость вверх/вниз для перемещения курсора вправо/влево</string>
 
-    <string name="recents_clear_all_title">Закрыть все текущие задачи</string>
-
     <string name="important">Важно</string>
 
     <string name="caller_fullscreen_photo_title">Фото вызывающего на весь экран</string>
@@ -344,13 +342,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Использовать тёмную тему</string>
     <string name="pref_gb_theme_dark_summary">Переключение темы интерфейса GravityBox со светлой на тёмную</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Выключено</string>
-    <string name="recent_clear_top_left">Сверху слева</string>
-    <string name="recent_clear_top_right">Сверху справа</string>
-    <string name="recent_clear_bottom_left">Снизу слева</string>
-    <string name="recent_clear_bottom_right">Снизу справа</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Настроить отступ сверху</string>
@@ -1309,9 +1300,6 @@
     <string name="pref_about_get_unlocker_title">Получить ключ разблокировки</string>
     <string name="pref_about_get_unlocker_summary">Нет счёта в PayPal? Просто нажмите здесь для получения ключа разблокировки премиум-функций GravityBox из Play Store.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Альтернативный значок</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Игнор.доступность моб.данных</string>
     <string name="pref_smart_radio_mda_ignore_summary">Переключение в обычный режим, даже если мобильные данные в настоящий момент недоступны</string>
@@ -1601,12 +1589,6 @@
     <string name="pref_reboot_allow_softreboot_summary">Имейте в виду, что мягкая перезагрузка может вызвать 
         повышенный расход батареи или нестабильность. Лучше использовать обычную перезагрузку.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Видимость панели поиска</string>
-    <string name="recents_searchbar_default">По умолчанию</string>
-    <string name="recents_searchbar_hide_keep_space">Скрыть и оставить место</string>
-    <string name="recents_searchbar_hide_remove_space">Скрыть и убрать место</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ВНИМАНИЕ</string>
     <string name="gb_new_package_dialog_message">Обнаружен установленный GravityBox для Lollipop. 
@@ -1704,9 +1686,6 @@
        включаю вибрацию уведомлений на ДАННОМ устройстве. Вибрации на сопряженном устройстве Android Wear
        могут работать, если вибрация включена.
     </string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Очистить только видимые</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Двойное нажатие для сна</string>

@@ -41,8 +41,6 @@
     <string name="vol_key_cursor_control_on">כפתורי עוצמת שמע (הגברה/החלשה) יזיזו את הסמן משמאל לימין (בהתאמה)</string>
     <string name="vol_key_cursor_control_on_reverse">כפתורי עוצמת שמע (הגברה/החלשה) יזיזו את הסמן מימין לשמאל (בהתאמה)</string>
 
-    <string name="recents_clear_all_title">כפתור \'נקה את כל המשימות האחרונות\'</string>
-
     <string name="important">חשוב</string>
 
     <string name="caller_fullscreen_photo_title">תמונת משתמש על כל המסך</string>
@@ -322,13 +320,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">השתמש בערכת Dark</string>
     <string name="pref_gb_theme_dark_summary">מאלץ ממשק משתמש של GravityBox להשתמש בערכת נושא כהה במקום ערכת נושא בהירה</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">כבוי</string>
-    <string name="recent_clear_top_left">שמאלי עליון</string>
-    <string name="recent_clear_top_right">ימני עליון</string>
-    <string name="recent_clear_bottom_left">שמאלי תחתון</string>
-    <string name="recent_clear_bottom_right">ימני תחתון</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">התאם שוליים עליונים</string>

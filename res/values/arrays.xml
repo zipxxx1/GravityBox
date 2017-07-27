@@ -503,22 +503,6 @@
         <item>always_on</item>
     </string-array>
 
-    <string-array name="recents_clear_entries" translatable="false">
-        <item>@string/recent_clear_off</item>
-        <item>@string/recent_clear_top_left</item>
-        <item>@string/recent_clear_top_right</item>
-        <item>@string/recent_clear_bottom_left</item>
-        <item>@string/recent_clear_bottom_right</item>
-    </string-array>
-
-    <string-array name="recents_clear_values" translatable="false">
-        <item>0</item>
-        <item>51</item>
-        <item>53</item>
-        <item>83</item>
-        <item>85</item>
-    </string-array>
-
     <string-array name="expanded_desktop_entries" translatable="false">
         <item>@string/expanded_desktop_disabled</item>
         <item>@string/expanded_desktop_navbar</item>
@@ -1090,18 +1074,6 @@
         <item>DEFAULT</item>
         <item>ALWAYS_SHOW</item>
         <item>HIDDEN</item>
-    </string-array>
-
-    <string-array name="recents_searchbar_entries" translatable="false">
-        <item>@string/recents_searchbar_default</item>
-        <item>@string/recents_searchbar_hide_keep_space</item>
-        <item>@string/recents_searchbar_hide_remove_space</item>
-    </string-array>
-
-    <string-array name="recents_searchbar_values" translatable="false">
-        <item>DEFAULT</item>
-        <item>HIDE_KEEP_SPACE</item>
-        <item>HIDE_REMOVE_SPACE</item>
     </string-array>
 
     <string-array name="lc_notif_visibility_entries" translatable="false">

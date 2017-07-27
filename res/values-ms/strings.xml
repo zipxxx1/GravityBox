@@ -43,8 +43,6 @@
     <string name="vol_key_cursor_control_on">Volume atas/bawah gerakkan anak panah kiri/kanan</string>
     <string name="vol_key_cursor_control_on_reverse">Volume atas/bawah gerakkan anak panah kiri/kanan</string>
 
-    <string name="recents_clear_all_title">Buang semua aktiviti terdahulu</string>
-
     <string name="important">Penting</string>
 
     <string name="caller_fullscreen_photo_title">Skrin penuh gambar pemanggil</string>
@@ -343,13 +341,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Gunakan tema gelap</string>
     <string name="pref_gb_theme_dark_summary">Gunakan tema gelap untuk GB</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Tidak aktif</string>
-    <string name="recent_clear_top_left">Kiri atas</string>
-    <string name="recent_clear_top_right">Kanan atas</string>
-    <string name="recent_clear_bottom_left">Kiri bawah</string>
-    <string name="recent_clear_bottom_right">Kanan bawah</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Set ukuran atas</string>
@@ -1306,9 +1297,6 @@
     <string name="pref_about_get_unlocker_title">Dapatkan kunci premium</string>
     <string name="pref_about_get_unlocker_summary">Tiada PayPal? klik disini untuk dapatkannya di playstore.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Guna ikon lain</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Biarkan data paket aktif</string>
     <string name="pref_smart_radio_mda_ignore_summary">Tukar ke mod biasa walaupun data tidak aktif</string>
@@ -1598,12 +1586,6 @@
     <string name="pref_reboot_allow_softreboot_summary">Amaran! soft reboot boleh menyebabkan peranti
         tidak stabil. Biasakan guna reboot biasa.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Pamer bar carian</string>
-    <string name="recents_searchbar_default">Tetapan asal</string>
-    <string name="recents_searchbar_hide_keep_space">Sembunyi dan kekalkan ruang</string>
-    <string name="recents_searchbar_hide_remove_space">Sembunyi dan buang ruang</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">PERHATIAN</string>
     <string name="gb_new_package_dialog_message">GravityBox dari Lollipop didapati ada. 
@@ -1700,9 +1682,6 @@
         termasuk getaran notifikasi pada peranti INI. Notifikasi pada peranti jam
         masih aktif jika getaran notifikasi aktif.
     </string>
-	
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Hapuskan yang jelas sahaja</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Sentuh 2 kali untuk matikan</string>

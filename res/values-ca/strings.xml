@@ -25,8 +25,6 @@
     <string name="vol_key_cursor_control_on">Volum superior/inferior mou el cursor esquerra/dreta</string>
     <string name="vol_key_cursor_control_on_reverse">Volum superior/inferior mou el cursor dreta/esquerra</string>
 
-    <string name="recents_clear_all_title">Suprimir totes les tasques recents</string>
-
     <string name="important">Important</string>
 
     <string name="caller_fullscreen_photo_title">Fotografia del contacte a pantalla sencera</string>

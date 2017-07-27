@@ -43,8 +43,6 @@
     <string name="vol_key_cursor_control_on">音量键增/减按钮控制光标向左/向右</string>
     <string name="vol_key_cursor_control_on_reverse">音量键增/减按钮控制光标向右/向左</string>
 
-    <string name="recents_clear_all_title">清除所有最近使用的应用程序</string>
-
     <string name="important">重要</string>
 
     <string name="caller_fullscreen_photo_title">全屏来电者照片</string>
@@ -344,13 +342,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">使用黑色主题</string>
     <string name="pref_gb_theme_dark_summary">切换GravityBox至黑色主题代替白色主题</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">关闭</string>
-    <string name="recent_clear_top_left">左上角</string>
-    <string name="recent_clear_top_right">右上角</string>
-    <string name="recent_clear_bottom_left">左下角</string>
-    <string name="recent_clear_bottom_right">右下角</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">调整顶部边距</string>
@@ -1309,9 +1300,6 @@
     <string name="pref_about_get_unlocker_title">获取解锁器</string>
     <string name="pref_about_get_unlocker_summary">没有PayPal？只需点击这里从Google Play市场购买GravityBox解锁器来解锁高级功能</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">使用备用图标</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">忽略移动数据可用性</string>
     <string name="pref_smart_radio_mda_ignore_summary">即使移动数据不可用也会切换到正常模式</string>
@@ -1602,12 +1590,6 @@
     <string name="pref_reboot_allow_softreboot_summary">注意,软重启会引起
 	意想不到的电池消耗或不稳定问题,最好的方法是使用正常重启</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">搜索栏可见性</string>
-    <string name="recents_searchbar_default">默认</string>
-    <string name="recents_searchbar_hide_keep_space">隐藏和保留空间</string>
-    <string name="recents_searchbar_hide_remove_space">隐藏和移除空间</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">注意</string>
     <string name="gb_new_package_dialog_message">发现GravityBox已安装Lollipop版本
@@ -1705,9 +1687,6 @@
 	包括在此设备上的通知振动,配对Android Wear设备上的通知仍然可以
  	在震动的情况下开启通知振动
     </string>
-	
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">仅清除可见</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">双击睡眠</string>

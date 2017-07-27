@@ -76,7 +76,6 @@ public class ModNavigationBar {
 
     private static boolean mAlwaysShowMenukey;
     private static View mNavigationBarView;
-    private static ModHwKeys.HwKeyAction mRecentsSingletapActionBck = new ModHwKeys.HwKeyAction(0, null);
     private static ModHwKeys.HwKeyAction mRecentsSingletapAction = new ModHwKeys.HwKeyAction(0, null);
     private static ModHwKeys.HwKeyAction mRecentsLongpressAction = new ModHwKeys.HwKeyAction(0, null);
     private static ModHwKeys.HwKeyAction mRecentsDoubletapAction = new ModHwKeys.HwKeyAction(0, null);
@@ -212,11 +211,6 @@ public class ModNavigationBar {
                             GravityBoxSettings.EXTRA_HWKEY_KEY))) {
                 mRecentsSingletapAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
                 mRecentsSingletapAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
-                if (mRecentsSingletapAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP) {
-                    mRecentsSingletapActionBck.actionId = mRecentsSingletapAction.actionId;
-                    mRecentsSingletapActionBck.customApp = mRecentsSingletapAction.customApp;
-                    if (DEBUG) log("mRecentsSingletapActionBck.actionId = " + mRecentsSingletapActionBck.actionId);
-                }
                 updateRecentsKeyCode();
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
@@ -267,8 +261,6 @@ public class ModNavigationBar {
                 mRecentsDoubletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP+"_custom", null));
-                mRecentsSingletapActionBck.actionId = mRecentsSingletapAction.actionId;
-                mRecentsSingletapActionBck.customApp = mRecentsSingletapAction.customApp;
                 mHomeLongpressAction = Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS, "0"));
             } catch (NumberFormatException nfe) {

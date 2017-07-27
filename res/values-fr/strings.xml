@@ -43,8 +43,6 @@
     <string name="vol_key_cursor_control_on">Volume haut/bas déplace le curseur à gauche/droite</string>
     <string name="vol_key_cursor_control_on_reverse">Volume haut/bas déplace le curseur à droite/gauche</string>
 
-    <string name="recents_clear_all_title">Effacer les tâches récentes</string>
-
     <string name="important">Important</string>
 
     <string name="caller_fullscreen_photo_title">Photo de l\'appelant plein écran</string>
@@ -343,13 +341,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Utiliser le thème Dark</string>
     <string name="pref_gb_theme_dark_summary">Bascule l\'interface de GravityBox vers le thème Dark au lieu de Light</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Désactivé</string>
-    <string name="recent_clear_top_left">En haut à gauche</string>
-    <string name="recent_clear_top_right">En haut à droite</string>
-    <string name="recent_clear_bottom_left">En bas à gauche</string>
-    <string name="recent_clear_bottom_right">En bas à droite</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ajuster la marge supérieure</string>
@@ -1306,9 +1297,6 @@
     <string name="pref_about_get_unlocker_title">Obtenir le déverrouilleur</string>
     <string name="pref_about_get_unlocker_summary">Vous n\'avez pas de compte Paypal ? Alors touchez ici pour obtenir le déverrouilleur d\'éléments premium de GravityBox depuis le PlayStore</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Utiliser une icône alternative</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ignorer la disponibilité des données mobiles</string>
     <string name="pref_smart_radio_mda_ignore_summary">Passe en mode normal même si les données mobiles sont indisponibles à ce moment</string>
@@ -1598,12 +1586,6 @@
     <string name="pref_reboot_allow_softreboot_summary">Remarquez que le redémarrage logiciel peut occasionner 
         une consommation de batterie inattendue ou des problèmes d\'instabilité. Le meilleur usage est de toujours redémarrer normalement.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Visibilité de la barre de recherche</string>
-    <string name="recents_searchbar_default">Par défaut</string>
-    <string name="recents_searchbar_hide_keep_space">Masquer et garder l\'espace</string>
-    <string name="recents_searchbar_hide_remove_space">Masquer et supprimer l\'espace</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATTENTION</string>
     <string name="gb_new_package_dialog_message">Une installation de GravityBox pour Lollipop a été détectée. 
@@ -1701,9 +1683,6 @@
         en incluant les vibrations de notification sur CET appareil. Les notifications sur un appareil Android Wear apairé peuvent
         toujours vibrer dans le cas où les notifications seraient actives
     </string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Effacer les tâches visibles uniquement</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Double appui pour mettre en veille</string>

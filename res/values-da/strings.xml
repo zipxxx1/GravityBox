@@ -25,8 +25,6 @@
     <string name="vol_key_cursor_control_on">Volumen op/ned bevæger markøren til venstre/højre</string>
     <string name="vol_key_cursor_control_on_reverse">Volumen op/ned bevæger markøren til højre/venstre</string>
 
-    <string name="recents_clear_all_title">Ryd alle seneste apps</string>
-
     <string name="important">Vigtigt</string>
 
     <string name="caller_fullscreen_photo_title">Fuldskærmsbillede af den, som ringer</string>

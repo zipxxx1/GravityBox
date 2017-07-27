@@ -43,8 +43,6 @@
     <string name="vol_key_cursor_control_on">Hangerő fel/le a kurzort balra/jobbra mozgatja</string>
     <string name="vol_key_cursor_control_on_reverse">Hangerő fel/le a kurzort jobbra/balra mozgatja</string>
 
-    <string name="recents_clear_all_title">Nemrég használt alkalmazások kiürítése gomb</string>
-
     <string name="important">Fontos</string>
 
     <string name="caller_fullscreen_photo_title">Teljes képernyős hívó fotó</string>
@@ -344,13 +342,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Sötét téma használata</string>
     <string name="pref_gb_theme_dark_summary">Átkapcsolja a Gravitybox felhasználói felületét sötét téma használatára</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Kikapcsolva</string>
-    <string name="recent_clear_top_left">Balra fent</string>
-    <string name="recent_clear_top_right">Jobbra fent</string>
-    <string name="recent_clear_bottom_left">Balra lent</string>
-    <string name="recent_clear_bottom_right">Jobbra lent</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Felső szegély beállítása</string>
@@ -1297,9 +1288,6 @@
     <string name="pref_about_get_unlocker_title">Feloldó beszerzése</string>
     <string name="pref_about_get_unlocker_summary">Nincs PayPal fiókja? Csak érintsen ide a GravityBox prémium funkciók feloldójának a Play Áruházból való beszerzéséhez</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Alternatív ikon használata</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Mobil adatforgalom elérhetőségének figyelmen kívül hagyása</string>
     <string name="pref_smart_radio_mda_ignore_summary">Normál módba vált akkor is, ha a mobil adatforgalom jelenleg nem elérhető</string>
@@ -1578,12 +1566,6 @@
     <string name="pref_reboot_allow_softreboot_title">Gyors újraindítás engedélyezése</string>
     <string name="pref_reboot_allow_softreboot_summary">Ne feledd, hogy a gyors újraindítás nem várt akku fogyasztást és instabilitási problémákat okozhat. Tapasztalat szerint jobb, ha mindig normál újraindítást alkalmazol.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Kereső sáv láthatósága</string>
-    <string name="recents_searchbar_default">Alapértelmezett</string>
-    <string name="recents_searchbar_hide_keep_space">Elrejtés, a hely megtartásával</string>
-    <string name="recents_searchbar_hide_remove_space">Elrejtés, a hely eltávolításával</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">FIGYELEM</string>
     <string name="gb_new_package_dialog_message">GravityBox Lollipop verzió van telepítve. Az új verzió használata előtt a régi verziót el kell távolítani. Az eltávolítási folyamat megkezdéséhez nyomd meg az OK gombot. Az eltávolítás után ne felejtsd el aktiválni az új modult az Xposed Telepítőben, majd RÖGTÖN INDÍTSD ÚJRA a készüléked.</string>
@@ -1669,9 +1651,6 @@
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Eszköz rezgések némítása</string>
     <string name="pref_lc_qh_mute_system_vibe_summary">Kikapcsolja az ÖSSZES rezgő visszajelzést rendszer szinten, az értesítések rezgéseit is beleértve EZEN az eszközön. A párosított Android Wear eszköz értesítés rezgései működni fognak, amennyiben engedélyez van a funkció.</string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Csak a láthatóak kiürítése</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Dupla érintésre alvás</string>

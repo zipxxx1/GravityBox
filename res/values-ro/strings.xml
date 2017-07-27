@@ -40,8 +40,6 @@
     <string name="vol_key_cursor_control_on">Volum sus/jos mută cursorul stânga/dreapta</string>
     <string name="vol_key_cursor_control_on_reverse">Volum sus/jos mută cursorul dreapta/stânga</string>
 
-    <string name="recents_clear_all_title">Ștergeți toate sarcinile recente</string>
-
     <string name="important">Important</string>
 
     <string name="caller_fullscreen_photo_title">Imagine apelant pe tot ecranul</string>
@@ -341,13 +339,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Utilizați tema întunecată</string>
     <string name="pref_gb_theme_dark_summary">Comută GB pentru a utiliza tema întunecată</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Oprit</string>
-    <string name="recent_clear_top_left">Stânga sus</string>
-    <string name="recent_clear_top_right">Dreapta sus</string>
-    <string name="recent_clear_bottom_left">Stânga jos</string>
-    <string name="recent_clear_bottom_right">Dreapta jos</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ajustare margine superioară</string>
@@ -1289,9 +1280,6 @@
     <string name="pref_about_get_unlocker_title">Obțineți GB Unlocker</string>
     <string name="pref_about_get_unlocker_summary">Nu aveți PayPal? Pur și simplu atingeți aici pentru a obține caracteristica de deblocare a caracteristicilor premium GravityBox din Magazinul Play.</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Utilizați pictogramă alternativă</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ignorați disponibilitatea datelor mobile</string>
     <string name="pref_smart_radio_mda_ignore_summary">Comută la modul normal chiar dacă datele mobile în prezent nu sunt disponibile</string>
@@ -1567,12 +1555,6 @@
     <string name="pref_reboot_allow_softreboot_title">Permiteți repornirea soft</string>
     <string name="pref_reboot_allow_softreboot_summary">Rețineți că repornirea soft poate cauza probleme neașteptate de descărcare a bateriei sau de instabilitate. Cea mai bună practică este să utilizați întotdeauna repornirea normală.</string>
 
-    <!-- Recents panel search bar -->
-    <string name="pref_recents_searchbar_title">Vizibilitatea barei de căutare</string>
-    <string name="recents_searchbar_default">Implicit</string>
-    <string name="recents_searchbar_hide_keep_space">Ascundeți și păstrați spațiu</string>
-    <string name="recents_searchbar_hide_remove_space">Ascundeți și eliminați spațiul</string>
-
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATENŢIE</string>
     <string name="gb_new_package_dialog_message">GravityBox pentru Lollipop a fost instalat. Înainte ca noua versiune să poată fi utilizată, vechea versine trebuie dezinstalată. Apăsați OK pentru a începe procesul de dezinstalare. După dezinstalare, nu uitați să activați modulul nou în Xposed Installer și REPORNIRE IMEDIATĂ.</string>
@@ -1659,9 +1641,6 @@
     <string name="pref_lc_qh_mute_system_vibe_title">Dezactivați vibrațiile dispozitivului</string>
     <string name="pref_lc_qh_mute_system_vibe_summary">Dezactivează TOATE vibrațiile la nivel de sistem, inclusiv vibrațiile de notificare pe acest dispozitiv. Notificările pe dispozitivul Wear Android asociat pot vibra în continuare în cazul în care vibrațiile de notificare sunt activate.
     </string>
-
-    <!-- Recents: clear visible only -->
-    <string name="pref_recents_clear_all_visible_title">Eliminaţi doar pe cele vizibile</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Atingeți de două ori pentru a închide ecranul</string>

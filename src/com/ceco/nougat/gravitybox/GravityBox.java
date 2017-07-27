@@ -160,8 +160,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         }
 
         if (lpparam.packageName.equals(ModClearAllRecents.PACKAGE_NAME)) {
-            // TODO: clear all recents
-            //ModClearAllRecents.init(prefs, lpparam.classLoader);
+            ModClearAllRecents.init(prefs, lpparam.classLoader);
         }
 
         if (ModDialer.PACKAGE_NAMES.contains(lpparam.packageName)) {

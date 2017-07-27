@@ -42,8 +42,6 @@
     <string name="vol_key_cursor_control_on">Volume atas/bawah menggerakkan kursor ke kiri/kanan</string>
     <string name="vol_key_cursor_control_on_reverse">Volume atas/bawah menggerakkan kursor ke kanan/kiri</string>
 
-    <string name="recents_clear_all_title">Bersihkan semua tugas baru</string>
-
     <string name="important">Penting</string>
 
     <string name="caller_fullscreen_photo_title">Foto pemanggil fullscreen</string>
@@ -313,13 +311,6 @@
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Gunakan tema Dark</string>
     <string name="pref_gb_theme_dark_summary">Ganti UI GB ke tema Dark daripada Light</string>
-
-    <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Matikan</string>
-    <string name="recent_clear_top_left">Atas kiri</string>
-    <string name="recent_clear_top_right">Atas kanan</string>
-    <string name="recent_clear_bottom_left">Bawah kiri</string>
-    <string name="recent_clear_bottom_right">Bawah kanan</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Tentukan batas atas</string>
