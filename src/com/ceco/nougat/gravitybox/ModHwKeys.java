@@ -84,6 +84,8 @@ public class ModHwKeys {
 
     private static final int FLAG_WAKE = 0x00000001;
     private static final int FLAG_WAKE_DROPPED = 0x00000002;
+    public static final int PA_SOURCE_CUSTOM = 0x08000000 | 0x00000001;
+
     public static final String ACTION_SCREENSHOT = "gravitybox.intent.action.SCREENSHOT";
     public static final String EXTRA_SCREENSHOT_DELAY_MS = "screenshotDelayMs";
     public static final String ACTION_SHOW_POWER_MENU = "gravitybox.intent.action.SHOW_POWER_MENU";
@@ -546,6 +548,7 @@ public class ModHwKeys {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     KeyEvent event = (KeyEvent) param.args[0];
+
                     int keyCode = event.getKeyCode();
                     boolean down = event.getAction() == KeyEvent.ACTION_DOWN;
                     boolean keyguardOn = (Boolean) XposedHelpers.callMethod(mPhoneWindowManager, "keyguardOn");
@@ -556,13 +559,19 @@ public class ModHwKeys {
                             "; flags=0x" + Integer.toHexString(event.getFlags()) +
                             "; source=" + event.getSource());
 
-                    if (event.getSource() == InputDevice.SOURCE_UNKNOWN) {
-                        // ignore unknow source events, e.g. synthetic events injected from GB itself
+                    if (event.getSource() == InputDevice.SOURCE_UNKNOWN ||
+                            event.getSource() == PA_SOURCE_CUSTOM) {
+                        // ignore unknown source events, e.g. synthetic events injected from GB itself
                         if (DEBUG) log("interceptKeyBeforeQueueing: ignoring event from unknown source");
                         if (Utils.isOxygenOs35Rom()) {
                             // mangle OOS3.5 key event to allow pass-through and to avoid double-vibrations
                             event = KeyEvent.changeFlags(event, event.getFlags() | KeyEvent.FLAG_VIRTUAL_HARD_KEY);
                             event.setSource(InputDevice.SOURCE_KEYBOARD);
+                            param.args[0] = event;
+                        } else if (Utils.isParanoidRom() && event.getSource() == InputDevice.SOURCE_UNKNOWN) {
+                            // mangle PA key event to allow pass-through
+                            event = KeyEvent.changeFlags(event, event.getFlags() | KeyEvent.FLAG_VIRTUAL_HARD_KEY);
+                            event.setSource(PA_SOURCE_CUSTOM);
                             param.args[0] = event;
                         }
                         return;
@@ -694,8 +703,9 @@ public class ModHwKeys {
                             "; flags=" + Integer.toHexString(event.getFlags()) +
                             "; source=" + event.getSource());
 
-                    if (event.getSource() == InputDevice.SOURCE_UNKNOWN) {
-                        // ignore unknow source events, e.g. events injected from GB itself
+                    if (event.getSource() == InputDevice.SOURCE_UNKNOWN ||
+                            event.getSource() == PA_SOURCE_CUSTOM) {
+                        // ignore unknown source events, e.g. events injected from GB itself
                         if (DEBUG) log("interceptKeyBeforeDispatching: ignoring event from unknown source");
                         return;
                     }
@@ -710,6 +720,8 @@ public class ModHwKeys {
                             mHandler.removeCallbacks(mMenuLongPress);
                             if (mIsMenuLongPressed) {
                                 mIsMenuLongPressed = false;
+                                param.setResult(-1);
+                                return;
                             } else if (event.getRepeatCount() == 0) {
                                 if (!areHwKeysEnabled()) {
                                     if (DEBUG) log("MENU KeyEvent coming from HW key and keys disabled. Ignoring.");
@@ -725,6 +737,8 @@ public class ModHwKeys {
                                         injectKey(KeyEvent.KEYCODE_MENU);
                                     }
                                 }
+                                param.setResult(-1);
+                                return;
                             }
                         } else if (event.getRepeatCount() == 0) {
                             mMenuKeyPressed = true;
@@ -748,9 +762,9 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId));
                                 }
                             }
+                            param.setResult(-1);
+                            return;
                         }
-                        param.setResult(-1);
-                        return;
                     }
 
                     if (keyCode == KeyEvent.KEYCODE_BACK && isFromSystem && !isTaskLocked() &&
@@ -761,6 +775,8 @@ public class ModHwKeys {
                             mHandler.removeCallbacks(mBackLongPress);
                             if (mIsBackLongPressed) {
                                 mIsBackLongPressed = false;
+                                param.setResult(-1);
+                                return;
                             } else if (event.getRepeatCount() == 0) {
                                 if (!areHwKeysEnabled()) {
                                     if (DEBUG) log("BACK KeyEvent coming from HW key and keys disabled. Ignoring.");
@@ -776,6 +792,8 @@ public class ModHwKeys {
                                         injectKey(KeyEvent.KEYCODE_BACK);
                                     }
                                 }
+                                param.setResult(-1);
+                                return;
                             }
                         } else if (event.getRepeatCount() == 0) {
                             mBackKeyPressed = true;
@@ -799,9 +817,9 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId));
                                 }
                             }
+                            param.setResult(-1);
+                            return;
                         }
-                        param.setResult(-1);
-                        return;
                     }
 
                     if (keyCode == KeyEvent.KEYCODE_APP_SWITCH && isFromSystem && !isTaskLocked() &&
@@ -812,6 +830,8 @@ public class ModHwKeys {
                             mHandler.removeCallbacks(mRecentsLongPress);
                             if (mIsRecentsLongPressed) {
                                 mIsRecentsLongPressed = false;
+                                param.setResult(-1);
+                                return;
                             } else if (event.getRepeatCount() == 0) {
                                 if (!areHwKeysEnabled()) {
                                     if (DEBUG) log("RECENTS KeyEvent coming from HW key and keys disabled. Ignoring.");
@@ -827,6 +847,8 @@ public class ModHwKeys {
                                         injectKey(KeyEvent.KEYCODE_APP_SWITCH);
                                     }
                                 }
+                                param.setResult(-1);
+                                return;
                             }
                         } else if (event.getRepeatCount() == 0) {
                             mRecentsKeyPressed = true;
@@ -850,9 +872,9 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.RECENTS_LONGPRESS).actionId));
                                 }
                             }
+                            param.setResult(-1);
+                            return;
                         }
-                        param.setResult(-1);
-                        return;
                     }
                 }
                 @Override

@@ -774,7 +774,7 @@ public class ModNavigationBar {
     }
 
     private static void updateRecentsKeyCode() {
-        if (mNavbarViewInfo == null) return;
+        if (mNavbarViewInfo == null || Utils.isParanoidRom()) return;
 
         try {
             final boolean hasAction = recentsKeyHasAction();
