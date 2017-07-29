@@ -44,6 +44,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Space;
 import android.widget.ImageView.ScaleType;
 
 import com.ceco.nougat.gravitybox.R;
@@ -595,11 +596,15 @@ public class ModNavigationBar {
 
             // find potential placeholder for custom key
             View v = endsGroup.getChildAt(1);
-            if (v.getId() == -1 && !v.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW) &&
-                    !(v instanceof ViewGroup)) {
+            if (v instanceof Space) {
                 mNavbarViewInfo[index].customKeyPlaceHolder = v;
-                if (DEBUG) log("customKeyPlaceHolder=" + v);
-            } 
+            } else {
+                v = endsGroup.getChildAt(endsGroup.getChildCount()-2);
+                if (v instanceof Space) {
+                    mNavbarViewInfo[index].customKeyPlaceHolder = v;
+                }
+            }
+            if (DEBUG) log("customKeyPlaceHolder=" + mNavbarViewInfo[index].customKeyPlaceHolder);
 
             // find ime switcher, menu group
             resId = mResources.getIdentifier("ime_switcher", "id", PACKAGE_NAME);
