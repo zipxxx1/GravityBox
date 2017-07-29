@@ -326,8 +326,7 @@ public class ModPowerMenu {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(globalActionsClass, "showDialog", 
-                    boolean.class, boolean.class, new XC_MethodHook() {
+            XC_MethodHook showDialogHook = new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     prefs.reload();
@@ -353,7 +352,14 @@ public class ModPowerMenu {
                         }
                     }
                 }
-            });
+            };
+            if (Utils.isParanoidRom()) {
+                XposedHelpers.findAndHookMethod(globalActionsClass, "showDialog", 
+                        boolean.class, boolean.class, boolean.class, showDialogHook);
+            } else {
+                XposedHelpers.findAndHookMethod(globalActionsClass, "showDialog", 
+                        boolean.class, boolean.class, showDialogHook);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
