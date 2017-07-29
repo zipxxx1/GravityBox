@@ -139,7 +139,9 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lParams.gravity = Gravity.CENTER_VERTICAL;
-        lParams.setMarginStart(gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left));
+        lParams.setMarginStart(Utils.isParanoidRom() ?
+                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left_pa) :
+                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left));
         lParams.setMarginEnd(Utils.isOxygenOs35Rom() ?
                  gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right_op3t) :
                  gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right));
@@ -216,6 +218,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                         }
                         break;
                     case KEYGUARD:
+                        mPercentText.updateText();
                         XposedHelpers.callMethod(mContainer, "updateVisibilities");
                         break;
                     default: break;
@@ -249,9 +252,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                         int.class, boolean.class, boolean.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mPercentText != null) {
-                            mPercentText.updateText();
-                        }
+                        updateBatteryStyle();
                     }
                 });
             } catch (Throwable t) {

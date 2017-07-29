@@ -600,7 +600,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     protected void updateBatteryPadding() {
-        if (Utils.isXperiaDevice()) return;
+        if (Utils.isXperiaDevice() || Utils.isParanoidRom()) return;
 
         try {
             if (mBatteryPaddingOriginal == null) {

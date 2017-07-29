@@ -45,7 +45,17 @@ public class StatusbarBattery implements IconManagerListener {
 
     public StatusbarBattery(View batteryView) {
         mBattery = batteryView;
+        backupOriginalColors();
         createHooks();
+        if (SysUiManagers.IconManager != null && !Utils.isParanoidRom()) {
+            SysUiManagers.IconManager.registerListener(this);
+        }
+    }
+
+    private void backupOriginalColors() {
+        if (Utils.isParanoidRom())
+            return;
+
         try {
             final int[] colors = (int[]) XposedHelpers.getObjectField(getDrawable(), "mColors");
             mDefaultColor = colors[colors.length-1];
@@ -55,9 +65,6 @@ public class StatusbarBattery implements IconManagerListener {
             mDefaultChargeColor = XposedHelpers.getIntField(getDrawable(), "mChargeColor");
         } catch (Throwable t) {
             log("Error backing up original colors: " + t.getMessage());
-        }
-        if (SysUiManagers.IconManager != null) {
-            SysUiManagers.IconManager.registerListener(this);
         }
     }
 
@@ -73,7 +80,7 @@ public class StatusbarBattery implements IconManagerListener {
     }
 
     private void createHooks() {
-        if (!Utils.isXperiaDevice() && getDrawable() != null) {
+        if (!Utils.isXperiaDevice() && !Utils.isParanoidRom() && getDrawable() != null) {
             try {
                 XposedHelpers.findAndHookMethod(getDrawable().getClass(), "getFillColor",
                         float.class, new XC_MethodHook() {
@@ -95,7 +102,7 @@ public class StatusbarBattery implements IconManagerListener {
         return mBattery;
     }
 
-    public void setColors(int mainColor, int frameColor, int chargeColor) {
+    private void setColors(int mainColor, int frameColor, int chargeColor) {
         if (mBattery != null && getDrawable() != null) {
             try {
                 final int[] colors = (int[]) XposedHelpers.getObjectField(getDrawable(), "mColors");

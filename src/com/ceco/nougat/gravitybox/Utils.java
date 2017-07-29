@@ -293,6 +293,10 @@ public class Utils {
         return mIsOxygenOs35Rom;
     }
 
+    public static boolean isParanoidRom() {
+        return (Build.DISPLAY != null && Build.DISPLAY.startsWith("pa_"));
+    }
+
     public static boolean hasGeminiSupport() {
         if (mHasGeminiSupport != null) return mHasGeminiSupport;
 

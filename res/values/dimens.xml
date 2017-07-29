@@ -46,6 +46,7 @@
 
     <!-- Statusbar Battery -->
     <dimen name="circle_battery_padding_left">0dp</dimen>
+    <dimen name="circle_battery_padding_left_pa">4dp</dimen>
     <dimen name="circle_battery_padding_right">0dp</dimen>
     <dimen name="circle_battery_padding_right_op3t">4dp</dimen>
     <dimen name="percent_text_padding_left">0dp</dimen>
