@@ -163,6 +163,15 @@ public class ProgressBarController implements BroadcastSubReceiver {
                     }
                 }
             });
+            XposedHelpers.findAndHookMethod(Notification.Builder.class, "maybeCloneStrippedForDelivery",
+                    Notification.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!"OFF".equals(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"))) {
+                        param.setResult(param.args[0]);
+                    }
+                }
+            });
         } catch (Throwable t) {
             log("builder hook: error populating content views");
         }
