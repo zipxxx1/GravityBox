@@ -99,7 +99,7 @@ public class ScreenRecordingService extends Service {
         public void run() {
             try {
                 // Firstly, make sure we are able to get to pid field of ProcessImpl class
-                final Class<?> classProcImpl = Class.forName("java.lang.ProcessManager$ProcessImpl");
+                final Class<?> classProcImpl = Class.forName("java.lang.UNIXProcess");
                 final Field fieldPid = classProcImpl.getDeclaredField("pid");
                 fieldPid.setAccessible(true);
 

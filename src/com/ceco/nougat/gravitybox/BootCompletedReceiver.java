@@ -26,7 +26,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            //prepareAssets(context);
+            prepareAssets(context);
             SettingsManager.getInstance(context).fixFolderPermissionsAsync();
         }
     }
