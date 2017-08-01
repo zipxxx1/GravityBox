@@ -223,9 +223,9 @@ public class QuietHours {
                     parcel.readInt();
 
                     // Store the actual string
-                    String t = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel).toString().trim();
-                    if (t != null) {
-                        texts.add(t);
+                    CharSequence cs = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
+                    if (cs != null) {
+                        texts.add(cs.toString().trim());
                     }
                 }
 
