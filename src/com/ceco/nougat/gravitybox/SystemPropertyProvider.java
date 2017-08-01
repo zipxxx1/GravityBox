@@ -74,7 +74,7 @@ public class SystemPropertyProvider {
         }
     }
 
-    public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
+    public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {
         try {
             final Class<?> classSystemUIService = XposedHelpers.findClass(
                     "com.android.systemui.SystemUIService", classLoader);
@@ -84,7 +84,7 @@ public class SystemPropertyProvider {
                     Context context = (Context) param.thisObject;
                     try {
                         if (DEBUG) log("Initializing SystemUI managers");
-                        SysUiManagers.init(context, prefs);
+                        SysUiManagers.init(context, prefs, qhPrefs);
                     } catch(Throwable t) {
                         log("Error initializing SystemUI managers: ");
                         XposedBridge.log(t);

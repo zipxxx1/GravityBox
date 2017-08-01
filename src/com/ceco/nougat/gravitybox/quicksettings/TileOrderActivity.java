@@ -27,14 +27,16 @@ import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.SettingsManager;
 import com.ceco.nougat.gravitybox.TouchInterceptor;
 import com.ceco.nougat.gravitybox.Utils;
+import com.ceco.nougat.gravitybox.WorldReadablePrefs;
+import com.ceco.nougat.gravitybox.WorldReadablePrefs.OnPreferencesCommitedListener;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings;
 
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -64,7 +66,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     private TileAdapter mTileAdapter;
     private Context mContext;
     private Resources mResources;
-    private SharedPreferences mPrefs;
+    private WorldReadablePrefs mPrefs;
     private Map<String, String> mTileTexts;
     private List<TileInfo> mOrderedTileList;
     private Button mBtnSave;
@@ -411,15 +413,23 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             }
         }
 
-        mPrefs.edit().putString(PREF_KEY_TILE_ORDER, newOrderedList).commit();
-        mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, newEnabledList).commit();
-        mPrefs.edit().putString(PREF_KEY_TILE_LOCKED, newLockedList).commit();
-        mPrefs.edit().putString(PREF_KEY_TILE_LOCKED_ONLY, newLockedOnlyList).commit();
-        mPrefs.edit().putString(PREF_KEY_TILE_SECURED, newSecuredList).commit();
-        mPrefs.edit().putString(PREF_KEY_TILE_DUAL, newDualList).commit();
-        Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
-        intent.putExtra(EXTRA_QS_ORDER_CHANGED, true);
-        mContext.sendBroadcast(intent);
+        mPrefs.edit()
+            .putString(PREF_KEY_TILE_ORDER, newOrderedList)
+            .putString(PREF_KEY_TILE_ENABLED, newEnabledList)
+            .putString(PREF_KEY_TILE_LOCKED, newLockedList)
+            .putString(PREF_KEY_TILE_LOCKED_ONLY, newLockedOnlyList)
+            .putString(PREF_KEY_TILE_SECURED, newSecuredList)
+            .putString(PREF_KEY_TILE_DUAL, newDualList)
+            .commit(new OnPreferencesCommitedListener() {
+                @Override
+                public void onPreferencesCommited() {
+                    if (WorldReadablePrefs.DEBUG)
+                        Log.d("GravityBox", "TileOrderActivity: onPreferencesCommited");
+                    Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
+                    intent.putExtra(EXTRA_QS_ORDER_CHANGED, true);
+                    mContext.sendBroadcast(intent);
+                }
+             });
     }
 
     private class TileAdapter extends BaseAdapter {

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
-import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxService;
 import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.ledcontrol.QuietHours;
@@ -35,7 +34,7 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
     private static StatusbarQuietHoursManager sManager;
 
     private Context mContext;
-    private XSharedPreferences mPrefs;
+    private XSharedPreferences mQhPrefs;
     private QuietHours mQuietHours;
     private List<QuietHoursListener> mListeners;
 
@@ -44,17 +43,18 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
         public void onTimeTick();
     }
 
-    protected static StatusbarQuietHoursManager getInstance(Context context) {
+    protected static StatusbarQuietHoursManager getInstance(Context context, XSharedPreferences qhPrefs) {
         synchronized(lock) {
             if (sManager == null) {
-                sManager = new StatusbarQuietHoursManager(context);
+                sManager = new StatusbarQuietHoursManager(context, qhPrefs);
             }
             return sManager;
         }
     }
 
-    private StatusbarQuietHoursManager(Context context) {
+    private StatusbarQuietHoursManager(Context context, XSharedPreferences qhPrefs) {
         mContext = context;
+        mQhPrefs = qhPrefs;
         mListeners = new ArrayList<QuietHoursListener>();
 
         refreshState();
@@ -90,16 +90,8 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
     }
 
     private void refreshState() {
-        try {
-            if (mPrefs == null) {
-                mPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
-            } else {
-                mPrefs.reload();
-            }
-            mQuietHours = new QuietHours(mPrefs);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
+        mQhPrefs.reload();
+        mQuietHours = new QuietHours(mQhPrefs);
     }
 
     private void notifyTimeTick() {

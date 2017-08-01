@@ -30,12 +30,15 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     public static final String PACKAGE_NAME = GravityBox.class.getPackage().getName();
     public static String MODULE_PATH = null;
     private static XSharedPreferences prefs;
+    private static XSharedPreferences qhPrefs;
+    private static XSharedPreferences uncPrefs;
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
         MODULE_PATH = startupParam.modulePath;
         prefs = new XSharedPreferences(PACKAGE_NAME);
-        prefs.makeWorldReadable();
+        uncPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
+        qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
 
         if (!startupParam.startsSystemServer) return;
 
@@ -122,14 +125,14 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModVolumeKeySkipTrack.initAndroid(prefs, lpparam.classLoader);
             ModHwKeys.initAndroid(prefs, lpparam.classLoader);
             ModExpandedDesktop.initAndroid(prefs, lpparam.classLoader);
-            ModAudio.initAndroid(prefs, lpparam.classLoader);
+            ModAudio.initAndroid(prefs, qhPrefs, lpparam.classLoader);
             PermissionGranter.initAndroid(lpparam.classLoader);
             ModLowBatteryWarning.initAndroid(prefs, lpparam.classLoader);
             ModDisplay.initAndroid(prefs, lpparam.classLoader);
             ConnectivityServiceWrapper.initAndroid(lpparam.classLoader);
             ModViewConfig.initAndroid(prefs, lpparam.classLoader);
             ModPower.initAndroid(prefs, lpparam.classLoader);
-            ModLedControl.initAndroid(prefs, lpparam.classLoader);
+            ModLedControl.initAndroid(prefs, uncPrefs, qhPrefs, lpparam.classLoader);
             ModTrustManager.initAndroid(prefs, lpparam.classLoader);
             ModPowerMenu.initAndroid(prefs, lpparam.classLoader);
             ModFingerprint.initAndroid(prefs, lpparam.classLoader);
@@ -139,7 +142,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {
-            SystemPropertyProvider.init(prefs, lpparam.classLoader);
+            SystemPropertyProvider.init(prefs, qhPrefs, lpparam.classLoader);
         }
 
         // MTK Specific (deprecated)
@@ -165,11 +168,11 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         if (ModDialer.PACKAGE_NAMES.contains(lpparam.packageName)) {
             if (lpparam.appInfo.targetSdkVersion == 25) {
-                ModDialer25.init(prefs, lpparam.classLoader, lpparam.packageName);
+                ModDialer25.init(prefs, qhPrefs, lpparam.classLoader, lpparam.packageName);
             } else if (lpparam.appInfo.targetSdkVersion == 24) {
-                ModDialer24.init(prefs, lpparam.classLoader, lpparam.packageName);
+                ModDialer24.init(prefs, qhPrefs, lpparam.classLoader, lpparam.packageName);
             } else {
-                ModDialer.init(prefs, lpparam.classLoader, lpparam.packageName);
+                ModDialer.init(prefs, qhPrefs, lpparam.classLoader, lpparam.packageName);
             }
         }
 
@@ -205,7 +208,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         if (!Utils.hasLenovoVibeUI() &&
                 lpparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
-            ModLockscreen.init(prefs, lpparam.classLoader);
+            ModLockscreen.init(prefs, qhPrefs, lpparam.classLoader);
         }
 
         // TODO: launcher tweaks? probably not...
@@ -223,13 +226,13 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         }
 
         if (lpparam.packageName.equals(ModRinger.PACKAGE_NAME)) {
-            ModRinger.init(prefs, lpparam.classLoader);
+            ModRinger.init(prefs, qhPrefs, lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(ModLedControl.PACKAGE_NAME_SYSTEMUI)) {
             ModLedControl.init(prefs, lpparam.classLoader);
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_MASTER_SWITCH, false)) {
-                ModLedControl.initHeadsUp(prefs, lpparam.classLoader);
+                ModLedControl.initHeadsUp(prefs, uncPrefs, lpparam.classLoader);
             }
         }
 

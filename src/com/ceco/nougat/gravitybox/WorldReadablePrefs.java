@@ -20,20 +20,37 @@ import java.util.Set;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.util.Log;
 
-public class WorldReadablePrefs implements SharedPreferences {
+public class WorldReadablePrefs implements SharedPreferences, 
+                                           SettingsManager.FileObserverListener {
+    public static final boolean DEBUG = false;
+
+    public interface OnPreferencesCommitedListener {
+        void onPreferencesCommited();
+    }
+
+    public interface OnSharedPreferenceChangeCommitedListener {
+        void onSharedPreferenceChangeCommited();
+    }
 
     private String mPrefsName;
     private Context mContext;
     private SharedPreferences mPrefs;
+    private OnPreferencesCommitedListener mOnPreferencesCommitedListener;
+    private OnSharedPreferenceChangeCommitedListener mOnSharedPreferenceChangeCommitedListener;
+    private EditorWrapper mEditorWrapper;
+    private boolean mSelfAttrChange;
+    private Handler mHandler;
 
     public WorldReadablePrefs(Context ctx, String prefsName) {
         mContext = ctx;
         mPrefsName = prefsName;
         mPrefs = ctx.getSharedPreferences(mPrefsName, 0);
+        mHandler = new Handler();
         maybePreCreateFile();
-        fixPermissions();
+        fixPermissions(true);
     }
 
     @Override
@@ -42,8 +59,11 @@ public class WorldReadablePrefs implements SharedPreferences {
     }
 
     @Override
-    public Editor edit() {
-        return new EditorWrapper(mPrefs.edit());
+    public EditorWrapper edit() {
+        if (mEditorWrapper == null) {
+            mEditorWrapper = new EditorWrapper(mPrefs.edit());
+        }
+        return mEditorWrapper;
     }
 
     @Override
@@ -93,10 +113,14 @@ public class WorldReadablePrefs implements SharedPreferences {
         mPrefs.unregisterOnSharedPreferenceChangeListener(listener);
     }
 
+    public void setOnSharedPreferenceChangeCommitedListener(
+            OnSharedPreferenceChangeCommitedListener listener) {
+        mOnSharedPreferenceChangeCommitedListener = listener;
+    }
+
     private void maybePreCreateFile() {
         try {
-            File sharedPrefsFolder = new File(mContext.getFilesDir().getAbsolutePath()
-                    + "/../shared_prefs");
+            File sharedPrefsFolder = new File(mContext.getDataDir().getAbsolutePath() + "/shared_prefs");
             if (!sharedPrefsFolder.exists()) {
                 sharedPrefsFolder.mkdir();
                 sharedPrefsFolder.setExecutable(true, false);
@@ -105,7 +129,6 @@ public class WorldReadablePrefs implements SharedPreferences {
             File f = new File(sharedPrefsFolder.getAbsolutePath() + "/" + mPrefsName + ".xml");
             if (!f.exists()) {
                 f.createNewFile();
-                f.setExecutable(true, false);
                 f.setReadable(true, false);
             }
         } catch (Exception e) {
@@ -113,19 +136,78 @@ public class WorldReadablePrefs implements SharedPreferences {
         }
     }
 
-    public void fixPermissions() {
-        File sharedPrefsFolder = new File(mContext.getFilesDir().getAbsolutePath()
-                + "/../shared_prefs");
+    private void fixPermissions(boolean force) {
+        File sharedPrefsFolder = new File(mContext.getDataDir().getAbsolutePath() + "/shared_prefs");
         if (sharedPrefsFolder.exists()) {
             sharedPrefsFolder.setExecutable(true, false);
             sharedPrefsFolder.setReadable(true, false);
             File f = new File(sharedPrefsFolder.getAbsolutePath() + "/" + mPrefsName + ".xml");
             if (f.exists()) {
-                f.setExecutable(true, false);
+                mSelfAttrChange = !force;
                 f.setReadable(true, false);
             }
         }
     }
+
+    private void fixPermissions() {
+        fixPermissions(false);
+    }
+
+    @Override
+    public void onFileAttributesChanged(String path) {
+        if (path != null && path.endsWith(mPrefsName + ".xml")) {
+            if (mSelfAttrChange) {
+                mSelfAttrChange = false;
+                if (DEBUG) Log.d("GravityBox", "onFileAttributesChanged: " + mPrefsName +
+                        "; ignoring self change");
+                return;
+            }
+            if (DEBUG) Log.d("GravityBox", "onFileAttributesChanged: " + mPrefsName +
+                    "; calling fixPermissions()");
+            fixPermissions();
+        }
+    }
+
+    @Override
+    public void onFileUpdated(String path) {
+        if (path != null && path.endsWith(mPrefsName + ".xml")) {
+            if (DEBUG) Log.d("GravityBox", "Prefs file updated for " + mPrefsName);
+            if (mOnPreferencesCommitedListener != null) {
+                postOnPreferencesCommited();
+            } else if (mOnSharedPreferenceChangeCommitedListener != null) {
+                postOnSharedPreferenceChangeCommited();
+            }
+        }
+    }
+
+    private void postOnPreferencesCommited() {
+        mHandler.removeCallbacks(mPreferencesCommitedRunnable);
+        mHandler.postDelayed(mPreferencesCommitedRunnable, 100);
+    }
+
+    private void postOnSharedPreferenceChangeCommited() {
+        mHandler.removeCallbacks(mSharedPreferenceChangeCommitedRunnable);
+        mHandler.postDelayed(mSharedPreferenceChangeCommitedRunnable, 100);
+    }
+
+    private Runnable mPreferencesCommitedRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mOnPreferencesCommitedListener != null) {
+                mOnPreferencesCommitedListener.onPreferencesCommited();
+                mOnPreferencesCommitedListener = null;
+            }
+        }
+    };
+
+    private Runnable mSharedPreferenceChangeCommitedRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mOnSharedPreferenceChangeCommitedListener != null) {
+                mOnSharedPreferenceChangeCommitedListener.onSharedPreferenceChangeCommited();
+            }
+        }
+    };
 
     public class EditorWrapper implements SharedPreferences.Editor {
 
@@ -136,61 +218,75 @@ public class WorldReadablePrefs implements SharedPreferences {
         }
 
         @Override
-        public android.content.SharedPreferences.Editor putString(String key,
+        public EditorWrapper putString(String key,
                 String value) {
-            return mEditor.putString(key, value);
+            mEditor.putString(key, value);
+            return this;
         }
 
         @Override
-        public android.content.SharedPreferences.Editor putStringSet(String key,
+        public EditorWrapper putStringSet(String key,
                 Set<String> values) {
-            return mEditor.putStringSet(key, values);
+            mEditor.putStringSet(key, values);
+            return this;
         }
 
         @Override
-        public android.content.SharedPreferences.Editor putInt(String key,
+        public EditorWrapper putInt(String key,
                 int value) {
-            return mEditor.putInt(key, value);
+            mEditor.putInt(key, value);
+            return this;
         }
 
         @Override
-        public android.content.SharedPreferences.Editor putLong(String key,
+        public EditorWrapper putLong(String key,
                 long value) {
-            return mEditor.putLong(key, value);
+            mEditor.putLong(key, value);
+            return this;
         }
 
         @Override
-        public android.content.SharedPreferences.Editor putFloat(String key,
+        public EditorWrapper putFloat(String key,
                 float value) {
-            return mEditor.putFloat(key, value);
+            mEditor.putFloat(key, value);
+            return this;
         }
 
         @Override
-        public android.content.SharedPreferences.Editor putBoolean(String key,
+        public EditorWrapper putBoolean(String key,
                 boolean value) {
-            return mEditor.putBoolean(key, value);
+            mEditor.putBoolean(key, value);
+            return this;
         }
 
         @Override
-        public android.content.SharedPreferences.Editor remove(String key) {
-            return mEditor.remove(key);
+        public EditorWrapper remove(String key) {
+            mEditor.remove(key);
+            return this;
         }
 
         @Override
-        public android.content.SharedPreferences.Editor clear() {
-            return mEditor.clear();
+        public EditorWrapper clear() {
+            mEditor.clear();
+            return this;
         }
 
         @Override
         public boolean commit() {
+            return commit(null);
+        }
+
+        public boolean commit(OnPreferencesCommitedListener listener) {
+            if (DEBUG) Log.d("GravityBox", "Commit for " + mPrefsName);
+            mOnPreferencesCommitedListener = listener;
             boolean ret = mEditor.commit();
-            fixPermissions();
             return ret;
         }
 
         @Override
         public void apply() {
-            commit();
+            throw new UnsupportedOperationException(
+                    "apply() not supported. Use commit() instead.");
         }
     }
 }

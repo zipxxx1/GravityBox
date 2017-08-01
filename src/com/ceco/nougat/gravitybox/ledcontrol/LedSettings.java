@@ -21,12 +21,15 @@ import java.util.Set;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.SettingsManager;
 import com.ceco.nougat.gravitybox.Utils;
+import com.ceco.nougat.gravitybox.WorldReadablePrefs;
+import com.ceco.nougat.gravitybox.WorldReadablePrefs.OnPreferencesCommitedListener;
 
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.util.Log;
 
 public class LedSettings {
 
@@ -36,7 +39,6 @@ public class LedSettings {
     public static final String PREF_KEY_ACTIVE_SCREEN_POCKET_MODE = "pref_unc_as_pocket_mode";
 
     public static final String ACTION_UNC_SETTINGS_CHANGED = "gravitybox.intent.action.UNC_SETTINGS_CHANGED";
-    public static final String EXTRA_UNC_AS_ENABLED = "uncActiveScreenEnabled";
 
     public enum LedMode { ORIGINAL, OVERRIDE, OFF };
     public enum HeadsUpMode { DEFAULT, ALWAYS, IMMERSIVE, OFF };
@@ -272,16 +274,29 @@ public class LedSettings {
         }
     }
 
-    public static void lockUnc(Context context, boolean lock) {
+    public static void lockUnc(final Context context, boolean lock) {
         try {
-            SharedPreferences prefs = SettingsManager.getInstance(context).getLedControlPrefs();
-            prefs.edit().putBoolean(PREF_KEY_LOCKED, lock).commit();
+            WorldReadablePrefs prefs = SettingsManager.getInstance(context).getLedControlPrefs();
+            prefs.edit().putBoolean(PREF_KEY_LOCKED, lock).commit(new OnPreferencesCommitedListener() {
+                @Override
+                public void onPreferencesCommited() {
+                    if (WorldReadablePrefs.DEBUG)
+                        Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited UNC");
+                    Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
+                    context.sendBroadcast(intent);
+                }
+            });
             prefs = SettingsManager.getInstance(context).getQuietHoursPrefs();
-            prefs.edit().putBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, lock).commit();
-            Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
-            context.sendBroadcast(intent);
-            intent = new Intent(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
-            context.sendBroadcast(intent);
+            prefs.edit().putBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, lock).commit(
+                    new OnPreferencesCommitedListener() {
+                @Override
+                public void onPreferencesCommited() {
+                    if (WorldReadablePrefs.DEBUG)
+                        Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited QH");
+                    Intent intent = new Intent(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
+                    context.sendBroadcast(intent);
+                }
+            });
         } catch (Throwable t) {
             t.printStackTrace();
         }
@@ -611,10 +626,16 @@ public class LedSettings {
             dataSet.add("hidePersistent:" + mHidePersistent);
             dataSet.add("ledDnd:" + mLedDnd);
             dataSet.add("ledIgnoreUpdate:" + mLedIgnoreUpdate);
-            SharedPreferences prefs = SettingsManager.getInstance(mContext).getLedControlPrefs();
-            prefs.edit().putStringSet(mPackageName, dataSet).commit();
-            Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
-            mContext.sendBroadcast(intent);
+            WorldReadablePrefs prefs = SettingsManager.getInstance(mContext).getLedControlPrefs();
+            prefs.edit().putStringSet(mPackageName, dataSet).commit(new OnPreferencesCommitedListener() {
+                @Override
+                public void onPreferencesCommited() {
+                    if (WorldReadablePrefs.DEBUG)
+                        Log.d("GravityBox", "LedSettings: serialize() onPreferencesCommited");
+                    Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
+                    mContext.sendBroadcast(intent);
+                }
+            });
         } catch (Throwable t) {
             t.printStackTrace();
         }

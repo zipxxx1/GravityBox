@@ -27,6 +27,9 @@ import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.SettingsManager;
 import com.ceco.nougat.gravitybox.Utils;
+import com.ceco.nougat.gravitybox.WorldReadablePrefs;
+import com.ceco.nougat.gravitybox.WorldReadablePrefs.OnPreferencesCommitedListener;
+import com.ceco.nougat.gravitybox.WorldReadablePrefs.OnSharedPreferenceChangeCommitedListener;
 
 import android.app.Activity;
 import android.content.Context;
@@ -36,6 +39,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 
 public class QuietHoursActivity extends Activity {
 
@@ -62,7 +66,7 @@ public class QuietHoursActivity extends Activity {
 
     public static QuietHours.Mode setQuietHoursMode(final Context context, String mode) {
         try {
-            SharedPreferences prefs = SettingsManager.getInstance(context).getQuietHoursPrefs();
+            WorldReadablePrefs prefs = SettingsManager.getInstance(context).getQuietHoursPrefs();
             QuietHours qh = new QuietHours(prefs);
             if (qh.uncLocked || !qh.enabled) {
                 return null;
@@ -93,9 +97,16 @@ public class QuietHoursActivity extends Activity {
                         break;
                 }
             }
-            prefs.edit().putString(QuietHoursActivity.PREF_KEY_QH_MODE, qhMode.toString()).commit();
-            Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
-            context.sendBroadcast(intent);
+            prefs.edit().putString(QuietHoursActivity.PREF_KEY_QH_MODE,
+                    qhMode.toString()).commit(new OnPreferencesCommitedListener() {
+                @Override
+                public void onPreferencesCommited() {
+                    if (WorldReadablePrefs.DEBUG)
+                        Log.d("GravityBox", "QuietHoursActivity: setQuietHoursMode() onPreferencesCommited");
+                    Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
+                    context.sendBroadcast(intent);
+                }
+            });
             return qhMode;
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,9 +137,10 @@ public class QuietHoursActivity extends Activity {
         }
     }
 
-    public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+    public static class PrefsFragment extends PreferenceFragment implements
+                OnSharedPreferenceChangeListener, OnSharedPreferenceChangeCommitedListener {
 
-        private SharedPreferences mPrefs;
+        private WorldReadablePrefs mPrefs;
         private MultiSelectListPreference mPrefWeekDays;
         private MultiSelectListPreference mPrefSystemSounds;
 
@@ -194,21 +206,28 @@ public class QuietHoursActivity extends Activity {
         public void onResume() {
             super.onResume();
             mPrefs.registerOnSharedPreferenceChangeListener(this);
+            mPrefs.setOnSharedPreferenceChangeCommitedListener(this);
             updateSummaries();
         }
 
         @Override
         public void onPause() {
             mPrefs.unregisterOnSharedPreferenceChangeListener(this);
+            mPrefs.setOnSharedPreferenceChangeCommitedListener(null);
             super.onPause();
         }
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
             updateSummaries();
+        }
+
+        @Override
+        public void onSharedPreferenceChangeCommited() {
+            if (WorldReadablePrefs.DEBUG)
+                Log.d("GravityBox", "QuietHoursActivity: onSharedPreferenceChangeCommited");
             Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
-            mPrefs.edit().commit();
-            getActivity().sendBroadcast(intent);
+            getActivity().sendBroadcast(intent);            
         }
     }
 }

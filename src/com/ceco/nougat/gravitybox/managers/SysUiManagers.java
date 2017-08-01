@@ -44,7 +44,7 @@ public class SysUiManagers {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static void init(Context context, XSharedPreferences prefs) {
+    public static void init(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs) {
         if (context == null)
             throw new IllegalArgumentException("Context cannot be null");
         if (prefs == null)
@@ -53,7 +53,7 @@ public class SysUiManagers {
         createKeyguardMonitor(context, prefs);
 
         try {
-            BatteryInfoManager = new BatteryInfoManager(context, prefs);
+            BatteryInfoManager = new BatteryInfoManager(context, prefs, qhPrefs);
         } catch (Throwable t) {
             log("Error creating BatteryInfoManager: ");
             XposedBridge.log(t);
@@ -67,7 +67,7 @@ public class SysUiManagers {
         }
 
         try {
-            QuietHoursManager = StatusbarQuietHoursManager.getInstance(context);
+            QuietHoursManager = StatusbarQuietHoursManager.getInstance(context, qhPrefs);
         } catch (Throwable t) {
             log("Error creating QuietHoursManager: ");
             XposedBridge.log(t);

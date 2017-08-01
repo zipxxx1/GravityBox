@@ -76,12 +76,11 @@ public class ModAudio {
         }
     };
 
-    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
+    public static void initAndroid(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {
         try {
             final Class<?> classAudioService = XposedHelpers.findClass(CLASS_AUDIO_SERVICE, classLoader);
 
-            mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
-            mQhPrefs.makeWorldReadable();
+            mQhPrefs = qhPrefs;
             mQh = new QuietHours(mQhPrefs);
 
             mSwapVolumeKeys = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_SWAP_KEYS, false);

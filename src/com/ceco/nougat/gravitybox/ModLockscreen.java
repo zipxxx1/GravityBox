@@ -182,10 +182,10 @@ public class ModLockscreen {
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
+    public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
-            mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+            mQhPrefs = qhPrefs;
             mQuietHours = new QuietHours(mQhPrefs);
 
             final Class<?> kgPasswordViewClass = XposedHelpers.findClass(CLASS_KG_PASSWORD_VIEW, classLoader);

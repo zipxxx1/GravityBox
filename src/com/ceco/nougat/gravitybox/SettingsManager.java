@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,11 +17,13 @@ package com.ceco.nougat.gravitybox;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.FileObserver;
 import android.widget.Toast;
 import com.ceco.nougat.gravitybox.R;
 
@@ -32,19 +34,39 @@ public class SettingsManager {
     private static final String BACKUP_NO_MEDIA = BACKUP_PATH + "/.nomedia";
     private static final String LP_PREFERENCES = "com.ceco.lollipop.gravitybox_preferences.xml";
 
+    public interface FileObserverListener {
+        void onFileUpdated(String path);
+        void onFileAttributesChanged(String path);
+    }
+
     private static Context mContext;
     private static SettingsManager mInstance;
     private WorldReadablePrefs mPrefsMain;
     private WorldReadablePrefs mPrefsLedControl;
     private WorldReadablePrefs mPrefsQuietHours;
+    private FileObserver mFileObserver;
+    private List<FileObserverListener> mFileObserverListeners;
 
     private SettingsManager(Context context) {
         mContext = context;
+        mFileObserverListeners = new ArrayList<>();
+        mPrefsMain =  new WorldReadablePrefs(mContext, mContext.getPackageName() + "_preferences");
+        mFileObserverListeners.add(mPrefsMain);
+        mPrefsLedControl = new WorldReadablePrefs(mContext, "ledcontrol");
+        mFileObserverListeners.add(mPrefsLedControl);
+        mPrefsQuietHours = new WorldReadablePrefs(mContext, "quiet_hours");
+        mFileObserverListeners.add(mPrefsQuietHours);
+
+        registerFileObserver();
     }
 
-    public static SettingsManager getInstance(Context context) {
+    public static synchronized SettingsManager getInstance(Context context) {
+        if (context == null && mInstance == null)
+            throw new IllegalArgumentException("Context cannot be null");
+
         if (mInstance == null) {
-            mInstance = new SettingsManager(context);
+            mInstance = new SettingsManager(context.getApplicationContext() != null ?
+                    context.getApplicationContext() : context);
         }
         return mInstance;
     }
@@ -79,7 +101,7 @@ public class SettingsManager {
                 "quiet_hours.xml"
         };
         for (String prefsFileName : prefsFileNames) {
-            File prefsFile = new File(mContext.getFilesDir() + "/../shared_prefs/" + prefsFileName);
+            File prefsFile = new File(mContext.getDataDir() + "/shared_prefs/" + prefsFileName);
             if (prefsFile.exists()) {
                 File prefsDestFile = new File(BACKUP_PATH + "/" + prefsFileName);
                 try {
@@ -186,7 +208,7 @@ public class SettingsManager {
             if (prefsFileName.equals(prefsFileNames[0]) && !prefsFile.exists())
                 prefsFile = new File(BACKUP_PATH + "/" + LP_PREFERENCES);
             if (prefsFile.exists()) {
-                File prefsDestFile = new File(mContext.getFilesDir() + "/../shared_prefs/" + prefsFileName);
+                File prefsDestFile = new File(mContext.getDataDir() + "/shared_prefs/" + prefsFileName);
                 try {
                     Utils.copyFile(prefsFile, prefsDestFile);
                     prefsDestFile.setReadable(true, false);
@@ -258,18 +280,16 @@ public class SettingsManager {
     }
 
     public String getOrCreateUuid() {
-        SharedPreferences prefs = getMainPrefs();
-        String uuid = prefs.getString("settings_uuid", null);
+        String uuid = mPrefsMain.getString("settings_uuid", null);
         if (uuid == null) {
             uuid = UUID.randomUUID().toString();
-            prefs.edit().putString("settings_uuid", uuid).commit();
+            mPrefsMain.edit().putString("settings_uuid", uuid).commit();
         }
         return uuid;
     }
 
     public void resetUuid(String uuid) {
-        SharedPreferences prefs = getMainPrefs();
-        prefs.edit().putString("settings_uuid", uuid).commit();
+        mPrefsMain.edit().putString("settings_uuid", uuid).commit();
     }
 
     public void resetUuid() {
@@ -281,7 +301,7 @@ public class SettingsManager {
             @Override
             public void run() {
                 // main dir
-                File pkgFolder = new File(mContext.getFilesDir() + "/..");
+                File pkgFolder = mContext.getDataDir();
                 if (pkgFolder.exists()) {
                     pkgFolder.setExecutable(true, false);
                     pkgFolder.setReadable(true, false);
@@ -317,30 +337,30 @@ public class SettingsManager {
     }
 
     public WorldReadablePrefs getMainPrefs() {
-        if (mPrefsMain == null) {
-            mPrefsMain =  new WorldReadablePrefs(mContext,
-                    mContext.getPackageName() + "_preferences");
-        } else {
-            mPrefsMain.fixPermissions();
-        }
         return mPrefsMain;
     }
 
     public WorldReadablePrefs getLedControlPrefs() {
-        if (mPrefsLedControl == null) {
-            mPrefsLedControl = new WorldReadablePrefs(mContext, "ledcontrol");
-        } else {
-            mPrefsLedControl.fixPermissions();
-        }
         return mPrefsLedControl; 
     }
 
     public WorldReadablePrefs getQuietHoursPrefs() {
-        if (mPrefsQuietHours == null) {
-            mPrefsQuietHours = new WorldReadablePrefs(mContext, "quiet_hours");
-        } else {
-            mPrefsQuietHours.fixPermissions();
-        }
         return mPrefsQuietHours;
+    }
+
+    private void registerFileObserver() {
+        mFileObserver = new FileObserver(mContext.getDataDir() + "/shared_prefs",
+                FileObserver.ATTRIB | FileObserver.CLOSE_WRITE) {
+            @Override
+            public void onEvent(int event, String path) {
+                for (FileObserverListener l : mFileObserverListeners) {
+                    if ((event & FileObserver.ATTRIB) != 0)
+                        l.onFileAttributesChanged(path);
+                    if ((event & FileObserver.CLOSE_WRITE) != 0)
+                        l.onFileUpdated(path);
+                }
+            }
+        };
+        mFileObserver.startWatching();
     }
 }

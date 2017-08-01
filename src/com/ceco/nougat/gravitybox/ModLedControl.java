@@ -82,7 +82,7 @@ public class ModLedControl {
 
     public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
 
-    private static XSharedPreferences mPrefs;
+    private static XSharedPreferences mUncPrefs;
     private static XSharedPreferences mQhPrefs;
     private static Context mContext;
     private static PowerManager mPm;
@@ -130,11 +130,8 @@ public class ModLedControl {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (action.equals(LedSettings.ACTION_UNC_SETTINGS_CHANGED)) {
-                mPrefs.reload();
-                if (intent.hasExtra(LedSettings.EXTRA_UNC_AS_ENABLED)) {
-                    toggleActiveScreenFeature(intent.getBooleanExtra(
-                            LedSettings.EXTRA_UNC_AS_ENABLED, false));
-                }
+                mUncPrefs.reload();
+                updateActiveScreenFeature();
             } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
                 mQhPrefs.reload();
                 mQuietHours = new QuietHours(mQhPrefs);
@@ -159,11 +156,11 @@ public class ModLedControl {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static void initAndroid(final XSharedPreferences mainPrefs, final ClassLoader classLoader) {
-        mPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
-        mPrefs.makeWorldReadable();
-        mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
-        mQhPrefs.makeWorldReadable();
+    public static void initAndroid(final XSharedPreferences mainPrefs,
+            final XSharedPreferences uncPrefs, final XSharedPreferences qhPrefs,
+            final ClassLoader classLoader) {
+        mUncPrefs = uncPrefs;
+        mQhPrefs = qhPrefs;
         mQuietHours = new QuietHours(mQhPrefs);
 
         mProximityWakeUpEnabled = mainPrefs.getBoolean(GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false);
@@ -186,8 +183,7 @@ public class ModLedControl {
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
-                        toggleActiveScreenFeature(!mPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
-                                mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false));
+                        updateActiveScreenFeature();
                         hookNotificationDelegate();
 
                         if (DEBUG) log("Notification manager service initialized");
@@ -217,7 +213,7 @@ public class ModLedControl {
         @Override
         protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
             try {
-                if (mPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false)) {
+                if (mUncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false)) {
                     if (DEBUG) log("Ultimate notification control feature locked.");
                     return;
                 }
@@ -243,10 +239,10 @@ public class ModLedControl {
                 Notification oldN = getNotificationFromRecord(oldRecord);
                 final String pkgName = (String) param.args[0];
 
-                LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
+                LedSettings ls = LedSettings.deserialize(mUncPrefs.getStringSet(pkgName, null));
                 if (!ls.getEnabled()) {
                     // use default settings in case they are active
-                    ls = LedSettings.deserialize(mPrefs.getStringSet("default", null));
+                    ls = LedSettings.deserialize(mUncPrefs.getStringSet("default", null));
                     if (!ls.getEnabled() && !mQuietHours.quietHoursActive(ls, n, mUserPresent)) {
                         return;
                     }
@@ -259,7 +255,7 @@ public class ModLedControl {
                         (mQuietHours.mode != QuietHours.Mode.WEAR && mQuietHours.muteVibe) ||
                         (mQuietHours.mode == QuietHours.Mode.WEAR && mUserPresent));
                 final boolean qhActiveIncludingActiveScreen = qhActive &&
-                        !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
+                        !mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
 
                 if (ls.getEnabled()) {
                     n.extras.putBoolean(NOTIF_EXTRA_PROGRESS_TRACKING, ls.getProgressTracking());
@@ -511,7 +507,7 @@ public class ModLedControl {
                 n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN);
 
                 // check if intercepted by Zen
-                if (!mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false) &&
+                if (!mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false) &&
                         (boolean) XposedHelpers.callMethod(param.args[0], "isIntercepted")) {
                     if (DEBUG) log("Active screen: intercepted by Zen - ignoring");
                     n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN_MODE);
@@ -522,7 +518,7 @@ public class ModLedControl {
                 final ActiveScreenMode asMode = ActiveScreenMode.valueOf(
                         n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE));
                 n.extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE, !mProximityWakeUpEnabled &&
-                        mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true));
+                        mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true));
 
                 if (DEBUG) log("Performing Active Screen with mode " + asMode.toString());
 
@@ -608,14 +604,16 @@ public class ModLedControl {
         }
     }
 
-    private static void toggleActiveScreenFeature(boolean enable) {
+    private static void updateActiveScreenFeature() {
         try {
-            if (enable && mContext != null) {
+            final boolean enable = !mUncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
+                    mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false); 
+            if (enable && mSm == null) {
                 mPm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
                 mKm = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
                 mSm = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
                 mProxSensor = mSm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-            } else {
+            } else if (!enable) {
                 mProxSensor = null;
                 mSm = null;
                 mPm = null;
@@ -658,6 +656,7 @@ public class ModLedControl {
     // SystemUI package
     private static Object mStatusBar;
     private static XSharedPreferences mSysUiPrefs;
+    private static XSharedPreferences mSysUiUncPrefs;
 
     private static BroadcastReceiver mSystemUiBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -710,9 +709,11 @@ public class ModLedControl {
         }
     }
 
-    public static void initHeadsUp(final XSharedPreferences prefs, final ClassLoader classLoader) {
+    public static void initHeadsUp(final XSharedPreferences prefs, final XSharedPreferences uncPrefs,
+            final ClassLoader classLoader) {
         try {
             mSysUiPrefs = prefs;
+            mSysUiUncPrefs = uncPrefs;
 
             XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "start", new XC_MethodHook() {
                 @Override
@@ -896,9 +897,9 @@ public class ModLedControl {
 
     private static boolean shouldNotDisturb(Context context) {
         String pkgName = getTopLevelPackageName(context);
-        final XSharedPreferences uncPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
-        if(!uncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && pkgName != null) {
-            LedSettings ls = LedSettings.deserialize(uncPrefs.getStringSet(pkgName, null));
+        mSysUiUncPrefs.reload();
+        if(!mSysUiUncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && pkgName != null) {
+            LedSettings ls = LedSettings.deserialize(mSysUiUncPrefs.getStringSet(pkgName, null));
             return (ls.getEnabled() && ls.getHeadsUpDnd());
         } else {
             return false;

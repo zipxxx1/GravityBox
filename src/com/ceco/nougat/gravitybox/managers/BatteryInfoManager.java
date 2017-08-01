@@ -18,7 +18,6 @@ package com.ceco.nougat.gravitybox.managers;
 import java.util.ArrayList;
 
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
-import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.ledcontrol.QuietHours;
@@ -44,6 +43,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     private TelephonyManager mTelephonyManager;
     private LowBatteryWarningPolicy mLowBatteryWarningPolicy;
     private PowerManager mPowerManager;
+    private XSharedPreferences mQhPrefs;
 
     public static final int SOUND_CHARGED = 0;
     public static final int SOUND_PLUGGED = 1;
@@ -106,8 +106,9 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         void onBatteryStatusChanged(BatteryData batteryData);
     }
 
-    protected BatteryInfoManager(Context context, XSharedPreferences prefs) {
+    protected BatteryInfoManager(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs) {
         mContext = context;
+        mQhPrefs = qhPrefs;
         mBatteryData = new BatteryData();
         mListeners = new ArrayList<BatteryStatusListener>();
         mSounds = new Uri[4];
@@ -264,8 +265,8 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     }
 
     private boolean quietHoursActive() {
-        QuietHours qh = new QuietHours(
-                new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours"));
+        mQhPrefs.reload();
+        QuietHours qh = new QuietHours(mQhPrefs);
         return qh.isSystemSoundMuted(QuietHours.SystemSound.CHARGER);
     }
 

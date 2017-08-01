@@ -57,7 +57,8 @@ public class ModDialer {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static void init(final XSharedPreferences prefs, ClassLoader classLoader, final String packageName) {
+    public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs,
+            ClassLoader classLoader, final String packageName) {
 
         try {
             final Class<?> classAnswerFragment = XposedHelpers.findClass(CLASS_ANSWER_FRAGMENT, classLoader);
@@ -170,7 +171,7 @@ public class ModDialer {
             XposedHelpers.findAndHookMethod(CLASS_DIALPAD_FRAGMENT, classLoader, "onResume", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param2) throws Throwable {
-                    XSharedPreferences qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+                    qhPrefs.reload();
                     mQuietHours = new QuietHours(qhPrefs);
                 }
             });

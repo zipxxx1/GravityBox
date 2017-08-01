@@ -122,7 +122,8 @@ public class ModDialer25 {
         }
     }
 
-    public static void init(final XSharedPreferences prefs, final ClassLoader classLoader, final String packageName) {
+    public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs,
+            final ClassLoader classLoader, final String packageName) {
         try {
             final ClassInfo classInfoDialtactsActivity = resolveDialtactsActivity(classLoader);
 
@@ -160,7 +161,7 @@ public class ModDialer25 {
                     classInfoDialpadFragment.methods.get("onResume"), new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param2) throws Throwable {
-                    XSharedPreferences qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+                    qhPrefs.reload();
                     mQuietHours = new QuietHours(qhPrefs);
                 }
             });

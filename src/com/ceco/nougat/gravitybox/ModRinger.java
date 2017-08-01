@@ -81,14 +81,12 @@ public class ModRinger {
         }
     };
 
-    public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
+    public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {
         try {
             final String CLASS_RINGTONE_PLAYER = Utils.isSamsungRom() ? 
                     "com.android.server.telecom.secutils.SecAsyncRingtonePlayer" :
                     "com.android.server.telecom.AsyncRingtonePlayer";
 
-            final XSharedPreferences qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
-            qhPrefs.makeWorldReadable();
             final Class<?> clsRingtonePlayer = XposedHelpers.findClass(CLASS_RINGTONE_PLAYER, classLoader);
             final Class<?> clsTelecomServiceImpl = XposedHelpers.findClass(
                     "com.android.server.telecom.TelecomServiceImpl", classLoader);

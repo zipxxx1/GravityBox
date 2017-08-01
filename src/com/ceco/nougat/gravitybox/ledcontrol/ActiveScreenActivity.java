@@ -21,6 +21,7 @@ import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.SettingsManager;
 import com.ceco.nougat.gravitybox.WorldReadablePrefs;
+import com.ceco.nougat.gravitybox.WorldReadablePrefs.OnSharedPreferenceChangeCommitedListener;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 
 public class ActiveScreenActivity extends Activity {
 
@@ -44,7 +46,8 @@ public class ActiveScreenActivity extends Activity {
         setContentView(R.layout.active_screen_activity);
     }
 
-    public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+    public static class PrefsFragment extends PreferenceFragment implements
+                OnSharedPreferenceChangeListener, OnSharedPreferenceChangeCommitedListener {
         private WorldReadablePrefs mPrefs;
         private CheckBoxPreference mPrefPocketMode;
 
@@ -70,27 +73,31 @@ public class ActiveScreenActivity extends Activity {
         public void onResume() {
             super.onResume();
             mPrefs.registerOnSharedPreferenceChangeListener(this);
+            mPrefs.setOnSharedPreferenceChangeCommitedListener(this);
             updateSummaries();
         }
 
         @Override
         public void onPause() {
             mPrefs.unregisterOnSharedPreferenceChangeListener(this);
+            mPrefs.setOnSharedPreferenceChangeCommitedListener(null);
             super.onPause();
         }
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-            Intent intent = new Intent(LedSettings.ACTION_UNC_SETTINGS_CHANGED);
-            if (LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED.equals(key)) {
-                intent.putExtra(LedSettings.EXTRA_UNC_AS_ENABLED, prefs.getBoolean(key, false));
-            }
-            mPrefs.edit().commit();
-            getActivity().sendBroadcast(intent);
             updateSummaries();
         }
 
         private void updateSummaries() {
+        }
+
+        @Override
+        public void onSharedPreferenceChangeCommited() {
+            if (WorldReadablePrefs.DEBUG)
+                Log.d("GravityBox", "ActiveScreenActivity: onSharedPreferenceChangeCommited");
+            Intent intent = new Intent(LedSettings.ACTION_UNC_SETTINGS_CHANGED);
+            getActivity().sendBroadcast(intent);
         }
     }
 }

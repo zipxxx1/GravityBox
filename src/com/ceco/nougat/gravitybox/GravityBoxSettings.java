@@ -77,7 +77,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -1087,7 +1086,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
         // fix folder permissions
         SettingsManager.getInstance(this).fixFolderPermissionsAsync();
-        
+
         // refuse to run if there's GB with old package name still installed
         // prompt to uninstall previous package and finish
         if (Utils.isAppInstalled(this, "com.ceco.lollipop.gravitybox")) {
@@ -2100,10 +2099,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (!mPrefs.getBoolean(PREF_KEY_PULSE_NOTIFICATION_DELAY + "_set", false)) {
                 int delay = Math.min(Math.max(sSystemProperties.defaultNotificationLedOff, 500), 20000);
-                Editor editor = mPrefs.edit();
-                editor.putInt(PREF_KEY_PULSE_NOTIFICATION_DELAY, delay);
-                editor.putBoolean(PREF_KEY_PULSE_NOTIFICATION_DELAY + "_set", true);
-                editor.commit();
+                mPrefs.edit()
+                    .putInt(PREF_KEY_PULSE_NOTIFICATION_DELAY, delay)
+                    .putBoolean(PREF_KEY_PULSE_NOTIFICATION_DELAY + "_set", true)
+                    .commit();
                 mPrefPulseNotificationDelay.setDefaultValue(delay);
                 mPrefPulseNotificationDelay.setValue(delay);
             }
@@ -2232,9 +2231,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         Integer.valueOf(mPrefs.getString(PREF_KEY_PIE_CONTROL_ENABLE, "0"));
                 if (pieMode == 0) {
                     if (mPrefPieHwKeysDisabled.isChecked()) {
-                        Editor e = mPrefs.edit();
-                        e.putBoolean(PREF_KEY_HWKEYS_DISABLE, false);
-                        e.commit();
+                        mPrefs.edit().putBoolean(PREF_KEY_HWKEYS_DISABLE, false).commit();
                         mPrefPieHwKeysDisabled.setChecked(false);
                     }
                     mPrefPieHwKeysDisabled.setEnabled(false);
@@ -2621,7 +2618,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             updatePreferences(key);
 
-            Intent intent = new Intent();
+            boolean delayedBroadcast = false;
+            final Intent intent = new Intent();
             if (key.equals(PREF_KEY_BATTERY_STYLE)) {
                 intent.setAction(ACTION_PREF_BATTERY_STYLE_CHANGED);
                 int batteryStyle = Integer.valueOf(prefs.getString(PREF_KEY_BATTERY_STYLE, "1"));
@@ -3269,9 +3267,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         prefs.getString(PREF_KEY_VK_VIBRATE_PATTERN, null));
             } else if (key.equals(PREF_KEY_FORCE_ENGLISH_LOCALE)) {
                 mPrefs.edit().commit();
-                intent = new Intent(getActivity(), GravityBoxSettings.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                getActivity().startActivity(intent);
+                Intent restartIntent = new Intent(getActivity(), GravityBoxSettings.class);
+                restartIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                getActivity().startActivity(restartIntent);
                 System.exit(0);
                 return;
             } else if (key.equals(PREF_KEY_STATUSBAR_BT_VISIBILITY)) {
@@ -3329,6 +3327,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         prefs.getBoolean(key, false));
             } else if (lockscreenKeys.contains(key)) {
                 intent.setAction(ACTION_LOCKSCREEN_SETTINGS_CHANGED);
+                delayedBroadcast = true;
             } else if (headsUpKeys.contains(key)) {
                 intent.setAction(ACTION_HEADS_UP_SETTINGS_CHANGED);
             } else if (key.equals(PREF_KEY_QUICKRECORD_QUALITY)) {
@@ -3498,9 +3497,18 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_FPL_SETTINGS_CHANGED);
                 intent.putExtra(EXTRA_FPL_SHOW_TOAST, prefs.getBoolean(key, true));
             }
+
             if (intent.getAction() != null) {
-                mPrefs.edit().commit();
-                getActivity().sendBroadcast(intent);
+                if (delayedBroadcast) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            getActivity().sendBroadcast(intent);
+                        }
+                    }, 200);
+                } else {
+                    getActivity().sendBroadcast(intent);
+                }
             }
 
             if (key.equals(PREF_KEY_BRIGHTNESS_MIN) &&
@@ -3515,8 +3523,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (rebootKeys.contains(key))
                 Toast.makeText(getActivity(), getString(R.string.reboot_required), Toast.LENGTH_SHORT).show();
-
-            mPrefs.fixPermissions();
         }
 
         @Override
