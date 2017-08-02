@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
-import com.ceco.nougat.gravitybox.ModQsTiles;
 import com.ceco.nougat.gravitybox.PhoneWrapper;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.Utils;
@@ -214,8 +213,6 @@ public class NetworkModeTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible = true;
-
         NetworkMode nm = findNetworkMode(mNetworkType);
         if (nm != null) {
             mState.label = stripLabel(mGbContext.getString(nm.labelRes));
@@ -305,7 +302,7 @@ public class NetworkModeTile extends QsTile {
     public Object getDetailAdapter() {
         if (mDetailAdapter == null) {
             mDetailAdapter = QsDetailAdapterProxy.createProxy(
-                    mContext.getClassLoader(), new ModeDetailAdapter());
+                    mContext.getClassLoader(), new ModeDetailAdapter(mContext));
         }
         return mDetailAdapter;
     }
@@ -332,19 +329,27 @@ public class NetworkModeTile extends QsTile {
         private ModeAdapter mAdapter;
         private QsDetailItemsList mDetails;
 
+        ModeDetailAdapter(Context ctx) {
+            mAdapter = new ModeAdapter(ctx);
+        }
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             setNetworkMode(((NetworkMode) parent.getItemAtPosition(position)).value);
         }
 
         @Override
-        public int getTitle() {
-            return ModQsTiles.RES_IDS.NM_TITLE;
+        public CharSequence getTitle() {
+            return mGbContext.getString(R.string.qs_tile_network_mode);
+        }
+
+        @Override
+        public boolean getToggleEnabled() {
+            return false;
         }
 
         @Override
         public Boolean getToggleState() {
-            rebuildModeList();
             return null;
         }
 
@@ -353,7 +358,6 @@ public class NetworkModeTile extends QsTile {
             if (mDetails == null) {
                 mDetails = QsDetailItemsList.create(context, parent);
                 mDetails.setEmptyState(0, null);
-                mAdapter = new ModeAdapter(context);
                 mDetails.setAdapter(mAdapter);
     
                 final ListView list = mDetails.getListView();
@@ -361,6 +365,7 @@ public class NetworkModeTile extends QsTile {
                 list.setOnItemClickListener(this);
             }
 
+            rebuildModeList();
             return mDetails.getView();
         }
 

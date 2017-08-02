@@ -33,12 +33,6 @@ public class ScreenshotTile extends QsTile {
     }
 
     @Override
-    public void handleUpdateState(Object state, Object arg) {
-        mState.visible = true;
-        super.handleUpdateState(state, arg);
-    }
-
-    @Override
     public boolean supportsHideOnChange() {
         // we collapse panels ourselves
         return false;

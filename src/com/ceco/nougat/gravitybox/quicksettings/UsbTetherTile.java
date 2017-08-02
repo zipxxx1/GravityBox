@@ -126,7 +126,6 @@ public class UsbTetherTile extends QsTile {
             mState.label = mGbContext.getString(R.string.quick_settings_usb_tether_off);
         }
 
-        mState.visible = mUsbConnected;
         super.handleUpdateState(state, arg);
     }
 

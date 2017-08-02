@@ -63,7 +63,6 @@ public class SmartRadioTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false);
         mState.booleanValue = mSmartRadioEnabled;
         if (mSmartRadioEnabled) {
             mState.label = mGbContext.getString(R.string.quick_settings_smart_radio_on);

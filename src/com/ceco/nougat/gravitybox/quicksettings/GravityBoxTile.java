@@ -35,12 +35,6 @@ public class GravityBoxTile extends QsTile {
     }
 
     @Override
-    public void handleUpdateState(Object state, Object arg) {
-        mState.visible = true;
-        super.handleUpdateState(state, arg);
-    }
-
-    @Override
     public boolean supportsHideOnChange() {
         // starting activity collapses panel anyway
         return false;

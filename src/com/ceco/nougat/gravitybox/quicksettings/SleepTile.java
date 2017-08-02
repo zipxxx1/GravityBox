@@ -37,12 +37,6 @@ public class SleepTile extends QsTile {
     }
 
     @Override
-    public void handleUpdateState(Object state, Object arg) {
-        mState.visible = true;
-        super.handleUpdateState(state, arg);
-    }
-
-    @Override
     public void handleClick() {
         try {
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
-import com.ceco.nougat.gravitybox.ModQsTiles;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.Utils;
 
@@ -135,8 +134,6 @@ public class RingerModeTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible = true;
-
         // The icon will change depending on index
         mState.icon = mGbContext.getDrawable(RINGERS[mRingerIndex].mDrawable);
 
@@ -360,7 +357,7 @@ public class RingerModeTile extends QsTile {
     public Object getDetailAdapter() {
         if (mDetailAdapter == null) {
             mDetailAdapter = QsDetailAdapterProxy.createProxy(
-                    mContext.getClassLoader(), new ModeDetailAdapter());
+                    mContext.getClassLoader(), new ModeDetailAdapter(mContext));
         }
         return mDetailAdapter;
     }
@@ -387,6 +384,10 @@ public class RingerModeTile extends QsTile {
         private ModeAdapter mAdapter;
         private QsDetailItemsList mDetails;
 
+        ModeDetailAdapter(Context ctx) {
+            mAdapter = new ModeAdapter(ctx);
+        }
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Ringer r = (Ringer) parent.getItemAtPosition(position);
@@ -394,13 +395,17 @@ public class RingerModeTile extends QsTile {
         }
 
         @Override
-        public int getTitle() {
-            return ModQsTiles.RES_IDS.RM_TITLE;
+        public CharSequence getTitle() {
+            return mGbContext.getString(R.string.qs_tile_ringer_mode);
+        }
+
+        @Override
+        public boolean getToggleEnabled() {
+            return false;
         }
 
         @Override
         public Boolean getToggleState() {
-            rebuildModeList();
             return null;
         }
 
@@ -409,7 +414,6 @@ public class RingerModeTile extends QsTile {
             if (mDetails == null) {
                 mDetails = QsDetailItemsList.create(context, parent);
                 mDetails.setEmptyState(0, null);
-                mAdapter = new ModeAdapter(context);
                 mDetails.setAdapter(mAdapter);
     
                 final ListView list = mDetails.getListView();
@@ -417,6 +421,7 @@ public class RingerModeTile extends QsTile {
                 list.setOnItemClickListener(this);
             }
 
+            rebuildModeList();
             return mDetails.getView();
         }
 

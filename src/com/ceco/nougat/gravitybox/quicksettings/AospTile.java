@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -114,11 +114,11 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        final boolean visible = mEnabled &&
+        final boolean enabled =
                 (!mLocked || !mKgMonitor.isShowing()) &&
                 (!mLockedOnly || mKgMonitor.isShowing()) &&
                 (!mSecured || !(mKgMonitor.isShowing() && mKgMonitor.isLocked()));
-        XposedHelpers.setBooleanField(state, "visible", visible);
+        XposedHelpers.setBooleanField(state, "disabledByPolicy", !enabled);
     }
 
     @Override

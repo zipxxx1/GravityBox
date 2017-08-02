@@ -1,3 +1,17 @@
+/*
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.ceco.nougat.gravitybox;
 
 import java.util.ArrayList;
@@ -8,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.quicksettings.AospTile;
 import com.ceco.nougat.gravitybox.quicksettings.OnePlus3TTile;
 import com.ceco.nougat.gravitybox.quicksettings.QsPanel;
@@ -19,7 +32,6 @@ import com.ceco.nougat.gravitybox.quicksettings.QsTileEventDistributor;
 import com.ceco.nougat.gravitybox.quicksettings.TileOrderActivity;
 
 import android.content.Context;
-import android.content.res.XModuleResources;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -37,7 +49,7 @@ public class ModQsTiles {
     public static final String TILES_SETTING = "sysui_qs_tiles";
 
     public static final List<String> GB_TILE_KEYS = new ArrayList<String>(Arrays.asList(
-            "gb_tile_battery",
+            //"gb_tile_battery",
             "gb_tile_nfc",
             "gb_tile_gps_slimkat",
             "gb_tile_gps_alt",
@@ -65,12 +77,6 @@ public class ModQsTiles {
             "gb_tile_bt_tethering"
     ));
 
-    public static class RES_IDS {
-        public static int NM_TITLE;
-        public static int RM_TITLE;
-        public static int SA_TITLE;
-    }
-
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
@@ -82,11 +88,6 @@ public class ModQsTiles {
     private static Map<String,Object> mTiles = new HashMap<>();
 
     public static void initResources(final InitPackageResourcesParam resparam) {
-        XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
-        RES_IDS.NM_TITLE = resparam.res.addResource(modRes, R.string.qs_tile_network_mode);
-        RES_IDS.RM_TITLE = resparam.res.addResource(modRes, R.string.qs_tile_ringer_mode);
-        RES_IDS.SA_TITLE = resparam.res.addResource(modRes, R.string.qs_tile_stay_awake);
-
         if (Utils.isXperiaDevice()) {
             resparam.res.setReplacement(PACKAGE_NAME, "integer", "config_maxToolItems", 60);
         }
@@ -202,16 +203,9 @@ public class ModQsTiles {
                     tileMap.clear();
                     tileMap.putAll(orderedMap);
 
-                    if (Utils.isOxygenOs35Rom()) {
-                        List<?> cbs = (List<?>) XposedHelpers.getObjectField(param.thisObject, "mCallbacks");
-                        for (int i = 0; i < cbs.size(); i++) {
-                            XposedHelpers.callMethod(cbs.get(i), "onTilesChanged");
-                        }
-                    } else {
-                        Object cb = XposedHelpers.getObjectField(param.thisObject, "mCallback");
-                        if (cb != null) {
-                            XposedHelpers.callMethod(cb, "onTilesChanged");
-                        }
+                    List<?> cbs = (List<?>) XposedHelpers.getObjectField(param.thisObject, "mCallbacks");
+                    for (int i = 0; i < cbs.size(); i++) {
+                        XposedHelpers.callMethod(cbs.get(i), "onTilesChanged");
                     }
 
                     if (DEBUG) log("Tiles created");

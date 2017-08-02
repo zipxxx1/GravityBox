@@ -1,3 +1,17 @@
+/*
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.ceco.nougat.gravitybox.quicksettings;
 
 import java.util.List;
@@ -9,6 +23,7 @@ import com.ceco.nougat.gravitybox.Utils;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.service.notification.StatusBarNotification;
 import android.view.MotionEvent;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -102,6 +117,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                         XposedHelpers.getBooleanField(o, "mBlockTouches") ||
                         XposedHelpers.getBooleanField(o, "mOnlyAffordanceInThisMotion") ||
                         XposedHelpers.getBooleanField(o, qsExpandFieldName) ||
+                        isQsContainerCustomizing(o) ||
                         (!XposedHelpers.getBooleanField(o, qsExpandFieldName) && 
                                 XposedHelpers.getBooleanField(o, "mQsTracking") &&
                                 !XposedHelpers.getBooleanField(o, "mConflictingQsExpansionGesture"))) {
@@ -147,13 +163,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                     !hasNotifications(o) : !hasClearableNotifications(o);
         }
 
-        if (XposedHelpers.getBooleanField(o, "mQsExpanded") && !Utils.isOxygenOs35Rom()) {
-            Object scv = XposedHelpers.getObjectField(o, "mScrollView");
-            return ((boolean)XposedHelpers.callMethod(scv, "isScrolledToBottom") && yDiff < 0) && 
-                    (boolean)XposedHelpers.callMethod(o, "isInQsArea", x, y);
-        } else {
-            return showQsOverride;
-        }
+        return showQsOverride;
     }
 
     private boolean hasNotifications(Object o) {
@@ -176,10 +186,27 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                 mNotificationData = XposedHelpers.getObjectField(
                         XposedHelpers.getObjectField(o, "mStatusBar"), "mNotificationData");
             }
-            return (boolean)XposedHelpers.callMethod(mNotificationData, "hasActiveClearableNotifications");
+            List<?> list = (List<?>)XposedHelpers.callMethod(mNotificationData, "getActiveNotifications");
+            boolean hasClearableNotifications = false;
+            for (Object entry : list) {
+                StatusBarNotification sbn = (StatusBarNotification) XposedHelpers.getObjectField(entry, "notification");
+                hasClearableNotifications |= sbn.isClearable();
+            }
+            return hasClearableNotifications;
         } catch (Throwable t) {
             XposedBridge.log(t);
             return true;
+        }
+    }
+
+    private boolean isQsContainerCustomizing(Object panel) {
+        try {
+            Object container = XposedHelpers.getObjectField(panel, "mQsContainer");
+            return (boolean) XposedHelpers.callMethod(container, "isCustomizing");
+        } catch (Throwable t) {
+            log("Error in isQsContainerCustomizing: " + t.getMessage());
+            if (DEBUG) XposedBridge.log(t);
+            return false;
         }
     }
 }

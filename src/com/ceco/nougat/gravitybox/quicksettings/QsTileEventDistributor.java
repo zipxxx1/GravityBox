@@ -1,3 +1,17 @@
+/*
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.ceco.nougat.gravitybox.quicksettings;
 
 import java.lang.reflect.Constructor;
@@ -49,9 +63,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         View onCreateIcon();
         Drawable getResourceIconDrawable();
         boolean handleSecondaryClick();
-        void onDualModeSet(View tileView, boolean enabled);
         Object getDetailAdapter();
-        boolean supportsDualTargets();
     }
 
     private static void log(String message) {
@@ -208,39 +220,30 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            if (Utils.isOxygenOs35Rom()) {
-                XposedHelpers.findAndHookMethod(BaseTile.CLASS_RESOURCE_ICON, cl,
-                        "getInvisibleDrawable", Context.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        final QsEventListener l = mListeners.get(XposedHelpers
-                                .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                        if (l instanceof QsTile) {
-                            param.setResult(l.getResourceIconDrawable());
-                        }
-                    }
-                });
 
-                XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl,
-                        "handleStateChanged", BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        boolean visible = XposedHelpers.getBooleanField(param.args[0], "visible");
-                        ((View)param.thisObject).setVisibility(visible ? View.VISIBLE : View.GONE);
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_RESOURCE_ICON, cl,
+                    "getInvisibleDrawable", Context.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l instanceof QsTile) {
+                        param.setResult(l.getResourceIconDrawable());
                     }
-                });
-            }
+                }
+            });
 
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "createTileView",
-                    Context.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(QsPanel.CLASS_QS_PANEL, cl, "createTileView",
+                    BaseTile.CLASS_BASE_TILE, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     mCreateTileViewTileKey = (String) XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME);
+                            .getAdditionalInstanceField(param.args[0], BaseTile.TILE_KEY_NAME);
                 }
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(mCreateTileViewTileKey);
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.args[0], BaseTile.TILE_KEY_NAME));
                     if (l != null) {
                         l.onCreateTileView((View)param.getResult());
                     }
@@ -287,29 +290,6 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            // this seems to be unsupported on some custom ROMs. Log one line and continue.
-            XC_MethodHook dtHook = new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                    if (l != null) {
-                        param.setResult(l.supportsDualTargets());
-                    }
-                }
-            };
-            try {
-                XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "supportsDualTargets", dtHook);
-            } catch (Throwable t) {
-                try {
-                    XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "hasDualTargetsDetails", dtHook);
-                } catch (Throwable t2) {
-                    if (!Utils.isOxygenOs35Rom()) {
-                        log("Your system does not seem to support standard AOSP tile dual mode");
-                    }
-                }
-            }
-
             XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "onConfigurationChanged",
                     Configuration.class, new XC_MethodHook() {
                 @Override
@@ -323,57 +303,31 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            if (!Utils.isOxygenOs35Rom()) {
-                XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "recreateLabel",
-                        new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        final QsEventListener l = mListeners.get(XposedHelpers
-                                .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                        if (l != null) {
-                            l.onRecreateLabel((View)param.thisObject);
-                        }
-                    }
-                });
-
-                XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "createIcon",
-                        new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        final QsEventListener l = mListeners.get(mCreateTileViewTileKey);
-                        if (l != null) {
-                            View icon = l.onCreateIcon();
-                            if (icon != null) {
-                                param.setResult(icon);
-                            }
-                        }
-                    }
-                });
-            }
-
-            XC_MethodHook sdHook = new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "createLabel",
+                    new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
                     if (l != null) {
-                        l.onDualModeSet((View)param.thisObject, (boolean)param.args[0]);
+                        l.onRecreateLabel((View)param.thisObject);
                     }
                 }
-            };
-            try {
-                XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "setDual",
-                        boolean.class, sdHook);
-            } catch (Throwable t) {
-                try {
-                    XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "setDual",
-                            boolean.class, boolean.class, sdHook);
-                } catch (Throwable t2) {
-                    if (!Utils.isOxygenOs35Rom()) {
-                        log("Your system does not seem to support standard AOSP tile dual mode");
+            });
+
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_ICON_VIEW, cl, "createIcon",
+                    new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(mCreateTileViewTileKey);
+                    if (l != null) {
+                        View icon = l.onCreateIcon();
+                        if (icon != null) {
+                            param.setResult(icon);
+                        }
                     }
                 }
-            }
+            });
 
             XC_MethodHook longClickHook = new XC_MethodHook() {
                 @Override

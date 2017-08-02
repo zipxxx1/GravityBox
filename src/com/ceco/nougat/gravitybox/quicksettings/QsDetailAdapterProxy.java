@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -33,11 +33,12 @@ public class QsDetailAdapterProxy implements InvocationHandler {
     public static final String IFACE_DETAIL_ADAPTER = BaseTile.CLASS_BASE_TILE+".DetailAdapter";
 
     public interface Callback {
-        int getTitle();
+        CharSequence getTitle();
         Boolean getToggleState();
         View createDetailView(Context context, View convertView, ViewGroup parent) throws Throwable;
         Intent getSettingsIntent();
         void setToggleState(boolean state);
+        boolean getToggleEnabled();
     }
 
     private Callback mCallback;
@@ -72,6 +73,8 @@ public class QsDetailAdapterProxy implements InvocationHandler {
             return 111;
         } else if (method.getName().equals("createDetailView")) {
             return mCallback.createDetailView((Context)args[0], (View)args[1], (ViewGroup)args[2]);
+        } else if (method.getName().equals("getToggleEnabled")) {
+            return mCallback.getToggleEnabled();
         } else {
             return null;
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -57,7 +57,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     public static final String PREF_KEY_TILE_LOCKED = "pref_qs_tile_locked";
     public static final String PREF_KEY_TILE_LOCKED_ONLY = "pref_qs_tile_locked_only";
     public static final String PREF_KEY_TILE_SECURED = "pref_qs_tile_secured";
-    public static final String PREF_KEY_TILE_DUAL = "pref_qs_tile_dual";
     public static final String EXTRA_QS_ORDER_CHANGED = "qsTileOrderChanged";
     public static final String EXTRA_HAS_MSIM_SUPPORT = "qsHasMsimSupport";
     public static final String EXTRA_IS_OOS_35_ROM = "qsIsOxygenOs35Rom";
@@ -79,7 +78,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         boolean locked;
         boolean lockedOnly;
         boolean secured;
-        boolean dual;
         void showMenu(final ListView listView, final View anchorView) {
             final PopupMenu menu = new PopupMenu(listView.getContext(), anchorView);
             menu.inflate(R.menu.tile_menu);
@@ -87,9 +85,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
                     switch(item.getItemId()) {
-                        case R.id.tile_dual:
-                            dual = !dual;
-                            break;
                         case R.id.tile_locked:
                             locked = !locked;
                             if (locked) {
@@ -113,11 +108,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             menu.show();
         }
         private void updateMenu(Menu menu) {
-            if (supportsDualMode()) {
-                menu.findItem(R.id.tile_dual).setChecked(dual);
-            } else {
-                menu.removeItem(R.id.tile_dual);
-            }
             MenuItem miLocked = menu.findItem(R.id.tile_locked);
             MenuItem miLockedOnly = menu.findItem(R.id.tile_locked_only);
             MenuItem miSecured = menu.findItem(R.id.tile_secured);
@@ -126,13 +116,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             miLockedOnly.setEnabled(!locked);
             miSecured.setChecked(!secured && !"gb_tile_lock_screen".equals(key));
             miSecured.setEnabled(!locked && !"gb_tile_lock_screen".equals(key));
-        }
-        private boolean supportsDualMode() {
-            return !isOxygenOs35Rom() &&
-                    ("aosp_tile_cell".equals(key) ||
-                    "aosp_tile_wifi".equals(key) ||
-                    "aosp_tile_bluetooth".equals(key) ||
-                    "gb_tile_gps_slimkat".equals(key));
         }
     }
 
@@ -355,9 +338,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
                 mPrefs.getString(PREF_KEY_TILE_LOCKED_ONLY, "").split(",")));
         List<String> securedTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_SECURED, "").split(",")));
-        List<String> dualTiles = new ArrayList<String>(Arrays.asList(
-                mPrefs.getString(PREF_KEY_TILE_DUAL,
-                        "aosp_tile_wifi,aosp_tile_bluetooth").split(",")));
 
         List<TileInfo> tiles = new ArrayList<TileInfo>();
         for (int i = 0; i < orderedTiles.length; i++) {
@@ -368,7 +348,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             ti.locked = lockedTiles.contains(ti.key);
             ti.lockedOnly = lockedOnlyTiles.contains(ti.key);
             ti.secured = securedTiles.contains(ti.key);
-            ti.dual = dualTiles.contains(ti.key);
             tiles.add(ti);
         }
 
@@ -381,7 +360,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         String newLockedList = "";
         String newLockedOnlyList = "";
         String newSecuredList = "";
-        String newDualList = "";
 
         for (TileInfo ti : mOrderedTileList) {
             if (!newOrderedList.isEmpty()) newOrderedList += ",";
@@ -406,11 +384,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
                 if (!newSecuredList.isEmpty()) newSecuredList += ",";
                 newSecuredList += ti.key;
             }
-
-            if (ti.dual) {
-                if (!newDualList.isEmpty()) newDualList += ",";
-                newDualList += ti.key;
-            }
         }
 
         mPrefs.edit()
@@ -419,7 +392,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             .putString(PREF_KEY_TILE_LOCKED, newLockedList)
             .putString(PREF_KEY_TILE_LOCKED_ONLY, newLockedOnlyList)
             .putString(PREF_KEY_TILE_SECURED, newSecuredList)
-            .putString(PREF_KEY_TILE_DUAL, newDualList)
             .commit(new OnPreferencesCommitedListener() {
                 @Override
                 public void onPreferencesCommited() {

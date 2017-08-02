@@ -248,7 +248,6 @@ public class QuickRecordTile extends QsTile {
             }
         }
 
-        mState.visible = true;
         switch (mRecordingState) {
             case STATE_PLAYING:
                 mState.label = res.getString(R.string.quick_settings_qr_playing);

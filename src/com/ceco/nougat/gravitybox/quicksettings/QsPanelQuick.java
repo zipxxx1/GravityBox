@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -75,7 +75,7 @@ public class QsPanelQuick {
                     "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    View editBtn = (View) XposedHelpers.getObjectField(param.thisObject, "mEditButton");
+                    View editBtn = (View) XposedHelpers.getObjectField(param.thisObject, "mEdit");
                     if (editBtn != null) {
                         editBtn.setOnClickListener(new View.OnClickListener() {
                             @Override

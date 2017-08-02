@@ -91,7 +91,6 @@ public class MusicTile extends QsTile {
 //                background.setColorFilter(null);
 //            }
 //        }
-        mState.visible = true;
         if (mActive) {
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_media_pause);
             mState.label = mMetadata.trackTitle != null && mMusicTileMode > 1

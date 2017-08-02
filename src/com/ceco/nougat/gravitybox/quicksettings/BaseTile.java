@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,6 +15,7 @@
 
 package com.ceco.nougat.gravitybox.quicksettings;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +33,6 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XSharedPreferences;
@@ -47,8 +47,10 @@ public abstract class BaseTile implements QsEventListener {
     public static final String CLASS_BASE_TILE = "com.android.systemui.qs.QSTile";
     public static final String CLASS_TILE_STATE = "com.android.systemui.qs.QSTile.State";
     public static final String CLASS_TILE_VIEW = "com.android.systemui.qs.QSTileView";
+    public static final String CLASS_TILE_VIEW_BASE = "com.android.systemui.qs.QSTileBaseView";
     public static final String CLASS_SIGNAL_TILE_VIEW = "com.android.systemui.qs.SignalTileView";
     public static final String CLASS_RESOURCE_ICON = CLASS_BASE_TILE + ".ResourceIcon";
+    public static final String CLASS_ICON_VIEW = "com.android.systemui.qs.QSIconView";
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -65,7 +67,6 @@ public abstract class BaseTile implements QsEventListener {
     protected boolean mLocked;
     protected boolean mLockedOnly;
     protected boolean mSecured;
-    protected boolean mDualMode;
     protected boolean mHideOnChange;
     protected float mScalingFactor = 1f;
     protected KeyguardStateMonitor mKgMonitor;
@@ -103,26 +104,7 @@ public abstract class BaseTile implements QsEventListener {
                 mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_SECURED, "").split(",")));
         mSecured = securedTiles.contains(mKey);
 
-        List<String> dualTiles = new ArrayList<String>(Arrays.asList(
-                mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_DUAL,
-                        "aosp_tile_wifi,aosp_tile_bluetooth").split(",")));
-        mDualMode = dualTiles.contains(mKey) && !Utils.isOxygenOs35Rom();
-
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
-    }
-
-    @Override
-    public void onDualModeSet(View tileView, boolean enabled) {
-        if (enabled) {
-            View bgView = (View) XposedHelpers.getObjectField(tileView, "mTopBackgroundView");
-            bgView.setOnLongClickListener((OnLongClickListener) 
-                    XposedHelpers.getObjectField(tileView, "mLongClick"));
-        }
-    }
-
-    @Override
-    public boolean supportsDualTargets() {
-        return mDualMode;
     }
 
     @Override
@@ -182,17 +164,18 @@ public abstract class BaseTile implements QsEventListener {
                 GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0")),
                 mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0));
         if (mScalingFactor != 1f) {
-            int iconSizePx = XposedHelpers.getIntField(tileView, "mIconSizePx");
-            XposedHelpers.setIntField(tileView, "mIconSizePx", Math.round(iconSizePx*mScalingFactor));
             int tileSpacingPx = XposedHelpers.getIntField(tileView, "mTileSpacingPx");
             XposedHelpers.setIntField(tileView, "mTileSpacingPx", Math.round(tileSpacingPx*mScalingFactor));
-            int tilePaddingBelowIconPx = XposedHelpers.getIntField(tileView, "mTilePaddingBelowIconPx");
-            XposedHelpers.setIntField(tileView, "mTilePaddingBelowIconPx",
+            Field iconField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
+                    tileView.getContext().getClassLoader()).getDeclaredField("mIcon");
+            iconField.setAccessible(true);
+            Object iconView = iconField.get(tileView);
+            int iconSizePx = XposedHelpers.getIntField(iconView, "mIconSizePx");
+            XposedHelpers.setIntField(iconView, "mIconSizePx", Math.round(iconSizePx*mScalingFactor));
+            int tilePaddingBelowIconPx = XposedHelpers.getIntField(iconView, "mTilePaddingBelowIconPx");
+            XposedHelpers.setIntField(iconView, "mTilePaddingBelowIconPx",
                     Math.round(tilePaddingBelowIconPx*mScalingFactor));
-            int dualTileVerticalPaddingPx = XposedHelpers.getIntField(tileView, "mDualTileVerticalPaddingPx");
-            XposedHelpers.setIntField(tileView, "mDualTileVerticalPaddingPx", 
-                    Math.round(dualTileVerticalPaddingPx*mScalingFactor));
-    
+
             updateLabelLayout(tileView);
             updatePaddingTop(tileView);
 
@@ -263,13 +246,6 @@ public abstract class BaseTile implements QsEventListener {
         if (label != null) {
             label.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     label.getTextSize()*mScalingFactor);
-        }
-        Object dualLabel = XposedHelpers.getObjectField(tileView, "mDualLabel");
-        if (dualLabel != null) {
-            TextView first = (TextView) XposedHelpers.getObjectField(dualLabel, "mFirstLine");
-            first.setTextSize(TypedValue.COMPLEX_UNIT_PX, first.getTextSize()*mScalingFactor);
-            TextView second = (TextView) XposedHelpers.getObjectField(dualLabel, "mSecondLine");
-            second.setTextSize(TypedValue.COMPLEX_UNIT_PX, second.getTextSize()*mScalingFactor);
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,10 +14,6 @@
  */
 
 package com.ceco.nougat.gravitybox.quicksettings;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
@@ -41,8 +37,9 @@ public class QsPanel implements BroadcastSubReceiver {
     private static final String TAG = "GB:QsPanel";
     private static final boolean DEBUG = false;
 
-    private static final String CLASS_QS_PANEL = "com.android.systemui.qs.QSPanel";
+    protected static final String CLASS_QS_PANEL = "com.android.systemui.qs.QSPanel";
     private static final String CLASS_BRIGHTNESS_CTRL = "com.android.systemui.settings.BrightnessController";
+    private static final String CLASS_TILE_LAYOUT = "com.android.systemui.qs.TileLayout";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -135,17 +132,7 @@ public class QsPanel implements BroadcastSubReceiver {
 
     private View getBrightnessSlider() {
         if (mBrightnessSlider != null) return mBrightnessSlider;
-
-        ViewGroup bv = (ViewGroup)XposedHelpers.getObjectField(mQsPanel, "mBrightnessView");
-        if (Utils.isOxygenOs35Rom()) {
-            mBrightnessSlider = bv;
-        } else {
-            int resId = mQsPanel.getResources().getIdentifier("brightness_slider", "id",
-                    mQsPanel.getContext().getPackageName());
-            if (resId != 0) {
-                mBrightnessSlider = bv.findViewById(resId);
-            }
-        }
+        mBrightnessSlider = (ViewGroup)XposedHelpers.getObjectField(mQsPanel, "mBrightnessView");
         return mBrightnessSlider;
     }
 
@@ -172,31 +159,6 @@ public class QsPanel implements BroadcastSubReceiver {
         }
     };
 
-    private int getDualTileCount() {
-        if (Utils.isOxygenOs35Rom())
-            return 0;
-
-        int count = 0;
-        List<String> dualTiles = new ArrayList<>();
-        List<String> enabledTiles = new ArrayList<>();
-        try {
-            dualTiles.addAll(Arrays.asList(
-                    mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_DUAL,
-                            "aosp_tile_wifi,aosp_tile_bluetooth").split(",")));
-            enabledTiles.addAll(Arrays.asList(
-                    mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ENABLED,
-                    TileOrderActivity.getDefaultTileList(
-                            Utils.getGbContext(mQsPanel.getContext()))).split(",")));
-        } catch (Throwable t) { /* ignore */ }
-
-        for (String tileKey : enabledTiles) {
-            if (dualTiles.contains(tileKey))
-                count++;
-        }
-
-        return count;
-    }
-
     private void createHooks(final ClassLoader classLoader) {
         try {
             Class<?> classQsPanel = XposedHelpers.findClass(CLASS_QS_PANEL, classLoader);
@@ -220,48 +182,39 @@ public class QsPanel implements BroadcastSubReceiver {
                         }
                     }
 
-                    // tiles per row
-                    if (mNumColumns != 0) {
-                        shouldInvalidate = true;
-                        XposedHelpers.setIntField(mQsPanel, "mColumns", mNumColumns);
-                        if (DEBUG) log("updateResources: Updated number of columns per row");
-                        final float factor = getScalingFactor(mNumColumns, mScaleCorrection);
-                        if (factor != 1f) {
-                            int ch = XposedHelpers.getIntField(mQsPanel, "mCellHeight");
-                            XposedHelpers.setIntField(mQsPanel, "mCellHeight", Math.round(ch*factor));
-                            int cw = XposedHelpers.getIntField(mQsPanel, "mCellWidth");
-                            XposedHelpers.setIntField(mQsPanel, "mCellWidth", Math.round(cw*factor));
-                            int lch = XposedHelpers.getIntField(mQsPanel, "mLargeCellHeight");
-                            XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight", Math.round(lch*factor));
-                            int lcw = XposedHelpers.getIntField(mQsPanel, "mLargeCellWidth");
-                            XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth", Math.round(lcw*factor));
-                            int dualTileUnderlap = XposedHelpers.getIntField(mQsPanel, "mDualTileUnderlap");
-                            XposedHelpers.setIntField(mQsPanel, "mDualTileUnderlap",
-                                    Math.round(dualTileUnderlap*factor));
-                            if (DEBUG) log("updateResources: scaling applied with factor=" + factor);
-                        }
-                    }
-
-                    final int dualTileCount = getDualTileCount();
-                    // reduce size of the first row if there aren't any dual tiles
-                    if (dualTileCount == 0 && !Utils.isOxygenOs35Rom()) {
-                        XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight",
-                                XposedHelpers.getIntField(mQsPanel, "mCellHeight"));
-                        XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth",
-                                XposedHelpers.getIntField(mQsPanel, "mCellWidth"));
-                        shouldInvalidate = true;
-                        if (DEBUG) log("updateResources: Updated first row dimensions: all tiles non-dual");
-                    // apply additional width reduction to nicely fit 3 dual tiles in one row
-                    } else if (dualTileCount > 2 && mNumColumns < 5) {
-                        int lcw = XposedHelpers.getIntField(mQsPanel, "mLargeCellWidth");
-                        XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth", Math.round(lcw*0.75f));
-                        shouldInvalidate = true;
-                        if (DEBUG) log("updateResources: Applied additional reduction to dual tile width");
-                    }
-
                     // invalidate if changes made
                     if (shouldInvalidate) {
                         mQsPanel.postInvalidate();
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_TILE_LAYOUT, classLoader, "updateResources",
+                    new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    // tiles per row
+                    if (mNumColumns != 0) {
+                        XposedHelpers.setIntField(param.thisObject, "mColumns", mNumColumns);
+                        if (DEBUG) log("updateResources: Updated number of columns per row");
+                        final float factor = getScalingFactor(mNumColumns, mScaleCorrection);
+                        if (factor != 1f) {
+                            int ch = XposedHelpers.getIntField(param.thisObject, "mCellHeight");
+                            XposedHelpers.setIntField(param.thisObject, "mCellHeight", Math.round(ch*factor));
+                            int cw = XposedHelpers.getIntField(param.thisObject, "mCellWidth");
+                            XposedHelpers.setIntField(param.thisObject, "mCellWidth", Math.round(cw*factor));
+                            int cm = XposedHelpers.getIntField(param.thisObject, "mCellMargin");
+                            XposedHelpers.setIntField(param.thisObject, "mCellMargin", Math.round(cm*factor));
+                            int cmTop = XposedHelpers.getIntField(param.thisObject, "mCellMarginTop");
+                            XposedHelpers.setIntField(param.thisObject, "mCellMarginTop", Math.round(cmTop*factor));
+                            if (DEBUG) log("updateResources: scaling applied with factor=" + factor);
+                        }
+                        ((View)param.thisObject).requestLayout();
+                        param.setResult(true);
                     }
                 }
             });

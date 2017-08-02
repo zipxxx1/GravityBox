@@ -71,7 +71,6 @@ public class GpsTile extends QsTile implements GpsStatusMonitor.Listener {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible = true;
         mState.booleanValue = mGpsEnabled;
         if (mGpsEnabled) {
             mState.label = mGpsFixed ? mGbContext.getString(R.string.qs_tile_gps_locked) :

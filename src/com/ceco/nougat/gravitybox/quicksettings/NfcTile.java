@@ -121,7 +121,6 @@ public class NfcTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible = true;
         mState.booleanValue = false;
         switch (mNfcState) {
         case ConnectivityServiceWrapper.NFC_STATE_ON:

@@ -33,7 +33,6 @@ public class VolumeTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible = true;
         super.handleUpdateState(state, arg);
     }
 

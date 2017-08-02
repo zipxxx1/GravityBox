@@ -107,7 +107,6 @@ public class TorchTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible = true;
         mState.booleanValue = mTorchStatus == TorchService.TORCH_STATUS_ON;
         if (mTorchStatus == TorchService.TORCH_STATUS_ON) {
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_torch_on);

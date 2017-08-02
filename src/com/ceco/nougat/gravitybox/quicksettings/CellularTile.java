@@ -1,3 +1,17 @@
+/*
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.ceco.nougat.gravitybox.quicksettings;
 
 import com.ceco.nougat.gravitybox.ConnectivityServiceWrapper;
@@ -6,8 +20,6 @@ import com.ceco.nougat.gravitybox.PhoneWrapper;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.Utils;
 
-import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -34,7 +46,6 @@ public class CellularTile extends AospTile {
             "com.android.phone", "com.android.phone.MobileNetworkSettings"));
 
     private String mAospKey;
-    private Unhook mCreateTileViewHook;
     private ImageView mDataOffView;
     private TelephonyManager mTm;
     private boolean mDataTypeIconVisible;
@@ -52,8 +63,6 @@ public class CellularTile extends AospTile {
         if (isPrimary()) {
             mTm = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
         }
-
-        createHooks();
     }
 
     private boolean isPrimary() {
@@ -96,11 +105,6 @@ public class CellularTile extends AospTile {
 
     private boolean canShowDataOffIcon() {
         return (mDataOffIconEnabled && !mIsSignalNull && !mDataTypeIconVisible);
-    }
-
-    @Override
-    public boolean supportsDualTargets() {
-        return (mDualMode && isPrimary());
     }
 
     @Override
@@ -178,20 +182,18 @@ public class CellularTile extends AospTile {
         if (isPrimary() && mDataOffView != null) {
             mDataTypeIconVisible = isDataTypeIconVisible(state);
             mIsSignalNull = isSignalNull(arg);
-            if ((Boolean) XposedHelpers.getBooleanField(state, "visible")) {
-                final boolean shouldShow = canShowDataOffIcon() && !isMobileDataEnabled();
-                mDataOffView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mDataOffView != null) {
-                            try {
-                                mDataOffView.setVisibility(shouldShow ?
-                                    View.VISIBLE : View.GONE);
-                            } catch (Throwable t) { /* ignore */ }
-                        }
+            final boolean shouldShow = canShowDataOffIcon() && !isMobileDataEnabled();
+            mDataOffView.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (mDataOffView != null) {
+                        try {
+                            mDataOffView.setVisibility(shouldShow ?
+                                View.VISIBLE : View.GONE);
+                        } catch (Throwable t) { /* ignore */ }
                     }
-                });
-            }
+                }
+            });
         }
     }
 
@@ -233,7 +235,7 @@ public class CellularTile extends AospTile {
 
         if (mDataToggle == DataToggle.SINGLEPRESS) {
             toggleMobileData();
-        } else if (!supportsDualTargets()) {
+        } else {
             showDetail();
         }
  
@@ -242,27 +244,14 @@ public class CellularTile extends AospTile {
 
     @Override
     public boolean handleLongClick() {
-        if (supportsDualTargets()) {
-            if (mDataToggle == DataToggle.LONGPRESS) {
-                toggleMobileData();
-            } else {
-                startSettingsActivity(CELLULAR_SETTINGS);
-            }
+        if (mDataToggle == DataToggle.LONGPRESS) {
+            toggleMobileData();
+        } else if (mDataToggle != DataToggle.DISABLED){
+            return showDetail();
         } else {
-            if (mDataToggle == DataToggle.LONGPRESS) {
-                toggleMobileData();
-            } else if (mDataToggle != DataToggle.DISABLED){
-                return showDetail();
-            } else {
-                startSettingsActivity(CELLULAR_SETTINGS);
-            }
+            startSettingsActivity(CELLULAR_SETTINGS);
         }
         return true;
-    }
-
-    @Override
-    public boolean handleSecondaryClick() {
-        return (supportsDualTargets() ? showDetail() : false);
     }
 
     private boolean showDetail() {
@@ -284,34 +273,8 @@ public class CellularTile extends AospTile {
     @Override
     public void handleDestroy() {
         super.handleDestroy();
-        destroyHooks();
         mTm = null;
         mDataOffView = null;
         mDataToggle = null;
-    }
-
-    private void createHooks() {
-        try {
-            mCreateTileViewHook = XposedHelpers.findAndHookMethod(
-                    mTile.getClass().getName(), mContext.getClassLoader(),
-                    "createTileView", Context.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mKey.equals(XposedHelpers.getAdditionalInstanceField(
-                            param.thisObject, BaseTile.TILE_KEY_NAME))) {
-                        onCreateTileView((View)param.getResult());
-                    }
-                }
-            });
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    private void destroyHooks() {
-        if (mCreateTileViewHook != null) {
-            mCreateTileViewHook.unhook();
-            mCreateTileViewHook = null;
-        }
     }
 }

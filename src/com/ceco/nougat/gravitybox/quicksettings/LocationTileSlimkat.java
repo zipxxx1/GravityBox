@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The SlimRoms Project
+ * Copyright (C) 2017 The SlimRoms Project
  * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -169,7 +169,6 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.booleanValue = true;
-        mState.visible = true;
         int locationMode = getLocationMode();
         switch (locationMode) {
             case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
@@ -195,8 +194,6 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
     public void handleClick() {
         if (mQuickMode) {
             switchLocationMode();
-        } else if (supportsDualTargets()) {
-            setLocationEnabled(!isLocationEnabled());
         } else {
             showDetail(true);
         }
@@ -205,7 +202,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
     @Override
     public boolean handleLongClick() {
-        if (supportsDualTargets() || Utils.isOxygenOs35Rom()) {
+        if (Utils.isOxygenOs35Rom()) {
             startSettingsActivity(LOCATION_SETTINGS_INTENT);
         } else if (mQuickMode) {
             showDetail(true);
@@ -217,13 +214,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
     @Override
     public boolean supportsHideOnChange() {
-        return supportsDualTargets();
-    }
-
-    @Override
-    public boolean handleSecondaryClick() {
-        showDetail(true);
-        return true;
+        return mQuickMode;
     }
 
     @Override
@@ -238,7 +229,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
     public Object getDetailAdapter() {
         if (mDetailAdapter == null) {
             mDetailAdapter = QsDetailAdapterProxy.createProxy(
-                    mContext.getClassLoader(), new LocationDetailAdapter());
+                    mContext.getClassLoader(), new LocationDetailAdapter(mContext));
         }
         return mDetailAdapter;
     }
@@ -264,22 +255,29 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
         private AdvancedLocationAdapter mAdapter;
         private QsDetailItemsList mDetails;
 
+        LocationDetailAdapter(Context ctx) {
+            mAdapter = new AdvancedLocationAdapter(ctx);
+        }
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             setLocationMode((Integer) parent.getItemAtPosition(position));
         }
 
         @Override
-        public int getTitle() {
-            return mContext.getResources().getIdentifier("quick_settings_location_label",
-                    "string", ModStatusBar.PACKAGE_NAME);
+        public CharSequence getTitle() {
+            return mContext.getString(mContext.getResources().getIdentifier("quick_settings_location_label",
+                    "string", ModStatusBar.PACKAGE_NAME));
+        }
+
+        @Override
+        public boolean getToggleEnabled() {
+            return true;
         }
 
         @Override
         public Boolean getToggleState() {
-            boolean state = isLocationEnabled();
-            rebuildLocationList(state);
-            return state;
+            return isLocationEnabled();
         }
 
         @Override
@@ -288,7 +286,6 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
                 mDetails = QsDetailItemsList.create(context, parent);
                 mDetails.setEmptyState(R.drawable.ic_qs_location_off,
                         GpsStatusMonitor.getModeLabel(mContext, Settings.Secure.LOCATION_MODE_OFF));
-                mAdapter = new AdvancedLocationAdapter(context);
                 mDetails.setAdapter(mAdapter);
     
                 final ListView list = mDetails.getListView();
@@ -296,6 +293,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
                 list.setOnItemClickListener(this);
             }
 
+            rebuildLocationList(isLocationEnabled());
             return mDetails.getView();
         }
 

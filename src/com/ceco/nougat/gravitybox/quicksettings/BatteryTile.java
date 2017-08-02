@@ -146,10 +146,8 @@ public class BatteryTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         if (mBatteryData == null) {
-            mState.visible = false;
             if (DEBUG) log(getKey() + ": handleUpdateState: battery data is null");
         } else {
-            mState.visible = true;
             mState.label = "";
             if (mShowTemp && mShowVoltage) {
                 mState.label = String.format("%.1f\u00b0%s, %dmV",

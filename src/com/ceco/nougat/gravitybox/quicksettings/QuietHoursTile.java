@@ -116,7 +116,6 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
                                 mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_off);
                     break;
             }
-            mState.visible = shouldShow();
         }
 
         super.handleUpdateState(state, arg);
