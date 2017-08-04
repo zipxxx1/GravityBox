@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,14 +28,18 @@ import android.os.Handler;
 import android.provider.Settings;
 
 public class ExpandedDesktopTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = ExpandedDesktopTile.class.getSimpleName()+"$Service";
+    }
+
     private int mMode;
     private boolean mExpanded;
     private Handler mHandler;
     private SettingsObserver mSettingsObserver;
 
-    public ExpandedDesktopTile(Object host, String key, XSharedPreferences prefs,
+    public ExpandedDesktopTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mHandler = new Handler();
         mSettingsObserver = new SettingsObserver(mHandler);
@@ -64,6 +68,11 @@ public class ExpandedDesktopTile extends QsTile {
     }
 
     @Override
+    public String getSettingsKey() {
+        return "gb_tile_expanded_desktop";
+    }
+
+    @Override
     public void initPreferences() {
         super.initPreferences();
         mMode = GravityBoxSettings.ED_DISABLED;
@@ -86,7 +95,7 @@ public class ExpandedDesktopTile extends QsTile {
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             mExpanded = (Settings.Global.getInt(mContext.getContentResolver(),
                     ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0) == 1)
                     && (mMode > 0);
@@ -102,12 +111,12 @@ public class ExpandedDesktopTile extends QsTile {
         mState.booleanValue = mExpanded;
         if (mExpanded) {
             mState.label = mGbContext.getString(R.string.quick_settings_expanded_desktop_expanded);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_expanded_desktop_on);
+            mState.icon = iconFromResId(R.drawable.ic_qs_expanded_desktop_on);
         } else {
             mState.label = (mMode == GravityBoxSettings.ED_DISABLED) ? 
                     mGbContext.getString(R.string.quick_settings_expanded_desktop_disabled) :
                         mGbContext.getString(R.string.quick_settings_expanded_desktop_normal);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_expanded_desktop_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_expanded_desktop_off);
         }
 
         super.handleUpdateState(state, arg);

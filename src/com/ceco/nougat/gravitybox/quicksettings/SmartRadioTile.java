@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,7 +15,6 @@
 
 package com.ceco.nougat.gravitybox.quicksettings;
 
-import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModSmartRadio;
 import com.ceco.nougat.gravitybox.R;
 
@@ -27,21 +26,29 @@ import android.os.Handler;
 import android.provider.Settings;
 
 public class SmartRadioTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = SmartRadioTile.class.getSimpleName()+"$Service";
+    }
 
     private boolean mSmartRadioEnabled;
     private ModSmartRadio.State mSmartRadioState;
     private SettingsObserver mSettingsObserver;
 
-    public SmartRadioTile(Object host, String key, XSharedPreferences prefs,
+    public SmartRadioTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mSettingsObserver = new SettingsObserver(new Handler());
     }
 
     @Override
+    public String getSettingsKey() {
+        return "gb_tile_smart_radio";
+    }
+
+    @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             getCurrentState();
             mSettingsObserver.observe();
             if (DEBUG) log(getKey() + ": observer registered");
@@ -67,11 +74,11 @@ public class SmartRadioTile extends QsTile {
         if (mSmartRadioEnabled) {
             mState.label = mGbContext.getString(R.string.quick_settings_smart_radio_on);
             mState.icon = mSmartRadioState == ModSmartRadio.State.POWER_SAVING ?
-                    mGbContext.getDrawable(R.drawable.ic_qs_smart_radio_on) : 
-                        mGbContext.getDrawable(R.drawable.ic_qs_smart_radio_on_normal);
+                    iconFromResId(R.drawable.ic_qs_smart_radio_on) : 
+                        iconFromResId(R.drawable.ic_qs_smart_radio_on_normal);
         } else {
             mState.label = mGbContext.getString(R.string.quick_settings_smart_radio_off);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_smart_radio_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_smart_radio_off);
         }
 
         super.handleUpdateState(state, arg);

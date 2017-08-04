@@ -23,12 +23,16 @@ import de.robv.android.xposed.XSharedPreferences;
 import android.provider.Settings;
 
 public class GpsTile extends QsTile implements GpsStatusMonitor.Listener {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = GpsTile.class.getSimpleName()+"$Service";
+    }
+
     private boolean mGpsEnabled;
     private boolean mGpsFixed;
 
-    public GpsTile(Object host, String key, XSharedPreferences prefs,
+    public GpsTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
     }
 
     private void registerListener() {
@@ -43,6 +47,11 @@ public class GpsTile extends QsTile implements GpsStatusMonitor.Listener {
         if (SysUiManagers.GpsMonitor != null) {
             SysUiManagers.GpsMonitor.unregisterListener(this);
         }
+    }
+
+    @Override
+    public String getSettingsKey() {
+        return "gb_tile_gps_alt";
     }
 
     @Override
@@ -62,7 +71,7 @@ public class GpsTile extends QsTile implements GpsStatusMonitor.Listener {
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             registerListener();
         } else {
             unregisterListener();
@@ -75,11 +84,11 @@ public class GpsTile extends QsTile implements GpsStatusMonitor.Listener {
         if (mGpsEnabled) {
             mState.label = mGpsFixed ? mGbContext.getString(R.string.qs_tile_gps_locked) :
                     mGbContext.getString(R.string.qs_tile_gps_enabled);
-            mState.icon = mGpsFixed ? mGbContext.getDrawable(R.drawable.ic_qs_gps_locked) :
-                    mGbContext.getDrawable(R.drawable.ic_qs_gps_enable);
+            mState.icon = mGpsFixed ? iconFromResId(R.drawable.ic_qs_gps_locked) :
+                iconFromResId(R.drawable.ic_qs_gps_enable);
         } else {
             mState.label = mGbContext.getString(R.string.qs_tile_gps_disabled);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_gps_disable);
+            mState.icon = iconFromResId(R.drawable.ic_qs_gps_disable);
         }
 
         super.handleUpdateState(state, arg);

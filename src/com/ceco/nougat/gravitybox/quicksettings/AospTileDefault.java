@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,16 +16,15 @@ package com.ceco.nougat.gravitybox.quicksettings;
 
 import de.robv.android.xposed.XSharedPreferences;
 
-public class MtkAudioProfileTile extends AospTile {
-    public static final String AOSP_KEY = "audioprofile";
+public class AospTileDefault extends AospTile {
 
-    protected MtkAudioProfileTile(Object host, Object tile, XSharedPreferences prefs, 
-            QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, "mtk_tile_audio_profile", tile, prefs, eventDistributor);
+    public AospTileDefault(Object host, String key, Object tile,
+            XSharedPreferences prefs, QsTileEventDistributor eventDistributor) throws Throwable {
+        super(host, key, tile, prefs, eventDistributor);
     }
 
     @Override
-    public String getAospKey() {
-        return AOSP_KEY;
+    public String getSettingsKey() {
+        return "aosp_tile_default";
     }
 }

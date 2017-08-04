@@ -14,6 +14,9 @@
  */
 package com.ceco.nougat.gravitybox.quicksettings;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.ceco.nougat.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.PhoneWrapper;
@@ -36,16 +39,13 @@ public class CellularTile extends AospTile {
     public static final String AOSP_KEY = "cell";
     public static final String MSIM_KEY1 = "cell1";
     public static final String MSIM_KEY2 = "cell2";
-
-    public static final String KEY = "aosp_tile_cell";
-    public static final String KEY2 = "aosp_tile_cell2";
+    public static final List<String> AOSP_KEYS = Arrays.asList(AOSP_KEY, MSIM_KEY1, MSIM_KEY2);
 
     public static enum DataToggle { DISABLED, SINGLEPRESS, LONGPRESS };
 
     private static final Intent CELLULAR_SETTINGS = new Intent().setComponent(new ComponentName(
             "com.android.phone", "com.android.phone.MobileNetworkSettings"));
 
-    private String mAospKey;
     private ImageView mDataOffView;
     private TelephonyManager mTm;
     private boolean mDataTypeIconVisible;
@@ -54,11 +54,9 @@ public class CellularTile extends AospTile {
     private boolean mClickHookBlocked;
     private DataToggle mDataToggle;
 
-    protected CellularTile(Object host, String aospKey, String key, Object tile, XSharedPreferences prefs,
+    protected CellularTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
-
-        mAospKey = aospKey;
 
         if (isPrimary()) {
             mTm = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
@@ -66,8 +64,8 @@ public class CellularTile extends AospTile {
     }
 
     private boolean isPrimary() {
-        return AOSP_KEY.equals(mAospKey) ||
-                MSIM_KEY1.equals(mAospKey);
+        return AOSP_KEY.equals(mKey) ||
+                MSIM_KEY1.equals(mKey);
     }
 
     private boolean isDataTypeIconVisible(Object state) {
@@ -136,8 +134,8 @@ public class CellularTile extends AospTile {
     }
 
     @Override
-    public String getAospKey() {
-        return mAospKey;
+    public String getSettingsKey() {
+        return "aosp_tile_cell";
     }
 
     @Override

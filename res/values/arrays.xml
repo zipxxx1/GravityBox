@@ -94,16 +94,10 @@
         <!-- AOSP -->
         <item>@string/qs_tile_wifi</item>
         <item>@string/qs_tile_bluetooth</item>
-        <item>@string/qs_tile_inversion</item>
         <item>@string/qs_tile_data_usage</item>
-        <item>@string/qs_tile_data_usage_2</item>
         <item>@string/qs_tile_airplane_mode</item>
-        <item>@string/qs_tile_autorotation</item>
-        <item>@string/qs_tile_torch_aosp</item>
         <item>@string/qs_tile_gps</item>
-        <item>@string/qs_tile_remote_display</item>
         <item>@string/qs_tile_wifi_ap</item>
-        <item>@string/qs_tile_dnd</item>
         <!-- GB -->
         <!--  <item>@string/qs_tile_battery</item> -->
         <item>@string/qs_tile_nfc</item>
@@ -126,51 +120,20 @@
         <item>@string/qs_tile_screenshot</item>
         <item>@string/qs_tile_gravitybox</item>
         <item>@string/qs_tile_usb_tethering</item>
-        <item>@string/qs_tile_music</item>
         <item>@string/qs_tile_lock_screen</item>
         <item>@string/lc_quiet_hours</item>
         <item>@string/qs_tile_compass</item>
         <item>@string/qs_tile_bt_tethering</item>
-        <!-- MTK -->
-        <item>@string/qs_tile_mobile_data</item>
-        <item>@string/qs_tile_audio_profile</item>
-        <item>@string/qs_tile_hotknot</item>
-        <item>@string/qs_tile_timeout</item>
-        <!-- Xperia -->
-        <item>@string/qs_tile_xperia_sync</item>
-        <item>@string/qs_tile_xperia_roaming</item>
-        <item>@string/qs_tile_xperia_nfc</item>
-        <item>@string/qs_tile_xperia_lte</item>
-        <item>@string/qs_tile_xperia_datatraffic</item>
-        <item>@string/qs_tile_xperia_screenmirroring</item>
-        <item>@string/qs_tile_xperia_throw</item>
-        <item>@string/qs_tile_xperia_volte</item>
-        <item>@string/qs_tile_xperia_tethering</item>
-        <item>@string/qs_tile_xperia_detectusbdevice</item>
-        <!-- Moto -->
-        <item>@string/qs_tile_moto_data</item>
-        <!-- OP3T -->
-        <item>@string/qs_tile_op3t_night_mode</item>
-        <item>@string/qs_tile_op3t_buttons</item>
-        <item>@string/qs_tile_op3t_vpn</item>
-        <item>@string/qs_tile_op3t_dataswitch</item>
-        <item>@string/qs_tile_op3t_powersaving</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
         <!-- AOSP -->
         <item>aosp_tile_wifi</item>
         <item>aosp_tile_bluetooth</item>
-        <item>aosp_tile_inversion</item>
         <item>aosp_tile_cell</item>
-        <item>aosp_tile_cell2</item>
         <item>aosp_tile_airplane_mode</item>
-        <item>aosp_tile_rotation</item>
-        <item>aosp_tile_torch</item>
         <item>aosp_tile_location</item>
-        <item>aosp_tile_cast</item>
         <item>aosp_tile_hotspot</item>
-        <item>aosp_tile_dnd</item>
         <!-- GB -->
         <!-- <item>gb_tile_battery</item> -->
         <item>gb_tile_nfc</item>
@@ -193,35 +156,10 @@
         <item>gb_tile_screenshot</item>
         <item>gb_tile_gravitybox</item>
         <item>gb_tile_usb_tether</item>
-        <item>gb_tile_music</item>
         <item>gb_tile_lock_screen</item>
         <item>gb_tile_quiet_hours</item>
         <item>gb_tile_compass</item>
         <item>gb_tile_bt_tethering</item>
-        <!-- MTK -->
-        <item>mtk_tile_mobile_data</item>
-        <item>mtk_tile_audio_profile</item>
-        <item>mtk_tile_hotknot</item>
-        <item>mtk_tile_timeout</item>
-        <!-- Xperia -->
-        <item>xperia_tile_sync</item>
-        <item>xperia_tile_roaming</item>
-        <item>xperia_tile_nfc</item>
-        <item>xperia_tile_lte</item>
-        <item>xperia_tile_datatraffic</item>
-        <item>xperia_tile_screenmirroring</item>
-        <item>xperia_tile_throw</item>
-        <item>xperia_tile_volte</item>
-        <item>xperia_tile_tethering</item>
-        <item>xperia_tile_detectusbdevice</item>
-        <!-- Moto -->
-        <item>moto_tile_data</item>
-        <!-- OP3T -->
-        <item>op3t_tile_night</item>
-        <item>op3t_tile_buttons</item>
-        <item>op3t_tile_vpn</item>
-        <item>op3t_tile_dataswitch</item>
-        <item>op3t_tile_powersaving</item>
     </string-array>
 
     <string-array name="qs_tile_default_values" translatable="false">

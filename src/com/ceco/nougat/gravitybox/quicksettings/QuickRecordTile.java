@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,9 +14,6 @@
  */
 
 package com.ceco.nougat.gravitybox.quicksettings;
-
-import java.io.File;
-import java.io.IOException;
 
 import com.ceco.nougat.gravitybox.GravityBoxResultReceiver;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
@@ -37,6 +34,10 @@ import android.os.Bundle;
 import android.os.Handler;
 
 public class QuickRecordTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = QuickRecordTile.class.getSimpleName()+"$Service";
+    }
+
     private static final int STATE_IDLE = 0;
     private static final int STATE_PLAYING = 1;
     private static final int STATE_RECORDING = 2;
@@ -52,9 +53,9 @@ public class QuickRecordTile extends QsTile {
     private GravityBoxResultReceiver mCurrentStateReceiver;
     private boolean mIsReceiving;
 
-    public QuickRecordTile(Object host, String key, XSharedPreferences prefs,
+    public QuickRecordTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mHandler = new Handler();
 
@@ -64,6 +65,9 @@ public class QuickRecordTile extends QsTile {
             public void onReceiveResult(int resultCode, Bundle resultData) {
                 final int oldState = mRecordingState;
                 final int newState = resultData.getInt(RecordingService.EXTRA_RECORDING_STATUS);
+                if (resultData.containsKey(RecordingService.EXTRA_AUDIO_FILENAME)) {
+                    mAudioFileName = resultData.getString(RecordingService.EXTRA_AUDIO_FILENAME);
+                }
                 switch(newState) {
                 case RecordingService.RECORDING_STATUS_IDLE:
                     mRecordingState = STATE_IDLE;
@@ -103,7 +107,7 @@ public class QuickRecordTile extends QsTile {
                     if (mAutoStopDelay > 0) {
                         mHandler.postDelayed(autoStopRecord, mAutoStopDelay);
                     }
-                    if (DEBUG) log(getKey() + ": Audio recording started");
+                    if (DEBUG) log(getKey() + ": Audio recording started; mAudioFileName=" + mAudioFileName);
                     break;
                 case RecordingService.RECORDING_STATUS_STOPPED:
                     mRecordingState = STATE_JUST_RECORDED;
@@ -121,6 +125,11 @@ public class QuickRecordTile extends QsTile {
             refreshState();
         }
     };
+
+    @Override
+    public String getSettingsKey() {
+        return "gb_tile_quickrecord";
+    }
 
     @Override
     public void initPreferences() {
@@ -166,7 +175,7 @@ public class QuickRecordTile extends QsTile {
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             registerRecordingStatusReceiver();
             getCurrentState();
         } else {
@@ -210,8 +219,9 @@ public class QuickRecordTile extends QsTile {
             mRecordingState = STATE_PLAYING;
             refreshState();
             mPlayer.setOnCompletionListener(stoppedPlaying);
-        } catch (IOException e) {
+        } catch (Exception e) {
             log(getKey() + ": startPlaying failed: " + e.getMessage());
+            if (DEBUG) XposedBridge.log(e);
         }
     }
 
@@ -239,36 +249,29 @@ public class QuickRecordTile extends QsTile {
     public void handleUpdateState(Object state, Object arg) {
         final Resources res = mGbContext.getResources();
 
-        if (mAudioFileName == null) {
-            mRecordingState = STATE_NO_RECORDING;
-        } else {
-            File file = new File(mAudioFileName);
-            if (!file.exists()) {
-                mRecordingState = STATE_NO_RECORDING;
-            }
-        }
+        if (DEBUG) log("Handle update state: mRecordingState=" + mRecordingState);
 
         switch (mRecordingState) {
             case STATE_PLAYING:
                 mState.label = res.getString(R.string.quick_settings_qr_playing);
-                mState.icon = res.getDrawable(R.drawable.ic_qs_qr_playing);
+                mState.icon = iconFromResId(R.drawable.ic_qs_qr_playing);
                 break;
             case STATE_RECORDING:
                 mState.label = res.getString(R.string.quick_settings_qr_recording);
-                mState.icon = res.getDrawable(R.drawable.ic_qs_qr_recording);
+                mState.icon = iconFromResId(R.drawable.ic_qs_qr_recording);
                 break;
             case STATE_JUST_RECORDED:
                 mState.label = res.getString(R.string.quick_settings_qr_recorded);
-                mState.icon = res.getDrawable(R.drawable.ic_qs_qr_recorded);
+                mState.icon = iconFromResId(R.drawable.ic_qs_qr_recorded);
                 break;
             case STATE_NO_RECORDING:
                 mState.label = res.getString(R.string.quick_settings_qr_record);
-                mState.icon = res.getDrawable(R.drawable.ic_qs_qr_record);
+                mState.icon = iconFromResId(R.drawable.ic_qs_qr_record);
                 break;
             case STATE_IDLE:
             default:
                 mState.label = res.getString(R.string.qs_tile_quickrecord);
-                mState.icon = res.getDrawable(R.drawable.ic_qs_qr_record);
+                mState.icon = iconFromResId(R.drawable.ic_qs_qr_record);
                 break;
         }
 
@@ -282,15 +285,6 @@ public class QuickRecordTile extends QsTile {
 
     @Override
     public void handleClick() {
-        if (mAudioFileName == null) {
-            mRecordingState = STATE_NO_RECORDING;
-        } else {
-            File file = new File(mAudioFileName);
-            if (!file.exists()) {
-                mRecordingState = STATE_NO_RECORDING;
-            }
-        }
-
         switch (mRecordingState) {
             case STATE_RECORDING:
                 stopRecording();
@@ -322,12 +316,14 @@ public class QuickRecordTile extends QsTile {
 
     @Override
     public void handleDestroy() {
-        super.handleDestroy();
+        autoStopRecord.run();
         mHandler = null;
         mCurrentStateReceiver = null;
+        mRecordingStatusReceiver = null;
         if (mPlayer != null) {
             mPlayer.release();
             mPlayer = null;
         }
+        super.handleDestroy();
     }
 }

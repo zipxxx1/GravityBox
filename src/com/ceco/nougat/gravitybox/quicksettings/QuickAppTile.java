@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,6 +28,7 @@ import com.ceco.nougat.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedHelpers;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +51,19 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
 public class QuickAppTile extends QsTile {
+    public static final class Service1 extends QsTileServiceBase {
+        static final String KEY = QuickAppTile.class.getSimpleName()+"$Service1";
+    }
+    public static final class Service2 extends QsTileServiceBase {
+        static final String KEY = QuickAppTile.class.getSimpleName()+"$Service2";
+    }
+    public static final class Service3 extends QsTileServiceBase {
+        static final String KEY = QuickAppTile.class.getSimpleName()+"$Service3";
+    }
+    public static final class Service4 extends QsTileServiceBase {
+        static final String KEY = QuickAppTile.class.getSimpleName()+"$Service4";
+    }
+
     private String KEY_QUICKAPP_DEFAULT = GravityBoxSettings.PREF_KEY_QUICKAPP_DEFAULT;
     private String KEY_QUICKAPP_SLOT1 = GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT1;
     private String KEY_QUICKAPP_SLOT2 = GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT2;
@@ -89,12 +103,12 @@ public class QuickAppTile extends QsTile {
 
         public Drawable getAppIcon() {
             return (mAppIcon == null ? 
-                    mResources.getDrawable(android.R.drawable.ic_menu_help) : mAppIcon);
+                    mResources.getDrawable(android.R.drawable.ic_menu_help, null) : mAppIcon);
         }
 
         public Drawable getAppIconSmall() {
             return (mAppIconSmall == null ? 
-                    mResources.getDrawable(android.R.drawable.ic_menu_help) : mAppIconSmall);
+                    mResources.getDrawable(android.R.drawable.ic_menu_help, null) : mAppIconSmall);
         }
 
         public String getValue() {
@@ -131,7 +145,7 @@ public class QuickAppTile extends QsTile {
                         mResources.getIdentifier(mIntent.getStringExtra("iconResName"),
                         "drawable", mGbContext.getPackageName()) : 0;
                 if (iconResId != 0) {
-                    appIcon = Utils.drawableToBitmap(mResources.getDrawable(iconResId));
+                    appIcon = Utils.drawableToBitmap(mResources.getDrawable(iconResId, null));
                 } else {
                     final String appIconPath = mIntent.getStringExtra("icon");
                     if (appIconPath != null) {
@@ -166,7 +180,7 @@ public class QuickAppTile extends QsTile {
                 }
                 if (DEBUG) log(getKey() + ": AppInfo initialized for: " + getAppName());
             } catch (NameNotFoundException e) {
-                log(getKey() + ": App not found: " + mIntent);
+                if (DEBUG) log(getKey() + ": App not found: " + mIntent);
                 reset();
             } catch (Exception e) {
                 log(getKey() + ": Unexpected error: " + e.getMessage());
@@ -176,7 +190,6 @@ public class QuickAppTile extends QsTile {
     }
 
     private Runnable mDismissDialogRunnable = new Runnable() {
-
         @Override
         public void run() {
             if (mDialog != null && mDialog.isShowing()) {
@@ -214,14 +227,14 @@ public class QuickAppTile extends QsTile {
     };
 
     
-    public QuickAppTile(Object host, String key, XSharedPreferences prefs,
+    public QuickAppTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        this(host, key, prefs, eventDistributor, 1);
+        this(host, key, tile, prefs, eventDistributor, 1);
     }
 
-    public QuickAppTile(Object host, String key, XSharedPreferences prefs,
+    public QuickAppTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor, int id) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mHandler = new Handler();
         mPm = mContext.getPackageManager();
@@ -242,6 +255,10 @@ public class QuickAppTile extends QsTile {
         mAppSlots.add(new AppInfo(R.id.quickapp2));
         mAppSlots.add(new AppInfo(R.id.quickapp3));
         mAppSlots.add(new AppInfo(R.id.quickapp4));
+        updateAllApps();
+    }
+
+    private void updateAllApps() {
         updateMainApp(mPrefs.getString(KEY_QUICKAPP_DEFAULT, null));
         updateSubApp(0, mPrefs.getString(KEY_QUICKAPP_SLOT1, null));
         updateSubApp(1, mPrefs.getString(KEY_QUICKAPP_SLOT2, null));
@@ -270,6 +287,11 @@ public class QuickAppTile extends QsTile {
     }
 
     @Override
+    public String getSettingsKey() {
+        return mId > 1 ? "gb_tile_quickapp" + mId : "gb_tile_quickapp";
+    }
+
+    @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         super.onBroadcastReceived(context, intent);
         if (DEBUG) log(getKey() + ": onBroadcastReceived: " + intent.toString());
@@ -290,6 +312,8 @@ public class QuickAppTile extends QsTile {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QUICKAPP_SLOT4)) {
                 updateSubApp(3, intent.getStringExtra(GravityBoxSettings.EXTRA_QUICKAPP_SLOT4));
             }
+        } else if (intent.getAction().equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)) {
+            updateAllApps();
         }
     }
 
@@ -310,7 +334,7 @@ public class QuickAppTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.label = mMainApp.getAppName();
-        mState.icon = mMainApp.getAppIconSmall();
+        mState.icon = iconFromDrawable(mMainApp.getAppIconSmall());
         super.handleUpdateState(state, arg);
     }
 
@@ -330,6 +354,7 @@ public class QuickAppTile extends QsTile {
         super.handleClick();
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public boolean handleLongClick() {
         LayoutInflater inflater = LayoutInflater.from(mGbContext);
@@ -361,7 +386,7 @@ public class QuickAppTile extends QsTile {
                 log(getKey() + ": Unable to start activity: " + t.getMessage());
             }
         } else if (count > 1) {
-            mDialog = new Dialog(mContext, android.R.style.Theme_Material_Dialog_NoActionBar);
+            mDialog = new Dialog(mContext, android.R.style.Theme_Material_Light_Dialog_NoActionBar);
             mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             mDialog.setContentView(appv);
             mDialog.setCanceledOnTouchOutside(true);
@@ -379,7 +404,6 @@ public class QuickAppTile extends QsTile {
 
     @Override
     public void handleDestroy() {
-        super.handleDestroy();
         mMainApp = null;
         if (mAppSlots != null) {
             mAppSlots.clear();
@@ -388,5 +412,8 @@ public class QuickAppTile extends QsTile {
         mPm = null;
         mDialog = null;
         mHandler = null;
+        mDismissDialogRunnable = null;
+        mOnSlotClick = null;
+        super.handleDestroy();
     }
 }

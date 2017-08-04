@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,10 +21,13 @@ import de.robv.android.xposed.XSharedPreferences;
 import android.provider.Settings;
 
 public class LockScreenTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = LockScreenTile.class.getSimpleName()+"$Service";
+    }
 
-    public LockScreenTile(Object host, String key, XSharedPreferences prefs,
+    public LockScreenTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
     }
 
     private void toggleLockscreenState() {
@@ -33,9 +36,14 @@ public class LockScreenTile extends QsTile {
     }
 
     @Override
+    public String getSettingsKey() {
+        return "gb_tile_lock_screen";
+    }
+
+    @Override
     public void initPreferences() {
         super.initPreferences();
-        mSecured = true;
+        mProtected = true;
     }
 
     @Override
@@ -43,11 +51,11 @@ public class LockScreenTile extends QsTile {
         if (mKgMonitor.isKeyguardDisabled()) {
             mState.booleanValue = false;
             mState.label = mGbContext.getString(R.string.quick_settings_lock_screen_off);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_lock_screen_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_lock_screen_off);
         } else {
             mState.booleanValue = true;
             mState.label = mGbContext.getString(R.string.quick_settings_lock_screen_on);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_lock_screen_on);
+            mState.icon = iconFromResId(R.drawable.ic_qs_lock_screen_on);
         }
 
         super.handleUpdateState(state, arg);

@@ -59,6 +59,7 @@ public class RecordingService extends Service {
     private Notification mRecordingNotif;
     private PendingIntent mPendingIntent;
     private int mSamplingRate = DEFAULT_SAMPLING_RATE;
+    private String mLastAudioFileName;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -99,6 +100,9 @@ public class RecordingService extends Service {
                 ResultReceiver receiver = intent.getParcelableExtra("receiver");
                 Bundle data = new Bundle();
                 data.putInt(EXTRA_RECORDING_STATUS, mRecordingStatus);
+                if (mLastAudioFileName != null) {
+                    data.putString(EXTRA_AUDIO_FILENAME, mLastAudioFileName);
+                }
                 receiver.send(0, data);
                 return START_STICKY;
             }
@@ -138,12 +142,15 @@ public class RecordingService extends Service {
 
     private void startRecording() {
         String statusMessage = "";
-        String audioFileName = prepareOutputFile();
+        mLastAudioFileName = prepareOutputFile();
+        if (mLastAudioFileName == null)
+            return;
+
         try {
             mRecorder = new MediaRecorder();
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            mRecorder.setOutputFile(audioFileName);
+            mRecorder.setOutputFile(mLastAudioFileName);
             mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
             mRecorder.setAudioEncodingBitRate(96000);
             mRecorder.setAudioSamplingRate(mSamplingRate);
@@ -160,7 +167,7 @@ public class RecordingService extends Service {
             Intent i = new Intent(ACTION_RECORDING_STATUS_CHANGED);
             i.putExtra(EXTRA_RECORDING_STATUS, mRecordingStatus);
             if (mRecordingStatus == RECORDING_STATUS_STARTED) {
-                i.putExtra(EXTRA_AUDIO_FILENAME, audioFileName);
+                i.putExtra(EXTRA_AUDIO_FILENAME, mLastAudioFileName);
             }
             i.putExtra(EXTRA_STATUS_MESSAGE, statusMessage); 
             sendBroadcast(i);

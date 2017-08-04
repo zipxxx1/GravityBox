@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,13 +22,21 @@ import android.content.Context;
 import android.media.AudioManager;
 
 public class VolumeTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = VolumeTile.class.getSimpleName()+"$Service";
+    }
 
-    public VolumeTile(Object host, String key, XSharedPreferences prefs,
+    public VolumeTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
-        mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_volume);
+        mState.icon = iconFromResId(R.drawable.ic_qs_volume);
         mState.label = mGbContext.getString(R.string.qs_tile_volume);
+    }
+
+    @Override
+    public String getSettingsKey() {
+        return "gb_tile_volume";
     }
 
     @Override

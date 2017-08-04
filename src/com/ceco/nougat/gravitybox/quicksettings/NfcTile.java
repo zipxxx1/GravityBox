@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,6 +30,10 @@ import android.os.Handler;
 import android.provider.Settings;
 
 public class NfcTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = NfcTile.class.getSimpleName()+"$Service";
+    }
+
     private static final String ACTION_ADAPTER_STATE_CHANGED = 
             "android.nfc.action.ADAPTER_STATE_CHANGED";
     private static final String EXTRA_STATE = "android.nfc.extra.ADAPTER_STATE";
@@ -51,9 +55,9 @@ public class NfcTile extends QsTile {
         }
     };
 
-    public NfcTile(Object host, String key, XSharedPreferences prefs,
+    public NfcTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mHandler = new Handler();
         mReceiver = new GravityBoxResultReceiver(mHandler);
@@ -90,8 +94,13 @@ public class NfcTile extends QsTile {
     }
 
     @Override
+    public String getSettingsKey() {
+        return "gb_tile_nfc";
+    }
+
+    @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             registerNfcReceiver();
         } else {
             unregisterNfcReceiver();
@@ -125,17 +134,17 @@ public class NfcTile extends QsTile {
         switch (mNfcState) {
         case ConnectivityServiceWrapper.NFC_STATE_ON:
             mState.booleanValue = true;
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_nfc_on);
+            mState.icon = iconFromResId(R.drawable.ic_qs_nfc_on);
             mState.label = mGbContext.getString(R.string.quick_settings_nfc_on);
             break;
         case ConnectivityServiceWrapper.NFC_STATE_OFF:
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_nfc_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_nfc_off);
             mState.label = mGbContext.getString(R.string.quick_settings_nfc_off);
             break;
         case ConnectivityServiceWrapper.NFC_STATE_TURNING_ON:
         case ConnectivityServiceWrapper.NFC_STATE_TURNING_OFF:
         default:
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_nfc_trans);
+            mState.icon = iconFromResId(R.drawable.ic_qs_nfc_trans);
             mState.label = "----";
         }
 
@@ -156,8 +165,9 @@ public class NfcTile extends QsTile {
 
     @Override
     public void handleDestroy() {
-        super.handleDestroy();
+        mStateChangeReceiver = null;
         mHandler = null;
         mReceiver = null;
+        super.handleDestroy();
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -40,7 +40,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class BatteryTile extends QsTile {
-
     private boolean mIsReceiving;
     private BatteryData mBatteryData;
     private BatteryView mBatteryView;
@@ -51,9 +50,9 @@ public class BatteryTile extends QsTile {
     private boolean mShowTemp;
     private boolean mShowVoltage;
 
-    public BatteryTile(Object host, String key, XSharedPreferences prefs,
+    public BatteryTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
     }
 
     private BatteryStatusListener mBatteryStatusListener = new BatteryStatusListener() {
@@ -82,6 +81,11 @@ public class BatteryTile extends QsTile {
             }
             mIsReceiving = false;
         }
+    }
+
+    @Override
+    public String getSettingsKey() {
+        return null;
     }
 
     @Override
@@ -136,7 +140,7 @@ public class BatteryTile extends QsTile {
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             registerReceiver();
         } else {
             unregisterReceiver();

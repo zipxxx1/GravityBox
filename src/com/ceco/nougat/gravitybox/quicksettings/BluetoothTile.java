@@ -18,15 +18,14 @@ import de.robv.android.xposed.XSharedPreferences;
 
 public class BluetoothTile extends AospTile {
     public static final String AOSP_KEY = "bt";
-    public static final String KEY = "aosp_tile_bluetooth";
 
-    protected BluetoothTile(Object host, Object tile, XSharedPreferences prefs,
+    protected BluetoothTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, KEY, tile, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
     }
 
     @Override
-    public String getAospKey() {
-        return AOSP_KEY;
+    public String getSettingsKey() {
+        return "aosp_tile_bluetooth";
     }
 }

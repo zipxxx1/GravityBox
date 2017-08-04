@@ -42,6 +42,9 @@ import com.ceco.nougat.gravitybox.managers.SysUiManagers;
 import de.robv.android.xposed.XSharedPreferences;
 
 public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.Listener {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = LocationTileSlimkat.class.getSimpleName()+"$Service";
+    }
 
     private static final Intent LOCATION_SETTINGS_INTENT = 
             new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -53,18 +56,23 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
     };
 
     private int mLastActiveMode;
-    private Object mDetailAdapter;
+    private QsDetailAdapterProxy mDetailAdapter;
     private List<Integer> mLocationList = new ArrayList<Integer>();
     private boolean mQuickMode;
 
-    public LocationTileSlimkat(Object host, String key, XSharedPreferences prefs,
+    public LocationTileSlimkat(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mLastActiveMode = getLocationMode();
         if(mLastActiveMode == Settings.Secure.LOCATION_MODE_OFF) {
             mLastActiveMode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
         }
+    }
+
+    @Override
+    public String getSettingsKey() {
+        return "gb_tile_gps_slimkat";
     }
 
     @Override
@@ -102,7 +110,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             registerListener();
         } else {
             unregisterListener();
@@ -172,16 +180,16 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
         int locationMode = getLocationMode();
         switch (locationMode) {
             case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
-                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_location_on);
+                mState.icon = iconFromResId(R.drawable.ic_qs_location_on);
                 break;
             case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
-                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_location_battery_saving);
+                mState.icon = iconFromResId(R.drawable.ic_qs_location_battery_saving);
                 break;
             case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
-                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_location_on);
+                mState.icon = iconFromResId(R.drawable.ic_qs_location_on);
                 break;
             case Settings.Secure.LOCATION_MODE_OFF:
-                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_location_off);
+                mState.icon = iconFromResId(R.drawable.ic_qs_location_off);
                 mState.booleanValue = false;
                 break;
         }
@@ -219,7 +227,10 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
     @Override
     public void handleDestroy() {
-        mDetailAdapter = null;
+        if (mDetailAdapter != null) {
+            mDetailAdapter.destroy();
+            mDetailAdapter = null;
+        }
         mLocationList.clear();
         mLocationList = null;
         super.handleDestroy();
@@ -228,10 +239,10 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
     @Override
     public Object getDetailAdapter() {
         if (mDetailAdapter == null) {
-            mDetailAdapter = QsDetailAdapterProxy.createProxy(
+            mDetailAdapter = QsDetailAdapterProxy.create(
                     mContext.getClassLoader(), new LocationDetailAdapter(mContext));
         }
-        return mDetailAdapter;
+        return mDetailAdapter.getProxy();
     }
 
     private class AdvancedLocationAdapter extends ArrayAdapter<Integer> {

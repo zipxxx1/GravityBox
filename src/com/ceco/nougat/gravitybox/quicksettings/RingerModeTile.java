@@ -48,6 +48,10 @@ import android.widget.CheckedTextView;
 import android.widget.ListView;
 
 public class RingerModeTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = RingerModeTile.class.getSimpleName()+"$Service";
+    }
+
     public static final String SETTING_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
     public static final String SETTING_ZEN_MODE = "zen_mode";
     public static final int ZEN_MODE_OFF = 0;
@@ -88,12 +92,12 @@ public class RingerModeTile extends QsTile {
     private Vibrator mVibrator;
     private SettingsObserver mSettingsObserver;
     private List<Ringer> mModeList = new ArrayList<>();
-    private Object mDetailAdapter;
+    private QsDetailAdapterProxy mDetailAdapter;
     private boolean mQuickMode;
 
-    public RingerModeTile(Object host, String key, XSharedPreferences prefs,
+    public RingerModeTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mState.label = mGbContext.getString(R.string.qs_tile_ringer_mode);
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
@@ -102,13 +106,21 @@ public class RingerModeTile extends QsTile {
     }
 
     @Override
+    public String getSettingsKey() {
+        return "gb_tile_ringer_mode";
+    }
+
+    @Override
     public void handleDestroy() {
+        if (mDetailAdapter != null) {
+            mDetailAdapter.destroy();
+            mDetailAdapter = null;
+        }
         mSettingsObserver = null;
         mAudioManager = null;
         mVibrator = null;
         mModeList.clear();
         mModeList = null;
-        mDetailAdapter = null;
         super.handleDestroy();
     }
 
@@ -135,7 +147,7 @@ public class RingerModeTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         // The icon will change depending on index
-        mState.icon = mGbContext.getDrawable(RINGERS[mRingerIndex].mDrawable);
+        mState.icon = iconFromResId(RINGERS[mRingerIndex].mDrawable);
 
         super.handleUpdateState(state, arg);
     }
@@ -143,7 +155,7 @@ public class RingerModeTile extends QsTile {
     @Override
     public void setListening(boolean listening) {
         if (DEBUG) log(getKey() + ": setListening(" + listening + ")");
-        if (listening && mEnabled) {
+        if (listening) {
             registerReceiver();
             findCurrentState();
         } else {
@@ -356,10 +368,10 @@ public class RingerModeTile extends QsTile {
     @Override
     public Object getDetailAdapter() {
         if (mDetailAdapter == null) {
-            mDetailAdapter = QsDetailAdapterProxy.createProxy(
+            mDetailAdapter = QsDetailAdapterProxy.create(
                     mContext.getClassLoader(), new ModeDetailAdapter(mContext));
         }
-        return mDetailAdapter;
+        return mDetailAdapter.getProxy();
     }
 
     private class ModeAdapter extends ArrayAdapter<Ringer> {

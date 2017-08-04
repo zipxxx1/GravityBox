@@ -31,6 +31,10 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 
 public class BluetoothTetheringTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = BluetoothTetheringTile.class.getSimpleName()+"$Service";
+    }
+
     private static final int BT_PROFILE_PAN = 5;
     public static final String ACTION_TETHER_STATE_CHANGED = "android.net.conn.TETHER_STATE_CHANGED";
 
@@ -39,9 +43,9 @@ public class BluetoothTetheringTile extends QsTile {
     private boolean mBluetoothEnableForTether;
     private boolean mIsListening;
 
-    public BluetoothTetheringTile(Object host, String key, XSharedPreferences prefs,
+    public BluetoothTetheringTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mBluetoothPan = new AtomicReference<>();
     }
@@ -188,8 +192,13 @@ public class BluetoothTetheringTile extends QsTile {
     }
 
     @Override
+    public String getSettingsKey() {
+        return "gb_tile_bt_tethering";
+    }
+
+    @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             registerListeners();
         } else {
             unregisterListeners();
@@ -205,18 +214,18 @@ public class BluetoothTetheringTile extends QsTile {
         int btState = adapter == null ? BluetoothAdapter.ERROR : adapter.getState();
         if (isInErrorState(btState)) {
             mState.label = mGbContext.getString(R.string.qs_tile_bt_tethering_error);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_bt_tethering_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_bt_tethering_off);
         } else if (btState == BluetoothAdapter.STATE_TURNING_ON ||
                 btState == BluetoothAdapter.STATE_TURNING_OFF) {
             mState.label = "---";
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_bt_tethering_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_bt_tethering_off);
         } else if (btState == BluetoothAdapter.STATE_ON && isTetheringOn()) {
             mState.label = mGbContext.getString(R.string.qs_tile_bt_tethering_on);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_bt_tethering_on);
+            mState.icon = iconFromResId(R.drawable.ic_qs_bt_tethering_on);
             mState.booleanValue = true;
         } else {
             mState.label = mGbContext.getString(R.string.qs_tile_bt_tethering_off);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_bt_tethering_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_bt_tethering_off);
         }
 
         super.handleUpdateState(state, arg);
@@ -255,6 +264,8 @@ public class BluetoothTetheringTile extends QsTile {
     public void handleDestroy() {
         mTetherableBluetoothRegexs = null;
         mBluetoothPan = null;
+        mProfileServiceListener = null;
+        mBroadcastReceiver = null;
         super.handleDestroy();
     }
 }

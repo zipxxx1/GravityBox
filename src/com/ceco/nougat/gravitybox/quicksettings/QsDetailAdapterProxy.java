@@ -41,21 +41,31 @@ public class QsDetailAdapterProxy implements InvocationHandler {
         boolean getToggleEnabled();
     }
 
+    private Object mProxy;
     private Callback mCallback;
 
     private QsDetailAdapterProxy() { /* must be created via createProxy */ };
 
-    private QsDetailAdapterProxy(Callback cb) {
+    private QsDetailAdapterProxy(ClassLoader cl, Callback cb) {
         mCallback = cb;
+        mProxy = Proxy.newProxyInstance(cl,
+                new Class<?>[] { XposedHelpers.findClass(IFACE_DETAIL_ADAPTER, cl) },
+                this);
     }
 
-    public static Object createProxy(ClassLoader cl, Callback cb) {
-        if (cb == null)
-            throw new IllegalArgumentException("Callback cannot be null");
+    public static QsDetailAdapterProxy create(ClassLoader cl, Callback cb) {
+        if (cl == null) throw new IllegalArgumentException("Classloader cannot be null");
+        if (cb == null) throw new IllegalArgumentException("Callback cannot be null");
+        return new QsDetailAdapterProxy(cl, cb);
+    }
 
-        return Proxy.newProxyInstance(cl,
-                new Class<?>[] { XposedHelpers.findClass(IFACE_DETAIL_ADAPTER, cl) },
-                new QsDetailAdapterProxy(cb));
+    public Object getProxy() {
+        return mProxy;
+    }
+
+    public void destroy() {
+        mProxy = null;
+        mCallback = null;
     }
 
     @Override

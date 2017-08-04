@@ -30,7 +30,6 @@ import com.ceco.nougat.gravitybox.quicksettings.QsTileEventDistributor.QsEventLi
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -63,15 +62,12 @@ public abstract class BaseTile implements QsEventListener {
     protected XSharedPreferences mPrefs;
     protected Context mContext;
     protected Context mGbContext;
-    protected boolean mEnabled;
-    protected boolean mLocked;
-    protected boolean mLockedOnly;
-    protected boolean mSecured;
+    protected boolean mProtected;
     protected boolean mHideOnChange;
     protected float mScalingFactor = 1f;
     protected KeyguardStateMonitor mKgMonitor;
 
-    public BaseTile(Object host, String key, XSharedPreferences prefs,
+    public BaseTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         mHost = host;
         mKey = key;
@@ -84,25 +80,13 @@ public abstract class BaseTile implements QsEventListener {
 
         mEventDistributor.registerListener(this);
         initPreferences();
+        setTile(tile);
     }
 
     protected void initPreferences() {
-        List<String> enabledTiles = new ArrayList<String>(Arrays.asList(
-                mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ENABLED,
-                        TileOrderActivity.getDefaultTileList(mGbContext)).split(",")));
-        mEnabled = enabledTiles.contains(mKey);
-
-        List<String> lockedTiles = new ArrayList<String>(Arrays.asList(
-                mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_LOCKED, "").split(",")));
-        mLocked = lockedTiles.contains(mKey);
-
-        List<String> lockedOnlyTiles = new ArrayList<String>(Arrays.asList(
-                mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_LOCKED_ONLY, "").split(",")));
-        mLockedOnly = lockedOnlyTiles.contains(mKey);
-
         List<String> securedTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_SECURED, "").split(",")));
-        mSecured = securedTiles.contains(mKey);
+        mProtected = securedTiles.contains(mKey);
 
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
     }
@@ -119,6 +103,7 @@ public abstract class BaseTile implements QsEventListener {
         return false;
     }
 
+    public abstract String getSettingsKey();
     public abstract void handleUpdateState(Object state, Object arg);
 
     @Override
@@ -127,6 +112,13 @@ public abstract class BaseTile implements QsEventListener {
     @Override
     public String getKey() {
         return mKey;
+    }
+
+    public final void setTile(Object tile) {
+        mTile = tile;
+        if (mTile != null) {
+            XposedHelpers.setAdditionalInstanceField(mTile, BaseTile.TILE_KEY_NAME, mKey);
+        }
     }
 
     @Override
@@ -192,11 +184,6 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     @Override
-    public Drawable getResourceIconDrawable() {
-        return null;
-    }
-
-    @Override
     public void onBroadcastReceived(Context context, Intent intent) { 
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
@@ -208,7 +195,7 @@ public abstract class BaseTile implements QsEventListener {
 
     @Override
     public void onKeyguardStateChanged() {
-        if (mLocked || mLockedOnly || mSecured) {
+        if (mProtected) {
             refreshState();
         }
     }

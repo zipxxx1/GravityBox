@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -29,14 +29,18 @@ import android.os.Handler;
 import android.provider.Settings;
 
 public class SyncTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = SyncTile.class.getSimpleName()+"$Service";
+    }
+
     private Handler mHandler;
     private GravityBoxResultReceiver mReceiver;
     private boolean mSyncState;
     private Object mSyncHandle;
 
-    public SyncTile(Object host, String key, XSharedPreferences prefs,
+    public SyncTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mHandler = new Handler();
         mReceiver = new GravityBoxResultReceiver(mHandler);
@@ -56,8 +60,13 @@ public class SyncTile extends QsTile {
     }
 
     @Override
+    public String getSettingsKey() {
+        return "gb_tile_sync";
+    }
+
+    @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             mSyncHandle = ContentResolver.addStatusChangeListener(
                 ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS, mSyncObserver);
             getSyncState();
@@ -87,10 +96,10 @@ public class SyncTile extends QsTile {
     public void handleUpdateState(Object state, Object arg) {
         mState.booleanValue = mSyncState;
         if (mSyncState) {
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_sync_on);
+            mState.icon = iconFromResId(R.drawable.ic_qs_sync_on);
             mState.label = mGbContext.getString(R.string.quick_settings_sync_on);
         } else {
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_sync_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_sync_off);
             mState.label = mGbContext.getString(R.string.quick_settings_sync_off);
         }
 

@@ -41,6 +41,9 @@ import android.widget.CheckedTextView;
 import android.widget.ListView;
 
 public class NetworkModeTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = NetworkModeTile.class.getSimpleName()+"$Service";
+    }
 
     private static class NetworkMode {
         int value;
@@ -85,14 +88,19 @@ public class NetworkModeTile extends QsTile {
     private int mSimSlot = 0;
     private boolean mIsReceiving;
     private List<NetworkMode> mModeList = new ArrayList<>();
-    private Object mDetailAdapter;
+    private QsDetailAdapterProxy mDetailAdapter;
     private boolean mQuickMode;
 
-    public NetworkModeTile(Object host, String key, XSharedPreferences prefs,
+    public NetworkModeTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mIsMsim = PhoneWrapper.hasMsimSupport();
+    }
+
+    @Override
+    public String getSettingsKey() {
+        return "gb_tile_network_mode";
     }
 
     @Override
@@ -196,7 +204,7 @@ public class NetworkModeTile extends QsTile {
     @Override
     public void setListening(boolean listening) {
         if (DEBUG) log(getKey() + ": setListening(" + listening + ")");
-        if (listening && mEnabled) {
+        if (listening) {
             if (mIsReceiving)
                 return;
             if (DEBUG) log(getKey() + ": mNetworkType=" + mNetworkType + "; DefaultNetworkType=" + 
@@ -216,10 +224,10 @@ public class NetworkModeTile extends QsTile {
         NetworkMode nm = findNetworkMode(mNetworkType);
         if (nm != null) {
             mState.label = stripLabel(mGbContext.getString(nm.labelRes));
-            mState.icon = mGbContext.getDrawable(nm.iconRes);
+            mState.icon = iconFromResId(nm.iconRes);
         } else {
             mState.label = mGbContext.getString(R.string.network_mode_unknown);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_unexpected_network);
+            mState.icon = iconFromResId(R.drawable.ic_qs_unexpected_network);
         }
 
         if (mIsMsim) {
@@ -292,19 +300,22 @@ public class NetworkModeTile extends QsTile {
 
     @Override
     public void handleDestroy() {
-        super.handleDestroy();
+        if (mDetailAdapter != null) {
+            mDetailAdapter.destroy();
+            mDetailAdapter = null;
+        }
         mModeList.clear();
         mModeList = null;
-        mDetailAdapter = null;
+        super.handleDestroy();
     }
 
     @Override
     public Object getDetailAdapter() {
         if (mDetailAdapter == null) {
-            mDetailAdapter = QsDetailAdapterProxy.createProxy(
+            mDetailAdapter = QsDetailAdapterProxy.create(
                     mContext.getClassLoader(), new ModeDetailAdapter(mContext));
         }
-        return mDetailAdapter;
+        return mDetailAdapter.getProxy();
     }
 
     private class ModeAdapter extends ArrayAdapter<NetworkMode> {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -29,6 +29,10 @@ import android.os.Bundle;
 import android.os.Handler;
 
 public class TorchTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = TorchTile.class.getSimpleName()+"$Service";
+    }
+
     private int mTorchStatus = TorchService.TORCH_STATUS_OFF;
     private boolean mIsReceiving;
     private GravityBoxResultReceiver mReceiver;
@@ -45,9 +49,9 @@ public class TorchTile extends QsTile {
         }
     };
 
-    public TorchTile(Object host, String key, XSharedPreferences prefs,
+    public TorchTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mReceiver = new GravityBoxResultReceiver(new Handler());
         mReceiver.setReceiver(new Receiver() {
@@ -82,8 +86,13 @@ public class TorchTile extends QsTile {
     }
 
     @Override
+    public String getSettingsKey() {
+        return "gb_tile_torch";
+    }
+
+    @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             registerReceiver();
             getTorchState();
         } else {
@@ -109,10 +118,10 @@ public class TorchTile extends QsTile {
     public void handleUpdateState(Object state, Object arg) {
         mState.booleanValue = mTorchStatus == TorchService.TORCH_STATUS_ON;
         if (mTorchStatus == TorchService.TORCH_STATUS_ON) {
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_torch_on);
+            mState.icon = iconFromResId(R.drawable.ic_qs_torch_on);
             mState.label = mGbContext.getString(R.string.quick_settings_torch_on);
         } else {
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_torch_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_torch_off);
             mState.label = mGbContext.getString(R.string.quick_settings_torch_off);
         }
 
@@ -129,5 +138,6 @@ public class TorchTile extends QsTile {
     public void handleDestroy() {
         super.handleDestroy();
         mReceiver = null;
+        mBroadcastReceiver = null;
     }
 }

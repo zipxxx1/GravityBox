@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -67,14 +67,14 @@ public class DoNotDisturbTile extends AospTile {
     private int mDuration;
     private boolean mClickOverrideBlocked;
 
-    protected DoNotDisturbTile(Object host, Object tile, XSharedPreferences prefs,
+    protected DoNotDisturbTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, "aosp_tile_dnd", tile, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
     }
 
     @Override
-    public String getAospKey() {
-        return AOSP_KEY;
+    public String getSettingsKey() {
+        return null;
     }
 
     @Override

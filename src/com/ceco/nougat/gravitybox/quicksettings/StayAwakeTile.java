@@ -45,6 +45,10 @@ import android.widget.CheckedTextView;
 import android.widget.ListView;
 
 public class StayAwakeTile extends QsTile {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = StayAwakeTile.class.getSimpleName()+"$Service";
+    }
+
     private static final int NEVER_SLEEP = Integer.MAX_VALUE;
     private static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
 
@@ -64,7 +68,7 @@ public class StayAwakeTile extends QsTile {
     private int mPreviousTimeout;
     private int mDefaultTimeout;
     private List<ScreenTimeout> mModeList = new ArrayList<>();
-    private Object mDetailAdapter;
+    private QsDetailAdapterProxy mDetailAdapter;
     private boolean mQuickMode;
     private boolean mAutoReset;
 
@@ -80,11 +84,11 @@ public class StayAwakeTile extends QsTile {
         }
     }
 
-    public StayAwakeTile(Object host, String key, XSharedPreferences prefs,
+    public StayAwakeTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
-        mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_stayawake_on);
+        mState.icon = iconFromResId(R.drawable.ic_qs_stayawake_on);
         mSettingsObserver = new SettingsObserver(new Handler());
 
         getCurrentState();
@@ -99,8 +103,13 @@ public class StayAwakeTile extends QsTile {
     }
 
     @Override
+    public String getSettingsKey() {
+        return "gb_tile_stay_awake";
+    }
+
+    @Override
     public void setListening(boolean listening) {
-        if (listening && mEnabled) {
+        if (listening) {
             final int prevTimeout = mCurrentTimeout;
             getCurrentState();
             // this means user most likely changed screen timeout in Android Display settings
@@ -256,11 +265,14 @@ public class StayAwakeTile extends QsTile {
 
     @Override
     public void handleDestroy() {
-        super.handleDestroy();
+        if (mDetailAdapter != null) {
+            mDetailAdapter.destroy();
+            mDetailAdapter = null;
+        }
         mSettingsObserver = null;
         mModeList.clear();
         mModeList = null;
-        mDetailAdapter = null;
+        super.handleDestroy();
     }
 
     class SettingsObserver extends ContentObserver {
@@ -290,10 +302,10 @@ public class StayAwakeTile extends QsTile {
     @Override
     public Object getDetailAdapter() {
         if (mDetailAdapter == null) {
-            mDetailAdapter = QsDetailAdapterProxy.createProxy(
+            mDetailAdapter = QsDetailAdapterProxy.create(
                     mContext.getClassLoader(), new ModeDetailAdapter(mContext));
         }
-        return mDetailAdapter;
+        return mDetailAdapter.getProxy();
     }
 
     private class ModeAdapter extends ArrayAdapter<ScreenTimeout> {

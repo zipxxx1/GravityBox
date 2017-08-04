@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The CyanogenMod Project
+ * Copyright (C) 2017 The CyanogenMod Project
  * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,10 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 public class CompassTile extends QsTile implements SensorEventListener {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = CompassTile.class.getSimpleName()+"$Service";
+    }
+
     private final static float ALPHA = 0.97f;
 
     private boolean mActive = false;
@@ -48,9 +52,9 @@ public class CompassTile extends QsTile implements SensorEventListener {
     private int mCount;
     private boolean mUpdatePending;
 
-    public CompassTile(Object host, String key, XSharedPreferences prefs,
+    public CompassTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         mAccelerationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -59,14 +63,21 @@ public class CompassTile extends QsTile implements SensorEventListener {
     }
 
     @Override
+    public String getSettingsKey() {
+        return "gb_tile_compass";
+    }
+
+    @Override
     public void handleDestroy() {
-        super.handleDestroy();
         setListeningSensors(false);
         mSensorManager = null;
         mAccelerationSensor = null;
         mGeomagneticFieldSensor = null;
         mWindowManager = null;
         mImage = null;
+        mAcceleration = null;
+        mGeomagnetic = null;
+        super.handleDestroy();
     }
 
     @Override
@@ -107,7 +118,7 @@ public class CompassTile extends QsTile implements SensorEventListener {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         if (mActive) {
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_compass_on);
+            mState.icon = iconFromResId(R.drawable.ic_qs_compass_on);
             if (mNewDegree != null) {
                 mState.label = formatValueWithCardinalDirection(mNewDegree);
 
@@ -121,7 +132,7 @@ public class CompassTile extends QsTile implements SensorEventListener {
                 mImage.setRotation(0);
             }
         } else {
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_compass_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_compass_off);
             mState.label = mGbContext.getString(R.string.quick_settings_compass_off);
             mImage.setRotation(0);
         }

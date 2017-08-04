@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,19 +27,27 @@ import de.robv.android.xposed.XSharedPreferences;
 import android.content.Intent;
 
 public class QuietHoursTile extends QsTile implements QuietHoursListener {
+    public static final class Service extends QsTileServiceBase {
+        static final String KEY = QuietHoursTile.class.getSimpleName()+"$Service";
+    }
 
     private QuietHours mQh;
 
-    public QuietHoursTile(Object host, String key, XSharedPreferences prefs,
+    public QuietHoursTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, key, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
+    }
+
+    @Override
+    public String getSettingsKey() {
+        return "gb_tile_quiet_hours";
     }
 
     @Override
     public void setListening(boolean listening) {
         if (listening) {
             mQh = SysUiManagers.QuietHoursManager.getQuietHours();
-            if (mEnabled && shouldShow()) {
+            if (shouldShow()) {
                 SysUiManagers.QuietHoursManager.registerListener(this);
                 if (DEBUG) log(getKey() + ": QuietHours listener registered");
             }
@@ -96,24 +104,24 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
                 case ON: 
                     mState.booleanValue = true;
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_on);
-                    mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_on);
+                    mState.icon = iconFromResId(R.drawable.ic_qs_quiet_hours_on);
                     break;
                 case OFF:
                     mState.booleanValue = false;
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_off);
-                    mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_off);
+                    mState.icon = iconFromResId(R.drawable.ic_qs_quiet_hours_off);
                     break;
                 case WEAR:
                     mState.booleanValue = true;
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_wear);
-                    mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_wear);
+                    mState.icon = iconFromResId(R.drawable.ic_qs_quiet_hours_wear);
                     break;
                 case AUTO:
                     mState.booleanValue = mQh.quietHoursActive();
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_auto);
                     mState.icon = mState.booleanValue ?
-                            mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_on) : 
-                                mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_off);
+                            iconFromResId(R.drawable.ic_qs_quiet_hours_auto_on) : 
+                                iconFromResId(R.drawable.ic_qs_quiet_hours_auto_off);
                     break;
             }
         }
