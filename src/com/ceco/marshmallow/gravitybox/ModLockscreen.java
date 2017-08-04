@@ -857,7 +857,7 @@ public class ModLockscreen {
         if (action == null || action.isEmpty()) {
             mLeftAction = null;
         } else if (SysUiManagers.AppLauncher != null &&
-                (mLeftAction == null || !mLeftAction.getValue().equals(action))) {
+                (mLeftAction == null || !action.equals(mLeftAction.getValue()))) {
             mLeftAction = SysUiManagers.AppLauncher.createAppInfo();
             mLeftAction.setSizeDp(32);
             mLeftAction.initAppInfo(action);
@@ -873,7 +873,7 @@ public class ModLockscreen {
         if (action == null || action.isEmpty()) {
             mRightAction = null;
         } else if (SysUiManagers.AppLauncher != null &&
-                (mRightAction == null || !mRightAction.getValue().equals(action))) {
+                (mRightAction == null || !action.equals(mRightAction.getValue()))) {
             mRightAction = SysUiManagers.AppLauncher.createAppInfo();
             mRightAction.setSizeDp(32);
             mRightAction.initAppInfo(action);
