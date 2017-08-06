@@ -404,6 +404,7 @@ public class RingerModeTile extends QsTile {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Ringer r = (Ringer) parent.getItemAtPosition(position);
             setRingerMode(r.mRingerMode, r.mVibrateWhenRinging);
+            showDetail(false);
         }
 
         @Override
