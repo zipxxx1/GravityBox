@@ -273,6 +273,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             setLocationMode((Integer) parent.getItemAtPosition(position));
+            showDetail(false);
         }
 
         @Override
@@ -293,16 +294,14 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
         @Override
         public View createDetailView(Context context, View convertView, ViewGroup parent) throws Throwable {
-            if (mDetails == null) {
-                mDetails = QsDetailItemsList.create(context, parent);
-                mDetails.setEmptyState(R.drawable.ic_qs_location_off,
-                        GpsStatusMonitor.getModeLabel(mContext, Settings.Secure.LOCATION_MODE_OFF));
-                mDetails.setAdapter(mAdapter);
-    
-                final ListView list = mDetails.getListView();
-                list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-                list.setOnItemClickListener(this);
-            }
+            mDetails = QsDetailItemsList.create(context, parent);
+            mDetails.setEmptyState(R.drawable.ic_qs_location_off,
+                    GpsStatusMonitor.getModeLabel(mContext, Settings.Secure.LOCATION_MODE_OFF));
+            mDetails.setAdapter(mAdapter);
+
+            final ListView list = mDetails.getListView();
+            list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+            list.setOnItemClickListener(this);
 
             rebuildLocationList(isLocationEnabled());
             return mDetails.getView();
@@ -316,11 +315,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
         @Override
         public void setToggleState(boolean state) {
             setLocationEnabled(state);
-            rebuildLocationList(state);
-            fireToggleStateChanged(state);
-            if (!state) {
-                showDetail(false);
-            }
+            showDetail(false);
         }
 
         private void rebuildLocationList(boolean populate) {
