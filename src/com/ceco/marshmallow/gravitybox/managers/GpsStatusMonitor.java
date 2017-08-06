@@ -82,6 +82,13 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
 
         mContext = context;
         mLocMan = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+
+        mLocationMode = getLocationModeFromSettings();
+        mGpsEnabled = (mLocationMode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY ||
+                mLocationMode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY);
+        if (mGpsEnabled) {
+            startGpsStatusTracking();
+        }
     }
 
     @Override
