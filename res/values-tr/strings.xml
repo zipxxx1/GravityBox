@@ -1014,14 +1014,9 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_lockscreen_smart_unlock_summary">Geçerli akıllı kilit ilkesi güvenilir koşulları algılandığında otomatik olarak kilit açılır</string>
     <string name="wifi_trusted_info">Akıllı Kilit için Güvenilir</string>
     <string name="pref_cat_qs_battery_tile_title">Pil karesi ayarları</string>
-    <string name="pref_battery_tile_percentage_title">Yüzdeyi göster</string>
-    <string name="pref_battery_tile_saver_indicate_title">Pil tasarrufu göstergesi</string>
-    <string name="pref_battery_tile_saver_indicate_summary">Pil tasarrufu modunun etkin olduğunu göstermek için sistem çubuklarıyla aynı renk kullanılır</string>
     <string name="pref_battery_tile_temp_unit_title">Sıcaklık birimi</string>
     <string name="celsius">Santigrat</string>
     <string name="fahrenheit">Fahrenhayt</string>
-    <string name="pref_battery_tile_swap_actions_title">Hareketleri değiştir</string>
-    <string name="pref_battery_tile_swap_actions_summary">Tek ve uzun basma hareketlerini değiştirir</string>
     <string name="pref_battery_saver_indication_disable_title">Pil tasarrufu göstergesini devre dışı bırak</string>
     <string name="pref_battery_saver_indication_disable_summary">Pil tasarrufu etkin olduğunda sistem çubuklarının turuncu rengini devre dışı bırakır</string>
     <string name="pref_signal_cluster_dem_title">Ünlem işaretlerini devre dışı bırak</string>

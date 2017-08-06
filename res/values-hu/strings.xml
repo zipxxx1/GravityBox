@@ -1612,14 +1612,9 @@
 
     <!-- QS: Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_title">Akkumulátor csempe beállítások</string>
-    <string name="pref_battery_tile_percentage_title">Százalék kijelzése</string>
-    <string name="pref_battery_tile_saver_indicate_title">Akkukímélés kijelzés</string>
-    <string name="pref_battery_tile_saver_indicate_summary">A rendszer sávok színének használata az akkukímélő üzemmód aktív állapotának a kijelzéséhez</string>
     <string name="pref_battery_tile_temp_unit_title">Hőmérséklet mértékegysége</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
-    <string name="pref_battery_tile_swap_actions_title">Műveletek felcserélése</string>
-    <string name="pref_battery_tile_swap_actions_summary">Felcseréli az egyszeri érintés/hosszú érintés műveleteit</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Akkukímélés kijelzés letiltása</string>

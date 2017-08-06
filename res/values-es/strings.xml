@@ -1635,15 +1635,8 @@
 
     <!-- QS: Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_title">Celda de batería</string>
-    <string name="pref_battery_tile_percentage_title">Mostrar porcentaje</string>
-    <string name="pref_battery_tile_saver_indicate_title">Indicación de ahorro de batería</string>
-    <string name="pref_battery_tile_saver_indicate_summary">Utiliza el mismo color que las barras del sistema
-         para indicar que la batería de ahorro de modo está activo</string>
     <string name="pref_battery_tile_temp_unit_title">Unidad de temperatura</string>
     <string name="celsius">Grados</string>
-
-    <string name="pref_battery_tile_swap_actions_title">Acciones swap</string>
-    <string name="pref_battery_tile_swap_actions_summary">Acciones swap en simple/larga pulsación</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Desactivar indicación de ahorro de batería</string>

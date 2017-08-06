@@ -1642,15 +1642,9 @@
 
     <!-- QS: Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_title">电池瓷砖设置</string>
-    <string name="pref_battery_tile_percentage_title">显示比例</string>
-    <string name="pref_battery_tile_saver_indicate_title">省电指示器</string>
-    <string name="pref_battery_tile_saver_indicate_summary">使用相同的系统栏颜色
-        以表示省电模式已激活</string>
     <string name="pref_battery_tile_temp_unit_title">温度单位</string>
     <string name="celsius">摄氏</string>
     <string name="fahrenheit">华氏</string>
-    <string name="pref_battery_tile_swap_actions_title">交换动作</string>
-    <string name="pref_battery_tile_swap_actions_summary">交换单击/长按操作</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">禁用省电指示器</string>

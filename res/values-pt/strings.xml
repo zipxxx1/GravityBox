@@ -1597,15 +1597,9 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
 
     <!-- QS: Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_title">Configs. bloco de bateria</string>
-    <string name="pref_battery_tile_percentage_title">Exibir porcentagem</string>
-    <string name="pref_battery_tile_saver_indicate_title">Indicador de economia de bateria</string>
-    <string name="pref_battery_tile_saver_indicate_summary">Usa a mesma cor que as barras de sistema para indicar
-    que o modo de economia de bateria está ativo</string>
     <string name="pref_battery_tile_temp_unit_title">Unidade de temperatura</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
-    <string name="pref_battery_tile_swap_actions_title">Inverter ações</string>
-    <string name="pref_battery_tile_swap_actions_summary">Inverte as acçoes de toque simples / toque longo</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Desativar indicação de economia de bateria</string>

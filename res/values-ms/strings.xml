@@ -1637,15 +1637,9 @@
 
     <!-- QS: Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_title">Tetapan tile bateri</string>
-    <string name="pref_battery_tile_percentage_title">Tunjukkan peratusan</string>
-    <string name="pref_battery_tile_saver_indicate_title">Penunjuk penjimat bateri</string>
-    <string name="pref_battery_tile_saver_indicate_summary">Gunakan kamus asal
-        untuk menujukkan penjimat bateri aktif</string>
     <string name="pref_battery_tile_temp_unit_title">Unit suhu</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
-    <string name="pref_battery_tile_swap_actions_title">Aksi tukar</string>
-    <string name="pref_battery_tile_swap_actions_summary">Tukar sekali tekan/tekan lama</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Matikan penunjuk penjimat bateri</string>

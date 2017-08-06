@@ -284,11 +284,6 @@
                     android:title="@string/pref_cat_qs_battery_tile_title">
 
                     <CheckBoxPreference 
-                        android:key="pref_battery_tile_percentage"
-                        android:title="@string/pref_battery_tile_percentage_title"
-                        android:defaultValue="false" />
-
-                    <CheckBoxPreference 
                         android:key="pref_battery_tile_temp"
                         android:title="@string/pref_battery_tile_temp_title"
                         android:defaultValue="true" />
@@ -305,18 +300,6 @@
                         android:key="pref_battery_tile_voltage"
                         android:title="@string/pref_battery_tile_voltage_title"
                         android:defaultValue="true" />
-
-                    <CheckBoxPreference 
-                        android:key="pref_battery_tile_saver_indicate"
-                        android:title="@string/pref_battery_tile_saver_indicate_title"
-                        android:summary="@string/pref_battery_tile_saver_indicate_summary"
-                        android:defaultValue="false" />
-
-                    <CheckBoxPreference 
-                        android:key="pref_battery_tile_swap_actions"
-                        android:title="@string/pref_battery_tile_swap_actions_title"
-                        android:summary="@string/pref_battery_tile_swap_actions_summary"
-                        android:defaultValue="false" />
 
                 </PreferenceScreen>
 

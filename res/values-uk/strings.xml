@@ -1640,15 +1640,9 @@
 
     <!-- QS: Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_title">Плитка батареї</string>
-    <string name="pref_battery_tile_percentage_title">Показувати відсотки</string>
-    <string name="pref_battery_tile_saver_indicate_title">Індикація Енергозбереження</string>
-    <string name="pref_battery_tile_saver_indicate_summary">Використовуються кольори системних смуг для індикації активності режиму енергозбереження</string>
-
     <string name="pref_battery_tile_temp_unit_title">Одиниці температури</string>
     <string name="celsius">Цельсій</string>
     <string name="fahrenheit">Фаренгейт</string>
-    <string name="pref_battery_tile_swap_actions_title">Зміна дій</string>
-    <string name="pref_battery_tile_swap_actions_summary">Зміна дій на дотик/утримання</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Вимкнути індикацію енергозбереження</string>

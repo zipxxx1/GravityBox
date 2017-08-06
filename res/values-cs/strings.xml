@@ -1607,15 +1607,9 @@
 
     <!-- QS: Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_title">Nastavení dlaždice baterie</string>
-    <string name="pref_battery_tile_percentage_title">Zobrazit procenta</string>
-    <string name="pref_battery_tile_saver_indicate_title">Indikace úsporného režimu</string>
-    <string name="pref_battery_tile_saver_indicate_summary">Pro indikaci úsporného režimu bude použita
-        barva, jakou jsou vybarvené systémové lišty (standardně oranžová)</string>
     <string name="pref_battery_tile_temp_unit_title">Jednotka teploty</string>
     <string name="celsius">Celzius</string>
     <string name="fahrenheit">Fahrenheit</string>
-    <string name="pref_battery_tile_swap_actions_title">Přehodit akce</string>
-    <string name="pref_battery_tile_swap_actions_summary">Přehodí akce na stisk a dlouhé podržení</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Vypnout indikaci úsporného režimu</string>

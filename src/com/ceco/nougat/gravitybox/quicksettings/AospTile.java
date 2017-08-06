@@ -27,6 +27,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
 
     protected Unhook mHandleUpdateStateHook;
     protected Unhook mHandleClickHook;
+    protected Unhook mSetListeningHook;
 
     public static AospTile create(Object host, Object tile, String aospKey, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -43,6 +44,8 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new LocationTile(host, aospKey, tile, prefs, eventDistributor);
         else if (DoNotDisturbTile.AOSP_KEY.equals(aospKey))
             return new DoNotDisturbTile(host, aospKey, tile, prefs, eventDistributor);
+        else if (BatteryTile.AOSP_KEY.equals(aospKey))
+            return new BatteryTile(host, aospKey, tile, prefs, eventDistributor);
         // Default wrapper for all other stock tiles we do not modify
         else
             return new AospTileDefault(host, aospKey, tile, prefs, eventDistributor);
@@ -111,6 +114,17 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
                     }
                 }
             });
+
+            mSetListeningHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), cl,
+                    "setListening", boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mKey.equals(XposedHelpers.getAdditionalInstanceField(
+                            param.thisObject, BaseTile.TILE_KEY_NAME))) {
+                        setListening((boolean)param.args[0]);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -124,6 +138,10 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
         if (mHandleClickHook != null) {
             mHandleClickHook.unhook();
             mHandleClickHook = null;
+        }
+        if (mSetListeningHook != null) {
+            mSetListeningHook.unhook();
+            mSetListeningHook = null;
         }
     }
 }

@@ -1620,15 +1620,9 @@
 
     <!-- QS: Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_title">Batterie Kachel</string>
-    <string name="pref_battery_tile_percentage_title">Prozent anzeigen</string>
-    <string name="pref_battery_tile_saver_indicate_title">Batteriesparanzeige</string>
-    <string name="pref_battery_tile_saver_indicate_summary">Verwende die Farbe der Systemleisten
-        um anzuzeigen wenn der Batteriesparmodus aktiv ist</string>
     <string name="pref_battery_tile_temp_unit_title">Temperatureinheit</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
-    <string name="pref_battery_tile_swap_actions_title">Aktionen vertauschen</string>
-    <string name="pref_battery_tile_swap_actions_summary">Tippen/Lang-drücken vertauschen</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Deaktiviere die Batteriesparanzeige</string>

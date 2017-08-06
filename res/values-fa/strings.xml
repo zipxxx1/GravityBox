@@ -1013,14 +1013,9 @@
 <string name="pref_lockscreen_smart_unlock_summary">قفل گشایی بصورت خودکار زمانیکه قفل‌گشای هوشمند ،دستگاه مورد اعتماد متصلی را شناسایی کرد</string>
 <string name="wifi_trusted_info">مورد اعتماد برای قفل هوشمند</string>
 <string name="pref_cat_qs_battery_tile_title">تنظیمات کاشی باطری</string>
-<string name="pref_battery_tile_percentage_title">نمایش درصد</string>
-<string name="pref_battery_tile_saver_indicate_title">نشانگر ذخیره‌سازی نیروی باطری</string>
-<string name="pref_battery_tile_saver_indicate_summary">استفاده از همان رنگ نوار سیستم برای نشانگر باطری زمان فعال بودن ذخیره نیرو</string>
 <string name="pref_battery_tile_temp_unit_title">واحد دما</string>
 <string name="celsius">سلسیوس</string>
 <string name="fahrenheit">فارنهایت</string>
-<string name="pref_battery_tile_swap_actions_title">تعویض عمل</string>
-<string name="pref_battery_tile_swap_actions_summary">تعویض تک لمس با لمس طولانی</string>
 <string name="pref_battery_saver_indication_disable_title">غیرفعالسازی نشانگر ذخیره نیرو</string>
 <string name="pref_battery_saver_indication_disable_summary">غیرفعالسازی رنگ نارنجی برای نوار سیستم هنگام فعال بودن ذخیره نیرو</string>
 <string name="pref_signal_cluster_dem_title">غیرفعالسازی علامت تعجب</string>

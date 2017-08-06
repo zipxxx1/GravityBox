@@ -1634,15 +1634,9 @@
 
     <!-- QS: Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_title">Cài đặt tile Pin</string>
-    <string name="pref_battery_tile_percentage_title">Hiện phần trăm</string>
-    <string name="pref_battery_tile_saver_indicate_title">Chỉ thị tiết kiệm pin</string>
-    <string name="pref_battery_tile_saver_indicate_summary">Dùng màu giống như thanh hệ thống 
-        để chỉ thị rằng chế độ tiết kiệm pin đang được bật</string>
     <string name="pref_battery_tile_temp_unit_title">Đơn vị nhiệt độ</string>
     <string name="celsius">Độ C</string>
     <string name="fahrenheit">Độ F</string>
-    <string name="pref_battery_tile_swap_actions_title">Hoán đổi hành động</string>
-    <string name="pref_battery_tile_swap_actions_summary">Hoán đổi hành động chạm/giữ</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Tắt chỉ thị tiết kiệm pin</string>
