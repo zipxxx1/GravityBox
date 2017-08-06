@@ -19,55 +19,76 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.SettingsManager;
-import com.ceco.nougat.gravitybox.TouchInterceptor;
 import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.WorldReadablePrefs;
-import com.ceco.nougat.gravitybox.WorldReadablePrefs.OnPreferencesCommitedListener;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings;
+import com.ceco.nougat.gravitybox.ledcontrol.QuietHoursActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.PopupMenu;
-import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 
 public class TileOrderActivity extends ListActivity implements View.OnClickListener {
-    private static final String PREF_KEY_TILE_ORDER = "pref_qs_tile_order3";
     public static final String PREF_KEY_TILE_ENABLED = "pref_qs_tile_enabled";
-    public static final String PREF_KEY_TILE_LOCKED = "pref_qs_tile_locked";
-    public static final String PREF_KEY_TILE_LOCKED_ONLY = "pref_qs_tile_locked_only";
     public static final String PREF_KEY_TILE_SECURED = "pref_qs_tile_secured";
-    public static final String EXTRA_QS_ORDER_CHANGED = "qsTileOrderChanged";
-    public static final String EXTRA_HAS_MSIM_SUPPORT = "qsHasMsimSupport";
-    public static final String EXTRA_IS_OOS_35_ROM = "qsIsOxygenOs35Rom";
+    public static final String EXTRA_TILE_SECURED_LIST = "tileSecuredList";
 
-    private ListView mTileList;
+    @SuppressWarnings("serial")
+    private static Map<String, Class<?>> SERVICES = new HashMap<String, Class<?>>() {{
+        put("gb_tile_nfc", NfcTile.Service.class);
+        put("gb_tile_gps_slimkat", LocationTileSlimkat.Service.class);
+        put("gb_tile_gps_alt", GpsTile.Service.class);
+        put("gb_tile_ringer_mode", RingerModeTile.Service.class);
+        put("gb_tile_volume", VolumeTile.Service.class);
+        put("gb_tile_network_mode", NetworkModeTile.Service.class);
+        put("gb_tile_smart_radio", SmartRadioTile.Service.class);
+        put("gb_tile_sync", SyncTile.Service.class);
+        put("gb_tile_torch", TorchTile.Service.class);
+        put("gb_tile_sleep", SleepTile.Service.class);
+        put("gb_tile_stay_awake", StayAwakeTile.Service.class);
+        put("gb_tile_quickrecord", QuickRecordTile.Service.class);
+        put("gb_tile_quickapp", QuickAppTile.Service1.class);
+        put("gb_tile_quickapp2", QuickAppTile.Service2.class);
+        put("gb_tile_quickapp3", QuickAppTile.Service3.class);
+        put("gb_tile_quickapp4", QuickAppTile.Service4.class);
+        put("gb_tile_expanded_desktop", ExpandedDesktopTile.Service.class);
+        put("gb_tile_screenshot", ScreenshotTile.Service.class);
+        put("gb_tile_gravitybox", GravityBoxTile.Service.class);
+        put("gb_tile_usb_tether", UsbTetherTile.Service.class);
+        put("gb_tile_lock_screen", LockScreenTile.Service.class);
+        put("gb_tile_quiet_hours", QuietHoursTile.Service.class);
+        put("gb_tile_compass", CompassTile.Service.class);
+        put("gb_tile_bt_tethering", BluetoothTetheringTile.Service.class);
+    }};
+
+    private ListView mTileListView;
     private TileAdapter mTileAdapter;
     private Context mContext;
     private Resources mResources;
     private WorldReadablePrefs mPrefs;
-    private Map<String, String> mTileTexts;
-    private List<TileInfo> mOrderedTileList;
+    private Map<String, String> mTileSpecs;
+    private Map<String, TileInfo> mTileList;
     private Button mBtnSave;
     private Button mBtnCancel;
 
@@ -75,48 +96,8 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         String key;
         String name;
         boolean enabled;
-        boolean locked;
-        boolean lockedOnly;
         boolean secured;
-        void showMenu(final ListView listView, final View anchorView) {
-            final PopupMenu menu = new PopupMenu(listView.getContext(), anchorView);
-            menu.inflate(R.menu.tile_menu);
-            menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    switch(item.getItemId()) {
-                        case R.id.tile_locked:
-                            locked = !locked;
-                            if (locked) {
-                                secured = true;
-                                lockedOnly = false;
-                            }
-                            break;
-                        case R.id.tile_locked_only:
-                            lockedOnly = !lockedOnly;
-                            break;
-                        case R.id.tile_secured:
-                            secured = !secured;
-                            break;
-                    }
-                    updateMenu(menu.getMenu());
-                    listView.invalidateViews();
-                    return true;
-                }
-            });
-            updateMenu(menu.getMenu());
-            menu.show();
-        }
-        private void updateMenu(Menu menu) {
-            MenuItem miLocked = menu.findItem(R.id.tile_locked);
-            MenuItem miLockedOnly = menu.findItem(R.id.tile_locked_only);
-            MenuItem miSecured = menu.findItem(R.id.tile_secured);
-            miLocked.setChecked(!locked);
-            miLockedOnly.setChecked(lockedOnly);
-            miLockedOnly.setEnabled(!locked);
-            miSecured.setChecked(!secured && !"gb_tile_lock_screen".equals(key));
-            miSecured.setEnabled(!locked && !"gb_tile_lock_screen".equals(key));
-        }
+        boolean isStock() { return key.startsWith("aosp_tile_"); }
     }
 
     @Override
@@ -138,141 +119,92 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         mBtnCancel = (Button) findViewById(R.id.btnCancel);
         mBtnCancel.setOnClickListener(this);
 
-        mTileList = getListView();
-        ((TouchInterceptor) mTileList).setDropListener(mDropListener);
-        mTileAdapter = new TileAdapter(mContext);
-
         String[] allTileKeys = mResources.getStringArray(R.array.qs_tile_values);
         String[] allTileNames = mResources.getStringArray(R.array.qs_tile_entries);
-        mTileTexts = new HashMap<String, String>();
+        mTileSpecs = new LinkedHashMap<String, String>();
         for (int i = 0; i < allTileKeys.length; i++) {
-            mTileTexts.put(allTileKeys[i], allTileNames[i]);
+            mTileSpecs.put(allTileKeys[i], allTileNames[i]);
         }
+        mTileList = getTileList();
+        filterOutStoredTileLists();
 
-        if (mPrefs.getString(PREF_KEY_TILE_ORDER, null) == null) {
-            createDefaultTileList();
-        } else {
-            updateDefaultTileList();
-        }
+        mTileListView = getListView();
+        mTileAdapter = new TileAdapter(mContext);
     }
 
-    private boolean isOxygenOs35Rom() {
-        if (GravityBoxSettings.sSystemProperties != null)
-            return GravityBoxSettings.sSystemProperties.isOxygenOs35Rom;
-        else if (getIntent() != null && getIntent().hasExtra(EXTRA_IS_OOS_35_ROM))
-            return getIntent().getBooleanExtra(EXTRA_IS_OOS_35_ROM, false);
-        else
-            return false;
-    }
+    private void filterOutStoredTileLists() {
+        List<String> toRemove = new ArrayList<>();
 
-    private boolean hasMsimSupport() {
-        if (GravityBoxSettings.sSystemProperties != null)
-            return GravityBoxSettings.sSystemProperties.hasMsimSupport;
-        else if (getIntent() != null && getIntent().hasExtra(EXTRA_HAS_MSIM_SUPPORT))
-            return getIntent().getBooleanExtra(EXTRA_HAS_MSIM_SUPPORT, false);
-        else
-            return false;
-    }
-
-    public static String getDefaultTileList(Context gbContext) {
-        try {
-            return Utils.join(gbContext.getResources().getStringArray(
-                    R.array.qs_tile_default_values), ",");
-        } catch (Throwable t) {
-            t.printStackTrace();
-            return "";
-        }
-    }
-
-    private void createDefaultTileList() {
-        String[] tileKeys = mResources.getStringArray(R.array.qs_tile_values);
-        String newList = "";
-
-        for (String key : tileKeys) {
-            if (supportedTile(key)) {
-                if (!newList.isEmpty()) newList += ",";
-                newList += key;
-            }
-        }
-
-        mPrefs.edit().putString(PREF_KEY_TILE_ORDER, newList).commit();
-        mPrefs.edit().putString(PREF_KEY_TILE_ENABLED,Utils.join(mResources.getStringArray(
-                R.array.qs_tile_default_values), ",")).commit();
-    }
-
-    private void updateDefaultTileList() {
-        List<String> list = new ArrayList<String>(Arrays.asList(
-                mPrefs.getString(PREF_KEY_TILE_ORDER, "").split(",")));
         List<String> enabledList = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
-        boolean listChanged = false;
-        boolean enabledListChanged = false;
-        String[] tileKeys = mResources.getStringArray(R.array.qs_tile_values);
-        for (String key : tileKeys) {
-            if (supportedTile(key)) {
-                if (!list.contains(key)) {
-                    list.add(key);
-                    listChanged = true;
-                }
-            } else {
-                if (list.contains(key)) {
-                    list.remove(key);
-                    listChanged = true;
-                }
-                if (enabledList.contains(key)) {
-                    enabledList.remove(key);
-                    enabledListChanged = true;
-                }
-            }
+        for (String key : enabledList) {
+            if (!mTileList.containsKey(key) || key.startsWith("aosp_tile_"))
+                toRemove.add(key);
         }
-        if (listChanged) {
-            mPrefs.edit().putString(PREF_KEY_TILE_ORDER, Utils.join(
-                    list.toArray(new String[list.size()]), ",")).commit();
-        }
-        if (enabledListChanged) {
+        if (toRemove.size() > 0) {
+            for (String key : toRemove) enabledList.remove(key);
             mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, Utils.join(
                     enabledList.toArray(new String[enabledList.size()]), ",")).commit();
+            updateServiceComponents();
         }
+
+        toRemove.clear();
+        List<String> securedList = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(PREF_KEY_TILE_SECURED, "").split(",")));
+        for (String key : securedList) {
+            if (!mTileList.containsKey(key))
+                toRemove.add(key);
+        }
+        if (toRemove.size() > 0) {
+            for (String key : toRemove) securedList.remove(key);
+            mPrefs.edit().putString(PREF_KEY_TILE_SECURED, Utils.join(
+                    securedList.toArray(new String[securedList.size()]), ",")).commit();
+            broadcastSecuredList();
+        }
+    }
+
+    private void updateServiceComponents() {
+        List<String> enabledList = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
+        PackageManager pm = getPackageManager();
+        for (Entry<String,Class<?>> service : SERVICES.entrySet()) {
+            pm.setComponentEnabledSetting(new ComponentName(this, service.getValue()),
+                    enabledList.contains(service.getKey()) ?
+                            PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
+                                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP);
+        }
+    }
+
+    private void broadcastSecuredList() {
+        Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
+        intent.putExtra(EXTRA_TILE_SECURED_LIST, mPrefs.getString(
+                PREF_KEY_TILE_SECURED, ""));
+        sendBroadcast(intent);
     }
 
     private boolean supportedTile(String key) {
-        // TODO: Music Tile
-        if (key.equals("gb_tile_music"))
+        if (!mTileSpecs.containsKey(key))
             return false;
         if (key.equals("gb_tile_torch") && !Utils.hasFlash(mContext))
             return false;
-        if (key.equals("gb_tile_gps_alt") && !Utils.hasGPS(mContext))
+        if ((key.equals("gb_tile_gps_alt") || key.equals("gb_tile_gps_slimkat")) &&
+                !Utils.hasGPS(mContext))
             return false;
-        if ((key.equals("aosp_tile_cell") || key.equals("aosp_tile_cell2") ||
-                key.equals("gb_tile_network_mode") || key.equals("gb_tile_smart_radio") ||
-                key.equals("mtk_tile_mobile_data")) && Utils.isWifiOnly(mContext))
+        if ((key.equals("aosp_tile_cell") || key.equals("gb_tile_network_mode") ||
+                key.equals("gb_tile_smart_radio")) && Utils.isWifiOnly(mContext))
             return false;
         if (key.equals("gb_tile_nfc") && !Utils.hasNfc(mContext))
             return false;
-        if (key.equals("gb_tile_quiet_hours") && LedSettings.isUncLocked(mContext))
+        if (key.equals("gb_tile_quiet_hours") &&
+                (LedSettings.isUncLocked(mContext) ||
+                 !SettingsManager.getInstance(mContext).getQuietHoursPrefs()
+                     .getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false)))
             return false;
         if (key.equals("gb_tile_compass") && !Utils.hasCompass(mContext))
             return false;
-        if (key.equals("aosp_tile_cell2") && (!Utils.isMotoXtDevice() || !hasMsimSupport()))
-            return false;
-        if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")
-                || key.equals("mtk_tile_hotknot") || key.equals("mtk_tile_timeout")) &&
-                !Utils.isMtkDevice())
-            return false;
         if (key.equals("gb_tile_smart_radio") && !mPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false))
-            return false;
-        if ((key.startsWith("xperia_tile") && !Utils.isXperiaDevice()) ||
-               key.equals("xperia_tile_stamina"))
-            return false;
-        if (key.equals("aosp_tile_hotspot") && Utils.isXperiaDevice())
-            return false;
-        if (key.startsWith("moto_tile") && !Utils.isMotoXtDevice())
-            return false;
-        if (key.startsWith("op3t_tile") && !isOxygenOs35Rom())
-            return false;
-        if ((key.equals("gb_tile_battery") || key.equals("aosp_tile_dnd")) && 
-                isOxygenOs35Rom())
             return false;
 
         return true;
@@ -281,7 +213,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     @Override
     public void onStart() {
         super.onStart();
-        mOrderedTileList = getOrderedTileList();
         setListAdapter(mTileAdapter);
     }
 
@@ -289,164 +220,121 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     public void onStop() {
         super.onStop();
         setListAdapter(null);
-        mOrderedTileList = null;
     }
 
     @Override
     public void onDestroy() {
-        ((TouchInterceptor) mTileList).setDropListener(null);
         super.onDestroy();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        // reload our tiles and invalidate the views for redraw
-        mTileList.invalidateViews();
+        mTileListView.invalidateViews();
     }
 
     @Override
     public void onClick(View v) {
         if (v == mBtnSave) {
-            saveOrderedTileList();
+            saveTileList();
             finish();
         } else if (v == mBtnCancel) {
             finish();
         }
     }
 
-    private TouchInterceptor.DropListener mDropListener = new TouchInterceptor.DropListener() {
-        public void drop(int from, int to) {
-            // move the tile
-            if (from < mOrderedTileList.size()) {
-                TileInfo tile = mOrderedTileList.remove(from);
-                if (to <= mOrderedTileList.size()) {
-                    mOrderedTileList.add(to, tile);
-                    mTileList.invalidateViews();
-                }
-            }
-        }
-    };
-
-    private List<TileInfo> getOrderedTileList() {
-        String[] orderedTiles = mPrefs.getString(PREF_KEY_TILE_ORDER, "").split(",");
+    private Map<String, TileInfo> getTileList() {
         List<String> enabledTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
-        List<String> lockedTiles = new ArrayList<String>(Arrays.asList(
-                mPrefs.getString(PREF_KEY_TILE_LOCKED, "").split(",")));
-        List<String> lockedOnlyTiles = new ArrayList<String>(Arrays.asList(
-                mPrefs.getString(PREF_KEY_TILE_LOCKED_ONLY, "").split(",")));
         List<String> securedTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_SECURED, "").split(",")));
 
-        List<TileInfo> tiles = new ArrayList<TileInfo>();
-        for (int i = 0; i < orderedTiles.length; i++) {
+        Map<String, TileInfo> tiles = new LinkedHashMap<>();
+        for (Entry<String,String> entry : mTileSpecs.entrySet()) {
+            if (!supportedTile(entry.getKey()))
+                continue;
             TileInfo ti = new TileInfo();
-            ti.key = orderedTiles[i];
-            ti.name = mTileTexts.get(ti.key);
-            ti.enabled = enabledTiles.contains(ti.key);
-            ti.locked = lockedTiles.contains(ti.key);
-            ti.lockedOnly = lockedOnlyTiles.contains(ti.key);
-            ti.secured = securedTiles.contains(ti.key);
-            tiles.add(ti);
+            ti.key = entry.getKey();
+            ti.name = entry.getValue();
+            ti.enabled = ti.isStock() || enabledTiles.contains(ti.key);
+            ti.secured = securedTiles.contains(ti.key) || ti.key.equals("gb_tile_lock_screen");
+            tiles.put(ti.key, ti);
         }
 
         return tiles;
     }
 
-    private void saveOrderedTileList() {
-        String newOrderedList = "";
+    private void saveTileList() {
         String newEnabledList = "";
-        String newLockedList = "";
-        String newLockedOnlyList = "";
         String newSecuredList = "";
 
-        for (TileInfo ti : mOrderedTileList) {
-            if (!newOrderedList.isEmpty()) newOrderedList += ",";
-            newOrderedList += ti.key;
-
-            if (ti.locked) {
-                if (!newLockedList.isEmpty()) newLockedList += ",";
-                newLockedList += ti.key;
-            }
-
-            if (ti.lockedOnly) {
-                if (!newLockedOnlyList.isEmpty()) newLockedOnlyList += ",";
-                newLockedOnlyList += ti.key;
-            }
-
-            if (ti.enabled) {
+        for (Entry<String,TileInfo> entry : mTileList.entrySet()) {
+            if (entry.getValue().enabled && !entry.getValue().isStock()) {
                 if (!newEnabledList.isEmpty()) newEnabledList += ",";
-                newEnabledList += ti.key;
+                newEnabledList += entry.getKey();
             }
-
-            if (ti.secured) {
+            if (entry.getValue().secured) {
                 if (!newSecuredList.isEmpty()) newSecuredList += ",";
-                newSecuredList += ti.key;
+                newSecuredList += entry.getKey();
             }
         }
 
         mPrefs.edit()
-            .putString(PREF_KEY_TILE_ORDER, newOrderedList)
             .putString(PREF_KEY_TILE_ENABLED, newEnabledList)
-            .putString(PREF_KEY_TILE_LOCKED, newLockedList)
-            .putString(PREF_KEY_TILE_LOCKED_ONLY, newLockedOnlyList)
             .putString(PREF_KEY_TILE_SECURED, newSecuredList)
-            .commit(new OnPreferencesCommitedListener() {
-                @Override
-                public void onPreferencesCommited() {
-                    if (WorldReadablePrefs.DEBUG)
-                        Log.d("GravityBox", "TileOrderActivity: onPreferencesCommited");
-                    Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
-                    intent.putExtra(EXTRA_QS_ORDER_CHANGED, true);
-                    mContext.sendBroadcast(intent);
-                }
-             });
+            .commit();
+
+        updateServiceComponents();
+        broadcastSecuredList();
     }
 
     private class TileAdapter extends BaseAdapter {
         private Context mContext;
         private LayoutInflater mInflater;
+        private List<TileInfo> mList;
 
         public TileAdapter(Context c) {
             mContext = c;
             mInflater = LayoutInflater.from(mContext);
+            mList = new ArrayList<>(mTileList.values());
         }
 
         public int getCount() {
-            return mOrderedTileList.size();
+            return mList.size();
         }
 
         public Object getItem(int position) {
-            return mOrderedTileList.get(position);
+            return mList.get(position);
         }
 
         public long getItemId(int position) {
             return position;
         }
 
+        @SuppressLint("InflateParams")
         public View getView(int position, View convertView, ViewGroup parent) {
             final View itemView;
-            final TileInfo tileInfo = mOrderedTileList.get(position);
+            final TileInfo tileInfo = mList.get(position);
 
             if (convertView == null) {
                 itemView = mInflater.inflate(R.layout.order_tile_list_item, null);
                 final CheckBox enabled = (CheckBox) itemView.findViewById(R.id.chkEnable);
-                final ImageView menu = (ImageView) itemView.findViewById(R.id.menu);
                 enabled.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         TileInfo ti = (TileInfo) itemView.getTag();
                         ti.enabled = ((CheckBox)v).isChecked();
-                        menu.setEnabled(ti.enabled);
-                        mTileList.invalidateViews();
+                        ti.secured &= ti.enabled || ti.key.equals("gb_tile_lock_screen");
+                        mTileListView.invalidateViews();
                     }
                 });
-                menu.setOnClickListener(new View.OnClickListener() {
+                final CheckBox secured = (CheckBox) itemView.findViewById(R.id.chkProtect);
+                secured.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         TileInfo ti = (TileInfo) itemView.getTag();
-                        ti.showMenu(mTileList, menu);
+                        ti.secured = ((CheckBox)v).isChecked();
+                        mTileListView.invalidateViews();
                     }
                 });
             } else {
@@ -457,23 +345,26 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             final TextView name = (TextView) itemView.findViewById(R.id.name);
             final TextView info = (TextView) itemView.findViewById(R.id.info);
             final CheckBox enabled = (CheckBox) itemView.findViewById(R.id.chkEnable);
-            final ImageView menu = (ImageView) itemView.findViewById(R.id.menu);
+            final CheckBox secured = (CheckBox) itemView.findViewById(R.id.chkProtect);
             name.setText(tileInfo.name);
+            String infoTxt = "";
             if (tileInfo.enabled) {
-                String txt = (tileInfo.locked ? getText(R.string.tile_hidden_locked) :
-                    tileInfo.secured ? getText(R.string.tile_hidden_secured) : "").toString();
-                if (tileInfo.lockedOnly) {
-                    if (!txt.isEmpty()) txt += "; ";
-                    txt += getText(R.string.tile_shown_locked_only);
+                if (!tileInfo.isStock()) { 
+                    infoTxt = getString(R.string.state_enabled);
                 }
-                info.setText(txt);
-            } else {
-                info.setText(null);
+                if (tileInfo.secured) {
+                    if (infoTxt.length() > 0) infoTxt += "; ";
+                    infoTxt += getString(R.string.qs_protected_summary);
+                }
             }
-            info.setVisibility(info.getText() == null || info.getText().length() == 0 ?
-                    View.GONE : View.VISIBLE);
+            info.setText(infoTxt);
+            info.setVisibility(infoTxt.length() == 0 ? View.GONE : View.VISIBLE);
+
             enabled.setChecked(tileInfo.enabled);
-            menu.setVisibility(tileInfo.enabled ? View.VISIBLE : View.INVISIBLE);
+            enabled.setVisibility(tileInfo.isStock() ? View.INVISIBLE : View.VISIBLE);
+            secured.setChecked(tileInfo.enabled && tileInfo.secured);
+            secured.setEnabled(enabled.isChecked() &&
+                    !tileInfo.key.equals("gb_tile_lock_screen"));
 
             return itemView;
         }

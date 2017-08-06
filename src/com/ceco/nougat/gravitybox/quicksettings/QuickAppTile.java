@@ -404,6 +404,7 @@ public class QuickAppTile extends QsTile {
 
     @Override
     public void handleDestroy() {
+        super.handleDestroy();
         mMainApp = null;
         if (mAppSlots != null) {
             mAppSlots.clear();
@@ -414,6 +415,5 @@ public class QuickAppTile extends QsTile {
         mHandler = null;
         mDismissDialogRunnable = null;
         mOnSlotClick = null;
-        super.handleDestroy();
     }
 }

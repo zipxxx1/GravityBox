@@ -262,10 +262,10 @@ public class BluetoothTetheringTile extends QsTile {
 
     @Override
     public void handleDestroy() {
+        super.handleDestroy();
         mTetherableBluetoothRegexs = null;
         mBluetoothPan = null;
         mProfileServiceListener = null;
         mBroadcastReceiver = null;
-        super.handleDestroy();
     }
 }

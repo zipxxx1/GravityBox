@@ -139,7 +139,7 @@ public class CellularTile extends AospTile {
     }
 
     @Override
-    public void onCreateTileView(View tileView) throws Throwable {
+    public void onCreateTileView(View tileView) {
         super.onCreateTileView(tileView);
 
         if (isPrimary() && hasField(tileView, "mIconFrame") && !Utils.isOxygenOs35Rom()) {
@@ -149,10 +149,8 @@ public class CellularTile extends AospTile {
             FrameLayout iconFrame = (FrameLayout) XposedHelpers.getObjectField(tileView, "mIconFrame");
             iconFrame.addView(mDataOffView, FrameLayout.LayoutParams.WRAP_CONTENT,
                     FrameLayout.LayoutParams.WRAP_CONTENT);
-            if (mScalingFactor != 1f) {
-                mDataOffView.setScaleX(mScalingFactor);
-                mDataOffView.setScaleY(mScalingFactor);
-            }
+            mDataOffView.setScaleX(getQsPanel().getScalingFactor());
+            mDataOffView.setScaleY(getQsPanel().getScalingFactor());
             if (PhoneWrapper.hasMsimSupport()) {
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mDataOffView.getLayoutParams();
                 int marginPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, -4,

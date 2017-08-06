@@ -32,7 +32,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -48,11 +47,18 @@ public abstract class BaseTile implements QsEventListener {
     public static final String CLASS_TILE_VIEW = "com.android.systemui.qs.QSTileView";
     public static final String CLASS_TILE_VIEW_BASE = "com.android.systemui.qs.QSTileBaseView";
     public static final String CLASS_SIGNAL_TILE_VIEW = "com.android.systemui.qs.SignalTileView";
-    public static final String CLASS_RESOURCE_ICON = CLASS_BASE_TILE + ".ResourceIcon";
     public static final String CLASS_ICON_VIEW = "com.android.systemui.qs.QSIconView";
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
+    }
+
+    static class StockLayout {
+        int tileSpacingPx;
+        int tilePaddingTopPx;
+        int iconSizePx;
+        int tilePaddingBelowIconPx;
+        float labelTextSizePx;
     }
 
     protected String mKey;
@@ -64,8 +70,9 @@ public abstract class BaseTile implements QsEventListener {
     protected Context mGbContext;
     protected boolean mProtected;
     protected boolean mHideOnChange;
-    protected float mScalingFactor = 1f;
     protected KeyguardStateMonitor mKgMonitor;
+    private StockLayout mStockLayout;
+    private View mTileView;
 
     public BaseTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -86,9 +93,13 @@ public abstract class BaseTile implements QsEventListener {
     protected void initPreferences() {
         List<String> securedTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_SECURED, "").split(",")));
-        mProtected = securedTiles.contains(mKey);
+        mProtected = securedTiles.contains(getSettingsKey());
 
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
+    }
+
+    protected final QsPanel getQsPanel() {
+        return mEventDistributor.getQsPanel();
     }
 
     @Override
@@ -115,6 +126,9 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     public final void setTile(Object tile) {
+        if (mTile != null) {
+            XposedHelpers.removeAdditionalInstanceField(mTile, BaseTile.TILE_KEY_NAME);
+        }
         mTile = tile;
         if (mTile != null) {
             XposedHelpers.setAdditionalInstanceField(mTile, BaseTile.TILE_KEY_NAME, mKey);
@@ -136,45 +150,49 @@ public abstract class BaseTile implements QsEventListener {
         return null;
     }
 
-    @Override
     public void handleDestroy() {
+        setListening(false);
+        XposedHelpers.removeAdditionalInstanceField(mTile, BaseTile.TILE_KEY_NAME);
         mEventDistributor.unregisterListener(this);
         mEventDistributor = null;
+        mKey = null;
         mTile = null;
         mHost = null;
         mPrefs = null;
         mContext = null;
         mGbContext = null;
         mKgMonitor = null;
+        mStockLayout = null;
+        mTileView = null;
     }
 
     @Override
-    public void onCreateTileView(View tileView) throws Throwable {
-        XposedHelpers.setAdditionalInstanceField(tileView, TILE_KEY_NAME, mKey);
+    public void onCreateTileView(View tileView) {
+        try {
+            mTileView = tileView;
+            XposedHelpers.setAdditionalInstanceField(tileView, TILE_KEY_NAME, mKey);
 
-        mScalingFactor = QsPanel.getScalingFactor(Integer.valueOf(mPrefs.getString(
-                GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0")),
-                mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0));
-        if (mScalingFactor != 1f) {
+            // backup original dimensions
+            int tilePaddingTopPx = XposedHelpers.getIntField(tileView, "mTilePaddingTopPx");
             int tileSpacingPx = XposedHelpers.getIntField(tileView, "mTileSpacingPx");
-            XposedHelpers.setIntField(tileView, "mTileSpacingPx", Math.round(tileSpacingPx*mScalingFactor));
+            TextView label = (TextView) XposedHelpers.getObjectField(mTileView, "mLabel");
+            float labelTextSizePx = label.getTextSize();
             Field iconField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
                     tileView.getContext().getClassLoader()).getDeclaredField("mIcon");
             iconField.setAccessible(true);
             Object iconView = iconField.get(tileView);
             int iconSizePx = XposedHelpers.getIntField(iconView, "mIconSizePx");
-            XposedHelpers.setIntField(iconView, "mIconSizePx", Math.round(iconSizePx*mScalingFactor));
             int tilePaddingBelowIconPx = XposedHelpers.getIntField(iconView, "mTilePaddingBelowIconPx");
-            XposedHelpers.setIntField(iconView, "mTilePaddingBelowIconPx",
-                    Math.round(tilePaddingBelowIconPx*mScalingFactor));
+            mStockLayout = new StockLayout();
+            mStockLayout.tilePaddingTopPx = tilePaddingTopPx;
+            mStockLayout.tileSpacingPx = tileSpacingPx;
+            mStockLayout.labelTextSizePx = labelTextSizePx;
+            mStockLayout.iconSizePx = iconSizePx;
+            mStockLayout.tilePaddingBelowIconPx = tilePaddingBelowIconPx;
 
-            updateLabelLayout(tileView);
-            updatePaddingTop(tileView);
-
-            if (tileView.getClass().getName().equals(CLASS_SIGNAL_TILE_VIEW) &&
-                    Utils.isMotoXtDevice()) {
-                updateMotoXtSignalIconLayout(tileView);
-            }
+            updateTileViewLayout();
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
     }
 
@@ -189,6 +207,11 @@ public abstract class BaseTile implements QsEventListener {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
                 mHideOnChange = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
+            }
+            if (intent.hasExtra(TileOrderActivity.EXTRA_TILE_SECURED_LIST)) {
+                List<String> securedTiles = new ArrayList<String>(Arrays.asList(
+                        intent.getStringExtra(TileOrderActivity.EXTRA_TILE_SECURED_LIST).split(",")));
+                mProtected = securedTiles.contains(getSettingsKey());
             }
         }
     }
@@ -207,45 +230,45 @@ public abstract class BaseTile implements QsEventListener {
 
     @Override
     public void onViewConfigurationChanged(View tileView, Configuration config) {
-        if (mScalingFactor != 1f) {
-            updateLabelLayout(tileView);
-            updatePaddingTop(tileView);
-            tileView.requestLayout();
+        if (mStockLayout != null) {
+            mStockLayout.tilePaddingTopPx = XposedHelpers.getIntField(tileView, "mTilePaddingTopPx");
+            TextView label = (TextView) XposedHelpers.getObjectField(tileView, "mLabel");
+            mStockLayout.labelTextSizePx = label.getTextSize();
+            updateTileViewLayout();
         }
     }
 
-    @Override
-    public void onRecreateLabel(View tileView) {
-        if (mScalingFactor != 1f) {
-            updateLabelLayout(tileView);
-            tileView.requestLayout();
-        }
-    }
-
-    private void updatePaddingTop(View tileView) {
-        int tilePaddingTopPx = XposedHelpers.getIntField(tileView, "mTilePaddingTopPx");
-        XposedHelpers.setIntField(tileView, "mTilePaddingTopPx",
-                Math.round(tilePaddingTopPx*mScalingFactor));
-    }
-
-    private void updateLabelLayout(View tileView) {
-        TextView label = (TextView) XposedHelpers.getObjectField(tileView, "mLabel");
-        if (label != null) {
-            label.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                    label.getTextSize()*mScalingFactor);
-        }
-    }
-
-    private void updateMotoXtSignalIconLayout(View tileView) {
+    protected void updateTileViewLayout() {
+        if (mStockLayout == null || mTileView == null) return;
         try {
-            View icon = (View) XposedHelpers.getObjectField(tileView,
-                    "mSignalImageView");
-            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams)
-                    icon.getLayoutParams();
-            lp.width = Math.round(lp.width * mScalingFactor);
-            lp.height = Math.round(lp.height * mScalingFactor);
-            icon.setLayoutParams(lp);
-        } catch (Throwable t) { /* ignore */ }
+            float scalingFactor = getQsPanel().getScalingFactor();
+            // base
+            XposedHelpers.setIntField(mTileView, "mTileSpacingPx",
+                    Math.round(mStockLayout.tileSpacingPx*scalingFactor));
+            XposedHelpers.setIntField(mTileView, "mTilePaddingTopPx",
+                    Math.round(mStockLayout.tilePaddingTopPx*scalingFactor));
+
+            // icon
+            Field iconField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
+                    mTileView.getContext().getClassLoader()).getDeclaredField("mIcon");
+            iconField.setAccessible(true);
+            Object iconView = iconField.get(mTileView);
+            XposedHelpers.setIntField(iconView, "mIconSizePx",
+                    Math.round(mStockLayout.iconSizePx*scalingFactor));
+            XposedHelpers.setIntField(iconView, "mTilePaddingBelowIconPx",
+                    Math.round(mStockLayout.tilePaddingBelowIconPx*scalingFactor));
+
+            // label
+            TextView label = (TextView) XposedHelpers.getObjectField(mTileView, "mLabel");
+            if (label != null) {
+                label.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        mStockLayout.labelTextSizePx*scalingFactor);
+            }
+
+            mTileView.requestLayout();
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 
     public void refreshState() {

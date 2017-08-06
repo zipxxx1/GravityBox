@@ -15,7 +15,14 @@
 
 package com.ceco.nougat.gravitybox.quicksettings;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModHwKeys;
 import com.ceco.nougat.gravitybox.ModQsTiles;
@@ -37,7 +44,7 @@ public class QsPanel implements BroadcastSubReceiver {
     private static final String TAG = "GB:QsPanel";
     private static final boolean DEBUG = false;
 
-    protected static final String CLASS_QS_PANEL = "com.android.systemui.qs.QSPanel";
+    public static final String CLASS_QS_PANEL = "com.android.systemui.qs.QSPanel";
     private static final String CLASS_BRIGHTNESS_CTRL = "com.android.systemui.settings.BrightnessController";
     private static final String CLASS_TILE_LAYOUT = "com.android.systemui.qs.TileLayout";
 
@@ -53,6 +60,11 @@ public class QsPanel implements BroadcastSubReceiver {
     private boolean mHideBrightness;
     private boolean mBrightnessIconEnabled;
     private ImageView mBrightnessIcon;
+    private Integer mCellWidthOriginal;
+    private QsTileEventDistributor mEventDistributor;
+    @SuppressWarnings("unused")
+    private QsQuickPulldownHandler mQuickPulldownHandler;
+    private Map<String, BaseTile> mTiles = new HashMap<>();
 
     public QsPanel(XSharedPreferences prefs, ClassLoader classLoader) {
         mPrefs = prefs;
@@ -66,7 +78,7 @@ public class QsPanel implements BroadcastSubReceiver {
     private void initPreferences() {
         mNumColumns = Utils.isOxygenOs35Rom() ? 0 : Integer.valueOf(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0"));
-        mScaleCorrection =Utils.isOxygenOs35Rom() ? 0 : mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0);
+        mScaleCorrection = Utils.isOxygenOs35Rom() ? 0 : mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0);
         mHideBrightness = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS, false);
         mBrightnessIconEnabled = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BRIGHTNESS_ICON, false);
         if (DEBUG) log("initPreferences: mNumColumns=" + mNumColumns +
@@ -74,31 +86,17 @@ public class QsPanel implements BroadcastSubReceiver {
                 "; mBrightnessIconEnabled=" + mBrightnessIconEnabled);
     }
 
-    public void setEventDistributor(QsTileEventDistributor eventDistributor) {
-        eventDistributor.registerBroadcastSubReceiver(this);   
-    }
-    
-    public void updateResources() {
-        try {
-            if (mQsPanel != null) {
-                XposedHelpers.callMethod(mQsPanel, "updateResources");
-            }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS)) {
                 mNumColumns = intent.getIntExtra(GravityBoxSettings.EXTRA_QS_COLS, 0);
-                updateResources();
+                updateLayout();
                 if (DEBUG) log("onBroadcastReceived: mNumColumns=" + mNumColumns);
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_SCALE_CORRECTION)) {
                 mScaleCorrection = intent.getIntExtra(GravityBoxSettings.EXTRA_QS_SCALE_CORRECTION, 0);
-                updateResources();
+                updateLayout();
                 if (DEBUG) log("onBroadcastReceived: mScaleCorrection=" + mScaleCorrection);
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_BRIGHTNESS)) {
@@ -115,12 +113,38 @@ public class QsPanel implements BroadcastSubReceiver {
         } 
     }
 
-    public static float getScalingFactor(int numColumns, int correctionPercent) {
+    private void updateResources() {
+        try {
+            XposedHelpers.callMethod(mQsPanel, "updateResources");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private void updateLayout() {
+        updateResources();
+        try {
+            List<?> records = (List<?>) XposedHelpers.getObjectField(mQsPanel, "mRecords");
+            for (Object record : records) {
+                Object tileObj = XposedHelpers.getObjectField(record, "tile");
+                String key = (String) XposedHelpers.getObjectField(tileObj, "mTileSpec");
+                BaseTile tile = mTiles.get(key);
+                if (tile != null) {
+                    if (DEBUG) log("Updating layout for: " + key);
+                    tile.updateTileViewLayout();
+                }
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    public float getScalingFactor() {
         if (Utils.isOxygenOs35Rom())
             return 1;
 
-        float correction = (float)correctionPercent / 100f;
-        switch (numColumns) {
+        float correction = (float)mScaleCorrection / 100f;
+        switch (mNumColumns) {
             default:
             case 0: return 1f + correction;
             case 3: return 1f + correction;
@@ -136,41 +160,88 @@ public class QsPanel implements BroadcastSubReceiver {
         return mBrightnessSlider;
     }
 
-    private View.OnClickListener mBrightnessIconOnClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(ModHwKeys.ACTION_TOGGLE_AUTO_BRIGHTNESS);
-            v.getContext().sendBroadcast(intent);
-        }
-    };
-
-    private View.OnLongClickListener mBrightnessIconOnLongClick = new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v) {
-            try {
-                Intent intent = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
-                Object host = XposedHelpers.getObjectField(mQsPanel, "mHost");
-                XposedHelpers.callMethod(host, "startActivityDismissingKeyguard", intent);
-                return true;
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-                return false;
-            }
-        }
-    };
-
     private void createHooks(final ClassLoader classLoader) {
         try {
             Class<?> classQsPanel = XposedHelpers.findClass(CLASS_QS_PANEL, classLoader);
+
+            XposedBridge.hookAllConstructors(classQsPanel, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (CLASS_QS_PANEL.equals(param.thisObject.getClass().getName())) {
+                        mQsPanel = (ViewGroup) param.thisObject;
+                        if (DEBUG) log("QSPanel created");
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsPanel.CLASS_QS_PANEL, classLoader,
+                    "setTiles", Collection.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!QsPanel.CLASS_QS_PANEL.equals(param.thisObject.getClass().getName()))
+                            return;
+
+                    mPrefs.reload();
+                    Object host = XposedHelpers.getObjectField(param.thisObject, "mHost");
+
+                    if (mEventDistributor == null) {
+                        mEventDistributor = new QsTileEventDistributor(host, mPrefs);
+                        mEventDistributor.setQsPanel(QsPanel.this);
+                        mQuickPulldownHandler = new QsQuickPulldownHandler(
+                                mQsPanel.getContext(), mPrefs, mEventDistributor);
+                    }
+
+                    Collection<?> tiles = (Collection<?>)param.args[0];
+
+                    // destroy wrappers for removed tiles
+                    for (String ourKey : new ArrayList<String>(mTiles.keySet())) {
+                        boolean removed = true;
+                        for (Object tile : tiles) {
+                            String key = (String) XposedHelpers.getObjectField(tile, "mTileSpec");
+                            if (key.equals(ourKey)) {
+                                removed = false;
+                                break;
+                            }
+                        }
+                        if (removed) {
+                            mTiles.get(ourKey).handleDestroy();
+                            mTiles.remove(ourKey);
+                            if (DEBUG) log("destroyed wrapper for: " + ourKey);
+                        }
+                    }
+
+                    // prepare tile wrappers
+                    for (Object tile : tiles) {
+                        String key = (String) XposedHelpers.getObjectField(tile, "mTileSpec");
+                        if (mTiles.containsKey(key)) {
+                            mTiles.get(key).setTile(tile);
+                            if (DEBUG) log("Updated tile reference for: " + key);
+                            continue;
+                        }
+                        if (key.contains(GravityBox.PACKAGE_NAME)) {
+                            if (DEBUG) log("Creating wrapper for custom tile: " + key);
+                            QsTile gbTile = QsTile.create(host, key, tile,
+                                mPrefs, mEventDistributor);
+                            if (gbTile != null) {
+                                mTiles.put(key, gbTile);
+                            }
+                        } else {
+                            if (DEBUG) log("Creating wrapper for AOSP tile: " + key);
+                            AospTile aospTile = AospTile.create(host, tile, 
+                                    key, mPrefs, mEventDistributor);
+                            mTiles.put(aospTile.getKey(), aospTile);
+                        }
+                    }
+                    if (DEBUG) log("Tile wrappers created");
+                }
+            });
 
             XposedHelpers.findAndHookMethod(classQsPanel, "updateResources",
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mQsPanel == null) {
-                        mQsPanel = (ViewGroup) param.thisObject;
-                    }
-                    boolean shouldInvalidate = false;
+                    if (param.thisObject != mQsPanel)
+                        return;
 
                     // brighntess slider
                     View bs = getBrightnessSlider();
@@ -178,13 +249,8 @@ public class QsPanel implements BroadcastSubReceiver {
                         final int vis = mHideBrightness ? View.GONE : View.VISIBLE; 
                         if (bs.getVisibility() != vis) {
                             bs.setVisibility(vis);
-                            shouldInvalidate = true;
+                            mQsPanel.postInvalidate();
                         }
-                    }
-
-                    // invalidate if changes made
-                    if (shouldInvalidate) {
-                        mQsPanel.postInvalidate();
                     }
                 }
             });
@@ -197,16 +263,21 @@ public class QsPanel implements BroadcastSubReceiver {
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mCellWidthOriginal == null) {
+                        mCellWidthOriginal = XposedHelpers.getIntField(param.thisObject, "mCellWidth");
+                    } else {
+                        XposedHelpers.setIntField(param.thisObject, "mCellWidth", mCellWidthOriginal);
+                    }
                     // tiles per row
                     if (mNumColumns != 0) {
                         XposedHelpers.setIntField(param.thisObject, "mColumns", mNumColumns);
                         if (DEBUG) log("updateResources: Updated number of columns per row");
-                        final float factor = getScalingFactor(mNumColumns, mScaleCorrection);
+                        final float factor = getScalingFactor();
                         if (factor != 1f) {
                             int ch = XposedHelpers.getIntField(param.thisObject, "mCellHeight");
                             XposedHelpers.setIntField(param.thisObject, "mCellHeight", Math.round(ch*factor));
-                            int cw = XposedHelpers.getIntField(param.thisObject, "mCellWidth");
-                            XposedHelpers.setIntField(param.thisObject, "mCellWidth", Math.round(cw*factor));
+                            XposedHelpers.setIntField(param.thisObject, "mCellWidth",
+                                    Math.round(mCellWidthOriginal*factor));
                             int cm = XposedHelpers.getIntField(param.thisObject, "mCellMargin");
                             XposedHelpers.setIntField(param.thisObject, "mCellMargin", Math.round(cm*factor));
                             int cmTop = XposedHelpers.getIntField(param.thisObject, "mCellMarginTop");
@@ -257,4 +328,27 @@ public class QsPanel implements BroadcastSubReceiver {
             XposedBridge.log(t);
         }
     }
+
+    private View.OnClickListener mBrightnessIconOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(ModHwKeys.ACTION_TOGGLE_AUTO_BRIGHTNESS);
+            v.getContext().sendBroadcast(intent);
+        }
+    };
+
+    private View.OnLongClickListener mBrightnessIconOnLongClick = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            try {
+                Intent intent = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
+                Object host = XposedHelpers.getObjectField(mQsPanel, "mHost");
+                XposedHelpers.callMethod(host, "startActivityDismissingKeyguard", intent);
+                return true;
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+                return false;
+            }
+        }
+    };
 }

@@ -107,10 +107,4 @@ public class GpsTile extends QsTile implements GpsStatusMonitor.Listener {
         startSettingsActivity(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         return true;
     }
-
-    @Override
-    public void handleDestroy() {
-        unregisterListener();
-        super.handleDestroy();
-    }
 }

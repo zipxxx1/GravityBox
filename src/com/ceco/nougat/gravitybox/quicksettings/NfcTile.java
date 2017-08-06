@@ -165,9 +165,9 @@ public class NfcTile extends QsTile {
 
     @Override
     public void handleDestroy() {
+        super.handleDestroy();
         mStateChangeReceiver = null;
         mHandler = null;
         mReceiver = null;
-        super.handleDestroy();
     }
 }

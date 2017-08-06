@@ -269,10 +269,10 @@ public class StayAwakeTile extends QsTile {
             mDetailAdapter.destroy();
             mDetailAdapter = null;
         }
+        super.handleDestroy();
         mSettingsObserver = null;
         mModeList.clear();
         mModeList = null;
-        super.handleDestroy();
     }
 
     class SettingsObserver extends ContentObserver {

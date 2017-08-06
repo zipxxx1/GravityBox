@@ -116,12 +116,12 @@ public class RingerModeTile extends QsTile {
             mDetailAdapter.destroy();
             mDetailAdapter = null;
         }
+        super.handleDestroy();
         mSettingsObserver = null;
         mAudioManager = null;
         mVibrator = null;
         mModeList.clear();
         mModeList = null;
-        super.handleDestroy();
     }
 
     @Override

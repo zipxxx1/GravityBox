@@ -24,7 +24,6 @@ import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModQsTiles;
 import com.ceco.nougat.gravitybox.PhoneWrapper;
-import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.nougat.gravitybox.managers.SysUiManagers;
 
@@ -46,13 +45,11 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
     public interface QsEventListener {
         String getKey();
         Object getTile();
-        void handleDestroy();
         void onCreateTileView(View tileView) throws Throwable;
         void onBroadcastReceived(Context context, Intent intent);
         void onKeyguardStateChanged();
         boolean supportsHideOnChange();
         void onViewConfigurationChanged(View tileView, Configuration config);
-        void onRecreateLabel(View tileView);
         void handleClick();
         boolean handleLongClick();
         void handleUpdateState(Object state, Object arg);
@@ -62,21 +59,18 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         Object getDetailAdapter();
     }
 
-    public interface OnTileDestroyedListener {
-        void onTileDestroyed(String key);
-    }
-
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
     private Object mHost;
     private Context mContext;
+    @SuppressWarnings("unused")
     private XSharedPreferences mPrefs;
     private Map<String,QsEventListener> mListeners;
     private List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private String mCreateTileViewTileKey;
-    private OnTileDestroyedListener mOnTileDestroyedListener;
+    private QsPanel mQsPanel;
 
     public QsTileEventDistributor(Object host, XSharedPreferences prefs) {
         mHost = host;
@@ -89,27 +83,24 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         prepareBroadcastReceiver();
     }
 
-    public void setOnTileDestroyedListener(OnTileDestroyedListener listener) {
-        mOnTileDestroyedListener = listener;
+    public void setQsPanel(QsPanel qsPanel) {
+        mQsPanel = qsPanel;
+        registerBroadcastSubReceiver(mQsPanel);
+    }
+
+    public QsPanel getQsPanel() {
+        return mQsPanel;
     }
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            notifyTilesOfBroadcast(context, intent);
             final String action = intent.getAction();
             if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
-                if (intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED) ||
-                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS) ||
-                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_SCALE_CORRECTION)) {
-                    recreateTiles();
-                } else {
-                    notifyTilesOfBroadcast(context, intent);
-                }
                 for (BroadcastSubReceiver receiver : mBroadcastSubReceivers) {
                     receiver.onBroadcastReceived(context, intent);
                 }
-            } else {
-                notifyTilesOfBroadcast(context, intent);
             }
         }
     };
@@ -130,28 +121,13 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
     }
 
     private void notifyTilesOfBroadcast(Context context, Intent intent) {
-        try {
-            for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
+        for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
+            try {
                 l.getValue().onBroadcastReceived(context, intent);
+            } catch (Throwable t) {
+                log("Error notifying listener " + l.getKey() + " of new broadcast: ");
+                XposedBridge.log(t);
             }
-        } catch (Throwable t) {
-            log("Error notifying listeners of new broadcast: ");
-            XposedBridge.log(t);
-        }        
-    }
-
-    private void recreateTiles() {
-        try {
-            mPrefs.reload();
-            if (Utils.isXperiaDevice()) {
-                XposedHelpers.setObjectField(mHost, "mQuickSettingsTilesDefault", "");
-                XposedHelpers.callMethod(mHost, "onConfigurationChanged");
-            } else {
-                XposedHelpers.callMethod(mHost, "onTuningChanged",
-                        ModQsTiles.TILES_SETTING, (String)null);
-            }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
         }
     }
 
@@ -231,21 +207,6 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl, "handleDestroy",
-                    new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                    if (l != null) {
-                        l.handleDestroy();
-                        if (mOnTileDestroyedListener != null) {
-                            mOnTileDestroyedListener.onTileDestroyed(l.getKey());
-                        }
-                    }
-                }
-            });
-
             XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "handleSecondaryClick",
                     new XC_MethodHook() {
                 @Override
@@ -267,18 +228,6 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                     if (l != null) {
                         l.onViewConfigurationChanged((View)param.thisObject,
                                 (Configuration)param.args[0]);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "createLabel",
-                    new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                    if (l != null) {
-                        l.onRecreateLabel((View)param.thisObject);
                     }
                 }
             });

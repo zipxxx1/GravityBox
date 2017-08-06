@@ -69,7 +69,7 @@ public class CompassTile extends QsTile implements SensorEventListener {
 
     @Override
     public void handleDestroy() {
-        setListeningSensors(false);
+        super.handleDestroy();
         mSensorManager = null;
         mAccelerationSensor = null;
         mGeomagneticFieldSensor = null;
@@ -77,11 +77,10 @@ public class CompassTile extends QsTile implements SensorEventListener {
         mImage = null;
         mAcceleration = null;
         mGeomagnetic = null;
-        super.handleDestroy();
     }
 
     @Override
-    public void onCreateTileView(View tileView) throws Throwable {
+    public void onCreateTileView(View tileView) {
         super.onCreateTileView(tileView);
 
         mImage = (ImageView) tileView.findViewById(android.R.id.icon);

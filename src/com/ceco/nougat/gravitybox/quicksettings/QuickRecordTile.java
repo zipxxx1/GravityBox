@@ -317,6 +317,7 @@ public class QuickRecordTile extends QsTile {
     @Override
     public void handleDestroy() {
         autoStopRecord.run();
+        super.handleDestroy();
         mHandler = null;
         mCurrentStateReceiver = null;
         mRecordingStatusReceiver = null;
@@ -324,6 +325,5 @@ public class QuickRecordTile extends QsTile {
             mPlayer.release();
             mPlayer = null;
         }
-        super.handleDestroy();
     }
 }
