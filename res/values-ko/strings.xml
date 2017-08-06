@@ -69,13 +69,10 @@
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">위치</string>
     <string name="qs_tile_gps_alt">GPS (CM 스타일)</string>
-    <string name="qs_tile_mobile_data">모바일 데이터</string>
     <string name="qs_tile_network_mode">네트워크 모드</string>
     <string name="qs_tile_data_usage">데이터 사용 상태</string>
-    <string name="qs_tile_autorotation">자동 회전</string>
     <string name="qs_tile_sync">동기화</string>
     <string name="qs_tile_wifi_ap">Wi-Fi 핫스팟</string>
-    <string name="qs_tile_torch_aosp">손전등 (순정)</string>
     <string name="qs_tile_torch_gb">손전등 (GravityBox)</string>
     <string name="qs_tile_sleep">화면 잠금 (Lock)</string>
     <string name="qs_tile_quickrecord">빠른 녹음</string>
@@ -85,10 +82,8 @@
     <string name="qs_tile_screenshot">스크린샷</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB 테더링</string>
-    <string name="qs_tile_music">뮤직</string>
     <string name="qs_tile_smart_radio">스마트 라디오</string>
     <string name="qs_tile_lock_screen">잠금 화면</string>
-    <string name="qs_tile_inversion">반전</string>
 
     <string name="dialog_color_picker">색깔 선택</string>
     <string name="press_color_to_apply">색깔을 눌러서 적용합니다.</string>
@@ -1106,8 +1101,6 @@
     <string name="lc_active_screen_mode_disabled">비활성화</string>
     <string name="lc_active_screen_mode_nothing">화면만 켜기</string>
 
-    <string name="qs_tile_remote_display">원격 화면 미러링</string>
-
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">개별 앱 설정이 없는 항목에 사용될 기본 설정을 관리합니다.</string>
     <string name="pref_unc_perapp_settings_title">개별 앱 설정</string>
@@ -1119,11 +1112,7 @@
 
     <string name="hwkey_action_custom">사용자 액션</string>
 
-    <string name="qs_tile_data_usage_2">셀룰러 2</string>
-
     <string name="pref_charger_unplugged_sound_title">충전기 분리 소리</string>
-
-    <string name="qs_tile_audio_profile">오디오 프로파일</string>
 
     <string name="pref_cat_mtk_fixes_title">MTK 특정 패치</string>
     <string name="pref_cat_mtk_fixes_summary">MediaTek 특정 패치들이 있습니다. 필요 시에만 사용하세요.</string>

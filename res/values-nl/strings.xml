@@ -79,10 +79,8 @@
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (CM stijl)</string>
-    <string name="qs_tile_mobile_data">Mobiele data</string>
     <string name="qs_tile_network_mode">Netwerk modus</string>
     <string name="qs_tile_data_usage">Data gebruik</string>
-    <string name="qs_tile_autorotation">Auto rotatie</string>
     <string name="qs_tile_sync">Synchronizatie</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Access Point</string>
     <string name="qs_tile_torch_gb">Zaklamp</string>
@@ -95,7 +93,6 @@
     <string name="qs_tile_screenshot">Scherm Opname</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
-    <string name="qs_tile_music">Muziek</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Schermvergrendeling</string>
 

@@ -69,10 +69,8 @@
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (estilo CM)</string>
-    <string name="qs_tile_mobile_data">Dados móveis</string>
     <string name="qs_tile_network_mode">Modo de Rede</string>
     <string name="qs_tile_data_usage">Uso de dados</string>
-    <string name="qs_tile_autorotation">Auto rotação</string>
     <string name="qs_tile_sync">Sincronização</string>
     <string name="qs_tile_wifi_ap">Ponto de Acesso Wi-Fi</string>
     <string name="qs_tile_torch_gb">Lanterna</string>
@@ -85,7 +83,6 @@
     <string name="qs_tile_screenshot">Captura de tela</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Tethering USB</string>
-    <string name="qs_tile_music">Música</string>
     <string name="qs_tile_smart_radio">Rádio inteligente</string>
     <string name="qs_tile_lock_screen">Bloqueio de tela</string>
 
@@ -1345,9 +1342,6 @@
     <string name="lc_active_screen_mode_disabled">Desativado</string>
     <string name="lc_active_screen_mode_nothing">Somente ligar a tela</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Tela remota</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Permite administrar as configurações das notificações para todos os aplicativos (apenas dos que não possuem configurações próprias)</string>
@@ -1361,14 +1355,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Ação personalizada</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Utilização de dados 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Som ao desconectar carregador</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Perfis de áudio</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Ajustes gerais MTK</string>

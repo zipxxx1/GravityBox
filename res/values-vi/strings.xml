@@ -87,13 +87,10 @@
     <string name="qs_tile_gps">Vị trí</string>
     <string name="qs_tile_gps_slimkat">Vị trí (kiểu SlimKat)</string>
     <string name="qs_tile_gps_alt">GPS (kiểu CM)</string>
-    <string name="qs_tile_mobile_data">Dữ liệu di động</string>
     <string name="qs_tile_network_mode">Chế độ mạng</string>
     <string name="qs_tile_data_usage">Kiểu ô</string>
-    <string name="qs_tile_autorotation">Tự động xoay</string>
     <string name="qs_tile_sync">Đồng bộ</string>
     <string name="qs_tile_wifi_ap">Hotspot</string>
-    <string name="qs_tile_torch_aosp">Đèn pin (Gốc)</string>
     <string name="qs_tile_torch_gb">Đèn pin (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Ngủ</string>
@@ -104,12 +101,9 @@
     <string name="qs_tile_screenshot">Chụp ảnh màn hình</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Truyền dữ liệu mạng qua cáp USB</string>
-    <string name="qs_tile_music">Nhạc</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Khóa màn hình</string>
-    <string name="qs_tile_inversion">Đảo ngược</string>
     <string name="qs_tile_battery">Pin</string>
-    <string name="qs_tile_dnd">Không làm phiền</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Chọn màu</string>
@@ -1384,9 +1378,6 @@
     <string name="lc_active_screen_mode_disabled">Tắt</string>
     <string name="lc_active_screen_mode_nothing">Chỉ bật sáng màn hình</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Truyền màn hình</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Quản lý các cài đặt của thông báo cho tất cả ứng dụng không có cài đặt per-app cá nhân nào được bật</string>
@@ -1400,14 +1391,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Hành động cá nhân</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Ô 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Âm báo rút sạc</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Cấu hình âm thanh</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">MTK sửa lỗi cụ thể</string>
@@ -1694,9 +1679,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Cài đặt tile Bluetooth</string>
 
-    <!-- MTK tiles: HotKnot -->
-    <string name="qs_tile_hotknot">HotKnot</string>
-
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Tắt chỉ thị loại mạng</string>
     <string name="pref_signal_cluster_dnti_summary">Cần khởi động lại</string>
@@ -1704,15 +1686,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Ẩn biểu tượng không có sim</string>
     <string name="pref_signal_cluster_nosim_summary">Cần khởi động lại</string>
-
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Chế độ song song</string>
-    <string name="menu_tile_locked">Hiện trong màn hình khóa</string>
-    <string name="menu_tile_locked_only">Chỉ hiện trong màn hình khóa</string>
-    <string name="menu_tile_secured">Hiện trong MH khóa được bảo mật</string>
-    <string name="tile_hidden_locked">Ẩn khỏi màn hình khóa</string>
-    <string name="tile_hidden_secured">Ẩn khỏi MH khóa được bảo mật</string>
-    <string name="tile_shown_locked_only">Chỉ hiện trong màn hình khóa</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Chính sách mở khóa nhanh</string>

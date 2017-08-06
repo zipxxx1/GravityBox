@@ -85,10 +85,8 @@
     <string name="qs_tile_gps">Location</string>
     <string name="qs_tile_gps_slimkat">Location (SlimKat)</string>
     <string name="qs_tile_gps_alt">GPS (CM)</string>
-    <string name="qs_tile_mobile_data">Mobile Data</string>
     <string name="qs_tile_network_mode">Network Mode</string>
     <string name="qs_tile_data_usage">Data Usage</string>
-    <string name="qs_tile_autorotation">Auto Rotation</string>
     <string name="qs_tile_sync">Synchronization</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Access Point</string>
     <string name="qs_tile_torch_gb">Torch</string>
@@ -101,7 +99,6 @@
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
-    <string name="qs_tile_music">Music</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Lock screen</string>
 

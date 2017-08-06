@@ -87,13 +87,10 @@
     <string name="qs_tile_gps">Lokasi</string>
     <string name="qs_tile_gps_slimkat">GPS (Jenis slimkat)</string>
     <string name="qs_tile_gps_alt">GPS (Jenis CM)</string>
-    <string name="qs_tile_mobile_data">Data telefon</string>
     <string name="qs_tile_network_mode">Jenis rangkaian</string>
     <string name="qs_tile_data_usage">Penggunaan data</string>
-    <string name="qs_tile_autorotation">Putaran automatik</string>
     <string name="qs_tile_sync">Penyegerakan</string>
     <string name="qs_tile_wifi_ap">Kongsi data</string>
-    <string name="qs_tile_torch_aosp">Lampu picit (asal)</string>
     <string name="qs_tile_torch_gb">Lampu picit (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Tidur</string>
@@ -104,12 +101,9 @@
     <string name="qs_tile_screenshot">Tangkapan skrin</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Sambungan USB</string>
-    <string name="qs_tile_music">Muzik</string>
     <string name="qs_tile_smart_radio">Radio pintar</string>
     <string name="qs_tile_lock_screen">Skrin kunci</string>
-    <string name="qs_tile_inversion">Terbalikkan</string>
     <string name="qs_tile_battery">Bateri</string>
-    <string name="qs_tile_dnd">Tiada gangguan</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Pemilih warna</string>
@@ -1387,9 +1381,6 @@
     <string name="lc_active_screen_mode_disabled">Tidak aktif</string>
     <string name="lc_active_screen_mode_nothing">Hidupkan skrin sahaja</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Cast skrin</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Tetapan untuk semua aplikasi yang tidak di set</string>
@@ -1403,14 +1394,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Aksi tertentu</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Sim 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Bunyi ketika charger dicabut</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Profil audio</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Pemulihan untuk MTK tertentu</string>
@@ -1704,9 +1689,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Tetapan tile BlueTooth</string>
 
-    <!-- MTK tiles: HotKnot -->
-    <string name="qs_tile_hotknot">HotKnot</string>
-
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Matikan jenis penunjuk sambungan</string>
     <string name="pref_signal_cluster_dnti_summary">Perlukan reboot</string>
@@ -1714,15 +1696,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Matikan ikon \"Tiada SIM\"</string>
     <string name="pref_signal_cluster_nosim_summary">Perlukan reboot</string>
-
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Mod pendua</string>
-    <string name="menu_tile_locked">Tunjuk di skrin kunci</string>
-    <string name="menu_tile_locked_only">Hanya di skrin kunci</string>
-    <string name="menu_tile_secured">Tunjuk di skrin kunci yang dikunci</string>
-    <string name="tile_hidden_locked">Sembunyi dari skrin kunci</string>
-    <string name="tile_hidden_secured">Sembunyi dari skrin kunci yang dikunci</string>
-    <string name="tile_shown_locked_only">Tunjuk hanya di skrin kunci</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Polisi buka kekunci terus</string>
@@ -1845,9 +1818,6 @@
 
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Pembetulan skala</string>
-
-    <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">Masa tamat</string>
 
     <!-- UNC: Notification lock screen visibility -->
     <string name="pref_lc_notif_visibility_ls_title">Penglihatan skrin kunci</string>

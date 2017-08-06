@@ -87,13 +87,10 @@
     <string name="qs_tile_gps">Ubicación</string>
     <string name="qs_tile_gps_slimkat">Ubicación (estilo SlimKat)</string>
     <string name="qs_tile_gps_alt">GPS (estilo CM)</string>
-    <string name="qs_tile_mobile_data">Datos móviles</string>
     <string name="qs_tile_network_mode">Modo de red</string>
     <string name="qs_tile_data_usage">Uso de datos</string>
-    <string name="qs_tile_autorotation">Rotación automática</string>
     <string name="qs_tile_sync">Sincronización</string>
     <string name="qs_tile_wifi_ap">Punto de acceso Wi-Fi</string>
-    <string name="qs_tile_torch_aosp">Linterna (Stock)</string>
     <string name="qs_tile_torch_gb">Linterna (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Apagar pantalla</string>
@@ -104,12 +101,9 @@
     <string name="qs_tile_screenshot">Captura de pantalla</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Tethering por USB</string>
-    <string name="qs_tile_music">Música</string>
     <string name="qs_tile_smart_radio">Modo de red inteligente</string>
     <string name="qs_tile_lock_screen">Bloquear pantalla</string>
-    <string name="qs_tile_inversion">Invertir</string>
     <string name="qs_tile_battery">Batería</string>
-    <string name="qs_tile_dnd">No molestar</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de color</string>
@@ -1385,9 +1379,6 @@
     <string name="lc_active_screen_mode_disabled">Desactivado</string>
     <string name="lc_active_screen_mode_nothing">Solo encender pantalla</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Pantalla remota</string>
-    
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Administra los ajustes predeterminados de notificaciones para todas las apps que no tengan habilitados los ajustes individuales</string>
@@ -1401,15 +1392,9 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Acción personalizada</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Uso de datos 2</string>
-    
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Sonido al desconectar cargador</string>
 
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Perfil de audio</string>
-    
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Arreglos específicos para MTK</string>
     <string name="pref_cat_mtk_fixes_summary">Contiene soluciones específicas para procesadores MediaTek. Úsalo solo si lo necesitas.</string>
@@ -1705,15 +1690,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Desactivar icino \"No SIM\"</string>
     <string name="pref_signal_cluster_nosim_summary">Requiere reinicio</string>
-
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Modo dual</string>
-    <string name="menu_tile_locked">Mostrar en pantalla de bloqueo</string>
-    <string name="menu_tile_locked_only">Sólo en pantalla de bloqueo</string>
-    <string name="menu_tile_secured">Mostrar en la pantalla de bloqueo segura</string>
-    <string name="tile_hidden_locked">Ocultar de la pantalla de bloqueo</string>
-    <string name="tile_hidden_secured">Ocultar de la pantalla de bloqueo segura</string>
-    <string name="tile_shown_locked_only">Mostrar sólo en pantalla de bloqueo</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Política de desbloqueo directo</string>

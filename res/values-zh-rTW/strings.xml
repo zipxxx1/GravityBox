@@ -85,10 +85,8 @@
     <string name="qs_tile_gps">定位服務</string>
     <string name="qs_tile_gps_slimkat">定位服務 (SlimKat 風格) </string>
     <string name="qs_tile_gps_alt">定位服務 (CM 風格) </string>
-    <string name="qs_tile_mobile_data">行動數據</string>
     <string name="qs_tile_network_mode">網路模式</string>
     <string name="qs_tile_data_usage">資料用量</string>
-    <string name="qs_tile_autorotation">自動旋轉</string>
     <string name="qs_tile_sync">同步功能</string>
     <string name="qs_tile_wifi_ap">Wi-Fi 行動熱點</string>
     <string name="qs_tile_torch_gb">手電筒</string>
@@ -101,7 +99,6 @@
     <string name="qs_tile_screenshot">螢幕截圖</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB 網絡共用</string>
-    <string name="qs_tile_music">音樂</string>
     <string name="qs_tile_smart_radio">智慧型無線網路</string>
     <string name="qs_tile_lock_screen">鎖定畫面</string>
 
@@ -1385,9 +1382,6 @@
     <string name="lc_active_screen_mode_disabled">停用</string>
     <string name="lc_active_screen_mode_nothing">只喚醒螢幕</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">遠端顯示</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">為未有個別設定的應用程式建立預設通知設定</string>
@@ -1401,14 +1395,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">其他選項</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">數據用量 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">充電器拔除音效</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">音效設定檔</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">MTK 機種設定</string>

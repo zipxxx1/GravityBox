@@ -87,13 +87,10 @@
     <string name="qs_tile_gps">Позиціювання</string>
     <string name="qs_tile_gps_slimkat">Позиціювання (в стилі SlimKat)</string>
     <string name="qs_tile_gps_alt">GPS (CM стиль)</string>
-    <string name="qs_tile_mobile_data">Мобільні дані</string>
     <string name="qs_tile_network_mode">Режим мережі</string>
     <string name="qs_tile_data_usage">Стільник</string>
-    <string name="qs_tile_autorotation">Авто-поворот</string>
     <string name="qs_tile_sync">Синхронізація</string>
     <string name="qs_tile_wifi_ap">Точка доступу</string>
-    <string name="qs_tile_torch_aosp">Ліхтарик (Стоковий)</string>
     <string name="qs_tile_torch_gb">Ліхтарик (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Сон</string>
@@ -104,12 +101,9 @@
     <string name="qs_tile_screenshot">Знімок екрану</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Роздача по USB</string>
-    <string name="qs_tile_music">Музика</string>
     <string name="qs_tile_smart_radio">Розумне радіо</string>
     <string name="qs_tile_lock_screen">Екран блокування</string>
-    <string name="qs_tile_inversion">Інверсія</string>
     <string name="qs_tile_battery">Батарея</string>
-    <string name="qs_tile_dnd">Не турбувати</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Вибір кольору</string>
@@ -1390,9 +1384,6 @@
     <string name="lc_active_screen_mode_disabled">Вимкнено</string>
     <string name="lc_active_screen_mode_nothing">Лише включення екрану</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Трансляція</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Керування типовими параметрами сповіщень для всіх додатків, для яких не застосовуються власні налаштування по додатках</string>
@@ -1406,14 +1397,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Користувацька дія</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Стільник 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Звук при від\'єднані ЗП</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Профіль звуку</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Виправляння для MTK</string>
@@ -1707,9 +1692,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Плитка BlueTooth</string>
 
-    <!-- MTK tiles: HotKnot -->
-    <string name="qs_tile_hotknot">HotKnot</string>
-
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Вимкнення індикаторів типу мережі</string>
     <string name="pref_signal_cluster_dnti_summary">Необхідне перезавантаження</string>
@@ -1717,15 +1699,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Вимкнути значок «SIM відсутня»</string>
     <string name="pref_signal_cluster_nosim_summary">Необхідне перезавантаження</string>
-
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Подвійний режим</string>
-    <string name="menu_tile_locked">Показати на екр. блокування</string>
-    <string name="menu_tile_locked_only">Лише на екр. блокування</string>
-    <string name="menu_tile_secured">На захищеному екр. блокування</string>
-    <string name="tile_hidden_locked">Приховано з екрану блокування</string>
-    <string name="tile_hidden_secured">Приховано з захищеного екр. блокування</string>
-    <string name="tile_shown_locked_only">Показ лише на екр. блокування</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Політика прямого розблокування</string>
@@ -1850,9 +1823,6 @@
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Корекція масштабу</string>
 
-    <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">Затримка</string>
-
     <!-- UNC: Notification lock screen visibility -->
     <string name="pref_lc_notif_visibility_ls_title">Видимість на екр. блокування</string>
     <string name="lc_notif_visibility_ls_default">Типово</string>
@@ -1940,18 +1910,6 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Показати повідомлення стану</string>
 
-    <!-- Xperia tiles -->
-    <string name="qs_tile_xperia_sync">Xperia автосинх. даних</string>
-    <string name="qs_tile_xperia_roaming">Xperia роумінг даних</string>
-    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
-    <string name="qs_tile_xperia_lte">Xperia LTE</string>
-    <string name="qs_tile_xperia_datatraffic">Xperia моб. дані</string>
-    <string name="qs_tile_xperia_screenmirroring">Xperia дзеркало екрану</string>
-    <string name="qs_tile_xperia_throw">Xperia Throw</string>
-    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
-    <string name="qs_tile_xperia_tethering">Xperia роздача</string>
-    <string name="qs_tile_xperia_detectusbdevice">Xperia виявлення USB</string>
-
     <!-- Navbar custom key icon style -->
     <string name="pref_navbar_custom_key_icon_style_title">Стиль піктограми</string>
     <string name="ncki_icon_style1">6 крапок</string>
@@ -1977,9 +1935,6 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Звук бездротової зарядки</string>
     <string name="stock_wireless_sound">Стоковий звук бездротової зарядки</string>
-
-    <!-- QS: Moto Data tile -->
-    <string name="qs_tile_moto_data">Дані (Moto)</string>
 
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Набір номеру</string>
@@ -2031,12 +1986,5 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">Перемкнути панель швидких налаштувань</string>
     <string name="qs_panel_collapse">Згорнути панель швидких налаштувань</string>
-
-    <!-- QS: OP3T tiles -->
-    <string name="qs_tile_op3t_night_mode">OP3T Нічний режим mode</string>
-    <string name="qs_tile_op3t_buttons">OP3T Кнопки</string>
-    <string name="qs_tile_op3t_vpn">OP3T VPN</string>
-    <string name="qs_tile_op3t_dataswitch">OP3T Перемикання даних</string>
-    <string name="qs_tile_op3t_powersaving">OP3T Енергозберігання</string>
 
 </resources>

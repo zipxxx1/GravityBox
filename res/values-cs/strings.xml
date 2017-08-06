@@ -71,13 +71,10 @@
     <string name="qs_tile_gps">Poloha</string>
     <string name="qs_tile_gps_slimkat">Poloha (SlimKat styl)</string>
     <string name="qs_tile_gps_alt">GPS (CM styl)</string>
-    <string name="qs_tile_mobile_data">Mobilní data</string>
     <string name="qs_tile_network_mode">Typ sítě</string>
     <string name="qs_tile_data_usage">Mobilní signál</string>
-    <string name="qs_tile_autorotation">Automatické otáčení obrazovky</string>
     <string name="qs_tile_sync">Synchronizace</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Přístupový bod</string>
-    <string name="qs_tile_torch_aosp">Světlo (Původní)</string>
     <string name="qs_tile_torch_gb">Světlo (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Uspat</string>
@@ -88,12 +85,9 @@
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB přístupový bod</string>
-    <string name="qs_tile_music">Hudba</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Obrazovka uzamčení</string>
-    <string name="qs_tile_inversion">Inverze barev</string>
     <string name="qs_tile_battery">Baterie</string>
-    <string name="qs_tile_dnd">Nerušit</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Výběr barvy</string>
@@ -1352,9 +1346,6 @@
     <string name="lc_active_screen_mode_disabled">Vypnutá</string>
     <string name="lc_active_screen_mode_nothing">Jen zapnout obrazovku</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Vzdálená obrazovka</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Spravuje výchozí nastavení, které jsou aplikovány automaticky na všechny aplikace, které nemají aktivní vlastní nastavení</string>
@@ -1368,14 +1359,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Vlastní akce</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Mobilní signál 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Zvuk odpojení napájení</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Zvukové profily</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Všeobecné MTK opravy</string>
@@ -1675,15 +1660,6 @@
     <string name="pref_signal_cluster_nosim_title">Skrýt ikonu nevložené SIM</string>
     <string name="pref_signal_cluster_nosim_summary">Vyžaduje restart</string>
 
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Duální režim</string>
-    <string name="menu_tile_locked">Zobrazit během uzamčení</string>
-    <string name="menu_tile_locked_only">Pouze během uzamčení</string>
-    <string name="menu_tile_secured">Zobrazit během zabezpečení</string>
-    <string name="tile_hidden_locked">Nezobrazí se během uzamčení</string>
-    <string name="tile_hidden_secured">Nezobrazí se během zabezpečení</string>
-    <string name="tile_shown_locked_only">Zobrazí se pouze během uzamčení</string>
-
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Režim přímého odemknutí</string>
 
@@ -1788,9 +1764,6 @@
 
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Korekce škály</string>
-
-    <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">Časový limit</string>
 
     <!-- UNC: Notification lock screen visibility -->
     <string name="pref_lc_notif_visibility_ls_title">Viditelnost na obrazovce uzamčení</string>
@@ -1905,9 +1878,6 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Zvuk bezdrátového nabíjení</string>
     <string name="stock_wireless_sound">Systémový zvuk bezdrátového nabíjení</string>
-
-    <!-- QS: Moto Data tile -->
-    <string name="qs_tile_moto_data">Dáta (Moto)</string>
 
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Dialer</string>

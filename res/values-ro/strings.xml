@@ -85,13 +85,10 @@
     <string name="qs_tile_gps">Locație</string>
     <string name="qs_tile_gps_slimkat">Locație (stil SlimKat)</string>
     <string name="qs_tile_gps_alt">GPS (stil CM)</string>
-    <string name="qs_tile_mobile_data">Date mobile</string>
     <string name="qs_tile_network_mode">Mod reţea</string>
     <string name="qs_tile_data_usage">Celular</string>
-    <string name="qs_tile_autorotation">Rotire automată</string>
     <string name="qs_tile_sync">Sincronizare</string>
     <string name="qs_tile_wifi_ap">Hotspot</string>
-    <string name="qs_tile_torch_aosp">Lanternă (stoc)</string>
     <string name="qs_tile_torch_gb">Lanternă (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Închidere ecran</string>
@@ -102,12 +99,9 @@
     <string name="qs_tile_screenshot">Captură ecran</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Tethering prin USB</string>
-    <string name="qs_tile_music">Muzică</string>
     <string name="qs_tile_smart_radio">Radio inteligent</string>
     <string name="qs_tile_lock_screen">Blocare ecran</string>
-    <string name="qs_tile_inversion">Inversiune</string>
     <string name="qs_tile_battery">Baterie</string>
-    <string name="qs_tile_dnd">Nu deranja</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de culoare</string>
@@ -1366,9 +1360,6 @@
     <string name="lc_active_screen_mode_disabled">Dezactivat</string>
     <string name="lc_active_screen_mode_nothing">Porniți numai ecranul</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Proiectare ecran</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_summary">Gestionează setările implicite ale notificărilor pentru toate aplicațiile care nu au activat setările proprii pentru fiecare aplicație</string>
     <string name="pref_unc_perapp_settings_title">Setări per aplicaţie</string>
@@ -1379,14 +1370,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Acțiune personalizată</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Celular 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Sunet de deconectare a încărcătorului</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Profil audio</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Modificări specifice MTK</string>
@@ -1663,9 +1648,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Setările dalei Bluetooth</string>
 
-    <!-- MTK tiles: HotKnot -->
-    <string name="qs_tile_hotknot">HotKnot</string>
-
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Dezactivați indicatorii de tip rețea</string>
     <string name="pref_signal_cluster_dnti_summary">Necesită repornire</string>
@@ -1673,15 +1655,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Dezactivați pictograma \"Fără SIM\"</string>
     <string name="pref_signal_cluster_nosim_summary">Necesită repornire</string>
-
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Mod dual</string>
-    <string name="menu_tile_locked">Afișează în ecranul de blocare</string>
-    <string name="menu_tile_locked_only">Doar în ecranul de blocare</string>
-    <string name="menu_tile_secured">Afișează în ecranul de blocare securizat</string>
-    <string name="tile_hidden_locked">Ascuns în ecranul de blocare</string>
-    <string name="tile_hidden_secured">Ascuns în ecranul de blocare securizat</string>
-    <string name="tile_shown_locked_only">Afișează numai în ecranul de blocare</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Politica de deblocare directă</string>
@@ -1803,9 +1776,6 @@
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Corectare scală</string>
 
-    <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">Expirare</string>
-
     <!-- UNC: Notification lock screen visibility -->
     <string name="pref_lc_notif_visibility_ls_title">Vizibilitate blocare ecran</string>
     <string name="lc_notif_visibility_ls_default">Implicit</string>
@@ -1893,18 +1863,6 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Afișați mesajul de stare</string>
 
-    <!-- Xperia tiles -->
-    <string name="qs_tile_xperia_sync">Xperia Auto-sincronizare date</string>
-    <string name="qs_tile_xperia_roaming">Xperia roaming de date</string>
-    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
-    <string name="qs_tile_xperia_lte">Xperia LTE</string>
-    <string name="qs_tile_xperia_datatraffic">Date mobile Xperia</string>
-    <string name="qs_tile_xperia_screenmirroring">Xperia difuzare ecran</string>
-    <string name="qs_tile_xperia_throw">Xperia Throw</string>
-    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
-    <string name="qs_tile_xperia_tethering">Xperia Tethering</string>
-    <string name="qs_tile_xperia_detectusbdevice">Xperia Detectare dispozitiv USB</string>
-
     <!-- Navbar custom key icon style -->
     <string name="pref_navbar_custom_key_icon_style_title">Stil pictogramă</string>
     <string name="ncki_icon_style1">6 puncte</string>
@@ -1928,9 +1886,6 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Sunet încărcător fără fir</string>
     <string name="stock_wireless_sound">Sunet stoc</string>
-
-    <!-- QS: Moto Data tile -->
-    <string name="qs_tile_moto_data">Date (Moto)</string>
 
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Taste numerice</string>
@@ -1975,13 +1930,6 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">Comutare panou Setări rapide</string>
     <string name="qs_panel_collapse">Restrângere panou Setări rapide</string>
-
-    <!-- QS: OP3T tiles -->
-    <string name="qs_tile_op3t_night_mode">Modul de noapte OP3T</string>
-    <string name="qs_tile_op3t_buttons">Butoane OP3T</string>
-    <string name="qs_tile_op3t_vpn">OP3T VPN</string>
-    <string name="qs_tile_op3t_dataswitch">Comutator de date OP3T</string>
-    <string name="qs_tile_op3t_powersaving">Economisire energie OP3T</string>
 
     <!-- Lockscreen shorcuts: Show badges -->
     <string name="pref_lockscreen_shortcuts_show_badges_title">Afişare insigne</string>

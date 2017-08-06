@@ -75,10 +75,8 @@
     <string name="qs_tile_bluetooth">קישורית Bluetooth</string>
     <string name="qs_tile_gps">מיקום</string>
     <string name="qs_tile_gps_alt">קישורית GPS (סגנון CM)</string>
-    <string name="qs_tile_mobile_data">גלישה סלולרית</string>
     <string name="qs_tile_network_mode">מצבי רשת</string>
     <string name="qs_tile_data_usage">שימוש בגלישה סלולרית</string>
-    <string name="qs_tile_autorotation">סיבוב מסך</string>
     <string name="qs_tile_sync">סינכרון</string>
     <string name="qs_tile_wifi_ap">נקודת גישה של Wi-Fi</string>
     <string name="qs_tile_torch_gb">פנס</string>
@@ -91,7 +89,6 @@
     <string name="qs_tile_screenshot">צילום מסך</string>
     <string name="qs_tile_nfc">קישורית NFC</string>
     <string name="qs_tile_usb_tethering">קשירה חמה ב-USB</string>
-    <string name="qs_tile_music">מוסיקה</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">בחירת צבע</string>

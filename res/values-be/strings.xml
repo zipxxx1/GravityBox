@@ -87,13 +87,10 @@
     <string name="qs_tile_gps">Геададзеныя</string>
     <string name="qs_tile_gps_slimkat">Геададзеныя (стыль SlimKat)</string>
     <string name="qs_tile_gps_alt">Геададзеныя (стыль CM)</string>
-    <string name="qs_tile_mobile_data">Мобільныя дадзеныя</string>
     <string name="qs_tile_network_mode">Рэжым сеткі"</string>
     <string name="qs_tile_data_usage">Мабільныя дадзеныя</string>
-    <string name="qs_tile_autorotation">Аўтаматычны паварот</string>
     <string name="qs_tile_sync">Сінхранізацыя</string>
     <string name="qs_tile_wifi_ap">КД Wi-Fi</string>
-    <string name="qs_tile_torch_aosp">Ліхтарык (сцёк)</string>
     <string name="qs_tile_torch_gb">Ліхтарык (GravityBox))</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Сон</string>
@@ -104,10 +101,8 @@
     <string name="qs_tile_screenshot">Здымак экрана</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Раздача па USB</string>
-    <string name="qs_tile_music">Музыка</string>
     <string name="qs_tile_smart_radio">Разумнае радыё</string>
     <string name="qs_tile_lock_screen">Экран блакавання</string>
-    <string name="qs_tile_inversion">Інверсія</string>
     <string name="qs_tile_battery">Батарэя</string>
 
     <!-- Color Picker -->
@@ -1382,9 +1377,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="lc_active_screen_mode_disabled">Адключаны</string>
     <string name="lc_active_screen_mode_nothing">Толькі ўключэнне экрана</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Трансляцыя</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Кіраванне параметрамі па змаўчанні паведамленняў для ўсіх дадаткаў, для якіх не ўжываюцца ўласныя налады па дадатках</string>
@@ -1398,14 +1390,8 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Карыстацкае дзеянне</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Мабільныя дадзеныя 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Гук пры адключэнні</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Профіль аўдыя</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Выпраўленні праблем MTK</string>

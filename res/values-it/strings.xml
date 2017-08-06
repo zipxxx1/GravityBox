@@ -85,10 +85,8 @@
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_slimkat">GPS (Stile SlimKat)</string>
     <string name="qs_tile_gps_alt">GPS (stile CM)</string>
-    <string name="qs_tile_mobile_data">Dati Mobili</string>
     <string name="qs_tile_network_mode">Modalità Rete</string>
     <string name="qs_tile_data_usage">Utilizzo Dati</string>
-    <string name="qs_tile_autorotation">Rotazione Automatica</string>
     <string name="qs_tile_sync">Sincronizzazione</string>
     <string name="qs_tile_wifi_ap">Punto d\'accesso Wi-Fi</string>
     <string name="qs_tile_torch_gb">Torcia</string>
@@ -101,7 +99,6 @@
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Tethering USB</string>
-    <string name="qs_tile_music">Musica</string>
     <string name="qs_tile_smart_radio">Modem Intelligente</string>
     <string name="qs_tile_lock_screen">Schermata di blocco</string>
 
@@ -1369,9 +1366,6 @@
     <string name="lc_active_screen_mode_disabled">Disabilitata</string>
     <string name="lc_active_screen_mode_nothing">Accendi solo schermo</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Trasmetti schermo</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Gestisci le impostazioni predefinite per le notifiche delle app che non hanno un profilo personalizzato</string>
@@ -1385,14 +1379,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Azioni personalizzate</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Utilizzo Dati 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Suono disinserimento cavo</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Profili audio</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Soluzioni specifiche per MTK</string>

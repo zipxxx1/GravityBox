@@ -69,10 +69,8 @@
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (styl CM)</string>
-    <string name="qs_tile_mobile_data">Transmisja Danych</string>
     <string name="qs_tile_network_mode">Tryb Sieci</string>
     <string name="qs_tile_data_usage">Użycie Danych</string>
-    <string name="qs_tile_autorotation">Auto-Obracanie Ekranu</string>
     <string name="qs_tile_sync">Synchronizacja</string>
     <string name="qs_tile_wifi_ap">Punkt dostępowy Wi-Fi</string>
     <string name="qs_tile_torch_gb">Latarka</string>
@@ -85,7 +83,6 @@
     <string name="qs_tile_screenshot">Zrzut Ekranu</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Tethering USB</string>
-    <string name="qs_tile_music">Muzyka</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Ekran blokady</string>
 
@@ -1341,9 +1338,6 @@
     <string name="lc_active_screen_mode_disabled">Wyłączony</string>
     <string name="lc_active_screen_mode_nothing">Tylko włącz ekran</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Zdalny Wyświetlacz</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Zarządza domyślnymi ustawieniami powiadomień dla wszystkich aplikacji, które nie mają włączonych żadnych własnych ustawień</string>
@@ -1357,14 +1351,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Własna akcja</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Użycie Danych 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Dźwięk odłączenia ładowarki</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Profile Dźwiękowe</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Specyficzne poprawki MTK</string>

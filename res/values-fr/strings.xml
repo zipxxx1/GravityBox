@@ -87,13 +87,10 @@
     <string name="qs_tile_gps">Localisation</string>
     <string name="qs_tile_gps_slimkat">Localisation (style SlimKat)</string>
     <string name="qs_tile_gps_alt">GPS (Style CM)</string>
-    <string name="qs_tile_mobile_data">Connexion de Données</string>
     <string name="qs_tile_network_mode">Mode Réseau</string>
     <string name="qs_tile_data_usage">Cellulaire</string>
-    <string name="qs_tile_autorotation">Rotation Automatique</string>
     <string name="qs_tile_sync">Synchronisation</string>
     <string name="qs_tile_wifi_ap">Hotspot Wi-Fi</string>
-    <string name="qs_tile_torch_aosp">Torche (par défaut)</string>
     <string name="qs_tile_torch_gb">Torche (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Veille</string>
@@ -104,12 +101,9 @@
     <string name="qs_tile_screenshot">Capture d\'Écran</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Partage de Connexion USB</string>
-    <string name="qs_tile_music">Musique</string>
     <string name="qs_tile_smart_radio">Ondes Radio Intelligentes</string>
     <string name="qs_tile_lock_screen">Écran de Déverrouillage</string>
-    <string name="qs_tile_inversion">Inversion</string>
     <string name="qs_tile_battery">Batterie</string>
-    <string name="qs_tile_dnd">Ne pas déranger</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -1387,9 +1381,6 @@
     <string name="lc_active_screen_mode_disabled">Désactivé</string>
     <string name="lc_active_screen_mode_nothing">Seulement allumer l\'écran</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Caster l\'écran</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Gère les paramètres par défaut des notifications pour les applications qui n\'ont pas leurs propres paramètres par-appli activés</string>
@@ -1403,14 +1394,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Action personnalisée</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Cellulaire 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Son à la déconnexion du chargeur</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Profile Audio</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Solutions spécifiques MTK</string>
@@ -1705,9 +1690,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Paramètres de la touche Bluetooth</string>
 
-    <!-- MTK tiles: HotKnot -->
-    <string name="qs_tile_hotknot">HotKnot</string>
-
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Désactiver les indicateurs du type de réseau</string>
     <string name="pref_signal_cluster_dnti_summary">Nécessite de redémarrer</string>
@@ -1715,15 +1697,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Désactiver l\'icône \"Aucune SIM\"</string>
     <string name="pref_signal_cluster_nosim_summary">Nécessite de redémarrer</string>
-
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Mode double</string>
-    <string name="menu_tile_locked">Afficher sur l\'écran de déverrouillage</string>
-    <string name="menu_tile_locked_only">Seulement sur l\'écran de déverrouillage</string>
-    <string name="menu_tile_secured">Afficher sur l\'écran de déverrouillage sécurisé</string>
-    <string name="tile_hidden_locked">Masqué de l\'écran de déverrouillage</string>
-    <string name="tile_hidden_secured">Masqué de l\'écran de déverrouillage sécurisé</string>
-    <string name="tile_shown_locked_only">Afficher seuleument sur l\'écran de déverrouillage</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Principe de déverrouillage direct</string>
@@ -1846,9 +1819,6 @@
 
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Correction à l\'échelle</string>
-
-    <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">Pause</string>
 
     <!-- UNC: Notification lock screen visibility -->
     <string name="pref_lc_notif_visibility_ls_title">Visibilité de l\'écran de déverrouillage</string>

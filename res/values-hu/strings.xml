@@ -87,13 +87,10 @@
     <string name="qs_tile_gps">Helyzetmeghatározás</string>
     <string name="qs_tile_gps_slimkat">Helyzetmeghatározás (SlimKat stílus)</string>
     <string name="qs_tile_gps_alt">GPS (CM stílus)</string>
-    <string name="qs_tile_mobile_data">Mobil adatátvitel</string>
     <string name="qs_tile_network_mode">Hálózati üzemmód</string>
     <string name="qs_tile_data_usage">Adat használat</string>
-    <string name="qs_tile_autorotation">Automatikus elforgatás</string>
     <string name="qs_tile_sync">Szinkronizáció</string>
     <string name="qs_tile_wifi_ap">Internet-hozzáférési pont</string>
-    <string name="qs_tile_torch_aosp">Zseblámpa (Gyári)</string>
     <string name="qs_tile_torch_gb">Zseblámpa (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Alvás</string>
@@ -104,12 +101,9 @@
     <string name="qs_tile_screenshot">Képernyőkép</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB internetmegosztás</string>
-    <string name="qs_tile_music">Zene</string>
     <string name="qs_tile_smart_radio">Okos rádiókapcsolat</string>
     <string name="qs_tile_lock_screen">Zárképernyő</string>
-    <string name="qs_tile_inversion">Inverzió</string>
     <string name="qs_tile_battery">Akkumulátor</string>
-    <string name="qs_tile_dnd">Ne zavarj</string>
 	
     <!-- Color Picker -->
     <string name="dialog_color_picker">Szín választó</string>
@@ -1374,9 +1368,6 @@
     <string name="lc_active_screen_mode_disabled">Letiltva</string>
     <string name="lc_active_screen_mode_nothing">Csak bekapcsolt képernyőnél</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Képernyőtartalom tükrözése</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Minden olyan alkalmazás alapértelmezett értesítés beállításainak kezelése, melynek nincs engedélyezve alkalmazásfüggő beállítása</string>
@@ -1390,14 +1381,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Egyéni művelet</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Adathasználat 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Töltő lecsatlakoztatás hang</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Hangprofilok</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">MTK specifikus javítások</string>
@@ -1673,9 +1658,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">BlueTooth csempe beállítások</string>
 
-    <!-- MTK tiles: HotKnot -->
-    <string name="qs_tile_hotknot">HotKnot</string>
-
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Hálózat típusa jelzőikonok letiltása</string>
     <string name="pref_signal_cluster_dnti_summary">Újraindítás szükséges</string>
@@ -1683,15 +1665,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">\"Nincs SIM kártya\" ikon letiltása</string>
     <string name="pref_signal_cluster_nosim_summary">Újraindítás szükséges</string>
-    
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Duál mód</string>
-    <string name="menu_tile_locked">Megjelenítés zárképernyőn</string>
-    <string name="menu_tile_locked_only">Csak zárképernyőn</string>
-    <string name="menu_tile_secured">Megjelenítés zárolt zárképernyőn</string>
-    <string name="tile_hidden_locked">Elrejtés zárképernyőnél</string>
-    <string name="tile_hidden_secured">Elrejtés zárolt zárképernyőnél</string>
-    <string name="tile_shown_locked_only">Megjelenítés csak zárképernyőn</string>
     
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Direkt feloldási házirend</string>
@@ -1813,9 +1786,6 @@
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Mérték korrekció</string>
 
-    <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">Időkorlát</string>
-
     <!-- UNC: Notification lock screen visibility -->
     <string name="pref_lc_notif_visibility_ls_title">Láthatóság zárképernyőn</string>
     <string name="lc_notif_visibility_ls_default">Alapértelmezett</string>
@@ -1901,18 +1871,6 @@
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Állapot üzenet mutatása</string>
-    
-    <!-- Xperia tiles -->
-    <string name="qs_tile_xperia_sync">Xperia Adat auto-szink.</string>
-    <string name="qs_tile_xperia_roaming">Xperia Adat roaming</string>
-    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
-    <string name="qs_tile_xperia_lte">Xperia LTE</string>
-    <string name="qs_tile_xperia_datatraffic">Xperia Mobil adatátvitel</string>
-    <string name="qs_tile_xperia_screenmirroring">Xperia Képernyő tükrözés</string>
-    <string name="qs_tile_xperia_throw">Xperia Throw</string>
-    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
-    <string name="qs_tile_xperia_tethering">Xperia Megosztás</string>
-    <string name="qs_tile_xperia_detectusbdevice">Xperia USB eszköz keresés</string>
 
     <!-- Navbar custom key icon style -->
     <string name="pref_navbar_custom_key_icon_style_title">Ikon stílus</string>
@@ -1938,9 +1896,6 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Vezeték nélküli töltés hang</string>
     <string name="stock_wireless_sound">Alapértelmezett hang</string>
-	
-    <!-- QS: Moto Data tile -->
-    <string name="qs_tile_moto_data">Adat (Moto)</string>
 	
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Tárcsázó</string>
@@ -1987,13 +1942,6 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">Gyorsbeállítások panel ki-bekapcsolása</string>
     <string name="qs_panel_collapse">Gyorsbeállítások panel összecsukása</string>
-
-    <!-- QS: OP3T tiles -->
-    <string name="qs_tile_op3t_night_mode">OP3T Éjszakai mód</string>
-    <string name="qs_tile_op3t_buttons">OP3T Gombok</string>
-    <string name="qs_tile_op3t_vpn">OP3T VPN</string>
-    <string name="qs_tile_op3t_dataswitch">OP3T Adat kapcsoló</string>
-    <string name="qs_tile_op3t_powersaving">OP3T Energiatakarékosság</string>
 
     <!-- Lockscreen shorcuts: Show badges -->
     <string name="pref_lockscreen_shortcuts_show_badges_title">Számláló mutatása</string>

@@ -87,13 +87,10 @@
     <string name="qs_tile_gps">Standort</string>
 	<string name="qs_tile_gps_slimkat">Standort (SlimKat)</string>
     <string name="qs_tile_gps_alt">GPS (CM)</string>
-    <string name="qs_tile_mobile_data">Mobile Daten</string>
     <string name="qs_tile_network_mode">Netzmodus</string>
     <string name="qs_tile_data_usage">Datenverkehr</string>
-    <string name="qs_tile_autorotation">Autom. Drehen</string>
     <string name="qs_tile_sync">Synchronisierung</string>
     <string name="qs_tile_wifi_ap">WLAN-Hotspot</string>
-	<string name="qs_tile_torch_aosp">Taschenlampe (System)</string>
     <string name="qs_tile_torch_gb">Taschenlampe (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Ruhezustand</string>
@@ -104,12 +101,9 @@
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB-Tethering</string>
-    <string name="qs_tile_music">Musik</string>
     <string name="qs_tile_smart_radio">Netzautomatik</string>
 	<string name="qs_tile_lock_screen">Sperren</string>
-    <string name="qs_tile_inversion">Umkehren</string>
     <string name="qs_tile_battery">Batterie</string>
-    <string name="qs_tile_dnd">Nicht unterbrechen</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Farbauswahl</string>
@@ -1377,9 +1371,6 @@
     <string name="lc_active_screen_mode_disabled">Aus</string>
     <string name="lc_active_screen_mode_nothing">Nur Bildschirm anschalten</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Bildschirmübertragung</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Benachrichtigungseinstellungen aller Apps verwalten, die keine eigenen Regeln haben</string>
@@ -1393,14 +1384,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Benutzerdefinierte Aktion</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Datenverkehr 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Ton bei Trennen vom Ladegerät</string>
-
-	<!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Audioprofil</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">MTK-spezifische Korrekturen</string>
@@ -1685,9 +1670,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Bluetooth Kachel</string>
 
-    <!-- MTK tiles: HotKnot -->
-    <string name="qs_tile_hotknot">HotKnot</string>
-
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Netzwerktypanzeige deaktivieren</string>
     <string name="pref_signal_cluster_dnti_summary">Erfordert Neustart</string>
@@ -1695,15 +1677,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">\"Keine SIM\" Symbol deaktivieren</string>
     <string name="pref_signal_cluster_nosim_summary">Erfordert Neustart</string>
-
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Dualer Modus</string>
-    <string name="menu_tile_locked">Auf dem Sperrbildschirm anzeigen</string>
-    <string name="menu_tile_locked_only">Nur auf dem Sperrbildschirm anzeigen</string>
-    <string name="menu_tile_secured">Auf gesichertem Sperrbildschirm anzeigen</string>
-    <string name="tile_hidden_locked">Vom Sperrbildschirm versteckt</string>
-    <string name="tile_hidden_secured">Vom sicheren Sperrbildschirm versteckt</string>
-    <string name="tile_shown_locked_only">Nur im Sperrbildschirm anzeigen</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Regel für direktes Entsperren</string>
@@ -1826,9 +1799,6 @@
 
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Skalierungskorrektur</string>
-    
-        <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">Timeout</string>
 
    <!-- UNC: Notification lock screen visibility -->
     <string name="pref_lc_notif_visibility_ls_title">Sperrbildschirm Sichtbarkeit</string>
@@ -1917,18 +1887,6 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Zeige Statusnachricht</string>
 
-    <!-- Xperia tiles -->
-    <string name="qs_tile_xperia_sync">Xperia Auto-sync Daten</string>
-    <string name="qs_tile_xperia_roaming">Xperia Datenroaming</string>
-    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
-    <string name="qs_tile_xperia_lte">Xperia LTE</string>
-    <string name="qs_tile_xperia_datatraffic">Xperia Mobile Daten</string>
-    <string name="qs_tile_xperia_screenmirroring">Xperia Screen Mirroring</string>
-    <string name="qs_tile_xperia_throw">Xperia Throw</string>
-    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
-    <string name="qs_tile_xperia_tethering">Xperia Tethering</string>
-    <string name="qs_tile_xperia_detectusbdevice">Xperia USB-Gerät Erkennung</string>
-
     <!-- Navbar custom key icon style -->
     <string name="pref_navbar_custom_key_icon_style_title">Stil des Symbols</string>
     <string name="ncki_icon_style1">6 Punkte</string>
@@ -1953,9 +1911,6 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Ton für drahtloses Laden</string>
     <string name="stock_wireless_sound">Standardton für drahtlosen Laden</string>
-
-    <!-- QS: Moto Data tile -->
-    <string name="qs_tile_moto_data">Daten (Moto)</string>
 
         <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Dialer</string>

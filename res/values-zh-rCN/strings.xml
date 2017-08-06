@@ -88,13 +88,10 @@
     <string name="qs_tile_gps">位置信息</string>
     <string name="qs_tile_gps_slimkat">位置（SlimKat风格）</string>
     <string name="qs_tile_gps_alt">GPS（CM风格）</string>
-    <string name="qs_tile_mobile_data">移动数据</string>
     <string name="qs_tile_network_mode">网络模式</string>
     <string name="qs_tile_data_usage">数据使用</string>
-    <string name="qs_tile_autorotation">自动旋转</string>
     <string name="qs_tile_sync">同步</string>
     <string name="qs_tile_wifi_ap">Wi-Fi接入点</string>
-    <string name="qs_tile_torch_aosp">手电筒(原厂)</string>
     <string name="qs_tile_torch_gb">手电筒(GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">睡眠</string>
@@ -105,12 +102,9 @@
     <string name="qs_tile_screenshot">屏幕截图</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB共享</string>
-    <string name="qs_tile_music">音乐</string>
     <string name="qs_tile_smart_radio">智能网络</string>
     <string name="qs_tile_lock_screen">锁屏</string>
-    <string name="qs_tile_inversion">反转</string>
     <string name="qs_tile_battery">电量</string>
-    <string name="qs_tile_dnd">请勿打扰</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">颜色选择器</string>
@@ -1390,9 +1384,6 @@
     <string name="lc_active_screen_mode_disabled">停用</string>
     <string name="lc_active_screen_mode_nothing">仅唤醒屏幕</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">投射屏幕</string>
-    
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">启用通知管理默认设置为每个应用程序设置自己的应用程序</string>
@@ -1406,15 +1397,9 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">自定义操作</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">数据使用 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">拔出充电器声音</string>
 
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">音量情景</string>
-    
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">修复MTK特性</string>
     <string name="pref_cat_mtk_fixes_summary">包含各种与联发科芯片的特性修复，仅在需要时使用</string>
@@ -1709,9 +1694,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">蓝牙瓷砖设置</string>
 
-    <!-- MTK tiles: HotKnot -->
-    <string name="qs_tile_hotknot">HotKnot</string>
-
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">禁用网络类型指示器</string>
     <string name="pref_signal_cluster_dnti_summary">需要重新启动</string>
@@ -1719,15 +1701,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">关闭\"无SIM\"图标</string>
     <string name="pref_signal_cluster_nosim_summary">需要重新启动</string>
-
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">双模式</string>
-    <string name="menu_tile_locked">在锁屏显示</string>
-    <string name="menu_tile_locked_only">仅在锁屏</string>
-    <string name="menu_tile_secured">在安全锁屏显示</string>
-    <string name="tile_hidden_locked">从锁屏隐藏</string>
-    <string name="tile_hidden_secured">从安全锁屏隐藏</string>
-    <string name="tile_shown_locked_only">仅在锁屏时显示</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">直接解锁策略</string>
@@ -1852,9 +1825,6 @@
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">修正角度</string>
 
-    <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">超时</string>
-
     <!-- UNC: Notification lock screen visibility -->
     <string name="pref_lc_notif_visibility_ls_title">锁定屏幕可见性</string>
     <string name="lc_notif_visibility_ls_default">默认</string>
@@ -1942,18 +1912,6 @@
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">显示状态消息</string>
-    
-    <!-- Xperia tiles -->
-    <string name="qs_tile_xperia_sync">Xperia数据自动同步</string>
-    <string name="qs_tile_xperia_roaming">Xperia数据漫游</string>
-    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
-    <string name="qs_tile_xperia_lte">Xperia LTE</string>
-    <string name="qs_tile_xperia_datatraffic">Xperia移动数据</string>
-    <string name="qs_tile_xperia_screenmirroring">Xperia屏幕镜像</string>
-    <string name="qs_tile_xperia_throw">Xperia屏幕投射</string>
-    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
-    <string name="qs_tile_xperia_tethering">Xperia Tethering</string>
-    <string name="qs_tile_xperia_detectusbdevice">Xperia检测USB设备</string>
 
     <!-- Navbar custom key icon style -->
     <string name="pref_navbar_custom_key_icon_style_title">图标风格</string>
@@ -1980,9 +1938,6 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">无线充电声音</string>
     <string name="stock_wireless_sound">原厂声音</string>
-	
-    <!-- QS: Moto Data tile -->
-    <string name="qs_tile_moto_data">数据(Moto)</string>
 
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">拨号器</string>
@@ -2034,14 +1989,7 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">切换快速设置面板</string>
     <string name="qs_panel_collapse">折叠快速设置面板</string>
-	
-    <!-- QS: OP3T tiles -->
-    <string name="qs_tile_op3t_night_mode">一加3T夜间模式</string>
-    <string name="qs_tile_op3t_buttons">一加3T按钮</string>
-    <string name="qs_tile_op3t_vpn">一加3T VPN</string>
-    <string name="qs_tile_op3t_dataswitch">一加3T数据开关</string>
-    <string name="qs_tile_op3t_powersaving">一加3T省电</string>
-	
+
     <!-- Lockscreen shorcuts: Show badges -->
     <string name="pref_lockscreen_shortcuts_show_badges_title">显示标记</string>
     <string name="pref_lockscreen_shortcuts_show_badges_summary">显示包含通知计数标记</string>

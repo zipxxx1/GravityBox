@@ -81,10 +81,8 @@
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (Στυλ CM)</string>
-    <string name="qs_tile_mobile_data">Δεδομένα</string>
     <string name="qs_tile_network_mode">Λειτουργία δικτύου</string>
     <string name="qs_tile_data_usage">Χρήση δεδομένων</string>
-    <string name="qs_tile_autorotation">Αυτόματη περιστροφή</string>
     <string name="qs_tile_sync">Συγχρονισμός</string>
     <string name="qs_tile_wifi_ap">Σημείο πρόσβασης Wi-Fi</string>
     <string name="qs_tile_torch_gb">Φακός</string>
@@ -97,7 +95,6 @@
     <string name="qs_tile_screenshot">Στιγμιότυπο οθόνης</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
-    <string name="qs_tile_music">Μουσική</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Επιλογέας χρώματος</string>

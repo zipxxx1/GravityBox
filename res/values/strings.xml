@@ -90,13 +90,10 @@
     <string name="qs_tile_gps">Location</string>
     <string name="qs_tile_gps_slimkat">Location (SlimKat style)</string>
     <string name="qs_tile_gps_alt">GPS (CM style)</string>
-    <string name="qs_tile_mobile_data">Mobile Data</string>
     <string name="qs_tile_network_mode">Network Mode</string>
     <string name="qs_tile_data_usage">Cellular</string>
-    <string name="qs_tile_autorotation">Auto Rotation</string>
     <string name="qs_tile_sync">Synchronization</string>
     <string name="qs_tile_wifi_ap">Hotspot</string>
-    <string name="qs_tile_torch_aosp">Torch (Stock)</string>
     <string name="qs_tile_torch_gb">Torch (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Sleep</string>
@@ -107,12 +104,9 @@
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
-    <string name="qs_tile_music">Music</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Lock screen</string>
-    <string name="qs_tile_inversion">Inversion</string>
     <string name="qs_tile_battery">Battery</string>
-    <string name="qs_tile_dnd">Do not disturb</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
@@ -1392,9 +1386,6 @@
     <string name="lc_active_screen_mode_disabled">Disabled</string>
     <string name="lc_active_screen_mode_nothing">Turn screen on only</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Cast screen</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Manages default settings of notifications for all apps that have no own per-app settings enabled</string>
@@ -1408,14 +1399,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Custom action</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Cellular 2</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Charger unplugged sound</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Audio Profile</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">MTK specific fixes</string>
@@ -1711,9 +1696,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">BlueTooth tile settings</string>
 
-    <!-- MTK tiles: HotKnot -->
-    <string name="qs_tile_hotknot">HotKnot</string>
-
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Disable network type indicators</string>
     <string name="pref_signal_cluster_dnti_summary">Requires reboot</string>
@@ -1721,15 +1703,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Disable \"No SIM\" icon</string>
     <string name="pref_signal_cluster_nosim_summary">Requires reboot</string>
-
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Dual mode</string>
-    <string name="menu_tile_locked">Show in lock screen</string>
-    <string name="menu_tile_locked_only">Only in lock screen</string>
-    <string name="menu_tile_secured">Show in secured lock screen</string>
-    <string name="tile_hidden_locked">Hidden from lock screen</string>
-    <string name="tile_hidden_secured">Hidden from secured lock screen</string>
-    <string name="tile_shown_locked_only">Shows only in lock screen</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Direct unlock policy</string>
@@ -1854,9 +1827,6 @@
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Scale correction</string>
 
-    <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">Timeout</string>
-
     <!-- UNC: Notification lock screen visibility -->
     <string name="pref_lc_notif_visibility_ls_title">Lock screen visibility</string>
     <string name="lc_notif_visibility_ls_default">Default</string>
@@ -1945,18 +1915,6 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Show status message</string>
 
-    <!-- Xperia tiles -->
-    <string name="qs_tile_xperia_sync">Xperia Auto-sync data</string>
-    <string name="qs_tile_xperia_roaming">Xperia Data roaming</string>
-    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
-    <string name="qs_tile_xperia_lte">Xperia LTE</string>
-    <string name="qs_tile_xperia_datatraffic">Xperia Mobile data</string>
-    <string name="qs_tile_xperia_screenmirroring">Xperia Screen mirroring</string>
-    <string name="qs_tile_xperia_throw">Xperia Throw</string>
-    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
-    <string name="qs_tile_xperia_tethering">Xperia Tethering</string>
-    <string name="qs_tile_xperia_detectusbdevice">Xperia Detect USB device</string>
-
     <!-- Navbar custom key icon style -->
     <string name="pref_navbar_custom_key_icon_style_title">Icon style</string>
     <string name="ncki_icon_style1">6-dot</string>
@@ -1982,9 +1940,6 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Wireless charging sound</string>
     <string name="stock_wireless_sound">Stock wireless sound</string>
-
-    <!-- QS: Moto Data tile -->
-    <string name="qs_tile_moto_data">Data (Moto)</string>
 
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Dialer</string>
@@ -2036,13 +1991,6 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">Toggle QuickSettings panel</string>
     <string name="qs_panel_collapse">Collapse QuickSettings panel</string>
-
-    <!-- QS: OP3T tiles -->
-    <string name="qs_tile_op3t_night_mode">OP3T Night mode</string>
-    <string name="qs_tile_op3t_buttons">OP3T Buttons</string>
-    <string name="qs_tile_op3t_vpn">OP3T VPN</string>
-    <string name="qs_tile_op3t_dataswitch">OP3T Data switch</string>
-    <string name="qs_tile_op3t_powersaving">OP3T Power saving</string>
 
     <!-- Lockscreen shorcuts: Show badges -->
     <string name="pref_lockscreen_shortcuts_show_badges_title">Show badges</string>

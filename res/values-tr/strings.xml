@@ -60,13 +60,10 @@
     <string name="qs_tile_gps">Konum</string>
     <string name="qs_tile_gps_slimkat">Konum (SlimKat stili)</string>
     <string name="qs_tile_gps_alt">GPS (CM stili)</string>
-    <string name="qs_tile_mobile_data">Mobil Veri</string>
     <string name="qs_tile_network_mode">Ağ Modu</string>
     <string name="qs_tile_data_usage">Veri Kullanımı</string>
-    <string name="qs_tile_autorotation">Ekran Döndürme</string>
     <string name="qs_tile_sync">Senkronizasyon</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Erişim Noktası</string>
-    <string name="qs_tile_torch_aosp">Fener (Stok)</string>
     <string name="qs_tile_torch_gb">Fener (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Uyku</string>
@@ -77,12 +74,9 @@
     <string name="qs_tile_screenshot">Ekran Görüntüsü</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
-    <string name="qs_tile_music">Müzik</string>
     <string name="qs_tile_smart_radio">Akıllı Radyo</string>
     <string name="qs_tile_lock_screen">Ekran Kilidi</string>
-    <string name="qs_tile_inversion">Ters Çevir</string>
     <string name="qs_tile_battery">Pil</string>
-    <string name="qs_tile_dnd">Rahatsız Etme</string>
     <string name="dialog_color_picker">Renk Seçici</string>
     <string name="press_color_to_apply">Uygulamak için renge dokunun</string>
     <string name="pref_cat_statusbar_title">Durum çubuğu iyileştirmeleri</string>
@@ -873,7 +867,6 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="pref_lc_active_screen_mode_title">Aktif Ekran modu</string>
     <string name="lc_active_screen_mode_disabled">Devre dışı</string>
     <string name="lc_active_screen_mode_nothing">Sadece ekranı aç</string>
-    <string name="qs_tile_remote_display">Yayınlama Ekranı</string>
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Kendine özel ayarı olmayan tüm uygulamaların varsayılan bildirim ayarlarını yönetir</string>
     <string name="pref_unc_perapp_settings_title">Uygulamaya özel ayarlar</string>
@@ -883,9 +876,7 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
     <string name="pref_unc_quiet_hours_summary">Bildirimler için Sessiz saatleri yönetir</string>
     <string name="hwkey_action_custom">Özel hareket</string>
-    <string name="qs_tile_data_usage_2">Veri Kullanımı 2</string>
     <string name="pref_charger_unplugged_sound_title">Şarj cihazı çıkarıldı sesi</string>
-    <string name="qs_tile_audio_profile">Ses Profili</string>
     <string name="pref_cat_mtk_fixes_title">MTK iyileştirmeleri</string>
     <string name="pref_cat_mtk_fixes_summary">MediaTek iyileştirmelerini içerir. Gerekirse kullanınız.</string>
     <string name="pref_mtk_fix_dev_opts_title">Gelişmiş geliştirici seçenekleri</string>
@@ -1048,18 +1039,10 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_pie_control_trigind_color_title">Tetikleyici göstergesi rengi</string>
     <string name="pref_cat_qs_wifi_tile_title">WiFi karesi ayarları</string>
     <string name="pref_cat_qs_bt_tile_title">BlueTooth karesi ayarları</string>
-    <string name="qs_tile_hotknot">HotKnot</string>
     <string name="pref_signal_cluster_dnti_title">Ağ tipi göstergelerini devre dışı bırak</string>
     <string name="pref_signal_cluster_dnti_summary">Yeniden başlatma gerektirir</string>
     <string name="pref_signal_cluster_nosim_title">\"SIM Yok\" simgesini devre dışı bırak</string>
     <string name="pref_signal_cluster_nosim_summary">Yeniden başlatma gerektirir</string>
-    <string name="menu_tile_dual">Çift mod</string>
-    <string name="menu_tile_locked">Kilit ekranında göster</string>
-    <string name="menu_tile_locked_only">Sadece kilit ekranında</string>
-    <string name="menu_tile_secured">Güvenli kilit ekranında göster</string>
-    <string name="tile_hidden_locked">Kilit ekranında gizli</string>
-    <string name="tile_hidden_secured">Güvenli kilit ekranında gizli</string>
-    <string name="tile_shown_locked_only">Sadece kilit ekranında gösterir</string>
     <string name="pref_lockscreen_direct_unlock_policy_title">Direkt kilit açma ilkesi</string>
     <string name="permission_denied_msg">Bazı izinleri reddetmeye karar verdiniz. Bunun ilgili özelliklerin çalışmasını engelleyeceğini unutmayın.</string>
     <string name="permission_denied_hide_title">Tekrar gösterme</string>
@@ -1138,7 +1121,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_battery_tile_temp_title">Sıcaklığı göster</string>
     <string name="pref_battery_tile_voltage_title">Gerilimi göster</string>
     <string name="pref_qs_scale_correction_title">Ölçek düzeltme</string>
-    <string name="qs_tile_timeout">Zaman aşımı</string>
     <string name="pref_lc_notif_visibility_ls_title">Kilit ekranı görünürlüğü</string>
     <string name="lc_notif_visibility_ls_default">Varsayılan</string>
     <string name="lc_notif_visibility_ls_clearable">Temizlenebilir bildirimleri gizle</string>
@@ -1185,16 +1167,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="hotspot_off">Hotspot kapalı</string>
     <string name="pref_sb_hide_vibrate_icon_title">Titreşim simgesini gizle</string>
     <string name="shortcut_show_toast">Durum mesajını göster</string>
-    <string name="qs_tile_xperia_sync">Xperia Oto-veri senk</string>
-    <string name="qs_tile_xperia_roaming">Xperia Veri dolaşımı</string>
-    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
-    <string name="qs_tile_xperia_lte">Xperia LTE</string>
-    <string name="qs_tile_xperia_datatraffic">Xperia Mobil veri</string>
-    <string name="qs_tile_xperia_screenmirroring">Xperia Ekran yansıtma</string>
-    <string name="qs_tile_xperia_throw">Xperia Throw</string>
-    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
-    <string name="qs_tile_xperia_tethering">Xperia Tethering</string>
-    <string name="qs_tile_xperia_detectusbdevice">Xperia USB aygıtı Algılama</string>
     <string name="pref_navbar_custom_key_icon_style_title">Simge stili</string>
     <string name="ncki_icon_style1">6-nokta</string>
     <string name="ncki_icon_style2">3-nokta</string>
@@ -1209,7 +1181,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_force_aosp_summary">Sistem, AOSP gibi davranır. Cihazınızda alternatif AOSP-tabanlı sistem çalıştırmanıza rağmen markalı sistem çalışıyor gibi tanımlandığında kullanın (yeniden başlatma gerektirir)</string>
     <string name="pref_charger_plugged_sound_wireless_title">Kablosuz şarj sesi</string>
     <string name="stock_wireless_sound">Stok kablosuz sesi</string>
-    <string name="qs_tile_moto_data">Veri (Moto)</string>
     <string name="pref_cat_phone_dialer_title">Çevirici</string>
     <string name="pref_qs_brightness_icon_title">Parlaklık simgesini göster</string>
     <string name="pref_qs_brightness_icon_summary">Geçerli parlaklık modunu belirten simgeyi gösterir. Tek basmada uyarlamalı parlaklığı,uzun basmada ekran ayarlarını açar.</string>
@@ -1243,13 +1214,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">Hızlı Ayarlar panelini aç/kapat</string>
     <string name="qs_panel_collapse">Hızlı Ayarlar panelini kapat</string>
-
-    <!-- QS: OP3T tiles -->
-    <string name="qs_tile_op3t_night_mode">OP3T Gece modu</string>
-    <string name="qs_tile_op3t_buttons">OP3T Düğmeler</string>
-    <string name="qs_tile_op3t_vpn">OP3T VPN</string>
-    <string name="qs_tile_op3t_dataswitch">OP3T Veri anahtarı</string>
-    <string name="qs_tile_op3t_powersaving">OP3T Güç tasarrufu</string>
 
     <!-- Lockscreen shorcuts: Show badges -->
     <string name="pref_lockscreen_shortcuts_show_badges_title">Rozetleri göster</string>

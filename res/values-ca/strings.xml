@@ -40,9 +40,7 @@
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
-    <string name="qs_tile_mobile_data">Dades mòbils</string>
     <string name="qs_tile_data_usage">Estadistiques de dades</string>
-    <string name="qs_tile_autorotation">Auto rotació</string>
     <string name="qs_tile_sync">Sincronització</string>
     <string name="qs_tile_wifi_ap">Punt d\'accés Wi-Fi</string>
     <string name="qs_tile_gravitybox">GravityBox</string>

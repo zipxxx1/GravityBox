@@ -88,13 +88,10 @@
     <string name="qs_tile_gps">Геоданные</string>
     <string name="qs_tile_gps_slimkat">Геоданные (стиль SlimKat)</string>
     <string name="qs_tile_gps_alt">Геоданные (стиль CM)</string>
-    <string name="qs_tile_mobile_data">Моб. данные</string>
     <string name="qs_tile_network_mode">Режим сети</string>
     <string name="qs_tile_data_usage">Мобильные данные</string>
-    <string name="qs_tile_autorotation">Автоповорот</string>
     <string name="qs_tile_sync">Синхронизация</string>
     <string name="qs_tile_wifi_ap">ТД Wi-Fi</string>
-    <string name="qs_tile_torch_aosp">Фонарик (сток)</string>
     <string name="qs_tile_torch_gb">Фонарик (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Сон</string>
@@ -105,12 +102,9 @@
     <string name="qs_tile_screenshot">Снимок экрана</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">Раздача по USB</string>
-    <string name="qs_tile_music">Музыка</string>
     <string name="qs_tile_smart_radio">Умное радио</string>
     <string name="qs_tile_lock_screen">Экран блокировки</string>
-    <string name="qs_tile_inversion">Инверсия</string>
     <string name="qs_tile_battery">Батарея</string>
-    <string name="qs_tile_dnd">Не беспокоить</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбор цвета</string>
@@ -1389,9 +1383,6 @@
     <string name="lc_active_screen_mode_disabled">Отключен</string>
     <string name="lc_active_screen_mode_nothing">Только включение экрана</string>
 
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Трансляция</string>
-
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">Управление параметрами по умолчанию уведомлений для всех приложений, для которых не применяются собственные настройки по приложениям</string>
@@ -1405,14 +1396,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Пользовательское действие</string>
 
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Мобильные данные 2</string>
-
    <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Звук при отключении ЗУ</string>
-
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">Профиль аудио</string>
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Исправления проблем MTK</string>
@@ -1708,9 +1693,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Параметры плитки BlueTooth</string>
 
-    <!-- MTK tiles: HotKnot -->
-    <string name="qs_tile_hotknot">HotKnot</string>
-
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Отключение индикаторов типа сети</string>
     <string name="pref_signal_cluster_dnti_summary">Необходима перезагрузка</string>
@@ -1718,15 +1700,6 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Отключить значок \"Нет SIM\"</string>
     <string name="pref_signal_cluster_nosim_summary">Необходима перезагрузка</string>
-
-    <!-- QS: tile options menu -->
-    <string name="menu_tile_dual">Двойной режим</string>
-    <string name="menu_tile_locked">На экр. блокировки</string>
-    <string name="menu_tile_locked_only">Только на экр. блокировки</string>
-    <string name="menu_tile_secured">На защищ. экране блокировки</string>
-    <string name="tile_hidden_locked">Скрыто с экрана блокировки</string>
-    <string name="tile_hidden_secured">Скрыто с защищенного экрана</string>
-    <string name="tile_shown_locked_only">Отображается только на экране блокировки</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Политика отображения разблокировки</string>
@@ -1851,9 +1824,6 @@
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Коррекция масштаба</string>
 
-    <!-- MTK tiles: Timeout -->
-    <string name="qs_tile_timeout">Задержка</string>
-
     <!-- UNC: Notification lock screen visibility -->
     <string name="pref_lc_notif_visibility_ls_title">Видимость на экр. блокировки</string>
     <string name="lc_notif_visibility_ls_default">По умолчанию</string>
@@ -1942,18 +1912,6 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Показать сообщение о состоянии</string>
 
-    <!-- Xperia tiles -->
-    <string name="qs_tile_xperia_sync">Xperia автосинх. данных</string>
-    <string name="qs_tile_xperia_roaming">Xperia роуминг данных</string>
-    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
-    <string name="qs_tile_xperia_lte">Xperia LTE</string>
-    <string name="qs_tile_xperia_datatraffic">Xperia моб. данные</string>
-    <string name="qs_tile_xperia_screenmirroring">Xperia зеркало экрана</string>
-    <string name="qs_tile_xperia_throw">Xperia Throw</string>
-    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
-    <string name="qs_tile_xperia_tethering">Xperia раздача</string>
-    <string name="qs_tile_xperia_detectusbdevice">Xperia обнаружение USB</string>
-
     <!-- Navbar custom key icon style -->
     <string name="pref_navbar_custom_key_icon_style_title">Стиль значка</string>
     <string name="ncki_icon_style1">6 точек</string>
@@ -1979,9 +1937,6 @@
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Звук беспроводной зарядки</string>
     <string name="stock_wireless_sound">Стоковый звук беспроводной зарядки</string>
-
-    <!-- QS: Moto Data tile -->
-    <string name="qs_tile_moto_data">Данные (Moto)</string>
 
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Набор номера</string>
@@ -2033,13 +1988,6 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">Включить панель быстрых настроек</string>
     <string name="qs_panel_collapse">Свернуть панель быстрых настроек</string>
-	
-    <!-- QS: OP3T tiles -->
-    <string name="qs_tile_op3t_night_mode">OP3T ночной режим</string>
-    <string name="qs_tile_op3t_buttons">OP3T кнопки</string>
-    <string name="qs_tile_op3t_vpn">OP3T VPN</string>
-    <string name="qs_tile_op3t_dataswitch">OP3T переключ. данных</string>
-    <string name="qs_tile_op3t_powersaving">OP3T энергосбережение</string>
 
     <!-- Lockscreen shorcuts: Show badges -->
     <string name="pref_lockscreen_shortcuts_show_badges_title">Показать значки</string>

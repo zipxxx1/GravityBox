@@ -76,13 +76,10 @@
     <string name="qs_tile_gps">位置情報</string>
     <string name="qs_tile_gps_slimkat">位置情報 (SlimKatスタイル)</string>
     <string name="qs_tile_gps_alt">GPS (CMスタイル)</string>
-    <string name="qs_tile_mobile_data">モバイルデータ</string>
     <string name="qs_tile_network_mode">ネットワークモード</string>
     <string name="qs_tile_data_usage">モバイルデータ</string>
-    <string name="qs_tile_autorotation">画面の自動回転</string>
     <string name="qs_tile_sync">自動同期</string>
     <string name="qs_tile_wifi_ap">ホットスポット</string>
-    <string name="qs_tile_torch_aosp">ライト (標準)</string>
     <string name="qs_tile_torch_gb">ライト (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">スリープ</string>
@@ -93,10 +90,8 @@
     <string name="qs_tile_screenshot">スクリーンショット</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_usb_tethering">USBテザリング</string>
-    <string name="qs_tile_music">音楽</string>
     <string name="qs_tile_smart_radio">スマートネットワーク</string>
     <string name="qs_tile_lock_screen">ロック画面</string>
-    <string name="qs_tile_inversion">反転</string>
     <!-- Color Picker -->
     <string name="dialog_color_picker">カラーピッカー</string>
     <string name="press_color_to_apply">色を押すと適用します。</string>
@@ -1136,8 +1131,6 @@
     <string name="pref_lc_active_screen_mode_title">アクティブスクリーンモード</string>
     <string name="lc_active_screen_mode_disabled">無効</string>
     <string name="lc_active_screen_mode_nothing">画面点灯のみ</string>
-    <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">画面のキャスト</string>
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">個別設定が有効でない全てのアプリに対する標準設定を管理します。</string>
@@ -1149,12 +1142,8 @@
     <string name="pref_unc_quiet_hours_summary">通知のお休みモードの設定を管理します。</string>
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">カスタムアクション</string>
-    <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">モバイルデータ2</string>
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">電源接続解除時のサウンド</string>
-    <!-- MTK tiles: Audio profile -->
-    <string name="qs_tile_audio_profile">オーディオプロファイル</string>
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">MTK向けの修正</string>
     <string name="pref_cat_mtk_fixes_summary">MediaTek向けの修正を含んでいます。必要な場合のみ有効にしてください。</string>
