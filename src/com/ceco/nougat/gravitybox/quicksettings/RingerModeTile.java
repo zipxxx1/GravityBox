@@ -135,6 +135,12 @@ public class RingerModeTile extends QsTile {
     }
 
     @Override
+    public boolean handleSecondaryClick() {
+        toggleState();
+        return true;
+    }
+
+    @Override
     public boolean handleLongClick() {
         if (mQuickMode && !Utils.isOxygenOs35Rom()) {
             showDetail(true);
