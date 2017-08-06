@@ -347,6 +347,7 @@ public class NetworkModeTile extends QsTile {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             setNetworkMode(((NetworkMode) parent.getItemAtPosition(position)).value);
+            showDetail(false);
         }
 
         @Override
