@@ -338,6 +338,7 @@ public class StayAwakeTile extends QsTile {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             ScreenTimeout st = (ScreenTimeout) parent.getItemAtPosition(position);
             setScreenOffTimeout(st.mMillis);
+            showDetail(false);
         }
 
         @Override
