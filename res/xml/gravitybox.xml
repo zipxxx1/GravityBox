@@ -286,7 +286,7 @@
                     <CheckBoxPreference 
                         android:key="pref_battery_tile_temp"
                         android:title="@string/pref_battery_tile_temp_title"
-                        android:defaultValue="true" />
+                        android:defaultValue="false" />
 
                     <ListPreference
                         android:key="pref_battery_tile_temp_unit" 
@@ -299,7 +299,7 @@
                     <CheckBoxPreference 
                         android:key="pref_battery_tile_voltage"
                         android:title="@string/pref_battery_tile_voltage_title"
-                        android:defaultValue="true" />
+                        android:defaultValue="false" />
 
                 </PreferenceScreen>
 
