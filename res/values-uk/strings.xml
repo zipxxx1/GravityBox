@@ -1617,10 +1617,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Плитка стільника</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Значок вимкнених даних</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Показ значку, якщо мобільні мережі вимкнено</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Ярлики</string>
     <string name="pref_lockscreen_shortcuts_summary">Дозволити назначати ярлики екрану блокування</string>

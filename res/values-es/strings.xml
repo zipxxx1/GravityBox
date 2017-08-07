@@ -1612,10 +1612,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Celda de ajustes del teléfono</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Icono apagar datos</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Mostrar icono cuando los datos están apagados</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Accesos directos</string>
     <string name="pref_lockscreen_shortcuts_summary">Permite definir los accesos directos de la pantalla de bloqueo</string>

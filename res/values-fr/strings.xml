@@ -1615,10 +1615,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Paramètres touche cellulaire</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Icône données désactivées</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Affiche une icône lorsque les données mobiles sont désactivées</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Raccourcis</string>
     <string name="pref_lockscreen_shortcuts_summary">Permet de définir les raccourcis de l\'écran de déverrouillage</string>

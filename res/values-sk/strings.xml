@@ -1589,10 +1589,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Nastavenia dlaždice mobilného signálu</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Ikona vypnutých dát</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Zobrazí ikonu ak sú mobilné dáta vypnuté</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Skratky</string>
     <string name="pref_lockscreen_shortcuts_summary">Umožňuje definovať skratky obrazovky uzamknutia</string>

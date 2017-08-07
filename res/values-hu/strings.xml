@@ -1591,10 +1591,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Adat használat csempe beállítások</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Adatkapcsolat ki ikon</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Ikon megjelenítése letiltott mobil adatkapcsolatnál</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Alkalmazás parancsikonok</string>
     <string name="pref_lockscreen_shortcuts_summary">Lehetővé teszi a zárképernyőn megjelenő alkalmazás parancsikonok meghatározását</string>

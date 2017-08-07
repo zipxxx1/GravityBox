@@ -1619,10 +1619,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">蜂窝瓷砖设置</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">关闭数据图标</string>
-    <string name="pref_cell_tile_data_off_icon_summary">当移动数据禁用时显示图标</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">快捷方式</string>
     <string name="pref_lockscreen_shortcuts_summary">允许定义锁屏快捷方式</string>

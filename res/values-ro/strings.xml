@@ -1580,10 +1580,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Setările dalelor celulare</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Pictograma date dezactivate</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Afișează pictograma atunci când datele mobile sunt dezactivate</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Comenzi rapide</string>
     <string name="pref_lockscreen_shortcuts_summary">Permite definirea comenzilor rapide pentru ecranul de blocare</string>

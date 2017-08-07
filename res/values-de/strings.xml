@@ -1599,10 +1599,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Telefon Kachel</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Datensymbol aus</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Symbol anzeigen, wenn mobile Daten deaktiviert sind</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Verknüpfungen</string>
     <string name="pref_lockscreen_shortcuts_summary">Erlaubt Verknüpfungen zum Sperrbildschirm hinzuzufügen</string>

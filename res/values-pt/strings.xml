@@ -1574,10 +1574,6 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Configs. painel de dados móveis</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Ícone de dados desativados</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Mostra um ícone quando os dados móveis estão desativados</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Atalhos</string>
     <string name="pref_lockscreen_shortcuts_summary">Permite definir atalhos na tela de bloqueio</string>

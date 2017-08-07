@@ -1611,10 +1611,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Cài đặt tile Ô</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Biểu tượng dữ liệu tắt</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Hiện biểu tượng khi dữ liệu bị tắt</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Phím tắt</string>
     <string name="pref_lockscreen_shortcuts_summary">Cho phép đặt phím tắt ở màn hình khóa</string>

@@ -1570,10 +1570,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Ustawienia kafelka sieci komórkowej</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Ikona wyłączonej transmisji danych</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Pokazuje ikonę gdy transmisja danych jest wyłączona</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Skróty</string>
     <string name="pref_lockscreen_shortcuts_summary">Umożliwia definiowanie skrótów ekranu blokady</string>

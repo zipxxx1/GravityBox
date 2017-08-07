@@ -832,8 +832,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_BBAR_COLOR_CHARGING = "batteryBarColorCharging";
 
     public static final String PREF_CAT_KEY_CELL_TILE = "pref_cat_qs_cell_tile";
-    public static final String PREF_KEY_CELL_TILE_DATA_OFF_ICON = "pref_cell_tile_data_off_icon";
-    public static final String EXTRA_CELL_TILE_DATA_OFF_ICON = "cellTileDataOffIcon";
     public static final String PREF_KEY_CELL_TILE_DATA_TOGGLE = "pref_cell_tile_data_toggle";
     public static final String EXTRA_CELL_TILE_DATA_TOGGLE = "cellTileDataToggle";
 
@@ -3387,9 +3385,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_SIGNAL_CLUSTER_NARROW)) {
                 intent.setAction(ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
                 intent.putExtra(EXTRA_SC_NARROW, prefs.getBoolean(key, false));
-            } else if (key.equals(PREF_KEY_CELL_TILE_DATA_OFF_ICON)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_CELL_TILE_DATA_OFF_ICON, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_CELL_TILE_DATA_TOGGLE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_CELL_TILE_DATA_TOGGLE, prefs.getString(key, "DISABLED"));

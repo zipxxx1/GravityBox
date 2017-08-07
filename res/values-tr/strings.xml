@@ -1004,8 +1004,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="lc_notif_visibility_private">Hassas içeriği gizle</string>
     <string name="lc_notif_visibility_secret">Bildirimi gizle</string>
     <string name="pref_cat_qs_cell_tile_title">Hücresel veri karesi ayarları</string>
-    <string name="pref_cell_tile_data_off_icon_title">Veri kapalı simgesi</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Mobil veri kapalıyken simge gösterir</string>
     <string name="pref_lockscreen_shortcuts_title">Kısayollar</string>
     <string name="pref_lockscreen_shortcuts_summary">Kilit ekranı kısayolları tanımlamayı sağlar</string>
     <string name="pref_lockscreen_shortcuts_safe_launch_title">Güvenli başlatma</string>

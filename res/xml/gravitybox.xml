@@ -307,12 +307,6 @@
                     android:key="pref_cat_qs_cell_tile"
                     android:title="@string/pref_cat_qs_cell_tile_title">
 
-                    <CheckBoxPreference 
-                        android:key="pref_cell_tile_data_off_icon"
-                        android:title="@string/pref_cell_tile_data_off_icon_title"
-                        android:summary="@string/pref_cell_tile_data_off_icon_summary"
-                        android:defaultValue="false" />
-
                     <ListPreference
                         android:key="pref_cell_tile_data_toggle" 
                         android:title="@string/pref_cell_tile_data_toggle_title"

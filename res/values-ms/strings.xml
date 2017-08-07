@@ -1614,10 +1614,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Tetapan tile selular</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Ikon data tidak aktif</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Tunjukkan ikon ketika data paket tidak aktif</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Jalan pintas</string>
     <string name="pref_lockscreen_shortcuts_summary">Aktifkan jalan pintas untuk skrin kunci</string>

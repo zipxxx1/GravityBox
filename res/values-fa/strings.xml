@@ -1003,8 +1003,6 @@
 <string name="lc_notif_visibility_private">پنهان‌سازی محتوای حساس</string>
 <string name="lc_notif_visibility_secret">پنهان‌سازی اعلان</string>
 <string name="pref_cat_qs_cell_tile_title">تنظیمات کاشی شبکه همراه</string>
-<string name="pref_cell_tile_data_off_icon_title">آیکون خاموش کردن داده‌های همراه</string>
-<string name="pref_cell_tile_data_off_icon_summary">نمایش آیکون هنگام غیرفعال بودن داده‌های همراه</string>
 <string name="pref_lockscreen_shortcuts_title">میانبرها</string>
 <string name="pref_lockscreen_shortcuts_summary">تعیین میانبرهای صفحه قفل</string>
 <string name="pref_lockscreen_shortcuts_safe_launch_title">راه‌اندازی امن</string>

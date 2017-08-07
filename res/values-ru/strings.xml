@@ -1618,10 +1618,6 @@
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Настройки плитки моб. сети</string>
 
-    <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Значок откл. данных</string>
-    <string name="pref_cell_tile_data_off_icon_summary">Отображение значка, если мобильные данные отключены</string>
-
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">Ярлыки</string>
     <string name="pref_lockscreen_shortcuts_summary">Назначение ярлыков экрана блокировки</string>
