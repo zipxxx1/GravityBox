@@ -1562,10 +1562,6 @@
     <string name="keyguard_percent_text_hide">Sembunyi</string>
     <string name="battery_percent_text_size_default">Tetapan asal</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Guna ikon yang lebih besar</string>
-    <string name="pref_navbar_larger_icons_summary">Perlukan reboot</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Aktifkan soft reboot</string>
     <string name="pref_reboot_allow_softreboot_summary">Amaran! soft reboot boleh menyebabkan peranti

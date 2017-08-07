@@ -1519,10 +1519,6 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="keyguard_percent_text_hide">Ocultar</string>
     <string name="battery_percent_text_size_default">Padrão</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Usar ícones grandes</string>
-    <string name="pref_navbar_larger_icons_summary">Necessário reiniciar</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Permitir reinício rápido</string>
     <string name="pref_reboot_allow_softreboot_summary">Nota: o reinício rápido pode causar consumo de bateria

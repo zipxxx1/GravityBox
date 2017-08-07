@@ -1565,10 +1565,6 @@
     <string name="keyguard_percent_text_hide">Скрыть</string>
     <string name="battery_percent_text_size_default">По умолчанию</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Увеличенные значки</string>
-    <string name="pref_navbar_larger_icons_summary">Необходима перезагрузка</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Разрешить мягкую перезагрузку</string>
     <string name="pref_reboot_allow_softreboot_summary">Имейте в виду, что мягкая перезагрузка может вызвать 

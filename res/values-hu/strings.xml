@@ -1543,10 +1543,6 @@
     <string name="keyguard_percent_text_hide">Elrejt</string>
     <string name="battery_percent_text_size_default">Alapértelmezett</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Nagyobb ikonok használata</string>
-    <string name="pref_navbar_larger_icons_summary">Újraindítás szükséges</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Gyors újraindítás engedélyezése</string>
     <string name="pref_reboot_allow_softreboot_summary">Ne feledd, hogy a gyors újraindítás nem várt akku fogyasztást és instabilitási problémákat okozhat. Tapasztalat szerint jobb, ha mindig normál újraindítást alkalmazol.</string>

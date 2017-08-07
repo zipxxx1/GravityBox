@@ -1547,10 +1547,6 @@
     <string name="keyguard_percent_text_hide">Verbergen</string>
     <string name="battery_percent_text_size_default">Standard</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Große Symbole benutzen</string>
-    <string name="pref_navbar_larger_icons_summary">Neustart erforderlich</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Software-Neustart erlauben</string>
     <string name="pref_reboot_allow_softreboot_summary">Ein Software-Neustart kann erhöhten Stromverbrauch und Stabilitätsverlust verursachen. Der reguläre Neustart wird daher empfohlen.</string>

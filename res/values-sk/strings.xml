@@ -1535,10 +1535,6 @@
     <string name="keyguard_percent_text_hide">Skryť</string>
     <string name="battery_percent_text_size_default">Pôvodná</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Použiť väčšie ikony</string>
-    <string name="pref_navbar_larger_icons_summary">Vyžaduje reštart</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Povoliť softvérový reštart</string>
     <string name="pref_reboot_allow_softreboot_summary">Pozor, softvérový reštart môže spôsobovať neočakávané 

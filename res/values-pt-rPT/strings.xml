@@ -1525,10 +1525,6 @@
     <string name="keyguard_percent_text_hide">Ocultar</string>
     <string name="battery_percent_text_size_default">Predefinido</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Utilizar ícones grandes</string>
-    <string name="pref_navbar_larger_icons_summary">Necessário reiniciar</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Permitir reinício rápido</string>
     <string name="pref_reboot_allow_softreboot_summary">De notar que o reinício rápido pode causar problemas de instabilidade ou 

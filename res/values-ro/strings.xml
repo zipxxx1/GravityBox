@@ -1532,10 +1532,6 @@
     <string name="keyguard_percent_text_hide">Ascunde</string>
     <string name="battery_percent_text_size_default">Implicit</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Pictograme mai mari</string>
-    <string name="pref_navbar_larger_icons_summary">Necesită repornire</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Permiteți repornirea soft</string>
     <string name="pref_reboot_allow_softreboot_summary">Rețineți că repornirea soft poate cauza probleme neașteptate de descărcare a bateriei sau de instabilitate. Cea mai bună practică este să utilizați întotdeauna repornirea normală.</string>

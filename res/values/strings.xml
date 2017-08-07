@@ -1568,10 +1568,6 @@
     <string name="keyguard_percent_text_hide">Hide</string>
     <string name="battery_percent_text_size_default">Default</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Use larger icons</string>
-    <string name="pref_navbar_larger_icons_summary">Requires reboot</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Allow soft reboot</string>
     <string name="pref_reboot_allow_softreboot_summary">Note that soft reboot can cause 

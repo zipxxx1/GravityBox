@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -84,7 +84,6 @@ public class ModNavigationBar {
     private static boolean mHwKeysEnabled;
     private static boolean mCursorControlEnabled;
     private static boolean mDpadKeysVisible;
-    private static boolean mUseLargerIcons;
     private static boolean mHideImeSwitcher;
     private static PowerManager mPm;
     private static long mLastTouchMs;
@@ -248,7 +247,6 @@ public class ModNavigationBar {
             final Class<?> navbarTransitionsClass = XposedHelpers.findClass(CLASS_NAVBAR_TRANSITIONS, classLoader);
 
             mAlwaysShowMenukey = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_MENUKEY, false);
-            mUseLargerIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LARGER_ICONS, false);
 
             try {
                 mRecentsSingletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
@@ -934,40 +932,29 @@ public class ModNavigationBar {
     }
 
     private static ScaleType getIconScaleType(int index, int keyId) {
-        if (mUseLargerIcons) {
-            return ScaleType.FIT_CENTER;
+        ScaleType origScaleType = mNavbarViewInfo[index] == null ? ScaleType.CENTER :
+                mNavbarViewInfo[index].originalScaleType.get(keyId, ScaleType.CENTER);
+        if (index == 0) {
+            return (mNavbarHeight < 75 ? ScaleType.CENTER_INSIDE : origScaleType);
         } else {
-            ScaleType origScaleType = mNavbarViewInfo[index] == null ? ScaleType.CENTER :
-                    mNavbarViewInfo[index].originalScaleType.get(keyId, ScaleType.CENTER);
-            if (index == 0) {
-                return (mNavbarHeight < 75 ? ScaleType.CENTER_INSIDE : origScaleType);
-            } else {
-                boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
-                return (mNavbarWidth < 75 && hasVerticalNavbar ? ScaleType.CENTER_INSIDE :
-                    origScaleType);
-            }
+            boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
+            return (mNavbarWidth < 75 && hasVerticalNavbar ? ScaleType.CENTER_INSIDE :
+                origScaleType);
         }
     }
 
     private static int[] getIconPaddingPx(int index) {
         int[] p = new int[] { 0, 0, 0, 0 };
-
-        if (mUseLargerIcons) {
-            int paddingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 7.5f,
-                    mResources.getDisplayMetrics()));
-            p[0] = p[1] = p[2] = p[3] = paddingPx;
-        } else {
-            int paddingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5,
-                    mResources.getDisplayMetrics()));
-            boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
-            if (index == 0 && mNavbarHeight < 75) {
-                p[1] = paddingPx;
-                p[3] = paddingPx;
-            }
-            if (index == 1 && hasVerticalNavbar && mNavbarWidth < 75) {
-                p[0] = paddingPx;
-                p[2] = paddingPx;
-            }
+        int paddingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5,
+                mResources.getDisplayMetrics()));
+        boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
+        if (index == 0 && mNavbarHeight < 75) {
+            p[1] = paddingPx;
+            p[3] = paddingPx;
+        }
+        if (index == 1 && hasVerticalNavbar && mNavbarWidth < 75) {
+            p[0] = paddingPx;
+            p[2] = paddingPx;
         }
         return p;
     }

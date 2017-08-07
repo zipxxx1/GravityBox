@@ -1417,12 +1417,6 @@
                 android:entryValues="@array/autofade_show_keys_values"
                 android:defaultValue="NAVBAR" />
 
-            <CheckBoxPreference
-                android:key="pref_navbar_larger_icons"
-                android:title="@string/pref_navbar_larger_icons_title"
-                android:summary="@string/pref_navbar_larger_icons_summary"
-                android:defaultValue="false" />
-
         </PreferenceCategory>
 
         <PreferenceCategory

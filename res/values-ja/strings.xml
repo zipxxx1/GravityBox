@@ -1276,9 +1276,6 @@
     <string name="keyguard_percent_text_show_always">常に表示</string>
     <string name="keyguard_percent_text_hide">非表示</string>
     <string name="battery_percent_text_size_default">デフォルト</string>
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">大きめのアイコンを使う</string>
-    <string name="pref_navbar_larger_icons_summary">再起動が必要です。</string>
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">ソフトリブートを許可する</string>
     <string name="pref_reboot_allow_softreboot_summary">注意: ソフトリブートは

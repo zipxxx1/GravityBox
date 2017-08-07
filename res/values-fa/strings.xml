@@ -977,8 +977,6 @@
 <string name="keyguard_percent_text_show_always">همیشه نمایش بده</string>
 <string name="keyguard_percent_text_hide">پنهان</string>
 <string name="battery_percent_text_size_default">پیشفرض</string>
-<string name="pref_navbar_larger_icons_title">استفاده از آیکون‌های بزرگ</string>
-<string name="pref_navbar_larger_icons_summary">نیازمند راه‌اندازی مجدد</string>
 <string name="pref_reboot_allow_softreboot_title">راه‌اندازی نرم</string>
 <string name="pref_reboot_allow_softreboot_summary">توجه داشته باشید که راه اندازی مجدد نرم سبب تخلیه بیشتر باطری و یا بی‌ثباتی و مسائل غیرمنتظره میشود. بهترین راه همیشه استفاده از راه‌اندازی مجدد سیستم بصورت عادی ست.</string>
 <string name="gb_new_package_dialog_title">توجه</string>

@@ -1518,10 +1518,6 @@
     <string name="keyguard_percent_text_hide">Ukryj</string>
     <string name="battery_percent_text_size_default">Domyślny</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Użyj dużych ikon</string>
-    <string name="pref_navbar_larger_icons_summary">Wymaga ponownego uruchomienia</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Pozwól na miękki restart</string>
     <string name="pref_reboot_allow_softreboot_summary">Należy pamiętać, że miękki restart może powodować 

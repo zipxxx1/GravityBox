@@ -1565,10 +1565,6 @@
     <string name="keyguard_percent_text_hide">Приховати</string>
     <string name="battery_percent_text_size_default">Типово</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Збільшені значки</string>
-    <string name="pref_navbar_larger_icons_summary">Необхідне перезавантаження</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">М\'яке перезавантаження</string>
     <string name="pref_reboot_allow_softreboot_summary">Майте на увазі, що м\'яке перезавантаження може викликати підвищене споживання батареї чи нестабільність. Краще використовувати звичайне перезавантаження.</string>

@@ -1559,10 +1559,6 @@
     <string name="keyguard_percent_text_hide">Ẩn</string>
     <string name="battery_percent_text_size_default">Mặc định</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Dùng biểu tượng lớn hơn</string>
-    <string name="pref_navbar_larger_icons_summary">Cần khởi động lại</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Cho phép khởi động lại nhanh</string>
     <string name="pref_reboot_allow_softreboot_summary">Chú ý rằng khởi động lại nhanh có thể gây ra 

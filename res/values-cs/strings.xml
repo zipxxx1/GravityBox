@@ -1530,10 +1530,6 @@
     <string name="keyguard_percent_text_hide">Skrýt</string>
     <string name="battery_percent_text_size_default">Původní</string>
 
-    <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Použít větší ikony</string>
-    <string name="pref_navbar_larger_icons_summary">Vyžaduje restart</string>
-
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Povolit softwarový restart</string>
     <string name="pref_reboot_allow_softreboot_summary">Pozor, softwarový restart může způsobovat neočekávané 
