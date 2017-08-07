@@ -25,6 +25,7 @@ import android.content.res.Resources;
 import android.content.res.XModuleResources;
 import android.content.res.XResources;
 import android.media.AudioManager;
+import android.os.Build;
 import android.view.View;
 import android.widget.ImageButton;
 import com.ceco.nougat.gravitybox.R;
@@ -146,7 +147,8 @@ public class ModVolumePanel {
                 });
             }
 
-            XposedHelpers.findAndHookMethod(classVolumePanel, "shouldBeVisibleH",
+            XposedHelpers.findAndHookMethod(classVolumePanel, Build.VERSION.SDK_INT == 24 ?
+                    "isVisibleH" : "shouldBeVisibleH",
                     CLASS_VOLUME_ROW, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {

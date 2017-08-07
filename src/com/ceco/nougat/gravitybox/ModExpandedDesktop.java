@@ -27,6 +27,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.Surface;
@@ -411,15 +412,20 @@ public class ModExpandedDesktop {
                         final int sysui = getInt("mLastSystemUiFlags");
                         boolean immersiveSticky = (sysui & ViewConst.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) != 0;
 
-                        int displayWidth = (int)param.args[0];
-                        int displayHeight = (int)param.args[1];
-                        int displayRotation = (int)param.args[2];
-                        int uiMode = (int)param.args[3];
-                        int overscanLeft = (int)param.args[4];
-                        int overscanRight = (int)param.args[5];
-                        int overscanBottom = (int)param.args[6];
-                        Rect dcf = (Rect)param.args[7];
-                        boolean navVisible = (boolean)param.args[8];
+                        int paramIndex = 0;
+                        int displayWidth = (int)param.args[paramIndex++];
+                        int displayHeight = (int)param.args[paramIndex++];
+                        int displayRotation = (int)param.args[paramIndex++];
+                        int uiMode = (int)param.args[paramIndex++];
+                        int overscanLeft = Build.VERSION.SDK_INT == 24 ? 0 : (int)param.args[paramIndex++];
+                        int overscanRight = (int)param.args[paramIndex++];
+                        int overscanBottom = (int)param.args[paramIndex++];
+                        Rect dcf = (Rect)param.args[paramIndex++];
+                        paramIndex++; // navTranslucent param handled below
+                        boolean navVisible = (boolean)param.args[paramIndex++];
+                        boolean navAllowedHidden = (boolean) param.args[paramIndex++];
+                        boolean statusBarExpandedNotKeyguard = (boolean) param.args[paramIndex];
+
                         boolean navTranslucent = (sysui & 
                                 (ViewConst.NAVIGATION_BAR_TRANSLUCENT | ViewConst.NAVIGATION_BAR_TRANSPARENT)) != 0;
                         navTranslucent &= !immersiveSticky || 
@@ -427,8 +433,6 @@ public class ModExpandedDesktop {
                         if (!isKeyguardShowing()) {
                             navTranslucent &= (Boolean) mAreTranslucentBarsAllowed.invoke(param.thisObject);
                         }
-                        boolean navAllowedHidden = (boolean) param.args[10];
-                        boolean statusBarExpandedNotKeyguard = (boolean) param.args[11];
 
                         Object navBar = getObj("mNavigationBar");
                         if (navBar != null) {
@@ -438,9 +442,15 @@ public class ModExpandedDesktop {
                             // size.  We need to do this directly, instead of relying on
                             // it to bubble up from the nav bar, because this needs to
                             // change atomically with screen rotations.
-                            final int position = (int)XposedHelpers.callMethod(param.thisObject, "navigationBarPosition",
+                            final int position;
+                            if (Build.VERSION.SDK_INT == 24) {
+                                position = (boolean)XposedHelpers.callMethod(param.thisObject, "isNavigationBarOnBottom",
+                                        displayWidth, displayHeight) ? NavBarPosition.NAV_BAR_BOTTOM : NavBarPosition.NAV_BAR_RIGHT;
+                            } else {
+                                position = (int)XposedHelpers.callMethod(param.thisObject, "navigationBarPosition",
                                     displayWidth, displayHeight, displayRotation);
-                            setInt("mNavigationBarPosition", position);
+                                setInt("mNavigationBarPosition", position);
+                            }
                             if (position == NavBarPosition.NAV_BAR_BOTTOM) {
                                 // It's a system nav bar or a portrait screen; nav bar goes on bottom.
                                 int top = displayHeight - overscanBottom
@@ -745,13 +755,15 @@ public class ModExpandedDesktop {
                         }
                         Object winAttrs = XposedHelpers.callMethod(winCandidate, "getAttrs");
 
-                        if (XposedHelpers.getObjectField(winAttrs, "token") ==
-                                XposedHelpers.callMethod(getObj("mImmersiveModeConfirmation"), "getWindowToken")) {
-                            boolean isStatusBarKg = (boolean) XposedHelpers.callMethod(param.thisObject, "isStatusBarKeyguard");
-                            winCandidate = isStatusBarKg ? getObj("mStatusBar") : getObj("mTopFullscreenOpaqueWindowState");
-                            if (winCandidate == null) {
-                                param.setResult(0);
-                                return;
+                        if (Build.VERSION.SDK_INT > 24) {
+                            if (XposedHelpers.getObjectField(winAttrs, "token") ==
+                                    XposedHelpers.callMethod(getObj("mImmersiveModeConfirmation"), "getWindowToken")) {
+                                boolean isStatusBarKg = (boolean) XposedHelpers.callMethod(param.thisObject, "isStatusBarKeyguard");
+                                winCandidate = isStatusBarKg ? getObj("mStatusBar") : getObj("mTopFullscreenOpaqueWindowState");
+                                if (winCandidate == null) {
+                                    param.setResult(0);
+                                    return;
+                                }
                             }
                         }
                         final Object win = winCandidate;

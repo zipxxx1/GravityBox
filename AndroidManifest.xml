@@ -20,7 +20,7 @@
     android:versionName="7.0.0-alpha-01" >
 
     <uses-sdk
-        android:minSdkVersion="25"
+        android:minSdkVersion="24"
         android:maxSdkVersion="25"
         android:targetSdkVersion="25" />
 

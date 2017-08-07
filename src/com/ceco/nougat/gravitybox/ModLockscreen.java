@@ -722,7 +722,9 @@ public class ModLockscreen {
                     final Object lockPatternUtils = XposedHelpers.getObjectField(securityView, "mLockPatternUtils");
                     final Object lockSettings = XposedHelpers.callMethod(lockPatternUtils, "getLockSettings");
                     final int userId = mKgMonitor.getCurrentUserId();
-                    final Object response = XposedHelpers.callMethod(lockSettings, "checkPassword", entry, userId, null);
+                    final Object response = Build.VERSION.SDK_INT == 24 ?
+                            XposedHelpers.callMethod(lockSettings, "checkPassword", entry, userId) :
+                                XposedHelpers.callMethod(lockSettings, "checkPassword", entry, userId, null);
                     final int code = (int)XposedHelpers.callMethod(response, "getResponseCode");
                     if (code == 0) {
                         final Object callback = XposedHelpers.getObjectField(securityView, "mCallback");

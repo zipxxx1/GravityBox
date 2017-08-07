@@ -24,6 +24,7 @@ import com.ceco.nougat.gravitybox.ModPower;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.SystemClock;
@@ -230,7 +231,11 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
     public void dismissKeyguard() {
         if (mMediator != null) {
             try {
-                XposedHelpers.callMethod(mMediator, "dismiss", false);
+                if (Build.VERSION.SDK_INT == 24) {
+                    XposedHelpers.callMethod(mMediator, "dismiss");
+                } else {
+                    XposedHelpers.callMethod(mMediator, "dismiss", false);
+                }
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }

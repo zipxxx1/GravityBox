@@ -585,8 +585,6 @@ public class ModNavigationBar {
             ViewGroup endsGroup = (ViewGroup) mNavbarViewInfo[index]
                     .navButtons.findViewById(resId);
             mNavbarViewInfo[index].endsGroup = endsGroup;
-            mNavbarViewInfo[index].endsGroup.addView(dpadLeft, 0);
-            mNavbarViewInfo[index].endsGroup.addView(dpadRight);
 
             // center group
             resId = mResources.getIdentifier("center_group", "id", PACKAGE_NAME);
@@ -595,16 +593,20 @@ public class ModNavigationBar {
             mNavbarViewInfo[index].centerGroup = centerGroup;
 
             // find potential placeholder for custom key
-            View v = endsGroup.getChildAt(1);
+            View v = endsGroup.getChildAt(0);
             if (v instanceof Space) {
                 mNavbarViewInfo[index].customKeyPlaceHolder = v;
             } else {
-                v = endsGroup.getChildAt(endsGroup.getChildCount()-2);
+                v = endsGroup.getChildAt(endsGroup.getChildCount()-1);
                 if (v instanceof Space) {
                     mNavbarViewInfo[index].customKeyPlaceHolder = v;
                 }
             }
             if (DEBUG) log("customKeyPlaceHolder=" + mNavbarViewInfo[index].customKeyPlaceHolder);
+
+            // Add cursor control keys
+            mNavbarViewInfo[index].endsGroup.addView(dpadLeft, 0);
+            mNavbarViewInfo[index].endsGroup.addView(dpadRight, mNavbarViewInfo[index].endsGroup.getChildCount());
 
             // find ime switcher, menu group
             resId = mResources.getIdentifier("ime_switcher", "id", PACKAGE_NAME);

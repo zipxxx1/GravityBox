@@ -18,6 +18,7 @@
 package com.ceco.nougat.gravitybox.quicksettings;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.ceco.nougat.gravitybox.R;
@@ -69,6 +70,9 @@ public class QsDetailItemsList {
     public static QsDetailItemsList create(Context context, ViewGroup parent) throws Throwable {
         LayoutInflater inflater = LayoutInflater.from(Utils.getGbContext(context));
         LinearLayout view = (LinearLayout) inflater.inflate(R.layout.qs_detail_items_list, parent, false);
+        if (Build.VERSION.SDK_INT == 24 && (parent.getParent() instanceof ScrollView)) {
+            ((ScrollView)parent.getParent()).setFillViewport(true);
+        }
         return new QsDetailItemsList(view);
     }
 
