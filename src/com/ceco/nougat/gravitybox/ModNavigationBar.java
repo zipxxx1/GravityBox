@@ -463,26 +463,6 @@ public class ModNavigationBar {
                         param.args[0] = MODE_LIGHTS_OUT_TRANSPARENT;
                     }
                 }
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    final int mode = (Integer) param.args[0];
-                    final boolean animate = (Boolean) param.args[1];
-                    final boolean isOpaque = mode == MODE_OPAQUE || mode == MODE_LIGHTS_OUT;
-                    final float alpha = isOpaque ? KeyButtonView.DEFAULT_QUIESCENT_ALPHA : 1f;
-                    for(int i = 0; i < mNavbarViewInfo.length; i++) {
-                        if (mNavbarViewInfo[i] != null) {
-                            if (mNavbarViewInfo[i].customKey != null) {
-                                mNavbarViewInfo[i].customKey.setQuiescentAlpha(alpha, animate);
-                            }
-                            if (mNavbarViewInfo[i].dpadLeft != null) {
-                                mNavbarViewInfo[i].dpadLeft.setQuiescentAlpha(alpha, animate);
-                            }
-                            if (mNavbarViewInfo[i].dpadRight != null) {
-                                mNavbarViewInfo[i].dpadRight.setQuiescentAlpha(alpha, animate);
-                            }
-                        }
-                    }
-                }
             });
 
             XposedHelpers.findAndHookMethod(CLASS_KEY_BUTTON_RIPPLE, classLoader,
