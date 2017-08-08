@@ -462,13 +462,6 @@
     <string name="pref_cat_phone_telephony_title">电话</string>
     <string name="pref_cat_phone_mobile_data_title">移动数据</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">转换Unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">将Unicode字符转换为普通字符，减少整体信息大小</string>
-    <string name="unicode_stripping_leave_intact">保留字符不变</string>
-    <string name="unicode_stripping_non_encodable">转换不可编码字符</string>
-    <string name="unicode_stripping_all">转换所有Unicode字符</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允许所有旋转方向</string>
 
@@ -1474,9 +1467,6 @@
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">切换自动亮度</string>
 
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">信息</string>
-    
     <!-- Compatibility warning -->
     <string name="compat_warning_title">警告</string>
     <string name="compat_warning_message">仅适用原生Android或Google Play Edition设备使用！\n\n	

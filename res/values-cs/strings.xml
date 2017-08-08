@@ -440,13 +440,6 @@
     <string name="pref_cat_phone_telephony_title">Telefon</string>
     <string name="pref_cat_phone_mobile_data_title">Mobilní data</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Konverze diakritiky</string>
-    <string name="pref_mms_unicode_stripping_summary">Odstraní diakritiku ze zprávy před jejím odesláním. Snižuje nároky na počet znaků zprávy.</string>
-    <string name="unicode_stripping_leave_intact">Ponechat výchozí</string>
-    <string name="unicode_stripping_non_encodable">Konverze nekódovatelných znaků</string>
-    <string name="unicode_stripping_all">Konverze všech znaků</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Povolit všechny rotace</string>
 
@@ -1435,9 +1428,6 @@
 
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Přepnout automatický jas</string>
-
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Zprávy</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">UPOZORNĚNÍ</string>

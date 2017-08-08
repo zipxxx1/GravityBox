@@ -1169,8 +1169,6 @@
 
     <string name="shortcut_auto_brightness">자동 밝기 토글</string>
 
-    <string name="pref_cat_phone_messaging_title">메시징</string>
-
     <string name="compat_warning_title">경고 !!</string>
     <string name="compat_warning_message">수정되지 않은 Android 기기(구글 넥서스 등)와 롬(AOSP) 혹은 구글 플레이 에디션 기기에서만 사용하세요!\n\n터치위즈, 센스, 엑스페리아 등 많이 수정된 롬이나 커스텀롬 등에선 지원하지 않거나 예상치 못한 결과를 가져올 수 있습니다.\n\n그래도 진행하시겠다면, 모든 불이익은 사용자가 책임져야 하고 지원을 받을 수 없다는 점을 꼭 알아두세요. 호환성 강화 모드에 대해 자세히 알고자 하면, <a href="http://forum.xda-developers.com/showthread.php?t=2316070">이 XDA-Developers 스레드를 읽어보세요</a>.</string>
     <string name="compat_warning_ok_stage1">잘 알겠습니다.</string>

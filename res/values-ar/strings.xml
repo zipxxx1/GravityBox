@@ -429,13 +429,6 @@
     <string name="pref_cat_phone_telephony_title">المكالمات</string>
     <string name="pref_cat_phone_mobile_data_title">بيانات الجوال</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Strip unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Converts unicode characters to normal characters. Decreases overall message size.</string>
-    <string name="unicode_stripping_leave_intact">Leave characters intact</string>
-    <string name="unicode_stripping_non_encodable">Strip non-encodable characters</string>
-    <string name="unicode_stripping_all">Strip all unicode characters</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">تفعيل الدوران في كل الاتجاهات</string>
 

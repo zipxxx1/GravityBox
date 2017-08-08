@@ -620,7 +620,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_CAT_KEY_PHONE_TELEPHONY = "pref_cat_phone_telephony";
     public static final String PREF_CAT_KEY_PHONE_DIALER = "pref_cat_phone_dialer";
-    public static final String PREF_CAT_KEY_PHONE_MESSAGING = "pref_cat_phone_messaging";
     public static final String PREF_CAT_KEY_PHONE_MOBILE_DATA = "pref_cat_phone_mobile_data";
 
     public static final String PREF_KEY_RINGER_MODE_TILE_MODE = "pref_qs_ringer_mode2";
@@ -798,11 +797,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICKRECORD_AUTOSTOP = "pref_quickrecord_autostop";
     public static final String EXTRA_QR_QUALITY = "quickRecordQuality";
     public static final String EXTRA_QR_AUTOSTOP = "quickRecordAutostop";
-
-    public static final String PREF_KEY_MMS_UNICODE_STRIPPING = "pref_mms_unicode_stripping";
-    public static final String UNISTR_LEAVE_INTACT = "leave_intact";
-    public static final String UNISTR_NON_ENCODABLE = "non_encodable";
-    public static final String UNISTR_ALL = "all";
 
     public static final String PREF_KEY_HIDE_LAUNCHER_ICON = "pref_hide_launcher_icon";
 
@@ -1277,7 +1271,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefMusicVolumeStepsValue;
         private PreferenceCategory mPrefCatPhoneTelephony;
         private PreferenceCategory mPrefCatPhoneDialer;
-        private PreferenceCategory mPrefCatPhoneMessaging;
         private PreferenceCategory mPrefCatPhoneMobileData;
         private ListPreference mPrefQsNetworkModeSimSlot;
         private ListPreference mPrefSbSignalColorMode;
@@ -1533,7 +1526,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCatPhoneTelephony = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_TELEPHONY);
             mPrefCatPhoneDialer = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_DIALER);
-            mPrefCatPhoneMessaging = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_MESSAGING);
             mPrefCatPhoneMobileData = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_MOBILE_DATA);
             mPrefCallVibrations = (MultiSelectListPreference) findPreference(PREF_KEY_CALL_VIBRATIONS);
             mPrefCallerUnknownPhotoEnable = (CheckBoxPreference) findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE);
@@ -1671,9 +1663,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.hasTelephonySupport(getActivity())) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
                 mPrefCatMedia.removePreference(mPrefLinkVolumes);
-            }
-            if (!Utils.isAppInstalled(getActivity(), APP_MESSAGING) && mPrefCatPhoneMessaging != null) {
-                mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
             }
             // TODO: launcher tweaks? probably not...
             //if (!(Utils.isAppInstalled(getActivity(), APP_GOOGLE_NOW) &&

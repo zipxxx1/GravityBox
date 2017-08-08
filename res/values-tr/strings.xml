@@ -295,11 +295,6 @@
     <string name="pref_statusbar_brightness_summary">Durum çubuğunun üzerinde kaydırarak parlaklığı ayarlar (otomatik parlaklık devre dışı olmalıdır)</string>
     <string name="pref_cat_phone_telephony_title">Telefon</string>
     <string name="pref_cat_phone_mobile_data_title">Mobil veri</string>
-    <string name="pref_mms_unicode_stripping_title">Unicode çıkar</string>
-    <string name="pref_mms_unicode_stripping_summary">Unicode karakterleri normal karakterlere çevirir. Mesaj boyutunu azaltır.</string>
-    <string name="unicode_stripping_leave_intact">Karakterleri olduğu gibi bırak</string>
-    <string name="unicode_stripping_non_encodable">Çevrilmeyen karakterleri çıkar</string>
-    <string name="unicode_stripping_all">Tüm unicode karakterleri çıkar</string>
     <string name="pref_display_allow_all_rotations_title">Tüm yönlere izin ver</string>
     <string name="pref_qs_network_mode_sim_slot_title">Ağ modu karesi SIM slotu</string>
     <string name="pref_qs_network_mode_sim_slot_summary">Ağ modunun hangi sim slotuna uygulanacağı tanımlar (%s)</string>
@@ -919,7 +914,6 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="pref_quickrecord_autostop_summary">"Belirtilen süreden sonra kaydı otomatik durdurur. 0'a ayarlamak devre dışı bırakır."</string>
     <string name="shortcut_clear_notifications">Bildirimleri temizle</string>
     <string name="shortcut_auto_brightness">Otomatik parlaklık</string>
-    <string name="pref_cat_phone_messaging_title">Mesajlaşma</string>
     <string name="compat_warning_title">UYARI</string>
     <string name="compat_warning_message">"SADECE SAF ANDROİD VEYA GOOGLE PLAY SÜRÜMÜ CİHAZLARDA KULLANMAK İÇİNDİR!
 

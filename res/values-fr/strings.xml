@@ -461,13 +461,6 @@
     <string name="pref_cat_phone_telephony_title">Téléphonie</string>
     <string name="pref_cat_phone_mobile_data_title">Données mobiles</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Alléger unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Convertit les caractères unicode en caractères normaux. Réduit la taille globale du message</string>
-    <string name="unicode_stripping_leave_intact">Laisser les caractères tels quels</string>
-    <string name="unicode_stripping_non_encodable">Alléger les caractères non-encodables</string>
-    <string name="unicode_stripping_all">Alléger tous les caractères unicode</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Permettre toutes les rotations</string>
 
@@ -1469,9 +1462,6 @@
 
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Interrupteur luminosité auto</string>
-
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Messagerie</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">AVERTISSEMENT</string>

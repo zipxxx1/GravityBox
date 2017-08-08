@@ -459,13 +459,6 @@
     <string name="pref_cat_phone_telephony_title">Telefonie</string>
     <string name="pref_cat_phone_mobile_data_title">Date mobile</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Eliminare unicod</string>
-    <string name="pref_mms_unicode_stripping_summary">Convertește caracterele unicode la caractere normale. Scade dimensiunea generală a mesajului.</string>
-    <string name="unicode_stripping_leave_intact">Lăsați caracterele intacte</string>
-    <string name="unicode_stripping_non_encodable">Eliminați caracterele non-codificabile</string>
-    <string name="unicode_stripping_all">Eliminați toate caracterele unicode</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Permiteți toate rotațiile</string>
 
@@ -1444,9 +1437,6 @@
 
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Comutare luminozitate automată</string>
-
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Mesagerie</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">AVERTIZARE</string>

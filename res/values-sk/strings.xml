@@ -441,13 +441,6 @@
     <string name="pref_cat_phone_telephony_title">Telefón</string>
     <string name="pref_cat_phone_mobile_data_title">Mobilné dáta</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Konverzia diakritiky</string>
-    <string name="pref_mms_unicode_stripping_summary">Odstráni diakritiku zo správy pred jej odoslaním. Znižuje nároky na počet znakov správy.</string>
-    <string name="unicode_stripping_leave_intact">Ponechať predvolené</string>
-    <string name="unicode_stripping_non_encodable">Konverzia nekódovateľných znakov</string>
-    <string name="unicode_stripping_all">Konverzia všetkých znakov</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Povoliť všetky rotácie</string>
 
@@ -1440,9 +1433,6 @@
 
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Prepnúť automatický jas</string>
-
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Správy</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">UPOZORNENIE</string>

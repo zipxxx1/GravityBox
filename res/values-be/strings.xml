@@ -460,13 +460,6 @@
     <string name="pref_cat_phone_telephony_title">Тэлефанія</string>
     <string name="pref_cat_phone_mobile_data_title">Мабільныя дадзеныя</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Змяняць юнікод</string>
-    <string name="pref_mms_unicode_stripping_summary">Канвертацыя знакаў юнікода ў звычайныя знакі. Змяншае агульны памер паведамлення.</string>
-    <string name="unicode_stripping_leave_intact">Не змяняць знакі</string>
-    <string name="unicode_stripping_non_encodable">Змяняць некадаваныя знакі</string>
-    <string name="unicode_stripping_all">Змяняць усе знакі юнікода</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Дазволіць усе павароты</string>
 
@@ -1464,9 +1457,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
 
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Улучэнне аўто яскравасці</string>
-
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Паведамленні</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">ПАПЯРЭДЖАННЕ</string>

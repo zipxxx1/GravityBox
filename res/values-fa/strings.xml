@@ -295,11 +295,6 @@
 <string name="pref_statusbar_brightness_summary">"تنظیم روشنایی صفحه نمایش با کشیدن انگشت بصورت افقی بروی نوار وضعیت "</string>
 <string name="pref_cat_phone_telephony_title">تلفن</string>
 <string name="pref_cat_phone_mobile_data_title">داده‌های موبایل</string>
-<string name="pref_mms_unicode_stripping_title">یونیکد خام</string>
-<string name="pref_mms_unicode_stripping_summary">تبدیل کاراکترهای یونیکد به کارکترهای معمولی .کاهش اندازه کلی پیام</string>
-<string name="unicode_stripping_leave_intact">Leave characters intact</string>
-<string name="unicode_stripping_non_encodable">پاک‌سازی کارکترهای کد نشده</string>
-<string name="unicode_stripping_all">پاک‌سازی تمام کاراکترهای یونیکد</string>
 <string name="pref_display_allow_all_rotations_title">اجازه چرخش همه صفحات</string>
 <string name="pref_qs_network_mode_sim_slot_title">درگاه سیمکارت کاشی حالت شبکه</string>
 <string name="pref_qs_network_mode_sim_slot_summary">تعیین درگاه سیمکارت اعمال کاشی حالت شبکه (%s)</string>
@@ -918,7 +913,6 @@
 <string name="pref_quickrecord_autostop_summary">توقف خودکار ضبط پس از مدت زمان تعیین شده.برای غیرفعالسازی بروی 0 تنظیم شود</string>
 <string name="shortcut_clear_notifications">پاکسازی اعلانات</string>
 <string name="shortcut_auto_brightness">روشنایی خودکار</string>
-<string name="pref_cat_phone_messaging_title">پیام</string>
 <string name="compat_warning_title">هشدار</string>
 <string name="compat_warning_message">"فقط برای دستگاه‌های ویرایش نشده یا ویرایش شده توسط گوگل مورد استفاده قرار گیرد!
 

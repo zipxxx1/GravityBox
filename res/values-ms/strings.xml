@@ -461,13 +461,6 @@
     <string name="pref_cat_phone_telephony_title">Telefon</string>
     <string name="pref_cat_phone_mobile_data_title">Paket data</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Strip unikod</string>
-    <string name="pref_mms_unicode_stripping_summary">Tukar unikod kepada mesej biasa.Saiz mesej akan berkurang</string>
-    <string name="unicode_stripping_leave_intact">Biarkan huruf seperti biasa</string>
-    <string name="unicode_stripping_non_encodable">Stripkod yang tidak boleh dileraikan</string>
-    <string name="unicode_stripping_all">Strip semua huruf unikod</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Aktifkan semua pusingan</string>
 
@@ -1469,9 +1462,6 @@
 
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Suis kecerahan automatik</string>
-
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Mesej</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">AMARAN</string>

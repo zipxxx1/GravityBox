@@ -433,13 +433,6 @@
     <string name="pref_cat_phone_telephony_title">Celular</string>
     <string name="pref_cat_phone_mobile_data_title">Dados móveis</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Remover caracteres unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Converte caracteres Unicode para caracteres normais. Diminui o tamanho total da mensagem.</string>
-    <string name="unicode_stripping_leave_intact">Deixar caracteres como estão</string>
-    <string name="unicode_stripping_non_encodable">Elimina caracteres não codificáveis</string>
-    <string name="unicode_stripping_all">Elimina todos os caracteres Unicode</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Permitir todas as rotações</string>
 
@@ -1428,9 +1421,6 @@
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Mudar para brilho automático</string>
 
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Mensagens</string>
-    
     <!-- Compatibility warning -->
     <string name="compat_warning_title">AVISO</string>
     <string name="compat_warning_message">PARA USO EXCLUSIVO EM DISPOSITIVOS EDIÇÃO GOOGLE PLAY OU COM ANDROID PURO!\n\n

@@ -461,13 +461,6 @@
     <string name="pref_cat_phone_telephony_title">Телефонія</string>
     <string name="pref_cat_phone_mobile_data_title">Мобільні дані</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Змінювати Unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Конвертує Unicode символи в звичайні символи. Зменшує загальний розмір повідомлення.</string>
-    <string name="unicode_stripping_leave_intact">Не міняти символи</string>
-    <string name="unicode_stripping_non_encodable">Змінювати некодовані символи</string>
-    <string name="unicode_stripping_all">Змінювати всі символи Unicode</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Дозволити всі повороти</string>
 
@@ -1472,9 +1465,6 @@
 
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Увімкнення авто-яскравості</string>
-
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Повідомлення</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">ПОПЕРЕДЖЕННЯ</string>

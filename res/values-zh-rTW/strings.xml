@@ -456,13 +456,6 @@
     <string name="pref_cat_phone_telephony_title">通話</string>
     <string name="pref_cat_phone_mobile_data_title">行動數據</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">去除 unicode 字符</string>
-    <string name="pref_mms_unicode_stripping_summary">正常字符轉換成 unicode 字符。降低整體郵件大小.</string>
-    <string name="unicode_stripping_leave_intact">保留字符不變</string>
-    <string name="unicode_stripping_non_encodable">去除非可編碼字符</string>
-    <string name="unicode_stripping_all">去除所有 unicode 字符</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允許畫面可以全方位旋轉</string>
 
@@ -1467,9 +1460,6 @@
 
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">開關自動亮度</string>
-
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">資訊</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">警告</string>

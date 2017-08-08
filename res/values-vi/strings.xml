@@ -461,13 +461,6 @@
     <string name="pref_cat_phone_telephony_title">Điện thoại</string>
     <string name="pref_cat_phone_mobile_data_title">Dữ liệu di động</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Chuyển unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Chuyển đổi các ký tự unicode thành các ký tự thương. Giảm kích thước tin nhắn.</string>
-    <string name="unicode_stripping_leave_intact">Giữ các ký tự nguyên vẹn</string>
-    <string name="unicode_stripping_non_encodable">Chuyển các ký tự không thể giải mã</string>
-    <string name="unicode_stripping_all">Chuyển tất cả các ký tự unicode</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Cho phép xoay mọi hướng</string>
 
@@ -1466,9 +1459,6 @@
 
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Toggle độ sáng tự động</string>
-
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Tin nhắn</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">CHÚ Ý</string>

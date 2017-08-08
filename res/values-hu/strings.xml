@@ -462,13 +462,6 @@
     <string name="pref_cat_phone_telephony_title">Telefonálás</string>
     <string name="pref_cat_phone_mobile_data_title">Mobil adatátvitel</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Unicode figyelmen kívül hagyása</string>
-    <string name="pref_mms_unicode_stripping_summary">Átkonvertálja az unicode karaktereket normál karakterekké. Csökkenti a teljes üzenet méretét.</string>
-    <string name="unicode_stripping_leave_intact">Karakterek érintetlenül hagyása</string>
-    <string name="unicode_stripping_non_encodable">Nem kódolható karakterek figyelmen kívül hagyása</string>
-    <string name="unicode_stripping_all">Az összes unicode karakter figyelmen kívül hagyása</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Összes elforgatás engedélyezése</string>
 
@@ -1456,9 +1449,6 @@
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Automatikus fényerő ki-bekapcsolása</string>
 
-    <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">Üzenetkezelés</string>
-    
     <!-- Compatibility warning -->
     <string name="compat_warning_title">FIGYELMEZTETÉS</string>
     <string name="compat_warning_message">CSAK MÓDOSÍTÁS NÉLKÜLI VAGY GOOGLE PLAY EDITION ESZKÖZÖKRE!\n\nMinden más módosított gyártói ROM-on való használat, úgymint Touchwiz, Sense, Xperia és minden más egyedi ROM nem támogatott, és nem várt problémákat okozhat.\n\nHa mégis folytatod, akkor meg kell erősítened, hogy ezt saját felelősségedre teszed, mindenféle támogatás reménye nélkül. További, részletes kompatibilitási információhoz nézd meg ezt: <a href="http://forum.xda-developers.com/showthread.php?t=3251148">szoftver támogatási oldal az XDA-n</a>.</string>
