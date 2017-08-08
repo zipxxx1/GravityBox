@@ -1777,36 +1777,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 if (p != null) mPrefCatLsOther.removePreference(p);
                 p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY);
                 if (p != null) mPrefCatSignalCluster.removePreference(p);
+                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColor);
                 p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
                 if (p != null) mPrefCatSignalCluster.removePreference(p);
-                //PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_CLOCK_SETTINGS);
-                //p = findPreference(PREF_CAT_KEY_NOTIF_PANEL_CLOCK);
-                //if (p != null) ps.removePreference(p);
-                //p = findPreference(PREF_KEY_NAVBAR_SWAP_KEYS);
-                //if (p != null) mPrefCatNavbarKeys.removePreference(p);
                 mPrefCatPower.removePreference(mPrefCatPowerMenu);
                 p = findPreference(PREF_CAT_KEY_BATTERY_TILE);
                 if (p != null) mPrefCatQsTileSettings.removePreference(p);
-                //mPrefCatQsTileSettings.removePreference(mPrefCatCellTile);
                 p = findPreference(PREF_CAT_KEY_QS_DND_TILE_SETTINGS);
                 if (p != null) mPrefCatQsTileSettings.removePreference(p);
-                //p = findPreference(PREF_CAT_KEY_QS_LOCATION_TILE_SETTINGS);
-                //if (p != null) mPrefCatQsTileSettings.removePreference(p);
-                //p = findPreference(PREF_KEY_NM_TILE_QUICK_MODE);
-                //if (p != null) mPrefCatQsNmTileSettings.removePreference(p);
-                //PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_RM_TILE_SETTINGS);
-                //p = findPreference(PREF_KEY_RINGER_MODE_TILE_QUICK_MODE);
-                //if (p != null) ps.removePreference(p);
-                //ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_SA_TILE_SETTINGS);
-                //p = findPreference(PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE);
-                //if (p != null) ps.removePreference(p);
-                //p = findPreference(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW);
-                //if (p != null) mPrefCatStatusbarQs.removePreference(p);
-                //p = findPreference(PREF_KEY_QS_SCALE_CORRECTION);
-                //if (p != null) mPrefCatStatusbarQs.removePreference(p);
-                //p = findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
-                //if (p != null) mPrefCatStatusbarQs.removePreference(p);
                 mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
             }
 

@@ -98,7 +98,6 @@ public class Utils {
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     private static Boolean mIsVerneeApolloDevice;
-    private static Boolean mIsOxygenOs35Rom = null;
     private static Boolean mIsOxygenOs41Rom = null;
 
     // Device features
@@ -280,18 +279,6 @@ public class Utils {
         mIsVerneeApolloDevice = (Build.BRAND.equalsIgnoreCase("vernee") &&
                 Build.MODEL.toLowerCase().contains("apollo"));
         return mIsVerneeApolloDevice;
-    }
-
-    public static boolean isOxygenOs35Rom() {
-        if (mIsOxygenOs35Rom == null) {
-            String version = SystemProp.get("ro.oxygen.version", "0");
-            mIsOxygenOs35Rom = (version.startsWith("3.5") ||
-                    version.startsWith("OP3_O2_Open_4") ||
-                    version.startsWith("OP3_O2_Open_5") ||
-                    version.startsWith("OP3_O2_Open_6") ||
-                    version.startsWith("OP3_O2_Open_7"));
-        }
-        return mIsOxygenOs35Rom;
     }
 
     public static boolean isOxygenOs41Rom() {
