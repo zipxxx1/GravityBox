@@ -1135,15 +1135,6 @@
 
     <string name="qs_tile_audio_profile">오디오 프로파일</string>
 
-    <string name="pref_cat_mtk_fixes_title">MTK 특정 패치</string>
-    <string name="pref_cat_mtk_fixes_summary">MediaTek 특정 패치들이 있습니다. 필요 시에만 사용하세요.</string>
-
-    <string name="pref_mtk_fix_dev_opts_title">고급 개발자 옵션</string>
-    <string name="pref_mtk_fix_dev_opts_summary">더 많은 개발자 옵션을 허용합니다. (재시작 필요)</string>
-
-    <string name="pref_mtk_fix_tts_settings_title">말하기 설정 패치</string>
-    <string name="pref_mtk_fix_tts_settings_summary">언어 및 입력 설정의 TTS나 말하기 설정의 문제점들을 패치합니다. (재시작 필요)</string>
-
     <string name="imgpick_dialog_title">이미지 선택...</string>
     <string name="imgpick_choose_error">이미지 선택 오류!</string>
     <string name="imgpick_crop_error">이미지 자르기 오류!</string>

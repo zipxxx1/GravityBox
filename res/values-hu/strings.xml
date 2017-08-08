@@ -1414,18 +1414,6 @@
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Hangprofilok</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">MTK specifikus javítások</string>
-    <string name="pref_cat_mtk_fixes_summary">Általános MediaTek specifikus javításokat tartalmaz. Csak akkor használd, ha szükséges.</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Fejlett fejlesztői beállítások</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Feloldja a fejlett fejlesztői beállításokat (újraindítás szükséges)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Beszéd beállítások javítása</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Feloldja a hangalapú keresést és a szövegfelolvasó beállításokat a Nyelv és bevitel menüben (újraindítás szükséges)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Képkiválasztás</string>
     <string name="imgpick_choose_error">Hiba történt a kép kiválasztása során</string>

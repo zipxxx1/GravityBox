@@ -1399,18 +1399,6 @@
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">音效設定檔</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">MTK 機種設定</string>
-    <string name="pref_cat_mtk_fixes_summary">包含各種只適用於使用 MediaTek 晶片機種的選項，請小心使用</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">進階開發人員選項</string>
-    <string name="pref_mtk_fix_dev_opts_summary">解鎖進階開發人員選項 (需要重新啟動)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">修復語音設定</string>
-    <string name="pref_mtk_fix_tts_settings_summary">解鎖 [語言與輸入設定] 內的 [語音搜尋] 及 [文字轉語音輸出] 選項 (需要重新啟動)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">使用此應用程式選擇圖片</string>
     <string name="imgpick_choose_error">選擇圖片時發生錯誤</string>

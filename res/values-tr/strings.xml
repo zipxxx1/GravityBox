@@ -1411,18 +1411,6 @@
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Ses Profili</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">MTK\'ya özel düzeltmeler</string>
-    <string name="pref_cat_mtk_fixes_summary">MediaTek\'e özel düzeltmeleri içerir. Sadece gerekirse kullanın.</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Gelişmiş geliştirici seçenekleri</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Gelişmiş geliştirici seçeneklerinin kilidini açar (yeniden başlatma gerektirir)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Konuşma ayarlarını düzelt</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Dil ve giriş ayarlarında sesle aramayı ve metin okuma ayarlarını açar (yeniden başlatma gerektirir)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Resim seç</string>
     <string name="imgpick_choose_error">Resim seçilirken hata</string>

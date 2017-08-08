@@ -897,11 +897,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_FPL_PAUSE = "fplPause";
     public static final String EXTRA_FPL_SHOW_TOAST = "fplShowToast";
 
-    // MTK fixes
-    public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
-    public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
-    public static final String PREF_KEY_MTK_FIX_TTS_SETTINGS = "pref_mtk_fix_tts_settings";
-
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -932,8 +927,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_FORCE_LTR_DIRECTION,
             PREF_KEY_HEADS_UP_MASTER_SWITCH,
             PREF_KEY_NAVBAR_LARGER_ICONS,
-            PREF_KEY_MTK_FIX_DEV_OPTS,
-            PREF_KEY_MTK_FIX_TTS_SETTINGS,
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
             PREF_KEY_NAVBAR_LEFT_HANDED,
             PREF_KEY_SAFE_MEDIA_VOLUME,
@@ -1360,7 +1353,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefScLteStyle;
         private ListPreference mPrefSbBtVisibility;
         private AppPickerPreference mPrefCustomApp;
-        private PreferenceScreen mPrefCatMtkFixes;
         private ListPreference mPrefChargingLed;
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
         private CheckBoxPreference mPrefScHideSimLabels;
@@ -1672,12 +1664,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefBatteryTileTempUnit = (ListPreference) findPreference(PREF_KEY_BATTERY_TILE_TEMP_UNIT); 
 
             mPrefPowerCameraVp = (EditTextPreference) findPreference(PREF_KEY_POWER_CAMERA_VP);
-
-            // MTK fixes (deprecated)
-            mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
-            //if (!Utils.isMtkDevice()) {
-                getPreferenceScreen().removePreference(mPrefCatMtkFixes);
-            //}
 
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {

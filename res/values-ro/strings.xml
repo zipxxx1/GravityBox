@@ -1403,18 +1403,6 @@
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Profil audio</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">Modificări specifice MTK</string>
-    <string name="pref_cat_mtk_fixes_summary">Conține corecții specifice pentru MediaTek. Utilizați numai dacă este necesar.</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Opțiuni avansate pentru dezvoltatori</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Deblochează opțiunile avansate pentru dezvoltatori (necesită repornire)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Corectare setări de vorbire</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Deblochează setările pentru Căutarea vocală și Text în vorbire în Limbă și introducere text (necesită repornire)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Alegeți imaginea utilizând</string>
     <string name="imgpick_choose_error">Eroare la alegerea imaginii</string>
