@@ -117,6 +117,10 @@ public class ModExpandedDesktop {
     private static Method mUpdateSystemBarsLw = null;
     private static Method mUpdateSystemUiVisibilityLw = null;
     private static Method mShouldUseOutsets = null;
+    private static Method mUpdateLightStatusBarLw = null;
+    private static Method mCalculateRelevantTaskInsets = null;
+    private static Method mNavigationBarPosition = null;
+    private static Method mGetNavigationBarHeight = null;
     private static NavbarDimensions mNavbarDimensions;
     private static Class<?> mClsScreenShapeHelper;
 
@@ -314,6 +318,39 @@ public class ModExpandedDesktop {
         } catch (NoSuchMethodException e) {
             log("could not find shouldUseOutsets method");
         }
+
+        try {
+            Class<?> windowState = XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null);
+            mUpdateLightStatusBarLw = classPhoneWindowManager.getDeclaredMethod(
+                    "updateLightStatusBarLw", int.class, windowState, windowState);
+            mUpdateLightStatusBarLw.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find updateLightStatusBarLw method");
+        }
+
+        try {
+            mCalculateRelevantTaskInsets = classPhoneWindowManager.getDeclaredMethod(
+                    "calculateRelevantTaskInsets", Rect.class, Rect.class, int.class, int.class);
+            mCalculateRelevantTaskInsets.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find calculateRelevantTaskInsets method");
+        }
+
+        try {
+            mNavigationBarPosition = classPhoneWindowManager.getDeclaredMethod(
+                    "navigationBarPosition", int.class, int.class, int.class);
+            mNavigationBarPosition.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find navigationBarPosition method");
+        }
+
+        try {
+            mGetNavigationBarHeight = classPhoneWindowManager.getDeclaredMethod(
+                    "getNavigationBarHeight", int.class, int.class);
+            mGetNavigationBarHeight.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find getNavigationBarHeight method");
+        }
     }
 
     public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
@@ -447,14 +484,14 @@ public class ModExpandedDesktop {
                                 position = (boolean)XposedHelpers.callMethod(param.thisObject, "isNavigationBarOnBottom",
                                         displayWidth, displayHeight) ? NavBarPosition.NAV_BAR_BOTTOM : NavBarPosition.NAV_BAR_RIGHT;
                             } else {
-                                position = (int)XposedHelpers.callMethod(param.thisObject, "navigationBarPosition",
+                                position = (int)mNavigationBarPosition.invoke(param.thisObject,
                                     displayWidth, displayHeight, displayRotation);
                                 setInt("mNavigationBarPosition", position);
                             }
                             if (position == NavBarPosition.NAV_BAR_BOTTOM) {
                                 // It's a system nav bar or a portrait screen; nav bar goes on bottom.
                                 int top = displayHeight - overscanBottom
-                                        - (int)XposedHelpers.callMethod(param.thisObject, "getNavigationBarHeight",
+                                        - (int)mGetNavigationBarHeight.invoke(param.thisObject,
                                                 displayRotation, uiMode);
                                 getRect("mTmpNavigationFrame").set(0, top, displayWidth, displayHeight - overscanBottom);
                                 int val = getRect("mTmpNavigationFrame").top;
@@ -806,11 +843,11 @@ public class ModExpandedDesktop {
                             tmpVisibility &= ~clearableFlags;
                         }
 
-                        final int fullscreenVisibility = (int)XposedHelpers.callMethod(param.thisObject,
-                                "updateLightStatusBarLw",0, getObj("mTopFullscreenOpaqueWindowState"),
+                        final int fullscreenVisibility = (int)mUpdateLightStatusBarLw.invoke(param.thisObject, 0,
+                                getObj("mTopFullscreenOpaqueWindowState"),
                                 getObj("mTopFullscreenOpaqueOrDimmingWindowState"));
-                        final int dockedVisibility = (int)XposedHelpers.callMethod(param.thisObject,
-                                "updateLightStatusBarLw",0, getObj("mTopDockedOpaqueWindowState"),
+                        final int dockedVisibility = (int)mUpdateLightStatusBarLw.invoke(param.thisObject, 0,
+                                getObj("mTopDockedOpaqueWindowState"),
                                 getObj("mTopDockedOpaqueOrDimmingWindowState"));
                         XposedHelpers.callMethod(getObj("mWindowManagerFuncs"), "getStackBounds",
                                 HOME_STACK_ID, getObj("mNonDockedStackBounds"));
@@ -959,9 +996,9 @@ public class ModExpandedDesktop {
                             availBottom - getInt("mStableBottom"));
 
                     if (taskBounds != null) {
-                        XposedHelpers.callMethod(param.thisObject, "calculateRelevantTaskInsets",
+                        mCalculateRelevantTaskInsets.invoke(param.thisObject,
                                 taskBounds, contentInset, displayWidth, displayHeight);
-                        XposedHelpers.callMethod(param.thisObject, "calculateRelevantTaskInsets",
+                        mCalculateRelevantTaskInsets.invoke(param.thisObject,
                                 taskBounds, stableInset, displayWidth, displayHeight);
                     }
                     param.setResult(getBool("mForceShowSystemBars"));
