@@ -74,8 +74,8 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
 
     @Override
     public void handleDestroy() {
-        super.handleDestroy();
         destroyHooks();
+        super.handleDestroy();
         if (DEBUG) log(mKey + ": handleDestroy called");
     }
 
