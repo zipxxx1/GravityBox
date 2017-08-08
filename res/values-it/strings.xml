@@ -1375,18 +1375,6 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Suono disinserimento cavo</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">Soluzioni specifiche per MTK</string>
-    <string name="pref_cat_mtk_fixes_summary">Colma alcune lacune dei dispositivi MediaTek. Usa solo se necessario.</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Sblocca opzioni sviluppatore</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Visualizza le opzioni sviluppatore tra le impostazioni telefono (richiede riavvio)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Sblocca impostazioni </string>
-    <string name="pref_mtk_fix_tts_settings_summary">Visualizza le impostazioni della ricerca vocale e dell\'output vocale in Lingua e immissione (richiede riavvio)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Scegli immagine da</string>
     <string name="imgpick_choose_error">Errore nella scelta immagine</string>

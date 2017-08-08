@@ -1392,18 +1392,6 @@
    <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Звук при отключении ЗУ</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">Исправления проблем MTK</string>
-    <string name="pref_cat_mtk_fixes_summary">Исправления общих для MediaTek специфических проблем. Используйте только при необходимости</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Доп. опции разработчика</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Разблокировка дополнительных опций разработчика (необходима перезагрузка)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Голосовые функции</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Разблокировка настроек голосового поиска и синтеза речи в разделе Язык и ввод (необходима перезагрузка)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Выбор изображения через</string>
     <string name="imgpick_choose_error">Ошибка при выборе изображения</string>

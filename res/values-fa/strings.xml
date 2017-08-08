@@ -872,12 +872,6 @@
 <string name="pref_unc_quiet_hours_summary">مدیریت ساعات آرامش برای اعلان‌ها</string>
 <string name="hwkey_action_custom">انتخاب شخصی</string>
 <string name="pref_charger_unplugged_sound_title">صدای قطع اتصال شارژر</string>
-<string name="pref_cat_mtk_fixes_title">MTK specific fixes</string>
-<string name="pref_cat_mtk_fixes_summary">حل مشکلات عمومی MediaTek. تنها در صورت نیاز استفاده شود</string>
-<string name="pref_mtk_fix_dev_opts_title">گزینه‌های دستیار برنامه‌نویس</string>
-<string name="pref_mtk_fix_dev_opts_summary">قفل‌گشایی گزینه دستیار برنامه‌نویس(نیازمند راه‌اندازی مجدد)</string>
-<string name="pref_mtk_fix_tts_settings_title">اصلاح تنظیمات تلفظ</string>
-<string name="pref_mtk_fix_tts_settings_summary">قفل‌گشایی تنظیمات جستجوی صوتی و مبدل متن‌به‌صوت در زبان ورودی(نیازمند راه‌اندازی مجدد)</string>
 <string name="imgpick_dialog_title">انتخاب تصویر با استفاده از</string>
 <string name="imgpick_choose_error">خطا هنگام انتخاب تصویر</string>
 <string name="imgpick_crop_error">خطا هنگام کپی تصویر</string>

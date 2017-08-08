@@ -1387,18 +1387,6 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Âm báo rút sạc</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">MTK sửa lỗi cụ thể</string>
-    <string name="pref_cat_mtk_fixes_summary">Bao gồm các sửa lỗi cho chip MediaTek. Chỉ sử dụng khi cần.</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Tùy chọn nhà phát triển nâng cao</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Mở khóa các tùy chọn nhà phát triển nâng cao (cần khởi động lại)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Sửa cài đặt giọng nói</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Mở khóa cài đặt tìm kiếm bằng giọng nói và văn bản thành giọng nói trong Ngôn ngữ&amp;Nhập vào (cần khởi động lại)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Chọn ảnh sử dụng</string>
     <string name="imgpick_choose_error">Lỗi khi chọn ảnh</string>

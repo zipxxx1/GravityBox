@@ -1355,18 +1355,6 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Zvuk odpojení napájení</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">Všeobecné MTK opravy</string>
-    <string name="pref_cat_mtk_fixes_summary">Obsahuje všeobecné opravy specifické pro MediaTek. Použít jen v případě potřeby.</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Rozšířené možnosti pro vývojáře</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Odemkne rozšířené nastavení pro vývojáře (vyžaduje restart)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Opravit nastavení řeči</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Odemkne nastavení výstupu převodu textu na řeč v nastavení Jazyk&amp;vstup (vyžaduje restart)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Vybrat obrázek pomocí</string>
     <string name="imgpick_choose_error">Chyba během vybírání obrázku</string>

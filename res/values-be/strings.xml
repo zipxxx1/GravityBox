@@ -1386,18 +1386,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Гук пры адключэнні</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">Выпраўленні праблем MTK</string>
-    <string name="pref_cat_mtk_fixes_summary">Выпраўленні агульных для MediaTek спецыфічных праблем. Выкарыстоўвайце толькі пры патрэбе.</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Дад. опцыі распрацоўніка</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Разблакоўка дадатковых опцый распрацоўніка (патрэбна перазагрузка)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Галасавыя функцыі</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Разблакоўка налад галасавога пошуку і сінтэзу гаворкі ў падзеле Мова і ўвод (патрэбна перазагрузка)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Выбар выявы праз</string>
     <string name="imgpick_choose_error">Памылка пры выбары выявы</string>

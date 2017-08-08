@@ -1390,18 +1390,6 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Son à la déconnexion du chargeur</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">Solutions spécifiques MTK</string>
-    <string name="pref_cat_mtk_fixes_summary">Regroupe les résolutions de problèmes spécifiques au processeur MediaTek. N\'utiliser que si nécessaire</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Options avancées développeurs</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Donne accès aux options avancées pour les développeurs (redémarrage nécessaire)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Solution paramètre Voix</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Donne accès aux paramètres de recherche vocale et de synthèse vocale dans Langue et saisie (redémarrage nécessaire)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Ouvrir l\'image avec</string>
     <string name="imgpick_choose_error">Erreur lors du choix de l\'image</string>

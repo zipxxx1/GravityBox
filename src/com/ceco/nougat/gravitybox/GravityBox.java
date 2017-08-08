@@ -144,18 +144,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             SystemPropertyProvider.init(prefs, qhPrefs, lpparam.classLoader);
         }
 
-        // MTK Specific (deprecated)
-//        if (Utils.isMtkDevice()) {
-//            if (lpparam.packageName.equals(MtkFixDevOptions.PACKAGE_NAME) &&
-//                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_DEV_OPTS, false)) {
-//                MtkFixDevOptions.init(prefs, lpparam.classLoader);
-//            }
-//            if (lpparam.packageName.equals(MtkFixTtsSettings.PACKAGE_NAME) &&
-//                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_TTS_SETTINGS, false)) {
-//                MtkFixTtsSettings.init(prefs, lpparam.classLoader);
-//            }
-//        }
-
         // Common
         if (lpparam.packageName.equals(ModLowBatteryWarning.PACKAGE_NAME)) {
             ModLowBatteryWarning.init(prefs, lpparam.classLoader);
