@@ -115,7 +115,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 }
             }
-            if (mPercentText == null || Utils.isOxygenOs35Rom()) {
+            if (mPercentText == null || Utils.isOxygenOs41Rom()) {
                 TextView percentTextView = new TextView(mContext);
                 LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -128,7 +128,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 percentTextView.setTextColor(Color.WHITE);
                 percentTextView.setVisibility(View.GONE);
                 mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
-                int offset = Utils.isOxygenOs35Rom() ? 2 : 1;
+                int offset = Utils.isOxygenOs41Rom() ? 3 : 1;
                 mSystemIcons.addView(mPercentText.getView(), mSystemIcons.getChildCount()-offset);
                 if (DEBUG) log("Battery percent text injected");
             }
@@ -142,13 +142,11 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         lParams.setMarginStart(Utils.isParanoidRom() ?
                 gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left_pa) :
                 gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left));
-        lParams.setMarginEnd(Utils.isOxygenOs35Rom() ?
-                 gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right_op3t) :
-                 gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right));
+        lParams.setMarginEnd(gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right));
         mCircleBattery.setLayoutParams(lParams);
         mCircleBattery.setVisibility(View.GONE);
-        int pos = Utils.isOxygenOs35Rom() ?
-                mSystemIcons.getChildCount()-1 : mSystemIcons.getChildCount();
+        int pos = Utils.isOxygenOs41Rom() ?
+                mSystemIcons.getChildCount()-2 : mSystemIcons.getChildCount();
         mSystemIcons.addView(mCircleBattery, pos);
         if (DEBUG) log("CmCircleBattery injected");
 
@@ -165,16 +163,13 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"))) {
             View v = mPercentText.getView();
             v.setPadding(
-                    Utils.isOxygenOs35Rom() ? 0 :
                     gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_right),
                     0,
-                    Utils.isOxygenOs35Rom() ?
-                     gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left_op3t) :
-                     gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
+                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
                     0);
             ViewGroup vg = (ViewGroup) v.getParent();
             vg.removeView(v);
-            pos = Utils.isOxygenOs35Rom() ? vg.getChildCount()-1 : vg.getChildCount();
+            pos = Utils.isOxygenOs41Rom() ? vg.getChildCount()-1 : vg.getChildCount();
             vg.addView(v, pos);
         }
     }
