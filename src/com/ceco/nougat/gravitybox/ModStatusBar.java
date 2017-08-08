@@ -340,9 +340,6 @@ public class ModStatusBar {
     }
 
     private static void prepareHeaderTimeView() {
-        if (Utils.isOxygenOs35Rom())
-            return;
-
         try {
             ViewGroup header = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
             int resId = mContext.getResources().getIdentifier("clock", "id", PACKAGE_NAME);
@@ -964,18 +961,16 @@ public class ModStatusBar {
                         }
                     }
                 });
-                if (!Utils.isOxygenOs35Rom()) {
-                    XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
-                            "expand", boolean.class, new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            if (mDisablePeek) {
-                                XposedHelpers.setBooleanField(param.thisObject,
-                                        QsQuickPulldownHandler.getQsExpandFieldName(), false);
-                            }
+                XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
+                        "expand", boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mDisablePeek) {
+                            XposedHelpers.setBooleanField(param.thisObject,
+                                    QsQuickPulldownHandler.getQsExpandFieldName(), false);
                         }
-                    });
-                }
+                    }
+                });
             } catch (Throwable t) {
                 log("Error setting up Disable peek hooks: " + t.getMessage());
                 if (DEBUG) XposedBridge.log(t);
