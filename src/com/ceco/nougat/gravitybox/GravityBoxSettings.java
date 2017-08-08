@@ -34,6 +34,7 @@ import com.ceco.nougat.gravitybox.managers.BatteryInfoManager;
 import com.ceco.nougat.gravitybox.preference.AppPickerPreference;
 import com.ceco.nougat.gravitybox.preference.AutoBrightnessDialogPreference;
 import com.ceco.nougat.gravitybox.preference.SeekBarPreference;
+import com.ceco.nougat.gravitybox.quicksettings.TileOrderActivity;
 import com.ceco.nougat.gravitybox.shortcuts.GoHomeShortcut;
 import com.ceco.nougat.gravitybox.shortcuts.ShortcutActivity;
 import com.ceco.nougat.gravitybox.webserviceclient.RequestParams;
@@ -1360,6 +1361,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             AppPickerPreference.sPrefsFragment = this;
             AppPickerPreference.cleanupAsync(getActivity());
+
+            // Force update tile service components
+            TileOrderActivity.updateServiceComponents(getActivity());
 
             mBatteryStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_STYLE);
             mPrefBatteryPercentSb = (CheckBoxPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR);

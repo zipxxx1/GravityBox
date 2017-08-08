@@ -37,6 +37,7 @@ import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -145,7 +146,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             for (String key : toRemove) enabledList.remove(key);
             mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, Utils.join(
                     enabledList.toArray(new String[enabledList.size()]), ",")).commit();
-            updateServiceComponents();
+            updateServiceComponents(this);
         }
 
         toRemove.clear();
@@ -163,12 +164,13 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         }
     }
 
-    private void updateServiceComponents() {
+    public static void updateServiceComponents(Context ctx) {
+        SharedPreferences prefs = SettingsManager.getInstance(ctx).getMainPrefs();
         List<String> enabledList = new ArrayList<String>(Arrays.asList(
-                mPrefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
-        PackageManager pm = getPackageManager();
+                prefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
+        PackageManager pm = ctx.getPackageManager();
         for (Entry<String,Class<?>> service : SERVICES.entrySet()) {
-            pm.setComponentEnabledSetting(new ComponentName(this, service.getValue()),
+            pm.setComponentEnabledSetting(new ComponentName(ctx, service.getValue()),
                     enabledList.contains(service.getKey()) ?
                             PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
                                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
@@ -284,7 +286,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             .putString(PREF_KEY_TILE_SECURED, newSecuredList)
             .commit();
 
-        updateServiceComponents();
+        updateServiceComponents(this);
         broadcastSecuredList();
     }
 
