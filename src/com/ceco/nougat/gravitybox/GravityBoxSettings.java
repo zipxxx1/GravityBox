@@ -995,7 +995,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public int xposedBridgeVersion;
         public boolean supportsFingerprint;
         public int[] fingerprintIds;
-        public boolean isOxygenOs35Rom;
+        public boolean isOxygenOs41Rom;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -1034,8 +1034,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (data.containsKey("fingerprintIds")) {
                 fingerprintIds = data.getIntArray("fingerprintIds");
             }
-            if (data.containsKey("isOxygenOs35Rom")) {
-                isOxygenOs35Rom = data.getBoolean("isOxygenOs35Rom");
+            if (data.containsKey("isOxygenOs41Rom")) {
+                isOxygenOs41Rom = data.getBoolean("isOxygenOs41Rom");
             }
         }
     }
@@ -1796,8 +1796,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatDisplay.removePreference(mPrefPulseNotificationDelay);
             }
 
-            // Remove OxygenOS 3.5 preferences
-            if (sSystemProperties.isOxygenOs35Rom) {
+            // Remove OxygenOS 4.1 preferences
+            if (sSystemProperties.isOxygenOs41Rom) {
                 Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
                 if (p != null) mPrefCatLsOther.removePreference(p);
                 p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY);
@@ -1805,33 +1805,34 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColor);
                 p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
                 if (p != null) mPrefCatSignalCluster.removePreference(p);
-                PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_CLOCK_SETTINGS);
-                p = findPreference(PREF_CAT_KEY_NOTIF_PANEL_CLOCK);
-                if (p != null) ps.removePreference(p);
-                p = findPreference(PREF_KEY_NAVBAR_SWAP_KEYS);
-                if (p != null) mPrefCatNavbarKeys.removePreference(p);
-                mPrefCatPower.removePreference(mPrefCatPowerMenu);
-                p = findPreference(PREF_CAT_KEY_BATTERY_TILE);
-                if (p != null) mPrefCatQsTileSettings.removePreference(p);
-                mPrefCatQsTileSettings.removePreference(mPrefCatCellTile);
-                p = findPreference(PREF_CAT_KEY_QS_DND_TILE_SETTINGS);
-                if (p != null) mPrefCatQsTileSettings.removePreference(p);
-                p = findPreference(PREF_CAT_KEY_QS_LOCATION_TILE_SETTINGS);
-                if (p != null) mPrefCatQsTileSettings.removePreference(p);
-                p = findPreference(PREF_KEY_NM_TILE_QUICK_MODE);
-                if (p != null) mPrefCatQsNmTileSettings.removePreference(p);
-                ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_RM_TILE_SETTINGS);
-                p = findPreference(PREF_KEY_RINGER_MODE_TILE_QUICK_MODE);
-                if (p != null) ps.removePreference(p);
-                ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_SA_TILE_SETTINGS);
-                p = findPreference(PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE);
-                if (p != null) ps.removePreference(p);
-                p = findPreference(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW);
-                if (p != null) mPrefCatStatusbarQs.removePreference(p);
-                p = findPreference(PREF_KEY_QS_SCALE_CORRECTION);
-                if (p != null) mPrefCatStatusbarQs.removePreference(p);
-                p = findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
-                if (p != null) mPrefCatStatusbarQs.removePreference(p);
+                //PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_CLOCK_SETTINGS);
+                //p = findPreference(PREF_CAT_KEY_NOTIF_PANEL_CLOCK);
+                //if (p != null) ps.removePreference(p);
+                //p = findPreference(PREF_KEY_NAVBAR_SWAP_KEYS);
+                //if (p != null) mPrefCatNavbarKeys.removePreference(p);
+                //mPrefCatPower.removePreference(mPrefCatPowerMenu);
+                //p = findPreference(PREF_CAT_KEY_BATTERY_TILE);
+                //if (p != null) mPrefCatQsTileSettings.removePreference(p);
+                //mPrefCatQsTileSettings.removePreference(mPrefCatCellTile);
+                //p = findPreference(PREF_CAT_KEY_QS_DND_TILE_SETTINGS);
+                //if (p != null) mPrefCatQsTileSettings.removePreference(p);
+                //p = findPreference(PREF_CAT_KEY_QS_LOCATION_TILE_SETTINGS);
+                //if (p != null) mPrefCatQsTileSettings.removePreference(p);
+                //p = findPreference(PREF_KEY_NM_TILE_QUICK_MODE);
+                //if (p != null) mPrefCatQsNmTileSettings.removePreference(p);
+                //PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_RM_TILE_SETTINGS);
+                //p = findPreference(PREF_KEY_RINGER_MODE_TILE_QUICK_MODE);
+                //if (p != null) ps.removePreference(p);
+                //ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_SA_TILE_SETTINGS);
+                //p = findPreference(PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE);
+                //if (p != null) ps.removePreference(p);
+                //p = findPreference(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW);
+                //if (p != null) mPrefCatStatusbarQs.removePreference(p);
+                //p = findPreference(PREF_KEY_QS_SCALE_CORRECTION);
+                //if (p != null) mPrefCatStatusbarQs.removePreference(p);
+                //p = findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
+                //if (p != null) mPrefCatStatusbarQs.removePreference(p);
+                mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
             }
 
             // Remove fingerprint related preferences
@@ -1966,8 +1967,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 appPref.setOnPreferenceChangeListener(this);
             }
 
-            // set default quick tap as Go Home for OOS 3.5
-            if (sSystemProperties.isOxygenOs35Rom &&
+            // set default quick tap as Go Home for OOS 4.1
+            if (sSystemProperties.isOxygenOs41Rom &&
                     mPrefs.getString(PREF_KEY_FINGERPRINT_LAUNCHER_APP, null) == null) {
                 AppPickerPreference appp = (AppPickerPreference)
                         findPreference(PREF_KEY_FINGERPRINT_LAUNCHER_APP);

@@ -51,7 +51,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         XposedBridge.log("GB:Is MTK device: " + Utils.isMtkDevice());
         XposedBridge.log("GB:Is Xperia device: " + Utils.isXperiaDevice());
         XposedBridge.log("GB:Is Moto XT device: " + Utils.isMotoXtDevice());
-        XposedBridge.log("GB:Is OxygenOS 3.5 ROM: " + Utils.isOxygenOs35Rom());
+        XposedBridge.log("GB:Is OxygenOS 4.1 ROM: " + Utils.isOxygenOs41Rom());
         XposedBridge.log("GB:Has Lenovo custom UI: " + Utils.hasLenovoCustomUI());
         if (Utils.hasLenovoCustomUI()) {
             XposedBridge.log("GB:Lenovo UI is VIBE: " + Utils.hasLenovoVibeUI());
@@ -166,7 +166,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModClearAllRecents.init(prefs, lpparam.classLoader);
         }
 
-        if (ModDialer.PACKAGE_NAMES.contains(lpparam.packageName)) {
+        if (ModDialer.PACKAGE_NAMES.contains(lpparam.packageName) && !Utils.isOxygenOs41Rom()) {
             if (lpparam.appInfo.targetSdkVersion == 25) {
                 ModDialer25.init(prefs, qhPrefs, lpparam.classLoader, lpparam.packageName);
             } else if (lpparam.appInfo.targetSdkVersion == 24) {

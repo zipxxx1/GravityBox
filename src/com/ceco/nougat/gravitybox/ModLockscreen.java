@@ -207,6 +207,7 @@ public class ModLockscreen {
                     }
                     mKgMonitor = SysUiManagers.KeyguardMonitor;
                     mKgMonitor.setMediator(param.thisObject);
+                    mKgMonitor.setUpdateMonitor(XposedHelpers.getObjectField(param.thisObject, "mUpdateMonitor"));
 
                     prepareCustomBackground();
                     prepareGestureDetector();
@@ -379,7 +380,7 @@ public class ModLockscreen {
                 }
             });
 
-            if (Utils.isOxygenOs35Rom()) {
+            if (Utils.isOxygenOs41Rom()) {
                 XposedHelpers.findAndHookMethod(CLASS_KG_PASSWORD_TEXT_VIEW_PIN, classLoader,
                         "append", char.class, new XC_MethodHook() {
                     @Override
@@ -478,7 +479,7 @@ public class ModLockscreen {
                             "id", PACKAGE_NAME);
                     if (containerId == 0) {
                         // fallback to AOSP container
-                        containerId = res.getIdentifier(Utils.isOxygenOs35Rom() ? "clock_view" :
+                        containerId = res.getIdentifier(Utils.isOxygenOs41Rom() ? "clock_view" :
                                 "keyguard_clock_container", "id", PACKAGE_NAME);
                     }
                     if (containerId != 0) {

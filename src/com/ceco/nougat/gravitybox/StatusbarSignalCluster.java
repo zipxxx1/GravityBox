@@ -286,7 +286,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     }
                 });
             } catch (Throwable t) {
-                if (!Utils.isOxygenOs35Rom()) {
+                if (!Utils.isOxygenOs41Rom()) {
                     log("Error hooking getOrInflateState: " + t.getMessage());
                 }
             }

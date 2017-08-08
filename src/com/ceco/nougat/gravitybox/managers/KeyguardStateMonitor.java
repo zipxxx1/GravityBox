@@ -88,6 +88,10 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
         mMediator = mediator;
     }
 
+    public void setUpdateMonitor(Object updateMonitor) {
+        mUpdateMonitor = updateMonitor;
+    }
+
     private void createHooks() {
         try {
             ClassLoader cl = mContext.getClassLoader();

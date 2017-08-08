@@ -99,6 +99,7 @@ public class Utils {
     private static String mDeviceCharacteristics = null;
     private static Boolean mIsVerneeApolloDevice;
     private static Boolean mIsOxygenOs35Rom = null;
+    private static Boolean mIsOxygenOs41Rom = null;
 
     // Device features
     private static Boolean mHasGeminiSupport = null;
@@ -291,6 +292,14 @@ public class Utils {
                     version.startsWith("OP3_O2_Open_7"));
         }
         return mIsOxygenOs35Rom;
+    }
+
+    public static boolean isOxygenOs41Rom() {
+        if (mIsOxygenOs41Rom == null) {
+            String version = SystemProp.get("ro.oxygen.version", "0");
+            mIsOxygenOs41Rom = version.startsWith("4.1");
+        }
+        return mIsOxygenOs41Rom;
     }
 
     public static boolean isParanoidRom() {
