@@ -1480,18 +1480,6 @@
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">音量情景</string>
     
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">修复MTK特性</string>
-    <string name="pref_cat_mtk_fixes_summary">包含各种与联发科芯片的特性修复，仅在需要时使用</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">高级开发人员选项</string>
-    <string name="pref_mtk_fix_dev_opts_summary">解锁高级开发人员选项（需要重新启动）</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">修复语音设置</string>
-    <string name="pref_mtk_fix_tts_settings_summary">在语言&amp;输入设置解锁语音搜索和文字转语音（需要重新启动）</string>
-    
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">使用选择的图像</string>
     <string name="imgpick_choose_error">选择的图像错误</string>

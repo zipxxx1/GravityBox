@@ -1459,18 +1459,6 @@
 	<!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Audioprofil</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">MTK-spezifische Korrekturen</string>
-    <string name="pref_cat_mtk_fixes_summary">Fehlerkorrekturen für MediaTek Geräte. Nur bei Bedarf benutzen!</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Erweiterte Entwickleroptionen</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Erweiterte Entwickleroptionen freischalten (Neustart erforderlich)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Spracheinstellungen reparieren</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Einstellungen für Sprachsuche und Text-in-Sprache unter Sprache&amp;Eingabe anzeigen (Neustart erforderlich)</string>
-
 	<!-- ImagePicker -->
     <string name="imgpick_dialog_title">Bild auswählen</string>
     <string name="imgpick_choose_error">Fehler bei Bildauswahl</string>

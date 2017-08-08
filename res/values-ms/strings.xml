@@ -1471,18 +1471,6 @@
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Profil audio</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">Pemulihan untuk MTK tertentu</string>
-    <string name="pref_cat_mtk_fixes_summary">Mangandungi pemulihan untuk MTK. Guna ketika perlu.</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">Tetapan developer tambahan</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Buka tetapan developer tambahan (perlukan reboot)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Baiki tetapan suara</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Buka carian bunyi&amp;Input (perlukan reboot)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Pilih imej melalui</string>
     <string name="imgpick_choose_error">Ralat ketika memilih imej</string>

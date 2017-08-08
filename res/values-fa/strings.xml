@@ -1480,18 +1480,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">پروفايل صوتي</string>
 
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">MTK فيکس موارد خاص</string>
-    <string name="pref_cat_mtk_fixes_summary">شامل فيکس موارد کلي مدياتک. استفاده فقط در صورت نياز</string>
-
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">گزينه هاي توسعه دهنده پيشرفته</string>
-    <string name="pref_mtk_fix_dev_opts_summary">انلاک گزينه هاي توسعه دهنده پيشرفته (نياز به راه اندازي مجدد سيستم)</string>
-
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">فيکس تنظيمات سخنراني</string>
-    <string name="pref_mtk_fix_tts_settings_summary">انلاک تنظيمات جستجو صدا و متن به گفتار در زبان و ورودي (نياز به راه اندازي مجدد سيستم)</string>
-
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">استفاده تصوير انتخابي</string>
     <string name="imgpick_choose_error">خطا در حال انتخاب تصوير</string>

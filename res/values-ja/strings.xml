@@ -1207,15 +1207,6 @@
     <string name="pref_charger_unplugged_sound_title">電源接続解除時のサウンド</string>
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">オーディオプロファイル</string>
-    <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">MTK向けの修正</string>
-    <string name="pref_cat_mtk_fixes_summary">MediaTek向けの修正を含んでいます。必要な場合のみ有効にしてください。</string>
-    <!-- MTK Advanced Developer Options -->
-    <string name="pref_mtk_fix_dev_opts_title">高度な開発者向けオプション</string>
-    <string name="pref_mtk_fix_dev_opts_summary">高度な開発者向けオプションを表示します。(要再起動)</string>
-    <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">スピーチ設定の修正</string>
-    <string name="pref_mtk_fix_tts_settings_summary">音声検索とTTSの設定を表示します。(要再起動)</string>
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">使う画像の選択</string>
     <string name="imgpick_choose_error">画像の選択中にエラーが発生しました</string>
