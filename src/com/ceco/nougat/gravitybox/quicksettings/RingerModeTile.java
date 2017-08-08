@@ -142,7 +142,7 @@ public class RingerModeTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (mQuickMode && !Utils.isOxygenOs35Rom()) {
+        if (mQuickMode) {
             showDetail(true);
         } else {
             startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
@@ -193,8 +193,7 @@ public class RingerModeTile extends QsTile {
         if (DEBUG) log(getKey() + ": onPreferenceInitialize: modes=" + Arrays.toString(modes));
         updateSettings(modes);
 
-        mQuickMode = Utils.isOxygenOs35Rom() ? true :
-                mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_RINGER_MODE_TILE_QUICK_MODE, false);
+        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_RINGER_MODE_TILE_QUICK_MODE, false);
 
         super.initPreferences();
     }

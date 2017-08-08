@@ -25,7 +25,6 @@ import java.util.concurrent.TimeUnit;
 
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
-import com.ceco.nougat.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.annotation.SuppressLint;
@@ -141,8 +140,7 @@ public class StayAwakeTile extends QsTile {
         if (DEBUG) log(getKey() + ": initPreferences: modes=" + modes);
         updateSettings(modes);
 
-        mQuickMode = Utils.isOxygenOs35Rom() ? true :
-                mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE, false);
+        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE, false);
         mAutoReset = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_AUTO_RESET, false);
     }
 

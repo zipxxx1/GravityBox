@@ -119,8 +119,7 @@ public class NetworkModeTile extends QsTile {
         if (DEBUG) log(getKey() + ": onPreferenceInitialize: modes=" + Arrays.toString(modes));
         setEnabledModes(modes);
 
-        mQuickMode = Utils.isOxygenOs35Rom() ? true :
-                mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_NM_TILE_QUICK_MODE, false);
+        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_NM_TILE_QUICK_MODE, false);
 
         if (mIsMsim) {
             try {
@@ -246,6 +245,8 @@ public class NetworkModeTile extends QsTile {
         Intent i = new Intent(PhoneWrapper.ACTION_CHANGE_NETWORK_TYPE);
         i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, mode);
         mContext.sendBroadcast(i);
+        mNetworkType = mode;
+        refreshState();
     }
 
     private void switchNetworkMode() {
@@ -284,7 +285,7 @@ public class NetworkModeTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (mQuickMode && !Utils.isOxygenOs35Rom()) {
+        if (mQuickMode) {
             showDetail(true);
         } else if (mIsMsim) {
             Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);

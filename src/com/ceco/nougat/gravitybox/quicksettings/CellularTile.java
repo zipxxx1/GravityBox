@@ -19,7 +19,6 @@ import java.util.List;
 
 import com.ceco.nougat.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
-import com.ceco.nougat.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -56,8 +55,7 @@ public class CellularTile extends AospTile {
     protected void initPreferences() {
         super.initPreferences();
 
-        mDataToggle = Utils.isOxygenOs35Rom() ? DataToggle.valueOf("DISABLED") :
-                DataToggle.valueOf(mPrefs.getString(
+        mDataToggle = DataToggle.valueOf(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_CELL_TILE_DATA_TOGGLE, "DISABLED"));
     }
 
@@ -91,9 +89,6 @@ public class CellularTile extends AospTile {
 
     @Override
     protected boolean onBeforeHandleClick() {
-        if (Utils.isOxygenOs35Rom())
-            return false;
-
         if (mClickHookBlocked) {
             mClickHookBlocked = false;
             return false;
@@ -101,6 +96,7 @@ public class CellularTile extends AospTile {
 
         if (mDataToggle == DataToggle.SINGLEPRESS) {
             toggleMobileData();
+            refreshState();
         } else {
             showDetail();
         }
@@ -112,6 +108,7 @@ public class CellularTile extends AospTile {
     public boolean handleLongClick() {
         if (mDataToggle == DataToggle.LONGPRESS) {
             toggleMobileData();
+            refreshState();
         } else if (mDataToggle != DataToggle.DISABLED){
             return showDetail();
         } else {

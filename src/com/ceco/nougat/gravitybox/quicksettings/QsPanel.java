@@ -76,9 +76,9 @@ public class QsPanel implements BroadcastSubReceiver {
     }
 
     private void initPreferences() {
-        mNumColumns = Utils.isOxygenOs35Rom() ? 0 : Integer.valueOf(mPrefs.getString(
+        mNumColumns = Integer.valueOf(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0"));
-        mScaleCorrection = Utils.isOxygenOs35Rom() ? 0 : mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0);
+        mScaleCorrection = mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0);
         mHideBrightness = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS, false);
         mBrightnessIconEnabled = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BRIGHTNESS_ICON, false);
         if (DEBUG) log("initPreferences: mNumColumns=" + mNumColumns +
@@ -140,9 +140,6 @@ public class QsPanel implements BroadcastSubReceiver {
     }
 
     public float getScalingFactor() {
-        if (Utils.isOxygenOs35Rom())
-            return 1;
-
         float correction = (float)mScaleCorrection / 100f;
         switch (mNumColumns) {
             default:

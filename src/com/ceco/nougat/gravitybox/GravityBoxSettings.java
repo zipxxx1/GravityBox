@@ -1811,8 +1811,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 //p = findPreference(PREF_KEY_NAVBAR_SWAP_KEYS);
                 //if (p != null) mPrefCatNavbarKeys.removePreference(p);
                 mPrefCatPower.removePreference(mPrefCatPowerMenu);
-                //p = findPreference(PREF_CAT_KEY_BATTERY_TILE);
-                //if (p != null) mPrefCatQsTileSettings.removePreference(p);
+                p = findPreference(PREF_CAT_KEY_BATTERY_TILE);
+                if (p != null) mPrefCatQsTileSettings.removePreference(p);
                 //mPrefCatQsTileSettings.removePreference(mPrefCatCellTile);
                 p = findPreference(PREF_CAT_KEY_QS_DND_TILE_SETTINGS);
                 if (p != null) mPrefCatQsTileSettings.removePreference(p);

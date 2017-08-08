@@ -35,7 +35,6 @@ import java.util.List;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModStatusBar;
 import com.ceco.nougat.gravitybox.R;
-import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.managers.GpsStatusMonitor;
 import com.ceco.nougat.gravitybox.managers.SysUiManagers;
 
@@ -77,8 +76,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
     @Override
     public void initPreferences() {
-        mQuickMode = Utils.isOxygenOs35Rom() ? true :
-                mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCATION_TILE_QUICK_MODE, false);
+        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCATION_TILE_QUICK_MODE, false);
 
         super.initPreferences();
     }
@@ -210,9 +208,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
     @Override
     public boolean handleLongClick() {
-        if (Utils.isOxygenOs35Rom()) {
-            startSettingsActivity(LOCATION_SETTINGS_INTENT);
-        } else if (mQuickMode) {
+        if (mQuickMode) {
             showDetail(true);
         } else {
             setLocationEnabled(!isLocationEnabled());
