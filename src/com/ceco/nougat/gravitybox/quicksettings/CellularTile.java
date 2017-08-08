@@ -130,7 +130,7 @@ public class CellularTile extends AospTile {
 
     @Override
     public boolean supportsHideOnChange() {
-        return false;
+        return mDataToggle == DataToggle.SINGLEPRESS;
     }
 
     @Override

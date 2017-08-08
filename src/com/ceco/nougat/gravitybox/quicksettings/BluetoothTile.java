@@ -25,6 +25,11 @@ public class BluetoothTile extends AospTile {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        return false;
+    }
+
+    @Override
     public String getSettingsKey() {
         return "aosp_tile_bluetooth";
     }

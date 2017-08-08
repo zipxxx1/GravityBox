@@ -103,6 +103,11 @@ public class BatteryTile extends AospTile {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        return false;
+    }
+
+    @Override
     public void setListening(boolean listening) {
         if (listening) {
             registerReceiver();
