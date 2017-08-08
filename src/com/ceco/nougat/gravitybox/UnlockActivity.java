@@ -27,6 +27,7 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
     private static final String ACTION_UNLOCK = "gravitybox.intent.action.UNLOCK";
     private static final String ACTION_CHECK_POLICY = "gravitybox.intent.action.CHECK_POLICY";
     private static final String PERMISSION_UNLOCK = "gravitybox.permission.UNLOCK";
+    private static final int UNLOCKER_VERSION_MIN = 17;
 
     protected interface CheckPolicyHandler {
         void onPolicyResult(boolean ok);
@@ -178,7 +179,7 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
         try {
             PackageInfo pkgInfo = context.getPackageManager()
                     .getPackageInfo(PKG_UNLOCKER, 0);
-            if (pkgInfo.versionCode < 16) {
+            if (pkgInfo.versionCode < UNLOCKER_VERSION_MIN) {
                 Toast.makeText(context, context.getString(R.string.msg_unlocker_old),
                         Toast.LENGTH_LONG).show();
             } else {
@@ -239,7 +240,7 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
         try {
             PackageInfo pkgInfo = context.getPackageManager()
                     .getPackageInfo(PKG_UNLOCKER, 0);
-            if (pkgInfo.versionCode < 16) {
+            if (pkgInfo.versionCode < UNLOCKER_VERSION_MIN) {
                 policyHandler.onPolicyResult(false);
                 Toast.makeText(context, context.getString(R.string.msg_unlocker_old),
                         Toast.LENGTH_LONG).show();
