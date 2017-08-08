@@ -1542,7 +1542,7 @@
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">POZOR</string>
-    <string name="gb_new_package_dialog_message">Bola nájdená predošlá verzia GravityBox pre Lollipop. 
+    <string name="gb_new_package_dialog_message">Bola nájdená predošlá verzia GravityBox pre Marshmallow. 
         Pred použitím novej verzie, je potrebné odinštalovať predošlú verziu. Slačte OK pre spustenie procesu odinštalácie. 
         Po odinštalovaní, aktivujte novú verziu v Xposed inštalátore a reštartuje zariadenie.</string>
 
