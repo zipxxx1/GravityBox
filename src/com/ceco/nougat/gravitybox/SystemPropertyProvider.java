@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.provider.Settings;
@@ -65,13 +64,15 @@ public class SystemPropertyProvider {
     }
 
     public static boolean supportsFingerprint(Context ctx) {
-        try {
-            FingerprintManager fpm = (FingerprintManager) ctx.getSystemService(Context.FINGERPRINT_SERVICE);
-            return (fpm != null && fpm.isHardwareDetected());
-        } catch (Throwable t) {
-            log("Error checkin for fingerprint support: " + t.getMessage());
-            return false;
-        }
+        // TODO: FP launcher
+        return false;
+//        try {
+//            FingerprintManager fpm = (FingerprintManager) ctx.getSystemService(Context.FINGERPRINT_SERVICE);
+//            return (fpm != null && fpm.isHardwareDetected());
+//        } catch (Throwable t) {
+//            log("Error checkin for fingerprint support: " + t.getMessage());
+//            return false;
+//        }
     }
 
     public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {

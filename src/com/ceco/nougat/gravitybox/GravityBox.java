@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,8 +14,6 @@
  */
 
 package com.ceco.nougat.gravitybox;
-
-import com.ceco.nougat.gravitybox.managers.FingerprintLauncher;
 
 import android.os.Build;
 import de.robv.android.xposed.IXposedHookInitPackageResources;
@@ -135,10 +133,11 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModLedControl.initAndroid(prefs, uncPrefs, qhPrefs, lpparam.classLoader);
             ModTrustManager.initAndroid(prefs, lpparam.classLoader);
             ModPowerMenu.initAndroid(prefs, lpparam.classLoader);
-            ModFingerprint.initAndroid(prefs, lpparam.classLoader);
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE, false)) {
-                FingerprintLauncher.initAndroid(lpparam.classLoader);
-            }
+            // TODO: FP launcher
+            //ModFingerprint.initAndroid(prefs, lpparam.classLoader);
+            //if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE, false)) {
+            //    FingerprintLauncher.initAndroid(lpparam.classLoader);
+            //}
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {
