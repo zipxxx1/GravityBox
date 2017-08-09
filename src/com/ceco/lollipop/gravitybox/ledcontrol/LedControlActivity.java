@@ -178,21 +178,31 @@ public class LedControlActivity extends ListActivity implements ListItemActionHa
         mAsyncTask = null;
     }
 
+    private void openSettingsActivityFor(LedListItem item) {
+        mCurrentItem = item;
+        Intent intent = new Intent(this, LedSettingsActivity.class);
+        intent.putExtra(LedSettingsActivity.EXTRA_PACKAGE_NAME, mCurrentItem.getAppInfo().packageName);
+        intent.putExtra(LedSettingsActivity.EXTRA_APP_NAME, mCurrentItem.getAppName());
+        this.startActivityForResult(intent, REQ_SETTINGS);
+    }
+
     @Override
     public void onItemCheckedChanged(LedListItem item, boolean checked) {
         item.setEnabled(checked);
         mList.invalidateViews();
+        if (checked) {
+            openSettingsActivityFor(item);
+        }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mCurrentItem = (LedListItem) mList.getItemAtPosition(position);
-        if (mCurrentItem.isEnabled()) {
-            Intent intent = new Intent(this, LedSettingsActivity.class);
-            intent.putExtra(LedSettingsActivity.EXTRA_PACKAGE_NAME, mCurrentItem.getAppInfo().packageName);
-            intent.putExtra(LedSettingsActivity.EXTRA_APP_NAME, mCurrentItem.getAppName());
-            this.startActivityForResult(intent, REQ_SETTINGS);
+        LedListItem item = (LedListItem) mList.getItemAtPosition(position);
+        if (!item.isEnabled()) {
+            item.setEnabled(true);
+            mList.invalidateViews();
         }
+        openSettingsActivityFor(item);
     }
 
     @Override
