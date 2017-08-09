@@ -140,7 +140,8 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
             .setContentText(String.format(Locale.getDefault(),
                     getString(R.string.lc_preview_notif_text), getTitle()))
             .setSmallIcon(R.drawable.ic_notif_gravitybox)
-            .setLargeIcon(Utils.drawableToBitmap(getDrawable(R.drawable.ic_launcher)));
+            .setLargeIcon(Utils.drawableToBitmap(getDrawable(R.drawable.ic_launcher)))
+            .setPriority(Notification.PRIORITY_HIGH);
         final Notification n = builder.build();
         if (mPrefsFragment.getLedMode() == LedMode.OFF) {
             n.defaults &= ~Notification.DEFAULT_LIGHTS;
@@ -169,6 +170,8 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
                 Toast.makeText(this, getString(R.string.lc_vibrate_pattern_invalid),
                         Toast.LENGTH_SHORT).show();
             }
+        } else {
+            n.defaults |= Notification.DEFAULT_VIBRATE;
         }
         if (mPrefsFragment.getVisibility() != Visibility.DEFAULT) {
             n.visibility = mPrefsFragment.getVisibility().getValue();
