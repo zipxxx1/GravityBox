@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,10 +17,10 @@ package com.ceco.nougat.gravitybox.ledcontrol;
 
 import java.io.File;
 
+import com.ceco.nougat.gravitybox.GravityBoxActivity;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -29,7 +29,7 @@ import android.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.TextView;
 
-public class LedMainActivity extends Activity {
+public class LedMainActivity extends GravityBoxActivity {
     public static final String EXTRA_UUID_REGISTERED = "uuidRegistered";
     public static final String EXTRA_TRIAL_COUNTDOWN = "uncTrialCountdown";
 

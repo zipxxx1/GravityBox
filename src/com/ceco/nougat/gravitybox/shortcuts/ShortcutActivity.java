@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.ceco.nougat.gravitybox.GravityBoxListActivity;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.Utils;
@@ -28,7 +29,6 @@ import com.ceco.nougat.gravitybox.adapters.IconListAdapter;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings;
 import com.ceco.nougat.gravitybox.shortcuts.AShortcut.CreateShortcutListener;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,7 +36,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class ShortcutActivity extends ListActivity {
+public class ShortcutActivity extends GravityBoxListActivity {
     public static final String ACTION_LAUNCH_ACTION = "gravitybox.intent.action.LAUNCH_ACTION";
     public static final String EXTRA_ACTION = "action";
     public static final String EXTRA_ACTION_TYPE = "actionType";

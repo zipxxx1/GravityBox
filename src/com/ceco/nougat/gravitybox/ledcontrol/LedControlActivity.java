@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,11 +20,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.ceco.nougat.gravitybox.GravityBoxListActivity;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.ledcontrol.LedListAdapter.ListItemActionHandler;
 
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -41,7 +41,7 @@ import android.widget.EditText;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class LedControlActivity extends ListActivity implements ListItemActionHandler, OnItemClickListener {
+public class LedControlActivity extends GravityBoxListActivity implements ListItemActionHandler, OnItemClickListener {
 
     private static final int REQ_SETTINGS = 1;
 

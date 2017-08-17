@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -31,7 +31,7 @@ import android.provider.MediaStore;
 import android.widget.Toast;
 import com.ceco.nougat.gravitybox.R;
 
-public class PickImageActivity extends Activity {
+public class PickImageActivity extends GravityBoxActivity {
 
     private static final int REQ_PICK_IMAGE = 1;
     private static final int REQ_CROP_IMAGE = 2;

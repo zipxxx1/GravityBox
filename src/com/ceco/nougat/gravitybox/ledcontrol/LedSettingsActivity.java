@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,6 +18,7 @@ package com.ceco.nougat.gravitybox.ledcontrol;
 import java.io.File;
 import java.util.Locale;
 
+import com.ceco.nougat.gravitybox.GravityBoxActivity;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModHwKeys;
 import com.ceco.nougat.gravitybox.ModLedControl;
@@ -26,7 +27,6 @@ import com.ceco.nougat.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings.Visibility;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings.VisibilityLs;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -41,7 +41,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class LedSettingsActivity extends Activity implements OnClickListener {
+public class LedSettingsActivity extends GravityBoxActivity implements OnClickListener {
     protected static final String EXTRA_PACKAGE_NAME = "packageName";
     protected static final String EXTRA_APP_NAME = "appName";
 

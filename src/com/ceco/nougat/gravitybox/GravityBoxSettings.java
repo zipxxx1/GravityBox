@@ -91,7 +91,7 @@ import android.graphics.Point;
 import android.graphics.Bitmap.CompressFormat;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
-public class GravityBoxSettings extends Activity implements GravityBoxResultReceiver.Receiver {
+public class GravityBoxSettings extends GravityBoxActivity implements GravityBoxResultReceiver.Receiver {
     public static final String PREF_KEY_QUICK_SETTINGS_ENABLE = "pref_qs_management_enable";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row2";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE = "pref_qs_tile_label_style";

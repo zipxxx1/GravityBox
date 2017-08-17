@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.nougat.gravitybox.ledcontrol;
 
 import java.io.File;
@@ -23,6 +22,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.ceco.nougat.gravitybox.GravityBoxActivity;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.SettingsManager;
@@ -31,7 +31,6 @@ import com.ceco.nougat.gravitybox.WorldReadablePrefs;
 import com.ceco.nougat.gravitybox.WorldReadablePrefs.OnPreferencesCommitedListener;
 import com.ceco.nougat.gravitybox.WorldReadablePrefs.OnSharedPreferenceChangeCommitedListener;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,7 +40,7 @@ import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 
-public class QuietHoursActivity extends Activity {
+public class QuietHoursActivity extends GravityBoxActivity {
 
     public static final String PREF_KEY_QH_LOCKED = "pref_lc_qh_locked";
     public static final String PREF_KEY_QH_ENABLED = "pref_lc_qh_enabled";

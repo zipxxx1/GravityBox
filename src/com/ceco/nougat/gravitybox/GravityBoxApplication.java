@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,46 +14,14 @@
  */
 package com.ceco.nougat.gravitybox;
 
-import java.util.Locale;
-
 import android.app.Application;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.StrictMode;
 
 public class GravityBoxApplication extends Application {
-
-    private Locale mLocale = null;
-
     @Override
     public void onCreate() {
         super.onCreate();
-
-        SharedPreferences prefs = SettingsManager.getInstance(this).getMainPrefs();
-        Resources res = getBaseContext().getResources();
-        Configuration config = res.getConfiguration();
-        boolean forceEng = prefs.getBoolean(GravityBoxSettings.PREF_KEY_FORCE_ENGLISH_LOCALE, false);
-        if (forceEng && !config.locale.getLanguage().equals("en")) {
-            mLocale = new Locale("en");
-            Locale.setDefault(mLocale);
-            config.locale = mLocale;
-            res.updateConfiguration(config, res.getDisplayMetrics());
-        }
-
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (mLocale != null && !newConfig.locale.getLanguage().equals("en")) {
-            Resources res = getBaseContext().getResources();
-            Configuration config = res.getConfiguration();
-            Locale.setDefault(mLocale);
-            config.locale = mLocale;
-            res.updateConfiguration(config, res.getDisplayMetrics());
-        }
     }
 }

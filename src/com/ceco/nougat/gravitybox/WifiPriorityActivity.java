@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 
 package com.ceco.nougat.gravitybox;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,7 +41,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class WifiPriorityActivity extends ListActivity implements GravityBoxResultReceiver.Receiver {
+public class WifiPriorityActivity extends GravityBoxListActivity implements GravityBoxResultReceiver.Receiver {
 
     public static final String PREF_KEY_WIFI_TRUSTED = "pref_wifi_trusted";
     public static final String ACTION_WIFI_TRUSTED_CHANGED = "gravitybox.intent.action.WIFI_TRUSTED_CHANGED";

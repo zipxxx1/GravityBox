@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.ceco.nougat.gravitybox.GravityBoxListActivity;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.SettingsManager;
@@ -33,7 +34,6 @@ import com.ceco.nougat.gravitybox.ledcontrol.LedSettings;
 import com.ceco.nougat.gravitybox.ledcontrol.QuietHoursActivity;
 
 import android.annotation.SuppressLint;
-import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -50,7 +50,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class TileOrderActivity extends ListActivity implements View.OnClickListener {
+public class TileOrderActivity extends GravityBoxListActivity implements View.OnClickListener {
     public static final String PREF_KEY_TILE_ENABLED = "pref_qs_tile_enabled";
     public static final String PREF_KEY_TILE_SECURED = "pref_qs_tile_secured";
     public static final String EXTRA_TILE_SECURED_LIST = "tileSecuredList";
