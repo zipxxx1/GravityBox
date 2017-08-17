@@ -110,32 +110,31 @@ public class ModPowerMenu {
                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                    mContext = (Context) param.args[0];
                    Resources res = mContext.getResources();
-                   Resources gbRes = Utils.getGbContext(mContext).getResources();
-                   gbRes.updateConfiguration(res.getConfiguration(), res.getDisplayMetrics());
+                   Context gbContext = Utils.getGbContext(mContext, res.getConfiguration());
 
                    int rebootStrId = res.getIdentifier("factorytest_reboot", "string", PACKAGE_NAME);
                    int rebootSoftStrId = R.string.reboot_soft;
                    int recoveryStrId = R.string.poweroff_recovery;
                    int bootloaderStrId = R.string.poweroff_bootloader;
                    mRebootStr  = (rebootStrId == 0) ? "Reboot" : res.getString(rebootStrId);
-                   mRebootSoftStr = gbRes.getString(rebootSoftStrId);
-                   mRecoveryStr = gbRes.getString(recoveryStrId);
-                   mBootloaderStr = gbRes.getString(bootloaderStrId);
-                   mExpandedDesktopStr = gbRes.getString(R.string.action_expanded_desktop_title);
-                   mExpandedDesktopOnStr = gbRes.getString(R.string.action_expanded_desktop_on);
-                   mExpandedDesktopOffStr = gbRes.getString(R.string.action_expanded_desktop_off);
-                   mScreenshotStr = gbRes.getString(R.string.screenshot);
-                   mScreenrecordStr = gbRes.getString(R.string.action_screenrecord);
+                   mRebootSoftStr = gbContext.getString(rebootSoftStrId);
+                   mRecoveryStr = gbContext.getString(recoveryStrId);
+                   mBootloaderStr = gbContext.getString(bootloaderStrId);
+                   mExpandedDesktopStr = gbContext.getString(R.string.action_expanded_desktop_title);
+                   mExpandedDesktopOnStr = gbContext.getString(R.string.action_expanded_desktop_on);
+                   mExpandedDesktopOffStr = gbContext.getString(R.string.action_expanded_desktop_off);
+                   mScreenshotStr = gbContext.getString(R.string.screenshot);
+                   mScreenrecordStr = gbContext.getString(R.string.action_screenrecord);
 
-                   mRebootIcon = gbRes.getDrawable(R.drawable.ic_lock_reboot);
-                   mRebootSoftIcon = gbRes.getDrawable(R.drawable.ic_lock_reboot_soft);
-                   mRecoveryIcon = gbRes.getDrawable(R.drawable.ic_lock_recovery);
-                   mBootloaderIcon = gbRes.getDrawable(R.drawable.ic_lock_bootloader);
-                   mExpandedDesktopIcon = gbRes.getDrawable(Utils.hasLenovoVibeUI() ?
+                   mRebootIcon = gbContext.getDrawable(R.drawable.ic_lock_reboot);
+                   mRebootSoftIcon = gbContext.getDrawable(R.drawable.ic_lock_reboot_soft);
+                   mRecoveryIcon = gbContext.getDrawable(R.drawable.ic_lock_recovery);
+                   mBootloaderIcon = gbContext.getDrawable(R.drawable.ic_lock_bootloader);
+                   mExpandedDesktopIcon = gbContext.getDrawable(Utils.hasLenovoVibeUI() ?
                            R.drawable.ic_lock_expanded_desktop_vibeui : R.drawable.ic_lock_expanded_desktop);
-                   mScreenshotIcon = gbRes.getDrawable(Utils.hasLenovoVibeUI() ?
+                   mScreenshotIcon = gbContext.getDrawable(Utils.hasLenovoVibeUI() ?
                            R.drawable.ic_lock_screenshot_vibeui : R.drawable.ic_lock_screenshot);
-                   mScreenrecordIcon = gbRes.getDrawable(Utils.hasLenovoVibeUI() ?
+                   mScreenrecordIcon = gbContext.getDrawable(Utils.hasLenovoVibeUI() ?
                            R.drawable.ic_lock_screen_record_vibeui : R.drawable.ic_lock_screen_record);
 
                    mRebootItemList = new ArrayList<IIconListAdapterItem>();
@@ -146,12 +145,12 @@ public class ModPowerMenu {
                        mRebootItemList.add(new BasicIconListItem(mBootloaderStr, null, mBootloaderIcon, null));
                    }
 
-                   mRebootConfirmStr = String.format(gbRes.getString(R.string.reboot_confirm),
-                           gbRes.getString(Utils.isTablet() ? R.string.device_tablet : R.string.device_phone));
-                   mRebootConfirmRecoveryStr = String.format(gbRes.getString(R.string.reboot_confirm_recovery),
-                           gbRes.getString(Utils.isTablet() ? R.string.device_tablet : R.string.device_phone));
-                   mRebootConfirmBootloaderStr = String.format(gbRes.getString(R.string.reboot_confirm_bootloader),
-                           gbRes.getString(Utils.isTablet() ? R.string.device_tablet : R.string.device_phone));
+                   mRebootConfirmStr = String.format(gbContext.getString(R.string.reboot_confirm),
+                           gbContext.getString(Utils.isTablet() ? R.string.device_tablet : R.string.device_phone));
+                   mRebootConfirmRecoveryStr = String.format(gbContext.getString(R.string.reboot_confirm_recovery),
+                           gbContext.getString(Utils.isTablet() ? R.string.device_tablet : R.string.device_phone));
+                   mRebootConfirmBootloaderStr = String.format(gbContext.getString(R.string.reboot_confirm_bootloader),
+                           gbContext.getString(Utils.isTablet() ? R.string.device_tablet : R.string.device_phone));
 
                    if (DEBUG) log("GlobalActions constructed, resources set.");
                }

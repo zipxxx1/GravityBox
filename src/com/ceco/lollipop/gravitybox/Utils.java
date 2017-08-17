@@ -104,12 +104,16 @@ public class Utils {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static synchronized Context getGbContext(Context context) throws Throwable {
+    public static synchronized Context getGbContext(Context context, Configuration config) throws Throwable {
         if (mGbContext == null) {
             mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME,
                     Context.CONTEXT_IGNORE_SECURITY);
         }
-        return mGbContext;
+        return (config == null ? mGbContext : mGbContext.createConfigurationContext(config));
+    }
+
+    public static synchronized Context getGbContext(Context context) throws Throwable {
+        return getGbContext(context, null);
     }
 
     private static int getScreenType(Context con) {
