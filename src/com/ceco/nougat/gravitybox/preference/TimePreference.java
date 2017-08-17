@@ -58,8 +58,8 @@ public class TimePreference extends DialogPreference {
         super.onBindDialogView(v);
         int hours = (int) (mValue / 60);
         int minutes = mValue - hours*60;
-        mPicker.setCurrentHour(hours);
-        mPicker.setCurrentMinute(minutes);
+        mPicker.setHour(hours);
+        mPicker.setMinute(minutes);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class TimePreference extends DialogPreference {
         super.onDialogClosed(positiveResult);
 
         if (positiveResult) {
-            mValue = mPicker.getCurrentHour() * 60 + mPicker.getCurrentMinute();
+            mValue = mPicker.getHour() * 60 + mPicker.getMinute();
             setSummary(getSummary());
             if (callChangeListener(mValue)) {
                 persistInt(mValue);
