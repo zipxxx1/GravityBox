@@ -37,7 +37,7 @@ public class KillAppShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_kill_app);
+        return mContext.getDrawable(R.drawable.shortcut_kill_app);
     }
 
     @Override

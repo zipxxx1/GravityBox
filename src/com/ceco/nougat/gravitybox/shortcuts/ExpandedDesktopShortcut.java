@@ -40,7 +40,7 @@ public class ExpandedDesktopShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_expanded_desktop, null);
+        return mContext.getDrawable(R.drawable.shortcut_expanded_desktop);
     }
 
     @Override

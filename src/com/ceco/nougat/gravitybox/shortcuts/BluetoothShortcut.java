@@ -40,7 +40,7 @@ public class BluetoothShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_bluetooth, null);
+        return mContext.getDrawable(R.drawable.shortcut_bluetooth);
     }
 
     @Override

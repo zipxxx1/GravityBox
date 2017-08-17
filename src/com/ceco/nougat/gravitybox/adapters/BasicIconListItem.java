@@ -15,7 +15,7 @@
 
 package com.ceco.nougat.gravitybox.adapters;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 public class BasicIconListItem extends BasicListItem
@@ -32,17 +32,17 @@ public class BasicIconListItem extends BasicListItem
         mIconRight = iconRight;
     }
 
-    public BasicIconListItem(String text, String subText, int iconLeftId, int iconRightId, Resources res) {
+    public BasicIconListItem(String text, String subText, int iconLeftId, int iconRightId, Context ctx) {
         super(text,  subText);
 
         mIconLeftId = iconLeftId;
         mIconRightId = iconRightId;
 
         if (mIconLeftId != 0) {
-            mIconLeft = res.getDrawable(mIconLeftId);
+            mIconLeft = ctx.getDrawable(mIconLeftId);
         }
         if (mIconRightId != 0) {
-            mIconRight = res.getDrawable(mIconRightId);
+            mIconRight = ctx.getDrawable(mIconRightId);
         }
     }
 

@@ -37,7 +37,7 @@ public class TorchShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_torch);
+        return mContext.getDrawable(R.drawable.shortcut_torch);
     }
 
     @Override

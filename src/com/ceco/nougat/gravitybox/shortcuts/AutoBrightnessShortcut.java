@@ -40,7 +40,7 @@ public class AutoBrightnessShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_auto_brightness, null);
+        return mContext.getDrawable(R.drawable.shortcut_auto_brightness);
     }
 
     @Override

@@ -40,7 +40,7 @@ public class SmartRadioShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_smart_radio, null);
+        return mContext.getDrawable(R.drawable.shortcut_smart_radio);
     }
 
     @Override

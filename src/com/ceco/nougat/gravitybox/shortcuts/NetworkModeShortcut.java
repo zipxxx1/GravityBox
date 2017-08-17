@@ -40,7 +40,7 @@ public class NetworkModeShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_network_mode, null);
+        return mContext.getDrawable(R.drawable.shortcut_network_mode);
     }
 
     @Override

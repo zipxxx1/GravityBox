@@ -38,7 +38,7 @@ public class UnlockShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.ic_lockscreen_unlock);
+        return mContext.getDrawable(R.drawable.ic_lockscreen_unlock);
     }
 
     @Override

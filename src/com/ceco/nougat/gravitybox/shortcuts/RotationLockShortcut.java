@@ -40,7 +40,7 @@ public class RotationLockShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_rotation_lock, null);
+        return mContext.getDrawable(R.drawable.shortcut_rotation_lock);
     }
 
     @Override

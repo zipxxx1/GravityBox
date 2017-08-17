@@ -40,7 +40,7 @@ public class NfcShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_nfc, null);
+        return mContext.getDrawable(R.drawable.shortcut_nfc);
     }
 
     @Override

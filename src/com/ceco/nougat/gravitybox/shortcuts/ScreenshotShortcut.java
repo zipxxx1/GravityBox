@@ -37,7 +37,7 @@ public class ScreenshotShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_screenshot);
+        return mContext.getDrawable(R.drawable.shortcut_screenshot);
     }
 
     @Override

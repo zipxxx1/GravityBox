@@ -250,8 +250,8 @@ public class ModDialer24 {
                     final Resources res = frag.getResources();
                     if (param.args[idx] != null) {
                         String resName = "img_no_image_automirrored";
-                        Drawable picUnknown = res.getDrawable(res.getIdentifier(resName, "drawable",
-                                        res.getResourcePackageName(frag.getId())), null);
+                        Drawable picUnknown = frag.getContext().getDrawable(res.getIdentifier(resName, "drawable",
+                                        res.getResourcePackageName(frag.getId())));
                         shouldShowUnknownPhoto = ((Drawable)param.args[idx]).getConstantState().equals(
                                                     picUnknown.getConstantState());
                     }

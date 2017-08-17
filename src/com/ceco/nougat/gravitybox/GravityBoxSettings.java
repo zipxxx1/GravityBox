@@ -2850,23 +2850,23 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_PIE_COLOR_BG)) {
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_COLOR_BG, prefs.getInt(PREF_KEY_PIE_COLOR_BG, 
-                        getResources().getColor(R.color.pie_background_color)));
+                        getActivity().getColor(R.color.pie_background_color)));
             } else if (key.equals(PREF_KEY_PIE_COLOR_FG)) {
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_COLOR_FG, prefs.getInt(PREF_KEY_PIE_COLOR_FG, 
-                        getResources().getColor(R.color.pie_foreground_color)));
+                        getActivity().getColor(R.color.pie_foreground_color)));
             } else if (key.equals(PREF_KEY_PIE_COLOR_OUTLINE)) {
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_COLOR_OUTLINE, prefs.getInt(PREF_KEY_PIE_COLOR_OUTLINE, 
-                        getResources().getColor(R.color.pie_outline_color)));
+                        getActivity().getColor(R.color.pie_outline_color)));
             } else if (key.equals(PREF_KEY_PIE_COLOR_SELECTED)) {
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_COLOR_SELECTED, prefs.getInt(PREF_KEY_PIE_COLOR_SELECTED, 
-                        getResources().getColor(R.color.pie_selected_color)));
+                        getActivity().getColor(R.color.pie_selected_color)));
             } else if (key.equals(PREF_KEY_PIE_COLOR_TEXT)) {
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_COLOR_TEXT, prefs.getInt(PREF_KEY_PIE_COLOR_TEXT, 
-                        getResources().getColor(R.color.pie_text_color)));
+                        getActivity().getColor(R.color.pie_text_color)));
             } else if (key.equals(PREF_KEY_PIE_BACK_LONGPRESS)) {
                 intent.setAction(ACTION_PREF_HWKEY_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_KEY, key);
@@ -3053,12 +3053,12 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_KEY_COLOR,
                         prefs.getInt(PREF_KEY_NAVBAR_KEY_COLOR, 
-                                getResources().getColor(R.color.navbar_key_color)));
+                                getActivity().getColor(R.color.navbar_key_color)));
             } else if (key.equals(PREF_KEY_NAVBAR_KEY_GLOW_COLOR)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_KEY_GLOW_COLOR,
                         prefs.getInt(PREF_KEY_NAVBAR_KEY_GLOW_COLOR, 
-                                getResources().getColor(R.color.navbar_key_glow_color)));
+                                getActivity().getColor(R.color.navbar_key_glow_color)));
             } else if (PREF_KEY_APP_LAUNCHER_SLOT.contains(key)) {
                 intent.setAction(ACTION_PREF_APP_LAUNCHER_CHANGED);
                 intent.putExtra(EXTRA_APP_LAUNCHER_SLOT,
@@ -3374,7 +3374,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_PIE_TRIGIND_COLOR)) {
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_TRIGIND_COLOR, prefs.getInt(key, 
-                        getResources().getColor(R.color.pie_trigind_color)));
+                        getActivity().getColor(R.color.pie_trigind_color)));
             } else if (key.equals(PREF_KEY_POWER_CAMERA_VP)) {
                 intent.setAction(ACTION_PREF_POWER_CHANGED);
                 intent.putExtra(EXTRA_POWER_CAMERA_VP, prefs.getString(key, null));
@@ -3536,12 +3536,11 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 }
                 getActivity().recreate();
             } else if (pref == mPrefPieColorReset) {
-                final Resources res = getResources();
-                final int bgColor = res.getColor(R.color.pie_background_color);
-                final int fgColor = res.getColor(R.color.pie_foreground_color);
-                final int outlineColor = res.getColor(R.color.pie_outline_color);
-                final int selectedColor = res.getColor(R.color.pie_selected_color);
-                final int textColor = res.getColor(R.color.pie_text_color);
+                final int bgColor = getActivity().getColor(R.color.pie_background_color);
+                final int fgColor = getActivity().getColor(R.color.pie_foreground_color);
+                final int outlineColor = getActivity().getColor(R.color.pie_outline_color);
+                final int selectedColor = getActivity().getColor(R.color.pie_selected_color);
+                final int textColor = getActivity().getColor(R.color.pie_text_color);
                 mPrefPieColorBg.setValue(bgColor);
                 mPrefPieColorFg.setValue(fgColor);
                 mPrefPieColorOutline.setValue(outlineColor);

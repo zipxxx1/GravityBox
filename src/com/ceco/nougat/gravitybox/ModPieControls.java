@@ -138,23 +138,23 @@ public class ModPieControls {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_BG)) {
                     mPieController.setBackgroundColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_BG,
-                            mGbContext.getResources().getColor(R.color.pie_background_color)));
+                            mGbContext.getColor(R.color.pie_background_color)));
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_FG)) {
                     mPieController.setForegroundColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_FG,
-                            mGbContext.getResources().getColor(R.color.pie_foreground_color)));
+                            mGbContext.getColor(R.color.pie_foreground_color)));
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_OUTLINE)) {
                     mPieController.setOutlineColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_OUTLINE,
-                            mGbContext.getResources().getColor(R.color.pie_outline_color)));
+                            mGbContext.getColor(R.color.pie_outline_color)));
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_SELECTED)) {
                     mPieController.setSelectedColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_SELECTED,
-                            mGbContext.getResources().getColor(R.color.pie_selected_color)));
+                            mGbContext.getColor(R.color.pie_selected_color)));
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_TEXT)) {
                     mPieController.setTextColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_TEXT,
-                            mGbContext.getResources().getColor(R.color.pie_text_color)));
+                            mGbContext.getColor(R.color.pie_text_color)));
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_SYSINFO_DISABLE)) {
                     mPieController.setSysinfoDisabled(intent.getBooleanExtra(
@@ -178,7 +178,7 @@ public class ModPieControls {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND_COLOR)) {
                     mTrigindColor = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND_COLOR,
-                            mGbContext.getResources().getColor(R.color.pie_trigind_color));
+                            mGbContext.getColor(R.color.pie_trigind_color));
                     attachPie();
                 }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
@@ -347,7 +347,7 @@ public class ModPieControls {
                     mPieController.setCustomKeyMode(customKeyMode);
                     mPieController.setMirroredKeys(prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_MIRRORED_KEYS, false));
                     mTrigindColor = prefs.getInt(GravityBoxSettings.PREF_KEY_PIE_TRIGIND_COLOR,
-                            mGbContext.getResources().getColor(R.color.pie_trigind_color));
+                            mGbContext.getColor(R.color.pie_trigind_color));
 
                     mPieController.attachTo(param.thisObject);
 

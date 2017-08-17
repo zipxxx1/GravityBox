@@ -18,7 +18,7 @@
 package com.ceco.nougat.gravitybox;
 
 import com.ceco.nougat.gravitybox.R;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -249,6 +249,7 @@ public class TouchInterceptor extends ListView {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if ((mDragListener != null || mDropListener != null) && mDragView != null) {
@@ -329,7 +330,7 @@ public class TouchInterceptor extends ListView {
 
         Context context = getContext();
         ImageView v = new ImageView(context);
-        int backGroundColor = context.getResources().getColor(R.color.dragndrop_background);
+        int backGroundColor = context.getColor(R.color.dragndrop_background);
 		v.setAlpha((float) 0.7);
         v.setBackgroundColor(backGroundColor);
         v.setImageBitmap(bm);

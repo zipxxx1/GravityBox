@@ -67,6 +67,7 @@ public class ModNavigationBar {
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_NAVBAR_INFLATER_VIEW = "com.android.systemui.statusbar.phone.NavigationBarInflaterView";
 
+    @SuppressWarnings("unused")
     private static final int MODE_OPAQUE = 0;
     private static final int MODE_LIGHTS_OUT = 3;
     private static final int MODE_LIGHTS_OUT_TRANSPARENT = 6;
@@ -298,11 +299,10 @@ public class ModNavigationBar {
                     mResources = context.getResources();
 
                     mGbContext = Utils.getGbContext(context);
-                    final Resources res = mGbContext.getResources();
                     mNavbarColorsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_COLOR_ENABLE, false);
-                    mKeyDefaultColor = res.getColor(R.color.navbar_key_color, null);
+                    mKeyDefaultColor = mGbContext.getColor(R.color.navbar_key_color);
                     mKeyColor = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_KEY_COLOR, mKeyDefaultColor);
-                    mKeyDefaultGlowColor = res.getColor(R.color.navbar_key_glow_color, null);
+                    mKeyDefaultGlowColor = mGbContext.getColor(R.color.navbar_key_glow_color);
                     mKeyGlowColor = prefs.getInt(
                             GravityBoxSettings.PREF_KEY_NAVBAR_KEY_GLOW_COLOR, mKeyDefaultGlowColor);
                     mCustomKeyIconStyle = CustomKeyIconStyle.valueOf(prefs.getString(
@@ -332,7 +332,6 @@ public class ModNavigationBar {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final Context context = ((View) param.thisObject).getContext();
-                    final Resources gbRes = mGbContext.getResources();
 
                     // prepare app, dpad left, dpad right keys
                     ViewGroup vRot, navButtons;
@@ -350,14 +349,14 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(scaleType);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_left, null));
+                        dpadLeft.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_left));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(scaleType);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_right, null));
+                        dpadRight.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_right));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -379,14 +378,14 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(scaleType);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_left, null));
+                        dpadLeft.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_left));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(scaleType);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_right, null));
+                        dpadRight.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_right));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 

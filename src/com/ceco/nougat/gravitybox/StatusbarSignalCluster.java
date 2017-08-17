@@ -67,7 +67,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected LinearLayout mView;
     protected StatusBarIconManager mIconManager;
     protected Resources mResources;
-    protected Resources mGbResources;
+    protected Context mGbContext;
     protected Field mFldWifiGroup;
     private List<String> mErrorsLogged = new ArrayList<String>();
     protected boolean mNetworkTypeIndicatorsDisabled;
@@ -121,13 +121,13 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 activityView.setTag("gbDataActivity");
                 container.addView(activityView);
                 if (type == SignalType.WIFI) {
-                    imageDataIn = mGbResources.getDrawable(R.drawable.stat_sys_wifi_in, null);
-                    imageDataOut = mGbResources.getDrawable(R.drawable.stat_sys_wifi_out, null);
-                    imageDataInOut = mGbResources.getDrawable(R.drawable.stat_sys_wifi_inout, null);
+                    imageDataIn = mGbContext.getDrawable(R.drawable.stat_sys_wifi_in);
+                    imageDataOut = mGbContext.getDrawable(R.drawable.stat_sys_wifi_out);
+                    imageDataInOut = mGbContext.getDrawable(R.drawable.stat_sys_wifi_inout);
                 } else if (type == SignalType.MOBILE) {
-                    imageDataIn = mGbResources.getDrawable(R.drawable.stat_sys_signal_in, null);
-                    imageDataOut = mGbResources.getDrawable(R.drawable.stat_sys_signal_out, null);
-                    imageDataInOut = mGbResources.getDrawable(R.drawable.stat_sys_signal_inout, null);
+                    imageDataIn = mGbContext.getDrawable(R.drawable.stat_sys_signal_in);
+                    imageDataOut = mGbContext.getDrawable(R.drawable.stat_sys_signal_out);
+                    imageDataInOut = mGbContext.getDrawable(R.drawable.stat_sys_signal_inout);
                 }
                 updateDataActivityColor();
             }
@@ -216,7 +216,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         mView = view;
         mIconManager = SysUiManagers.IconManager;
         mResources = mView.getResources();
-        mGbResources = Utils.getGbContext(mView.getContext()).getResources();
+        mGbContext = Utils.getGbContext(mView.getContext());
 
         mFldWifiGroup = resolveField("mWifiGroup", "mWifiViewGroup");
 

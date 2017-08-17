@@ -37,7 +37,7 @@ public class ShowPowerMenuShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_power_menu);
+        return mContext.getDrawable(R.drawable.shortcut_power_menu);
     }
 
     @Override

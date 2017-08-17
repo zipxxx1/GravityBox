@@ -472,7 +472,6 @@ public class ModLedControl {
         return mDefaultNotificationLedOff;
     }
 
-    @SuppressWarnings("deprecation")
     private static int getDefaultNotificationProp(String resName, String resType, int defVal) {
         int val = defVal;
         try {
@@ -482,7 +481,7 @@ public class ModLedControl {
             int resId = res.getIdentifier(resName, resType, "android");
             if (resId != 0) {
                 switch (resType) {
-                    case "color": val = res.getColor(resId); break;
+                    case "color": val = ctx.getColor(resId); break;
                     case "integer": val = res.getInteger(resId); break;
                 }
             }

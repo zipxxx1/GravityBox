@@ -31,6 +31,7 @@ import com.ceco.nougat.gravitybox.shortcuts.ShortcutActivity;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -163,6 +164,7 @@ public class AppLauncher implements BroadcastSubReceiver {
         return dismissed;
     }
 
+    @SuppressLint("InflateParams")
     public void showDialog() {
         try {
             if (dismissDialog()) {
@@ -335,7 +337,7 @@ public class AppLauncher implements BroadcastSubReceiver {
 
         public Drawable getAppIcon() {
             return (mAppIcon == null ? 
-                    mResources.getDrawable(android.R.drawable.ic_menu_help) : mAppIcon);
+                    mContext.getDrawable(android.R.drawable.ic_menu_help) : mAppIcon);
         }
 
         public void setAppIcon(Drawable d) {
@@ -403,7 +405,7 @@ public class AppLauncher implements BroadcastSubReceiver {
                             mGbResources.getIdentifier(mIntent.getStringExtra("iconResName"),
                             "drawable", mGbContext.getPackageName()) : 0;
                     if (iconResId != 0) {
-                        appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                        appIcon = Utils.drawableToBitmap(mGbContext.getDrawable(iconResId));
                     } else if (mIntent.hasExtra("icon")) {
                         final String appIconPath = mIntent.getStringExtra("icon");
                         if (appIconPath != null) {
