@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.util.SparseBooleanArray;
 import de.robv.android.xposed.XC_MethodHook;
@@ -75,15 +76,32 @@ public class ModTrustManager {
 
     private static void onWifiConnectivityChanged() {
         try {
-            NetworkInfo nwInfo = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            boolean connectedChanged = mWifiConnected != nwInfo.isConnected();
-            mWifiConnected = nwInfo.isConnected();
+            final boolean isWifiConnected = isWifiConnected();
+            boolean connectedChanged = mWifiConnected != isWifiConnected;
+            mWifiConnected = isWifiConnected;
             if (DEBUG) log("onWifiConnectivityChanged: connected=" + mWifiConnected);
             if ((mWifiTrusted.size() > 0 || mForceRefreshAgentList) && connectedChanged) {
                 updateTrustAll();
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static boolean isWifiConnected() {
+        try {
+            Network[] networkInfos= mConnectivityManager.getAllNetworks();
+            for (Network net : networkInfos) {
+                NetworkInfo netInfo = mConnectivityManager.getNetworkInfo(net);
+                if (netInfo.getType() == ConnectivityManager.TYPE_WIFI &&
+                        netInfo.isConnected()) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
+            return false;
         }
     }
 
