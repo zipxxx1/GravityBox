@@ -60,19 +60,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Адключана</string>
     <string name="quick_settings_expanded_desktop_normal">Звычайны</string>
     <string name="quick_settings_expanded_desktop_expanded">Пашыраны</string>
-    <string name="quick_settings_stay_awake_on">Няспанне ўкл.</string>
     <string name="quick_settings_nfc_on">NFC укл.</string>
     <string name="quick_settings_nfc_off">NFC выкл.</string>
     <string name="quick_settings_usb_tether_off">Адключана</string>
     <string name="quick_settings_usb_tether_connected">Раздача выкл.</string>
     <string name="quick_settings_usb_tether_on">Раздача</string>
-    <string name="quick_settings_music_play">Прайграць</string>
-    <string name="quick_settings_music_pause">Паўза</string>
     <string name="quick_settings_smart_radio_on">Разумнае радыё ўкл.</string>
     <string name="quick_settings_smart_radio_off">Разумнае радыё выкл.</string>
     <string name="quick_settings_lock_screen_on">Экран блакавання ўкл.</string>
     <string name="quick_settings_lock_screen_off">Экран блакавання выкл.</string>
-    <string name="quick_settings_location_on">Геададзеныя</string>
     <string name="quick_settings_location_off">Геададзеныя</string>
     <string name="quick_settings_quiet_hours_off">"Ціхая гадзіна" выкл.</string>
     <string name="quick_settings_quiet_hours_on">"Ціхая гадзіна" ўкл.</string>
@@ -103,7 +99,6 @@
     <string name="qs_tile_usb_tethering">Раздача па USB</string>
     <string name="qs_tile_smart_radio">Разумнае радыё</string>
     <string name="qs_tile_lock_screen">Экран блакавання</string>
-    <string name="qs_tile_battery">Батарэя</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбар колеру</string>
@@ -657,7 +652,6 @@
     <string name="pref_volume_panel_timeout_title">Затрымка панэлі гучнасці</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Важныя</string>
     <string name="ringer_mode_vibrate">Вібрацыя</string>
     <string name="ringer_mode_sound">Гук</string>
     <string name="ringer_mode_sound_vibrate">Гук і вібрацыя</string>
@@ -942,9 +936,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Панэль лончара</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Паказаць панэль дадаткаў лончара</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Іншае</string>

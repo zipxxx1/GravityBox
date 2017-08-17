@@ -60,19 +60,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Отключено</string>
     <string name="quick_settings_expanded_desktop_normal">Нормальный</string>
     <string name="quick_settings_expanded_desktop_expanded">Расширенный</string>
-    <string name="quick_settings_stay_awake_on">Бодрствование вкл</string>
     <string name="quick_settings_nfc_on">NFC вкл</string>
     <string name="quick_settings_nfc_off">NFC выкл</string>
     <string name="quick_settings_usb_tether_off">Отключено</string>
     <string name="quick_settings_usb_tether_connected">Раздача выкл</string>
     <string name="quick_settings_usb_tether_on">Раздача</string>
-    <string name="quick_settings_music_play">Воспр.</string>
-    <string name="quick_settings_music_pause">Пауза</string>
     <string name="quick_settings_smart_radio_on">Умн.радио вкл</string>
     <string name="quick_settings_smart_radio_off">Умн.радио выкл</string>
     <string name="quick_settings_lock_screen_on">Экр.блокировки вкл</string>
     <string name="quick_settings_lock_screen_off">Экр.блокировки выкл</string>
-    <string name="quick_settings_location_on">Геоданные</string>
     <string name="quick_settings_location_off">Геоданные выкл</string>
     <string name="quick_settings_quiet_hours_off">Тихий час выкл</string>
     <string name="quick_settings_quiet_hours_on">Тихий час вкл</string>
@@ -104,7 +100,6 @@
     <string name="qs_tile_usb_tethering">Раздача по USB</string>
     <string name="qs_tile_smart_radio">Умное радио</string>
     <string name="qs_tile_lock_screen">Экран блокировки</string>
-    <string name="qs_tile_battery">Батарея</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбор цвета</string>
@@ -661,7 +656,6 @@
     <string name="pref_volume_panel_timeout_summary">Оставьте ноль для задержки по умолчанию</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Важные</string>
     <string name="ringer_mode_vibrate">Вибрация</string>
     <string name="ringer_mode_sound">Звук</string>
     <string name="ringer_mode_sound_vibrate">Звук и вибрация</string>
@@ -946,9 +940,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Панель лончера</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Показать панель приложений лончера</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Другое</string>
@@ -1883,8 +1874,6 @@
     <string name="ncki_icon_style3">Прозрачный</string>
     <string name="ncki_icon_style4">Пользовательский</string>
     <string name="pref_navbar_custom_key_image_title">Установить польз. изображение</string>
-    <string name="custom_image_success">Пользовательское установлено</string>
-    <string name="custom_image_failure">Ошибка установки пользовательского</string>
 
     <!-- Key actions: allow volume rocker wake when music active -->
     <string name="pref_volume_rocker_wake_allow_music_title">Разрешить пробуждение при активной музыке</string>

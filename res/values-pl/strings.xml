@@ -43,19 +43,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Wyłączony</string>
     <string name="quick_settings_expanded_desktop_normal">Normalny</string>
     <string name="quick_settings_expanded_desktop_expanded">Rozszerzony</string>
-    <string name="quick_settings_stay_awake_on">Blokowanie uśpienia Włączone</string>
     <string name="quick_settings_nfc_on">NFC Włączone</string>
     <string name="quick_settings_nfc_off">NFC Wyłączone</string>
     <string name="quick_settings_usb_tether_off">Rozłączony</string>
     <string name="quick_settings_usb_tether_connected">Tethering Wyłączony</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
-    <string name="quick_settings_music_play">Play</string>
-    <string name="quick_settings_music_pause">Pauza</string>
     <string name="quick_settings_smart_radio_on">Smart Radio Włączone</string>
     <string name="quick_settings_smart_radio_off">Smart Radio Wyłączone</string>
     <string name="quick_settings_lock_screen_on">Ekran Blokady Włączony</string>
     <string name="quick_settings_lock_screen_off">Ekran Blokady Wyłączony</string>
-    <string name="quick_settings_location_on">Lokalizacja Włączona</string>
     <string name="quick_settings_location_off">Lokalizacja Wyłączona</string>
     <string name="quick_settings_quiet_hours_off">Ciche Godziny Wyłączone</string>
     <string name="quick_settings_quiet_hours_on">Ciche Godziny Włączone</string>
@@ -633,7 +629,6 @@
     <string name="pref_volume_panel_timeout_title">Czas wyświetlania panelu głośności</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Cisza</string>
     <string name="ringer_mode_vibrate">Wibracje</string>
     <string name="ringer_mode_sound">Dźwięk</string>
     <string name="ringer_mode_sound_vibrate">Dźwięk i Wibracje</string>
@@ -914,9 +909,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Zasobnik aplikacji startera</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Pokaż zasobnik aplikacji startera</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Inne</string>

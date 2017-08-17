@@ -60,19 +60,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Désactivé</string>
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Étendu</string>
-    <string name="quick_settings_stay_awake_on">Rester Allumé On</string>
     <string name="quick_settings_nfc_on">NFC On</string>
     <string name="quick_settings_nfc_off">NFC Off</string>
     <string name="quick_settings_usb_tether_off">Déconnecté</string>
     <string name="quick_settings_usb_tether_connected">Partage de Connexion Off</string>
     <string name="quick_settings_usb_tether_on">Partage de Connexion</string>
-    <string name="quick_settings_music_play">Lecture</string>
-    <string name="quick_settings_music_pause">Pause</string>
     <string name="quick_settings_smart_radio_on">Ondes Radio Intelligentes On</string>
     <string name="quick_settings_smart_radio_off">Ondes Radio Intelligentes Off</string>
     <string name="quick_settings_lock_screen_on">Écran de Déverrouillage On</string>
     <string name="quick_settings_lock_screen_off">Écran de Déverrouillage Off</string>
-    <string name="quick_settings_location_on">Localisation</string>
     <string name="quick_settings_location_off">Localisation Off</string>
     <string name="quick_settings_quiet_hours_off">Heures Silencieuses Off</string>
     <string name="quick_settings_quiet_hours_on">Heures Silencieuses On</string>
@@ -103,7 +99,6 @@
     <string name="qs_tile_usb_tethering">Partage de Connexion USB</string>
     <string name="qs_tile_smart_radio">Ondes Radio Intelligentes</string>
     <string name="qs_tile_lock_screen">Écran de Déverrouillage</string>
-    <string name="qs_tile_battery">Batterie</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -658,7 +653,6 @@
     <string name="pref_volume_panel_timeout_title">Temporisation du panneau de volume</string>
  
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Prioritaire</string>
     <string name="ringer_mode_vibrate">Vibreur</string>
     <string name="ringer_mode_sound">Sonnerie</string>
     <string name="ringer_mode_sound_vibrate">Sonnerie et vibreur</string>
@@ -943,9 +937,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Tiroir de lancement d\'appli</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Afficher le tiroir de lancement d\'appli</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Autre</string>

@@ -44,19 +44,15 @@
     <string name="quick_settings_expanded_desktop_disabled">비활성화</string>
     <string name="quick_settings_expanded_desktop_normal">기본</string>
     <string name="quick_settings_expanded_desktop_expanded">확장됨</string>
-    <string name="quick_settings_stay_awake_on">화면 꺼짐 비활성화</string>
     <string name="quick_settings_nfc_on">NFC 활성화</string>
     <string name="quick_settings_nfc_off">NFC 비활성화</string>
     <string name="quick_settings_usb_tether_off">연결 해제됨</string>
     <string name="quick_settings_usb_tether_connected">테더링 끄기</string>
     <string name="quick_settings_usb_tether_on">테더링</string>
-    <string name="quick_settings_music_play">재생</string>
-    <string name="quick_settings_music_pause">일시 중지</string>
     <string name="quick_settings_smart_radio_on">스마트 라디오 활성화</string>
     <string name="quick_settings_smart_radio_off">스마트 라디오 비활성화</string>
     <string name="quick_settings_lock_screen_on">잠금화면 활성화</string>
     <string name="quick_settings_lock_screen_off">잠금화면 비활성화</string>
-    <string name="quick_settings_location_on">위치</string>
     <string name="quick_settings_location_off">위치 비활성화</string>
     <string name="quick_settings_quiet_hours_off">무음 모드 비활성화</string>
     <string name="quick_settings_quiet_hours_on">무음 모드 활성화</string>
@@ -525,7 +521,6 @@
 
     <string name="pref_volume_panel_timeout_title">음량 조절 패널 타임아웃</string>
 
-    <string name="ringer_mode_silent">음소거</string>
     <string name="ringer_mode_vibrate">진동</string>
     <string name="ringer_mode_sound">소리</string>
     <string name="ringer_mode_sound_vibrate">소리와 진동</string>
@@ -749,8 +744,6 @@
     <string name="pie_longpress_delay_default">시스템 기본값</string>
 
     <string name="shortcut_launcher_drawer">런처 앱 서랍</string>
-
-    <string name="hwkey_action_launcher_drawer">런처 앱 서랍 보이기</string>
 
     <string name="pref_cat_launcher_other_title">기타</string>
     <string name="pref_launcher_resize_widget_title">위젯 크기 조정</string>

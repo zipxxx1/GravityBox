@@ -57,19 +57,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Dezactivat</string>
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Extins</string>
-    <string name="quick_settings_stay_awake_on">Activ permanent pornit</string>
     <string name="quick_settings_nfc_on">NFC pornit</string>
     <string name="quick_settings_nfc_off">NFC Oprit</string>
     <string name="quick_settings_usb_tether_off">Deconectat</string>
     <string name="quick_settings_usb_tether_connected">Tethering oprit</string>
     <string name="quick_settings_usb_tether_on">Tethering pornit</string>
-    <string name="quick_settings_music_play">Redare</string>
-    <string name="quick_settings_music_pause">Pauză</string>
     <string name="quick_settings_smart_radio_on">Radio inteligent activat</string>
     <string name="quick_settings_smart_radio_off">Radio inteligent dezactivat</string>
     <string name="quick_settings_lock_screen_on">Blocare ecran pornită</string>
     <string name="quick_settings_lock_screen_off">Blocare ecran oprită</string>
-    <string name="quick_settings_location_on">Locație</string>
     <string name="quick_settings_location_off">Locație dezactivată</string>
     <string name="quick_settings_quiet_hours_off">Ore de linişte oprite</string>
     <string name="quick_settings_quiet_hours_on">Ore de linişte pornite</string>
@@ -101,7 +97,6 @@
     <string name="qs_tile_usb_tethering">Tethering prin USB</string>
     <string name="qs_tile_smart_radio">Radio inteligent</string>
     <string name="qs_tile_lock_screen">Blocare ecran</string>
-    <string name="qs_tile_battery">Baterie</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de culoare</string>
@@ -654,7 +649,6 @@
     <string name="pref_volume_panel_timeout_summary">Lăsați zero pentru intervalul de timp prestabilit</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Prioritate</string>
     <string name="ringer_mode_vibrate">Vibrare</string>
     <string name="ringer_mode_sound">Sunet</string>
     <string name="ringer_mode_sound_vibrate">Sunet și vibrare</string>
@@ -936,9 +930,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Sertar de lansare</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Afișează sertarul de aplicații pentru lansator</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Alte</string>
@@ -1835,8 +1826,6 @@
     <string name="ncki_icon_style3">Transparent</string>
     <string name="ncki_icon_style4">Personalizat</string>
     <string name="pref_navbar_custom_key_image_title">Setați o imagine personalizată</string>
-    <string name="custom_image_success">Set de imagini personalizate</string>
-    <string name="custom_image_failure">Setarea imaginii personalizate a eșuat</string>
 
     <!-- Key actions: allow volume rocker wake when music active -->
     <string name="pref_volume_rocker_wake_allow_music_title">Permite trezirea când este redată muzica</string>

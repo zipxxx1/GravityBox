@@ -58,14 +58,11 @@
     <string name="quick_settings_expanded_desktop_disabled">Uitgeschakeld</string>
     <string name="quick_settings_expanded_desktop_normal">Normaal</string>
     <string name="quick_settings_expanded_desktop_expanded">Uitgebreid</string>
-    <string name="quick_settings_stay_awake_on">Wakker Blijven aan</string>
     <string name="quick_settings_nfc_on">NFC Aan</string>
     <string name="quick_settings_nfc_off">NFC Uit</string>
     <string name="quick_settings_usb_tether_off">Niet verbonden</string>
     <string name="quick_settings_usb_tether_connected">Tethering Uit</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
-    <string name="quick_settings_music_play">Speel Af</string>
-    <string name="quick_settings_music_pause">Pauze</string>
     <string name="quick_settings_smart_radio_on">Smart Radio Aan</string>
     <string name="quick_settings_smart_radio_off">Smart Radio Uit</string>
     <string name="quick_settings_lock_screen_on">Schermvergrendeling Aan</string>
@@ -647,7 +644,6 @@
     <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Silent</string>
     <string name="ringer_mode_vibrate">Vibrate</string>
     <string name="ringer_mode_sound">Sound</string>
     <string name="ringer_mode_sound_vibrate">Sound and vibrate</string>
@@ -931,9 +927,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Launcher drawer</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Show launcher app drawer</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Other</string>

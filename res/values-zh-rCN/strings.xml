@@ -60,19 +60,15 @@
     <string name="quick_settings_expanded_desktop_disabled">禁用</string>
     <string name="quick_settings_expanded_desktop_normal">正常</string>
     <string name="quick_settings_expanded_desktop_expanded">扩展</string>
-    <string name="quick_settings_stay_awake_on">保持唤醒开启</string>
     <string name="quick_settings_nfc_on">NFC已开启</string>
     <string name="quick_settings_nfc_off">NFC已关闭</string>
     <string name="quick_settings_usb_tether_off">共享已断开</string>
     <string name="quick_settings_usb_tether_connected">共享已关闭</string>
     <string name="quick_settings_usb_tether_on">正在共享</string>
-    <string name="quick_settings_music_play">播放音乐</string>
-    <string name="quick_settings_music_pause">暂停</string>
     <string name="quick_settings_smart_radio_on">智能网络已开启</string>
     <string name="quick_settings_smart_radio_off">智能网络已关闭</string>
     <string name="quick_settings_lock_screen_on">锁屏已开启</string>
     <string name="quick_settings_lock_screen_off">锁屏已关闭</string>
-    <string name="quick_settings_location_on">位置</string>
     <string name="quick_settings_location_off">位置已关闭</string>
     <string name="quick_settings_quiet_hours_off">静音时段已关闭</string>
     <string name="quick_settings_quiet_hours_on">静音时段已开启</string>
@@ -104,7 +100,6 @@
     <string name="qs_tile_usb_tethering">USB共享</string>
     <string name="qs_tile_smart_radio">智能网络</string>
     <string name="qs_tile_lock_screen">锁屏</string>
-    <string name="qs_tile_battery">电量</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">颜色选择器</string>
@@ -661,11 +656,10 @@
     <string name="pref_volume_panel_timeout_summary">默认超时为零</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">优先级</string>
     <string name="ringer_mode_vibrate">振动</string>
     <string name="ringer_mode_sound">声音</string>
     <string name="ringer_mode_sound_vibrate">声音和振动</string>
-    
+
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">屏幕录制已开始</string>
     <string name="screenrecord_notif_title">屏幕录制中</string>
@@ -947,9 +941,6 @@
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">启动抽屉</string>
 
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">显示应用抽屉</string>
-    
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">其它</string>
     <string name="pref_launcher_resize_widget_title">调整任何小部件</string>
@@ -1884,8 +1875,6 @@
     <string name="ncki_icon_style3">透明</string>
     <string name="ncki_icon_style4">自定义</string>
     <string name="pref_navbar_custom_key_image_title">设置自定图像</string>
-    <string name="custom_image_success">设置自定义图像</string>
-    <string name="custom_image_failure">设置自定图像失败</string>
 
     <!-- Key actions: allow volume rocker wake when music active -->
     <string name="pref_volume_rocker_wake_allow_music_title">激活的音乐允许唤醒</string>

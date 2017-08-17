@@ -50,19 +50,15 @@
     <string name="quick_settings_expanded_desktop_disabled">無効</string>
     <string name="quick_settings_expanded_desktop_normal">通常</string>
     <string name="quick_settings_expanded_desktop_expanded">展開中</string>
-    <string name="quick_settings_stay_awake_on">常時点灯オン</string>
     <string name="quick_settings_nfc_on">NFCオン</string>
     <string name="quick_settings_nfc_off">NFCオフ</string>
     <string name="quick_settings_usb_tether_off">未接続</string>
     <string name="quick_settings_usb_tether_connected">テザリングオフ</string>
     <string name="quick_settings_usb_tether_on">テザリング</string>
-    <string name="quick_settings_music_play">再生</string>
-    <string name="quick_settings_music_pause">一時停止</string>
     <string name="quick_settings_smart_radio_on">スマートネットワークオン</string>
     <string name="quick_settings_smart_radio_off">スマートネットワークオフ</string>
     <string name="quick_settings_lock_screen_on">ロック画面オン</string>
     <string name="quick_settings_lock_screen_off">ロック画面オフ</string>
-    <string name="quick_settings_location_on">位置情報オン</string>
     <string name="quick_settings_location_off">位置情報オフ</string>
     <string name="quick_settings_quiet_hours_off">お休みモードオフ</string>
     <string name="quick_settings_quiet_hours_on">お休みモードオン</string>
@@ -539,7 +535,6 @@
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">音量パネルを非表示にするまでの時間</string>
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">サイレント</string>
     <string name="ringer_mode_vibrate">マナーモード</string>
     <string name="ringer_mode_sound">通常</string>
     <string name="ringer_mode_sound_vibrate">通常＋バイブ</string>
@@ -766,8 +761,6 @@
     <string name="pie_longpress_delay_default">デフォルト</string>
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">ホームアプリのドロワー</string>
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">ホームアプリのドロワーを表示</string>
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">その他</string>
     <string name="pref_launcher_resize_widget_title">ウィジェトをリサイズ可能にする</string>

@@ -60,19 +60,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Tắt</string>
     <string name="quick_settings_expanded_desktop_normal">Bình thường</string>
     <string name="quick_settings_expanded_desktop_expanded">Mở rộng</string>
-    <string name="quick_settings_stay_awake_on">ĐT luôn thức Bật</string>
     <string name="quick_settings_nfc_on">NFC Bật</string>
     <string name="quick_settings_nfc_off">NFC Tắt</string>
     <string name="quick_settings_usb_tether_off">Ngắt kết nối</string>
     <string name="quick_settings_usb_tether_connected">Chế độ moderm Tắt</string>
     <string name="quick_settings_usb_tether_on">Chế độ moderm Bật</string>
-    <string name="quick_settings_music_play">Phát</string>
-    <string name="quick_settings_music_pause">Tạm dừng</string>
     <string name="quick_settings_smart_radio_on">Smart Radio Bật</string>
     <string name="quick_settings_smart_radio_off">Smart Radio Tắt</string>
     <string name="quick_settings_lock_screen_on">Khóa màn hình Bật</string>
     <string name="quick_settings_lock_screen_off">Khóa màn hình Tắt</string>
-    <string name="quick_settings_location_on">Vị trí Bật</string>
     <string name="quick_settings_location_off">Vị trí Tắt</string>
     <string name="quick_settings_quiet_hours_off">Giờ im lặng Tắt</string>
     <string name="quick_settings_quiet_hours_on">Giờ im lặng Bật</string>
@@ -103,7 +99,6 @@
     <string name="qs_tile_usb_tethering">Truyền dữ liệu mạng qua cáp USB</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Khóa màn hình</string>
-    <string name="qs_tile_battery">Pin</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Chọn màu</string>
@@ -658,7 +653,6 @@
     <string name="pref_volume_panel_timeout_title">Thời gian hiện bảng âm lượng</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Ưu tiên</string>
     <string name="ringer_mode_vibrate">Rung</string>
     <string name="ringer_mode_sound">Chuông</string>
     <string name="ringer_mode_sound_vibrate">Chuông và rung</string>
@@ -943,9 +937,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Ngăn chứa Launcher</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Hiện ngăn chứa ứng dụng</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Khác</string>

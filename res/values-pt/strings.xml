@@ -43,19 +43,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Desativado</string>
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Expandido</string>
-    <string name="quick_settings_stay_awake_on">Manter ligado</string>
     <string name="quick_settings_nfc_on">NFC ativado</string>
     <string name="quick_settings_nfc_off">NFC desativado</string>
     <string name="quick_settings_usb_tether_off">Desligado</string>
     <string name="quick_settings_usb_tether_connected">Tethering USB desativado</string>
     <string name="quick_settings_usb_tether_on">Tethering USB ativado</string>
-    <string name="quick_settings_music_play">Tocar</string>
-    <string name="quick_settings_music_pause">Pausa</string>
     <string name="quick_settings_smart_radio_on">Rádio inteligente ativado</string>
     <string name="quick_settings_smart_radio_off">Rádio inteligente desativado</string>
     <string name="quick_settings_lock_screen_on">Bloqueio de tela ativado</string>
     <string name="quick_settings_lock_screen_off">Bloqueio de tela desativado</string>
-    <string name="quick_settings_location_on">Localização</string>
     <string name="quick_settings_location_off">Localização desativada</string>
     <string name="quick_settings_quiet_hours_off">Horas de silêncio desativadas</string>
     <string name="quick_settings_quiet_hours_on">Horas de silêncio ativadas</string>
@@ -630,7 +626,6 @@
     <string name="pref_volume_panel_timeout_title">Tempo-limite do painel de volumes</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Silencioso</string>
     <string name="ringer_mode_vibrate">Vibrar</string>
     <string name="ringer_mode_sound">Som</string>
     <string name="ringer_mode_sound_vibrate">Som e vibrar</string>
@@ -914,9 +909,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Lista de aplicativos</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Mostrar lista de aplicativos</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Outros</string>

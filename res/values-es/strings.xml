@@ -60,19 +60,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Desactivado</string>
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Expandido</string>
-    <string name="quick_settings_stay_awake_on">Permanecer despierto</string>
     <string name="quick_settings_nfc_on">NFC activado</string>
     <string name="quick_settings_nfc_off">NFC</string>
     <string name="quick_settings_usb_tether_off">Desconectado</string>
     <string name="quick_settings_usb_tether_connected">Tethering</string>
     <string name="quick_settings_usb_tether_on">Tethering activado</string>
-    <string name="quick_settings_music_play">Reproducir</string>
-    <string name="quick_settings_music_pause">Pausar</string>
     <string name="quick_settings_smart_radio_on">Modo de red inteligente activado</string>
     <string name="quick_settings_smart_radio_off">Modo de red inteligente</string>
     <string name="quick_settings_lock_screen_on">Bloquear pantalla activado</string>
     <string name="quick_settings_lock_screen_off">Bloquear pantalla</string>
-    <string name="quick_settings_location_on">Ubicación</string>
     <string name="quick_settings_location_off">Ubicación desactivada</string>
     <string name="quick_settings_quiet_hours_off">Horas tranquilas</string>
     <string name="quick_settings_quiet_hours_on">Horas tranquilas activado</string>
@@ -103,7 +99,6 @@
     <string name="qs_tile_usb_tethering">Tethering por USB</string>
     <string name="qs_tile_smart_radio">Modo de red inteligente</string>
     <string name="qs_tile_lock_screen">Bloquear pantalla</string>
-    <string name="qs_tile_battery">Batería</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de color</string>
@@ -658,7 +653,6 @@
     <string name="pref_volume_panel_timeout_title">Ocultar panel de volumen tras</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Silencio</string>
     <string name="ringer_mode_vibrate">Vibrar</string>
     <string name="ringer_mode_sound">Sonar</string>
     <string name="ringer_mode_sound_vibrate">Sonar y vibrar</string>
@@ -943,9 +937,6 @@
     
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Cajón de aplicaciones</string> <!-- launcher drawer -->
-    
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Mostrar cajón de aplicaciones</string> <!-- Show launcher app drawer -->
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Otro</string>

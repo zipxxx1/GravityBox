@@ -99,7 +99,6 @@
         <item>@string/qs_tile_gps</item>
         <item>@string/qs_tile_wifi_ap</item>
         <!-- GB -->
-        <!--  <item>@string/qs_tile_battery</item> -->
         <item>@string/qs_tile_nfc</item>
         <item>@string/qs_tile_gps_slimkat</item>
         <item>@string/qs_tile_gps_alt</item>
@@ -135,7 +134,6 @@
         <item>aosp_tile_location</item>
         <item>aosp_tile_hotspot</item>
         <!-- GB -->
-        <!-- <item>gb_tile_battery</item> -->
         <item>gb_tile_nfc</item>
         <item>gb_tile_gps_slimkat</item>
         <item>gb_tile_gps_alt</item>
@@ -186,7 +184,6 @@
         <item>@string/hwkey_action_sleep</item>
         <item>@string/hwkey_action_recent_apps</item>
         <item>@string/hwkey_action_app_launcher</item>
-        <!--  <item>@string/hwkey_action_launcher_drawer</item> -->
         <item>@string/hwkey_action_menu</item>
         <item>@string/hwkey_action_home</item>
         <item>@string/hwkey_action_back</item>
@@ -212,7 +209,6 @@
         <item>5</item>
         <item>6</item>
         <item>12</item>
-        <!-- <item>22</item> -->
         <item>9</item>
         <item>13</item>
         <item>14</item>

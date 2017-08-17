@@ -60,19 +60,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Tiada</string>
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Dipanjangkan</string>
-    <string name="quick_settings_stay_awake_on">Hidupkan screen tanpa had masa</string>
     <string name="quick_settings_nfc_on">Hidupkan NFC</string>
     <string name="quick_settings_nfc_off">Matikan NFC</string>
     <string name="quick_settings_usb_tether_off">Diputuskan</string>
     <string name="quick_settings_usb_tether_connected">Tutup sambungan USB</string>
     <string name="quick_settings_usb_tether_on">Sambungan USB</string>
-    <string name="quick_settings_music_play">Main</string>
-    <string name="quick_settings_music_pause">Jeda</string>
     <string name="quick_settings_smart_radio_on">Radio pintar diaktifkan</string>
     <string name="quick_settings_smart_radio_off">Radio pintar tidak aktif</string>
     <string name="quick_settings_lock_screen_on">Kunci skrin dihidupkan</string>
     <string name="quick_settings_lock_screen_off">Kunci skrin dimatikan</string>
-    <string name="quick_settings_location_on">Lokasi</string>
     <string name="quick_settings_location_off">Lokasi tidak aktif</string>
     <string name="quick_settings_quiet_hours_off">Waktu tiada gangguan tidak aktif</string>
     <string name="quick_settings_quiet_hours_on">Waktu tiada gangguan dihidupkan</string>
@@ -103,7 +99,6 @@
     <string name="qs_tile_usb_tethering">Sambungan USB</string>
     <string name="qs_tile_smart_radio">Radio pintar</string>
     <string name="qs_tile_lock_screen">Skrin kunci</string>
-    <string name="qs_tile_battery">Bateri</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Pemilih warna</string>
@@ -658,7 +653,6 @@
     <string name="pref_volume_panel_timeout_title">Masa tamat panel nada</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Senyap</string>
     <string name="ringer_mode_vibrate">Getaran sahaja</string>
     <string name="ringer_mode_sound">Bunyi sahaja</string>
     <string name="ringer_mode_sound_vibrate">Bunyi dan getaran</string>
@@ -943,9 +937,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Drawer pelancar</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Tunjuk drawer pelancar</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Lain-lain</string>

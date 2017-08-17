@@ -58,14 +58,11 @@
     <string name="quick_settings_expanded_desktop_disabled">כבוי</string>
     <string name="quick_settings_expanded_desktop_normal">רגיל</string>
     <string name="quick_settings_expanded_desktop_expanded">מורחב</string>
-    <string name="quick_settings_stay_awake_on">מצב ערנות מופעל</string>
     <string name="quick_settings_nfc_on">קישורית NFC מופעלת</string>
     <string name="quick_settings_nfc_off">קישורית NFC כבויה</string>
     <string name="quick_settings_usb_tether_off">מנותק</string>
     <string name="quick_settings_usb_tether_connected">קשירה חמה כבויה</string>
     <string name="quick_settings_usb_tether_on">קשירה חמה</string>
-    <string name="quick_settings_music_play">נגן</string>
-    <string name="quick_settings_music_pause">השהייה</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">אריחי QuickSettings של שורת מצב</string>
@@ -637,7 +634,6 @@
     <string name="pref_volume_panel_timeout_title">פסק זמן של תפריט עוצמת השמע</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">שקט</string>
     <string name="ringer_mode_vibrate">רטט</string>
     <string name="ringer_mode_sound">צליל</string>
     <string name="ringer_mode_sound_vibrate">צליל ורטט</string>
@@ -921,9 +917,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">מגירת לאונצ\'ר</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">הצג את מגירת היישומים של לאונצ\'ר</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">אחר</string>

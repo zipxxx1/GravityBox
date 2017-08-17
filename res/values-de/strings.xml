@@ -60,19 +60,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Deaktiviert</string>
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Erweitert</string>
-    <string name="quick_settings_stay_awake_on">Wachbleiben an</string>
     <string name="quick_settings_nfc_on">NFC an</string>
     <string name="quick_settings_nfc_off">NFC aus</string>
     <string name="quick_settings_usb_tether_off">Nicht verbunden</string>
     <string name="quick_settings_usb_tether_connected">Tethering aus</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
-    <string name="quick_settings_music_play">Abspielen</string>
-    <string name="quick_settings_music_pause">Pause</string>
     <string name="quick_settings_smart_radio_on">Netzautomatik an</string>
     <string name="quick_settings_smart_radio_off">Netzautomatik aus</string>
     <string name="quick_settings_lock_screen_on">Bildschirmsperre an</string>
     <string name="quick_settings_lock_screen_off">Bildschirmsperre aus</string>
-   	<string name="quick_settings_location_on">Standort an</string>
     <string name="quick_settings_location_off">Standort aus</string>
     <string name="quick_settings_quiet_hours_off">Ruhestunden aus</string>
     <string name="quick_settings_quiet_hours_on">Ruhestunden an</string>
@@ -103,7 +99,6 @@
     <string name="qs_tile_usb_tethering">USB-Tethering</string>
     <string name="qs_tile_smart_radio">Netzautomatik</string>
 	<string name="qs_tile_lock_screen">Sperren</string>
-    <string name="qs_tile_battery">Batterie</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Farbauswahl</string>
@@ -656,7 +651,6 @@
     <string name="pref_volume_panel_timeout_summary">Wähle 0ms für Standardeinstellung</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Stumm</string>
     <string name="ringer_mode_vibrate">Vibrieren</string>
     <string name="ringer_mode_sound">Ton</string>
     <string name="ringer_mode_sound_vibrate">Ton und Vibrieren</string>
@@ -937,9 +931,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Launcher-Drawer</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">App-Drawer anzeigen</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Sonstiges</string>
@@ -1858,8 +1849,6 @@
     <string name="ncki_icon_style3">Transparent</string>
     <string name="ncki_icon_style4">Eigenes</string>
     <string name="pref_navbar_custom_key_image_title">Setze eigenes Bild</string>
-    <string name="custom_image_success">Benutzerdefiniertes Bild gesetzt</string>
-    <string name="custom_image_failure">Setzen des benutzerdefinierten Bildes fehlgeschlagen</string>
 
     <!-- Key actions: allow volume rocker wake when music active -->
     <string name="pref_volume_rocker_wake_allow_music_title">Erlauben wenn Musik abgespielt wird</string>

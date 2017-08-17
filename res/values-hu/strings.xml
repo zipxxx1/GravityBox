@@ -60,19 +60,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Letiltva</string>
     <string name="quick_settings_expanded_desktop_normal">Normál</string>
     <string name="quick_settings_expanded_desktop_expanded">Kiterjesztett</string>
-    <string name="quick_settings_stay_awake_on">Ébrentartás bekapcsolva</string>
     <string name="quick_settings_nfc_on">NFC bekapcsolva</string>
     <string name="quick_settings_nfc_off">NFC kikapcsolva</string>
     <string name="quick_settings_usb_tether_off">Szétkapcsolva</string>
     <string name="quick_settings_usb_tether_connected">Megosztás kikapcsolva</string>
     <string name="quick_settings_usb_tether_on">Megosztás</string>
-    <string name="quick_settings_music_play">Lejátszás</string>
-    <string name="quick_settings_music_pause">Szünet</string>
     <string name="quick_settings_smart_radio_on">Okos rádiókapcsolat be</string>
     <string name="quick_settings_smart_radio_off">Okos rádiókapcsolat ki</string>
     <string name="quick_settings_lock_screen_on">Zárképernyő bekapcsolva</string>
     <string name="quick_settings_lock_screen_off">Zárképernyő kikapcsolva</string>
-    <string name="quick_settings_location_on">Helyzetmeghatározás</string>
     <string name="quick_settings_location_off">Helyzetmeghatározás kikapcsolva</string>
     <string name="quick_settings_quiet_hours_off">Csendes Időszak kikapcsolva</string>
     <string name="quick_settings_quiet_hours_on">Csendes Időszak bekapcsolva</string>
@@ -103,8 +99,7 @@
     <string name="qs_tile_usb_tethering">USB internetmegosztás</string>
     <string name="qs_tile_smart_radio">Okos rádiókapcsolat</string>
     <string name="qs_tile_lock_screen">Zárképernyő</string>
-    <string name="qs_tile_battery">Akkumulátor</string>
-	
+
     <!-- Color Picker -->
     <string name="dialog_color_picker">Szín választó</string>
     <string name="press_color_to_apply">Nyomjon a színre a beállításhoz</string>
@@ -660,7 +655,6 @@
     <string name="pref_volume_panel_timeout_summary">Hagyd 0 értéken alapértelmezett időtúllépéshez</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Prioritást élvező</string>
     <string name="ringer_mode_vibrate">Rezgés</string>
     <string name="ringer_mode_sound">Csengés</string>
     <string name="ringer_mode_sound_vibrate">Csengés és rezgés</string>
@@ -942,9 +936,6 @@
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Indító alkalmazástár</string>
 
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Indító alkalmazástár mutatása</string>
-    
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Egyéb</string>
     <string name="pref_launcher_resize_widget_title">Bármely modul átméretezése</string>
@@ -1844,8 +1835,6 @@
     <string name="ncki_icon_style3">Átlátszó</string>
     <string name="ncki_icon_style4">Egyéni</string>
     <string name="pref_navbar_custom_key_image_title">Egyéni kép beállítása</string>
-    <string name="custom_image_success">Egyéni kép beállítva</string>
-    <string name="custom_image_failure">Nem sikerült beállítani az egyéni képet</string>
 
     <!-- Key actions: allow volume rocker wake when music active -->
     <string name="pref_volume_rocker_wake_allow_music_title">Ébresztés engedélyezése aktív zenelejátszáskor</string>
@@ -1885,8 +1874,6 @@
     <string name="pref_cat_fingerprint_launcher_summary">Lehetővé teszi alkalmazás vagy művelet indítását az ujjlenyomat érzékelő használatával, bekapcsolt képernyőnél és feloldott eszköznél</string>
     <string name="pref_fingerprint_launcher_enable_summary">Ujjlenyomat indító funkció ki- és bekapcsolása (újraindítás szükséges)</string>
     <string name="pref_fingerprint_launcher_app_title">Alkalmazás vagy művelet választása</string>
-    <string name="pref_fingerprint_launcher_ignore_auth_title">Gyors érintés mód</string>
-    <string name="pref_fingerprint_launcher_ignore_auth_summary">KÍSÉRLETI: Elfogadja a fel nem ismert ujjlenyomatokat és gyorsabb érintéseket. Átmeneti érzékelő lezárást eredményezhet túl sok újabb hitelesítési hiba esetén.</string>
     <string name="fingerprint_auth_failed">Hitelesítés sikertelen</string>
     <string name="fingerprint_sensor_unavail">Az ujjlenyomat érzékelő elérhetetlenné vált</string>
     <string name="fingerprint_sensor_locked">Az ujjlenyomat érzékelő lezárásra került a túl sok sikertelen hitelesítési próbálkozás miatt. Próbáld meg újra 35 másodperc múlva.</string>

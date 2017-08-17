@@ -35,19 +35,15 @@
 <string name="quick_settings_expanded_desktop_disabled">غیر فعال</string>
 <string name="quick_settings_expanded_desktop_normal">گسترش صفحه‌نمایش</string>
 <string name="quick_settings_expanded_desktop_expanded">گسترش یافته</string>
-<string name="quick_settings_stay_awake_on">ماندن در حالت بیداری</string>
 <string name="quick_settings_nfc_on">NFC</string>
 <string name="quick_settings_nfc_off">NFC</string>
 <string name="quick_settings_usb_tether_off">انتشار اینترنت با USB</string>
 <string name="quick_settings_usb_tether_connected">انتشار اینترنت</string>
 <string name="quick_settings_usb_tether_on">انتشار اینترنت</string>
-<string name="quick_settings_music_play">پخش</string>
-<string name="quick_settings_music_pause">توقف</string>
 <string name="quick_settings_smart_radio_on">رادیو هوشمند</string>
 <string name="quick_settings_smart_radio_off">رادیو هوشمند</string>
 <string name="quick_settings_lock_screen_on">قفل صفحه‌نمایش</string>
 <string name="quick_settings_lock_screen_off">قفل صفحه‌نمایش</string>
-<string name="quick_settings_location_on">موقعیت مکانی</string>
 <string name="quick_settings_location_off">موقعیت مکانی</string>
 <string name="quick_settings_quiet_hours_off">ساعات آرامش</string>
 <string name="quick_settings_quiet_hours_on">ساعات آرامش</string>
@@ -76,7 +72,6 @@
 <string name="qs_tile_usb_tethering">انتشار اینترنت با USB</string>
 <string name="qs_tile_smart_radio">رادیو هوشمند</string>
 <string name="qs_tile_lock_screen">قفل صفحه نمایش</string>
-<string name="qs_tile_battery">باطری</string>
 <string name="dialog_color_picker">انتخاب رنگ</string>
 <string name="press_color_to_apply">برای اعمال بروی رنگ لمس کنید</string>
 <string name="pref_cat_statusbar_title">نوار وضعیت</string>
@@ -415,7 +410,6 @@
 <string name="pref_navbar_swap_keys_title">تعویض کلید بازگشت با کلید موارد اخیر</string>
 <string name="pref_volume_panel_timeout_title">زمان نمایش پنل حجم‌صدا</string>
 <string name="pref_volume_panel_timeout_summary">برای نمایش با زمان پیشفرض بروی 0 تنظیم شود</string>
-<string name="ringer_mode_silent">اولویت</string>
 <string name="ringer_mode_vibrate">لرزش</string>
 <string name="ringer_mode_sound">صدا</string>
 <string name="ringer_mode_sound_vibrate">صدا و لرزش</string>
@@ -580,7 +574,6 @@
 <string name="pref_pie_longpress_delay_title">تأخیر زمانی لمس طولانی</string>
 <string name="pie_longpress_delay_default">پیشفرض سیستم</string>
 <string name="shortcut_launcher_drawer">منوی لانچر سیستم</string>
-<string name="hwkey_action_launcher_drawer">نمایش کشوی لانچر برنامه‌ها</string>
 <string name="pref_cat_launcher_other_title">غیره</string>
 <string name="pref_launcher_resize_widget_title">تغییر اندازه ویجت‌ها</string>
 <string name="pref_launcher_resize_widget_summary">تغییر اندازه ویجت‌ها به اندازه دلخواه (نیازمند شروع مجدد لانچر)</string>
@@ -1150,8 +1143,6 @@
 <string name="ncki_icon_style3">شفاف</string>
 <string name="ncki_icon_style4">شخصی</string>
 <string name="pref_navbar_custom_key_image_title">تنظیم تصویر شخصی</string>
-<string name="custom_image_success">تصویر شخصی تنظیم شد</string>
-<string name="custom_image_failure">تنظیم تصویر شخصی ناموفق بود</string>
 <string name="pref_volume_rocker_wake_allow_music_title">اجازه بیدارشدن هنگام فعال بودن موسیقی</string>
 <string name="turn_off">خاموش کردن</string>
 <string name="pref_force_aosp_title">شبیه‌ساز اجباری سیستم AOSP</string>

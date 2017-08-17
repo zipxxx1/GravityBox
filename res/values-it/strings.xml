@@ -58,19 +58,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Disattivato</string>
     <string name="quick_settings_expanded_desktop_normal">Normale</string>
     <string name="quick_settings_expanded_desktop_expanded">Esteso</string>
-    <string name="quick_settings_stay_awake_on">Sempre acceso</string>
     <string name="quick_settings_nfc_on">NFC On</string>
     <string name="quick_settings_nfc_off">NFC Off</string>
     <string name="quick_settings_usb_tether_off">Disconnesso</string>
     <string name="quick_settings_usb_tether_connected">Tethering Off</string>
     <string name="quick_settings_usb_tether_on">Tethering On</string>
-    <string name="quick_settings_music_play">Play</string>
-    <string name="quick_settings_music_pause">Pausa</string>
     <string name="quick_settings_smart_radio_on">Modem Intelligente On</string>
     <string name="quick_settings_smart_radio_off">Modem Intelligente Off</string>
     <string name="quick_settings_lock_screen_on">Blocco schermo On</string>
     <string name="quick_settings_lock_screen_off">Blocco schermo Off</string>
-    <string name="quick_settings_location_on">GPS</string>
     <string name="quick_settings_location_off">GPS Spento</string>
     <string name="quick_settings_quiet_hours_off">Ore Notturne Off</string>
     <string name="quick_settings_quiet_hours_on">Ore Notturne On</string>
@@ -653,7 +649,6 @@
     <string name="pref_volume_panel_timeout_title">Timeout pannello volume</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Silenzioso</string>
     <string name="ringer_mode_vibrate">Vibrazione</string>
     <string name="ringer_mode_sound">Suoneria</string>
     <string name="ringer_mode_sound_vibrate">Suoneria e vibrazione</string>
@@ -937,10 +932,7 @@
  
      <!-- GB Actions: Launcher drawer shortcut -->
      <string name="shortcut_launcher_drawer">App drawer del launcher</string>
- 
-     <!-- Key Actions: Show launcher drawer -->
-     <string name="hwkey_action_launcher_drawer">Mostra app drawer del launcher</string>
- 
+
      <!-- Launcher tweaks: resize any widget -->
      <string name="pref_cat_launcher_other_title">Altro</string>
      <string name="pref_launcher_resize_widget_title">Ridimensiona qualsiasi widget</string>

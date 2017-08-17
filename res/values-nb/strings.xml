@@ -58,19 +58,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Deaktivert</string>
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Utvidet</string>
-    <string name="quick_settings_stay_awake_on">Forbli Våken På</string>
     <string name="quick_settings_nfc_on">NFC På</string>
     <string name="quick_settings_nfc_off">NFC Av</string>
     <string name="quick_settings_usb_tether_off">Frakoblet</string>
     <string name="quick_settings_usb_tether_connected">USB Deling Av</string>
     <string name="quick_settings_usb_tether_on">USB Deling</string>
-    <string name="quick_settings_music_play">Play</string>
-    <string name="quick_settings_music_pause">Pause</string>
     <string name="quick_settings_smart_radio_on">Smart Radio På</string>
     <string name="quick_settings_smart_radio_off">Smart Radio Av</string>
     <string name="quick_settings_lock_screen_on">Skjermlås På</string>
     <string name="quick_settings_lock_screen_off">Skjermlås Av</string>
-    <string name="quick_settings_location_on">Lokasjon</string>
     <string name="quick_settings_location_off">Lokoasjon Av</string>
     <string name="quick_settings_quiet_hours_off">Quiet Hours Av</string>
     <string name="quick_settings_quiet_hours_on">Quiet Hours På</string>
@@ -653,7 +649,6 @@
     <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Stille</string>
     <string name="ringer_mode_vibrate">Vibrasjon</string>
     <string name="ringer_mode_sound">Lys</string>
     <string name="ringer_mode_sound_vibrate">Lyd og vibrasjon</string>
@@ -937,9 +932,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Launcher drawer</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Show launcher app drawer</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Other</string>

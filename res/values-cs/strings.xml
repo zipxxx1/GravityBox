@@ -43,19 +43,15 @@
     <string name="quick_settings_expanded_desktop_disabled">Vypnuto</string>
     <string name="quick_settings_expanded_desktop_normal">Normální plocha</string>
     <string name="quick_settings_expanded_desktop_expanded">Rozšířená plocha</string>
-    <string name="quick_settings_stay_awake_on">Bdění zap</string>
     <string name="quick_settings_nfc_on">NFC zap</string>
     <string name="quick_settings_nfc_off">NFC vyp</string>
     <string name="quick_settings_usb_tether_off">Odpojeno</string>
     <string name="quick_settings_usb_tether_connected">Sdílení vyp</string>
     <string name="quick_settings_usb_tether_on">Sdílení zap</string>
-    <string name="quick_settings_music_play">Přehrát</string>
-    <string name="quick_settings_music_pause">Zastavit</string>
     <string name="quick_settings_smart_radio_on">Smart Radio zap</string>
     <string name="quick_settings_smart_radio_off">Smart Radio vyp</string>
     <string name="quick_settings_lock_screen_on">Obrazovka uzamčení zap</string>
     <string name="quick_settings_lock_screen_off">Obrazovka uzamčení vyp</string>
-    <string name="quick_settings_location_on">Poloha</string>
     <string name="quick_settings_location_off">Poloha vyp</string>
     <string name="quick_settings_quiet_hours_off">Tiché hodiny vyp</string>
     <string name="quick_settings_quiet_hours_on">Tiché hodiny zap</string>
@@ -87,7 +83,6 @@
     <string name="qs_tile_usb_tethering">USB přístupový bod</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Obrazovka uzamčení</string>
-    <string name="qs_tile_battery">Baterie</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Výběr barvy</string>
@@ -634,7 +629,6 @@
     <string name="pref_volume_panel_timeout_summary">Nastavte 0 pro původní časovač</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">Prioritní</string>
     <string name="ringer_mode_vibrate">Vibrovat</string>
     <string name="ringer_mode_sound">Vyzvánět</string>
     <string name="ringer_mode_sound_vibrate">Vyzvánět a vibrovat</string>
@@ -915,9 +909,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Seznam aplikací spouštěče</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">Otevřít seznam aplikací spouštěče</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Jiné</string>
@@ -1824,8 +1815,6 @@
     <string name="ncki_icon_style3">Průhledná</string>
     <string name="ncki_icon_style4">Vlastní</string>
     <string name="pref_navbar_custom_key_image_title">Nastavit vlastní ikonu</string>
-    <string name="custom_image_success">Vlastní ikona nastavena</string>
-    <string name="custom_image_failure">Nastavení vlastní ikony selhalo</string>
 
     <!-- Key actions: allow volume rocker wake when music active -->
     <string name="pref_volume_rocker_wake_allow_music_title">Povolit probuzení během hudby</string>

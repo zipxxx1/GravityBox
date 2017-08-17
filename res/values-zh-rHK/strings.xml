@@ -58,19 +58,15 @@
     <string name="quick_settings_expanded_desktop_disabled">已停用</string>
     <string name="quick_settings_expanded_desktop_normal">正常</string>
     <string name="quick_settings_expanded_desktop_expanded">擴展</string>
-    <string name="quick_settings_stay_awake_on">保持螢幕長亮 開啟</string>
     <string name="quick_settings_nfc_on">NFC 開啟</string>
     <string name="quick_settings_nfc_off">NFC 關閉</string>
     <string name="quick_settings_usb_tether_off">中斷連結</string>
     <string name="quick_settings_usb_tether_connected">USB 網絡共用 關閉</string>
     <string name="quick_settings_usb_tether_on">USB 網絡共用 開啟</string>
-    <string name="quick_settings_music_play">播放</string>
-    <string name="quick_settings_music_pause">暫停</string>
     <string name="quick_settings_smart_radio_on">智慧型無線網路 開啟</string>
     <string name="quick_settings_smart_radio_off">智慧型無線網路 關閉</string>
     <string name="quick_settings_lock_screen_on">鎖定畫面 開啟</string>
     <string name="quick_settings_lock_screen_off">鎖定畫面 關閉</string>
-    <string name="quick_settings_location_on">定位服務 開啟</string>
     <string name="quick_settings_location_off">定位服務 關閉</string>
     <string name="quick_settings_quiet_hours_off">勿擾模式 關閉</string>
     <string name="quick_settings_quiet_hours_on">勿擾模式 開啟</string>
@@ -645,7 +641,6 @@
     <string name="pref_volume_panel_timeout_title">音量面板逾時時間</string>
 
     <!-- Ringer tile modes -->
-    <string name="ringer_mode_silent">靜音</string>
     <string name="ringer_mode_vibrate">震動</string>
     <string name="ringer_mode_sound">響鈴</string>
     <string name="ringer_mode_sound_vibrate">響鈴與震動</string>
@@ -928,9 +923,6 @@
 
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">啟動器程式抽屜</string>
-
-    <!-- Key Actions: Show launcher drawer -->
-    <string name="hwkey_action_launcher_drawer">顯示啟動器程式抽屜</string>
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">其他</string>
