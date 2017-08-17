@@ -136,7 +136,6 @@ public class SystemPropertyProvider {
                                     data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
                                             SETTING_UNC_TRIAL_COUNTDOWN, 50));
                                     data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
-                                    data.putInt("xposedBridgeVersion", XposedBridge.XPOSED_BRIDGE_VERSION);
                                     data.putBoolean("supportsFingerprint", supportsFingerprint(context));
                                     if (SysUiManagers.FingerprintLauncher != null) {
                                         data.putIntArray("fingerprintIds",
