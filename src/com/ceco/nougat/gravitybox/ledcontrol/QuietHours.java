@@ -183,6 +183,7 @@ public class QuietHours {
                     weekDays.contains(String.valueOf(nextDay)));
     }
 
+    @SuppressWarnings("deprecation")
     private List<String> getNotificationTexts(Notification notification) {
         List<String> texts = new ArrayList<String>();
 

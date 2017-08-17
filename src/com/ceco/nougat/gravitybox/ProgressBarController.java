@@ -23,6 +23,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ceco.nougat.gravitybox.ledcontrol.QuietHoursActivity;
+
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
@@ -139,14 +141,16 @@ public class ProgressBarController implements BroadcastSubReceiver {
         mHandler = new Handler();
     }
 
-    public static void initZygote(final XSharedPreferences prefs) {
+    public static void initZygote(final XSharedPreferences prefs, final XSharedPreferences qhPrefs) {
         // Content views for apps targeting SDK24+ are not populated so we force them to
         try {
             XposedHelpers.findAndHookMethod(Notification.Builder.class, "build", new XC_MethodHook() {
                 @SuppressWarnings("deprecation")
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!"OFF".equals(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"))) {
+                    if (!"OFF".equals(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF")) ||
+                            (!qhPrefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false) &&
+                                    qhPrefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false))) {
                         Object style = XposedHelpers.getObjectField(param.thisObject, "mStyle");
                         if (style == null || !(boolean)XposedHelpers.callMethod(style, "displayCustomViewInline")) {
                             Notification n = (Notification) XposedHelpers.getObjectField(param.thisObject, "mN");
@@ -167,7 +171,9 @@ public class ProgressBarController implements BroadcastSubReceiver {
                     Notification.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!"OFF".equals(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"))) {
+                    if (!"OFF".equals(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF")) ||
+                            (!qhPrefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false) &&
+                                    qhPrefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false))) {
                         param.setResult(param.args[0]);
                     }
                 }
@@ -390,6 +396,7 @@ public class ProgressBarController implements BroadcastSubReceiver {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
     private ProgressInfo getProgressInfo(String id, Notification n) {
         if (id == null || n == null) return null;
 
