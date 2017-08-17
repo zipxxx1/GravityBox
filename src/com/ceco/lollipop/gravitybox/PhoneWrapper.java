@@ -194,6 +194,7 @@ public class PhoneWrapper {
     private static void setPreferredNetworkType(int networkType) {
         try {
             Object defPhone = getPhone();
+            if (DEBUG) log("setPreferredNetworkType: phone=" + defPhone);
             if (defPhone == null) return;
             if (Utils.hasGeminiSupport()) {
                 mSimSlot = (Integer) XposedHelpers.callMethod(defPhone, "get3GSimId");
@@ -217,6 +218,7 @@ public class PhoneWrapper {
                 paramArgs[1] = Message.class;
                 XposedHelpers.callMethod(defPhone, "setPreferredNetworkType", paramArgs, networkType, null);
             }
+            broadcastCurrentNetworkType(mSimSlot, networkType, null);
         } catch (Throwable t) {
             log("setPreferredNetworkType failed: " + t.getMessage());
             XposedBridge.log(t);

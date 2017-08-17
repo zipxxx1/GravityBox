@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.TrafficStats;
 import android.os.Handler;
@@ -109,11 +110,9 @@ public class ModSmartRadio {
                 }
             } else if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 int nwType = intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, -1);
-                if (nwType == -1) return;
-                NetworkInfo nwInfo = mConnManager.getNetworkInfo(nwType);
+                if (DEBUG) log("Received CONNECTIVITY_ACTION broadcast; networkType=" + nwType);
                 if (nwType == ConnectivityManager.TYPE_WIFI ||
                         nwType == ConnectivityManager.TYPE_MOBILE) {
-                    if (DEBUG) log("Network type: " + nwType + "; connected: " + nwInfo.isConnected());
                     if (shouldSwitchToNormalState()) {
                         switchToState(State.NORMAL);
                     } else {
@@ -172,16 +171,38 @@ public class ModSmartRadio {
             return true;
         }
         try {
-            return mConnManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isAvailable();
+            Network[] networkInfos= mConnManager.getAllNetworks();
+            for (Network net : networkInfos) {
+                NetworkInfo netInfo = mConnManager.getNetworkInfo(net);
+                if (netInfo.getType() == ConnectivityManager.TYPE_MOBILE &&
+                        netInfo.isAvailable()) {
+                    if (DEBUG) log("isMobileNetworkAvailable: true");
+                    return true;
+                }
+            }
+            if (DEBUG) log("isMobileNetworkAvailable: false");
+            return false;
         } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
             return false;
         }
     }
 
     private static boolean isWifiConnected() {
         try {
-            return mConnManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+            Network[] networkInfos= mConnManager.getAllNetworks();
+            for (Network net : networkInfos) {
+                NetworkInfo netInfo = mConnManager.getNetworkInfo(net);
+                if (netInfo.getType() == ConnectivityManager.TYPE_WIFI &&
+                        netInfo.isConnected()) {
+                    if (DEBUG) log("isWifiConnected: true");
+                    return true;
+                }
+            }
+            if (DEBUG) log("isWifiConnected: false");
+            return false;
         } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
             return false;
         }
     }
