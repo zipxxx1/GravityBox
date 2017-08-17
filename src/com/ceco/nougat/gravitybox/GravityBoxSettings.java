@@ -32,7 +32,6 @@ import com.ceco.nougat.gravitybox.ledcontrol.LedMainActivity;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings;
 import com.ceco.nougat.gravitybox.managers.BatteryInfoManager;
 import com.ceco.nougat.gravitybox.preference.AppPickerPreference;
-import com.ceco.nougat.gravitybox.preference.AutoBrightnessDialogPreference;
 import com.ceco.nougat.gravitybox.preference.SeekBarPreference;
 import com.ceco.nougat.gravitybox.quicksettings.TileOrderActivity;
 import com.ceco.nougat.gravitybox.shortcuts.GoHomeShortcut;
@@ -1173,32 +1172,24 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private ListPreference mPrefLockscreenBg;
         private ColorPickerPreference mPrefLockscreenBgColor;
         private Preference mPrefLockscreenBgImage;
-        private SeekBarPreference mPrefLockscreenBgOpacity;
         private CheckBoxPreference mPrefLockscreenBgBlurEffect;
         private SeekBarPreference mPrefLockscreenBlurIntensity;
         private EditTextPreference mPrefLockscreenCarrierText;
         private File wallpaperImage;
         private File notifBgImagePortrait;
         private File notifBgImageLandscape;
-        private PreferenceScreen mPrefCatHwKeyActions;
-        private PreferenceCategory mPrefCatHwKeyMenu;
         private ListPreference mPrefHwKeyMenuSingletap;
         private ListPreference mPrefHwKeyMenuLongpress;
         private ListPreference mPrefHwKeyMenuDoubletap;
-        private PreferenceCategory mPrefCatHwKeyHome;
         private ListPreference mPrefHwKeyHomeLongpress;
         private ListPreference mPrefHwKeyHomeDoubletap;
-        private CheckBoxPreference mPrefHwKeyHomeLongpressKeyguard;
-        private PreferenceCategory mPrefCatHwKeyBack;
         private ListPreference mPrefHwKeyBackSingletap;
         private ListPreference mPrefHwKeyBackLongpress;
         private ListPreference mPrefHwKeyBackDoubletap;
-        private PreferenceCategory mPrefCatHwKeyRecents;
         private ListPreference mPrefHwKeyRecentsSingletap;
         // TODO: recents key long-press
         //private ListPreference mPrefHwKeyRecentsLongpress;
         private ListPreference mPrefHwKeyRecentsDoubletap;
-        private PreferenceCategory mPrefCatHwKeyVolume;
         private ListPreference mPrefHwKeyDoubletapSpeed;
         private ListPreference mPrefHwKeyKillDelay;
         private ListPreference mPrefPhoneFlip;
@@ -1219,7 +1210,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private CheckBoxPreference mPrefNotifExpandAll;
         private CheckBoxPreference mPrefDisableRoamingIndicators;
         private ListPreference mPrefButtonBacklightMode;
-        private CheckBoxPreference mPrefButtonBacklightNotif;
         private ListPreference mPrefPieEnabled;
         private ListPreference mPrefPieCustomKey;
         private CheckBoxPreference mPrefPieHwKeysDisabled;
@@ -1241,14 +1231,12 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private PreferenceScreen mPrefCatPhone;
         private SeekBarPreference mPrefBrightnessMin;
         private SeekBarPreference mPrefScreenDimLevel;
-        private AutoBrightnessDialogPreference mPrefAutoBrightness;
         private PreferenceScreen mPrefCatLockscreen;
         private PreferenceScreen mPrefCatPower;
         private PreferenceCategory mPrefCatPowerMenu;
         private PreferenceCategory mPrefCatPowerOther;
         private CheckBoxPreference mPrefPowerProximityWake;
         private PreferenceScreen mPrefCatDisplay;
-        private PreferenceScreen mPrefCatBrightness;
         private ListPreference mPrefTranclucentDecor;
         private PreferenceScreen mPrefCatMedia;
         private ListPreference mPrefExpandedDesktop;
@@ -1260,7 +1248,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private SeekBarPreference mPrefMusicVolumeStepsValue;
         private PreferenceCategory mPrefCatPhoneTelephony;
         private PreferenceCategory mPrefCatPhoneDialer;
-        private PreferenceCategory mPrefCatPhoneMobileData;
         private ListPreference mPrefQsNetworkModeSimSlot;
         private ListPreference mPrefSbSignalColorMode;
         private CheckBoxPreference mPrefUnplugTurnsOnScreen;
@@ -1282,8 +1269,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private CheckBoxPreference mPrefDataTrafficActiveMobileOnly;
         private ListPreference mPrefDataTrafficDisplayMode;
         private CheckBoxPreference mPrefLinkVolumes;
-        private CheckBoxPreference mPrefVolumePanelAutoexpand;
-        private CheckBoxPreference mPrefHomeDoubletapDisable;
         private PreferenceScreen mPrefCatAppLauncher;
         private AppPickerPreference[] mPrefAppLauncherSlot;
         private File callerPhotoFile;
@@ -1301,7 +1286,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private ListPreference mPrefLauncherDesktopGridRows;
         private ListPreference mPrefLauncherDesktopGridCols;
         private ListPreference mPrefVolumeRockerWake;
-        private PreferenceScreen mPrefCatNavbarCustomKey;
         private ListPreference mPrefNavbarCustomKeySingletap;
         private ListPreference mPrefNavbarCustomKeyLongpress;
         private ListPreference mPrefNavbarCustomKeyDoubletap;
@@ -1388,8 +1372,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                     (ColorPickerPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR);
             mPrefLockscreenBgImage = 
                     (Preference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_IMAGE);
-            mPrefLockscreenBgOpacity = 
-                    (SeekBarPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY);
             mPrefLockscreenBgBlurEffect =
                     (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT);
             mPrefLockscreenBlurIntensity =
@@ -1402,28 +1384,21 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             notifBgImageLandscape = new File(getActivity().getFilesDir() + "/notifwallpaper_landscape");
             callerPhotoFile = new File(getActivity().getFilesDir() + "/caller_photo");
 
-            mPrefCatHwKeyActions = (PreferenceScreen) findPreference(PREF_CAT_HWKEY_ACTIONS);
-            mPrefCatHwKeyMenu = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_MENU);
             mPrefHwKeyMenuSingletap = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_SINGLETAP);
             mPrefHwKeyMenuLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_LONGPRESS);
             mPrefHwKeyMenuDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_DOUBLETAP);
-            mPrefCatHwKeyHome = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_HOME);
             mPrefHwKeyHomeLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_HOME_LONGPRESS);
             //mPrefHwKeyHomeLongpressKeyguard = (CheckBoxPreference) findPreference(PREF_KEY_HWKEY_HOME_LONGPRESS_KEYGUARD);
             mPrefHwKeyHomeDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_HOME_DOUBLETAP);
-            mPrefCatHwKeyBack = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_BACK);
             mPrefHwKeyBackSingletap = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_SINGLETAP);
             mPrefHwKeyBackLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_LONGPRESS);
             mPrefHwKeyBackDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_DOUBLETAP);
-            mPrefCatHwKeyRecents = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_RECENTS);
             mPrefHwKeyRecentsSingletap = (ListPreference) findPreference(PREF_KEY_HWKEY_RECENTS_SINGLETAP);
             // TODO: recents key long-press
             //mPrefHwKeyRecentsLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_RECENTS_LONGPRESS);
             mPrefHwKeyRecentsDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_RECENTS_DOUBLETAP);
             mPrefHwKeyDoubletapSpeed = (ListPreference) findPreference(PREF_KEY_HWKEY_DOUBLETAP_SPEED);
             mPrefHwKeyKillDelay = (ListPreference) findPreference(PREF_KEY_HWKEY_KILL_DELAY);
-            mPrefCatHwKeyVolume = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_VOLUME);
-            mPrefHomeDoubletapDisable = (CheckBoxPreference) findPreference(PREF_KEY_HWKEY_HOME_DOUBLETAP_DISABLE);
             mPrefHwKeyLockscreenTorch = (ListPreference) findPreference(PREF_KEY_HWKEY_LOCKSCREEN_TORCH);
             mPrefCatHwKeyOthers = (PreferenceCategory) findPreference(PREF_CAT_KEY_HWKEY_ACTIONS_OTHERS);
 
@@ -1453,7 +1428,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             mPrefDisableRoamingIndicators = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_ROAMING_INDICATORS);
             mPrefButtonBacklightMode = (ListPreference) findPreference(PREF_KEY_BUTTON_BACKLIGHT_MODE);
-            mPrefButtonBacklightNotif = (CheckBoxPreference) findPreference(PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS);
 
             mPrefPieEnabled = (ListPreference) findPreference(PREF_KEY_PIE_CONTROL_ENABLE);
             mPrefPieHwKeysDisabled = (CheckBoxPreference) findPreference(PREF_KEY_HWKEYS_DISABLE);
@@ -1484,7 +1458,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefBrightnessMin.setMinimum(getResources().getInteger(R.integer.screen_brightness_min));
             mPrefScreenDimLevel = (SeekBarPreference) findPreference(PREF_KEY_SCREEN_DIM_LEVEL);
             mPrefScreenDimLevel.setMinimum(getResources().getInteger(R.integer.screen_brightness_dim_min));
-            mPrefAutoBrightness = (AutoBrightnessDialogPreference) findPreference(PREF_KEY_AUTOBRIGHTNESS);
 
             mPrefCatLockscreen = (PreferenceScreen) findPreference(PREF_CAT_KEY_LOCKSCREEN);
             mPrefCatPower = (PreferenceScreen) findPreference(PREF_CAT_KEY_POWER);
@@ -1492,13 +1465,11 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefCatPowerOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_POWER_OTHER);
             mPrefPowerProximityWake = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE);
             mPrefCatDisplay = (PreferenceScreen) findPreference(PREF_CAT_KEY_DISPLAY);
-            mPrefCatBrightness = (PreferenceScreen) findPreference(PREF_CAT_KEY_BRIGHTNESS);
             mPrefUnplugTurnsOnScreen = (CheckBoxPreference) findPreference(PREF_KEY_UNPLUG_TURNS_ON_SCREEN);
             mPrefCatMedia = (PreferenceScreen) findPreference(PREF_CAT_KEY_MEDIA);
             mPrefMusicVolumeSteps = (CheckBoxPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS);
             mPrefMusicVolumeStepsValue = (SeekBarPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS_VALUE);
             mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
-            mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
             mPrefTranclucentDecor =  (ListPreference) findPreference(PREF_KEY_TRANSLUCENT_DECOR);
 
             mPrefExpandedDesktop = (ListPreference) findPreference(PREF_KEY_EXPANDED_DESKTOP);
@@ -1507,14 +1478,12 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefCatNavbarColor = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_COLOR);
             mPrefCatNavbarDimen = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_DIMEN);
             mPrefNavbarEnable = (CheckBoxPreference) findPreference(PREF_KEY_NAVBAR_ENABLE);
-            mPrefCatNavbarCustomKey = (PreferenceScreen) findPreference(PREF_CAT_KEY_NAVBAR_CUSTOM_KEY);
             mPrefNavbarCustomKeySingletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP);
             mPrefNavbarCustomKeyLongpress = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS);
             mPrefNavbarCustomKeyDoubletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP);
 
             mPrefCatPhoneTelephony = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_TELEPHONY);
             mPrefCatPhoneDialer = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_DIALER);
-            mPrefCatPhoneMobileData = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_MOBILE_DATA);
             mPrefCallVibrations = (MultiSelectListPreference) findPreference(PREF_KEY_CALL_VIBRATIONS);
             mPrefCallerUnknownPhotoEnable = (CheckBoxPreference) findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE);
             mPrefCallerUnknownPhoto = (Preference) findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO);

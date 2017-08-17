@@ -22,13 +22,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModSettings {
-    private static final String TAG = "GB:ModSettings";
     public static final String PACKAGE_NAME = "com.android.settings";
-    private static final boolean DEBUG = false;
-
-    private static void log (String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
 
     public static void initPackageResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
         try {

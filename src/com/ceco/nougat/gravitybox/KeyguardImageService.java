@@ -19,9 +19,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-
+import android.annotation.SuppressLint;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -48,6 +47,7 @@ public class KeyguardImageService extends Service {
 
     final Messenger mMessenger = new Messenger(new ClientHandler());
 
+    @SuppressLint("HandlerLeak")
     class ClientHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {

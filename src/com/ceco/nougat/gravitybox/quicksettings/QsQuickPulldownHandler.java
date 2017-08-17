@@ -18,7 +18,6 @@ import java.util.List;
 
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
-import com.ceco.nougat.gravitybox.Utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,11 +36,11 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
     private static final int MODE_OFF = 0;
     private static final int MODE_RIGHT = 1;
     private static final int MODE_LEFT = 2;
-    private static final int MODE_BOTH = 3;
+    //private static final int MODE_BOTH = 3;
 
     private static final int MODE_AUTO_OFF = 0;
     private static final int MODE_AUTO_NONE = 1;
-    private static final int MODE_AUTO_ONGOING = 2;
+    //private static final int MODE_AUTO_ONGOING = 2;
 
     private static final String CLASS_NOTIF_PANEL = 
             "com.android.systemui.statusbar.phone.NotificationPanelView";

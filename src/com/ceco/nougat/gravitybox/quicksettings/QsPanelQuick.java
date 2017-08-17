@@ -21,7 +21,7 @@ public class QsPanelQuick {
     private static final String TAG = "GB:QsPanelQuick";
     private static final boolean DEBUG = false;
 
-    private static final String CLASS_QS_PANEL_QUICK = "com.android.systemui.qs.QuickQSPanel";
+    //private static final String CLASS_QS_PANEL_QUICK = "com.android.systemui.qs.QuickQSPanel";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);

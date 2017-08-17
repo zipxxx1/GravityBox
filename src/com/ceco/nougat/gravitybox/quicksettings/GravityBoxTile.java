@@ -17,9 +17,7 @@ package com.ceco.nougat.gravitybox.quicksettings;
 
 import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
-import com.ceco.nougat.gravitybox.PhoneWrapper;
 import com.ceco.nougat.gravitybox.R;
-import com.ceco.nougat.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.Intent;

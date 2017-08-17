@@ -26,6 +26,7 @@ import com.ceco.nougat.gravitybox.managers.StatusBarIconManager;
 import com.ceco.nougat.gravitybox.managers.StatusBarIconManager.ColorInfo;
 
 import de.robv.android.xposed.XSharedPreferences;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -39,7 +40,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 public class TrafficMeterOmni extends TrafficMeterAbstract {
-    private static final int KILOBIT = 1000;
     private static final int KILOBYTE = 1024;
 
     private static DecimalFormat decimalFormat = new DecimalFormat("##0.#");
@@ -71,6 +71,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
     private boolean mAutoHide;
     private int mAutoHideThreshold;
 
+    @SuppressLint("HandlerLeak")
     private Handler mTrafficHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

@@ -20,7 +20,6 @@ import java.util.List;
 
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.adapters.BaseListAdapterFilter;
-import com.ceco.nougat.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.nougat.gravitybox.adapters.BaseListAdapterFilter.IBaseListAdapterFilterable;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings.LedMode;
 

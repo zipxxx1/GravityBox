@@ -1042,10 +1042,6 @@ public class ModExpandedDesktop {
         return (Rect) getObj(field);
     }
 
-    private static int[] getIntArray(String field) {
-        return (int[]) getObj(field);
-    }
-
     private static boolean isStatusbarImmersive() {
         return (mExpandedDesktop
                 && (mExpandedDesktopMode == GravityBoxSettings.ED_SEMI_IMMERSIVE ||

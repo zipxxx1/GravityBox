@@ -17,8 +17,8 @@
 
 package com.ceco.nougat.gravitybox.quicksettings;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -53,6 +53,7 @@ public class QsDetailItemsList {
         mListView = (ListView) mView.findViewById(android.R.id.list);
         mListView.setOnTouchListener(new OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 // Disallow the touch request for parent scroll on touch of child view

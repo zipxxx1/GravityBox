@@ -25,7 +25,6 @@ import java.util.Set;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.PhoneWrapper;
 import com.ceco.nougat.gravitybox.R;
-import com.ceco.nougat.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.annotation.SuppressLint;

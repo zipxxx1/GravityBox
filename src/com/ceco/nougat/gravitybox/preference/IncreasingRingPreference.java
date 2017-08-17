@@ -34,7 +34,6 @@ import android.widget.TextView;
 
 public class IncreasingRingPreference extends VolumePreference implements
         CheckBox.OnCheckedChangeListener {
-    private static final String TAG = "IncreasingRingPreference";
     private static final String SEPARATOR = "#C3C0#";
 
     public static final String ACTION_INCREASING_RING_CHANGED =
