@@ -149,6 +149,7 @@ public class SysUiManagers {
         // GpsStatusMonitor
         if (GpsMonitor != null) {
             intentFilter.addAction(LocationManager.MODE_CHANGED_ACTION);
+            intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
         }
 
         // SubscriptionManager

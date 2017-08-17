@@ -25,7 +25,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
-import android.location.GpsStatus;
+import android.location.GnssStatus;
 import android.os.UserManager;
 import android.provider.Settings;
 import de.robv.android.xposed.XposedBridge;
@@ -53,26 +53,24 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
     private LocationManager mLocMan;
     private List<Listener> mListeners = new ArrayList<>();
 
-    private GpsStatus.Listener mGpsStatusListener = new GpsStatus.Listener() {
+    private GnssStatus.Callback mGnssStatusCallback = new GnssStatus.Callback() {
         @Override
-        public void onGpsStatusChanged(int event) {
-            switch (event) {
-                case GpsStatus.GPS_EVENT_STARTED:
-                    if (DEBUG) log("onGpsStatusChanged: GPS_EVENT_STARTED");
-                    break;
-                case GpsStatus.GPS_EVENT_STOPPED:
-                    if (DEBUG) log("onGpsStatusChanged: GPS_EVENT_STOPPED");
-                    if (mGpsFixed) {
-                        mGpsFixed = false;
-                        notifyGpsFixChanged();
-                    }
-                    break;
-                case GpsStatus.GPS_EVENT_FIRST_FIX:
-                    if (DEBUG) log("onGpsStatusChanged: GPS_EVENT_FIRST_FIX");
-                    mGpsFixed = true;
-                    notifyGpsFixChanged();
-                    break;
+        public void onStarted() {
+            if (DEBUG) log("mGnssStatusCallback: onStarted()");
+        }
+        @Override
+        public void onStopped() {
+            if (DEBUG) log("mGnssStatusCallback: onStopped()");
+            if (mGpsFixed) {
+                mGpsFixed = false;
+                notifyGpsFixChanged();
             }
+        }
+        @Override
+        public void onFirstFix(int ttffMillis) {
+            if (DEBUG) log("mGnssStatusCallback: onFirstFix(" + ttffMillis + ")");
+            mGpsFixed = true;
+            notifyGpsFixChanged();
         }
     };
 
@@ -86,9 +84,6 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
         mLocationMode = getLocationModeFromSettings();
         mGpsEnabled = (mLocationMode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY ||
                 mLocationMode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY);
-        if (mGpsEnabled) {
-            startGpsStatusTracking();
-        }
     }
 
     @Override
@@ -116,19 +111,23 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
             }
             if (DEBUG) log("MODE_CHANGED_ACTION received: mode=" + mLocationMode + "; " +
                     "mGpsEnabled=" + mGpsEnabled);
+        } else if (intent.getAction().equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)) {
+            if (mGpsEnabled) {
+                startGpsStatusTracking();
+            }
         }
     }
 
     private void startGpsStatusTracking() {
         if (!mGpsStatusTrackingActive) {
-            mGpsStatusTrackingActive = mLocMan.addGpsStatusListener(mGpsStatusListener);
-            if (DEBUG) log("startGpsStatusTracking: addGpsStatusListener returned: " + mGpsStatusTrackingActive);
+            mGpsStatusTrackingActive = mLocMan.registerGnssStatusCallback(mGnssStatusCallback);
+            if (DEBUG) log("startGpsStatusTracking: registerGnssStatusCallback returned: " + mGpsStatusTrackingActive);
         }
     }
 
     private void stopGpsStatusTracking() {
         if (mGpsStatusTrackingActive) {
-            mLocMan.removeGpsStatusListener(mGpsStatusListener);
+            mLocMan.unregisterGnssStatusCallback(mGnssStatusCallback);
             mGpsStatusTrackingActive = false;
             if (DEBUG) log("stopGpsStatusTracking: GPS status tracking stopped");
         }
