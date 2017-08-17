@@ -458,8 +458,8 @@ public class ModExpandedDesktop {
                         int overscanRight = (int)param.args[paramIndex++];
                         int overscanBottom = (int)param.args[paramIndex++];
                         Rect dcf = (Rect)param.args[paramIndex++];
-                        paramIndex++; // navTranslucent param handled below
                         boolean navVisible = (boolean)param.args[paramIndex++];
+                        paramIndex++; // navTranslucent param handled below
                         boolean navAllowedHidden = (boolean) param.args[paramIndex++];
                         boolean statusBarExpandedNotKeyguard = (boolean) param.args[paramIndex];
 
