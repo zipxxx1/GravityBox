@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -39,7 +39,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -73,8 +72,10 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 
 public class Utils {
     private static final String TAG = "GB:Utils";
+    @SuppressWarnings("unused")
     private static final boolean DEBUG = false;
 
+    @SuppressLint("SdCardPath")
     public static final String AOSP_FORCED_FILE_PATH = 
             "/data/data/com.ceco.nougat.gravitybox/files/aosp_forced";
 
@@ -277,6 +278,7 @@ public class Utils {
         return mIsSamsumgRom;
     }
 
+    @SuppressLint("DefaultLocale")
     public static boolean isVerneeApolloDevice() {
         if (mIsVerneeApolloDevice != null) return mIsVerneeApolloDevice;
 
@@ -309,9 +311,8 @@ public class Utils {
         if (mIsWifiOnly != null) return mIsWifiOnly;
 
         try {
-            ConnectivityManager cm = (ConnectivityManager) con.getSystemService(
-                    Context.CONNECTIVITY_SERVICE);
-            mIsWifiOnly = (cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE) == null);
+            mIsWifiOnly = !con.getPackageManager().hasSystemFeature(
+                    PackageManager.FEATURE_TELEPHONY);
             return mIsWifiOnly;
         } catch (Throwable t) {
             mIsWifiOnly = null;
