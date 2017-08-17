@@ -979,7 +979,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         public String uuidType;
         public int uncTrialCountdown;
         public boolean hasMsimSupport;
-        public int xposedBridgeVersion;
         public boolean supportsFingerprint;
         public int[] fingerprintIds;
         public boolean isOxygenOs41Rom;
@@ -1011,9 +1010,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             }
             if (data.containsKey("hasMsimSupport")) {
                 hasMsimSupport = data.getBoolean("hasMsimSupport");
-            }
-            if (data.containsKey("xposedBridgeVersion")) {
-                xposedBridgeVersion = data.getInt("xposedBridgeVersion");
             }
             if (data.containsKey("supportsFingerprint")) {
                 supportsFingerprint = data.getBoolean("supportsFingerprint");
