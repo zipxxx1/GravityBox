@@ -1,3 +1,11 @@
+Changelog 6.3.8 - 02/09/2017
+--------------------------------------
+- Dialer tweaks: adjusted for compatibility with Google Dialer v11
+- Screenshot delay adjustments
+- Added Romanian translations (thanks to Igor Sorocean)
+- Updated Russian translations (thanks to gaich)
+- Updated Turkish translations (thanks to electric.droid)
+
 Changelog 6.3.7 - 29/05/2017
 --------------------------------------
 - Lockscreen tweaks: use stock icon for bottom action in case of Phone app
