@@ -329,7 +329,7 @@ public class ModHwKeys {
                     mPieMode = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_ENABLE, 0);
                 }
             } else if (action.equals(ACTION_SCREENSHOT) && mPhoneWindowManager != null) {
-                takeScreenshot(intent.getLongExtra(EXTRA_SCREENSHOT_DELAY_MS, 100L));
+                takeScreenshot(intent.getLongExtra(EXTRA_SCREENSHOT_DELAY_MS, 300L));
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED)) {
                 final boolean allowAllRotations = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_ALLOW_ALL_ROTATIONS, false);
@@ -1257,7 +1257,7 @@ public class ModHwKeys {
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_EXPAND_QUICKSETTINGS) {
             expandQsPanel();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_SCREENSHOT) {
-            takeScreenshot(100L);
+            takeScreenshot(400L);
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_VOLUME_PANEL) {
             showVolumePanel();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_LAUNCHER_DRAWER) {
