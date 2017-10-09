@@ -65,7 +65,7 @@ public class ModDialer25 {
             info = new ClassInfo(clazz);
             for (String methodName : METHOD_NAMES) {
                 if (methodName.equals("displayFragment")) {
-                    for (String realMethodName : new String[] { methodName, "c", "b" }) {
+                    for (String realMethodName : new String[] { methodName, "c", "b", "a" }) {
                         Method m = XposedHelpers.findMethodExactIfExists(clazz, realMethodName,
                             Intent.class);
                         if (m != null) {
@@ -74,8 +74,10 @@ public class ModDialer25 {
                                 info.extra = "showDialpadFragment";
                             } else if (realMethodName.equals("c")) {
                                 info.extra = "b";
-                            } else {
+                            } else if (realMethodName.equals("b")) {
                                 info.extra = "c";
+                            } else if (realMethodName.equals("a")) {
+                                info.extra = "d";
                             }
                             break;
                         }

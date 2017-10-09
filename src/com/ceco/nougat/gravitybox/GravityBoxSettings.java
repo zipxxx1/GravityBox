@@ -1639,7 +1639,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             }
             if (pi == null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
-            } else if (pi.applicationInfo.targetSdkVersion == 25) {
+            } else if (pi.applicationInfo.targetSdkVersion >= 25) {
                 Preference p = findPreference(PREF_KEY_CALLER_FULLSCREEN_PHOTO);
                 if (p != null) mPrefCatPhoneDialer.removePreference(p);
                 mPrefCatPhoneDialer.removePreference(mPrefCallerUnknownPhotoEnable);
