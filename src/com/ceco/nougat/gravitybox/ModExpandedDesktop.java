@@ -336,12 +336,14 @@ public class ModExpandedDesktop {
             log("could not find calculateRelevantTaskInsets method");
         }
 
-        try {
-            mNavigationBarPosition = classPhoneWindowManager.getDeclaredMethod(
-                    "navigationBarPosition", int.class, int.class, int.class);
-            mNavigationBarPosition.setAccessible(true);
-        } catch (NoSuchMethodException e) {
-            log("could not find navigationBarPosition method");
+        if (Build.VERSION.SDK_INT >= 25) {
+            try {
+                mNavigationBarPosition = classPhoneWindowManager.getDeclaredMethod(
+                        "navigationBarPosition", int.class, int.class, int.class);
+                mNavigationBarPosition.setAccessible(true);
+            } catch (NoSuchMethodException e) {
+                log("could not find navigationBarPosition method");
+            }
         }
 
         try {
