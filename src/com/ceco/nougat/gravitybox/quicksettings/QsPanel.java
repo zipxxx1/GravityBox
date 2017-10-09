@@ -59,7 +59,6 @@ public class QsPanel implements BroadcastSubReceiver {
     private View mBrightnessSlider;
     private boolean mHideBrightness;
     private boolean mBrightnessIconEnabled;
-    private ImageView mBrightnessIcon;
     private Integer mCellWidthOriginal;
     private QsTileEventDistributor mEventDistributor;
     @SuppressWarnings("unused")
@@ -237,17 +236,18 @@ public class QsPanel implements BroadcastSubReceiver {
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (param.thisObject != mQsPanel)
-                        return;
+                    if (param.thisObject == mQsPanel) {
+                        updateBrightnessSliderVisibility();
+                    }
+                }
+            });
 
-                    // brighntess slider
-                    View bs = getBrightnessSlider();
-                    if (bs != null) {
-                        final int vis = mHideBrightness ? View.GONE : View.VISIBLE; 
-                        if (bs.getVisibility() != vis) {
-                            bs.setVisibility(vis);
-                            mQsPanel.postInvalidate();
-                        }
+            XposedHelpers.findAndHookMethod(classQsPanel, "onTuningChanged",
+                    String.class, String.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (param.thisObject == mQsPanel && "qs_show_brightness".equals(param.args[0])) {
+                        updateBrightnessSliderVisibility();
                     }
                 }
             });
@@ -296,33 +296,39 @@ public class QsPanel implements BroadcastSubReceiver {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (DEBUG) log("BrightnessController: updateIcon");
-                    ImageView icon = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mIcon");
+                    ImageView icon = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mIcon");                      
                     if (icon != null) {
-                        if (mBrightnessIcon == null) {
-                            mBrightnessIcon = icon;
+                        if (!icon.hasOnClickListeners()) {
                             icon.setOnClickListener(mBrightnessIconOnClick);
                             icon.setOnLongClickListener(mBrightnessIconOnLongClick);
                             icon.setBackground(Utils.getGbContext(
-                                    mBrightnessIcon.getContext()).getDrawable(
+                                    icon.getContext()).getDrawable(
                                             R.drawable.ripple));
                         }
-                        if (mBrightnessIconEnabled && !mHideBrightness) {
-                            boolean automatic = (boolean) param.args[0];
-                            int resId = icon.getResources().getIdentifier(
-                                    (automatic ? "ic_qs_brightness_auto_on" : "ic_qs_brightness_auto_off"),
-                                    "drawable", ModQsTiles.PACKAGE_NAME);
-                            if (resId != 0) {
-                                icon.setImageResource(resId);
-                            }
-                            icon.setVisibility(View.VISIBLE);
-                        } else {
-                            icon.setVisibility(View.GONE);
+                        boolean automatic = XposedHelpers.getBooleanField(param.thisObject, "mAutomatic");
+                        int resId = icon.getResources().getIdentifier(
+                                (automatic ? "ic_qs_brightness_auto_on" : "ic_qs_brightness_auto_off"),
+                                "drawable", ModQsTiles.PACKAGE_NAME);
+                        if (resId != 0) {
+                            icon.setImageResource(resId);
                         }
+                        icon.setVisibility(mBrightnessIconEnabled ? View.VISIBLE : View.GONE);
                     }
                 }
             });
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private void updateBrightnessSliderVisibility() {
+        View bs = getBrightnessSlider();
+        if (bs != null) {
+            final int vis = mHideBrightness ? View.GONE : View.VISIBLE; 
+            if (bs.getVisibility() != vis) {
+                bs.setVisibility(vis);
+                mQsPanel.postInvalidate();
+            }
         }
     }
 
