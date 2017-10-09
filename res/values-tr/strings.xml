@@ -1214,12 +1214,12 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_lockscreen_direct_unlock_trans_level_title">Şeffaf gör</string>
 
     <!-- Subscription manager -->
-    <string name="sm_choose_voice_sub">Aramalar için varsayılan SIM'i seçin</string>
-    <string name="sm_choose_sms_sub">Mesajlaşma için varsayılan SIM'i seçin</string>
-    <string name="sm_choose_data_sub">Hücresel veriler için varsayılan SIM'i seçin</string>
-    <string name="sm_sub_change_voice_failed">Aramalar için varsayılan SIM'i ayarlama başarısız</string>
-    <string name="sm_sub_change_sms_failed">Mesajlaşma için varsayılan SIM'i ayarlama başarısız</string>
-    <string name="sm_sub_change_data_failed">Hücresel veriler için varsayılan SIM'i ayarlama başarısız</string>
+    <string name="sm_choose_voice_sub">Aramalar için varsayılan SIM\'i seçin</string>
+    <string name="sm_choose_sms_sub">Mesajlaşma için varsayılan SIM\'i seçin</string>
+    <string name="sm_choose_data_sub">Hücresel veriler için varsayılan SIM\'i seçin</string>
+    <string name="sm_sub_change_voice_failed">Aramalar için varsayılan SIM\'i ayarlama başarısız</string>
+    <string name="sm_sub_change_sms_failed">Mesajlaşma için varsayılan SIM\'i ayarlama başarısız</string>
+    <string name="sm_sub_change_data_failed">Hücresel veriler için varsayılan SIM\'i ayarlama başarısız</string>
     <string name="sm_sub_change_voice_ok">Aramalar için varsayılan SIM ayarı:</string>
     <string name="sm_sub_change_sms_ok">Mesajlaşma için varsayılan SIM ayarı:</string>
     <string name="sm_sub_change_data_ok">Hücresel veriler için varsayılan SIM ayarı:</string>
@@ -1230,13 +1230,13 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="shortcut_sm_voice_sim_1">Aramalar için SIM 1</string>
     <string name="shortcut_sm_voice_sim_2">Aramalar için SIM 2</string>
     <string name="shortcut_sm_voice_sim_ask">Arama yaparken sor</string>
-    <string name="shortcut_sm_voice_sim_ui">Aramalar için SIM'i seçin</string>
+    <string name="shortcut_sm_voice_sim_ui">Aramalar için SIM\'i seçin</string>
     <string name="shortcut_sm_sms_sim_1">SMS için SIM 1</string>
     <string name="shortcut_sm_sms_sim_2">SMS için SIM 2</string>
-    <string name="shortcut_sm_sms_sim_ui">SMS için SIM'i seçin</string>
+    <string name="shortcut_sm_sms_sim_ui">SMS için SIM\'i seçin</string>
     <string name="shortcut_sm_data_sim_1">Veri için SIM 1</string>
     <string name="shortcut_sm_data_sim_2">Veri için SIM 2</string>
-    <string name="shortcut_sm_data_sim_ui">Veri için SIM'i seçin</string>
+    <string name="shortcut_sm_data_sim_ui">Veri için SIM\'i seçin</string>
 
     <!-- QuickApp Tile #3 and #4 -->
     <string name="pref_cat_quickapp_tile_3_title">Hızlı Uygulama karesi 3 ayarları</string>
