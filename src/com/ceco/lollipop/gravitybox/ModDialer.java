@@ -86,10 +86,6 @@ public class ModDialer {
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false)) { 
                     final View v = ((Fragment) param.thisObject).getView(); 
                         v.setBackgroundColor(0);
-                        if (Utils.isMtkDevice()) {
-                            final View gpView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowpad");
-                            gpView.setBackgroundColor(0);
-                        }
                         if (DEBUG) log("AnswerFragment showAnswerUi: background color set");
                     }
                 }

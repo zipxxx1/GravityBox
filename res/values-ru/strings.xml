@@ -145,10 +145,6 @@
     <string name="engineering_mode_title">Инженерный режим</string>
     <string name="engineering_mode_summary">Запуск приложения в инженерном режиме</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">Мелодия звонка для 2-х SIM</string>
-    <string name="dual_sim_ringer_summary">Запуск приложения, которое позволяет установить мелодию звонка и уведомлений отдельно для каждой SIM-карты</string>
-
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Настройки экрана блокировки</string>
     <string name="pref_cat_lockscreen_summary">Различные настройки экрана блокировки</string>

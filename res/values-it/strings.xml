@@ -139,10 +139,6 @@
     <string name="engineering_mode_title">Modalità Engineer</string>
     <string name="engineering_mode_summary">Lancia l\'applicazione in Modalità Engineer</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">Suoneria Dual SIM</string>
-    <string name="dual_sim_ringer_summary">Lancia l\'applicazione che consente di impostare suonerie e notifiche specifiche per ogni SIM</string>
-
     <!-- Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Schermata di blocco</string>
     <string name="pref_cat_lockscreen_summary">Permette di personalizzare la schermata di blocco</string>

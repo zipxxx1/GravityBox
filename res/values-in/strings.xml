@@ -117,10 +117,6 @@
     <string name="engineering_mode_title">Engineering mode</string>
     <string name="engineering_mode_summary">Membuka aplikasi Engineering mode</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">Dual SIM Ringer</string>
-    <string name="dual_sim_ringer_summary">Membuka aplikasi yang membolehkan anda untuk men-set suara ringtone dan notifikasi berbeda untuk masing-masing SIM</string>
-
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Tweak Lockscreen </string>
     <string name="pref_cat_lockscreen_summary">Berisi berbagai tweak lockscreen</string>

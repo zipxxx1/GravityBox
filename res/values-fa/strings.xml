@@ -145,10 +145,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <string name="engineering_mode_title">حالت مهندسي</string>
     <string name="engineering_mode_summary">راه اندازي برنامه حالت مهندسي</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">زنگ دو سيم کارت</string>
-    <string name="dual_sim_ringer_summary">راه اندازي برنامه شخصي سازي اعلان ها ي زنگ براي هر سيم کارت</string>
-
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">سفارشي سازي قفل صفحه نمايش</string>
     <string name="pref_cat_lockscreen_summary">شامل سفارشي سازي هاي قفل صفحه نمايش</string>

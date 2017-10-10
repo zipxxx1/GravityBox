@@ -23,7 +23,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
-import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,11 +41,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             "com.android.systemui.statusbar.policy.BatteryController";
     private static final boolean DEBUG = false;
 
-    public static final String ACTION_MTK_BATTERY_PERCENTAGE_SWITCH = 
-            "mediatek.intent.action.BATTERY_PERCENTAGE_SWITCH";
-    public static final String EXTRA_MTK_BATTERY_PERCENTAGE_STATE = "state";
-    public static final String SETTING_MTK_BATTERY_PERCENTAGE = "battery_percentage";
-
     private enum KeyguardMode { DEFAULT, ALWAYS_SHOW, HIDDEN };
 
     private ContainerType mContainerType;
@@ -58,7 +52,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private boolean mBatteryPercentTextEnabledSb;
     private boolean mBatteryPercentTextHeaderHide;
     private KeyguardMode mBatteryPercentTextKgMode;
-    private boolean mMtkPercentTextEnabled;
     private StatusbarBatteryPercentage mPercentText;
     private CmCircleBattery mCircleBattery;
     private StatusbarBattery mStockBattery;
@@ -91,9 +84,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_HEADER_HIDE, false);
         mBatteryPercentTextKgMode = KeyguardMode.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD, "DEFAULT"));
-        mMtkPercentTextEnabled = Utils.isMtkDevice() ?
-                Settings.Secure.getInt(mContext.getContentResolver(), 
-                        SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1 : false;
         mBatterySaverIndicationDisabled = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
     }
@@ -205,11 +195,8 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             if (mPercentText != null) {
                 switch (mContainerType) {
                     case STATUSBAR:
-                        if (Utils.isMtkDevice()) {
-                            mPercentText.update();
-                        }
                         mPercentText.setVisibility(
-                                (mBatteryPercentTextEnabledSb || mMtkPercentTextEnabled) ?
+                                (mBatteryPercentTextEnabledSb) ?
                                         View.VISIBLE : View.GONE);
                         break;
                     case KEYGUARD:
@@ -353,10 +340,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 mPercentText.setChargingColor(chargingColor);
                 if (DEBUG) log("PercentText charging color changed to: " + chargingColor);
             }
-        } else if (action.equals(ACTION_MTK_BATTERY_PERCENTAGE_SWITCH)) {
-            mMtkPercentTextEnabled = intent.getIntExtra(EXTRA_MTK_BATTERY_PERCENTAGE_STATE, 0) == 1;
-            if (DEBUG) log("mMtkPercentText changed to: " + mMtkPercentTextEnabled);
-            updateBatteryStyle();
         } else if (action.equals(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE)) {
                 mBatterySaverIndicationDisabled = intent.getBooleanExtra(
