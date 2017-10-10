@@ -20,6 +20,7 @@ import java.util.List;
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModPower;
+import com.ceco.nougat.gravitybox.Utils;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -67,6 +68,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
     private PowerManager mPm;
     private Handler mHandler;
     private boolean mFpAuthOnNextScreenOn;
+    private int mFpAuthUserId;
     private ImprintMode mImprintMode = ImprintMode.DEFAULT;
     private List<Listener> mListeners = new ArrayList<>();
 
@@ -142,6 +144,11 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                     if ((mProxWakeupEnabled || mImprintMode == ImprintMode.WAKE_ONLY) &&
                             !XposedHelpers.getBooleanField(param.thisObject, "mDeviceInteractive")) {
                         mFpAuthOnNextScreenOn = mProxWakeupEnabled && mImprintMode == ImprintMode.DEFAULT;
+                        if (param.args.length > 0 && Integer.class.isAssignableFrom(param.args[0].getClass())) {
+                            mFpAuthUserId = (int)param.args[0];
+                        } else {
+                            mFpAuthUserId = Utils.getCurrentUser();
+                        }
                         XposedHelpers.callMethod(mPm, "wakeUp", SystemClock.uptimeMillis());
                         if (mFpAuthOnNextScreenOn) {
                             mHandler.postDelayed(mResetFpRunnable, ModPower.MAX_PROXIMITY_WAIT + 200);
@@ -289,9 +296,9 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
         }
     };
 
-    private void handleFingerprintAuthenticated() {
+    private void handleFingerprintAuthenticated(int userId) {
         try {
-            XposedHelpers.callMethod(mUpdateMonitor, "handleFingerprintAuthenticated");
+            XposedHelpers.callMethod(mUpdateMonitor, "handleFingerprintAuthenticated", userId);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -304,7 +311,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
             if (mFpAuthOnNextScreenOn) {
                 mHandler.removeCallbacks(mResetFpRunnable);
                 mFpAuthOnNextScreenOn = false;
-                handleFingerprintAuthenticated();
+                handleFingerprintAuthenticated(mFpAuthUserId);
             }
         } else if (action.equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
