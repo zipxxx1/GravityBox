@@ -775,7 +775,7 @@
                 android:key="pref_statusbar_icon_color"
                 android:title="@string/pref_statusbar_icon_color_title" 
                 android:summary="@string/pref_statusbar_icon_color_summary"
-                android:defaultValue="@integer/COLOR_HOLO_BLUE_LIGHT" />
+                android:defaultValue="@integer/COLOR_WHITE" />
 
             <ListPreference
                 android:key="pref_status_icon_style" 
