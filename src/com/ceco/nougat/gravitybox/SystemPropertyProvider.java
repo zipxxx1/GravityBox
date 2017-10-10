@@ -141,7 +141,7 @@ public class SystemPropertyProvider {
                                         data.putIntArray("fingerprintIds",
                                                 SysUiManagers.FingerprintLauncher.getEnrolledFingerprintIds());
                                     }
-                                    data.putBoolean("isOxygenOs41Rom", Utils.isOxygenOs41Rom());
+                                    data.putBoolean("isOxygenOsRom", Utils.isOxygenOsRom());
                                     if (DEBUG) {
                                         log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
                                         log("isTablet: " + data.getBoolean("isTablet"));
@@ -157,7 +157,7 @@ public class SystemPropertyProvider {
                                         if (data.containsKey("fingerprintIds")) {
                                             log("fingerprintIds: " + data.getIntArray("fingerprintIds"));
                                         }
-                                        log("isOxygenOs41Rom: " + data.getBoolean("isOxygenOs41Rom"));
+                                        log("isOxygenOsRom: " + data.getBoolean("isOxygenOsRom"));
                                     }
                                     receiver.send(RESULT_SYSTEM_PROPERTIES, data);
                                 } else if (intent.getAction().equals(ACTION_REGISTER_UUID) && 

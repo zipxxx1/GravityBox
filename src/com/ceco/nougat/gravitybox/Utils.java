@@ -99,7 +99,7 @@ public class Utils {
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     private static Boolean mIsVerneeApolloDevice;
-    private static Boolean mIsOxygenOs41Rom = null;
+    private static Boolean mIsOxygenOsRom = null;
 
     // Device features
     private static Boolean mHasGeminiSupport = null;
@@ -287,12 +287,12 @@ public class Utils {
         return mIsVerneeApolloDevice;
     }
 
-    public static boolean isOxygenOs41Rom() {
-        if (mIsOxygenOs41Rom == null) {
+    public static boolean isOxygenOsRom() {
+        if (mIsOxygenOsRom == null) {
             String version = SystemProp.get("ro.oxygen.version", "0");
-            mIsOxygenOs41Rom = version.startsWith("4.1");
+            mIsOxygenOsRom = version != null && !version.isEmpty() &&  !"0".equals("version"); 
         }
-        return mIsOxygenOs41Rom;
+        return mIsOxygenOsRom;
     }
 
     public static boolean isParanoidRom() {

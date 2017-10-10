@@ -106,7 +106,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 }
             }
-            if (mPercentText == null || Utils.isOxygenOs41Rom()) {
+            if (mPercentText == null || Utils.isOxygenOsRom()) {
                 TextView percentTextView = new TextView(mContext);
                 LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -119,7 +119,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 percentTextView.setTextColor(Color.WHITE);
                 percentTextView.setVisibility(View.GONE);
                 mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
-                int offset = Utils.isOxygenOs41Rom() ? 3 : 1;
+                int offset = Utils.isOxygenOsRom() ? 3 : 1;
                 mSystemIcons.addView(mPercentText.getView(), mSystemIcons.getChildCount()-offset);
                 if (DEBUG) log("Battery percent text injected");
             }
@@ -136,7 +136,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         lParams.setMarginEnd(gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right));
         mCircleBattery.setLayoutParams(lParams);
         mCircleBattery.setVisibility(View.GONE);
-        int pos = Utils.isOxygenOs41Rom() ?
+        int pos = Utils.isOxygenOsRom() ?
                 mSystemIcons.getChildCount()-2 : mSystemIcons.getChildCount();
         mSystemIcons.addView(mCircleBattery, pos);
         if (DEBUG) log("CmCircleBattery injected");
@@ -160,7 +160,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     0);
             ViewGroup vg = (ViewGroup) v.getParent();
             vg.removeView(v);
-            pos = Utils.isOxygenOs41Rom() ? vg.getChildCount()-1 : vg.getChildCount();
+            pos = Utils.isOxygenOsRom() ? vg.getChildCount()-1 : vg.getChildCount();
             vg.addView(v, pos);
         }
     }

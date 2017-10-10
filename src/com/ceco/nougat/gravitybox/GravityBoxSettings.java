@@ -976,7 +976,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         public boolean hasMsimSupport;
         public boolean supportsFingerprint;
         public int[] fingerprintIds;
-        public boolean isOxygenOs41Rom;
+        public boolean isOxygenOsRom;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -1012,8 +1012,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (data.containsKey("fingerprintIds")) {
                 fingerprintIds = data.getIntArray("fingerprintIds");
             }
-            if (data.containsKey("isOxygenOs41Rom")) {
-                isOxygenOs41Rom = data.getBoolean("isOxygenOs41Rom");
+            if (data.containsKey("isOxygenOsRom")) {
+                isOxygenOsRom = data.getBoolean("isOxygenOsRom");
             }
         }
     }
@@ -1733,7 +1733,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             }
 
             // Remove OxygenOS 4.1 preferences
-            if (sSystemProperties.isOxygenOs41Rom) {
+            if (sSystemProperties.isOxygenOsRom) {
                 Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
                 if (p != null) mPrefCatLsOther.removePreference(p);
                 p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY);
@@ -1884,7 +1884,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             }
 
             // set default quick tap as Go Home for OOS 4.1
-            if (sSystemProperties.isOxygenOs41Rom &&
+            if (sSystemProperties.isOxygenOsRom &&
                     mPrefs.getString(PREF_KEY_FINGERPRINT_LAUNCHER_APP, null) == null) {
                 AppPickerPreference appp = (AppPickerPreference)
                         findPreference(PREF_KEY_FINGERPRINT_LAUNCHER_APP);

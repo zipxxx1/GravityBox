@@ -533,7 +533,7 @@ public class ModHwKeys {
 
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
             Class<?> classPhoneWindowManagerOem = null;
-            if (Utils.isOxygenOs41Rom()) {
+            if (Utils.isOxygenOsRom()) {
                 classPhoneWindowManagerOem = XposedHelpers.findClass(
                         CLASS_PHONE_WINDOW_MANAGER_OEM, classLoader);
             }
@@ -563,7 +563,7 @@ public class ModHwKeys {
                             event.getSource() == PA_SOURCE_CUSTOM) {
                         // ignore unknown source events, e.g. synthetic events injected from GB itself
                         if (DEBUG) log("interceptKeyBeforeQueueing: ignoring event from unknown source");
-                        if (Utils.isOxygenOs41Rom()) {
+                        if (Utils.isOxygenOsRom()) {
                             // mangle OOS3.5 key event to allow pass-through and to avoid double-vibrations
                             event = KeyEvent.changeFlags(event, event.getFlags() | KeyEvent.FLAG_VIRTUAL_HARD_KEY);
                             event.setSource(InputDevice.SOURCE_KEYBOARD);
