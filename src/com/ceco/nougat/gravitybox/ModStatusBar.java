@@ -958,16 +958,18 @@ public class ModStatusBar {
                         }
                     }
                 });
-                XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
-                        "expand", boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mDisablePeek) {
-                            XposedHelpers.setBooleanField(param.thisObject,
-                                    QsQuickPulldownHandler.getQsExpandFieldName(), false);
+                if (!Utils.isOxygenOsRom()) {
+                    XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
+                            "expand", boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if (mDisablePeek) {
+                                XposedHelpers.setBooleanField(param.thisObject,
+                                        QsQuickPulldownHandler.getQsExpandFieldName(), false);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             } catch (Throwable t) {
                 log("Error setting up Disable peek hooks: " + t.getMessage());
                 if (DEBUG) XposedBridge.log(t);
