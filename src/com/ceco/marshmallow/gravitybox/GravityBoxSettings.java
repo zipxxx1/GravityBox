@@ -1373,6 +1373,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // this is important because although the handler classes that read these settings
             // are in the same package, they are executed in the context of the hooked package
             getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
+
+            if (sSystemProperties == null) {
+                Intent restartIntent = new Intent(getActivity(), GravityBoxSettings.class);
+                restartIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                getActivity().startActivity(restartIntent);
+                System.exit(0);
+                return;
+            }
+
             addPreferencesFromResource(R.xml.gravitybox);
 
             mPrefs = getPreferenceScreen().getSharedPreferences();
