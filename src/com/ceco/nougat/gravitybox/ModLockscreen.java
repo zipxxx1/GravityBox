@@ -508,15 +508,26 @@ public class ModLockscreen {
             if (!Utils.isXperiaDevice()) {
                 XC_MethodHook carrierTextHook = new XC_MethodHook() {
                     @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (Utils.isOxygenOsRom()) {
+                            String text = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, "");
+                            if (!text.isEmpty()) {
+                                param.setResult(text.trim().isEmpty() ? "" : text);
+                            }
+                        }
+                    }
+                    @Override
                     protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                        String text = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, "");
                         if (!mCarrierTextViews.contains(param.thisObject)) {
                             mCarrierTextViews.add((TextView) param.thisObject);
-                        } 
-                        if (text.isEmpty()) {
-                            return;
-                        } else {
-                            ((TextView)param.thisObject).setText(text.trim().isEmpty() ? "" : text);
+                        }
+                        if (!Utils.isOxygenOsRom()) {
+                            String text = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, "");
+                            if (text.isEmpty()) {
+                                return;
+                            } else {
+                                ((TextView)param.thisObject).setText(text.trim().isEmpty() ? "" : text);
+                            }
                         }
                     }
                 };
@@ -524,6 +535,9 @@ public class ModLockscreen {
                 if (Utils.isSamsungRom()) {
                     XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT,
                             classLoader, "updateCarrierText", Intent.class, carrierTextHook);
+                } else if (Utils.isOxygenOsRom()) {
+                    XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT,
+                            classLoader, "updateCarrierTextInternal", carrierTextHook);
                 } else {
                     XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT,
                             classLoader, "updateCarrierText", carrierTextHook);
