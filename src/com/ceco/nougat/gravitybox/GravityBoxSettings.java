@@ -1321,6 +1321,14 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
+            if (sSystemProperties == null) {
+                Intent restartIntent = new Intent(getActivity(), GravityBoxSettings.class);
+                restartIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                getActivity().startActivity(restartIntent);
+                System.exit(0);
+                return;
+            }
+            
             mPrefs = SettingsManager.getInstance(getActivity()).getMainPrefs();
             addPreferencesFromResource(R.xml.gravitybox);
 
