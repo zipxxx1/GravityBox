@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.provider.Settings;
@@ -64,15 +65,13 @@ public class SystemPropertyProvider {
     }
 
     public static boolean supportsFingerprint(Context ctx) {
-        // TODO: FP launcher
-        return false;
-//        try {
-//            FingerprintManager fpm = (FingerprintManager) ctx.getSystemService(Context.FINGERPRINT_SERVICE);
-//            return (fpm != null && fpm.isHardwareDetected());
-//        } catch (Throwable t) {
-//            log("Error checkin for fingerprint support: " + t.getMessage());
-//            return false;
-//        }
+        try {
+            FingerprintManager fpm = (FingerprintManager) ctx.getSystemService(Context.FINGERPRINT_SERVICE);
+            return (fpm != null && fpm.isHardwareDetected());
+        } catch (Throwable t) {
+            log("Error checkin for fingerprint support: " + t.getMessage());
+            return false;
+        }
     }
 
     public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {
