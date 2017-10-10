@@ -619,7 +619,7 @@ public class ModPowerMenu {
 
         private void takeScreenshot() {
             Intent intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
-            intent.putExtra(ModHwKeys.EXTRA_SCREENSHOT_DELAY_MS, 200L);
+            intent.putExtra(ModHwKeys.EXTRA_SCREENSHOT_DELAY_MS, 300L);
             mContext.sendBroadcast(intent);
         }
 
