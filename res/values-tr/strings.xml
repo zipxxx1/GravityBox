@@ -143,10 +143,6 @@
     <string name="engineering_mode_title">Mühendislik modu</string>
     <string name="engineering_mode_summary">Mühendislik modu uygulamasını başlatır</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">Çift SIM Zili</string>
-    <string name="dual_sim_ringer_summary">Zil sesi ve bildirim seslerini her SIM için ayrı ayrı ayarlamaya izin veren uygulamayı başlatır</string>
-
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Kilit ekranı iyileştirmeleri</string>
     <string name="pref_cat_lockscreen_summary">Çeşitli kilit ekranı iyileştirmelerini içerir</string>

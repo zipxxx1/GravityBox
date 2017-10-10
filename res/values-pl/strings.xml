@@ -120,10 +120,6 @@
     <string name="engineering_mode_title">Tryb inżynierski</string>
     <string name="engineering_mode_summary">Włącza ukrytą aplikację trybu inżynierskiego</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">Dzwonki Dual SIM</string>
-    <string name="dual_sim_ringer_summary">Uruchamia aplikację pozwalającą na przypisanie innych dzwonków dla każdej karty SIM</string>
-
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Ustawienia ekranu blokady</string>
     <string name="pref_cat_lockscreen_summary">Zawiera dodatkowe poprawki ustawień ekranu blokady</string>

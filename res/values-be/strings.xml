@@ -141,10 +141,6 @@
     <string name="engineering_mode_title">Інжынерны рэжым</string>
     <string name="engineering_mode_summary">Запуск дадатку ў інжынерным рэжыме</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">Мелодыя тэлефанавання для 2-х SIM</string>
-    <string name="dual_sim_ringer_summary">Запуск дадатку, якое дазваляе ўсталяваць мелодыю тэлефанавання і паведамленняў асобна для кожнай SIM-карткі</string>
-
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Налады экрана блакавання</string>
     <string name="pref_cat_lockscreen_summary">Розныя налады экрана блакавання</string>

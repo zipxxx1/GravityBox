@@ -142,9 +142,7 @@ public class ModPowerMenu {
                    mRebootItemList.add(new BasicIconListItem(mRebootStr, null, mRebootIcon, null));
                    mRebootItemList.add(new BasicIconListItem(mRebootSoftStr, null, mRebootSoftIcon, null));
                    mRebootItemList.add(new BasicIconListItem(mRecoveryStr, null, mRecoveryIcon, null));
-                   if (!Utils.isMtkDevice()) {
-                       mRebootItemList.add(new BasicIconListItem(mBootloaderStr, null, mBootloaderIcon, null));
-                   }
+                   mRebootItemList.add(new BasicIconListItem(mBootloaderStr, null, mBootloaderIcon, null));
 
                    mRebootConfirmStr = String.format(gbContext.getString(R.string.reboot_confirm),
                            gbContext.getString(Utils.isTablet() ? R.string.device_tablet : R.string.device_phone));

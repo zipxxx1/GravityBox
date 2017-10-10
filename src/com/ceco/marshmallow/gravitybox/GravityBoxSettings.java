@@ -58,7 +58,6 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
-import android.provider.Settings;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.util.TypedValue;
@@ -233,9 +232,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String APP_GOOGLE_NOW = "com.google.android.googlequicksearchbox";
     public static final String APP_ENGINEERING_MODE = "com.mediatek.engineermode";
     public static final String APP_ENGINEERING_MODE_CLASS = "com.mediatek.engineermode.EngineerMode";
-    public static final String PREF_KEY_DUAL_SIM_RINGER = "pref_dual_sim_ringer";
-    public static final String APP_DUAL_SIM_RINGER = "dualsim.ringer";
-    public static final String APP_DUAL_SIM_RINGER_CLASS = "dualsim.ringer.main";
     public static final String ACTION_PREF_TELEPHONY_CHANGED = "gravity.intent.action.TELEPHONY_CHANGED";
     public static final String EXTRA_TELEPHONY_NATIONAL_ROAMING = "nationalRoaming";
 
@@ -1184,7 +1180,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                                       implements OnSharedPreferenceChangeListener,
                                                  OnPreferenceChangeListener {
         private ListPreference mBatteryStyle;
-        private CheckBoxPreference mPrefBatteryPercentSb;
         private ListPreference mPrefBatteryPercentSize;
         private ListPreference mPrefBatteryPercentStyle;
         private ListPreference mPrefBatteryPercentCharging;
@@ -1198,7 +1193,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private Preference mPrefAboutDonate;
         private Preference mPrefAboutUnlocker;
         private Preference mPrefEngMode;
-        private Preference mPrefDualSimRinger;
         private PreferenceCategory mPrefCatLockscreenBg;
         private ListPreference mPrefLockscreenBg;
         private ColorPickerPreference mPrefLockscreenBgColor;
@@ -1389,7 +1383,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             AppPickerPreference.cleanupAsync(getActivity());
 
             mBatteryStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_STYLE);
-            mPrefBatteryPercentSb = (CheckBoxPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR);
             mPrefBatteryPercentSize = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE);
             mPrefBatteryPercentStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_STYLE);
             mPrefBatteryPercentCharging = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING);
@@ -1416,11 +1409,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefEngMode = (Preference) findPreference(PREF_KEY_ENGINEERING_MODE);
             if (!Utils.isAppInstalled(getActivity(), APP_ENGINEERING_MODE)) {
                 getPreferenceScreen().removePreference(mPrefEngMode);
-            }
-
-            mPrefDualSimRinger = (Preference) findPreference(PREF_KEY_DUAL_SIM_RINGER);
-            if (!Utils.isAppInstalled(getActivity(), APP_DUAL_SIM_RINGER)) {
-                getPreferenceScreen().removePreference(mPrefDualSimRinger);
             }
 
             mPrefCatLockscreenBg = 
@@ -2281,20 +2269,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefQsNetworkModeSimSlot.setSummary(
                         String.format(getString(R.string.pref_qs_network_mode_sim_slot_summary),
                                 mPrefQsNetworkModeSimSlot.getEntry()));
-            }
-
-            if (Utils.isMtkDevice()) {
-                final boolean mtkBatteryPercent = Settings.Secure.getInt(getActivity().getContentResolver(), 
-                        BatteryStyleController.SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1;
-                if (mtkBatteryPercent) {
-                    mPrefs.edit().putBoolean(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false).commit();
-                    mPrefBatteryPercentSb.setChecked(false);
-                    Intent intent = new Intent();
-                    intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
-                    intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, false);
-                    getActivity().sendBroadcast(intent);
-                }
-                mPrefBatteryPercentSb.setEnabled(!mtkBatteryPercent);
             }
 
             if (key == null || key.equals(PREF_KEY_STATUSBAR_CLOCK_DATE)) {
@@ -3594,9 +3568,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (pref == mPrefEngMode) {
                 intent = new Intent(Intent.ACTION_MAIN);
                 intent.setClassName(APP_ENGINEERING_MODE, APP_ENGINEERING_MODE_CLASS);
-            } else if (pref == mPrefDualSimRinger) {
-                intent = new Intent(Intent.ACTION_MAIN);
-                intent.setClassName(APP_DUAL_SIM_RINGER, APP_DUAL_SIM_RINGER_CLASS);
             } else if (pref == mPrefLockscreenBgImage) {
                 setCustomLockscreenImage();
                 return true;

@@ -136,10 +136,6 @@
     <string name="engineering_mode_title">工程模式</string>
     <string name="engineering_mode_summary">啟動 [工程模式] 應用程式</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">雙 SIM 卡鈴聲</string>
-    <string name="dual_sim_ringer_summary">讓您可以設定各個 SIM 卡的鈴聲與通知音效</string>
-
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">鎖定畫面選項</string>
     <string name="pref_cat_lockscreen_summary">包含各種鎖定畫面的選項</string>

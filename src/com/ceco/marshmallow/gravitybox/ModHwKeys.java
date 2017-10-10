@@ -855,18 +855,6 @@ public class ModHwKeys {
                         return;
                     }
                 }
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (Utils.isMtkDevice() && getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId != 
-                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                        try {
-                            final Runnable r = (Runnable) XposedHelpers.getObjectField(param.thisObject,
-                                    "toggleFloatAppLongPress");
-                            final Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
-                            h.removeCallbacks(r);
-                        } catch (Throwable t) { /* be quiet */ }
-                    }
-                }
             });
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, 

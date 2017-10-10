@@ -121,9 +121,6 @@
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">開発者モード</string>
     <string name="engineering_mode_summary">開発者モードアプリを起動します。</string>
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">デュアルSIM着信音</string>
-    <string name="dual_sim_ringer_summary">SIM毎に着信音と通地温を設定できるアプリを起動します。</string>
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">ロック画面設定</string>
     <string name="pref_cat_lockscreen_summary">ロック画面に関連した設定を変更します。</string>
