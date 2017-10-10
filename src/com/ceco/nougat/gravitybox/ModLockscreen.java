@@ -479,8 +479,7 @@ public class ModLockscreen {
                             "id", PACKAGE_NAME);
                     if (containerId == 0) {
                         // fallback to AOSP container
-                        containerId = res.getIdentifier(Utils.isOxygenOsRom() ? "clock_view" :
-                                "keyguard_clock_container", "id", PACKAGE_NAME);
+                        containerId = res.getIdentifier("keyguard_clock_container", "id", PACKAGE_NAME);
                     }
                     if (containerId != 0) {
                         ViewGroup container = (ViewGroup) kgStatusView.findViewById(containerId);
