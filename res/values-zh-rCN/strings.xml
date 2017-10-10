@@ -128,10 +128,6 @@
     <string name="engineering_mode_title">工程模式</string>
     <string name="engineering_mode_summary">启动“工程模式”应用程序</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">双SIM卡铃声</string>
-    <string name="dual_sim_ringer_summary">开启可以设置各个SIM卡的铃声与通知音效的程序</string>
-
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">锁屏画面调整</string>
     <string name="pref_cat_lockscreen_summary">包含各种锁屏画面的调整选项</string>

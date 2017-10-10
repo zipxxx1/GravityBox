@@ -76,13 +76,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         PhoneWrapper.initZygote(prefs);
         ModTelephony.initZygote(prefs);
         ProgressBarController.initZygote(prefs, qhPrefs);
-
-        // MTK (deprecated)
-//        if (Utils.isMtkDevice()) {
-//            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_DEV_OPTS, false)) {
-//                MtkFixDevOptions.initZygote();
-//            }
-//        }
     }
 
     @Override

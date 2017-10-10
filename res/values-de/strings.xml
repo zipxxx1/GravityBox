@@ -127,10 +127,6 @@
     <string name="engineering_mode_title">Entwicklermodus</string>
     <string name="engineering_mode_summary">Startet die Anwendung für den Entwicklermodus</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">Klingelton bei Dual-SIM</string>
-    <string name="dual_sim_ringer_summary">Einstellen von Ruf- und Benachrichtigungstönen für die jeweilige SIM-Karte</string>
-
     <!-- Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Sperrbildschirm anpassen</string>
     <string name="pref_cat_lockscreen_summary">Enthält Sperrbildschirmeinstellungen</string>

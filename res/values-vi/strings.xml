@@ -127,10 +127,6 @@
     <string name="engineering_mode_title">Chế độ kiểm tra máy</string>
     <string name="engineering_mode_summary">Vào chế độ kiểm tra máy</string>
 
-    <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">Đặt nhạc 2 SIM</string>
-    <string name="dual_sim_ringer_summary">Đặt nhạc chuông và âm thông báo riêng biệt cho từng SIM</string>
-
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Tinh chỉnh màn hình khóa</string>
     <string name="pref_cat_lockscreen_summary">Bao gồm nhiều tinh chỉnh màn hình khóa</string>
