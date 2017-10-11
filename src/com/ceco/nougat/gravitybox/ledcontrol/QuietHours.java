@@ -28,12 +28,6 @@ import com.ceco.nougat.gravitybox.Utils;
 
 import android.app.Notification;
 import android.content.SharedPreferences;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.text.TextUtils;
-import android.widget.RemoteViews;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 
 public class QuietHours {
     public static final String PKG_WEARABLE_APP = "com.google.android.wearable.app";
@@ -46,6 +40,10 @@ public class QuietHours {
         public static final String CHARGER = "charger";
         public static final String RINGER = "ringer";
     }
+
+    private static final List<String> NOTIF_TEXT_FIELDS = new ArrayList<>(Arrays.asList(
+            "android.title","android.text","android.subText","android.infoText",
+            "android.summaryText","android.bigText"));
 
     public boolean uncLocked;
     public boolean enabled;
@@ -93,15 +91,15 @@ public class QuietHours {
                 if (ModLedControl.DEBUG) ModLedControl.log("QH ignored for all notifications");
                 return false;
             } else {
-                List<String> notifTexts = getNotificationTexts(n);
+                List<CharSequence> notifTexts = getNotificationTexts(n);
                 String[] keywords = ls.getQhIgnoreList().trim().split(",");
                 boolean ignore = false;
                 for (String kw : keywords) {
                     kw = kw.toLowerCase(Locale.getDefault());
                     ignore |= n.tickerText != null && n.tickerText.toString()
                             .toLowerCase(Locale.getDefault()).contains(kw);
-                    for (String notifText : notifTexts) {
-                        ignore |= notifText.toLowerCase(Locale.getDefault()).contains(kw);
+                    for (CharSequence notifText : notifTexts) {
+                        ignore |= notifText.toString().toLowerCase(Locale.getDefault()).contains(kw);
                     }
                 }
                 if (ModLedControl.DEBUG) ModLedControl.log("QH ignore list contains keyword?: " + ignore);
@@ -183,59 +181,16 @@ public class QuietHours {
                     weekDays.contains(String.valueOf(nextDay)));
     }
 
-    @SuppressWarnings("deprecation")
-    private List<String> getNotificationTexts(Notification notification) {
-        List<String> texts = new ArrayList<String>();
+    private List<CharSequence> getNotificationTexts(Notification notification) {
+        List<CharSequence> texts = new ArrayList<>();
 
-        // We have to extract the information from the content view
-        RemoteViews views = notification.bigContentView;
-        if (views == null) views = notification.contentView;
-        if (views == null) return texts;
-
-        try {
-            // Get the mActions member of the given RemoteViews object.
-            @SuppressWarnings("unchecked")
-            List<Parcelable> actions = (List<Parcelable>) 
-                XposedHelpers.getObjectField(views, "mActions");
-            if (actions == null) return texts;
-
-            // Find the setText() actions
-            for (Parcelable p : actions) {
-                Parcel parcel = Parcel.obtain();
-                p.writeToParcel(parcel, 0);
-                parcel.setDataPosition(0);
-
-                // The tag tells which type of action it is (2 is ReflectionAction)
-                int tag = parcel.readInt();
-                if (tag != 2)  {
-                    parcel.recycle();
-                    continue;
-                }
-
-                // Skip View ID
-                parcel.readInt();
-
-                // Get method name
-                String methodName = parcel.readString();
-                if ("setText".equals(methodName)) {
-                    // Skip Parameter type (10 = Character Sequence)
-                    parcel.readInt();
-
-                    // Store the actual string
-                    CharSequence cs = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
-                    if (cs != null) {
-                        texts.add(cs.toString().trim());
-                    }
-                }
-
-                parcel.recycle();
-            }
-        } catch (Throwable  t) {
-            XposedBridge.log(t);
+        for (String extra : NOTIF_TEXT_FIELDS) {
+            CharSequence cs = notification.extras.getCharSequence(extra);
+            if (cs != null) texts.add(cs);
         }
 
         if (ModLedControl.DEBUG) {
-            for (String text : texts) {
+            for (CharSequence text : texts) {
                 ModLedControl.log("Notif text: " + text);
             }
         }
