@@ -31,14 +31,10 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.os.PowerManager;
 import android.service.notification.StatusBarNotification;
-import android.widget.RemoteViews;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 
 public class ProgressBarController implements BroadcastSubReceiver {
     private static final String TAG = "GB:ProgressBarController";
@@ -46,6 +42,8 @@ public class ProgressBarController implements BroadcastSubReceiver {
 
     private static final long MAX_IDLE_TIME = 10000; // ms
     private static final int IDLE_CHECK_FREQUENCY = 5000; // ms
+    private static final String EXTRA_PROGRESS = "android.progress";
+    private static final String EXTRA_PROGRESS_MAX = "android.progressMax";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -69,14 +67,12 @@ public class ProgressBarController implements BroadcastSubReceiver {
 
     public class ProgressInfo {
         String id;
-        boolean hasProgressBar;
         int progress;
         int max;
         long lastUpdatedMs;
 
-        public ProgressInfo(String id, boolean hasProgressBar, int progress, int max) {
+        public ProgressInfo(String id, int progress, int max) {
             this.id = id;
-            this.hasProgressBar = hasProgressBar;
             this.progress = progress;
             this.max = max;
             this.lastUpdatedMs = System.currentTimeMillis();
@@ -329,9 +325,7 @@ public class ProgressBarController implements BroadcastSubReceiver {
         if (n != null && 
                (SUPPORTED_PACKAGES.contains(statusBarNotif.getPackageName()) ||
                 n.extras.getBoolean(ModLedControl.NOTIF_EXTRA_PROGRESS_TRACKING))) {
-            ProgressInfo pi = getProgressInfo(id, n);
-            if (pi != null && pi.hasProgressBar)
-                return pi;
+            return getProgressInfo(id, n);
         }
         return null;
     }
@@ -352,53 +346,15 @@ public class ProgressBarController implements BroadcastSubReceiver {
     }
 
     private ProgressInfo getProgressInfo(String id, Notification n) {
-        if (id == null || n == null) return null;
-
-        ProgressInfo pInfo = new ProgressInfo(id, false, 0, 0);
-
-        // We have to extract the information from the content view
-        RemoteViews views = n.bigContentView;
-        if (views == null) views = n.contentView;
-        if (views == null) return pInfo;
-
-        try {
-            @SuppressWarnings("unchecked")
-            List<Parcelable> actions = (List<Parcelable>) 
-                XposedHelpers.getObjectField(views, "mActions");
-            if (actions == null) return pInfo;
-
-            for (Parcelable p : actions) {
-                Parcel parcel = Parcel.obtain();
-                p.writeToParcel(parcel, 0);
-                parcel.setDataPosition(0);
-
-                // The tag tells which type of action it is (2 is ReflectionAction)
-                int tag = parcel.readInt();
-                if (tag != 2)  {
-                    parcel.recycle();
-                    continue;
-                }
-
-                parcel.readInt(); // skip View ID
-                String methodName = parcel.readString();
-                if ("setMax".equals(methodName)) {
-                    parcel.readInt(); // skip type value
-                    pInfo.max = parcel.readInt();
-                    if (DEBUG) log("getProgressInfo: total=" + pInfo.max);
-                } else if ("setProgress".equals(methodName)) {
-                    parcel.readInt(); // skip type value
-                    pInfo.progress = parcel.readInt();
-                    pInfo.hasProgressBar = true;
-                    if (DEBUG) log("getProgressInfo: current=" + pInfo.progress);
-                }
-
-                parcel.recycle();
-            }
-        } catch (Throwable  t) {
-            XposedBridge.log(t);
+        if (id !=null && n != null &&
+                n.extras.containsKey(EXTRA_PROGRESS) &&
+                n.extras.containsKey(EXTRA_PROGRESS_MAX) &&
+                n.extras.getInt(EXTRA_PROGRESS_MAX) > 0) {
+            return new ProgressInfo(id,
+                    n.extras.getInt(EXTRA_PROGRESS),
+                    n.extras.getInt(EXTRA_PROGRESS_MAX));
         }
-
-        return pInfo;
+        return null;
     }
 
     private void maybePlaySound() {
