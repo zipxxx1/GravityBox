@@ -290,7 +290,7 @@ public class Utils {
     public static boolean isOxygenOsRom() {
         if (mIsOxygenOsRom == null) {
             String version = SystemProp.get("ro.oxygen.version", "0");
-            mIsOxygenOsRom = version != null && !version.isEmpty() &&  !"0".equals("version"); 
+            mIsOxygenOsRom = version != null && !version.isEmpty() &&  !"0".equals(version); 
         }
         return mIsOxygenOsRom;
     }
