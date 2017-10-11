@@ -1,3 +1,10 @@
+Changelog 7.0.1 - 11/10/2017
+--------------------------------------
+- Fixed bug which resulted in all devices being identified as running OxygenOS
+- Use protected storage for GravityBox preferences and other GravityBox files
+--- allows devices with file-based encryption to read preferences at boot (Pixel, OP5, ...)
+--- !!! this change causes reset of all the GravityBox settings !!!
+
 Changelog 7.0.0 - 11/10/2017
 --------------------------------------
 - Nougat specific fixes
