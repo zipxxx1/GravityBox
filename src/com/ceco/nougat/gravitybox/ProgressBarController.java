@@ -23,8 +23,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ceco.nougat.gravitybox.ledcontrol.QuietHoursActivity;
-
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
@@ -33,15 +31,10 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.os.PowerManager;
 import android.service.notification.StatusBarNotification;
-import android.widget.RemoteViews;
-import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 
 public class ProgressBarController implements BroadcastSubReceiver {
     private static final String TAG = "GB:ProgressBarController";
@@ -49,6 +42,8 @@ public class ProgressBarController implements BroadcastSubReceiver {
 
     private static final long MAX_IDLE_TIME = 10000; // ms
     private static final int IDLE_CHECK_FREQUENCY = 5000; // ms
+    private static final String EXTRA_PROGRESS = "android.progress";
+    private static final String EXTRA_PROGRESS_MAX = "android.progressMax";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -72,14 +67,12 @@ public class ProgressBarController implements BroadcastSubReceiver {
 
     public class ProgressInfo {
         String id;
-        boolean hasProgressBar;
         int progress;
         int max;
         long lastUpdatedMs;
 
-        public ProgressInfo(String id, boolean hasProgressBar, int progress, int max) {
+        public ProgressInfo(String id, int progress, int max) {
             this.id = id;
-            this.hasProgressBar = hasProgressBar;
             this.progress = progress;
             this.max = max;
             this.lastUpdatedMs = System.currentTimeMillis();
@@ -139,48 +132,6 @@ public class ProgressBarController implements BroadcastSubReceiver {
 
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mHandler = new Handler();
-    }
-
-    public static void initZygote(final XSharedPreferences prefs, final XSharedPreferences qhPrefs) {
-        // Content views for apps targeting SDK24+ are not populated so we force them to
-        try {
-            XposedHelpers.findAndHookMethod(Notification.Builder.class, "build", new XC_MethodHook() {
-                @SuppressWarnings("deprecation")
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!"OFF".equals(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF")) ||
-                            (!qhPrefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false) &&
-                                    qhPrefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false))) {
-                        Object style = XposedHelpers.getObjectField(param.thisObject, "mStyle");
-                        if (style == null || !(boolean)XposedHelpers.callMethod(style, "displayCustomViewInline")) {
-                            Notification n = (Notification) XposedHelpers.getObjectField(param.thisObject, "mN");
-                            if (n.contentView == null) {
-                                n.contentView = (RemoteViews) XposedHelpers.callMethod(
-                                        param.thisObject, "createContentView");
-                            }
-                            if (n.bigContentView == null) {
-                                n.bigContentView = (RemoteViews) XposedHelpers.callMethod(
-                                        param.thisObject, "createBigContentView");
-                            }
-                            if (DEBUG) log("Content views created for " + n);
-                        }
-                    }
-                }
-            });
-            XposedHelpers.findAndHookMethod(Notification.Builder.class, "maybeCloneStrippedForDelivery",
-                    Notification.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!"OFF".equals(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF")) ||
-                            (!qhPrefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false) &&
-                                    qhPrefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false))) {
-                        param.setResult(param.args[0]);
-                    }
-                }
-            });
-        } catch (Throwable t) {
-            log("builder hook: error populating content views");
-        }
     }
 
     public void registerListener(ProgressStateListener listener) {
@@ -374,9 +325,7 @@ public class ProgressBarController implements BroadcastSubReceiver {
         if (n != null && 
                (SUPPORTED_PACKAGES.contains(statusBarNotif.getPackageName()) ||
                 n.extras.getBoolean(ModLedControl.NOTIF_EXTRA_PROGRESS_TRACKING))) {
-            ProgressInfo pi = getProgressInfo(id, n);
-            if (pi != null && pi.hasProgressBar)
-                return pi;
+            return getProgressInfo(id, n);
         }
         return null;
     }
@@ -396,55 +345,16 @@ public class ProgressBarController implements BroadcastSubReceiver {
         return null;
     }
 
-    @SuppressWarnings("deprecation")
     private ProgressInfo getProgressInfo(String id, Notification n) {
-        if (id == null || n == null) return null;
-
-        ProgressInfo pInfo = new ProgressInfo(id, false, 0, 0);
-
-        // We have to extract the information from the content view
-        RemoteViews views = n.bigContentView;
-        if (views == null) views = n.contentView;
-        if (views == null) return pInfo;
-
-        try {
-            @SuppressWarnings("unchecked")
-            List<Parcelable> actions = (List<Parcelable>) 
-                XposedHelpers.getObjectField(views, "mActions");
-            if (actions == null) return pInfo;
-
-            for (Parcelable p : actions) {
-                Parcel parcel = Parcel.obtain();
-                p.writeToParcel(parcel, 0);
-                parcel.setDataPosition(0);
-
-                // The tag tells which type of action it is (2 is ReflectionAction)
-                int tag = parcel.readInt();
-                if (tag != 2)  {
-                    parcel.recycle();
-                    continue;
-                }
-
-                parcel.readInt(); // skip View ID
-                String methodName = parcel.readString();
-                if ("setMax".equals(methodName)) {
-                    parcel.readInt(); // skip type value
-                    pInfo.max = parcel.readInt();
-                    if (DEBUG) log("getProgressInfo: total=" + pInfo.max);
-                } else if ("setProgress".equals(methodName)) {
-                    parcel.readInt(); // skip type value
-                    pInfo.progress = parcel.readInt();
-                    pInfo.hasProgressBar = true;
-                    if (DEBUG) log("getProgressInfo: current=" + pInfo.progress);
-                }
-
-                parcel.recycle();
-            }
-        } catch (Throwable  t) {
-            XposedBridge.log(t);
+        if (id !=null && n != null &&
+                n.extras.containsKey(EXTRA_PROGRESS) &&
+                n.extras.containsKey(EXTRA_PROGRESS_MAX) &&
+                n.extras.getInt(EXTRA_PROGRESS_MAX) > 0) {
+            return new ProgressInfo(id,
+                    n.extras.getInt(EXTRA_PROGRESS),
+                    n.extras.getInt(EXTRA_PROGRESS_MAX));
         }
-
-        return pInfo;
+        return null;
     }
 
     private void maybePlaySound() {

@@ -75,7 +75,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModInputMethod.initZygote(prefs);
         PhoneWrapper.initZygote(prefs);
         ModTelephony.initZygote(prefs);
-        ProgressBarController.initZygote(prefs, qhPrefs);
     }
 
     @Override
