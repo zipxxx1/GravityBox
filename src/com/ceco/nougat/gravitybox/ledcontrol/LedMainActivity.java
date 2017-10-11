@@ -15,11 +15,9 @@
 
 package com.ceco.nougat.gravitybox.ledcontrol;
 
-import java.io.File;
-
 import com.ceco.nougat.gravitybox.GravityBoxActivity;
-import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
+import com.ceco.nougat.gravitybox.Utils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,11 +37,6 @@ public class LedMainActivity extends GravityBoxActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
-        if (file.exists()) {
-            setTheme(R.style.AppThemeDark);
-        }
-
         super.onCreate(savedInstanceState);
 
         if (getIntent() == null || !getIntent().hasExtra(EXTRA_UUID_REGISTERED) ||
@@ -78,6 +71,9 @@ public class LedMainActivity extends GravityBoxActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
+            if (Utils.USE_DEVICE_PROTECTED_STORAGE) {
+                getPreferenceManager().setStorageDeviceProtected();
+            }
             addPreferencesFromResource(R.xml.led_control_main_activity_prefs);
         }
 

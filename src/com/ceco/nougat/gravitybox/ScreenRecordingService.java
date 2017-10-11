@@ -442,7 +442,7 @@ public class ScreenRecordingService extends Service {
     }
 
     private String getBinaryPath() {
-        return (mUseStockBinary ? "/system/bin/screenrecord" : getFilesDir() + "/screenrecord");
+        return (mUseStockBinary ? "/system/bin/screenrecord" : Utils.getFilesDir(this) + "/screenrecord");
     }
 
     private static void copyFileUsingStream(File source, File dest) throws IOException {

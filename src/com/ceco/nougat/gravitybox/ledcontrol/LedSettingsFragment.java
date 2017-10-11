@@ -22,6 +22,7 @@ import java.util.HashSet;
 
 import com.ceco.nougat.gravitybox.ProgressBarController;
 import com.ceco.nougat.gravitybox.R;
+import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings.LedMode;
@@ -123,6 +124,9 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Utils.USE_DEVICE_PROTECTED_STORAGE) {
+            getPreferenceManager().setStorageDeviceProtected();
+        }
         addPreferencesFromResource(R.xml.led_control_settings);
 
         mColorPref = (ColorPickerPreference) findPreference(PREF_KEY_LED_COLOR);

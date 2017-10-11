@@ -36,7 +36,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         File f;
 
         // prepare alternative screenrecord binary if doesn't exist yet
-        f = new File(context.getFilesDir() + "/screenrecord");
+        f = new File(Utils.getFilesDir(context) + "/screenrecord");
         if (!f.exists()) {
             String assetName = Build.SUPPORTED_64_BIT_ABIS.length > 0 ?
                     "screenrecord_arm64" : "screenrecord";

@@ -1044,12 +1044,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // set Holo Dark theme if flag file exists
-        File file = new File(getFilesDir() + "/" + FILE_THEME_DARK_FLAG);
-        if (file.exists()) {
-            this.setTheme(R.style.AppThemeDark);
-        }
-
         super.onCreate(savedInstanceState);
 
         // fix folder permissions
@@ -1324,6 +1318,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             }
             
             mPrefs = SettingsManager.getInstance(getActivity()).getMainPrefs();
+            if (Utils.USE_DEVICE_PROTECTED_STORAGE) {
+                getPreferenceManager().setStorageDeviceProtected();
+            }
             addPreferencesFromResource(R.xml.gravitybox);
 
             AppPickerPreference.sPrefsFragment = this;
@@ -1375,10 +1372,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefLockscreenCarrierText = 
                     (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER_TEXT);
 
-            wallpaperImage = new File(getActivity().getFilesDir() + "/lockwallpaper"); 
-            notifBgImagePortrait = new File(getActivity().getFilesDir() + "/notifwallpaper");
-            notifBgImageLandscape = new File(getActivity().getFilesDir() + "/notifwallpaper_landscape");
-            callerPhotoFile = new File(getActivity().getFilesDir() + "/caller_photo");
+            wallpaperImage = new File(Utils.getFilesDir(getActivity()) + "/lockwallpaper"); 
+            notifBgImagePortrait = new File(Utils.getFilesDir(getActivity()) + "/notifwallpaper");
+            notifBgImageLandscape = new File(Utils.getFilesDir(getActivity()) + "/notifwallpaper_landscape");
+            callerPhotoFile = new File(Utils.getFilesDir(getActivity()) + "/caller_photo");
 
             mPrefHwKeyMenuSingletap = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_SINGLETAP);
             mPrefHwKeyMenuLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_LONGPRESS);
@@ -1443,7 +1440,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefPieLongpressDelay = (ListPreference) findPreference(PREF_KEY_PIE_LONGPRESS_DELAY);
 
             mPrefGbThemeDark = (CheckBoxPreference) findPreference(PREF_KEY_GB_THEME_DARK);
-            File file = new File(getActivity().getFilesDir() + "/" + FILE_THEME_DARK_FLAG);
+            File file = new File(Utils.getFilesDir(getActivity()) + "/" + FILE_THEME_DARK_FLAG);
             mPrefGbThemeDark.setChecked(file.exists());
 
             mPrefRambar = (ListPreference) findPreference(PREF_KEY_RAMBAR);
@@ -3465,7 +3462,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 setCustomNotifBgLandscape();
                 return true;
             } else if (pref == mPrefGbThemeDark) {
-                File file = new File(getActivity().getFilesDir() + "/" + FILE_THEME_DARK_FLAG);
+                File file = new File(Utils.getFilesDir(getActivity()) + "/" + FILE_THEME_DARK_FLAG);
                 if (mPrefGbThemeDark.isChecked()) {
                     if (!file.exists()) {
                         try {
@@ -3697,7 +3694,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 @Override
                 public void onIconPicked(Bitmap icon) {
                     try {
-                        File target = new File(getActivity().getFilesDir() + "/navbar_custom_key_image");
+                        File target = new File(Utils.getFilesDir(getActivity()) + "/navbar_custom_key_image");
                         FileOutputStream fos = new FileOutputStream(target);
                         if (icon.compress(CompressFormat.PNG, 100, fos)) {
                             target.setReadable(true, false);

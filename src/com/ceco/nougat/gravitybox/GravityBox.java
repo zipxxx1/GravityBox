@@ -15,6 +15,8 @@
 
 package com.ceco.nougat.gravitybox;
 
+import java.io.File;
+
 import com.ceco.nougat.gravitybox.managers.FingerprintLauncher;
 
 import android.os.Build;
@@ -29,6 +31,9 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackageResources, IXposedHookLoadPackage {
     public static final String PACKAGE_NAME = GravityBox.class.getPackage().getName();
     public static String MODULE_PATH = null;
+    private static final File prefsFileProt = new File("/data/user_de/0/com.ceco.nougat.gravitybox/shared_prefs/com.ceco.nougat.gravitybox_preferences.xml");
+    private static final File qhPrefsFileProt = new File("/data/user_de/0/com.ceco.nougat.gravitybox/shared_prefs/quiet_hours.xml");
+    private static final File uncPrefsFileProt = new File("/data/user_de/0/com.ceco.nougat.gravitybox/shared_prefs/ledcontrol.xml");
     private static XSharedPreferences prefs;
     private static XSharedPreferences qhPrefs;
     private static XSharedPreferences uncPrefs;
@@ -36,9 +41,15 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
         MODULE_PATH = startupParam.modulePath;
-        prefs = new XSharedPreferences(PACKAGE_NAME);
-        uncPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
-        qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+        if (Utils.USE_DEVICE_PROTECTED_STORAGE) {
+            prefs = new XSharedPreferences(prefsFileProt);
+            uncPrefs = new XSharedPreferences(uncPrefsFileProt);
+            qhPrefs = new XSharedPreferences(qhPrefsFileProt);
+        } else {
+            prefs = new XSharedPreferences(PACKAGE_NAME);
+            uncPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
+            qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+        }
 
         if (!startupParam.startsSystemServer) return;
 

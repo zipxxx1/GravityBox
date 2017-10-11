@@ -169,7 +169,7 @@ public class AppPickerPreference extends DialogPreference
                         }
                     }
                     // delete all unused icon files
-                    File appPickerDir = new File(context.getFilesDir() + "/app_picker");
+                    File appPickerDir = new File(Utils.getFilesDir(context) + "/app_picker");
                     if (appPickerDir.exists() && appPickerDir.isDirectory()) {
                         File[] files = appPickerDir.listFiles();
                         for (File f : files) {
@@ -417,7 +417,7 @@ public class AppPickerPreference extends DialogPreference
                 try {
                     Intent intent = Intent.parseUri(getPersistedString(null), 0);
                     final Context context = AppPickerPreference.this.mContext;
-                    final String dir = context.getFilesDir() + "/app_picker";
+                    final String dir = Utils.getFilesDir(context) + "/app_picker";
                     final String fileName = dir + "/" + UUID.randomUUID().toString();
                     File d = new File(dir);
                     d.mkdirs();
@@ -777,7 +777,7 @@ public class AppPickerPreference extends DialogPreference
             } else if (icon != null) {
                 try {
                     final Context context = AppPickerPreference.this.mContext;
-                    final String dir = context.getFilesDir() + "/app_picker";
+                    final String dir = Utils.getFilesDir(context) + "/app_picker";
                     final String fileName = dir + "/" + UUID.randomUUID().toString();
                     File d = new File(dir);
                     d.mkdirs();

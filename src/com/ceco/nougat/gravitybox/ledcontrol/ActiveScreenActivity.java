@@ -15,12 +15,10 @@
 
 package com.ceco.nougat.gravitybox.ledcontrol;
 
-import java.io.File;
-
 import com.ceco.nougat.gravitybox.GravityBoxActivity;
-import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.SettingsManager;
+import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.WorldReadablePrefs;
 import com.ceco.nougat.gravitybox.WorldReadablePrefs.OnSharedPreferenceChangeCommitedListener;
 
@@ -36,13 +34,7 @@ public class ActiveScreenActivity extends GravityBoxActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
-        if (file.exists()) {
-            setTheme(R.style.AppThemeDark);
-        }
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.active_screen_activity);
     }
 
@@ -56,8 +48,10 @@ public class ActiveScreenActivity extends GravityBoxActivity {
             super.onCreate(savedInstanceState);
 
             getPreferenceManager().setSharedPreferencesName("ledcontrol");
+            if (Utils.USE_DEVICE_PROTECTED_STORAGE) {
+                getPreferenceManager().setStorageDeviceProtected();
+            }
             mPrefs = SettingsManager.getInstance(getActivity()).getLedControlPrefs();
-
             addPreferencesFromResource(R.xml.led_control_active_screen_settings);
 
             mPrefPocketMode = (CheckBoxPreference) findPreference(

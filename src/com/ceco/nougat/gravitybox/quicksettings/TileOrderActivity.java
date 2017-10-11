@@ -15,7 +15,6 @@
 
 package com.ceco.nougat.gravitybox.quicksettings;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -103,11 +102,6 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
-        if (file.exists()) {
-            setTheme(R.style.AppThemeDark);
-        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_tile_list_activity);
 

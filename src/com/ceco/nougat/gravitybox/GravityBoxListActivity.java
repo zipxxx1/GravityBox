@@ -14,6 +14,8 @@
  */
 package com.ceco.nougat.gravitybox;
 
+import java.io.File;
+
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -23,6 +25,10 @@ public class GravityBoxListActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        File file = new File(Utils.getFilesDir(this) + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
+        if (file.exists()) {
+            setTheme(R.style.AppThemeDark);
+        }
         super.onCreate(savedInstanceState);
 
         try {

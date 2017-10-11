@@ -15,13 +15,11 @@
 
 package com.ceco.nougat.gravitybox.ledcontrol;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import com.ceco.nougat.gravitybox.GravityBoxListActivity;
-import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.ledcontrol.LedListAdapter.ListItemActionHandler;
 
@@ -54,11 +52,6 @@ public class LedControlActivity extends GravityBoxListActivity implements ListIt
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
-        if (file.exists()) {
-            setTheme(R.style.AppThemeDark);
-        }
-
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {

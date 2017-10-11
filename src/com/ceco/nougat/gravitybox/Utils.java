@@ -74,6 +74,7 @@ public class Utils {
     private static final String TAG = "GB:Utils";
     @SuppressWarnings("unused")
     private static final boolean DEBUG = false;
+    public static final boolean USE_DEVICE_PROTECTED_STORAGE = true;
 
     @SuppressLint("SdCardPath")
     public static final String AOSP_FORCED_FILE_PATH = 
@@ -123,12 +124,23 @@ public class Utils {
         if (mGbContext == null) {
             mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME,
                     Context.CONTEXT_IGNORE_SECURITY);
+            if (USE_DEVICE_PROTECTED_STORAGE) {
+                mGbContext = mGbContext.createDeviceProtectedStorageContext();
+            }
         }
         return (config == null ? mGbContext : mGbContext.createConfigurationContext(config));
     }
 
     public static synchronized Context getGbContext(Context context) throws Throwable {
         return getGbContext(context, null);
+    }
+
+    public static File getFilesDir(Context ctx) {
+        if (USE_DEVICE_PROTECTED_STORAGE) {
+            return ctx.isDeviceProtectedStorage() ?
+                    ctx.getFilesDir() : ctx.createDeviceProtectedStorageContext().getFilesDir();
+        }
+        return ctx.getFilesDir();
     }
 
     private static int getScreenType(Context con) {

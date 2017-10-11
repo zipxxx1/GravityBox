@@ -14,7 +14,6 @@
  */
 package com.ceco.nougat.gravitybox.ledcontrol;
 
-import java.io.File;
 import java.text.DateFormatSymbols;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,7 +22,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import com.ceco.nougat.gravitybox.GravityBoxActivity;
-import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.SettingsManager;
 import com.ceco.nougat.gravitybox.Utils;
@@ -125,11 +123,6 @@ public class QuietHoursActivity extends GravityBoxActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
-        if (file.exists()) {
-            setTheme(R.style.AppThemeDark);
-        }
-
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction().replace(android.R.id.content, new PrefsFragment()).commit();
@@ -148,6 +141,9 @@ public class QuietHoursActivity extends GravityBoxActivity {
             super.onCreate(savedInstanceState);
 
             getPreferenceManager().setSharedPreferencesName("quiet_hours");
+            if (Utils.USE_DEVICE_PROTECTED_STORAGE) {
+                getPreferenceManager().setStorageDeviceProtected();
+            }
             mPrefs = SettingsManager.getInstance(getActivity()).getQuietHoursPrefs();
 
             addPreferencesFromResource(R.xml.led_control_quiet_hours_settings);

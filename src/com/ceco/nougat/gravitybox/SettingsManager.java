@@ -49,7 +49,8 @@ public class SettingsManager {
     private List<FileObserverListener> mFileObserverListeners;
 
     private SettingsManager(Context context) {
-        mContext = context;
+        mContext = Utils.USE_DEVICE_PROTECTED_STORAGE && !context.isDeviceProtectedStorage() ? 
+                context.createDeviceProtectedStorageContext() : context;
         mFileObserverListeners = new ArrayList<>();
         mPrefsMain =  new WorldReadablePrefs(mContext, mContext.getPackageName() + "_preferences");
         mFileObserverListeners.add(mPrefsMain);

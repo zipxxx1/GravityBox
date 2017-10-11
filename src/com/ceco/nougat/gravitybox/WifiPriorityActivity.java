@@ -83,11 +83,6 @@ public class WifiPriorityActivity extends GravityBoxListActivity implements Grav
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
-        if (file.exists()) {
-            this.setTheme(R.style.AppThemeDark);
-        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wifi_network_priority);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);

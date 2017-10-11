@@ -15,11 +15,9 @@
 
 package com.ceco.nougat.gravitybox.ledcontrol;
 
-import java.io.File;
 import java.util.Locale;
 
 import com.ceco.nougat.gravitybox.GravityBoxActivity;
-import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModHwKeys;
 import com.ceco.nougat.gravitybox.ModLedControl;
 import com.ceco.nougat.gravitybox.R;
@@ -55,11 +53,6 @@ public class LedSettingsActivity extends GravityBoxActivity implements OnClickLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
-        if (file.exists()) {
-            setTheme(R.style.AppThemeDark);
-        }
-
         super.onCreate(savedInstanceState);
 
         final Intent intent = getIntent();

@@ -74,7 +74,7 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
+        File file = new File(Utils.getFilesDir(this) + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
         mDlgThemeId = file.exists() ? android.R.style.Theme_Material_Dialog :
             android.R.style.Theme_Material_Light_Dialog;
         super.onCreate(savedInstanceState);
