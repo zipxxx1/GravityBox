@@ -1732,7 +1732,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefCatDisplay.removePreference(mPrefPulseNotificationDelay);
             }
 
-            // Remove OxygenOS 4.1 preferences
+            // Remove OxygenOS preferences
             if (sSystemProperties.isOxygenOsRom) {
                 Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
                 if (p != null) mPrefCatLsOther.removePreference(p);
@@ -1749,6 +1749,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 p = findPreference(PREF_CAT_KEY_QS_DND_TILE_SETTINGS);
                 if (p != null) mPrefCatQsTileSettings.removePreference(p);
                 mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
+                mBatteryStyle.setEntries(R.array.battery_style_entries_oos);
+                mBatteryStyle.setEntryValues(R.array.battery_style_values_oos);
             }
 
             // Remove fingerprint related preferences
