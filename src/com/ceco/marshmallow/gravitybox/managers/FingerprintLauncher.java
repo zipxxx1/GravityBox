@@ -37,6 +37,7 @@ import android.hardware.fingerprint.FingerprintManager.CryptoObject;
 import android.os.Binder;
 import android.os.CancellationSignal;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.widget.Toast;
@@ -95,6 +96,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
     private Map<String,String> mFingerAppMap;
     private boolean mIsPaused;
     private boolean mShowToast;
+    private PowerManager mPm;
 
     public FingerprintLauncher(Context ctx, XSharedPreferences prefs) throws Throwable {
         if (ctx == null)
@@ -106,6 +108,8 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
 
         mQuickApp = mPrefs.getString(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_APP, null);
         mShowToast = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_SHOW_TOAST, true);
+
+        mPm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
 
         initFingerprintManager();
         initFingerAppMap(prefs);
@@ -248,8 +252,12 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         }
 
         private void startListening() {
+            if (!mPm.isInteractive()) {
+                if (DEBUG) log("startListening: User not present");
+                return;
+            }
             if (mCancellationSignal != null) {
-                if (DEBUG) log("Already listening");
+                if (DEBUG) log("startListening: Already listening");
                 return;
             }
             mCancellationSignal = new CancellationSignal();
@@ -271,10 +279,11 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
         }
 
         private void restartListeningDelayed(long delayMs) {
-            if (DEBUG) log("Restarting listening in " + delayMs + "ms");
-
             stopListening();
-            mHandler.postDelayed(mStartListeningRunnable, delayMs);
+            if (mPm.isInteractive()) {
+                if (DEBUG) log("Restarting listening in " + delayMs + "ms");
+                mHandler.postDelayed(mStartListeningRunnable, delayMs);
+            }
         }
 
         private Runnable mStartListeningRunnable = new Runnable() {
