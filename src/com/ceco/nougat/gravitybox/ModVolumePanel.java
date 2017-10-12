@@ -21,7 +21,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
 import android.content.res.XModuleResources;
 import android.content.res.XResources;
 import android.media.AudioManager;
@@ -92,13 +91,13 @@ public class ModVolumePanel {
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> classVolumePanel = XposedHelpers.findClass(CLASS_VOLUME_PANEL, classLoader);
+            final Class<?> classVolumePanelCtrl = XposedHelpers.findClass(CLASS_VOLUME_PANEL_CTRL, classLoader);
 
             mVolumeAdjustVibrateMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE, false);
             mAutoExpand = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_AUTOEXPAND, false);
             mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
 
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
-
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mVolumePanel = param.thisObject;
@@ -108,12 +107,24 @@ public class ModVolumePanel {
                     mTimeout = prefs.getInt(
                             GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TIMEOUT, 0);
 
-                    prepareNotificationRow(context.getResources());
+                    prepareNotificationRow();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
                     context.registerReceiver(mBrodcastReceiver, intentFilter);
+                }
+            });
+
+            XposedBridge.hookAllConstructors(classVolumePanelCtrl, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    String[] titles = (String[]) XposedHelpers.getObjectField(param.thisObject, "mStreamTitles");
+                    int idx = AudioManager.STREAM_NOTIFICATION;
+                    if (titles.length > idx && (titles[idx] == null || titles[idx].trim().isEmpty())) {
+                        Context ctx = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                        titles[idx] = Utils.getGbContext(ctx).getString(R.string.notification_stream_name);
+                    }
                 }
             });
 
@@ -140,7 +151,7 @@ public class ModVolumePanel {
             });
 
             if (!Utils.isSamsungRom()) {
-                XposedHelpers.findAndHookMethod(CLASS_VOLUME_PANEL_CTRL, classLoader, "vibrate", new XC_MethodHook() {
+                XposedHelpers.findAndHookMethod(classVolumePanelCtrl, "vibrate", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                         if (mVolumeAdjustVibrateMuted) {
@@ -182,7 +193,7 @@ public class ModVolumePanel {
         }
     }
 
-    private static void prepareNotificationRow(Resources res) {
+    private static void prepareNotificationRow() {
         try {
             XposedHelpers.callMethod(mVolumePanel, "addRow",
                     AudioManager.STREAM_NOTIFICATION,

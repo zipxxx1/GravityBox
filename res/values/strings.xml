@@ -2009,4 +2009,7 @@
     <!-- QS protected when device locked -->
     <string name="qs_protected_summary">Protected when device locked</string>
 
+    <!-- Volume panel: notification stream label -->
+    <string name="notification_stream_name">Notification</string>
+
 </resources>
