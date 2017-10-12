@@ -43,6 +43,7 @@ public class ModVolumePanel {
             "com.android.systemui.volume.VolumeDialog";
     private static final String CLASS_VOLUME_ROW = CLASS_VOLUME_PANEL + ".VolumeRow";
     private static final String CLASS_VOLUME_PANEL_CTRL = "com.android.systemui.volume.VolumeDialogController";
+    private static final String CLASS_VOLUME_DIALOG_MOTION = "com.android.systemui.volume.VolumeDialogMotion";
     private static final boolean DEBUG = false;
 
     private static Object mVolumePanel;
@@ -116,12 +117,14 @@ public class ModVolumePanel {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classVolumePanel, "showH", int.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_VOLUME_DIALOG_MOTION, classLoader,
+                    "setShowing", boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mAutoExpand && !XposedHelpers.getBooleanField(param.thisObject, "mExpanded")) {
+                    if (mAutoExpand && !(boolean)param.args[0] &&
+                            !XposedHelpers.getBooleanField(param.thisObject, "mDismissing")) {
                         ImageButton expandBtn = (ImageButton) XposedHelpers.getObjectField(
-                                param.thisObject, "mExpandButton");
+                                mVolumePanel, "mExpandButton");
                         expandBtn.performClick();
                     }
                 }
