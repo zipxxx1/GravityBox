@@ -167,7 +167,7 @@ public class PickImageActivity extends GravityBoxActivity {
             cropIntent.putExtra("return-data", false);
             cropIntent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
 
-            File out = new File(getCacheDir() + "/" + srcFile.getName() + "_cropped");
+            File out = new File(Utils.getCacheDir(this) + "/" + srcFile.getName() + "_cropped");
             out.createNewFile();
             out.setReadable(true, false);
             out.setWritable(true, false);
@@ -211,7 +211,7 @@ public class PickImageActivity extends GravityBoxActivity {
 
         @Override
         protected LoadResult doInBackground(Uri... params) {
-            File outFile = new File(getCacheDir() + "/" + UUID.randomUUID().toString());
+            File outFile = new File(Utils.getCacheDir(PickImageActivity.this) + "/" + UUID.randomUUID().toString());
             LoadResult result = new LoadResult();
             InputStream in = null;
             FileOutputStream out = null;

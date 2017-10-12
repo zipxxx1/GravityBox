@@ -143,6 +143,14 @@ public class Utils {
         return ctx.getFilesDir();
     }
 
+    public static File getCacheDir(Context ctx) {
+        if (USE_DEVICE_PROTECTED_STORAGE) {
+            return ctx.isDeviceProtectedStorage() ?
+                    ctx.getCacheDir() : ctx.createDeviceProtectedStorageContext().getCacheDir();
+        }
+        return ctx.getCacheDir();
+    }
+
     private static int getScreenType(Context con) {
         if (mDeviceType == -1) {
             WindowManager wm = (WindowManager)con.getSystemService(Context.WINDOW_SERVICE);
