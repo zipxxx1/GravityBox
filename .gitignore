@@ -2,3 +2,7 @@
 /libs
 /gen
 .settings/org.eclipse.jdt.core.prefs
+project.properties
+lint.xml
+.project
+.classpath

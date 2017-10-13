@@ -240,24 +240,24 @@ public class BatteryStyleController implements BroadcastSubReceiver {
 
         if (mContainerType == ContainerType.KEYGUARD) {
             try {
-               if (Utils.isSamsungRom())
-               {
-                  XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
-                          int.class, boolean.class, boolean.class, int.class, int.class, int.class, int.class, boolean.class, new XC_MethodHook() {
-                     @Override
-                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        updateBatteryStyle();
-                     }
-                  });
+               if (Utils.isSamsungRom()) {
+                   XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
+                          int.class, boolean.class, boolean.class, int.class, int.class, int.class,
+                          int.class, boolean.class, new XC_MethodHook() {
+                       @Override
+                       protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                           updateBatteryStyle();
+                       }
+                   });
                } else {
-                  XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
+                   XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
                           int.class, boolean.class, boolean.class, new XC_MethodHook() {
-                     @Override
-                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        updateBatteryStyle();
-                     }
-                  });
-                 }
+                       @Override
+                       protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                           updateBatteryStyle();
+                       }
+                   });
+               }
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }
