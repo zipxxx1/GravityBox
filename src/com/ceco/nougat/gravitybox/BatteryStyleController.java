@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,11 +169,11 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             if (mStockBattery != null) {
                 if (mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK ||
                         mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK_PERCENT) {
-                    mStockBattery.getView().setVisibility(View.VISIBLE);
+                    mStockBattery.setVisibility(View.VISIBLE);
                     mStockBattery.setShowPercentage(mBatteryStyle == 
                             GravityBoxSettings.BATTERY_STYLE_STOCK_PERCENT);
                 } else {
-                    mStockBattery.getView().setVisibility(View.GONE);
+                    mStockBattery.setVisibility(View.GONE);
                 }
             }
 
