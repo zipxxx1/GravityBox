@@ -48,6 +48,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private ViewGroup mSystemIcons;
     private Context mContext;
     private XSharedPreferences mPrefs;
+    private Object mPhoneStatusBar;
     private int mBatteryStyle;
     private boolean mBatteryPercentTextEnabledSb;
     private KeyguardMode mBatteryPercentTextKgMode;
@@ -55,14 +56,17 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private CmCircleBattery mCircleBattery;
     private StatusbarBattery mStockBattery;
     private boolean mBatterySaverIndicationDisabled;
+    private boolean mDashIconHidden;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public BatteryStyleController(ContainerType containerType, ViewGroup container, XSharedPreferences prefs) throws Throwable {
+    public BatteryStyleController(ContainerType containerType, ViewGroup container,
+            XSharedPreferences prefs, Object phoneStatusBar) throws Throwable {
         mContainerType = containerType;
         mContainer = container;
+        mPhoneStatusBar = phoneStatusBar;
         mContext = container.getContext();
         mSystemIcons = (ViewGroup) mContainer.findViewById(
                 mContext.getResources().getIdentifier("system_icons", "id", PACKAGE_NAME));
@@ -85,6 +89,8 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD, "DEFAULT"));
         mBatterySaverIndicationDisabled = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
+        mDashIconHidden = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_BATTERY_HIDE_DASH_ICON, false);
     }
 
     private void initLayout() throws Throwable {
@@ -144,7 +150,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         View stockBatteryView = mSystemIcons.findViewById(
                 res.getIdentifier("battery", "id", PACKAGE_NAME));
         if (stockBatteryView != null) {
-            mStockBattery = new StatusbarBattery(stockBatteryView);
+            mStockBattery = new StatusbarBattery(stockBatteryView, this);
         }
 
         // reposition percent text
@@ -229,6 +235,26 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }
+            if (Utils.isOxygenOsRom()) {
+                try {
+                    XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR,
+                            mContainer.getClass().getClassLoader(),
+                            "updateDashChargeView", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (mDashIconHidden) {
+                                ((View)XposedHelpers.getObjectField(param.thisObject,
+                                        "mBatteryDashChargeView")).setVisibility(View.GONE);
+                                ((View)XposedHelpers.getObjectField(param.thisObject,
+                                        "mKeyguardBatteryDashChargeView")).setVisibility(View.GONE);
+                            }
+                            updateBatteryStyle();
+                        }
+                    });
+                } catch (Throwable t) {
+                    XposedBridge.log(t);
+                }
+            }
         }
 
         if (mContainerType == ContainerType.KEYGUARD) {
@@ -282,17 +308,34 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         return mBatterySaverIndicationDisabled;
     }
 
+    public boolean isDashIconHidden() {
+        return mDashIconHidden;
+    }
+
     public ContainerType getContainerType() {
         return mContainerType;
+    }
+
+    private void updateDashChargeView() {
+        try {
+            XposedHelpers.callMethod(mPhoneStatusBar, "updateDashChargeView");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         String action = intent.getAction();
-        if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED) &&
-                intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE)) {
-            mBatteryStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE, 1);
-            if (DEBUG) log("mBatteryStyle changed to: " + mBatteryStyle);
+        if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE)) {
+                mBatteryStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE, 1);
+                if (DEBUG) log("mBatteryStyle changed to: " + mBatteryStyle);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_HIDE_DASH)) {
+                mDashIconHidden = intent.getBooleanExtra(GravityBoxSettings.EXTRA_HIDE_DASH, false);
+                updateDashChargeView();
+            }
             updateBatteryStyle();
         } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR)) {

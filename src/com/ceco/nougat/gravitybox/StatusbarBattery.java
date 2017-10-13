@@ -32,6 +32,7 @@ public class StatusbarBattery implements IconManagerListener {
     private static final String TAG = "GB:StatusbarBattery";
     private static final boolean DEBUG = false;
 
+    private BatteryStyleController mController;
     private View mBattery;
     private int mDefaultColor;
     private int mDefaultFrameColor;
@@ -44,8 +45,9 @@ public class StatusbarBattery implements IconManagerListener {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public StatusbarBattery(View batteryView) {
+    public StatusbarBattery(View batteryView, BatteryStyleController controller) {
         mBattery = batteryView;
+        mController = controller;
         backupOriginalColors();
         createHooks();
         if (SysUiManagers.IconManager != null && !Utils.isParanoidRom()) {
@@ -114,7 +116,8 @@ public class StatusbarBattery implements IconManagerListener {
     }
 
     public void setVisibility(int visibility) {
-        mBattery.setVisibility(mIsDashCharging ? View.GONE : visibility);
+        mBattery.setVisibility((mIsDashCharging && !mController.isDashIconHidden()) ?
+                View.GONE : visibility);
     }
 
     private void setColors(int mainColor, int frameColor, int chargeColor) {
