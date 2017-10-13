@@ -35,6 +35,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceFragment;
+import android.widget.Toast;
 
 public class QuietHoursActivity extends Activity {
 
@@ -59,12 +60,12 @@ public class QuietHoursActivity extends Activity {
             "gravitybox.intent.action.SET_QUIET_HOURS_MODE";
     public static final String EXTRA_QH_MODE = "qhMode";
 
-    public static QuietHours.Mode setQuietHoursMode(final Context context, String mode) {
+    public static void setQuietHoursMode(final Context context, String mode, boolean showToast) {
         try {
             SharedPreferences prefs = context.getSharedPreferences("quiet_hours", Context.MODE_WORLD_READABLE);
             QuietHours qh = new QuietHours(prefs);
             if (qh.uncLocked || !qh.enabled) {
-                return null;
+                return;
             }
 
             final QuietHours.Mode qhMode;
@@ -95,10 +96,12 @@ public class QuietHoursActivity extends Activity {
             prefs.edit().putString(QuietHoursActivity.PREF_KEY_QH_MODE, qhMode.toString()).commit();
             Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
             context.sendBroadcast(intent);
-            return qhMode;
+            if (showToast) {
+                Toast.makeText(context, QuietHoursActivity.getToastResIdFromMode(qhMode),
+                        Toast.LENGTH_SHORT).show();
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
     }
 
