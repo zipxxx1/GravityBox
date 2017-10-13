@@ -39,7 +39,6 @@ public class StatusbarBattery implements IconManagerListener {
     private int mFrameAlpha;
     private int mDefaultChargeColor;
     private Drawable mDrawable;
-    private boolean mIsDashCharging;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -99,24 +98,10 @@ public class StatusbarBattery implements IconManagerListener {
                 log("Error hooking getFillColor(): " + t.getMessage());
             }
         }
-        if (Utils.isOxygenOsRom()) {
-            try {
-                XposedHelpers.findAndHookMethod(mBattery.getClass(), "onFastChargeChanged",
-                        boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        mIsDashCharging = (boolean)param.args[0];
-                        if (DEBUG) log("onFastChargeChanged: mIsDashCharging=" + mIsDashCharging);
-                    }
-                });
-            } catch (Throwable t) {
-                log("Error hooking onFastChargeChanged(): " + t.getMessage());
-            }
-        }
     }
 
     public void setVisibility(int visibility) {
-        mBattery.setVisibility((mIsDashCharging && !mController.isDashIconHidden()) ?
+        mBattery.setVisibility((mController.isDashCharging() && !mController.isDashIconHidden()) ?
                 View.GONE : visibility);
     }
 

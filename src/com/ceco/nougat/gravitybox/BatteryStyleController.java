@@ -57,6 +57,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private StatusbarBattery mStockBattery;
     private boolean mBatterySaverIndicationDisabled;
     private boolean mDashIconHidden;
+    private boolean mIsDashCharging;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -235,26 +236,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }
-            if (Utils.isOxygenOsRom()) {
-                try {
-                    XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR,
-                            mContainer.getClass().getClassLoader(),
-                            "updateDashChargeView", new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            if (mDashIconHidden) {
-                                ((View)XposedHelpers.getObjectField(param.thisObject,
-                                        "mBatteryDashChargeView")).setVisibility(View.GONE);
-                                ((View)XposedHelpers.getObjectField(param.thisObject,
-                                        "mKeyguardBatteryDashChargeView")).setVisibility(View.GONE);
-                            }
-                            updateBatteryStyle();
-                        }
-                    });
-                } catch (Throwable t) {
-                    XposedBridge.log(t);
-                }
-            }
         }
 
         if (mContainerType == ContainerType.KEYGUARD) {
@@ -302,6 +283,28 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 XposedBridge.log(t);
             }
         }
+
+        if (Utils.isOxygenOsRom()) {
+            try {
+                XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR,
+                        mContainer.getClass().getClassLoader(),
+                        "updateDashChargeView", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        mIsDashCharging = XposedHelpers.getBooleanField(param.thisObject, "mFastCharge");
+                        if (mDashIconHidden) {
+                            ((View)XposedHelpers.getObjectField(param.thisObject,
+                                    "mBatteryDashChargeView")).setVisibility(View.GONE);
+                            ((View)XposedHelpers.getObjectField(param.thisObject,
+                                    "mKeyguardBatteryDashChargeView")).setVisibility(View.GONE);
+                        }
+                        updateBatteryStyle();
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+        }
     }
 
     public boolean isBatterySaverIndicationDisabled() {
@@ -310,6 +313,10 @@ public class BatteryStyleController implements BroadcastSubReceiver {
 
     public boolean isDashIconHidden() {
         return mDashIconHidden;
+    }
+
+    public boolean isDashCharging() {
+        return mIsDashCharging;
     }
 
     public ContainerType getContainerType() {
