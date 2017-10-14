@@ -77,7 +77,8 @@ public class Utils {
     public static final boolean USE_DEVICE_PROTECTED_STORAGE = true;
 
     @SuppressLint("SdCardPath")
-    public static final String AOSP_FORCED_FILE_PATH = 
+    public static final String AOSP_FORCED_FILE_PATH = USE_DEVICE_PROTECTED_STORAGE ?
+            "/data/user_de/0/com.ceco.nougat.gravitybox/files/aosp_forced" :
             "/data/data/com.ceco.nougat.gravitybox/files/aosp_forced";
 
     // Device types
