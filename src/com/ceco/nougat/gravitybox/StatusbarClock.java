@@ -179,6 +179,13 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                     if (DEBUG) log("getSmallTime() called. mAmPmHide=" + mAmPmHide);
                     Object sbClock = XposedHelpers.getAdditionalInstanceField(param.thisObject, "sbClock");
                     if (DEBUG) log("Is statusbar clock: " + (sbClock == null ? "false" : "true"));
+                    // hide and finish if sb clock hidden
+                    if (sbClock != null && mClockHidden) {
+                        if (mClock.getVisibility() != View.GONE) {
+                            setClockVisibility(false);
+                        }
+                        return;
+                    }
                     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
                     boolean is24 = DateFormat.is24HourFormat(mClock.getContext());
                     String clockText = param.getResult().toString();
@@ -298,6 +305,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
             if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_HIDE)) {
                 mClockHidden = intent.getBooleanExtra(GravityBoxSettings.EXTRA_CLOCK_HIDE, false);
                 setClockVisibility();
+                updateClock();
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_DOW_SIZE)) {
                 mDowSize = intent.getIntExtra(GravityBoxSettings.EXTRA_CLOCK_DOW_SIZE, 70) / 100f;
