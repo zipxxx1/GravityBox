@@ -2014,5 +2014,6 @@
 
     <!-- OOS: hide dash charge icon -->
     <string name="pref_battery_hide_dash_icon_title">Hide Dash charge icon</string>
+    <string name="pref_battery_hide_dash_icon_summary">For stock battery indicator</string>
 
 </resources>

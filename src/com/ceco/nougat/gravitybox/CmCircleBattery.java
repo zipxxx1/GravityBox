@@ -49,6 +49,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     // state variables
     private boolean mAttached;      // whether or not attached to a window
     private boolean mIsCharging;    // whether or not device is currently charging
+    private boolean mIsFastCharging; // whether or not device is currently fast charging
     private int     mLevel;         // current battery level
     private boolean mIsPowerSaving; // whether power saving mode is on
     private int     mAnimOffset;    // current level of charging animation
@@ -93,6 +94,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     public void onBatteryStatusChanged(BatteryData batteryData) {
         mLevel = batteryData.level;
         mIsCharging = batteryData.charging;
+        mIsFastCharging = batteryData.fastCharging;
         mIsPowerSaving = batteryData.isPowerSaving;
         if (mAttached) {
             invalidate();
@@ -280,14 +282,14 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
 
         mIsAnimating = true;
 
-        if (mAnimOffset > 360) {
+        if (mAnimOffset >= 360) {
             mAnimOffset = 0;
         } else {
-            mAnimOffset += 3;
+            mAnimOffset += mIsFastCharging ? 6 : 3;
         }
 
         mHandler.removeCallbacks(mInvalidate);
-        mHandler.postDelayed(mInvalidate, 50);
+        mHandler.postDelayed(mInvalidate, mIsFastCharging ? 30 : 50);
     }
 
     /***
