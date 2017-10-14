@@ -419,6 +419,9 @@ public class ModNavigationBar {
                         setDpadKeyVisibility();
                         setCustomKeyVisibility();
                         setMenuKeyVisibility();
+                        if (mNavbarColorsEnabled) {
+                            setKeyColor();
+                        }
                     }
                 }
             });
@@ -435,9 +438,6 @@ public class ModNavigationBar {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mUpdateIconHints) {
                         mUpdateIconHints = false;
-                        if (mNavbarColorsEnabled) {
-                            setKeyColor();
-                        }
                         if (mHideImeSwitcher) {
                             hideImeSwitcher();
                         }
