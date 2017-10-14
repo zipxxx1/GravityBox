@@ -1,3 +1,27 @@
+Changelog 7.0.2 - 14/10/2017
+--------------------------------------
+- General fixes:
+--- fixed image chooser to use proper cache
+--- VolumePanel: changed auto-expand behavior
+------ fixes closing volume panel on outside touch
+------ has a side effect in form of 2-step animation which does not have a solution
+--- QuietHours tile: fixed switching modes
+--- Fixed hidden status bar clock showing after reboot
+--- Fixed navbar key colors not fully applied after reboot
+--- Adjusted Force LTR for RTL locales feature
+- OxygenOS fixes:
+--- Fixed stock battery icon showing when Dash charging
+--- Added option for hiding Dash charge icon in Status Bar (for stock battery indicator)
+--- Circle battery indicates Dash charging by faster charging animation (keeps dash icon hidden)
+--- Fixed double vibrate icon
+- Samsung fixes (provided by Firefds)
+--- Fixed coloring of settings button
+--- Fixed reboot to download (bootloader) mode
+--- Fixed lockscreen carrier text
+--- Fixed manipulation of lockscreen bottom shortcuts
+--- Fixed Circle battery size
+--- Fixed battery style not updating in lockscreen
+
 Changelog 7.0.1 - 11/10/2017
 --------------------------------------
 - Fixed bug which resulted in all devices being identified as running OxygenOS
