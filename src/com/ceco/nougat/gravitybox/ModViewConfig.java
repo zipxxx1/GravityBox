@@ -47,7 +47,8 @@ public class ModViewConfig {
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FORCE_LTR_DIRECTION, false)) {
                 final Class<?> activityManagerSvcClass = XposedHelpers.findClass(CLASS_ACTIVITY_MANAGER_SERVICE, classLoader);
                 XposedHelpers.findAndHookMethod(activityManagerSvcClass, "updateConfigurationLocked", 
-                        Configuration.class, CLASS_ACTIVITY_RECORD, boolean.class, boolean.class, new XC_MethodHook() {
+                        Configuration.class, CLASS_ACTIVITY_RECORD, boolean.class, boolean.class,
+                        int.class, boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                         if (param.args[0] != null) {
