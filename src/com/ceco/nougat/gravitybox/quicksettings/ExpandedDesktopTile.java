@@ -116,7 +116,8 @@ public class ExpandedDesktopTile extends QsTile {
             mState.label = (mMode == GravityBoxSettings.ED_DISABLED) ? 
                     mGbContext.getString(R.string.quick_settings_expanded_desktop_disabled) :
                         mGbContext.getString(R.string.quick_settings_expanded_desktop_normal);
-            mState.icon = iconFromResId(R.drawable.ic_qs_expanded_desktop_off);
+            mState.icon = iconFromResId(supportsIconTinting() ?
+                    R.drawable.ic_qs_expanded_desktop_on : R.drawable.ic_qs_expanded_desktop_off);
         }
 
         super.handleUpdateState(state, arg);

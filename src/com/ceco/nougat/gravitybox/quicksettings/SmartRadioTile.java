@@ -78,7 +78,8 @@ public class SmartRadioTile extends QsTile {
                         iconFromResId(R.drawable.ic_qs_smart_radio_on_normal);
         } else {
             mState.label = mGbContext.getString(R.string.quick_settings_smart_radio_off);
-            mState.icon = iconFromResId(R.drawable.ic_qs_smart_radio_off);
+            mState.icon = iconFromResId(supportsIconTinting() ?
+                    R.drawable.ic_qs_smart_radio_on : R.drawable.ic_qs_smart_radio_off);
         }
 
         super.handleUpdateState(state, arg);

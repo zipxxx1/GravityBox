@@ -333,9 +333,15 @@ public class QuickAppTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.booleanValue = false;
         mState.label = mMainApp.getAppName();
         mState.icon = iconFromDrawable(mMainApp.getAppIconSmall());
         super.handleUpdateState(state, arg);
+    }
+
+    @Override
+    protected boolean supportsIconTinting() {
+        return false;
     }
 
     @Override

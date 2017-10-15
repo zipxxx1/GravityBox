@@ -185,10 +185,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             }
 
             if (mCircleBattery != null) {
-                mCircleBattery.setVisibility((mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE ||
-                        mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_PERCENT ||
-                        mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_DASHED ||
-                        mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_DASHED_PERCENT) ?
+                mCircleBattery.setVisibility(isCurrentStyleCircleBattery() ?
                                 View.VISIBLE : View.GONE);
                 mCircleBattery.setPercentage(
                         mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_PERCENT ||
@@ -303,7 +300,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         mIsDashCharging = XposedHelpers.getBooleanField(param.thisObject, "mFastCharge");
-                        if (mDashIconHidden) {
+                        if (mDashIconHidden || isCurrentStyleCircleBattery()) {
                             ((View)XposedHelpers.getObjectField(param.thisObject,
                                     "mBatteryDashChargeView")).setVisibility(View.GONE);
                             ((View)XposedHelpers.getObjectField(param.thisObject,
@@ -316,6 +313,14 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 XposedBridge.log(t);
             }
         }
+    }
+
+    private boolean isCurrentStyleCircleBattery() {
+        return (mCircleBattery != null &&
+                (mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE ||
+                 mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_PERCENT ||
+                 mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_DASHED ||
+                 mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_DASHED_PERCENT));
     }
 
     public boolean isBatterySaverIndicationDisabled() {
@@ -352,9 +357,9 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_HIDE_DASH)) {
                 mDashIconHidden = intent.getBooleanExtra(GravityBoxSettings.EXTRA_HIDE_DASH, false);
-                updateDashChargeView();
             }
             updateBatteryStyle();
+            updateDashChargeView();
         } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR)) {
                 mBatteryPercentTextEnabledSb = intent.getBooleanExtra(

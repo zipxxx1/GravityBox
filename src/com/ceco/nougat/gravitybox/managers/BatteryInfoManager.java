@@ -55,6 +55,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     public static final String ACTION_POWER_SAVE_MODE_CHANGING = 
             "android.os.action.POWER_SAVE_MODE_CHANGING";
     public static final String EXTRA_POWER_SAVE_MODE = "mode";
+    public static final String EXTRA_FAST_CHARGE = "fastcharge_status";
 
     public class BatteryData {
         public boolean charging;
@@ -63,6 +64,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         public int temperature;
         public int voltage;
         public boolean isPowerSaving;
+        public boolean fastCharging;
 
         public float getTempCelsius() {
             return ((float)temperature/10f);
@@ -89,6 +91,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
             bd.temperature = this.temperature;
             bd.voltage = this.voltage;
             bd.isPowerSaving = this.isPowerSaving;
+            bd.fastCharging = this.fastCharging;
             return bd;
         }
 
@@ -97,7 +100,8 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
                     "; powerSource="+this.powerSource+
                     "; temperature="+this.temperature+
                     "; voltage="+this.voltage+
-                    "; isPowerSaving="+this.isPowerSaving;
+                    "; isPowerSaving="+this.isPowerSaving+
+                    "; fastCharging="+this.fastCharging;
                     
         }
     }
@@ -167,11 +171,13 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         boolean newCharging = newPowerSource != 0;
         int newTemp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0);
         int newVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
+        boolean newFastCharging = intent.getBooleanExtra(EXTRA_FAST_CHARGE, false);
 
         if (mBatteryData.level != newLevel || mBatteryData.charging != newCharging ||
                 mBatteryData.powerSource != newPowerSource ||
                 mBatteryData.temperature != newTemp || 
-                mBatteryData.voltage != newVoltage) {
+                mBatteryData.voltage != newVoltage ||
+                mBatteryData.fastCharging != newFastCharging) {
             if (newLevel == 100 && mBatteryData.level < 100 && mBatteryData.level > 0) {
                 playSound(SOUND_CHARGED);
             }
@@ -190,6 +196,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
             mBatteryData.powerSource = newPowerSource;
             mBatteryData.temperature = newTemp;
             mBatteryData.voltage = newVoltage;
+            mBatteryData.fastCharging = newFastCharging;
 
             notifyListeners();
         }

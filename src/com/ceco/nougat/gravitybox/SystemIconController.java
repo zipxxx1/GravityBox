@@ -123,8 +123,17 @@ public class SystemIconController implements BroadcastSubReceiver {
         if (mIconCtrl == null || mContext == null) return;
         try {
             AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-            if (am.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
-                XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "volume", !mHideVibrateIcon);
+            if (Utils.isOxygenOsRom()) {
+                final boolean hide = XposedHelpers.getIntField(mSbPolicy, "mZen") == 0 ||
+                        (mHideVibrateIcon &&
+                         XposedHelpers.getIntField(mSbPolicy, "mZen") == 3 &&
+                         XposedHelpers.getIntField(mSbPolicy, "mVibrateWhenMute") == 1);
+                XposedHelpers.callMethod(mIconCtrl, "setIconVisibility",
+                        XposedHelpers.getObjectField(mSbPolicy, "mSlotZen"), !hide);
+            } else {
+                if (am.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
+                    XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "volume", !mHideVibrateIcon);
+                }
             }
         } catch (Throwable t) {
             XposedBridge.log(t);

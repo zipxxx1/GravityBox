@@ -127,11 +127,13 @@ public class UsbTetherTile extends QsTile {
                 mState.icon = iconFromResId(R.drawable.ic_qs_usb_tether_on);
                 mState.label = mGbContext.getString(R.string.quick_settings_usb_tether_on);
             } else {
-                mState.icon = iconFromResId(R.drawable.ic_qs_usb_tether_connected);
+                mState.icon = iconFromResId(supportsIconTinting() ?
+                        R.drawable.ic_qs_usb_tether_on : R.drawable.ic_qs_usb_tether_connected);
                 mState.label = mGbContext.getString(R.string.quick_settings_usb_tether_connected);
             }
         } else {
-            mState.icon = iconFromResId(R.drawable.ic_qs_usb_tether_off);
+            mState.icon = iconFromResId(supportsIconTinting() ?
+                    R.drawable.ic_qs_usb_tether_on : R.drawable.ic_qs_usb_tether_off);
             mState.label = mGbContext.getString(R.string.quick_settings_usb_tether_off);
         }
 

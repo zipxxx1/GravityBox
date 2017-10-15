@@ -117,6 +117,7 @@ public class CompassTile extends QsTile implements SensorEventListener {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         if (mActive) {
+            mState.booleanValue = true;
             mState.icon = iconFromResId(R.drawable.ic_qs_compass_on);
             if (mNewDegree != null) {
                 mState.label = formatValueWithCardinalDirection(mNewDegree);
@@ -131,13 +132,15 @@ public class CompassTile extends QsTile implements SensorEventListener {
                 mImage.setRotation(0);
             }
         } else {
-            mState.icon = iconFromResId(R.drawable.ic_qs_compass_off);
+            mState.booleanValue = false;
+            mState.icon = iconFromResId(supportsIconTinting() ? 
+                    R.drawable.ic_qs_compass_on : R.drawable.ic_qs_compass_off);
             mState.label = mGbContext.getString(R.string.quick_settings_compass_off);
             mImage.setRotation(0);
         }
 
         mUpdatePending = false;
-        
+
         super.handleUpdateState(state, arg);
     }
 

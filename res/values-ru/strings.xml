@@ -2003,4 +2003,14 @@
     <string name="qs_tile_bt_tethering_off">Раздача выкл</string>
     <string name="qs_tile_bt_tethering_error">Ошибка</string>
 
+    <!-- QS protected when device locked -->
+    <string name="qs_protected_summary">Защищено на заблокированном устройстве</string>
+
+    <!-- Volume panel: notification stream label -->
+    <string name="notification_stream_name">Уведомление</string>
+
+    <!-- OOS: hide dash charge icon -->
+    <string name="pref_battery_hide_dash_icon_title">Скрыть значок Dash charge</string>
+    <string name="pref_battery_hide_dash_icon_summary">Для стокового индикатора батареи</string>
+
 </resources>

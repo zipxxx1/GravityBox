@@ -99,7 +99,8 @@ public class SyncTile extends QsTile {
             mState.icon = iconFromResId(R.drawable.ic_qs_sync_on);
             mState.label = mGbContext.getString(R.string.quick_settings_sync_on);
         } else {
-            mState.icon = iconFromResId(R.drawable.ic_qs_sync_off);
+            mState.icon = iconFromResId(supportsIconTinting() ?
+                    R.drawable.ic_qs_sync_on : R.drawable.ic_qs_sync_off);
             mState.label = mGbContext.getString(R.string.quick_settings_sync_off);
         }
 

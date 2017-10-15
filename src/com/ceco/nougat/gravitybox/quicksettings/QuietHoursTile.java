@@ -109,7 +109,8 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
                 case OFF:
                     mState.booleanValue = false;
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_off);
-                    mState.icon = iconFromResId(R.drawable.ic_qs_quiet_hours_off);
+                    mState.icon = iconFromResId(supportsIconTinting() ?
+                            R.drawable.ic_qs_quiet_hours_on : R.drawable.ic_qs_quiet_hours_off);
                     break;
                 case WEAR:
                     mState.booleanValue = true;
@@ -119,7 +120,7 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
                 case AUTO:
                     mState.booleanValue = mQh.quietHoursActive();
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_auto);
-                    mState.icon = mState.booleanValue ?
+                    mState.icon = mState.booleanValue || supportsIconTinting() ?
                             iconFromResId(R.drawable.ic_qs_quiet_hours_auto_on) : 
                                 iconFromResId(R.drawable.ic_qs_quiet_hours_auto_off);
                     break;

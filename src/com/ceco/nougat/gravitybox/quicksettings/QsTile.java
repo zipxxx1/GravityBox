@@ -116,6 +116,23 @@ public abstract class QsTile extends BaseTile {
         if (DEBUG) log(mKey + ": handleDestroy called");
     }
 
+    protected boolean supportsIconTinting() {
+        return Utils.isOxygenOsRom();
+    }
+
+    private Integer getTintColor(boolean state) {
+        try {
+            final Class<?> cls = XposedHelpers.findClass(
+                    BaseTile.CLASS_ICON_VIEW, mContext.getClassLoader());
+            return XposedHelpers.getStaticIntField(cls,
+                    state ? "sIconColor" : "sCustomDisableIconColor");
+        } catch (Throwable t) {
+            log("Error getting QsTile tint color: " + t.getMessage());
+            if (DEBUG) XposedBridge.log(t);
+            return null;
+        }
+    }
+
     protected final Object iconFromResId(int resId) {
         return iconFromDrawable(mGbContext.getDrawable(resId));
     }
@@ -123,6 +140,12 @@ public abstract class QsTile extends BaseTile {
     protected final Object iconFromDrawable(Drawable d) {
         try {
             d.setTintList(null);
+            if (supportsIconTinting()) {
+                Integer color = getTintColor(mState.booleanValue);
+                if (color != null) {
+                    d.setTint(color);
+                }
+            }
             return sDrawableIconClassConstructor.newInstance(d);
         } catch (Throwable t) {
             XposedBridge.log(t);

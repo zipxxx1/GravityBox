@@ -30,7 +30,6 @@ public class VolumeTile extends QsTile {
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
 
-        mState.icon = iconFromResId(R.drawable.ic_qs_volume);
         mState.label = mGbContext.getString(R.string.qs_tile_volume);
     }
 
@@ -41,6 +40,7 @@ public class VolumeTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.icon = iconFromResId(R.drawable.ic_qs_volume);
         super.handleUpdateState(state, arg);
     }
 
