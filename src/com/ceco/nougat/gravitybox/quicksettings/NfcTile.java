@@ -138,13 +138,15 @@ public class NfcTile extends QsTile {
             mState.label = mGbContext.getString(R.string.quick_settings_nfc_on);
             break;
         case ConnectivityServiceWrapper.NFC_STATE_OFF:
-            mState.icon = iconFromResId(R.drawable.ic_qs_nfc_off);
+            mState.icon = iconFromResId(supportsIconTinting() ?
+                    R.drawable.ic_qs_nfc_on : R.drawable.ic_qs_nfc_off);
             mState.label = mGbContext.getString(R.string.quick_settings_nfc_off);
             break;
         case ConnectivityServiceWrapper.NFC_STATE_TURNING_ON:
         case ConnectivityServiceWrapper.NFC_STATE_TURNING_OFF:
         default:
-            mState.icon = iconFromResId(R.drawable.ic_qs_nfc_trans);
+            mState.icon = iconFromResId(supportsIconTinting() ?
+                    R.drawable.ic_qs_nfc_on : R.drawable.ic_qs_nfc_trans);
             mState.label = "----";
         }
 

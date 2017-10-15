@@ -31,7 +31,6 @@ public class ScreenshotTile extends QsTile {
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
 
-        mState.icon = iconFromResId(R.drawable.ic_qs_screenshot);
         mState.label = mGbContext.getString(R.string.qs_tile_screenshot);
     }
 
@@ -44,6 +43,12 @@ public class ScreenshotTile extends QsTile {
     public boolean supportsHideOnChange() {
         // we collapse panels ourselves
         return false;
+    }
+
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
+        mState.icon = iconFromResId(R.drawable.ic_qs_screenshot);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

@@ -214,18 +214,21 @@ public class BluetoothTetheringTile extends QsTile {
         int btState = adapter == null ? BluetoothAdapter.ERROR : adapter.getState();
         if (isInErrorState(btState)) {
             mState.label = mGbContext.getString(R.string.qs_tile_bt_tethering_error);
-            mState.icon = iconFromResId(R.drawable.ic_qs_bt_tethering_off);
+            mState.icon = iconFromResId(supportsIconTinting() ? 
+                    R.drawable.ic_qs_bt_tethering_on : R.drawable.ic_qs_bt_tethering_off);
         } else if (btState == BluetoothAdapter.STATE_TURNING_ON ||
                 btState == BluetoothAdapter.STATE_TURNING_OFF) {
             mState.label = "---";
-            mState.icon = iconFromResId(R.drawable.ic_qs_bt_tethering_off);
+            mState.icon = iconFromResId(supportsIconTinting() ? 
+                    R.drawable.ic_qs_bt_tethering_on : R.drawable.ic_qs_bt_tethering_off);
         } else if (btState == BluetoothAdapter.STATE_ON && isTetheringOn()) {
+            mState.booleanValue = true;
             mState.label = mGbContext.getString(R.string.qs_tile_bt_tethering_on);
             mState.icon = iconFromResId(R.drawable.ic_qs_bt_tethering_on);
-            mState.booleanValue = true;
         } else {
             mState.label = mGbContext.getString(R.string.qs_tile_bt_tethering_off);
-            mState.icon = iconFromResId(R.drawable.ic_qs_bt_tethering_off);
+            mState.icon = iconFromResId(supportsIconTinting() ? 
+                    R.drawable.ic_qs_bt_tethering_on : R.drawable.ic_qs_bt_tethering_off);
         }
 
         super.handleUpdateState(state, arg);

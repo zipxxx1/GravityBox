@@ -187,8 +187,9 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
                 mState.icon = iconFromResId(R.drawable.ic_qs_location_on);
                 break;
             case Settings.Secure.LOCATION_MODE_OFF:
-                mState.icon = iconFromResId(R.drawable.ic_qs_location_off);
                 mState.booleanValue = false;
+                mState.icon = iconFromResId(supportsIconTinting() ?
+                        R.drawable.ic_qs_location_on : R.drawable.ic_qs_location_off);
                 break;
         }
         mState.label = GpsStatusMonitor.getModeLabel(mContext, locationMode);

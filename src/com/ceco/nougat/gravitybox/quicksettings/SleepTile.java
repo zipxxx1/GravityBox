@@ -35,13 +35,18 @@ public class SleepTile extends QsTile {
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
 
-        mState.icon = iconFromResId(R.drawable.ic_qs_sleep);
         mState.label = mGbContext.getString(R.string.qs_tile_sleep);
     }
 
     @Override
     public String getSettingsKey() {
         return "gb_tile_sleep";
+    }
+
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
+        mState.icon = iconFromResId(R.drawable.ic_qs_sleep);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

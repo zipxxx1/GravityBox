@@ -88,7 +88,8 @@ public class GpsTile extends QsTile implements GpsStatusMonitor.Listener {
                 iconFromResId(R.drawable.ic_qs_gps_enable);
         } else {
             mState.label = mGbContext.getString(R.string.qs_tile_gps_disabled);
-            mState.icon = iconFromResId(R.drawable.ic_qs_gps_disable);
+            mState.icon = iconFromResId(supportsIconTinting() ?
+                    R.drawable.ic_qs_gps_enable : R.drawable.ic_qs_gps_disable);
         }
 
         super.handleUpdateState(state, arg);

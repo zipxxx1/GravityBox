@@ -87,7 +87,6 @@ public class StayAwakeTile extends QsTile {
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
 
-        mState.icon = iconFromResId(R.drawable.ic_qs_stayawake_on);
         mSettingsObserver = new SettingsObserver(new Handler());
 
         getCurrentState();
@@ -224,6 +223,7 @@ public class StayAwakeTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.icon = iconFromResId(R.drawable.ic_qs_stayawake_on);
         int currentIndex = getIndexFromValue(mCurrentTimeout);
         if (currentIndex == -1) {
             mState.label = mCurrentTimeout == NEVER_SLEEP ?

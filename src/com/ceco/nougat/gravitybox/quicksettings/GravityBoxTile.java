@@ -31,7 +31,6 @@ public class GravityBoxTile extends QsTile {
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
 
-        mState.icon = iconFromResId(R.drawable.ic_qs_gravitybox);
         mState.label = "GravityBox";
     }
 
@@ -44,6 +43,12 @@ public class GravityBoxTile extends QsTile {
     public boolean supportsHideOnChange() {
         // starting activity collapses panel anyway
         return false;
+    }
+
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
+        mState.icon = iconFromResId(R.drawable.ic_qs_gravitybox);
+        super.handleUpdateState(state, arg);
     }
 
     @Override
