@@ -106,6 +106,20 @@ public class ModPowerMenu {
             final Class<?> globalActionsClass = XposedHelpers.findClass(CLASS_GLOBAL_ACTIONS, classLoader);
             final Class<?> actionClass = XposedHelpers.findClass(CLASS_ACTION, classLoader);
 
+            //hides reboot confirmation screen for Samsung roms
+            if (Utils.isSamsungRom()) {
+                XposedHelpers.findAndHookMethod(globalActionsClass, "initValueForCreate", boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        prefs.reload();
+                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWEROFF_ADVANCED, false)) {
+                            XposedHelpers.setIntField(param.thisObject, "mRestartIconResId",0);
+                            XposedHelpers.setIntField(param.thisObject, "mConfirmRestartIconResId",0);
+                        }
+                    }
+                });
+            }
+
             XposedBridge.hookAllConstructors(globalActionsClass, new XC_MethodHook() {
                @Override
                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
@@ -116,7 +130,8 @@ public class ModPowerMenu {
                    int rebootStrId = res.getIdentifier("factorytest_reboot", "string", PACKAGE_NAME);
                    int rebootSoftStrId = R.string.reboot_soft;
                    int recoveryStrId = R.string.poweroff_recovery;
-                   int bootloaderStrId = R.string.poweroff_bootloader;
+                   int bootloaderStrId = Utils.isSamsungRom() ? 
+                           R.string.poweroff_download : R.string.poweroff_bootloader;
                    mRebootStr  = (rebootStrId == 0) ? "Reboot" : res.getString(rebootStrId);
                    mRebootSoftStr = gbContext.getString(rebootSoftStrId);
                    mRecoveryStr = gbContext.getString(recoveryStrId);
@@ -148,7 +163,7 @@ public class ModPowerMenu {
                            gbContext.getString(Utils.isTablet() ? R.string.device_tablet : R.string.device_phone));
                    mRebootConfirmRecoveryStr = String.format(gbContext.getString(R.string.reboot_confirm_recovery),
                            gbContext.getString(Utils.isTablet() ? R.string.device_tablet : R.string.device_phone));
-                   mRebootConfirmBootloaderStr = String.format(gbContext.getString(R.string.reboot_confirm_bootloader),
+                   mRebootConfirmBootloaderStr = String.format(gbContext.getString(Utils.isSamsungRom() ? R.string.reboot_confirm_download : R.string.reboot_confirm_bootloader),
                            gbContext.getString(Utils.isTablet() ? R.string.device_tablet : R.string.device_phone));
 
                    if (DEBUG) log("GlobalActions constructed, resources set.");

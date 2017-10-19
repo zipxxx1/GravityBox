@@ -124,6 +124,26 @@ public class ModAudio {
                 }
             });
 
+            if (Utils.isSamsungRom()) {
+                Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
+                        GravityBoxSettings.PREF_KEY_SAFE_MEDIA_VOLUME, "DEFAULT"));
+                if (DEBUG) log(GravityBoxSettings.PREF_KEY_SAFE_MEDIA_VOLUME + ": " + triState);
+                if (triState == Utils.TriState.DISABLED) {
+                    XposedHelpers.findAndHookConstructor("android.media.AudioManager", classLoader, Context.class,
+                            new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            Object objService = XposedHelpers.callMethod(param.thisObject, "getService");
+                            Context mApplicationContext = (Context) XposedHelpers.getObjectField(param.thisObject,
+                                    "mApplicationContext");
+                            if (objService != null && mApplicationContext != null) {
+                                XposedHelpers.callMethod(param.thisObject, "disableSafeMediaVolume");
+                            }
+                        }
+                    });
+                }
+            }
+            
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS, false)) {
                 XposedHelpers.findAndHookMethod(classAudioService, "onConfigureSafeVolume",
                         boolean.class, String.class, new XC_MethodHook() {
