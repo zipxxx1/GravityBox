@@ -31,10 +31,14 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.os.PowerManager;
 import android.service.notification.StatusBarNotification;
+import android.widget.RemoteViews;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 
 public class ProgressBarController implements BroadcastSubReceiver {
     private static final String TAG = "GB:ProgressBarController";
@@ -346,15 +350,66 @@ public class ProgressBarController implements BroadcastSubReceiver {
     }
 
     private ProgressInfo getProgressInfo(String id, Notification n) {
-        if (id !=null && n != null &&
-                n.extras.containsKey(EXTRA_PROGRESS) &&
+        if (id == null || n == null)
+            return null;
+
+        if(n.extras.containsKey(EXTRA_PROGRESS) &&
                 n.extras.containsKey(EXTRA_PROGRESS_MAX) &&
                 n.extras.getInt(EXTRA_PROGRESS_MAX) > 0) {
             return new ProgressInfo(id,
                     n.extras.getInt(EXTRA_PROGRESS),
                     n.extras.getInt(EXTRA_PROGRESS_MAX));
+        } else if (n.bigContentView != null) {
+            return getProgressInfoFromRemoteView(id, n.bigContentView);
+        } else if (n.contentView != null) {
+            return getProgressInfoFromRemoteView(id, n.contentView);
         }
+
         return null;
+    }
+
+    private ProgressInfo getProgressInfoFromRemoteView(String id, RemoteViews view) {
+        int max = -1;
+        int progress = -1;
+
+        try {
+            @SuppressWarnings("unchecked")
+            List<Parcelable> actions = (List<Parcelable>) 
+                XposedHelpers.getObjectField(view, "mActions");
+            if (actions == null) return null;
+
+            for (Parcelable p : actions) {
+                Parcel parcel = Parcel.obtain();
+                p.writeToParcel(parcel, 0);
+                parcel.setDataPosition(0);
+
+                // The tag tells which type of action it is (2 is ReflectionAction)
+                int tag = parcel.readInt();
+                if (tag != 2)  {
+                    parcel.recycle();
+                    continue;
+                }
+
+                parcel.readInt(); // skip View ID
+                String methodName = parcel.readString();
+                if ("setMax".equals(methodName)) {
+                    parcel.readInt(); // skip type value
+                    max = parcel.readInt();
+                    if (DEBUG) log("getProgressInfoFromRemoteView: max=" + max);
+                } else if ("setProgress".equals(methodName)) {
+                    parcel.readInt(); // skip type value
+                    progress = parcel.readInt();
+                    if (DEBUG) log("getProgressInfoFromRemoteView: progress=" + progress);
+                }
+
+                parcel.recycle();
+            }
+        } catch (Throwable  t) {
+            XposedBridge.log(t);
+        }
+
+        return (max != -1 && progress != -1) ?
+                new ProgressInfo(id, progress, max) : null;
     }
 
     private void maybePlaySound() {
