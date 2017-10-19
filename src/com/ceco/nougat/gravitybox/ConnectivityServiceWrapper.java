@@ -32,6 +32,7 @@ import android.telephony.TelephonyManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.XposedHelpers.InvocationTargetError;
 
 public class ConnectivityServiceWrapper {
     private static final String TAG = "GB:ConnectivityServiceWrapper";
@@ -256,11 +257,25 @@ public class ConnectivityServiceWrapper {
         }
     }
 
+    private static NfcAdapter getNfcAdapter() {
+        NfcAdapter adapter = null;
+        try {
+            adapter = (NfcAdapter) XposedHelpers.callStaticMethod(NfcAdapter.class,
+                "getNfcAdapter", (Context)null);
+        } catch (InvocationTargetError e1) {
+            if (DEBUG) log("getNfcAdapter: NFC adapter not available");
+        } catch (NoSuchMethodError e2) {
+            log("getNfcAdapter(): method not found");
+        }
+        return adapter;
+    }
+
     private static void sendNfcState(ResultReceiver receiver) {
-        if (mContext == null || receiver == null) return;
+        if (receiver == null) return;
+
         int nfcState = NFC_STATE_UNKNOWN;
         try {
-            NfcAdapter adapter = NfcAdapter.getDefaultAdapter(mContext);
+            NfcAdapter adapter = getNfcAdapter();
             if (adapter != null) {
                 nfcState = (Integer) XposedHelpers.callMethod(adapter, "getAdapterState");
             }
@@ -274,12 +289,10 @@ public class ConnectivityServiceWrapper {
     }
 
     private static void changeNfcState(Intent intent) {
-        if (mContext == null) return;
-        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(mContext);
-        if (adapter == null) return;
-
         try {
             boolean enable = false;
+            NfcAdapter adapter = getNfcAdapter();
+            if (adapter == null) return;
             if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
                 enable = intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false);
             } else {
