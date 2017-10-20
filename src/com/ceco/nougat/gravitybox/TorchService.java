@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,6 +15,7 @@
 
 package com.ceco.nougat.gravitybox;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -26,13 +27,10 @@ import android.graphics.BitmapFactory;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.PowerManager;
 import android.os.ResultReceiver;
 import android.text.TextUtils;
 import android.util.Log;
-import android.os.PowerManager.WakeLock;
 
 import com.ceco.nougat.gravitybox.R;
 
@@ -43,6 +41,7 @@ public class TorchService extends Service {
     public static final String ACTION_TOGGLE_TORCH = "gravitybox.intent.action.TOGGLE_TORCH";
     public static final String ACTION_TORCH_STATUS_CHANGED = "gravitybox.intent.action.TORCH_STATUS_CHANGED";
     public static final String ACTION_TORCH_GET_STATUS = "gravitybox.intent.action.TORCH_GET_STATUS";
+    private static final String ACTION_TORCH_TIMEOUT = "gravitybox.intent.action.TORCH_TIMEOUT";
     public static final String EXTRA_TORCH_STATUS = "torchStatus";
     public static final int TORCH_STATUS_OFF = 0;
     public static final int TORCH_STATUS_ON = 1;
@@ -53,10 +52,9 @@ public class TorchService extends Service {
     private String mCameraId;
     private int mTorchStatus;
     private Notification mTorchNotif;
-    private WakeLock mPartialWakeLock;
-    private int mTorchTimeout;
-    private Handler mHandler;
     private Intent mStartIntent;
+    private AlarmManager mAlarmManager;
+    private PendingIntent mPendingIntent;
 
     private final CameraManager.TorchCallback mTorchCallback =
             new CameraManager.TorchCallback() {
@@ -118,9 +116,7 @@ public class TorchService extends Service {
                 getString(R.string.turn_off), stopIntent).build());
         mTorchNotif = builder.build();
 
-        SharedPreferences prefs = SettingsManager.getInstance(this).getMainPrefs();
-        mTorchTimeout = prefs.getInt(GravityBoxSettings.PREF_KEY_TORCH_AUTO_OFF, 10)*60*1000;
-        mHandler = new Handler();
+        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         mCameraManager.registerTorchCallback(mTorchCallback, null);
@@ -130,14 +126,18 @@ public class TorchService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent != null &&
-                (ACTION_TOGGLE_TORCH.equals(intent.getAction()) ||
-                    ACTION_TORCH_GET_STATUS.equals(intent.getAction()))) {
-            mStartIntent = intent;
-            maybeProcessStartIntent();
-            return START_NOT_STICKY;
+        if (intent != null) {
+            if (ACTION_TOGGLE_TORCH.equals(intent.getAction()) ||
+                    ACTION_TORCH_GET_STATUS.equals(intent.getAction())) {
+                mStartIntent = intent;
+                maybeProcessStartIntent();
+                return START_NOT_STICKY;
+            } else if (ACTION_TORCH_TIMEOUT.equals(intent.getAction())) {
+                if (DEBUG) Log.d(TAG, "Received torch timeout intent");
+                setTorchOff();
+                return START_NOT_STICKY;
+            }
         }
-
         stopSelf();
         return START_NOT_STICKY;
     }
@@ -226,19 +226,21 @@ public class TorchService extends Service {
     }
 
     private void setupTimeout() {
-        if (mTorchTimeout > 0) {
-            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-            mPartialWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-            mPartialWakeLock.acquire(mTorchTimeout);
-            mHandler.postDelayed(mTorchTimeoutRunnable, mTorchTimeout);
+        SharedPreferences prefs = SettingsManager.getInstance(this).getMainPrefs();
+        int torchTimeout = prefs.getInt(GravityBoxSettings.PREF_KEY_TORCH_AUTO_OFF, 10)*60*1000;
+        if (torchTimeout > 0) {
+            Intent intent = new Intent(this, TorchService.class);
+            intent.setAction(ACTION_TORCH_TIMEOUT);
+            mPendingIntent = PendingIntent.getService(this, 1, intent, PendingIntent.FLAG_ONE_SHOT);
+            long triggerAtMillis = System.currentTimeMillis() + torchTimeout;
+            mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, mPendingIntent);
         }
     }
 
     private void resetTimeout() {
-        mHandler.removeCallbacks(mTorchTimeoutRunnable);
-        if (mPartialWakeLock != null && mPartialWakeLock.isHeld()) {
-            mPartialWakeLock.release();
-            mPartialWakeLock = null;
+        if (mPendingIntent != null) {
+            mAlarmManager.cancel(mPendingIntent);
+            mPendingIntent = null;
         }
     }
 
@@ -250,17 +252,9 @@ public class TorchService extends Service {
         mCameraManager.unregisterTorchCallback(mTorchCallback);
         mCameraId = null;
         mCameraManager = null;
-        mHandler = null;
-        mPartialWakeLock = null;
         mTorchNotif = null;
         mStartIntent = null;
+        mAlarmManager = null;
         super.onDestroy();
     }
-
-    private Runnable mTorchTimeoutRunnable = new Runnable() {
-        @Override
-        public void run() {
-            setTorchOff();
-        }
-    };
 }
