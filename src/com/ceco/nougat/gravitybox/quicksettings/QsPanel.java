@@ -47,6 +47,8 @@ public class QsPanel implements BroadcastSubReceiver {
     public static final String CLASS_QS_PANEL = "com.android.systemui.qs.QSPanel";
     private static final String CLASS_BRIGHTNESS_CTRL = "com.android.systemui.settings.BrightnessController";
     private static final String CLASS_TILE_LAYOUT = "com.android.systemui.qs.TileLayout";
+    private static final String CLASS_TILE_HOST = "com.android.systemui.statusbar.phone.QSTileHost";
+    private static final String ACTION_SHOW_ADMIN_SUPPORT_DETAILS = "android.settings.SHOW_ADMIN_SUPPORT_DETAILS";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -318,6 +320,38 @@ public class QsPanel implements BroadcastSubReceiver {
             });
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+
+        // Disable info icon for protected tiles
+        try {
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, classLoader,
+                    "handleStateChanged", BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    View padlock = (View) XposedHelpers.getObjectField(param.thisObject, "mPadLock");
+                    if (padlock != null) {
+                        padlock.setVisibility(View.GONE);
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
+        }
+
+        // Disable restricted by admin dialog
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_TILE_HOST, classLoader,
+                    "startActivityDismissingKeyguard", Intent.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (ACTION_SHOW_ADMIN_SUPPORT_DETAILS.equals(
+                            ((Intent)param.args[0]).getAction())) {
+                        param.setResult(null);
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
         }
     }
 
