@@ -31,6 +31,7 @@ import com.ceco.nougat.gravitybox.Utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
@@ -352,6 +353,29 @@ public class QsPanel implements BroadcastSubReceiver {
             });
         } catch (Throwable t) {
             if (DEBUG) XposedBridge.log(t);
+        }
+
+        // OOS: apply alpha channel to protected tiles when locked
+        if (Utils.isOxygenOsRom()) {
+            try {
+                XposedHelpers.findAndHookMethod(BaseTile.CLASS_ICON_VIEW, classLoader,
+                        "setIcon", ImageView.class, BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        Object icon = XposedHelpers.getObjectField(param.args[1], "icon");
+                        if (icon != null) {
+                            Drawable d = (Drawable) XposedHelpers.callMethod(icon, "getDrawable",
+                                    mQsPanel.getContext());
+                            if (d != null) {
+                                d.setAlpha(XposedHelpers.getBooleanField(
+                                        param.args[1], "disabledByPolicy") ? 80 : 255);
+                            }
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                if (DEBUG) XposedBridge.log(t);
+            }
         }
     }
 
