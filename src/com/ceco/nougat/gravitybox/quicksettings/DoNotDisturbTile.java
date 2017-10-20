@@ -144,7 +144,7 @@ public class DoNotDisturbTile extends AospTile {
 
     @Override
     public boolean handleLongClick() {
-        if (mQuickMode) {
+        if (mQuickMode && !disabledByPolicy()) {
             if (getZenMode() == ZEN_MODE_OFF) {
                 mClickOverrideBlocked = true;
                 XposedHelpers.callMethod(mTile, "handleClick");

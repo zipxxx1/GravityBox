@@ -106,14 +106,16 @@ public class CellularTile extends AospTile {
 
     @Override
     public boolean handleLongClick() {
-        if (mDataToggle == DataToggle.LONGPRESS) {
-            toggleMobileData();
-            refreshState();
-        } else if (mDataToggle != DataToggle.DISABLED){
-            return showDetail();
-        } else {
-            startSettingsActivity(CELLULAR_SETTINGS);
+        if (!disabledByPolicy()) {
+            if (mDataToggle == DataToggle.LONGPRESS) {
+                toggleMobileData();
+                refreshState();
+                return true;
+            } else if (mDataToggle != DataToggle.DISABLED){
+                return showDetail();
+            }
         }
+        startSettingsActivity(CELLULAR_SETTINGS);
         return true;
     }
 

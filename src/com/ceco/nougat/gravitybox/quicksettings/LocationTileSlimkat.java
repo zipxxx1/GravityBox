@@ -209,10 +209,12 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
     @Override
     public boolean handleLongClick() {
-        if (mQuickMode) {
-            showDetail(true);
-        } else {
-            setLocationEnabled(!isLocationEnabled());
+        if (!mState.disabledByPolicy) {
+            if (mQuickMode) {
+                showDetail(true);
+            } else {
+                setLocationEnabled(!isLocationEnabled());
+            }
         }
         return true;
     }

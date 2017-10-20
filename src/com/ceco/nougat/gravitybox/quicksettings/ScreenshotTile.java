@@ -62,14 +62,16 @@ public class ScreenshotTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        collapsePanels();
-        try {
-            Intent intent = new Intent(mGbContext, ScreenRecordingService.class);
-            intent.setAction(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING);
-            mGbContext.startService(intent);
-        } catch (Throwable t) {
-            log(getKey() + ": Error toggling screen recording: " + t.getMessage());
-        } 
+        if (!mState.disabledByPolicy) {
+            collapsePanels();
+            try {
+                Intent intent = new Intent(mGbContext, ScreenRecordingService.class);
+                intent.setAction(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING);
+                mGbContext.startService(intent);
+            } catch (Throwable t) {
+                log(getKey() + ": Error toggling screen recording: " + t.getMessage());
+            }
+        }
         return true;
     }
 }

@@ -304,12 +304,14 @@ public class QuickRecordTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        switch (mRecordingState) {
-            case STATE_NO_RECORDING:
-            case STATE_IDLE:
-            case STATE_JUST_RECORDED:
-                startRecording();
-                break;
+        if (!mState.disabledByPolicy) {
+            switch (mRecordingState) {
+                case STATE_NO_RECORDING:
+                case STATE_IDLE:
+                case STATE_JUST_RECORDED:
+                    startRecording();
+                    break;
+            }
         }
         return true;
     }

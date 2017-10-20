@@ -284,17 +284,20 @@ public class NetworkModeTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (mQuickMode) {
-            showDetail(true);
-        } else if (mIsMsim) {
-            Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
-            intent.putExtra(GravityBoxSettings.EXTRA_SIM_SLOT, mSimSlot == 0 ? 1 : 0);
-            mContext.sendBroadcast(intent);
-        } else {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setClassName("com.android.phone", "com.android.phone.Settings");
-            startSettingsActivity(intent);
+        if (!mState.disabledByPolicy) {
+            if (mQuickMode) {
+                showDetail(true);
+                return true;
+            } else if (mIsMsim) {
+                Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
+                intent.putExtra(GravityBoxSettings.EXTRA_SIM_SLOT, mSimSlot == 0 ? 1 : 0);
+                mContext.sendBroadcast(intent);
+                return true;
+            }
         }
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setClassName("com.android.phone", "com.android.phone.Settings");
+        startSettingsActivity(intent);
         return true;
     }
 

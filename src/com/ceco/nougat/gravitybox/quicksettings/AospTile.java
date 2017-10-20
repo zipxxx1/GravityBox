@@ -59,6 +59,10 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
         if (DEBUG) log(mKey + ": aosp tile wrapper created");
     }
 
+    protected final boolean disabledByPolicy() {
+        return (mProtected && mKgMonitor.isShowing() && mKgMonitor.isLocked());
+    }
+
     // Tiles can override click functionality
     // When true is returned, original click handler will be suppressed
     protected boolean onBeforeHandleClick() {
