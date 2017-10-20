@@ -230,6 +230,11 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         if (lpparam.packageName.equals(ModTelecom.PACKAGE_NAME)) {
             ModTelecom.init(prefs, lpparam.classLoader);
         }
+
+        if (Utils.isOxygenOsRom() &&
+                lpparam.packageName.equals((ModDialerOOS.PACKAGE_NAME_IN_CALL_UI))) {
+            ModDialerOOS.initInCallUi(prefs, lpparam.classLoader);
+        }
     }
 }
 

@@ -865,6 +865,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_FPL_PAUSE = "fplPause";
     public static final String EXTRA_FPL_SHOW_TOAST = "fplShowToast";
 
+    public static final String PREF_KEY_OOS_CALL_RECORDING = "pref_oos_call_recording";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -1754,6 +1756,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_BATTERY_SETTINGS);
                 Preference p = findPreference(PREF_KEY_BATTERY_HIDE_DASH_ICON);
                 if (ps != null && p != null) ps.removePreference(p);
+                p = findPreference(PREF_KEY_OOS_CALL_RECORDING);
+                if (p != null) mPrefCatPhoneTelephony.removePreference(p);
             }
 
             // Remove fingerprint related preferences

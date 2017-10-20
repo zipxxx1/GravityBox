@@ -1924,6 +1924,12 @@
                 android:dialogTitle="@string/pref_increasing_ring_title"
                 gb:streamType="ring" />
 
+            <CheckBoxPreference 
+                android:key="pref_oos_call_recording"
+                android:title="@string/pref_oos_call_recording_title"
+                android:summaryOn="@string/pref_oos_call_recording_summary"
+                android:defaultValue="false" />
+
         </PreferenceCategory>
 
         <PreferenceCategory
