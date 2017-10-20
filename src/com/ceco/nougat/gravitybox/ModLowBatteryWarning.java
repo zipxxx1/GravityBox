@@ -18,6 +18,7 @@ package com.ceco.nougat.gravitybox;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 
+import com.ceco.nougat.gravitybox.ledcontrol.QuietHours;
 import com.ceco.nougat.gravitybox.managers.SysUiManagers;
 import com.ceco.nougat.gravitybox.managers.BatteryInfoManager.LowBatteryWarningPolicy;
 
@@ -133,7 +134,7 @@ public class ModLowBatteryWarning {
 
     // SystemUI package
 
-    static void init(final XSharedPreferences prefs, ClassLoader classLoader) {
+    static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, ClassLoader classLoader) {
         try {
             if (DEBUG) log("init");
 
@@ -169,7 +170,34 @@ public class ModLowBatteryWarning {
                     }
                 }
             });
-
         } catch (Throwable t) { XposedBridge.log(t); }
+
+        // OOS Dash charging sound
+        if (Utils.isOxygenOsRom()) {
+            final String CLASS_INDICATION_CTRL = "com.android.systemui.statusbar.KeyguardIndicationController";
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_INDICATION_CTRL, classLoader,
+                        "-get3", CLASS_INDICATION_CTRL, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (isDashSoundDisabled(prefs, qhPrefs)) {
+                            param.setResult(0);
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+        }
+    }
+
+    private static boolean isDashSoundDisabled(final XSharedPreferences prefs, final XSharedPreferences qhPrefs) {
+        prefs.reload();
+        if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_OOS_DASH_SOUND_DISABLE, false)) {
+            qhPrefs.reload();
+            QuietHours qh = new QuietHours(qhPrefs);
+            return qh.isSystemSoundMuted(QuietHours.SystemSound.CHARGER);
+        }
+        return true;
     }
 }

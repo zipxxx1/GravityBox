@@ -1761,6 +1761,11 @@
                 android:defaultValue="" />
 
             <CheckBoxPreference 
+                android:key="pref_oos_dash_sound_disable"
+                android:title="@string/pref_oos_dash_sound_disable_title"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference 
                 android:key="pref_battery_saver_indication_disable"
                 android:title="@string/pref_battery_saver_indication_disable_title"
                 android:summary="@string/pref_battery_saver_indication_disable_summary"
