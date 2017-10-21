@@ -90,7 +90,10 @@ public class ModDialer25 {
 
     private static ClassInfo resolveDialpadFragment(ClassLoader cl) {
         ClassInfo info = null;
-        String[] CLASS_NAMES = new String[] { "com.android.dialer.app.dialpad.DialpadFragment" };
+        String[] CLASS_NAMES = new String[] {
+                "com.android.dialer.app.dialpad.DialpadFragment",
+                "com.android.dialer.dialpadview.DialpadFragment"
+        };
         String[] METHOD_NAMES = new String[] { "onResume", "playTone" };
         for (String className : CLASS_NAMES) {
             Class<?> clazz = XposedHelpers.findClassIfExists(className, cl);
