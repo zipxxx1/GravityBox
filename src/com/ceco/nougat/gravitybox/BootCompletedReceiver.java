@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,6 +17,8 @@ package com.ceco.nougat.gravitybox;
 
 import java.io.File;
 
+import com.ceco.nougat.gravitybox.quicksettings.TileOrderActivity;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,10 +27,9 @@ import android.os.Build;
 public class BootCompletedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            prepareAssets(context);
-            SettingsManager.getInstance(context).fixFolderPermissionsAsync();
-        }
+        maybePerformTasksAfterRestore(context);
+        prepareAssets(context);
+        SettingsManager.getInstance(context).fixFolderPermissionsAsync();
     }
 
     // copies required files from assets to file system
@@ -44,6 +45,23 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         }
         if (f.exists()) {
             f.setExecutable(true);
+        }
+    }
+
+    // performs necessary tasks after last restore of the settings
+    private void maybePerformTasksAfterRestore(Context context) {
+        File uuidFile = null;
+        for (File file : Utils.getFilesDir(context).listFiles()) {
+            if (file.getName().startsWith("uuid_")) {
+                uuidFile = file;
+                break;
+            }
+        }
+        if (uuidFile != null) {
+            uuidFile.delete();
+            String uuid = uuidFile.getName().split("_")[1];
+            SettingsManager.getInstance(context).resetUuid(uuid);
+            TileOrderActivity.updateServiceComponents(context);
         }
     }
 }

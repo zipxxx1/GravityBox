@@ -210,8 +210,11 @@ public class SettingsManager {
             return false;
         }
 
-        // Save existing UUID
-        String uuid = getOrCreateUuid();
+        // Make UUID file that serves as flag to perform some tasks at next boot after restore
+        String uuid = "uuid_" + getOrCreateUuid();
+        try {
+            new File(mContext.getFilesDir() + "/" + uuid).createNewFile();
+        } catch (IOException e) { /* ignore */ }
 
         // preferences
         String[] prefsFileNames = new String[] { 
@@ -291,9 +294,6 @@ public class SettingsManager {
                 }
             }
         }
-
-        // Put back UUID
-        resetUuid(uuid);
 
         Toast.makeText(mContext, R.string.settings_restore_success, Toast.LENGTH_SHORT).show();
         return true;
