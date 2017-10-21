@@ -2025,4 +2025,7 @@
     <!-- OOS: disable dash charging sound -->
     <string name="pref_oos_dash_sound_disable_title">Disable Dash charging sound</string>
 
+    <!-- Storage permission toast -->
+    <string name="permission_storage_denied">Permission to access Storage was denied</string>
+
 </resources>
