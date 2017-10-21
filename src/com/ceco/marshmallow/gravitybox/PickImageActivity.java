@@ -19,15 +19,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.UUID;
+
+import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.provider.MediaStore.Images;
 import android.widget.Toast;
 import com.ceco.marshmallow.gravitybox.R;
 
@@ -49,7 +52,6 @@ public class PickImageActivity extends Activity {
     public static final String EXTRA_FILE_PATH = "filePath";
 
     private ProgressDialog mProgressDialog;
-    private LoadResult mLoadResult;
     private boolean mCropImage;
     private boolean mScale;
     private boolean mScaleUp;
@@ -60,6 +62,13 @@ public class PickImageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (checkSelfPermission(permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                checkSelfPermission(permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, R.string.permission_storage_denied, Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
         mProgressDialog = new ProgressDialog(PickImageActivity.this);
         mProgressDialog.setMessage(getString(R.string.lc_please_wait));
@@ -107,79 +116,105 @@ public class PickImageActivity extends Activity {
             if (requestCode == REQ_PICK_IMAGE) {
                 new ImageLoader().execute(data.getData());
             } else if (requestCode == REQ_CROP_IMAGE) {
-                new File(mLoadResult.filePath).delete();
-                mLoadResult.filePath += "_cropped";
-                setResult(Activity.RESULT_OK, 
-                        new Intent().putExtra(EXTRA_FILE_PATH, mLoadResult.filePath));
-                finish();
+                sendResult(data.getData());
             }
         } else {
-            setResult(Activity.RESULT_CANCELED);
-            cleanup();
-            finish();
+            sendResult(null);
         }
     }
 
     private void onImageLoadedResult(LoadResult result) {
         if (isDestroyed()) {
-            cleanup();
             return;
         } else if (result.exception != null) {
             Toast.makeText(this, String.format("%s: %s", getString(R.string.imgpick_choose_error),
-                    result.exception.getMessage()), Toast.LENGTH_SHORT).show();
-            setResult(Activity.RESULT_CANCELED);
-            cleanup();
-            finish();
+                    result.exception.getMessage()), Toast.LENGTH_LONG).show();
+            sendResult(null);
             return;
         }
 
-        mLoadResult = result;
         if (mCropImage) {
-            cropImage();
+            cropImage(result.file);
         } else {
             setResult(Activity.RESULT_OK, 
-                    new Intent().putExtra(EXTRA_FILE_PATH, mLoadResult.filePath));
+                    new Intent().putExtra(EXTRA_FILE_PATH, result.file.getAbsolutePath()));
             finish();
         }
     }
 
-    private void cropImage() {
+    private void sendResult(Uri uri) {
+        if (uri == null) {
+            setResult(Activity.RESULT_CANCELED);
+        } else {
+            try {
+                File f = createFileFromUri(uri);
+                setResult(Activity.RESULT_OK, 
+                        new Intent().putExtra(EXTRA_FILE_PATH, f.getAbsolutePath()));
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, String.format("%s: %s", getString(R.string.imgpick_crop_error),
+                        e.getMessage()), Toast.LENGTH_LONG).show();
+                setResult(Activity.RESULT_CANCELED);
+            }
+            getContentResolver().delete(uri, null, null);
+        }
+        finish();
+    }
+
+    private File createFileFromUri(Uri uri) throws Exception {
+        File outFile = new File(getCacheDir() + "/" + UUID.randomUUID().toString());
+        InputStream in = null;
+        FileOutputStream out = null;
         try {
-            File srcFile = new File(mLoadResult.filePath);
-            Uri uri = Uri.fromFile(srcFile);
+            in = getContentResolver().openInputStream(uri);
+            out = new FileOutputStream(outFile);
+            final byte[] buffer = new byte[1024];
+            int read;
+            while((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            out.flush();
+        } finally {
+            try { in.close(); } catch (Exception e) { }
+            try { out.close(); } catch (Exception e) { }
+        }
+        return outFile;
+    }
+
+    private void cropImage(File file) {
+        Uri uri = null;
+        try {
+            uri = Uri.parse(Images.Media.insertImage(
+                    getContentResolver(), file.getAbsolutePath(), null, null));
             Intent cropIntent = new Intent(ACTION_CROP);
             cropIntent.setDataAndType(uri, "image/*");
-            cropIntent.putExtra("crop", "true");
+            cropIntent.putExtra(EXTRA_CROP, "true");
             if (mAspectSize != null) {
-                cropIntent.putExtra("aspectX", mAspectSize.x);
-                cropIntent.putExtra("aspectY", mAspectSize.y);
+                cropIntent.putExtra(EXTRA_ASPECT_X, mAspectSize.x);
+                cropIntent.putExtra(EXTRA_ASPECT_Y, mAspectSize.y);
             }
             if (mOutputSize != null) {
-                cropIntent.putExtra("outputX", mOutputSize.x);
-                cropIntent.putExtra("outputY", mOutputSize.y);
+                cropIntent.putExtra(EXTRA_OUTPUT_X, mOutputSize.x);
+                cropIntent.putExtra(EXTRA_OUTPUT_Y, mOutputSize.y);
             }
             if (mSpotlightSize != null) {
-                cropIntent.putExtra("spotlightX", mSpotlightSize.x);
-                cropIntent.putExtra("spotlightY", mSpotlightSize.y);
+                cropIntent.putExtra(EXTRA_SPOTLIGHT_X, mSpotlightSize.x);
+                cropIntent.putExtra(EXTRA_SPOTLIGHT_Y, mSpotlightSize.y);
             }
-            cropIntent.putExtra("scale", mScale);
-            cropIntent.putExtra("scaleUpIfNeeded", mScaleUp);
-            cropIntent.putExtra("return-data", false);
+            cropIntent.putExtra(EXTRA_SCALE, mScale);
+            cropIntent.putExtra(EXTRA_SCALE_UP, mScaleUp);
+            cropIntent.putExtra("return-data", true);
             cropIntent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
 
-            File out = new File(getCacheDir() + "/" + srcFile.getName() + "_cropped");
-            out.createNewFile();
-            out.setReadable(true, false);
-            out.setWritable(true, false);
-            cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(out));
             startActivityForResult(cropIntent, REQ_CROP_IMAGE);
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, String.format("%s: %s", getString(R.string.imgpick_crop_error),
-                    e.getMessage()), Toast.LENGTH_SHORT).show();
-            setResult(Activity.RESULT_CANCELED);
-            cleanup();
-            finish();
+                    e.getMessage()), Toast.LENGTH_LONG).show();
+            if (uri != null) {
+                getContentResolver().delete(uri, null, null);
+            }
+            sendResult(null);
         }
     }
 
@@ -189,16 +224,8 @@ public class PickImageActivity extends Activity {
         }
     }
 
-    private void cleanup() {
-        if (mLoadResult != null && mLoadResult.filePath != null) {
-            new File(mLoadResult.filePath).delete();
-            new File(mLoadResult.filePath + "_cropped").delete();
-        }
-        mLoadResult = null;
-    }
-
     class LoadResult {
-        String filePath;
+        File file;
         Exception exception;
     }
 
@@ -211,30 +238,13 @@ public class PickImageActivity extends Activity {
 
         @Override
         protected LoadResult doInBackground(Uri... params) {
-            File outFile = new File(getCacheDir() + "/" + UUID.randomUUID().toString());
             LoadResult result = new LoadResult();
-            InputStream in = null;
-            FileOutputStream out = null;
-            try {
-                in = getContentResolver().openInputStream(params[0]);
-                out = new FileOutputStream(outFile);
-                final byte[] buffer = new byte[1024];
-                int read;
-                while((read = in.read(buffer)) != -1) {
-                    out.write(buffer, 0, read);
-                }
-                out.flush();
-                outFile.setReadable(true, false);
-                outFile.setWritable(true, false);
-                result.filePath = outFile.getAbsolutePath();
+            try { 
+                result.file = createFileFromUri(params[0]);
             } catch (Exception e) {
-                e.printStackTrace();
                 result.exception = e;
-            } finally {
-                try { in.close(); } catch (Exception e) { }
-                try { out.close(); } catch (Exception e) { }
+                e.printStackTrace();
             }
-
             return result;
         }
 

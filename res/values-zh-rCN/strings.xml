@@ -2120,4 +2120,7 @@
     <string name="qs_tile_bt_tethering_off">共享关</string>
     <string name="qs_tile_bt_tethering_error">错误</string>
 
+    <!-- Storage permission toast -->
+    <string name="permission_storage_denied">访问存储权限时被拒绝</string>
+
 </resources>

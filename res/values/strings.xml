@@ -2120,4 +2120,7 @@
     <string name="qs_tile_bt_tethering_off">Tethering Off</string>
     <string name="qs_tile_bt_tethering_error">Error</string>
 
+    <!-- Storage permission toast -->
+    <string name="permission_storage_denied">Permission to access Storage was denied</string>
+
 </resources>

@@ -2023,4 +2023,7 @@
     <string name="pref_statusbar_download_progress_sound_screen_off_title">Csak kikapcsolt képernyőnél</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_summary">Értesítési hang lejátszása csak kikapocsolt képernyő esetén</string>
 
+    <!-- Storage permission toast -->
+    <string name="permission_storage_denied">A Háttértárhoz való hozzáférési engedély megtagadásra került</string>
+
 </resources>

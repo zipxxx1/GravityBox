@@ -1656,4 +1656,7 @@
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Rozwiń panel Szybkich Ustawień</string>
 
+    <!-- Storage permission toast -->
+    <string name="permission_storage_denied">Zezwolenie na dostęp do pamięci zostało odrzucone</string>
+
 </resources>
