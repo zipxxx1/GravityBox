@@ -20,7 +20,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import android.Manifest.permission;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.FileObserver;
@@ -74,6 +77,12 @@ public class SettingsManager {
     }
 
     public boolean backupSettings() {
+        if (mContext.checkSelfPermission(permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                mContext.checkSelfPermission(permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(mContext, R.string.permission_storage_denied, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         File targetDir = new File(BACKUP_PATH);
         if (!(targetDir.exists() && targetDir.isDirectory())) {
             if (!targetDir.mkdirs()) {
@@ -190,6 +199,12 @@ public class SettingsManager {
     }
 
     public boolean restoreSettings() {
+        if (mContext.checkSelfPermission(permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                mContext.checkSelfPermission(permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(mContext, R.string.permission_storage_denied, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         if (!isBackupAvailable()) {
             Toast.makeText(mContext, R.string.settings_restore_no_backup, Toast.LENGTH_SHORT).show();
             return false;
