@@ -107,7 +107,8 @@ public class ModVolumePanel {
                     mTimeout = prefs.getInt(
                             GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TIMEOUT, 0);
 
-                    prepareNotificationRow();
+                    if (!Utils.isSamsungRom())
+                        prepareNotificationRow();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
