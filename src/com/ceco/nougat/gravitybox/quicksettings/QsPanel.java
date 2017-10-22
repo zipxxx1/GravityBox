@@ -31,7 +31,8 @@ import com.ceco.nougat.gravitybox.Utils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Animatable;
 import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +49,6 @@ public class QsPanel implements BroadcastSubReceiver {
     public static final String CLASS_QS_PANEL = "com.android.systemui.qs.QSPanel";
     private static final String CLASS_BRIGHTNESS_CTRL = "com.android.systemui.settings.BrightnessController";
     private static final String CLASS_TILE_LAYOUT = "com.android.systemui.qs.TileLayout";
-    private static final String CLASS_TILE_HOST = "com.android.systemui.statusbar.phone.QSTileHost";
-    private static final String ACTION_SHOW_ADMIN_SUPPORT_DETAILS = "android.settings.SHOW_ADMIN_SUPPORT_DETAILS";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -323,59 +322,68 @@ public class QsPanel implements BroadcastSubReceiver {
             XposedBridge.log(t);
         }
 
-        // Disable info icon for protected tiles
         try {
-            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, classLoader,
-                    "handleStateChanged", BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    View padlock = (View) XposedHelpers.getObjectField(param.thisObject, "mPadLock");
-                    if (padlock != null) {
-                        padlock.setVisibility(View.GONE);
-                    }
-                }
-            });
-        } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
-        }
-
-        // Disable restricted by admin dialog
-        try {
-            XposedHelpers.findAndHookMethod(CLASS_TILE_HOST, classLoader,
-                    "startActivityDismissingKeyguard", Intent.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_ICON_VIEW, classLoader,
+                    "setIcon", ImageView.class, BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (ACTION_SHOW_ADMIN_SUPPORT_DETAILS.equals(
-                            ((Intent)param.args[0]).getAction())) {
-                        param.setResult(null);
+                    Boolean locked = (Boolean) XposedHelpers.getAdditionalInstanceField(
+                            param.args[1], "locked");
+                    if (locked != null && param.args[0] != null) {
+                        int id = mQsPanel.getResources().getIdentifier("qs_icon_tag", "id",
+                                ModQsTiles.PACKAGE_NAME);
+                        if (id != 0) {
+                            ((View)param.args[0]).setTag(id, 0);
+                        }
                     }
                 }
-            });
-        } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
-        }
-
-        // OOS: apply alpha channel to protected tiles when locked
-        if (Utils.isOxygenOsRom()) {
-            try {
-                XposedHelpers.findAndHookMethod(BaseTile.CLASS_ICON_VIEW, classLoader,
-                        "setIcon", ImageView.class, BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Object icon = XposedHelpers.getObjectField(param.args[1], "icon");
-                        if (icon != null) {
-                            Drawable d = (Drawable) XposedHelpers.callMethod(icon, "getDrawable",
-                                    mQsPanel.getContext());
-                            if (d != null) {
-                                d.setAlpha(XposedHelpers.getBooleanField(
-                                        param.args[1], "disabledByPolicy") ? 80 : 255);
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    Boolean locked = (Boolean) XposedHelpers.getAdditionalInstanceField(
+                            param.args[1], "locked");
+                    if (locked != null && locked.booleanValue()) {
+                        ImageView v = (ImageView) param.args[0];
+                        if (v != null && v.getDrawable() != null) {
+                            if (v.getDrawable() instanceof Animatable) {
+                                Animatable ad = (Animatable) v.getDrawable();
+                                if (ad.isRunning()) ad.stop();
+                            }
+                            if (Utils.isOxygenOsRom()) {
+                                v.getDrawable().mutate().setAlpha(80);
+                            } else {
+                                v.getDrawable().mutate().setColorFilter(
+                                    BaseTile.COLOR_LOCKED,
+                                    PorterDuff.Mode.SRC_IN);
                             }
                         }
                     }
-                });
-            } catch (Throwable t) {
-                if (DEBUG) XposedBridge.log(t);
-            }
+                }
+            });
+        } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_STATE, classLoader,
+                    "copyTo", BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    Boolean lockedNew = (Boolean) XposedHelpers.getAdditionalInstanceField(
+                            param.thisObject, "locked");
+                    if (lockedNew != null) {
+                        Boolean lockedOld = (Boolean) XposedHelpers.getAdditionalInstanceField(
+                                param.args[0], "locked");
+                        if (lockedOld == null || lockedOld.booleanValue() != lockedNew.booleanValue()) {
+                            XposedHelpers.setAdditionalInstanceField(param.args[0], "locked", lockedNew);
+                            param.setResult(true);
+                        }
+                    } else {
+                        XposedHelpers.removeAdditionalInstanceField(param.args[0], "locked");
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
         }
     }
 

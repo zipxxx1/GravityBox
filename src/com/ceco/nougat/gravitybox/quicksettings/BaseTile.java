@@ -30,6 +30,7 @@ import com.ceco.nougat.gravitybox.quicksettings.QsTileEventDistributor.QsEventLi
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public abstract class BaseTile implements QsEventListener {
     protected static final boolean DEBUG = ModQsTiles.DEBUG;
 
     public static final String TILE_KEY_NAME = "gbTileKey";
+    public static final int COLOR_LOCKED = Color.parseColor("#9E9E9E");
     public static final String CLASS_BASE_TILE = "com.android.systemui.qs.QSTile";
     public static final String CLASS_TILE_STATE = "com.android.systemui.qs.QSTile.State";
     public static final String CLASS_TILE_VIEW = "com.android.systemui.qs.QSTileView";
@@ -148,6 +150,11 @@ public abstract class BaseTile implements QsEventListener {
     @Override
     public Object getDetailAdapter() {
         return null;
+    }
+
+    @Override
+    public final boolean isLocked() {
+        return (mProtected && mKgMonitor.isShowing() && mKgMonitor.isLocked());
     }
 
     public void handleDestroy() {

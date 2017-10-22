@@ -15,6 +15,8 @@
 
 package com.ceco.nougat.gravitybox.quicksettings;
 
+import java.lang.reflect.Method;
+
 import com.ceco.nougat.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -28,6 +30,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
     protected Unhook mHandleUpdateStateHook;
     protected Unhook mHandleClickHook;
     protected Unhook mSetListeningHook;
+    protected Unhook mHandleSecondaryClickHook;
 
     public static AospTile create(Object host, Object tile, String aospKey, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -59,21 +62,19 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
         if (DEBUG) log(mKey + ": aosp tile wrapper created");
     }
 
-    protected final boolean disabledByPolicy() {
-        return (mProtected && mKgMonitor.isShowing() && mKgMonitor.isLocked());
-    }
-
     // Tiles can override click functionality
     // When true is returned, original click handler will be suppressed
     protected boolean onBeforeHandleClick() {
-        return false;
+        return isLocked();
     }
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        final boolean disabledByPolicy =
-                mProtected && mKgMonitor.isShowing() && mKgMonitor.isLocked();
-        XposedHelpers.setBooleanField(state, "disabledByPolicy", disabledByPolicy);
+        if (mProtected) {
+            XposedHelpers.setAdditionalInstanceField(state, "locked", Boolean.valueOf(isLocked()));
+        } else {
+            XposedHelpers.removeAdditionalInstanceField(state, "locked");
+        }
     }
 
     @Override
@@ -129,6 +130,19 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
                     }
                 }
             });
+
+            Method m = XposedHelpers.findMethodExactIfExists(mTile.getClass().getName(), cl,
+                    "handleSecondaryClick");
+            if (m != null) {
+                mHandleSecondaryClickHook = XposedBridge.hookMethod(m, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (isLocked() || handleSecondaryClick()) {
+                            param.setResult(null);
+                        }
+                    }
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -146,6 +160,10 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
         if (mSetListeningHook != null) {
             mSetListeningHook.unhook();
             mSetListeningHook = null;
+        }
+        if (mHandleSecondaryClickHook != null) {
+            mHandleSecondaryClickHook.unhook();
+            mHandleSecondaryClickHook = null;
         }
     }
 }

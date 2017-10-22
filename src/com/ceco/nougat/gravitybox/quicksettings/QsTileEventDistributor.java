@@ -57,6 +57,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         View onCreateIcon();
         boolean handleSecondaryClick();
         Object getDetailAdapter();
+        boolean isLocked();
     }
 
     private static void log(String message) {
@@ -157,7 +158,11 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
                     if (l instanceof QsTile) {
-                        l.handleClick();
+                        if (!l.isLocked()) {
+                            l.handleClick();
+                        } else {
+                            param.setResult(null);
+                        }
                     }
                 }
             });
@@ -213,7 +218,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                    if (l != null && l.handleSecondaryClick()) {
+                    if (l != null && (l.isLocked() || l.handleSecondaryClick())) {
                         param.setResult(null);
                     }
                 }

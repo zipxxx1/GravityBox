@@ -139,7 +139,7 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
     @Override
     public boolean handleLongClick() {
         if (mQh != null) {
-            if (mQh.mode != QuietHours.Mode.AUTO && !mState.disabledByPolicy) {
+            if (mQh.mode != QuietHours.Mode.AUTO && !isLocked()) {
                 SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.AUTO);
             } else {
                 Intent i = new Intent();

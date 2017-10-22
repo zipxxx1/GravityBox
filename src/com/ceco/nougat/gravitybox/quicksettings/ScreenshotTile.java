@@ -62,7 +62,7 @@ public class ScreenshotTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (!mState.disabledByPolicy) {
+        if (!isLocked()) {
             collapsePanels();
             try {
                 Intent intent = new Intent(mGbContext, ScreenRecordingService.class);

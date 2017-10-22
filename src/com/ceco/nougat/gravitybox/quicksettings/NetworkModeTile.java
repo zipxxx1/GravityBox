@@ -284,7 +284,7 @@ public class NetworkModeTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (!mState.disabledByPolicy) {
+        if (!isLocked()) {
             if (mQuickMode) {
                 showDetail(true);
                 return true;

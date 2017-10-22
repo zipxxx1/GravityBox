@@ -142,7 +142,7 @@ public class RingerModeTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (mQuickMode && !mState.disabledByPolicy) {
+        if (mQuickMode && !isLocked()) {
             showDetail(true);
         } else {
             startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);

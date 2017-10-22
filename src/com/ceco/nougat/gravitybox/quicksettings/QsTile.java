@@ -19,6 +19,7 @@ import java.lang.reflect.Constructor;
 import com.ceco.nougat.gravitybox.Utils;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -104,8 +105,6 @@ public abstract class QsTile extends BaseTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.disabledByPolicy =
-                mProtected && mKgMonitor.isShowing() && mKgMonitor.isLocked();
         mState.applyTo(state);
     }
 
@@ -145,6 +144,12 @@ public abstract class QsTile extends BaseTile {
                 if (color != null) {
                     d.setTint(color);
                 }
+                d.setAlpha(isLocked() ? 80 : 255);
+            } else if (!(this instanceof QuickAppTile)) {
+                d.clearColorFilter();
+                if (isLocked()) {
+                    d.setColorFilter(COLOR_LOCKED, PorterDuff.Mode.SRC_IN);
+                }
             }
             return sDrawableIconClassConstructor.newInstance(d);
         } catch (Throwable t) {
@@ -165,14 +170,12 @@ public abstract class QsTile extends BaseTile {
     }
 
     public static class State {
-        public boolean disabledByPolicy;
         public Object icon;
         public String label = "";
         public boolean autoMirrorDrawable = true;
         public boolean booleanValue = true;
 
         public void applyTo(Object state) {
-            XposedHelpers.setBooleanField(state, "disabledByPolicy", disabledByPolicy);
             XposedHelpers.setObjectField(state, "icon", icon);
             XposedHelpers.setObjectField(state, "label", label);
             XposedHelpers.setBooleanField(state, "autoMirrorDrawable", autoMirrorDrawable);

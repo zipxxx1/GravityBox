@@ -63,7 +63,7 @@ public class SleepTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (!mState.disabledByPolicy) {
+        if (!isLocked()) {
             Intent intent = new Intent(ModHwKeys.ACTION_SHOW_POWER_MENU);
             mContext.sendBroadcast(intent);
             collapsePanels();

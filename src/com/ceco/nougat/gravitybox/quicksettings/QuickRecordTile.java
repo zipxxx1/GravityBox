@@ -304,7 +304,7 @@ public class QuickRecordTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (!mState.disabledByPolicy) {
+        if (!isLocked()) {
             switch (mRecordingState) {
                 case STATE_NO_RECORDING:
                 case STATE_IDLE:

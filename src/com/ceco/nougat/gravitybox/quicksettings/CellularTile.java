@@ -106,7 +106,7 @@ public class CellularTile extends AospTile {
 
     @Override
     public boolean handleLongClick() {
-        if (!disabledByPolicy()) {
+        if (!isLocked()) {
             if (mDataToggle == DataToggle.LONGPRESS) {
                 toggleMobileData();
                 refreshState();

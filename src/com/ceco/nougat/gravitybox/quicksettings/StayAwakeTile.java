@@ -253,7 +253,7 @@ public class StayAwakeTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (!mState.disabledByPolicy) {
+        if (!isLocked()) {
             if (mCurrentTimeout == NEVER_SLEEP) {
                 setScreenOffTimeout(mPreviousTimeout);
             } else {
