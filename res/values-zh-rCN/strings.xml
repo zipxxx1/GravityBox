@@ -126,7 +126,7 @@
     <string name="reboot_confirm">您的%s将重新启动</string>
     <string name="reboot_confirm_recovery">您的%s将重新启动至Recovery</string>
     <string name="reboot_confirm_bootloader">您的%s将重新启动至Bootloader</string>
-	<string name="reboot_confirm_download">您的％s将重新启动进入下载模式</string>
+	<string name="reboot_confirm_download">您的%s将重新启动进入下载模式</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">工程模式</string>
