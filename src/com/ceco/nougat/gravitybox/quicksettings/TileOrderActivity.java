@@ -32,6 +32,7 @@ import com.ceco.nougat.gravitybox.WorldReadablePrefs;
 import com.ceco.nougat.gravitybox.ledcontrol.LedSettings;
 import com.ceco.nougat.gravitybox.ledcontrol.QuietHoursActivity;
 
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
@@ -202,8 +203,15 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         if (key.equals("gb_tile_smart_radio") && !mPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false))
             return false;
+        if (key.equals("gb_tile_quickrecord") && !isAudioRecordingAllowed())
+            return false;
 
         return true;
+    }
+
+    private boolean isAudioRecordingAllowed() {
+        return (checkSelfPermission(permission.RECORD_AUDIO) ==
+                    PackageManager.PERMISSION_GRANTED);
     }
 
     @Override
