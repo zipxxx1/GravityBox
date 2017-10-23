@@ -107,6 +107,8 @@
     <!-- Reboot confirmation -->
     <string name="reboot_confirm">Váš %s bude reštartovaný.</string>
     <string name="reboot_confirm_recovery">Váš %s bude reštartovaný do režimu Recovery.</string>
+    <string name="reboot_confirm_bootloader">Váš %s bude reštartovaný do režimu Bootloader.</string>
+    <string name="reboot_confirm_download">Váš %s bude reštartovaný do režimu Download.</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Režim technika</string>
@@ -1937,10 +1939,36 @@
     <string name="shortcut_sm_data_sim_2">SIM 2 pre dáta</string>
     <string name="shortcut_sm_data_sim_ui">Vybrať SIM pre dáta</string>
 
+    <!-- QuickApp Tile #3 and #4 -->
+    <string name="pref_cat_quickapp_tile_3_title">Rýchla aplikácia 3</string>
+    <string name="qs_tile_quickapp_3">Rýchla aplikácia 3</string>
+    <string name="pref_cat_quickapp_tile_4_title">Rýchla aplikácia 4</string>
+    <string name="qs_tile_quickapp_4">Rýchla aplikácia 4</string>
+
     <!-- QS Bluetooth Tethering tile -->
     <string name="qs_tile_bt_tethering">Bluetooth Tethering</string>
     <string name="qs_tile_bt_tethering_on">Tethering zap</string>
     <string name="qs_tile_bt_tethering_off">Tethering vyp</string>
     <string name="qs_tile_bt_tethering_error">Chyba</string>
+
+    <!-- QS protected when device locked -->
+    <string name="qs_protected_summary">Chránená počas uzamknutia zariadenia</string>
+
+    <!-- Volume panel: notification stream label -->
+    <string name="notification_stream_name">Upozornenia</string>
+
+    <!-- OOS: hide dash charge icon -->
+    <string name="pref_battery_hide_dash_icon_title">Skryť Dash ikonu</string>
+    <string name="pref_battery_hide_dash_icon_summary">Pre systémový indikátor batérie</string>
+
+    <!-- OOS: call recording -->
+    <string name="pref_oos_call_recording_title">Povoliť nahrávanie hovorov</string>
+    <string name="pref_oos_call_recording_summary">Pozor, nahrávanie hovorov môže byť ilegálne vo Vašej krajine</string>
+
+    <!-- OOS: disable dash charging sound -->
+    <string name="pref_oos_dash_sound_disable_title">Vypnúť zvuk Dash nabíjania</string>
+
+    <!-- Storage permission toast -->
+    <string name="permission_storage_denied">Prístup k úložisku bol zamietnutý</string>
 
 </resources>

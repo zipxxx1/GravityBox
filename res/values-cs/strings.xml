@@ -105,6 +105,8 @@
     <!-- Reboot confirmation -->
     <string name="reboot_confirm">Váš %s bude restartován</string>
     <string name="reboot_confirm_recovery">Váš %s bude restartován do režimu Recovery</string>
+    <string name="reboot_confirm_bootloader">Váš %s bude restartován do režimu Bootloader.</string>
+    <string name="reboot_confirm_download">Váš %s bude restartován do režimu Download.</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Režim technika</string>
@@ -315,13 +317,13 @@
     <string name="app_picker_none">(Žádná)</string>
 
     <!-- QuickApp tile settings -->
-    <string name="qs_tile_quickapp">Quick App</string>
-    <string name="pref_cat_quickapp_tile_title">Nastavení QuickApp dlaždice</string>
+    <string name="qs_tile_quickapp">Rychlá aplikace</string>
+    <string name="pref_cat_quickapp_tile_title">Rychlá aplikace</string>
     <string name="pref_quickapp_default_title">Hlavní aplikace</string>
-    <string name="pref_quickapp_slot1_title">Dlouhé stisknutí - app slot 1</string>
-    <string name="pref_quickapp_slot2_title">Dlouhé stisknutí - app slot 2</string>
-    <string name="pref_quickapp_slot3_title">Dlouhé stisknutí - app slot 3</string>
-    <string name="pref_quickapp_slot4_title">Dlouhé stisknutí - app slot 4</string>
+    <string name="pref_quickapp_slot1_title">Na podržení - app slot 1</string>
+    <string name="pref_quickapp_slot2_title">Na podržení - app slot 2</string>
+    <string name="pref_quickapp_slot3_title">Na podržení - app slot 3</string>
+    <string name="pref_quickapp_slot4_title">Na podržení - app slot 4</string>
 
     <!-- GPS Tile (for non-MTK) -->
     <string name="qs_tile_gps_enabled">GPS zap</string>
@@ -771,8 +773,8 @@
     <string name="bpt_charging_animated">Animovaná</string>
 
     <!-- QuickApp Tile #2 -->
-    <string name="pref_cat_quickapp_tile_2_title">Nastavení QuickApp dlaždice 2</string>
-    <string name="qs_tile_quickapp_2">Quick App 2</string>
+    <string name="pref_cat_quickapp_tile_2_title">Rychlá aplikace 2</string>
+    <string name="qs_tile_quickapp_2">Rychlá aplikace 2</string>
 
     <!-- Force music volume control -->
     <string name="pref_vol_force_music_control_title">Vynutit ovládání hlasitosti médií</string>
@@ -1931,10 +1933,36 @@
     <string name="shortcut_sm_data_sim_2">SIM 2 pro data</string>
     <string name="shortcut_sm_data_sim_ui">Vybrat SIM pro data</string>
 
+    <!-- QuickApp Tile #3 and #4 -->
+    <string name="pref_cat_quickapp_tile_3_title">Rychlá aplikace 3</string>
+    <string name="qs_tile_quickapp_3">Rychlá aplikace 3</string>
+    <string name="pref_cat_quickapp_tile_4_title">Rychlá aplikace 4</string>
+    <string name="qs_tile_quickapp_4">Rychlá aplikace 4</string>
+
     <!-- QS Bluetooth Tethering tile -->
     <string name="qs_tile_bt_tethering">Bluetooth Tethering</string>
     <string name="qs_tile_bt_tethering_on">Tethering zap</string>
     <string name="qs_tile_bt_tethering_off">Tethering vyp</string>
     <string name="qs_tile_bt_tethering_error">Chyba</string>
+
+    <!-- QS protected when device locked -->
+    <string name="qs_protected_summary">Chráněná během uzamčení zařízení</string>
+
+    <!-- Volume panel: notification stream label -->
+    <string name="notification_stream_name">Upozornění</string>
+
+    <!-- OOS: hide dash charge icon -->
+    <string name="pref_battery_hide_dash_icon_title">Skrýt Dash ikonu</string>
+    <string name="pref_battery_hide_dash_icon_summary">Pro systémový indikátor baterie</string>
+
+    <!-- OOS: call recording -->
+    <string name="pref_oos_call_recording_title">Povolit nahrávání hovorů</string>
+    <string name="pref_oos_call_recording_summary">Pozor, nahrávání hovorů může být ilegální ve Vaší zemi</string>
+
+    <!-- OOS: disable dash charging sound -->
+    <string name="pref_oos_dash_sound_disable_title">Vypnout zvuk Dash nabíjení</string>
+
+    <!-- Storage permission toast -->
+    <string name="permission_storage_denied">Přístup k úložišti byl zamítnut</string>
 
 </resources>
