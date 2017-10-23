@@ -2026,6 +2026,6 @@
     <string name="pref_oos_dash_sound_disable_title">禁用快速充电声音</string>
 
     <!-- Storage permission toast -->
-    <string name="permission_storage_denied">访问存储的权限被拒绝</string>
+    <string name="permission_storage_denied">访问存储权限时被拒绝</string>
 
 </resources>
