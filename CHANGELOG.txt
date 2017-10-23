@@ -1,3 +1,28 @@
+Changelog 7.0.3 - 23/10/2017
+--------------------------------------
+- General fixes and improvements:
+--- QS: improved reliability of NFC tile and GravityBox NFC Actions
+--- QS: reworked Protected mode of tiles
+--- QS: fixed protected tiles showing wrong color after unlocking
+--- QS: fixed some long-press actions still working on protected tiles while locked
+--- QS: fixed press actions still working for header tiles while locked
+--- QS: removed info icon showing for protected tiles
+--- Improved image choosing/cropping to eliminate direct file access causing problems on some systems
+--- ProgressBar: fixed not showing for apps targeting old versions of Android
+--- GB Torch: fixed auto-off feature to use Alarm (does not require WakeLock permission anymore)
+--- Phone: adjusted for the latest version of Google Dialer
+- OxygenOS improvements:
+--- Added OOS theming support to GravityBox tiles
+--- Added option for enabling built-in call recording
+--- Added option for disabling Dash charging sound
+--- Made Dash charging sound respect GB Quiet Hours
+- Samsung fixes and improvements (provided by Firetds)
+--- Fixed duplicate reboot confirmation
+--- Added Samsung specific strings for rebooting into Download mode
+--- Fixed disabling safe media volume warning
+--- Fixed duplicate notification slider showing in Volume panel
+- Updated Russian translations (thanks to gaich)
+
 Changelog 7.0.2 - 14/10/2017
 --------------------------------------
 - General fixes:
