@@ -16,8 +16,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name" translatable="false">GravityBox [N]</string>
-
     <string name="battery_style_title">电量图标风格</string>        
     <string name="battery_style_stock">原厂电量图标</string>
     <string name="battery_style_circle">圆形电量图标</string>
