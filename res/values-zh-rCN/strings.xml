@@ -16,6 +16,8 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <string name="app_name" translatable="false">GravityBox [N]</string>
+
     <string name="battery_style_title">电量图标风格</string>        
     <string name="battery_style_stock">原厂电量图标</string>
     <string name="battery_style_circle">圆形电量图标</string>
@@ -36,6 +38,7 @@
     <string name="poweroff_advanced_summary">启用重新启动和Recovery选项高级菜单</string>
     <string name="poweroff_recovery">Recovery</string>
     <string name="poweroff_bootloader">Bootloader</string>
+	<string name="poweroff_download">下载模式</string>
 
     <string name="vol_key_cursor_control_title">音量键光标调整</string>
     <string name="vol_key_cursor_control_summary">在文字输入区域内，使用音量键控制光标位置</string>
@@ -123,6 +126,7 @@
     <string name="reboot_confirm">您的%s将重新启动</string>
     <string name="reboot_confirm_recovery">您的%s将重新启动至Recovery</string>
     <string name="reboot_confirm_bootloader">您的%s将重新启动至Bootloader</string>
+	<string name="reboot_confirm_download">您的%s将重新启动进入下载模式</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">工程模式</string>
@@ -381,7 +385,7 @@
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">亮度设置</string>
     <string name="pref_brightness_master_switch_summary">这个功能只能在您的设备支持标准的Android亮度调整功能才启用，如果遇到任何亮度问题请关闭此选项（需要重新启动）</string>
-
+	
     <!-- HW Key Action: Recent apps -->
     <string name="hwkey_action_recent_apps">显示最近使用的应用程序</string>
 
@@ -1977,7 +1981,7 @@
     <string name="sm_sub_change_voice_ok">呼叫设置为默认SIM卡:</string>
     <string name="sm_sub_change_sms_ok">短信设置为默认SIM卡:</string>
     <string name="sm_sub_change_data_ok">数据设置为默认SIM卡:</string>
-    <string name="sm_voice_ask">每次都问</string>
+    <string name="sm_voice_ask">每次询问</string>
 
     <!-- GB Actions: SIM settings -->
     <string name="shortcut_sm_title">SIM设置</string>
@@ -1999,9 +2003,29 @@
     <string name="qs_tile_quickapp_4">快速应用4</string>
 
     <!-- QS Bluetooth Tethering tile -->
-    <string name="qs_tile_bt_tethering">蓝牙共享</string>
-    <string name="qs_tile_bt_tethering_on">共享开</string>
-    <string name="qs_tile_bt_tethering_off">共享关</string>
+    <string name="qs_tile_bt_tethering">蓝牙共享中</string>
+    <string name="qs_tile_bt_tethering_on">共享已开启</string>
+    <string name="qs_tile_bt_tethering_off">共享已关闭</string>
     <string name="qs_tile_bt_tethering_error">错误</string>
+
+    <!-- QS protected when device locked -->
+    <string name="qs_protected_summary">设备锁定时受保护</string>
+
+    <!-- Volume panel: notification stream label -->
+    <string name="notification_stream_name">通知</string>
+
+    <!-- OOS: hide dash charge icon -->
+    <string name="pref_battery_hide_dash_icon_title">隐藏破折号图标</string>
+    <string name="pref_battery_hide_dash_icon_summary">原厂电池指示灯</string>
+
+    <!-- OOS: call recording -->
+    <string name="pref_oos_call_recording_title">启用通话录音</string>
+    <string name="pref_oos_call_recording_summary">请注意,您的国家/地区通话记录可能是非法的</string>
+
+    <!-- OOS: disable dash charging sound -->
+    <string name="pref_oos_dash_sound_disable_title">禁用快速充电声音</string>
+
+    <!-- Storage permission toast -->
+    <string name="permission_storage_denied">访问存储权限时被拒绝</string>
 
 </resources>
