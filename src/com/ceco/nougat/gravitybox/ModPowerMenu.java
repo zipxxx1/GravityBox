@@ -108,7 +108,7 @@ public class ModPowerMenu {
 
             //hides reboot confirmation screen for Samsung roms
             if (Utils.isSamsungRom()) {
-                XposedHelpers.findAndHookMethod(globalActionsClass, "initValueForCreate", boolean.class, new XC_MethodHook() {
+                XposedBridge.hookAllMethods(globalActionsClass, "initValueForCreate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         prefs.reload();
