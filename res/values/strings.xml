@@ -2038,4 +2038,7 @@
     <!-- QS: WiFi quick mode -->
     <string name="pref_wifi_tile_quick_mode_summary">Allows toggling WiFi on tile single-press</string>
 
+    <!-- QS: BT quick mode -->
+    <string name="pref_bt_tile_quick_mode_summary">Allows toggling Bluetooth on tile single-press</string>
+
 </resources>
