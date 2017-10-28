@@ -167,6 +167,7 @@ public class ShortcutActivity extends GravityBoxListActivity {
         list.add(new RingerModeShortcut(mContext));
         list.add(new AutoBrightnessShortcut(mContext));
         list.add(new RecentAppsShortcut(mContext));
+        list.add(new SplitScreenShortcut(mContext));
         if (mInvokedFromGb && !mLaunchesFromLockscreen) {
             list.add(new KillAppShortcut(mContext));
             list.add(new SwitchAppShortcut(mContext));

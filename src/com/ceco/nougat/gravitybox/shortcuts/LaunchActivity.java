@@ -111,6 +111,8 @@ public class LaunchActivity extends Activity {
             GoHomeShortcut.launchAction(mContext, intent);
         } else if (action.equals(SimSettingsShortcut.ACTION)) {
             SimSettingsShortcut.launchAction(mContext, intent);
+        } else if (action.equals(SplitScreenShortcut.ACTION)) {
+            SplitScreenShortcut.launchAction(mContext, intent);
         }
     }
 }
