@@ -267,11 +267,17 @@
                 android:summary="@string/pref_cat_qs_tile_settings_summary"
                 android:dependency="pref_qs_management_enable">
 
-                <!-- PreferenceScreen
+                <PreferenceScreen
                     android:key="pref_cat_qs_wifi_tile"
                     android:title="@string/pref_cat_qs_wifi_tile_title">
 
-                </PreferenceScreen -->
+                    <CheckBoxPreference 
+                        android:key="pref_wifi_tile_quick_mode"
+                        android:title="@string/pref_tile_quick_mode_title"
+                        android:summary="@string/pref_wifi_tile_quick_mode_summary"
+                        android:defaultValue="false" />
+
+                </PreferenceScreen>
 
                 <!-- PreferenceScreen
                     android:key="pref_cat_qs_bt_tile"

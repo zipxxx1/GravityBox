@@ -50,6 +50,8 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new DoNotDisturbTile(host, aospKey, tile, prefs, eventDistributor);
         else if (BatteryTile.AOSP_KEY.equals(aospKey))
             return new BatteryTile(host, aospKey, tile, prefs, eventDistributor);
+        else if (WifiTile.AOSP_KEY.equals(aospKey))
+            return new WifiTile(host, aospKey, tile, prefs, eventDistributor);
         // Default wrapper for all other stock tiles we do not modify
         else
             return new AospTileDefault(host, aospKey, tile, prefs, eventDistributor);

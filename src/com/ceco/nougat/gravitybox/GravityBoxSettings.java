@@ -823,6 +823,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_BBAR_CENTERED = "batteryBarCentered";
     public static final String EXTRA_BBAR_COLOR_CHARGING = "batteryBarColorCharging";
 
+    public static final String PREF_KEY_WIFI_TILE_QUICK_MODE = "pref_wifi_tile_quick_mode";
+    public static final String EXTRA_WIFI_TILE_QUICK_MODE = "wifiTileQuickMode";
+
     public static final String PREF_CAT_KEY_CELL_TILE = "pref_cat_qs_cell_tile";
     public static final String PREF_KEY_CELL_TILE_DATA_TOGGLE = "pref_cell_tile_data_toggle";
     public static final String EXTRA_CELL_TILE_DATA_TOGGLE = "cellTileDataToggle";
@@ -3404,6 +3407,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_QS_LOCKED_TILE_INDICATOR)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_LOCKED_TILE_INDICATOR, prefs.getString(key, "DIM"));
+            } else if (key.equals(PREF_KEY_WIFI_TILE_QUICK_MODE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_WIFI_TILE_QUICK_MODE, prefs.getBoolean(key, false));
             }
 
             if (intent.getAction() != null) {

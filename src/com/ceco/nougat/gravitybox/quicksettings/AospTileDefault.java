@@ -26,7 +26,6 @@ public class AospTileDefault extends AospTile {
     @Override
     public String getSettingsKey() {
         switch (mKey) {
-            case WifiTile.AOSP_KEY: return "aosp_tile_wifi";
             case BluetoothTile.AOSP_KEY: return "aosp_tile_bluetooth";
             default: return "aosp_tile_default";
         }

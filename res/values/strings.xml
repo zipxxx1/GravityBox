@@ -2035,4 +2035,7 @@
     <string name="locked_tile_indicator_padlock">Padlock &#x1f512;</string>
     <string name="locked_tile_indicator_key">Key &#x1f511;</string>
 
+    <!-- QS: WiFi quick mode -->
+    <string name="pref_wifi_tile_quick_mode_summary">Allows toggling WiFi on tile single-press</string>
+
 </resources>
