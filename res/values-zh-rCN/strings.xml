@@ -16,6 +16,8 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+
+
     <string name="battery_style_title">电量图标风格</string>        
     <string name="battery_style_stock">原厂电量图标</string>
     <string name="battery_style_circle">圆形电量图标</string>
@@ -2025,5 +2027,21 @@
 
     <!-- Storage permission toast -->
     <string name="permission_storage_denied">访问存储权限时被拒绝</string>
+
+    <!-- QS: Locked tile indicattor -->
+    <string name="pref_qs_locked_tile_indicator_title">锁定瓷砖指示器</string>
+    <string name="locked_tile_indicator_none">无</string>
+    <string name="locked_tile_indicator_dim">灰色图标</string>
+    <string name="locked_tile_indicator_padlock">挂锁&#x1f512;</string>
+    <string name="locked_tile_indicator_key">密钥&#x1f511;</string>
+
+    <!-- QS: WiFi quick mode -->
+    <string name="pref_wifi_tile_quick_mode_summary">允许在瓷砖内单击时切换WiFi</string>
+
+    <!-- QS: BT quick mode -->
+    <string name="pref_bt_tile_quick_mode_summary">允许在瓷砖内单击时切换蓝牙</string>
+
+    <!-- KeyAction: Toggle split screen -->
+    <string name="hwkey_action_split_screen">切换分屏</string>
 
 </resources>
