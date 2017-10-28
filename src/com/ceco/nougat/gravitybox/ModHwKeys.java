@@ -113,6 +113,7 @@ public class ModHwKeys {
     public static final String ACTION_UPDATE_WIFI_CONFIG = "gravitybox.intent.action.UPDATE_WIFI_CONFIG";
     public static final String EXTRA_WIFI_CONFIG_LIST = "wifiConfigList";
     public static final String ACTION_GO_HOME = "gravitybox.intent.action.GO_HOME";
+    public static final String ACTION_TOGGLE_SPLIT_SCREEN = "gravitybox.intent.action.TOGGLE_SPLIT_SCREEN";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
     public static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
@@ -410,6 +411,8 @@ public class ModHwKeys {
                 updateWifiConfig(wcl, (ResultReceiver)intent.getParcelableExtra("receiver"));
             } else if (action.equals(ACTION_GO_HOME)) {
                 injectKey(KeyEvent.KEYCODE_HOME);
+            } else if (action.equals(ACTION_TOGGLE_SPLIT_SCREEN)) {
+                toggleSplitScreen();
             }
         }
     };
@@ -480,10 +483,9 @@ public class ModHwKeys {
                 setActionFor(HwKeyTrigger.RECENTS_SINGLETAP, Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP+"_custom", null));
-                // TODO: recents key long-press
-                //setActionFor(HwKeyTrigger.RECENTS_LONGPRESS, Integer.valueOf(
-                //        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
-                //        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
+                setActionFor(HwKeyTrigger.RECENTS_LONGPRESS, Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
                 setActionFor(HwKeyTrigger.RECENTS_DOUBLETAP, Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP+"_custom", null));
@@ -1023,6 +1025,7 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_TOGGLE_SHOW_TOUCHES);
             intentFilter.addAction(ACTION_UPDATE_WIFI_CONFIG);
             intentFilter.addAction(ACTION_GO_HOME);
+            intentFilter.addAction(ACTION_TOGGLE_SPLIT_SCREEN);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -1274,6 +1277,8 @@ public class ModHwKeys {
             showLauncherDrawer();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_INAPP_SEARCH) {
             injectKey(KeyEvent.KEYCODE_SEARCH);
+        } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_SPLIT_SCREEN) {
+            toggleSplitScreen();
         }
     }
 
@@ -1915,6 +1920,15 @@ public class ModHwKeys {
                             true : mSupportLongPressPowerWhenNonInteractiveOrig);
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static void toggleSplitScreen() {
+        try {
+            Object sb = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarManagerInternal");
+            XposedHelpers.callMethod(sb, "toggleSplitScreen");
+        } catch (Throwable t) {
+            log("Error executing toggleSplitScreen(): " + t.getMessage());
         }
     }
 }

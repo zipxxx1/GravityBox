@@ -378,6 +378,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final int HWKEY_ACTION_LAUNCHER_DRAWER = 22;
     public static final int HWKEY_ACTION_INAPP_SEARCH = 24;
     public static final int HWKEY_ACTION_CUSTOM_APP = 25;
+    public static final int HWKEY_ACTION_SPLIT_SCREEN = 26;
     public static final int HWKEY_DOUBLETAP_SPEED_DEFAULT = 400;
     public static final int HWKEY_KILL_DELAY_DEFAULT = 1000;
     public static final int HWKEY_TORCH_DISABLED = 0;
@@ -914,7 +915,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE
     ));
 
-    // TODO: recents key long-press
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
             PREF_KEY_HWKEY_MENU_SINGLETAP,
             PREF_KEY_HWKEY_MENU_LONGPRESS,
@@ -925,7 +925,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_HWKEY_BACK_LONGPRESS,
             PREF_KEY_HWKEY_BACK_DOUBLETAP,
             PREF_KEY_HWKEY_RECENTS_SINGLETAP,
-            //PREF_KEY_HWKEY_RECENTS_LONGPRESS,
+            PREF_KEY_HWKEY_RECENTS_LONGPRESS,
             PREF_KEY_HWKEY_RECENTS_DOUBLETAP,
             PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP,
             PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS,
@@ -1188,8 +1188,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private ListPreference mPrefHwKeyBackLongpress;
         private ListPreference mPrefHwKeyBackDoubletap;
         private ListPreference mPrefHwKeyRecentsSingletap;
-        // TODO: recents key long-press
-        //private ListPreference mPrefHwKeyRecentsLongpress;
+        private ListPreference mPrefHwKeyRecentsLongpress;
         private ListPreference mPrefHwKeyRecentsDoubletap;
         private ListPreference mPrefHwKeyDoubletapSpeed;
         private ListPreference mPrefHwKeyKillDelay;
@@ -1400,8 +1399,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefHwKeyBackLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_LONGPRESS);
             mPrefHwKeyBackDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_DOUBLETAP);
             mPrefHwKeyRecentsSingletap = (ListPreference) findPreference(PREF_KEY_HWKEY_RECENTS_SINGLETAP);
-            // TODO: recents key long-press
-            //mPrefHwKeyRecentsLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_RECENTS_LONGPRESS);
+            mPrefHwKeyRecentsLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_RECENTS_LONGPRESS);
             mPrefHwKeyRecentsDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_RECENTS_DOUBLETAP);
             mPrefHwKeyDoubletapSpeed = (ListPreference) findPreference(PREF_KEY_HWKEY_DOUBLETAP_SPEED);
             mPrefHwKeyKillDelay = (ListPreference) findPreference(PREF_KEY_HWKEY_KILL_DELAY);
@@ -1813,9 +1811,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefHwKeyBackDoubletap.setEntryValues(actionEntryValues);
             mPrefHwKeyRecentsSingletap.setEntries(actionEntries);
             mPrefHwKeyRecentsSingletap.setEntryValues(actionEntryValues);
-            // TODO: recents key long-press
-            //mPrefHwKeyRecentsLongpress.setEntries(actionEntries);
-            //mPrefHwKeyRecentsLongpress.setEntryValues(actionEntryValues);
+            mPrefHwKeyRecentsLongpress.setEntries(actionEntries);
+            mPrefHwKeyRecentsLongpress.setEntryValues(actionEntryValues);
             mPrefHwKeyRecentsDoubletap.setEntries(actionEntries);
             mPrefHwKeyRecentsDoubletap.setEntryValues(actionEntryValues);
             mPrefNavbarCustomKeySingletap.setEntries(actionEntries);

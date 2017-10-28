@@ -160,6 +160,9 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
             case GravityBoxSettings.HWKEY_ACTION_INAPP_SEARCH:
                 intent = new Intent(ModHwKeys.ACTION_INAPP_SEARCH);
                 break;
+            case GravityBoxSettings.HWKEY_ACTION_SPLIT_SCREEN:
+                intent = new Intent(ModHwKeys.ACTION_TOGGLE_SPLIT_SCREEN);
+                break;
             case GravityBoxSettings.HWKEY_ACTION_DEFAULT:
             default: return false;
         }

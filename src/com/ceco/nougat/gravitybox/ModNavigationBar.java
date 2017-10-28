@@ -253,11 +253,10 @@ public class ModNavigationBar {
                 mRecentsSingletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP+"_custom", null));
-                // TODO: recents key long-press
                 mRecentsLongpressAction = new ModHwKeys.HwKeyAction(0, null);
-                //mRecentsLongpressAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
-                //        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
-                //        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
+                mRecentsLongpressAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
                 mRecentsDoubletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP+"_custom", null));
@@ -524,6 +523,17 @@ public class ModNavigationBar {
                     "onInterceptTouchEvent", MotionEvent.class, touchEventHook);
             XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
                     "onTouchEvent", MotionEvent.class, touchEventHook);
+
+            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader,
+                    "toggleSplitScreenMode", int.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mRecentsLongpressAction.actionId != 0 &&
+                            (int)param.args[0] != -1 && (int)param.args[1] != -1) {
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch(Throwable t) {
             XposedBridge.log(t);
         }

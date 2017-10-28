@@ -201,6 +201,7 @@
         <item>@string/hwkey_action_kill</item>
         <item>@string/hwkey_action_sleep</item>
         <item>@string/hwkey_action_recent_apps</item>
+        <item>@string/hwkey_action_split_screen</item>
         <item>@string/hwkey_action_app_launcher</item>
         <item>@string/hwkey_action_menu</item>
         <item>@string/hwkey_action_home</item>
@@ -226,6 +227,7 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
+        <item>26</item>
         <item>12</item>
         <item>9</item>
         <item>13</item>
