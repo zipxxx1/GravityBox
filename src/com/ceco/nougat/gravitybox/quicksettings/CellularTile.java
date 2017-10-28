@@ -92,6 +92,8 @@ public class CellularTile extends AospTile {
         if (mClickHookBlocked) {
             mClickHookBlocked = false;
             return false;
+        } else if (isLocked()) {
+            return true;
         }
 
         if (mDataToggle == DataToggle.SINGLEPRESS) {
