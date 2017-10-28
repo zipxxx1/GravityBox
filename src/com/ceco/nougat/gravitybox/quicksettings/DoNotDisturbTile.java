@@ -159,8 +159,11 @@ public class DoNotDisturbTile extends AospTile {
 
     @Override
     protected boolean onBeforeHandleClick() {
-        if (!mQuickMode) return false;
-        if (mClickOverrideBlocked) {
+        if (isLocked()) {
+            return true;
+        } else if (!mQuickMode) {
+            return false;
+        } else if (mClickOverrideBlocked) {
             mClickOverrideBlocked = false;
             return false;
         }
