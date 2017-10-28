@@ -50,6 +50,10 @@ public class QsPanel implements BroadcastSubReceiver {
     private static final String CLASS_BRIGHTNESS_CTRL = "com.android.systemui.settings.BrightnessController";
     private static final String CLASS_TILE_LAYOUT = "com.android.systemui.qs.TileLayout";
 
+    public static enum LockedTileIndicator { NONE, DIM, PADLOCK, KEY };
+    public static final String IC_PADLOCK = "\uD83D\uDD12";
+    public static final String IC_KEY = "\uD83D\uDD11";
+
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
@@ -66,6 +70,7 @@ public class QsPanel implements BroadcastSubReceiver {
     @SuppressWarnings("unused")
     private QsQuickPulldownHandler mQuickPulldownHandler;
     private Map<String, BaseTile> mTiles = new HashMap<>();
+    private LockedTileIndicator mLockedTileIndicator;
 
     public QsPanel(XSharedPreferences prefs, ClassLoader classLoader) {
         mPrefs = prefs;
@@ -82,9 +87,12 @@ public class QsPanel implements BroadcastSubReceiver {
         mScaleCorrection = mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0);
         mHideBrightness = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS, false);
         mBrightnessIconEnabled = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BRIGHTNESS_ICON, false);
+        mLockedTileIndicator = LockedTileIndicator.valueOf(
+                mPrefs.getString(GravityBoxSettings.PREF_KEY_QS_LOCKED_TILE_INDICATOR, "DIM"));
         if (DEBUG) log("initPreferences: mNumColumns=" + mNumColumns +
                 "; mHideBrightness=" + mHideBrightness +
-                "; mBrightnessIconEnabled=" + mBrightnessIconEnabled);
+                "; mBrightnessIconEnabled=" + mBrightnessIconEnabled +
+                "; mLockedTileIndicator=" + mLockedTileIndicator);
     }
 
     @Override
@@ -110,6 +118,11 @@ public class QsPanel implements BroadcastSubReceiver {
                 mBrightnessIconEnabled = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_QS_BRIGHTNESS_ICON, false);
                 if (DEBUG) log("onBroadcastReceived: mBrightnessIconEnabled=" + mBrightnessIconEnabled);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_LOCKED_TILE_INDICATOR)) {
+                mLockedTileIndicator = LockedTileIndicator.valueOf(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_QS_LOCKED_TILE_INDICATOR));
+                if (DEBUG) log("onBroadcastReceived: mLockedTileIndicator=" + mLockedTileIndicator);
             }
         } 
     }
@@ -150,6 +163,10 @@ public class QsPanel implements BroadcastSubReceiver {
             case 5: return 0.75f + correction;
             case 6: return 0.65f + correction;
         }
+    }
+
+    public LockedTileIndicator getLockedTileIndicator() {
+        return mLockedTileIndicator;
     }
 
     private View getBrightnessSlider() {
@@ -327,6 +344,9 @@ public class QsPanel implements BroadcastSubReceiver {
                     "setIcon", ImageView.class, BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mLockedTileIndicator != LockedTileIndicator.DIM)
+                        return;
+
                     Boolean locked = (Boolean) XposedHelpers.getAdditionalInstanceField(
                             param.args[1], "locked");
                     if (locked != null && param.args[0] != null) {
@@ -339,6 +359,9 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mLockedTileIndicator != LockedTileIndicator.DIM)
+                        return;
+
                     Boolean locked = (Boolean) XposedHelpers.getAdditionalInstanceField(
                             param.args[1], "locked");
                     if (locked != null && locked.booleanValue()) {
@@ -368,6 +391,9 @@ public class QsPanel implements BroadcastSubReceiver {
                     "copyTo", BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mLockedTileIndicator != LockedTileIndicator.DIM)
+                        return;
+
                     Boolean lockedNew = (Boolean) XposedHelpers.getAdditionalInstanceField(
                             param.thisObject, "locked");
                     if (lockedNew != null) {

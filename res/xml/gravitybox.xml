@@ -607,6 +607,14 @@
                 monitorBoxUnit="%" 
                 android:defaultValue="0" />
 
+            <ListPreference
+                android:key="pref_qs_locked_tile_indicator" 
+                android:title="@string/pref_qs_locked_tile_indicator_title" 
+                android:entries="@array/locked_tile_indicator_entries"
+                android:entryValues="@array/locked_tile_indicator_values"
+                android:defaultValue="DIM"
+                android:dependency="pref_qs_management_enable" />
+
             <!--
             <ListPreference
                 android:key="pref_qs_tile_label_style" 

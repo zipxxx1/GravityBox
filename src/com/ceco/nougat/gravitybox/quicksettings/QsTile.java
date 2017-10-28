@@ -17,6 +17,7 @@ package com.ceco.nougat.gravitybox.quicksettings;
 import java.lang.reflect.Constructor;
 
 import com.ceco.nougat.gravitybox.Utils;
+import com.ceco.nougat.gravitybox.quicksettings.QsPanel.LockedTileIndicator;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -105,6 +106,8 @@ public abstract class QsTile extends BaseTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.locked = isLocked();
+        mState.lockedTileIndicator = getQsPanel().getLockedTileIndicator();
         mState.applyTo(state);
     }
 
@@ -144,10 +147,10 @@ public abstract class QsTile extends BaseTile {
                 if (color != null) {
                     d.setTint(color);
                 }
-                d.setAlpha(isLocked() ? 80 : 255);
+                d.setAlpha(isLocked() && getQsPanel().getLockedTileIndicator() == LockedTileIndicator.DIM ? 80 : 255);
             } else if (!(this instanceof QuickAppTile)) {
                 d.clearColorFilter();
-                if (isLocked()) {
+                if (isLocked() && getQsPanel().getLockedTileIndicator() == LockedTileIndicator.DIM) {
                     d.setColorFilter(COLOR_LOCKED, PorterDuff.Mode.SRC_IN);
                 }
             }
@@ -174,10 +177,19 @@ public abstract class QsTile extends BaseTile {
         public String label = "";
         public boolean autoMirrorDrawable = true;
         public boolean booleanValue = true;
+        public boolean locked;
+        public LockedTileIndicator lockedTileIndicator;
 
         public void applyTo(Object state) {
             XposedHelpers.setObjectField(state, "icon", icon);
-            XposedHelpers.setObjectField(state, "label", label);
+            String newLabel = label;
+            if (locked && (lockedTileIndicator == LockedTileIndicator.PADLOCK ||
+                    lockedTileIndicator == LockedTileIndicator.KEY)) {
+                newLabel = String.format("%s %s",
+                        (lockedTileIndicator == LockedTileIndicator.PADLOCK ?
+                         QsPanel.IC_PADLOCK : QsPanel.IC_KEY), label);
+            }
+            XposedHelpers.setObjectField(state, "label", newLabel);
             XposedHelpers.setBooleanField(state, "autoMirrorDrawable", autoMirrorDrawable);
         }
     }

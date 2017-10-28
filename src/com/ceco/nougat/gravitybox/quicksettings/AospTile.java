@@ -17,6 +17,7 @@ package com.ceco.nougat.gravitybox.quicksettings;
 
 import java.lang.reflect.Method;
 
+import com.ceco.nougat.gravitybox.quicksettings.QsPanel.LockedTileIndicator;
 import com.ceco.nougat.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -70,10 +71,20 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        final LockedTileIndicator lti = getQsPanel().getLockedTileIndicator();
         if (mProtected) {
-            XposedHelpers.setAdditionalInstanceField(state, "locked", Boolean.valueOf(isLocked()));
+            if (lti == LockedTileIndicator.DIM) {
+                XposedHelpers.setAdditionalInstanceField(state, "locked", Boolean.valueOf(isLocked()));
+            } else if (isLocked() && (lti == LockedTileIndicator.PADLOCK || lti == LockedTileIndicator.KEY)) {
+                String label = (String) XposedHelpers.getObjectField(state, "label");
+                label = String.format("%s %s", (lti == LockedTileIndicator.PADLOCK ?
+                        QsPanel.IC_PADLOCK : QsPanel.IC_KEY), label);
+                XposedHelpers.setObjectField(state, "label", label);
+            }
         } else {
-            XposedHelpers.removeAdditionalInstanceField(state, "locked");
+            if (lti == LockedTileIndicator.DIM) {
+                XposedHelpers.removeAdditionalInstanceField(state, "locked");
+            }
         }
     }
 

@@ -1224,4 +1224,18 @@
         <item>RIGHT</item>
     </string-array>
 
+    <string-array name="locked_tile_indicator_entries" translatable="false">
+        <item>@string/locked_tile_indicator_none</item>
+        <item>@string/locked_tile_indicator_dim</item>
+        <item>@string/locked_tile_indicator_padlock</item>
+        <item>@string/locked_tile_indicator_key</item>
+    </string-array>
+
+    <string-array name="locked_tile_indicator_values" translatable="false">
+        <item>NONE</item>
+        <item>DIM</item>
+        <item>PADLOCK</item>
+        <item>KEY</item>
+    </string-array>
+
 </resources>

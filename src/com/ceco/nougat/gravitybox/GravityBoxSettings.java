@@ -100,6 +100,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS = "pref_qs_hide_brightness";
     public static final String PREF_KEY_QS_BRIGHTNESS_ICON = "pref_qs_brightness_icon";
     public static final String PREF_KEY_QS_SCALE_CORRECTION = "pref_qs_scale_correction";
+    public static final String PREF_KEY_QS_LOCKED_TILE_INDICATOR = "pref_qs_locked_tile_indicator";
     public static final int QUICK_PULLDOWN_OFF = 0;
     public static final int QUICK_PULLDOWN_RIGHT = 1;
     public static final int QUICK_PULLDOWN_LEFT = 2;
@@ -551,6 +552,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_QS_HIDE_BRIGHTNESS = "qsHideBrightness";
     public static final String EXTRA_QS_BRIGHTNESS_ICON = "qsBrightnessIcon";
     public static final String EXTRA_QS_SCALE_CORRECTION = "qsScaleCorrection";
+    public static final String EXTRA_QS_LOCKED_TILE_INDICATOR = "qsLockedTileIndicator";
 
     public static final String ACTION_PREF_CLOCK_CHANGED = "gravitybox.intent.action.CENTER_CLOCK_CHANGED";
     public static final String EXTRA_CENTER_CLOCK = "centerClock";
@@ -2464,6 +2466,11 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 }
             }
 
+            if (key == null || key.equals(PREF_KEY_QS_LOCKED_TILE_INDICATOR)) {
+                ListPreference p = (ListPreference) findPreference(PREF_KEY_QS_LOCKED_TILE_INDICATOR);
+                p.setSummary(p.getEntry());
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -3394,6 +3401,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_FINGERPRINT_LAUNCHER_SHOW_TOAST)) {
                 intent.setAction(ACTION_FPL_SETTINGS_CHANGED);
                 intent.putExtra(EXTRA_FPL_SHOW_TOAST, prefs.getBoolean(key, true));
+            } else if (key.equals(PREF_KEY_QS_LOCKED_TILE_INDICATOR)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QS_LOCKED_TILE_INDICATOR, prefs.getString(key, "DIM"));
             }
 
             if (intent.getAction() != null) {
