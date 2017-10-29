@@ -124,12 +124,15 @@ public class SystemIconController implements BroadcastSubReceiver {
         try {
             AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
             if (Utils.isOxygenOsRom()) {
-                final boolean hide = XposedHelpers.getIntField(mSbPolicy, "mZen") == 0 ||
-                        (mHideVibrateIcon &&
-                         XposedHelpers.getIntField(mSbPolicy, "mZen") == 3 &&
-                         XposedHelpers.getIntField(mSbPolicy, "mVibrateWhenMute") == 1);
+                final boolean zenVibrateShowing = XposedHelpers.getIntField(mSbPolicy, "mZen") == 3 &&
+                        XposedHelpers.getIntField(mSbPolicy, "mVibrateWhenMute") == 1;
+                final boolean hideZen = XposedHelpers.getIntField(mSbPolicy, "mZen") == 0 ||
+                        (mHideVibrateIcon && zenVibrateShowing);
                 XposedHelpers.callMethod(mIconCtrl, "setIconVisibility",
-                        XposedHelpers.getObjectField(mSbPolicy, "mSlotZen"), !hide);
+                        XposedHelpers.getObjectField(mSbPolicy, "mSlotZen"), !hideZen);
+                final boolean showNative = !zenVibrateShowing && !mHideVibrateIcon &&
+                        am.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE;
+                XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "volume", showNative);
             } else {
                 if (am.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
                     XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "volume", !mHideVibrateIcon);
