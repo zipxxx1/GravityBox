@@ -1971,4 +1971,20 @@
     <!-- Storage permission toast -->
     <string name="permission_storage_denied">Prístup k úložisku bol zamietnutý</string>
 
+    <!-- QS: Locked tile indicattor -->
+    <string name="pref_qs_locked_tile_indicator_title">Indikátor uzamknutých dlaždíc</string>
+    <string name="locked_tile_indicator_none">Žiadny</string>
+    <string name="locked_tile_indicator_dim">Stmavené ikony</string>
+    <string name="locked_tile_indicator_padlock">Zámok &#x1f512;</string>
+    <string name="locked_tile_indicator_key">Kľúč &#x1f511;</string>
+
+    <!-- QS: WiFi quick mode -->
+    <string name="pref_wifi_tile_quick_mode_summary">Umožňuje priame prepnutie WiFi jednoduchým ťuknutím</string>
+
+    <!-- QS: BT quick mode -->
+    <string name="pref_bt_tile_quick_mode_summary">Umožňuje priame prepnutie Bluetooth jednoduchým ťuknutím</string>
+
+    <!-- KeyAction: Toggle split screen -->
+    <string name="hwkey_action_split_screen">Rozdelená obrazovka</string>
+
 </resources>
