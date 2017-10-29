@@ -1,3 +1,21 @@
+Changelog 7.0.4 - 29/10/2017
+--------------------------------------
+- QuickSettings management:
+--- Added option for Locked tile indication (none, dimmed icons, padlock, key)
+--- WiFi tile: added option for quick mode
+--- Bluetooth tile: added option for quick mode
+--- CellularTile: fixed click actions working while tile locked
+--- DnD tile: fixed click actions working while tile locked
+- Key actions:
+--- recents long-press action is back
+--- added Split screen action
+- GB Actions: added Split screen action (shortcut)
+- OxygenOS: fixed missing vibrate icon in vibrate only mode
+- Fixed advanced power menu for some Samsung devices (thanks to Firefds)
+- Fixed Force LTR for RTL locales on Samsung devices (thanks to Firefds)
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 7.0.3 - 23/10/2017
 --------------------------------------
 - General fixes and improvements:
