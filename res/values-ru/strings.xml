@@ -2025,4 +2025,20 @@
     <!-- Storage permission toast -->
     <string name="permission_storage_denied">Разрешение на доступ к памяти не предоставлено</string>
 
+    <!-- QS: Locked tile indicattor -->
+    <string name="pref_qs_locked_tile_indicator_title">Индикатор блокированной плитки</string>
+    <string name="locked_tile_indicator_none">Нет</string>
+    <string name="locked_tile_indicator_dim">Затемнённый значок</string>
+    <string name="locked_tile_indicator_padlock">Замок &#x1f512;</string>
+    <string name="locked_tile_indicator_key">Ключ &#x1f511;</string>
+
+    <!-- QS: WiFi quick mode -->
+    <string name="pref_wifi_tile_quick_mode_summary">Возможность вкл/выкл WiFi одним нажатием плитки</string>
+
+    <!-- QS: BT quick mode -->
+    <string name="pref_bt_tile_quick_mode_summary">Возможность вкл/выкл Bluetooth одним нажатием плитки</string>
+
+    <!-- KeyAction: Toggle split screen -->
+    <string name="hwkey_action_split_screen">Разделение экрана</string>
+
 </resources>
