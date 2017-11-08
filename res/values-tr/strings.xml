@@ -1250,5 +1250,41 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
 
     <!-- QS protected when device locked -->
     <string name="qs_protected_summary">Cihaz kilitliyken korunur</string>
+    
+     <!-- Dashed circle battery style -->
+    <string name="battery_style_circle_dashed">Dash daire pil göstergesi</string>
+    <string name="battery_style_circle_dashed_percent">Dash yüzdeli daire pil göstergesi</string>
+    
+    <!-- Volume panel: notification stream label -->
+    <string name="notification_stream_name">Bildirim</string>
 
+    <!-- OOS: hide dash charge icon -->
+    <string name="pref_battery_hide_dash_icon_title">Dash şarj simgesini gizle</string>
+    <string name="pref_battery_hide_dash_icon_summary">Stok pil göstergesi için</string>
+
+    <!-- OOS: call recording -->
+    <string name="pref_oos_call_recording_title">Çağrı kaydını etkinleştir</string>
+    <string name="pref_oos_call_recording_summary">Not, çağrı kaydı ülkenizde yasadışı olabilir</string>
+
+    <!-- OOS: disable dash charging sound -->
+    <string name="pref_oos_dash_sound_disable_title">Dash şarj sesini kapat</string>
+
+    <!-- Storage permission toast -->
+    <string name="permission_storage_denied">Depolama alanına erişim izni reddedildi</string>
+
+    <!-- QS: Locked tile indicattor -->
+    <string name="pref_qs_locked_tile_indicator_title">Kilitli kare göstergesi</string>
+    <string name="locked_tile_indicator_none">Hiçbiri</string>
+    <string name="locked_tile_indicator_dim">Soluk simge</string>
+    <string name="locked_tile_indicator_padlock">Asma kilit &#x1f512;</string>
+    <string name="locked_tile_indicator_key">Tuş &#x1f511;</string>
+
+    <!-- QS: WiFi quick mode -->
+    <string name="pref_wifi_tile_quick_mode_summary">Kareye tek basmayla WiFi açma/kapatmaya izin verir</string>
+
+    <!-- QS: BT quick mode -->
+    <string name="pref_bt_tile_quick_mode_summary">Kareye tek basmayla Bluetooth açma/kapatmaya izin verir</string>
+
+    <!-- KeyAction: Toggle split screen -->
+    <string name="hwkey_action_split_screen">Bölünmüş ekran</string>
 </resources>
