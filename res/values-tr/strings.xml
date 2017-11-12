@@ -798,8 +798,6 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="pref_force_ltr_direction_summary">Sağdan sola diller için soldan sağa yerleşim yönünü zorla (yeniden başlatma gerektirir)</string>
     <string name="shortcut_ringer_mode">Zil sesi modunu ayarla</string>
     <string name="pref_data_traffic_active_mobile_only_title">Sadece mobil veri</string>
-    <string name="battery_style_circle_dashed">Çizgili yuvarlak gösterge</string>
-    <string name="battery_style_circle_dashed_percent">Çizgili yuvarlak yüzdeli pil göstergesi</string>
     <string name="premium_unlocked_message">Desteğiniz için teşekkürler. Ücretli özellikler sistem yeniden başlatıldıktan sonra açılacaktır.</string>
     <string name="pref_about_get_unlocker_title">Kilidi aç</string>
     <string name="pref_about_get_unlocker_summary">PayPal hesabınız yok mu? Buraya dokunup Play Store uygulamasını indirerek ücretli özelliklerin kilidi açabilirsiniz.</string>
