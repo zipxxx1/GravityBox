@@ -1411,6 +1411,7 @@
     <string name="imgpick_dialog_title">Resim seç</string>
     <string name="imgpick_choose_error">Resim seçilirken hata</string>
     <string name="imgpick_crop_error">Resim kırpılırken hata</string>
+    <string name="imgpick_crop_uri_null">Kırpma uygulaması kırpılmış görüntü sunmadı. Orijinal resim kullanılıyor.</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Yakınlık sensörüyle uyandır</string>

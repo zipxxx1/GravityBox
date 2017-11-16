@@ -1430,6 +1430,7 @@
     <string name="imgpick_dialog_title">使用选择的图像</string>
     <string name="imgpick_choose_error">选择的图像错误</string>
     <string name="imgpick_crop_error">剪裁图像错误</string>
+    <string name="imgpick_crop_uri_null">应用没有提供裁剪图像将使用原始图像</string>
     
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">靠近唤醒</string>

@@ -1397,6 +1397,7 @@
     <string name="imgpick_dialog_title">Vybrať obrázok pomocou</string>
     <string name="imgpick_choose_error">Chyba počas vyberania obrázku</string>
     <string name="imgpick_crop_error">Chyba počas orezania obrázku</string>
+    <string name="imgpick_crop_uri_null">Aplikácia orezávania nedodala orezaný obrázok. Bude použitý originál.</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Zabrániť nechcenému prebudeniu</string>

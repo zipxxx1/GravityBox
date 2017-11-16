@@ -1429,6 +1429,7 @@
     <string name="imgpick_dialog_title">Выбор изображения через</string>
     <string name="imgpick_choose_error">Ошибка при выборе изображения</string>
     <string name="imgpick_crop_error">Ошибка при обрезке изображения</string>
+    <string name="imgpick_crop_uri_null">Приложению не удалось обработать изображение. Будет использован оригинал.</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Приближение при пробуждении</string>

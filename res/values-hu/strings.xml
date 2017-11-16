@@ -1414,6 +1414,7 @@
     <string name="imgpick_dialog_title">Képkiválasztás</string>
     <string name="imgpick_choose_error">Hiba történt a kép kiválasztása során</string>
     <string name="imgpick_crop_error">Hiba történt a kép kivágás során</string>
+    <string name="imgpick_crop_uri_null">A kivágást végző alkalmazás nem adott kivágott képet. Az eredeti kép kerül felhasználásra.</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Ébresztés közelség érzékelővel</string>
