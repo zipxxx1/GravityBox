@@ -1388,6 +1388,7 @@
     <string name="imgpick_dialog_title">Pick image using</string>
     <string name="imgpick_choose_error">Error while choosing image</string>
     <string name="imgpick_crop_error">Error while cropping image</string>
+    <string name="imgpick_crop_uri_null">Cropping app did not deliver cropped image. Using original image.</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Proximity wake-up</string>
