@@ -63,7 +63,7 @@ public class ModDownloadProvider {
             XposedBridge.hookAllMethods(classDownloadJobService, "onStartJob", jobStartStopHook);
             XposedBridge.hookAllMethods(classDownloadJobService, "onStopJob", jobStartStopHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

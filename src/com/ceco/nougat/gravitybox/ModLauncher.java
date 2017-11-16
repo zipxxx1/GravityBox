@@ -217,14 +217,14 @@ public class ModLauncher {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
 
             break;
         }
 
         if (!dynamicGridFound) {
-            log("Couldn't find dynamic grid. Incompatible Google Search?");
+            GravityBox.log(TAG, "Couldn't find dynamic grid. Incompatible Google Search?");
         }
 
         try {
@@ -232,7 +232,7 @@ public class ModLauncher {
             try {
                 classLauncher = XposedHelpers.findClass(CLASS_LAUNCHER, classLoader);
             } catch (ClassNotFoundError e) { 
-                log("Launcher3.Launcher not found");
+                GravityBox.log(TAG, "Launcher3.Launcher not found");
             }
 
             if (classLauncher != null) {
@@ -317,7 +317,7 @@ public class ModLauncher {
                                     }
                                 }
                                 if (mShowAllAppsMethod == null) {
-                                    log("Couldn't find method for opening app dawer. Incompatible Google Search?");
+                                    GravityBox.log(TAG, "Couldn't find method for opening app dawer. Incompatible Google Search?");
                                 }
                             }
                         }
@@ -329,7 +329,7 @@ public class ModLauncher {
             try {
                 classAppWidgetHostView = XposedHelpers.findClass(CLASS_APP_WIDGET_HOST_VIEW, classLoader);
             } catch (ClassNotFoundError e) {
-                log("AppWidgetHostView not found");
+                GravityBox.log(TAG, "AppWidgetHostView not found", e);
             }
 
             if (classAppWidgetHostView != null) {
@@ -349,7 +349,7 @@ public class ModLauncher {
                 });
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

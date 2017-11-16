@@ -47,7 +47,7 @@ public class ModQsTiles {
             mQsPanel = new QsPanel(prefs, classLoader);
             mQsPanelQuick = new QsPanelQuick(prefs, classLoader);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

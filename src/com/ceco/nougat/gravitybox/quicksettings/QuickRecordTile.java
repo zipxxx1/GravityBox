@@ -15,6 +15,7 @@
 
 package com.ceco.nougat.gravitybox.quicksettings;
 
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxResultReceiver;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
@@ -190,8 +191,7 @@ public class QuickRecordTile extends QsTile {
             si.putExtra("receiver", mCurrentStateReceiver);
             mGbContext.startService(si);
         } catch (Throwable t) {
-            log(getKey() + ": Error getting current state: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, getKey() + ": Error getting current state: ", t);
         }
     }
 
@@ -220,8 +220,7 @@ public class QuickRecordTile extends QsTile {
             refreshState();
             mPlayer.setOnCompletionListener(stoppedPlaying);
         } catch (Exception e) {
-            log(getKey() + ": startPlaying failed: " + e.getMessage());
-            if (DEBUG) XposedBridge.log(e);
+            GravityBox.log(TAG, getKey() + ": startPlaying failed: ", e);
         }
     }
 

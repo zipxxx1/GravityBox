@@ -16,7 +16,6 @@
 package com.ceco.nougat.gravitybox;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 import com.ceco.nougat.gravitybox.managers.StatusBarIconManager;
@@ -40,10 +39,6 @@ public class StatusbarBattery implements IconManagerListener {
     private int mDefaultChargeColor;
     private Drawable mDrawable;
 
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
-
     public StatusbarBattery(View batteryView, BatteryStyleController controller) {
         mBattery = batteryView;
         mController = controller;
@@ -66,7 +61,7 @@ public class StatusbarBattery implements IconManagerListener {
             mFrameAlpha = framePaint.getAlpha();
             mDefaultChargeColor = XposedHelpers.getIntField(getDrawable(), "mChargeColor");
         } catch (Throwable t) {
-            log("Error backing up original colors: " + t.getMessage());
+            GravityBox.log(TAG, "Error backing up original colors: ", t);
         }
     }
 
@@ -75,7 +70,7 @@ public class StatusbarBattery implements IconManagerListener {
             try {
                 mDrawable = (Drawable) XposedHelpers.getObjectField(mBattery, "mDrawable");
             } catch (Throwable t) {
-                if (DEBUG) XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
         return mDrawable;
@@ -95,7 +90,7 @@ public class StatusbarBattery implements IconManagerListener {
                     }
                 });
             } catch (Throwable t) {
-                log("Error hooking getFillColor(): " + t.getMessage());
+                GravityBox.log(TAG, "Error hooking getFillColor(): ", t);
             }
         }
     }
@@ -116,7 +111,7 @@ public class StatusbarBattery implements IconManagerListener {
                 XposedHelpers.setIntField(getDrawable(), "mChargeColor", chargeColor);
                 XposedHelpers.setIntField(getDrawable(), "mIconTint", mainColor);
             } catch (Throwable t) {
-                log("Error setting colors: " + t.getMessage());
+                GravityBox.log(TAG, "Error setting colors: ", t);
             }
         }
     }
@@ -127,7 +122,7 @@ public class StatusbarBattery implements IconManagerListener {
                 XposedHelpers.setBooleanField(getDrawable(), "mShowPercent", showPercentage);
                 mBattery.invalidate();
             } catch (Throwable t) {
-                log("Error setting percentage: " + t.getMessage());
+                GravityBox.log(TAG, "Error setting percentage: ", t);
             }
         }
     }

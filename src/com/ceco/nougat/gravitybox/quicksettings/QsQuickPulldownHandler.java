@@ -17,6 +17,7 @@ package com.ceco.nougat.gravitybox.quicksettings;
 import java.util.List;
 
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 
 import android.content.Context;
@@ -136,7 +137,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -174,7 +175,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
             List<?> list = (List<?>)XposedHelpers.callMethod(mNotificationData, "getActiveNotifications");
             return list.size() > 0;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return true;
         }
     }
@@ -193,7 +194,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
             }
             return hasClearableNotifications;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return true;
         }
     }
@@ -203,8 +204,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
             Object container = XposedHelpers.getObjectField(panel, "mQsContainer");
             return (boolean) XposedHelpers.callMethod(container, "isCustomizing");
         } catch (Throwable t) {
-            log("Error in isQsContainerCustomizing: " + t.getMessage());
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, "Error in isQsContainerCustomizing: ", t);
             return false;
         }
     }

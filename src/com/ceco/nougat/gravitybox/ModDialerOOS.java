@@ -50,7 +50,7 @@ public class ModDialerOOS {
                 }
             });
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

@@ -263,7 +263,7 @@ public class ModNavigationBar {
                 mHomeLongpressAction = Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS, "0"));
             } catch (NumberFormatException nfe) {
-                XposedBridge.log(nfe);
+                GravityBox.log(TAG, nfe);
             }
 
             mCustomKeyEnabled = prefs.getBoolean(
@@ -535,7 +535,7 @@ public class ModNavigationBar {
                 }
             });
         } catch(Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -553,7 +553,7 @@ public class ModNavigationBar {
             Object bt = XposedHelpers.callMethod(mNavigationBarView, "getBarTransitions");
             XposedHelpers.callMethod(bt, "applyMode", mode, true, true);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -646,7 +646,7 @@ public class ModNavigationBar {
             mNavbarViewInfo[index].dpadLeft.setLayoutParams(lp);
             mNavbarViewInfo[index].dpadRight.setLayoutParams(lp);
         } catch (Throwable t) {
-            log("Error preparing NavbarViewInfo: " + t.getMessage());
+            GravityBox.log(TAG, "Error preparing NavbarViewInfo: ", t);
         }
     }
 
@@ -688,8 +688,7 @@ public class ModNavigationBar {
                 }
             }
         } catch (Throwable t) {
-            log("Error setting app key visibility: " + t.getMessage());
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, "Error setting app key visibility: ", t);
         }
     }
 
@@ -709,7 +708,7 @@ public class ModNavigationBar {
                         visible ? View.VISIBLE : View.INVISIBLE);
             }
         } catch (Throwable t) {
-            log("Error setting menu key visibility:" + t.getMessage());
+            GravityBox.log(TAG, "Error setting menu key visibility:", t);
         }
     }
 
@@ -762,7 +761,7 @@ public class ModNavigationBar {
                 if (DEBUG) log("setDpadKeyVisibility: visible=" + mDpadKeysVisible);
             }
         } catch (Throwable t) {
-            log("Error setting dpad key visibility: " + t.getMessage());
+            GravityBox.log(TAG, "Error setting dpad key visibility: ", t);
         }
     }
 
@@ -778,7 +777,7 @@ public class ModNavigationBar {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -796,7 +795,7 @@ public class ModNavigationBar {
                     mResources.getIdentifier("nav_buttons", "id", PACKAGE_NAME));
             setKeyColorRecursive(navButtons);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -855,7 +854,7 @@ public class ModNavigationBar {
             }
         }
         catch (Throwable t) {
-            log("Error swapping back and recents key: " + t.getMessage());
+            GravityBox.log(TAG, "Error swapping back and recents key: ", t);
         }
     }
 
@@ -880,8 +879,7 @@ public class ModNavigationBar {
             if (DEBUG) log("swapMenuAndCustom: swapped=" + nvi.menuCustomSwapped);
         }
         catch (Throwable t) {
-            log("Error swapping menu and custom key: " + t.getMessage());
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, "Error swapping menu and custom key: ", t);
         }
     }
 
@@ -891,7 +889,7 @@ public class ModNavigationBar {
                 nvi.customKey.setImageDrawable(getCustomKeyIconDrawable());
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -976,7 +974,7 @@ public class ModNavigationBar {
                 }
             }
         } catch (Throwable t) {
-            
+            GravityBox.log(TAG, "updateIconScaleType: ", t);
         }
     }
 }

@@ -118,7 +118,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         try {
             XposedHelpers.callMethod(mClock, "updateClock");
         } catch (Throwable t) {
-            log("Error in updateClock: " + t.getMessage());
+            GravityBox.log(TAG, "Error in updateClock: ", t);
         }
     }
 
@@ -256,7 +256,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

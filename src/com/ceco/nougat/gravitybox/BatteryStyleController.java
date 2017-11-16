@@ -214,7 +214,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -231,7 +231,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
 
@@ -256,7 +256,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                    });
                }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
             try {
                 XposedHelpers.findAndHookMethod(mContainer.getClass(),
@@ -274,7 +274,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
             try {
                 XposedHelpers.findAndHookMethod(mContainer.getClass(), "onConfigurationChanged",
@@ -288,7 +288,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
 
@@ -310,7 +310,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }
@@ -343,7 +343,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         try {
             XposedHelpers.callMethod(mPhoneStatusBar, "updateDashChargeView");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

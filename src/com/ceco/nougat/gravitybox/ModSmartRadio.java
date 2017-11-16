@@ -184,7 +184,7 @@ public class ModSmartRadio {
             if (DEBUG) log("isMobileNetworkAvailable: false");
             return false;
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -203,7 +203,7 @@ public class ModSmartRadio {
             if (DEBUG) log("isWifiConnected: false");
             return false;
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -244,7 +244,7 @@ public class ModSmartRadio {
             if (DEBUG) log("isTetheringViaMobileNetwork: nope");
             return false;
         } catch (Throwable t) {
-            log("isTetheringViaMobileNetwork: " + t.getMessage());
+            GravityBox.log(TAG, "isTetheringViaMobileNetwork: ", t);
             return false;
         }
     }
@@ -305,7 +305,7 @@ public class ModSmartRadio {
                     SETTING_SMART_RADIO_STATE, mCurrentState.toString());
             mNetworkModeChanger.changeNetworkMode(networkMode);
         } catch (Throwable t) {
-            log("switchToState: " + t.getMessage());
+            GravityBox.log(TAG, "switchToState: ", t);
         }
     }
 
@@ -345,7 +345,7 @@ public class ModSmartRadio {
             }
             if (DEBUG) log("mSmartRadioEnabled=" + mSmartRadioEnabled);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -525,7 +525,7 @@ public class ModSmartRadio {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     } 
 }

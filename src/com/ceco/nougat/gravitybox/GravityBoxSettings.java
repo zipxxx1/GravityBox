@@ -877,6 +877,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_OOS_CALL_RECORDING = "pref_oos_call_recording";
     public static final String PREF_KEY_OOS_DASH_SOUND_DISABLE = "pref_oos_dash_sound_disable";
 
+    public static final String PREF_KEY_LOG_ERRORS = "pref_log_errors";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -912,7 +914,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_SIGNAL_CLUSTER_DNTI,
             PREF_KEY_SIGNAL_CLUSTER_NOSIM,
             PREF_KEY_BATTERY_PERCENT_TEXT_POSITION,
-            PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE
+            PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE,
+            PREF_KEY_LOG_ERRORS
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(

@@ -37,6 +37,26 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     private static XSharedPreferences prefs;
     private static XSharedPreferences qhPrefs;
     private static XSharedPreferences uncPrefs;
+    private static boolean LOG_ERRORS;
+
+    public static void log(String tag, String message, Throwable t) {
+        if (LOG_ERRORS) {
+            if (message != null) {
+                XposedBridge.log(tag + ": " + message);
+            }
+            if (t != null) {
+                XposedBridge.log(t);
+            }
+        }
+    }
+
+    public static void log(String tag, String message) {
+        log(tag, message, null);
+    }
+
+    public static void log(String tag, Throwable t) {
+        log(tag, null, t);
+    }
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
@@ -50,6 +70,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             uncPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
             qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
         }
+        LOG_ERRORS = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOG_ERRORS, false);
 
         if (!startupParam.startsSystemServer) return;
 
@@ -73,6 +94,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         XposedBridge.log("GB:Android SDK: " + Build.VERSION.SDK_INT);
         XposedBridge.log("GB:Android Release: " + Build.VERSION.RELEASE);
         XposedBridge.log("GB:ROM: " + Build.DISPLAY);
+        XposedBridge.log("GB:Error logging: " + LOG_ERRORS);
 
         if (Build.VERSION.SDK_INT < 24 || Build.VERSION.SDK_INT > 25) {
             XposedBridge.log("!!! GravityBox you are running is not designed for "

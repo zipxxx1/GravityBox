@@ -406,7 +406,7 @@ public class ProgressBarController implements BroadcastSubReceiver {
                 parcel.recycle();
             }
         } catch (Throwable  t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         return (max != -1 && progress != -1) ?
@@ -428,7 +428,7 @@ public class ProgressBarController implements BroadcastSubReceiver {
                     sfx.play();
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }

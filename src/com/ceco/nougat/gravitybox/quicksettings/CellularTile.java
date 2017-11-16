@@ -18,10 +18,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.ceco.nougat.gravitybox.ConnectivityServiceWrapper;
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.ComponentName;
 import android.content.Context;
@@ -127,7 +127,7 @@ public class CellularTile extends AospTile {
             XposedHelpers.callMethod(mTile, "handleClick");
             return true;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }

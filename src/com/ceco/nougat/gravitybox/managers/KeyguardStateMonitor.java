@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModPower;
 import com.ceco.nougat.gravitybox.Utils;
@@ -160,7 +161,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -248,7 +249,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                     XposedHelpers.callMethod(mMediator, "dismiss", false);
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }
@@ -261,7 +262,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                 XposedHelpers.setBooleanField(mMediator, "mNeedToReshowWhenReenabled", false);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -284,14 +285,14 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                 try {
                     XposedHelpers.callMethod(mUpdateMonitor, "setFingerprintRunningDetectionRunning", false);
                 } catch (Throwable t2) {
-                    XposedBridge.log(t2);
+                    GravityBox.log(TAG, t2);
                 }
             }
 
             try {
                 XposedHelpers.callMethod(mUpdateMonitor, "updateFingerprintListeningState");
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     };
@@ -300,7 +301,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
         try {
             XposedHelpers.callMethod(mUpdateMonitor, "handleFingerprintAuthenticated", userId);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

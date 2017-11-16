@@ -2052,4 +2052,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Error logging</string>
+    <string name="pref_log_errors_summary">Logs all errors to Xposed log when enabled (requires reboot)</string>
+
 </resources>

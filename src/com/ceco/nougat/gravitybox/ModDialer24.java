@@ -228,7 +228,7 @@ public class ModDialer24 {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -269,7 +269,7 @@ public class ModDialer24 {
                     classInfoCallCardFragment.methods.get("setDrawableToImageView"),
                     Drawable.class, unknownCallerHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -298,7 +298,7 @@ public class ModDialer24 {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -324,7 +324,7 @@ public class ModDialer24 {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

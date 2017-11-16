@@ -16,6 +16,7 @@ package com.ceco.nougat.gravitybox.quicksettings;
 
 import java.lang.reflect.Constructor;
 
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.quicksettings.QsPanel.LockedTileIndicator;
 
@@ -23,7 +24,6 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public abstract class QsTile extends BaseTile {
@@ -129,8 +129,7 @@ public abstract class QsTile extends BaseTile {
             return XposedHelpers.getStaticIntField(cls,
                     state ? "sIconColor" : "sCustomDisableIconColor");
         } catch (Throwable t) {
-            log("Error getting QsTile tint color: " + t.getMessage());
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log("Error getting QsTile tint color: ", t);
             return null;
         }
     }
@@ -156,7 +155,7 @@ public abstract class QsTile extends BaseTile {
             }
             return sDrawableIconClassConstructor.newInstance(d);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return null;
         }
     }
@@ -167,7 +166,7 @@ public abstract class QsTile extends BaseTile {
             return c.getConstructor(Drawable.class);
         } catch (Throwable t) {
             log("Error getting drawable icon class constructor:");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return null;
         }
     }

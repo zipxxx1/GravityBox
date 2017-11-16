@@ -33,7 +33,6 @@ import android.widget.TextView;
 
 import com.ceco.nougat.gravitybox.R;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

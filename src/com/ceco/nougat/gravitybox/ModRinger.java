@@ -105,7 +105,7 @@ public class ModRinger {
             }
 
             if (mtdHandlePlay == null) {
-                log("Cannot find handlePlay method in " + CLASS_RINGTONE_PLAYER + ". Increasing ringtone disabled");
+                GravityBox.log(TAG, "Cannot find handlePlay method in " + CLASS_RINGTONE_PLAYER + ". Increasing ringtone disabled");
                 return;
             }
 
@@ -171,7 +171,7 @@ public class ModRinger {
             });
 
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -187,7 +187,7 @@ public class ModRinger {
                             XposedHelpers.getObjectField(mRingtone, "mRemoteToken"),
                             volume, false);
                 } catch (Throwable t) {
-                    
+                    GravityBox.log(TAG, "setVolume: ", t);
                 }
             }
         }

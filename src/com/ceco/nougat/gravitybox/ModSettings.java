@@ -18,10 +18,10 @@ package com.ceco.nougat.gravitybox;
 import android.content.res.XModuleResources;
 import com.ceco.nougat.gravitybox.R;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModSettings {
+    private static final String TAG = "GB:ModSettings";
     public static final String PACKAGE_NAME = "com.android.settings";
 
     public static void initPackageResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
@@ -40,7 +40,7 @@ public class ModSettings {
             resparam.res.setReplacement(PACKAGE_NAME, "array", "animator_duration_scale_values",
                     modRes.fwd(R.array.animator_duration_scale_values));
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -48,7 +48,7 @@ public class ModSettings {
         try {
             // reserved for potential future use
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

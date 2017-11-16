@@ -18,6 +18,7 @@ package com.ceco.nougat.gravitybox.managers;
 import java.util.ArrayList;
 
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.ledcontrol.QuietHours;
@@ -36,6 +37,7 @@ import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 
 public class BatteryInfoManager implements BroadcastSubReceiver {
+    private static final String TAG = "GB:BatteryInfoManager";
     private BatteryData mBatteryData;
     private ArrayList<BatteryStatusListener> mListeners;
     private Context mContext;
@@ -258,7 +260,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
                 sfx.play();
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -270,7 +272,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
             }
             return (mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return true;
         }
     }

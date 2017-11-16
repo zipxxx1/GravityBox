@@ -49,6 +49,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModHwKeys;
 import com.ceco.nougat.gravitybox.ModPieControls;
@@ -325,7 +326,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         try {
             mBaseStatusBarClass = XposedHelpers.findClass(CLASS_BASE_STATUSBAR, mContext.getClassLoader());
         } catch (ClassNotFoundError e) {
-            XposedBridge.log(e);
+            GravityBox.log(TAG, e);
         }
 
         mSysinfoDisabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_SYSINFO_DISABLE, false);
@@ -611,14 +612,14 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                         try {
                             m.invoke(mStatusBar);
                         } catch (IllegalArgumentException e) {
-                            XposedBridge.log(e);
+                            GravityBox.log(TAG, e);
                         } catch (IllegalAccessException e) {
-                            XposedBridge.log(e);
+                            GravityBox.log(TAG, e);
                         } catch (InvocationTargetException e) {
-                            XposedBridge.log(e);
+                            GravityBox.log(TAG, e);
                         }
                     } catch (NoSuchMethodException e) {
-                        XposedBridge.log(e);
+                        GravityBox.log(TAG, e);
                     }
                 }
                 break;

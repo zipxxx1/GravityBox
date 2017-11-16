@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.managers.SysUiManagers;
 
@@ -32,7 +33,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class DoNotDisturbTile extends AospTile {
@@ -213,7 +213,7 @@ public class DoNotDisturbTile extends AospTile {
         try {
             return (int) XposedHelpers.callMethod(getZenCtrl(), "getZen");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return ZEN_MODE_OFF;
         }
     }
@@ -222,7 +222,7 @@ public class DoNotDisturbTile extends AospTile {
         try {
             XposedHelpers.callMethod(getZenCtrl(), "setZen", mode, getCondition(mode), "GravityBox");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -251,7 +251,7 @@ public class DoNotDisturbTile extends AospTile {
                     mContext, mDuration, SysUiManagers.KeyguardMonitor.getCurrentUserId());
             return (Uri) XposedHelpers.getObjectField(condition, "id");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return null;
         }
     }
@@ -275,7 +275,7 @@ public class DoNotDisturbTile extends AospTile {
             }
             return null;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return null;
         }
     }

@@ -131,7 +131,7 @@ public class QsPanel implements BroadcastSubReceiver {
         try {
             XposedHelpers.callMethod(mQsPanel, "updateResources");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -149,7 +149,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -271,7 +271,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -306,7 +306,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -336,7 +336,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -383,7 +383,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -409,7 +409,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -441,7 +441,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 XposedHelpers.callMethod(host, "startActivityDismissingKeyguard", intent);
                 return true;
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
                 return false;
             }
         }

@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModQsTiles;
 import com.ceco.nougat.gravitybox.PhoneWrapper;
@@ -126,8 +127,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
             try {
                 l.getValue().onBroadcastReceived(context, intent);
             } catch (Throwable t) {
-                log("Error notifying listener " + l.getKey() + " of new broadcast: ");
-                XposedBridge.log(t);
+                GravityBox.log(TAG, "Error notifying listener " + l.getKey() + " of new broadcast: ", t);
             }
         }
     }
@@ -264,7 +264,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
             XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl,
                         "handleLongClick", longClickHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

@@ -117,10 +117,6 @@ public class Utils {
     // GB Context
     private static Context mGbContext;
 
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
-
     public static synchronized Context getGbContext(Context context, Configuration config) throws Throwable {
         if (mGbContext == null) {
             mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME,
@@ -364,7 +360,7 @@ public class Utils {
             Resources res = XResources.getSystem();
             return res.getBoolean(res.getIdentifier("config_voice_capable", "bool", "android"));
         } catch (Throwable t) {
-            log("hasTelephonySupport(): " + t.getMessage());
+            GravityBox.log(TAG, "hasTelephonySupport(): ", t);
             return false;
         }
     }
@@ -633,8 +629,8 @@ public class Utils {
                 SystemProp.set("ctl.restart", "surfaceflinger");
                 SystemProp.set("ctl.restart", "zygote");
             } catch (Throwable t2) {
-                XposedBridge.log(t);
-                XposedBridge.log(t2);
+                GravityBox.log(TAG, t);
+                GravityBox.log(TAG, t2);
             }
         }
     }
@@ -683,7 +679,7 @@ public class Utils {
         try {
             return (int) XposedHelpers.callStaticMethod(ActivityManager.class, "getCurrentUser");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return 0;
         }
     }
@@ -704,7 +700,7 @@ public class Utils {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log("Error showing toast: " + t.getMessage());
+            GravityBox.log(TAG, "Error showing toast: ", t);
         }
     }
 
@@ -745,7 +741,7 @@ public class Utils {
                 Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
                 ret = (String) callStaticMethod(classSystemProperties, "get", key);
             } catch (Throwable t) {
-                log("SystemProp.get failed: " + t.getMessage());
+                GravityBox.log(TAG, "SystemProp.get failed: ", t);
                 ret = null;
             }
             return ret;
@@ -762,7 +758,7 @@ public class Utils {
                 Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
                 ret = (String) callStaticMethod(classSystemProperties, "get", key, def);
             } catch (Throwable t) {
-                log("SystemProp.get failed: " + t.getMessage());
+                GravityBox.log(TAG, "SystemProp.get failed: ", t);
                 ret = def;
             }
             return ret;
@@ -779,7 +775,7 @@ public class Utils {
                 Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
                 ret = (Integer) callStaticMethod(classSystemProperties, "getInt", key, def);
             } catch (Throwable t) {
-                log("SystemProp.getInt failed: " + t.getMessage());
+                GravityBox.log(TAG, "SystemProp.getInt failed: ", t);
                 ret = def;
             }
             return ret;
@@ -796,7 +792,7 @@ public class Utils {
                 Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
                 ret = (Long) callStaticMethod(classSystemProperties, "getLong", key, def);
             } catch (Throwable t) {
-                log("SystemProp.getLong failed: " + t.getMessage());
+                GravityBox.log(TAG, "SystemProp.getLong failed: ", t);
                 ret = def;
             }
             return ret;
@@ -816,7 +812,7 @@ public class Utils {
                 Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
                 ret = (Boolean) callStaticMethod(classSystemProperties, "getBoolean", key, def);
             } catch (Throwable t) {
-                log("SystemProp.getBoolean failed: " + t.getMessage());
+                GravityBox.log(TAG, "SystemProp.getBoolean failed: ", t);
                 ret = def;
             }
             return ret;
@@ -828,7 +824,7 @@ public class Utils {
                 Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
                 callStaticMethod(classSystemProperties, "set", key, val);
             } catch (Throwable t) {
-                log("SystemProp.set failed: " + t.getMessage());
+                GravityBox.log(TAG, "SystemProp.set failed: ", t);
             }
         }
     }

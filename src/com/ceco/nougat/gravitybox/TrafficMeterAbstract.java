@@ -123,14 +123,14 @@ public abstract class TrafficMeterAbstract extends TextView
             mSize = Integer.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_SIZE, "14"));
         } catch (NumberFormatException nfe) {
-            log("Invalid preference value for PREF_KEY_DATA_TRAFFIC_SIZE");
+            GravityBox.log(TAG, "Invalid preference value for PREF_KEY_DATA_TRAFFIC_SIZE");
         }
 
         try {
             mPosition = Integer.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_POSITION, "0"));
         } catch (NumberFormatException nfe) {
-            log("Invalid preference value for PREF_KEY_DATA_TRAFFIC_POSITION");
+            GravityBox.log(TAG, "Invalid preference value for PREF_KEY_DATA_TRAFFIC_POSITION");
         }
 
         mDisplayMode = DisplayMode.valueOf(prefs.getString(
@@ -373,7 +373,7 @@ public abstract class TrafficMeterAbstract extends TextView
                 }
             }
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             // fallback to TrafficStats
             bytes = getTotalRxTxBytesFromStats();
         } finally {

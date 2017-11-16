@@ -206,7 +206,7 @@ public class ModAudio {
                 }
             });
         } catch(Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -219,7 +219,7 @@ public class ModAudio {
         try {
             XposedHelpers.callMethod(mAudioService, "updateStreamVolumeAlias", true, "AudioService");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -250,7 +250,7 @@ public class ModAudio {
                         if (DEBUG) log("Modified direction = " + param.args[1]);
                     }
                 } catch (Throwable t) {
-                    XposedBridge.log(t);
+                    GravityBox.log(TAG, t);
                 }
             }
         }

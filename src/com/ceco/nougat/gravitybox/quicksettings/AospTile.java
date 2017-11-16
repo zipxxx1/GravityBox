@@ -17,6 +17,7 @@ package com.ceco.nougat.gravitybox.quicksettings;
 
 import java.lang.reflect.Method;
 
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.quicksettings.QsPanel.LockedTileIndicator;
 import com.ceco.nougat.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
@@ -159,7 +160,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
                 });
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

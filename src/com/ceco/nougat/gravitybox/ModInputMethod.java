@@ -98,7 +98,7 @@ public class ModInputMethod {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     InputMethodService imeService = (InputMethodService) param.thisObject; 
                     if (imeService == null) {
-                        log("failed to cast param.thisObject to InputMethodService");
+                        GravityBox.log(TAG, "failed to cast param.thisObject to InputMethodService");
                         return;
                     }
                     
@@ -125,7 +125,7 @@ public class ModInputMethod {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

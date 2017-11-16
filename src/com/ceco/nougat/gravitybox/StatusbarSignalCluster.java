@@ -20,7 +20,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.nougat.gravitybox.R;
@@ -69,7 +68,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected Resources mResources;
     protected Context mGbContext;
     protected Field mFldWifiGroup;
-    private List<String> mErrorsLogged = new ArrayList<String>();
     protected boolean mNetworkTypeIndicatorsDisabled;
 
     // Data activity
@@ -85,13 +83,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
-    }
-
-    protected void logAndMute(String key, Throwable t) {
-        if (!mErrorsLogged.contains(key)) {
-            XposedBridge.log(t);
-            mErrorsLogged.add(key);
-        }
     }
 
     // Signal activity
@@ -137,7 +128,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             try {
                 update(enabled, activityIn, activityOut);
             } catch (Throwable t) {
-                logAndMute("SignalActivity.update", t);
+                GravityBox.log(TAG, "SignalActivity.update", t);
             }
         }
 
@@ -287,7 +278,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 });
             } catch (Throwable t) {
                 if (!Utils.isOxygenOsRom()) {
-                    log("Error hooking getOrInflateState: " + t.getMessage());
+                    GravityBox.log(TAG, "Error hooking getOrInflateState: ", t);
                 }
             }
 
@@ -320,7 +311,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                         });
                     }
                 } catch (Throwable t) {
-                    log("Error hooking setNoSims: " + t.getMessage());
+                    GravityBox.log(TAG, "Error hooking setNoSims: ", t);
                 }
             }
         }
@@ -351,7 +342,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     }
                 });
             } catch (Throwable t) {
-                log("Error hooking SignalActivity related methods: " + t.getMessage());
+                GravityBox.log(TAG, "Error hooking SignalActivity related methods: ", t);
             }
         }
 
@@ -441,7 +432,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     }
                 });
             } catch (Throwable t) {
-                logAndMute("updateDataNetType", t);
+                GravityBox.log(TAG, "updateDataNetType", t);
             }
         }
     }
@@ -562,7 +553,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 mobileGroupIdx = 0;
                 updateIconColorRecursive(mView);
             } catch (Throwable t) {
-                logAndMute("update", t);
+                GravityBox.log(TAG, "update", t);
             }
         }
     }
@@ -615,7 +606,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             }
             XposedHelpers.setIntField(mView, "mEndPadding", padding);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -682,7 +673,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     }
                 }
             } catch (Throwable t) {
-                logAndMute("NetworkControllerCallback", t);
+                GravityBox.log(TAG, "NetworkControllerCallback", t);
             }
 
             return null;

@@ -155,7 +155,7 @@ public class ModPower {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         // Wireless charging sound
@@ -176,7 +176,7 @@ public class ModPower {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -195,7 +195,7 @@ public class ModPower {
             }
             if (DEBUG) log("toggleWakeUpWithProximityFeature: " + enabled);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -209,7 +209,7 @@ public class ModPower {
             TelephonyManager phone = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
             return (phone.getCallState() == TelephonyManager.CALL_STATE_RINGING);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }

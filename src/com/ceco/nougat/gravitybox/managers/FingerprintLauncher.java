@@ -25,6 +25,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 import com.ceco.nougat.gravitybox.BroadcastSubReceiver;
+import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 import com.ceco.nougat.gravitybox.Utils;
@@ -83,7 +84,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -238,7 +239,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
                         Toast.LENGTH_SHORT).show();
             }
         } catch (Throwable t) {
-            log("Error starting activity: " + t.getMessage());
+            GravityBox.log(TAG, "Error starting activity: ", t);
         }
     }
 
@@ -364,7 +365,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
                     if (DEBUG) log("getFingerPrintIdFromResult: id=" + id);
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
             return id;
         }
@@ -382,7 +383,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
         return ids;
     }

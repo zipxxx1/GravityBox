@@ -155,8 +155,7 @@ public class ModDialer25 {
                 }
             });
         } catch (Throwable t) {
-            log("DialtactsActivity: incompatible version of Dialer app");
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, "DialtactsActivity: incompatible version of Dialer app", t);
         }
 
         try {
@@ -182,8 +181,7 @@ public class ModDialer25 {
                 }
             });
         } catch (Throwable t) {
-            log("DialpadFragment: incompatible version of Dialer app");
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, "DialpadFragment: incompatible version of Dialer app", t);
         }
     }
 }
