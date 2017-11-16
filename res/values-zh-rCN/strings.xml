@@ -1431,7 +1431,10 @@
     <string name="imgpick_choose_error">选择的图像错误</string>
     <string name="imgpick_crop_error">剪裁图像错误</string>
     <string name="imgpick_crop_uri_null">应用没有提供裁剪图像将使用原始图像</string>
-    
+    <string name="imgpick_crop_ask_title">裁剪图像?</string>
+    <string name="imgpick_crop_ask_msg">如果选择否原始图像将按原样使用. 
+        确保其尺寸接近到: %1$dx%2$dpx</string>
+
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">靠近唤醒</string>
     <string name="pref_power_proximity_wake_summary">使用接近传感器以帮助决定是否需要唤醒设备</string>

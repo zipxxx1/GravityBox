@@ -3806,7 +3806,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
         private void setCustomLockscreenImage() {
             Intent intent = new Intent(getActivity(), PickImageActivity.class);
-            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
+            intent.putExtra(PickImageActivity.EXTRA_CROP_MODE, "CROP");
             intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
             Display display = getActivity().getWindowManager().getDefaultDisplay();
             Point displaySize = new Point();
@@ -3840,7 +3840,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             Point displaySize = new Point();
             display.getRealSize(displaySize);
             Intent intent = new Intent(getActivity(), PickImageActivity.class);
-            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
+            intent.putExtra(PickImageActivity.EXTRA_CROP_MODE, "CROP");
             boolean isPortrait = getResources()
                     .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
             intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? displaySize.x : displaySize.y);
@@ -3857,7 +3857,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             Point displaySize = new Point();
             display.getRealSize(displaySize);
             Intent intent = new Intent(getActivity(), PickImageActivity.class);
-            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
+            intent.putExtra(PickImageActivity.EXTRA_CROP_MODE, "CROP");
             boolean isPortrait = getResources()
                   .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
             intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? displaySize.y : displaySize.x);
@@ -3873,7 +3873,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             int width = getResources().getDimensionPixelSize(R.dimen.caller_id_photo_width);
             int height = getResources().getDimensionPixelSize(R.dimen.caller_id_photo_height);
             Intent intent = new Intent(getActivity(), PickImageActivity.class);
-            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
+            intent.putExtra(PickImageActivity.EXTRA_CROP_MODE, "CROP");
             boolean isPortrait = getResources()
                     .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
             intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? width : height);
@@ -3945,7 +3945,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mIconPickHandler = handler;
 
             Intent intent = new Intent(getActivity(), PickImageActivity.class);
-            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
+            intent.putExtra(PickImageActivity.EXTRA_CROP_MODE, "ASK");
             intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, width);
             intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, height);
             intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, width);

@@ -22,7 +22,9 @@ import java.util.UUID;
 
 import android.Manifest.permission;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
@@ -39,7 +41,7 @@ public class PickImageActivity extends Activity {
     private static final int REQ_CROP_IMAGE = 2;
     private static final String ACTION_CROP = "com.android.camera.action.CROP";
 
-    public static final String EXTRA_CROP = "crop";
+    public static final String EXTRA_CROP_MODE = "cropMode";
     public static final String EXTRA_SCALE = "scale";
     public static final String EXTRA_SCALE_UP = "scaleUpIfNeeded";
     public static final String EXTRA_ASPECT_X = "aspectX";
@@ -50,14 +52,17 @@ public class PickImageActivity extends Activity {
     public static final String EXTRA_SPOTLIGHT_Y = "spotlightY";
     public static final String EXTRA_FILE_PATH = "filePath";
 
+    private static enum CropMode { ORIGINAL, CROP, ASK };
+
     private ProgressDialog mProgressDialog;
-    private boolean mCropImage;
+    private CropMode mCropMode = CropMode.ORIGINAL;
     private boolean mScale;
     private boolean mScaleUp;
     private Point mAspectSize;
     private Point mOutputSize;
     private Point mSpotlightSize;
     private Uri mCropUri;
+    private AlertDialog mAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +82,9 @@ public class PickImageActivity extends Activity {
 
         Intent startIntent = getIntent();
         if (savedInstanceState == null && startIntent != null) {
-            mCropImage = startIntent.getBooleanExtra(EXTRA_CROP, false);
+            if (startIntent.hasExtra(EXTRA_CROP_MODE)) {
+                mCropMode = CropMode.valueOf(startIntent.getStringExtra(EXTRA_CROP_MODE));
+            }
             mScale = startIntent.getBooleanExtra(EXTRA_SCALE, false);
             mScaleUp = startIntent.getBooleanExtra(EXTRA_SCALE_UP, false);
             if (startIntent.hasExtra(EXTRA_ASPECT_X) || startIntent.hasExtra(EXTRA_ASPECT_Y)) {
@@ -105,6 +112,7 @@ public class PickImageActivity extends Activity {
     @Override
     public void onDestroy() {
         dismissProgressDialog();
+        dismissAlertDialog();
         super.onDestroy();
     }
 
@@ -128,7 +136,7 @@ public class PickImageActivity extends Activity {
         }
     }
 
-    private void onImageLoadedResult(LoadResult result) {
+    private void onImageLoadedResult(final LoadResult result) {
         if (isDestroyed()) {
             return;
         } else if (result.exception != null) {
@@ -138,12 +146,32 @@ public class PickImageActivity extends Activity {
             return;
         }
 
-        if (mCropImage) {
-            cropImage(result.file);
-        } else {
+        if (mCropMode == CropMode.ORIGINAL) {
             setResult(Activity.RESULT_OK, 
                     new Intent().putExtra(EXTRA_FILE_PATH, result.file.getAbsolutePath()));
             finish();
+        } else if (mCropMode == CropMode.CROP) {
+            cropImage(result.file);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert)
+                    .setTitle(R.string.imgpick_crop_ask_title)
+                    .setMessage(getString(R.string.imgpick_crop_ask_msg, mOutputSize.x, mOutputSize.y))
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cropImage(result.file);
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setResult(Activity.RESULT_OK, 
+                                    new Intent().putExtra(EXTRA_FILE_PATH, result.file.getAbsolutePath()));
+                            finish();
+                        }
+                    });
+            mAlertDialog = builder.create();
+            mAlertDialog.show();
         }
     }
 
@@ -196,7 +224,7 @@ public class PickImageActivity extends Activity {
                     getContentResolver(), file.getAbsolutePath(), null, null));
             Intent cropIntent = new Intent(ACTION_CROP);
             cropIntent.setDataAndType(mCropUri, "image/*");
-            cropIntent.putExtra(EXTRA_CROP, "true");
+            cropIntent.putExtra("crop", "true");
             if (mAspectSize != null) {
                 cropIntent.putExtra(EXTRA_ASPECT_X, mAspectSize.x);
                 cropIntent.putExtra(EXTRA_ASPECT_Y, mAspectSize.y);
@@ -227,6 +255,12 @@ public class PickImageActivity extends Activity {
     private void dismissProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
+        }
+    }
+
+    private void dismissAlertDialog() {
+        if (mAlertDialog != null && mAlertDialog.isShowing()) {
+            mAlertDialog.dismiss();
         }
     }
 

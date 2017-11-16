@@ -1412,6 +1412,8 @@
     <string name="imgpick_choose_error">Помилка під час вибору зображення</string>
     <string name="imgpick_crop_error">Помилка під час обрізання зображення</string>
     <string name="imgpick_crop_uri_null">Додаток для обрізання зображення не надав результат своєї роботи. Використано оригінальне зображення.</string>
+    <string name="imgpick_crop_ask_title">Обрізати зображення?</string>
+    <string name="imgpick_crop_ask_msg">Якщо відмовитись, буде обрано оригінальне зображення. Переконайтеся, що розмір відповідає вказаному: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Наближення під час пробудження</string>

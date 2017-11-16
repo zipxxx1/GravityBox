@@ -1412,6 +1412,9 @@
     <string name="imgpick_choose_error">Resim seçilirken hata</string>
     <string name="imgpick_crop_error">Resim kırpılırken hata</string>
     <string name="imgpick_crop_uri_null">Kırpma uygulaması kırpılmış görüntü sunmadı. Orijinal resim kullanılıyor.</string>
+    <string name="imgpick_crop_ask_title">Resim kırpılsın mı?</string>
+    <string name="imgpick_crop_ask_msg">Hayır derseniz, orijinal görüntü olduğu gibi kullanılacaktır. 
+        Boyutlarının şuna yakın olduğundan emin olun: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Yakınlık sensörüyle uyandır</string>

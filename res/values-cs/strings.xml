@@ -1393,6 +1393,9 @@
     <string name="imgpick_choose_error">Chyba během vybírání obrázku</string>
     <string name="imgpick_crop_error">Chyba během oříznutí obrázku</string>
     <string name="imgpick_crop_uri_null">Aplikace ořezávání nedodala oříznutý obrázek. Bude použitý originál.</string>
+    <string name="imgpick_crop_ask_title">Oříznout obrázek?</string>
+    <string name="imgpick_crop_ask_msg">Pokud zvolíte ne, originální obrázek bude použit bez změny rozměru. 
+         Ujistěte se, že jeho originální rozměry jsou přibližně: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Zabránit nechtěnému probuzení</string>
