@@ -1389,6 +1389,9 @@
     <string name="imgpick_choose_error">Error while choosing image</string>
     <string name="imgpick_crop_error">Error while cropping image</string>
     <string name="imgpick_crop_uri_null">Cropping app did not deliver cropped image. Using original image.</string>
+    <string name="imgpick_crop_ask_title">Crop image?</string>
+    <string name="imgpick_crop_ask_msg">If you choose no, original image willl be used as is. 
+        Make sure its dimensions are close to: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Proximity wake-up</string>
@@ -2044,5 +2047,9 @@
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Toggle split screen</string>
+
+    <!-- Yes/No -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>
