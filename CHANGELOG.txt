@@ -1,3 +1,18 @@
+Changelog 7.0.5 - 17/11/2017
+--------------------------------------
+- Image chooser:
+--- improved compatibility (thanks to Ashtrix for testing and providing logs)
+--- custom icon picker now allows to use uncropped (original) images
+- QS: reduced QS panel top margin when brightness slider hidden
+- Added switch for Error logging in About section (off by default):
+--- module logs errors to Xposed log only when switch is enabled
+--- avoids flooding Xposed log happening on unsupported devices
+- Permissions: added back WakeLock permission
+--- needed by Camera2 Torch API on some legacy LineageOS devices (blame LOS devs)
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Russian translations (thanks to gaich)
+- Updated Polish translations (thanks to kkthx)
+
 Changelog 7.0.4 - 29/10/2017
 --------------------------------------
 - QuickSettings management:
