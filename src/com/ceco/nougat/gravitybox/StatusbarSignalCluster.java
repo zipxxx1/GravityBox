@@ -349,11 +349,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
                 !Utils.isFalconAsiaDs() && !Utils.isMtkDevice() && !Utils.isOxygenOsRom()) {
             try {
-                final Class<?> mobileNetworkCtrlClass = Utils.isMotoXtDevice() ?
-                        XposedHelpers.findClass(
-                        "com.android.systemui.statusbar.policy.MotorolaMobileSignalController", 
-                        mView.getContext().getClassLoader()) :
-                        XposedHelpers.findClass(
+                final Class<?> mobileNetworkCtrlClass = XposedHelpers.findClass(
                         "com.android.systemui.statusbar.policy.MobileSignalController", 
                         mView.getContext().getClassLoader());
 
