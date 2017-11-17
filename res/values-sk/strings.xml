@@ -1354,6 +1354,10 @@
     <string name="imgpick_dialog_title">Vybrať obrázok pomocou</string>
     <string name="imgpick_choose_error">Chyba počas vyberania obrázku</string>
     <string name="imgpick_crop_error">Chyba počas orezania obrázku</string>
+    <string name="imgpick_crop_uri_null">Aplikácia orezávania nedodala orezaný obrázok. Bude použitý originál.</string>
+    <string name="imgpick_crop_ask_title">Orezať obrázok?</string>
+    <string name="imgpick_crop_ask_msg">Ak zvolíte nie, originálny obrázok bude použitý bez zmeny rozmeru. 
+         Uistite sa, že jeho originálne rozmery sú približne: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Zabrániť nechcenému prebudeniu</string>
@@ -1986,5 +1990,13 @@
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Rozdelená obrazovka</string>
+
+    <!-- Yes/No -->
+    <string name="yes">Áno</string>
+    <string name="no">Nie</string>
+
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Logovanie chýb</string>
+    <string name="pref_log_errors_summary">Zapíše všetky chyby do Xposed logu (vyžaduje reštart)</string>
 
 </resources>
