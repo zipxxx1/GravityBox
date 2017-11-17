@@ -36,6 +36,7 @@ import android.graphics.drawable.Animatable;
 import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -71,6 +72,7 @@ public class QsPanel implements BroadcastSubReceiver {
     private QsQuickPulldownHandler mQuickPulldownHandler;
     private Map<String, BaseTile> mTiles = new HashMap<>();
     private LockedTileIndicator mLockedTileIndicator;
+    private Integer mPanelMarginTopOrig;
 
     public QsPanel(XSharedPreferences prefs, ClassLoader classLoader) {
         mPrefs = prefs;
@@ -419,8 +421,26 @@ public class QsPanel implements BroadcastSubReceiver {
             final int vis = mHideBrightness ? View.GONE : View.VISIBLE; 
             if (bs.getVisibility() != vis) {
                 bs.setVisibility(vis);
+                updatePanelTopPadding(vis == View.VISIBLE);
                 mQsPanel.postInvalidate();
             }
+        }
+    }
+
+    private void updatePanelTopPadding(boolean sliderVisible) {
+        if (Utils.isOxygenOsRom())
+            return;
+
+        try {
+            MarginLayoutParams lp = (MarginLayoutParams) mQsPanel.getLayoutParams();
+            if (mPanelMarginTopOrig == null) {
+                mPanelMarginTopOrig = lp.topMargin;
+            }
+            lp.topMargin = sliderVisible ? mPanelMarginTopOrig :
+                Math.round(mPanelMarginTopOrig / 2f);
+            mQsPanel.setLayoutParams(lp);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "updatePanelTopPadding:", t);
         }
     }
 
