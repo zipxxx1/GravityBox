@@ -113,6 +113,7 @@
         <item>@string/qs_tile_wifi</item>
         <item>@string/qs_tile_bluetooth</item>
         <item>@string/qs_tile_data_usage</item>
+        <item>@string/qs_tile_data</item>
         <item>@string/qs_tile_airplane_mode</item>
         <item>@string/qs_tile_gps</item>
         <item>@string/qs_tile_wifi_ap</item>
@@ -148,6 +149,7 @@
         <item>aosp_tile_wifi</item>
         <item>aosp_tile_bluetooth</item>
         <item>aosp_tile_cell</item>
+        <item>aosp_tile_data</item>
         <item>aosp_tile_airplane_mode</item>
         <item>aosp_tile_location</item>
         <item>aosp_tile_hotspot</item>

@@ -25,6 +25,9 @@ public class AospTileDefault extends AospTile {
 
     @Override
     public String getSettingsKey() {
-        return "aosp_tile_default";
+        switch (mKey) {
+            case "data": return "aosp_tile_data";
+            default: return "aosp_tile_default";
+        }
     }
 }

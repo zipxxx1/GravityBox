@@ -89,6 +89,7 @@
     <string name="qs_tile_gps_alt">GPS (CM style)</string>
     <string name="qs_tile_network_mode">Network Mode</string>
     <string name="qs_tile_data_usage">Cellular</string>
+    <string name="qs_tile_data">Cellular data</string>
     <string name="qs_tile_sync">Synchronization</string>
     <string name="qs_tile_wifi_ap">Hotspot</string>
     <string name="qs_tile_torch_gb">Torch (GravityBox)</string>

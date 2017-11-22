@@ -205,6 +205,8 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
             return false;
         if (key.equals("gb_tile_quickrecord") && !isAudioRecordingAllowed())
             return false;
+        if (key.equals("aosp_tile_data") && !Utils.isMotoXtDevice())
+            return false;
 
         return true;
     }
