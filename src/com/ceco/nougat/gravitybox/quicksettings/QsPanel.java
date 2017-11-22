@@ -33,6 +33,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Animatable;
+import android.os.Build;
 import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
@@ -428,7 +429,7 @@ public class QsPanel implements BroadcastSubReceiver {
     }
 
     private void updatePanelTopPadding(boolean sliderVisible) {
-        if (Utils.isOxygenOsRom())
+        if (Build.VERSION.SDK_INT == 24 || Utils.isOxygenOsRom())
             return;
 
         try {
