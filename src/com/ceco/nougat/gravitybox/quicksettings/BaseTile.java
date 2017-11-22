@@ -34,6 +34,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -62,6 +63,9 @@ public abstract class BaseTile implements QsEventListener {
         int iconSizePx;
         int tilePaddingBelowIconPx;
         float labelTextSizePx;
+        int baseIconWidth;
+        int iconHeight;
+        int doubleWideIconWidth;
     }
 
     protected String mKey;
@@ -191,17 +195,31 @@ public abstract class BaseTile implements QsEventListener {
             Object iconView = iconField.get(tileView);
             int iconSizePx = XposedHelpers.getIntField(iconView, "mIconSizePx");
             int tilePaddingBelowIconPx = XposedHelpers.getIntField(iconView, "mTilePaddingBelowIconPx");
+            int baseIconWidth = hasIntField(iconView, "mBaseIconWidth") ?
+                    XposedHelpers.getIntField(iconView, "mBaseIconWidth") : 0;
+            int iconHeight = hasIntField(iconView, "mIconHeight") ?
+                    XposedHelpers.getIntField(iconView, "mIconHeight") : 0;
+            int doubleWideIconWidth = hasIntField(iconView, "mDoubleWideIconWidth") ?
+                    XposedHelpers.getIntField(iconView, "mDoubleWideIconWidth") : 0;
             mStockLayout = new StockLayout();
             mStockLayout.tilePaddingTopPx = tilePaddingTopPx;
             mStockLayout.tileSpacingPx = tileSpacingPx;
             mStockLayout.labelTextSizePx = labelTextSizePx;
             mStockLayout.iconSizePx = iconSizePx;
             mStockLayout.tilePaddingBelowIconPx = tilePaddingBelowIconPx;
+            mStockLayout.baseIconWidth = baseIconWidth;
+            mStockLayout.iconHeight = iconHeight;
+            mStockLayout.doubleWideIconWidth = doubleWideIconWidth;
 
             updateTileViewLayout();
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
+    }
+
+    private boolean hasIntField(Object o, String name) {
+        Field f = XposedHelpers.findFieldIfExists(o.getClass(), name);
+        return (f != null && f.getType().isAssignableFrom(int.class));
     }
 
     @Override
@@ -273,9 +291,39 @@ public abstract class BaseTile implements QsEventListener {
                         mStockLayout.labelTextSizePx*scalingFactor);
             }
 
+            // Moto SignalTileView
+            if (Utils.isMotoXtDevice() &&
+                    "SignalTileView".equals(iconView.getClass().getSimpleName())) {
+                updateMotoXtSignalTileViewLayout(iconView);
+            }
+
             mTileView.requestLayout();
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
+        }
+    }
+
+    private void updateMotoXtSignalTileViewLayout(Object signalTileView) {
+        try {
+            float scalingFactor = getQsPanel().getScalingFactor();
+            for (String vName : new String[] { "mSignal", "mOverlay", "mSimStatusImageView",
+                    "mRoamingAnimatedImageView", "mDataActivityAnimatedImageView" }) {
+                View v = (View) XposedHelpers.getObjectField(signalTileView, vName);
+                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) v.getLayoutParams();
+                lp.width = Math.round(mStockLayout.baseIconWidth*scalingFactor);
+                lp.height = Math.round(mStockLayout.iconHeight*scalingFactor);
+                v.setLayoutParams(lp);
+            }
+            for (String vName : new String[] { "mOverlayDoubleWideImageView",
+                    "mDataActivityDoubleWideAnimatedImageView" }) {
+                View v = (View) XposedHelpers.getObjectField(signalTileView, vName);
+                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) v.getLayoutParams();
+                lp.width = Math.round(mStockLayout.doubleWideIconWidth*scalingFactor);
+                lp.height = Math.round(mStockLayout.iconHeight*scalingFactor);
+                v.setLayoutParams(lp);
+            }
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "updateMotoXtSignalTileViewLayout:", t);
         }
     }
 
