@@ -346,7 +346,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
 
         if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                !Utils.isFalconAsiaDs() && !Utils.isMtkDevice() && !Utils.isOxygenOsRom()) {
+                !Utils.isMotoXtDevice() && !Utils.isMtkDevice() && !Utils.isOxygenOsRom()) {
             try {
                 final Class<?> mobileNetworkCtrlClass = XposedHelpers.findClass(
                         "com.android.systemui.statusbar.policy.MobileSignalController", 
@@ -359,71 +359,25 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                         SparseArray<Object> iconSet = (SparseArray<Object>) XposedHelpers.getObjectField(
                                 param.thisObject, "mNetworkToIconLookup");
                         Object hGroup = iconSet.get(TelephonyManager.NETWORK_TYPE_HSPAP);
-                        if (Utils.isMotoXtDevice()) {
-                            Constructor<?> c = hGroup.getClass().getConstructor(
-                                    String.class, int[][].class, int[][].class, int[].class,
-                                    int.class, int.class, int.class, int.class,
-                                    int.class, int.class, int.class, boolean.class, int.class,
-                                    int[][].class, int[][].class, boolean.class, boolean.class,
-                                    int[].class, int[].class, int[].class, int[].class,
-                                    int[].class, int[].class, int[].class, int[].class,
-                                    int[].class, int.class, int[].class, int[].class, int[].class,
-                                    int[].class, int[].class);
-                            c.setAccessible(true);
-                            Object hPlusGroup = c.newInstance("HP",
-                                    XposedHelpers.getObjectField(hGroup, "mSbIcons"),
-                                    XposedHelpers.getObjectField(hGroup, "mQsIcons"),
-                                    XposedHelpers.getObjectField(hGroup, "mContentDesc"),
-                                    XposedHelpers.getIntField(hGroup, "mSbNullState"),
-                                    XposedHelpers.getIntField(hGroup, "mQsNullState"),
-                                    XposedHelpers.getIntField(hGroup, "mSbDiscState"),
-                                    XposedHelpers.getIntField(hGroup, "mQsDiscState"),
-                                    XposedHelpers.getIntField(hGroup, "mDiscContentDesc"),
-                                    XposedHelpers.getIntField(hGroup, "mDataContentDescription"),
-                                    sSbHpResId,
-                                    XposedHelpers.getBooleanField(hGroup, "mIsWide"),
-                                    sQsHpResId,
-                                    XposedHelpers.getObjectField(hGroup, "mMotoSBActivityAOSPLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoQSActivityAOSPLookup"),
-                                    XposedHelpers.getBooleanField(hGroup, "mIsMotoUI"),
-                                    XposedHelpers.getBooleanField(hGroup, "mIsMotoTwoCell"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoSimDescriptionLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoSBSimLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoQSSimLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoSignalDescriptionLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoSBSignalLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoQSSignalLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoRoamingDescriptionLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoSBRoamingLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoQSRoamingLookup"),
-                                    XposedHelpers.getIntField(hGroup, "mMotoDataTypeDescription"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoSBDataTypeLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoQSDataTypeLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoActivityDescriptionLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoSBActivityLookup"),
-                                    XposedHelpers.getObjectField(hGroup, "mMotoQSActivityLookup"));
-                            iconSet.put(TelephonyManager.NETWORK_TYPE_HSPAP, hPlusGroup);
-                        } else {
-                            Constructor<?> c = hGroup.getClass().getConstructor(
-                                    String.class, int[][].class, int[][].class, int[].class,
-                                    int.class, int.class, int.class, int.class,
-                                    int.class, int.class, int.class, boolean.class, int.class);
-                            c.setAccessible(true);
-                            Object hPlusGroup = c.newInstance("HP",
-                                    XposedHelpers.getObjectField(hGroup, "mSbIcons"),
-                                    XposedHelpers.getObjectField(hGroup, "mQsIcons"),
-                                    XposedHelpers.getObjectField(hGroup, "mContentDesc"),
-                                    XposedHelpers.getIntField(hGroup, "mSbNullState"),
-                                    XposedHelpers.getIntField(hGroup, "mQsNullState"),
-                                    XposedHelpers.getIntField(hGroup, "mSbDiscState"),
-                                    XposedHelpers.getIntField(hGroup, "mQsDiscState"),
-                                    XposedHelpers.getIntField(hGroup, "mDiscContentDesc"),
-                                    XposedHelpers.getIntField(hGroup, "mDataContentDescription"),
-                                    sSbHpResId,
-                                    XposedHelpers.getBooleanField(hGroup, "mIsWide"),
-                                    sQsHpResId);
-                            iconSet.put(TelephonyManager.NETWORK_TYPE_HSPAP, hPlusGroup);
-                        }
+                        Constructor<?> c = hGroup.getClass().getConstructor(
+                                String.class, int[][].class, int[][].class, int[].class,
+                                int.class, int.class, int.class, int.class,
+                                int.class, int.class, int.class, boolean.class, int.class);
+                        c.setAccessible(true);
+                        Object hPlusGroup = c.newInstance("HP",
+                                XposedHelpers.getObjectField(hGroup, "mSbIcons"),
+                                XposedHelpers.getObjectField(hGroup, "mQsIcons"),
+                                XposedHelpers.getObjectField(hGroup, "mContentDesc"),
+                                XposedHelpers.getIntField(hGroup, "mSbNullState"),
+                                XposedHelpers.getIntField(hGroup, "mQsNullState"),
+                                XposedHelpers.getIntField(hGroup, "mSbDiscState"),
+                                XposedHelpers.getIntField(hGroup, "mQsDiscState"),
+                                XposedHelpers.getIntField(hGroup, "mDiscContentDesc"),
+                                XposedHelpers.getIntField(hGroup, "mDataContentDescription"),
+                                sSbHpResId,
+                                XposedHelpers.getBooleanField(hGroup, "mIsWide"),
+                                sQsHpResId);
+                        iconSet.put(TelephonyManager.NETWORK_TYPE_HSPAP, hPlusGroup);
                     }
                 });
             } catch (Throwable t) {
