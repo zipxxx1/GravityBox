@@ -387,7 +387,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     public static void disableSignalExclamationMarks(ClassLoader cl) {
-        if (Utils.isFalconAsiaDs() || Utils.isMtkDevice()) {
+        if (Utils.isMtkDevice()) {
             return;
         }
 

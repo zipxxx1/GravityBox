@@ -15,7 +15,6 @@
 
 package com.ceco.nougat.gravitybox;
 
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -91,7 +90,6 @@ public class Utils {
     private static Boolean mIsMtkDevice = null;
     private static Boolean mIsXperiaDevice = null;
     private static Boolean mIsMotoXtDevice = null;
-    private static Boolean mIsFalconAsiaDs = null;
     private static Boolean mIsGpeDevice = null;
     private static Boolean mIsExynosDevice = null;
     private static Boolean mHasLenovoCustomUI = null;
@@ -230,13 +228,6 @@ public class Utils {
                      !isGpeDevice();
         }
         return (mIsMotoXtDevice && !isAospForced());
-    }
-
-    public static boolean isFalconAsiaDs() {
-        if (mIsFalconAsiaDs != null) return mIsFalconAsiaDs;
-
-        mIsFalconAsiaDs = isMotoXtDevice() && "falcon_asia_ds".equals(Build.PRODUCT);
-        return mIsFalconAsiaDs;
     }
 
     public static boolean isGpeDevice() {
