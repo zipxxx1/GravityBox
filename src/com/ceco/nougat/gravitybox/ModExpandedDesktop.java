@@ -121,6 +121,7 @@ public class ModExpandedDesktop {
     private static Method mCalculateRelevantTaskInsets = null;
     private static Method mNavigationBarPosition = null;
     private static Method mGetNavigationBarHeight = null;
+    private static Method mIsNavigationBarOnBottom = null;
     private static NavbarDimensions mNavbarDimensions;
     private static Class<?> mClsScreenShapeHelper;
 
@@ -353,6 +354,16 @@ public class ModExpandedDesktop {
         } catch (NoSuchMethodException e) {
             GravityBox.log(TAG, "could not find getNavigationBarHeight method");
         }
+
+        if (Build.VERSION.SDK_INT == 24) {
+            try {
+                mIsNavigationBarOnBottom = classPhoneWindowManager.getDeclaredMethod(
+                        "isNavigationBarOnBottom", int.class, int.class);
+                mIsNavigationBarOnBottom.setAccessible(true);
+            } catch (NoSuchMethodException e) {
+                GravityBox.log(TAG, "could not find isNavigationBarOnBottom method");
+            }
+        }
     }
 
     public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
@@ -483,7 +494,7 @@ public class ModExpandedDesktop {
                             // change atomically with screen rotations.
                             final int position;
                             if (Build.VERSION.SDK_INT == 24) {
-                                position = (boolean)XposedHelpers.callMethod(param.thisObject, "isNavigationBarOnBottom",
+                                position = (boolean) mIsNavigationBarOnBottom.invoke(param.thisObject,
                                         displayWidth, displayHeight) ? NavBarPosition.NAV_BAR_BOTTOM : NavBarPosition.NAV_BAR_RIGHT;
                             } else {
                                 position = (int)mNavigationBarPosition.invoke(param.thisObject,
