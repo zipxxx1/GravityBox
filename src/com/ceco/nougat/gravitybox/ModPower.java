@@ -61,6 +61,7 @@ public class ModPower {
     private static boolean mIgnoreIncomingCall;
     private static boolean mIsWirelessChargingSoundCustom;
     private static boolean mMotoHooksCreated;
+    private static int mLockscreenTorch = 0;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -83,6 +84,11 @@ public class ModPower {
                         BatteryInfoManager.SOUND_WIRELESS) {
                 updateIsWirelessChargingSoundCustom(intent.getStringExtra(
                         GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED)) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
+                    mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
+                            GravityBoxSettings.HWKEY_TORCH_DISABLED);
+                }
             }
         }
     };
@@ -95,6 +101,8 @@ public class ModPower {
 
             mIgnoreIncomingCall = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL, false);
+            mLockscreenTorch = Integer.valueOf(
+                    prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_LOCKSCREEN_TORCH, "0"));
 
             XposedBridge.hookAllMethods(pmServiceClass, "systemReady", new XC_MethodHook() {
                 @Override
@@ -107,6 +115,7 @@ public class ModPower {
 
                     IntentFilter intentFilter = new IntentFilter(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                 }
             });
@@ -115,11 +124,11 @@ public class ModPower {
                     long.class, String.class, int.class, String.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!shouldRunProximityCheck()) return;
-
                     if (Utils.isMotoXtDevice()) {
                         createMotoSpecificHooks(classLoader);
                     }
+                    if (!shouldRunProximityCheck())
+                        return;
 
                     synchronized (mLock) { 
                         if (mHandler.hasMessages(MSG_WAKE_UP)) {
@@ -297,6 +306,9 @@ public class ModPower {
                         if (shouldRunProximityCheck()) {
                             param.setResult(null);
                             if (DEBUG) log("notifyPowerKeyWakeup: suppressed due to proximity wake up");
+                        } else if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS) {
+                            param.setResult(null);
+                            if (DEBUG) log("notifyPowerKeyWakeup: suppressed due to power long-press torch");
                         }
                     }
                 });
