@@ -174,7 +174,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
                 !Utils.isMtkDevice() && !Utils.isOxygenOsRom()) {
-
             sQsHpResId = XResources.getFakeResId(modRes, R.drawable.ic_qs_signal_hp);
             sSbHpResId = XResources.getFakeResId(modRes, R.drawable.stat_sys_data_fully_connected_hp);
     
@@ -187,6 +186,11 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             };
             QS_DATA_HP = new int[] { sQsHpResId, sQsHpResId };
             if (DEBUG) log("H+ icon resources initialized");
+
+            if (Utils.isMotoXtDevice()) {
+                resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "bool",
+                        "config_hspap_data_distinguishable", true);
+            }
         }
 
         String lteStyle = prefs.getString(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE, "DEFAULT");
@@ -345,13 +349,13 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             }
         }
 
-        if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                !Utils.isMotoXtDevice() && !Utils.isMtkDevice() && !Utils.isOxygenOsRom()) {
-            try {
-                final Class<?> mobileNetworkCtrlClass = XposedHelpers.findClass(
-                        "com.android.systemui.statusbar.policy.MobileSignalController", 
-                        mView.getContext().getClassLoader());
+        final Class<?> mobileNetworkCtrlClass = XposedHelpers.findClass(
+                "com.android.systemui.statusbar.policy.MobileSignalController", 
+                mView.getContext().getClassLoader());
 
+        if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
+                !Utils.isMtkDevice() && !Utils.isOxygenOsRom()) {
+            try {
                 XposedHelpers.findAndHookMethod(mobileNetworkCtrlClass, "mapIconSets", new XC_MethodHook() {
                     @SuppressWarnings("unchecked")
                     @Override
@@ -382,6 +386,21 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 });
             } catch (Throwable t) {
                 GravityBox.log(TAG, "updateDataNetType", t);
+            }
+        }
+
+        if (Utils.isMotoXtDevice() && sPrefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE, false)) {
+            try {
+                XposedBridge.hookAllConstructors(mobileNetworkCtrlClass, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        Object ei = XposedHelpers.getObjectField(param.thisObject, "mExtendedInfo");
+                        XposedHelpers.setBooleanField(ei, "enableCustomize", false);
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Moto enableCustomize:", t);
             }
         }
     }

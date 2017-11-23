@@ -2057,4 +2057,8 @@
     <string name="pref_log_errors_title">Error logging</string>
     <string name="pref_log_errors_summary">Logs all errors to Xposed log when enabled (requires reboot)</string>
 
+    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
+    <string name="pref_signal_cluster_aosp_mobile_type_title">Use AOSP mobile type icons</string>
+    <string name="pref_signal_cluster_aosp_mobile_type_summary">Requires reboot</string>
+
 </resources>

@@ -702,6 +702,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_SIGNAL_CLUSTER_DEM = "pref_signal_cluster_dem";
     public static final String PREF_KEY_SIGNAL_CLUSTER_DNTI = "pref_signal_cluster_dnti";
     public static final String PREF_KEY_SIGNAL_CLUSTER_NOSIM = "pref_signal_cluster_nosim";
+    public static final String PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE = "pref_signal_cluster_aosp_mobile_type";
     public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
     public static final String EXTRA_SC_NARROW = "scNarrow";
 
@@ -915,7 +916,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_SIGNAL_CLUSTER_NOSIM,
             PREF_KEY_BATTERY_PERCENT_TEXT_POSITION,
             PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE,
-            PREF_KEY_LOG_ERRORS
+            PREF_KEY_LOG_ERRORS,
+            PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -1690,9 +1692,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifExpandAll);
             }
 
-            // Remove Moto XT preferences
-            if (Utils.isMotoXtDevice()) {
-                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
+            // Remove Non-Moto XT preferences
+            if (!Utils.isMotoXtDevice()) {
+                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE);
                 if (p != null) mPrefCatSignalCluster.removePreference(p);
             }
 

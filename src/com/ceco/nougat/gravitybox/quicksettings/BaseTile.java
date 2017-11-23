@@ -310,8 +310,14 @@ public abstract class BaseTile implements QsEventListener {
                     "mRoamingAnimatedImageView", "mDataActivityAnimatedImageView" }) {
                 View v = (View) XposedHelpers.getObjectField(signalTileView, vName);
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) v.getLayoutParams();
-                lp.width = Math.round(mStockLayout.baseIconWidth*scalingFactor);
-                lp.height = Math.round(mStockLayout.iconHeight*scalingFactor);
+                if (vName.equals("mOverlay") && mPrefs.getBoolean(
+                        GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE, false)) {
+                    lp.width = FrameLayout.LayoutParams.WRAP_CONTENT;
+                    lp.height = FrameLayout.LayoutParams.WRAP_CONTENT;
+                } else {
+                    lp.width = Math.round(mStockLayout.baseIconWidth*scalingFactor);
+                    lp.height = Math.round(mStockLayout.iconHeight*scalingFactor);
+                }
                 v.setLayoutParams(lp);
             }
             for (String vName : new String[] { "mOverlayDoubleWideImageView",

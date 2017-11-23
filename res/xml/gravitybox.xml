@@ -704,6 +704,12 @@
                 android:dependency="pref_signal_cluster_data_activity" />
 
             <CheckBoxPreference 
+                android:key="pref_signal_cluster_aosp_mobile_type"
+                android:title="@string/pref_signal_cluster_aosp_mobile_type_title"
+                android:summary="@string/pref_signal_cluster_aosp_mobile_type_summary"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference 
                 android:key="pref_signal_cluster_hplus"
                 android:title="@string/pref_signal_cluster_hplus_title"
                 android:summary="@string/pref_signal_cluster_hplus_summary"
