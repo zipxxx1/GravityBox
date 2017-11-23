@@ -28,6 +28,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Binder;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -59,6 +60,7 @@ public class ModPower {
     private static WakeLock mWakeLock;
     private static boolean mIgnoreIncomingCall;
     private static boolean mIsWirelessChargingSoundCustom;
+    private static boolean mMotoHooksCreated;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -115,13 +117,17 @@ public class ModPower {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (!shouldRunProximityCheck()) return;
 
+                    if (Utils.isMotoXtDevice()) {
+                        createMotoSpecificHooks(classLoader);
+                    }
+
                     synchronized (mLock) { 
                         if (mHandler.hasMessages(MSG_WAKE_UP)) {
                             if (DEBUG) log("wakeUpInternal: Wake up message already queued");
                             param.setResult(null);
                             return;
                         }
-    
+
                         mWakeUpRunnable = new Runnable() {
                             @Override
                             public void run() {
@@ -271,5 +277,33 @@ public class ModPower {
                 !value.equals("content://settings/system/notification_sound"));
         if (DEBUG) log("mIsWirelessChargingSoundCustom: " + mIsWirelessChargingSoundCustom + 
                 " [" + (value != null && value.isEmpty() ? "silent" : value) + "]");
+    }
+
+    private static void createMotoSpecificHooks(ClassLoader cl) {
+        if (mMotoHooksCreated)
+            return;
+
+        try {
+            Class<?> classSm = XposedHelpers.findClass("android.os.ServiceManager", cl);
+            IBinder b = (IBinder) XposedHelpers.callStaticMethod(classSm, "checkService", "motodisplay_int_service");
+            Class<?> stub = XposedHelpers.findClass("android.app.IMotoDisplayIntService$Stub", cl);
+            Object mds = XposedHelpers.callStaticMethod(stub, "asInterface", b);
+            if (mds != null) {
+                if (DEBUG) log("createMotoSpecificHooks: got MotoDisplayService: " + mds);
+                XposedHelpers.findAndHookMethod(mds.getClass().getName(), cl,
+                        "notifyPowerKeyWakeup", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (shouldRunProximityCheck()) {
+                            param.setResult(null);
+                            if (DEBUG) log("notifyPowerKeyWakeup: suppressed due to proximity wake up");
+                        }
+                    }
+                });
+                mMotoHooksCreated = true;
+            }
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "createMotoSpecificHooks:", t);
+        }
     }
 }
