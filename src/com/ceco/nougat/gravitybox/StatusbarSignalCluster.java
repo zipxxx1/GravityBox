@@ -575,11 +575,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     int enabledIdx = 0;
                     int inIdx = 3;
                     int outIdx = 4;
-                    if (Utils.isMotoXtDevice() && args.length == 10) {
-                        enabledIdx = 1;
-                        inIdx = 5;
-                        outIdx = 6;
-                    }
                     if (DEBUG) {
                         log("WiFi enabled: " + args[enabledIdx]);
                         log("WiFi activity in: " + (Boolean)args[inIdx]);
@@ -593,11 +588,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     //int enabledIdx = 0;
                     int inIdx = 4;
                     int outIdx = 5;
-                    if (Utils.isMotoXtDevice() && args.length == 24) {
-                        //enabledIdx = 1;
-                        inIdx = 7;
-                        outIdx = 8;
-                    }
                     if (DEBUG) {
                         //log("Mobile data enabled: " + args[enabledIdx]);
                         log("Mobile data activity in: " + (Boolean)args[inIdx]);
