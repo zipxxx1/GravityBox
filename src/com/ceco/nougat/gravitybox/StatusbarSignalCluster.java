@@ -391,26 +391,13 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             return;
         }
 
-        final String CLASS_WIFI_ICONS = Utils.isMotoXtDevice() ?
-                "com.android.systemui.statusbar.policy.MotorolaWifiIcons" :
-                "com.android.systemui.statusbar.policy.WifiIcons";
-        final String CLASS_TELEPHONY_ICONS = Utils.isMotoXtDevice() ?
-                "com.android.systemui.statusbar.policy.MotorolaTelephonyIcons" :
-                "com.android.systemui.statusbar.policy.TelephonyIcons";
+        final String CLASS_WIFI_ICONS = "com.android.systemui.statusbar.policy.WifiIcons";
+        final String CLASS_TELEPHONY_ICONS = "com.android.systemui.statusbar.policy.TelephonyIcons";
         Class<?> clsWifiIcons = null;
         Class<?> clsTelephonyIcons = null;
-        final String[] wifiFields = new String[] {
-                "WIFI_SIGNAL_STRENGTH", "WIFI_SIGNAL_STRENGTH_NARROW", "WIFI_SIGNAL_STRENGTH_WIDE"
-        };
+        final String[] wifiFields = new String[] { "WIFI_SIGNAL_STRENGTH" };
         final String[] mobileFields = new String[] {
-                "TELEPHONY_SIGNAL_STRENGTH", "TELEPHONY_SIGNAL_STRENGTH_ROAMING", 
-                "DATA_SIGNAL_STRENGTH", "SB_TELEPHONY_SIGNAL_STRENGTH_4_BAR_NARROW",
-                "SB_TELEPHONY_SIGNAL_STRENGTH_4_BAR_SEPARATED_NARROW", "SB_TELEPHONY_SIGNAL_STRENGTH_4_BAR_SEPARATED_WIDE",
-                "SB_TELEPHONY_SIGNAL_STRENGTH_4_BAR_WIDE", "SB_TELEPHONY_SIGNAL_STRENGTH_5_BAR_NARROW",
-                "SB_TELEPHONY_SIGNAL_STRENGTH_5_BAR_SEPARATED_NARROW", "SB_TELEPHONY_SIGNAL_STRENGTH_5_BAR_SEPARATED_WIDE",
-                "SB_TELEPHONY_SIGNAL_STRENGTH_5_BAR_WIDE", "SB_TELEPHONY_SIGNAL_STRENGTH_6_BAR_NARROW",
-                "SB_TELEPHONY_SIGNAL_STRENGTH_6_BAR_SEPARATED_NARROW", "SB_TELEPHONY_SIGNAL_STRENGTH_6_BAR_SEPARATED_WIDE",
-                "SB_TELEPHONY_SIGNAL_STRENGTH_6_BAR_WIDE"
+                "TELEPHONY_SIGNAL_STRENGTH", "TELEPHONY_SIGNAL_STRENGTH_ROAMING"
         };
 
         // Get classes
