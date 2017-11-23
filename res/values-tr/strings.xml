@@ -884,8 +884,6 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="sb_download_progress_off">Devre dışı</string>
     <string name="sb_download_progress_top">Üst kenar</string>
     <string name="sb_download_progress_bottom">Alt kenar</string>
-    <string name="pref_signal_cluster_hide_sim_labels_title">SIM etiketlerini gizle</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Yeniden başlatma gerektirir</string>
     <string name="pref_powermenu_expanded_desktop_title">Güç menüsünde genişletilmiş masaüstü</string>
     <string name="pref_powermenu_expanded_desktop_summary">Genişletilmiş masaüstünü her zaman kapatabilmenizi sağlar!!!</string>
     <string name="pref_cat_quickrecord_tile_title">Hızlı Kayıt karesi ayarları</string>
@@ -963,8 +961,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_data_traffic_lockscreen_title">Kilit ekranında göster</string>
     <string name="pref_data_traffic_lockscreen_summary">Her zaman kilit ekranında ortada gösterir</string>
     <string name="pref_qs_hide_brightness_title">Parlaklık kaydırıcısını gizle</string>
-    <string name="pref_signal_cluster_narrow_title">Simge aralığını azalt</string>
-    <string name="pref_signal_cluster_narrow_summary">Sinyal simgesi aralığını azaltır</string>
     <string name="pref_navbar_hide_ime_title">Klavye değiştiriciyi gizle</string>
     <string name="pref_lockscreen_direct_unlock_title">Direkt kilit aç</string>
     <string name="pref_lockscreen_direct_unlock_summary">Ekran açıldığında direkt bir güvenlik sorgusu gösterir</string>

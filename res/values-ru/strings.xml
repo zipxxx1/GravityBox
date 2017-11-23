@@ -1420,10 +1420,6 @@
     <string name="sb_download_progress_top">Верхний край</string>
     <string name="sb_download_progress_bottom">Нижний край</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">Скрыть ярлыки SIM</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Необходима перезагрузка</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Расш. рабочий стол в меню</string>
     <string name="pref_powermenu_expanded_desktop_summary">Убедитесь, что доступен альтернативный метод отключения расширенного рабочего стола!!!</string>
@@ -1553,10 +1549,6 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Скрыть слайдер яркости</string>
-
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Сжатие значка</string>
-    <string name="pref_signal_cluster_narrow_summary">Уменьшение пробелов в значке сигнала</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Скрыть переключатель IME</string>

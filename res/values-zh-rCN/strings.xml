@@ -1428,10 +1428,6 @@
     <string name="sb_download_progress_top">顶部</string>
     <string name="sb_download_progress_bottom">底部</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">隐藏SIM卡标签</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">需要重新启动</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">在电源键菜单显示扩展桌面按钮</string>
     <string name="pref_powermenu_expanded_desktop_summary">请确认扩展桌面是可用的然后再替换</string>
@@ -1561,10 +1557,6 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">隐藏亮度滑块</string>
-    
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">减少图标间距</string>
-    <string name="pref_signal_cluster_narrow_summary">减少信号图标间距</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">隐藏输入法切换器</string>

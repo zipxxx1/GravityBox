@@ -1413,10 +1413,6 @@
     <string name="sb_download_progress_top">Borde superior</string>
     <string name="sb_download_progress_bottom">Borde inferior</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">Ocultar etiquetas de SIM</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Requiere reinicio</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Escritorio expandido en el menú de apagado</string>
     <string name="pref_powermenu_expanded_desktop_summary">Asegúrese que el método alternativo de escritorio expandido este disponible!!!</string>
@@ -1546,10 +1542,6 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Ocultar control deslizante de brillo</string>
-
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Reducir espacio del icono de señal</string>
-    <string name="pref_signal_cluster_narrow_summary">Reduce la separación con el icono de señal</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Ocultar IME switcher</string>

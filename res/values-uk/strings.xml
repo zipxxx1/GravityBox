@@ -1418,10 +1418,6 @@
     <string name="sb_download_progress_top">Верхній край</string>
     <string name="sb_download_progress_bottom">Нижній край</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">Приховати SIM мітки</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Необхідне перезавантаження</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Розширений стіл в меню вимкнення</string>
     <string name="pref_powermenu_expanded_desktop_summary">Переконайтеся, що доступний альтернативний метод вимикання розширеного робочого столу!!!</string>
@@ -1550,10 +1546,6 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Приховати повзунок яскравості</string>
-
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Стиснення значка</string>
-    <string name="pref_signal_cluster_narrow_summary">Зменшення проміжків в значку сигналу</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Приховати перемикач IME</string>

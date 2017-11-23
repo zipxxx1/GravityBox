@@ -1157,9 +1157,6 @@
     <string name="sb_download_progress_off">無効</string>
     <string name="sb_download_progress_top">上端に表示</string>
     <string name="sb_download_progress_bottom">下端に表示</string>
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">SIMラベルを隠す</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">変更後は再起動してください。</string>
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">電源メニューの拡張デスクトップ</string>
     <string name="pref_powermenu_expanded_desktop_summary">まず拡張デスクトップを無効に出来る他の方法があるか確認してください!!!</string>

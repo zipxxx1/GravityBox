@@ -1393,10 +1393,6 @@
     <string name="sb_download_progress_top">Górna krawędź</string>
     <string name="sb_download_progress_bottom">Dolna krawędź</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">Ukryj etykiety SIM</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Wymagany restart</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Rozszerzony pulpit w menu zasilania</string>
     <string name="pref_powermenu_expanded_desktop_summary">Upewnij się, że istnieje alternatywna metoda wyłączenia rozszerzonego pulpitu!!!</string>
@@ -1526,10 +1522,6 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Ukryj suwak jasności</string>
-
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Zmniejsz odstęp icon</string>
-    <string name="pref_signal_cluster_narrow_summary">Zmniejsza odstęp ikon sygnału</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Ukryj przełącznik klawiatury</string>

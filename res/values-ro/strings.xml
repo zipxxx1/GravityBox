@@ -1390,10 +1390,6 @@
     <string name="sb_download_progress_top">Marginea superioară</string>
     <string name="sb_download_progress_bottom">Marginea de jos</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">Ascundeți etichetele SIM</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Necesită repornire</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Extindere desktop în meniul de alimentare</string>
     <string name="pref_powermenu_expanded_desktop_summary">Asigurați-vă că este disponibilă o metodă alternativă de dezactivare a desktopului extins!</string>
@@ -1514,10 +1510,6 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Ascundeți cursorul luminozității</string>
-
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Reduceți distanța dintre pictograme</string>
-    <string name="pref_signal_cluster_narrow_summary">Reduce distanța între pictogramele de semnal</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Ascunde pictograma selectorului metodei de introdicere</string>

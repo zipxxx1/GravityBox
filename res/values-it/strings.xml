@@ -1400,10 +1400,6 @@
     <string name="sb_download_progress_top">In alto</string>
     <string name="sb_download_progress_bottom">In basso</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">Nascondi nomi operatore</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Richiede riavvio</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Desktop esteso in menu spegnimento</string>
     <string name="pref_powermenu_expanded_desktop_summary">Assicuratevi che siano disponibili altri metodi per disattivare il desktop esteso!</string>

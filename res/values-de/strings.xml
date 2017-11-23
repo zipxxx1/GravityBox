@@ -1404,10 +1404,6 @@
     <string name="sb_download_progress_top">Oberkante</string>
     <string name="sb_download_progress_bottom">Unterkante</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">SIM-Titel verbergen</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Neustart erforderlich</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Erweiterter Desktop in Ausschaltmenü</string>
     <string name="pref_powermenu_expanded_desktop_summary">Achtung: Stellen Sie sicher, dass eine alternative Methode verfügbar ist, um den erweiterten Desktop zu deaktivieren!</string>
@@ -1532,10 +1528,6 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Helligkeitsschieber verstecken</string>
-
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Symbolabstand verringern</string>
-    <string name="pref_signal_cluster_narrow_summary">Signalsymbolabstand verringern</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">IME-Wechsler verstecken</string>

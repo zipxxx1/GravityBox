@@ -1132,9 +1132,6 @@
     <string name="sb_download_progress_top">상단 가장자리</string>
     <string name="sb_download_progress_bottom">하단 가장자리</string>
 
-    <string name="pref_signal_cluster_hide_sim_labels_title">SIM 라벨 숨기기</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">재시작 필요</string>
-
     <string name="pref_powermenu_expanded_desktop_title">전원 메뉴에 화면 확장 모드 추가</string>
     <string name="pref_powermenu_expanded_desktop_summary">꼭 화면 확장 모드를 끌 수 있는 다른 방법을 마련해두세요!</string>
 
@@ -1232,9 +1229,6 @@
     <string name="pref_data_traffic_lockscreen_summary">잠금 화면 가운데에서 항상 보여집니다.</string>
 
     <string name="pref_qs_hide_brightness_title">밝기 슬라이더 숨기기</string>
-
-    <string name="pref_signal_cluster_narrow_title">아이콘 패딩 줄이기</string>
-    <string name="pref_signal_cluster_narrow_summary">아이콘간의 패딩을 줄입니다.</string>
 
     <string name="pref_navbar_hide_ime_title">가상 키보드 전환 버튼 숨기기</string>
 

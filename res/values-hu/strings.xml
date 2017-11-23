@@ -1401,10 +1401,6 @@
     <string name="sb_download_progress_top">Felső szélen</string>
     <string name="sb_download_progress_bottom">Alsó szélen</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">SIM címke elrejtése</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Újraindítás szükséges</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Kiterjesztett asztal a kikapcsoló menüben</string>
     <string name="pref_powermenu_expanded_desktop_summary">Ellenőrizd a kiterjesztett asztal kikapcsolás alternatív módszerét!!!</string>
@@ -1525,10 +1521,6 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Fényerő csúszka elrejtése</string>
-    
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Ikontávolság csökkentése</string>
-    <string name="pref_signal_cluster_narrow_summary">Csökkenti a jelszint ikon távolságot</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Beviteli mód kapcsoló elrejtése</string>

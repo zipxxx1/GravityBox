@@ -1374,10 +1374,6 @@
     <string name="sb_download_progress_top">Acima da barra de status</string>
     <string name="sb_download_progress_bottom">Abaixo da barra de status</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">Ocultar títulos dos cartões SIM</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Necessário reiniciar</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Área de trabalho expandida no Menu Desligar</string>
     <string name="pref_powermenu_expanded_desktop_summary">Certifique-se de que existe um método alternativo para desativar a área de trabalho expandida!!!</string>
@@ -1509,10 +1505,6 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Ocultar o controle deslizante de brilho</string>  
-    
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Reduzir espaçamento de ícone</string>
-    <string name="pref_signal_cluster_narrow_summary">Reduzir espaçamento do ícone de sinal</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Ocultar o seletor de métodos de entrada</string>

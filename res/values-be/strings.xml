@@ -1410,10 +1410,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="sb_download_progress_top">Верхні край</string>
     <string name="sb_download_progress_bottom">Ніжні край</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">Схаваць цэтлікі SIM</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Патрэбна перазагрузка</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Пашыраны працоўны стол у меню вымыкання</string>
     <string name="pref_powermenu_expanded_desktop_summary">Пераканаецеся, што даступны альтэрнатыўны метад адключэння пашыранага працоўнага стала!!!</string>
@@ -1543,10 +1539,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Схаваць слайдар яскравасці</string>
-
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Сціск значка</string>
-    <string name="pref_signal_cluster_narrow_summary">Змяншэнне прабелаў у значку сігналу</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Схаваць перамыкач IME</string>

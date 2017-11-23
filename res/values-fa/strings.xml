@@ -885,8 +885,6 @@
 <string name="sb_download_progress_off">غیرفعال</string>
 <string name="sb_download_progress_top">لبه بالا</string>
 <string name="sb_download_progress_bottom">لبه پایین</string>
-<string name="pref_signal_cluster_hide_sim_labels_title">پنهان‌سازی برچسب سیم کارت</string>
-<string name="pref_signal_cluster_hide_sim_labels_summary">نیازمند راه‌اندازی مجدد</string>
 <string name="pref_powermenu_expanded_desktop_title">صفحه نمایش گسترده در منوی پاور</string>
 <string name="pref_powermenu_expanded_desktop_summary">برای خاموش کردن صفحه نمایش گسترده، اگر در دسترس است، باید شیوه جایگزین ایجاد شود!!!</string>
 <string name="pref_cat_quickrecord_tile_title">تنظیمات کاشی ضبط سریع</string>
@@ -964,8 +962,6 @@
 <string name="pref_data_traffic_lockscreen_title">نمایش در صفحه قفل</string>
 <string name="pref_data_traffic_lockscreen_summary">نمایش همیشگی در مرکز صفحه قفل</string>
 <string name="pref_qs_hide_brightness_title">پنهان‌سازی نوار لغزنده روشنایی</string>
-<string name="pref_signal_cluster_narrow_title">کاهش فضای آیکون</string>
-<string name="pref_signal_cluster_narrow_summary">کاهش فضای آیکون سیگنال</string>
 <string name="pref_navbar_hide_ime_title">پنهان‌سازی سوئیچر IME</string>
 <string name="pref_lockscreen_direct_unlock_title">قفل‌گشایی مستقیم</string>
 <string name="pref_lockscreen_direct_unlock_summary">نمایش تمامی راه‌های دسترسی به قفل‌گشایی هنگام روشن شدن صفحه نمایش</string>

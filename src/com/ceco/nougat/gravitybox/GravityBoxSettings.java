@@ -697,14 +697,11 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY = "pref_signal_cluster_data_activity";
     public static final String PREF_KEY_SIGNAL_CLUSTER_HPLUS = "pref_signal_cluster_hplus";
     public static final String PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE = "pref_signal_cluster_lte_style";
-    public static final String PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS = "pref_signal_cluster_hide_sim_labels";
-    public static final String PREF_KEY_SIGNAL_CLUSTER_NARROW = "pref_signal_cluster_narrow";
     public static final String PREF_KEY_SIGNAL_CLUSTER_DEM = "pref_signal_cluster_dem";
     public static final String PREF_KEY_SIGNAL_CLUSTER_DNTI = "pref_signal_cluster_dnti";
     public static final String PREF_KEY_SIGNAL_CLUSTER_NOSIM = "pref_signal_cluster_nosim";
     public static final String PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE = "pref_signal_cluster_aosp_mobile_type";
     public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
-    public static final String EXTRA_SC_NARROW = "scNarrow";
 
     public static final String PREF_KEY_SMART_RADIO_ENABLE = "pref_smart_radio_enable";
     public static final String PREF_KEY_SMART_RADIO_NORMAL_MODE = "pref_smart_radio_normal_mode";
@@ -909,7 +906,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE,
             PREF_KEY_FORCE_LTR_DIRECTION,
             PREF_KEY_HEADS_UP_MASTER_SWITCH,
-            PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
             PREF_KEY_SAFE_MEDIA_VOLUME,
             PREF_KEY_SIGNAL_CLUSTER_DEM,
             PREF_KEY_SIGNAL_CLUSTER_DNTI,
@@ -1312,8 +1308,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private AppPickerPreference mPrefCustomApp;
         private ListPreference mPrefChargingLed;
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
-        private CheckBoxPreference mPrefScHideSimLabels;
-        private CheckBoxPreference mPrefScNarrow;
         private ListPreference mPrefQrQuality;
         private SeekBarPreference mPrefSrAdaptiveDelay;
         private ListPreference mPrefBbarPosition;
@@ -1576,8 +1570,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefScreenrecordSize = (ListPreference) findPreference(PREF_KEY_SCREENRECORD_SIZE);
 
             mPrefCatSignalCluster = (PreferenceScreen) findPreference(PREF_CAT_KEY_SIGNAL_CLUSTER);
-            mPrefScHideSimLabels = (CheckBoxPreference) findPreference(PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS);
-            mPrefScNarrow = (CheckBoxPreference) findPreference(PREF_KEY_SIGNAL_CLUSTER_NARROW);
 
             mPrefLedControl = findPreference(PREF_LED_CONTROL);
 
@@ -1700,12 +1692,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             // Remove MSIM preferences for non-MSIM devices
             if (!sSystemProperties.hasMsimSupport) {
-                mPrefCatSignalCluster.removePreference(mPrefScHideSimLabels);
-                mPrefCatSignalCluster.removePreference(mPrefScNarrow);
                 mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
-            } else {
-                mPrefCatSignalCluster.removePreference(mPrefScHideSimLabels);
-                mPrefCatSignalCluster.removePreference(mPrefScNarrow);
             }
 
             // Remove Xperia preferences
@@ -3307,9 +3294,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM)) {
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
                 intent.putExtra(EXTRA_RECENTS_MARGIN_BOTTOM, prefs.getInt(key, 50));
-            } else if (key.equals(PREF_KEY_SIGNAL_CLUSTER_NARROW)) {
-                intent.setAction(ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
-                intent.putExtra(EXTRA_SC_NARROW, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_CELL_TILE_DATA_TOGGLE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_CELL_TILE_DATA_TOGGLE, prefs.getString(key, "DISABLED"));

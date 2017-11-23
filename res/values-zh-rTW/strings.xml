@@ -1414,10 +1414,6 @@
     <string name="sb_download_progress_top">上沿</string>
     <string name="sb_download_progress_bottom">下沿</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">隱藏訊號條 SIM 卡提示</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">需要重新啟動</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">電源選單顯示 [全螢幕模式] 選項</string>
     <string name="pref_powermenu_expanded_desktop_summary">請先確認已設定其他可以關閉 [全螢幕模式] 的方法，然後才停用本選項!</string>

@@ -1415,10 +1415,6 @@
     <string name="sb_download_progress_top">Bord supérieur</string>
     <string name="sb_download_progress_bottom">Bord inférieur</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">Masquer les marques de SIM</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Redémarrage nécessaire</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Bureau étendu dans le menu d\'extinction</string>
     <string name="pref_powermenu_expanded_desktop_summary">Vérifiez qu\'une méthode alternative soit accessible pour stopper le mode bureau étendu !!!</string>
@@ -1548,10 +1544,6 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Masquer le curseur de luminosité</string>
-
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Réduire espace entre icônes</string>
-    <string name="pref_signal_cluster_narrow_summary">Réduit l\'espacement entre les icônes de signal</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Masquer le bouton IME (choix du clavier)</string>

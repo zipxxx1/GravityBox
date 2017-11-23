@@ -1412,10 +1412,6 @@
     <string name="sb_download_progress_top">Cạnh trên cùng</string>
     <string name="sb_download_progress_bottom">Cạnh dưới cùng</string>
 
-    <!-- MSIM signal cluster: Hide SIM labels -->
-    <string name="pref_signal_cluster_hide_sim_labels_title">Ẩn biểu tượng SIM</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Cần khởi động lại</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Mở rộng desktop trong menu phím nguồn</string>
     <string name="pref_powermenu_expanded_desktop_summary">Hãy chắc rằng phương pháp thay thế để tắt mở rộng desktop là có sẵn!!!</string>
@@ -1545,10 +1541,6 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Ẩn thanh vuốt độ sáng</string>
-
-    <!-- SignalCluster: reduce icon spacing -->
-    <string name="pref_signal_cluster_narrow_title">Giảm khoảng cách biểu tượng</string>
-    <string name="pref_signal_cluster_narrow_summary">Giảm khoảng cách biểu tượng cột sóng</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Ẩn đổi phương pháp nhập</string>

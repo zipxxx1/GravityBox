@@ -742,18 +742,6 @@
                 android:defaultValue="@integer/signal_cluster_data_activity_icon_color"
                 android:dependency="pref_signal_cluster_data_activity" />
 
-            <CheckBoxPreference 
-                android:key="pref_signal_cluster_hide_sim_labels"
-                android:title="@string/pref_signal_cluster_hide_sim_labels_title"
-                android:summary="@string/pref_signal_cluster_hide_sim_labels_summary"
-                android:defaultValue="false" />
-
-            <CheckBoxPreference 
-                android:key="pref_signal_cluster_narrow"
-                android:title="@string/pref_signal_cluster_narrow_title"
-                android:summary="@string/pref_signal_cluster_narrow_summary"
-                android:defaultValue="false" />
-
             <!-- MTK Only -->
             <CheckBoxPreference 
                 android:key="pref_signal_cluster_dnti"
