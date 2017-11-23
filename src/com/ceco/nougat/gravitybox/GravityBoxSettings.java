@@ -1690,12 +1690,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifExpandAll);
             }
 
-            // Remove Moto XT preferences
-            if (Utils.isMotoXtDevice()) {
-                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_NOSIM);
-                if (p != null) mPrefCatSignalCluster.removePreference(p);
-            }
-
             // Remove Moto G DS (falcon_asia_ds) preferences
             if (Utils.isFalconAsiaDs()) {
                 Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);

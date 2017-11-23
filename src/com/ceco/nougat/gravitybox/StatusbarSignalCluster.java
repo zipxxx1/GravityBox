@@ -282,8 +282,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 }
             }
 
-            if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_NOSIM, false) &&
-                    !Utils.isMotoXtDevice()) {
+            if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_NOSIM, false)) {
                 try {
                     int noSimsResId = mResources.getIdentifier("no_sims", "id", ModStatusBar.PACKAGE_NAME);
                     if (noSimsResId != 0) {
