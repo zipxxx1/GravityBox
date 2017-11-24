@@ -71,6 +71,7 @@
     <string name="qs_tile_gps_alt">GPS (CM štýl)</string> 
     <string name="qs_tile_network_mode">Typ siete</string>
     <string name="qs_tile_data_usage">Mobilný signál</string>
+    <string name="qs_tile_data">Mobilné dáta</string>
     <string name="qs_tile_sync">Synchronizácia</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Prístupový Bod</string>
     <string name="qs_tile_torch_gb">Svetlo (GravityBox)</string>
@@ -1990,5 +1991,9 @@
     <!-- Error logging -->
     <string name="pref_log_errors_title">Logovanie chýb</string>
     <string name="pref_log_errors_summary">Zapíše všetky chyby do Xposed logu (vyžaduje reštart)</string>
+
+    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
+    <string name="pref_signal_cluster_aosp_mobile_type_title">AOSP ikony pre typ mobilnej siete</string>
+    <string name="pref_signal_cluster_aosp_mobile_type_summary">Vyžaduje reštart</string>
 
 </resources>
