@@ -1,3 +1,20 @@
+Changelog 7.0.6 - 24/11/2017
+--------------------------------------
+- Moto specific adjustments:
+--- QS: added protection support to Cellular data tile
+--- QS: fixed scaling of signal tiles (WiFi, Cellular)
+--- QS: fixed panel top padding when brightness slider hidden
+--- SignalCluster: fixed option for hiding empty SIM slots
+--- SignalCluster: fixed option for disabling exclamation marks
+--- SignalCluster: fixed data activity indicators
+--- SignalCluster: fixed option for showing H+
+--- SignalCluster: added option for using AOSP mobile type icons
+--- ExpandedDesktop: fixed isNavigationBarOnBottom error
+--- Power: fixed Proximity Wake Up feature
+--- Key actions: fixed Torch on power long-press feature
+- Updated Spanish translations (thanks to manos78)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 7.0.5 - 17/11/2017
 --------------------------------------
 - Image chooser:
