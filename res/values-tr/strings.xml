@@ -863,7 +863,11 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="pref_charger_unplugged_sound_title">Şarj cihazı çıkarıldı sesi</string>
     <string name="imgpick_dialog_title">Resim seç</string>
     <string name="imgpick_choose_error">Resim seçilirken hata</string>
-    <string name="imgpick_crop_error">Resim kırpılırken hata</string>
+    <string name="imgpick_crop_error">Resim kırpılırken hata</string>>
+    <string name="imgpick_crop_uri_null">Kırpma uygulaması kırpılmış görüntü sunmadı. Orijinal resim kullanılıyor.</string>
+    <string name="imgpick_crop_ask_title">Resim kırpılsın mı?</string>
+    <string name="imgpick_crop_ask_msg">Hayır derseniz, orijinal görüntü olduğu gibi kullanılacaktır. 
+        Boyutlarının şuna yakın olduğundan emin olun: %1$dx%2$dpx</string>
     <string name="pref_power_proximity_wake_title">Yakınlık sensörüyle uyandır</string>
     <string name="pref_power_proximity_wake_summary">Cihazı uyandırmak için yakınlık sensörünü kullanın</string>
     <string name="pref_charging_led_title">"Pil şarj LED'i"</string>
@@ -1281,4 +1285,16 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Bölünmüş ekran</string>
+    
+    <!-- Yes/No -->
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Hata günlüğü</string>
+    <string name="pref_log_errors_summary">Etkinleştirilirse tüm hataları Xposed günlüğüne kaydeder(yeniden başlatma gerektirir)</string>
+
+    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
+    <string name="pref_signal_cluster_aosp_mobile_type_title">AOSP mobil türü simgeleri kullan</string>
+    <string name="pref_signal_cluster_aosp_mobile_type_summary">Yeniden başlatma gerektirir</string>
 </resources>
