@@ -863,7 +863,7 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="pref_charger_unplugged_sound_title">Şarj cihazı çıkarıldı sesi</string>
     <string name="imgpick_dialog_title">Resim seç</string>
     <string name="imgpick_choose_error">Resim seçilirken hata</string>
-    <string name="imgpick_crop_error">Resim kırpılırken hata</string>>
+    <string name="imgpick_crop_error">Resim kırpılırken hata</string>
     <string name="imgpick_crop_uri_null">Kırpma uygulaması kırpılmış görüntü sunmadı. Orijinal resim kullanılıyor.</string>
     <string name="imgpick_crop_ask_title">Resim kırpılsın mı?</string>
     <string name="imgpick_crop_ask_msg">Hayır derseniz, orijinal görüntü olduğu gibi kullanılacaktır. 
