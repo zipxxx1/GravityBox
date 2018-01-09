@@ -21,7 +21,7 @@
     android:orientation="vertical"
     android:gravity="center_vertical" >
 
-    <com.ceco.nougat.gravitybox.TouchInterceptor
+    <com.ceco.oreo.gravitybox.TouchInterceptor
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="0dip"

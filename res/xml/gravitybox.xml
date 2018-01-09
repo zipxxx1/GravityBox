@@ -15,7 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:gb="http://schemas.android.com/apk/res/com.ceco.nougat.gravitybox" >
+    xmlns:gb="http://schemas.android.com/apk/res/com.ceco.oreo.gravitybox" >
 
     <PreferenceScreen
         android:key="pref_cat_lockscreen"
@@ -53,7 +53,7 @@
                 android:defaultValue="false"
                 android:order="4" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_lockscreen_bg_blur_intensity"
                 android:title="@string/pref_lockscreen_bg_blur_intensity_title"
                 minimum="1"
@@ -63,7 +63,7 @@
                 android:order="5"
                 android:dependency="pref_lockscreen_bg_blur_effect" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_lockscreen_bg_opacity"
                 android:title="@string/pref_lockscreen_bg_opacity_title"
                 android:summary="@string/pref_lockscreen_bg_opacity_summary"
@@ -130,7 +130,7 @@
                 android:summary="@string/pref_lockscreen_quick_unlock_summary"
                 android:defaultValue="false" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_lockscreen_pin_length"
                 android:title="@string/pref_lockscreen_pin_length_title"
                 android:summary="@string/pref_lockscreen_pin_length_summary"
@@ -156,7 +156,7 @@
                 android:entryValues="@array/direct_unlock_values"
                 android:defaultValue="OFF" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_lockscreen_direct_unlock_trans_level"
                 android:title="@string/pref_lockscreen_direct_unlock_trans_level_title"
                 minimum="0"
@@ -218,14 +218,14 @@
                 android:entryValues="@array/ls_bottom_action_values"
                 android:defaultValue="@array/empty_array" />
 
-            <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+            <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                 android:key="pref_lockscreen_bleft_action_custom"
                 android:title="@string/pref_lockscreen_bleft_action_title"
                 android:summary="@string/state_default"
                 forceCustomIcon="true"
                 allowGravityBoxActions="false" />
 
-            <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+            <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                 android:key="pref_lockscreen_bright_action_custom"
                 android:title="@string/pref_lockscreen_bright_action_title"
                 android:summary="@string/state_default"
@@ -257,8 +257,8 @@
                 android:summary="@string/quick_settings_summary"
                 android:dependency="pref_qs_management_enable" >
                 <intent
-                    android:targetPackage="com.ceco.nougat.gravitybox"
-                    android:targetClass="com.ceco.nougat.gravitybox.quicksettings.TileOrderActivity" />
+                    android:targetPackage="com.ceco.oreo.gravitybox"
+                    android:targetClass="com.ceco.oreo.gravitybox.quicksettings.TileOrderActivity" />
             </PreferenceScreen>
 
             <PreferenceScreen 
@@ -355,7 +355,7 @@
                         android:defaultValue="MANUAL"
                         android:dependency="pref_dnd_tile_quick_mode" />
 
-                    <com.ceco.nougat.gravitybox.preference.TimePreference
+                    <com.ceco.oreo.gravitybox.preference.TimePreference
                         android:key="pref_dnd_tile_duration"
                         android:title="@string/pref_dnd_tile_duration_title"
                         timerMode="true"
@@ -380,27 +380,27 @@
                     android:key="pref_cat_quick_app_tile"
                     android:title="@string/pref_cat_quickapp_tile_title">
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_default"
                         android:title="@string/pref_quickapp_default_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot1"
                         android:title="@string/pref_quickapp_slot1_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot2"
                         android:title="@string/pref_quickapp_slot2_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot3"
                         android:title="@string/pref_quickapp_slot3_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot4"
                         android:title="@string/pref_quickapp_slot4_title"
                         android:summary="@string/app_picker_none" />
@@ -411,27 +411,27 @@
                     android:key="pref_cat_quick_app_tile_2"
                     android:title="@string/pref_cat_quickapp_tile_2_title">
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_default_2"
                         android:title="@string/pref_quickapp_default_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot1_2"
                         android:title="@string/pref_quickapp_slot1_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot2_2"
                         android:title="@string/pref_quickapp_slot2_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot3_2"
                         android:title="@string/pref_quickapp_slot3_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot4_2"
                         android:title="@string/pref_quickapp_slot4_title"
                         android:summary="@string/app_picker_none" />
@@ -442,27 +442,27 @@
                     android:key="pref_cat_quick_app_tile_3"
                     android:title="@string/pref_cat_quickapp_tile_3_title">
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_default_3"
                         android:title="@string/pref_quickapp_default_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot1_3"
                         android:title="@string/pref_quickapp_slot1_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot2_3"
                         android:title="@string/pref_quickapp_slot2_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot3_3"
                         android:title="@string/pref_quickapp_slot3_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot4_3"
                         android:title="@string/pref_quickapp_slot4_title"
                         android:summary="@string/app_picker_none" />
@@ -473,27 +473,27 @@
                     android:key="pref_cat_quick_app_tile_4"
                     android:title="@string/pref_cat_quickapp_tile_4_title">
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_default_4"
                         android:title="@string/pref_quickapp_default_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot1_4"
                         android:title="@string/pref_quickapp_slot1_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot2_4"
                         android:title="@string/pref_quickapp_slot2_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot3_4"
                         android:title="@string/pref_quickapp_slot3_title"
                         android:summary="@string/app_picker_none" />
 
-                    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+                    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                         android:key="pref_quickapp_slot4_4"
                         android:title="@string/pref_quickapp_slot4_title"
                         android:summary="@string/app_picker_none" />
@@ -511,7 +511,7 @@
                         android:entryValues="@array/qr_audio_quality_values"
                         android:defaultValue="22050" />
 
-                    <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+                    <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                         android:key="pref_quickrecord_autostop"
                         android:title="@string/pref_quickrecord_autostop_title"
                         android:summary="@string/pref_quickrecord_autostop_summary"
@@ -609,7 +609,7 @@
                 android:defaultValue="0"
                 android:dependency="pref_qs_management_enable" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_qs_scale_correction"
                 android:title="@string/pref_qs_scale_correction_title"
                 minimum="-30"
@@ -662,7 +662,7 @@
                 android:defaultValue="0"
                 android:dependency="pref_qs_management_enable" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_quick_pulldown_size"
                 android:title="@string/pref_quick_pulldown_size_title"
                 minimum="10"
@@ -818,7 +818,7 @@
                 android:title="@string/pref_notif_image_landscape_title"
                 android:order="4" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_notif_background_alpha"
                 android:title="@string/pref_notif_background_alpha_title"
                 minimum="0"
@@ -848,7 +848,7 @@
                 android:summary="@string/pref_heads_up_master_switch_summary"
                 android:defaultValue="false" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_heads_up_timeout"
                 android:title="@string/pref_heads_up_timeout_title"
                 android:summary="@string/pref_heads_up_timeout_summary"
@@ -944,7 +944,7 @@
                     android:defaultValue="TOP"
                     android:dependency="pref_battery_bar_show" />
 
-                <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+                <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                     android:key="pref_battery_bar_margin"
                     android:title="@string/pref_battery_bar_margin_title"
                     minimum="0"
@@ -955,7 +955,7 @@
                     android:defaultValue="0"
                     android:dependency="pref_battery_bar_show" />
 
-                <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+                <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                     android:key="pref_battery_bar_thickness"
                     android:title="@string/pref_battery_bar_thickness_title"
                     minimum="1"
@@ -1069,7 +1069,7 @@
                     android:defaultValue="0"
                     android:dependency="pref_clock_hide" />
 
-                <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+                <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                     android:key="pref_sb_clock_dow_size"
                     android:title="@string/pref_sb_clock_dow_size_title"
                     minimum="40"
@@ -1087,7 +1087,7 @@
                     android:dependency="pref_clock_hide"
                     android:disableDependentsState="true" />
 
-                <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+                <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                     android:key="pref_sb_clock_ampm_size"
                     android:title="@string/pref_sb_clock_ampm_size_title"
                     minimum="40"
@@ -1110,13 +1110,13 @@
                 android:key="pref_cat_notif_panel_clock"
                 android:title="@string/pref_cat_notif_panel_clock_title">
 
-                <com.ceco.nougat.gravitybox.preference.AppPickerPreference 
+                <com.ceco.oreo.gravitybox.preference.AppPickerPreference 
                     android:key="pref_clock_link_app"
                     android:title="@string/pref_clock_link_title"
                     android:summary="@string/pref_clock_link_summary"
                     iconPickerEnabled="false" />
 
-                <com.ceco.nougat.gravitybox.preference.AppPickerPreference 
+                <com.ceco.oreo.gravitybox.preference.AppPickerPreference 
                     android:key="pref_clock_longpress_link"
                     android:title="@string/pref_clock_longpress_link_title"
                     android:summary="@string/app_picker_none"
@@ -1193,7 +1193,7 @@
                 android:title="@string/inactivity_mode_hide"
                 android:defaultValue="false" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_data_traffic_omni_autohide_threshold"
                 android:title="@string/pref_data_traffic_omni_autohide_threshold_title"
                 minimum="0"
@@ -1218,7 +1218,7 @@
                 android:entryValues="@array/sb_download_progress_values"
                 android:defaultValue="OFF" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_statusbar_download_progress_margin"
                 android:title="@string/pref_statusbar_download_progress_margin_title"
                 minimum="0"
@@ -1228,7 +1228,7 @@
                 monitorBoxUnit="px"
                 android:defaultValue="0" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_statusbar_download_progress_thickness"
                 android:title="@string/pref_statusbar_download_progress_thickness_title"
                 minimum="1"
@@ -1290,7 +1290,7 @@
             android:title="@string/pref_sb_hide_vibrate_icon_title"
             android:defaultValue="false" />
 
-        <com.ceco.nougat.gravitybox.preference.OngoingNotifPreference
+        <com.ceco.oreo.gravitybox.preference.OngoingNotifPreference
             android:key="pref_ongoing_notifications"
             android:title="@string/pref_ongoing_notifications_title"
             android:summary="@string/pref_ongoing_notifications_summary" />
@@ -1417,7 +1417,7 @@
 
             </PreferenceScreen>
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_navbar_autofade_keys"
                 android:title="@string/pref_navbar_autofade_keys_title"
                 android:summary="@string/pref_navbar_autofade_keys_summary"
@@ -1467,7 +1467,7 @@
             android:key="pref_cat_navbar_dimen"
             android:title="@string/pref_cat_navbar_dimen_title">
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_navbar_height"
                 android:title="@string/pref_navbar_height_title"
                 android:summary="@string/pref_navbar_height_summary"
@@ -1478,7 +1478,7 @@
                 monitorBoxUnit="%"
                 android:defaultValue="100" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_navbar_height_landscape"
                 android:title="@string/pref_navbar_height_title"
                 android:summary="@string/pref_navbar_height_landscape_summary"
@@ -1489,7 +1489,7 @@
                 monitorBoxUnit="%"
                 android:defaultValue="100" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_navbar_width"
                 android:title="@string/pref_navbar_width_title"
                 android:summary="@string/pref_navbar_width_summary"
@@ -1554,7 +1554,7 @@
             alphaSlider="true"
             android:dependency="pref_pie_control_trigind" />
 
-        <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+        <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_pie_control_trigger_size"
                 android:title="@string/pie_control_trigger_size_title"
                 minimum="2"
@@ -1564,7 +1564,7 @@
                 monitorBoxUnit="px"
                 android:defaultValue="5" />
 
-        <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+        <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_pie_control_size"
                 android:title="@string/pie_control_size_title"
                 minimum="500"
@@ -1841,7 +1841,7 @@
                 android:summary="@string/pref_brightness_master_switch_summary"
                 android:defaultValue="false" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_brightness_min2"
                 android:title="@string/pref_brightness_min_title"
                 android:summary="@string/pref_brightness_min_summary"
@@ -1852,7 +1852,7 @@
                 android:defaultValue="20"
                 android:dependency="pref_brightness_master_switch" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_screen_dim_level"
                 android:title="@string/pref_screen_dim_level_title"
                 android:summary="@string/pref_screen_dim_level_summary"
@@ -1863,7 +1863,7 @@
                 android:defaultValue="10"
                 android:dependency="pref_brightness_master_switch" />
 
-            <com.ceco.nougat.gravitybox.preference.AutoBrightnessDialogPreference
+            <com.ceco.oreo.gravitybox.preference.AutoBrightnessDialogPreference
                 android:key="pref_autobrightness" 
                 android:title="@string/pref_ab_title"
                 android:summary="@string/pref_ab_summary"
@@ -1881,7 +1881,7 @@
             android:title="@string/pref_unplug_turns_on_screen_title"
             android:summary="@string/pref_unplug_turns_on_screen_summary" />
 
-        <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+        <com.ceco.oreo.gravitybox.preference.SeekBarPreference
             android:key="pref_pulse_notification_delay2"
             android:title="@string/pref_pulse_notification_delay_title"
             android:summary="@string/pref_pulse_notification_delay_summary"
@@ -1937,7 +1937,7 @@
                 android:entryValues="@array/call_vibration_values"
                 android:defaultValue="@array/empty_array" />
 
-            <com.ceco.nougat.gravitybox.preference.IncreasingRingPreference
+            <com.ceco.oreo.gravitybox.preference.IncreasingRingPreference
                 android:key="pref_increasing_ring"
                 android:title="@string/pref_increasing_ring_title"
                 android:dialogTitle="@string/pref_increasing_ring_title"
@@ -1991,14 +1991,14 @@
                     android:summary="@string/pref_smart_radio_enable_summary"
                     android:defaultValue="false" />
 
-                <com.ceco.nougat.gravitybox.preference.NetworkModePreference
+                <com.ceco.oreo.gravitybox.preference.NetworkModePreference
                     android:key="pref_smart_radio_normal_mode"
                     android:title="@string/pref_smart_radio_normal_mode_title"
                     android:summary="@string/smart_radio_action_undefined"
                     android:defaultValue="-1"
                     android:dependency="pref_smart_radio_enable" />
 
-                <com.ceco.nougat.gravitybox.preference.NetworkModePreference
+                <com.ceco.oreo.gravitybox.preference.NetworkModePreference
                     android:key="pref_smart_radio_power_saving_mode"
                     android:title="@string/pref_smart_radio_power_saving_mode_title"
                     android:summary="@string/smart_radio_action_undefined"
@@ -2012,7 +2012,7 @@
                     android:defaultValue="false"
                     android:dependency="pref_smart_radio_enable" />
 
-                <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+                <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                     android:key="pref_smart_radio_mode_change_delay"
                     android:title="@string/pref_smart_radio_mode_change_delay_title"
                     android:summary="@string/pref_smart_radio_mode_change_delay_summary"
@@ -2031,7 +2031,7 @@
                     android:defaultValue="false"
                     android:dependency="pref_smart_radio_enable" />
 
-                <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+                <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                     android:key="pref_smart_radio_screen_off_delay"
                     android:title="@string/pref_smart_radio_screen_off_delay_title"
                     android:summary="@string/pref_smart_radio_screen_off_delay_summary"
@@ -2043,7 +2043,7 @@
                     android:defaultValue="0"
                     android:dependency="pref_smart_radio_screen_off" />
 
-                <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+                <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                     android:key="pref_smart_radio_adaptive_delay"
                     android:title="@string/pref_smart_radio_adaptive_delay_title"
                     android:summary="@string/pref_smart_radio_adaptive_delay_summary"
@@ -2091,7 +2091,7 @@
             android:summary="@string/pref_music_volume_steps_summary"
             android:defaultValue="false" />
 
-        <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+        <com.ceco.oreo.gravitybox.preference.SeekBarPreference
             android:key="pref_music_volume_steps_value"
             minimum="5"
             maximum="50"
@@ -2138,7 +2138,7 @@
             android:summary="@string/pref_volume_adjust_vibrate_mute_summary"
             android:defaultValue="false" />
 
-        <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+        <com.ceco.oreo.gravitybox.preference.SeekBarPreference
             android:key="pref_volume_panel_timeout2"
             android:title="@string/pref_volume_panel_timeout_title"
             android:summary="@string/pref_volume_panel_timeout_summary"
@@ -2414,7 +2414,7 @@
             android:title="@string/pref_cat_fingerprint_launcher_quick_tap_title"
             android:dependency="pref_fingerprint_launcher_enable" >
 
-            <com.ceco.nougat.gravitybox.preference.AppPickerPreference 
+            <com.ceco.oreo.gravitybox.preference.AppPickerPreference 
                 android:key="pref_fingerprint_launcher_app"
                 android:title="@string/pref_fingerprint_launcher_app_title"
                 android:summary="@string/app_picker_none"
@@ -2444,7 +2444,7 @@
             android:entryValues="@array/scr_size_values"
             android:defaultValue="default" />
 
-        <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+        <com.ceco.oreo.gravitybox.preference.SeekBarPreference
             android:key="pref_screenrecord_bitrate"
             android:title="@string/pref_screenrecord_bitrate_title"
             minimum="1"
@@ -2454,7 +2454,7 @@
             monitorBoxUnit="MBps" 
             android:defaultValue="4" />
 
-        <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+        <com.ceco.oreo.gravitybox.preference.SeekBarPreference
             android:key="pref_screenrecord_timelimit"
             android:title="@string/pref_screenrecord_timelimit_title"
             minimum="1"
@@ -2498,7 +2498,7 @@
                 android:entryValues="@array/rambar_values"
                 android:defaultValue="0" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_recent_clear_margin_top"
                 android:title="@string/pref_recent_clear_margin_top_title"
                 minimum="0"
@@ -2508,7 +2508,7 @@
                 monitorBoxUnit="px"
                 android:defaultValue="50" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_recent_clear_margin_bottom"
                 android:title="@string/pref_recent_clear_margin_bottom_title"
                 minimum="0"
@@ -2524,13 +2524,13 @@
             android:key="pref_cat_headset_actions"
             android:title="@string/pref_cat_headset_actions_title">
 
-            <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+            <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                 android:key="pref_headset_action_plug"
                 android:title="@string/pref_headset_action_plug_title"
                 android:summary="@string/app_picker_none"
                 iconPickerEnabled="false" />
 
-            <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+            <com.ceco.oreo.gravitybox.preference.AppPickerPreference
                 android:key="pref_headset_action_unplug"
                 android:title="@string/pref_headset_action_unplug_title"
                 android:summary="@string/app_picker_none"
@@ -2547,8 +2547,8 @@
                 android:title="@string/pref_wifi_priority_title"
                 android:summary="@string/pref_wifi_priority_summary">
                 <intent
-                    android:targetPackage="com.ceco.nougat.gravitybox"
-                    android:targetClass="com.ceco.nougat.gravitybox.WifiPriorityActivity" />
+                    android:targetPackage="com.ceco.oreo.gravitybox"
+                    android:targetClass="com.ceco.oreo.gravitybox.WifiPriorityActivity" />
             </PreferenceScreen>
 
             <CheckBoxPreference
@@ -2556,7 +2556,7 @@
                 android:title="@string/pref_ime_fullscreen_disable_title"
                 android:defaultValue="false" />
 
-            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
                 android:key="pref_torch_auto_off"
                 android:title="@string/pref_torch_auto_off_title"
                 android:summary="@string/pref_torch_auto_off_summary"
@@ -2672,7 +2672,7 @@
     </PreferenceScreen>
 
     <!-- Hidden preference helper for Key Actions / Custom action -->
-    <com.ceco.nougat.gravitybox.preference.AppPickerPreference
+    <com.ceco.oreo.gravitybox.preference.AppPickerPreference
         android:key="pref_hwkey_custom_app"
         android:title="@string/hwkey_action_custom"
         android:summary="@string/app_picker_none"

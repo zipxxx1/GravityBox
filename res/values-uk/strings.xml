@@ -1532,7 +1532,7 @@
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">УВАГА</string>
-    <string name="gb_new_package_dialog_message">Виявлено GravityBox для Marshmallow. Перед використанням нової версії, стару буде вилучено. Натисніть ГАРАЗД, аби почати процес вилучення. Після вилучення, не забудьте активувати новий модуль в Xposed Installer та ОБОВ\'ЯЗКОВО ПЕРЕЗАВАНТАЖИТИ пристрій.</string>
+    <string name="gb_new_package_dialog_message">Виявлено GravityBox для Nougat. Перед використанням нової версії, стару буде вилучено. Натисніть ГАРАЗД, аби почати процес вилучення. Після вилучення, не забудьте активувати новий модуль в Xposed Installer та ОБОВ\'ЯЗКОВО ПЕРЕЗАВАНТАЖИТИ пристрій.</string>
 
 
 

@@ -72,13 +72,13 @@
             android:title="@string/pref_lc_qh_weekdays_title"
             android:dependency="pref_lc_qh_enabled" />
 
-        <com.ceco.nougat.gravitybox.preference.TimePreference
+        <com.ceco.oreo.gravitybox.preference.TimePreference
             android:key="pref_lc_qh_start2"
             android:title="@string/pref_lc_qh_start_title"
             android:defaultValue="1380"
             android:dependency="pref_lc_qh_enabled" />
 
-        <com.ceco.nougat.gravitybox.preference.TimePreference
+        <com.ceco.oreo.gravitybox.preference.TimePreference
             android:key="pref_lc_qh_end2"
             android:title="@string/pref_lc_qh_end_title"
             android:defaultValue="360"
@@ -88,13 +88,13 @@
     <PreferenceCategory 
         android:key="pref_lc_qh_cat_weekend"
         android:title="@string/pref_lc_qh_cat_weekend_title">
-        <com.ceco.nougat.gravitybox.preference.TimePreference
+        <com.ceco.oreo.gravitybox.preference.TimePreference
             android:key="pref_lc_qh_start_alt2"
             android:title="@string/pref_lc_qh_start_title"
             android:defaultValue="1380"
             android:dependency="pref_lc_qh_enabled" />
 
-        <com.ceco.nougat.gravitybox.preference.TimePreference
+        <com.ceco.oreo.gravitybox.preference.TimePreference
             android:key="pref_lc_qh_end_alt2"
             android:title="@string/pref_lc_qh_end_title"
             android:defaultValue="360"
