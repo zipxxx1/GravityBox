@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -60,11 +60,12 @@ public class ModNavigationBar {
     private static final boolean DEBUG = false;
 
     private static final String CLASS_NAVBAR_VIEW = "com.android.systemui.statusbar.phone.NavigationBarView";
+    private static final String CLASS_NAVBAR_FRAGMENT = "com.android.systemui.statusbar.phone.NavigationBarFragment";
     private static final String CLASS_KEY_BUTTON_VIEW = "com.android.systemui.statusbar.policy.KeyButtonView";
     private static final String CLASS_KEY_BUTTON_RIPPLE = "com.android.systemui.statusbar.policy.KeyButtonRipple";
     private static final String CLASS_NAVBAR_TRANSITIONS = 
             "com.android.systemui.statusbar.phone.NavigationBarTransitions";
-    private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
+    private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_NAVBAR_INFLATER_VIEW = "com.android.systemui.statusbar.phone.NavigationBarInflaterView";
 
     @SuppressWarnings("unused")
@@ -490,7 +491,7 @@ public class ModNavigationBar {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader,
+            XposedHelpers.findAndHookMethod(CLASS_NAVBAR_FRAGMENT, classLoader,
                     "shouldDisableNavbarGestures", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -524,7 +525,7 @@ public class ModNavigationBar {
             XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
                     "onTouchEvent", MotionEvent.class, touchEventHook);
 
-            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader,
+            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader,
                     "toggleSplitScreenMode", int.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

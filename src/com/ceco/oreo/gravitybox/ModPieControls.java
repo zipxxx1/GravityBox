@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project (Jens Doll)
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * This code is loosely based on portions of the ParanoidAndroid Project source, Copyright (C) 2012.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -31,7 +31,9 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.PixelFormat;
+import android.inputmethodservice.InputMethodService;
 import android.os.Handler;
+import android.os.IBinder;
 import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -55,9 +57,9 @@ public class ModPieControls {
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_INPUT = false;
 
-    private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     private static final String CLASS_SYSTEM_UI = "com.android.systemui.SystemUI";
-    private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
+    private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
+    private static final String CLASS_COMMAND_QUEUE = "com.android.systemui.statusbar.CommandQueue";
 
     public static final int STATUS_BAR_DISABLE_HOME = 0x00200000;
     public static final int STATUS_BAR_DISABLE_SEARCH = 0x02000000;
@@ -299,9 +301,8 @@ public class ModPieControls {
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
-            final Class<?> baseStatusBarClass = XposedHelpers.findClass(CLASS_BASE_STATUSBAR, classLoader);
+            final Class<?> statusBarClass = XposedHelpers.findClass(CLASS_STATUSBAR, classLoader);
             final Class<?> systemUiClass = XposedHelpers.findClass(CLASS_SYSTEM_UI, classLoader);
-            final Class<?> phoneStatusBarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
 
             mPieMode = PIE_DISABLED;
             try {
@@ -327,11 +328,10 @@ public class ModPieControls {
                 GravityBox.log(TAG, "Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
             }
 
-            XposedHelpers.findAndHookMethod(baseStatusBarClass, "start", new XC_MethodHook() {
-
+            XposedHelpers.findAndHookMethod(statusBarClass, "start", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (DEBUG) log("BaseStatusBar starting...");
+                    if (DEBUG) log("StatusBar starting...");
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     mGbContext = Utils.getGbContext(mContext);
                     mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
@@ -372,7 +372,7 @@ public class ModPieControls {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "disable", 
+            XposedHelpers.findAndHookMethod(statusBarClass, "disable", 
                     int.class, int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -390,18 +390,22 @@ public class ModPieControls {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass, 
-                    "setNavigationIconHints", int.class, new XC_MethodHook() {
-
+            XposedHelpers.findAndHookMethod(CLASS_COMMAND_QUEUE, classLoader, "setImeWindowStatus",
+                    IBinder.class, int.class, int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mPieController == null) return;
-
-                    mPieController.setNavigationIconHints((Integer)param.args[0]);
+                    if (mPieController != null) {
+                        int hints = 0;
+                        boolean imeShown = ((int)param.args[1] & 0x2) != 0;
+                        if ((int)param.args[2] == InputMethodService.BACK_DISPOSITION_WILL_DISMISS || imeShown) {
+                            hints |= (1 << 0);
+                        }
+                        mPieController.setNavigationIconHints(hints);
+                    }
                 }
             });
 
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass,
+            XposedHelpers.findAndHookMethod(statusBarClass,
                     "topAppWindowChanged", boolean.class, new XC_MethodHook() {
 
                 @Override

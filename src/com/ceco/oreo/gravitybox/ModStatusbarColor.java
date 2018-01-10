@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -37,7 +37,7 @@ import de.robv.android.xposed.callbacks.XCallback;
 public class ModStatusbarColor {
     private static final String TAG = "GB:ModStatusbarColor";
     public static final String PACKAGE_NAME = "com.android.systemui";
-    private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
+    private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_STATUSBAR_ICON_VIEW = "com.android.systemui.statusbar.StatusBarIconView";
     private static final String CLASS_STATUSBAR_ICON = "com.android.internal.statusbar.StatusBarIcon";
     private static final String CLASS_SB_TRANSITIONS = "com.android.systemui.statusbar.phone.PhoneStatusBarTransitions";
@@ -46,7 +46,7 @@ public class ModStatusbarColor {
 
     public static final String ACTION_PHONE_STATUSBAR_VIEW_MADE = "gravitybox.intent.action.PHONE_STATUSBAR_VIEW_MADE";
 
-    private static Object mPhoneStatusBar;
+    private static Object mStatusBar;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -55,15 +55,15 @@ public class ModStatusbarColor {
     // in process hooks
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
-            final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
+            final Class<?> statusbarClass = XposedHelpers.findClass(CLASS_STATUSBAR, classLoader);
             final Class<?> statusbarIconViewClass = XposedHelpers.findClass(CLASS_STATUSBAR_ICON_VIEW, classLoader);
             final Class<?> sbTransitionsClass = XposedHelpers.findClass(CLASS_SB_TRANSITIONS, classLoader);
 
-            XposedHelpers.findAndHookMethod(phoneStatusbarClass, 
+            XposedHelpers.findAndHookMethod(statusbarClass, 
                     "makeStatusBarView", new XC_MethodHook(XCallback.PRIORITY_LOWEST) {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    mPhoneStatusBar = param.thisObject;
+                    mStatusBar = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
                     if (SysUiManagers.IconManager != null) {
@@ -157,9 +157,9 @@ public class ModStatusbarColor {
     }
 
     private static void updateStatusIcons(String statusIcons) {
-        if (mPhoneStatusBar == null) return;
+        if (mStatusBar == null) return;
         try {
-            Object icCtrl = XposedHelpers.getObjectField(mPhoneStatusBar, "mIconController");
+            Object icCtrl = XposedHelpers.getObjectField(mStatusBar, "mIconController");
             ViewGroup vg = (ViewGroup) XposedHelpers.getObjectField(icCtrl, statusIcons);
             final int childCount = vg.getChildCount();
             for (int i = 0; i < childCount; i++) {
@@ -184,9 +184,9 @@ public class ModStatusbarColor {
     }
 
     private static void updateSettingsButton() {
-        if (mPhoneStatusBar == null || SysUiManagers.IconManager == null) return;
+        if (mStatusBar == null || SysUiManagers.IconManager == null) return;
         try {
-            Object header = XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
+            Object header = XposedHelpers.getObjectField(mStatusBar, "mHeader");
             ImageView settingsButton = (ImageView) XposedHelpers.getObjectField(
                     header, "mSettingsButton");
             if (SysUiManagers.IconManager.isColoringEnabled()) {

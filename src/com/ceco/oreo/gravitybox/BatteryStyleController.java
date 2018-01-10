@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -48,7 +48,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private ViewGroup mSystemIcons;
     private Context mContext;
     private XSharedPreferences mPrefs;
-    private Object mPhoneStatusBar;
+    private Object mStatusBar;
     private int mBatteryStyle;
     private boolean mBatteryPercentTextEnabledSb;
     private KeyguardMode mBatteryPercentTextKgMode;
@@ -64,10 +64,10 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     }
 
     public BatteryStyleController(ContainerType containerType, ViewGroup container,
-            XSharedPreferences prefs, Object phoneStatusBar) throws Throwable {
+            XSharedPreferences prefs, Object statusBar) throws Throwable {
         mContainerType = containerType;
         mContainer = container;
-        mPhoneStatusBar = phoneStatusBar;
+        mStatusBar = statusBar;
         mContext = container.getContext();
         mSystemIcons = (ViewGroup) mContainer.findViewById(
                 mContext.getResources().getIdentifier("system_icons", "id", PACKAGE_NAME));
@@ -294,7 +294,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
 
         if (Utils.isOxygenOsRom()) {
             try {
-                XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR,
+                XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_STATUSBAR,
                         mContainer.getClass().getClassLoader(),
                         "updateDashChargeView", new XC_MethodHook() {
                     @Override
@@ -341,7 +341,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
 
     private void updateDashChargeView() {
         try {
-            XposedHelpers.callMethod(mPhoneStatusBar, "updateDashChargeView");
+            XposedHelpers.callMethod(mStatusBar, "updateDashChargeView");
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }

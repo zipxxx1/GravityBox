@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project (Jens Doll)
- * Copyright (C) 2015 Peter Gregus for GravityBox project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox project (C3C076@xda)
  * This code is loosely based on portions of the ParanoidAndroid Project source, Copyright (C) 2012.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -17,8 +17,6 @@
  */
 package com.ceco.oreo.gravitybox.pie;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -66,7 +64,6 @@ import com.ceco.oreo.gravitybox.pie.PieLayout.PieSlice;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.XposedHelpers.ClassNotFoundError;
 
 /**
  * Controller class for the default pie control.
@@ -77,7 +74,6 @@ import de.robv.android.xposed.XposedHelpers.ClassNotFoundError;
 public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnClickListener {
     public static final String PACKAGE_NAME = "com.android.systemui";
     public static final String TAG = "GB:PieController";
-    private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     public static final boolean DEBUG = false;
 
     protected enum ButtonType {
@@ -102,7 +98,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
      * This is only needed for #toggleRecentApps()
      */
     private Object mStatusBar;
-    private Class<?> mBaseStatusBarClass;
     private Vibrator mVibrator;
     private int mBatteryLevel;
     private int mBatteryStatus;
@@ -323,12 +318,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mRecentIcon = mContext.getDrawable(res.getIdentifier(
                 "ic_sysbar_recent", "drawable", PACKAGE_NAME)).mutate();
 
-        try {
-            mBaseStatusBarClass = XposedHelpers.findClass(CLASS_BASE_STATUSBAR, mContext.getClassLoader());
-        } catch (ClassNotFoundError e) {
-            GravityBox.log(TAG, e);
-        }
-
         mSysinfoDisabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_SYSINFO_DISABLE, false);
         setLongpressDelay(Integer.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_PIE_LONGPRESS_DELAY, "0")));;
@@ -535,8 +524,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
 
         final boolean disableHome = ((disabledFlags & 0x00200000) != 0);
         final boolean disableRecent = ((disabledFlags & 0x01000000) != 0);
-        final boolean disableBack = ((disabledFlags & 0x00400000) != 0)
-                && ((mNavigationIconHints & (1 << 3)) == 0);
+        final boolean disableBack = ((disabledFlags & 0x00400000) != 0);
         final boolean disableSearch = ((disabledFlags & 0x02000000) != 0);
 
         PieItem item = findItem(ButtonType.BACK);
@@ -605,21 +593,12 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                 injectKeyDelayed(KeyEvent.KEYCODE_MENU);
                 break;
             case RECENT:
-                if (mStatusBar != null && mBaseStatusBarClass != null) {
+                if (mStatusBar != null) {
                     try {
-                        Method m = mBaseStatusBarClass.getDeclaredMethod("toggleRecentApps");
-                        m.setAccessible(true);
-                        try {
-                            m.invoke(mStatusBar);
-                        } catch (IllegalArgumentException e) {
-                            GravityBox.log(TAG, e);
-                        } catch (IllegalAccessException e) {
-                            GravityBox.log(TAG, e);
-                        } catch (InvocationTargetException e) {
-                            GravityBox.log(TAG, e);
-                        }
-                    } catch (NoSuchMethodException e) {
-                        GravityBox.log(TAG, e);
+                        Object commandQueue = XposedHelpers.getObjectField(mStatusBar, "mCommandQueue");
+                        XposedHelpers.callMethod(commandQueue, "toggleRecentApps");
+                    } catch (Throwable t) {
+                        GravityBox.log(TAG, t);
                     }
                 }
                 break;

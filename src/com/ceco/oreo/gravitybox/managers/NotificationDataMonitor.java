@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,6 +22,7 @@ import com.ceco.oreo.gravitybox.GravityBox;
 
 import android.app.Notification;
 import android.content.Context;
+import android.service.notification.NotificationListenerService.RankingMap;
 import android.service.notification.StatusBarNotification;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -32,7 +33,7 @@ public class NotificationDataMonitor {
     private static boolean DEBUG = false;
 
     private static final String CLASS_NOTIF_DATA = "com.android.systemui.statusbar.NotificationData";
-    private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
+    private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.StatusBar";
 
     private static void log(String msg) {
         XposedBridge.log(TAG + ": " + msg);
@@ -59,7 +60,7 @@ public class NotificationDataMonitor {
         try {
             ClassLoader cl = mContext.getClassLoader();
             Class<?> classNotifData = XposedHelpers.findClass(CLASS_NOTIF_DATA, cl);
-            Class<?> classBaseStatusbar = XposedHelpers.findClass(CLASS_BASE_STATUSBAR, cl);
+            Class<?> classStatusbar = XposedHelpers.findClass(CLASS_STATUSBAR, cl);
 
             XposedBridge.hookAllConstructors(classNotifData, new XC_MethodHook() {
                 @Override
@@ -91,12 +92,12 @@ public class NotificationDataMonitor {
                 }
             });
 
-            XposedBridge.hookAllMethods(classBaseStatusbar, "updateNotification", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(classStatusbar, "updateNotification",
+                    StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (DEBUG) log("Notification entry updated");
-                    StatusBarNotification sbn = getSbNotificationFromArgs(param.args);
-                    notifyDataChanged(sbn);
+                    notifyDataChanged((StatusBarNotification) param.args[0]);
                 }
             });
         } catch (Throwable t) {

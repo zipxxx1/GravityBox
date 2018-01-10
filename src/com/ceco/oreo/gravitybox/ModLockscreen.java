@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -94,7 +94,7 @@ public class ModLockscreen {
     private static Context mGbContext;
     private static Bitmap mCustomBg;
     private static QuietHours mQuietHours;
-    private static Object mPhoneStatusBar;
+    private static Object mStatusBar;
     private static DirectUnlock mDirectUnlock = DirectUnlock.OFF;
     private static UnlockPolicy mDirectUnlockPolicy = UnlockPolicy.DEFAULT;
     private static LockscreenAppBar mAppBar;
@@ -224,23 +224,23 @@ public class ModLockscreen {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR, classLoader,
+            XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_STATUSBAR, classLoader,
                     "updateMediaMetaData", boolean.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mPhoneStatusBar == null) {
-                        mPhoneStatusBar = param.thisObject;
+                    if (mStatusBar == null) {
+                        mStatusBar = param.thisObject;
                     }
 
-                    int state = XposedHelpers.getIntField(mPhoneStatusBar, "mState");
+                    int state = XposedHelpers.getIntField(mStatusBar, "mState");
                     if (state != StatusBarState.KEYGUARD && state != StatusBarState.SHADE_LOCKED) {
                         if (DEBUG) log("updateMediaMetaData: Invalid status bar state: " + state);
                         return;
                     }
 
-                    View backDrop = (View) XposedHelpers.getObjectField(mPhoneStatusBar, "mBackdrop");
+                    View backDrop = (View) XposedHelpers.getObjectField(mStatusBar, "mBackdrop");
                     ImageView backDropBack = (ImageView) XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mBackdropBack");
+                            mStatusBar, "mBackdropBack");
                     if (backDrop == null || backDropBack == null) {
                         if (DEBUG) log("updateMediaMetaData: called too early");
                         return;
@@ -248,7 +248,7 @@ public class ModLockscreen {
 
                     boolean hasArtwork = false;
                     MediaMetadata mm = (MediaMetadata) XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mMediaMetadata");
+                            mStatusBar, "mMediaMetadata");
                     if (mm != null) {
                         hasArtwork = mm.getBitmap(MediaMetadata.METADATA_KEY_ART) != null ||
                                 mm.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART) != null;
@@ -261,9 +261,9 @@ public class ModLockscreen {
                         backDropBack.animate().cancel();
                         backDropBack.setImageBitmap(mCustomBg);
                         if ((Boolean) XposedHelpers.getBooleanField(
-                                mPhoneStatusBar, "mScrimSrcModeEnabled")) {
+                                mStatusBar, "mScrimSrcModeEnabled")) {
                             PorterDuffXfermode xferMode = (PorterDuffXfermode) XposedHelpers
-                                    .getObjectField(mPhoneStatusBar, "mSrcXferMode");
+                                    .getObjectField(mStatusBar, "mSrcXferMode");
                             XposedHelpers.callMethod(backDropBack.getDrawable().mutate(),
                                     "setXfermode", xferMode);
                         }
@@ -449,9 +449,9 @@ public class ModLockscreen {
                     if (!mKgMonitor.isTrustManaged()) {
                         if (canTriggerDirectUnlock()) {
                             if (mDirectUnlock == DirectUnlock.SEE_THROUGH) {
-                                XposedHelpers.callMethod(mPhoneStatusBar, "showBouncer");
+                                XposedHelpers.callMethod(mStatusBar, "showBouncer");
                             } else {
-                                XposedHelpers.callMethod(mPhoneStatusBar, "makeExpandedInvisible");
+                                XposedHelpers.callMethod(mStatusBar, "makeExpandedInvisible");
                             }
                         }
                     } else if (canTriggerSmartUnlock()) {
@@ -467,8 +467,8 @@ public class ModLockscreen {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR, classLoader,
-                    "makeStatusBarView", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_NOTIF_PANEL_VIEW, classLoader,
+                    "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     ViewGroup kgStatusView = (ViewGroup) XposedHelpers.getObjectField(
@@ -721,7 +721,7 @@ public class ModLockscreen {
         if (policy == UnlockPolicy.DEFAULT) return true;
 
         try {
-            ViewGroup stack = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStackScroller");
+            ViewGroup stack = (ViewGroup) XposedHelpers.getObjectField(mStatusBar, "mStackScroller");
             int childCount = stack.getChildCount();
             int notifCount = 0;
             int notifClearableCount = 0;
@@ -828,8 +828,8 @@ public class ModLockscreen {
         try {
             String kisImageFile = mGbContext.getFilesDir() + "/kis_image.png";
             mCustomBg = BitmapFactory.decodeFile(kisImageFile);
-            if (refresh && mPhoneStatusBar != null) {
-                XposedHelpers.callMethod(mPhoneStatusBar, "updateMediaMetaData", false, false);
+            if (refresh && mStatusBar != null) {
+                XposedHelpers.callMethod(mStatusBar, "updateMediaMetaData", false, false);
             }
             if (DEBUG_KIS) log("setLastScreenBackground: Last screen background updated");
         } catch (Throwable t) {

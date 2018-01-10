@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -65,8 +65,7 @@ import android.widget.TextView;
 public class ModStatusBar {
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String TAG = "GB:ModStatusBar";
-    private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
-    public static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
+    public static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
@@ -77,7 +76,6 @@ public class ModStatusBar {
     public static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
     private static final String CLASS_SBI_CTRL = "com.android.systemui.statusbar.phone.StatusBarIconController";
-    private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData$Entry";
     private static final String CLASS_ASSIST_MANAGER = "com.android.systemui.assist.AssistManager";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
@@ -109,8 +107,7 @@ public class ModStatusBar {
     private static LinearLayout mLayoutCenter;
     private static LinearLayout mLayoutCenterKg;
     private static StatusbarClock mClock;
-    private static Object mPhoneStatusBar;
-    private static Object mHeader;
+    private static Object mStatusBar;
     private static ViewGroup mStatusBarView;
     private static Context mContext;
     private static boolean mClockCentered = false;
@@ -305,10 +302,10 @@ public class ModStatusBar {
             mLayoutCenterKg.setVisibility(View.GONE);
             if (DEBUG_LAYOUT) mLayoutCenterKg.setBackgroundColor(0x4d0000ff);
             ((ViewGroup) XposedHelpers.getObjectField(
-                    mPhoneStatusBar, "mKeyguardStatusBar")).addView(mLayoutCenterKg);
+                    mStatusBar, "mKeyguardStatusBar")).addView(mLayoutCenterKg);
             if (DEBUG) log("mLayoutCenterKg injected");
 
-            Object icCtrl = XposedHelpers.getObjectField(mPhoneStatusBar, "mIconController");
+            Object icCtrl = XposedHelpers.getObjectField(mStatusBar, "mIconController");
             mIconArea = (ViewGroup) XposedHelpers.getObjectField(icCtrl, "mSystemIconArea");
             mSbContents = (ViewGroup) ((ViewGroup) mStatusBarView)
                     .findViewById(res.getIdentifier("status_bar_contents", "id", PACKAGE_NAME));
@@ -341,7 +338,7 @@ public class ModStatusBar {
 
     private static void prepareHeaderTimeView() {
         try {
-            ViewGroup header = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
+            ViewGroup header = (ViewGroup) XposedHelpers.getObjectField(mStatusBar, "mHeader");
             int resId = mContext.getResources().getIdentifier("clock", "id", PACKAGE_NAME);
             View timeView = header.findViewById(resId);
             if (timeView != null) {
@@ -400,7 +397,7 @@ public class ModStatusBar {
                     break;
                 case KEYGUARD:
                     container = (ViewGroup) XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mKeyguardStatusBar");
+                            mStatusBar, "mKeyguardStatusBar");
                     break;
                 default: break;
             }
@@ -411,7 +408,7 @@ public class ModStatusBar {
                     mBroadcastSubReceivers.add(sc);
                     if (sc.supportsDataActivityIndicators()) {
                         sc.setNetworkController(XposedHelpers.getObjectField(
-                                mPhoneStatusBar, "mNetworkController"));
+                                mStatusBar, "mNetworkController"));
                     }
                     if (DEBUG) log("SignalClusterView constructed for: " + containerType);
                 }
@@ -432,13 +429,13 @@ public class ModStatusBar {
                     break;
                 case KEYGUARD:
                     container = (ViewGroup) XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mKeyguardStatusBar");
+                            mStatusBar, "mKeyguardStatusBar");
                     break;
                 default: break;
             }
             if (container != null) {
                 BatteryStyleController bsc = new BatteryStyleController(
-                        containerType, container, mPrefs, mPhoneStatusBar);
+                        containerType, container, mPrefs, mStatusBar);
                 mBroadcastSubReceivers.add(bsc);
             }
         } catch (Throwable t) {
@@ -457,7 +454,7 @@ public class ModStatusBar {
                     break;
                 case KEYGUARD:
                     container = (ViewGroup) XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mKeyguardStatusBar");
+                            mStatusBar, "mKeyguardStatusBar");
                     break;
                 default: break;
             }
@@ -478,7 +475,7 @@ public class ModStatusBar {
                     break;
                 case KEYGUARD:
                     container = (ViewGroup) XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mKeyguardStatusBar");
+                            mStatusBar, "mKeyguardStatusBar");
                     break;
                 default: break;
             }
@@ -502,7 +499,7 @@ public class ModStatusBar {
                     break;
                 case KEYGUARD:
                     container = (ViewGroup) XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mKeyguardStatusBar");
+                            mStatusBar, "mKeyguardStatusBar");
                     break;
                 default: break;
             }
@@ -537,8 +534,8 @@ public class ModStatusBar {
         try {
             mPrefs = prefs;
 
-            final Class<?> phoneStatusBarClass =
-                    XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
+            final Class<?> statusBarClass =
+                    XposedHelpers.findClass(CLASS_STATUSBAR, classLoader);
             final Class<?> phoneStatusBarPolicyClass = 
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_POLICY, classLoader);
             Class<?> expandableNotifRowClass = null;
@@ -587,19 +584,18 @@ public class ModStatusBar {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "makeStatusBarView", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(statusBarClass, "makeStatusBarView", new XC_MethodHook() {
 
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    mPhoneStatusBar = param.thisObject;
-                    mHeader = XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
-                    mStatusBarView = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStatusBarView");
-                    mContext = (Context) XposedHelpers.getObjectField(mPhoneStatusBar, "mContext");
+                    mStatusBar = param.thisObject;
+                    mStatusBarView = (ViewGroup) XposedHelpers.getObjectField(mStatusBar, "mStatusBarView");
+                    mContext = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
                     mProgressBarCtrl = new ProgressBarController(mContext, mPrefs);
                     mBroadcastSubReceivers.add(mProgressBarCtrl);
 
                     if (SysUiManagers.AppLauncher != null) {
-                        SysUiManagers.AppLauncher.setStatusBar(mPhoneStatusBar);
+                        SysUiManagers.AppLauncher.setStatusBar(mStatusBar);
                     }
 
                     prepareLayout();
@@ -645,7 +641,7 @@ public class ModStatusBar {
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
-                            (Handler) XposedHelpers.getObjectField(mPhoneStatusBar, "mHandler"));
+                            (Handler) XposedHelpers.getObjectField(mStatusBar, "mHandler"));
                     mSettingsObserver.observe();
                 }
             });
@@ -669,7 +665,7 @@ public class ModStatusBar {
                 });
             }
 
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass, 
+            XposedHelpers.findAndHookMethod(statusBarClass, 
                     "interceptTouchEvent", MotionEvent.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -700,8 +696,8 @@ public class ModStatusBar {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "addNotification", 
-                    StatusBarNotification.class, RankingMap.class, CLASS_NOTIF_DATA_ENTRY, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(statusBarClass, "addNotification", 
+                    StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final StatusBarNotification notif = (StatusBarNotification) param.args[0];
@@ -743,7 +739,7 @@ public class ModStatusBar {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "updateNotification", 
+            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader, "updateNotification", 
                     StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -753,7 +749,7 @@ public class ModStatusBar {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "removeNotificationViews",
+            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader, "removeNotificationViews",
                     String.class, RankingMap.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -989,7 +985,7 @@ public class ModStatusBar {
 
             // Camera vibrate pattern
             try {
-                XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader,
+                XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader,
                         "vibrateForCameraGesture", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -1253,11 +1249,11 @@ public class ModStatusBar {
             final int action = event.getAction();
             final int x = (int) event.getRawX();
             final int y = (int) event.getRawY();
-            Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneStatusBar, "mHandler");
-            int statusBarHeaderHeight = (int)XposedHelpers.callMethod(mHeader, "getCollapsedHeight");
+            Handler handler = (Handler) XposedHelpers.getObjectField(mStatusBar, "mHandler");
+            int statusBarHeight = (int)XposedHelpers.callMethod(mStatusBar, "getStatusBarHeight");
 
             if (action == MotionEvent.ACTION_DOWN) {
-                if (y < statusBarHeaderHeight) {
+                if (y < statusBarHeight) {
                     mLinger = 0;
                     mInitialTouchX = x;
                     mInitialTouchY = y;
@@ -1268,7 +1264,7 @@ public class ModStatusBar {
                             BRIGHTNESS_CONTROL_LONG_PRESS_TIMEOUT);
                 }
             } else if (action == MotionEvent.ACTION_MOVE) {
-                if (y < statusBarHeaderHeight && mJustPeeked) {
+                if (y < statusBarHeight && mJustPeeked) {
                     if (mLinger > BRIGHTNESS_CONTROL_LINGER_THRESHOLD) {
                         adjustBrightness(x);
                     } else {
@@ -1299,9 +1295,9 @@ public class ModStatusBar {
 
     public static void startSearchAssist() {
         try {
-            Object assistManager = XposedHelpers.getObjectField(mPhoneStatusBar, "mAssistManager");
+            Object assistManager = XposedHelpers.getObjectField(mStatusBar, "mAssistManager");
             XposedHelpers.callMethod(assistManager, "startAssist", new Bundle());
-            XposedHelpers.callMethod(mPhoneStatusBar, "awakenDreams");
+            XposedHelpers.callMethod(mStatusBar, "awakenDreams");
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -1315,8 +1311,8 @@ public class ModStatusBar {
             if (intent != null) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mContext.startActivity(intent);
-                if (mPhoneStatusBar != null) {
-                    XposedHelpers.callMethod(mPhoneStatusBar, "animateCollapsePanels");
+                if (mStatusBar != null) {
+                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
                 }
             }
         } catch (ActivityNotFoundException e) {
@@ -1348,7 +1344,7 @@ public class ModStatusBar {
     private static void setNotificationPanelState(Intent intent, boolean withQs) {
         try {
             if (!intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
-                Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
+                Object notifPanel = XposedHelpers.getObjectField(mStatusBar, "mNotificationPanel");
                 if ((boolean) XposedHelpers.callMethod(notifPanel, "isFullyCollapsed")) {
                     expandNotificationPanel(withQs);
                 } else {
@@ -1367,7 +1363,7 @@ public class ModStatusBar {
     }
 
     private static void expandNotificationPanel(boolean withQs) {
-        Object notifPanel = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationPanel");
+        Object notifPanel = XposedHelpers.getObjectField(mStatusBar, "mNotificationPanel");
         if (withQs && XposedHelpers.getBooleanField(notifPanel, "mQsExpansionEnabled")) {
             XposedHelpers.callMethod(notifPanel, "expand", false);
             XposedHelpers.callMethod(notifPanel, "setQsExpansion",
@@ -1378,6 +1374,6 @@ public class ModStatusBar {
     }
 
     private static void collapseNotificationPanel() {
-        XposedHelpers.callMethod(mPhoneStatusBar, "postAnimateCollapsePanels");
+        XposedHelpers.callMethod(mStatusBar, "postAnimateCollapsePanels");
     }
 }
