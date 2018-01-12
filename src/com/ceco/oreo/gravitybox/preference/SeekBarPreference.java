@@ -63,6 +63,8 @@ public class SeekBarPreference extends Preference
     public SeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        setRecycleEnabled(false);
+
         if (attrs != null) {
             mMinimum = attrs.getAttributeIntValue(null, "minimum", 0);
             mMaximum = attrs.getAttributeIntValue(null, "maximum", 100);

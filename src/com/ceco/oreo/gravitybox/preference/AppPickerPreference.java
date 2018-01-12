@@ -197,6 +197,7 @@ public class AppPickerPreference extends DialogPreference
     public AppPickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        setRecycleEnabled(false);
         mContext = context;
         mResources = mContext.getResources();
         mDefaultSummaryText = (String) getSummary();
