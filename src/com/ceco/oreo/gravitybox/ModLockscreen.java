@@ -765,20 +765,16 @@ public class ModLockscreen {
             public void run() {
                 try {
                     final Object lockPatternUtils = XposedHelpers.getObjectField(securityView, "mLockPatternUtils");
-                    final Object lockSettings = XposedHelpers.callMethod(lockPatternUtils, "getLockSettings");
                     final int userId = mKgMonitor.getCurrentUserId();
-                    final Object response = Build.VERSION.SDK_INT == 24 ?
-                            XposedHelpers.callMethod(lockSettings, "checkPassword", entry, userId) :
-                                XposedHelpers.callMethod(lockSettings, "checkPassword", entry, userId, null);
-                    final int code = (int)XposedHelpers.callMethod(response, "getResponseCode");
-                    if (code == 0) {
+                    final boolean valid = (boolean) XposedHelpers.callMethod(lockPatternUtils, "checkPassword", entry, userId);
+                    if (valid) {
                         final Object callback = XposedHelpers.getObjectField(securityView, "mCallback");
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {
                                 try {
                                     XposedHelpers.callMethod(callback, "reportUnlockAttempt", userId, true, 0);
-                                    XposedHelpers.callMethod(callback, "dismiss", true);
+                                    XposedHelpers.callMethod(callback, "dismiss", true, userId);
                                 } catch (Throwable t) {
                                     GravityBox.log(TAG, "Error dimissing keyguard: ", t);
                                 }
