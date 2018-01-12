@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -42,6 +42,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.managers.KeyguardStateMonitor;
@@ -66,7 +67,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
     private Context mContext;
     private Context mGbContext;
     private ViewGroup mContainer;
-    private Object mStatusBar;
+    private Object mNotifPanel;
     private PackageManager mPm;
     private List<AppInfo> mAppSlots;
     private ViewGroup mRootView;
@@ -79,11 +80,11 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
     private NotificationDataMonitor mNdMonitor;
 
     public LockscreenAppBar(Context ctx, Context gbCtx, ViewGroup container,
-            Object statusBar, XSharedPreferences prefs) {
+            Object notifPanel, XSharedPreferences prefs) {
         mContext = ctx;
         mGbContext = gbCtx;
         mContainer = container;
-        mStatusBar = statusBar;
+        mNotifPanel = notifPanel;
         mPrefs = prefs;
         mPm = mContext.getPackageManager();
         mHandler = new Handler();
@@ -99,6 +100,14 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
 
         LayoutInflater inflater = LayoutInflater.from(mGbContext);
         mRootView = (ViewGroup) inflater.inflate(R.layout.lockscreen_app_bar, mContainer, false);
+        if (mContainer instanceof RelativeLayout) {
+            int ownerInfoResId = mContext.getResources().getIdentifier("owner_info", "id", ModStatusBar.PACKAGE_NAME);
+            if (ownerInfoResId != 0) {
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mRootView.getLayoutParams();
+                lp.addRule(RelativeLayout.BELOW, ownerInfoResId);
+                mRootView.setLayoutParams(lp);
+            }
+        }
         mContainer.addView(mRootView);
         mAppSlots = new ArrayList<AppInfo>(6);
         mAppSlots.add(new AppInfo(R.id.quickapp1));
@@ -199,7 +208,8 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
         // otherwise start activity dismissing keyguard
         } else {
             try {
-                XposedHelpers.callMethod(mStatusBar, "postStartActivityDismissingKeyguard", intent, 0);
+                Object statusBar = XposedHelpers.getObjectField(mNotifPanel, "mStatusBar");
+                XposedHelpers.callMethod(statusBar, "postStartActivityDismissingKeyguard", intent, 0);
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }

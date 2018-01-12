@@ -33,7 +33,7 @@ public class NotificationDataMonitor {
     private static boolean DEBUG = false;
 
     private static final String CLASS_NOTIF_DATA = "com.android.systemui.statusbar.NotificationData";
-    private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.StatusBar";
+    private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
 
     private static void log(String msg) {
         XposedBridge.log(TAG + ": " + msg);
