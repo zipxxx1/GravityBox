@@ -39,9 +39,9 @@ public class ModVolumePanel {
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String CLASS_VOLUME_PANEL = Utils.isSamsungRom() ?
             "com.android.systemui.volume.SecVolumeDialog" :
-            "com.android.systemui.volume.VolumeDialog";
+            "com.android.systemui.volume.VolumeDialogImpl";
     private static final String CLASS_VOLUME_ROW = CLASS_VOLUME_PANEL + ".VolumeRow";
-    private static final String CLASS_VOLUME_PANEL_CTRL = "com.android.systemui.volume.VolumeDialogController";
+    private static final String CLASS_VOLUME_PANEL_CTRL = "com.android.systemui.volume.VolumeDialogControllerImpl";
     private static final String CLASS_VOLUME_DIALOG_MOTION = "com.android.systemui.volume.VolumeDialogMotion";
     private static final boolean DEBUG = false;
 
@@ -107,9 +107,6 @@ public class ModVolumePanel {
                     mTimeout = prefs.getInt(
                             GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TIMEOUT, 0);
 
-                    if (!Utils.isSamsungRom())
-                        prepareNotificationRow();
-
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
@@ -117,24 +114,12 @@ public class ModVolumePanel {
                 }
             });
 
-            XposedBridge.hookAllConstructors(classVolumePanelCtrl, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(classVolumePanel, "initDialog", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    // TODO: needs injection of fake resource
-//                    if (Utils.isSamsungRom()) {
-//                       int[] titles = (int[]) XposedHelpers.getObjectField(param.thisObject, "STREAMTITLES");
-//                       int idx = AudioManager.STREAM_NOTIFICATION;
-//                       if (titles.length > idx && (titles[idx]==0)) {
-//                          titles[idx] = (R.string.notification_stream_name);
-//                       }
-//                    } else {	
-                       String[] titles = (String[]) XposedHelpers.getObjectField(param.thisObject, "mStreamTitles");
-                       int idx = AudioManager.STREAM_NOTIFICATION;
-                       if (titles.length > idx && (titles[idx] == null || titles[idx].trim().isEmpty())) {
-                           Context ctx = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                           titles[idx] = Utils.getGbContext(ctx).getString(R.string.notification_stream_name);
-                       }
-//                    }
+                    if (!Utils.isSamsungRom()) {
+                        prepareNotificationRow();
+                    }
                 }
             });
 
