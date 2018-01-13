@@ -263,7 +263,7 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
             intent.setComponent(new ComponentName(pkgInfo.packageName,
                     pkgInfo.packageName+".CheckPolicyService"));
             receiver.register();
-            context.startService(intent);
+            context.startForegroundService(intent);
         } catch (NameNotFoundException nnfe) {
             policyHandler.onPolicyResult(false);
             Toast.makeText(context, context.getString(R.string.msg_unlocker_missing),
