@@ -58,9 +58,9 @@ import com.ceco.oreo.gravitybox.adapters.*;
 
 public class ModPowerMenu {
     private static final String TAG = "GB:ModPowerMenu";
-    public static final String PACKAGE_NAME = "android";
-    public static final String CLASS_GLOBAL_ACTIONS = "com.android.server.policy.GlobalActions";
-    public static final String CLASS_ACTION = "com.android.server.policy.GlobalActions.Action";
+    public static final String PACKAGE_NAME = "com.android.systemui";
+    public static final String CLASS_GLOBAL_ACTIONS = "com.android.systemui.globalactions.GlobalActionsDialog";
+    public static final String CLASS_ACTION = CLASS_GLOBAL_ACTIONS + ".Action";
     private static final boolean DEBUG = false;
 
     private static Context mContext;
@@ -100,7 +100,7 @@ public class ModPowerMenu {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
+    public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
 
         try {
             final Class<?> globalActionsClass = XposedHelpers.findClass(CLASS_GLOBAL_ACTIONS, classLoader);
