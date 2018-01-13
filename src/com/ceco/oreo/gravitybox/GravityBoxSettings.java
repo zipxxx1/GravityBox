@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -1717,11 +1717,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_BATTERY_SETTINGS);
                 PreferenceScreen ps2 = (PreferenceScreen) findPreference(PREF_CAT_KEY_BATTERY_PERCENT_TEXT);
                 ps.removePreference(ps2);
-            }
-
-            // Remove Vernee Apollo Lite preferences
-            if (Utils.isVerneeApolloDevice()) {
-                mPrefCatDisplay.removePreference(mPrefPulseNotificationDelay);
             }
 
             // Remove OxygenOS preferences

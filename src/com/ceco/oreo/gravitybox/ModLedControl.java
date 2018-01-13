@@ -39,7 +39,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -60,6 +59,7 @@ public class ModLedControl {
     private static final String TAG = "GB:ModLedControl";
     public static final boolean DEBUG = false;
     private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.notification.NotificationManagerService";
+    private static final String CLASS_NOTIFICATION_MANAGER_SERVICE_ENR = "com.android.server.notification.NotificationManagerService.EnqueueNotificationRunnable";
     private static final String CLASS_VIBRATOR_SERVICE = "com.android.server.VibratorService";
     private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_NOTIF_DATA = "com.android.systemui.statusbar.NotificationData";
@@ -95,9 +95,6 @@ public class ModLedControl {
     private static boolean mProximityWakeUpEnabled;
     private static boolean mScreenOnDueToActiveScreen;
     private static AudioManager mAudioManager;
-    private static Integer mDefaultNotificationLedColor;
-    private static Integer mDefaultNotificationLedOn;
-    private static Integer mDefaultNotificationLedOff;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -190,10 +187,8 @@ public class ModLedControl {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
-                    "enqueueNotificationInternal", String.class, String.class,
-                    int.class, int.class, String.class, 
-                    int.class, Notification.class, int[].class, int.class, notifyHook);
+            XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE_ENR, classLoader,
+                    "run", notifyHook);
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
                     "applyZenModeLocked", CLASS_NOTIFICATION_RECORD, applyZenModeHook);
@@ -217,26 +212,15 @@ public class ModLedControl {
                     return;
                 }
 
-                Notification n = (Notification) param.args[6];
-
-                if (Utils.isVerneeApolloDevice()) {
-                    XposedHelpers.setIntField(param.thisObject, "mDefaultNotificationColor",
-                            ((n.defaults & Notification.DEFAULT_LIGHTS) != 0 ?
-                                    getDefaultNotificationLedColor() : n.ledARGB));
-                    XposedHelpers.setIntField(param.thisObject, "mDefaultNotificationLedOn",
-                            ((n.defaults & Notification.DEFAULT_LIGHTS) != 0 ?
-                                    getDefaultNotificationLedOn() : n.ledOnMS));
-                    XposedHelpers.setIntField(param.thisObject, "mDefaultNotificationLedOff",
-                            ((n.defaults & Notification.DEFAULT_LIGHTS) != 0 ?
-                                    getDefaultNotificationLedOff() : n.ledOffMS));
-                }
+                Object record = XposedHelpers.getObjectField(param.thisObject, "r");
+                StatusBarNotification sbn = (StatusBarNotification) XposedHelpers.getObjectField(record, "sbn");
+                Notification n = sbn.getNotification();
 
                 if (n.extras.containsKey("gbIgnoreNotification")) return;
 
-                Object oldRecord = getOldNotificationRecord(param.args[0], param.args[4],
-                        param.args[5], param.args[8]);
+                Object oldRecord = getOldNotificationRecord(sbn.getKey());
                 Notification oldN = getNotificationFromRecord(oldRecord);
-                final String pkgName = (String) param.args[0];
+                final String pkgName = sbn.getPackageName();
 
                 LedSettings ls = LedSettings.deserialize(mUncPrefs.getStringSet(pkgName, null));
                 if (!ls.getEnabled()) {
@@ -287,20 +271,10 @@ public class ModLedControl {
                 } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE &&
                         !(isOngoing && !ls.getOngoing())) {
                     n.flags |= Notification.FLAG_SHOW_LIGHTS;
-                    if (Utils.isVerneeApolloDevice()) {
-                        n.defaults |= Notification.DEFAULT_LIGHTS;
-                        XposedHelpers.setIntField(param.thisObject,
-                                "mDefaultNotificationColor", ls.getColor());
-                        XposedHelpers.setIntField(param.thisObject,
-                                "mDefaultNotificationLedOn", ls.getLedOnMs());
-                        XposedHelpers.setIntField(param.thisObject,
-                                "mDefaultNotificationLedOff", ls.getLedOffMs());
-                    } else {
-                        n.defaults &= ~Notification.DEFAULT_LIGHTS;
-                        n.ledOnMS = ls.getLedOnMs();
-                        n.ledOffMS = ls.getLedOffMs();
-                        n.ledARGB = ls.getColor();
-                    }
+                    n.defaults &= ~Notification.DEFAULT_LIGHTS;
+                    n.ledOnMS = ls.getLedOnMs();
+                    n.ledOffMS = ls.getLedOffMs();
+                    n.ledARGB = ls.getColor();
                 }
 
                 // vibration
@@ -390,15 +364,14 @@ public class ModLedControl {
         }
     };
 
-    private static Object getOldNotificationRecord(Object pkg, Object tag, Object id, Object userId) {
+    private static Object getOldNotificationRecord(String key) {
         Object oldNotifRecord = null;
         try {
             ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(
                     mNotifManagerService, "mNotificationList");
             synchronized (notifList) {
                 int index = (Integer) XposedHelpers.callMethod(
-                        mNotifManagerService, "indexOfNotificationLocked",
-                        pkg, tag, id, userId);
+                        mNotifManagerService, "indexOfNotificationLocked", key);
                 if (index >= 0) {
                     oldNotifRecord = notifList.get(index);
                 }
@@ -442,49 +415,6 @@ public class ModLedControl {
         boolean shouldIgnore = (ignore && record != null && !notificationRecordHasLight(record));
         if (DEBUG) log("shouldIgnoreUpdatedNotificationLight: " + shouldIgnore);
         return shouldIgnore;
-    }
-
-    private static int getDefaultNotificationLedColor() {
-        if (mDefaultNotificationLedColor == null) {
-            mDefaultNotificationLedColor = getDefaultNotificationProp(
-                    "config_defaultNotificationColor", "color", 0xff000080);
-        }
-        return mDefaultNotificationLedColor;
-    }
-
-    private static int getDefaultNotificationLedOn() {
-        if (mDefaultNotificationLedOn == null) {
-            mDefaultNotificationLedOn = getDefaultNotificationProp(
-                    "config_defaultNotificationLedOn", "integer", 500);
-        }
-        return mDefaultNotificationLedOn;
-    }
-
-    private static int getDefaultNotificationLedOff() {
-        if (mDefaultNotificationLedOff == null) {
-            mDefaultNotificationLedOff = getDefaultNotificationProp(
-                    "config_defaultNotificationLedOff", "integer", 0);
-        }
-        return mDefaultNotificationLedOff;
-    }
-
-    private static int getDefaultNotificationProp(String resName, String resType, int defVal) {
-        int val = defVal;
-        try {
-            Context ctx = (Context) XposedHelpers.callMethod(
-                    mNotifManagerService, "getContext");
-            Resources res = ctx.getResources();
-            int resId = res.getIdentifier(resName, resType, "android");
-            if (resId != 0) {
-                switch (resType) {
-                    case "color": val = ctx.getColor(resId); break;
-                    case "integer": val = res.getInteger(resId); break;
-                }
-            }
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t); 
-        }
-        return val;
     }
 
     private static XC_MethodHook applyZenModeHook = new XC_MethodHook() {

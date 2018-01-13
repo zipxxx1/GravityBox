@@ -98,7 +98,6 @@ public class Utils {
     private static Boolean mIsSamsumgRom = null;
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
-    private static Boolean mIsVerneeApolloDevice;
     private static Boolean mIsOxygenOsRom = null;
 
     // Device features
@@ -285,15 +284,6 @@ public class Utils {
         mIsSamsumgRom = (new File("/system/framework/twframework.jar").isFile() ||
                 new File("/system/framework/touchwiz.jar").isFile());
         return mIsSamsumgRom;
-    }
-
-    @SuppressLint("DefaultLocale")
-    public static boolean isVerneeApolloDevice() {
-        if (mIsVerneeApolloDevice != null) return mIsVerneeApolloDevice;
-
-        mIsVerneeApolloDevice = (Build.BRAND.equalsIgnoreCase("vernee") &&
-                Build.MODEL.toLowerCase().contains("apollo"));
-        return mIsVerneeApolloDevice;
     }
 
     public static boolean isOxygenOsRom() {
