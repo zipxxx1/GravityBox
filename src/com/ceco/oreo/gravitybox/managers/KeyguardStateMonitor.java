@@ -37,8 +37,8 @@ import de.robv.android.xposed.XSharedPreferences;
 
 public class KeyguardStateMonitor implements BroadcastSubReceiver {
     public static final String TAG="GB:KeyguardStateMonitor";
-    public static final String CLASS_KG_MONITOR =
-            "com.android.systemui.statusbar.policy.KeyguardMonitor";
+    public static final String CLASS_KG_MONITOR_IMPL =
+            "com.android.systemui.statusbar.policy.KeyguardMonitorImpl";
     public static final String CLASS_KG_UPDATE_MONITOR =
             "com.android.keyguard.KeyguardUpdateMonitor";
     public static final String CLASS_KG_VIEW_MEDIATOR =
@@ -98,7 +98,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
     private void createHooks() {
         try {
             ClassLoader cl = mContext.getClassLoader();
-            Class<?> monitorClass = XposedHelpers.findClass(CLASS_KG_MONITOR, cl);
+            Class<?> monitorClass = XposedHelpers.findClass(CLASS_KG_MONITOR_IMPL, cl);
 
             XposedBridge.hookAllConstructors(monitorClass, new XC_MethodHook() {
                 @Override
@@ -108,7 +108,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_KG_MONITOR, cl,
+            XposedHelpers.findAndHookMethod(CLASS_KG_MONITOR_IMPL, cl,
                     "notifyKeyguardChanged", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
@@ -246,7 +246,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                 if (Build.VERSION.SDK_INT == 24) {
                     XposedHelpers.callMethod(mMediator, "dismiss");
                 } else {
-                    XposedHelpers.callMethod(mMediator, "dismiss", false);
+                    XposedHelpers.callMethod(mMediator, "dismiss", (Object)null);
                 }
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
