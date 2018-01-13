@@ -614,7 +614,7 @@ public class ModLockscreen {
                                     param.thisObject, "mRightAffordanceView");
                         } else {
                             v = (ImageView) XposedHelpers.getObjectField(
-                                   param.thisObject, "mCameraImageView");
+                                   param.thisObject, "mRightAffordanceView");
                         }
                         if (mRightActionHidden) {
                             v.setVisibility(View.GONE);
