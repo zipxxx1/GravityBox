@@ -64,6 +64,7 @@ public class ModStatusBar {
     private static final String TAG = "GB:ModStatusBar";
     public static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
+    private static final String CLASS_QS_FOOTER = "com.android.systemui.qs.QSFooter";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
@@ -330,18 +331,11 @@ public class ModStatusBar {
         }
     }
 
-    private static void prepareHeaderTimeView() {
+    private static void prepareHeaderTimeView(ViewGroup qsFooter) {
         try {
-            ViewGroup header = (ViewGroup) XposedHelpers.getObjectField(mStatusBar, "mHeader");
-            int resId = mContext.getResources().getIdentifier("clock", "id", PACKAGE_NAME);
-            View timeView = header.findViewById(resId);
+            View timeView = (View) XposedHelpers.getObjectField(qsFooter, "mDateTimeGroup");
             if (timeView != null) {
-                timeView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        launchClockAction(mClockLink);
-                    }
-                });
+                timeView.setLongClickable(true);
                 timeView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
@@ -628,7 +622,6 @@ public class ModStatusBar {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     mStatusBarView = (ViewGroup) param.thisObject;
                     prepareLayout();
-                    prepareHeaderTimeView();
                     prepareBrightnessControl();
                     prepareTrafficMeter();
                     prepareSignalCluster(ContainerType.STATUSBAR);
@@ -642,6 +635,14 @@ public class ModStatusBar {
                     prepareProgressBar(ContainerType.STATUSBAR);
                     prepareProgressBar(ContainerType.KEYGUARD);
                     prepareGestureDetector();
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_QS_FOOTER, classLoader,
+                    "onFinishInflate", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    prepareHeaderTimeView((ViewGroup)param.thisObject);
                 }
             });
 

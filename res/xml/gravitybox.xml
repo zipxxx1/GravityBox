@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -1110,11 +1110,13 @@
                 android:key="pref_cat_notif_panel_clock"
                 android:title="@string/pref_cat_notif_panel_clock_title">
 
+                <!-- Stock action exists
                 <com.ceco.oreo.gravitybox.preference.AppPickerPreference 
                     android:key="pref_clock_link_app"
                     android:title="@string/pref_clock_link_title"
                     android:summary="@string/pref_clock_link_summary"
                     iconPickerEnabled="false" />
+                -->
 
                 <com.ceco.oreo.gravitybox.preference.AppPickerPreference 
                     android:key="pref_clock_longpress_link"
