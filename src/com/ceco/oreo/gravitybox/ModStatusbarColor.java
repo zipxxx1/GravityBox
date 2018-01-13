@@ -41,7 +41,7 @@ public class ModStatusbarColor {
     private static final String CLASS_STATUSBAR_ICON_VIEW = "com.android.systemui.statusbar.StatusBarIconView";
     private static final String CLASS_STATUSBAR_ICON = "com.android.internal.statusbar.StatusBarIcon";
     private static final String CLASS_SB_TRANSITIONS = "com.android.systemui.statusbar.phone.PhoneStatusBarTransitions";
-    private static final String CLASS_SB_ICON_CTRL = "com.android.systemui.statusbar.phone.StatusBarIconController";
+    private static final String CLASS_SB_DARK_ICON_DISPATCHER = "com.android.systemui.statusbar.phone.DarkIconDispatcherImpl";
     private static final boolean DEBUG = false;
 
     public static final String ACTION_PHONE_STATUSBAR_VIEW_MADE = "gravitybox.intent.action.PHONE_STATUSBAR_VIEW_MADE";
@@ -107,7 +107,7 @@ public class ModStatusbarColor {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_SB_ICON_CTRL, classLoader, "applyIconTint", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_SB_DARK_ICON_DISPATCHER, classLoader, "applyIconTint", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (SysUiManagers.IconManager != null) {
@@ -126,9 +126,9 @@ public class ModStatusbarColor {
         public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
             if ((flags & (StatusBarIconManager.FLAG_ICON_COLOR_CHANGED |
                     StatusBarIconManager.FLAG_ICON_STYLE_CHANGED)) != 0) {
-                updateStatusIcons("mStatusIcons");
-                updateStatusIcons("mStatusIconsKeyguard");
-                updateSettingsButton();
+                updateStatusIconsStatusBar();
+                updateStatusIconsKeyguard();
+                //updateSettingsButton();
             }
         }
     };
@@ -156,30 +156,47 @@ public class ModStatusbarColor {
         return d;
     }
 
-    private static void updateStatusIcons(String statusIcons) {
-        if (mStatusBar == null) return;
+    private static void updateStatusIconsStatusBar() {
         try {
-            Object icCtrl = XposedHelpers.getObjectField(mStatusBar, "mIconController");
-            ViewGroup vg = (ViewGroup) XposedHelpers.getObjectField(icCtrl, statusIcons);
-            final int childCount = vg.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                if (!vg.getChildAt(i).getClass().getName().equals(CLASS_STATUSBAR_ICON_VIEW)) {
-                    continue;
-                }
-                ImageView v = (ImageView) vg.getChildAt(i);
-                final Object sbIcon = XposedHelpers.getObjectField(v, "mIcon");
-                if (sbIcon != null) {
-                    final String iconPackage =
-                            (String) XposedHelpers.getObjectField(sbIcon, "pkg");
-                    Drawable d = getColoredDrawable(v.getContext(), iconPackage,
-                            (Icon) XposedHelpers.getObjectField(sbIcon, "icon"));
-                    if (d != null) {
-                        v.setImageDrawable(d);
-                    }
-                }
+            Object view = XposedHelpers.getObjectField(mStatusBar, "mStatusBarView");
+            if (view != null) {
+                Object bt = XposedHelpers.getObjectField(view, "mBarTransitions");
+                ViewGroup vg = (ViewGroup) XposedHelpers.getObjectField(bt, "mStatusIcons");
+                updateStatusIcons(vg);
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
+        }
+    }
+
+    private static void updateStatusIconsKeyguard() {
+        try {
+            ViewGroup kg = (ViewGroup) XposedHelpers.getObjectField(mStatusBar, "mKeyguardStatusBar");
+            int resId = kg.getResources().getIdentifier("statusIcons", "id", PACKAGE_NAME);
+            ViewGroup vg = (ViewGroup) kg.findViewById(resId);
+            updateStatusIcons(vg);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
+    private static void updateStatusIcons(ViewGroup container) {
+        final int childCount = container.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            if (!container.getChildAt(i).getClass().getName().equals(CLASS_STATUSBAR_ICON_VIEW)) {
+                continue;
+            }
+            ImageView v = (ImageView) container.getChildAt(i);
+            final Object sbIcon = XposedHelpers.getObjectField(v, "mIcon");
+            if (sbIcon != null) {
+                final String iconPackage =
+                        (String) XposedHelpers.getObjectField(sbIcon, "pkg");
+                Drawable d = getColoredDrawable(v.getContext(), iconPackage,
+                        (Icon) XposedHelpers.getObjectField(sbIcon, "icon"));
+                if (d != null) {
+                    v.setImageDrawable(d);
+                }
+            }
         }
     }
 

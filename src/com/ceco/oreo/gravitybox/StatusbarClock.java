@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -31,6 +31,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.text.Spannable;
@@ -112,6 +113,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         });
 
         hookGetSmallTime();
+        hookOnDarkChanged();
     }
 
     private void updateClock() {
@@ -159,13 +161,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
     public void updateColor(int color) {
         if (mClock != null) {
             mClock.setTextColor(color);
-        }
-    }
-
-    public void refreshColor() {
-        if (SysUiManagers.IconManager != null &&
-                SysUiManagers.IconManager.isColoringEnabled()) {
-            updateColor(SysUiManagers.IconManager.getIconColor());
         }
     }
 
@@ -253,6 +248,22 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                     }
                     if (DEBUG) log("Final clockText: '" + sb + "'");
                     param.setResult(sb);
+                }
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
+    private void hookOnDarkChanged() {
+        try {
+            XposedHelpers.findAndHookMethod(mClock.getClass(), "onDarkChanged",
+                    Rect.class, float.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (SysUiManagers.IconManager != null && SysUiManagers.IconManager.isColoringEnabled()) {
+                        param.setResult(null);
+                    }
                 }
             });
         } catch (Throwable t) {

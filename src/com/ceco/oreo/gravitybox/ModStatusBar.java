@@ -15,7 +15,6 @@
 
 package com.ceco.oreo.gravitybox;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,6 @@ import com.ceco.oreo.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.oreo.gravitybox.shortcuts.AShortcut;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -40,7 +38,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
-import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -70,12 +67,10 @@ public class ModStatusBar {
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
-    private static final String CLASS_ICON_MERGER = "com.android.systemui.statusbar.phone.IconMerger";
     private static final String CLASS_STATUSBAR_WM = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
     private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
     public static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
-    private static final String CLASS_SBI_CTRL = "com.android.systemui.statusbar.phone.StatusBarIconController";
     private static final String CLASS_ASSIST_MANAGER = "com.android.systemui.assist.AssistManager";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
@@ -121,7 +116,6 @@ public class ModStatusBar {
     private static ViewGroup mSbContents;
     private static boolean mClockInSbContents = false;
     private static boolean mNotifExpandAll;
-    private static View mIconMergerView;
     private static String mClockLongpressLink;
     private static XSharedPreferences mPrefs;
     private static ProgressBarController mProgressBarCtrl;
@@ -305,8 +299,8 @@ public class ModStatusBar {
                     mStatusBar, "mKeyguardStatusBar")).addView(mLayoutCenterKg);
             if (DEBUG) log("mLayoutCenterKg injected");
 
-            Object icCtrl = XposedHelpers.getObjectField(mStatusBar, "mIconController");
-            mIconArea = (ViewGroup) XposedHelpers.getObjectField(icCtrl, "mSystemIconArea");
+            mIconArea = (ViewGroup) ((ViewGroup) mStatusBarView)
+                    .findViewById(res.getIdentifier("system_icon_area", "id", PACKAGE_NAME));
             mSbContents = (ViewGroup) ((ViewGroup) mStatusBarView)
                     .findViewById(res.getIdentifier("status_bar_contents", "id", PACKAGE_NAME));
 
@@ -544,7 +538,6 @@ public class ModStatusBar {
             }
             final Class<?> statusBarWmClass = XposedHelpers.findClass(CLASS_STATUSBAR_WM, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
-            final Class<?> sbiCtrlClass = XposedHelpers.findClass(CLASS_SBI_CTRL, classLoader);
 
             mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
             mClockLink = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LINK, null);
@@ -589,7 +582,6 @@ public class ModStatusBar {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     mStatusBar = param.thisObject;
-                    mStatusBarView = (ViewGroup) XposedHelpers.getObjectField(mStatusBar, "mStatusBarView");
                     mContext = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
                     mProgressBarCtrl = new ProgressBarController(mContext, mPrefs);
                     mBroadcastSubReceivers.add(mProgressBarCtrl);
@@ -597,22 +589,6 @@ public class ModStatusBar {
                     if (SysUiManagers.AppLauncher != null) {
                         SysUiManagers.AppLauncher.setStatusBar(mStatusBar);
                     }
-
-                    prepareLayout();
-                    prepareHeaderTimeView();
-                    prepareBrightnessControl();
-                    prepareTrafficMeter();
-                    prepareSignalCluster(ContainerType.STATUSBAR);
-                    prepareSignalCluster(ContainerType.KEYGUARD);
-                    prepareBatteryStyle(ContainerType.STATUSBAR);
-                    prepareBatteryStyle(ContainerType.KEYGUARD);
-                    prepareQuietHoursIcon(ContainerType.STATUSBAR);
-                    prepareQuietHoursIcon(ContainerType.KEYGUARD);
-                    prepareBatteryBar(ContainerType.STATUSBAR);
-                    prepareBatteryBar(ContainerType.KEYGUARD);
-                    prepareProgressBar(ContainerType.STATUSBAR);
-                    prepareProgressBar(ContainerType.KEYGUARD);
-                    prepareGestureDetector();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED);
@@ -646,24 +622,28 @@ public class ModStatusBar {
                 }
             });
 
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH, true)) {
-                XposedHelpers.findAndHookMethod(sbiCtrlClass, "setClockVisibility", boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mClock != null) {
-                            mClock.setClockVisibility((Boolean)param.args[0]);
-                        }
-                    }
-                });
-                XposedHelpers.findAndHookMethod(sbiCtrlClass, "applyIconTint", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mClock != null) {
-                            mClock.refreshColor();
-                        }
-                    }
-                });
-            }
+            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR_VIEW, classLoader,
+                    "setBar", statusBarClass, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    mStatusBarView = (ViewGroup) param.thisObject;
+                    prepareLayout();
+                    prepareHeaderTimeView();
+                    prepareBrightnessControl();
+                    prepareTrafficMeter();
+                    prepareSignalCluster(ContainerType.STATUSBAR);
+                    prepareSignalCluster(ContainerType.KEYGUARD);
+                    prepareBatteryStyle(ContainerType.STATUSBAR);
+                    prepareBatteryStyle(ContainerType.KEYGUARD);
+                    prepareQuietHoursIcon(ContainerType.STATUSBAR);
+                    prepareQuietHoursIcon(ContainerType.KEYGUARD);
+                    prepareBatteryBar(ContainerType.STATUSBAR);
+                    prepareBatteryBar(ContainerType.KEYGUARD);
+                    prepareProgressBar(ContainerType.STATUSBAR);
+                    prepareProgressBar(ContainerType.KEYGUARD);
+                    prepareGestureDetector();
+                }
+            });
 
             XposedHelpers.findAndHookMethod(statusBarClass, 
                     "interceptTouchEvent", MotionEvent.class, new XC_MethodHook() {
@@ -770,116 +750,6 @@ public class ModStatusBar {
                 });
             }
 
-            // fragment that takes care of notification icon layout for center clock
-            try {
-                final Class<?> classIconMerger = XposedHelpers.findClass(CLASS_ICON_MERGER, classLoader);
-
-                XposedHelpers.findAndHookMethod(classIconMerger, "onMeasure", 
-                        int.class, int.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mIconMergerView == null) {
-                            mIconMergerView = (View) param.thisObject;
-                        }
-
-                        if ((mClock == null && mTrafficMeter == null) || 
-                                mContext == null || mLayoutCenter == null || 
-                                        mLayoutCenter.getChildCount() == 0) return;
-
-                        Resources res = mContext.getResources();
-                        int totalWidth = res.getDisplayMetrics().widthPixels;
-                        int iconSize = XposedHelpers.getIntField(param.thisObject, "mIconSize");
-                        Integer sbIconPad = (Integer) XposedHelpers.getAdditionalInstanceField(
-                                param.thisObject, "gbSbIconPad");
-                        if (sbIconPad == null) {
-                            sbIconPad = 0;
-                            int sbIconPadResId = res.getIdentifier("status_bar_icon_padding", "dimen", PACKAGE_NAME);
-                            if (sbIconPadResId != 0) {
-                                sbIconPad = res.getDimensionPixelSize(sbIconPadResId);
-                            }
-                            XposedHelpers.setAdditionalInstanceField(param.thisObject, "gbSbIconPad", sbIconPad);
-                        } else {
-                            sbIconPad = (Integer) XposedHelpers.getAdditionalInstanceField(
-                                    param.thisObject, "gbSbIconPad");
-                        }
-
-                        // use clock or traffic meter for basic measurement
-                        Paint p;
-                        String text;
-                        if (mClock != null) {
-                            p = mClock.getClock().getPaint();
-                            text = mClock.getClock().getText().toString();
-                        } else {
-                            p = mTrafficMeter.getPaint();
-                            text = "00000000"; // dummy text in case traffic meter is used for measurement
-                        }
-
-                        int clockWidth = (int) p.measureText(text) + iconSize;
-                        int availWidth = totalWidth/2 - clockWidth/2 - iconSize/2;
-                        XposedHelpers.setAdditionalInstanceField(param.thisObject, "gbAvailWidth", availWidth);
-                        int newWidth = availWidth - (availWidth % (iconSize + 2 * sbIconPad));
-
-                        Field fMeasuredWidth = View.class.getDeclaredField("mMeasuredWidth");
-                        fMeasuredWidth.setAccessible(true);
-                        Field fMeasuredHeight = View.class.getDeclaredField("mMeasuredHeight");
-                        fMeasuredHeight.setAccessible(true);
-                        Field fPrivateFlags = View.class.getDeclaredField("mPrivateFlags");
-                        fPrivateFlags.setAccessible(true); 
-                        fMeasuredWidth.setInt(param.thisObject, newWidth);
-                        fMeasuredHeight.setInt(param.thisObject, ((View)param.thisObject).getMeasuredHeight());
-                        int privateFlags = fPrivateFlags.getInt(param.thisObject);
-                        privateFlags |= 0x00000800;
-                        fPrivateFlags.setInt(param.thisObject, privateFlags);
-                    }
-                });
-
-                XposedHelpers.findAndHookMethod(classIconMerger, "checkOverflow",
-                        int.class, new XC_MethodReplacement() {
-                    @Override
-                    protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mLayoutCenter == null || mLayoutCenter.getChildCount() == 0 ||
-                                XposedHelpers.getAdditionalInstanceField(param.thisObject, "gbAvailWidth") == null) {
-                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                        }
-
-                        try {
-                            final View moreView = (View) XposedHelpers.getObjectField(param.thisObject, "mMoreView");
-                            if (moreView == null) return null;
-    
-                            int iconSize = XposedHelpers.getIntField(param.thisObject, "mIconSize");
-                            int availWidth = (Integer) XposedHelpers.getAdditionalInstanceField(
-                                    param.thisObject, "gbAvailWidth");
-                            int sbIconPad = (Integer) XposedHelpers.getAdditionalInstanceField(
-                                    param.thisObject, "gbSbIconPad");
-    
-                            LinearLayout layout = (LinearLayout) param.thisObject;
-                            final int N = layout.getChildCount();
-                            int visibleChildren = 0;
-                            for (int i=0; i<N; i++) {
-                                if (layout.getChildAt(i).getVisibility() != View.GONE) visibleChildren++;
-                            }
-    
-                            final boolean overflowShown = (moreView.getVisibility() == View.VISIBLE);
-                            final boolean moreRequired = visibleChildren * (iconSize + 2 * sbIconPad) > availWidth;
-                            if (moreRequired != overflowShown) {
-                                layout.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        moreView.setVisibility(moreRequired ? View.VISIBLE : View.GONE);
-                                    }
-                                });
-                            }
-                            return null;
-                        } catch (Throwable t) {
-                            GravityBox.log(TAG, "Error in IconMerger.checkOverflow: ", t);
-                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                        }
-                    }
-                });
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);;
-            }
-
             // Status bar Bluetooth icon policy
             mBroadcastSubReceivers.add(new SystemIconController(classLoader, prefs));
 
@@ -946,7 +816,7 @@ public class ModStatusBar {
             // Disable peek
             try {
                 XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
-                        "schedulePeek", new XC_MethodHook() {
+                        "runPeekAnimation", long.class, float.class, boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if (mDisablePeek) {
@@ -1170,11 +1040,6 @@ public class ModStatusBar {
                     }
                     break;
             }
-        }
-
-        if (mIconMergerView != null) {
-            mIconMergerView.requestLayout();
-            mIconMergerView.invalidate();
         }
     }
 
