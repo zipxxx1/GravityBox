@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +27,6 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.Surface;
@@ -121,7 +120,6 @@ public class ModExpandedDesktop {
     private static Method mCalculateRelevantTaskInsets = null;
     private static Method mNavigationBarPosition = null;
     private static Method mGetNavigationBarHeight = null;
-    private static Method mIsNavigationBarOnBottom = null;
     private static NavbarDimensions mNavbarDimensions;
     private static Class<?> mClsScreenShapeHelper;
 
@@ -337,14 +335,12 @@ public class ModExpandedDesktop {
             GravityBox.log(TAG, "could not find calculateRelevantTaskInsets method");
         }
 
-        if (Build.VERSION.SDK_INT >= 25) {
-            try {
-                mNavigationBarPosition = classPhoneWindowManager.getDeclaredMethod(
-                        "navigationBarPosition", int.class, int.class, int.class);
-                mNavigationBarPosition.setAccessible(true);
-            } catch (NoSuchMethodException e) {
-                GravityBox.log(TAG, "could not find navigationBarPosition method");
-            }
+        try {
+            mNavigationBarPosition = classPhoneWindowManager.getDeclaredMethod(
+                    "navigationBarPosition", int.class, int.class, int.class);
+            mNavigationBarPosition.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            GravityBox.log(TAG, "could not find navigationBarPosition method");
         }
 
         try {
@@ -353,16 +349,6 @@ public class ModExpandedDesktop {
             mGetNavigationBarHeight.setAccessible(true);
         } catch (NoSuchMethodException e) {
             GravityBox.log(TAG, "could not find getNavigationBarHeight method");
-        }
-
-        if (Build.VERSION.SDK_INT == 24) {
-            try {
-                mIsNavigationBarOnBottom = classPhoneWindowManager.getDeclaredMethod(
-                        "isNavigationBarOnBottom", int.class, int.class);
-                mIsNavigationBarOnBottom.setAccessible(true);
-            } catch (NoSuchMethodException e) {
-                GravityBox.log(TAG, "could not find isNavigationBarOnBottom method");
-            }
         }
     }
 
@@ -467,7 +453,7 @@ public class ModExpandedDesktop {
                         int displayHeight = (int)param.args[paramIndex++];
                         int displayRotation = (int)param.args[paramIndex++];
                         int uiMode = (int)param.args[paramIndex++];
-                        int overscanLeft = Build.VERSION.SDK_INT == 24 ? 0 : (int)param.args[paramIndex++];
+                        int overscanLeft = (int)param.args[paramIndex++];
                         int overscanRight = (int)param.args[paramIndex++];
                         int overscanBottom = (int)param.args[paramIndex++];
                         Rect dcf = (Rect)param.args[paramIndex++];
@@ -492,15 +478,9 @@ public class ModExpandedDesktop {
                             // size.  We need to do this directly, instead of relying on
                             // it to bubble up from the nav bar, because this needs to
                             // change atomically with screen rotations.
-                            final int position;
-                            if (Build.VERSION.SDK_INT == 24) {
-                                position = (boolean) mIsNavigationBarOnBottom.invoke(param.thisObject,
-                                        displayWidth, displayHeight) ? NavBarPosition.NAV_BAR_BOTTOM : NavBarPosition.NAV_BAR_RIGHT;
-                            } else {
-                                position = (int)mNavigationBarPosition.invoke(param.thisObject,
+                            final int position = (int)mNavigationBarPosition.invoke(param.thisObject,
                                     displayWidth, displayHeight, displayRotation);
-                                setInt("mNavigationBarPosition", position);
-                            }
+                            setInt("mNavigationBarPosition", position);
                             if (position == NavBarPosition.NAV_BAR_BOTTOM) {
                                 // It's a system nav bar or a portrait screen; nav bar goes on bottom.
                                 int top = displayHeight - overscanBottom
@@ -805,15 +785,13 @@ public class ModExpandedDesktop {
                         }
                         Object winAttrs = XposedHelpers.callMethod(winCandidate, "getAttrs");
 
-                        if (Build.VERSION.SDK_INT > 24) {
-                            if (XposedHelpers.getObjectField(winAttrs, "token") ==
-                                    XposedHelpers.callMethod(getObj("mImmersiveModeConfirmation"), "getWindowToken")) {
-                                boolean isStatusBarKg = (boolean) XposedHelpers.callMethod(param.thisObject, "isStatusBarKeyguard");
-                                winCandidate = isStatusBarKg ? getObj("mStatusBar") : getObj("mTopFullscreenOpaqueWindowState");
-                                if (winCandidate == null) {
-                                    param.setResult(0);
-                                    return;
-                                }
+                        if (XposedHelpers.getObjectField(winAttrs, "token") ==
+                                XposedHelpers.callMethod(getObj("mImmersiveModeConfirmation"), "getWindowToken")) {
+                            boolean isStatusBarKg = (boolean) XposedHelpers.callMethod(param.thisObject, "isStatusBarKeyguard");
+                            winCandidate = isStatusBarKg ? getObj("mStatusBar") : getObj("mTopFullscreenOpaqueWindowState");
+                            if (winCandidate == null) {
+                                param.setResult(0);
+                                return;
                             }
                         }
                         final Object win = winCandidate;
@@ -821,7 +799,7 @@ public class ModExpandedDesktop {
                         final int privateFlags = XposedHelpers.getIntField(winAttrs, "privateFlags");
                         final int windowType = XposedHelpers.getIntField(winAttrs, "type");
                         if ((privateFlags & WmLp.PRIVATE_FLAG_KEYGUARD) != 0 && 
-                                getBool("mHideLockScreen") == true) {
+                                getBool("mKeyguardOccluded") == true) {
                             // We are updating at a point where the keyguard has gotten
                             // focus, but we were last in a state where the top window is
                             // hiding it.  This is probably because the keyguard as been
