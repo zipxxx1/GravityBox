@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,20 +17,23 @@ package com.ceco.oreo.gravitybox;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import com.ceco.oreo.gravitybox.ledcontrol.QuietHours;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class ModDialer25 {
-    private static final String TAG = "GB:ModDialer25";
+public class ModDialer26 {
+    private static final String TAG = "GB:ModDialer26";
+    public static final List<String> PACKAGE_NAMES = new ArrayList<String>(Arrays.asList(
+            "com.google.android.dialer", "com.android.dialer"));
 
     private static final String CLASS_DIALTACTS_ACTIVITY = "com.android.dialer.app.DialtactsActivity";
     private static final String CLASS_DIALTACTS_ACTIVITY_GOOGLE = 
@@ -38,7 +41,6 @@ public class ModDialer25 {
     private static final boolean DEBUG = false;
 
     private static QuietHours mQuietHours;
-    private static long mPrefsReloadedTstamp;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -52,40 +54,6 @@ public class ModDialer25 {
             clazz = cls;
             methods = new HashMap<>();
         }
-    }
-
-    private static ClassInfo resolveDialtactsActivity(ClassLoader cl) {
-        ClassInfo info = null;
-        String[] CLASS_NAMES = new String[] { CLASS_DIALTACTS_ACTIVITY };
-        String[] METHOD_NAMES = new String[] { "displayFragment" };
-        for (String className : CLASS_NAMES) {
-            Class<?> clazz = XposedHelpers.findClassIfExists(className, cl);
-            if (clazz == null || !Activity.class.isAssignableFrom(clazz))
-                continue;
-            info = new ClassInfo(clazz);
-            for (String methodName : METHOD_NAMES) {
-                if (methodName.equals("displayFragment")) {
-                    for (String realMethodName : new String[] { methodName, "c", "b", "a" }) {
-                        Method m = XposedHelpers.findMethodExactIfExists(clazz, realMethodName,
-                            Intent.class);
-                        if (m != null) {
-                            info.methods.put(methodName, realMethodName);
-                            if (realMethodName.equals(methodName)) {
-                                info.extra = "showDialpadFragment";
-                            } else if (realMethodName.equals("c")) {
-                                info.extra = "b";
-                            } else if (realMethodName.equals("b")) {
-                                info.extra = "c";
-                            } else if (realMethodName.equals("a")) {
-                                info.extra = "d";
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return info;
     }
 
     private static ClassInfo resolveDialpadFragment(ClassLoader cl) {
@@ -119,36 +87,31 @@ public class ModDialer25 {
         return info;
     }
 
-    private static void reloadPrefs(XSharedPreferences prefs) {
-        if ((System.currentTimeMillis() - mPrefsReloadedTstamp) > 10000) {
-            if (DEBUG) log("Reloading preferences");
-            prefs.reload();
-            mPrefsReloadedTstamp = System.currentTimeMillis();
-        }
-    }
-
     public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs,
             final ClassLoader classLoader, final String packageName) {
         try {
-            final ClassInfo classInfoDialtactsActivity = resolveDialtactsActivity(classLoader);
-
-            XposedHelpers.findAndHookMethod(classInfoDialtactsActivity.clazz,
-                    classInfoDialtactsActivity.methods.get("displayFragment"),
-                    Intent.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_DIALTACTS_ACTIVITY, classLoader, 
+                    "onResume", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    reloadPrefs(prefs);
+                    prefs.reload();
                     if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_DIALER_SHOW_DIALPAD, false)) return;
 
                     final String realClassName = param.thisObject.getClass().getName();
-                    if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY)) {
-                        XposedHelpers.callMethod(param.thisObject,
-                                classInfoDialtactsActivity.extra.toString(), false);
-                        if (DEBUG) log("showDialpadFragment() called within " + realClassName);
-                    } else if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY_GOOGLE)) {
-                        final Class<?> superc = param.thisObject.getClass().getSuperclass();
-                        Method m = XposedHelpers.findMethodExact(superc,
-                                classInfoDialtactsActivity.extra.toString(), boolean.class);
+                    Method m = null;
+                    for (String mn : new String[] { "showDialpadFragment", "e" }) {
+                        if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY)) {
+                            m = XposedHelpers.findMethodExactIfExists(
+                                    param.thisObject.getClass(), mn, boolean.class);
+                        } else if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY_GOOGLE)) {
+                            m = XposedHelpers.findMethodExactIfExists(
+                                    param.thisObject.getClass().getSuperclass(), mn, boolean.class);
+                        }
+                        if (m != null) break;
+                    }
+                    if (m == null) {
+                        GravityBox.log(TAG, "DialtactsActivity: couldn't identify showDialpadFragment method");
+                    } else {
                         m.invoke(param.thisObject, false);
                         if (DEBUG) log("showDialpadFragment() called within " + realClassName);
                     }

@@ -1617,13 +1617,14 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             // remove Dialer features if Dialer package unavailable
             PackageInfo pi = null;
-            for (String pkg : ModDialer.PACKAGE_NAMES) {
+            for (String pkg : ModDialer26.PACKAGE_NAMES) {
                 pi = Utils.getPackageInfo(getActivity(), pkg);
                 if (pi != null) break;
             }
             if (pi == null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
-            } else if (pi.applicationInfo.targetSdkVersion >= 25) {
+            } else {
+                // always remove these no longer supported features
                 Preference p = findPreference(PREF_KEY_CALLER_FULLSCREEN_PHOTO);
                 if (p != null) mPrefCatPhoneDialer.removePreference(p);
                 mPrefCatPhoneDialer.removePreference(mPrefCallerUnknownPhotoEnable);
