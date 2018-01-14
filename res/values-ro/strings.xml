@@ -1607,12 +1607,6 @@
     <string name="permission_denied_msg">Ați decis să renunțați la unele dintre permisiuni. Rețineți că acest lucru va împiedica funcționarea funcțiilor asociate.</string>
     <string name="permission_denied_hide_title">Nu mai afișa din nou</string>
 
-    <!-- Cellular tile Mobile data toggle -->
-    <string name="pref_cell_tile_data_toggle_title">Comutare date mobile</string>
-    <string name="tile_data_toggle_disabled">Dezactivat</string>
-    <string name="tile_data_toggle_singlepress">La o singură apăsare</string>
-    <string name="tile_data_toggle_longpress">La apăsare lungă</string>
-
     <!-- Lockscreen: Imprint mode -->
     <string name="pref_lockscreen_imprint_mode_title">Amprentă</string>
     <string name="imprint_mode_default">Trezire şi deblocare (implicit)</string>

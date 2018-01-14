@@ -1638,12 +1638,6 @@
         Lưu ý rằng điều này sẽ chặn các tính nănh có liên quan.</string>
     <string name="permission_denied_hide_title">Không nhắc lại</string>
 
-    <!-- Cellular tile Mobile data toggle -->
-    <string name="pref_cell_tile_data_toggle_title">Toggle dữ liệu di động</string>
-    <string name="tile_data_toggle_disabled">Tắt</string>
-    <string name="tile_data_toggle_singlepress">Khi bấm</string>
-    <string name="tile_data_toggle_longpress">Khi giữ</string>
-
     <!-- Lockscreen: Imprint mode -->
     <string name="pref_lockscreen_imprint_mode_title">Chế độ Imprint</string>
     <string name="imprint_mode_default">Sáng MH và mở khóa (mặc định)</string>

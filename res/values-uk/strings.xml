@@ -1651,12 +1651,6 @@
 
     <string name="permission_denied_hide_title">Не показувати знову</string>
 
-    <!-- Cellular tile Mobile data toggle -->
-    <string name="pref_cell_tile_data_toggle_title">Перемикач мобільних даних</string>
-    <string name="tile_data_toggle_disabled">Вимкнено</string>
-    <string name="tile_data_toggle_singlepress">На один дотик</string>
-    <string name="tile_data_toggle_longpress">На утримання</string>
-
     <!-- Lockscreen: Imprint mode -->
     <string name="pref_lockscreen_imprint_mode_title">Режим відбитку</string>
     <string name="imprint_mode_default">Пробудження та розблокування (типово)</string>

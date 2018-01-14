@@ -1662,12 +1662,6 @@
         Note that this will prevent related features from functioning.</string>
     <string name="permission_denied_hide_title">Don\'t show again</string>
 
-    <!-- Cellular tile Mobile data toggle -->
-    <string name="pref_cell_tile_data_toggle_title">Mobile data toggle</string>
-    <string name="tile_data_toggle_disabled">Disabled</string>
-    <string name="tile_data_toggle_singlepress">On single-press</string>
-    <string name="tile_data_toggle_longpress">On long-press</string>
-
     <!-- Lockscreen: Imprint mode -->
     <string name="pref_lockscreen_imprint_mode_title">Imprint mode</string>
     <string name="imprint_mode_default">Wake and unlock (default)</string>

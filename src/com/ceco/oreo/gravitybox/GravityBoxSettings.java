@@ -819,8 +819,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_BBAR_COLOR_CHARGING = "batteryBarColorCharging";
 
     public static final String PREF_CAT_KEY_CELL_TILE = "pref_cat_qs_cell_tile";
-    public static final String PREF_KEY_CELL_TILE_DATA_TOGGLE = "pref_cell_tile_data_toggle";
-    public static final String EXTRA_CELL_TILE_DATA_TOGGLE = "cellTileDataToggle";
 
     public static final String PREF_CAT_KEY_BATTERY_TILE = "pref_cat_qs_battery_tile";
     public static final String PREF_KEY_BATTERY_TILE_TEMP = "pref_battery_tile_temp";
@@ -1297,7 +1295,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private SeekBarPreference mPrefSrAdaptiveDelay;
         private ListPreference mPrefBbarPosition;
         private ListPreference mPrefSbdpMode;
-        private PreferenceScreen mPrefCatCellTile;
+        //private PreferenceScreen mPrefCatCellTile;
         private ListPreference mPrefBatteryTileTempUnit;
         private EditTextPreference mPrefPowerCameraVp;
 
@@ -1579,7 +1577,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             mPrefSbdpMode = (ListPreference) findPreference(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS);
 
-            mPrefCatCellTile = (PreferenceScreen) findPreference(PREF_CAT_KEY_CELL_TILE);
+            //mPrefCatCellTile = (PreferenceScreen) findPreference(PREF_CAT_KEY_CELL_TILE);
 
             mPrefBatteryTileTempUnit = (ListPreference) findPreference(PREF_KEY_BATTERY_TILE_TEMP_UNIT); 
 
@@ -1610,7 +1608,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (Utils.isWifiOnly(getActivity())) {
                 // Remove preferences that don't apply to wifi-only devices
                 getPreferenceScreen().removePreference(mPrefCatPhone);
-                mPrefCatQsTileSettings.removePreference(mPrefCatCellTile);
+                //mPrefCatQsTileSettings.removePreference(mPrefCatCellTile);
                 mPrefCatQsTileSettings.removePreference(mPrefCatQsNmTileSettings);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
@@ -2356,11 +2354,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY)) {
                 ListPreference sup = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY);
                 sup.setSummary(sup.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_CELL_TILE_DATA_TOGGLE)) {
-                ListPreference p = (ListPreference) findPreference(PREF_KEY_CELL_TILE_DATA_TOGGLE);
-                if (p != null) p.setSummary(p.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_IMPRINT_MODE)) {
@@ -3274,9 +3267,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM)) {
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
                 intent.putExtra(EXTRA_RECENTS_MARGIN_BOTTOM, prefs.getInt(key, 50));
-            } else if (key.equals(PREF_KEY_CELL_TILE_DATA_TOGGLE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_CELL_TILE_DATA_TOGGLE, prefs.getString(key, "DISABLED"));
             } else if (PREF_KEY_LOCKSCREEN_SHORTCUT.contains(key)) {
                 intent.setAction(ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
                 intent.putExtra(EXTRA_LS_SHORTCUT_SLOT,

@@ -1011,10 +1011,6 @@
 <string name="pref_lockscreen_direct_unlock_policy_title">شرایط قفل گشایی مستقیم</string>
 <string name="permission_denied_msg">شما تصمیم به انسداد برخی از مجوزهای دسترسی دارید. توجه داشته باشید که اینکار سبب جلوگیری از بعضی عملکرد ها میشود.</string>
 <string name="permission_denied_hide_title">دوباره نشان نده</string>
-<string name="pref_cell_tile_data_toggle_title">سوئیچ وضعیت داده‌های همراه</string>
-<string name="tile_data_toggle_disabled">غیرفعال شد</string>
-<string name="tile_data_toggle_singlepress">با یک لمس</string>
-<string name="tile_data_toggle_longpress">با لمس طولانی</string>
 <string name="pref_lockscreen_imprint_mode_title">حالت اثر‌انگشت</string>
 <string name="imprint_mode_default">بیدار کردن و قفل گشایی(پیشفرض)</string>
 <string name="imprint_mode_wake_only">فقط بیدار کردن</string>

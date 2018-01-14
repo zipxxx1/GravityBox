@@ -1617,12 +1617,6 @@
     <string name="permission_denied_msg">Úgy döntöttél, hogy megtagadsz néhány engedélyt. Ne feledd, hogy ez megakadályozza a kapcsolódó funkciók működését.</string>
     <string name="permission_denied_hide_title">Ne mutassa újra</string>
 
-    <!-- Cellular tile Mobile data toggle -->
-    <string name="pref_cell_tile_data_toggle_title">Mobil adatátvitel ki-bekapcsolása</string>
-    <string name="tile_data_toggle_disabled">Letiltva</string>
-    <string name="tile_data_toggle_singlepress">Egyszeri érintésre</string>
-    <string name="tile_data_toggle_longpress">Hosszú érintésre</string>
-
     <!-- Lockscreen: Imprint mode -->
     <string name="pref_lockscreen_imprint_mode_title">Imprint mód (ujjlenyomat érzékelő)</string>
     <string name="imprint_mode_default">Eszköz ébresztése és feloldás (alapértelmezett)</string>

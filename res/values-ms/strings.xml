@@ -1648,12 +1648,6 @@
         Ini menghalang beberapa tetapan daripada berfungsi.</string>
     <string name="permission_denied_hide_title">Jangan tunjuk lagi</string>
 
-    <!-- Cellular tile Mobile data toggle -->
-    <string name="pref_cell_tile_data_toggle_title">Togel data paket</string>
-    <string name="tile_data_toggle_disabled">Tidak aktif</string>
-    <string name="tile_data_toggle_singlepress">Sekali tekan</string>
-    <string name="tile_data_toggle_longpress">Tekan lama</string>
-
     <!-- Lockscreen: Imprint mode -->
     <string name="pref_lockscreen_imprint_mode_title">Mod jejak</string>
     <string name="imprint_mode_default">Buka skrin dan kunci (tetapan asal)</string>
