@@ -23,6 +23,7 @@ import com.ceco.oreo.gravitybox.managers.SysUiManagers;
 import com.ceco.oreo.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.oreo.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
+import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -79,18 +80,34 @@ public class StatusbarBattery implements IconManagerListener {
     private void createHooks() {
         if (!Utils.isXperiaDevice() && !Utils.isParanoidRom() && getDrawable() != null) {
             try {
-                XposedHelpers.findAndHookMethod(getDrawable().getClass(), "getFillColor",
-                        float.class, new XC_MethodHook() {
+                XposedHelpers.findAndHookMethod(getDrawable().getClass(), "setColorFilter",
+                        ColorFilter.class, new XC_MethodHook() {
                     @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if (SysUiManagers.IconManager != null &&
                                 SysUiManagers.IconManager.isColoringEnabled()) {
-                            param.setResult(SysUiManagers.IconManager.getIconColor());
+                            int color = SysUiManagers.IconManager.getIconColor();
+                            setColors(color, color, color);
                         }
                     }
                 });
             } catch (Throwable t) {
-                GravityBox.log(TAG, "Error hooking getFillColor(): ", t);
+                GravityBox.log(TAG, "Error hooking setColorFilter(): ", t);
+            }
+            try {
+                XposedHelpers.findAndHookMethod(getDrawable().getClass(), "setColors",
+                        int.class, int.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (SysUiManagers.IconManager != null &&
+                                SysUiManagers.IconManager.isColoringEnabled()) {
+                            int color = SysUiManagers.IconManager.getIconColor();
+                            setColors(color, color, color);
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error hooking setColors(): ", t);
             }
         }
     }

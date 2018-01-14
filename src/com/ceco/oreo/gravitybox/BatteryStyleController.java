@@ -359,7 +359,9 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 mDashIconHidden = intent.getBooleanExtra(GravityBoxSettings.EXTRA_HIDE_DASH, false);
             }
             updateBatteryStyle();
-            updateDashChargeView();
+            if (Utils.isOxygenOsRom()) {
+                updateDashChargeView();
+            }
         } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR)) {
                 mBatteryPercentTextEnabledSb = intent.getBooleanExtra(
