@@ -186,7 +186,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                     String clockText = param.getResult().toString();
                     if (DEBUG) log("Original clockText: '" + clockText + "'");
                     // generate fresh base time text if seconds enabled
-                    if (mShowSeconds) {
+                    if (mShowSeconds && sbClock != null) {
                         if (mSecondsFormat == null) {
                             mSecondsFormat = new SimpleDateFormat(
                                     DateFormat.getBestDateTimePattern(
@@ -261,7 +261,9 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                     Rect.class, float.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (SysUiManagers.IconManager != null && SysUiManagers.IconManager.isColoringEnabled()) {
+                    if (param.thisObject == mClock &&
+                            SysUiManagers.IconManager != null &&
+                            SysUiManagers.IconManager.isColoringEnabled()) {
                         param.setResult(null);
                     }
                 }
