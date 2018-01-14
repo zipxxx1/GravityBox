@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -161,10 +161,10 @@ public class QsPanel implements BroadcastSubReceiver {
         switch (mNumColumns) {
             default:
             case 0: return 1f + correction;
-            case 3: return 1f + correction;
-            case 4: return 0.85f + correction;
-            case 5: return 0.75f + correction;
-            case 6: return 0.65f + correction;
+//            case 3: return 1f + correction;
+//            case 4: return 0.85f + correction;
+//            case 5: return 0.75f + correction;
+//            case 6: return 0.65f + correction;
         }
     }
 

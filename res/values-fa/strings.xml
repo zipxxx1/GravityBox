@@ -1037,7 +1037,6 @@
 <string name="dnd_tile_dm_custom">شخصی</string>
 <string name="pref_dnd_tile_duration_title">تنظیم مدت زمان شخصی</string>
 <string name="pref_cat_qs_location_tile_title">تنظیمات کاشی موقعیت مکانی (SlimKat)</string>
-<string name="pref_location_tile_quick_mode_summary">سوئیچ سریع موقعیت مکانی با یک لمس کاشی</string>
 <string name="network_mode_0">برتر (3G/2G)</string>
 <string name="network_mode_1">فقط (2G)</string>
 <string name="network_mode_2">فقط (3G)</string>
@@ -1063,13 +1062,10 @@
 <string name="network_mode_22">TD-SCDMA LTE Global (4G/2G/3G)</string>
 <string name="network_mode_unknown">ناشناخته</string>
 <string name="pref_nm_tile_enabled_modes_summary">تعیین حالت‌های شبکه که تمایل دارید پشتیبانی شود</string>
-<string name="pref_nm_tile_quick_mode_summary">سوئیچ سریع حالت شبکه با یک لمس کاشی</string>
 <string name="pref_cat_qs_rm_tile_title">تنظیمات کاشی حالت زنگ تماس</string>
 <string name="pref_rm_tile_enabled_modes_summary">تعیین حالت‌های زنگ تماس که تمایل دارید پشتیبانی شود</string>
-<string name="pref_rm_tile_quick_mode_summary">"سوئیچ سریع حالت زنگ تماس با یک لمس کاشی "</string>
 <string name="pref_cat_qs_sa_tile_title">تنظیمات کاشی ماندن در حالت بیداری</string>
 <string name="pref_sa_tile_enabled_modes_summary">تعیین مدت زمان‌های خاموش شدن نور صفحه که تمایل دارید پشتیبانی شود</string>
-<string name="pref_sa_tile_quick_mode_summary">سوئیچ سریع توقف زمان خاموش شدن صفحه نمایش با یک لمس کاشی</string>
 <string name="pref_lockscreen_smart_unlock_policy_title">شرایط قفل‌گشایی هوشمند</string>
 <string name="pref_battery_percent_text_position_title">موقعیت در نوار وضعیت</string>
 <string name="pref_battery_percent_text_position_summary">نیازمند راه‌اندازی مجدد</string>

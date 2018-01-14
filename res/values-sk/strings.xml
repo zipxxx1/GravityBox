@@ -1670,21 +1670,17 @@
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Nastavenia dlaždice Poloha (SlimKat)</string>
-    <string name="pref_location_tile_quick_mode_summary">Umožňuje prepínať medzi typmi sledovania polohy jednoduchým ťuknutím na dlaždicu</string>
 
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">Definuje, ktoré typy siete dlaždica podporuje</string>
-    <string name="pref_nm_tile_quick_mode_summary">Umožňuje prepínať medzi typmi siete jednoduchým ťuknutím na dlaždicu</string>
 
     <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">Nastavenia dlaždice Režim zvonenia</string>
     <string name="pref_rm_tile_enabled_modes_summary">Definuje, ktoré typy zvonenia dlaždica podporuje</string>
-    <string name="pref_rm_tile_quick_mode_summary">Umožňuje prepínať medzi typmi zvonenia jednoduchým ťuknutím na dlaždicu</string>
 
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">Nastavenia dlaždice Bdenie</string>
     <string name="pref_sa_tile_enabled_modes_summary">Definuje, ktoré typy časovača vypnutia obrazovky dlaždica podporuje</string>
-    <string name="pref_sa_tile_quick_mode_summary">Umožňuje prepínať medzi typmi časovača vypnutia obrazovky jednoduchým ťuknutím na dlaždicu</string>
 
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Zakázať vibrácie zariadenia</string>
@@ -1974,12 +1970,6 @@
     <string name="locked_tile_indicator_dim">Stmavené ikony</string>
     <string name="locked_tile_indicator_padlock">Zámok &#x1f512;</string>
     <string name="locked_tile_indicator_key">Kľúč &#x1f511;</string>
-
-    <!-- QS: WiFi quick mode -->
-    <string name="pref_wifi_tile_quick_mode_summary">Umožňuje priame prepnutie WiFi jednoduchým ťuknutím</string>
-
-    <!-- QS: BT quick mode -->
-    <string name="pref_bt_tile_quick_mode_summary">Umožňuje priame prepnutie Bluetooth jednoduchým ťuknutím</string>
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Rozdelená obrazovka</string>

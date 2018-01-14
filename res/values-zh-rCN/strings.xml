@@ -1706,7 +1706,6 @@
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">位置瓷砖(SlimKat)设置</string>
-    <string name="pref_location_tile_quick_mode_summary">允许通过单击位置瓷砖模式循环</string>
 
     <!-- Cellular network modes -->
     <string name="network_mode_0">首选GSM/WCDMA (3G/2G)</string>
@@ -1736,17 +1735,14 @@
     
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">在瓷砖中定义支持哪些网络模式</string>
-    <string name="pref_nm_tile_quick_mode_summary">允许通过单击瓷砖循环选定的网络模式</string>
     
     <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">闹钟模式瓷砖设置</string>
     <string name="pref_rm_tile_enabled_modes_summary">在瓷砖中定义支持哪些闹钟模式</string>
-    <string name="pref_rm_tile_quick_mode_summary">允许通过单击瓷砖循环选定的闹钟模式</string>
     
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">保持唤醒瓷砖设置</string>
     <string name="pref_sa_tile_enabled_modes_summary">在瓷砖中定义支持哪些屏幕超时</string>
-    <string name="pref_sa_tile_quick_mode_summary">允许通过单击瓷砖循环选定的屏幕超时</string>
     
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">智能锁策略</string>
@@ -2031,12 +2027,6 @@
     <string name="locked_tile_indicator_dim">灰色图标</string>
     <string name="locked_tile_indicator_padlock">挂锁&#x1f512;</string>
     <string name="locked_tile_indicator_key">密钥&#x1f511;</string>
-
-    <!-- QS: WiFi quick mode -->
-    <string name="pref_wifi_tile_quick_mode_summary">允许在瓷砖内单击时切换WiFi</string>
-
-    <!-- QS: BT quick mode -->
-    <string name="pref_bt_tile_quick_mode_summary">允许在瓷砖内单击时切换蓝牙</string>
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">切换分屏</string>

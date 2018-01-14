@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -88,12 +88,12 @@ public class NetworkModeTile extends QsTile {
     private boolean mIsReceiving;
     private List<NetworkMode> mModeList = new ArrayList<>();
     private QsDetailAdapterProxy mDetailAdapter;
-    private boolean mQuickMode;
 
     public NetworkModeTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
 
+        mState.dualTarget = true;
         mIsMsim = PhoneWrapper.hasMsimSupport();
     }
 
@@ -118,8 +118,6 @@ public class NetworkModeTile extends QsTile {
         if (DEBUG) log(getKey() + ": onPreferenceInitialize: modes=" + Arrays.toString(modes));
         setEnabledModes(modes);
 
-        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_NM_TILE_QUICK_MODE, false);
-
         if (mIsMsim) {
             try {
                 mSimSlot = Integer.valueOf(mPrefs.getString(
@@ -140,9 +138,6 @@ public class NetworkModeTile extends QsTile {
                 int[] modes = intent.getIntArrayExtra(GravityBoxSettings.EXTRA_NM_TILE_ENABLED_MODES);
                 if (DEBUG) log(getKey() + ": onBroadcastReceived: modes=" + Arrays.toString(modes));
                 setEnabledModes(modes);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_NM_TILE_QUICK_MODE)) {
-                mQuickMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NM_TILE_QUICK_MODE, false);
             }
         }
 
@@ -274,30 +269,28 @@ public class NetworkModeTile extends QsTile {
 
     @Override
     public void handleClick() {
-        if (mQuickMode) {
-            switchNetworkMode();
-        } else {
-            showDetail(true);
-        }
+        switchNetworkMode();
         super.handleClick();
+    }
+
+    
+    @Override
+    public boolean handleSecondaryClick() {
+        showDetail(true);
+        return true;
     }
 
     @Override
     public boolean handleLongClick() {
-        if (!isLocked()) {
-            if (mQuickMode) {
-                showDetail(true);
-                return true;
-            } else if (mIsMsim) {
-                Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
-                intent.putExtra(GravityBoxSettings.EXTRA_SIM_SLOT, mSimSlot == 0 ? 1 : 0);
-                mContext.sendBroadcast(intent);
-                return true;
-            }
+        if (!isLocked() && mIsMsim) {
+            Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
+            intent.putExtra(GravityBoxSettings.EXTRA_SIM_SLOT, mSimSlot == 0 ? 1 : 0);
+            mContext.sendBroadcast(intent);
+        } else {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setClassName("com.android.phone", "com.android.phone.Settings");
+            startSettingsActivity(intent);
         }
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setClassName("com.android.phone", "com.android.phone.Settings");
-        startSettingsActivity(intent);
         return true;
     }
 

@@ -1698,7 +1698,6 @@
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Настройки плитки местоположения (SlimKat)</string>
-    <string name="pref_location_tile_quick_mode_summary">Опция переключения режимов местоположения при нажатии на плитку</string>
 
     <!-- Cellular network modes -->
     <string name="network_mode_0">GSM/WCDMA предпочтительно (3G/2G)</string>
@@ -1728,17 +1727,14 @@
 
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">Определение сетевых режимов, которые должна поддерживать плитка</string>
-    <string name="pref_nm_tile_quick_mode_summary">Опция переключения сетевых режимов при нажатии на плитку</string>
 
     <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">Настройки плитки режима звонка</string>
     <string name="pref_rm_tile_enabled_modes_summary">Определение режимов звонка, которые должна поддерживать плитка</string>
-    <string name="pref_rm_tile_quick_mode_summary">Опция переключения режимов звонка при нажатии на плитку</string>
 
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">Настройки плитки бодрствования</string>
     <string name="pref_sa_tile_enabled_modes_summary">Определение режимов задержки отключения экрана, которые должна поддерживать плитка</string>
-    <string name="pref_sa_tile_quick_mode_summary">Опция переключения режимов задержки отключения экрана при нажатии на плитку</string>
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Политика умной разблокировки</string>
@@ -2023,12 +2019,6 @@
     <string name="locked_tile_indicator_dim">Затемнённый значок</string>
     <string name="locked_tile_indicator_padlock">Замок &#x1f512;</string>
     <string name="locked_tile_indicator_key">Ключ &#x1f511;</string>
-
-    <!-- QS: WiFi quick mode -->
-    <string name="pref_wifi_tile_quick_mode_summary">Возможность вкл/выкл WiFi одним нажатием плитки</string>
-
-    <!-- QS: BT quick mode -->
-    <string name="pref_bt_tile_quick_mode_summary">Возможность вкл/выкл Bluetooth одним нажатием плитки</string>
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Разделение экрана</string>

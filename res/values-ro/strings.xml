@@ -1649,7 +1649,6 @@
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Setările dalei de locaţie (SlimKat)</string>
-    <string name="pref_location_tile_quick_mode_summary">Permite comutarea între modurile de localizare printr-o singură apăsare</string>
 
     <!-- Cellular network modes -->
     <string name="network_mode_0">GSM/WCDMA preferat (3G/2G)</string>
@@ -1679,17 +1678,14 @@
 
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">Definește ce moduri de rețea ar trebui să fie suportate</string>
-    <string name="pref_nm_tile_quick_mode_summary">Permite comutarea între modurile de rețea selectate printr-o singură apăsare</string>
 
     <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">Setările pentru dala Mod sonerie</string>
     <string name="pref_rm_tile_enabled_modes_summary">Definește ce moduri de sonerie trebuie să fie suportate</string>
-    <string name="pref_rm_tile_quick_mode_summary">Permite comutarea între modurile soneriei selectate printr-o singură apăsare</string>
 
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">Setările dalei Activ permanent</string>
     <string name="pref_sa_tile_enabled_modes_summary">Definește durata de expirare a ecranului</string>
-    <string name="pref_sa_tile_quick_mode_summary">Permite comutarea între modurile de expirare a ecranului selectate printr-o singură apăsare</string>
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Politica de deblocare inteligentă</string>

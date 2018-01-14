@@ -1691,7 +1691,6 @@
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Tetapan tile lokasi (SlimKat)</string>
-    <string name="pref_location_tile_quick_mode_summary">Aktifkan jenis lokasi pada sekali tekan</string>
 
     <!-- Cellular network modes -->
     <string name="network_mode_0">GSM/WCDMA diutamakan (3G/2G)</string>
@@ -1721,17 +1720,14 @@
 
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">Menentukan jenis sokongan tile sambungan</string>
-    <string name="pref_nm_tile_quick_mode_summary">Aktifkan mod sambungan pada sekali tekan</string>
 
     <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">Tetapan tile nada</string>
     <string name="pref_rm_tile_enabled_modes_summary">Menentukan jenis sokongan tile nada</string>
-    <string name="pref_rm_tile_quick_mode_summary">Aktifkan mod nada pada sekali tekan</string>
 
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">Tetapan tile sentiasa aktif</string>
     <string name="pref_sa_tile_enabled_modes_summary">Menentukan jenis sokongan tile sentiasa aktif</string>
-    <string name="pref_sa_tile_quick_mode_summary">Aktifkan mod sentiasa aktif pada sekali tekan</string>
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Polisi buka bijak</string>

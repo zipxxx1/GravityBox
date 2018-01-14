@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2017 The SlimRoms Project
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 The SlimRoms Project
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -33,7 +33,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.ceco.oreo.gravitybox.R;
-import com.ceco.oreo.gravitybox.GravityBoxSettings;
 import com.ceco.oreo.gravitybox.ModStatusBar;
 import com.ceco.oreo.gravitybox.managers.GpsStatusMonitor;
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
@@ -57,12 +56,12 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
     private int mLastActiveMode;
     private QsDetailAdapterProxy mDetailAdapter;
     private List<Integer> mLocationList = new ArrayList<Integer>();
-    private boolean mQuickMode;
 
     public LocationTileSlimkat(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
 
+        mState.dualTarget = true;
         mLastActiveMode = getLocationMode();
         if(mLastActiveMode == Settings.Secure.LOCATION_MODE_OFF) {
             mLastActiveMode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
@@ -72,24 +71,6 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
     @Override
     public String getSettingsKey() {
         return "gb_tile_gps_slimkat";
-    }
-
-    @Override
-    public void initPreferences() {
-        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCATION_TILE_QUICK_MODE, false);
-
-        super.initPreferences();
-    }
-
-    @Override
-    public void onBroadcastReceived(Context context, Intent intent) {
-        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_LOCATION_TILE_QUICK_MODE)) {
-                mQuickMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LOCATION_TILE_QUICK_MODE, false);
-            }
-        }
-
-        super.onBroadcastReceived(context, intent);
     }
 
     private void registerListener() {
@@ -188,8 +169,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
                 break;
             case Settings.Secure.LOCATION_MODE_OFF:
                 mState.booleanValue = false;
-                mState.icon = iconFromResId(supportsIconTinting() ?
-                        R.drawable.ic_qs_location_on : R.drawable.ic_qs_location_off);
+                mState.icon = iconFromResId(R.drawable.ic_qs_location_off);
                 break;
         }
         mState.label = GpsStatusMonitor.getModeLabel(mContext, locationMode);
@@ -199,31 +179,20 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
     @Override
     public void handleClick() {
-        if (mQuickMode) {
-            switchLocationMode();
-        } else {
-            showDetail(true);
-        }
+        switchLocationMode();
         super.handleClick();
     }
 
     @Override
-    public boolean handleLongClick() {
-        if (!isLocked()) {
-            if (mQuickMode) {
-                showDetail(true);
-            } else {
-                setLocationEnabled(!isLocationEnabled());
-            }
-        } else {
-            startSettingsActivity(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        }
+    public boolean handleSecondaryClick() {
+        showDetail(true);
         return true;
     }
 
     @Override
-    public boolean supportsHideOnChange() {
-        return mQuickMode;
+    public boolean handleLongClick() {
+        startSettingsActivity(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        return true;
     }
 
     @Override

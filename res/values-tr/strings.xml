@@ -1041,7 +1041,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="dnd_tile_dm_custom">Özel</string>
     <string name="pref_dnd_tile_duration_title">Özel süreyi ayarla</string>
     <string name="pref_cat_qs_location_tile_title">Konum karesi (SlimKat) ayarları</string>
-    <string name="pref_location_tile_quick_mode_summary">Kareye tek basmada konum modları arasında dolaşmaya izin verir</string>
     <string name="network_mode_0">GSM/WCDMA preferred (3G/2G)</string>
     <string name="network_mode_1">GSM only (2G)</string>
     <string name="network_mode_2">WCDMA only (3G)</string>
@@ -1067,13 +1066,10 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="network_mode_22">TD-SCDMA LTE Global (4G/2G/3G)</string>
     <string name="network_mode_unknown">Bilinmeyen</string>
     <string name="pref_nm_tile_enabled_modes_summary">Karede desteklenmesi gereken ağ modlarını tanımlar</string>
-    <string name="pref_nm_tile_quick_mode_summary">Kareye tek basmada seçilen ağ modları arasında dolaşmaya izin verir</string>
     <string name="pref_cat_qs_rm_tile_title">Zil modu karesi ayarları</string>
     <string name="pref_rm_tile_enabled_modes_summary">Karede desteklenmesi gereken zil modlarını tanımlar</string>
-    <string name="pref_rm_tile_quick_mode_summary">Tek basmada seçilen zil modları arasında dolaşmaya izin verir</string>
     <string name="pref_cat_qs_sa_tile_title">Uyanık kal karesi ayarları</string>
     <string name="pref_sa_tile_enabled_modes_summary">Karede desteklenmesi gereken ekran zaman aşımlarını tanımlar</string>
-    <string name="pref_sa_tile_quick_mode_summary">Tek basmada seçilen zaman aşımları arasında dolaşmaya izin verir</string>
     <string name="pref_lockscreen_smart_unlock_policy_title">Akıllı kilit açma ilkesi</string>
     <string name="pref_battery_percent_text_position_title">Durum çubuğundaki konumu</string>
     <string name="pref_battery_percent_text_position_summary">Yeniden başlatma gerektirir</string>
@@ -1276,12 +1272,6 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="locked_tile_indicator_dim">Soluk simge</string>
     <string name="locked_tile_indicator_padlock">Asma kilit &#x1f512;</string>
     <string name="locked_tile_indicator_key">Tuş &#x1f511;</string>
-
-    <!-- QS: WiFi quick mode -->
-    <string name="pref_wifi_tile_quick_mode_summary">Kareye tek basmayla WiFi açma/kapatmaya izin verir</string>
-
-    <!-- QS: BT quick mode -->
-    <string name="pref_bt_tile_quick_mode_summary">Kareye tek basmayla Bluetooth açma/kapatmaya izin verir</string>
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Bölünmüş ekran</string>

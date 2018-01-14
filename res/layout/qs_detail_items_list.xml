@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2014 The Android Open Source Project
-     Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+     Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,13 +15,12 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="16dp"
     android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:orientation="horizontal" >
+    android:paddingEnd="16dp" >
 
     <ListView
         android:id="@android:id/list"
@@ -33,7 +32,7 @@
     <LinearLayout
             android:id="@android:id/empty"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="vertical" >
@@ -41,7 +40,8 @@
         <ImageView
                 android:id="@android:id/icon"
                 android:layout_width="56dp"
-                android:layout_height="56dp" />
+                android:layout_height="56dp"
+                android:tint="?android:attr/textColorSecondary" />
 
         <TextView
                 android:id="@android:id/title"
@@ -51,4 +51,4 @@
                 android:textAppearance="@style/TextAppearance.QS.DetailEmpty" />
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -108,16 +108,14 @@ public class ExpandedDesktopTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.icon = iconFromResId(R.drawable.ic_qs_expanded_desktop);
         mState.booleanValue = mExpanded;
         if (mExpanded) {
             mState.label = mGbContext.getString(R.string.quick_settings_expanded_desktop_expanded);
-            mState.icon = iconFromResId(R.drawable.ic_qs_expanded_desktop_on);
         } else {
             mState.label = (mMode == GravityBoxSettings.ED_DISABLED) ? 
                     mGbContext.getString(R.string.quick_settings_expanded_desktop_disabled) :
                         mGbContext.getString(R.string.quick_settings_expanded_desktop_normal);
-            mState.icon = iconFromResId(supportsIconTinting() ?
-                    R.drawable.ic_qs_expanded_desktop_on : R.drawable.ic_qs_expanded_desktop_off);
         }
 
         super.handleUpdateState(state, arg);

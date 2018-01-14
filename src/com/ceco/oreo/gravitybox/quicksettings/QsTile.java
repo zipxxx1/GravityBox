@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,6 +23,7 @@ import com.ceco.oreo.gravitybox.quicksettings.QsPanel.LockedTileIndicator;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.service.quicksettings.Tile;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedHelpers;
 
@@ -162,7 +163,7 @@ public abstract class QsTile extends BaseTile {
 
     private static Constructor<?> getDrawableIconClassConstructor(ClassLoader cl) {
         try {
-            Class<?> c = XposedHelpers.findClass(CLASS_BASE_TILE+".DrawableIcon", cl);
+            Class<?> c = XposedHelpers.findClass(CLASS_BASE_TILE_IMPL+".DrawableIcon", cl);
             return c.getConstructor(Drawable.class);
         } catch (Throwable t) {
             log("Error getting drawable icon class constructor:");
@@ -174,10 +175,10 @@ public abstract class QsTile extends BaseTile {
     public static class State {
         public Object icon;
         public String label = "";
-        public boolean autoMirrorDrawable = true;
         public boolean booleanValue = true;
         public boolean locked;
         public LockedTileIndicator lockedTileIndicator;
+        public boolean dualTarget = false;
 
         public void applyTo(Object state) {
             XposedHelpers.setObjectField(state, "icon", icon);
@@ -189,7 +190,8 @@ public abstract class QsTile extends BaseTile {
                          QsPanel.IC_PADLOCK : QsPanel.IC_KEY), label);
             }
             XposedHelpers.setObjectField(state, "label", newLabel);
-            XposedHelpers.setBooleanField(state, "autoMirrorDrawable", autoMirrorDrawable);
+            XposedHelpers.setIntField(state, "state", booleanValue ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+            XposedHelpers.setBooleanField(state, "dualTarget", dualTarget);
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -46,20 +46,21 @@ public abstract class BaseTile implements QsEventListener {
 
     public static final String TILE_KEY_NAME = "gbTileKey";
     public static final int COLOR_LOCKED = Color.parseColor("#9E9E9E");
-    public static final String CLASS_BASE_TILE = "com.android.systemui.qs.QSTile";
-    public static final String CLASS_TILE_STATE = "com.android.systemui.qs.QSTile.State";
-    public static final String CLASS_TILE_VIEW = "com.android.systemui.qs.QSTileView";
-    public static final String CLASS_TILE_VIEW_BASE = "com.android.systemui.qs.QSTileBaseView";
+    public static final String CLASS_BASE_TILE = "com.android.systemui.plugins.qs.QSTile";
+    public static final String CLASS_BASE_TILE_IMPL = "com.android.systemui.qs.tileimpl.QSTileImpl";
+    public static final String CLASS_TILE_STATE = "com.android.systemui.plugins.qs.QSTile.State";
+    public static final String CLASS_TILE_VIEW = "com.android.systemui.qs.tileimpl.QSTileView";
+    public static final String CLASS_TILE_VIEW_BASE = "com.android.systemui.qs.tileimpl.QSTileBaseView";
     public static final String CLASS_SIGNAL_TILE_VIEW = "com.android.systemui.qs.SignalTileView";
-    public static final String CLASS_ICON_VIEW = "com.android.systemui.qs.QSIconView";
+    public static final String CLASS_ICON_VIEW = "com.android.systemui.qs.tileimpl.QSIconViewImpl";
+    public static final String CLASS_DEPENDENCY = "com.android.systemui.Dependency";
+    public static final String CLASS_ACTIVITY_STARTER = "com.android.systemui.plugins.ActivityStarter";
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
     static class StockLayout {
-        int tileSpacingPx;
-        int tilePaddingTopPx;
         int iconSizePx;
         int tilePaddingBelowIconPx;
         float labelTextSizePx;
@@ -185,8 +186,6 @@ public abstract class BaseTile implements QsEventListener {
             XposedHelpers.setAdditionalInstanceField(tileView, TILE_KEY_NAME, mKey);
 
             // backup original dimensions
-            int tilePaddingTopPx = XposedHelpers.getIntField(tileView, "mTilePaddingTopPx");
-            int tileSpacingPx = XposedHelpers.getIntField(tileView, "mTileSpacingPx");
             TextView label = (TextView) XposedHelpers.getObjectField(mTileView, "mLabel");
             float labelTextSizePx = label.getTextSize();
             Field iconField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
@@ -202,8 +201,6 @@ public abstract class BaseTile implements QsEventListener {
             int doubleWideIconWidth = hasIntField(iconView, "mDoubleWideIconWidth") ?
                     XposedHelpers.getIntField(iconView, "mDoubleWideIconWidth") : 0;
             mStockLayout = new StockLayout();
-            mStockLayout.tilePaddingTopPx = tilePaddingTopPx;
-            mStockLayout.tileSpacingPx = tileSpacingPx;
             mStockLayout.labelTextSizePx = labelTextSizePx;
             mStockLayout.iconSizePx = iconSizePx;
             mStockLayout.tilePaddingBelowIconPx = tilePaddingBelowIconPx;
@@ -257,7 +254,6 @@ public abstract class BaseTile implements QsEventListener {
     @Override
     public void onViewConfigurationChanged(View tileView, Configuration config) {
         if (mStockLayout != null) {
-            mStockLayout.tilePaddingTopPx = XposedHelpers.getIntField(tileView, "mTilePaddingTopPx");
             TextView label = (TextView) XposedHelpers.getObjectField(tileView, "mLabel");
             mStockLayout.labelTextSizePx = label.getTextSize();
             updateTileViewLayout();
@@ -268,12 +264,6 @@ public abstract class BaseTile implements QsEventListener {
         if (mStockLayout == null || mTileView == null) return;
         try {
             float scalingFactor = getQsPanel().getScalingFactor();
-            // base
-            XposedHelpers.setIntField(mTileView, "mTileSpacingPx",
-                    Math.round(mStockLayout.tileSpacingPx*scalingFactor));
-            XposedHelpers.setIntField(mTileView, "mTilePaddingTopPx",
-                    Math.round(mStockLayout.tilePaddingTopPx*scalingFactor));
-
             // icon
             Field iconField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
                     mTileView.getContext().getClassLoader()).getDeclaredField("mIcon");
@@ -344,7 +334,10 @@ public abstract class BaseTile implements QsEventListener {
 
     public void startSettingsActivity(Intent intent) {
         try {
-            XposedHelpers.callMethod(mHost, "startActivityDismissingKeyguard", intent);
+            Class<?> clsDependency = XposedHelpers.findClass(CLASS_DEPENDENCY, mContext.getClassLoader());
+            Class<?> activityStarter = XposedHelpers.findClass(CLASS_ACTIVITY_STARTER, mContext.getClassLoader());
+            Object starter = XposedHelpers.callStaticMethod(clsDependency, "get", activityStarter);
+            XposedHelpers.callMethod(starter, "postStartActivityDismissingKeyguard", intent, 0);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error in startSettingsActivity: ", t);
         }

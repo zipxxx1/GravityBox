@@ -1695,7 +1695,6 @@
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Налаштування плитки позиціювання (SlimKat)</string>
-    <string name="pref_location_tile_quick_mode_summary">Дозволяє циклічно перемикати режими позиціювання при одиничному дотику по плитці</string>
 
     <!-- Cellular network modes -->
     <string name="network_mode_0">Переважно GSM/WCDMA (3G/2G)</string>
@@ -1725,17 +1724,14 @@
 
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">Визначити режими, які підтримувати при перемиканні</string>
-    <string name="pref_nm_tile_quick_mode_summary">Дозволяє циклічно перемикати вибрані режими мережі при одиничному дотику по плитці</string>
 
     <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">Налаштування плитки «Режим дзвінка»</string>
     <string name="pref_rm_tile_enabled_modes_summary">Визначає доступні режими дзвінка</string>
-    <string name="pref_rm_tile_quick_mode_summary">Дозволяє циклічно перемикати обрані режими дзвінку при одиничному дотику по плитці</string>
 
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">Налаштування плитки «Не засинати»</string>
     <string name="pref_sa_tile_enabled_modes_summary">Визначає доступні часові затримки</string>
-    <string name="pref_sa_tile_quick_mode_summary">Дозволяє циклічно змінювати затримку при одиничному дотику по плитці</string>
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Політика розумного розблокування</string>

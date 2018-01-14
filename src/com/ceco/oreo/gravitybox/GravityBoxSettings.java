@@ -623,14 +623,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_CAT_KEY_PHONE_MOBILE_DATA = "pref_cat_phone_mobile_data";
 
     public static final String PREF_KEY_RINGER_MODE_TILE_MODE = "pref_qs_ringer_mode2";
-    public static final String PREF_KEY_RINGER_MODE_TILE_QUICK_MODE = "pref_rm_tile_quick_mode";
     public static final String PREF_STAY_AWAKE_TILE_MODE = "pref_qs_stay_awake";
-    public static final String PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE = "pref_sa_tile_quick_mode";
     public static final String PREF_KEY_STAY_AWAKE_TILE_AUTO_RESET = "pref_sa_tile_auto_reset";
     public static final String EXTRA_RMT_MODE = "ringerModeTileMode";
-    public static final String EXTRA_RMT_QUICK_MODE = "ringerModeTileQuickMode";
     public static final String EXTRA_SA_MODE = "stayAwakeTileMode";
-    public static final String EXTRA_SA_QUICK_MODE = "stayAwakeTileQuickMode";
     public static final String EXTRA_SA_AUTO_RESET = "stayAwakeTileAutoReset";
 
     public static final String PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS = "pref_display_allow_all_rotations";
@@ -822,12 +818,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_BBAR_CENTERED = "batteryBarCentered";
     public static final String EXTRA_BBAR_COLOR_CHARGING = "batteryBarColorCharging";
 
-    public static final String PREF_KEY_WIFI_TILE_QUICK_MODE = "pref_wifi_tile_quick_mode";
-    public static final String EXTRA_WIFI_TILE_QUICK_MODE = "wifiTileQuickMode";
-
-    public static final String PREF_KEY_BT_TILE_QUICK_MODE = "pref_bt_tile_quick_mode";
-    public static final String EXTRA_BT_TILE_QUICK_MODE = "btTileQuickMode";
-
     public static final String PREF_CAT_KEY_CELL_TILE = "pref_cat_qs_cell_tile";
     public static final String PREF_KEY_CELL_TILE_DATA_TOGGLE = "pref_cell_tile_data_toggle";
     public static final String EXTRA_CELL_TILE_DATA_TOGGLE = "cellTileDataToggle";
@@ -849,13 +839,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_DND_TILE_DURATION_MODE = "dndTileDurationMode";
     public static final String EXTRA_DND_TILE_DURATION = "dndTileDuration";
 
-    public static final String PREF_KEY_LOCATION_TILE_QUICK_MODE = "pref_location_tile_quick_mode";
-    public static final String EXTRA_LOCATION_TILE_QUICK_MODE = "locationTileQuickMode";
-
     public static final String PREF_KEY_NM_TILE_ENABLED_MODES = "pref_nm_tile_enabled_modes";
-    public static final String PREF_KEY_NM_TILE_QUICK_MODE = "pref_nm_tile_quick_mode";
     public static final String EXTRA_NM_TILE_ENABLED_MODES = "nmTileEnabledModes";
-    public static final String EXTRA_NM_TILE_QUICK_MODE = "nmTileQuickMode";
 
     public static final String PREF_KEY_FORCE_AOSP = "pref_force_aosp";
 
@@ -3345,9 +3330,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_DND_TILE_DURATION)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_DND_TILE_DURATION, prefs.getInt(key, 60));
-            } else if (key.equals(PREF_KEY_LOCATION_TILE_QUICK_MODE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_LOCATION_TILE_QUICK_MODE, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_NM_TILE_ENABLED_MODES)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 Set<String> modes = prefs.getStringSet(key,
@@ -3359,15 +3341,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                     imodes[i] = Integer.valueOf(lmodes.get(i));
                 }
                 intent.putExtra(EXTRA_NM_TILE_ENABLED_MODES, imodes);
-            } else if (key.equals(PREF_KEY_NM_TILE_QUICK_MODE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_NM_TILE_QUICK_MODE, prefs.getBoolean(key, false));
-            } else if (key.equals(PREF_KEY_RINGER_MODE_TILE_QUICK_MODE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_RMT_QUICK_MODE, prefs.getBoolean(key, false));
-            } else if (key.equals(PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_SA_QUICK_MODE, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_STAY_AWAKE_TILE_AUTO_RESET)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_SA_AUTO_RESET, prefs.getBoolean(key, false));
@@ -3383,12 +3356,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_QS_LOCKED_TILE_INDICATOR)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_LOCKED_TILE_INDICATOR, prefs.getString(key, "DIM"));
-            } else if (key.equals(PREF_KEY_WIFI_TILE_QUICK_MODE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_WIFI_TILE_QUICK_MODE, prefs.getBoolean(key, false));
-            } else if (key.equals(PREF_KEY_BT_TILE_QUICK_MODE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_BT_TILE_QUICK_MODE, prefs.getBoolean(key, false));
             }
 
             if (intent.getAction() != null) {

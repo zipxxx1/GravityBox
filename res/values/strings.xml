@@ -1706,7 +1706,6 @@
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Location tile (SlimKat) settings</string>
-    <string name="pref_location_tile_quick_mode_summary">Allows cycling through location modes on tile single-press</string>
 
     <!-- Cellular network modes -->
     <string name="network_mode_0">GSM/WCDMA preferred (3G/2G)</string>
@@ -1736,17 +1735,14 @@
 
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">Defines which network modes tile should support</string>
-    <string name="pref_nm_tile_quick_mode_summary">Allows cycling through selected network modes on tile single-press</string>
 
     <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">Ringer mode tile settings</string>
     <string name="pref_rm_tile_enabled_modes_summary">Defines which ringer modes tile should support</string>
-    <string name="pref_rm_tile_quick_mode_summary">Allows cycling through selected ringer modes on tile single-press</string>
 
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">Stay awake tile settings</string>
     <string name="pref_sa_tile_enabled_modes_summary">Defines which screen timeouts tile should support</string>
-    <string name="pref_sa_tile_quick_mode_summary">Allows cycling through selected screen timeouts on tile single-press</string>
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Smart unlock policy</string>
@@ -2031,12 +2027,6 @@
     <string name="locked_tile_indicator_dim">Dimmed icon</string>
     <string name="locked_tile_indicator_padlock">Padlock &#x1f512;</string>
     <string name="locked_tile_indicator_key">Key &#x1f511;</string>
-
-    <!-- QS: WiFi quick mode -->
-    <string name="pref_wifi_tile_quick_mode_summary">Allows toggling WiFi on tile single-press</string>
-
-    <!-- QS: BT quick mode -->
-    <string name="pref_bt_tile_quick_mode_summary">Allows toggling Bluetooth on tile single-press</string>
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Toggle split screen</string>

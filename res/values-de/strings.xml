@@ -1672,7 +1672,6 @@
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Position Kachel (SlimKat)</string>
-    <string name="pref_location_tile_quick_mode_summary">Erlaubt zwischen ausgewählten Positionsmodi zu wechseln</string>
 
     <!-- Cellular network modes -->
     <string name="network_mode_0">Vorzugsweise GSM/WCDMA (3G/2G)</string>
@@ -1702,17 +1701,14 @@
 
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">Setzt welche Netzwerkmodi von der Kachel verwendet werden</string>
-    <string name="pref_nm_tile_quick_mode_summary">Erlaubt zwischen ausgewählten Netzwerkmodi zu wechseln</string>
 
     <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">Klingelmodus Kachel</string>
     <string name="pref_rm_tile_enabled_modes_summary">Setzt welche Klingelmodi von der Kachel verwendet werden</string>
-    <string name="pref_rm_tile_quick_mode_summary">Erlaubt zwischen ausgewählten Klingelmodi zu wechseln</string>
 
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">Wach bleiben Kachel</string>
     <string name="pref_sa_tile_enabled_modes_summary">Setzt welche Bildschirmtimeouts von der Kachel verwendet werden</string>
-    <string name="pref_sa_tile_quick_mode_summary">Erlaubt zwischen ausgewählten Bildschirmtimeouts zu wechseln</string>
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Regel für intelligentes Entsperren</string>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -68,7 +68,6 @@ public class StayAwakeTile extends QsTile {
     private int mDefaultTimeout;
     private List<ScreenTimeout> mModeList = new ArrayList<>();
     private QsDetailAdapterProxy mDetailAdapter;
-    private boolean mQuickMode;
     private boolean mAutoReset;
 
     private static class ScreenTimeout {
@@ -87,6 +86,7 @@ public class StayAwakeTile extends QsTile {
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
 
+        mState.dualTarget = true;
         mSettingsObserver = new SettingsObserver(new Handler());
 
         getCurrentState();
@@ -139,7 +139,6 @@ public class StayAwakeTile extends QsTile {
         if (DEBUG) log(getKey() + ": initPreferences: modes=" + modes);
         updateSettings(modes);
 
-        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE, false);
         mAutoReset = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_AUTO_RESET, false);
     }
 
@@ -152,9 +151,6 @@ public class StayAwakeTile extends QsTile {
                 int[] modes = intent.getIntArrayExtra(GravityBoxSettings.EXTRA_SA_MODE);
                 if (DEBUG) log(getKey() + ": onBroadcastReceived: modes=" + modes);
                 updateSettings(modes);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_SA_QUICK_MODE)) {
-                mQuickMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SA_QUICK_MODE, false);
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_SA_AUTO_RESET)) {
                 mAutoReset = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SA_AUTO_RESET, false);
@@ -243,12 +239,15 @@ public class StayAwakeTile extends QsTile {
 
     @Override
     public void handleClick() {
-        if (mQuickMode) {
-            toggleStayAwake();
-        } else {
-            showDetail(true);
-        }
+        toggleStayAwake();
         super.handleClick();
+    }
+
+    
+    @Override
+    public boolean handleSecondaryClick() {
+        showDetail(true);
+        return true;
     }
 
     @Override

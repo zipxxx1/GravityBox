@@ -1671,7 +1671,6 @@
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Opcje kafelka lokalizacji (SlimKat)</string>
-    <string name="pref_location_tile_quick_mode_summary">Zezwala na przewijanie przez tryby lokalizacji przy pojedynczym naciśnięciu kafelka</string>
 
     <!-- Cellular network modes -->
     <string name="network_mode_0">Preferowany GSM/WCDMA (3G/2G)</string>
@@ -1701,17 +1700,14 @@
 
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">Określa które tryby sieci powinien obsługiwać kafelek</string>
-    <string name="pref_nm_tile_quick_mode_summary">Zezwala na przewijanie przez wybrane tryby sieci przy pojedynczym naciśnięciu kafelka</string>
 
     <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">Opcje kafelka trybu dzwonka</string>
     <string name="pref_rm_tile_enabled_modes_summary">Określa które tryby dzwonka kafelek powinien obsługiwać</string>
-    <string name="pref_rm_tile_quick_mode_summary">Zezwala na przewijanie przez wybrane tryby dzwonka przy pojedynczym naciśnięciu kafelka</string>
 
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">Opcje kafelka pozostania w aktywności</string>
     <string name="pref_sa_tile_enabled_modes_summary">Określa które czasy wyświetlania ekranu kafelek powinien obsługiwać</string>
-    <string name="pref_sa_tile_quick_mode_summary">Zezwala na przewijanie przez wybrane czasy wyświetlania ekranu przy pojedynczym naciśnięciu kafelka</string>
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Reguła mądrego odblokowania (Smart unlock)</string>
@@ -1994,12 +1990,6 @@
     <string name="locked_tile_indicator_dim">Przyciemniona ikona</string>
     <string name="locked_tile_indicator_padlock">Kłódka &#x1f512;</string>
     <string name="locked_tile_indicator_key">Klucz &#x1f511;</string>
-
-    <!-- QS: WiFi quick mode -->
-    <string name="pref_wifi_tile_quick_mode_summary">Pozwala przełączyć WiFi po jednokrotnym naciśnięciu przycisku</string>
-
-    <!-- QS: BT quick mode -->
-    <string name="pref_bt_tile_quick_mode_summary">Pozwala przełączyć Bluetooth po jednokrotnym naciśnięciu przycisku</string>
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Przełącz dzielenie ekranu</string>

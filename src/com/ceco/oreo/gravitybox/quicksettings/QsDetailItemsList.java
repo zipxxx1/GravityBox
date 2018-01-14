@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -43,11 +43,11 @@ public class QsDetailItemsList {
     private View mEmpty;
     private TextView mEmptyText;
     private ImageView mEmptyIcon;
-    private LinearLayout mView;
+    private FrameLayout mView;
 
     private QsDetailItemsList() { /* must be created via create method */ }
 
-    private QsDetailItemsList(LinearLayout view) {
+    private QsDetailItemsList(FrameLayout view) {
         mView = view;
 
         mListView = (ListView) mView.findViewById(android.R.id.list);
@@ -70,7 +70,7 @@ public class QsDetailItemsList {
 
     public static QsDetailItemsList create(Context context, ViewGroup parent) throws Throwable {
         LayoutInflater inflater = LayoutInflater.from(Utils.getGbContext(context));
-        LinearLayout view = (LinearLayout) inflater.inflate(R.layout.qs_detail_items_list, parent, false);
+        FrameLayout view = (FrameLayout) inflater.inflate(R.layout.qs_detail_items_list, parent, false);
         if (parent.getParent() instanceof ScrollView) {
             ((ScrollView)parent.getParent()).setFillViewport(true);
         }

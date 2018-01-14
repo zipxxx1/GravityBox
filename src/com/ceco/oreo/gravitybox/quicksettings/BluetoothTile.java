@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,18 +14,10 @@
  */
 package com.ceco.oreo.gravitybox.quicksettings;
 
-import com.ceco.oreo.gravitybox.GravityBoxSettings;
-
-import android.content.Context;
-import android.content.Intent;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedHelpers;
 
 public class BluetoothTile extends AospTile {
     public static final String AOSP_KEY = "bt";
-
-    private boolean mQuickMode;
-    private boolean mClickOverrideBlocked;
 
     protected BluetoothTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -33,53 +25,7 @@ public class BluetoothTile extends AospTile {
     }
 
     @Override
-    public void initPreferences() {
-        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BT_TILE_QUICK_MODE, false);
-        super.initPreferences();
-    }
-
-    @Override
-    public void onBroadcastReceived(Context context, Intent intent) {
-        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_BT_TILE_QUICK_MODE)) {
-                mQuickMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BT_TILE_QUICK_MODE, false);
-            }
-        }
-        super.onBroadcastReceived(context, intent);
-    }
-
-    @Override
-    public boolean supportsHideOnChange() {
-        return mQuickMode;
-    }
-
-    @Override
     public String getSettingsKey() {
         return "aosp_tile_bluetooth";
-    }
-
-    @Override
-    protected boolean onBeforeHandleClick() {
-        if (isLocked()) {
-            return true;
-        } else if (!mQuickMode) {
-            return false;
-        } else if (mClickOverrideBlocked) {
-            mClickOverrideBlocked = false;
-            return false;
-        }
-
-        XposedHelpers.callMethod(mTile, "handleSecondaryClick");
-        return true;
-    }
-
-    @Override
-    public boolean handleLongClick() {
-        if (mQuickMode && !isLocked()) {
-            mClickOverrideBlocked = true;
-            XposedHelpers.callMethod(mTile, "handleClick");
-            return true;
-        }
-        return false;
     }
 }

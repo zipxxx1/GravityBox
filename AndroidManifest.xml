@@ -231,7 +231,7 @@
         <service
                 android:name=".quicksettings.ExpandedDesktopTile$Service"
                 android:label="@string/qs_tile_expanded_desktop"
-                android:icon="@drawable/ic_qs_expanded_desktop_on"
+                android:icon="@drawable/ic_qs_expanded_desktop"
                 android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
                 android:enabled="false">
             <intent-filter>
@@ -341,7 +341,7 @@
         <service
                 android:name=".quicksettings.QuietHoursTile$Service"
                 android:label="@string/lc_quiet_hours"
-                android:icon="@drawable/ic_qs_quiet_hours_auto_on"
+                android:icon="@drawable/ic_qs_quiet_hours_auto"
                 android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
                 android:enabled="false">
             <intent-filter>
@@ -385,7 +385,7 @@
         <service
                 android:name=".quicksettings.SmartRadioTile$Service"
                 android:label="@string/qs_tile_smart_radio"
-                android:icon="@drawable/ic_qs_smart_radio_on"
+                android:icon="@drawable/ic_qs_smart_radio_saving"
                 android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
                 android:enabled="false">
             <intent-filter>
@@ -462,7 +462,7 @@
         <service
                 android:name=".quicksettings.BluetoothTetheringTile$Service"
                 android:label="@string/qs_tile_bt_tethering"
-                android:icon="@drawable/ic_qs_bt_tethering_on"
+                android:icon="@drawable/ic_qs_bt_tethering"
                 android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
                 android:enabled="false">
             <intent-filter>

@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -122,18 +122,16 @@ public class UsbTetherTile extends QsTile {
     public void handleUpdateState(Object state, Object arg) {
         mState.booleanValue = false;
         if (mUsbConnected) {
+            mState.booleanValue = true;
             if (mUsbTethered) {
-                mState.booleanValue = true;
                 mState.icon = iconFromResId(R.drawable.ic_qs_usb_tether_on);
                 mState.label = mGbContext.getString(R.string.quick_settings_usb_tether_on);
             } else {
-                mState.icon = iconFromResId(supportsIconTinting() ?
-                        R.drawable.ic_qs_usb_tether_on : R.drawable.ic_qs_usb_tether_connected);
+                mState.icon = iconFromResId(R.drawable.ic_qs_usb_tether_off);
                 mState.label = mGbContext.getString(R.string.quick_settings_usb_tether_connected);
             }
         } else {
-            mState.icon = iconFromResId(supportsIconTinting() ?
-                    R.drawable.ic_qs_usb_tether_on : R.drawable.ic_qs_usb_tether_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_usb_tether_off);
             mState.label = mGbContext.getString(R.string.quick_settings_usb_tether_off);
         }
 

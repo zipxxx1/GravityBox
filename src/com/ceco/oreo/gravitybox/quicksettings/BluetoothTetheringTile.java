@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -208,27 +208,20 @@ public class BluetoothTetheringTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.booleanValue = false;
+        mState.icon = iconFromResId(R.drawable.ic_qs_bt_tethering);
 
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-
         int btState = adapter == null ? BluetoothAdapter.ERROR : adapter.getState();
         if (isInErrorState(btState)) {
             mState.label = mGbContext.getString(R.string.qs_tile_bt_tethering_error);
-            mState.icon = iconFromResId(supportsIconTinting() ? 
-                    R.drawable.ic_qs_bt_tethering_on : R.drawable.ic_qs_bt_tethering_off);
         } else if (btState == BluetoothAdapter.STATE_TURNING_ON ||
                 btState == BluetoothAdapter.STATE_TURNING_OFF) {
             mState.label = "---";
-            mState.icon = iconFromResId(supportsIconTinting() ? 
-                    R.drawable.ic_qs_bt_tethering_on : R.drawable.ic_qs_bt_tethering_off);
         } else if (btState == BluetoothAdapter.STATE_ON && isTetheringOn()) {
             mState.booleanValue = true;
             mState.label = mGbContext.getString(R.string.qs_tile_bt_tethering_on);
-            mState.icon = iconFromResId(R.drawable.ic_qs_bt_tethering_on);
         } else {
             mState.label = mGbContext.getString(R.string.qs_tile_bt_tethering_off);
-            mState.icon = iconFromResId(supportsIconTinting() ? 
-                    R.drawable.ic_qs_bt_tethering_on : R.drawable.ic_qs_bt_tethering_off);
         }
 
         super.handleUpdateState(state, arg);

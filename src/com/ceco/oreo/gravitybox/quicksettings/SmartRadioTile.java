@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -74,12 +74,11 @@ public class SmartRadioTile extends QsTile {
         if (mSmartRadioEnabled) {
             mState.label = mGbContext.getString(R.string.quick_settings_smart_radio_on);
             mState.icon = mSmartRadioState == ModSmartRadio.State.POWER_SAVING ?
-                    iconFromResId(R.drawable.ic_qs_smart_radio_on) : 
-                        iconFromResId(R.drawable.ic_qs_smart_radio_on_normal);
+                    iconFromResId(R.drawable.ic_qs_smart_radio_saving) : 
+                        iconFromResId(R.drawable.ic_qs_smart_radio_normal);
         } else {
             mState.label = mGbContext.getString(R.string.quick_settings_smart_radio_off);
-            mState.icon = iconFromResId(supportsIconTinting() ?
-                    R.drawable.ic_qs_smart_radio_on : R.drawable.ic_qs_smart_radio_off);
+            mState.icon = iconFromResId(R.drawable.ic_qs_smart_radio_saving);
         }
 
         super.handleUpdateState(state, arg);

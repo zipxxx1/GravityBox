@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -104,13 +104,12 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
                 case ON: 
                     mState.booleanValue = true;
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_on);
-                    mState.icon = iconFromResId(R.drawable.ic_qs_quiet_hours_on);
+                    mState.icon = iconFromResId(R.drawable.ic_qs_quiet_hours);
                     break;
                 case OFF:
                     mState.booleanValue = false;
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_off);
-                    mState.icon = iconFromResId(supportsIconTinting() ?
-                            R.drawable.ic_qs_quiet_hours_on : R.drawable.ic_qs_quiet_hours_off);
+                    mState.icon = iconFromResId(R.drawable.ic_qs_quiet_hours);
                     break;
                 case WEAR:
                     mState.booleanValue = true;
@@ -120,9 +119,7 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
                 case AUTO:
                     mState.booleanValue = mQh.quietHoursActive();
                     mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_auto);
-                    mState.icon = mState.booleanValue || supportsIconTinting() ?
-                            iconFromResId(R.drawable.ic_qs_quiet_hours_auto_on) : 
-                                iconFromResId(R.drawable.ic_qs_quiet_hours_auto_off);
+                    mState.icon = iconFromResId(R.drawable.ic_qs_quiet_hours_auto); 
                     break;
             }
         }

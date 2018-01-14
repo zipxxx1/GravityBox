@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -190,14 +190,14 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.args[0], BaseTile.TILE_KEY_NAME));
-                    if (l != null) {
+                    if (l != null && !(boolean)param.args[1]) {
                         l.onCreateTileView((View)param.getResult());
                     }
                     mCreateTileViewTileKey = null;
                 }
             });
 
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "getDetailAdapter",
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE_IMPL, cl, "getDetailAdapter",
                     new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -212,7 +212,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "handleSecondaryClick",
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE_IMPL, cl, "handleSecondaryClick",
                     new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -261,7 +261,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                     }
                 }
             };
-            XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl,
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE_IMPL, cl,
                         "handleLongClick", longClickHook);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);

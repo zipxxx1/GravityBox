@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -93,12 +93,12 @@ public class RingerModeTile extends QsTile {
     private SettingsObserver mSettingsObserver;
     private List<Ringer> mModeList = new ArrayList<>();
     private QsDetailAdapterProxy mDetailAdapter;
-    private boolean mQuickMode;
 
     public RingerModeTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
 
+        mState.dualTarget = true;
         mState.label = mGbContext.getString(R.string.qs_tile_ringer_mode);
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 
@@ -126,27 +126,19 @@ public class RingerModeTile extends QsTile {
 
     @Override
     public void handleClick() {
-        if (mQuickMode) {
-            toggleState();
-        } else {
-            showDetail(true);
-        }
+        toggleState();
         super.handleClick();
     }
 
     @Override
     public boolean handleSecondaryClick() {
-        toggleState();
+        showDetail(true);
         return true;
     }
 
     @Override
     public boolean handleLongClick() {
-        if (mQuickMode && !isLocked()) {
-            showDetail(true);
-        } else {
-            startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
-        }
+        startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
         return true;
     }
 
@@ -193,8 +185,6 @@ public class RingerModeTile extends QsTile {
         if (DEBUG) log(getKey() + ": onPreferenceInitialize: modes=" + Arrays.toString(modes));
         updateSettings(modes);
 
-        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_RINGER_MODE_TILE_QUICK_MODE, false);
-
         super.initPreferences();
     }
 
@@ -207,9 +197,6 @@ public class RingerModeTile extends QsTile {
                 int[] modes = intent.getIntArrayExtra(GravityBoxSettings.EXTRA_RMT_MODE);
                 if (DEBUG) log(getKey() + ": onBroadcastReceived: modes=" + Arrays.toString(modes));
                 updateSettings(modes);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_RMT_QUICK_MODE)) {
-                mQuickMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_RMT_QUICK_MODE, false);
             }
         }
 
