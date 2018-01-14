@@ -531,7 +531,7 @@ public class ModNavigationBar {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mRecentsLongpressAction.actionId != 0 &&
                             (int)param.args[0] != -1 && (int)param.args[1] != -1) {
-                        param.setResult(null);
+                        param.setResult(false);
                     }
                 }
             });
