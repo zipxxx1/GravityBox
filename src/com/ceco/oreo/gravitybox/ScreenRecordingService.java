@@ -342,7 +342,7 @@ public class ScreenRecordingService extends Service {
     }
 
     private void startScreenrecord() {
-        mUseStockBinary = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENRECORD_USE_STOCK, false);
+        mUseStockBinary = true; //mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENRECORD_USE_STOCK, true);
         if (!isScreenrecordSupported()) {
             Log.e(TAG, "startScreenrecord: System does not support screen recording");
             Toast.makeText(this, "Your system does not support screen recording", Toast.LENGTH_SHORT).show();

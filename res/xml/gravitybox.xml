@@ -2404,6 +2404,7 @@
             android:title="@string/pref_screenrecord_use_stock_title"
             android:summary="@string/pref_screenrecord_use_stock_summary"
             android:defaultValue="true"
+            android:enabled="false"
             android:disableDependentsState="true" />
 
         <ListPreference
