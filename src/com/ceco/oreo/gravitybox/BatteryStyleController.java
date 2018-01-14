@@ -39,6 +39,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     public static final String PACKAGE_NAME = "com.android.systemui";
     public static final String CLASS_BATTERY_CONTROLLER = 
             "com.android.systemui.statusbar.policy.BatteryControllerImpl";
+    public static final String CLASS_BATTERY_METER_VIEW = "com.android.systemui.BatteryMeterView";
     private static final boolean DEBUG = false;
 
     private enum KeyguardMode { DEFAULT, ALWAYS_SHOW, HIDDEN };
@@ -98,7 +99,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         final String[] batteryPercentTextIds = new String[] { "battery_level", "percentage", "battery_text" };
         Resources res = mContext.getResources();
         Resources gbRes = Utils.getGbContext(mContext).getResources();
-        
+
         if (!Utils.hasLenovoCustomUI()) {
             // inject percent text if it doesn't exist
             for (String bptId : batteryPercentTextIds) {
@@ -284,6 +285,22 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                         if (mPercentText != null) {
                             mPercentText.setTextSize(Integer.valueOf(mPrefs.getString(
                                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, t);
+            }
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_BATTERY_METER_VIEW, mContext.getClassLoader(),
+                        "updateShowPercent", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mContainerType == ContainerType.KEYGUARD) {
+                            TextView v = (TextView) XposedHelpers.getObjectField(param.thisObject, "mBatteryPercentView");
+                            if (v != null) {
+                                v.setVisibility(View.GONE);
+                            }
                         }
                     }
                 });
