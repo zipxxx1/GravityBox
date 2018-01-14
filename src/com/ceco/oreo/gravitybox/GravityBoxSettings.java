@@ -2398,7 +2398,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             if (key == null || key.equals(PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS);
-                p.setSummary(p.getEntry());
+                if (p != null) p.setSummary(p.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE) ||
