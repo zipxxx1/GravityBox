@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  * Modifications Copyright (C) The OmniROM Project
  * Modifications Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
  *
@@ -216,7 +216,8 @@ public class ScreenRecordingService extends Service {
 
         mRecordingStatus = STATUS_IDLE;
 
-        Notification.Builder builder = new Notification.Builder(this)
+        Notification.Builder builder = new Notification.Builder(this,
+                GravityBoxApplication.NOTIF_CHANNEL_SERVICES)
             .setTicker(getString(R.string.screenrecord_notif_ticker))
             .setContentTitle(getString(R.string.screenrecord_notif_title))
             .setSmallIcon(R.drawable.ic_sysbar_camera)

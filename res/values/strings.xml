@@ -2037,4 +2037,8 @@
     <string name="pref_signal_cluster_aosp_mobile_type_title">Use AOSP mobile type icons</string>
     <string name="pref_signal_cluster_aosp_mobile_type_summary">Requires reboot</string>
 
+    <!-- Notification channels -->
+    <string name="notif_channel_services_title">Services</string>
+    <string name="notif_channel_services_desc">For foreground service notifications such as Torch and ScreenRecording</string>
+
 </resources>

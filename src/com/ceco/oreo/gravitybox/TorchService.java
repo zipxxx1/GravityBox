@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -106,8 +106,8 @@ public class TorchService extends Service {
         intent.setAction(ACTION_TOGGLE_TORCH);
         PendingIntent stopIntent = PendingIntent.getService(this, 0, intent, 0);
 
-        Notification.Builder builder = new Notification.Builder(this);
-        builder.setVisibility(Notification.VISIBILITY_PUBLIC);
+        Notification.Builder builder = new Notification.Builder(
+                this, GravityBoxApplication.NOTIF_CHANNEL_SERVICES);
         builder.setContentTitle(getString(R.string.quick_settings_torch_on));
         builder.setSmallIcon(R.drawable.ic_qs_torch_on);
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_qs_torch_on);

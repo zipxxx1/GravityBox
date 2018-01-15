@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,10 +15,32 @@
 package com.ceco.oreo.gravitybox;
 
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 
 public class GravityBoxApplication extends Application {
+    public static final String NOTIF_CHANNEL_SERVICES = "services";
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        setupNotificationChannels();
+    }
+
+    private void setupNotificationChannels() {
+        NotificationChannel services = new NotificationChannel(
+                NOTIF_CHANNEL_SERVICES, getString(R.string.notif_channel_services_title),
+                NotificationManager.IMPORTANCE_LOW);
+        services.setDescription(getString(R.string.notif_channel_services_desc));
+        services.enableLights(false);
+        services.enableVibration(false);
+        services.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+        services.setShowBadge(false);
+
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.createNotificationChannel(services);
     }
 }
