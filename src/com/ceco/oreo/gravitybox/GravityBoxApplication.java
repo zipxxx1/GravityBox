@@ -22,6 +22,7 @@ import android.content.Context;
 
 public class GravityBoxApplication extends Application {
     public static final String NOTIF_CHANNEL_SERVICES = "services";
+    public static final String NOTIF_CHANNEL_UNC = "unc";
 
     @Override
     public void onCreate() {
@@ -40,7 +41,17 @@ public class GravityBoxApplication extends Application {
         services.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
         services.setShowBadge(false);
 
+        NotificationChannel unc = new NotificationChannel(
+                NOTIF_CHANNEL_UNC, getString(R.string.notif_channel_unc_title),
+                NotificationManager.IMPORTANCE_DEFAULT);
+        unc.setDescription(getString(R.string.notif_channel_unc_desc));
+        unc.enableLights(true);
+        unc.enableVibration(true);
+        unc.setShowBadge(false);
+        unc.setBypassDnd(true);
+
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.createNotificationChannel(services);
+        manager.createNotificationChannel(unc);
     }
 }

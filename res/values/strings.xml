@@ -2040,5 +2040,7 @@
     <!-- Notification channels -->
     <string name="notif_channel_services_title">Services</string>
     <string name="notif_channel_services_desc">For foreground service notifications such as Torch and ScreenRecording</string>
+    <string name="notif_channel_unc_title">UNC Preview</string>
+    <string name="notif_channel_unc_desc">For Ultimate Notification Control notification preview</string>
 
 </resources>

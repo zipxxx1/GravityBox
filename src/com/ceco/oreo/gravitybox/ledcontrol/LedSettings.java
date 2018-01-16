@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,6 @@ import java.util.Set;
 
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
 import com.ceco.oreo.gravitybox.SettingsManager;
-import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.WorldReadablePrefs;
 import com.ceco.oreo.gravitybox.WorldReadablePrefs.OnPreferencesCommitedListener;
 
@@ -55,6 +54,10 @@ public class LedSettings {
         public int getValue() { return mValue; }
     }
     public enum VisibilityLs { DEFAULT, CLEARABLE, PERSISTENT, ALL };
+
+    interface Callback {
+        void onSerialized();
+    }
 
     private Context mContext;
     private String mPackageName;
@@ -589,6 +592,10 @@ public class LedSettings {
     }
 
     protected void serialize() {
+        serialize(false, null);
+    }
+
+    protected void serialize(final boolean isPreview, final Callback callback) {
         try {
             Set<String> dataSet = new HashSet<String>();
             dataSet.add("enabled:" + mEnabled);
@@ -626,14 +633,21 @@ public class LedSettings {
             dataSet.add("hidePersistent:" + mHidePersistent);
             dataSet.add("ledDnd:" + mLedDnd);
             dataSet.add("ledIgnoreUpdate:" + mLedIgnoreUpdate);
+            if (isPreview) {
+                dataSet.add("previewTimestamp:" + System.currentTimeMillis());
+            }
             WorldReadablePrefs prefs = SettingsManager.getInstance(mContext).getLedControlPrefs();
-            prefs.edit().putStringSet(mPackageName, dataSet).commit(new OnPreferencesCommitedListener() {
+            prefs.edit().putStringSet(isPreview ? "preview" : mPackageName, dataSet).commit(new OnPreferencesCommitedListener() {
                 @Override
                 public void onPreferencesCommited() {
                     if (WorldReadablePrefs.DEBUG)
                         Log.d("GravityBox", "LedSettings: serialize() onPreferencesCommited");
-                    Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
-                    mContext.sendBroadcast(intent);
+                    if (!isPreview) {
+                        Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
+                        mContext.sendBroadcast(intent);
+                    } else if (callback != null) {
+                        callback.onSerialized();
+                    }
                 }
             });
         } catch (Throwable t) {

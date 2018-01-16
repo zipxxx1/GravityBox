@@ -15,6 +15,7 @@
 
 package com.ceco.oreo.gravitybox;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,6 +35,8 @@ import com.ceco.oreo.gravitybox.ledcontrol.LedSettings.VisibilityLs;
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -58,8 +61,8 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModLedControl {
     private static final String TAG = "GB:ModLedControl";
     public static final boolean DEBUG = false;
+    private static final boolean DEBUG_EXTRAS = false;
     private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.notification.NotificationManagerService";
-    private static final String CLASS_NOTIFICATION_MANAGER_SERVICE_ENR = "com.android.server.notification.NotificationManagerService.EnqueueNotificationRunnable";
     private static final String CLASS_VIBRATOR_SERVICE = "com.android.server.VibratorService";
     private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_NOTIF_DATA = "com.android.systemui.statusbar.NotificationData";
@@ -95,6 +98,7 @@ public class ModLedControl {
     private static boolean mProximityWakeUpEnabled;
     private static boolean mScreenOnDueToActiveScreen;
     private static AudioManager mAudioManager;
+    private static Constructor<?> mNotificationLightConstructor;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -187,8 +191,9 @@ public class ModLedControl {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE_ENR, classLoader,
-                    "run", notifyHook);
+            XposedHelpers.findAndHookConstructor(CLASS_NOTIFICATION_RECORD, classLoader,
+                    Context.class, StatusBarNotification.class, NotificationChannel.class,
+                    createNotificationRecordHook);
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
                     "applyZenModeLocked", CLASS_NOTIFICATION_RECORD, applyZenModeHook);
@@ -203,26 +208,30 @@ public class ModLedControl {
         }
     }
 
-    private static XC_MethodHook notifyHook = new XC_MethodHook() {
+    private static XC_MethodHook createNotificationRecordHook = new XC_MethodHook() {
         @Override
-        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
                 if (mUncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false)) {
                     if (DEBUG) log("Ultimate notification control feature locked.");
                     return;
                 }
 
-                Object record = XposedHelpers.getObjectField(param.thisObject, "r");
-                StatusBarNotification sbn = (StatusBarNotification) XposedHelpers.getObjectField(record, "sbn");
-                Notification n = sbn.getNotification();
-
-                if (n.extras.containsKey("gbIgnoreNotification")) return;
+                final StatusBarNotification sbn = (StatusBarNotification) param.args[1];
+                final Notification n = sbn.getNotification();
+                final NotificationChannel channel = (NotificationChannel) param.args[2]; 
 
                 Object oldRecord = getOldNotificationRecord(sbn.getKey());
                 Notification oldN = getNotificationFromRecord(oldRecord);
                 final String pkgName = sbn.getPackageName();
+                String settingsKey = pkgName;
+                if (n.extras.containsKey("gbUncPreviewNotification")) {
+                    settingsKey = "preview";
+                    mUncPrefs.reload();
+                    if (DEBUG) log("Received UNC preview notification");
+                }
 
-                LedSettings ls = LedSettings.deserialize(mUncPrefs.getStringSet(pkgName, null));
+                LedSettings ls = LedSettings.deserialize(mUncPrefs.getStringSet(settingsKey, null));
                 if (!ls.getEnabled()) {
                     // use default settings in case they are active
                     ls = LedSettings.deserialize(mUncPrefs.getStringSet("default", null));
@@ -239,6 +248,9 @@ public class ModLedControl {
                         (mQuietHours.mode == QuietHours.Mode.WEAR && mUserPresent));
                 final boolean qhActiveIncludingActiveScreen = qhActive &&
                         !mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
+                if (DEBUG) log("qhActive=" + qhActive + "; qhActiveIncludingLed=" + qhActiveIncludingLed +
+                        "; qhActiveIncludingVibe=" + qhActiveIncludingVibe + 
+                        "; qhActiveIncludingActiveScreen=" + qhActiveIncludingActiveScreen);
 
                 if (ls.getEnabled()) {
                     n.extras.putBoolean(NOTIF_EXTRA_PROGRESS_TRACKING, ls.getProgressTracking());
@@ -266,53 +278,48 @@ public class ModLedControl {
                             (ls.getLedMode() == LedMode.OFF ||
                              currentZenModeDisallowsLed(ls.getLedDnd()) ||
                              shouldIgnoreUpdatedNotificationLight(oldRecord, ls.getLedIgnoreUpdate())))) {
-                    n.defaults &= ~Notification.DEFAULT_LIGHTS;
-                    n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
+                    XposedHelpers.setObjectField(param.thisObject, "mLight", null);
+                    if (DEBUG) log("Removing light");
                 } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE &&
                         !(isOngoing && !ls.getOngoing())) {
-                    n.flags |= Notification.FLAG_SHOW_LIGHTS;
-                    n.defaults &= ~Notification.DEFAULT_LIGHTS;
-                    n.ledOnMS = ls.getLedOnMs();
-                    n.ledOffMS = ls.getLedOffMs();
-                    n.ledARGB = ls.getColor();
+                    XposedHelpers.setObjectField(param.thisObject, "mLight",
+                            createNotificationLight(ls.getColor(), ls.getLedOffMs(), ls.getLedOffMs()));
+                    if (DEBUG) log("Overriding light");
                 }
 
                 // vibration
                 if (qhActiveIncludingVibe) {
-                    n.defaults &= ~Notification.DEFAULT_VIBRATE;
-                    n.vibrate = null;
+                    XposedHelpers.setObjectField(param.thisObject, "mVibration", null);
+                    if (DEBUG) log("Removing vibration");
                 } else if (ls.getEnabled() && !(isOngoing && !ls.getOngoing())) {
                     if (ls.getVibrateOverride() && ls.getVibratePattern() != null &&
-                            ((n.defaults & Notification.DEFAULT_VIBRATE) != 0 || 
-                             n.vibrate != null || !ls.getVibrateReplace())) {
-                        n.defaults &= ~Notification.DEFAULT_VIBRATE;
-                        n.vibrate = ls.getVibratePattern();
+                            (hasOriginalVibration(param.thisObject, channel, n) || !ls.getVibrateReplace())) {
+                        XposedHelpers.setObjectField(param.thisObject, "mVibration", ls.getVibratePattern());
+                        if (DEBUG) log("Overriding vibration");
                     }
                 }
 
                 // sound
                 if (qhActive || (ls.getEnabled() && 
                         ls.getSoundToVibrateDisabled() && isRingerModeVibrate())) {
-                    n.defaults &= ~Notification.DEFAULT_SOUND;
-                    n.sound = null;
+                    XposedHelpers.setObjectField(param.thisObject, "mSound", null);
                     n.flags &= ~Notification.FLAG_INSISTENT;
+                    if (DEBUG) log("Removing sound");
                 } else {
                     if (ls.getSoundOverride() &&
-                        ((n.defaults & Notification.DEFAULT_SOUND) != 0 ||
-                          n.sound != null || !ls.getSoundReplace())) {
-                        n.defaults &= ~Notification.DEFAULT_SOUND;
-                        n.sound = ls.getSoundUri();
+                        (hasOriginalSound(param.thisObject, channel, n) || !ls.getSoundReplace())) {
+                        XposedHelpers.setObjectField(param.thisObject, "mSound", ls.getSoundUri());
+                        if (DEBUG) log("Overriding sound");
                     }
                     if (ls.getSoundOnlyOnce()) {
                         if (ls.getSoundOnlyOnceTimeout() > 0) {
                             if (mNotifTimestamps.containsKey(pkgName)) {
                                 long delta = System.currentTimeMillis() - mNotifTimestamps.get(pkgName);
                                 if (delta > 500 &&  delta < ls.getSoundOnlyOnceTimeout()) {
-                                    n.defaults &= ~Notification.DEFAULT_SOUND;
-                                    n.defaults &= ~Notification.DEFAULT_VIBRATE;
-                                    n.sound = null;
-                                    n.vibrate = null;
+                                    XposedHelpers.setObjectField(param.thisObject, "mVibration", null);
+                                    XposedHelpers.setObjectField(param.thisObject, "mSound", null);
                                     n.flags &= ~Notification.FLAG_ONLY_ALERT_ONCE;
+                                    if (DEBUG) log("Within sound only once interval - muting");
                                 } else {
                                     mNotifTimestamps.put(pkgName, System.currentTimeMillis());
                                 }
@@ -342,7 +349,7 @@ public class ModLedControl {
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
                             !(ls.getActiveScreenIgnoreUpdate() && oldN != null) &&
-                            n.priority > Notification.PRIORITY_MIN &&
+                            getNotificationImportance(param.thisObject) > NotificationManager.IMPORTANCE_MIN &&
                             ls.getVisibilityLs() != VisibilityLs.CLEARABLE &&
                             ls.getVisibilityLs() != VisibilityLs.ALL &&
                             !qhActiveIncludingActiveScreen && !isOngoing &&
@@ -357,12 +364,77 @@ public class ModLedControl {
                     }
                 }
 
-                if (DEBUG) log("Notification info: defaults=" + n.defaults + "; flags=" + n.flags);
+                if (DEBUG_EXTRAS) {
+                    for (String key : n.extras.keySet()) {
+                        log(key + "=" + n.extras.get(key));
+                    }
+                }
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }
         }
     };
+
+    private static Object createNotificationLight(int color, int onMs, int offMs) {
+        try {
+            if (mNotificationLightConstructor == null) {
+                mNotificationLightConstructor = XposedHelpers.findConstructorExact(
+                        CLASS_NOTIFICATION_RECORD+".Light", mContext.getClassLoader(),
+                        int.class, int.class, int.class);
+            }
+            return mNotificationLightConstructor.newInstance(color, onMs, offMs);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error creating notification light object", t);
+            return null;
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private static boolean hasOriginalVibration(Object record, NotificationChannel channel, Notification n) {
+        try {
+            final boolean legacy = XposedHelpers.getBooleanField(record, "mPreChannelsNotification");
+            final boolean hasVibration;
+            if (legacy) {
+                hasVibration = ((n.defaults & Notification.DEFAULT_VIBRATE) != 0 ||
+                            n.vibrate != null);
+            } else {
+                hasVibration = channel.shouldVibrate();
+            }
+            if (DEBUG) log("hasOriginalVibration: " + hasVibration);
+            return hasVibration;
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error in hasOriginalVibration() method", t);
+            return false;
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private static boolean hasOriginalSound(Object record, NotificationChannel channel, Notification n) {
+        try {
+            final boolean legacy = XposedHelpers.getBooleanField(record, "mPreChannelsNotification");
+            final boolean hasSound;
+            if (legacy) {
+                hasSound = ((n.defaults & Notification.DEFAULT_SOUND) != 0 ||
+                            n.sound != null);
+            } else {
+                hasSound = (channel.getSound() != null);
+            }
+            if (DEBUG) log("hasOriginalSound: " + hasSound);
+            return hasSound;
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error in hasOriginalSound() method", t);
+            return false;
+        }
+    }
+
+    private static int getNotificationImportance(Object record) {
+        try {
+            return XposedHelpers.getIntField(record, "mImportance");
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error in getNotificationImportance() method", t);
+            return NotificationManager.IMPORTANCE_DEFAULT;
+        }
+    }
 
     private static Object getOldNotificationRecord(String key) {
         Object oldNotifRecord = null;
