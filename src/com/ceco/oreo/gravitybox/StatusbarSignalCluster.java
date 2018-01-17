@@ -145,11 +145,17 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     activityView.setImageDrawable(imageDataIn);
                 } else if (activityOut) {
                     activityView.setImageDrawable(imageDataOut);
+                } else if (signalType == SignalType.MOBILE) {
+                    activityView.setImageDrawable(imageDataInOut);
                 } else {
                     activityView.setImageDrawable(null);
                 }
-                activityView.setVisibility(activityIn || activityOut ?
+                if (signalType == SignalType.WIFI) {
+                    activityView.setVisibility(activityIn || activityOut ?
                         View.VISIBLE : View.GONE);
+                } else {
+                    activityView.setAlpha(activityIn || activityOut ? 1f : 0f);
+                }
                 if (DEBUG) log("SignalActivity: " + signalType + ": data activity indicators updated");
             }
         }
@@ -324,12 +330,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 XposedHelpers.findAndHookMethod(mView.getClass(), "onAttachedToWindow", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mView != param.thisObject) return;
-
-                        ViewGroup wifiGroup = (ViewGroup) mFldWifiGroup.get(param.thisObject);
-                        if (wifiGroup != null) {
-                            mWifiActivity = new SignalActivity(wifiGroup, SignalType.WIFI);
-                            if (DEBUG) log("onAttachedToWindow: mWifiActivity created");
+                        if (mView == param.thisObject) {
+                            addWifiActivityView();
                         }
                     }
                 });
@@ -337,13 +339,17 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 XposedHelpers.findAndHookMethod(mView.getClass(), "onDetachedFromWindow", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mView != param.thisObject) return;
-
-                        mWifiActivity = null;
-                        mMobileActivity = null;
-                        if (DEBUG) log("onDetachedFromWindow: signal activities destoyed");
+                        if (mView == param.thisObject) {
+                            mWifiActivity = null;
+                            mMobileActivity = null;
+                            if (DEBUG) log("onDetachedFromWindow: signal activities destroyed");
+                        }
                     }
                 });
+
+                if (mView.isAttachedToWindow()) {
+                    addWifiActivityView();
+                }
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error hooking SignalActivity related methods: ", t);
             }
@@ -402,6 +408,14 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Moto enableCustomize:", t);
             }
+        }
+    }
+
+    private void addWifiActivityView() throws Throwable {
+        ViewGroup wifiGroup = (ViewGroup) mFldWifiGroup.get(mView);
+        if (wifiGroup != null) {
+            mWifiActivity = new SignalActivity(wifiGroup, SignalType.WIFI);
+            if (DEBUG) log("addWifiActivityView: mWifiActivity created");
         }
     }
 
@@ -497,7 +511,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         final Class<?> networkCtrlCbClass = XposedHelpers.findClass("com.android.systemui.statusbar.policy.NetworkController.SignalCallback", classLoader);
         mNetworkControllerCallback = Proxy.newProxyInstance(classLoader, 
                 new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallback());
-            XposedHelpers.callMethod(networkController, "addSignalCallback",
+            XposedHelpers.callMethod(networkController, "addCallback",
                     mNetworkControllerCallback);
         if (DEBUG) log("setNetworkController: callback registered");
     }
