@@ -243,11 +243,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
     public void dismissKeyguard() {
         if (mMediator != null) {
             try {
-                if (Build.VERSION.SDK_INT == 24) {
-                    XposedHelpers.callMethod(mMediator, "dismiss");
-                } else {
-                    XposedHelpers.callMethod(mMediator, "dismiss", (Object)null);
-                }
+                XposedHelpers.callMethod(mMediator, "dismiss", (Object)null);
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }

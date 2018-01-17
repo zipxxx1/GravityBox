@@ -429,7 +429,7 @@ public class QsPanel implements BroadcastSubReceiver {
     }
 
     private void updatePanelTopPadding(boolean sliderVisible) {
-        if (Build.VERSION.SDK_INT == 24 || Utils.isOxygenOsRom())
+        if (Utils.isOxygenOsRom())
             return;
 
         try {

@@ -156,8 +156,7 @@ public class ModVolumePanel {
                 });
             }
 
-            XposedHelpers.findAndHookMethod(classVolumePanel, Build.VERSION.SDK_INT == 24 ?
-                    "isVisibleH" : "shouldBeVisibleH",
+            XposedHelpers.findAndHookMethod(classVolumePanel, "shouldBeVisibleH",
                     CLASS_VOLUME_ROW, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
