@@ -163,6 +163,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE, false)) {
                 FingerprintLauncher.initAndroid(lpparam.classLoader);
             }
+            ModActivityManager.initAndroid(lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {
