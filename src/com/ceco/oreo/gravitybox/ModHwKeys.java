@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -80,6 +80,7 @@ public class ModHwKeys {
     private static final String CLASS_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
+    private static final String CLASS_VIBRATION_EFFECT = "android.os.VibrationEffect";
     private static final boolean DEBUG = false;
 
     private static final int FLAG_WAKE = 0x00000001;
@@ -159,7 +160,6 @@ public class ModHwKeys {
     private static boolean mWasCustomKeyDoubletap = false;
     private static boolean mCustomKeyPressed = false;
     private static long[] mVkVibePattern;
-    private static long[] mVkVibePatternDefault;
     private static String[] mHeadsetUri = new String[2]; // index 0 = unplugged, index 1 = plugged 
     private static Method mLaunchAssistAction = null;
     private static Method mLaunchAssistLongPressAction = null;
@@ -962,6 +962,18 @@ public class ModHwKeys {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "getVibrationEffect",
+                    int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mVkVibePattern != null && (int)param.args[0] == HapticFeedbackConstants.VIRTUAL_KEY) {
+                        final Class<?> classVibeEffect = XposedHelpers.findClass(CLASS_VIBRATION_EFFECT, classLoader);
+                        param.setResult(XposedHelpers.callStaticMethod(classVibeEffect, "createWaveform",
+                                mVkVibePattern, -1));
+                    }
+                }
+            });
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -983,8 +995,6 @@ public class ModHwKeys {
             mStrCustomAppNone = res.getString(R.string.hwkey_action_custom_app_none);
             mStrCustomAppMissing = res.getString(R.string.hwkey_action_custom_app_missing);
 
-            mVkVibePatternDefault = (long[]) XposedHelpers.getObjectField(
-                    mPhoneWindowManager, "mVirtualKeyVibePattern");
             setVirtualKeyVibePattern(mPrefs.getString(GravityBoxSettings.PREF_KEY_VK_VIBRATE_PATTERN, null));
             adjustLongPressPowerWhenNonInteractive();
 
@@ -1737,23 +1747,12 @@ public class ModHwKeys {
     }
 
     private static void setVirtualKeyVibePattern(String pattern) {
-        if (mPhoneWindowManager == null) return;
-
         mVkVibePattern = null;
         try {
             if (pattern != null && !pattern.isEmpty()) {
                 mVkVibePattern = Utils.csvToLongArray(pattern);
             }
         } catch (Throwable t) { 
-            GravityBox.log(TAG, t);
-        }
-
-        try {
-            final long[] vp = mVkVibePattern == null ? mVkVibePatternDefault : mVkVibePattern;
-            if (vp != null) {
-                XposedHelpers.setObjectField(mPhoneWindowManager, "mVirtualKeyVibePattern", vp);
-            }
-        } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
     }
