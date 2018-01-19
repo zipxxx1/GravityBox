@@ -45,6 +45,7 @@ import com.ceco.oreo.gravitybox.webserviceclient.WebServiceClient.WebServiceTask
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -1582,6 +1583,12 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefBatteryTileTempUnit = (ListPreference) findPreference(PREF_KEY_BATTERY_TILE_TEMP_UNIT); 
 
             mPrefPowerCameraVp = (EditTextPreference) findPreference(PREF_KEY_POWER_CAMERA_VP);
+
+            // Disable features not applicable to 8.1
+            if (Build.VERSION.SDK_INT >= 27) {
+                Preference p = findPreference(PREF_KEY_NAVBAR_AUTOFADE_KEYS);
+                if (p != null) mPrefCatNavbarKeys.removePreference(p);
+            }
 
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {

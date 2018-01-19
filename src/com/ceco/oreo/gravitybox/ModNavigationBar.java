@@ -30,6 +30,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
@@ -278,7 +279,8 @@ public class ModNavigationBar {
 
             mNavbarHeight = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT, 100);
             mNavbarWidth = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_WIDTH, 100);
-            mAutofadeTimeoutMs = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_KEYS, 0) * 1000;
+            mAutofadeTimeoutMs = Build.VERSION.SDK_INT >= 27 ? 0 :
+                                 prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_KEYS, 0) * 1000;
             mAutofadeShowKeysPolicy = "NAVBAR"; //prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS, "NAVBAR");
 
             // for HTC GPE devices having capacitive keys
@@ -446,22 +448,24 @@ public class ModNavigationBar {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(navbarTransitionsClass, "applyMode",
-                    int.class, boolean.class, boolean.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    int barMode = (int)param.args[0];
-                    if (barMode != MODE_LIGHTS_OUT_TRANSPARENT) {
-                        mBarModeOriginal = barMode;
+            if (Build.VERSION.SDK_INT < 27) {
+                XposedHelpers.findAndHookMethod(navbarTransitionsClass, "applyMode",
+                        int.class, boolean.class, boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        int barMode = (int)param.args[0];
+                        if (barMode != MODE_LIGHTS_OUT_TRANSPARENT) {
+                            mBarModeOriginal = barMode;
+                        }
+                        if (mAutofadeTimeoutMs > 0 &&
+                                SystemClock.uptimeMillis() - mLastTouchMs >= mAutofadeTimeoutMs &&
+                                    barMode != MODE_LIGHTS_OUT &&
+                                    barMode != MODE_LIGHTS_OUT_TRANSPARENT) {
+                            param.args[0] = MODE_LIGHTS_OUT_TRANSPARENT;
+                        }
                     }
-                    if (mAutofadeTimeoutMs > 0 &&
-                            SystemClock.uptimeMillis() - mLastTouchMs >= mAutofadeTimeoutMs &&
-                                barMode != MODE_LIGHTS_OUT &&
-                                barMode != MODE_LIGHTS_OUT_TRANSPARENT) {
-                        param.args[0] = MODE_LIGHTS_OUT_TRANSPARENT;
-                    }
-                }
-            });
+                });
+            }
 
             XposedHelpers.findAndHookMethod(CLASS_KEY_BUTTON_RIPPLE, classLoader,
                     "getRipplePaint", new XC_MethodHook() {
@@ -501,29 +505,31 @@ public class ModNavigationBar {
                 }
             });
 
-            XC_MethodHook touchEventHook = new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mAutofadeTimeoutMs == 0) return;
-
-                    int action = ((MotionEvent)param.args[0]).getAction();
-                    if (action == MotionEvent.ACTION_DOWN ||
-                            (action == MotionEvent.ACTION_OUTSIDE &&
-                                 "SCREEN".equals(mAutofadeShowKeysPolicy))) {
-                        mLastTouchMs = SystemClock.uptimeMillis();
-                        if (mBarModeHandler.hasMessages(MSG_LIGHTS_OUT)) {
-                            mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
-                        } else {
-                            setBarMode(mBarModeOriginal);
+            if (Build.VERSION.SDK_INT < 27) {
+                XC_MethodHook touchEventHook = new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mAutofadeTimeoutMs == 0) return;
+    
+                        int action = ((MotionEvent)param.args[0]).getAction();
+                        if (action == MotionEvent.ACTION_DOWN ||
+                                (action == MotionEvent.ACTION_OUTSIDE &&
+                                     "SCREEN".equals(mAutofadeShowKeysPolicy))) {
+                            mLastTouchMs = SystemClock.uptimeMillis();
+                            if (mBarModeHandler.hasMessages(MSG_LIGHTS_OUT)) {
+                                mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
+                            } else {
+                                setBarMode(mBarModeOriginal);
+                            }
+                            mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
                         }
-                        mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
                     }
-                }
-            };
-            XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
-                    "onInterceptTouchEvent", MotionEvent.class, touchEventHook);
-            XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
-                    "onTouchEvent", MotionEvent.class, touchEventHook);
+                };
+                XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
+                        "onInterceptTouchEvent", MotionEvent.class, touchEventHook);
+                XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
+                        "onTouchEvent", MotionEvent.class, touchEventHook);
+            }
 
             XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader,
                     "toggleSplitScreenMode", int.class, int.class, new XC_MethodHook() {
