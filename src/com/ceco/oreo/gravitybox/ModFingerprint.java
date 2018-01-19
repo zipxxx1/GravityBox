@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -29,6 +30,7 @@ public class ModFingerprint {
     private static final String TAG = "GB:ModFingerprint";
     private static final String CLASS_FINGERPRINT_SERVICE = "com.android.server.fingerprint.FingerprintService";
     private static final String CLASS_FINGERPRINT_UTILS = "com.android.server.fingerprint.FingerprintUtils";
+    private static final String CLASS_CLIENT_MONITOR = "com.android.server.fingerprint.ClientMonitor";
     private static final boolean DEBUG = false;
 
     private static void log(String message) {
@@ -64,8 +66,7 @@ public class ModFingerprint {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_FINGERPRINT_UTILS, classLoader,
-                    "vibrateFingerprintError", Context.class, new XC_MethodHook() {
+            XC_MethodHook vibrateErrorHook = new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (DEBUG) log("vibrateFingerprintError");
@@ -74,10 +75,9 @@ public class ModFingerprint {
                         param.setResult(null);
                     }
                 }
-            });
+            };
 
-            XposedHelpers.findAndHookMethod(CLASS_FINGERPRINT_UTILS, classLoader,
-                    "vibrateFingerprintSuccess", Context.class, new XC_MethodHook() {
+            XC_MethodHook vibrateSuccessHook = new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (DEBUG) log("vibrateFingerprintSuccess");
@@ -86,7 +86,19 @@ public class ModFingerprint {
                         param.setResult(null);
                     }
                 }
-            });
+            };
+
+            if (Build.VERSION.SDK_INT >= 27) {
+                XposedHelpers.findAndHookMethod(CLASS_CLIENT_MONITOR, classLoader,
+                        "vibrateError", vibrateErrorHook);
+                XposedHelpers.findAndHookMethod(CLASS_CLIENT_MONITOR, classLoader,
+                        "vibrateSuccess", vibrateSuccessHook);
+            } else {
+                XposedHelpers.findAndHookMethod(CLASS_FINGERPRINT_UTILS, classLoader,
+                        "vibrateFingerprintError", Context.class, vibrateErrorHook);
+                XposedHelpers.findAndHookMethod(CLASS_FINGERPRINT_UTILS, classLoader,
+                        "vibrateFingerprintSuccess", Context.class, vibrateSuccessHook);
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
