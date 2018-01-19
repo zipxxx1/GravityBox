@@ -1557,8 +1557,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             mPrefLedControl = findPreference(PREF_LED_CONTROL);
 
-            mPrefVkVibratePattern = (EditTextPreference) findPreference(PREF_KEY_VK_VIBRATE_PATTERN);
-            mPrefVkVibratePattern.setOnPreferenceChangeListener(this);
+            // TODO: Virtual key vibrate pattern
+            //mPrefVkVibratePattern = (EditTextPreference) findPreference(PREF_KEY_VK_VIBRATE_PATTERN);
+            //mPrefVkVibratePattern.setOnPreferenceChangeListener(this);
 
             mPrefScLteStyle = (ListPreference) findPreference(PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE);
 

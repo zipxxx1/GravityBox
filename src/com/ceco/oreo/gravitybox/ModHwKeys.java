@@ -962,18 +962,6 @@ public class ModHwKeys {
                     }
                 }
             });
-
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "getVibrationEffect",
-                    int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mVkVibePattern != null && (int)param.args[0] == HapticFeedbackConstants.VIRTUAL_KEY) {
-                        final Class<?> classVibeEffect = XposedHelpers.findClass(CLASS_VIBRATION_EFFECT, classLoader);
-                        param.setResult(XposedHelpers.callStaticMethod(classVibeEffect, "createWaveform",
-                                mVkVibePattern, -1));
-                    }
-                }
-            });
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -1746,6 +1734,7 @@ public class ModHwKeys {
         }
     }
 
+    // TODO: Virtual key vibrate pattern
     private static void setVirtualKeyVibePattern(String pattern) {
         mVkVibePattern = null;
         try {
