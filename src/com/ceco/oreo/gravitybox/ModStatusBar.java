@@ -811,18 +811,20 @@ public class ModStatusBar {
             }
 
             // notification drawer wallpaper
-            try {
-                XposedHelpers.findAndHookMethod(notifPanelViewClass, "onFinishInflate", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        NotificationWallpaper nw = 
-                                new NotificationWallpaper((FrameLayout) param.thisObject, prefs);
-                        mStateChangeListeners.add(nw);
-                        mBroadcastSubReceivers.add(nw);
-                    }
-                });
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
+            if (Build.VERSION.SDK_INT < 27) {
+                try {
+                    XposedHelpers.findAndHookMethod(notifPanelViewClass, "onFinishInflate", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            NotificationWallpaper nw = 
+                                    new NotificationWallpaper((FrameLayout) param.thisObject, prefs);
+                            mStateChangeListeners.add(nw);
+                            mBroadcastSubReceivers.add(nw);
+                        }
+                    });
+                } catch (Throwable t) {
+                    GravityBox.log(TAG, t);
+                }
             }
 
             // suppress battery saver indication

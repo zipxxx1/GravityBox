@@ -1589,6 +1589,11 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (Build.VERSION.SDK_INT >= 27) {
                 Preference p = findPreference(PREF_KEY_NAVBAR_AUTOFADE_KEYS);
                 if (p != null) mPrefCatNavbarKeys.removePreference(p);
+                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifBackground);
+                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifColor);
+                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifImagePortrait);
+                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifImageLandscape);
+                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifAlpha);
             }
 
             // Filter preferences according to feature availability 
