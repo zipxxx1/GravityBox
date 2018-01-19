@@ -39,6 +39,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -64,7 +65,8 @@ public class ModStatusBar {
     private static final String TAG = "GB:ModStatusBar";
     public static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
-    private static final String CLASS_QS_FOOTER = "com.android.systemui.qs.QSFooter";
+    private static final String CLASS_QS_FOOTER = Build.VERSION.SDK_INT >= 27 ?
+            "com.android.systemui.qs.QSFooterImpl" : "com.android.systemui.qs.QSFooter";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
@@ -558,21 +560,7 @@ public class ModStatusBar {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(phoneStatusBarPolicyClass, "updateAlarm", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    Object iconCtrl = XposedHelpers.getObjectField(param.thisObject, "mIconController");
-                    if (iconCtrl != null) {
-                        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-                        boolean alarmSet = (alarmManager.getNextAlarmClock() != null);
-                        XposedHelpers.callMethod(iconCtrl, "setIconVisibility", "alarm_clock",
-                                (alarmSet && !mAlarmHide));
-                    }
-                }
-            });
-
             XposedHelpers.findAndHookMethod(statusBarClass, "makeStatusBarView", new XC_MethodHook() {
-
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     mStatusBar = param.thisObject;
@@ -638,117 +626,155 @@ public class ModStatusBar {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_QS_FOOTER, classLoader,
-                    "onFinishInflate", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    prepareHeaderTimeView((ViewGroup)param.thisObject);
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(statusBarClass, 
-                    "interceptTouchEvent", MotionEvent.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!mBrightnessControlEnabled) return;
-
-                    brightnessControl((MotionEvent) param.args[0]);
-                    if ((XposedHelpers.getIntField(param.thisObject, "mDisabled1")
-                            & STATUS_BAR_DISABLE_EXPAND) != 0) {
-                        param.setResult(true);
+            // Long press on QS footer clock
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_QS_FOOTER, classLoader,
+                        "onFinishInflate", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        prepareHeaderTimeView((ViewGroup)param.thisObject);
                     }
-                }
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!mBrightnessControlEnabled || !mBrightnessChanged) return;
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error setting up long-press on QS footer clock", t);
+            }
 
-                    int action = ((MotionEvent) param.args[0]).getAction();
-                    final boolean upOrCancel = (action == MotionEvent.ACTION_UP ||
-                            action == MotionEvent.ACTION_CANCEL);
-                    if (upOrCancel) {
-                        mBrightnessChanged = false;
-                        if (mJustPeeked && XposedHelpers.getBooleanField(
-                                param.thisObject, "mExpandedVisible")) {
-                            Object notifPanel = XposedHelpers.getObjectField(
-                                    param.thisObject, "mNotificationPanel");
-                            XposedHelpers.callMethod(notifPanel, "fling", 10, false);
-                        }
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(statusBarClass, "addNotification", 
-                    StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    final StatusBarNotification notif = (StatusBarNotification) param.args[0];
-                    final String pkg = notif.getPackageName();
-                    final boolean clearable = notif.isClearable();
-                    final int id = notif.getId();
-                    final Notification n = notif.getNotification();
-                    if (DEBUG) log ("addNotificationViews: pkg=" + pkg + "; id=" + id + 
-                                    "; iconId=" + n.icon + "; clearable=" + clearable);
-
-                    if (clearable) return;
-
-                    // store if new
-                    final String notifData = pkg + "," + n.icon;
-                    final ContentResolver cr = mContext.getContentResolver();
-                    String storedNotifs = Settings.Secure.getString(cr,
-                            SETTING_ONGOING_NOTIFICATIONS);
-                    if (storedNotifs == null || !storedNotifs.contains(notifData)) {
-                        if (storedNotifs == null || storedNotifs.isEmpty()) {
-                            storedNotifs = notifData;
-                        } else {
-                            storedNotifs += "#C3C0#" + notifData;
-                        }
-                        if (DEBUG) log("New storedNotifs = " + storedNotifs);
-                        Settings.Secure.putString(cr, SETTING_ONGOING_NOTIFICATIONS, storedNotifs);
-                    }
-
-                    // block if requested
-                    if (mOngoingNotif.contains(notifData)) {
-                        param.setResult(null);
-                        if (DEBUG) log("Ongoing notification " + notifData + " blocked.");
-                    }
-                }
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mProgressBarCtrl != null) {
-                        mProgressBarCtrl.onNotificationAdded((StatusBarNotification)param.args[0]);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader, "updateNotification", 
-                    StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mProgressBarCtrl != null) {
-                        mProgressBarCtrl.onNotificationUpdated((StatusBarNotification)param.args[0]);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader, "removeNotificationViews",
-                    String.class, RankingMap.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mProgressBarCtrl != null) {
-                        mProgressBarCtrl.onNotificationRemoved((StatusBarNotification)param.getResult());
-                    }
-                }
-            });
-
-            if (!Utils.hasLenovoVibeUI()) {
-                XposedHelpers.findAndHookMethod(expandableNotifRowClass, "isUserExpanded", new XC_MethodHook() {
+            // brightness control
+            try {
+                XposedHelpers.findAndHookMethod(statusBarClass, 
+                        "interceptTouchEvent", MotionEvent.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mNotifExpandAll) {
+                        if (!mBrightnessControlEnabled) return;
+    
+                        brightnessControl((MotionEvent) param.args[0]);
+                        if ((XposedHelpers.getIntField(param.thisObject, "mDisabled1")
+                                & STATUS_BAR_DISABLE_EXPAND) != 0) {
                             param.setResult(true);
                         }
                     }
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (!mBrightnessControlEnabled || !mBrightnessChanged) return;
+    
+                        int action = ((MotionEvent) param.args[0]).getAction();
+                        final boolean upOrCancel = (action == MotionEvent.ACTION_UP ||
+                                action == MotionEvent.ACTION_CANCEL);
+                        if (upOrCancel) {
+                            mBrightnessChanged = false;
+                            if (mJustPeeked && XposedHelpers.getBooleanField(
+                                    param.thisObject, "mExpandedVisible")) {
+                                Object notifPanel = XposedHelpers.getObjectField(
+                                        param.thisObject, "mNotificationPanel");
+                                XposedHelpers.callMethod(notifPanel, "fling", 10, false);
+                            }
+                        }
+                    }
                 });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error setting up brightness control", t);
+            }
+
+            // Ongoing notification blocker and progress bar
+            try {
+                XposedHelpers.findAndHookMethod(statusBarClass, "addNotification", 
+                        StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        final StatusBarNotification notif = (StatusBarNotification) param.args[0];
+                        final String pkg = notif.getPackageName();
+                        final boolean clearable = notif.isClearable();
+                        final int id = notif.getId();
+                        final Notification n = notif.getNotification();
+                        if (DEBUG) log ("addNotificationViews: pkg=" + pkg + "; id=" + id + 
+                                        "; iconId=" + n.icon + "; clearable=" + clearable);
+    
+                        if (clearable) return;
+    
+                        // store if new
+                        final String notifData = pkg + "," + n.icon;
+                        final ContentResolver cr = mContext.getContentResolver();
+                        String storedNotifs = Settings.Secure.getString(cr,
+                                SETTING_ONGOING_NOTIFICATIONS);
+                        if (storedNotifs == null || !storedNotifs.contains(notifData)) {
+                            if (storedNotifs == null || storedNotifs.isEmpty()) {
+                                storedNotifs = notifData;
+                            } else {
+                                storedNotifs += "#C3C0#" + notifData;
+                            }
+                            if (DEBUG) log("New storedNotifs = " + storedNotifs);
+                            Settings.Secure.putString(cr, SETTING_ONGOING_NOTIFICATIONS, storedNotifs);
+                        }
+    
+                        // block if requested
+                        if (mOngoingNotif.contains(notifData)) {
+                            param.setResult(null);
+                            if (DEBUG) log("Ongoing notification " + notifData + " blocked.");
+                        }
+                    }
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mProgressBarCtrl != null) {
+                            mProgressBarCtrl.onNotificationAdded((StatusBarNotification)param.args[0]);
+                        }
+                    }
+                });
+    
+                XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader, "updateNotification", 
+                        StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mProgressBarCtrl != null) {
+                            mProgressBarCtrl.onNotificationUpdated((StatusBarNotification)param.args[0]);
+                        }
+                    }
+                });
+    
+                XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader, "removeNotificationViews",
+                        String.class, RankingMap.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mProgressBarCtrl != null) {
+                            mProgressBarCtrl.onNotificationRemoved((StatusBarNotification)param.getResult());
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error setting up ongoing notification control and progress bar", t);
+            }
+
+            // Expanded notifications
+            if (!Utils.hasLenovoVibeUI()) {
+                try {
+                    XposedHelpers.findAndHookMethod(expandableNotifRowClass, "isUserExpanded", new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if (mNotifExpandAll) {
+                                param.setResult(true);
+                            }
+                        }
+                    });
+                } catch (Throwable t) {
+                    GravityBox.log(TAG, "Error setting up always expanded notifications", t);
+                }
+            }
+
+            // Hide alarm icon
+            try {
+                XposedHelpers.findAndHookMethod(phoneStatusBarPolicyClass, "updateAlarm", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        Object iconCtrl = XposedHelpers.getObjectField(param.thisObject, "mIconController");
+                        if (iconCtrl != null) {
+                            AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+                            boolean alarmSet = (alarmManager.getNextAlarmClock() != null);
+                            XposedHelpers.callMethod(iconCtrl, "setIconVisibility", "alarm_clock",
+                                    (alarmSet && !mAlarmHide));
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error setting up Hide alarm icon", t);
             }
 
             // Status bar Bluetooth icon policy
