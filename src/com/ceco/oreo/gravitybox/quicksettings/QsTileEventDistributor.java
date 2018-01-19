@@ -33,6 +33,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -167,7 +168,8 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_CUSTOM_TILE, cl, "setListening",
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_CUSTOM_TILE, cl,
+                    Build.VERSION.SDK_INT >= 27 ? "handleSetListening" : "setListening",
                     boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

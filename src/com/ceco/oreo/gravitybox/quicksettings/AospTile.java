@@ -21,6 +21,7 @@ import com.ceco.oreo.gravitybox.GravityBox;
 import com.ceco.oreo.gravitybox.quicksettings.QsPanel.LockedTileIndicator;
 import com.ceco.oreo.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
+import android.os.Build;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -137,7 +138,8 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             });
 
             mSetListeningHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), cl,
-                    "setListening", boolean.class, new XC_MethodHook() {
+                    Build.VERSION.SDK_INT >= 27 ? "handleSetListening" : "setListening",
+                            boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mKey.equals(XposedHelpers.getAdditionalInstanceField(

@@ -246,6 +246,7 @@ public class BluetoothTetheringTile extends QsTile {
             }
         }
         refreshState();
+        super.handleClick();
     }
 
     @Override

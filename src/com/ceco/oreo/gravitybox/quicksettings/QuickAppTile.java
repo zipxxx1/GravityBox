@@ -330,10 +330,12 @@ public class QuickAppTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.booleanValue = true;
-        mState.label = mMainApp.getAppName();
-        mState.icon = mMainApp.getAppIconResId() == 0 ? 
-                iconFromDrawable(mMainApp.getAppIconDrawable()) :
-                    iconFromResId(mMainApp.getAppIconResId());
+        if (mMainApp != null) {
+            mState.label = mMainApp.getAppName();
+            mState.icon = mMainApp.getAppIconResId() == 0 ? 
+                    iconFromDrawable(mMainApp.getAppIconDrawable()) :
+                        iconFromResId(mMainApp.getAppIconResId());
+        }
         super.handleUpdateState(state, arg);
     }
 
