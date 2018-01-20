@@ -15,6 +15,7 @@
 package com.ceco.oreo.gravitybox.quicksettings;
 
 import java.lang.reflect.Constructor;
+import java.util.function.Supplier;
 
 import com.ceco.oreo.gravitybox.GravityBox;
 import com.ceco.oreo.gravitybox.Utils;
@@ -23,6 +24,7 @@ import com.ceco.oreo.gravitybox.quicksettings.QsPanel.LockedTileIndicator;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.service.quicksettings.Tile;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedHelpers;
@@ -181,7 +183,11 @@ public abstract class QsTile extends BaseTile {
         public boolean dualTarget = false;
 
         public void applyTo(Object state) {
-            XposedHelpers.setObjectField(state, "icon", icon);
+            if (Build.VERSION.SDK_INT >= 27) {
+                XposedHelpers.setObjectField(state, "iconSupplier", newIconSupplier());
+            } else {
+                XposedHelpers.setObjectField(state, "icon", icon);
+            }
             String newLabel = label;
             if (locked && (lockedTileIndicator == LockedTileIndicator.PADLOCK ||
                     lockedTileIndicator == LockedTileIndicator.KEY)) {
@@ -192,6 +198,15 @@ public abstract class QsTile extends BaseTile {
             XposedHelpers.setObjectField(state, "label", newLabel);
             XposedHelpers.setIntField(state, "state", booleanValue ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
             XposedHelpers.setBooleanField(state, "dualTarget", dualTarget);
+        }
+
+        private Supplier<Object> newIconSupplier() {
+            return new Supplier<Object>() {
+                @Override
+                public Object get() {
+                    return icon;
+                }
+            };
         }
     }
 }
