@@ -483,6 +483,9 @@ public class ModLockscreen {
                     }
                     if (containerId != 0) {
                         ViewGroup container = (ViewGroup) kgStatusView.findViewById(containerId);
+                        if (Build.VERSION.SDK_INT >= 27) {
+                            container = (ViewGroup) container.getParent();
+                        }
                         if (container != null) {
                             mAppBar = new LockscreenAppBar(mContext, mGbContext, container,
                                     param.thisObject, prefs);
