@@ -660,24 +660,26 @@ public class ModLockscreen {
             }
 
             // Direct unlock see through transparency level
-            try {
-                XposedHelpers.findAndHookMethod(CLASS_SCRIM_CONTROLLER, classLoader,
-                        "updateScrimKeyguard", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                        if (mDirectUnlock == DirectUnlock.SEE_THROUGH &&
-                            !(XposedHelpers.getBooleanField(param.thisObject, "mDarkenWhileDragging")) &&
-                            XposedHelpers.getBooleanField(param.thisObject, "mBouncerShowing")) {
-                            float alpha = 1 - (float)mPrefs.getInt(GravityBoxSettings
-                                    .PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL, 75) / 100f;
-                            XposedHelpers.callMethod(param.thisObject, "setScrimInFrontColor", alpha);
-                            XposedHelpers.callMethod(param.thisObject, "setScrimBehindColor", 0f);
-                            param.setResult(null);
+            if (Build.VERSION.SDK_INT < 27) {
+                try {
+                    XposedHelpers.findAndHookMethod(CLASS_SCRIM_CONTROLLER, classLoader,
+                            "updateScrimKeyguard", new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                            if (mDirectUnlock == DirectUnlock.SEE_THROUGH &&
+                                !(XposedHelpers.getBooleanField(param.thisObject, "mDarkenWhileDragging")) &&
+                                XposedHelpers.getBooleanField(param.thisObject, "mBouncerShowing")) {
+                                float alpha = 1 - (float)mPrefs.getInt(GravityBoxSettings
+                                        .PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL, 75) / 100f;
+                                XposedHelpers.callMethod(param.thisObject, "setScrimInFrontColor", alpha);
+                                XposedHelpers.callMethod(param.thisObject, "setScrimBehindColor", 0f);
+                                param.setResult(null);
+                            }
                         }
-                    }
-                });
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
+                    });
+                } catch (Throwable t) {
+                    GravityBox.log(TAG, t);
+                }
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);

@@ -1587,13 +1587,18 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             // Disable features not applicable to 8.1
             if (Build.VERSION.SDK_INT >= 27) {
+                // Navbar auto fade keys
                 Preference p = findPreference(PREF_KEY_NAVBAR_AUTOFADE_KEYS);
                 if (p != null) mPrefCatNavbarKeys.removePreference(p);
+                // Notification drawer background
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifBackground);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifColor);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifImagePortrait);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifImageLandscape);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifAlpha);
+                // Direct unlock see-through transparency
+                p = findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL);
+                if (p != null) mPrefCatLsOther.removePreference(p);
             }
 
             // Filter preferences according to feature availability 
