@@ -83,6 +83,17 @@ public class PermissionGranter {
                                     permission.ACCESS_FINE_LOCATION);
                             XposedHelpers.callMethod(ps, "grantInstallPermission", p);
                         }
+                        // Add permissions needed by advanced power menu
+                        if (!grantedPerms.contains(permission.REBOOT)) {
+                            final Object p = XposedHelpers.callMethod(permissions, "get",
+                                    permission.REBOOT);
+                            XposedHelpers.callMethod(ps, "grantInstallPermission", p);
+                        }
+                        if (!grantedPerms.contains("android.permission.RECOVERY")) {
+                            final Object p = XposedHelpers.callMethod(permissions, "get",
+                                    "android.permission.RECOVERY");
+                            XposedHelpers.callMethod(ps, "grantInstallPermission", p);
+                        }
                     }
                 }
             });
