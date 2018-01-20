@@ -329,6 +329,18 @@ public class ModNavigationBar {
                 }
             });
 
+            XposedHelpers.findAndHookMethod(CLASS_NAVBAR_INFLATER_VIEW, classLoader,
+                    "getDefaultLayout", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    String layout = (String)param.getResult();
+                    if (DEBUG) log("origLayout=" + layout);
+                    layout = layout.replaceAll("\\[(.*?)\\]", "");
+                    if (DEBUG) log("newLayout=" + layout);
+                    param.setResult(layout);
+                }
+            });
+
             XposedHelpers.findAndHookMethod(CLASS_NAVBAR_INFLATER_VIEW, classLoader, "inflateLayout",
                     String.class, new XC_MethodHook() {
                 @Override
