@@ -314,4 +314,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
             entry.getValue().onKeyguardStateChanged();
         }
     }
+
+    @Override
+    public void onScreenStateChanged(boolean interactive) { }
 }

@@ -78,6 +78,8 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
     private Handler mHandler;
     private KeyguardStateMonitor mKgMonitor;
     private NotificationDataMonitor mNdMonitor;
+    private boolean mIsActive;
+    private boolean mIsInteractive = true;
 
     public LockscreenAppBar(Context ctx, Context gbCtx, ViewGroup container,
             Object notifPanel, XSharedPreferences prefs) {
@@ -160,10 +162,11 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
                 break;
             }
         }
-        mRootView.setVisibility(atLeastOneVisible ? View.VISIBLE : View.GONE);
+        mIsActive = atLeastOneVisible;
+        mRootView.setVisibility(mIsActive && mIsInteractive ? View.VISIBLE : View.GONE);
         if (Utils.isOxygenOsRom()) {
             mContainer.getChildAt(mContainer.getChildCount()-2).setVisibility(
-                    mRootView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+                    mIsActive && mIsInteractive ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -177,6 +180,12 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
                 ai.updateIcon();
             }
         }
+    }
+
+    @Override
+    public void onScreenStateChanged(boolean interactive) {
+        mIsInteractive = interactive;
+        mRootView.setVisibility(mIsActive && mIsInteractive ? View.VISIBLE : View.GONE);
     }
 
     @Override

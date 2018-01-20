@@ -710,6 +710,9 @@ public class ModLockscreen {
                 mKgMonitor.unregisterListener(this);
             }
         }
+
+        @Override
+        public void onScreenStateChanged(boolean interactive) { }
     };
 
     private static boolean canTriggerDirectUnlock() {

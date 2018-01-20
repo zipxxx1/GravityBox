@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,7 +26,6 @@ import com.ceco.oreo.gravitybox.Utils;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.SystemClock;
@@ -53,6 +52,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
 
     public interface Listener {
         void onKeyguardStateChanged();
+        void onScreenStateChanged(boolean interactive);
     }
 
     private XSharedPreferences mPrefs;
@@ -72,6 +72,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
     private int mFpAuthUserId;
     private ImprintMode mImprintMode = ImprintMode.DEFAULT;
     private List<Listener> mListeners = new ArrayList<>();
+    private boolean mIsInteractive;
 
     protected KeyguardStateMonitor(Context context, XSharedPreferences prefs) {
         mContext = context;
@@ -198,6 +199,15 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
         }
     }
 
+    private void notifyScreenStateChanged() {
+        if (DEBUG) log("interactive:" + mIsInteractive);
+        synchronized (mListeners) {
+            for (Listener l : mListeners) {
+                l.onScreenStateChanged(mIsInteractive);
+            }
+        }
+    }
+
     public void registerListener(Listener l) {
         if (l == null) return;
         synchronized (mListeners) {
@@ -305,11 +315,16 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
     public void onBroadcastReceived(Context context, Intent intent) {
         String action = intent.getAction();
         if (action.equals(Intent.ACTION_SCREEN_ON)) {
+            mIsInteractive = true;
             if (mFpAuthOnNextScreenOn) {
                 mHandler.removeCallbacks(mResetFpRunnable);
                 mFpAuthOnNextScreenOn = false;
                 handleFingerprintAuthenticated(mFpAuthUserId);
             }
+            notifyScreenStateChanged();
+        } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
+            mIsInteractive = false;
+            notifyScreenStateChanged();
         } else if (action.equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
             mProxWakeupEnabled = intent.getBooleanExtra(

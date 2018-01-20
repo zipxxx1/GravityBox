@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -124,13 +124,13 @@ public class SysUiManagers {
 
         // KeyguardStateMonitor
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
+        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
         intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
 
         // FingerprintLauncher
         if (FingerprintLauncher != null) {
             intentFilter.addAction(Intent.ACTION_USER_PRESENT);
-            intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
             intentFilter.addAction(GravityBoxSettings.ACTION_FPL_SETTINGS_CHANGED);
         }
 
