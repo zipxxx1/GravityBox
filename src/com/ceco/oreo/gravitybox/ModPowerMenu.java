@@ -31,7 +31,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.content.res.XResources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.PorterDuff;
@@ -434,20 +433,10 @@ public class ModPowerMenu {
             } else if (mode == 1) {
                 Utils.performSoftReboot();
             } else if (mode == 2) {
-                replaceRecoveryMessage();
                 pm.reboot("recovery");
             } else if (mode == 3) {
                 pm.reboot(Utils.isSamsungRom() ? "download" : "bootloader");
             }
-        }
-
-        private static void replaceRecoveryMessage() {
-            try {
-                Resources res = XResources.getSystem();
-                XResources.setSystemWideReplacement(
-                        res.getIdentifier("reboot_to_reset_title", "string", "android"),
-                        mRecoveryStr);
-            } catch (Throwable t) { /* ignore */ }
         }
 
         private static void handleReboot(final Context context, String caption, final int mode) {

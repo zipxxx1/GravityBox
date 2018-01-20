@@ -81,6 +81,9 @@ public class SystemWideResources {
                     if (DEBUG) log("config_safe_media_volume_enabled: " + (triState == Utils.TriState.ENABLED));
                 }
             }
+
+            // Replace reboot to recovery message
+            XResources.setSystemWideReplacement("android", "string", "reboot_to_reset_title", "Recovery");
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
