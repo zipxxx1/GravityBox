@@ -35,6 +35,7 @@ import android.content.res.XResources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
@@ -62,6 +63,7 @@ public class ModPowerMenu {
     public static final String CLASS_GLOBAL_ACTIONS = "com.android.systemui.globalactions.GlobalActionsDialog";
     public static final String CLASS_ACTION = CLASS_GLOBAL_ACTIONS + ".Action";
     private static final boolean DEBUG = false;
+    private static final String ITEM_LAYOUT_PACKAGE = Build.VERSION.SDK_INT >= 27 ? PACKAGE_NAME : "android";
 
     private static Context mContext;
     private static String mRebootStr;
@@ -494,7 +496,7 @@ public class ModPowerMenu {
                 Resources res = mContext.getResources();
                 LayoutInflater li = (LayoutInflater) args[3];
                 int layoutId = res.getIdentifier(
-                        "global_actions_item", "layout", "android");
+                        "global_actions_item", "layout", ITEM_LAYOUT_PACKAGE);
                 View v = li.inflate(layoutId, (ViewGroup) args[2], false);
 
                 ImageView icon = (ImageView) v.findViewById(res.getIdentifier(
@@ -588,7 +590,7 @@ public class ModPowerMenu {
                 Resources res = mContext.getResources();
                 LayoutInflater li = (LayoutInflater) args[3];
                 int layoutId = res.getIdentifier(
-                        "global_actions_item", "layout", "android");
+                        "global_actions_item", "layout", ITEM_LAYOUT_PACKAGE);
                 View v = li.inflate(layoutId, (ViewGroup) args[2], false);
 
                 ImageView icon = (ImageView) v.findViewById(res.getIdentifier(
@@ -645,7 +647,7 @@ public class ModPowerMenu {
                 Resources res = mContext.getResources();
                 LayoutInflater li = (LayoutInflater) args[3];
                 int layoutId = res.getIdentifier(
-                        "global_actions_item", "layout", "android");
+                        "global_actions_item", "layout", ITEM_LAYOUT_PACKAGE);
                 View v = li.inflate(layoutId, (ViewGroup) args[2], false);
 
                 ImageView icon = (ImageView) v.findViewById(res.getIdentifier(
@@ -709,7 +711,7 @@ public class ModPowerMenu {
                 Resources res = mContext.getResources();
                 LayoutInflater li = (LayoutInflater) args[3];
                 int layoutId = res.getIdentifier(
-                        "global_actions_item", "layout", "android");
+                        "global_actions_item", "layout", ITEM_LAYOUT_PACKAGE);
                 View v = li.inflate(layoutId, (ViewGroup) args[2], false);
 
                 ImageView icon = (ImageView) v.findViewById(res.getIdentifier(
