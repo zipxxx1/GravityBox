@@ -353,15 +353,19 @@ public class ModNavigationBar {
                     // prepare keys for rot0 view
                     vRot = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mRot0");
                     if (vRot != null) {
-                        ScaleType scaleType = getIconScaleType(0, View.NO_ID);
+                        ScaleType scaleType = Build.VERSION.SDK_INT >= 27 ?
+                                ScaleType.FIT_CENTER : getIconScaleType(0, View.NO_ID);
+                        int[] padding = getIconPaddingPx(0);
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setScaleType(scaleType);
+                        appKey.setPadding(padding[0], padding[1], padding[2], padding[3]);
                         appKey.setClickable(true);
                         appKey.setImageDrawable(getCustomKeyIconDrawable());
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(scaleType);
+                        dpadLeft.setPadding(padding[0], padding[1], padding[2], padding[3]);
                         dpadLeft.setClickable(true);
                         dpadLeft.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_left));
                         dpadLeft.setVisibility(View.GONE);
@@ -369,6 +373,7 @@ public class ModNavigationBar {
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(scaleType);
+                        dpadRight.setPadding(padding[0], padding[1], padding[2], padding[3]);
                         dpadRight.setClickable(true);
                         dpadRight.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_right));
                         dpadRight.setVisibility(View.GONE);
@@ -382,15 +387,19 @@ public class ModNavigationBar {
                     // prepare keys for rot90 view
                     vRot = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mRot90");
                     if (vRot != null) {
-                        ScaleType scaleType = getIconScaleType(1, View.NO_ID);
+                        ScaleType scaleType = Build.VERSION.SDK_INT >= 27 ?
+                                ScaleType.FIT_CENTER : getIconScaleType(1, View.NO_ID);
+                        int[] padding = getIconPaddingPx(1);
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setScaleType(scaleType);
+                        appKey.setPadding(padding[0], padding[1], padding[2], padding[3]);
                         appKey.setClickable(true);
                         appKey.setImageDrawable(getCustomKeyIconDrawable());
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(scaleType);
+                        dpadLeft.setPadding(padding[0], padding[1], padding[2], padding[3]);
                         dpadLeft.setClickable(true);
                         dpadLeft.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_left));
                         dpadLeft.setVisibility(View.GONE);
@@ -398,6 +407,7 @@ public class ModNavigationBar {
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(scaleType);
+                        dpadRight.setPadding(padding[0], padding[1], padding[2], padding[3]);
                         dpadRight.setClickable(true);
                         dpadRight.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_right));
                         dpadRight.setVisibility(View.GONE);
@@ -952,14 +962,19 @@ public class ModNavigationBar {
         int[] p = new int[] { 0, 0, 0, 0 };
         int paddingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5,
                 mResources.getDisplayMetrics()));
+        int threshold = Build.VERSION.SDK_INT >= 27 ? 0 : 75;
         boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
-        if (index == 0 && mNavbarHeight < 75) {
-            p[1] = paddingPx;
-            p[3] = paddingPx;
+        if (index == 0) {
+            int paddingPxSdk27 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15,
+                    mResources.getDisplayMetrics()) * (mNavbarHeight / 100f));
+            p[1] = p[3] = mNavbarHeight < threshold ? paddingPx :
+                            Build.VERSION.SDK_INT >= 27 ? paddingPxSdk27 : 0;
         }
-        if (index == 1 && hasVerticalNavbar && mNavbarWidth < 75) {
-            p[0] = paddingPx;
-            p[2] = paddingPx;
+        if (index == 1 && hasVerticalNavbar) {
+            int paddingPxSdk27 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15,
+                    mResources.getDisplayMetrics()) * (mNavbarWidth / 100f));
+            p[0] = p[2] = mNavbarWidth < threshold ? paddingPx :
+                            Build.VERSION.SDK_INT >= 27 ? paddingPxSdk27 : 0;
         }
         return p;
     }
@@ -972,7 +987,9 @@ public class ModNavigationBar {
                         mNavbarViewInfo[i].endsGroup,
                         mNavbarViewInfo[i].centerGroup,
                         mNavbarViewInfo[i].menuImeGroup}) {
-                    if (group == null) continue;
+                    if (group == null || (i == 1 &&
+                            group == mNavbarViewInfo[i].menuImeGroup &&
+                            Build.VERSION.SDK_INT >= 27)) continue;
                     int childCount = group.getChildCount();
                     for (int j = 0; j < childCount; j++) {
                         View child = group.getChildAt(j);
@@ -984,7 +1001,9 @@ public class ModNavigationBar {
                                 mNavbarViewInfo[i].originalScaleType.put(iv.getId(),
                                         iv.getScaleType());
                             }
-                            iv.setScaleType(getIconScaleType(i, iv.getId()));
+                            if (Build.VERSION.SDK_INT < 27) {
+                                iv.setScaleType(getIconScaleType(i, iv.getId()));
+                            }
                             if (!Utils.isXperiaDevice()) {
                                 iv.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
                             }
