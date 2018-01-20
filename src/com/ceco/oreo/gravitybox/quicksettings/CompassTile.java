@@ -135,7 +135,9 @@ public class CompassTile extends QsTile implements SensorEventListener {
             mState.booleanValue = false;
             mState.icon = iconFromResId(R.drawable.ic_qs_compass_off);
             mState.label = mGbContext.getString(R.string.quick_settings_compass_off);
-            mImage.setRotation(0);
+            if (mImage != null) {
+                mImage.setRotation(0);
+            }
         }
 
         mUpdatePending = false;
