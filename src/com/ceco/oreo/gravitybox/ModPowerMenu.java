@@ -358,6 +358,8 @@ public class ModPowerMenu {
                         }
 
                         if (locked) {
+                            Object wmf = XposedHelpers.getObjectField(param.thisObject, "mWindowManagerFuncs");
+                            XposedHelpers.callMethod(wmf, "onGlobalActionsShown");
                             Dialog d = (Dialog) XposedHelpers.getObjectField(param.thisObject, "mDialog");
                             if (d == null) {
                                 XposedHelpers.callMethod(param.thisObject, "createDialog");
