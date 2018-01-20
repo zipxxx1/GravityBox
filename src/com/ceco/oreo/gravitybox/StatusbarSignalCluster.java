@@ -41,6 +41,7 @@ import android.content.res.XModuleResources;
 import android.content.res.XResources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -311,13 +312,19 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                             }
                         });
                     } else {
-                        XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
-                                boolean.class, new XC_MethodHook() {
+                        XC_MethodHook setNoSimsHook = new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                                 param.args[0] = false;
                             }
-                        });
+                        };
+                        if (Build.VERSION.SDK_INT >= 27) {
+                            XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
+                                    boolean.class, boolean.class, setNoSimsHook);
+                        } else {
+                            XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
+                                    boolean.class, setNoSimsHook);
+                        }
                     }
                 } catch (Throwable t) {
                     GravityBox.log(TAG, "Error hooking setNoSims: ", t);
