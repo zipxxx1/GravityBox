@@ -24,6 +24,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
+import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings;
 
@@ -78,6 +79,9 @@ public class ExpandedDesktopTile extends QsTile {
         mMode = GravityBoxSettings.ED_DISABLED;
         try {
             mMode = Integer.valueOf(mPrefs.getString(GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
+            if (Build.VERSION.SDK_INT >= 27 && mMode > 2) {
+                mMode = 2;
+            }
         } catch (NumberFormatException nfe) {
             log(getKey() + ": Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
         }

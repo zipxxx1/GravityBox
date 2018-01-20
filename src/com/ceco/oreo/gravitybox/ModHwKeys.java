@@ -43,6 +43,7 @@ import android.hardware.input.InputManager;
 import android.media.AudioManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -524,6 +525,9 @@ public class ModHwKeys {
             try {
                 mExpandedDesktopMode = Integer.valueOf(prefs.getString(
                         GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
+                if (Build.VERSION.SDK_INT >= 27 && mExpandedDesktopMode > 2) {
+                    mExpandedDesktopMode = 2;
+                }
             } catch (NumberFormatException nfe) {
                 GravityBox.log(TAG, "Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
             }
