@@ -140,9 +140,10 @@ public class QuickAppTile extends QsTile {
                 final int mode = mIntent.getIntExtra("mode", AppPickerPreference.MODE_APP);
 
                 Bitmap appIcon = null;
-                final int iconResId = mIntent.getStringExtra("iconResName") != null ?
-                        mResources.getIdentifier(mIntent.getStringExtra("iconResName"),
-                        "drawable", mGbContext.getPackageName()) : 0;
+                final String iconResName = mIntent.getStringExtra("iconResName");
+                final int iconResId = iconResName != null ?
+                        mResources.getIdentifier(iconResName, "drawable",
+                                mGbContext.getPackageName()) : 0;
                 if (iconResId != 0) {
                     mAppIconResId = iconResId;
                     appIcon = Utils.drawableToBitmap(mGbContext.getDrawable(iconResId));
@@ -173,6 +174,9 @@ public class QuickAppTile extends QsTile {
                             mResources.getDisplayMetrics());
                     Bitmap scaledIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
                     mAppIconDrawable = new BitmapDrawable(mResources, scaledIcon);
+                    if (mResId != mId && iconResName != null && iconResName.startsWith("ic_shortcut")) {
+                        mAppIconDrawable.setTint(0xFF707070);
+                    }
                 }
                 if (DEBUG) log(getKey() + ": AppInfo initialized for: " + getAppName());
             } catch (NameNotFoundException e) {
