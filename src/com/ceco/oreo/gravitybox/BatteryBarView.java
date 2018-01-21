@@ -76,6 +76,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     private boolean mCentered;
     private int mStatusBarState;
     private ContainerType mContainerType;
+    private ViewGroup mContainer;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -84,6 +85,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     public BatteryBarView(ContainerType containerType, ViewGroup container, XSharedPreferences prefs) {
         super(container.getContext());
 
+        mContainer = container;
         mContainerType = containerType;
 
         mEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_BAR_SHOW, false);
@@ -103,11 +105,17 @@ public class BatteryBarView extends View implements IconManagerListener,
         mColorCharging = prefs.getInt(GravityBoxSettings.PREF_KEY_BATTERY_BAR_COLOR_CHARGING, Color.GREEN);
         mCentered = prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_BAR_CENTERED, false);
 
-        container.addView(this);
+        mContainer.addView(this);
 
         setScaleX(0f);
-        setVisibility(View.GONE);
         updatePosition();
+        update();
+    }
+
+    public void destroy() {
+        stopAnimation();
+        mContainer.removeView(this);
+        mContainer = null;
     }
 
     @Override

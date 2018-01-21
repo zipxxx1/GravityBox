@@ -41,6 +41,7 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
     private Drawable mDrawableWear;
     private int mCurrentDrawableId = -1; // -1=unset; 0=default; 1=wear
     private int mIconHeightPx;
+    private ViewGroup mSystemIcons;
 
     public StatusbarQuietHoursView(ContainerType containerType, ViewGroup container, Context context) throws Throwable {
         super(context);
@@ -54,13 +55,22 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(mIconHeightPx, mIconHeightPx);
         setLayoutParams(lParams);
         setScaleType(ImageView.ScaleType.CENTER);
-        ViewGroup systemIcons = (ViewGroup) mContainer.findViewById(
+        mSystemIcons = (ViewGroup) mContainer.findViewById(
                 context.getResources().getIdentifier("system_icons", "id", ModStatusBar.PACKAGE_NAME));
-        systemIcons.addView(this, 0);
+        mSystemIcons.addView(this, 0);
 
         mQuietHours = SysUiManagers.QuietHoursManager.getQuietHours();
 
         updateVisibility();
+    }
+
+    public void destroy() {
+        mSystemIcons.removeView(this);
+        mSystemIcons = null;
+        mQuietHours = null;
+        mDrawable = null;
+        mDrawableWear = null;
+        mContainer = null;
     }
 
     @Override

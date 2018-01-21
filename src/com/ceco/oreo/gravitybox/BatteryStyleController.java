@@ -16,6 +16,10 @@
 package com.ceco.oreo.gravitybox;
 
 import com.ceco.oreo.gravitybox.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ceco.oreo.gravitybox.ModStatusBar.ContainerType;
 
 import android.content.Intent;
@@ -30,6 +34,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -59,6 +64,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private boolean mBatterySaverIndicationDisabled;
     private boolean mDashIconHidden;
     private boolean mIsDashCharging;
+    private List<Unhook> mHooks = new ArrayList<>();
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -79,6 +85,32 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             createHooks();
             updateBatteryStyle();
         }
+    }
+
+    public void destroy() {
+        for (Unhook hook : mHooks) {
+            hook.unhook();
+        }
+        mHooks.clear();
+        mHooks = null;
+        if (mPercentText != null) {
+            mSystemIcons.removeView(mPercentText.getView());
+            mPercentText.destroy();
+            mPercentText = null;
+        }
+        if (mCircleBattery != null) {
+            mSystemIcons.removeView(mCircleBattery);
+            mCircleBattery = null;
+        }
+        if (mStockBattery != null) {
+            mStockBattery.destroy();
+            mStockBattery = null;
+        }
+        mSystemIcons = null;
+        mContainer = null;
+        mStatusBar = null;
+        mPrefs = null;
+        mContext = null;
     }
 
     private void initPreferences(XSharedPreferences prefs) {
@@ -224,13 +256,13 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             try {
                 Class<?> batteryControllerClass = XposedHelpers.findClass(CLASS_BATTERY_CONTROLLER,
                         mContext.getClassLoader());
-                XposedHelpers.findAndHookMethod(batteryControllerClass, "onReceive", 
+                mHooks.add(XposedHelpers.findAndHookMethod(batteryControllerClass, "onReceive", 
                         Context.class, Intent.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         updateBatteryStyle();
                     }
-                });
+                }));
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }
@@ -239,28 +271,28 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         if (mContainerType == ContainerType.KEYGUARD) {
             try {
                if (Utils.isSamsungRom()) {
-                   XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
+                   mHooks.add(XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
                           int.class, boolean.class, boolean.class, int.class, int.class, int.class,
                           int.class, boolean.class, new XC_MethodHook() {
                        @Override
                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                            updateBatteryStyle();
                        }
-                   });
+                   }));
                } else {
-                   XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
+                   mHooks.add(XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
                           int.class, boolean.class, boolean.class, new XC_MethodHook() {
                        @Override
                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                            updateBatteryStyle();
                        }
-                   });
+                   }));
                }
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }
             try {
-                XposedHelpers.findAndHookMethod(mContainer.getClass(),
+                mHooks.add(XposedHelpers.findAndHookMethod(mContainer.getClass(),
                         "updateVisibilities", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -273,12 +305,12 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                             }
                         }
                     }
-                });
+                }));
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }
             try {
-                XposedHelpers.findAndHookMethod(mContainer.getClass(), "onConfigurationChanged",
+                mHooks.add(XposedHelpers.findAndHookMethod(mContainer.getClass(), "onConfigurationChanged",
                         Configuration.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -287,12 +319,12 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
                         }
                     }
-                });
+                }));
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }
             try {
-                XposedHelpers.findAndHookMethod(CLASS_BATTERY_METER_VIEW, mContext.getClassLoader(),
+                mHooks.add(XposedHelpers.findAndHookMethod(CLASS_BATTERY_METER_VIEW, mContext.getClassLoader(),
                         "updateShowPercent", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -303,7 +335,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                             }
                         }
                     }
-                });
+                }));
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }
@@ -311,7 +343,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
 
         if (Utils.isOxygenOsRom()) {
             try {
-                XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_STATUSBAR,
+                mHooks.add(XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_STATUSBAR,
                         mContainer.getClass().getClassLoader(),
                         "updateDashChargeView", new XC_MethodHook() {
                     @Override
@@ -325,7 +357,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                         }
                         updateBatteryStyle();
                     }
-                });
+                }));
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }

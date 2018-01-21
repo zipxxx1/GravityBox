@@ -16,7 +16,11 @@
 package com.ceco.oreo.gravitybox;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XposedHelpers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ceco.oreo.gravitybox.managers.StatusBarIconManager;
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
@@ -39,6 +43,7 @@ public class StatusbarBattery implements IconManagerListener {
     private int mFrameAlpha;
     private int mDefaultChargeColor;
     private Drawable mDrawable;
+    private List<Unhook> mHooks = new ArrayList<>();
 
     public StatusbarBattery(View batteryView, BatteryStyleController controller) {
         mBattery = batteryView;
@@ -48,6 +53,20 @@ public class StatusbarBattery implements IconManagerListener {
         if (SysUiManagers.IconManager != null && !Utils.isParanoidRom()) {
             SysUiManagers.IconManager.registerListener(this);
         }
+    }
+
+    public void destroy() {
+        if (SysUiManagers.IconManager != null) {
+            SysUiManagers.IconManager.unregisterListener(this);
+        }
+        for (Unhook hook : mHooks) {
+            hook.unhook();
+        }
+        mHooks.clear();
+        mHooks = null;
+        mDrawable = null;
+        mController = null;
+        mBattery = null;
     }
 
     private void backupOriginalColors() {
@@ -80,7 +99,7 @@ public class StatusbarBattery implements IconManagerListener {
     private void createHooks() {
         if (!Utils.isXperiaDevice() && !Utils.isParanoidRom() && getDrawable() != null) {
             try {
-                XposedHelpers.findAndHookMethod(getDrawable().getClass(), "setColorFilter",
+                mHooks.add(XposedHelpers.findAndHookMethod(getDrawable().getClass(), "setColorFilter",
                         ColorFilter.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -90,12 +109,12 @@ public class StatusbarBattery implements IconManagerListener {
                             setColors(color, color, color);
                         }
                     }
-                });
+                }));
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error hooking setColorFilter(): ", t);
             }
             try {
-                XposedHelpers.findAndHookMethod(getDrawable().getClass(), "setColors",
+                mHooks.add(XposedHelpers.findAndHookMethod(getDrawable().getClass(), "setColors",
                         int.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -105,7 +124,7 @@ public class StatusbarBattery implements IconManagerListener {
                             setColors(color, color, color);
                         }
                     }
-                });
+                }));
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error hooking setColors(): ", t);
             }

@@ -62,6 +62,7 @@ public class ProgressBarView extends View implements
     private ContainerType mContainerType;
     private ProgressBarController mCtrl;
     private int mCurrentIndex = 0;
+    private ViewGroup mContainer;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -71,6 +72,7 @@ public class ProgressBarView extends View implements
             XSharedPreferences prefs, ProgressBarController ctrl) {
         super(container.getContext());
 
+        mContainer = container;
         mContainerType = containerType;
         mCtrl = ctrl;
 
@@ -86,13 +88,22 @@ public class ProgressBarView extends View implements
         setScaleX(0f);
         setBackgroundColor(Color.WHITE);
         setVisibility(View.GONE);
-        container.addView(this);
+        mContainer.addView(this);
 
         mAnimator = new ObjectAnimator();
         mAnimator.setTarget(this);
         mAnimator.setInterpolator(new DecelerateInterpolator());
         mAnimator.setDuration(ANIM_DURATION);
         mAnimator.setRepeatCount(0);
+    }
+
+    public void destroy() {
+        clearAnimation();
+        mAnimator.cancel();
+        removeCallbacks(mIndexCyclerRunnable);
+        mContainer.removeView(this);
+        mCtrl = null;
+        mContainer = null;
     }
 
     @Override

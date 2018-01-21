@@ -128,6 +128,11 @@ public class ModStatusBar {
     private static GestureDetector mGestureDetector;
     private static boolean mDt2sEnabled;
     private static long[] mCameraVp;
+    private static StatusbarSignalCluster mSignalClusterSb;
+    private static BatteryStyleController mBatteryStyleCtrlSb;
+    private static StatusbarQuietHoursView mQhViewSb;
+    private static BatteryBarView mBatteryBarViewSb;
+    private static ProgressBarView mProgressBarViewSb;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -278,7 +283,7 @@ public class ModStatusBar {
         return mStatusBarState;
     }
 
-    private static void prepareLayout() {
+    private static void prepareLayoutStatusBar() {
         try {
             Resources res = mContext.getResources();
 
@@ -290,17 +295,6 @@ public class ModStatusBar {
             if (DEBUG_LAYOUT) mLayoutCenter.setBackgroundColor(0x4dff0000);
             mStatusBarView.addView(mLayoutCenter);
             if (DEBUG) log("mLayoutCenter injected");
-
-            // inject new center layout container into keyguard status bar
-            mLayoutCenterKg = new LinearLayout(mContext);
-            mLayoutCenterKg.setLayoutParams(new LayoutParams(
-                            LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-            mLayoutCenterKg.setGravity(Gravity.CENTER);
-            mLayoutCenterKg.setVisibility(View.GONE);
-            if (DEBUG_LAYOUT) mLayoutCenterKg.setBackgroundColor(0x4d0000ff);
-            ((ViewGroup) XposedHelpers.getObjectField(
-                    mStatusBar, "mKeyguardStatusBar")).addView(mLayoutCenterKg);
-            if (DEBUG) log("mLayoutCenterKg injected");
 
             mIconArea = (ViewGroup) ((ViewGroup) mStatusBarView)
                     .findViewById(res.getIdentifier("system_icon_area", "id", PACKAGE_NAME));
@@ -328,6 +322,55 @@ public class ModStatusBar {
                 setClockPosition(mPrefs.getBoolean(
                         GravityBoxSettings.PREF_KEY_STATUSBAR_CENTER_CLOCK, false));
             }
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
+    private static void destroyLayoutStatusBar() {
+        try {
+            // disable traffic meter
+            setTrafficMeterMode(TrafficMeterMode.OFF);
+
+            // destroy clock
+            if (mClock != null) {
+                setClockPosition(false);
+                if (SysUiManagers.IconManager != null) {
+                    SysUiManagers.IconManager.unregisterListener(mClock);
+                }
+                mBroadcastSubReceivers.remove(mClock);
+                mClock.destroy();
+                mClock = null;
+                if (DEBUG) log("destroyLayoutStatusBar: Clock destroyed");
+            }
+
+            // destroy center layout
+            if (mLayoutCenter != null) {
+                mStatusBarView.removeView(mLayoutCenter);
+                mLayoutCenter.removeAllViews();
+                mLayoutCenter = null;
+                if (DEBUG) log("destroyLayoutStatusBar: mLayoutCenter destroyed");
+            }
+
+            mIconArea = null;
+            mSbContents = null;
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
+    private static void prepareLayoutKeyguard() {
+        try {
+            // inject new center layout container into keyguard status bar
+            mLayoutCenterKg = new LinearLayout(mContext);
+            mLayoutCenterKg.setLayoutParams(new LayoutParams(
+                            LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            mLayoutCenterKg.setGravity(Gravity.CENTER);
+            mLayoutCenterKg.setVisibility(View.GONE);
+            if (DEBUG_LAYOUT) mLayoutCenterKg.setBackgroundColor(0x4d0000ff);
+            ((ViewGroup) XposedHelpers.getObjectField(
+                    mStatusBar, "mKeyguardStatusBar")).addView(mLayoutCenterKg);
+            if (DEBUG) log("mLayoutCenterKg injected");
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -395,6 +438,14 @@ public class ModStatusBar {
                 LinearLayout view = (LinearLayout) container.findViewById(scResId);
                 if (view != null) {
                     StatusbarSignalCluster sc = StatusbarSignalCluster.create(containerType, view, mPrefs);
+                    if (containerType == ContainerType.STATUSBAR) {
+                        if (mSignalClusterSb != null) {
+                            mBroadcastSubReceivers.remove(mSignalClusterSb);
+                            mSignalClusterSb.destroy();
+                            if (DEBUG) log("prepareSignalCluster: old signal cluster destroyed");
+                        }
+                        mSignalClusterSb = sc;
+                    }
                     mBroadcastSubReceivers.add(sc);
                     if (sc.supportsDataActivityIndicators()) {
                         sc.setNetworkController(XposedHelpers.getObjectField(
@@ -426,6 +477,14 @@ public class ModStatusBar {
             if (container != null) {
                 BatteryStyleController bsc = new BatteryStyleController(
                         containerType, container, mPrefs, mStatusBar);
+                if (containerType == ContainerType.STATUSBAR) {
+                    if (mBatteryStyleCtrlSb != null) {
+                        mBroadcastSubReceivers.remove(mBatteryStyleCtrlSb);
+                        mBatteryStyleCtrlSb.destroy();
+                        if (DEBUG) log("prepareBatteryStyle: old BatteryStyleController destroyed");
+                    }
+                    mBatteryStyleCtrlSb = bsc;
+                }
                 mBroadcastSubReceivers.add(bsc);
             }
         } catch (Throwable t) {
@@ -449,7 +508,14 @@ public class ModStatusBar {
                 default: break;
             }
             if (container != null) {
-                new StatusbarQuietHoursView(containerType, container, mContext);
+                StatusbarQuietHoursView qhView = new StatusbarQuietHoursView(containerType, container, mContext);
+                if (containerType == ContainerType.STATUSBAR) {
+                    if (mQhViewSb != null) {
+                        mQhViewSb.destroy();
+                        if (DEBUG) log("prepareQuietHoursIcon: old QuietHoursView destroyed");
+                    }
+                    mQhViewSb = qhView;
+                }
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
@@ -471,6 +537,16 @@ public class ModStatusBar {
             }
             if (container != null) {
                 BatteryBarView bbView = new BatteryBarView(containerType, container, mPrefs);
+                if (containerType == ContainerType.STATUSBAR) {
+                    if (mBatteryBarViewSb != null) {
+                        mBroadcastSubReceivers.remove(mBatteryBarViewSb);
+                        mProgressBarCtrl.unregisterListener(mBatteryBarViewSb);
+                        mStateChangeListeners.remove(mBatteryBarViewSb);
+                        mBatteryBarViewSb.destroy();
+                        if (DEBUG) log("prepareBatteryBar: old BatteryBarView destroyed");
+                    }
+                    mBatteryBarViewSb = bbView;
+                }
                 mBroadcastSubReceivers.add(bbView);
                 mProgressBarCtrl.registerListener(bbView);
                 mStateChangeListeners.add(bbView);
@@ -496,6 +572,15 @@ public class ModStatusBar {
             if (container != null) {
                 ProgressBarView pbView = new ProgressBarView(
                         containerType, container, mPrefs, mProgressBarCtrl);
+                if (containerType == ContainerType.STATUSBAR) {
+                    if (mProgressBarViewSb != null) {
+                        mProgressBarCtrl.unregisterListener(mProgressBarViewSb);
+                        mStateChangeListeners.remove(mProgressBarViewSb);
+                        mProgressBarViewSb.destroy();
+                        if (DEBUG) log("prepareProgressBar: old ProgressBarView destroyed");
+                    }
+                    mProgressBarViewSb = pbView;
+                }
                 mProgressBarCtrl.registerListener(pbView);
                 mStateChangeListeners.add(pbView);
             }
@@ -572,6 +657,15 @@ public class ModStatusBar {
                         SysUiManagers.AppLauncher.setStatusBar(mStatusBar);
                     }
 
+                    prepareLayoutKeyguard();
+                    prepareSignalCluster(ContainerType.KEYGUARD);
+                    prepareBatteryStyle(ContainerType.KEYGUARD);
+                    prepareQuietHoursIcon(ContainerType.KEYGUARD);
+                    prepareBatteryBar(ContainerType.KEYGUARD);
+                    prepareProgressBar(ContainerType.KEYGUARD);
+                    prepareBrightnessControl();
+                    prepareGestureDetector();
+
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED);
@@ -608,21 +702,17 @@ public class ModStatusBar {
                     "setBar", statusBarClass, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mStatusBarView != null) {
+                        destroyLayoutStatusBar();
+                    }
                     mStatusBarView = (ViewGroup) param.thisObject;
-                    prepareLayout();
-                    prepareBrightnessControl();
-                    prepareTrafficMeter();
+                    prepareLayoutStatusBar();
                     prepareSignalCluster(ContainerType.STATUSBAR);
-                    prepareSignalCluster(ContainerType.KEYGUARD);
                     prepareBatteryStyle(ContainerType.STATUSBAR);
-                    prepareBatteryStyle(ContainerType.KEYGUARD);
                     prepareQuietHoursIcon(ContainerType.STATUSBAR);
-                    prepareQuietHoursIcon(ContainerType.KEYGUARD);
                     prepareBatteryBar(ContainerType.STATUSBAR);
-                    prepareBatteryBar(ContainerType.KEYGUARD);
                     prepareProgressBar(ContainerType.STATUSBAR);
-                    prepareProgressBar(ContainerType.KEYGUARD);
-                    prepareGestureDetector();
+                    prepareTrafficMeter();
                 }
             });
 

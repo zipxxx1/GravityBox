@@ -77,6 +77,19 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
         }
     }
 
+    public void destroy() {
+        if (SysUiManagers.IconManager != null) {
+            SysUiManagers.IconManager.unregisterListener(this);
+        }
+        if (SysUiManagers.BatteryInfoManager != null) {
+            SysUiManagers.BatteryInfoManager.unregisterListener(this);
+        }
+        stopChargingAnimation();
+        mBatteryData = null;
+        mController = null;
+        mPercentage = null;
+    }
+
     private void initPreferences(XSharedPreferences prefs) {
         setTextSize(Integer.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));

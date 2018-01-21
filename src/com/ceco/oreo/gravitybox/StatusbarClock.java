@@ -16,7 +16,9 @@
 package com.ceco.oreo.gravitybox;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -26,6 +28,7 @@ import com.ceco.oreo.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.oreo.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -59,6 +62,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
     private boolean mShowSeconds;
     private SimpleDateFormat mSecondsFormat;
     private Handler mSecondsHandler;
+    private List<Unhook> mHooks = new ArrayList<>();
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -118,7 +122,9 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
 
     private void updateClock() {
         try {
-            XposedHelpers.callMethod(mClock, "updateClock");
+            if (mClock != null) {
+                XposedHelpers.callMethod(mClock, "updateClock");
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error in updateClock: ", t);
         }
@@ -166,7 +172,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
 
     private void hookGetSmallTime() {
         try {
-            XposedHelpers.findAndHookMethod(mClock.getClass(), "getSmallTime", new XC_MethodHook() {
+            mHooks.add(XposedHelpers.findAndHookMethod(mClock.getClass(), "getSmallTime", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     // is this a status bar Clock instance?
@@ -249,7 +255,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                     if (DEBUG) log("Final clockText: '" + sb + "'");
                     param.setResult(sb);
                 }
-            });
+            }));
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -257,7 +263,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
 
     private void hookOnDarkChanged() {
         try {
-            XposedHelpers.findAndHookMethod(mClock.getClass(), "onDarkChanged",
+            mHooks.add(XposedHelpers.findAndHookMethod(mClock.getClass(), "onDarkChanged",
                     Rect.class, float.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -267,7 +273,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                         param.setResult(null);
                     }
                 }
-            });
+            }));
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -284,11 +290,26 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         }
     }
 
+    public void destroy() {
+        if (mSecondsHandler != null) {
+            mSecondsHandler.removeCallbacksAndMessages(null);
+            mSecondsHandler = null;
+        }
+        for (Unhook hook : mHooks) {
+            hook.unhook();
+        }
+        mHooks.clear();
+        mHooks = null;
+        mClock = null;
+    }
+
     private final Runnable mSecondTick = new Runnable() {
         @Override
         public void run() {
             updateClock();
-            mSecondsHandler.postAtTime(this, SystemClock.uptimeMillis() / 1000 * 1000 + 1000);
+            if (mSecondsHandler != null) {
+                mSecondsHandler.postAtTime(this, SystemClock.uptimeMillis() / 1000 * 1000 + 1000);
+            }
         }
     };
 
