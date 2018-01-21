@@ -24,6 +24,7 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.os.ResultReceiver;
 
@@ -162,11 +163,12 @@ public class WifiManagerWrapper {
     public void setWifiApEnabled(boolean enable, boolean showToast) {
         try {
             ConnectivityManager conMan = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            Object service = XposedHelpers.getObjectField(conMan, "mService");
+            Object tethering = XposedHelpers.getObjectField(service, "mTethering");
             if (enable) {
-                Object service = XposedHelpers.getObjectField(conMan, "mService");
-                XposedHelpers.callMethod(service, "startTethering", 0, new ResultReceiver(new Handler()), false);
+                XposedHelpers.callMethod(tethering, "startTethering", 0, new ResultReceiver(new Handler()), false);
             } else {
-                XposedHelpers.callMethod(conMan, "stopTethering", 0);
+                XposedHelpers.callMethod(tethering, "stopTethering", 0);
             }
             if (showToast) {
                 Utils.postToast(mContext, enable ? R.string.hotspot_on :
