@@ -1488,7 +1488,11 @@ public class ModHwKeys {
 
     private static void dismissKeyguard() {
         try {
-            XposedHelpers.callMethod(mPhoneWindowManager, "dismissKeyguardLw");
+            if (Build.VERSION.SDK_INT >= 27) {
+                XposedHelpers.callMethod(mPhoneWindowManager, "dismissKeyguardLw", (Object)null);
+            } else {
+                XposedHelpers.callMethod(mPhoneWindowManager, "dismissKeyguardLw");
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
