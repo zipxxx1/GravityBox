@@ -71,6 +71,7 @@ public abstract class TrafficMeterAbstract extends TextView
     protected boolean mIsTrackingProgress;
     protected boolean mAllowInLockscreen;
     private Boolean mCanReadFromFile;
+    private boolean mHiddenByPolicy;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -214,6 +215,11 @@ public abstract class TrafficMeterAbstract extends TextView
         return mAllowInLockscreen;
     }
 
+    public void setHiddenByPolicy(boolean hidden) {
+        mHiddenByPolicy = hidden;
+        updateState();
+    }
+
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         String action = intent.getAction();
@@ -264,7 +270,7 @@ public abstract class TrafficMeterAbstract extends TextView
     }
 
     private boolean shoudStartTrafficUpdates() {
-        boolean shouldStart = mAttached && mIsScreenOn && getConnectAvailable();
+        boolean shouldStart = mAttached && mIsScreenOn && !mHiddenByPolicy &&  getConnectAvailable();
         if (mDisplayMode == DisplayMode.DOWNLOAD_MANAGER) {
             shouldStart &= mIsDownloadActive;
         } else if (mDisplayMode == DisplayMode.PROGRESS_TRACKING) {

@@ -75,6 +75,7 @@ public class ModStatusBar {
     public static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
     private static final String CLASS_ASSIST_MANAGER = "com.android.systemui.assist.AssistManager";
+    private static final String CLASS_COLLAPSED_SB_FRAGMENT = "com.android.systemui.statusbar.phone.CollapsedStatusBarFragment";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
 
@@ -1031,9 +1032,43 @@ public class ModStatusBar {
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }
+
+            // Hide center layout whenever needed
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_COLLAPSED_SB_FRAGMENT, classLoader,
+                        "hideSystemIconArea", boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (DEBUG) log("hideSystemIconArea");
+                        updateHiddenByPolicy(true);
+                    }
+                });
+                XposedHelpers.findAndHookMethod(CLASS_COLLAPSED_SB_FRAGMENT, classLoader,
+                        "showSystemIconArea", boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (DEBUG) log("showSystemIconArea");
+                        updateHiddenByPolicy(false);
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, t);
+            }
         }
         catch (Throwable t) {
             GravityBox.log(TAG, t);
+        }
+    }
+
+    private static void updateHiddenByPolicy(boolean hidden) {
+        if (mLayoutCenter != null) {
+            mLayoutCenter.setVisibility(hidden ? View.GONE : View.VISIBLE);
+        }
+        if (mTrafficMeter != null) {
+            mTrafficMeter.setHiddenByPolicy(hidden);
+        }
+        if (mBatteryBarViewSb != null) {
+            mBatteryBarViewSb.setHiddenByPolicy(hidden);
         }
     }
 

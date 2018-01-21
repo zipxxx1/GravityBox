@@ -77,6 +77,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     private int mStatusBarState;
     private ContainerType mContainerType;
     private ViewGroup mContainer;
+    private boolean mHiddenByPolicy;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -167,8 +168,13 @@ public class BatteryBarView extends View implements IconManagerListener,
         }
     }
 
+    public void setHiddenByPolicy(boolean hidden) {
+        mHiddenByPolicy = hidden;
+        update();
+    }
+
     private void update() {
-        if (mEnabled && !mHiddenByProgressBar && isValidStatusBarState()) {
+        if (mEnabled && !mHiddenByProgressBar && !mHiddenByPolicy && isValidStatusBarState()) {
             setVisibility(View.VISIBLE);
             if (mDynaColor) {
                 int cappedLevel = Math.min(Math.max(mLevel, 15), 90);
