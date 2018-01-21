@@ -68,6 +68,7 @@ public class ModNavigationBar {
             "com.android.systemui.statusbar.phone.NavigationBarTransitions";
     private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_NAVBAR_INFLATER_VIEW = "com.android.systemui.statusbar.phone.NavigationBarInflaterView";
+    private static final String CLASS_LIGHT_BAR_CTRL = "com.android.systemui.statusbar.phone.LightBarTransitionsController";
 
     @SuppressWarnings("unused")
     private static final int MODE_OPAQUE = 0;
@@ -136,6 +137,17 @@ public class ModNavigationBar {
         View backKey;
         View recentsKey;
         SparseArray<ScaleType> originalScaleType = new SparseArray<ScaleType>();
+        void setDarkIntensity(float intensity) {
+            if (intensity == 0f) {
+                if (customKey != null) customKey.clearColorFilter();
+                if (dpadLeft != null) dpadLeft.clearColorFilter();
+                if (dpadRight != null) dpadRight.clearColorFilter();
+            } else {
+                if (customKey != null) customKey.setColorFilter(0xff707070, PorterDuff.Mode.SRC_ATOP);
+                if (dpadLeft != null) dpadLeft.setColorFilter(0xff707070, PorterDuff.Mode.SRC_ATOP);
+                if (dpadRight != null) dpadRight.setColorFilter(0xff707070, PorterDuff.Mode.SRC_ATOP);
+            }
+        }
     }
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -560,6 +572,22 @@ public class ModNavigationBar {
                     if (mRecentsLongpressAction.actionId != 0 &&
                             (int)param.args[0] != -1 && (int)param.args[1] != -1) {
                         param.setResult(false);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_LIGHT_BAR_CTRL, classLoader,
+                    "setIconTintInternal", float.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mNavbarColorsEnabled)
+                        return;
+
+                    float intensity = (float)param.args[0];
+                    for (int i = 0; i < mNavbarViewInfo.length; i++) {
+                        if (mNavbarViewInfo[i] != null) {
+                            mNavbarViewInfo[i].setDarkIntensity(intensity);
+                        }
                     }
                 }
             });
