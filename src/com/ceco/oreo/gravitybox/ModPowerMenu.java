@@ -96,6 +96,7 @@ public class ModPowerMenu {
     private static boolean mRebootConfirmRequired;
     private static boolean mRebootAllowOnLockscreen;
     private static boolean mAllowSoftReboot;
+    private static Object mGlobalActionsDialog;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -125,6 +126,7 @@ public class ModPowerMenu {
                @Override
                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                    mContext = (Context) param.args[0];
+                   mGlobalActionsDialog = param.thisObject;
                    Resources res = mContext.getResources();
                    Context gbContext = Utils.getGbContext(mContext, res.getConfiguration());
 
@@ -380,6 +382,15 @@ public class ModPowerMenu {
         }
     }
 
+    private static void reboot() {
+        try {
+            Object wmf = XposedHelpers.getObjectField(mGlobalActionsDialog, "mWindowManagerFuncs");
+            XposedHelpers.callMethod(wmf, "reboot", false);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
     private static class RebootAction implements InvocationHandler {
         private Context mContext;
 
@@ -429,7 +440,7 @@ public class ModPowerMenu {
         private static void doReboot(Context context, int mode) {
             final PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
             if (mode == 0) {
-                pm.reboot(null);
+                reboot();
             } else if (mode == 1) {
                 Utils.performSoftReboot();
             } else if (mode == 2) {
