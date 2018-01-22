@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 rovo89@xda
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,13 +16,14 @@
 
 package com.ceco.oreo.gravitybox;
 
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
-import static de.robv.android.xposed.XposedHelpers.findClass;
 import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
+
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Binder;
 import android.os.Handler;
@@ -37,46 +38,70 @@ import de.robv.android.xposed.XposedHelpers;
 
 public class ModVolumeKeySkipTrack {
     private static final String TAG = "GB:ModVolumeKeySkipTrack";
+    private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.server.policy.PhoneWindowManager";
+    private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
+    private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
     private static final boolean DEBUG = false;
 
+
     private static boolean mIsLongPress = false;
-    private static boolean allowSkipTrack;
+    private static boolean mAllowSkipTrack;
     private static AudioManager mAudioManager;
     private static PowerManager mPowerManager;
-    private static boolean mShoudTriggerWakeUp;
+    private static String mVolumeRockerWakeMode;
+    private static boolean mVolumeRockerWakeAllowMusic;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (action.equals(GravityBoxSettings.ACTION_PREF_VOL_MUSIC_CONTROLS_CHANGED)) {
+                mAllowSkipTrack = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_MUSIC_CONTROLS, false);
+                if (DEBUG) log("mAllowSkipTrack=" + mAllowSkipTrack);
+            } else if (action.equals(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED)) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE)) {
+                    mVolumeRockerWakeMode = intent.getStringExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE);
+                    if (DEBUG) log("mVolumeRockerWakeMode=" + mVolumeRockerWakeMode);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC)) {
+                    mVolumeRockerWakeAllowMusic = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC, false);
+                    if (DEBUG) log("mVolumeRockerWakeAllowMusic=" + mVolumeRockerWakeAllowMusic);
+                }
+            }
+        }
+    };
+
     static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             if (DEBUG) log("init");
 
-            updatePreference(prefs);
+            mAllowSkipTrack = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_MUSIC_CONTROLS, false);
+            mVolumeRockerWakeMode = prefs.getString(GravityBoxSettings.PREF_KEY_VOLUME_ROCKER_WAKE, "default");
+            mVolumeRockerWakeAllowMusic =  prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ROCKER_WAKE_ALLOW_MUSIC, false);
+            if (DEBUG) log("mAllowSkipTrack=" + mAllowSkipTrack +
+                    "; mVolumeRockerWakeMode=" + mVolumeRockerWakeMode +
+                    "; mVolumeRockerWakeAllowMusic=" + mVolumeRockerWakeAllowMusic);
 
-            Class<?> classPhoneWindowManager = findClass("com.android.server.policy.PhoneWindowManager", classLoader);
-            XposedBridge.hookAllConstructors(classPhoneWindowManager, handleConstructPhoneWindowManager);
+            XposedHelpers.findAndHookMethod(CLASS_PHONE_WINDOW_MANAGER, classLoader, "init",
+                    Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS,
+                    handleConstructPhoneWindowManager);
 
-            // take advantage of screenTurnedOff method for refreshing state of allowSkipTrack preference
-            findAndHookMethod(classPhoneWindowManager, "screenTurnedOff", new XC_MethodHook() {
-
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (DEBUG) log("screenTurnedOff");
-                    updatePreference(prefs);
-                }
-            });
-
-            findAndHookMethod(classPhoneWindowManager, "interceptKeyBeforeQueueing",
-                    KeyEvent.class, int.class, handleInterceptKeyBeforeQueueing);
-        } catch (Throwable t) { GravityBox.log(TAG, t); }
+            XposedHelpers.findAndHookMethod(CLASS_PHONE_WINDOW_MANAGER, classLoader,
+                    "interceptKeyBeforeQueueing", KeyEvent.class, int.class, handleInterceptKeyBeforeQueueing);
+        } catch (Throwable t) { 
+            GravityBox.log(TAG, t); 
+        }
     }
 
     private static XC_MethodHook handleInterceptKeyBeforeQueueing = new XC_MethodHook() {
         @Override
         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-            if (!allowSkipTrack) return;
+            if (!mAllowSkipTrack) return;
 
             final KeyEvent event = (KeyEvent) param.args[0];
             final int keyCode = event.getKeyCode();
@@ -92,7 +117,7 @@ public class ModVolumeKeySkipTrack {
                 } else {
                     handleVolumeLongPressAbort(param.thisObject);
                     if (!mIsLongPress) {
-                        if (mShoudTriggerWakeUp) {
+                        if (shouldTriggerWakeUp()) {
                             wakeUp();
                         } else {
                             mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
@@ -110,6 +135,12 @@ public class ModVolumeKeySkipTrack {
     private static XC_MethodHook handleConstructPhoneWindowManager = new XC_MethodHook() {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+            Context ctx = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_MUSIC_CONTROLS_CHANGED);
+            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED);
+            ctx.registerReceiver(mBroadcastReceiver, intentFilter);
+
             /**
              * When a volumeup-key longpress expires, skip songs based on key press
              */
@@ -190,14 +221,8 @@ public class ModVolumeKeySkipTrack {
         mHandler.removeCallbacks(mVolumeDownLongPress);
     }
 
-    private static void updatePreference(final XSharedPreferences prefs) {
-        prefs.reload();
-        allowSkipTrack = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_MUSIC_CONTROLS, false);
-        mShoudTriggerWakeUp = "enabled".equals(
-                prefs.getString(GravityBoxSettings.PREF_KEY_VOLUME_ROCKER_WAKE, "default")) &&
-                prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ROCKER_WAKE_ALLOW_MUSIC, false);
-        if (DEBUG) log("allowSkipTrack = " + allowSkipTrack + "; " +
-                "mShoudTriggerWakeUp=" + mShoudTriggerWakeUp);
+    private static boolean shouldTriggerWakeUp() {
+        return ("enabled".equals(mVolumeRockerWakeMode) && mVolumeRockerWakeAllowMusic);
     }
 
     private static void wakeUp() {

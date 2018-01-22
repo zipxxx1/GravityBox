@@ -328,6 +328,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String ACTION_PREF_VOL_SWAP_KEYS_CHANGED = 
             "gravitybox.intent.action.VOL_SWAP_KEYS_CHANGED";
     public static final String EXTRA_VOL_SWAP_KEYS = "volKeysSwap";
+    public static final String ACTION_PREF_VOL_MUSIC_CONTROLS_CHANGED = 
+            "gravitybox.intent.action.VOL_MUSIC_CONTROLS_CHANGED";
+    public static final String EXTRA_VOL_MUSIC_CONTROLS = "extraVolMusicControls";
 
     public static final String PREF_CAT_HWKEY_ACTIONS = "pref_cat_hwkey_actions";
     public static final String PREF_CAT_HWKEY_MENU = "pref_cat_hwkey_menu";
@@ -3365,6 +3368,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_QS_LOCKED_TILE_INDICATOR)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_LOCKED_TILE_INDICATOR, prefs.getString(key, "DIM"));
+            } else if (key.equals(PREF_KEY_VOL_MUSIC_CONTROLS)) {
+                intent.setAction(ACTION_PREF_VOL_MUSIC_CONTROLS_CHANGED);
+                intent.putExtra(EXTRA_VOL_MUSIC_CONTROLS, prefs.getBoolean(key, false));
             }
 
             if (intent.getAction() != null) {
