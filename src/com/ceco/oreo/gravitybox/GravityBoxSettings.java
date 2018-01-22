@@ -262,6 +262,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE = "pref_lockscreen_bottom_actions_hide";
     public static final String PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE = "pref_lockscreen_pin_sramble";
     public static final String ACTION_LOCKSCREEN_SETTINGS_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SETTINGS_CHANGED";
+    public static final String EXTRA_IMPRINT_VIBE_DISABLE = "imprintVibeDisable";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN_SHORTCUTS = "pref_cat_lockscreen_shortcuts";
     public static final List<String> PREF_KEY_LOCKSCREEN_SHORTCUT = new ArrayList<String>(Arrays.asList(
@@ -3226,6 +3227,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                         prefs.getBoolean(key, false));
             } else if (lockscreenKeys.contains(key)) {
                 intent.setAction(ACTION_LOCKSCREEN_SETTINGS_CHANGED);
+                if (key.equals(PREF_KEY_IMPRINT_VIBE_DISABLE)) {
+                    intent.putStringArrayListExtra(EXTRA_IMPRINT_VIBE_DISABLE,
+                            new ArrayList<String>(prefs.getStringSet(key, new HashSet<String>())));
+                }
                 delayedBroadcast = true;
             } else if (headsUpKeys.contains(key)) {
                 intent.setAction(ACTION_HEADS_UP_SETTINGS_CHANGED);

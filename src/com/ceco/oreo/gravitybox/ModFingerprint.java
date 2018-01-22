@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,6 +15,7 @@
 package com.ceco.oreo.gravitybox;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -37,22 +38,26 @@ public class ModFingerprint {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static XSharedPreferences mPrefs;
+    private static Set<String> mImprintVibeDisable;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED)) {
-                mPrefs.reload();
-                if (DEBUG) log("Settings reloaded");
+            if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED) &&
+                    intent.hasExtra(GravityBoxSettings.EXTRA_IMPRINT_VIBE_DISABLE)) {
+                mImprintVibeDisable = new HashSet<String>(intent.getStringArrayListExtra(
+                        GravityBoxSettings.EXTRA_IMPRINT_VIBE_DISABLE));
+                if (DEBUG) log("mImprintVibeDisable=" + mImprintVibeDisable);
             }
         }
     };
 
     public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
-            mPrefs = prefs;
+            mImprintVibeDisable = prefs.getStringSet(
+                    GravityBoxSettings.PREF_KEY_IMPRINT_VIBE_DISABLE,
+                        new HashSet<String>());
 
             XposedBridge.hookAllConstructors(XposedHelpers.findClass(
                     CLASS_FINGERPRINT_SERVICE, classLoader), new XC_MethodHook() {
@@ -70,8 +75,7 @@ public class ModFingerprint {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (DEBUG) log("vibrateFingerprintError");
-                    if (mPrefs.getStringSet(GravityBoxSettings.PREF_KEY_IMPRINT_VIBE_DISABLE,
-                            new HashSet<String>()).contains("ERROR")) {
+                    if (mImprintVibeDisable.contains("ERROR")) {
                         param.setResult(null);
                     }
                 }
@@ -81,8 +85,7 @@ public class ModFingerprint {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (DEBUG) log("vibrateFingerprintSuccess");
-                    if (mPrefs.getStringSet(GravityBoxSettings.PREF_KEY_IMPRINT_VIBE_DISABLE,
-                            new HashSet<String>()).contains("SUCCESS")) {
+                    if (mImprintVibeDisable.contains("SUCCESS")) {
                         param.setResult(null);
                     }
                 }
