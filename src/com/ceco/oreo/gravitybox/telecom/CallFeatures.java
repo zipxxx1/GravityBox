@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,7 +22,10 @@ import java.util.Set;
 import com.ceco.oreo.gravitybox.GravityBox;
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Handler;
@@ -50,7 +53,6 @@ public class CallFeatures {
         return new CallFeatures(prefs, classLoader);
     }
 
-    private XSharedPreferences mPrefs;
     private int mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
     private Set<String> mCallVibrations;
     private Context mContext;
@@ -66,9 +68,38 @@ public class CallFeatures {
     private CallFeatures() { /* must be created by calling init() */ }
 
     private CallFeatures(XSharedPreferences prefs, ClassLoader classLoader) throws Throwable {
-        mPrefs = prefs;
-        refreshPrefs();
+        initPrefs(prefs);
         createHooks(classLoader);
+    }
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PHONE_FLIP)) {
+                mFlipAction = Integer.valueOf(intent.getStringExtra(GravityBoxSettings.EXTRA_PHONE_FLIP));
+                if (DEBUG) log("mFlipAction=" + mFlipAction);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_CALL_VIBRATIONS)) {
+                mCallVibrations = new HashSet<String>(intent.getStringArrayListExtra(
+                        GravityBoxSettings.EXTRA_CALL_VIBRATIONS));
+                if (DEBUG) log("mCallVibrations=" + mCallVibrations);
+            }
+        }
+    };
+
+    private void initPrefs(XSharedPreferences prefs) {
+        mCallVibrations = prefs.getStringSet(
+                GravityBoxSettings.PREF_KEY_CALL_VIBRATIONS, new HashSet<String>());
+        if (DEBUG) log("mCallVibrations = " + mCallVibrations.toString());
+
+        mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
+        try {
+            mFlipAction = Integer.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_PHONE_FLIP, "0"));
+            if (DEBUG) log("mFlipAction = " + mFlipAction);
+        } catch (NumberFormatException e) {
+            GravityBox.log(TAG, e);
+        }
     }
 
     private void createHooks(ClassLoader classLoader) throws Throwable {
@@ -105,10 +136,12 @@ public class CallFeatures {
         mHandler = new Handler();
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mWakeLock  = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+
+        IntentFilter intentFilter = new IntentFilter(GravityBoxSettings.ACTION_PREF_CALL_FEATURES_CHANGED);
+        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
     }
 
     private void onCallAdded(Object call) {
-        refreshPrefs();
         int state = (int) XposedHelpers.callMethod(call, "getState");
         if (DEBUG) log("onCallAdded: state = " + CallState.toString(state));
         onCallStateChanged(call, state);
@@ -278,20 +311,4 @@ public class CallFeatures {
             mHandler.postDelayed(this, 60000);
         }
     };
-
-    private void refreshPrefs() {
-        mPrefs.reload();
-        mCallVibrations = mPrefs.getStringSet(
-                GravityBoxSettings.PREF_KEY_CALL_VIBRATIONS, new HashSet<String>());
-        if (DEBUG) log("mCallVibrations = " + mCallVibrations.toString());
-
-        mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
-        try {
-            mFlipAction = Integer.valueOf(mPrefs.getString(
-                    GravityBoxSettings.PREF_KEY_PHONE_FLIP, "0"));
-            if (DEBUG) log("mFlipAction = " + mFlipAction);
-        } catch (NumberFormatException e) {
-            GravityBox.log(TAG, e);
-        }
-    }
 }

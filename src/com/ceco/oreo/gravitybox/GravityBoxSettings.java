@@ -414,6 +414,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String CV_DISCONNECTED = "disconnected";
     public static final String CV_WAITING = "waiting";
     public static final String CV_PERIODIC = "periodic";
+    public static final String ACTION_PREF_CALL_FEATURES_CHANGED = "gravitybox.intent.action.CALL_FEATURES_CHANGED";
+    public static final String EXTRA_PHONE_FLIP = "phoneFlip";
+    public static final String EXTRA_CALL_VIBRATIONS = "callVibrations";
 
     public static final String PREF_CAT_KEY_NOTIF_DRAWER_STYLE = "pref_cat_notification_drawer_style";
     public static final String PREF_KEY_NOTIF_BACKGROUND = "pref_notif_background";
@@ -3376,6 +3379,13 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_VOL_MUSIC_CONTROLS)) {
                 intent.setAction(ACTION_PREF_VOL_MUSIC_CONTROLS_CHANGED);
                 intent.putExtra(EXTRA_VOL_MUSIC_CONTROLS, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_PHONE_FLIP)) {
+                intent.setAction(ACTION_PREF_CALL_FEATURES_CHANGED);
+                intent.putExtra(EXTRA_PHONE_FLIP, prefs.getString(key, "0"));
+            } else if (key.equals(PREF_KEY_CALL_VIBRATIONS)) {
+                intent.setAction(ACTION_PREF_CALL_FEATURES_CHANGED);
+                intent.putStringArrayListExtra(EXTRA_CALL_VIBRATIONS,
+                        new ArrayList<String>(prefs.getStringSet(key, new HashSet<String>())));
             }
 
             if (intent.getAction() != null) {
