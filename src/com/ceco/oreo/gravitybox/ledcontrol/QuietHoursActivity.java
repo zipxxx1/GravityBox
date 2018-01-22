@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,6 +15,7 @@
 package com.ceco.oreo.gravitybox.ledcontrol;
 
 import java.text.DateFormatSymbols;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
@@ -60,11 +61,46 @@ public class QuietHoursActivity extends GravityBoxActivity {
             "gravitybox.intent.action.QUIET_HOURS_CHANGED";
     public static final String ACTION_SET_QUIET_HOURS_MODE = 
             "gravitybox.intent.action.SET_QUIET_HOURS_MODE";
+
+    public static final String EXTRA_QH_LOCKED = "qhLocked";
+    public static final String EXTRA_QH_ENABLED = "qhEnabled";
+    public static final String EXTRA_QH_START = "qhStart";
+    public static final String EXTRA_QH_END = "qhEnd";
+    public static final String EXTRA_QH_START_ALT = "qhStartAlt";
+    public static final String EXTRA_QH_END_ALT = "qhEndAlt";
+    public static final String EXTRA_QH_MUTE_LED = "qhMuteLed";
+    public static final String EXTRA_QH_MUTE_VIBE = "qhMuteVibe";
+    public static final String EXTRA_QH_MUTE_SYSTEM_SOUNDS = "qhMuteSystemSounds";
+    public static final String EXTRA_QH_STATUSBAR_ICON = "qhStatusbarIcon";
     public static final String EXTRA_QH_MODE = "qhMode";
+    public static final String EXTRA_QH_INTERACTIVE = "qhInteractive";
+    public static final String EXTRA_QH_WEEKDAYS = "qhWeekDays";
+    public static final String EXTRA_QH_MUTE_SYSTEM_VIBE = "qhMuteSystemVibe";
+
+    protected static void broadcastSettings(Context ctx, SharedPreferences prefs) {
+        Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
+        intent.putExtra(EXTRA_QH_LOCKED, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false));
+        intent.putExtra(EXTRA_QH_ENABLED, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false));
+        intent.putExtra(EXTRA_QH_START, prefs.getInt(QuietHoursActivity.PREF_KEY_QH_START, 1380));
+        intent.putExtra(EXTRA_QH_END, prefs.getInt(QuietHoursActivity.PREF_KEY_QH_END, 360));
+        intent.putExtra(EXTRA_QH_START_ALT, prefs.getInt(QuietHoursActivity.PREF_KEY_QH_START_ALT, 1380));
+        intent.putExtra(EXTRA_QH_END_ALT, prefs.getInt(QuietHoursActivity.PREF_KEY_QH_END_ALT, 360));
+        intent.putExtra(EXTRA_QH_MUTE_LED, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_LED, false));
+        intent.putExtra(EXTRA_QH_MUTE_VIBE, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_VIBE, true));
+        intent.putStringArrayListExtra(EXTRA_QH_MUTE_SYSTEM_SOUNDS, new ArrayList<String>(
+                 prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_MUTE_SYSTEM_SOUNDS, new HashSet<String>())));
+        intent.putExtra(EXTRA_QH_STATUSBAR_ICON, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_STATUSBAR_ICON, true));
+        intent.putExtra(EXTRA_QH_MODE, prefs.getString(QuietHoursActivity.PREF_KEY_QH_MODE, "AUTO"));
+        intent.putExtra(EXTRA_QH_INTERACTIVE, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_INTERACTIVE, false));
+        intent.putStringArrayListExtra(EXTRA_QH_WEEKDAYS, new ArrayList<String>(prefs.getStringSet(
+                QuietHoursActivity.PREF_KEY_QH_WEEKDAYS, new HashSet<String>(Arrays.asList("2","3","4","5","6")))));
+        intent.putExtra(EXTRA_QH_MUTE_SYSTEM_VIBE, prefs.getBoolean(QuietHoursActivity.PREF_KEY_MUTE_SYSTEM_VIBE, false));
+        ctx.sendBroadcast(intent);
+    }
 
     public static void setQuietHoursMode(final Context context, String mode, boolean showToast) {
         try {
-            WorldReadablePrefs prefs = SettingsManager.getInstance(context).getQuietHoursPrefs();
+            final WorldReadablePrefs prefs = SettingsManager.getInstance(context).getQuietHoursPrefs();
             QuietHours qh = new QuietHours(prefs);
             if (qh.uncLocked || !qh.enabled) {
                 return;
@@ -101,8 +137,7 @@ public class QuietHoursActivity extends GravityBoxActivity {
                 public void onPreferencesCommited() {
                     if (WorldReadablePrefs.DEBUG)
                         Log.d("GravityBox", "QuietHoursActivity: setQuietHoursMode() onPreferencesCommited");
-                    Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
-                    context.sendBroadcast(intent);
+                    broadcastSettings(context, prefs);
                 }
             });
             if (showToast) {
@@ -224,8 +259,7 @@ public class QuietHoursActivity extends GravityBoxActivity {
         public void onSharedPreferenceChangeCommited() {
             if (WorldReadablePrefs.DEBUG)
                 Log.d("GravityBox", "QuietHoursActivity: onSharedPreferenceChangeCommited");
-            Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
-            getActivity().sendBroadcast(intent);            
+            broadcastSettings(getActivity(), mPrefs);
         }
     }
 }

@@ -90,7 +90,6 @@ public class ModLockscreen {
     private static enum UnlockPolicy { DEFAULT, NOTIF_NONE, NOTIF_ONGOING };
 
     private static XSharedPreferences mPrefs;
-    private static XSharedPreferences mQhPrefs;
     private static Context mContext;
     private static Context mGbContext;
     private static Bitmap mCustomBg;
@@ -134,8 +133,7 @@ public class ModLockscreen {
                 if (DEBUG_KIS) log("ACTION_KEYGUARD_IMAGE_UPDATED received");
                 setLastScreenBackground(true);
             } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
-                mQhPrefs.reload();
-                mQuietHours = new QuietHours(mQhPrefs);
+                mQuietHours = new QuietHours(intent.getExtras());
                 if (DEBUG) log("QuietHours settings reloaded");
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED)) {
                 if (mAppBar != null) {
@@ -186,8 +184,7 @@ public class ModLockscreen {
     public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
-            mQhPrefs = qhPrefs;
-            mQuietHours = new QuietHours(mQhPrefs);
+            mQuietHours = new QuietHours(qhPrefs);
 
             final Class<?> kgPasswordViewClass = XposedHelpers.findClass(CLASS_KG_PASSWORD_VIEW, classLoader);
             final Class<?> kgPINViewClass = XposedHelpers.findClass(CLASS_KG_PIN_VIEW, classLoader);

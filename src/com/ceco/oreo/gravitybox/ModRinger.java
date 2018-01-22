@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.ceco.oreo.gravitybox;
 import java.lang.reflect.Method;
 
 import com.ceco.oreo.gravitybox.ledcontrol.QuietHours;
+import com.ceco.oreo.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.oreo.gravitybox.preference.IncreasingRingPreference;
 import com.ceco.oreo.gravitybox.preference.IncreasingRingPreference.ConfigStore;
 
@@ -44,6 +45,7 @@ public class ModRinger {
     private static Ringtone mRingtone;
     private static Handler mHandler;
     private static Object mAsyncRinger;
+    private static QuietHours mQuietHours;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -62,6 +64,8 @@ public class ModRinger {
                mRingerConfig.rampUpDuration = intent.getIntExtra(
                        IncreasingRingPreference.EXTRA_RAMP_UP_DURATION, 10);
                if (DEBUG) log(mRingerConfig.toString());
+           } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+               mQuietHours = new QuietHours(intent.getExtras());
            }
         }
     };
@@ -113,12 +117,15 @@ public class ModRinger {
                     GravityBoxSettings.PREF_KEY_INCREASING_RING, null));
             if (DEBUG) log(mRingerConfig.toString());
 
+            mQuietHours = new QuietHours(qhPrefs);
+
             XposedBridge.hookAllConstructors(clsTelecomServiceImpl, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(IncreasingRingPreference.ACTION_INCREASING_RING_CHANGED);
+                    intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     context.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("TelecomServiceImpl created; broadcast receiver registered");
                 }
@@ -135,9 +142,7 @@ public class ModRinger {
             XposedBridge.hookMethod(mtdHandlePlay, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    qhPrefs.reload();
-                    QuietHours qh = new QuietHours(qhPrefs);
-                    if (qh.isSystemSoundMuted(QuietHours.SystemSound.RINGER)) {
+                    if (mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.RINGER)) {
                         param.setResult(null);
                     }
                 }

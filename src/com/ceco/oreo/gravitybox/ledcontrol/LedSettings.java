@@ -279,8 +279,8 @@ public class LedSettings {
 
     public static void lockUnc(final Context context, boolean lock) {
         try {
-            WorldReadablePrefs prefs = SettingsManager.getInstance(context).getLedControlPrefs();
-            prefs.edit().putBoolean(PREF_KEY_LOCKED, lock).commit(new OnPreferencesCommitedListener() {
+            final WorldReadablePrefs prefsUnc = SettingsManager.getInstance(context).getLedControlPrefs();
+            prefsUnc.edit().putBoolean(PREF_KEY_LOCKED, lock).commit(new OnPreferencesCommitedListener() {
                 @Override
                 public void onPreferencesCommited() {
                     if (WorldReadablePrefs.DEBUG)
@@ -289,15 +289,14 @@ public class LedSettings {
                     context.sendBroadcast(intent);
                 }
             });
-            prefs = SettingsManager.getInstance(context).getQuietHoursPrefs();
-            prefs.edit().putBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, lock).commit(
+            final WorldReadablePrefs prefsQh = SettingsManager.getInstance(context).getQuietHoursPrefs();
+            prefsQh.edit().putBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, lock).commit(
                     new OnPreferencesCommitedListener() {
                 @Override
                 public void onPreferencesCommited() {
                     if (WorldReadablePrefs.DEBUG)
                         Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited QH");
-                    Intent intent = new Intent(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
-                    context.sendBroadcast(intent);
+                    QuietHoursActivity.broadcastSettings(context, prefsQh);
                 }
             });
         } catch (Throwable t) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,6 +22,7 @@ import com.ceco.oreo.gravitybox.GravityBox;
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
 import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.ledcontrol.QuietHours;
+import com.ceco.oreo.gravitybox.ledcontrol.QuietHoursActivity;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -45,7 +46,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     private TelephonyManager mTelephonyManager;
     private LowBatteryWarningPolicy mLowBatteryWarningPolicy;
     private PowerManager mPowerManager;
-    private XSharedPreferences mQhPrefs;
+    private static QuietHours mQuietHours;
 
     public static final int SOUND_CHARGED = 0;
     public static final int SOUND_PLUGGED = 1;
@@ -114,7 +115,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
 
     protected BatteryInfoManager(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs) {
         mContext = context;
-        mQhPrefs = qhPrefs;
+        mQuietHours = new QuietHours(qhPrefs);
         mBatteryData = new BatteryData();
         mListeners = new ArrayList<BatteryStatusListener>();
         mSounds = new Uri[4];
@@ -278,9 +279,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     }
 
     private boolean quietHoursActive() {
-        mQhPrefs.reload();
-        QuietHours qh = new QuietHours(mQhPrefs);
-        return qh.isSystemSoundMuted(QuietHours.SystemSound.CHARGER);
+        return mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.CHARGER);
     }
 
     @Override
@@ -297,6 +296,8 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
                 intent.hasExtra(GravityBoxSettings.EXTRA_LOW_BATTERY_WARNING_POLICY)) {
             mLowBatteryWarningPolicy = LowBatteryWarningPolicy.valueOf(intent.getStringExtra(
                     GravityBoxSettings.EXTRA_LOW_BATTERY_WARNING_POLICY));
+        } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+            mQuietHours = new QuietHours(intent.getExtras());
         }
     }
 }

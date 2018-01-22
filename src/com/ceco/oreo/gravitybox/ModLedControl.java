@@ -85,7 +85,6 @@ public class ModLedControl {
     public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
 
     private static XSharedPreferences mUncPrefs;
-    private static XSharedPreferences mQhPrefs;
     private static Context mContext;
     private static PowerManager mPm;
     private static SensorManager mSm;
@@ -133,8 +132,7 @@ public class ModLedControl {
                 mUncPrefs.reload();
                 updateActiveScreenFeature();
             } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
-                mQhPrefs.reload();
-                mQuietHours = new QuietHours(mQhPrefs);
+                mQuietHours = new QuietHours(intent.getExtras());
             } else if (action.equals(Intent.ACTION_USER_PRESENT)) {
                 if (DEBUG) log("User present");
                 mUserPresent = true;
@@ -160,8 +158,7 @@ public class ModLedControl {
             final XSharedPreferences uncPrefs, final XSharedPreferences qhPrefs,
             final ClassLoader classLoader) {
         mUncPrefs = uncPrefs;
-        mQhPrefs = qhPrefs;
-        mQuietHours = new QuietHours(mQhPrefs);
+        mQuietHours = new QuietHours(qhPrefs);
 
         mProximityWakeUpEnabled = mainPrefs.getBoolean(GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false);
 

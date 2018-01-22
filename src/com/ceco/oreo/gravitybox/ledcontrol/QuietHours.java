@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,6 +28,7 @@ import com.ceco.oreo.gravitybox.Utils;
 
 import android.app.Notification;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 
 public class QuietHours {
     public static final String PKG_WEARABLE_APP = "com.google.android.wearable.app";
@@ -59,6 +60,23 @@ public class QuietHours {
     public boolean interactive;
     Set<String> weekDays;
     public boolean muteSystemVibe;
+
+    public QuietHours(Bundle prefs) {
+        uncLocked = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_LOCKED);
+        enabled = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_ENABLED);
+        start = prefs.getInt(QuietHoursActivity.EXTRA_QH_START);
+        end = prefs.getInt(QuietHoursActivity.EXTRA_QH_END);
+        startAlt = prefs.getInt(QuietHoursActivity.EXTRA_QH_START_ALT);
+        endAlt = prefs.getInt(QuietHoursActivity.EXTRA_QH_END_ALT);
+        muteLED = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_MUTE_LED);
+        muteVibe = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_MUTE_VIBE);
+        muteSystemSounds = new HashSet<String>(prefs.getStringArrayList(QuietHoursActivity.EXTRA_QH_MUTE_SYSTEM_SOUNDS));
+        showStatusbarIcon = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_STATUSBAR_ICON);
+        mode = Mode.valueOf(prefs.getString(QuietHoursActivity.EXTRA_QH_MODE));
+        interactive = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_INTERACTIVE);
+        weekDays = new HashSet<String>(prefs.getStringArrayList(QuietHoursActivity.EXTRA_QH_WEEKDAYS));
+        muteSystemVibe = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_MUTE_SYSTEM_VIBE);
+    }
 
     public QuietHours(SharedPreferences prefs) {
         uncLocked = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false);

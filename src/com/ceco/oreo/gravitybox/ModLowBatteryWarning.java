@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,6 +19,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 
 import com.ceco.oreo.gravitybox.ledcontrol.QuietHours;
+import com.ceco.oreo.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
 import com.ceco.oreo.gravitybox.managers.BatteryInfoManager.LowBatteryWarningPolicy;
 
@@ -45,6 +46,7 @@ public class ModLowBatteryWarning {
     private static Object mBatteryLed;
     private static boolean mFlashingLedDisabled;
     private static ChargingLed mChargingLed;
+    private static QuietHours mQuietHours;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -63,6 +65,8 @@ public class ModLowBatteryWarning {
                             GravityBoxSettings.EXTRA_BLED_CHARGING));
                 }
                 updateLightsLocked();
+            } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+                mQuietHours = new QuietHours(intent.getExtras());
             }
         }
     };
@@ -77,13 +81,14 @@ public class ModLowBatteryWarning {
         }
     }
 
-    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
+    public static void initAndroid(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {
         if (DEBUG) log("initAndroid");
         try {
             final Class<?> batteryServiceClass = XposedHelpers.findClass(CLASS_BATTERY_SERVICE_LED, classLoader);
 
             mFlashingLedDisabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_FLASHING_LED_DISABLE, false);
             mChargingLed = ChargingLed.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_CHARGING_LED, "DEFAULT"));
+            mQuietHours = new QuietHours(qhPrefs);
 
             XposedBridge.hookAllConstructors(batteryServiceClass, new XC_MethodHook() {
                 @Override
@@ -93,6 +98,7 @@ public class ModLowBatteryWarning {
                             XposedHelpers.getSurroundingThis(param.thisObject), "mContext");
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED);
+                    intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     context.registerReceiver(mBroadcastReceiver, intentFilter);
                 }
             });
@@ -194,9 +200,7 @@ public class ModLowBatteryWarning {
     private static boolean isDashSoundDisabled(final XSharedPreferences prefs, final XSharedPreferences qhPrefs) {
         prefs.reload();
         if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_OOS_DASH_SOUND_DISABLE, false)) {
-            qhPrefs.reload();
-            QuietHours qh = new QuietHours(qhPrefs);
-            return qh.isSystemSoundMuted(QuietHours.SystemSound.CHARGER);
+            return mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.CHARGER);
         }
         return true;
     }

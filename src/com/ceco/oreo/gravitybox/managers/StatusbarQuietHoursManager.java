@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -34,7 +34,6 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
     private static StatusbarQuietHoursManager sManager;
 
     private Context mContext;
-    private XSharedPreferences mQhPrefs;
     private QuietHours mQuietHours;
     private List<QuietHoursListener> mListeners;
 
@@ -54,10 +53,8 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
 
     private StatusbarQuietHoursManager(Context context, XSharedPreferences qhPrefs) {
         mContext = context;
-        mQhPrefs = qhPrefs;
+        mQuietHours = new QuietHours(qhPrefs);
         mListeners = new ArrayList<QuietHoursListener>();
-
-        refreshState();
     }
 
     @Override
@@ -68,7 +65,7 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
                 action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
             notifyTimeTick();
         } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
-            refreshState();
+            mQuietHours = new QuietHours(intent.getExtras());
             notifyQuietHoursChange();
         }
     }
@@ -87,11 +84,6 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
         if (mListeners.contains(listener)) {
             mListeners.remove(listener);
         }
-    }
-
-    private void refreshState() {
-        mQhPrefs.reload();
-        mQuietHours = new QuietHours(mQhPrefs);
     }
 
     private void notifyTimeTick() {

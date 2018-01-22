@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -152,7 +152,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModExpandedDesktop.initAndroid(prefs, lpparam.classLoader);
             ModAudio.initAndroid(prefs, qhPrefs, lpparam.classLoader);
             PermissionGranter.initAndroid(lpparam.classLoader);
-            ModLowBatteryWarning.initAndroid(prefs, lpparam.classLoader);
+            ModLowBatteryWarning.initAndroid(prefs, qhPrefs, lpparam.classLoader);
             ModDisplay.initAndroid(prefs, lpparam.classLoader);
             ConnectivityServiceWrapper.initAndroid(lpparam.classLoader);
             ModViewConfig.initAndroid(prefs, lpparam.classLoader);

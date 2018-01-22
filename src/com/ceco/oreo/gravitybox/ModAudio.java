@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -42,7 +42,6 @@ public class ModAudio {
     private static boolean mVolForceMusicControl;
     private static boolean mSwapVolumeKeys;
     private static HandleChangeVolume mHandleChangeVolume;
-    private static XSharedPreferences mQhPrefs;
     private static QuietHours mQh;
     private static boolean mVolumesLinked;
     private static Object mAudioService;
@@ -68,10 +67,8 @@ public class ModAudio {
                 mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
                 if (DEBUG) log("mVolumesLinked set to: " + mVolumesLinked);
                 updateStreamVolumeAlias();
-            } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED) &&
-                    mQhPrefs != null) {
-                mQhPrefs.reload();
-                mQh = new QuietHours(mQhPrefs);
+            } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+                mQh = new QuietHours(intent.getExtras());
             }
         }
     };
@@ -80,8 +77,7 @@ public class ModAudio {
         try {
             final Class<?> classAudioService = XposedHelpers.findClass(CLASS_AUDIO_SERVICE, classLoader);
 
-            mQhPrefs = qhPrefs;
-            mQh = new QuietHours(mQhPrefs);
+            mQh = new QuietHours(qhPrefs);
 
             mSwapVolumeKeys = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_SWAP_KEYS, false);
             mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
