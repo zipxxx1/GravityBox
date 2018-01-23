@@ -15,6 +15,7 @@
 
 package com.ceco.oreo.gravitybox.ledcontrol;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,6 +39,8 @@ public class LedSettings {
     public static final String PREF_KEY_ACTIVE_SCREEN_POCKET_MODE = "pref_unc_as_pocket_mode";
 
     public static final String ACTION_UNC_SETTINGS_CHANGED = "gravitybox.intent.action.UNC_SETTINGS_CHANGED";
+    public static final String EXTRA_UNC_PACKAGE_NAME = "gravitybox.uncPackageName";
+    public static final String EXTRA_UNC_PACKAGE_SETTINGS = "gravitybox.uncPackageSettings";
 
     public enum LedMode { ORIGINAL, OVERRIDE, OFF };
     public enum HeadsUpMode { DEFAULT, ALWAYS, IMMERSIVE, OFF };
@@ -54,10 +57,6 @@ public class LedSettings {
         public int getValue() { return mValue; }
     }
     public enum VisibilityLs { DEFAULT, CLEARABLE, PERSISTENT, ALL };
-
-    interface Callback {
-        void onSerialized();
-    }
 
     private Context mContext;
     private String mPackageName;
@@ -115,6 +114,10 @@ public class LedSettings {
 
     public static LedSettings deserialize(Set<String> dataSet) {
         return deserialize(null, null, dataSet);
+    }
+
+    public static LedSettings deserialize(String pkg, ArrayList<String> list) {
+        return deserialize(null, pkg, new HashSet<String>(list));
     }
 
     private static LedSettings deserialize(Context context, String packageName, Set<String> dataSet) {
@@ -227,6 +230,12 @@ public class LedSettings {
         return deserialize(context, "default");
     }
 
+    protected static LedSettings createForPreview() {
+        LedSettings settings = new LedSettings(null, "preview");
+        settings.setEnabled(true);
+        return settings;
+    }
+
     protected static boolean isActiveScreenMasterEnabled(Context context) {
         try {
             SharedPreferences prefs = SettingsManager.getInstance(context).getLedControlPrefs();
@@ -277,7 +286,7 @@ public class LedSettings {
         }
     }
 
-    public static void lockUnc(final Context context, boolean lock) {
+    public static void lockUnc(final Context context, final boolean lock) {
         try {
             final WorldReadablePrefs prefsUnc = SettingsManager.getInstance(context).getLedControlPrefs();
             prefsUnc.edit().putBoolean(PREF_KEY_LOCKED, lock).commit(new OnPreferencesCommitedListener() {
@@ -286,6 +295,7 @@ public class LedSettings {
                     if (WorldReadablePrefs.DEBUG)
                         Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited UNC");
                     Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
+                    intent.putExtra(PREF_KEY_LOCKED, lock);
                     context.sendBroadcast(intent);
                 }
             });
@@ -590,69 +600,73 @@ public class LedSettings {
         return mLedIgnoreUpdate;
     }
 
-    protected void serialize() {
-        serialize(false, null);
+    private Set<String> createDataSet() {
+        Set<String> dataSet = new HashSet<String>();
+
+        dataSet.add("enabled:" + mEnabled);
+        dataSet.add("ongoing:" + mOngoing);
+        dataSet.add("ledOnMs:" + mLedOnMs);
+        dataSet.add("ledOffMs:" + mLedOffMs);
+        dataSet.add("color:" + mColor);
+        dataSet.add("soundOverride:" + mSoundOverride);
+        if (mSoundUri != null) {
+            dataSet.add("sound:" + mSoundUri.toString());
+        }
+        dataSet.add("soundOnlyOnce:" + mSoundOnlyOnce);
+        dataSet.add("soundOnlyOnceTimeoutMs:" + mSoundOnlyOnceTimeout);
+        dataSet.add("insistent:" + mInsistent);
+        dataSet.add("vibrateOverride:" + mVibrateOverride);
+        if (mVibratePatternStr != null) {
+            dataSet.add("vibratePattern:" + mVibratePatternStr);
+        }
+        dataSet.add("activeScreenMode:" + mActiveScreenMode);
+        dataSet.add("activeScreenIgnoreUpdate:" + mActiveScreenIgnoreUpdate);
+        dataSet.add("ledMode:" + mLedMode);
+        dataSet.add("qhIgnore:" + mQhIgnore);
+        if (mQhIgnoreList != null) {
+            dataSet.add("qhIgnoreList:" + mQhIgnoreList);
+        }
+        dataSet.add("headsUpMode:" + mHeadsUpMode.toString());
+        dataSet.add("headsUpDnd:" + mHeadsUpDnd);
+        dataSet.add("headsUpTimeout:" + mHeadsUpTimeout);
+        dataSet.add("progressTracking:" + mProgressTracking);
+        dataSet.add("visibility:" + mVisibility.toString());
+        dataSet.add("visibilityLs:" + mVisibilityLs.toString());
+        dataSet.add("soundToVibrateDisabled:" + mSoundToVibrateDisabled);
+        dataSet.add("vibrateReplace:" + mVibrateReplace);
+        dataSet.add("soundReplace:" + mSoundReplace);
+        dataSet.add("hidePersistent:" + mHidePersistent);
+        dataSet.add("ledDnd:" + mLedDnd);
+        dataSet.add("ledIgnoreUpdate:" + mLedIgnoreUpdate);
+
+        return dataSet;
     }
 
-    protected void serialize(final boolean isPreview, final Callback callback) {
+    protected void serialize() {
         try {
-            Set<String> dataSet = new HashSet<String>();
-            dataSet.add("enabled:" + mEnabled);
-            dataSet.add("ongoing:" + mOngoing);
-            dataSet.add("ledOnMs:" + mLedOnMs);
-            dataSet.add("ledOffMs:" + mLedOffMs);
-            dataSet.add("color:" + mColor);
-            dataSet.add("soundOverride:" + mSoundOverride);
-            if (mSoundUri != null) {
-                dataSet.add("sound:" + mSoundUri.toString());
-            }
-            dataSet.add("soundOnlyOnce:" + mSoundOnlyOnce);
-            dataSet.add("soundOnlyOnceTimeoutMs:" + mSoundOnlyOnceTimeout);
-            dataSet.add("insistent:" + mInsistent);
-            dataSet.add("vibrateOverride:" + mVibrateOverride);
-            if (mVibratePatternStr != null) {
-                dataSet.add("vibratePattern:" + mVibratePatternStr);
-            }
-            dataSet.add("activeScreenMode:" + mActiveScreenMode);
-            dataSet.add("activeScreenIgnoreUpdate:" + mActiveScreenIgnoreUpdate);
-            dataSet.add("ledMode:" + mLedMode);
-            dataSet.add("qhIgnore:" + mQhIgnore);
-            if (mQhIgnoreList != null) {
-                dataSet.add("qhIgnoreList:" + mQhIgnoreList);
-            }
-            dataSet.add("headsUpMode:" + mHeadsUpMode.toString());
-            dataSet.add("headsUpDnd:" + mHeadsUpDnd);
-            dataSet.add("headsUpTimeout:" + mHeadsUpTimeout);
-            dataSet.add("progressTracking:" + mProgressTracking);
-            dataSet.add("visibility:" + mVisibility.toString());
-            dataSet.add("visibilityLs:" + mVisibilityLs.toString());
-            dataSet.add("soundToVibrateDisabled:" + mSoundToVibrateDisabled);
-            dataSet.add("vibrateReplace:" + mVibrateReplace);
-            dataSet.add("soundReplace:" + mSoundReplace);
-            dataSet.add("hidePersistent:" + mHidePersistent);
-            dataSet.add("ledDnd:" + mLedDnd);
-            dataSet.add("ledIgnoreUpdate:" + mLedIgnoreUpdate);
-            if (isPreview) {
-                dataSet.add("previewTimestamp:" + System.currentTimeMillis());
-            }
+            final Set<String> dataSet = createDataSet();
             WorldReadablePrefs prefs = SettingsManager.getInstance(mContext).getLedControlPrefs();
-            prefs.edit().putStringSet(isPreview ? "preview" : mPackageName, dataSet).commit(new OnPreferencesCommitedListener() {
+            prefs.edit().putStringSet(mPackageName, dataSet).commit(new OnPreferencesCommitedListener() {
                 @Override
                 public void onPreferencesCommited() {
                     if (WorldReadablePrefs.DEBUG)
                         Log.d("GravityBox", "LedSettings: serialize() onPreferencesCommited");
-                    if (!isPreview) {
-                        Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
-                        mContext.sendBroadcast(intent);
-                    } else if (callback != null) {
-                        callback.onSerialized();
-                    }
+                    Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
+                    intent.putExtra(EXTRA_UNC_PACKAGE_NAME, mPackageName);
+                    intent.putStringArrayListExtra(EXTRA_UNC_PACKAGE_SETTINGS,
+                            new ArrayList<String>(dataSet));
+                    mContext.sendBroadcast(intent);
                 }
+                
             });
         } catch (Throwable t) {
             t.printStackTrace();
         }
     }
+
+    public ArrayList<String> toArrayList() {
+        return new ArrayList<>(createDataSet());
+    } 
 
     public String toString() {
         String buf = "[" + mPackageName + "," + mEnabled + "," + mColor + "," + mLedOnMs + 

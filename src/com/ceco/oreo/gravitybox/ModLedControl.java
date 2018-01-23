@@ -99,6 +99,13 @@ public class ModLedControl {
     private static AudioManager mAudioManager;
     private static Constructor<?> mNotificationLightConstructor;
 
+    // UNC settings
+    private static boolean mUncLocked;
+    private static boolean mUncActiveScreenEnabled;
+    private static boolean mUncActiveScreenPocketModeEnabled;
+    private static boolean mUncActiveScreenIgnoreQh;
+    private static Map<String,LedSettings> mUncAppPrefs = new HashMap<>();
+
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
@@ -129,8 +136,33 @@ public class ModLedControl {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (action.equals(LedSettings.ACTION_UNC_SETTINGS_CHANGED)) {
-                mUncPrefs.reload();
-                updateActiveScreenFeature();
+                if (intent.hasExtra(LedSettings.PREF_KEY_LOCKED)) {
+                    mUncLocked = intent.getBooleanExtra(LedSettings.PREF_KEY_LOCKED, false);
+                    if (DEBUG) log("mUncLocked=" + mUncLocked);
+                }
+                if (intent.hasExtra(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED)) {
+                    mUncActiveScreenEnabled = intent.getBooleanExtra(
+                            LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false);
+                    if (DEBUG) log("mUncActiveScreenEnabled=" + mUncActiveScreenEnabled);
+                    updateActiveScreenFeature();
+                }
+                if (intent.hasExtra(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE)) {
+                    mUncActiveScreenPocketModeEnabled = intent.getBooleanExtra(
+                            LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true);
+                    if (DEBUG) log("mUncActiveScreenPocketModeEnabled=" + mUncActiveScreenPocketModeEnabled);
+                }
+                if (intent.hasExtra(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS)) {
+                    mUncActiveScreenIgnoreQh = intent.getBooleanExtra(
+                            LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
+                    if (DEBUG) log("mUncActiveScreenIgnoreQh=" + mUncActiveScreenIgnoreQh);
+                }
+                if (intent.hasExtra(LedSettings.EXTRA_UNC_PACKAGE_NAME) &&
+                        intent.hasExtra(LedSettings.EXTRA_UNC_PACKAGE_SETTINGS)) {
+                    String pkgName = intent.getStringExtra(LedSettings.EXTRA_UNC_PACKAGE_NAME);
+                    mUncAppPrefs.put(pkgName, LedSettings.deserialize(pkgName,
+                            intent.getStringArrayListExtra(LedSettings.EXTRA_UNC_PACKAGE_SETTINGS)));
+                    if (DEBUG) log("Settings for " + pkgName + " updated");
+                }
             } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
                 mQuietHours = new QuietHours(intent.getExtras());
             } else if (action.equals(Intent.ACTION_USER_PRESENT)) {
@@ -146,6 +178,8 @@ public class ModLedControl {
                     intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
                 mProximityWakeUpEnabled = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false);
+            } else if (action.equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)) {
+                updateActiveScreenFeature();
             }
         }
     };
@@ -161,6 +195,10 @@ public class ModLedControl {
         mQuietHours = new QuietHours(qhPrefs);
 
         mProximityWakeUpEnabled = mainPrefs.getBoolean(GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false);
+        mUncLocked = mUncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false);
+        mUncActiveScreenEnabled = mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false);
+        mUncActiveScreenPocketModeEnabled = mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true);
+        mUncActiveScreenIgnoreQh = mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
 
         try {
             final Class<?> nmsClass = XposedHelpers.findClass(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader);
@@ -178,9 +216,9 @@ public class ModLedControl {
                         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                         intentFilter.addAction(ACTION_CLEAR_NOTIFICATIONS);
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
+                        intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
-                        updateActiveScreenFeature();
                         hookNotificationDelegate();
 
                         if (DEBUG) log("Notification manager service initialized");
@@ -205,11 +243,21 @@ public class ModLedControl {
         }
     }
 
+    private static LedSettings resolveLedSettings(String pkgName) {
+        if (mUncAppPrefs.containsKey(pkgName)) {
+            if (DEBUG) log("resolveLedSettings: getting in-memory settings for " + pkgName);
+            return mUncAppPrefs.get(pkgName);
+        } else {
+            if (DEBUG) log("resolveLedSettings: getting in-prefs settings for " + pkgName);
+            return LedSettings.deserialize(mUncPrefs.getStringSet(pkgName, null));
+        }
+    }
+
     private static XC_MethodHook createNotificationRecordHook = new XC_MethodHook() {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
-                if (mUncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false)) {
+                if (mUncLocked) {
                     if (DEBUG) log("Ultimate notification control feature locked.");
                     return;
                 }
@@ -221,30 +269,30 @@ public class ModLedControl {
                 Object oldRecord = getOldNotificationRecord(sbn.getKey());
                 Notification oldN = getNotificationFromRecord(oldRecord);
                 final String pkgName = sbn.getPackageName();
-                String settingsKey = pkgName;
-                if (n.extras.containsKey("gbUncPreviewNotification")) {
-                    settingsKey = "preview";
-                    mUncPrefs.reload();
-                    if (DEBUG) log("Received UNC preview notification");
-                }
 
-                LedSettings ls = LedSettings.deserialize(mUncPrefs.getStringSet(settingsKey, null));
-                if (!ls.getEnabled()) {
-                    // use default settings in case they are active
-                    ls = LedSettings.deserialize(mUncPrefs.getStringSet("default", null));
-                    if (!ls.getEnabled() && !mQuietHours.quietHoursActive(ls, n, mUserPresent)) {
-                        return;
+                LedSettings ls;
+                if (n.extras.containsKey("gbUncPreviewNotification")) {
+                    ls = LedSettings.deserialize("preview", n.extras.getStringArrayList(
+                            LedSettings.EXTRA_UNC_PACKAGE_SETTINGS));
+                    if (DEBUG) log("Received UNC preview notification");
+                } else {
+                    ls = resolveLedSettings(pkgName);
+                    if (!ls.getEnabled()) {
+                        // use default settings in case they are active
+                        ls = resolveLedSettings("default");
+                        if (!ls.getEnabled() && !mQuietHours.quietHoursActive(ls, n, mUserPresent)) {
+                            return;
+                        }
                     }
+                    if (DEBUG) log(pkgName + ": " + ls.toString());
                 }
-                if (DEBUG) log(pkgName + ": " + ls.toString());
 
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
                 final boolean qhActiveIncludingVibe = qhActive && (
                         (mQuietHours.mode != QuietHours.Mode.WEAR && mQuietHours.muteVibe) ||
                         (mQuietHours.mode == QuietHours.Mode.WEAR && mUserPresent));
-                final boolean qhActiveIncludingActiveScreen = qhActive &&
-                        !mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
+                final boolean qhActiveIncludingActiveScreen = qhActive && !mUncActiveScreenIgnoreQh;
                 if (DEBUG) log("qhActive=" + qhActive + "; qhActiveIncludingLed=" + qhActiveIncludingLed +
                         "; qhActiveIncludingVibe=" + qhActiveIncludingVibe + 
                         "; qhActiveIncludingActiveScreen=" + qhActiveIncludingActiveScreen);
@@ -501,7 +549,7 @@ public class ModLedControl {
                 n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN);
 
                 // check if intercepted by Zen
-                if (!mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false) &&
+                if (!mUncActiveScreenIgnoreQh &&
                         (boolean) XposedHelpers.callMethod(param.args[0], "isIntercepted")) {
                     if (DEBUG) log("Active screen: intercepted by Zen - ignoring");
                     n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN_MODE);
@@ -511,8 +559,8 @@ public class ModLedControl {
                 // set additional params
                 final ActiveScreenMode asMode = ActiveScreenMode.valueOf(
                         n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE));
-                n.extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE, !mProximityWakeUpEnabled &&
-                        mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true));
+                n.extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE,
+                        !mProximityWakeUpEnabled && mUncActiveScreenPocketModeEnabled);
 
                 if (DEBUG) log("Performing Active Screen with mode " + asMode.toString());
 
@@ -600,8 +648,7 @@ public class ModLedControl {
 
     private static void updateActiveScreenFeature() {
         try {
-            final boolean enable = !mUncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
-                    mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false); 
+            final boolean enable = !mUncLocked && mUncActiveScreenEnabled;  
             if (enable && mSm == null) {
                 mPm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
                 mKm = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);

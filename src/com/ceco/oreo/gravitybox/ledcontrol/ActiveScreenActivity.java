@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,6 @@ import com.ceco.oreo.gravitybox.GravityBoxActivity;
 import com.ceco.oreo.gravitybox.SettingsManager;
 import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.WorldReadablePrefs;
-import com.ceco.oreo.gravitybox.WorldReadablePrefs.OnSharedPreferenceChangeCommitedListener;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,7 +27,6 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceFragment;
-import android.util.Log;
 
 public class ActiveScreenActivity extends GravityBoxActivity {
 
@@ -39,7 +37,7 @@ public class ActiveScreenActivity extends GravityBoxActivity {
     }
 
     public static class PrefsFragment extends PreferenceFragment implements
-                OnSharedPreferenceChangeListener, OnSharedPreferenceChangeCommitedListener {
+                OnSharedPreferenceChangeListener {
         private WorldReadablePrefs mPrefs;
         private CheckBoxPreference mPrefPocketMode;
 
@@ -67,31 +65,30 @@ public class ActiveScreenActivity extends GravityBoxActivity {
         public void onResume() {
             super.onResume();
             mPrefs.registerOnSharedPreferenceChangeListener(this);
-            mPrefs.setOnSharedPreferenceChangeCommitedListener(this);
             updateSummaries();
         }
 
         @Override
         public void onPause() {
             mPrefs.unregisterOnSharedPreferenceChangeListener(this);
-            mPrefs.setOnSharedPreferenceChangeCommitedListener(null);
             super.onPause();
         }
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
             updateSummaries();
+            Intent intent = new Intent(LedSettings.ACTION_UNC_SETTINGS_CHANGED);
+            if (key.equals(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED)) {
+                intent.putExtra(key, prefs.getBoolean(key, false));
+            } else if (key.equals(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE)) {
+                intent.putExtra(key, prefs.getBoolean(key, true));
+            } else if (key.equals(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS)) {
+                intent.putExtra(key, prefs.getBoolean(key, false));
+            }
+            getActivity().sendBroadcast(intent);
         }
 
         private void updateSummaries() {
-        }
-
-        @Override
-        public void onSharedPreferenceChangeCommited() {
-            if (WorldReadablePrefs.DEBUG)
-                Log.d("GravityBox", "ActiveScreenActivity: onSharedPreferenceChangeCommited");
-            Intent intent = new Intent(LedSettings.ACTION_UNC_SETTINGS_CHANGED);
-            getActivity().sendBroadcast(intent);
         }
     }
 }
