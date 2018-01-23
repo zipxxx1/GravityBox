@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -40,7 +40,9 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
     private static final String ACTION_UNLOCK = "gravitybox.intent.action.UNLOCK";
     private static final String ACTION_CHECK_POLICY = "gravitybox.intent.action.CHECK_POLICY";
     private static final String PERMISSION_UNLOCK = "gravitybox.permission.UNLOCK";
-    private static final int UNLOCKER_VERSION_MIN = 17;
+    private static final int UNLOCKER_VERSION_MIN = 21;
+    private static final String PREF_KEY_POLICY_CHECK_TIMESTAMP = "policy_check_timestamp";
+    private static final long POLICY_CHECK_INTERVAL = 86400000;
 
     protected interface CheckPolicyHandler {
         void onPolicyResult(boolean ok);
@@ -181,10 +183,6 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
                     !intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) {
                 maybeRunUnlocker(context);
             }
-
-            if (intent.getAction().equals(Intent.ACTION_PACKAGE_FULLY_REMOVED)) {
-                SettingsManager.getInstance(context).resetUuid();
-            }
         }
     }
 
@@ -231,6 +229,9 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
             mHandler.removeCallbacks(mExpiredRunnable);
             mPolicyHandler.onPolicyResult(true);
             unregister();
+            SettingsManager.getInstance(mContext).getMainPrefs().edit()
+                .putLong(PREF_KEY_POLICY_CHECK_TIMESTAMP, System.currentTimeMillis())
+                .commit();
         }
 
         private void register() {
@@ -248,8 +249,14 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
         }
     };
 
+    private static boolean shouldPerformPolicyCheck(Context context) {
+        long lastCheck = SettingsManager.getInstance(context)
+                .getMainPrefs().getLong(PREF_KEY_POLICY_CHECK_TIMESTAMP, 0);
+        return ((System.currentTimeMillis() - lastCheck) > POLICY_CHECK_INTERVAL);
+    }
+
     protected static void checkPolicyOk(final Context context, final CheckPolicyHandler policyHandler) {
-        final CheckPolicyReceiver receiver = new CheckPolicyReceiver(context, policyHandler);;
+        CheckPolicyReceiver receiver = null;
         try {
             PackageInfo pkgInfo = context.getPackageManager()
                     .getPackageInfo(PKG_UNLOCKER, 0);
@@ -259,17 +266,24 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
                         Toast.LENGTH_LONG).show();
                 return;
             }
-            Intent intent = new Intent(ACTION_CHECK_POLICY);
-            intent.setComponent(new ComponentName(pkgInfo.packageName,
-                    pkgInfo.packageName+".CheckPolicyService"));
-            receiver.register();
-            context.startForegroundService(intent);
+            if (shouldPerformPolicyCheck(context)) {
+                receiver = new CheckPolicyReceiver(context, policyHandler);
+                Intent intent = new Intent(ACTION_CHECK_POLICY);
+                intent.setComponent(new ComponentName(pkgInfo.packageName,
+                        pkgInfo.packageName+".CheckPolicyService"));
+                receiver.register();
+                context.startForegroundService(intent);
+            } else {
+                policyHandler.onPolicyResult(true);
+            }
         } catch (NameNotFoundException nnfe) {
             policyHandler.onPolicyResult(false);
             Toast.makeText(context, context.getString(R.string.msg_unlocker_missing),
                     Toast.LENGTH_LONG).show();
         } catch (Exception e) {
-            receiver.unregister();
+            if (receiver != null) {
+                receiver.unregister();
+            }
             policyHandler.onPolicyResult(false);
             Toast.makeText(context,
                     String.format("%s: %s",
