@@ -1980,4 +1980,10 @@
     <string name="pref_signal_cluster_aosp_mobile_type_title">AOSP ikony pre typ mobilnej siete</string>
     <string name="pref_signal_cluster_aosp_mobile_type_summary">Vyžaduje reštart</string>
 
+    <!-- Notification channels -->
+    <string name="notif_channel_services_title">Služby</string>
+    <string name="notif_channel_services_desc">Pre oznámenia služieb</string>
+    <string name="notif_channel_unc_title">Náhľad oznámení</string>
+    <string name="notif_channel_unc_desc">Pre funkciu náhľadu nastavení oznámení</string>
+
 </resources>
