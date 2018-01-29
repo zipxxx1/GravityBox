@@ -344,11 +344,6 @@ public class QuickAppTile extends QsTile {
     }
 
     @Override
-    protected boolean supportsIconTinting() {
-        return false;
-    }
-
-    @Override
     public boolean supportsHideOnChange() {
         // starting activity collapses panel anyway
         return false;

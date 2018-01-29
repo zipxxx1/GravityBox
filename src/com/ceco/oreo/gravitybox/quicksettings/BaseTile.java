@@ -31,7 +31,6 @@ import com.ceco.oreo.gravitybox.quicksettings.QsTileEventDistributor.QsEventList
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -45,7 +44,6 @@ public abstract class BaseTile implements QsEventListener {
     protected static final boolean DEBUG = ModQsTiles.DEBUG;
 
     public static final String TILE_KEY_NAME = "gbTileKey";
-    public static final int COLOR_LOCKED = Color.parseColor("#9E9E9E");
     public static final String CLASS_BASE_TILE = "com.android.systemui.plugins.qs.QSTile";
     public static final String CLASS_BASE_TILE_IMPL = "com.android.systemui.qs.tileimpl.QSTileImpl";
     public static final String CLASS_TILE_STATE = "com.android.systemui.plugins.qs.QSTile.State";

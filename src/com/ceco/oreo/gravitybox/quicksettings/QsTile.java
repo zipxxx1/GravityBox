@@ -22,7 +22,6 @@ import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.quicksettings.QsPanel.LockedTileIndicator;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.service.quicksettings.Tile;
@@ -121,41 +120,12 @@ public abstract class QsTile extends BaseTile {
         if (DEBUG) log(mKey + ": handleDestroy called");
     }
 
-    protected boolean supportsIconTinting() {
-        return Utils.isOxygenOsRom();
-    }
-
-    private Integer getTintColor(boolean state) {
-        try {
-            final Class<?> cls = XposedHelpers.findClass(
-                    BaseTile.CLASS_ICON_VIEW, mContext.getClassLoader());
-            return XposedHelpers.getStaticIntField(cls,
-                    state ? "sIconColor" : "sCustomDisableIconColor");
-        } catch (Throwable t) {
-            GravityBox.log("Error getting QsTile tint color: ", t);
-            return null;
-        }
-    }
-
     protected final Object iconFromResId(int resId) {
         return iconFromDrawable(mGbContext.getDrawable(resId));
     }
 
     protected final Object iconFromDrawable(Drawable d) {
         try {
-            d.setTintList(null);
-            if (supportsIconTinting()) {
-                Integer color = getTintColor(mState.booleanValue);
-                if (color != null) {
-                    d.setTint(color);
-                }
-                d.setAlpha(isLocked() && getQsPanel().getLockedTileIndicator() == LockedTileIndicator.DIM ? 80 : 255);
-            } else if (!(this instanceof QuickAppTile)) {
-                d.clearColorFilter();
-                if (isLocked() && getQsPanel().getLockedTileIndicator() == LockedTileIndicator.DIM) {
-                    d.setColorFilter(COLOR_LOCKED, PorterDuff.Mode.SRC_IN);
-                }
-            }
             return sDrawableIconClassConstructor.newInstance(d);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
@@ -196,7 +166,9 @@ public abstract class QsTile extends BaseTile {
                          QsPanel.IC_PADLOCK : QsPanel.IC_KEY), label);
             }
             XposedHelpers.setObjectField(state, "label", newLabel);
-            XposedHelpers.setIntField(state, "state", booleanValue ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+            XposedHelpers.setIntField(state, "state",
+                    locked && lockedTileIndicator == LockedTileIndicator.DIM ? Tile.STATE_UNAVAILABLE :
+                        booleanValue ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
             XposedHelpers.setBooleanField(state, "dualTarget", dualTarget);
         }
 
