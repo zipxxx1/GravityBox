@@ -113,7 +113,7 @@ public class ModPowerMenu {
                 XposedBridge.hookAllMethods(globalActionsClass, "initValueForShow", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    	prefs.reload();
+                        prefs.reload();
                         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWEROFF_ADVANCED, false)) {
                             XposedHelpers.setIntField(param.thisObject, "mRestartIconResId",0);
                             XposedHelpers.setIntField(param.thisObject, "mConfirmRestartIconResId",0);
@@ -344,7 +344,7 @@ public class ModPowerMenu {
             XC_MethodHook showDialogHook = new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                	prefs.reload();
+                    prefs.reload();
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWERMENU_DISABLE_ON_LOCKSCREEN, false)) {
                         boolean locked = (Boolean) param.args[0];
                         if (!locked) {
