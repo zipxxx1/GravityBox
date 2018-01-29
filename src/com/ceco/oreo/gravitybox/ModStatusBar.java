@@ -484,7 +484,7 @@ public class ModStatusBar {
             }
             if (container != null) {
                 BatteryStyleController bsc = new BatteryStyleController(
-                        containerType, container, mPrefs, mStatusBar);
+                        containerType, container, mPrefs);
                 if (containerType == ContainerType.STATUSBAR) {
                     if (mBatteryStyleCtrlSb != null) {
                         mBroadcastSubReceivers.remove(mBatteryStyleCtrlSb);

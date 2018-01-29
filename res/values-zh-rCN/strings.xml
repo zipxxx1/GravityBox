@@ -2001,10 +2001,6 @@
     <!-- Volume panel: notification stream label -->
     <string name="notification_stream_name">通知</string>
 
-    <!-- OOS: hide dash charge icon -->
-    <string name="pref_battery_hide_dash_icon_title">隐藏破折号图标</string>
-    <string name="pref_battery_hide_dash_icon_summary">原厂电池指示灯</string>
-
     <!-- OOS: call recording -->
     <string name="pref_oos_call_recording_title">启用通话录音</string>
     <string name="pref_oos_call_recording_summary">请注意,您的国家/地区通话记录可能是非法的</string>

@@ -1964,10 +1964,6 @@
     <!-- Volume panel: notification stream label -->
     <string name="notification_stream_name">Powiadomienia</string>
 
-    <!-- OOS: hide dash charge icon -->
-    <string name="pref_battery_hide_dash_icon_title">Ukryj ikonę ładowania Dash</string>
-    <string name="pref_battery_hide_dash_icon_summary">Dla standardowego stylu wskaźnika baterii</string>
-
     <!-- OOS: call recording -->
     <string name="pref_oos_call_recording_title">Włącz nagrywanie rozmów</string>
     <string name="pref_oos_call_recording_summary">Nagrywanie rozmów może być nielegalne w twoim kraju</string>

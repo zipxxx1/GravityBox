@@ -55,7 +55,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private ViewGroup mSystemIcons;
     private Context mContext;
     private XSharedPreferences mPrefs;
-    private Object mStatusBar;
     private int mBatteryStyle;
     private boolean mBatteryPercentTextEnabledSb;
     private boolean mBatteryPercentTextOnRight;
@@ -64,7 +63,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private CmCircleBattery mCircleBattery;
     private StatusbarBattery mStockBattery;
     private boolean mBatterySaverIndicationDisabled;
-    private boolean mDashIconHidden;
     private boolean mIsDashCharging;
     private List<Unhook> mHooks = new ArrayList<>();
     private Integer mOosSystemIconsMarginEndOriginal;
@@ -74,10 +72,9 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     }
 
     public BatteryStyleController(ContainerType containerType, ViewGroup container,
-            XSharedPreferences prefs, Object statusBar) throws Throwable {
+            XSharedPreferences prefs) throws Throwable {
         mContainerType = containerType;
         mContainer = container;
-        mStatusBar = statusBar;
         mContext = container.getContext();
         mSystemIcons = (ViewGroup) mContainer.findViewById(
                 mContext.getResources().getIdentifier("system_icons", "id", PACKAGE_NAME));
@@ -111,7 +108,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         }
         mSystemIcons = null;
         mContainer = null;
-        mStatusBar = null;
         mPrefs = null;
         mContext = null;
     }
@@ -126,8 +122,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD, "DEFAULT"));
         mBatterySaverIndicationDisabled = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
-        mDashIconHidden = prefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_BATTERY_HIDE_DASH_ICON, false);
         mBatteryPercentTextOnRight = "RIGHT".equals(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"));
     }
@@ -147,7 +141,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             bIconIndex = mSystemIcons.indexOfChild(stockBatteryView);
             bIconMarginStart = ((MarginLayoutParams) stockBatteryView.getLayoutParams()).getMarginStart();
             bIconMarginEnd = ((MarginLayoutParams) stockBatteryView.getLayoutParams()).getMarginEnd();
-            mStockBattery = new StatusbarBattery(stockBatteryView, this);
+            mStockBattery = new StatusbarBattery(stockBatteryView);
         }
 
         // inject circle battery view
@@ -326,18 +320,12 @@ public class BatteryStyleController implements BroadcastSubReceiver {
 
         if (Utils.isOxygenOsRom()) {
             try {
-                mHooks.add(XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_STATUSBAR,
+                mHooks.add(XposedHelpers.findAndHookMethod(CLASS_BATTERY_METER_VIEW,
                         mContainer.getClass().getClassLoader(),
-                        "updateDashChargeView", new XC_MethodHook() {
+                        "onFastChargeChanged", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        mIsDashCharging = XposedHelpers.getBooleanField(param.thisObject, "mFastCharge");
-                        if (mDashIconHidden || isCurrentStyleCircleBattery()) {
-                            ((View)XposedHelpers.getObjectField(param.thisObject,
-                                    "mBatteryDashChargeView")).setVisibility(View.GONE);
-                            ((View)XposedHelpers.getObjectField(param.thisObject,
-                                    "mKeyguardBatteryDashChargeView")).setVisibility(View.GONE);
-                        }
+                        mIsDashCharging = (boolean) param.args[0];
                         updateBatteryStyle();
                     }
                 }));
@@ -359,24 +347,12 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         return mBatterySaverIndicationDisabled;
     }
 
-    public boolean isDashIconHidden() {
-        return mDashIconHidden;
-    }
-
     public boolean isDashCharging() {
         return mIsDashCharging;
     }
 
     public ContainerType getContainerType() {
         return mContainerType;
-    }
-
-    private void updateDashChargeView() {
-        try {
-            XposedHelpers.callMethod(mStatusBar, "updateDashChargeView");
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
     }
 
     @Override
@@ -387,13 +363,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 mBatteryStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE, 1);
                 if (DEBUG) log("mBatteryStyle changed to: " + mBatteryStyle);
             }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_HIDE_DASH)) {
-                mDashIconHidden = intent.getBooleanExtra(GravityBoxSettings.EXTRA_HIDE_DASH, false);
-            }
             updateBatteryStyle();
-            if (Utils.isOxygenOsRom()) {
-                updateDashChargeView();
-            }
         } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR)) {
                 mBatteryPercentTextEnabledSb = intent.getBooleanExtra(

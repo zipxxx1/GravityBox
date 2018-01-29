@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -36,7 +36,6 @@ public class StatusbarBattery implements IconManagerListener {
     private static final String TAG = "GB:StatusbarBattery";
     private static final boolean DEBUG = false;
 
-    private BatteryStyleController mController;
     private View mBattery;
     private int mDefaultColor;
     private int mDefaultFrameColor;
@@ -45,9 +44,8 @@ public class StatusbarBattery implements IconManagerListener {
     private Drawable mDrawable;
     private List<Unhook> mHooks = new ArrayList<>();
 
-    public StatusbarBattery(View batteryView, BatteryStyleController controller) {
+    public StatusbarBattery(View batteryView) {
         mBattery = batteryView;
-        mController = controller;
         backupOriginalColors();
         createHooks();
         if (SysUiManagers.IconManager != null && !Utils.isParanoidRom()) {
@@ -65,7 +63,6 @@ public class StatusbarBattery implements IconManagerListener {
         mHooks.clear();
         mHooks = null;
         mDrawable = null;
-        mController = null;
         mBattery = null;
     }
 
@@ -134,8 +131,7 @@ public class StatusbarBattery implements IconManagerListener {
     }
 
     public void setVisibility(int visibility) {
-        mBattery.setVisibility((mController.isDashCharging() && !mController.isDashIconHidden()) ?
-                View.GONE : visibility);
+        mBattery.setVisibility(visibility);
     }
 
     private void setColors(int mainColor, int frameColor, int chargeColor) {

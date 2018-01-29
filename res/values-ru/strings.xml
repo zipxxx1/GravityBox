@@ -1993,10 +1993,6 @@
     <!-- Volume panel: notification stream label -->
     <string name="notification_stream_name">Уведомление</string>
 
-    <!-- OOS: hide dash charge icon -->
-    <string name="pref_battery_hide_dash_icon_title">Скрыть значок Dash charge</string>
-    <string name="pref_battery_hide_dash_icon_summary">Для стокового индикатора батареи</string>
-
     <!-- OOS: call recording -->
     <string name="pref_oos_call_recording_title">Включить запись вызовов</string>
     <string name="pref_oos_call_recording_summary">Имейте в виду, что запись вызовов может быть запрещена в Вашей стране</string>
