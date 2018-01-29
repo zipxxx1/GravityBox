@@ -38,7 +38,7 @@ public class ModVolumePanel {
     private static final String TAG = "GB:ModVolumePanel";
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String CLASS_VOLUME_PANEL = Utils.isSamsungRom() ?
-            "com.android.systemui.volume.SecVolumeDialog" :
+            "com.android.systemui.volume.SecVolumeDialogImpl" :
             "com.android.systemui.volume.VolumeDialogImpl";
     private static final String CLASS_VOLUME_ROW = CLASS_VOLUME_PANEL + ".VolumeRow";
     private static final String CLASS_VOLUME_PANEL_CTRL = "com.android.systemui.volume.VolumeDialogControllerImpl";
