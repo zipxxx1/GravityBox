@@ -111,7 +111,9 @@ public class StatusbarBattery implements IconManagerListener {
                     }
                 }));
             } catch (Throwable t) {
-                GravityBox.log(TAG, "Error hooking setColorFilter(): ", t);
+                if (!Utils.isOxygenOsRom()) {
+                    GravityBox.log(TAG, "Error hooking setColorFilter(): ", t);
+                }
             }
             try {
                 mHooks.add(XposedHelpers.findAndHookMethod(getDrawable().getClass(), "setColors",
