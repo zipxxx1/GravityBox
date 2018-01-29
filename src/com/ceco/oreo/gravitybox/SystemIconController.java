@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -124,10 +124,11 @@ public class SystemIconController implements BroadcastSubReceiver {
         try {
             AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
             if (Utils.isOxygenOsRom()) {
-                final boolean zenVibrateShowing = XposedHelpers.getIntField(mSbPolicy, "mZen") == 3 &&
-                        XposedHelpers.getIntField(mSbPolicy, "mVibrateWhenMute") == 1;
-                final boolean hideZen = XposedHelpers.getIntField(mSbPolicy, "mZen") == 0 ||
-                        (mHideVibrateIcon && zenVibrateShowing);
+                final Object zenCtrl = XposedHelpers.getObjectField(mSbPolicy, "mZenController");
+                final int zen = (int) XposedHelpers.callMethod(zenCtrl, "getZen");
+                final boolean vibrateWhenMute = (XposedHelpers.getIntField(mSbPolicy, "mVibrateWhenMute") == 1);
+                final boolean zenVibrateShowing = (zen == 3 && vibrateWhenMute);
+                final boolean hideZen = (zen == 0 || (mHideVibrateIcon && zenVibrateShowing));
                 XposedHelpers.callMethod(mIconCtrl, "setIconVisibility",
                         XposedHelpers.getObjectField(mSbPolicy, "mSlotZen"), !hideZen);
                 final boolean showNative = !zenVibrateShowing && !mHideVibrateIcon &&
