@@ -164,10 +164,6 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
         }
         mIsActive = atLeastOneVisible;
         mRootView.setVisibility(mIsActive && mIsInteractive ? View.VISIBLE : View.GONE);
-        if (Utils.isOxygenOsRom()) {
-            mContainer.getChildAt(mContainer.getChildCount()-2).setVisibility(
-                    mIsActive && mIsInteractive ? View.GONE : View.VISIBLE);
-        }
     }
 
     @Override
