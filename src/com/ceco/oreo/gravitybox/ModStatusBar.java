@@ -284,6 +284,13 @@ public class ModStatusBar {
         return mStatusBarState;
     }
 
+    public static boolean isCLockOnRight() {
+        if (mClock != null && mClock.getClock() != null) {
+            return (!mClockCentered && mClock.getClock().getVisibility() == View.VISIBLE);
+        }
+        return true;
+    }
+
     private static void prepareLayoutStatusBar() {
         try {
             Resources res = mContext.getResources();
