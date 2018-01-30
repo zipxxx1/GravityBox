@@ -76,6 +76,7 @@ public class ModStatusBar {
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
     private static final String CLASS_ASSIST_MANAGER = "com.android.systemui.assist.AssistManager";
     private static final String CLASS_COLLAPSED_SB_FRAGMENT = "com.android.systemui.statusbar.phone.CollapsedStatusBarFragment";
+    private static final String CLASS_NOTIF_ICON_CONTAINER = "com.android.systemui.statusbar.phone.NotificationIconContainer";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
 
@@ -1061,6 +1062,32 @@ public class ModStatusBar {
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }
+
+            // Adjust notification icon area for center clock
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_NOTIF_ICON_CONTAINER, classLoader,
+                        "getActualWidth", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mLayoutCenter != null && mLayoutCenter.getChildCount() > 0 &&
+                                mLayoutCenter.getChildAt(0).getVisibility() == View.VISIBLE &&
+                                XposedHelpers.getBooleanField(param.thisObject, "mShowAllIcons")) {
+                            int width = Math.round(mLayoutCenter.getWidth()/2f -
+                                            mLayoutCenter.getChildAt(0).getWidth()/2f) - 4;
+                            if (width > 0) {
+                                if (mTrafficMeter != null &&
+                                        mTrafficMeter.getVisibility() == View.VISIBLE &&
+                                        mTrafficMeter.getTrafficMeterPosition() == GravityBoxSettings.DT_POSITION_LEFT) {
+                                    width -= (mTrafficMeter.getWidth()+4);
+                                }
+                                param.setResult(width);
+                            }
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, t);
+            }
         }
         catch (Throwable t) {
             GravityBox.log(TAG, t);
@@ -1087,8 +1114,6 @@ public class ModStatusBar {
 
         if (center) {
             mClock.getClock().setGravity(Gravity.CENTER);
-            mClock.getClock().setLayoutParams(new LinearLayout.LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             mClock.getClock().setPadding(0, 0, 0, 0);
             if (mClockInSbContents) {
                 mSbContents.removeView(mClock.getClock());
@@ -1099,8 +1124,6 @@ public class ModStatusBar {
             if (DEBUG) log("Clock set to center position");
         } else {
             mClock.getClock().setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-            mClock.getClock().setLayoutParams(new LinearLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
             mClock.resetOriginalPaddingLeft();
             mLayoutCenter.removeView(mClock.getClock());
             if (mClockInSbContents) {
