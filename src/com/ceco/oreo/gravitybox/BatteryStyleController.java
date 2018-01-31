@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,6 +173,9 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 0);
         percentTextView.setTextColor(Color.WHITE);
         percentTextView.setVisibility(View.GONE);
+        if (!Utils.isOxygenOsRom()) {
+            percentTextView.setTypeface(null, Typeface.BOLD);
+        }
         mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
         mSystemIcons.addView(mPercentText.getView(), mBatteryPercentTextOnRight ? bIconIndex+2 : bIconIndex);
         if (DEBUG) log("Battery percent text injected");
