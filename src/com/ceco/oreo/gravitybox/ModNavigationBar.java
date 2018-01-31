@@ -994,13 +994,13 @@ public class ModNavigationBar {
         boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
         if (index == 0) {
             int paddingPxSdk27 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15,
-                    mResources.getDisplayMetrics()) * (mNavbarHeight / 100f));
+                    mResources.getDisplayMetrics()) * (mNavbarHeight / (100f+Math.abs(100f-mNavbarHeight))));
             p[1] = p[3] = mNavbarHeight < threshold ? paddingPx :
                             Build.VERSION.SDK_INT >= 27 ? paddingPxSdk27 : 0;
         }
         if (index == 1 && hasVerticalNavbar) {
             int paddingPxSdk27 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15,
-                    mResources.getDisplayMetrics()) * (mNavbarWidth / 100f));
+                    mResources.getDisplayMetrics()) * (mNavbarWidth / (100f+Math.abs(100f-mNavbarWidth))));
             p[0] = p[2] = mNavbarWidth < threshold ? paddingPx :
                             Build.VERSION.SDK_INT >= 27 ? paddingPxSdk27 : 0;
         }
