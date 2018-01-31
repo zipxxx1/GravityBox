@@ -40,11 +40,9 @@ public abstract class QsDetailItemsListAdapter<T> extends ArrayAdapter<T> {
                 android.R.layout.simple_list_item_single_choice, parent, false);
         label.setText(getListItemText(getItem(position)));
         if (Utils.isOxygenOsRom()) {
-            label.setTextColor(OOSThemeColorUtils.getColor(getContext(),
-                    OOSThemeColorUtils.QS_PRIMARY_TEXT, android.R.attr.textColorPrimary));
+            label.setTextColor(OOSThemeColorUtils.getColorTextPrimary(getContext()));
             label.setCheckMarkTintList(ColorStateList.valueOf(
-                    OOSThemeColorUtils.getColor(getContext(),
-                            OOSThemeColorUtils.QS_ACCENT, android.R.attr.colorControlNormal)));
+                    OOSThemeColorUtils.getColorAccent(getContext())));
         }
         return label;
     }

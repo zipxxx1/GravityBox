@@ -26,13 +26,13 @@ class OOSThemeColorUtils {
     private static final String TAG = "GB:OOSThemeColorUtils";
     private static final String CLASS_THEME_COLOR_UTILS = "com.android.systemui.util.ThemeColorUtils";
 
-    public static final int QS_PRIMARY_TEXT = 0x1;
-    public static final int QS_SECONDARY_TEXT = 0x2;
-    public static final int QS_ACCENT = 0x64;
+    private static final int QS_PRIMARY_TEXT = 0x1;
+    private static final int QS_SECONDARY_TEXT = 0x2;
+    private static final int QS_ACCENT = 0x64;
 
     private OOSThemeColorUtils() { /* static, non-instantiable */ }
 
-    public static int getColor(Context ctx, int spec, int defaultColorStyleAttr) {
+    private static int getColor(Context ctx, int spec, int defaultColorStyleAttr) {
         try {
             final Class<?> tcuClass = XposedHelpers.findClass(
                     CLASS_THEME_COLOR_UTILS, ctx.getClassLoader());
@@ -55,5 +55,17 @@ class OOSThemeColorUtils {
         int color = arr.getColor(0, -1);
         arr.recycle();
         return color;
+    }
+
+    public static int getColorTextPrimary(Context ctx) {
+        return getColor(ctx, QS_PRIMARY_TEXT, android.R.attr.textColorPrimary);
+    }
+
+    public static int getColorTextSecondary(Context ctx) {
+        return getColor(ctx, QS_SECONDARY_TEXT, android.R.attr.textColorSecondary);
+    }
+
+    public static int getColorAccent(Context ctx) {
+        return getColor(ctx, QS_ACCENT, android.R.attr.colorControlNormal);
     }
 }

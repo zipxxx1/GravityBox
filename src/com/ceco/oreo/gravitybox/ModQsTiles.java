@@ -14,6 +14,7 @@
  */
 package com.ceco.oreo.gravitybox;
 
+import com.ceco.oreo.gravitybox.quicksettings.QsDetailItems;
 import com.ceco.oreo.gravitybox.quicksettings.QsPanel;
 import com.ceco.oreo.gravitybox.quicksettings.QsPanelQuick;
 
@@ -34,6 +35,8 @@ public class ModQsTiles {
     private static QsPanel mQsPanel;
     @SuppressWarnings("unused")
     private static QsPanelQuick mQsPanelQuick;
+    @SuppressWarnings("unused")
+    private static QsDetailItems mQsDetailItems;
 
     public static void initResources(final InitPackageResourcesParam resparam) {
         if (Utils.isXperiaDevice()) {
@@ -46,6 +49,9 @@ public class ModQsTiles {
             if (DEBUG) log("init");
             mQsPanel = new QsPanel(prefs, classLoader);
             mQsPanelQuick = new QsPanelQuick(prefs, classLoader);
+            if (Utils.isOxygenOsRom()) {
+                mQsDetailItems = new QsDetailItems(classLoader);
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }

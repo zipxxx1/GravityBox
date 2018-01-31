@@ -14,7 +14,10 @@
  */
 package com.ceco.oreo.gravitybox.quicksettings;
 
+import com.ceco.oreo.gravitybox.Utils;
+
 import de.robv.android.xposed.XSharedPreferences;
+import de.robv.android.xposed.XposedHelpers;
 
 public class WifiTile extends AospTile {
     public static final String AOSP_KEY = "wifi";
@@ -22,6 +25,14 @@ public class WifiTile extends AospTile {
     protected WifiTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
+    }
+
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
+        if (Utils.isOxygenOsRom()) {
+            XposedHelpers.setBooleanField(state, "dualTarget", true);
+        }
+        super.handleUpdateState(state, arg);
     }
 
     @Override
