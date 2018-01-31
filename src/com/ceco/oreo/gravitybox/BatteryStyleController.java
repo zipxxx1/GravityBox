@@ -332,6 +332,26 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }
+            if (mContainerType == ContainerType.KEYGUARD) {
+                try {
+                    mHooks.add(XposedHelpers.findAndHookMethod(mContainer.getClass(),
+                            "updateVisibilities", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            boolean charging = XposedHelpers.getBooleanField(param.thisObject, "mBatteryCharging");
+                            if (mBatteryPercentTextKgMode == KeyguardMode.DEFAULT) {
+                                mPercentText.setVisibility(charging ? View.VISIBLE : View.GONE);
+                            } else if (mBatteryPercentTextKgMode == KeyguardMode.ALWAYS_SHOW) {
+                                mPercentText.setVisibility(View.VISIBLE);
+                            } else if (mBatteryPercentTextKgMode == KeyguardMode.HIDDEN) {
+                                mPercentText.setVisibility(View.GONE);
+                            }
+                        }
+                    }));
+                } catch (Throwable t) {
+                    GravityBox.log(TAG, t);
+                }
+            }
         }
     }
 
