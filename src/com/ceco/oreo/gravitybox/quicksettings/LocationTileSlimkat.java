@@ -15,17 +15,13 @@
  */
 package com.ceco.oreo.gravitybox.quicksettings;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -215,29 +211,18 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
         return mDetailAdapter.getProxy();
     }
 
-    private class AdvancedLocationAdapter extends ArrayAdapter<Integer> {
-        public AdvancedLocationAdapter(Context context) {
-            super(context, android.R.layout.simple_list_item_single_choice, mLocationList);
-        }
-
-        @SuppressLint("ViewHolder")
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            CheckedTextView label = (CheckedTextView) inflater.inflate(
-                    android.R.layout.simple_list_item_single_choice, parent, false);
-            label.setText(GpsStatusMonitor.getModeLabel(mContext, getItem(position)));
-            return label;
-        }
-    }
-
     private class LocationDetailAdapter implements QsDetailAdapterProxy.Callback, AdapterView.OnItemClickListener {
 
-        private AdvancedLocationAdapter mAdapter;
+        private QsDetailItemsListAdapter<Integer> mAdapter;
         private QsDetailItemsList mDetails;
 
         LocationDetailAdapter(Context ctx) {
-            mAdapter = new AdvancedLocationAdapter(ctx);
+            mAdapter = new QsDetailItemsListAdapter<Integer>(ctx, mLocationList) {
+                @Override
+                protected CharSequence getListItemText(Integer item) {
+                    return GpsStatusMonitor.getModeLabel(mContext, item);
+                }
+            };
         }
 
         @Override

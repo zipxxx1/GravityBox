@@ -39,6 +39,7 @@ import com.ceco.oreo.gravitybox.Utils;
  */
 public class QsDetailItemsList {
 
+    private Context mSysUiContext;
     private ListView mListView;
     private View mEmpty;
     private TextView mEmptyText;
@@ -47,7 +48,8 @@ public class QsDetailItemsList {
 
     private QsDetailItemsList() { /* must be created via create method */ }
 
-    private QsDetailItemsList(FrameLayout view) {
+    private QsDetailItemsList(Context sysUiContext, FrameLayout view) {
+        mSysUiContext = sysUiContext;
         mView = view;
 
         mListView = (ListView) mView.findViewById(android.R.id.list);
@@ -64,6 +66,11 @@ public class QsDetailItemsList {
         mEmpty = mView.findViewById(android.R.id.empty);
         mEmpty.setVisibility(View.GONE);
         mEmptyText = (TextView) mEmpty.findViewById(android.R.id.title);
+        if (Utils.isOxygenOsRom()) {
+            mEmptyText.setTextColor(OOSThemeColorUtils.getColor(
+                    mSysUiContext, OOSThemeColorUtils.QS_SECONDARY_TEXT,
+                        android.R.attr.textColorSecondary));
+        }
         mEmptyIcon = (ImageView) mEmpty.findViewById(android.R.id.icon);
         mListView.setEmptyView(mEmpty);
     }
@@ -74,7 +81,7 @@ public class QsDetailItemsList {
         if (parent.getParent() instanceof ScrollView) {
             ((ScrollView)parent.getParent()).setFillViewport(true);
         }
-        return new QsDetailItemsList(view);
+        return new QsDetailItemsList(context, view);
     }
 
     public View getView() {

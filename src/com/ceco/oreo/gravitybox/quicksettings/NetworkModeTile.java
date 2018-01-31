@@ -27,16 +27,12 @@ import com.ceco.oreo.gravitybox.GravityBoxSettings;
 import com.ceco.oreo.gravitybox.PhoneWrapper;
 
 import de.robv.android.xposed.XSharedPreferences;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
 import android.widget.ListView;
 
 public class NetworkModeTile extends QsTile {
@@ -314,30 +310,18 @@ public class NetworkModeTile extends QsTile {
         return mDetailAdapter.getProxy();
     }
 
-    private class ModeAdapter extends ArrayAdapter<NetworkMode> {
-        public ModeAdapter(Context context) {
-            super(context, android.R.layout.simple_list_item_single_choice, mModeList);
-        }
-
-        @SuppressLint("ViewHolder")
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            CheckedTextView label = (CheckedTextView) inflater.inflate(
-                    android.R.layout.simple_list_item_single_choice, parent, false);
-            NetworkMode nm = getItem(position);
-            label.setText(mGbContext.getString(nm.labelRes));
-            return label;
-        }
-    }
-
     private class ModeDetailAdapter implements QsDetailAdapterProxy.Callback, AdapterView.OnItemClickListener {
 
-        private ModeAdapter mAdapter;
+        private QsDetailItemsListAdapter<NetworkMode> mAdapter;
         private QsDetailItemsList mDetails;
 
         ModeDetailAdapter(Context ctx) {
-            mAdapter = new ModeAdapter(ctx);
+            mAdapter = new QsDetailItemsListAdapter<NetworkMode>(ctx, mModeList) {
+                @Override
+                protected CharSequence getListItemText(NetworkMode item) {
+                    return mGbContext.getString(item.labelRes);
+                }
+            };
         }
 
         @Override
