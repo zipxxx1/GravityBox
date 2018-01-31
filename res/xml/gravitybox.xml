@@ -1069,13 +1069,11 @@
                 android:key="pref_cat_notif_panel_clock"
                 android:title="@string/pref_cat_notif_panel_clock_title">
 
-                <!-- Stock action exists
                 <com.ceco.oreo.gravitybox.preference.AppPickerPreference 
                     android:key="pref_clock_link_app"
                     android:title="@string/pref_clock_link_title"
                     android:summary="@string/pref_clock_link_summary"
                     iconPickerEnabled="false" />
-                -->
 
                 <com.ceco.oreo.gravitybox.preference.AppPickerPreference 
                     android:key="pref_clock_longpress_link"

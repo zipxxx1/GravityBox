@@ -77,6 +77,7 @@ public class ModStatusBar {
     private static final String CLASS_ASSIST_MANAGER = "com.android.systemui.assist.AssistManager";
     private static final String CLASS_COLLAPSED_SB_FRAGMENT = "com.android.systemui.statusbar.phone.CollapsedStatusBarFragment";
     private static final String CLASS_NOTIF_ICON_CONTAINER = "com.android.systemui.statusbar.phone.NotificationIconContainer";
+    private static final String CLASS_QUICK_STATUSBAR_HEADER = "com.android.systemui.qs.QuickStatusBarHeader";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
 
@@ -389,6 +390,15 @@ public class ModStatusBar {
         try {
             View timeView = (View) XposedHelpers.getObjectField(qsFooter, "mDateTimeGroup");
             if (timeView != null) {
+                if (Utils.isOxygenOsRom()) {
+                    timeView.setClickable(true);
+                    timeView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            launchClockAction(mClockLink);
+                        }
+                    });
+                }
                 timeView.setLongClickable(true);
                 timeView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
@@ -727,7 +737,8 @@ public class ModStatusBar {
 
             // Long press on QS footer clock
             try {
-                XposedHelpers.findAndHookMethod(CLASS_QS_FOOTER, classLoader,
+                XposedHelpers.findAndHookMethod(Utils.isOxygenOsRom() ?
+                        CLASS_QUICK_STATUSBAR_HEADER : CLASS_QS_FOOTER, classLoader,
                         "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {

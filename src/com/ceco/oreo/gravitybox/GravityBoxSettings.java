@@ -1750,6 +1750,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 if (p != null) mPrefCatPhoneTelephony.removePreference(p);
                 p = findPreference(PREF_KEY_OOS_DASH_SOUND_DISABLE);
                 if (p != null) mPrefCatPowerOther.removePreference(p);
+                PreferenceCategory pc = (PreferenceCategory) findPreference(PREF_CAT_KEY_NOTIF_PANEL_CLOCK);
+                p = findPreference(PREF_KEY_STATUSBAR_CLOCK_LINK);
+                if (pc != null && p != null) pc.removePreference(p);
             }
 
             // Remove fingerprint related preferences
