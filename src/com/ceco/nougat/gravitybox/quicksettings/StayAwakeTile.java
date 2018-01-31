@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,20 +27,16 @@ import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
-import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
 import android.widget.ListView;
 
 public class StayAwakeTile extends QsTile {
@@ -308,30 +304,18 @@ public class StayAwakeTile extends QsTile {
         return mDetailAdapter.getProxy();
     }
 
-    private class ModeAdapter extends ArrayAdapter<ScreenTimeout> {
-        public ModeAdapter(Context context) {
-            super(context, android.R.layout.simple_list_item_single_choice, mModeList);
-        }
-
-        @SuppressLint("ViewHolder")
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            CheckedTextView label = (CheckedTextView) inflater.inflate(
-                    android.R.layout.simple_list_item_single_choice, parent, false);
-            ScreenTimeout st = getItem(position);
-            label.setText(mGbContext.getString(st.mLabelResId));
-            return label;
-        }
-    }
-
     private class ModeDetailAdapter implements QsDetailAdapterProxy.Callback, AdapterView.OnItemClickListener {
 
-        private ModeAdapter mAdapter;
+        private QsDetailItemsListAdapter<ScreenTimeout> mAdapter;
         private QsDetailItemsList mDetails;
 
         ModeDetailAdapter(Context ctx) {
-            mAdapter = new ModeAdapter(ctx);
+            mAdapter = new QsDetailItemsListAdapter<ScreenTimeout>(ctx, mModeList) {
+                @Override
+                protected CharSequence getListItemText(ScreenTimeout item) {
+                    return mGbContext.getString(item.mLabelResId);
+                }
+            };
         }
 
         @Override
