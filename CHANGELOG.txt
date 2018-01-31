@@ -1,4 +1,29 @@
-Changelog 8.0.0 - 24/01/2018
+Changelog 8.0.0-beta-2 - 31/01/2018
+--------------------------------------
+- General:
+--- fixed battery percentage disappearing in status bar header
+--- slightly decreased size of CircleBattery to match other status bar elements
+--- don't show expanded desktop status line in 8.1 power menu
+--- QS: simplified and improved dimming of protected tiles
+--- fixed collision of notification icons with center clock
+--- bold font for percent text (except for OOS)
+--- Navbar: improved key icon scaling on 8.1
+- OxygenOS specific (OOS 5.0.1/OP3T):
+--- fixed Lockscreen tweaks
+--- fixed positioning of custom battery icon
+--- fixed option for hiding vibrate icon
+--- fixed muting dash charge sound during Quiet Hours
+--- QS: added OOS theming support to tile detail dialogs
+--- QS: enabled detail dialog for WiFi tile
+--- fixed statusbar header clock actions
+- Samsung specific (thanks to firefds):
+--- fixed Samsung device identification
+--- fixed LTR enforce
+--- fixed Advanced power menu
+--- fixed Lockscreen bottom shortcuts
+--- fixed volume dialog tweaks
+
+Changelog 8.0.0-beta-1 - 24/01/2018
 --------------------------------------
 - Initial release for Android Oreo
 
