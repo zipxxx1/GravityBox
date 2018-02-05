@@ -1248,6 +1248,11 @@
             android:key="pref_sb_hide_vibrate_icon"
             android:title="@string/pref_sb_hide_vibrate_icon_title"
             android:defaultValue="false" />
+        
+        <CheckBoxPreference 
+            android:key="pref_sb_hide_data_saver_icon"
+            android:title="@string/pref_sb_hide_data_saver_icon_title"
+            android:defaultValue="false" />
 
         <com.ceco.oreo.gravitybox.preference.OngoingNotifPreference
             android:key="pref_ongoing_notifications"
