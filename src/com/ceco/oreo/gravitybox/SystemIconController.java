@@ -34,9 +34,11 @@ public class SystemIconController implements BroadcastSubReceiver {
 
     private Object mSbPolicy;
     private Object mIconCtrl;
+    private Object mPolicyManager;
     private Context mContext;
     private BtMode mBtMode;
     private boolean mHideVibrateIcon;
+    private boolean mHideDataSaverIcon;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -47,11 +49,12 @@ public class SystemIconController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_STATUSBAR_BT_VISIBILITY, "DEFAULT"));
         mHideVibrateIcon = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_STATUSBAR_HIDE_VIBRATE_ICON, false);
-
+        mHideDataSaverIcon = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_STATUSBAR_HIDE_DATA_SAVER_ICON, false);
         createHooks(classLoader);
     }
 
-    private void createHooks(ClassLoader classLoader) {
+    private void createHooks(final ClassLoader classLoader) {
         try {
             XposedBridge.hookAllConstructors(XposedHelpers.findClass(
                     CLASS_PHONE_STATUSBAR_POLICY, classLoader), new XC_MethodHook() {
@@ -60,6 +63,8 @@ public class SystemIconController implements BroadcastSubReceiver {
                     mSbPolicy = param.thisObject;
                     mIconCtrl = XposedHelpers.getObjectField(param.thisObject, "mIconController");
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    Class<?> PolicyManagerClazz = XposedHelpers.findClass("android.net.NetworkPolicyManager", classLoader);
+                    mPolicyManager = XposedHelpers.callStaticMethod(PolicyManagerClazz, "from", mContext);
                     if (DEBUG) log ("Phone statusbar policy created");
                 }
             });
@@ -89,6 +94,32 @@ public class SystemIconController implements BroadcastSubReceiver {
                     updateVibrateIcon();
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+        
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR_POLICY, classLoader, 
+                    "onDataSaverChanged", boolean.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    boolean isDataSaving = (boolean) param.args[0];
+                    boolean show = !mHideDataSaverIcon && isDataSaving;
+                    param.args[0] = show;
+                }
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+    
+    private void updateDataSaverIcon() {
+        if (mIconCtrl == null || mPolicyManager == null) return;
+        
+        try {
+            boolean isDataSaving = (boolean) XposedHelpers.callMethod(mPolicyManager, "getRestrictBackground");
+            boolean show = !mHideDataSaverIcon && isDataSaving;
+            XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "data_saver", show);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -168,6 +199,11 @@ public class SystemIconController implements BroadcastSubReceiver {
                 mHideVibrateIcon = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_SB_HIDE_VIBRATE_ICON, false);
                 updateVolumeZen();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_HIDE_DATA_SAVER_ICON)) {
+                mHideDataSaverIcon = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_SB_HIDE_DATA_SAVER_ICON, false);
+                updateDataSaverIcon();
             }
         }
     }

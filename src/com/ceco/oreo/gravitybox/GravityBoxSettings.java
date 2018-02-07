@@ -750,10 +750,12 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
     public static final String PREF_KEY_STATUSBAR_BT_VISIBILITY = "pref_sb_bt_visibility";
     public static final String PREF_KEY_STATUSBAR_HIDE_VIBRATE_ICON = "pref_sb_hide_vibrate_icon";
+    public static final String PREF_KEY_STATUSBAR_HIDE_DATA_SAVER_ICON = "pref_sb_hide_data_saver_icon";
     public static final String ACTION_PREF_SYSTEM_ICON_CHANGED = 
             "gravitybox.intent.action.SYSTEM_ICON_CHANGED";
     public static final String EXTRA_SB_BT_VISIBILITY = "sbBtVisibility";
     public static final String EXTRA_SB_HIDE_VIBRATE_ICON = "sbHideVibrateIcon";
+    public static final String EXTRA_SB_HIDE_DATA_SAVER_ICON = "sbHideDataSaverIcon";
 
     public static final String PREF_KEY_INCREASING_RING = "pref_increasing_ring";
 
@@ -3177,6 +3179,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_STATUSBAR_HIDE_VIBRATE_ICON)) {
                 intent.setAction(ACTION_PREF_SYSTEM_ICON_CHANGED);
                 intent.putExtra(EXTRA_SB_HIDE_VIBRATE_ICON, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_STATUSBAR_HIDE_DATA_SAVER_ICON)) {
+                intent.setAction(ACTION_PREF_SYSTEM_ICON_CHANGED);
+                intent.putExtra(EXTRA_SB_HIDE_DATA_SAVER_ICON, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_FLASHING_LED_DISABLE)) {
                 intent.setAction(ACTION_BATTERY_LED_CHANGED);
                 intent.putExtra(EXTRA_BLED_FLASHING_DISABLED,
