@@ -1490,7 +1490,7 @@
     <string name="pref_powermenu_expanded_desktop_summary">请确认扩展桌面是可用的然后再替换</string>
 
     <!-- QuickRecord tile settings -->
-    <string name="pref_cat_quickrecord_tile_title">快速录像瓷砖设置</string>
+    <string name="pref_cat_quickrecord_tile_title">快速录像磁贴设置</string>
     <string name="pref_quickrecord_quality_title">录音质量</string>
     <string name="qr_audio_quality_low">低(16kHz)</string>
     <string name="qr_audio_quality_medium">中(22kHz)</string>
@@ -1658,7 +1658,7 @@
     <string name="lc_notif_visibility_secret">隐藏通知</string>
 
     <!-- Cellular tile settings -->
-    <string name="pref_cat_qs_cell_tile_title">蜂窝瓷砖设置</string>
+    <string name="pref_cat_qs_cell_tile_title">蜂窝磁贴设置</string>
 
     <!-- Cellular tile: data off icon -->
     <string name="pref_cell_tile_data_off_icon_title">关闭数据图标</string>
@@ -1682,7 +1682,7 @@
     <string name="wifi_trusted_info">信任的智能锁</string>
 
     <!-- QS: Battery tile settings -->
-    <string name="pref_cat_qs_battery_tile_title">电池瓷砖设置</string>
+    <string name="pref_cat_qs_battery_tile_title">电池磁贴设置</string>
     <string name="pref_battery_tile_percentage_title">显示比例</string>
     <string name="pref_battery_tile_saver_indicate_title">省电指示器</string>
     <string name="pref_battery_tile_saver_indicate_summary">使用相同的系统栏颜色
@@ -1733,10 +1733,10 @@
     <string name="pref_pie_control_trigind_color_title">触发指示器颜色</string>
 
     <!-- WiFi tile settings -->
-    <string name="pref_cat_qs_wifi_tile_title">WiFi瓷砖设置</string>
+    <string name="pref_cat_qs_wifi_tile_title">WiFi磁贴设置</string>
 
     <!-- Bluetooth tile settings -->
-    <string name="pref_cat_qs_bt_tile_title">蓝牙瓷砖设置</string>
+    <string name="pref_cat_qs_bt_tile_title">蓝牙磁贴设置</string>
 
     <!-- MTK tiles: HotKnot -->
     <string name="qs_tile_hotknot">HotKnot</string>
@@ -1796,8 +1796,8 @@
     <string name="pref_tile_enabled_modes_title">启用模式</string>
 
     <!-- DND tile settings -->
-    <string name="pref_cat_qs_dnd_tile_title">请勿打扰瓷砖设置</string>
-    <string name="pref_dnd_tile_quick_mode_summary">允许在瓷砖上循环单击选择打扰模式</string>
+    <string name="pref_cat_qs_dnd_tile_title">请勿打扰磁贴设置</string>
+    <string name="pref_dnd_tile_quick_mode_summary">允许在磁贴上循环单击选择打扰模式</string>
     <string name="pref_dnd_tile_enabled_modes_summary">设置循环不需要的打扰模式</string>
     <string name="dnd_tile_em_priority">仅优先级</string>
     <string name="dnd_tile_em_alarms">仅闹钟</string>
@@ -1809,8 +1809,8 @@
     <string name="pref_dnd_tile_duration_title">设置自定义时间</string>
 
     <!-- Location tile (Slimkat) settings -->
-    <string name="pref_cat_qs_location_tile_title">位置瓷砖(SlimKat)设置</string>
-    <string name="pref_location_tile_quick_mode_summary">允许通过单击位置瓷砖模式循环</string>
+    <string name="pref_cat_qs_location_tile_title">位置磁贴(SlimKat)设置</string>
+    <string name="pref_location_tile_quick_mode_summary">允许通过单击位置磁贴模式循环</string>
 
     <!-- Cellular network modes -->
     <string name="network_mode_0">首选GSM/WCDMA (3G/2G)</string>
@@ -1839,18 +1839,18 @@
     <string name="network_mode_unknown">未知</string>
     
     <!-- Network mode tile settings -->
-    <string name="pref_nm_tile_enabled_modes_summary">在瓷砖中定义支持哪些网络模式</string>
-    <string name="pref_nm_tile_quick_mode_summary">允许通过单击瓷砖循环选定的网络模式</string>
+    <string name="pref_nm_tile_enabled_modes_summary">在磁贴中定义支持哪些网络模式</string>
+    <string name="pref_nm_tile_quick_mode_summary">允许通过单击磁贴循环选定的网络模式</string>
     
     <!-- Ringer mode tile settings -->
-    <string name="pref_cat_qs_rm_tile_title">闹钟模式瓷砖设置</string>
-    <string name="pref_rm_tile_enabled_modes_summary">在瓷砖中定义支持哪些闹钟模式</string>
-    <string name="pref_rm_tile_quick_mode_summary">允许通过单击瓷砖循环选定的闹钟模式</string>
+    <string name="pref_cat_qs_rm_tile_title">闹钟模式磁贴设置</string>
+    <string name="pref_rm_tile_enabled_modes_summary">在磁贴中定义支持哪些闹钟模式</string>
+    <string name="pref_rm_tile_quick_mode_summary">允许通过单击磁贴循环选定的闹钟模式</string>
     
     <!-- Stay awake tile settings -->
-    <string name="pref_cat_qs_sa_tile_title">保持唤醒瓷砖设置</string>
-    <string name="pref_sa_tile_enabled_modes_summary">在瓷砖中定义支持哪些屏幕超时</string>
-    <string name="pref_sa_tile_quick_mode_summary">允许通过单击瓷砖循环选定的屏幕超时</string>
+    <string name="pref_cat_qs_sa_tile_title">保持唤醒磁贴设置</string>
+    <string name="pref_sa_tile_enabled_modes_summary">在磁贴中定义支持哪些屏幕超时</string>
+    <string name="pref_sa_tile_quick_mode_summary">允许通过单击磁贴循环选定的屏幕超时</string>
     
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">智能锁策略</string>
@@ -2125,9 +2125,9 @@
     <string name="shortcut_sm_data_sim_ui">选择SIM卡作为数据</string>
 
     <!-- QuickApp Tile #3 and #4 -->
-    <string name="pref_cat_quickapp_tile_3_title">快速应用瓷砖3设置</string>
+    <string name="pref_cat_quickapp_tile_3_title">快速应用磁贴3设置</string>
     <string name="qs_tile_quickapp_3">快速应用3</string>
-    <string name="pref_cat_quickapp_tile_4_title">快速应用瓷砖4设置</string>
+    <string name="pref_cat_quickapp_tile_4_title">快速应用磁贴4设置</string>
     <string name="qs_tile_quickapp_4">快速应用4</string>
 
     <!-- QS Bluetooth Tethering tile -->
