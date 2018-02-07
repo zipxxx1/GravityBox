@@ -86,7 +86,8 @@
     <string name="qs_tile_gps_slimkat">Геоданные (стиль SlimKat)</string>
     <string name="qs_tile_gps_alt">Геоданные (стиль CM)</string>
     <string name="qs_tile_network_mode">Режим сети</string>
-    <string name="qs_tile_data_usage">Мобильные данные</string>
+    <string name="qs_tile_data_usage">Сотовая сеть</string>
+    <string name="qs_tile_data">Мобильные данные</string>
     <string name="qs_tile_sync">Синхронизация</string>
     <string name="qs_tile_wifi_ap">ТД Wi-Fi</string>
     <string name="qs_tile_torch_gb">Фонарик (GravityBox)</string>
@@ -1385,6 +1386,10 @@
     <string name="imgpick_dialog_title">Выбор изображения через</string>
     <string name="imgpick_choose_error">Ошибка при выборе изображения</string>
     <string name="imgpick_crop_error">Ошибка при обрезке изображения</string>
+    <string name="imgpick_crop_uri_null">Приложению не удалось обработать изображение. Будет использован оригинал.</string>
+    <string name="imgpick_crop_ask_title">Обрезать?</string>
+    <string name="imgpick_crop_ask_msg">Если выберете Нет, будет оставлено оригинальное изображение. 
+        Убедитесь, что его размеры примерно соответствуют: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Приближение при пробуждении</string>
@@ -2012,5 +2017,23 @@
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Разделение экрана</string>
+
+    <!-- Yes/No -->
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Логирование ошибок</string>
+    <string name="pref_log_errors_summary">Логирование всех ошибок в журнале Xposed, если включено(необходима перезагрузка)</string>
+
+    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
+    <string name="pref_signal_cluster_aosp_mobile_type_title">Использование мобильных значков AOSP</string>
+    <string name="pref_signal_cluster_aosp_mobile_type_summary">Необходима перезагрузка</string>
+
+    <!-- Notification channels -->
+    <string name="notif_channel_services_title">Службы</string>
+    <string name="notif_channel_services_desc">Для активных уведомлений запущенных служб, таких как фонарик и запись экрана</string>
+    <string name="notif_channel_unc_title">Предпросмотр</string>
+    <string name="notif_channel_unc_desc">Для предпросмотра уведомлений управления оповещением</string>
 
 </resources>
