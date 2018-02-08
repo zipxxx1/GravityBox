@@ -80,7 +80,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Durum çubuğu Hızlı Ayarlar kareleri</string>
     <string name="quick_settings_summary">Durum çubuğunda Hızlı Ayarlar karelerini göster veya gizle</string>
-    <string name="qs_tile_airplane_mode">Uçuş Modu</string>
+    <string name="qs_tile_airplane_mode">Uçak Modu</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Konum</string>
@@ -303,7 +303,7 @@
 
     <!-- Phone status in pie controls -->
     <string name="pie_phone_status_no_service">Hizmet yok</string>
-    <string name="pie_phone_status_airplane_mode">Uçuş modu açık</string>
+    <string name="pie_phone_status_airplane_mode">Uçak modu açık</string>
     <string name="pie_phone_status_emergency_only">Yalnızca acil çağrılar</string>
 
     <!-- Pie Controls settings -->
@@ -357,7 +357,7 @@
     <string name="pie_control_menu_title">Menü düğmesini her zaman göster</string>
 
     <!-- Ringer mode tile (for non-MTK) -->
-    <string name="qs_tile_ringer_mode">Zil Sesi Modu</string>
+    <string name="qs_tile_ringer_mode">Zil Modu</string>
 
     <!-- Clock settings category -->
     <string name="pref_cat_clock_settings_title">Saat ayarları</string>
@@ -484,11 +484,11 @@
     <string name="call_vibration_periodic">Giden çağrı süresince her 45 saniyede</string>
 
     <!-- Ongoing notifications -->
-    <string name="pref_ongoing_notifications_title">Giden bildirim engelleyici</string>
-    <string name="pref_ongoing_notifications_summary">Seçili giden bildirimleri engelle</string>
-    <string name="ongoing_notif_info">Liste otomatik olarak her giden bildirimden çekilerek oluşturulur. Bir dahaki sefere giden bildirim tekrar oluştuğunda engellenip engellenmeyeceğine karar verebilirsiniz. Dikkatli kullanın.</string>
+    <string name="pref_ongoing_notifications_title">Devam eden bildirim engelleyici</string>
+    <string name="pref_ongoing_notifications_summary">Seçilen devam eden bildirimlerin engellenmesine izin verir</string>
+    <string name="ongoing_notif_info">Liste otomatik olarak her devam eden bildirimden çekilerek oluşturulur. Bir dahaki sefere devam eden bildirim tekrar oluştuğunda engellenip engellenmeyeceğine karar verebilirsiniz. Dikkatli kullanın.</string>
     <string name="ongoing_notif_reset_list">Listeyi sıfırla</string>
-    <string name="ongoing_notif_reset_alert">Listeyi sıfırlamak istediğinizden emin misiniz? Bu, şimdiki listeyi sıfırlar ve daha önceden engellenmiş giden bildirimlerin engelini kaldırır.</string>
+    <string name="ongoing_notif_reset_alert">Listeyi sıfırlamak istediğinizden emin misiniz? Bu, şimdiki listeyi sıfırlar ve daha önceden engellenmiş devam eden bildirimlerin engelini kaldırır.</string>
     <string name="ongoing_notif_list_empty">(liste boş)</string>
 
     <!-- Quick unlock -->
@@ -641,7 +641,7 @@
     <!-- AppPickerPreference: shortcut support -->
     <string name="app_picker_applications">Uygulamalar</string>
     <string name="app_picker_shortcuts">Kısayollar</string>
-    <string name="app_picker_shortcut_null_intent">Kısayol oluşturma imkansız çünkü etkinlikte kısayol yok</string>
+    <string name="app_picker_shortcut_null_intent">Kısayol oluşturma imkânsız çünkü etkinlikte kısayol yok</string>
     <string name="app_picker_shortcut_cancelled">Kısayol oluşturma hedef uygulama tarafından iptal edildi</string>
 
     <!-- Navigation bar: swap back and recents key -->
@@ -1249,7 +1249,7 @@
     <string name="pref_force_ltr_direction_summary">Sağdan sola diller için soldan sağa yerleşim yönünü zorla (yeniden başlatma gerektirir)</string>
 
     <!-- Ringer mode shortcut -->
-    <string name="shortcut_ringer_mode">Zil sesi modunu ayarla</string>
+    <string name="shortcut_ringer_mode">Zil modunu ayarla</string>
 
     <!-- Data traffic monitor: Only for mobile data -->
     <string name="pref_data_traffic_active_mobile_only_title">Yalnızca mobil veri</string>
@@ -1433,7 +1433,7 @@
 Touchwiz, Sense, Xperia gibi diğer markalı rom'ların yanı sıra, herhangi bir özel rom'da da kullanımı desteklenmez ve beklenmedik sonuçlara neden olabilir.
 
 Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek beklentiniz olmadan onaylarsınız. Uyumluluk hakkında daha ayrıntılı bilgi için, "<a href="http://forum.xda-developers.com/showthread.php?t=3653953">XDA destek konusu</a>na bakın.</string>
-    <string name="compat_warning_ok_stage1">TAMAM. Anladım.</string>
+    <string name="compat_warning_ok_stage1">Tamam. Anladım.</string>
     <string name="compat_warning_ok_stage2">GERÇEKTEN anladım!</string>
 
     <!-- UNC Active screen: Pocket mode -->
