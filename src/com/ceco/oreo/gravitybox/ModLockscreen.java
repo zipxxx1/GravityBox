@@ -152,7 +152,7 @@ public class ModLockscreen {
                     }
                 }
             } else if (action.equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)
-            		|| action.equals(Intent.ACTION_BOOT_COMPLETED)) {
+                        || action.equals(Intent.ACTION_BOOT_COMPLETED)) {
                 if (mAppBar != null)
                     mAppBar.initAppSlots();
                 prepareBottomActions();
@@ -223,12 +223,12 @@ public class ModLockscreen {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
 
                     if (Utils.isOxygenOsRom()
-                    		&& dpm.getStorageEncryptionStatus() == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE_PER_USER) {
-                    	if (DEBUG) log("File-based encryption enabled on Oneplus device. Using ACTION_BOOT_COMPLETED intent to init appbar.");
-                    	intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED );
+                            && dpm.getStorageEncryptionStatus() == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE_PER_USER) {
+                        if (DEBUG) log("File-based encryption enabled on Oneplus device. Using ACTION_BOOT_COMPLETED intent to init appbar.");
+                        intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED );
                     }
                     else {
-                    intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
+                        intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
                     }
 
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
