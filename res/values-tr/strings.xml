@@ -78,7 +78,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Durum çubuğu Hızlı Ayarlar kareleri</string>
     <string name="quick_settings_summary">Durum çubuğunda Hızlı Ayarlar karelerini göster veya gizle</string>
-    <string name="qs_tile_airplane_mode">Uçuş Modu</string>
+    <string name="qs_tile_airplane_mode">Uçak Modu</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Konum</string>
@@ -482,11 +482,11 @@
     <string name="call_vibration_periodic">Giden çağrı süresince her 45 saniyede</string>
 
     <!-- Ongoing notifications -->
-    <string name="pref_ongoing_notifications_title">Giden bildirim engelleyici</string>
-    <string name="pref_ongoing_notifications_summary">Seçili giden bildirimleri engelle</string>
-    <string name="ongoing_notif_info">Liste otomatik olarak her giden bildirimden çekilerek oluşturulur. Bir dahaki sefere giden bildirim tekrar oluştuğunda engellenip engellenmeyeceğine karar verebilirsiniz. Dikkatli kullanın.</string>
+    <string name="pref_ongoing_notifications_title">Devam eden bildirim engelleyici</string>
+    <string name="pref_ongoing_notifications_summary">Seçilen devam eden bildirimlerin engellenmesine izin verir</string>
+    <string name="ongoing_notif_info">Liste otomatik olarak her devam eden bildirimden çekilerek oluşturulur. Bir dahaki sefere devam eden bildirim tekrar oluştuğunda engellenip engellenmeyeceğine karar verebilirsiniz. Dikkatli kullanın.</string>
     <string name="ongoing_notif_reset_list">Listeyi sıfırla</string>
-    <string name="ongoing_notif_reset_alert">Listeyi sıfırlamak istediğinizden emin misiniz? Bu, şimdiki listeyi sıfırlar ve daha önceden engellenmiş giden bildirimlerin engelini kaldırır.</string>
+    <string name="ongoing_notif_reset_alert">Listeyi sıfırlamak istediğinizden emin misiniz? Bu, şimdiki listeyi sıfırlar ve daha önceden engellenmiş devam eden bildirimlerin engelini kaldırır.</string>
     <string name="ongoing_notif_list_empty">(liste boş)</string>
 
     <!-- Quick unlock -->
@@ -545,8 +545,10 @@
     <string name="pref_hwkey_singletap_title">Tek dokunuş hareketi</string>
     <string name="pref_hwkey_doubletap_title">Çift dokunuş hareketi</string>
 
-    <!-- Disable double-tap (e.g. for Home Key on Android 4.3+) -->
-    <string name="pref_hwkey_doubletap_disable_title">Sinyal renk modu</string>
+    <string name="pref_hwkey_doubletap_disable_title">Çift dokunuşu devre dışı bırak</string>
+
+    <!-- Color mode for statusbar signal icons -->
+    <string name="pref_statusbar_signal_color_mode_title">Sinyal renk modu</string>
     <string name="signal_color_mode_stock">Stok simgeleri kullan</string>
     <string name="signal_color_mode_disabled">Renk uygulama</string>
 
@@ -739,7 +741,7 @@
     <string name="hwkey_action_auto_rotation_disabled">Ekran döndürme kapalı</string>
 
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
-    <string name="hwkey_action_show_power_menu">Güç menüsünü aç</string>
+    <string name="hwkey_action_show_power_menu">Güç menüsünü göster</string>
     <string name="hwkey_action_expand_notifications">Bildirim panelini aç</string>
 
     <!-- Shortcut activity title -->
@@ -1163,7 +1165,7 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktif Ekran</string>
     <string name="lc_active_screen_info">"Aktif Ekran özelliği her bildirim geldiğinde otomatik olarak ekranı açar. İsteğe bağlı olarak bildirim panelini açar veya mevcut kilit ekranı güvenlik ilkesi ve kullanıcı tercihine bağlı olarak üst bildirim gösterir. Aktif Ekran'ın kilit ekranını etkinleştirmeyi gerektirdiğini unutmayın. Açma/kapama anahtarı aşağıdadır. Etkinleştirdikten sonra, her uygulamaya göre ek ayar yapılabilir"</string>
-    <string name="lc_active_screen_switch_title">"Aktif Ekran'ı Etkinleştir"</string>
+    <string name="lc_active_screen_switch_title">Aktif Ekranı Etkinleştir</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Sessiz saatler</string>
@@ -1427,7 +1429,7 @@
 Touchwiz, Sense, Xperia gibi diğer markalı rom'ların yanı sıra, herhangi bir özel rom'da da kullanımı desteklenmez ve beklenmedik sonuçlara neden olabilir.
 
 Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek beklentiniz olmadan onaylarsınız. Uyumluluk hakkında daha ayrıntılı bilgi için, "<a href="http://forum.xda-developers.com/showthread.php?t=3653953">XDA destek konusu</a>na bakın.</string>
-    <string name="compat_warning_ok_stage1">TAMAM. Anladım.</string>
+    <string name="compat_warning_ok_stage1">Tamam. Anladım.</string>
     <string name="compat_warning_ok_stage2">GERÇEKTEN anladım!</string>
 
     <!-- UNC Active screen: Pocket mode -->
@@ -1811,6 +1813,9 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
 
     <!-- Statusbar: Hide vibrate icon -->
     <string name="pref_sb_hide_vibrate_icon_title">Titreşim simgesini gizle</string>
+    
+    <!-- Statusbar: Hide data saver icon -->
+    <string name="pref_sb_hide_data_saver_icon_title">Veri tasarrufu simgesini gizle</string>
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Durum mesajını göster</string>
