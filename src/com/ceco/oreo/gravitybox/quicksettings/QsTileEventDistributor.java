@@ -25,9 +25,11 @@ import com.ceco.oreo.gravitybox.GravityBox;
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
 import com.ceco.oreo.gravitybox.ModQsTiles;
 import com.ceco.oreo.gravitybox.PhoneWrapper;
+import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -109,6 +111,9 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
     };
 
     private void prepareBroadcastReceiver() {
+        DevicePolicyManager dpm = (DevicePolicyManager)
+                mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
@@ -119,7 +124,16 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
         intentFilter.addAction(PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
+
+        if (Utils.isOxygenOsRom()
+                && dpm.getStorageEncryptionStatus() == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE_PER_USER) {
+            if (DEBUG) log("File-based encryption enabled on Oneplus device. Using ACTION_BOOT_COMPLETED intent to init QuickApp Tiles after unlock.");
+            intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
+        }
+        else {
+            intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
+        }
+
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
     }
 
