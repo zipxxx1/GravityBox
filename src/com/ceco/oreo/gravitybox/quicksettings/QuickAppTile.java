@@ -255,7 +255,6 @@ public class QuickAppTile extends QsTile {
         mAppSlots.add(new AppInfo(R.id.quickapp2));
         mAppSlots.add(new AppInfo(R.id.quickapp3));
         mAppSlots.add(new AppInfo(R.id.quickapp4));
-        updateAllApps();
     }
 
     private void updateAllApps() {
@@ -312,7 +311,8 @@ public class QuickAppTile extends QsTile {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QUICKAPP_SLOT4)) {
                 updateSubApp(3, intent.getStringExtra(GravityBoxSettings.EXTRA_QUICKAPP_SLOT4));
             }
-        } else if (intent.getAction().equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)) {
+        } else if (intent.getAction().equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)
+                || intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
             updateAllApps();
         }
     }
