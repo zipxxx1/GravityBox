@@ -1976,4 +1976,7 @@
     <string name="notif_channel_unc_title">Náhled oznámení</string>
     <string name="notif_channel_unc_desc">Pro funkci náhledu nastavení oznámení</string>
 
+    <!-- Statusbar: Hide data saver icon -->
+    <string name="pref_sb_hide_data_saver_icon_title">Skrýt ikonu spořiče dat</string>
+
 </resources>
