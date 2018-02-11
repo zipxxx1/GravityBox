@@ -1,3 +1,16 @@
+Changelog 8.0.0 - 11/02/2018
+--------------------------------------
+- Statusbar: added option for hiding Data Saver icon (thanks to Rijul-A)
+- Lockscreen:
+--- fixed shortcuts initialization on file-based encrypted devices (thanks to Phil Freeman AKA GT500x)
+--- fixed custom bottom shortcuts showing on ambient screen 
+- QuickSettings:
+--- fixed QuickApp tile initialization on file-based encrypted devices (thanks to Phil Freeman AKA GT500x)
+- fixed GB not receiving Unlocker response early after boot resulting in frozen screen
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Turkish translations (thanks to Fatih Firinci)
+
 Changelog 8.0.0-beta-2 - 31/01/2018
 --------------------------------------
 - General:
