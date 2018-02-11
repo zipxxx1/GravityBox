@@ -549,7 +549,8 @@ public class ModLockscreen {
                             if (mLeftActionHidden) {
                                 v.setVisibility(View.GONE);
                             } else if (mLeftAction != null) {
-                                v.setVisibility(View.VISIBLE);
+                                v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
+                                        View.VISIBLE : View.GONE);
                                 if (mLeftActionDrawableOrig == null) {
                                     mLeftActionDrawableOrig = v.getDrawable();
                                 }
@@ -596,7 +597,8 @@ public class ModLockscreen {
                             if (mLeftActionHidden) {
                                 v.setVisibility(View.GONE);
                             } else if (mLeftAction != null) {
-                                v.setVisibility(View.VISIBLE);
+                                v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
+                                        View.VISIBLE : View.GONE);
                                 if (mLeftActionDrawableOrig == null) {
                                     mLeftActionDrawableOrig = v.getDrawable();
                                 }
@@ -615,7 +617,8 @@ public class ModLockscreen {
                         if (mRightActionHidden) {
                             v.setVisibility(View.GONE);
                         } else if (mRightAction != null) {
-                            v.setVisibility(View.VISIBLE);
+                            v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
+                                    View.VISIBLE : View.GONE);
                             if (mRightActionDrawableOrig == null) {
                                 mRightActionDrawableOrig = v.getDrawable();
                             }
