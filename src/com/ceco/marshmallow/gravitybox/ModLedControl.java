@@ -36,6 +36,7 @@ import android.app.KeyguardManager;
 import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -186,6 +187,7 @@ public class ModLedControl {
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
+                        updateUncTrialCountdown();
                         toggleActiveScreenFeature(!mPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
                                 mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false));
                         hookNotificationDelegate();
@@ -208,6 +210,25 @@ public class ModLedControl {
 
             XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_VIBRATOR_SERVICE, classLoader),
                     "startVibrationLocked", startVibrationHook);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void updateUncTrialCountdown() {
+        try {
+            final ContentResolver cr = mContext.getContentResolver();
+            int uncTrialCountdown = Settings.System.getInt(cr,
+                    SystemPropertyProvider.SETTING_UNC_TRIAL_COUNTDOWN, -1);
+            if (uncTrialCountdown == -1) {
+                Settings.System.putInt(cr,
+                        SystemPropertyProvider.SETTING_UNC_TRIAL_COUNTDOWN, 50);
+            } else {
+                if (--uncTrialCountdown >= 0) {
+                    Settings.System.putInt(cr,
+                            SystemPropertyProvider.SETTING_UNC_TRIAL_COUNTDOWN, uncTrialCountdown);
+                }
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
