@@ -173,7 +173,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 0);
         percentTextView.setTextColor(Color.WHITE);
         percentTextView.setVisibility(View.GONE);
-        if (!Utils.isOxygenOsRom()) {
+        if (!Utils.isOxygenOsRom() && !Utils.isSamsungRom()) {
             percentTextView.setTypeface(null, Typeface.BOLD);
         }
         mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
@@ -291,7 +291,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if (mPercentText != null) {
                             mPercentText.setTextSize(Integer.valueOf(mPrefs.getString(
-                                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
+                                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, Utils.isSamsungRom() ? "14" : "16")));
                         }
                     }
                 }));
