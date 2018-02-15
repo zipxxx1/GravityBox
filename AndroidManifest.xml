@@ -184,17 +184,6 @@
         </receiver>
 
         <receiver 
-            android:name="com.ceco.nougat.gravitybox.UnlockActivity$UnlockReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="gravitybox.permission.UNLOCK">
-            <intent-filter>
-                 <action android:name="gravitybox.intent.action.UNLOCK" />
-                 <action android:name="gravitybox.intent.action.CHECK_POLICY" />
-            </intent-filter>
-        </receiver>
-
-        <receiver 
             android:name="com.ceco.nougat.gravitybox.UnlockActivity$PkgManagerReceiver"
             android:enabled="true"
             android:exported="true">
