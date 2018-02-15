@@ -350,6 +350,12 @@ public class QuickAppTile extends QsTile {
     }
 
     @Override
+    protected Object iconFromDrawable(Drawable d) {
+        d.setTintList(null);
+        return super.iconFromDrawable(d);
+    }
+
+    @Override
     public boolean supportsHideOnChange() {
         // starting activity collapses panel anyway
         return false;

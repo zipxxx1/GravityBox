@@ -124,7 +124,7 @@ public abstract class QsTile extends BaseTile {
         return iconFromDrawable(mGbContext.getDrawable(resId));
     }
 
-    protected final Object iconFromDrawable(Drawable d) {
+    protected Object iconFromDrawable(Drawable d) {
         try {
             return sDrawableIconClassConstructor.newInstance(d);
         } catch (Throwable t) {
