@@ -357,8 +357,8 @@ public class QuickAppTile extends QsTile {
 
     @Override
     public boolean supportsHideOnChange() {
-        // starting activity collapses panel anyway
-        return false;
+        // allow explicitly for actions of broadcast type as starting normal activity collapses panel anyway
+        return (ShortcutActivity.isGbBroadcastShortcut(mMainApp.getIntent()));
     }
 
     @Override
