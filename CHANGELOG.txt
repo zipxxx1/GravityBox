@@ -1,3 +1,10 @@
+Changelog 7.0.7 - 16/02/2018
+--------------------------------------
+- Improvements backported from GravityBox for Oreo
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 7.0.6 - 24/11/2017
 --------------------------------------
 - Moto specific adjustments:
