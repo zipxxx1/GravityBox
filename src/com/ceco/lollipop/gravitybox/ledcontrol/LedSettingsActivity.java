@@ -20,12 +20,8 @@ import java.util.Locale;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModHwKeys;
-import com.ceco.lollipop.gravitybox.ModLedControl;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.Utils;
-import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
-import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.Visibility;
-import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.VisibilityLs;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -39,7 +35,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class LedSettingsActivity extends Activity implements OnClickListener {
     protected static final String EXTRA_PACKAGE_NAME = "packageName";
@@ -134,96 +129,68 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
         mPrefsFragment.initialize(mLedSettings);
     }
 
+    private void applyPrefsToSettings(LedSettings settings) {
+        settings.setColor(mPrefsFragment.getColor());
+        settings.setLedOnMs(mPrefsFragment.getLedOnMs());
+        settings.setLedOffMs(mPrefsFragment.getLedOffMs());
+        settings.setOngoing(mPrefsFragment.getOngoing());
+        settings.setSoundOverride(mPrefsFragment.getSoundOverride());
+        settings.setSoundUri(mPrefsFragment.getSoundUri());
+        settings.setSoundOnlyOnce(mPrefsFragment.getSoundOnlyOnce());
+        settings.setSoundOnlyOnceTimeout(mPrefsFragment.getSoundOnlyOnceTimeout());
+        settings.setInsistent(mPrefsFragment.getInsistent());
+        settings.setVibrateOverride(mPrefsFragment.getVibrateOverride());
+        settings.setVibratePatternFromString(mPrefsFragment.getVibratePatternAsString());
+        settings.setActiveScreenMode(mPrefsFragment.getActiveScreenMode());
+        settings.setActiveScreenIgnoreUpdate(mPrefsFragment.getActiveScreenIgnoreUpdate());
+        settings.setLedMode(mPrefsFragment.getLedMode());
+        settings.setQhIgnore(mPrefsFragment.getQhIgnore());
+        settings.setQhIgnoreList(mPrefsFragment.getQhIgnoreList());
+        settings.setHeadsUpMode(mPrefsFragment.getHeadsUpMode());
+        settings.setHeadsUpDnd(mPrefsFragment.getHeadsUpDnd());
+        settings.setHeadsUpTimeout(mPrefsFragment.getHeadsUpTimeout());
+        settings.setProgressTracking(mPrefsFragment.getProgressTracking());
+        settings.setVisibility(mPrefsFragment.getVisibility());
+        settings.setVisibilityLs(mPrefsFragment.getVisibilityLs());
+        settings.setSoundToVibrateDisabled(mPrefsFragment.getSoundToVibrateDisabled());
+        settings.setVibrateReplace(mPrefsFragment.getVibrateReplace());
+        settings.setSoundReplace(mPrefsFragment.getSoundReplace());
+        settings.setHidePersistent(mPrefsFragment.getHidePersistent());
+        settings.setLedDnd(mPrefsFragment.getLedDnd());
+        settings.setLedIgnoreUpdate(mPrefsFragment.getLedIgnoreUpdate());
+     }
+
     private void previewSettings() {
+        LedSettings settings = LedSettings.createForPreview();
+        applyPrefsToSettings(settings);
+
+        final NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
         Notification.Builder builder = new Notification.Builder(this)
             .setContentTitle(getString(R.string.lc_preview_notif_title))
             .setContentText(String.format(Locale.getDefault(),
                     getString(R.string.lc_preview_notif_text), getTitle()))
             .setSmallIcon(R.drawable.ic_notif_gravitybox)
-            .setLargeIcon(Utils.drawableToBitmap(getDrawable(R.drawable.ic_launcher)))
-            .setPriority(Notification.PRIORITY_HIGH);
+            .setLargeIcon(Utils.drawableToBitmap(getDrawable(R.drawable.ic_launcher)));
+
         final Notification n = builder.build();
-        if (mPrefsFragment.getLedMode() == LedMode.OFF) {
-            n.defaults &= ~Notification.DEFAULT_LIGHTS;
-            n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
-        } else if (mPrefsFragment.getLedMode() == LedMode.OVERRIDE) {
-            n.defaults &= ~Notification.DEFAULT_LIGHTS;
-            n.flags |= Notification.FLAG_SHOW_LIGHTS;
-            n.ledARGB = mPrefsFragment.getColor();
-            n.ledOnMS = mPrefsFragment.getLedOnMs();
-            n.ledOffMS =  mPrefsFragment.getLedOffMs();
-        }
-        if (mPrefsFragment.getSoundOverride() && mPrefsFragment.getSoundUri() != null) {
-            n.defaults &= ~Notification.DEFAULT_SOUND;
-            n.sound = mPrefsFragment.getSoundUri();
-        }
-        if (mPrefsFragment.getInsistent()) {
-            n.flags |= Notification.FLAG_INSISTENT;
-        }
-        if (mPrefsFragment.getVibrateOverride()) {
-            try {
-                long[] pattern = LedSettings.parseVibratePatternString(
-                        mPrefsFragment.getVibratePatternAsString());
-                n.defaults &= ~Notification.DEFAULT_VIBRATE;
-                n.vibrate = pattern;
-            } catch (Exception e) {
-                Toast.makeText(this, getString(R.string.lc_vibrate_pattern_invalid),
-                        Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            n.defaults |= Notification.DEFAULT_VIBRATE;
-        }
-        if (mPrefsFragment.getVisibility() != Visibility.DEFAULT) {
-            n.visibility = mPrefsFragment.getVisibility().getValue();
-        }
-        if (mPrefsFragment.getVisibilityLs() != VisibilityLs.DEFAULT) {
-            n.extras.putString(ModLedControl.NOTIF_EXTRA_VISIBILITY_LS,
-                    mPrefsFragment.getVisibilityLs().toString());
-        }
-        n.extras.putBoolean("gbIgnoreNotification", true);
+        n.extras.putBoolean("gbUncPreviewNotification", true);
+        n.extras.putStringArrayList(LedSettings.EXTRA_UNC_PACKAGE_SETTINGS, settings.toArrayList());
         Intent intent = new Intent(ModHwKeys.ACTION_SLEEP);
         sendBroadcast(intent);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(++NOTIF_ID,  n);
+                nm.notify(++NOTIF_ID,  n);
             }
         }, 1000);
     }
 
     private void saveSettings() {
+        applyPrefsToSettings(mLedSettings);
         if (mLedSettings.getPackageName().equals("default")) {
             mLedSettings.setEnabled(mPrefsFragment.getDefaultSettingsEnabled());
         }
-        mLedSettings.setColor(mPrefsFragment.getColor());
-        mLedSettings.setLedOnMs(mPrefsFragment.getLedOnMs());
-        mLedSettings.setLedOffMs(mPrefsFragment.getLedOffMs());
-        mLedSettings.setOngoing(mPrefsFragment.getOngoing());
-        mLedSettings.setSoundOverride(mPrefsFragment.getSoundOverride());
-        mLedSettings.setSoundUri(mPrefsFragment.getSoundUri());
-        mLedSettings.setSoundOnlyOnce(mPrefsFragment.getSoundOnlyOnce());
-        mLedSettings.setSoundOnlyOnceTimeout(mPrefsFragment.getSoundOnlyOnceTimeout());
-        mLedSettings.setInsistent(mPrefsFragment.getInsistent());
-        mLedSettings.setVibrateOverride(mPrefsFragment.getVibrateOverride());
-        mLedSettings.setVibratePatternFromString(mPrefsFragment.getVibratePatternAsString());
-        mLedSettings.setActiveScreenMode(mPrefsFragment.getActiveScreenMode());
-        mLedSettings.setActiveScreenIgnoreUpdate(mPrefsFragment.getActiveScreenIgnoreUpdate());
-        mLedSettings.setLedMode(mPrefsFragment.getLedMode());
-        mLedSettings.setQhIgnore(mPrefsFragment.getQhIgnore());
-        mLedSettings.setQhIgnoreList(mPrefsFragment.getQhIgnoreList());
-        mLedSettings.setHeadsUpMode(mPrefsFragment.getHeadsUpMode());
-        mLedSettings.setHeadsUpDnd(mPrefsFragment.getHeadsUpDnd());
-        mLedSettings.setHeadsUpTimeout(mPrefsFragment.getHeadsUpTimeout());
-        mLedSettings.setProgressTracking(mPrefsFragment.getProgressTracking());
-        mLedSettings.setVisibility(mPrefsFragment.getVisibility());
-        mLedSettings.setPriorityMode(mPrefsFragment.getPriorityMode());
-        mLedSettings.setVisibilityLs(mPrefsFragment.getVisibilityLs());
-        mLedSettings.setSoundToVibrateDisabled(mPrefsFragment.getSoundToVibrateDisabled());
-        mLedSettings.setVibrateReplace(mPrefsFragment.getVibrateReplace());
-        mLedSettings.setSoundReplace(mPrefsFragment.getSoundReplace());
-        mLedSettings.setHidePersistent(mPrefsFragment.getHidePersistent());
-        mLedSettings.setLedDnd(mPrefsFragment.getLedDnd());
-        mLedSettings.setLedIgnoreUpdate(mPrefsFragment.getLedIgnoreUpdate());
         mLedSettings.serialize();
         Intent intent = new Intent();
         intent.putExtra(EXTRA_PACKAGE_NAME, mLedSettings.getPackageName());

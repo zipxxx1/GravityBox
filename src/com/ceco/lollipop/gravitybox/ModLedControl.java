@@ -236,22 +236,27 @@ public class ModLedControl {
                 }
 
                 Notification n = (Notification) param.args[6];
-                if (n.extras.containsKey("gbIgnoreNotification")) return;
-
                 Object oldRecord = getOldNotificationRecord(param.args[0], param.args[4],
                         param.args[5], param.args[8]);
                 Notification oldN = getNotificationFromRecord(oldRecord);
                 final String pkgName = (String) param.args[0];
 
-                LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
-                if (!ls.getEnabled()) {
-                    // use default settings in case they are active
-                    ls = LedSettings.deserialize(mPrefs.getStringSet("default", null));
-                    if (!ls.getEnabled() && !mQuietHours.quietHoursActive(ls, n, mUserPresent)) {
-                        return;
+                LedSettings ls;
+                if (n.extras.containsKey("gbUncPreviewNotification")) {
+                    ls = LedSettings.deserialize("preview", n.extras.getStringArrayList(
+                            LedSettings.EXTRA_UNC_PACKAGE_SETTINGS));
+                    if (DEBUG) log("Received UNC preview notification");
+                } else {
+                    ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
+                    if (!ls.getEnabled()) {
+                        // use default settings in case they are active
+                        ls = LedSettings.deserialize(mPrefs.getStringSet("default", null));
+                        if (!ls.getEnabled() && !mQuietHours.quietHoursActive(ls, n, mUserPresent)) {
+                            return;
+                        }
                     }
+                    if (DEBUG) log(pkgName + ": " + ls.toString());
                 }
-                if (DEBUG) log(pkgName + ": " + ls.toString());
 
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
