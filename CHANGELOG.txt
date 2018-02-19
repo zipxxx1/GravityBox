@@ -1,3 +1,8 @@
+Changelog 7.0.8 - 19/02/2018
+--------------------------------------
+- QS QuickAppTile: fixed tile icon disappearing on OxygenOS
+- Updated Russian translations (thanks to gaich)
+
 Changelog 7.0.7 - 16/02/2018
 --------------------------------------
 - Improvements backported from GravityBox for Oreo
