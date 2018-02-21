@@ -111,6 +111,7 @@ public class ModHwKeys {
     public static final String SETTING_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
 
     private static Object mPhoneWindowManager;
+    private static Class<?> mPhoneWindowManagerClass;
     private static Context mContext;
     private static Context mGbContext;
     private static String mStrAppKilled;
@@ -503,13 +504,13 @@ public class ModHwKeys {
             mHeadsetUri[0] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_UNPLUG, null);
             mHeadsetUri[1] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_PLUG, null);
 
-            final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
-            initReflections(classPhoneWindowManager);
+            mPhoneWindowManagerClass = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
+            initReflections(mPhoneWindowManagerClass);
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "init",
+            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, "init",
                 Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS, phoneWindowManagerInitHook);
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "interceptKeyBeforeQueueing", 
+            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, "interceptKeyBeforeQueueing", 
                     KeyEvent.class, int.class, new XC_MethodHook(XCallback.PRIORITY_HIGHEST) {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -625,7 +626,7 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "interceptKeyBeforeDispatching", 
+            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, "interceptKeyBeforeDispatching", 
                     CLASS_WINDOW_STATE, KeyEvent.class, int.class, new XC_MethodHook() {
 
                 @Override
@@ -796,7 +797,7 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "handleLongPressOnHome", new XC_MethodReplacement() {
+            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, "handleLongPressOnHome", new XC_MethodReplacement() {
 
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
@@ -813,7 +814,7 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, 
+            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, 
                     "isWakeKeyWhenScreenOff", int.class, new XC_MethodHook() {
 
                 @Override
@@ -829,7 +830,7 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, 
+            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, 
                     "readConfigurationDependentBehaviors", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -844,7 +845,7 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager,
+            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
                     "handleDoubleTapOnHome", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -858,7 +859,7 @@ public class ModHwKeys {
             });
 
             if (Build.VERSION.SDK_INT > 21) {
-                XposedHelpers.findAndHookMethod(classPhoneWindowManager,
+                XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
                         "powerLongPress", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -871,7 +872,7 @@ public class ModHwKeys {
                     }
                 });
 
-                XposedHelpers.findAndHookMethod(classPhoneWindowManager,
+                XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
                         "wakeUpFromPowerKey", long.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -887,7 +888,7 @@ public class ModHwKeys {
                     }
                 });
 
-                XposedBridge.hookAllMethods(classPhoneWindowManager, "interceptPowerKeyUp",
+                XposedBridge.hookAllMethods(mPhoneWindowManagerClass, "interceptPowerKeyUp",
                         new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -895,7 +896,7 @@ public class ModHwKeys {
                             Handler h = (Handler) XposedHelpers.getObjectField(
                                     param.thisObject, "mHandler");
                             h.removeMessages(MSG_POWER_LONG_PRESS);
-                            Method m = classPhoneWindowManager.getDeclaredMethod(
+                            Method m = mPhoneWindowManagerClass.getDeclaredMethod(
                                     "wakeUpFromPowerKey", long.class);
                             m.setAccessible(true);
                             m.invoke(param.thisObject, mPostponeWakeUpOnPowerKeyUpEventTime);
@@ -1527,11 +1528,36 @@ public class ModHwKeys {
         }
     }
 
+    private static Method getNativeScreenshotMethod() {
+        try {
+            Method m = mPhoneWindowManagerClass.getDeclaredMethod("takeScreenshot");
+            m.setAccessible(true);
+            return m;
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
     private static final Object mScreenshotLock = new Object();
     private static ServiceConnection mScreenshotConnection = null;  
     private static void takeScreenshot(final long delayMs) {
         final Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
         if (handler == null) return;
+
+        final Method m = getNativeScreenshotMethod();
+        if (m != null) {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        m.invoke(mPhoneWindowManager);
+                    } catch (Throwable t) {
+                        XposedBridge.log(t);
+                    }
+                }
+            }, delayMs);
+            return;
+        }
 
         synchronized (mScreenshotLock) {  
             if (mScreenshotConnection != null) {  
