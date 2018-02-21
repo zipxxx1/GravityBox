@@ -121,9 +121,9 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         intentFilter.addAction(PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
 
-        if (Utils.isFileBasedEncrypted(mContext)) {
-            if (DEBUG) log("File-based encryption enabled device. Using ACTION_BOOT_COMPLETED intent to init QuickApp Tiles after unlock.");
-            intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
+        if (!Utils.isUserUnlocked(mContext)) {
+            if (DEBUG) log("File-based encryption enabled device. Using ACTION_USER_UNLOCKED intent to init QuickApp Tiles after unlock.");
+            intentFilter.addAction(Intent.ACTION_USER_UNLOCKED);
         }
         else {
             intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);

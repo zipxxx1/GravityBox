@@ -151,7 +151,7 @@ public class ModLockscreen {
                     }
                 }
             } else if (action.equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)
-                        || action.equals(Intent.ACTION_BOOT_COMPLETED)) {
+                        || action.equals(Intent.ACTION_USER_UNLOCKED)) {
                 if (mAppBar != null)
                     mAppBar.initAppSlots();
                 prepareBottomActions();
@@ -210,6 +210,9 @@ public class ModLockscreen {
 
                     prepareCustomBackground();
                     prepareGestureDetector();
+                    if (Utils.isUserUnlocked(mContext)) {
+                        prepareBottomActions();
+                    }
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
@@ -218,9 +221,9 @@ public class ModLockscreen {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
 
-                    if (Utils.isFileBasedEncrypted(mContext)) {
-                        if (DEBUG) log("File-based encryption enabled device. Using ACTION_BOOT_COMPLETED intent to init appbar.");
-                        intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED );
+                    if (!Utils.isUserUnlocked(mContext)) {
+                        if (DEBUG) log("File-based encryption enabled device. Using ACTION_USER_UNLOCKED intent to init appbar.");
+                        intentFilter.addAction(Intent.ACTION_USER_UNLOCKED);
                     }
                     else {
                         intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
@@ -495,6 +498,9 @@ public class ModLockscreen {
                         if (container != null) {
                             mAppBar = new LockscreenAppBar(mContext, mGbContext, container,
                                     param.thisObject, prefs);
+                            if (Utils.isUserUnlocked(mContext)) {
+                                mAppBar.initAppSlots();
+                            }
                         }
                     }
                 }

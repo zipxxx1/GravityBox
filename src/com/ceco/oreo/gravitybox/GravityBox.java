@@ -166,6 +166,13 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModActivityManager.initAndroid(lpparam.classLoader);
         }
 
+        // Force reloading of preferences for SystemUI
+        if (lpparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
+            prefs.reload();
+            qhPrefs.reload();
+            uncPrefs.reload();
+        }
+
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {
             SystemPropertyProvider.init(prefs, qhPrefs, lpparam.classLoader);
         }

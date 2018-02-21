@@ -312,10 +312,6 @@ public class Utils {
     }
 
     public static boolean isUserUnlocked(Context con){
-        if (!isFileBasedEncrypted(con)) {
-            return true;
-        }
-
         try {
             UserManager um = (UserManager) con.getSystemService(Context.USER_SERVICE);
             return um.isUserUnlocked();
