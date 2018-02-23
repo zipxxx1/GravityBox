@@ -1,3 +1,17 @@
+Changelog 8.0.1 - 23/02/2018
+--------------------------------------
+- Recents: added option for always visible Clear All button (non-OOS only)
+- QuickSettings:
+--- fixed QuickApp tile icon appearance
+--- improved scaling correction
+- Screenshot: use native method if available (e.g. uses OnePlus screenshot on OOS)
+- Improved handling of GravityBox services (Torch,...)
+--- they should work with Battery Optimization turned on for GravityBox
+- Improved handling of explicitly triggered SystemUI restarts
+- BatteryStyle adjustments for Samsung devices (thanks to Firefds)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 8.0.0 - 11/02/2018
 --------------------------------------
 - Statusbar: added option for hiding Data Saver icon (thanks to Rijul-A)
