@@ -40,6 +40,7 @@ import android.widget.TextView;
 import com.ceco.nougat.gravitybox.R;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -50,6 +51,11 @@ public class ModClearAllRecents {
     public static final String CLASS_RECENT_VIEW = "com.android.systemui.recents.views.RecentsView";
     public static final String CLASS_RECENT_ACTIVITY = "com.android.systemui.recents.RecentsActivity";
     public static final String CLASS_TASK_STACK = "com.android.systemui.recents.model.TaskStack";
+    public static final String CLASS_TASK_STACK_VIEW = "com.android.systemui.recents.views.TaskStackView";
+    public static final String CLASS_ANIMATION_PROPS = "com.android.systemui.recents.views.AnimationProps";
+    public static final String CLASS_EVENT_BUS = "com.android.systemui.recents.events.EventBus";
+    public static final String CLASS_SHOW_STACK_ACTION_BUTTON_EVENT = "com.android.systemui.recents.events.activity.ShowStackActionButtonEvent";
+
     private static final boolean DEBUG = false;
 
     private static int mMarginTopPx;
@@ -58,6 +64,8 @@ public class ModClearAllRecents {
     private static Interpolator mExitAnimInterpolator;
     private static int mExitAnimDuration;
     private static Activity mRecentsActivity;
+    private static boolean mClearAlwaysVisible;
+    private static Unhook mEventBusSendHook;
 
     // RAM bar
     private static TextView mBackgroundProcessText;
@@ -81,6 +89,10 @@ public class ModClearAllRecents {
         public void onReceive(Context context, Intent intent) {
             if (DEBUG) log("Broadcast received: " + intent.toString());
             if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_RECENTS_CHANGED)) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_RECENTS_CLEAR_ALWAYS_VISIBLE)) {
+                    mClearAlwaysVisible = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_RECENTS_CLEAR_ALWAYS_VISIBLE, false);
+                }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_RECENTS_RAMBAR)) {
                     mRamBarGravity = intent.getIntExtra(GravityBoxSettings.EXTRA_RECENTS_RAMBAR, 0);
                     updateRamBarLayout();
@@ -101,7 +113,7 @@ public class ModClearAllRecents {
         }
     };
 
-    public static void init(final XSharedPreferences prefs, ClassLoader classLoader) {
+    public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             Class<?> recentActivityClass = XposedHelpers.findClass(CLASS_RECENT_ACTIVITY, classLoader);
 
@@ -118,6 +130,9 @@ public class ModClearAllRecents {
                     mRecentsView = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mRecentsView");
 
                     final Resources res = mRecentsActivity.getResources();
+
+                    mClearAlwaysVisible = prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_RECENT_CLEAR_ALWAYS_VISIBLE, false);
 
                     mMarginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                             prefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_TOP, 77), 
@@ -203,9 +218,67 @@ public class ModClearAllRecents {
                     }
                 }
             });
+
+            if (!Utils.isOxygenOsRom()) {
+                XposedHelpers.findAndHookMethod(CLASS_TASK_STACK_VIEW, classLoader,
+                        "onFirstLayout", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mClearAlwaysVisible && getTaskCount(param.thisObject) > 0) {
+                            mEventBusSendHook = XposedHelpers.findAndHookMethod(CLASS_EVENT_BUS, classLoader,
+                                    "send", CLASS_EVENT_BUS+".Event", new XC_MethodHook() {
+                                @Override
+                                protected void beforeHookedMethod(final MethodHookParam param2) throws Throwable {
+                                    if (param2.args[0] != null && param2.args[0].getClass().getName().endsWith(
+                                            "StackActionButtonEvent")) {
+                                        param2.setResult(null);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mEventBusSendHook != null) {
+                            mEventBusSendHook.unhook();
+                            mEventBusSendHook = null;
+                            sendShowActionButtonEvent(classLoader);
+                        }
+                    }
+                });
+                XposedHelpers.findAndHookMethod(CLASS_TASK_STACK_VIEW, classLoader,
+                        "onStackScrollChanged", float.class, float.class,
+                        CLASS_ANIMATION_PROPS, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mClearAlwaysVisible) {
+                            Object uiDozeTrigger = XposedHelpers.getObjectField(param.thisObject, "mUIDozeTrigger");
+                            XposedHelpers.callMethod(uiDozeTrigger, "poke");
+                            if (param.args[2] != null) {
+                                XposedHelpers.callMethod(param.thisObject,
+                                        "relayoutTaskViewsOnNextFrame", param.args[2]);
+                            }
+                            param.setResult(null);
+                        }
+                    }
+                });
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
+    }
+
+    private static int getTaskCount(Object taskView) throws Throwable {
+        final Object stack = XposedHelpers.getObjectField(taskView, "mStack");
+        return (int) XposedHelpers.callMethod(stack, "getTaskCount");
+    }
+
+    private static void sendShowActionButtonEvent(ClassLoader cl) throws Throwable {
+        final Object eb = XposedHelpers.callStaticMethod(XposedHelpers.findClass(
+                CLASS_EVENT_BUS, cl), "getDefault");
+        XposedHelpers.callMethod(eb, "send",
+                XposedHelpers.findConstructorExact(CLASS_SHOW_STACK_ACTION_BUTTON_EVENT,
+                        cl, boolean.class).newInstance(true));
     }
 
     private static void performExitAnimation(final View view) {

@@ -154,6 +154,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final int VOL_KEY_CURSOR_CONTROL_ON = 1;
     public static final int VOL_KEY_CURSOR_CONTROL_ON_REVERSE = 2;
 
+    public static final String PREF_CAT_RECENTS_PANEL = "pref_cat_misc_recents_panel";
+    public static final String PREF_KEY_RECENT_CLEAR_ALWAYS_VISIBLE = "pref_recent_clear_always_visible";
     public static final String PREF_KEY_RAMBAR = "pref_rambar";
     public static final String PREF_KEY_RECENTS_CLEAR_MARGIN_TOP = "pref_recent_clear_margin_top";
     public static final String PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM = "pref_recent_clear_margin_bottom";
@@ -163,6 +165,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final int RECENT_CLEAR_BOTTOM_LEFT = 83;
     public static final int RECENT_CLEAR_BOTTOM_RIGHT = 85;
     public static final String ACTION_PREF_RECENTS_CHANGED = "gravitybox.intent.action.RECENTS_CHANGED";
+    public static final String EXTRA_RECENTS_CLEAR_ALWAYS_VISIBLE = "recentsClearAlwaysVisible";
     public static final String EXTRA_RECENTS_RAMBAR = "recentsRambar";
     public static final String EXTRA_RECENTS_MARGIN_TOP = "recentsMarginTop";
     public static final String EXTRA_RECENTS_MARGIN_BOTTOM = "recentsMarginBottom";
@@ -1745,6 +1748,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
                 mBatteryStyle.setEntries(R.array.battery_style_entries_oos);
                 mBatteryStyle.setEntryValues(R.array.battery_style_values_oos);
+                PreferenceCategory pc = (PreferenceCategory) findPreference(PREF_CAT_RECENTS_PANEL);
+                p = findPreference(PREF_KEY_RECENT_CLEAR_ALWAYS_VISIBLE);
+                if (pc != null && p != null) pc.removePreference(p);
             } else {
                 PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_BATTERY_SETTINGS);
                 Preference p = findPreference(PREF_KEY_BATTERY_HIDE_DASH_ICON);
@@ -3294,6 +3300,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
                 intent.putExtra(EXTRA_BBAR_COLOR_CHARGING, prefs.getInt(key, 
                         getResources().getInteger(R.integer.COLOR_GREEN)));
+            } else if (key.equals(PREF_KEY_RECENT_CLEAR_ALWAYS_VISIBLE)) {
+                intent.setAction(ACTION_PREF_RECENTS_CHANGED);
+                intent.putExtra(EXTRA_RECENTS_CLEAR_ALWAYS_VISIBLE, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_RAMBAR)) {
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
                 intent.putExtra(EXTRA_RECENTS_RAMBAR, 

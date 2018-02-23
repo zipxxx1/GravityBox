@@ -2053,10 +2053,13 @@
     <string name="pref_signal_cluster_aosp_mobile_type_title">Use AOSP mobile type icons</string>
     <string name="pref_signal_cluster_aosp_mobile_type_summary">Requires reboot</string>
 
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">Always show clear all button</string>
+
     <!-- Theme -->
     <string name="theme_title">Theme</string>
     <string name="theme_default">Default</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
-    
+
 </resources>

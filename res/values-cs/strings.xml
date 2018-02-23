@@ -1990,4 +1990,7 @@
     <string name="pref_signal_cluster_aosp_mobile_type_title">AOSP ikony pro typ mobilní sítě</string>
     <string name="pref_signal_cluster_aosp_mobile_type_summary">Vyžaduje restart</string>
 
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">Vždy zobrazit tlačítko vymazání</string>
+
 </resources>
