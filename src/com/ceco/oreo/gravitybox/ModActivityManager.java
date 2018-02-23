@@ -49,6 +49,22 @@ public class ModActivityManager {
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
+
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_AM_SERVICE, classLoader,
+                    "appServicesRestrictedInBackgroundLocked",
+                    int.class, String.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (GravityBox.PACKAGE_NAME.equals(param.args[1])) {
+                        if (DEBUG) log("Explicitly allowing GravityBox background services");
+                        param.setResult(0);
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
     }
 
     private static Intent getIntentFromParamArgs(Object[] args) {
