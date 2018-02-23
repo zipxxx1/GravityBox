@@ -1985,4 +1985,7 @@
     <!-- Statusbar: Hide data saver icon -->
     <string name="pref_sb_hide_data_saver_icon_title">Skryť ikonu šteriča dát</string>
 
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">Vždy zobraziť tlačidlo vymazania</string>
+
 </resources>

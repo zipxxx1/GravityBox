@@ -2042,4 +2042,7 @@
     <string name="notif_channel_unc_title">UNC Preview</string>
     <string name="notif_channel_unc_desc">For Ultimate Notification Control notification preview</string>
 
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">Always show clear all button</string>
+
 </resources>
