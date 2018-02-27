@@ -1995,5 +1995,8 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="notif_channel_services_desc">Fener ve Ekran Kaydı gibi önplan hizmet bildirimleri için</string>
     <string name="notif_channel_unc_title">UNC Önizleme</string>
     <string name="notif_channel_unc_desc">Güçlü Bildirim Kontrolü bildirim önizlemesi için</string>
+    
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">Tümünü temizle düğmesini hep göster</string>
 
 </resources>
