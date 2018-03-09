@@ -1851,6 +1851,9 @@
 
     <!-- Statusbar: Hide vibrate icon -->
     <string name="pref_sb_hide_vibrate_icon_title">隐藏振动图标</string>
+	
+    <!-- Statusbar: Hide data saver icon -->
+    <string name="pref_sb_hide_data_saver_icon_title">隐藏数据保护图标</string>
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">显示状态消息</string>
@@ -2038,5 +2041,8 @@
     <string name="notif_channel_services_desc">用于前台服务通知,如触摸和屏幕录制</string>
     <string name="notif_channel_unc_title">终极通知控制预览</string>
     <string name="notif_channel_unc_desc">终极通知控制通知预览</string>
+	
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">始终显示全部清除按钮</string>
 
 </resources>
