@@ -2048,5 +2048,9 @@
     <!-- Error logging -->
     <string name="pref_log_errors_title">错误日志</string>
     <string name="pref_log_errors_summary">启用后所有错误将记录到Xposed日志(需要重新启动)</string>
+	
+    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
+    <string name="pref_signal_cluster_aosp_mobile_type_title">使用AOSP移动类型图标</string>
+    <string name="pref_signal_cluster_aosp_mobile_type_summary">需要重新启动</string>
 
 </resources>
