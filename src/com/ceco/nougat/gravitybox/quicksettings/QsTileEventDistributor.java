@@ -25,6 +25,7 @@ import com.ceco.nougat.gravitybox.GravityBox;
 import com.ceco.nougat.gravitybox.GravityBoxSettings;
 import com.ceco.nougat.gravitybox.ModQsTiles;
 import com.ceco.nougat.gravitybox.PhoneWrapper;
+import com.ceco.nougat.gravitybox.Utils;
 import com.ceco.nougat.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.nougat.gravitybox.managers.SysUiManagers;
 
@@ -118,7 +119,13 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
         intentFilter.addAction(PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
+
+        if (!Utils.isUserUnlocked(mContext)) {
+            intentFilter.addAction(Intent.ACTION_USER_UNLOCKED);
+        } else {
+            intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
+        }
+
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
     }
 

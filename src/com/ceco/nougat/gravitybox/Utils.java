@@ -44,6 +44,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.os.Vibrator;
 import android.renderscript.Allocation;
 import android.renderscript.Allocation.MipmapControl;
@@ -681,6 +682,16 @@ public class Utils {
     public static UserHandle getUserHandle(int userId) throws Exception {
         Constructor<?> uhConst = XposedHelpers.findConstructorExact(UserHandle.class, int.class);
         return (UserHandle) uhConst.newInstance(userId);
+    }
+
+    public static boolean isUserUnlocked(Context con){
+        try {
+            UserManager um = (UserManager) con.getSystemService(Context.USER_SERVICE);
+            return um.isUserUnlocked();
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+            return true;
+        }
     }
 
     public static void postToast(final Context ctx, final int msgResId) {
