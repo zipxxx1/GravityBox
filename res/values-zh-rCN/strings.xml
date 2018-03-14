@@ -2124,4 +2124,10 @@
     <!-- Storage permission toast -->
     <string name="permission_storage_denied">访问存储权限时被拒绝</string>
 
+    <!-- Theme -->
+    <string name="theme_title">主题</string>
+    <string name="theme_default">默认</string>
+    <string name="theme_light">明亮</string>
+    <string name="theme_dark">黑暗</string>
+
 </resources>

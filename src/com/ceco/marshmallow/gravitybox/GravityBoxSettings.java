@@ -694,9 +694,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             "pref_app_launcher_slot3", "pref_app_launcher_slot4", "pref_app_launcher_slot5",
             "pref_app_launcher_slot6", "pref_app_launcher_slot7", "pref_app_launcher_slot8",
             "pref_app_launcher_slot9", "pref_app_launcher_slot10", "pref_app_launcher_slot11"));
+    public static final String PREF_KEY_APP_LAUNCHER_THEME = "pref_app_launcher_theme";
     public static final String ACTION_PREF_APP_LAUNCHER_CHANGED = "gravitybox.intent.action.APP_LAUNCHER_CHANGED";
     public static final String EXTRA_APP_LAUNCHER_SLOT = "appLauncherSlot";
     public static final String EXTRA_APP_LAUNCHER_APP = "appLauncherApp";
+    public static final String EXTRA_APP_LAUNCHER_THEME = "appLauncherTheme";
 
     public static final String PREF_CAT_LAUNCHER_TWEAKS = "pref_cat_launcher_tweaks";
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS = "pref_launcher_desktop_grid_rows";
@@ -2549,6 +2551,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
             }
 
+            if (key == null || key.equals(PREF_KEY_APP_LAUNCHER_THEME)) {
+                ListPreference p = (ListPreference) findPreference(PREF_KEY_APP_LAUNCHER_THEME);
+                p.setSummary(p.getEntry());
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -3109,6 +3116,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_APP_LAUNCHER_SLOT,
                         PREF_KEY_APP_LAUNCHER_SLOT.indexOf(key));
                 intent.putExtra(EXTRA_APP_LAUNCHER_APP, prefs.getString(key, null));
+            } else if (key.equals(PREF_KEY_APP_LAUNCHER_THEME)) {
+                intent.setAction(ACTION_PREF_APP_LAUNCHER_CHANGED);
+                intent.putExtra(EXTRA_APP_LAUNCHER_THEME, prefs.getString(key, "DEFAULT"));
             } else if (key.equals(PREF_KEY_STATUSBAR_BRIGHTNESS)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_CHANGED);
                 intent.putExtra(EXTRA_SB_BRIGHTNESS, prefs.getBoolean(key, false));

@@ -2035,4 +2035,10 @@
     <!-- Storage permission toast -->
     <string name="permission_storage_denied">Přístup k úložišti byl zamítnut</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Téma</string>
+    <string name="theme_default">Původní</string>
+    <string name="theme_light">Světlá</string>
+    <string name="theme_dark">Tmavá</string>
+
 </resources>

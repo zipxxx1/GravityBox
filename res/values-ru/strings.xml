@@ -2123,4 +2123,10 @@
     <!-- Storage permission toast -->
     <string name="permission_storage_denied">Разрешение на доступ к памяти не предоставлено</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Тема</string>
+    <string name="theme_default">По умолчанию</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+
 </resources>

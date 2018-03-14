@@ -2124,4 +2124,10 @@
     <!-- Storage permission toast -->
     <string name="permission_storage_denied">Permission to access Storage was denied</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Theme</string>
+    <string name="theme_default">Default</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
 </resources>

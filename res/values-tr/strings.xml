@@ -2080,4 +2080,10 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <!-- Storage permission toast -->
     <string name="permission_storage_denied">Depolama alanına erişim izni reddedildi</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Tema</string>
+    <string name="theme_default">Varsayılan</string>
+    <string name="theme_light">Aydınlık</string>
+    <string name="theme_dark">Karanlık</string>
+
 </resources>
