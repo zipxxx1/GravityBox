@@ -27,7 +27,7 @@ import java.util.Map;
 
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
-import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -49,7 +49,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.PowerManager;
-import android.os.Process;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
 import android.os.SystemClock;
@@ -172,12 +171,7 @@ public class ModHwKeys {
     private static long mPostponeWakeUpOnPowerKeyUpEventTime = 0;
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
-            "com.android.systemui",
-            "com.mediatek.bluetooth",
-            "android.process.acore",
-            "com.google.process.gapps",
-            "com.android.smspush",
-            "com.mediatek.voicecommand"
+            "com.android.systemui"
     ));
 
     private static void log(String message) {
@@ -1305,6 +1299,7 @@ public class ModHwKeys {
 
         handler.post(
             new Runnable() {
+                @SuppressWarnings("deprecation")
                 @Override
                 public void run() {
                     try {
@@ -1319,28 +1314,16 @@ public class ModHwKeys {
                         }
 
                         ActivityManager am = getActivityManager();
-                        List<RunningAppProcessInfo> apps = am.getRunningAppProcesses();
+                        List<RunningTaskInfo> apps = am.getRunningTasks(1);
 
                         String targetKilled = null;
-                        for (RunningAppProcessInfo appInfo : apps) {  
-                            int uid = appInfo.uid;  
-                            // Make sure it's a foreground user application (not system,  
-                            // root, phone, etc.)  
-                            if (uid >= Process.FIRST_APPLICATION_UID && uid <= Process.LAST_APPLICATION_UID  
-                                    && appInfo.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&
-                                    !mKillIgnoreList.contains(appInfo.processName) &&
-                                    !appInfo.processName.startsWith(defaultHomePackage)) {
-                                if (appInfo.pkgList != null && appInfo.pkgList.length > 0) {
-                                    for (String pkg : appInfo.pkgList) {
-                                        if (DEBUG) log("Force stopping: " + pkg);
-                                        XposedHelpers.callMethod(am, "forceStopPackage", pkg);
-                                    }
-                                } else {
-                                    if (DEBUG) log("Killing process ID " + appInfo.pid + ": " + appInfo.processName);
-                                    Process.killProcess(appInfo.pid);
-                                }
-                                targetKilled = appInfo.processName;
-                                break;
+                        if (apps.size() > 0 && apps.get(0).numRunning > 0) {
+                            ComponentName cn = apps.get(0).topActivity;
+                            if (!mKillIgnoreList.contains(cn.getPackageName()) &&
+                                    !cn.getPackageName().startsWith(defaultHomePackage)) {
+                                if (DEBUG) log("Force stopping: " + cn.getPackageName());
+                                XposedHelpers.callMethod(am, "removeTask", apps.get(0).id);
+                                targetKilled = cn.getPackageName();
                             }
                         }
         
