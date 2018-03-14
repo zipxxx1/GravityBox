@@ -212,6 +212,9 @@ public class ModLockscreen {
 
                     prepareCustomBackground();
                     prepareGestureDetector();
+                    if (Utils.isUserUnlocked(mContext)) {
+                        prepareBottomActions();
+                    }
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
@@ -493,6 +496,9 @@ public class ModLockscreen {
                         if (container != null) {
                             mAppBar = new LockscreenAppBar(mContext, mGbContext, container,
                                     param.thisObject, prefs);
+                            if (Utils.isUserUnlocked(mContext)) {
+                                mAppBar.initAppSlots();
+                            }
                         }
                     }
                 }
