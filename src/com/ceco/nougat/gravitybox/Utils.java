@@ -65,6 +65,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -730,6 +731,11 @@ public class Utils {
         int color = arr.getColor(0, -1);
         arr.recycle();
         return color;
+    }
+
+    public static boolean hasFieldOfType(Object o, String name, Class<?> type) {
+        Field f = XposedHelpers.findFieldIfExists(o.getClass(), name);
+        return (f != null && f.getType().isAssignableFrom(type));
     }
 
     static class SystemProp extends Utils {
