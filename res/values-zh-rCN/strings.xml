@@ -2045,4 +2045,10 @@
     <!-- Recents: Clear always visible -->
     <string name="pref_recent_clear_always_visible_title">始终显示全部清除按钮</string>
 
+    <!-- Theme -->
+    <string name="theme_title">主题</string>
+    <string name="theme_default">默认</string>
+    <string name="theme_light">亮</string>
+    <string name="theme_dark">暗</string>
+
 </resources>

@@ -1988,4 +1988,10 @@
     <!-- Recents: Clear always visible -->
     <string name="pref_recent_clear_always_visible_title">Vždy zobraziť tlačidlo vymazania</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Téma</string>
+    <string name="theme_default">Pôvodná</string>
+    <string name="theme_light">Svetlá</string>
+    <string name="theme_dark">Tmavá</string>
+
 </resources>

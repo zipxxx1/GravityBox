@@ -15,11 +15,9 @@
 package com.ceco.oreo.gravitybox.quicksettings;
 
 import com.ceco.oreo.gravitybox.GravityBox;
+import com.ceco.oreo.gravitybox.Utils;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.util.TypedValue;
 import de.robv.android.xposed.XposedHelpers;
 
 class OOSThemeColorUtils {
@@ -39,22 +37,8 @@ class OOSThemeColorUtils {
             return (int) XposedHelpers.callStaticMethod(tcuClass, "getColor", spec);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error getting OOS theme specific color", t);
-            return getColorFromStyleAttr(ctx, defaultColorStyleAttr);
+            return Utils.getColorFromStyleAttr(ctx, defaultColorStyleAttr);
         }
-    }
-
-    private static int getColorFromStyleAttr(Context ctx, int attrId) {
-        if (attrId == 0)
-            return 0;
-
-        TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = ctx.getTheme();
-        theme.resolveAttribute(attrId, typedValue, true);
-        TypedArray arr = ctx.obtainStyledAttributes(
-                typedValue.data, new int[] { attrId });
-        int color = arr.getColor(0, -1);
-        arr.recycle();
-        return color;
     }
 
     public static int getColorTextPrimary(Context ctx) {

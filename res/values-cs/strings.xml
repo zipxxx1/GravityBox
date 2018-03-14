@@ -1982,4 +1982,10 @@
     <!-- Recents: Clear always visible -->
     <string name="pref_recent_clear_always_visible_title">Vždy zobrazit tlačítko vymazání</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Téma</string>
+    <string name="theme_default">Původní</string>
+    <string name="theme_light">Světlá</string>
+    <string name="theme_dark">Tmavá</string>
+
 </resources>

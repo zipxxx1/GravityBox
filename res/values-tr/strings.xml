@@ -1999,4 +1999,10 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <!-- Recents: Clear always visible -->
     <string name="pref_recent_clear_always_visible_title">Tümünü temizle düğmesini hep göster</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Tema</string>
+    <string name="theme_default">Varsayılan</string>
+    <string name="theme_light">Aydınlık</string>
+    <string name="theme_dark">Karanlık</string>
+
 </resources>

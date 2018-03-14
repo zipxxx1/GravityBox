@@ -2045,4 +2045,10 @@
     <!-- Recents: Clear always visible -->
     <string name="pref_recent_clear_always_visible_title">Always show clear all button</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Theme</string>
+    <string name="theme_default">Default</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
 </resources>

@@ -1230,4 +1230,16 @@
         <item>KEY</item>
     </string-array>
 
+    <string-array name="theme_entries" translatable="false">
+        <item>@string/theme_default</item>
+        <item>@string/theme_light</item>
+        <item>@string/theme_dark</item>
+    </string-array>
+
+    <string-array name="theme_values" translatable="false">
+        <item>DEFAULT</item>
+        <item>LIGHT</item>
+        <item>DARK</item>
+    </string-array>
+
 </resources>
