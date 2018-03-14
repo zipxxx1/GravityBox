@@ -203,11 +203,11 @@ public abstract class BaseTile implements QsEventListener {
             Object iconView = iconField.get(tileView);
             int iconSizePx = XposedHelpers.getIntField(iconView, "mIconSizePx");
             int tilePaddingBelowIconPx = XposedHelpers.getIntField(iconView, "mTilePaddingBelowIconPx");
-            int baseIconWidth = hasIntField(iconView, "mBaseIconWidth") ?
+            int baseIconWidth = Utils.hasFieldOfType(iconView, "mBaseIconWidth", int.class) ?
                     XposedHelpers.getIntField(iconView, "mBaseIconWidth") : 0;
-            int iconHeight = hasIntField(iconView, "mIconHeight") ?
+            int iconHeight = Utils.hasFieldOfType(iconView, "mIconHeight", int.class) ?
                     XposedHelpers.getIntField(iconView, "mIconHeight") : 0;
-            int doubleWideIconWidth = hasIntField(iconView, "mDoubleWideIconWidth") ?
+            int doubleWideIconWidth = Utils.hasFieldOfType(iconView, "mDoubleWideIconWidth", int.class) ?
                     XposedHelpers.getIntField(iconView, "mDoubleWideIconWidth") : 0;
 
             mStockLayout = new StockLayout();
@@ -224,11 +224,6 @@ public abstract class BaseTile implements QsEventListener {
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
-    }
-
-    private boolean hasIntField(Object o, String name) {
-        Field f = XposedHelpers.findFieldIfExists(o.getClass(), name);
-        return (f != null && f.getType().isAssignableFrom(int.class));
     }
 
     @Override
@@ -322,7 +317,11 @@ public abstract class BaseTile implements QsEventListener {
             float scalingFactor = getQsPanel().getScalingFactor();
             for (String vName : new String[] { "mSignal", "mOverlay", "mSimStatusImageView",
                     "mRoamingAnimatedImageView", "mDataActivityAnimatedImageView" }) {
+                if (!Utils.hasFieldOfType(signalTileView, vName, View.class))
+                    continue;
                 View v = (View) XposedHelpers.getObjectField(signalTileView, vName);
+                if (v == null)
+                    continue;
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) v.getLayoutParams();
                 if (vName.equals("mOverlay") && mPrefs.getBoolean(
                         GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE, false)) {
@@ -336,7 +335,11 @@ public abstract class BaseTile implements QsEventListener {
             }
             for (String vName : new String[] { "mOverlayDoubleWideImageView",
                     "mDataActivityDoubleWideAnimatedImageView" }) {
+                if (!Utils.hasFieldOfType(signalTileView, vName, View.class))
+                    continue;
                 View v = (View) XposedHelpers.getObjectField(signalTileView, vName);
+                if (v == null)
+                    continue;
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) v.getLayoutParams();
                 lp.width = Math.round(mStockLayout.doubleWideIconWidth*scalingFactor);
                 lp.height = Math.round(mStockLayout.iconHeight*scalingFactor);
