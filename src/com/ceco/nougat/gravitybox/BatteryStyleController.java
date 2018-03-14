@@ -27,6 +27,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
@@ -51,6 +52,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private Object mPhoneStatusBar;
     private int mBatteryStyle;
     private boolean mBatteryPercentTextEnabledSb;
+    private boolean mBatteryPercentTextOnRight;
     private KeyguardMode mBatteryPercentTextKgMode;
     private StatusbarBatteryPercentage mPercentText;
     private CmCircleBattery mCircleBattery;
@@ -92,43 +94,30 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
         mDashIconHidden = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_BATTERY_HIDE_DASH_ICON, false);
+        mBatteryPercentTextOnRight = "RIGHT".equals(prefs.getString(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"));
     }
 
     private void initLayout() throws Throwable {
         final String[] batteryPercentTextIds = new String[] { "battery_level", "percentage", "battery_text" };
         Resources res = mContext.getResources();
         Resources gbRes = Utils.getGbContext(mContext).getResources();
-        
-        if (!Utils.hasLenovoCustomUI()) {
-            // inject percent text if it doesn't exist
-            for (String bptId : batteryPercentTextIds) {
-                final int bptResId = res.getIdentifier(bptId, "id", PACKAGE_NAME);
-                if (bptResId != 0) {
-                    View v = mContainer.findViewById(bptResId);
-                    if (v != null && v instanceof TextView) {
-                        mPercentText = new StatusbarBatteryPercentage((TextView) v, mPrefs, this);
-                        if (DEBUG) log("Battery percent text found as: " + bptId);
-                        break;
-                    }
-                }
-            }
-            if (mPercentText == null || Utils.isOxygenOsRom()) {
-                TextView percentTextView = new TextView(mContext);
-                LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                percentTextView.setLayoutParams(lParams);
-                percentTextView.setPadding(
-                        gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
-                        0,
-                        gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_right),
-                        0);
-                percentTextView.setTextColor(Color.WHITE);
-                percentTextView.setVisibility(View.GONE);
-                mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
-                int offset = Utils.isOxygenOsRom() ? 3 : 1;
-                mSystemIcons.addView(mPercentText.getView(), mSystemIcons.getChildCount()-offset);
-                if (DEBUG) log("Battery percent text injected");
-            }
+
+        int bIconIndex = Utils.isOxygenOsRom() ?
+                mSystemIcons.getChildCount()-2 : mSystemIcons.getChildCount();
+        int bIconMarginStart = Utils.isParanoidRom() ?
+                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left_pa) :
+                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left);
+        int bIconMarginEnd = gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right);
+
+        // find stock battery
+        View stockBatteryView = mSystemIcons.findViewById(
+                res.getIdentifier("battery", "id", PACKAGE_NAME));
+        if (stockBatteryView != null) {
+            bIconIndex = mSystemIcons.indexOfChild(stockBatteryView);
+            bIconMarginStart = ((MarginLayoutParams) stockBatteryView.getLayoutParams()).getMarginStart();
+            bIconMarginEnd = ((MarginLayoutParams) stockBatteryView.getLayoutParams()).getMarginEnd();
+            mStockBattery = new StatusbarBattery(stockBatteryView, this);
         }
 
         // inject circle battery view
@@ -136,38 +125,48 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lParams.gravity = Gravity.CENTER_VERTICAL;
-        lParams.setMarginStart(Utils.isParanoidRom() ?
-                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left_pa) :
-                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left));
-        lParams.setMarginEnd(gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right));
+        lParams.setMarginStart(bIconMarginStart);
+        lParams.setMarginEnd(bIconMarginEnd);
         mCircleBattery.setLayoutParams(lParams);
         mCircleBattery.setVisibility(View.GONE);
-        int pos = Utils.isOxygenOsRom() ?
-                mSystemIcons.getChildCount()-2 : mSystemIcons.getChildCount();
-        mSystemIcons.addView(mCircleBattery, pos);
+        mSystemIcons.addView(mCircleBattery, bIconIndex);
         if (DEBUG) log("CmCircleBattery injected");
 
-        // find battery
-        View stockBatteryView = mSystemIcons.findViewById(
-                res.getIdentifier("battery", "id", PACKAGE_NAME));
-        if (stockBatteryView != null) {
-            mStockBattery = new StatusbarBattery(stockBatteryView, this);
-        }
-
-        // reposition percent text
-        if (mPercentText != null && 
-                mContainerType == ContainerType.STATUSBAR && "RIGHT".equals(mPrefs.getString(
-                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"))) {
-            View v = mPercentText.getView();
-            v.setPadding(
-                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_right),
-                    0,
-                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
-                    0);
-            ViewGroup vg = (ViewGroup) v.getParent();
-            vg.removeView(v);
-            pos = Utils.isOxygenOsRom() ? vg.getChildCount()-1 : vg.getChildCount();
-            vg.addView(v, pos);
+        if (!Utils.hasLenovoCustomUI()) {
+            // inject percent text if it doesn't exist
+            if (mContainerType == ContainerType.KEYGUARD) {
+                for (String bptId : batteryPercentTextIds) {
+                    final int bptResId = res.getIdentifier(bptId, "id", PACKAGE_NAME);
+                    if (bptResId != 0) {
+                        View v = mContainer.findViewById(bptResId);
+                        if (v != null && v instanceof TextView) {
+                            mPercentText = new StatusbarBatteryPercentage((TextView) v, mPrefs, this);
+                            if (DEBUG) log("Battery percent text found as: " + bptId);
+                            break;
+                        }
+                    }
+                }
+            }
+            if (mPercentText == null || Utils.isOxygenOsRom()) {
+                TextView percentTextView = new TextView(mContext);
+                lParams = new LinearLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                percentTextView.setLayoutParams(lParams);
+                percentTextView.setPadding(
+                        gbRes.getDimensionPixelSize(mBatteryPercentTextOnRight ?
+                                R.dimen.percent_text_padding_right :
+                                R.dimen.percent_text_padding_left),
+                        0,
+                        gbRes.getDimensionPixelSize(mBatteryPercentTextOnRight ?
+                                R.dimen.percent_text_padding_left :
+                                R.dimen.percent_text_padding_right),
+                        0);
+                percentTextView.setTextColor(Color.WHITE);
+                percentTextView.setVisibility(View.GONE);
+                mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
+                mSystemIcons.addView(mPercentText.getView(), mBatteryPercentTextOnRight ? bIconIndex+2 : bIconIndex);
+                if (DEBUG) log("Battery percent text injected");
+            }
         }
     }
 
