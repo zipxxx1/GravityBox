@@ -2077,4 +2077,10 @@
     <string name="qs_tile_bt_tethering_off">共享关</string>
     <string name="qs_tile_bt_tethering_error">错误</string>
 
+    <!-- Theme -->
+    <string name="theme_title">主题</string>
+    <string name="theme_default">默认</string>
+    <string name="theme_light">明亮</string>
+    <string name="theme_dark">黑暗</string>
+
 </resources>

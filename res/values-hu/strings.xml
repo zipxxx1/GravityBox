@@ -2009,4 +2009,10 @@
     <string name="pref_statusbar_download_progress_sound_screen_off_title">Csak kikapcsolt képernyőnél</string>
     <string name="pref_statusbar_download_progress_sound_screen_off_summary">Értesítési hang lejátszása csak kikapocsolt képernyő esetén</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Téma</string>
+    <string name="theme_default">Alapértelmezett</string>
+    <string name="theme_light">Világos</string>
+    <string name="theme_dark">Sötét</string>
+
 </resources>

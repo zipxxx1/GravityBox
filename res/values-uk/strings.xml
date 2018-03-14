@@ -2032,4 +2032,10 @@
     <string name="qs_tile_bt_tethering_off">Роздачу вимкнуто</string>
     <string name="qs_tile_bt_tethering_error">Помилка</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Тема</string>
+    <string name="theme_default">Типова</string>
+    <string name="theme_light">Світла</string>
+    <string name="theme_dark">Темна</string>
+
 </resources>

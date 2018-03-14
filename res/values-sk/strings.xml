@@ -2006,4 +2006,10 @@
     <string name="qs_tile_bt_tethering_off">Tethering vyp</string>
     <string name="qs_tile_bt_tethering_error">Chyba</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Téma</string>
+    <string name="theme_default">Pôvodná</string>
+    <string name="theme_light">Svetlá</string>
+    <string name="theme_dark">Tmavá</string>
+
 </resources>
