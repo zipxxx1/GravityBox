@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.content.res.XResources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -52,6 +53,7 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -714,6 +716,20 @@ public class Utils {
             }
         }
         return mDefaultDialerPkgName;
+    }
+
+    public static int getColorFromStyleAttr(Context ctx, int attrId) {
+        if (attrId == 0)
+            return 0;
+
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = ctx.getTheme();
+        theme.resolveAttribute(attrId, typedValue, true);
+        TypedArray arr = ctx.obtainStyledAttributes(
+                typedValue.data, new int[] { attrId });
+        int color = arr.getColor(0, -1);
+        arr.recycle();
+        return color;
     }
 
     static class SystemProp extends Utils {

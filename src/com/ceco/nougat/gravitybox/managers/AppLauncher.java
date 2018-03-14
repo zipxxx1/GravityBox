@@ -42,6 +42,7 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -65,6 +66,8 @@ public class AppLauncher implements BroadcastSubReceiver {
 
     public static final String ACTION_SHOW_APP_LAUCNHER = "gravitybox.intent.action.SHOW_APP_LAUNCHER";
 
+    enum DialogTheme { DEFAULT, LIGHT, DARK };
+
     private Context mContext;
     private Context mGbContext;
     private Resources mResources;
@@ -76,6 +79,7 @@ public class AppLauncher implements BroadcastSubReceiver {
     private View mAppView;
     private XSharedPreferences mPrefs;
     private Object mStatusBar;
+    private DialogTheme mDialogTheme;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -115,6 +119,9 @@ public class AppLauncher implements BroadcastSubReceiver {
         mHandler = new Handler();
         mPm = mContext.getPackageManager();
 
+        mDialogTheme = DialogTheme.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_APP_LAUNCHER_THEME, "DEFAULT"));
+
         mAppSlots = new ArrayList<AppInfo>();
         mAppSlots.add(new AppInfo(R.id.quickapp1));
         mAppSlots.add(new AppInfo(R.id.quickapp2));
@@ -145,6 +152,11 @@ public class AppLauncher implements BroadcastSubReceiver {
                 if (DEBUG) log("appSlot=" + slot + "; app=" + app);
                 updateAppSlot(slot, app);
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_APP_LAUNCHER_THEME)) {
+                mDialogTheme = DialogTheme.valueOf(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_APP_LAUNCHER_THEME));
+                mDialog = null;
+            }
         }
         if (intent.getAction().equals(ACTION_SHOW_APP_LAUCNHER)) {
             showDialog();
@@ -173,13 +185,20 @@ public class AppLauncher implements BroadcastSubReceiver {
             }
 
             if (mDialog == null) {
+                mPrefs.reload();
                 for (int i = 0; i < GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.size(); i++) {
                   updateAppSlot(i, mPrefs.getString(
                           GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.get(i), null));
                 }
                 LayoutInflater inflater = LayoutInflater.from(mGbContext);
                 mAppView = inflater.inflate(R.layout.navbar_app_dialog, null);
-                mDialog = new Dialog(mContext, android.R.style.Theme_Material_Light_Dialog_NoActionBar);
+                if (mDialogTheme == DialogTheme.LIGHT) {
+                    mDialog = new Dialog(mContext, android.R.style.Theme_Material_Light_Dialog_NoActionBar);
+                } else if (mDialogTheme == DialogTheme.DARK) {
+                    mDialog = new Dialog(mContext, android.R.style.Theme_Material_Dialog_NoActionBar);
+                } else {
+                    mDialog = new Dialog(mContext);
+                }
                 mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 mDialog.setContentView(mAppView);
                 mDialog.setCanceledOnTouchOutside(true);
@@ -200,6 +219,7 @@ public class AppLauncher implements BroadcastSubReceiver {
             boolean appRow2Visible = false;
             boolean appRow3Visible = false;
             TextView lastVisible = null;
+            int color = Utils.getColorFromStyleAttr(mDialog.getContext(), android.R.attr.textColorPrimary);
             for (AppInfo ai : mAppSlots) {
                 TextView tv = (TextView) mAppView.findViewById(ai.getResId());
                 if (ai.getValue() == null || (ai.isUnsafeAction() &&
@@ -209,6 +229,7 @@ public class AppLauncher implements BroadcastSubReceiver {
                     continue;
                 }
 
+                tv.setTextColor(ColorStateList.valueOf(color));
                 tv.setText(ai.getAppName());
                 tv.setCompoundDrawablesWithIntrinsicBounds(null, ai.getAppIcon(), null, null);
                 tv.setOnClickListener(mAppOnClick);
@@ -434,7 +455,8 @@ public class AppLauncher implements BroadcastSubReceiver {
                                 mResources.getDisplayMetrics());
                         Bitmap scaledIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
                         mAppIcon = new BitmapDrawable(mResources, scaledIcon);
-                        if (iconResName != null && iconResName.startsWith("ic_shortcut")) {
+                        if (mDialogTheme != DialogTheme.DARK && 
+                                iconResName != null && iconResName.startsWith("ic_shortcut")) {
                             mAppIcon.setTint(0xFF707070);
                         }
                     }
