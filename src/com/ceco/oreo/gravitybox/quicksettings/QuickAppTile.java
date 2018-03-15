@@ -75,6 +75,7 @@ public class QuickAppTile extends QsTile {
     private List<AppInfo> mAppSlots;
     private PackageManager mPm;
     private Dialog mDialog;
+    private View mAppView;
     private Handler mHandler;
     private int mId = 1;
 
@@ -194,7 +195,6 @@ public class QuickAppTile extends QsTile {
         public void run() {
             if (mDialog != null && mDialog.isShowing()) {
                 mDialog.dismiss();
-                mDialog = null;
             }
         }
     };
@@ -205,7 +205,6 @@ public class QuickAppTile extends QsTile {
             mHandler.removeCallbacks(mDismissDialogRunnable);
             if (mDialog != null && mDialog.isShowing()) {
                 mDialog.dismiss();
-                mDialog = null;
             }
 
             AppInfo aiProcessing = null;
@@ -374,17 +373,31 @@ public class QuickAppTile extends QsTile {
     @SuppressLint("InflateParams")
     @Override
     public boolean handleLongClick() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        View appv = inflater.inflate(R.layout.quick_settings_app_dialog, null);
+        if (mDialog == null) {
+            LayoutInflater inflater = LayoutInflater.from(mGbContext);
+            mAppView = inflater.inflate(R.layout.quick_settings_app_dialog, null);
+            mDialog = new Dialog(mContext);
+            mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mDialog.setContentView(mAppView);
+            mDialog.setCanceledOnTouchOutside(true);
+            mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL);
+            int pf = XposedHelpers.getIntField(mDialog.getWindow().getAttributes(), "privateFlags");
+            pf |= 0x00000010;
+            XposedHelpers.setIntField(mDialog.getWindow().getAttributes(), "privateFlags", pf);
+            mDialog.getWindow().clearFlags(LayoutParams.FLAG_DIM_BEHIND);
+        }
+
         int count = 0;
         AppInfo lastAppInfo = null;
+        int color = Utils.getColorFromStyleAttr(mDialog.getContext(), android.R.attr.textColorPrimary);
         for (AppInfo ai : mAppSlots) {
-            TextView tv = (TextView) appv.findViewById(ai.getResId());
+            TextView tv = (TextView) mAppView.findViewById(ai.getResId());
             if (ai.getValue() == null) {
                 tv.setVisibility(View.GONE);
                 continue;
             }
 
+            tv.setTextColor(color);
             tv.setText(ai.getAppName());
             tv.setTextSize(1, 10);
             tv.setMaxLines(2);
@@ -403,17 +416,8 @@ public class QuickAppTile extends QsTile {
                 log(getKey() + ": Unable to start activity: " + t.getMessage());
             }
         } else if (count > 1) {
-            mDialog = new Dialog(mContext, android.R.style.Theme_Material_Light_Dialog_NoActionBar);
-            mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            mDialog.setContentView(appv);
-            mDialog.setCanceledOnTouchOutside(true);
-            mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL);
-            int pf = XposedHelpers.getIntField(mDialog.getWindow().getAttributes(), "privateFlags");
-            pf |= 0x00000010;
-            XposedHelpers.setIntField(mDialog.getWindow().getAttributes(), "privateFlags", pf);
-            mDialog.getWindow().clearFlags(LayoutParams.FLAG_DIM_BEHIND);
-            mDialog.show();
             mHandler.removeCallbacks(mDismissDialogRunnable);
+            mDialog.show();
             mHandler.postDelayed(mDismissDialogRunnable, 4000);
         }
         return true;
@@ -429,6 +433,7 @@ public class QuickAppTile extends QsTile {
         }
         mPm = null;
         mDialog = null;
+        mAppView = null;
         mHandler = null;
         mDismissDialogRunnable = null;
         mOnSlotClick = null;
