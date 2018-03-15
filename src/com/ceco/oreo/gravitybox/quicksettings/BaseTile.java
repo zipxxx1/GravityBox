@@ -32,6 +32,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.TypedValue;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -79,6 +80,7 @@ public abstract class BaseTile implements QsEventListener {
     protected Context mGbContext;
     protected boolean mProtected;
     protected boolean mHideOnChange;
+    protected boolean mHapticFeedback;
     protected KeyguardStateMonitor mKgMonitor;
     private StockLayout mStockLayout;
     private View mTileView;
@@ -105,6 +107,7 @@ public abstract class BaseTile implements QsEventListener {
         mProtected = securedTiles.contains(getSettingsKey());
 
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
+        mHapticFeedback = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HAPTIC_FEEDBACK, false);
     }
 
     protected final QsPanel getQsPanel() {
@@ -113,6 +116,10 @@ public abstract class BaseTile implements QsEventListener {
 
     @Override
     public void handleClick() {
+        if (mHapticFeedback) {
+            mTileView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY,
+                    HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+        }
         if (mHideOnChange && supportsHideOnChange()) {
             collapsePanels();
         }
@@ -151,6 +158,10 @@ public abstract class BaseTile implements QsEventListener {
 
     @Override
     public boolean handleSecondaryClick() {
+        if (mHapticFeedback) {
+            mTileView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY,
+                    HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+        }
         return false;
     }
 
@@ -242,6 +253,10 @@ public abstract class BaseTile implements QsEventListener {
                 List<String> securedTiles = new ArrayList<String>(Arrays.asList(
                         intent.getStringExtra(TileOrderActivity.EXTRA_TILE_SECURED_LIST).split(",")));
                 mProtected = securedTiles.contains(getSettingsKey());
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HAPTIC_FEEDBACK)) {
+                mHapticFeedback = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_QS_HAPTIC_FEEDBACK, false);
             }
         }
     }
