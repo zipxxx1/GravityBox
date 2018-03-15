@@ -2012,4 +2012,8 @@
     <string name="theme_light">Svetlá</string>
     <string name="theme_dark">Tmavá</string>
 
+    <!-- QS: Haptic feedback -->
+    <string name="pref_qs_haptic_feedback_title">Hmatová odozva</string>
+    <string name="pref_qs_haptic_feedback_summary">Zapne hmatovú odozvu pri stlačení dlaždice</string>
+
 </resources>

@@ -2038,4 +2038,8 @@
     <string name="theme_light">Світла</string>
     <string name="theme_dark">Темна</string>
 
+    <!-- QS: Haptic feedback -->
+    <string name="pref_qs_haptic_feedback_title">Тактильний відгук</string>
+    <string name="pref_qs_haptic_feedback_summary">Вмикає тактильний відгук при одиничному дотику по плитці</string>
+
 </resources>

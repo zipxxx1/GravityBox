@@ -25,6 +25,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.TypedValue;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.FrameLayout;
@@ -69,8 +70,10 @@ public abstract class BaseTile implements QsEventListener {
     protected boolean mSecured;
     protected boolean mDualMode;
     protected boolean mHideOnChange;
+    protected boolean mHapticFeedback;
     protected float mScalingFactor = 1f;
     protected KeyguardStateMonitor mKgMonitor;
+    private View mTileView;
 
     public BaseTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -111,6 +114,7 @@ public abstract class BaseTile implements QsEventListener {
         mDualMode = dualTiles.contains(mKey);
 
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
+        mHapticFeedback = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HAPTIC_FEEDBACK, false);
     }
 
     private View.OnLongClickListener mLongClick = new View.OnLongClickListener() {
@@ -140,6 +144,10 @@ public abstract class BaseTile implements QsEventListener {
 
     @Override
     public void handleClick() {
+        if (mHapticFeedback) {
+            mTileView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY,
+            HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+        }
         if (mHideOnChange && supportsHideOnChange()) {
             collapsePanels();
         }
@@ -185,10 +193,12 @@ public abstract class BaseTile implements QsEventListener {
         mContext = null;
         mGbContext = null;
         mKgMonitor = null;
+        mTileView = null;
     }
 
     @Override
     public void onCreateTileView(View tileView) throws Throwable {
+        mTileView = tileView;
         XposedHelpers.setAdditionalInstanceField(tileView, TILE_KEY_NAME, mKey);
 
         mScalingFactor = QsPanel.getScalingFactor(Integer.valueOf(mPrefs.getString(
@@ -232,6 +242,10 @@ public abstract class BaseTile implements QsEventListener {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
                 mHideOnChange = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HAPTIC_FEEDBACK)) {
+                mHapticFeedback = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_QS_HAPTIC_FEEDBACK, false);
             }
         }
     }
