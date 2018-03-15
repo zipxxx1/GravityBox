@@ -94,6 +94,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row2";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE = "pref_qs_tile_label_style";
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE = "pref_qs_hide_on_change";
+    public static final String PREF_KEY_QUICK_SETTINGS_HAPTIC_FEEDBACK = "pref_qs_haptic_feedback";
     public static final String PREF_KEY_QUICK_SETTINGS_AUTOSWITCH = "pref_auto_switch_qs2";
     public static final String PREF_KEY_QUICK_PULLDOWN = "pref_quick_pulldown";
     public static final String PREF_KEY_QUICK_PULLDOWN_SIZE = "pref_quick_pulldown_size";
@@ -552,6 +553,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_QUICK_PULLDOWN_SIZE = "quickPulldownSize";
     public static final String EXTRA_QS_TILE_STYLE = "qsTileStyle";
     public static final String EXTRA_QS_HIDE_ON_CHANGE = "qsHideOnChange";
+    public static final String EXTRA_QS_HAPTIC_FEEDBACK = "qsHapticFeedback";
     public static final String EXTRA_QS_TILE_LABEL_STYLE = "qsTileLabelStyle";
     public static final String EXTRA_QS_HIDE_BRIGHTNESS = "qsHideBrightness";
     public static final String EXTRA_QS_BRIGHTNESS_ICON = "qsBrightnessIcon";
@@ -2576,6 +2578,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_HIDE_ON_CHANGE,
                         prefs.getBoolean(PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false));
+            } else if (key.equals(PREF_KEY_QUICK_SETTINGS_HAPTIC_FEEDBACK)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QS_HAPTIC_FEEDBACK, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_AUTOSWITCH, Integer.valueOf(

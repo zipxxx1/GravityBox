@@ -137,6 +137,7 @@ public class RingerModeTile extends QsTile {
     @Override
     public boolean handleSecondaryClick() {
         toggleState();
+        super.handleSecondaryClick();
         return true;
     }
 
