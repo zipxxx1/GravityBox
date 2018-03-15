@@ -2053,4 +2053,13 @@
     <string name="pref_signal_cluster_aosp_mobile_type_title">使用AOSP移动类型图标</string>
     <string name="pref_signal_cluster_aosp_mobile_type_summary">需要重新启动</string>
 
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">始终显示全部清除按钮</string>
+
+    <!-- Theme -->
+    <string name="theme_title">主题</string>
+    <string name="theme_default">默认</string>
+    <string name="theme_light">亮</string>
+    <string name="theme_dark">暗</string>
+
 </resources>
