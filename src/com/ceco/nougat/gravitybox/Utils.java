@@ -746,7 +746,7 @@ public class Utils {
 
     public static boolean hasFieldOfType(Object o, String name, Class<?> type) {
         Field f = XposedHelpers.findFieldIfExists(o.getClass(), name);
-        return (f != null && f.getType().isAssignableFrom(type));
+        return (f != null && type.isAssignableFrom(f.getType()));
     }
 
     static class SystemProp extends Utils {

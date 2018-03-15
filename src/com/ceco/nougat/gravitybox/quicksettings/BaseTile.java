@@ -34,6 +34,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XSharedPreferences;
@@ -66,6 +67,8 @@ public abstract class BaseTile implements QsEventListener {
         int baseIconWidth;
         int iconHeight;
         int doubleWideIconWidth;
+        int iconFrameWidthPx;
+        int iconFrameHeightPx;
     }
 
     protected String mKey;
@@ -189,6 +192,7 @@ public abstract class BaseTile implements QsEventListener {
             int tileSpacingPx = XposedHelpers.getIntField(tileView, "mTileSpacingPx");
             TextView label = (TextView) XposedHelpers.getObjectField(mTileView, "mLabel");
             float labelTextSizePx = label.getTextSize();
+
             Field iconField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
                     tileView.getContext().getClassLoader()).getDeclaredField("mIcon");
             iconField.setAccessible(true);
@@ -201,6 +205,15 @@ public abstract class BaseTile implements QsEventListener {
                     XposedHelpers.getIntField(iconView, "mIconHeight") : 0;
             int doubleWideIconWidth = Utils.hasFieldOfType(iconView, "mDoubleWideIconWidth", int.class) ?
                     XposedHelpers.getIntField(iconView, "mDoubleWideIconWidth") : 0;
+
+            int iconFrameWidthPx = 0;
+            int iconFrameHeightPx = 0;
+            if (Utils.hasFieldOfType(iconView, "mIconFrame", ViewGroup.class)) {
+                ViewGroup frame = (ViewGroup) XposedHelpers.getObjectField(iconView, "mIconFrame");
+                iconFrameWidthPx = frame.getLayoutParams().width;
+                iconFrameHeightPx = frame.getLayoutParams().height;
+            }
+
             mStockLayout = new StockLayout();
             mStockLayout.tilePaddingTopPx = tilePaddingTopPx;
             mStockLayout.tileSpacingPx = tileSpacingPx;
@@ -210,6 +223,8 @@ public abstract class BaseTile implements QsEventListener {
             mStockLayout.baseIconWidth = baseIconWidth;
             mStockLayout.iconHeight = iconHeight;
             mStockLayout.doubleWideIconWidth = doubleWideIconWidth;
+            mStockLayout.iconFrameWidthPx = iconFrameWidthPx;
+            mStockLayout.iconFrameHeightPx = iconFrameHeightPx;
 
             updateTileViewLayout();
         } catch (Throwable t) {
@@ -278,6 +293,15 @@ public abstract class BaseTile implements QsEventListener {
                     Math.round(mStockLayout.iconSizePx*scalingFactor));
             XposedHelpers.setIntField(iconView, "mTilePaddingBelowIconPx",
                     Math.round(mStockLayout.tilePaddingBelowIconPx*scalingFactor));
+
+            // icon frame
+            if (Utils.hasFieldOfType(iconView, "mIconFrame", ViewGroup.class)) {
+                ViewGroup frame = (ViewGroup) XposedHelpers.getObjectField(iconView, "mIconFrame");
+                ViewGroup.LayoutParams lp = frame.getLayoutParams();
+                lp.width = Math.round(mStockLayout.iconFrameWidthPx*scalingFactor);
+                lp.height = Math.round(mStockLayout.iconFrameHeightPx*scalingFactor);
+                frame.setLayoutParams(lp);
+            }
 
             // label
             TextView label = (TextView) XposedHelpers.getObjectField(mTileView, "mLabel");
