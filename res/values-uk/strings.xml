@@ -2079,4 +2079,7 @@
     <string name="pref_qs_haptic_feedback_title">Тактильний відгук</string>
     <string name="pref_qs_haptic_feedback_summary">Вмикає тактильний відгук при одиничному дотику по плитці</string>
 
+    <!-- BatteryStyle: Master switch -->
+    <string name="pref_battery_masterswitch_summary">Активує зміну стилю значків батареї та процентів (необхідне перезавантаження)</string>
+
 </resources>
