@@ -111,13 +111,14 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             }
         }
         mContainer.addView(mRootView);
-        mAppSlots = new ArrayList<AppInfo>(6);
+        mAppSlots = new ArrayList<AppInfo>(7);
         mAppSlots.add(new AppInfo(R.id.quickapp1));
         mAppSlots.add(new AppInfo(R.id.quickapp2));
         mAppSlots.add(new AppInfo(R.id.quickapp3));
         mAppSlots.add(new AppInfo(R.id.quickapp4));
         mAppSlots.add(new AppInfo(R.id.quickapp5));
         mAppSlots.add(new AppInfo(R.id.quickapp6));
+        mAppSlots.add(new AppInfo(R.id.quickapp7));
 
         mKgMonitor = SysUiManagers.KeyguardMonitor;
         mKgMonitor.registerListener(this);
