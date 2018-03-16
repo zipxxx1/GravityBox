@@ -608,8 +608,10 @@ public class ModStatusBar {
                     prepareTrafficMeter();
                     prepareSignalCluster(ContainerType.STATUSBAR);
                     prepareSignalCluster(ContainerType.KEYGUARD);
-                    prepareBatteryStyle(ContainerType.STATUSBAR);
-                    prepareBatteryStyle(ContainerType.KEYGUARD);
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TWEAKS_ENABLED, true)) {
+                        prepareBatteryStyle(ContainerType.STATUSBAR);
+                        prepareBatteryStyle(ContainerType.KEYGUARD);
+                    }
                     prepareQuietHoursIcon(ContainerType.STATUSBAR);
                     prepareQuietHoursIcon(ContainerType.KEYGUARD);
                     prepareBatteryBar(ContainerType.STATUSBAR);

@@ -108,6 +108,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
     public static final String PREF_CAT_KEY_BATTERY_SETTINGS = "pref_cat_battery_settings";
     public static final String PREF_CAT_KEY_BATTERY_PERCENT_TEXT = "pref_cat_battery_percent_text";
+    public static final String PREF_KEY_BATTERY_TWEAKS_ENABLED = "pref_battery_masterswitch";
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR = "pref_battery_percent_text_statusbar";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_POSITION = "pref_battery_percent_text_position";
@@ -920,7 +921,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_BATTERY_PERCENT_TEXT_POSITION,
             PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE,
             PREF_KEY_LOG_ERRORS,
-            PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE
+            PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE,
+            PREF_KEY_BATTERY_TWEAKS_ENABLED
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
