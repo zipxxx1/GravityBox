@@ -678,7 +678,9 @@ public class ModStatusBar {
 
                     prepareLayoutKeyguard();
                     prepareSignalCluster(ContainerType.KEYGUARD);
-                    prepareBatteryStyle(ContainerType.KEYGUARD);
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TWEAKS_ENABLED, true)) {
+                        prepareBatteryStyle(ContainerType.KEYGUARD);
+                    }
                     prepareQuietHoursIcon(ContainerType.KEYGUARD);
                     prepareBatteryBar(ContainerType.KEYGUARD);
                     prepareProgressBar(ContainerType.KEYGUARD);
@@ -727,7 +729,9 @@ public class ModStatusBar {
                     mStatusBarView = (ViewGroup) param.thisObject;
                     prepareLayoutStatusBar();
                     prepareSignalCluster(ContainerType.STATUSBAR);
-                    prepareBatteryStyle(ContainerType.STATUSBAR);
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TWEAKS_ENABLED, true)) {
+                        prepareBatteryStyle(ContainerType.STATUSBAR);
+                    }
                     prepareQuietHoursIcon(ContainerType.STATUSBAR);
                     prepareBatteryBar(ContainerType.STATUSBAR);
                     prepareProgressBar(ContainerType.STATUSBAR);

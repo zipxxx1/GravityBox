@@ -83,6 +83,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     // Battery padding
     protected Integer mBatteryPaddingOriginal;
+    protected boolean mBatteryTweaksEnabled;
     protected int mBatteryStyle;
     protected boolean mPercentTextSb;
 
@@ -520,6 +521,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 !Utils.isOxygenOsRom() &&
                 sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
 
+        mBatteryTweaksEnabled = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TWEAKS_ENABLED, true);
+
         mBatteryStyle = Integer.valueOf(sPrefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
 
@@ -605,7 +608,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     protected void updateBatteryPadding() {
-        if (Utils.isXperiaDevice() || Utils.isParanoidRom()) return;
+        if (!mBatteryTweaksEnabled || Utils.isXperiaDevice() || Utils.isParanoidRom())
+            return;
 
         try {
             if (mBatteryPaddingOriginal == null) {
