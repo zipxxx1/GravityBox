@@ -1993,4 +1993,17 @@
     <!-- Recents: Clear always visible -->
     <string name="pref_recent_clear_always_visible_title">Vždy zobrazit tlačítko vymazání</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Téma</string>
+    <string name="theme_default">Původní</string>
+    <string name="theme_light">Světlá</string>
+    <string name="theme_dark">Tmavá</string>
+
+    <!-- QS: Haptic feedback -->
+    <string name="pref_qs_haptic_feedback_title">Hmatová odezva</string>
+    <string name="pref_qs_haptic_feedback_summary">Zapne hmatovou odezvu při stisku dlaždice</string>
+
+    <!-- BatteryStyle: Master switch -->
+    <string name="pref_battery_masterswitch_summary">Povolí nastavení stylů baterie a procentního textu (vyžaduje restart)</string>
+
 </resources>

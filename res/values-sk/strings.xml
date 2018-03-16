@@ -1999,4 +1999,17 @@
     <!-- Recents: Clear always visible -->
     <string name="pref_recent_clear_always_visible_title">Vždy zobraziť tlačidlo vymazania</string>
 
+    <!-- Theme -->
+    <string name="theme_title">Téma</string>
+    <string name="theme_default">Pôvodná</string>
+    <string name="theme_light">Svetlá</string>
+    <string name="theme_dark">Tmavá</string>
+
+    <!-- QS: Haptic feedback -->
+    <string name="pref_qs_haptic_feedback_title">Hmatová odozva</string>
+    <string name="pref_qs_haptic_feedback_summary">Zapne hmatovú odozvu pri stlačení dlaždice</string>
+
+    <!-- BatteryStyle: Master switch -->
+    <string name="pref_battery_masterswitch_summary">Povolí nastavenia štýlov batérie a percentuálneho textu (vyžaduje reštart)</string>
+
 </resources>
