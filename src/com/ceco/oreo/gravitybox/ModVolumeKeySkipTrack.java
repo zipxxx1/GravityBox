@@ -110,7 +110,7 @@ public class ModVolumeKeySkipTrack {
                     keyCode == KeyEvent.KEYCODE_VOLUME_UP) &&
                     (event.getFlags() & KeyEvent.FLAG_FROM_SYSTEM) != 0 &&
                     !mPowerManager.isInteractive() &&
-                    mAudioManager != null && mAudioManager.isMusicActive()) {
+                    mAudioManager != null && isMusicActive()) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     mIsLongPress = false;
                     handleVolumeLongPress(param.thisObject, keyCode);
@@ -181,6 +181,24 @@ public class ModVolumeKeySkipTrack {
         if (mPowerManager == null) {
             mPowerManager = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
         }
+    }
+
+    private static boolean isMusicActive() {
+        // check local
+        if (mAudioManager.isMusicActive())
+            return true;
+        // check remote
+        try {
+            if ((boolean) XposedHelpers.callMethod(mAudioManager, "isMusicActiveRemotely"))
+                return true;
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+        // bluetooth A2DP? (not sure here)
+        if (mAudioManager.isBluetoothA2dpOn())
+            return true;
+
+        return false;
     }
 
     private static void sendMediaButtonEvent(Object phoneWindowManager, int code) {
