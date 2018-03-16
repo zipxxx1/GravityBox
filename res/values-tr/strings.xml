@@ -2007,5 +2007,18 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <!-- SignalCluster: Moto: use AOSP mobile type icon -->
     <string name="pref_signal_cluster_aosp_mobile_type_title">AOSP mobil tipi simgeleri kullan</string>
     <string name="pref_signal_cluster_aosp_mobile_type_summary">Yeniden başlatma gerektirir</string>
+    
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">Tümünü temizle düğmesini hep göster</string>
+
+    <!-- Theme -->
+    <string name="theme_title">Tema</string>
+    <string name="theme_default">Varsayılan</string>
+    <string name="theme_light">Aydınlık</string>
+    <string name="theme_dark">Karanlık</string>
+
+    <!-- QS: Haptic feedback -->
+    <string name="pref_qs_haptic_feedback_title">Dokunma geribildirimi</string>
+    <string name="pref_qs_haptic_feedback_summary">Kareye tek basmada dokunma geribildirimini etkinleştirir</string>
 
 </resources>
