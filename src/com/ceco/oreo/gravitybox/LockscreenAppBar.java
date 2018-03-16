@@ -60,6 +60,8 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
     private static final String TAG = "GB:LockscreenAppBar";
     private static final boolean DEBUG = false;
 
+    private static final float DEFAULT_SIZE_DP = 40f;
+
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
@@ -80,6 +82,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
     private NotificationDataMonitor mNdMonitor;
     private boolean mIsActive;
     private boolean mIsInteractive = true;
+    private int mScale;
 
     public LockscreenAppBar(Context ctx, Context gbCtx, ViewGroup container,
             Object notifPanel, XSharedPreferences prefs) {
@@ -94,6 +97,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHORTCUT_SAFE_LAUNCH, false);
         mShowBadges = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHORTCUT_SHOW_BADGES, false);
+        mScale = prefs.getInt(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHORTCUT_SCALE, 0);
 
         mNdMonitor = SysUiManagers.NotifDataMonitor;
         if (mNdMonitor != null) {
@@ -111,6 +115,8 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             }
         }
         mContainer.addView(mRootView);
+        updateScale();
+
         mAppSlots = new ArrayList<AppInfo>(7);
         mAppSlots.add(new AppInfo(R.id.quickapp1));
         mAppSlots.add(new AppInfo(R.id.quickapp2));
@@ -122,6 +128,19 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
 
         mKgMonitor = SysUiManagers.KeyguardMonitor;
         mKgMonitor.registerListener(this);
+    }
+
+    private void updateScale() {
+        float scaledSizeDp = DEFAULT_SIZE_DP * (1 + (float)mScale/100f);
+        int scaledSizePx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                scaledSizeDp, mContext.getResources().getDisplayMetrics()));
+        int childCount = mRootView.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View v = mRootView.getChildAt(i);
+            ViewGroup.LayoutParams lp = v.getLayoutParams();
+            lp.width = lp.height = scaledSizePx;
+            v.setLayoutParams(lp);
+        }
     }
 
     public void initAppSlots() {
@@ -141,6 +160,11 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
     public void setShowBadges(boolean showBadges) {
         mShowBadges = showBadges;
         onNotificationDataChanged(null);
+    }
+
+    public void setScale(int scale) {
+        mScale = scale;
+        updateScale();
     }
 
     public void updateAppSlot(int slot, String value) {
