@@ -108,13 +108,14 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
         mRootView = (ViewGroup) inflater.inflate(R.layout.lockscreen_app_bar, mContainer, false);
         mContainer.addView(mRootView);
 
-        mAppSlots = new ArrayList<AppInfo>(6);
+        mAppSlots = new ArrayList<AppInfo>(7);
         mAppSlots.add(new AppInfo(R.id.quickapp1));
         mAppSlots.add(new AppInfo(R.id.quickapp2));
         mAppSlots.add(new AppInfo(R.id.quickapp3));
         mAppSlots.add(new AppInfo(R.id.quickapp4));
         mAppSlots.add(new AppInfo(R.id.quickapp5));
         mAppSlots.add(new AppInfo(R.id.quickapp6));
+        mAppSlots.add(new AppInfo(R.id.quickapp7));
 
         for (int i = 0; i < GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHORTCUT.size(); i++) {
             updateAppSlot(i, mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHORTCUT.get(i),

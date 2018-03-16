@@ -276,7 +276,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_LOCKSCREEN_SHORTCUTS = "pref_cat_lockscreen_shortcuts";
     public static final List<String> PREF_KEY_LOCKSCREEN_SHORTCUT = new ArrayList<String>(Arrays.asList(
             "pref_lockscreen_shortcut0", "pref_lockscreen_shortcut1", "pref_lockscreen_shortcut2",
-            "pref_lockscreen_shortcut3", "pref_lockscreen_shortcut4", "pref_lockscreen_shortcut5"));
+            "pref_lockscreen_shortcut3", "pref_lockscreen_shortcut4", "pref_lockscreen_shortcut5",
+            "pref_lockscreen_shortcut6"));
     public static final String PREF_KEY_LOCKSCREEN_SHORTCUT_SAFE_LAUNCH = "pref_lockscreen_shortcuts_safe_launch";
     public static final String PREF_KEY_LOCKSCREEN_SHORTCUT_SHOW_BADGES = "pref_lockscreen_shortcuts_show_badges";
     public static final String ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SHORTCUT_CHANGED";
