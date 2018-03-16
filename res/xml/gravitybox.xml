@@ -98,6 +98,16 @@
                     android:summary="@string/pref_lockscreen_shortcuts_show_badges_summary"
                     android:defaultValue="false" />
 
+                <com.ceco.marshmallow.gravitybox.preference.SeekBarPreference
+                    android:key="pref_lockscreen_shortcuts_scale"
+                    android:title="@string/pref_qs_scale_correction_title"
+                    minimum="-20"
+                    maximum="20"
+                    interval="1"
+                    monitorBoxEnabled="true"
+                    monitorBoxUnit="%" 
+                    android:defaultValue="0" />
+
                 <!-- will be populated at runtime -->
 
             </PreferenceScreen>

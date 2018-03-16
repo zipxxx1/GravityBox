@@ -150,6 +150,9 @@ public class ModLockscreen {
                         mAppBar.setShowBadges(intent.getBooleanExtra(
                                 GravityBoxSettings.EXTRA_LS_SHOW_BADGES, false));
                     }
+                    if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SCALE)) {
+                        mAppBar.setScale(intent.getIntExtra(GravityBoxSettings.EXTRA_LS_SCALE, 0));
+                    }
                 }
             }
         }
