@@ -106,6 +106,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int QUICK_PULLDOWN_RIGHT = 1;
     public static final int QUICK_PULLDOWN_LEFT = 2;
 
+    public static final String PREF_KEY_BATTERY_TWEAKS_ENABLED = "pref_battery_masterswitch";
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
     public static final String PREF_CAT_KEY_BATTERY_PERCENT_TEXT_SETTINGS = "pref_cat_battery_percent_text";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR = "pref_battery_percent_text_statusbar";
@@ -926,7 +927,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_VOLUME_PANEL_EXPANDABLE,
             PREF_KEY_SIGNAL_CLUSTER_DNTI,
             PREF_KEY_SIGNAL_CLUSTER_NOSIM,
-            PREF_KEY_BATTERY_PERCENT_TEXT_POSITION
+            PREF_KEY_BATTERY_PERCENT_TEXT_POSITION,
+            PREF_KEY_BATTERY_TWEAKS_ENABLED
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(

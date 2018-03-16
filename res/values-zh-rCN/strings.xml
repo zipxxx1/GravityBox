@@ -2087,4 +2087,7 @@
     <string name="pref_qs_haptic_feedback_title">触觉反馈</string>
     <string name="pref_qs_haptic_feedback_summary">启用单击磁贴时的触觉反馈</string>
 
+    <!-- BatteryStyle: Master switch -->
+    <string name="pref_battery_masterswitch_summary">启用电池图标样式和百分比调整(需要重新启动)</string>
+
 </resources>

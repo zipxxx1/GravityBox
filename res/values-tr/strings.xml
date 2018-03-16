@@ -1272,4 +1272,7 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="pref_qs_haptic_feedback_title">Dokunma geribildirimi</string>
     <string name="pref_qs_haptic_feedback_summary">Kareye tek basmada dokunma geribildirimini etkinleştirir</string>
 
+    <!-- BatteryStyle: Master switch -->
+    <string name="pref_battery_masterswitch_summary">Pil simgesi stili ve yüzdesi için iyileştirmeleri etkinleştirir (yeniden başlatma gerektirir)</string>
+
 </resources>
