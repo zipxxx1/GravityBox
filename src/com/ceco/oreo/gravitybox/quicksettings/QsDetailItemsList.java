@@ -66,9 +66,9 @@ public class QsDetailItemsList {
         mEmpty = mView.findViewById(android.R.id.empty);
         mEmpty.setVisibility(View.GONE);
         mEmptyText = (TextView) mEmpty.findViewById(android.R.id.title);
-        if (Utils.isOxygenOsRom()) {
-            mEmptyText.setTextColor(OOSThemeColorUtils.getColorTextSecondary(mSysUiContext));
-        }
+        mEmptyText.setTextColor(Utils.isOxygenOsRom() ?
+                OOSThemeColorUtils.getColorTextSecondary(mSysUiContext) :
+                Utils.getColorFromStyleAttr(mSysUiContext, android.R.attr.textColorSecondary));
         mEmptyIcon = (ImageView) mEmpty.findViewById(android.R.id.icon);
         mListView.setEmptyView(mEmpty);
     }

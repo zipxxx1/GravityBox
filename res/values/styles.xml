@@ -78,7 +78,7 @@
 
     <style name="TextAppearance.QS.DetailEmpty">
         <item name="android:textSize">@dimen/qs_detail_empty_text_size</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
 </resources>
