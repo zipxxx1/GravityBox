@@ -175,9 +175,6 @@ public class QuickAppTile extends QsTile {
                             mResources.getDisplayMetrics());
                     Bitmap scaledIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
                     mAppIconDrawable = new BitmapDrawable(mResources, scaledIcon);
-                    if (mResId != mId && iconResName != null && iconResName.startsWith("ic_shortcut")) {
-                        mAppIconDrawable.setTint(0xFF707070);
-                    }
                 }
                 if (DEBUG) log(getKey() + ": AppInfo initialized for: " + getAppName());
             } catch (NameNotFoundException e) {
@@ -373,7 +370,7 @@ public class QuickAppTile extends QsTile {
         if (mDialog == null) {
             LayoutInflater inflater = LayoutInflater.from(mGbContext);
             mAppView = inflater.inflate(R.layout.quick_settings_app_dialog, null);
-            mDialog = new Dialog(mContext);
+            mDialog = new Dialog(mContext, android.R.style.Theme_Material_Dialog_NoActionBar);
             mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             mDialog.setContentView(mAppView);
             mDialog.setCanceledOnTouchOutside(true);
