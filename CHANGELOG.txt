@@ -1,3 +1,23 @@
+Changelog 8.0.2 - 17/03/2018
+--------------------------------------
+- Lockscreen shortcuts:
+--- added additional slot
+--- added option for scale correction
+- QuickSettings management:
+--- fixed wallpaper-based dynamic theming of tile dialogs
+--- added option for Haptic feedback (vibrate on tile press)
+--- QuickAppTile: use dark theme by default for better contrast
+- Battery settings: added master switch for battery settings
+- Actions: improved killing of foreground apps
+--- kills only what's really visible to the user
+--- removes killed task from the recents panel
+- Navbar: fixed light bar key color when power saving indication disabled
+- GB's App Launcher: added option for choosing theme
+- Media: allow volume keys skip track for music playing remotely
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Ukrainian translations (thanks to burunduk)
+
 Changelog 8.0.1 - 23/02/2018
 --------------------------------------
 - Recents: added option for always visible Clear All button (non-OOS only)
