@@ -16,6 +16,8 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <string name="app_name" translatable="false">GravityBox [O]</string>
+
     <string name="battery_style_title">Стиль індикатора батареї</string>
     <string name="battery_style_stock">Стоковий індикатор батареї</string>
     <string name="battery_style_circle">Круглий індикатор</string>
@@ -27,15 +29,16 @@
 
     <string name="low_battery_warning_policy_title">Попередження про низький заряд</string>
     <string name="low_battery_warning_default">Типово</string>
-    <string name="low_battery_warning_nonintrusive">Делікатний</string>
+    <string name="low_battery_warning_nonintrusive">Делікатно</string>
     <string name="low_battery_warning_off">Не попереджати</string>
 
     <string name="reboot_required">Зміни набудуть чинності після перезавантаження</string>
 
     <string name="poweroff_advanced_title">Розширене меню вимикання</string>
-    <string name="poweroff_advanced_summary">Включає розширене меню вимикання з можливістю перезавантаження у режим відновлення</string>
-    <string name="poweroff_recovery">Відновлення</string>
-    <string name="poweroff_bootloader">Завантажувач</string>
+    <string name="poweroff_advanced_summary">Включає розширене меню вимикання з можливістю перезавантаження у режим «recovery»</string>
+    <string name="poweroff_recovery">Recovery</string>
+    <string name="poweroff_bootloader">Bootloader</string>
+    <string name="poweroff_download">Завантаження</string>
 
     <string name="vol_key_cursor_control_title">Керування курсором клавішами гучності</string>
     <string name="vol_key_cursor_control_summary">Дозволяє управляти курсором в текстових полях клавішами гучності</string>
@@ -52,18 +55,18 @@
     <string name="quick_settings_sync_off">Синхронізація вимкнена</string>
     <string name="quick_settings_torch_on">Ліхтарик увімкнений</string>
     <string name="quick_settings_torch_off">Ліхтарик вимкнений</string>
-    <string name="quick_settings_qr_playing">Відтворення&#8230;</string>
-    <string name="quick_settings_qr_recording">Запис&#8230;</string>
+    <string name="quick_settings_qr_playing">Відтворення…</string>
+    <string name="quick_settings_qr_recording">Запис…</string>
     <string name="quick_settings_qr_recorded">Записано</string>
     <string name="quick_settings_qr_record">Утримуйте для запису</string>
     <string name="quick_settings_qr_recording_notif">Торкніться щоб зупинити запис</string>
     <string name="quick_settings_expanded_desktop_disabled">Вимкнено</string>
-    <string name="quick_settings_expanded_desktop_normal">Нормальний</string>
+    <string name="quick_settings_expanded_desktop_normal">Звичайний</string>
     <string name="quick_settings_expanded_desktop_expanded">Розширений</string>
     <string name="quick_settings_nfc_on">Увімк. NFC</string>
     <string name="quick_settings_nfc_off">Вимк. NFC</string>
     <string name="quick_settings_usb_tether_off">Від\'єднано</string>
-    <string name="quick_settings_usb_tether_connected">Роздача вимк.</string>
+    <string name="quick_settings_usb_tether_connected">Роздачу вимкнуто</string>
     <string name="quick_settings_usb_tether_on">Роздача</string>
     <string name="quick_settings_smart_radio_on">Роз.радіо увімк</string>
     <string name="quick_settings_smart_radio_off">Роз.радіо вимк</string>
@@ -73,6 +76,7 @@
     <string name="quick_settings_quiet_hours_off">Тиха година вимк</string>
     <string name="quick_settings_quiet_hours_on">Тиха година увімк</string>
     <string name="quick_settings_quiet_hours_auto">Тиха година авто</string>
+    <string name="quick_settings_quiet_hours_wear">Wear Mode</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Плитки швидких налаштувань</string>
@@ -85,6 +89,7 @@
     <string name="qs_tile_gps_alt">GPS (CM стиль)</string>
     <string name="qs_tile_network_mode">Режим мережі</string>
     <string name="qs_tile_data_usage">Стільник</string>
+    <string name="qs_tile_data">Стільникові дані</string>
     <string name="qs_tile_sync">Синхронізація</string>
     <string name="qs_tile_wifi_ap">Точка доступу</string>
     <string name="qs_tile_torch_gb">Ліхтарик (GravityBox)</string>
@@ -120,8 +125,9 @@
 
     <!-- Reboot confirmation -->
     <string name="reboot_confirm">%s буде перезавантажено.</string>
-    <string name="reboot_confirm_recovery">%s буде перезавантажений в режим відновлення.</string>
-    <string name="reboot_confirm_bootloader">%s буде перезавантажений в режим завантаження.</string>
+    <string name="reboot_confirm_recovery">%s буде перезавантажений в режим «recovery».</string>
+    <string name="reboot_confirm_bootloader">%s буде перезавантажений в режим «bootloader».</string>
+    <string name="reboot_confirm_download">%s буде перезавантажений в режим «download».</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Інженерний режим</string>
@@ -138,7 +144,7 @@
     <string name="lockscreen_bg_last_screen">Останній екран</string>
     <string name="pref_lockscreen_bg_color_title">Задати колір</string>
     <string name="pref_lockscreen_bg_color_summary">Дозволяє задати колір фону для екрана блокування</string>
-    <string name="pref_lockscreen_bg_image_title">Задати зображення</string>
+    <string name="pref_lockscreen_bg_image_title">Встановити зображення</string>
     <string name="pref_lockscreen_bg_image_summary">Дозволяє встановити користувацьке зображення для екрана блокування</string>
     <string name="lockscreen_background_result_successful">Фон змінено</string>
     <string name="lockscreen_background_result_not_successful">Фон не змінено</string>
@@ -158,7 +164,7 @@
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">Мінімальний рівень яскравості</string>
-    <string name="pref_brightness_min_summary">Дозволяє встановити мінімальний рівень яскравості. Застосовується до ручного налаштуванні яскравості.\n(необхідне перезавантаження)</string>
+    <string name="pref_brightness_min_summary">Дозволяє встановити мінімальний рівень яскравості. Застосовується до ручного налаштуванні яскравості. (необхідне перезавантаження)</string>
 
     <!--  Autobrightness levels -->
     <string name="pref_ab_title">Рівні авто-яскравості</string>
@@ -226,7 +232,7 @@
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">Переворот під час дзвінку</string>
-    <string name="pref_phone_flip_summary">Дозволяє задати дію при перевертанні телефону під час вхідного дзвінку\n</string>
+    <string name="pref_phone_flip_summary">Дозволяє задати дію при перевертанні телефону під час вхідного дзвінку</string>
     <string name="phone_flip_action_none">Нічого не робити</string>
     <string name="phone_flip_action_mute">Приглушити звук</string>
     <string name="phone_flip_action_dismiss">Скинути дзвінок</string>
@@ -298,7 +304,7 @@
 
     <!-- Phone status in pie controls -->
     <string name="pie_phone_status_no_service">Немає мережі</string>
-    <string name="pie_phone_status_airplane_mode">Режим польоту увімк</string>
+    <string name="pie_phone_status_airplane_mode">Режим «в літаку» увімкнено</string>
     <string name="pie_phone_status_emergency_only">Лише екстрені виклики</string>
 
     <!-- Pie Controls settings -->
@@ -379,7 +385,7 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Налаштування яскравості</string>
-    <string name="pref_brightness_master_switch_summary">Включити тільки у випадку, якщо пристрій використовує стандартний механізм Android для регулювання яскравості. Залиште вимкненим, якщо є проблеми, якось пов\'язані з яскравістю.\n(необхідне перезавантаження)</string>
+    <string name="pref_brightness_master_switch_summary">Включити тільки у випадку, якщо пристрій використовує стандартний механізм Android для регулювання яскравості. Залиште вимкненим, якщо є проблеми, якось пов\'язані з яскравістю. (необхідне перезавантаження)</string>
 
     <!-- HW Key Action: Recent apps -->
     <string name="hwkey_action_recent_apps">Показати нещодавні додатки</string>
@@ -399,7 +405,7 @@
     <string name="pref_clock_longpress_link_title">Утримання на годиннику</string>
 
     <!-- GravityBox settings startup handling -->
-    <string name="gb_startup_progress">Очікування відгуку від системного фреймворку GravityBox&#8230;</string>
+    <string name="gb_startup_progress">Очікування відгуку від системного фреймворку GravityBox…</string>
     <string name="gb_startup_error">Системний фреймворк GravityBox не відповідає. Вихід.</string>
 
     <!-- National data roaming -->
@@ -482,10 +488,8 @@
     <string name="pref_ongoing_notifications_title">Блокування сповіщень</string>
     <string name="pref_ongoing_notifications_summary">Дозволяє блокувати вибрані сповіщення</string>
     <string name="ongoing_notif_info">Список формується автоматично при появі сповіщення. Ви можете вирішити пізніше, яке сповіщення блокувати. Використовуйте з обережністю.</string>
-
     <string name="ongoing_notif_reset_list">Скинути список</string>
     <string name="ongoing_notif_reset_alert">Ви впевнені, що хочете скинути список? Це очистить список і розблокує всі поточні сповіщення.</string>
-
     <string name="ongoing_notif_list_empty">(Список порожній)</string>
 
     <!-- Quick unlock -->
@@ -583,8 +587,7 @@
     <string name="caller_unkown_photo_result_not_successful">Фото не змінено</string>
 
     <!-- Minimum screen brightness warning -->
-    <string name="screen_brightness_min_warning">Ваш екран може не підтримувати значення менше ніж 20. Якщо ваш екран не засвітиться, затисніть кнопку Гучність+ як мінімум на 7 секунд для скидання яскравості й потім виправте значення яскравості на більше.</string>
-
+    <string name="screen_brightness_min_warning">Ваш екран може не підтримувати значення менше ніж 20. Якщо ваш екран не засвітиться, затисніть кнопку «Гучність+» як мінімум на 7 секунд для скидання яскравості й потім виправте значення яскравості на більше.</string>
 
     <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">Загальне</string>
@@ -627,7 +630,6 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">При включенні підтримки дії для панелі навігації необхідно переписати типові налаштування в меню «налаштування панелі навігації»</string>
 
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Ліхтарик на екрані блокування</string>
     <string name="hwkey_ls_torch_disabled">Вимкнено</string>
@@ -669,7 +671,7 @@
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Показати панель набору</string>
-    <string name="pref_dialer_show_dialpad_summary">Показ панелі набору відбуватиметься автоматично при відкритті додатку «телефон»</string>
+    <string name="pref_dialer_show_dialpad_summary">Показ панелі набору відбуватиметься автоматично при відкритті додатку «Телефон»</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Налаштування пускача</string>
@@ -715,13 +717,12 @@
     <string name="pref_qs_hide_on_change_title">Приховати після зміни</string>
     <string name="pref_qs_hide_on_change_summary">Приховати панель стану по одиничному дотику по плитці. Застосовується до простих 2-х позиційних плиток.</string>
 
-
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Меню вимикання</string>
     <string name="pref_cat_power_other_title">Інше</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">Розширити на екр.блокування</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">Дозволити перезавантаження на екрані блокування</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">Неактивний режим</string>
@@ -754,7 +755,7 @@
     <string name="shortcut_network_mode">Перемикання режиму мережі</string>
 
     <!-- Toggle mobile data shortcut -->
-    <string name="shortcut_mobile_data">Увімкнення моб. даних</string>
+    <string name="shortcut_mobile_data">Увімкнення мобільних даних</string>
 
     <!-- Toggle WiFi shortcut -->
     <string name="shortcut_wifi">Увімкнення Wi-Fi</string>
@@ -763,14 +764,14 @@
     <string name="shortcut_bluetooth">Увімкнення Bluetooth</string>
 
     <!-- Toggle WiFi AP shortcut -->
-    <string name="shortcut_wifi_ap">Увімкнення точки доступу</string>
+    <string name="shortcut_wifi_ap">Увімкнення точки доступу Wi-Fi</string>
 
     <!-- Location mode shortcut -->
-    <string name="shortcut_location_mode">Налаштування позиціювання</string>
+    <string name="shortcut_location_mode">Режим позиціювання</string>
     <string name="location_mode_high_accuracy">Висока точність</string>
     <string name="location_mode_battery_saving">Економія батареї</string>
     <string name="location_mode_device_only">Лише пристрій</string>
-    <string name="location_mode_off">Позиціювання вимк</string>
+    <string name="location_mode_off">Позиціювання вимкнено</string>
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">Увімкнення NFC</string>
@@ -836,7 +837,6 @@
     <string name="smart_radio_action_undefined">Не визначено</string>
     <string name="pref_cat_smart_radio_title">Розумне радіо</string>
     <string name="pref_smart_radio_enable_summary">Автоматичне перемикання радіо-модуля на встановлений користувачем економічний чи звичайний режим, в залежності від передачі мобільних даних та стану з\'єднання Wi-Fi\n(необхідне перезавантаження)</string>
-
     <string name="pref_smart_radio_normal_mode_title">Звичайний режим мережі</string>
     <string name="pref_smart_radio_power_saving_mode_title">Економний режим мережі</string>
     <string name="pref_smart_radio_screen_off_title">Коли екран вимкнено</string>
@@ -848,7 +848,7 @@
 
     <!-- Lockscreen: custom carrier text -->
     <string name="pref_lockscreen_carrier_text_title">Свій текст в полі оператора</string>
-    <string name="carrier_text_default">Типовий</string>
+    <string name="carrier_text_default">Типово</string>
     <string name="carrier_text_empty">Порожньо</string>
 
     <!-- Battery charged sound -->
@@ -856,11 +856,11 @@
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Дія при утриманні</string>
-    <string name="pref_pie_back_longpress_title">Назад</string>
-    <string name="pref_pie_home_longpress_title">Додому</string>
-    <string name="pref_pie_recents_longpress_title">Нещодавні</string>
+    <string name="pref_pie_back_longpress_title">Кнопка «Назад»</string>
+    <string name="pref_pie_home_longpress_title">Кнопка «Додому»</string>
+    <string name="pref_pie_recents_longpress_title">Кнопка «Нещодавні»</string>
     <string name="pref_pie_search_longpress_title">Пошук</string>
-    <string name="pref_pie_menu_longpress_title">Меню</string>
+    <string name="pref_pie_menu_longpress_title">Кнопка «Меню»</string>
     <string name="pref_pie_app_longpress_title">Запуск додатків</string>
 
     <!-- Translucent decor options -->
@@ -894,7 +894,6 @@
     <string name="pref_smart_radio_screen_off_delay_title">Затримка економ. режиму</string>
     <string name="pref_smart_radio_screen_off_delay_summary">Затримка перемикання в економний режим при вимиканні екрану. Змінює типову затримку зміни режиму, якщо не дорівнює нулю.</string>
 
-
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">Резервне копіювання</string>
     <string name="pref_settings_restore_title">Відновлення</string>
@@ -911,8 +910,7 @@
     <string name="wsc_hash_creation_failed">Помилка створення унікального хеш-коду додатку</string>
     <string name="wsc_parse_response_error">Помилка обробки даних, отриманих від мережевої служби</string>
     <string name="wsc_hash_invalid">Мережева служба відмовила у з\'єднанні через невідповідність хеш-коду. Зазвичай це трапляється, якщо ви використовуєте неофіційну версію, або apk-файл GravityBox було модифіковано третьою стороною.</string>
-
-    <string name="wsc_please_wait">Будь ласка, зачекайте&#8230;</string>
+    <string name="wsc_please_wait">Будь ласка, зачекайте…</string>
     <string name="wsc_error">Помилка зв\'язку із мережевою службою: %s</string>
     <string name="wsc_task_cancelled">Операцію мережевої служби скасовано</string>
 
@@ -920,7 +918,7 @@
     <string name="wsc_trans_parse_response_error">Помилка обробки даних транзакції, отриманих від мережевої служби</string>
     <string name="wsc_trans_valid">Підтвердження ID транзакції пройшло вдало. Розширені функції будуть розблоковані після перезавантаження GravityBox.</string>
     <string name="wsc_trans_invalid">Не вдалося знайти запис для ID вказаної транзакції</string>
-    <string name="wsc_trans_violation">Вказаний ID транзакції був використаний занадто багато разів. Зв\'яжіться з розробниками GravityBox для вирішення проблеми.</string>
+    <string name="wsc_trans_violation">Вказаний ID транзакції був використаний занадто багато разів. Зв\'яжіться з розробником GravityBox для вирішення проблеми.</string>
     <string name="wsc_trans_blocked">Вказаний ID транзакції заблоковано. Зв\'яжіться з розробником GravityBox для вирішення проблеми.</string>
     <string name="pref_trans_verification_title">ID транзакції PayPal</string>
     <string name="pref_trans_verification_summary">Якщо ви внесли пожертвування, можете внести ID транзакції PayPal для розблокування розширених функцій</string>
@@ -1006,7 +1004,7 @@
     <string name="pref_notif_expand_all_summary">Якщо увімкнуто, розгортає всі сповіщення автоматично</string>
 
     <!-- Animation scales -->
-    <string name="animation_scale0">Анімація вимк</string>
+    <string name="animation_scale0">Вимкнути анімацію</string>
     <string name="animation_scale1">Масштаб .25x</string>
     <string name="animation_scale2">Масштаб .5x</string>
     <string name="animation_scale3">Масштаб 1x</string>
@@ -1040,16 +1038,16 @@
     <string name="pref_cat_screenrecord_options_title">Запис екрану</string>
     <string name="pref_cat_screenrecord_options_summary">Параметри запису екрана</string>
     <string name="pref_screenrecord_size_title">Розширення відео</string>
-    <string name="scr_size_default">Типове</string>
+    <string name="scr_size_default">Типове для пристрою</string>
     <string name="scr_size_sd">SD (360x640px)</string>
     <string name="scr_size_hd">HD (720x1280px)</string>
     <string name="scr_size_full_hd">Full HD (1080x1920px)</string>
     <string name="pref_screenrecord_bitrate_title">Швидкість потоку</string>
     <string name="pref_screenrecord_timelimit_title">Обмеження часу</string>
     <string name="pref_screenrecord_rotate_title">Обертання зображення</string>
-    <string name="pref_screenrecord_rotate_summary">Поворот файлу на 90°</string>
-    <string name="pref_screenrecord_microphone_title">Мікрофон</string>
-    <string name="pref_screenrecord_microphone_summary">Використання мікрофону для аудіовиходу</string>
+    <string name="pref_screenrecord_rotate_summary">Поворот на 90°</string>
+    <string name="pref_screenrecord_microphone_title">Використовувати мікрофон</string>
+    <string name="pref_screenrecord_microphone_summary">Використання мікрофону для вхідного аудіо</string>
 
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
@@ -1071,7 +1069,6 @@
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Стоковий бінарний файл</string>
     <string name="pref_screenrecord_use_stock_summary">Якщо увімкнуто, для запису екрана буде використано стоковий бінарний фал. Активуйте при проблемах з альтернативним бінарним файлом. Майте на увазі, що стоковий файл не підтримує аудіо та тривалість запису більше 3-х хвилин.</string>
-
 
     <!-- Clock settings master switch -->
     <string name="pref_sb_clock_masterswitch_summary">Увімкнення налаштувань годинників в панелі стану\n(необхідне перезавантаження)</string>
@@ -1113,7 +1110,7 @@
     <!-- Led control -->
     <string name="pref_led_control_title">Керування сповіщенням</string>
     <string name="pref_led_control_summary">Керування сповіщенням, зміна світлової індикації, звуків та вібрації для відповідних додатків</string>
-    <string name="lc_please_wait">Будь ласка, зачекайте&#8230;</string>
+    <string name="lc_please_wait">Будь ласка, зачекайте…</string>
     <string name="lc_disabled">Керування сповіщеннями вимкнено</string>
     <string name="pref_lc_led_color_title">Колір світлодіоду</string>
     <string name="pref_lc_led_time_on_title">Тривалість увімк. індикації</string>
@@ -1122,8 +1119,8 @@
     <string name="pref_lc_ongoing_summary">Застосовується також до поточних сповіщень, якщо увімкнуто</string>
     <string name="lc_btn_preview">Перегляд</string>
     <string name="lc_btn_save">Зберегти</string>
-    <string name="lc_item_summary_on">Увімк</string>
-    <string name="lc_item_summary_off">Вимк</string>
+    <string name="lc_item_summary_on">Увімкнено</string>
+    <string name="lc_item_summary_off">Вимкнено</string>
     <string name="lc_item_summary_ongoing">Поточні</string>
     <string name="lc_preview_notif_title">Керування сповіщеннями GravityBox</string>
     <string name="lc_preview_notif_text">Перевірка %s</string>
@@ -1154,7 +1151,7 @@
 
     <!-- Virtual keys vibrate pattern -->
     <string name="pref_virtual_key_vibrate_pattern_title">Шаблон вібрації віртуальних клавіш</string>
-    <string name="pref_virtual_key_vibrate_pattern_summary">Перелік, розділений комами, пар вимкнення/увімкнення в мілісекундах.</string>
+    <string name="pref_virtual_key_vibrate_pattern_summary">Перелік, який розділено комами, пар вимкнення/увімкнення в мілісекундах. Залиште порожнім для типового шаблону вібрації.</string>
 
     <!-- Lockscreen: show pattern error -->
     <string name="pref_lockscreen_show_pattern_error_title">Показати помилку ключа</string>
@@ -1162,7 +1159,6 @@
 
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Функція працює в випробувальному режимі. Якщо ви вважаєте її корисною, можете продовжувати користуватися нею після розблокування розширених функцій. Пробний період закінчиться через %d перезавантажень.</string>
-
 
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">Типові налаштування</string>
@@ -1172,17 +1168,13 @@
 
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Активний екран</string>
-    <string name="lc_active_screen_info">Функція активного екрану автоматично вмикає екран при отримані кожного нового сповіщення. Функція не працює, якщо екран закрито, наприклад, коли пристрій знаходиться в кишені. Майте на увазі, що для роботи активного екрану потрібно, аби екран блокування було вимкнено.\nФункція активується перемикачем нижче. Після вмикання можливо виконати додаткову конфігурацію по додатках</string>
-
-
-
+    <string name="lc_active_screen_info">Функція активного екрану автоматично вмикає екран при отримані кожного нового сповіщення. Майте на увазі, що для роботи активного екрану потрібно, аби екран блокування було вимкнено.\nФункція активується перемикачем нижче. Після вмикання можливо виконати додаткову конфігурацію по додатках</string>
     <string name="lc_active_screen_switch_title">Увімкнути активний екран</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Тиха година</string>
     <string name="pref_lc_qh_enabled_title">Увімкнути тиху годину</string>
     <string name="pref_lc_qh_enabled_summary">Приглушення звуків/вібрацій та, на вибір, світлової індикації для всіх сповіщень, які поступають у визначений період часу</string>
-
     <string name="pref_lc_qh_start_title">Час початку</string>
     <string name="pref_lc_qh_end_title">Час закінчення</string>
     <string name="pref_lc_qh_mute_led_title">Приглушити індикацію</string>
@@ -1211,7 +1203,6 @@
     <string name="pref_lc_qh_ignore_title">Ігнорувати тиху годину</string>
     <string name="pref_lc_qh_ignore_list_title">З таких слів</string>
     <string name="pref_lc_qh_ignore_list_summary">Перелік, розділений комами, ключових слів для ігнорування тихої години. Залиште порожнім для збереження всіх сповіщень.</string>
-
 
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Увімкнення тихої години</string>
@@ -1270,7 +1261,6 @@
 
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">Дякуємо за вашу підтримку. Розширені функції будуть розблоковані після перезавантаження системи.</string>
-
     <string name="pref_about_get_unlocker_title">Отримати ключ розблокування</string>
     <string name="pref_about_get_unlocker_summary">Немає рахунку в PayPal? Просто натисніть тут для отримання ключа розблокування розширених функцій з Play Store.</string>
 
@@ -1296,8 +1286,7 @@
     <!-- QS: Compass tile -->
     <string name="qs_tile_compass">Компас</string>
     <string name="quick_settings_compass_off">Компас вимк</string>
-    <string name="quick_settings_compass_init">Ініціалізація&#8230;</string>
-
+    <string name="quick_settings_compass_init">Ініціалізація…</string>
 
     <!-- Cardinal directions -->
     <string name="cd_north">Пн</string>
@@ -1307,7 +1296,7 @@
     <string name="cd_south">Пд</string>
     <string name="cd_south_west">Пд-Зх</string>
     <string name="cd_west">Зх</string>
-    <string name="cd_north_west">Пн-Сх</string>
+    <string name="cd_north_west">Пн-Зх</string>
 
     <!-- Pie: mirrored keys -->
     <string name="pref_pie_control_mirrored_keys_title">Дзеркальні кнопки</string>
@@ -1334,23 +1323,20 @@
     <string name="pref_lc_qh_mute_vibe_title">Приглушити вібрацію сповіщень</string>
     <string name="pref_lc_qh_mute_vibe_summary">Вимикає вібрацію сповіщень на пристрої та на будь-якому зв\'язаному пристрої Android Wear</string>
 
-
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Інтерактивний режим</string>
     <string name="pref_lc_qh_interactive_summary">Тиха година завжди застосовується до сповіщень під час дій користувача (з виконанням налаштувань ігнорування по додатках)</string>
-
 
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Режим Зринання (Heads up)</string>
     <string name="lc_heads_up_default">Типово</string>
     <string name="lc_heads_up_always">Завжди</string>
     <string name="lc_heads_up_immersive">Коли панель статусу схована</string>
-    <string name="lc_heads_up_off">Вимк</string>
+    <string name="lc_heads_up_off">Вимкнено</string>
 
     <!-- Statusbar: notification heads up category -->
     <string name="pref_cat_notif_heads_up_title">Сповіщення режиму зринання</string>
-    <string name="pref_heads_up_master_switch_summary">Активація розширеної функції Зринання. Якщо увімкнуто, будуть доступні параметри для додатків керування сповіщеннями.\n(необхідне перезавантаження)</string>
-
+    <string name="pref_heads_up_master_switch_summary">Активація розширеної функції Зринання. Якщо увімкнуто, будуть доступні параметри для додатків керування сповіщеннями. (необхідне перезавантаження)</string>
     <string name="pref_heads_up_timeout_title">Затримка</string>
     <string name="pref_heads_up_timeout_summary">Час показу вікна сповіщення. Нуль - постійно.</string>
 
@@ -1384,6 +1370,9 @@
     <string name="imgpick_dialog_title">Вибір зображення через</string>
     <string name="imgpick_choose_error">Помилка під час вибору зображення</string>
     <string name="imgpick_crop_error">Помилка під час обрізання зображення</string>
+    <string name="imgpick_crop_uri_null">Додаток для обрізання зображення не надав результат своєї роботи. Використано оригінальне зображення.</string>
+    <string name="imgpick_crop_ask_title">Обрізати зображення?</string>
+    <string name="imgpick_crop_ask_msg">Якщо відмовитись, буде обрано оригінальне зображення. Переконайтеся, що розмір відповідає вказаному: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Наближення під час пробудження</string>
@@ -1393,6 +1382,7 @@
     <string name="pref_charging_led_title">Індикація зарядки</string>
     <string name="charging_led_default">Типово</string>
     <string name="charging_led_emulated">Емуляція</string>
+    <string name="charging_led_constant">Постійно (потребує підтримки драйвером LED)</string>
     <string name="charging_led_disabled">Вимкнено</string>
 
     <!-- Quiet hours week days -->
@@ -1412,8 +1402,6 @@
     <!-- Status bar: show download progress -->
     <string name="pref_statusbar_download_progress_title">Шкала виконання</string>
     <string name="pref_statusbar_download_progress_summary">Показувати шкалу виконання в панелі стану для завантажень через стандартний менеджер завантажень Android, передачі по Bluetooth та інших додатків, які використовують слідкування за шкалою виконання в менеджері сповіщень</string>
-
-
     <string name="sb_download_progress_off">Вимкнено</string>
     <string name="sb_download_progress_top">Верхній край</string>
     <string name="sb_download_progress_bottom">Нижній край</string>
@@ -1429,7 +1417,7 @@
     <string name="qr_audio_quality_medium">Середня (22 кГц)</string>
     <string name="qr_audio_quality_high">Висока (44 кГц)</string>
     <string name="pref_quickrecord_autostop_title">Автоматична зупинка запису</string>
-    <string name="pref_quickrecord_autostop_summary">Автоматична зупинка запису через вказаний проміжок часу.\nНуль - для вимикання цієї функції.</string>
+    <string name="pref_quickrecord_autostop_summary">Автоматична зупинка запису через вказаний проміжок часу. Нуль - для вимикання цієї функції.</string>
 
     <!-- Clear notifications shortcut -->
     <string name="shortcut_clear_notifications">Очистити сповіщення</string>
@@ -1440,9 +1428,6 @@
     <!-- Compatibility warning -->
     <string name="compat_warning_title">ПОПЕРЕДЖЕННЯ</string>
     <string name="compat_warning_message">ДЛЯ ВИКОРИСТАННЯ ЛИШЕ НА ПРИСТРОЯХ ІЗ НЕМОДИФІКОВАНОЮ ОС ANDROID ЧИ GOOGLE PLAY EDITION!\n\nВикористання на інших сильно змінених прошивках, таких як Touchwiz, Sense, Xperia, а також на будь-яких кастомних прошивках, не підтримується і може призвести до непередбачених результатів.\n\nЯкщо ви погоджуєтесь на ці умови, погодьтеся, що все, що ви робите, ви робите на власний розсуд без отримання будь-якої підтримки. Для більш детальної інформації про сумісність, дивіться на <a href="http://forum.xda-developers.com/showthread.php?t=3251148">форумі підтримки на XDA</a>.</string>
-
-
-
     <string name="compat_warning_ok_stage1">ГАРАЗД. Я зрозумів.</string>
     <string name="compat_warning_ok_stage2">Так, я ДІЙСНО зрозумів!</string>
 
@@ -1459,11 +1444,9 @@
     <string name="pref_smart_radio_adaptive_delay_title">Адаптивна затримка</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Автоматичне продовження затримки при перевищенні трафіку мобільних даних за межі встановленого порогу (нуль - для вимкнення)</string>
 
-
     <!-- UNC: Progress bar tracking -->
     <string name="pref_lc_progress_tracking_title">Стеження за школою виконання</string>
     <string name="pref_lc_progress_tracking_summary">Показувати шкали виконання в панелі статусу для поточних сповіщень, які містять їх на собі. Необхідно, аби функція шкали виконання в її налаштуваннях була увімкнута.</string>
-
 
     <!-- Data traffic monitor: display mode -->
     <string name="pref_data_traffic_display_mode_title">Режим показу</string>
@@ -1534,11 +1517,8 @@
     <string name="gb_new_package_dialog_title">УВАГА</string>
     <string name="gb_new_package_dialog_message">Виявлено GravityBox для Nougat. Перед використанням нової версії, стару буде вилучено. Натисніть ГАРАЗД, аби почати процес вилучення. Після вилучення, не забудьте активувати новий модуль в Xposed Installer та ОБОВ\'ЯЗКОВО ПЕРЕЗАВАНТАЖИТИ пристрій.</string>
 
-
-
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">Резервна копія, яка була зроблена на старій версії Android, не може бути відновлена через значні відмінності систем. Наполегливо рекомендуємо налаштувати GravityBox наново.</string>
-
 
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">Показувати на екрані блокування</string>
@@ -1553,15 +1533,14 @@
     <!-- Lockscreen: direct unlock -->
     <string name="pref_lockscreen_direct_unlock_title">Пряме розблокування</string>
     <string name="pref_lockscreen_direct_unlock_summary">Показ розблокування одразу при вмиканні екрану</string>
-    <string name="direct_unlock_off">Вимкнуто</string>
-    <string name="direct_unlock_standard">Стандарт</string>
+    <string name="direct_unlock_off">Вимкнено</string>
+    <string name="direct_unlock_standard">Типово</string>
     <string name="direct_unlock_see_through">Прозоро</string>
 
     <!-- UNC: Notification visibility -->
     <string name="pref_cat_lc_visibility_title">Видимість</string>
     <string name="pref_lc_notif_visibility_title">Видимість вмісту</string>
     <string name="pref_lc_notif_visibility_summary">Видимість вмісту сповіщень на захищеному екрані блокування. Застосовуються, якщо активовано «Приховати конфіденційний вміст» на екрані блокування</string>
-
     <string name="lc_notif_visibility_default">Типово</string>
     <string name="lc_notif_visibility_public">Показати все</string>
     <string name="lc_notif_visibility_private">Приховати конфіденційний вміст</string>
@@ -1578,11 +1557,9 @@
     <string name="pref_lockscreen_shortcuts_safe_launch_title">Безпечний запуск</string>
     <string name="pref_lockscreen_shortcuts_safe_launch_summary">Потреба в подвійному дотику для запуску ярликів, аби запобігти випадковому запуску, наприклад, коли пристрій в кишені</string>
 
-
     <!-- Lockscreen Smart unlock -->
     <string name="pref_lockscreen_smart_unlock_title">Розумне розблокування</string>
     <string name="pref_lockscreen_smart_unlock_summary">Автоматичне розблокування при виявлені поточною політикою блокування довірених умов</string>
-
 
     <!--  WiFi trusted networks -->
     <string name="wifi_trusted_info">Довірено для розумного розблокування</string>
@@ -1594,9 +1571,8 @@
     <string name="fahrenheit">Фаренгейт</string>
 
     <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Вимкнути індикацію енергозбереження</string>
-    <string name="pref_battery_saver_indication_disable_summary">Вимкнути помаранчеві кольори системних смуг при активності енергозбереження</string>
-
+    <string name="pref_battery_saver_indication_disable_title">Вимкнути індикацію енергоощадження</string>
+    <string name="pref_battery_saver_indication_disable_summary">Вимкнути помаранчеві кольори системних смуг при активності енергоощадження</string>
 
     <!-- Signal cluster: Disable exclamation marks -->
     <string name="pref_signal_cluster_dem_title">Прибрати знаки оклику</string>
@@ -1606,13 +1582,9 @@
     <string name="pref_lc_sound_vibrate_title">Перетворення звуку у вібрацію</string>
     <string name="pref_lc_sound_vibrate_summary">Запобігання вібрації сповіщень з раніше вимкнутою вібрацією при виборі режиму дзвінка «Лише вібрація»</string>
 
-
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Приглушити вібрацію пристрою</string>
-    <string name="pref_lc_qh_mute_system_vibe_summary">Вимикає ВСІ тактильні відгуки на системному рівні,
-        та вібрацію сповіщень включно на ДАНОМУ пристрої. Сповіщення на зв\'язаному Android Wear пристрої
-        лишаться в тому ж стані, як і були.
-    </string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Вимикає ВСІ тактильні відгуки на системному рівні, та вібрацію сповіщень включно на ДАНОМУ пристрої. Сповіщення на зв\'язаному Android Wear пристрої лишаться в тому ж стані, як і були.</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Подвійний дотик для сну</string>
@@ -1648,7 +1620,6 @@
 
     <!-- Permission denial message -->
     <string name="permission_denied_msg">Ви вирішили відкликати деякі дозволи. Майте на увазі, що це вимкне роботу відповідних функцій.</string>
-
     <string name="permission_denied_hide_title">Не показувати знову</string>
 
     <!-- Lockscreen: Imprint mode -->
@@ -1657,8 +1628,8 @@
     <string name="imprint_mode_wake_only">Лише пробудження</string>
 
     <!-- Lockscreen: Bottom-left action -->
-    <string name="pref_lockscreen_bleft_action_title">Дія зліва знизу</string>
-    <string name="pref_lockscreen_bright_action_title">Дія зправа знизу</string>
+    <string name="pref_lockscreen_bleft_action_title">Дія на зліва знизу</string>
+    <string name="pref_lockscreen_bright_action_title">Дія на зправа знизу</string>
 
     <!-- Lockscreen: Quick unlock PIN length -->
     <string name="pref_lockscreen_pin_length_title">Довжина PIN</string>
@@ -1666,9 +1637,7 @@
 
     <!-- Power: Camera vibration pattern -->
     <string name="pref_power_camera_vibrate_pattern_title">Шаблон вібрації камери</string>
-    <string name="pref_power_camera_vibrate_pattern_summary">Перелік, який розділено комами, 
-        пар вимкнення/увімкнення в мілісекундах для камери, яку запустили кнопкою живлення.
-        Лишіть порожнім для типового значення. Встановіть нуль для вимкнення вібрації.</string>
+    <string name="pref_power_camera_vibrate_pattern_summary">Перелік, який розділено комами, пар вимкнення/увімкнення в мілісекундах для камери, яку запустили кнопкою живлення. Лишіть порожнім для типового значення. Встановіть 0 для вимкнення вібрації.</string>
 
     <!-- QS: common quick mode option -->
     <string name="pref_tile_quick_mode_title">Увімкнути швидкий режим</string>
@@ -1679,12 +1648,12 @@
     <string name="pref_dnd_tile_quick_mode_summary">Дозволяє циклічно перемикати режими при одиничному дотику по плитці</string>
     <string name="pref_dnd_tile_enabled_modes_summary">Встановити доступні режими «Не турбувати» для перемикання</string>
     <string name="dnd_tile_em_priority">Лише пріоритетні</string>
-    <string name="dnd_tile_em_alarms">Лише будильник</string>
+    <string name="dnd_tile_em_alarms">Лише будильники</string>
     <string name="dnd_tile_em_silence">Повна тиша</string>
     <string name="pref_dnd_tile_duration_mode_title">Попередньо встановлена тривалість</string>
     <string name="dnd_tile_dm_manual">Доки не вимкнути вручну</string>
     <string name="dnd_tile_dm_alarm">До наступного будильнику</string>
-    <string name="dnd_tile_dm_custom">Інше</string>
+    <string name="dnd_tile_dm_custom">Інший</string>
     <string name="pref_dnd_tile_duration_title">Встановити іншу тривалість</string>
 
     <!-- Location tile (Slimkat) settings -->
@@ -1737,7 +1706,7 @@
     <string name="battery_percent_text_position_left">Ліворуч від значка батареї</string>
 
     <!-- Disable Imprint vibrations -->
-    <string name="pref_imprint_vibe_disable_title">Вимк вібрацію відбитку</string>
+    <string name="pref_imprint_vibe_disable_title">Вимкнути вібрацію відбитку</string>
     <string name="imprint_vibe_disable_success">При успішній аутентифікації</string>
     <string name="imprint_vibe_disable_error">При невдалій аутентифікації</string>
 
@@ -1757,7 +1726,7 @@
     <string name="pref_qs_scale_correction_title">Корекція масштабу</string>
 
     <!-- UNC: Notification lock screen visibility -->
-    <string name="pref_lc_notif_visibility_ls_title">Видимість на екр. блокування</string>
+    <string name="pref_lc_notif_visibility_ls_title">Видимість на екрані блокування</string>
     <string name="lc_notif_visibility_ls_default">Типово</string>
     <string name="lc_notif_visibility_ls_clearable">Приховати сповіщення</string>
     <string name="lc_notif_visibility_ls_persistent">Приховати постійні сповіщення</string>
@@ -1765,12 +1734,11 @@
 
     <!-- UNC: Hide persistent notifications -->
     <string name="pref_lc_notif_hide_persistent_title">Приховати постійні сповіщення</string>
-    <string name="pref_lc_notif_hide_persistent_summary">Приховати всі спливаючі та інші сповіщення, що не прибираються,
-        які надходять від вказаного додатку</string>
+    <string name="pref_lc_notif_hide_persistent_summary">Приховувати всі сповіщення, що не очищаються, від даного додатку</string>
 
     <!-- Navbar: Auto-fade keys -->
     <string name="pref_navbar_autofade_keys_title">Приховувати кнопки</string>
-    <string name="pref_navbar_autofade_keys_summary">Кнопки автоматично зникають через вказаний час. Встановіть 0 для вимкнення.</string>
+    <string name="pref_navbar_autofade_keys_summary">Кнопки автоматично зникають через вказаний час. Нуль - для вимикання цієї функції.</string>
     <string name="pref_navbar_autofade_show_keys_title">Показувати кнопки на</string>
     <string name="autofade_show_keys_navbar">Сенсорній навігаційній панелі</string>
     <string name="autofade_show_keys_screen">Сенсорному екрані</string>
@@ -1820,6 +1788,7 @@
     <string name="quiet_hours_on">Тихі години увімкнено</string>
     <string name="quiet_hours_off">Тихі години вимкнено</string>
     <string name="quiet_hours_auto">Тихі години автоматично</string>
+    <string name="quiet_hours_wear">Wear mode</string>
 
     <!-- Auto rotation shortcut -->
     <string name="auto_rotation_on">Авто-поворот увімкнено</string>
@@ -1838,13 +1807,16 @@
     <string name="hotspot_off">Точку доступу вимкнено</string>
 
     <!-- Statusbar: Hide vibrate icon -->
-    <string name="pref_sb_hide_vibrate_icon_title">Приховати піктограму вібрації</string>
+    <string name="pref_sb_hide_vibrate_icon_title">Приховати значок вібрації</string>
+    
+    <!-- Statusbar: Hide data saver icon -->
+    <string name="pref_sb_hide_data_saver_icon_title">Приховати значок обмеження даних</string>
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Показати повідомлення стану</string>
 
     <!-- Navbar custom key icon style -->
-    <string name="pref_navbar_custom_key_icon_style_title">Стиль піктограми</string>
+    <string name="pref_navbar_custom_key_icon_style_title">Стиль значків</string>
     <string name="ncki_icon_style1">6 крапок</string>
     <string name="ncki_icon_style2">3 крапки</string>
     <string name="ncki_icon_style3">Прозорий</string>
@@ -1859,9 +1831,7 @@
 
     <!-- Force AOSP -->
     <string name="pref_force_aosp_title">Примусово AOSP</string>
-    <string name="pref_force_aosp_summary">Treats system as AOSP. 
-        Use in case your device is identified as running branded system despite it is
-        actually running alternate AOSP-based system (необхідне перезавантаження)</string>
+    <string name="pref_force_aosp_summary">Позначити систему як AOSP. Використовуйте, якщо ваш пристрій ідентифікується як брендована система, хоча насправді це кастомна на базі AOSP</string>
 
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Звук бездротової зарядки</string>
@@ -1871,42 +1841,35 @@
     <string name="pref_cat_phone_dialer_title">Набір номеру</string>
 
     <!-- QS: Brightness control -->
-    <string name="pref_qs_brightness_icon_title">Показати піктограму яскравості</string>
-    <string name="pref_qs_brightness_icon_summary">Показує піктограму з поточним режимом яскравості. 
-        Дотик перемикає стан адаптивної яскравості, утримування - відкриває налаштування.</string>
+    <string name="pref_qs_brightness_icon_title">Показати значок яскравості</string>
+    <string name="pref_qs_brightness_icon_summary">Показує значок з поточним режимом яскравості. Дотик перемикає стан адаптивної яскравості, утримування - відкриває налаштування.</string>
 
     <!-- UNC: Active screen: Ignore updated notifications -->
     <string name="pref_lc_active_screen_ignore_update_title">Ігнорувати оновлені сповіщення</string>
-    <string name="pref_lc_active_screen_ignore_update_summary">Активний екран не буде спрацьовувати при 
-        оновлені існуючих сповіщень</string>
+    <string name="pref_lc_active_screen_ignore_update_summary">Активний екран не буде спрацьовувати при оновлені наявних сповіщень</string>
 
     <!-- UNC: LED: Ignore updated notifications -->
     <string name="pref_lc_led_ignore_update_title">Ігнорувати оновлені сповіщення</string>
-    <string name="pref_lc_led_ignore_update_summary">Світлодіод не буде спрацьовувати при 
-        оновлені існуючих сповіщень</string>
+    <string name="pref_lc_led_ignore_update_summary">Світлодіод не буде спрацьовувати при оновлені наявних сповіщень</string>
 
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Розгорнути панель швидких налаштувань</string>
 
     <!-- Fingeprint launcher -->
-    <string name="pref_cat_fingerprint_launcher_title">Запус відбитком</string>
-    <string name="pref_cat_fingerprint_launcher_summary">Дозволити запуск додатку чи дії з використанням 
-        датчику відбитку пальця при увімкненому екрані та розблокованому пристрої</string>
-    <string name="pref_fingerprint_launcher_enable_summary">Перемикання стану запуску додатку чи дії
-        за відбитком (необхідне перезавантаження)</string>
+    <string name="pref_cat_fingerprint_launcher_title">Запуск відбитком</string>
+    <string name="pref_cat_fingerprint_launcher_summary">Дозволити запуск додатку чи дії з використанням датчику відбитку пальця при увімкненому екрані та розблокованому пристрої</string>
+    <string name="pref_fingerprint_launcher_enable_summary">Перемикання стану запуску додатку чи дії за відбитком\n(необхідне перезавантаження)</string>
     <string name="pref_fingerprint_launcher_app_title">Оберіть додаток чи дію</string>
-    <string name="fingerprint_auth_failed">Помилка аторизації</string>
+    <string name="fingerprint_auth_failed">Помилка авторизації</string>
     <string name="fingerprint_sensor_unavail">Датчик відбитку недоступний</string>
-    <string name="fingerprint_sensor_locked">Датчик відбитку заблоковано по причині великої
-        кількості помилок авторизації. Перезапуск через 35 секунд.</string>
-    <string name="fingerprint_no_app">Не назначено додатку/дію</string>
+    <string name="fingerprint_sensor_locked">Датчик відбитку заблоковано по причині великої кількості помилок авторизації. Перезапуск через 35 секунд.</string>
+    <string name="fingerprint_no_app">Не назначено додаток/дію</string>
     <string name="pref_cat_fingerprint_launcher_fingers_title">Дії по пальцях</string>
     <string name="finger">Палець</string>
     <string name="pref_cat_fingerprint_launcher_quick_tap_title">Швидкий дотик</string>
     <string name="pref_fingerprint_launcher_pause_title">Пауза</string>
-    <string name="pref_fingerprint_launcher_pause_summary">Призупинення запуску до наступного циклу включення/виключення екрану. 
-        Використовуйте, якщо датчик необхідний для роботи іншого додатку на протязі тривалого періоду, наприклад, під час налаштування відбитків.</string>
-    <string name="fingerprint_launcher_paused">Запуск призупинено до наступного циклу включення/виключення екрану</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Тимчасове зупинення запуску до наступного циклу включення/виключення екрану. Використовуйте, якщо датчик необхідний для роботи іншого додатку на протязі тривалого періоду, наприклад, під час налаштування відбитків.</string>
+    <string name="fingerprint_launcher_paused">Запуск тимчасово зупинено до наступного циклу включення/виключення екрану</string>
     <string name="pref_fingerprint_launcher_show_toast_title">Повідомлення про стан</string>
     <string name="pref_fingerprint_launcher_show_toast_summary">Вибір показу чи приховування повідомлень про стан у вигляді плавучого вікна</string>
 
@@ -1917,5 +1880,130 @@
     <!-- Action: toggle/expand/collapse QS panel -->
     <string name="qs_panel_toggle">Перемкнути панель швидких налаштувань</string>
     <string name="qs_panel_collapse">Згорнути панель швидких налаштувань</string>
+
+    <!-- Lockscreen shorcuts: Show badges -->
+    <string name="pref_lockscreen_shortcuts_show_badges_title">Показувати емблеми</string>
+    <string name="pref_lockscreen_shortcuts_show_badges_summary">Показувати емблеми які містять кількість сповіщень</string>
+
+    <!-- Clock: Show seconds -->
+    <string name="pref_statusbar_clock_show_seconds_title">Показувати секунди</string>
+
+    <!-- ProgressBar: Sounds -->
+    <string name="pref_cat_statusbar_download_progress_sounds_title">Звуки</string>
+    <string name="pref_statusbar_download_progress_sound_enable_title">Увімкнути звуки</string>
+    <string name="pref_statusbar_download_progress_sound_enable_summary">Відтворювати звуки сповіщення, коли передачу завершено, чи перервано</string>
+    <string name="pref_statusbar_download_progress_sound_title">Обрати звук</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_title">Лише при вимкненому екрані</string>
+    <string name="pref_statusbar_download_progress_sound_screen_off_summary">Програвати звук сповіщення лише при вимкненому екрані</string>
+
+    <!-- Unlocker policy check feedback -->
+    <string name="msg_unlocker_missing">Неможливо зв\'язатися із GravityBox Unlocker для перевірки ліцензії</string>
+    <string name="msg_unlocker_old">Ваша версія GravityBox Unlocker застаріла. Будь ласка, оновіть.</string>
+    <string name="msg_unlocker_error">Трапилась невідома помилка під час зв\'язку із GravityBox Unlocker</string>
+
+    <!-- Lockscreen: hide bottom actions -->
+    <string name="pref_lockscreen_bottom_actions_hide_title">Приховати нижні дії</string>
+    <string name="bottom_action_left">Приховати ліву дію</string>
+    <string name="bottom_action_right">Приховати праву дію</string>
+
+    <!-- Lockscreen: Direct unlock see through transparency level -->
+    <string name="pref_lockscreen_direct_unlock_trans_level_title">See through transparency</string>
+
+    <!-- Subscription manager -->
+    <string name="sm_choose_voice_sub">Обрати типову SIM для дзвінків</string>
+    <string name="sm_choose_sms_sub">Обрати типову SIM для повідомлень</string>
+    <string name="sm_choose_data_sub">Обрати типову SIM для стільникових даних</string>
+    <string name="sm_sub_change_voice_failed">Не вдалося встановити типову SIM для дзвінків</string>
+    <string name="sm_sub_change_sms_failed">Не вдалося встановити типову SIM для повідомлень</string>
+    <string name="sm_sub_change_data_failed">Не вдалося встановити типову SIM для стільникових даних</string>
+    <string name="sm_sub_change_voice_ok">Встановлено типову SIM для дзвінків:</string>
+    <string name="sm_sub_change_sms_ok">Встановлено типову SIM для повідомлень:</string>
+    <string name="sm_sub_change_data_ok">Встановлено типову SIM для стільникових даних:</string>
+    <string name="sm_voice_ask">Запитувати кожного разу</string>
+
+    <!-- GB Actions: SIM settings -->
+    <string name="shortcut_sm_title">Налаштування SIM</string>
+    <string name="shortcut_sm_voice_sim_1">SIM 1 для дзвінків</string>
+    <string name="shortcut_sm_voice_sim_2">SIM 2 для дзвінків</string>
+    <string name="shortcut_sm_voice_sim_ask">Запитувати під час виклику</string>
+    <string name="shortcut_sm_voice_sim_ui">Обрати SIM для дзвінків</string>
+    <string name="shortcut_sm_sms_sim_1">SIM 1 для SMS</string>
+    <string name="shortcut_sm_sms_sim_2">SIM 2 для SMS</string>
+    <string name="shortcut_sm_sms_sim_ui">Обрати SIM для SMS</string>
+    <string name="shortcut_sm_data_sim_1">SIM 1 для даних</string>
+    <string name="shortcut_sm_data_sim_2">SIM 2 для даних</string>
+    <string name="shortcut_sm_data_sim_ui">Обрати SIM для даних</string>
+
+    <!-- QuickApp Tile #3 and #4 -->
+    <string name="pref_cat_quickapp_tile_3_title">Плитка QuickApp 3 налаштування</string>
+    <string name="qs_tile_quickapp_3">Quick App 3</string>
+    <string name="pref_cat_quickapp_tile_4_title">Плитка QuickApp 4 налаштування</string>
+    <string name="qs_tile_quickapp_4">Quick App 4</string>
+
+    <!-- QS Bluetooth Tethering tile -->
+    <string name="qs_tile_bt_tethering">Роздача по Bluetooth</string>
+    <string name="qs_tile_bt_tethering_on">Роздачу увімкнуто</string>
+    <string name="qs_tile_bt_tethering_off">Роздачу вимкнуто</string>
+    <string name="qs_tile_bt_tethering_error">Помилка</string>
+
+    <!-- QS protected when device locked -->
+    <string name="qs_protected_summary">Protected when device locked</string>
+
+    <!-- Volume panel: notification stream label -->
+    <string name="notification_stream_name">Сповіщення</string>
+
+    <!-- OOS: call recording -->
+    <string name="pref_oos_call_recording_title">Увімкнути запис дзвінків</string>
+    <string name="pref_oos_call_recording_summary">Увага, запис дзвінків повинно буди дозволено на законодавчому рівні у вашій країні</string>
+
+    <!-- OOS: disable dash charging sound -->
+    <string name="pref_oos_dash_sound_disable_title">Disable Dash charging sound</string>
+
+    <!-- Storage permission toast -->
+    <string name="permission_storage_denied">Permission to access Storage was denied</string>
+
+    <!-- QS: Locked tile indicattor -->
+    <string name="pref_qs_locked_tile_indicator_title">Locked tile indicator</string>
+    <string name="locked_tile_indicator_none">Відсутня</string>
+    <string name="locked_tile_indicator_dim">Затемнений значок</string>
+    <string name="locked_tile_indicator_padlock">Замок 🔒</string>
+    <string name="locked_tile_indicator_key">Ключ 🔑</string>
+
+    <!-- KeyAction: Toggle split screen -->
+    <string name="hwkey_action_split_screen">Toggle split screen</string>
+
+    <!-- Yes/No -->
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
+
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Звітування помилок</string>
+    <string name="pref_log_errors_summary">Звітувати всі помилки до звіту Xposed якщо активно (потребує перезавантаження)</string>
+
+    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
+    <string name="pref_signal_cluster_aosp_mobile_type_title">Використовувати мобільні значки AOSP</string>
+    <string name="pref_signal_cluster_aosp_mobile_type_summary">Необхідне перезавантаження</string>
+
+    <!-- Notification channels -->
+    <string name="notif_channel_services_title">Сервіси</string>
+    <string name="notif_channel_services_desc">Для фонових сервісів сповіщення, таких як «Ліхтарик» та «Запис екрану»</string>
+    <string name="notif_channel_unc_title">UNC Preview</string>
+    <string name="notif_channel_unc_desc">For Ultimate Notification Control notification preview</string>
+
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">Завжди показувати кнопку «Очистити все»</string>
+
+    <!-- Theme -->
+    <string name="theme_title">Тема</string>
+    <string name="theme_default">Типова</string>
+    <string name="theme_light">Світла</string>
+    <string name="theme_dark">Темна</string>
+
+    <!-- QS: Haptic feedback -->
+    <string name="pref_qs_haptic_feedback_title">Тактильний відгук</string>
+    <string name="pref_qs_haptic_feedback_summary">Вмикає тактильний відгук при одиничному дотику по плитці</string>
+
+    <!-- BatteryStyle: Master switch -->
+    <string name="pref_battery_masterswitch_summary">Активує зміну стилю значків батареї та процентів (необхідне перезавантаження)</string>
 
 </resources>
