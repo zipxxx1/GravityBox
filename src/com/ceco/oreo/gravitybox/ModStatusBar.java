@@ -74,6 +74,7 @@ public class ModStatusBar {
     private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
     public static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
+    private static final String CLASS_LIGHT_BAR_CTRL = "com.android.systemui.statusbar.phone.LightBarController";
     private static final String CLASS_ASSIST_MANAGER = "com.android.systemui.assist.AssistManager";
     private static final String CLASS_COLLAPSED_SB_FRAGMENT = "com.android.systemui.statusbar.phone.CollapsedStatusBarFragment";
     private static final String CLASS_NOTIF_ICON_CONTAINER = "com.android.systemui.statusbar.phone.NotificationIconContainer";
@@ -952,6 +953,24 @@ public class ModStatusBar {
                         }
                     }
                 });
+                if (Build.VERSION.SDK_INT >= 27) {
+                    XposedHelpers.findAndHookMethod(CLASS_LIGHT_BAR_CTRL, classLoader,
+                            "isLight", int.class, int.class, int.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if (mBatterySaverIndicationDisabled && 
+                                    SysUiManagers.BatteryInfoManager.getCurrentBatteryData().isPowerSaving) {
+                                int vis = (int) param.args[0];
+                                int mode = (int) param.args[1];
+                                int flag = (int) param.args[2];
+                                boolean allowLight = (mode == ModNavigationBar.MODE_TRANSPARENT ||
+                                        mode == ModNavigationBar.MODE_LIGHTS_OUT_TRANSPARENT);
+                                boolean light = (vis & flag) != 0;
+                                param.setResult(allowLight && light);
+                            }
+                        }
+                    });
+                }
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }

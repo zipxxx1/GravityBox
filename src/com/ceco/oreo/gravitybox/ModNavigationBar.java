@@ -71,9 +71,10 @@ public class ModNavigationBar {
     private static final String CLASS_LIGHT_BAR_CTRL = "com.android.systemui.statusbar.phone.LightBarTransitionsController";
 
     @SuppressWarnings("unused")
-    private static final int MODE_OPAQUE = 0;
-    private static final int MODE_LIGHTS_OUT = 3;
-    private static final int MODE_LIGHTS_OUT_TRANSPARENT = 6;
+    public static final int MODE_OPAQUE = 0;
+    public static final int MODE_LIGHTS_OUT = 3;
+    public static final int MODE_TRANSPARENT = 4;
+    public static final int MODE_LIGHTS_OUT_TRANSPARENT = 6;
     private static final int MSG_LIGHTS_OUT = 1;
 
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
