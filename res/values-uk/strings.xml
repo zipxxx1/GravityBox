@@ -33,9 +33,9 @@
     <string name="reboot_required">Зміни набудуть чинності після перезавантаження</string>
 
     <string name="poweroff_advanced_title">Розширене меню вимикання</string>
-    <string name="poweroff_advanced_summary">Включає розширене меню вимикання з можливістю перезавантаження у режим відновлення</string>
-    <string name="poweroff_recovery">Відновлення</string>
-    <string name="poweroff_bootloader">Завантажувач</string>
+    <string name="poweroff_advanced_summary">Включає розширене меню вимикання з можливістю перезавантаження у режим «recovery»</string>
+    <string name="poweroff_recovery">Recovery</string>
+    <string name="poweroff_bootloader">Bootloader</string>
     <string name="poweroff_download">Завантаження</string>
 
     <string name="vol_key_cursor_control_title">Керування курсором клавішами гучності</string>
@@ -585,7 +585,7 @@
     <string name="caller_unkown_photo_result_not_successful">Фото не змінено</string>
 
     <!-- Minimum screen brightness warning -->
-    <string name="screen_brightness_min_warning">Ваш екран може не підтримувати значення менше ніж 20. Якщо ваш екран не засвітиться, затисніть кнопку Гучність+ як мінімум на 7 секунд для скидання яскравості й потім виправте значення яскравості на більше.</string>
+    <string name="screen_brightness_min_warning">Ваш екран може не підтримувати значення менше ніж 20. Якщо ваш екран не засвітиться, затисніть кнопку «Гучність+» як мінімум на 7 секунд для скидання яскравості й потім виправте значення яскравості на більше.</string>
 
     <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">Загальне</string>
@@ -669,7 +669,7 @@
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Показати панель набору</string>
-    <string name="pref_dialer_show_dialpad_summary">Показ панелі набору відбуватиметься автоматично при відкритті додатку «телефон»</string>
+    <string name="pref_dialer_show_dialpad_summary">Показ панелі набору відбуватиметься автоматично при відкритті додатку «Телефон»</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Налаштування пускача</string>
@@ -720,7 +720,7 @@
     <string name="pref_cat_power_other_title">Інше</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">Розширити на екр.блокування</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">Дозволити перезавантаження на екрані блокування</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">Неактивний режим</string>
@@ -1368,7 +1368,7 @@
     <string name="imgpick_dialog_title">Вибір зображення через</string>
     <string name="imgpick_choose_error">Помилка під час вибору зображення</string>
     <string name="imgpick_crop_error">Помилка під час обрізання зображення</string>
-    <string name="imgpick_crop_uri_null">Додаток для обрізки зображення не надав результат своєї роботи. Використано оригінальне зображення.</string>
+    <string name="imgpick_crop_uri_null">Додаток для обрізання зображення не надав результат своєї роботи. Використано оригінальне зображення.</string>
     <string name="imgpick_crop_ask_title">Обрізати зображення?</string>
     <string name="imgpick_crop_ask_msg">Якщо відмовитись, буде обрано оригінальне зображення. Переконайтеся, що розмір відповідає вказаному: %1$dx%2$dpx</string>
 
@@ -1569,8 +1569,8 @@
     <string name="fahrenheit">Фаренгейт</string>
 
     <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Вимкнути індикацію енергозбереження</string>
-    <string name="pref_battery_saver_indication_disable_summary">Вимкнути помаранчеві кольори системних смуг при активності енергозбереження</string>
+    <string name="pref_battery_saver_indication_disable_title">Вимкнути індикацію енергоощадження</string>
+    <string name="pref_battery_saver_indication_disable_summary">Вимкнути помаранчеві кольори системних смуг при активності енергоощадження</string>
 
     <!-- Signal cluster: Disable exclamation marks -->
     <string name="pref_signal_cluster_dem_title">Прибрати знаки оклику</string>
@@ -1873,8 +1873,8 @@
     <string name="finger">Палець</string>
     <string name="pref_cat_fingerprint_launcher_quick_tap_title">Швидкий дотик</string>
     <string name="pref_fingerprint_launcher_pause_title">Пауза</string>
-    <string name="pref_fingerprint_launcher_pause_summary">Призупинення запуску до наступного циклу включення/виключення екрану. Використовуйте, якщо датчик необхідний для роботи іншого додатку на протязі тривалого періоду, наприклад, під час налаштування відбитків.</string>
-    <string name="fingerprint_launcher_paused">Запуск призупинено до наступного циклу включення/виключення екрану</string>
+    <string name="pref_fingerprint_launcher_pause_summary">Тимчасове зупинення запуску до наступного циклу включення/виключення екрану. Використовуйте, якщо датчик необхідний для роботи іншого додатку на протязі тривалого періоду, наприклад, під час налаштування відбитків.</string>
+    <string name="fingerprint_launcher_paused">Запуск тимчасово зупинено до наступного циклу включення/виключення екрану</string>
     <string name="pref_fingerprint_launcher_show_toast_title">Повідомлення про стан</string>
     <string name="pref_fingerprint_launcher_show_toast_summary">Вибір показу чи приховування повідомлень про стан у вигляді плавучого вікна</string>
 
@@ -1907,9 +1907,9 @@
     <string name="msg_unlocker_error">Трапилась невідома помилка під час зв\'язку із GravityBox Unlocker</string>
 
     <!-- Lockscreen: hide bottom actions -->
-    <string name="pref_lockscreen_bottom_actions_hide_title">Hide bottom actions</string>
-    <string name="bottom_action_left">Hide left action</string>
-    <string name="bottom_action_right">Hide right action</string>
+    <string name="pref_lockscreen_bottom_actions_hide_title">Приховати нижні дії</string>
+    <string name="bottom_action_left">Приховати ліву дію</string>
+    <string name="bottom_action_right">Приховати праву дію</string>
 
     <!-- Lockscreen: Direct unlock see through transparency level -->
     <string name="pref_lockscreen_direct_unlock_trans_level_title">See through transparency</string>
@@ -1930,7 +1930,7 @@
     <string name="shortcut_sm_title">Налаштування SIM</string>
     <string name="shortcut_sm_voice_sim_1">SIM 1 для дзвінків</string>
     <string name="shortcut_sm_voice_sim_2">SIM 2 для дзвінків</string>
-    <string name="shortcut_sm_voice_sim_ask">Ask when placing a call</string>
+    <string name="shortcut_sm_voice_sim_ask">Запитувати під час виклику</string>
     <string name="shortcut_sm_voice_sim_ui">Обрати SIM для дзвінків</string>
     <string name="shortcut_sm_sms_sim_1">SIM 1 для SMS</string>
     <string name="shortcut_sm_sms_sim_2">SIM 2 для SMS</string>
@@ -2007,5 +2007,12 @@
     <string name="theme_default">Типова</string>
     <string name="theme_light">Світла</string>
     <string name="theme_dark">Темна</string>
+
+    <!-- QS: Haptic feedback -->
+    <string name="pref_qs_haptic_feedback_title">Тактильний відгук</string>
+    <string name="pref_qs_haptic_feedback_summary">Вмикає тактильний відгук при одиничному дотику по плитці</string>
+
+    <!-- BatteryStyle: Master switch -->
+    <string name="pref_battery_masterswitch_summary">Активує зміну стилю значків батареї та процентів (необхідне перезавантаження)</string>
 
 </resources>
