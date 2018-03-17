@@ -312,7 +312,7 @@ public class NetworkModeTile extends QsTile {
     public Object getDetailAdapter() {
         if (mDetailAdapter == null) {
             mDetailAdapter = QsDetailAdapterProxy.create(
-                    mContext.getClassLoader(), new ModeDetailAdapter(mContext));
+                    mContext.getClassLoader(), new ModeDetailAdapter());
         }
         return mDetailAdapter.getProxy();
     }
@@ -321,15 +321,6 @@ public class NetworkModeTile extends QsTile {
 
         private QsDetailItemsListAdapter<NetworkMode> mAdapter;
         private QsDetailItemsList mDetails;
-
-        ModeDetailAdapter(Context ctx) {
-            mAdapter = new QsDetailItemsListAdapter<NetworkMode>(ctx, mModeList) {
-                @Override
-                protected CharSequence getListItemText(NetworkMode item) {
-                    return mGbContext.getString(item.labelRes);
-                }
-            };
-        }
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -353,16 +344,20 @@ public class NetworkModeTile extends QsTile {
         }
 
         @Override
-        public View createDetailView(Context context, View convertView, ViewGroup parent) throws Throwable {
-            if (mDetails == null) {
-                mDetails = QsDetailItemsList.create(context, parent);
-                mDetails.setEmptyState(0, null);
-                mDetails.setAdapter(mAdapter);
-    
-                final ListView list = mDetails.getListView();
-                list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-                list.setOnItemClickListener(this);
-            }
+        public View createDetailView(final Context context, View convertView, ViewGroup parent) throws Throwable {
+            mAdapter = new QsDetailItemsListAdapter<NetworkMode>(context, mModeList) {
+                @Override
+                protected CharSequence getListItemText(NetworkMode item) {
+                    return mGbContext.getString(item.labelRes);
+                }
+            };
+            mDetails = QsDetailItemsList.create(context, parent);
+            mDetails.setEmptyState(0, null);
+            mDetails.setAdapter(mAdapter);
+
+            final ListView list = mDetails.getListView();
+            list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+            list.setOnItemClickListener(this);
 
             rebuildModeList();
             return mDetails.getView();

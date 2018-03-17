@@ -299,7 +299,7 @@ public class StayAwakeTile extends QsTile {
     public Object getDetailAdapter() {
         if (mDetailAdapter == null) {
             mDetailAdapter = QsDetailAdapterProxy.create(
-                    mContext.getClassLoader(), new ModeDetailAdapter(mContext));
+                    mContext.getClassLoader(), new ModeDetailAdapter());
         }
         return mDetailAdapter.getProxy();
     }
@@ -308,15 +308,6 @@ public class StayAwakeTile extends QsTile {
 
         private QsDetailItemsListAdapter<ScreenTimeout> mAdapter;
         private QsDetailItemsList mDetails;
-
-        ModeDetailAdapter(Context ctx) {
-            mAdapter = new QsDetailItemsListAdapter<ScreenTimeout>(ctx, mModeList) {
-                @Override
-                protected CharSequence getListItemText(ScreenTimeout item) {
-                    return mGbContext.getString(item.mLabelResId);
-                }
-            };
-        }
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -341,16 +332,20 @@ public class StayAwakeTile extends QsTile {
         }
 
         @Override
-        public View createDetailView(Context context, View convertView, ViewGroup parent) throws Throwable {
-            if (mDetails == null) {
-                mDetails = QsDetailItemsList.create(context, parent);
-                mDetails.setEmptyState(0, null);
-                mDetails.setAdapter(mAdapter);
-    
-                final ListView list = mDetails.getListView();
-                list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-                list.setOnItemClickListener(this);
-            }
+        public View createDetailView(final Context context, View convertView, ViewGroup parent) throws Throwable {
+            mAdapter = new QsDetailItemsListAdapter<ScreenTimeout>(context, mModeList) {
+                @Override
+                protected CharSequence getListItemText(ScreenTimeout item) {
+                    return mGbContext.getString(item.mLabelResId);
+                }
+            };
+            mDetails = QsDetailItemsList.create(context, parent);
+            mDetails.setEmptyState(0, null);
+            mDetails.setAdapter(mAdapter);
+
+            final ListView list = mDetails.getListView();
+            list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+            list.setOnItemClickListener(this);
 
             rebuildModeList();
             return mDetails.getView();

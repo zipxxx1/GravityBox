@@ -28,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 
 public abstract class QsDetailItemsListAdapter<T> extends ArrayAdapter<T> {
+
     public QsDetailItemsListAdapter(Context context, List<T> list) {
         super(context, android.R.layout.simple_list_item_single_choice, list);
     }
@@ -39,13 +40,13 @@ public abstract class QsDetailItemsListAdapter<T> extends ArrayAdapter<T> {
         CheckedTextView label = (CheckedTextView) inflater.inflate(
                 android.R.layout.simple_list_item_single_choice, parent, false);
         label.setText(getListItemText(getItem(position)));
-        if (Utils.isOxygenOsRom()) {
-            label.setTextColor(OOSThemeColorUtils.getColor(getContext(),
-                    OOSThemeColorUtils.QS_PRIMARY_TEXT, android.R.attr.textColorPrimary));
-            label.setCheckMarkTintList(ColorStateList.valueOf(
-                    OOSThemeColorUtils.getColor(getContext(),
-                            OOSThemeColorUtils.QS_ACCENT, android.R.attr.colorControlNormal)));
-        }
+        label.setTextColor(Utils.isOxygenOsRom() ?
+                OOSThemeColorUtils.getColorTextPrimary(getContext()) :
+                Utils.getColorFromStyleAttr(getContext(), android.R.attr.textColorPrimary));
+        label.setCheckMarkTintList(ColorStateList.valueOf(
+                Utils.isOxygenOsRom() ?
+                        OOSThemeColorUtils.getColorAccent(getContext()) :
+                        Utils.getColorFromStyleAttr(getContext(), android.R.attr.colorAccent)));
         return label;
     }
 

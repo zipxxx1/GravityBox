@@ -237,7 +237,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
     public Object getDetailAdapter() {
         if (mDetailAdapter == null) {
             mDetailAdapter = QsDetailAdapterProxy.create(
-                    mContext.getClassLoader(), new LocationDetailAdapter(mContext));
+                    mContext.getClassLoader(), new LocationDetailAdapter());
         }
         return mDetailAdapter.getProxy();
     }
@@ -246,15 +246,6 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
         private QsDetailItemsListAdapter<Integer> mAdapter;
         private QsDetailItemsList mDetails;
-
-        LocationDetailAdapter(Context ctx) {
-            mAdapter = new QsDetailItemsListAdapter<Integer>(ctx, mLocationList) {
-                @Override
-                protected CharSequence getListItemText(Integer item) {
-                    return GpsStatusMonitor.getModeLabel(mContext, item);
-                }
-            };
-        }
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -279,10 +270,16 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
         }
 
         @Override
-        public View createDetailView(Context context, View convertView, ViewGroup parent) throws Throwable {
+        public View createDetailView(final Context context, View convertView, ViewGroup parent) throws Throwable {
+            mAdapter = new QsDetailItemsListAdapter<Integer>(context, mLocationList) {
+                @Override
+                protected CharSequence getListItemText(Integer item) {
+                    return GpsStatusMonitor.getModeLabel(context, item);
+                }
+            };
             mDetails = QsDetailItemsList.create(context, parent);
             mDetails.setEmptyState(R.drawable.ic_qs_location_off,
-                    GpsStatusMonitor.getModeLabel(mContext, Settings.Secure.LOCATION_MODE_OFF));
+                    GpsStatusMonitor.getModeLabel(context, Settings.Secure.LOCATION_MODE_OFF));
             mDetails.setAdapter(mAdapter);
 
             final ListView list = mDetails.getListView();
