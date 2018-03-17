@@ -16,8 +16,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name" translatable="false">GravityBox [O]</string>
-
     <string name="battery_style_title">Стиль індикатора батареї</string>
     <string name="battery_style_stock">Стоковий індикатор батареї</string>
     <string name="battery_style_circle">Круглий індикатор</string>
