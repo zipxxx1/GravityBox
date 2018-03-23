@@ -216,7 +216,7 @@
     <string name="hwkey_action_kill">Önplan uygulamayı sonlandır</string>
     <string name="hwkey_action_sleep">Uykuya geç</string>
     <string name="pref_hwkey_kill_delay_title">Uyg sonlandırma uzun basma gecikmesi</string>
-    <string name="pref_hwkey_kill_delay_summary">Uygulama sonladırma eylemine uygulanır. Sonlandırmak için tuşa ne kadar uzun basılacağını belirler</string>
+    <string name="pref_hwkey_kill_delay_summary">Uygulama sonlandırma eylemine uygulanır. Sonlandırmak için tuşa ne kadar uzun basılacağını belirler</string>
     <string name="pref_hwkey_doubletap_speed_title">Çift tıklama hızı</string>
     <string name="pref_hwkey_doubletap_speed_summary">Çift tıklamanın oluşması için tuşa ne kadar hızlı basılacağını belirler</string>
     <string name="app_killed">%s sonlandırıldı</string>
