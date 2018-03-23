@@ -2039,4 +2039,20 @@
     <string name="notif_channel_unc_title">Предпросмотр</string>
     <string name="notif_channel_unc_desc">Для предпросмотра уведомлений управления оповещением</string>
 
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">Всегда показывать Очистить все</string>
+
+    <!-- Theme -->
+    <string name="theme_title">Тема</string>
+    <string name="theme_default">По умолчанию</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+
+    <!-- QS: Haptic feedback -->
+    <string name="pref_qs_haptic_feedback_title">Виброотдача</string>
+    <string name="pref_qs_haptic_feedback_summary">Включение виброотдачи при однократном нажатии на плитку</string>
+
+    <!-- BatteryStyle: Master switch -->
+    <string name="pref_battery_masterswitch_summary">Включение настройки стиля значка батареии процентов (необходима перезагрузка)</string>
+
 </resources>
