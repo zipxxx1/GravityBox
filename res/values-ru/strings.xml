@@ -1385,6 +1385,10 @@
     <string name="imgpick_dialog_title">Выбор изображения через</string>
     <string name="imgpick_choose_error">Ошибка при выборе изображения</string>
     <string name="imgpick_crop_error">Ошибка при обрезке изображения</string>
+    <string name="imgpick_crop_uri_null">Приложению не удалось обработать изображение. Будет использован оригинал.</string>
+    <string name="imgpick_crop_ask_title">Обрезать?</string>
+    <string name="imgpick_crop_ask_msg">IЕсли выберете Нет, будет оставлено оригинальное изображение. 
+        Убедитесь, что его размеры примерно соответствуют: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Приближение при пробуждении</string>
@@ -2032,5 +2036,33 @@
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Разделение экрана</string>
+
+    <!-- Yes/No -->
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Логирование ошибок</string>
+    <string name="pref_log_errors_summary">Логирование всех ошибок в журнале Xposed, если включено(необходима перезагрузка)</string>
+
+    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
+    <string name="pref_signal_cluster_aosp_mobile_type_title">Использование мобильных значков AOSP</string>
+    <string name="pref_signal_cluster_aosp_mobile_type_summary">Необходима перезагрузка</string>
+
+    <!-- Recents: Clear always visible -->
+    <string name="pref_recent_clear_always_visible_title">Всегда показывать Очистить все</string>
+
+    <!-- Theme -->
+    <string name="theme_title">Тема</string>
+    <string name="theme_default">По умолчанию</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+
+    <!-- QS: Haptic feedback -->
+    <string name="pref_qs_haptic_feedback_title">Виброотдача</string>
+    <string name="pref_qs_haptic_feedback_summary">Включение виброотдачи при однократном нажатии на плитку</string>
+
+    <!-- BatteryStyle: Master switch -->
+    <string name="pref_battery_masterswitch_summary">Включение настройки стиля значка батареии процентов (необходима перезагрузка)</string>
 
 </resources>
