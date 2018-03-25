@@ -2119,6 +2119,7 @@
                 android:key="pref_visualizer_color"
                 android:title="@string/pref_visualizer_color_title"
                 android:defaultValue="@integer/COLOR_WHITE"
+                android:dependency="pref_visualizer_enable"
                 alphaSlider="false" />
 
             <CheckBoxPreference 
@@ -2126,8 +2127,7 @@
                 android:title="@string/pref_visualizer_dynamic_color_title"
                 android:summary="@string/pref_visualizer_dynamic_color_summary"
                 android:defaultValue="true"
-                android:dependency="pref_visualizer_enable"
-                android:disableDependentsState="true" />
+                android:dependency="pref_visualizer_enable" />
 
             <com.ceco.nougat.gravitybox.preference.SeekBarPreference
                 android:key="pref_visualizer_opacity"
@@ -2138,6 +2138,13 @@
                 monitorBoxEnabled="true"
                 monitorBoxUnit="%" 
                 android:defaultValue="50"
+                android:dependency="pref_visualizer_enable" />
+
+            <CheckBoxPreference 
+                android:key="pref_visualizer_active_mode"
+                android:title="@string/pref_visualizer_active_mode_title"
+                android:summary="@string/pref_visualizer_active_mode_summary"
+                android:defaultValue="false"
                 android:dependency="pref_visualizer_enable" />
 
         </PreferenceScreen>

@@ -2013,5 +2013,7 @@
     <string name="pref_visualizer_dynamic_color_summary">Extrahuje barvu z grafiky aktuální skladby</string>
     <string name="pref_visualizer_color_title">Standardní barva</string>
     <string name="pref_visualizer_opacity_title">Neprůhlednost barvy</string>
+    <string name="pref_visualizer_active_mode_title">Aktivní režim</string>
+    <string name="pref_visualizer_active_mode_summary">Udrží obrazovku uzamčení aktivní během zobrazení vizualizátora</string>
 
 </resources>

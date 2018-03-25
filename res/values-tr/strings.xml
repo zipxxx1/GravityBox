@@ -2031,5 +2031,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_visualizer_dynamic_color_summary">Rengi mevcut şarkının resminden alır</string>
     <string name="pref_visualizer_color_title">Varsayılan renk</string>
     <string name="pref_visualizer_opacity_title">Renk opaklığı</string>
+    <string name="pref_visualizer_active_mode_title">Etkin mod</string>
+    <string name="pref_visualizer_active_mode_summary">Görselleştirici gösterilirken kilit ekranı etkin kalır</string>
 
 </resources>
