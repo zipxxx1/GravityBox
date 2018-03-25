@@ -2093,4 +2093,12 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">Pil simgesi stili ve yüzdesi için iyileştirmeleri etkinleştirir (yeniden başlatma gerektirir)</string>
 
+    <!-- Visualizer -->
+    <string name="pref_cat_visualizer_title">Görselleştirici</string>
+    <string name="pref_visualizer_enable_summary">Müzik çalarken kilit ekranında görselleştiriciyi etkinleştirir (yeniden başlatma gerektirir)</string>
+    <string name="pref_visualizer_dynamic_color_title">Dinamik renk</string>
+    <string name="pref_visualizer_dynamic_color_summary">Rengi mevcut şarkının resminden alır</string>
+    <string name="pref_visualizer_color_title">Varsayılan renk</string>
+    <string name="pref_visualizer_opacity_title">Renk opaklığı</string>
+
 </resources>
