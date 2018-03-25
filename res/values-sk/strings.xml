@@ -2026,5 +2026,7 @@
     <string name="pref_visualizer_dynamic_color_summary">Extrahuje farbu z grafiky aktuálnej skladby</string>
     <string name="pref_visualizer_color_title">Štandardná farba</string>
     <string name="pref_visualizer_opacity_title">Nepriehľadnosť farby</string>
+    <string name="pref_visualizer_active_mode_title">Aktívny režim</string>
+    <string name="pref_visualizer_active_mode_summary">Udrží obrazovku uzamknutia aktívnu počas zobrazenia vizualizátora</string>
 
 </resources>

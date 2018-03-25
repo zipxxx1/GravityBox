@@ -896,10 +896,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_VISUALIZER_DYNAMIC_COLOR = "pref_visualizer_dynamic_color";
     public static final String PREF_KEY_VISUALIZER_COLOR = "pref_visualizer_color";
     public static final String PREF_KEY_VISUALIZER_OPACITY = "pref_visualizer_opacity";
+    public static final String PREF_KEY_VISUALIZER_ACTIVE_MODE = "pref_visualizer_active_mode";
     public static final String ACTION_VISUALIZER_SETTINGS_CHANGED = "gravitybox.intent.action.VISUALIZER_SETTINGS_CHANGED";
     public static final String EXTRA_VISUALIZER_DYNAMIC_COLOR = "visualizerDynamicColor";
     public static final String EXTRA_VISUALIZER_COLOR = "visualizerColor";
     public static final String EXTRA_VISUALIZER_OPACITY = "visualizerOpacity";
+    public static final String EXTRA_VISUALIZER_ACTIVE_MODE = "visualizerActiveMode";
 
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
@@ -3388,6 +3390,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_VISUALIZER_OPACITY)) {
                 intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
                 intent.putExtra(EXTRA_VISUALIZER_OPACITY, prefs.getInt(key, 50));
+            } else if (key.equals(PREF_KEY_VISUALIZER_ACTIVE_MODE)) {
+                intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_VISUALIZER_ACTIVE_MODE, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

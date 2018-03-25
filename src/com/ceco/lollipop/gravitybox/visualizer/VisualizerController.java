@@ -58,11 +58,13 @@ public class VisualizerController implements StatusBarStateChangedListener,
     private boolean mDynamicColorEnabled;
     private int mColor;
     private int mOpacityPercent;
+    private boolean mActiveMode;
 
     public VisualizerController(ClassLoader cl, XSharedPreferences prefs) {
         mDynamicColorEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DYNAMIC_COLOR, true);
         mColor = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_COLOR, Color.WHITE);
         mOpacityPercent = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_OPACITY, 50);
+        mActiveMode = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ACTIVE_MODE, false);
 
         createHooks(cl);
     }
@@ -119,6 +121,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
 
         mView.setOpacityPercent(mOpacityPercent);
         mView.setDefaultColor(mColor);
+        mView.setActiveMode(mActiveMode);
 
         if (SysUiManagers.BatteryInfoManager != null) {
             SysUiManagers.BatteryInfoManager.registerListener(this);
@@ -197,6 +200,10 @@ public class VisualizerController implements StatusBarStateChangedListener,
             if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_OPACITY)) {
                 mOpacityPercent = intent.getIntExtra(GravityBoxSettings.EXTRA_VISUALIZER_OPACITY, 50);
                 if (mView != null) mView.setOpacityPercent(mOpacityPercent);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_ACTIVE_MODE)) {
+                mActiveMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_ACTIVE_MODE, false);
+                if (mView != null) mView.setActiveMode(mActiveMode);
             }
         }
     }
