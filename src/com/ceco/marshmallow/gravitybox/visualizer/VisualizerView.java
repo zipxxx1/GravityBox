@@ -28,9 +28,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.audiofx.Visualizer;
 import android.os.AsyncTask;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.support.v7.graphics.Palette;
 import android.view.View;
 import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 
 public class VisualizerView extends View
         implements Palette.PaletteAsyncListener {
@@ -58,6 +61,9 @@ public class VisualizerView extends View
     private int mDefaultColor;
     private int mColor;
     private int mOpacity;
+    private boolean mActiveMode;
+    private PowerManager mPowerManager;
+    private long mLastUserActivityStamp;
 
     private Visualizer.OnDataCaptureListener mVisualizerListener =
             new Visualizer.OnDataCaptureListener() {
@@ -82,8 +88,22 @@ public class VisualizerView extends View
                         mFFTPoints[3] - (dbValue * 16f));
                 mValueAnimators[i].start();
             }
+
+            if (mActiveMode && SystemClock.uptimeMillis() - mLastUserActivityStamp > 3000) {
+                mLastUserActivityStamp = SystemClock.uptimeMillis();
+                userActivity();
+            }
         }
     };
+
+    private void userActivity() {
+        try {
+            XposedHelpers.callMethod(mPowerManager, "userActivity",
+                    SystemClock.uptimeMillis(), false);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
 
     private final Runnable mLinkVisualizer = new Runnable() {
         @Override
@@ -144,7 +164,7 @@ public class VisualizerView extends View
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setColor(mColor);
+        mPaint.setColor(mDefaultColor);
 
         mFFTPoints = new float[128];
         mValueAnimators = new ValueAnimator[32];
@@ -160,6 +180,8 @@ public class VisualizerView extends View
                 }
             });
         }
+
+        mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
     }
 
     private void updateViewVisibility() {
@@ -296,6 +318,10 @@ public class VisualizerView extends View
     void setOpacityPercent(int opacityPercent) {
         mOpacity = Math.round(255f * ((float)opacityPercent/100f));
         setColor(mColor);
+    }
+
+    void setActiveMode(boolean active) {
+        mActiveMode = active;
     }
 
     private void checkStateChanged() {
