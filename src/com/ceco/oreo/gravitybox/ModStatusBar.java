@@ -22,6 +22,7 @@ import com.ceco.oreo.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
 import com.ceco.oreo.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.oreo.gravitybox.shortcuts.AShortcut;
+import com.ceco.oreo.gravitybox.visualizer.VisualizerController;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -137,6 +138,7 @@ public class ModStatusBar {
     private static StatusbarQuietHoursView mQhViewSb;
     private static BatteryBarView mBatteryBarViewSb;
     private static ProgressBarView mProgressBarViewSb;
+    private static VisualizerController mVisualizerCtrl;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -640,6 +642,12 @@ public class ModStatusBar {
             final Class<?> statusBarWmClass = XposedHelpers.findClass(CLASS_STATUSBAR_WM, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
 
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ENABLE, false)) {
+                mVisualizerCtrl = new VisualizerController(classLoader, prefs);
+                mStateChangeListeners.add(mVisualizerCtrl);
+                mBroadcastSubReceivers.add(mVisualizerCtrl);
+            }
+
             mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
             mClockLink = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LINK, null);
             mClockLongpressLink = prefs.getString(
@@ -711,6 +719,9 @@ public class ModStatusBar {
                     intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                     intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ENABLE, false)) {
+                        intentFilter.addAction(GravityBoxSettings.ACTION_VISUALIZER_SETTINGS_CHANGED);
+                    }
 
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 

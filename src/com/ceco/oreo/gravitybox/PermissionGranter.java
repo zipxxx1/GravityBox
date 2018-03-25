@@ -94,6 +94,17 @@ public class PermissionGranter {
                                     "android.permission.RECOVERY");
                             XposedHelpers.callMethod(ps, "grantInstallPermission", p);
                         }
+                        // Add permissions needed by Visualizer
+                        if (!grantedPerms.contains(permission.RECORD_AUDIO)) {
+                            final Object p = XposedHelpers.callMethod(permissions, "get",
+                                    permission.RECORD_AUDIO);
+                            XposedHelpers.callMethod(ps, "grantInstallPermission", p);
+                        }
+                        if (!grantedPerms.contains(permission.MODIFY_AUDIO_SETTINGS)) {
+                            final Object p = XposedHelpers.callMethod(permissions, "get",
+                                    permission.MODIFY_AUDIO_SETTINGS);
+                            XposedHelpers.callMethod(ps, "grantInstallPermission", p);
+                        }
                     }
                 }
             });
