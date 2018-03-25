@@ -25,6 +25,7 @@ import com.ceco.lollipop.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.lollipop.gravitybox.shortcuts.AShortcut;
+import com.ceco.lollipop.gravitybox.visualizer.VisualizerController;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -151,6 +152,7 @@ public class ModStatusBar {
     private static boolean mDisablePeek;
     private static GestureDetector mGestureDetector;
     private static boolean mDt2sEnabled;
+    private static VisualizerController mVisualizerCtrl;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -593,6 +595,12 @@ public class ModStatusBar {
             loadAnimParamArgs[0] = int.class;
             loadAnimParamArgs[1] = Animation.AnimationListener.class;
 
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ENABLE, false)) {
+                mVisualizerCtrl = new VisualizerController(classLoader, prefs);
+                mStateChangeListeners.add(mVisualizerCtrl);
+                mBroadcastSubReceivers.add(mVisualizerCtrl);
+            }
+
             mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
             mClockLink = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LINK, null);
             mClockLongpressLink = prefs.getString(
@@ -694,6 +702,9 @@ public class ModStatusBar {
                     intentFilter.addAction(Intent.ACTION_SCREEN_ON);
                     intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                     intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ENABLE, false)) {
+                        intentFilter.addAction(GravityBoxSettings.ACTION_VISUALIZER_SETTINGS_CHANGED);
+                    }
 
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 

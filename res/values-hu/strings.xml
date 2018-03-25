@@ -2022,4 +2022,12 @@
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">Engedélyezi az akkumulátor ikon stílus és százalék módosításokat (újraindítás szükséges)</string>
 
+    <!-- Visualizer -->
+    <string name="pref_cat_visualizer_title">Vizualizáló</string>
+    <string name="pref_visualizer_enable_summary">Engedélyezi a vizualizálót a zárképernyőn zene lejátszása közben (újraindítás szükséges)</string>
+    <string name="pref_visualizer_dynamic_color_title">Dinamikus szín</string>
+    <string name="pref_visualizer_dynamic_color_summary">Az aktuális dal képéből határozza meg a színt</string>
+    <string name="pref_visualizer_color_title">Alapértelmezett szín</string>
+    <string name="pref_visualizer_opacity_title">Szín átlátszóság</string>
+
 </resources>

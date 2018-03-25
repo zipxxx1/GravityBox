@@ -892,6 +892,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NM_TILE_ENABLED_MODES = "nmTileEnabledModes";
     public static final String EXTRA_NM_TILE_QUICK_MODE = "nmTileQuickMode";
 
+    public static final String PREF_KEY_VISUALIZER_ENABLE = "pref_visualizer_enable";
+    public static final String PREF_KEY_VISUALIZER_DYNAMIC_COLOR = "pref_visualizer_dynamic_color";
+    public static final String PREF_KEY_VISUALIZER_COLOR = "pref_visualizer_color";
+    public static final String PREF_KEY_VISUALIZER_OPACITY = "pref_visualizer_opacity";
+    public static final String ACTION_VISUALIZER_SETTINGS_CHANGED = "gravitybox.intent.action.VISUALIZER_SETTINGS_CHANGED";
+    public static final String EXTRA_VISUALIZER_DYNAMIC_COLOR = "visualizerDynamicColor";
+    public static final String EXTRA_VISUALIZER_COLOR = "visualizerColor";
+    public static final String EXTRA_VISUALIZER_OPACITY = "visualizerOpacity";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -931,7 +940,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SIGNAL_CLUSTER_DNTI,
             PREF_KEY_SIGNAL_CLUSTER_NOSIM,
             PREF_KEY_BATTERY_PERCENT_TEXT_POSITION,
-            PREF_KEY_BATTERY_TWEAKS_ENABLED
+            PREF_KEY_BATTERY_TWEAKS_ENABLED,
+            PREF_KEY_VISUALIZER_ENABLE
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -3369,6 +3379,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_QS_SCALE_CORRECTION)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_SCALE_CORRECTION, prefs.getInt(key, 0));
+            } else if (key.equals(PREF_KEY_VISUALIZER_DYNAMIC_COLOR)) {
+                intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_VISUALIZER_DYNAMIC_COLOR, prefs.getBoolean(key, true));
+            } else if (key.equals(PREF_KEY_VISUALIZER_COLOR)) {
+                intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_VISUALIZER_COLOR, prefs.getInt(key, Color.WHITE));
+            } else if (key.equals(PREF_KEY_VISUALIZER_OPACITY)) {
+                intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_VISUALIZER_OPACITY, prefs.getInt(key, 50));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

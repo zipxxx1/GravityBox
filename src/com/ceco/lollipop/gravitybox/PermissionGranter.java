@@ -163,6 +163,29 @@ public class PermissionGranter {
 
                             if (DEBUG) log(pkgName + ": Permission added: " + pCns);
                         }
+                        // Add permissions needed by Visualizer
+                        if (!grantedPerms.contains(permission.RECORD_AUDIO)) {
+                            final Object pCns = XposedHelpers.callMethod(permissions, "get",
+                                    permission.RECORD_AUDIO);
+                            grantedPerms.add(permission.RECORD_AUDIO);
+                            int[] gpGids = (int[]) XposedHelpers.getObjectField(sharedUser, "gids");
+                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCns, "gids");
+                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
+                                    "appendInts", gpGids, bpGids);
+
+                            if (DEBUG) log(pkgName + ": Permission added: " + pCns);
+                        }
+                        if (!grantedPerms.contains(permission.MODIFY_AUDIO_SETTINGS)) {
+                            final Object pCns = XposedHelpers.callMethod(permissions, "get",
+                                    permission.MODIFY_AUDIO_SETTINGS);
+                            grantedPerms.add(permission.MODIFY_AUDIO_SETTINGS);
+                            int[] gpGids = (int[]) XposedHelpers.getObjectField(sharedUser, "gids");
+                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCns, "gids");
+                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
+                                    "appendInts", gpGids, bpGids);
+
+                            if (DEBUG) log(pkgName + ": Permission added: " + pCns);
+                        }
 
                         if (DEBUG) {
                             log("List of permissions: ");
