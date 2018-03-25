@@ -2065,4 +2065,12 @@
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">Включение настройки стиля значка батареии процентов (необходима перезагрузка)</string>
 
+    <!-- Visualizer -->
+    <string name="pref_cat_visualizer_title">Визуалайзер</string>
+    <string name="pref_visualizer_enable_summary">Включение визуалайзера на экране блокировки при воспроизведении музыки (необходима перезагрузка)</string>
+    <string name="pref_visualizer_dynamic_color_title">Динамический цвет</string>
+    <string name="pref_visualizer_dynamic_color_summary">Извлечение цвета из обложки текущей песни</string>
+    <string name="pref_visualizer_color_title">Цвет по умолчанию</string>
+    <string name="pref_visualizer_opacity_title">Непрозрачность цвета</string>
+
 </resources>

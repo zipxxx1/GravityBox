@@ -2006,4 +2006,12 @@
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">Povolí nastavení stylů baterie a procentního textu (vyžaduje restart)</string>
 
+    <!-- Visualizer -->
+    <string name="pref_cat_visualizer_title">Vizualizátor</string>
+    <string name="pref_visualizer_enable_summary">Povolí vizualizátor zvuku, který se zobrazí na obrazovce uzamčení během přehrávání hudby (vyžaduje restart)</string>
+    <string name="pref_visualizer_dynamic_color_title">Dynamická barva</string>
+    <string name="pref_visualizer_dynamic_color_summary">Extrahuje barvu z grafiky aktuální skladby</string>
+    <string name="pref_visualizer_color_title">Standardní barva</string>
+    <string name="pref_visualizer_opacity_title">Neprůhlednost barvy</string>
+
 </resources>

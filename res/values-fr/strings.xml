@@ -1778,4 +1778,12 @@
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Développer le panneau Paramètres Rapides</string>
 
+    <!-- Visualizer -->
+    <string name="pref_cat_visualizer_title">Visualiseur</string>
+    <string name="pref_visualizer_enable_summary">Active le visualiseur sur l\'écran de verrouillage pendant la lecture de la musique (nécessite un redémarrage)</string>
+    <string name="pref_visualizer_dynamic_color_title">Couleur dynamique</string>
+    <string name="pref_visualizer_dynamic_color_summary">Extrait la couleur depuis l\'illustration de la chanson en cours</string>
+    <string name="pref_visualizer_color_title">Couleur par défaut</string>
+    <string name="pref_visualizer_opacity_title">Opacité de la couleur</string>
+
 </resources>

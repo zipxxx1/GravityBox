@@ -23,6 +23,7 @@ import com.ceco.nougat.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.nougat.gravitybox.managers.SysUiManagers;
 import com.ceco.nougat.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.nougat.gravitybox.shortcuts.AShortcut;
+import com.ceco.nougat.gravitybox.visualizer.VisualizerController;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -134,6 +135,7 @@ public class ModStatusBar {
     private static GestureDetector mGestureDetector;
     private static boolean mDt2sEnabled;
     private static long[] mCameraVp;
+    private static VisualizerController mVisualizerCtrl;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -549,6 +551,12 @@ public class ModStatusBar {
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
             final Class<?> sbiCtrlClass = XposedHelpers.findClass(CLASS_SBI_CTRL, classLoader);
 
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ENABLE, false)) {
+                mVisualizerCtrl = new VisualizerController(classLoader, prefs);
+                mStateChangeListeners.add(mVisualizerCtrl);
+                mBroadcastSubReceivers.add(mVisualizerCtrl);
+            }
+
             mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
             mClockLink = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LINK, null);
             mClockLongpressLink = prefs.getString(
@@ -643,6 +651,9 @@ public class ModStatusBar {
                     intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                     intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ENABLE, false)) {
+                        intentFilter.addAction(GravityBoxSettings.ACTION_VISUALIZER_SETTINGS_CHANGED);
+                    }
 
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 

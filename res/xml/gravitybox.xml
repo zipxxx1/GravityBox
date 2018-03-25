@@ -2105,6 +2105,43 @@
         android:title="@string/pref_cat_media_title"
         android:summary="@string/pref_cat_media_summary">
 
+        <PreferenceScreen
+                android:key="pref_cat_visualizer"
+                android:title="@string/pref_cat_visualizer_title" >
+
+            <SwitchPreference
+                android:key="pref_visualizer_enable"
+                android:title="@string/pref_masterswitch_title"
+                android:summary="@string/pref_visualizer_enable_summary"
+                android:defaultValue="false" />
+
+            <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                android:key="pref_visualizer_color"
+                android:title="@string/pref_visualizer_color_title"
+                android:defaultValue="@integer/COLOR_WHITE"
+                alphaSlider="false" />
+
+            <CheckBoxPreference 
+                android:key="pref_visualizer_dynamic_color"
+                android:title="@string/pref_visualizer_dynamic_color_title"
+                android:summary="@string/pref_visualizer_dynamic_color_summary"
+                android:defaultValue="true"
+                android:dependency="pref_visualizer_enable"
+                android:disableDependentsState="true" />
+
+            <com.ceco.nougat.gravitybox.preference.SeekBarPreference
+                android:key="pref_visualizer_opacity"
+                android:title="@string/pref_visualizer_opacity_title"
+                minimum="10"
+                maximum="100"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="%" 
+                android:defaultValue="50"
+                android:dependency="pref_visualizer_enable" />
+
+        </PreferenceScreen>
+
         <CheckBoxPreference 
             android:key="pref_vol_music_controls"
             android:title="@string/vol_music_controls_title"
