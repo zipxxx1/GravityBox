@@ -2099,5 +2099,10 @@
     <string name="pref_visualizer_opacity_title">Color opacity</string>
     <string name="pref_visualizer_active_mode_title">Active mode</string>
     <string name="pref_visualizer_active_mode_summary">Keeps lock screen active while visualizer is showing</string>
+    <string name="pref_visualizer_dim_title">Dim screen</string>
+    <string name="pref_visualizer_dim_summary">Dims contents of lock screen after user inactivity timeout</string>
+    <string name="pref_visualizer_dim_level_title">Dim level</string>
+    <string name="pref_visualizer_dim_info_title">Show media info</string>
+    <string name="pref_visualizer_dim_info_summary">Shows current media info on dimmed screen</string>
 
 </resources>

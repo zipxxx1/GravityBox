@@ -1914,5 +1914,10 @@
     <string name="pref_visualizer_opacity_title">Opacité de la couleur</string>
     <string name="pref_visualizer_active_mode_title">Mode actif</string>
     <string name="pref_visualizer_active_mode_summary">Maintient l\'écran de verrouillage actif lorsque le visualiseur est affiché</string>
+    <string name="pref_visualizer_dim_title">Écran tamisé</string>
+    <string name="pref_visualizer_dim_summary">Assombrir le contenu de l\'écran de verrouillage après un délai d\'inactivité</string>
+    <string name="pref_visualizer_dim_level_title">Niveau d\'opacité</string>
+    <string name="pref_visualizer_dim_info_title">Afficher les informations des médias</string>
+    <string name="pref_visualizer_dim_info_summary">Affiche les informations du média en cours sur l\'écran tamisé</string>
 
 </resources>

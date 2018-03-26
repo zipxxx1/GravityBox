@@ -19,8 +19,10 @@ package com.ceco.lollipop.gravitybox.visualizer;
 
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -31,7 +33,12 @@ import android.os.AsyncTask;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v7.graphics.Palette;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
@@ -41,11 +48,15 @@ public class VisualizerView extends View
     private static final String TAG = "GB:VisualizerView";
     private static final boolean DEBUG = true;
 
+    private static final long DIM_STATE_DELAY = 10000l;
+    private static final float TEXT_SIZE_SP = 16f;
+
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
     private Paint mPaint;
+    private TextPaint mTextPaint;
     private Visualizer mVisualizer;
     private ObjectAnimator mVisualizerColorAnimator;
 
@@ -60,10 +71,19 @@ public class VisualizerView extends View
 
     private int mDefaultColor;
     private int mColor;
+    private int mBgColor;
+    private ValueAnimator mBgColorAnimator;
     private int mOpacity;
     private boolean mActiveMode;
     private PowerManager mPowerManager;
     private long mLastUserActivityStamp;
+    private int mPosition;
+    private boolean mIsDimmed;
+    private boolean mDimEnabled;
+    private int mDimLevel;
+    private boolean mDimInfoEnabled;
+    private String mText;
+    private StaticLayout mTextLayout;
 
     private Visualizer.OnDataCaptureListener mVisualizerListener =
             new Visualizer.OnDataCaptureListener() {
@@ -89,9 +109,14 @@ public class VisualizerView extends View
                 mValueAnimators[i].start();
             }
 
-            if (mActiveMode && SystemClock.uptimeMillis() - mLastUserActivityStamp > 3000) {
-                mLastUserActivityStamp = SystemClock.uptimeMillis();
-                userActivity();
+            if (mActiveMode && (SystemClock.elapsedRealtime() - mLastUserActivityStamp) > 4000) {
+                mLastUserActivityStamp = SystemClock.elapsedRealtime();
+                post(new Runnable() {
+                    @Override
+                    public void run() {
+                        userActivity();
+                    }
+                });
             }
         }
     };
@@ -100,6 +125,7 @@ public class VisualizerView extends View
         try {
             XposedHelpers.callMethod(mPowerManager, "userActivity",
                     SystemClock.uptimeMillis(), false);
+            if (DEBUG) log("Virtual userActivity sent");
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -125,6 +151,10 @@ public class VisualizerView extends View
                     false, true);
             mVisualizer.setEnabled(true);
 
+            if (mActiveMode && mDimEnabled) {
+                postDelayed(mEnterDimStateRunnable, DIM_STATE_DELAY);
+            }
+
             if (DEBUG) {
                 log("--- mLinkVisualizer run()");
             }
@@ -144,6 +174,17 @@ public class VisualizerView extends View
             if (DEBUG) {
                 log("+++ mUnlinkVisualizer run(), mVisualizer: " + mVisualizer);
             }
+
+            removeCallbacks(mEnterDimStateRunnable);
+            if (mIsDimmed) {
+                post(new Runnable() {
+                    @Override
+                    public void run() {
+                        setDimState(false);
+                    }
+                });
+            }
+
             if (mVisualizer != null) {
                 mVisualizer.setEnabled(false);
                 mVisualizer.release();
@@ -155,16 +196,32 @@ public class VisualizerView extends View
         }
     };
 
-    VisualizerView(Context context) {
+    private final Runnable mEnterDimStateRunnable = new Runnable() {
+        @Override
+        public void run() {
+            setDimState(true);
+        }
+    };
+
+    VisualizerView(Context context, int position) {
         super(context, null, 0);
 
+        mPosition = position;
         mDefaultColor = Color.WHITE;
         mColor = Color.TRANSPARENT;
         mOpacity = 140;
+        mBgColor = 0;
+        setBackgroundColor(mBgColor);
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(mDefaultColor);
+
+        mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint.setColor(mDefaultColor);
+        mTextPaint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+                TEXT_SIZE_SP, context.getResources().getDisplayMetrics()));
+        mTextPaint.setShadowLayer(2f, 2f, 2f, Color.WHITE);
 
         mFFTPoints = new float[128];
         mValueAnimators = new ValueAnimator[32];
@@ -191,6 +248,41 @@ public class VisualizerView extends View
         if (curVis != newVis) {
             setVisibility(newVis);
             checkStateChanged();
+        }
+    }
+
+    private void setDimState(final boolean dim) {
+        mIsDimmed = dim;
+
+        if (mBgColorAnimator != null) {
+            mBgColorAnimator.cancel();
+            mBgColorAnimator = null;
+        }
+
+        if (isAttachedToWindow()) {
+            ViewGroup parent = (ViewGroup) getParent();
+            int targetPos = dim ? parent.getChildCount()-1 : mPosition;
+            if (targetPos != parent.indexOfChild(VisualizerView.this)) {
+                parent.removeView(VisualizerView.this);
+                parent.addView(VisualizerView.this, targetPos);
+            }
+        }
+
+        if (dim) {
+            mBgColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),
+                    mBgColor, Color.argb(mDimLevel, 0, 0, 0));
+            mBgColorAnimator.setDuration(1000);
+            mBgColorAnimator.addUpdateListener(new AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator va) {
+                    mBgColor = (int) va.getAnimatedValue();
+                    setBackgroundColor(mBgColor);
+                }
+            });
+            mBgColorAnimator.start();
+        } else {
+            mBgColor = 0;
+            setBackgroundColor(mBgColor);
         }
     }
 
@@ -221,6 +313,38 @@ public class VisualizerView extends View
 
         if (mVisualizer != null) {
             canvas.drawLines(mFFTPoints, mPaint);
+
+            if (mIsDimmed && mDimInfoEnabled && mText != null) {
+                int textWidth = (int) (canvas.getWidth() - mTextPaint.getTextSize());
+                if (mTextLayout == null || !mText.equals(mTextLayout.getText())) {
+                    mTextLayout = new StaticLayout(mText, mTextPaint,
+                            textWidth, Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, false);
+                    if (DEBUG) log("Text layout created with new text: " + mText);
+                }
+                int textHeight = mTextLayout.getHeight();
+                float x = (canvas.getWidth() - textWidth)/2;
+                float y = (canvas.getHeight() - textHeight)/2;
+                canvas.save();
+                canvas.translate(x, y);
+                mTextLayout.draw(canvas);
+                canvas.restore();
+            }
+        }
+    }
+
+    void onUserActivity() {
+        if (DEBUG) log("onUserActivity");
+        removeCallbacks(mEnterDimStateRunnable);
+        if (mIsDimmed) {
+            post(new Runnable() {
+                @Override
+                public void run() {
+                    setDimState(false);
+                }
+            });
+        }
+        if (mDisplaying && mActiveMode && mDimEnabled) {
+            postDelayed(mEnterDimStateRunnable, DIM_STATE_DELAY);
         }
     }
 
@@ -299,6 +423,7 @@ public class VisualizerView extends View
         if (mColor != color) {
             mColor = color;
 
+            mTextPaint.setColor(mColor);
             if (mVisualizer != null) {
                 if (mVisualizerColorAnimator != null) {
                     mVisualizerColorAnimator.cancel();
@@ -322,6 +447,22 @@ public class VisualizerView extends View
 
     void setActiveMode(boolean active) {
         mActiveMode = active;
+    }
+
+    void setDimEnabled(boolean enabled) {
+        mDimEnabled = enabled;
+    }
+
+    void setDimLevelPercent(int dimLevelPercent) {
+        mDimLevel = Math.round(255f * ((float)dimLevelPercent/100f));
+    }
+
+    void setDimInfoEnabled(boolean enabled) {
+        mDimInfoEnabled = enabled;
+    }
+
+    void setText(String text) {
+        mText = text;
     }
 
     private void checkStateChanged() {

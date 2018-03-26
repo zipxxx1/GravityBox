@@ -2031,5 +2031,10 @@
     <string name="pref_visualizer_opacity_title">Szín átlátszóság</string>
     <string name="pref_visualizer_active_mode_title">Aktív mód</string>
     <string name="pref_visualizer_active_mode_summary">Zárképernyő aktívan tartása a vizualizáló működésekor</string>
+    <string name="pref_visualizer_dim_title">Sötétített képernyő</string>
+    <string name="pref_visualizer_dim_summary">A zárképernyő tartalmának sötétítése a felhasználó inaktivitási időszaka után</string>
+    <string name="pref_visualizer_dim_level_title">Sötétítési szint</string>
+    <string name="pref_visualizer_dim_info_title">Médiaadatok mutatása</string>
+    <string name="pref_visualizer_dim_info_summary">Megjeleníti az aktuális médiaadatokat a sötétített képernyőn</string>
 
 </resources>
