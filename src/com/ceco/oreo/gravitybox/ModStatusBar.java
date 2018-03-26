@@ -969,7 +969,8 @@ public class ModStatusBar {
                             "isLight", int.class, int.class, int.class, new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            if (mBatterySaverIndicationDisabled && 
+                            if (mBatterySaverIndicationDisabled && SysUiManagers.BatteryInfoManager != null &&
+                                    SysUiManagers.BatteryInfoManager.getCurrentBatteryData() != null &&
                                     SysUiManagers.BatteryInfoManager.getCurrentBatteryData().isPowerSaving) {
                                 int vis = (int) param.args[0];
                                 int mode = (int) param.args[1];
