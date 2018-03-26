@@ -17,6 +17,7 @@ package com.ceco.oreo.gravitybox.visualizer;
 import com.ceco.oreo.gravitybox.BroadcastSubReceiver;
 import com.ceco.oreo.gravitybox.GravityBox;
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
+import com.ceco.oreo.gravitybox.ModLockscreen;
 import com.ceco.oreo.gravitybox.ModStatusBar;
 import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.ModStatusBar.StatusBarStateChangedListener;
@@ -30,6 +31,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
 import android.view.Gravity;
@@ -60,12 +62,18 @@ public class VisualizerController implements StatusBarStateChangedListener,
     private int mColor;
     private int mOpacityPercent;
     private boolean mActiveMode;
+    private boolean mDimEnabled;
+    private int mDimLevelPercent;
+    private boolean mDimInfoEnabled;
 
     public VisualizerController(ClassLoader cl, XSharedPreferences prefs) {
         mDynamicColorEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DYNAMIC_COLOR, true);
         mColor = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_COLOR, Color.WHITE);
         mOpacityPercent = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_OPACITY, 50);
         mActiveMode = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ACTIVE_MODE, false);
+        mDimEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM, true);
+        mDimLevelPercent = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_LEVEL, 80);
+        mDimInfoEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_INFO, true);
 
         createHooks(cl);
     }
@@ -98,16 +106,21 @@ public class VisualizerController implements StatusBarStateChangedListener,
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
+
+        try {
+            XposedHelpers.findAndHookMethod(ModLockscreen.CLASS_KGVIEW_MEDIATOR, cl,
+                    "userActivity", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    onUserActivity();
+                }
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
     }
 
     private void createView(ViewGroup parent) {
-        mView = new VisualizerView(parent.getContext());
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                Gravity.BOTTOM);
-        mView.setLayoutParams(lp);
-
         // find suitable position, put as last if failed
         int pos = parent.getChildCount();
         int resId = parent.getResources().getIdentifier("status_bar_container", "id",
@@ -119,11 +132,21 @@ public class VisualizerController implements StatusBarStateChangedListener,
             }
         }
         if (DEBUG) log("Computed view position: " + pos);
+
+        mView = new VisualizerView(parent.getContext(), pos);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                Gravity.BOTTOM);
+        mView.setLayoutParams(lp);
         parent.addView(mView, pos);
 
         mView.setOpacityPercent(mOpacityPercent);
         mView.setDefaultColor(mColor);
         mView.setActiveMode(mActiveMode);
+        mView.setDimEnabled(mDimEnabled);
+        mView.setDimLevelPercent(mDimLevelPercent);
+        mView.setDimInfoEnabled(mDimInfoEnabled);
 
         if (SysUiManagers.BatteryInfoManager != null) {
             SysUiManagers.BatteryInfoManager.registerListener(this);
@@ -143,25 +166,52 @@ public class VisualizerController implements StatusBarStateChangedListener,
                 mc.getPlaybackState().getState() == PlaybackState.STATE_PLAYING;
         mView.setPlaying(playing);
 
-        if (mDynamicColorEnabled) {
-            ImageView backDrop = (ImageView) XposedHelpers.getObjectField(sb, "mBackdropBack");
-            if (backDrop != null) {
-                Bitmap bitmap = null;
-                Drawable d = backDrop.getDrawable();
-                int hash = (d == null ? 0 : d.hashCode());
-                if (hash != mCurrentDrawableHash) {
-                    if (d instanceof BitmapDrawable) {
-                        bitmap = ((BitmapDrawable)d).getBitmap();
-                    } else if (d != null) {
-                        bitmap = Utils.drawableToBitmap(d);
+        if (playing) {
+            mView.setText(getTextFromMetaData(mc.getMetadata()));
+            if (mDynamicColorEnabled) {
+                ImageView backDrop = (ImageView) XposedHelpers.getObjectField(sb, "mBackdropBack");
+                if (backDrop != null) {
+                    Bitmap bitmap = null;
+                    Drawable d = backDrop.getDrawable();
+                    int hash = (d == null ? 0 : d.hashCode());
+                    if (hash != mCurrentDrawableHash) {
+                        if (d instanceof BitmapDrawable) {
+                            bitmap = ((BitmapDrawable)d).getBitmap();
+                        } else if (d != null) {
+                            bitmap = Utils.drawableToBitmap(d);
+                        }
+                        mCurrentDrawableHash = hash;
+                        mView.setBitmap(bitmap);
+                        if (DEBUG) log("updateMediaMetaData: artwork change detected");
                     }
-                    mCurrentDrawableHash = hash;
-                    mView.setBitmap(bitmap);
-                    if (DEBUG) log("updateMediaMetaData: artwork change detected");
                 }
+            } else {
+                mView.setBitmap(null);
             }
         } else {
+            mView.setText(null);
             mView.setBitmap(null);
+        }
+    }
+
+    private String getTextFromMetaData(MediaMetadata data) {
+        if (data == null)
+            return null;
+
+        String out = "";
+        if (data.containsKey(MediaMetadata.METADATA_KEY_ARTIST)) {
+            out += data.getString(MediaMetadata.METADATA_KEY_ARTIST);
+        }
+        if (data.containsKey(MediaMetadata.METADATA_KEY_TITLE)) {
+            if (!out.isEmpty()) out += " - ";
+            out += data.getString(MediaMetadata.METADATA_KEY_TITLE);
+        }
+        return out;
+    }
+
+    private void onUserActivity() {
+        if (mView != null) {
+            mView.onUserActivity();
         }
     }
 
@@ -206,6 +256,18 @@ public class VisualizerController implements StatusBarStateChangedListener,
             if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_ACTIVE_MODE)) {
                 mActiveMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_ACTIVE_MODE, false);
                 if (mView != null) mView.setActiveMode(mActiveMode);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM)) {
+                mDimEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM, true);
+                if (mView != null) mView.setDimEnabled(mDimEnabled);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_LEVEL)) {
+                mDimLevelPercent = intent.getIntExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_LEVEL, 80);
+                if (mView != null) mView.setDimLevelPercent(mDimLevelPercent);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_INFO)) {
+                mDimInfoEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_INFO, true);
+                if (mView != null) mView.setDimInfoEnabled(mDimInfoEnabled);
             }
         }
     }

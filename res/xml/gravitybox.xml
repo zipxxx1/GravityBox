@@ -2112,6 +2112,31 @@
                 android:defaultValue="false"
                 android:dependency="pref_visualizer_enable" />
 
+            <CheckBoxPreference 
+                android:key="pref_visualizer_dim"
+                android:title="@string/pref_visualizer_dim_title"
+                android:summary="@string/pref_visualizer_dim_summary"
+                android:defaultValue="true"
+                android:dependency="pref_visualizer_active_mode" />
+
+            <com.ceco.oreo.gravitybox.preference.SeekBarPreference
+                android:key="pref_visualizer_dim_level"
+                android:title="@string/pref_visualizer_dim_level_title"
+                minimum="50"
+                maximum="100"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="%" 
+                android:defaultValue="80"
+                android:dependency="pref_visualizer_dim" />
+
+            <CheckBoxPreference 
+                android:key="pref_visualizer_dim_info"
+                android:title="@string/pref_visualizer_dim_info_title"
+                android:summary="@string/pref_visualizer_dim_info_summary"
+                android:defaultValue="true"
+                android:dependency="pref_visualizer_dim" />
+
         </PreferenceScreen>
 
         <CheckBoxPreference 
