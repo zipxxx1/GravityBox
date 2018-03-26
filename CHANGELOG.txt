@@ -1,3 +1,17 @@
+Changelog 8.0.3 - 26/03/2018
+--------------------------------------
+- Media tweaks: added Visualizer feature (basic functionality ported from LineageOS)
+--- shows in lock screen during media playback
+--- supports static as well as dynamic color (extracted from artwork of current media)
+--- supports Active mode - keeps lock screen on while Visualizer is showing
+--- supports Lock screen dimming with adjustable dim level (based on user interaction)
+--- supports showing media info on dimmed screen
+--- deactivates automatically during power saving mode
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Updated French translations (thanks to Choukajohn)
+- Updated Turkish translations (thanks to Fatih Firinci)
+
 Changelog 8.0.2 - 17/03/2018
 --------------------------------------
 - Lockscreen shortcuts:
