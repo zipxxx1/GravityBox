@@ -185,10 +185,12 @@ public class VisualizerController implements StatusBarStateChangedListener,
                 }
             } else {
                 mView.setBitmap(null);
+                mCurrentDrawableHash = 0;
             }
         } else {
             mView.setText(null);
             mView.setBitmap(null);
+            mCurrentDrawableHash = 0;
         }
     }
 
