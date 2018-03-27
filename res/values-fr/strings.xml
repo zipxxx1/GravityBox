@@ -1123,13 +1123,13 @@ Si activée, des options additionnelles par application sont accessibles depuis 
     <string name="lc_active_screen_mode_disabled">Désactivé</string>
     <string name="lc_active_screen_mode_nothing">Seulement allumer l\'écran</string>
     <!-- UNC: main screen -->
-    <string name="pref_unc_default_settings_title">\@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_title">Paramètres par défaut</string>
     <string name="pref_unc_default_settings_summary">Gère les paramètres par défaut des notifications pour les applications qui n\'ont pas leurs propres paramètres par-appli activés</string>
     <string name="pref_unc_perapp_settings_title">Paramètres par-appli</string>
     <string name="pref_unc_perapp_settings_summary">Gère les paramètres des notifications application par application en remplaçant les paramètres par défaut</string>
-    <string name="pref_unc_active_screen_title">\@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_title">Écran Actif</string>
     <string name="pref_unc_active_screen_summary">Gère les paramètres communs pour l\'option Écran Actif</string>
-    <string name="pref_unc_quiet_hours_title">\@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_title">Heures silencieuses</string>
     <string name="pref_unc_quiet_hours_summary">Gère les Heures silencieuses pour les notifications</string>
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Action personnalisée</string>
@@ -1674,4 +1674,18 @@ Utiliser dans le cas où une autre application nécessite l\'utilisation du capt
     <string name="pref_qs_haptic_feedback_summary">Active le retour tactile sur simple pression sur les tuiles</string>
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">Active les réglages pour le style d\'icône et le pourcentage de la batterie (nécessite un redémarrage)</string>
+    <!-- Visualizer -->
+    <string name="pref_cat_visualizer_title">Visualiseur</string>
+    <string name="pref_visualizer_enable_summary">Active le visualiseur sur l\'écran de verrouillage pendant la lecture de la musique (nécessite un redémarrage)</string>
+    <string name="pref_visualizer_dynamic_color_title">Couleur dynamique</string>
+    <string name="pref_visualizer_dynamic_color_summary">Extrait la couleur depuis l\'illustration de la chanson en cours</string>
+    <string name="pref_visualizer_color_title">Couleur par défaut</string>
+    <string name="pref_visualizer_opacity_title">Opacité de la couleur</string>
+    <string name="pref_visualizer_active_mode_title">Mode actif</string>
+    <string name="pref_visualizer_active_mode_summary">Maintient l\'écran de verrouillage actif lorsque le visualiseur est affiché</string>
+    <string name="pref_visualizer_dim_title">Écran tamisé</string>
+    <string name="pref_visualizer_dim_summary">Assombrir le contenu de l\'écran de verrouillage après un délai d\'inactivité</string>
+    <string name="pref_visualizer_dim_level_title">Niveau de luminosité</string>
+    <string name="pref_visualizer_dim_info_title">Afficher les informations des médias</string>
+    <string name="pref_visualizer_dim_info_summary">Affiche les informations du média en cours sur l\'écran tamisé</string>
 </resources>
