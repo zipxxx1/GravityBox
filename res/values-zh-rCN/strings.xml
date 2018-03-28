@@ -2058,4 +2058,19 @@
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">启用电池图标样式和百分比调整(需要重新启动)</string>
 
+    <!-- Visualizer -->
+    <string name="pref_cat_visualizer_title">视觉效果</string>
+    <string name="pref_visualizer_enable_summary">当音乐播放时在锁屏中显示视觉效果(需要重新启动)</string>
+    <string name="pref_visualizer_dynamic_color_title">动态颜色</string>
+    <string name="pref_visualizer_dynamic_color_summary">从当前歌曲封面中提取颜色</string>
+    <string name="pref_visualizer_color_title">默认颜色</string>
+    <string name="pref_visualizer_opacity_title">颜色不透明</string>
+    <string name="pref_visualizer_active_mode_title">主动模式</string>
+    <string name="pref_visualizer_active_mode_summary">当视觉效果显示时保持锁屏处于活动状态</string>
+    <string name="pref_visualizer_dim_title">降低亮度</string>
+    <string name="pref_visualizer_dim_summary">在用户不操作超时后调整锁屏亮度</string>
+    <string name="pref_visualizer_dim_level_title">亮度等级</string>
+    <string name="pref_visualizer_dim_info_title">显示媒体信息</string>
+    <string name="pref_visualizer_dim_info_summary">在低亮度屏幕上显示当前媒体信息</string>
+
 </resources>
