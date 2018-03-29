@@ -2072,5 +2072,11 @@
     <string name="pref_visualizer_dim_level_title">Dim level</string>
     <string name="pref_visualizer_dim_info_title">Show media info</string>
     <string name="pref_visualizer_dim_info_summary">Shows current media info on dimmed screen</string>
+    <string name="pref_visualizer_dim_header_title">Show header</string>
+    <string name="pref_visualizer_dim_header_summary">Shows header containing current time and battery level on dimmed screen</string>
+    <string name="pref_visualizer_dim_controls_title">Show media controls</string>
+    <string name="pref_visualizer_dim_controls_summary">Shows media playback controls on dimmed screen</string>
+    <string name="pref_visualizer_dim_artwork_title">Show artwork</string>
+    <string name="pref_visualizer_dim_artwork_summary">Shows artwork covering lock screen contents on dimmed screen</string>
 
 </resources>

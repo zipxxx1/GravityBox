@@ -2131,9 +2131,30 @@
                 android:dependency="pref_visualizer_dim" />
 
             <CheckBoxPreference 
+                android:key="pref_visualizer_dim_header"
+                android:title="@string/pref_visualizer_dim_header_title"
+                android:summary="@string/pref_visualizer_dim_header_summary"
+                android:defaultValue="true"
+                android:dependency="pref_visualizer_dim" />
+
+            <CheckBoxPreference 
                 android:key="pref_visualizer_dim_info"
                 android:title="@string/pref_visualizer_dim_info_title"
                 android:summary="@string/pref_visualizer_dim_info_summary"
+                android:defaultValue="true"
+                android:dependency="pref_visualizer_dim" />
+
+            <CheckBoxPreference 
+                android:key="pref_visualizer_dim_controls"
+                android:title="@string/pref_visualizer_dim_controls_title"
+                android:summary="@string/pref_visualizer_dim_controls_summary"
+                android:defaultValue="true"
+                android:dependency="pref_visualizer_dim" />
+
+            <CheckBoxPreference 
+                android:key="pref_visualizer_dim_artwork"
+                android:title="@string/pref_visualizer_dim_artwork_title"
+                android:summary="@string/pref_visualizer_dim_artwork_summary"
                 android:defaultValue="true"
                 android:dependency="pref_visualizer_dim" />
 

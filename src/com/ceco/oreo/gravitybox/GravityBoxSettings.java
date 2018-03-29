@@ -887,6 +887,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_VISUALIZER_DIM = "pref_visualizer_dim";
     public static final String PREF_KEY_VISUALIZER_DIM_LEVEL = "pref_visualizer_dim_level";
     public static final String PREF_KEY_VISUALIZER_DIM_INFO = "pref_visualizer_dim_info";
+    public static final String PREF_KEY_VISUALIZER_DIM_HEADER = "pref_visualizer_dim_header";
+    public static final String PREF_KEY_VISUALIZER_DIM_CONTROLS = "pref_visualizer_dim_controls";
+    public static final String PREF_KEY_VISUALIZER_DIM_ARTWORK = "pref_visualizer_dim_artwork";
     public static final String ACTION_VISUALIZER_SETTINGS_CHANGED = "gravitybox.intent.action.VISUALIZER_SETTINGS_CHANGED";
     public static final String EXTRA_VISUALIZER_DYNAMIC_COLOR = "visualizerDynamicColor";
     public static final String EXTRA_VISUALIZER_COLOR = "visualizerColor";
@@ -895,6 +898,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_VISUALIZER_DIM = "visualizerDim";
     public static final String EXTRA_VISUALIZER_DIM_LEVEL = "visualizerDimLevel";
     public static final String EXTRA_VISUALIZER_DIM_INFO = "visualizerDimInfo";
+    public static final String EXTRA_VISUALIZER_DIM_HEADER = "visualizerDimHeader";
+    public static final String EXTRA_VISUALIZER_DIM_CONTROLS = "visualizerDimControls";
+    public static final String EXTRA_VISUALIZER_DIM_ARTWORK = "visualizerDimArtwork";
 
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
@@ -3457,6 +3463,15 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_VISUALIZER_DIM_INFO)) {
                 intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
                 intent.putExtra(EXTRA_VISUALIZER_DIM_INFO, prefs.getBoolean(key, true));
+            } else if (key.equals(PREF_KEY_VISUALIZER_DIM_HEADER)) {
+                intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_VISUALIZER_DIM_HEADER, prefs.getBoolean(key, true));
+            } else if (key.equals(PREF_KEY_VISUALIZER_DIM_CONTROLS)) {
+                intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_VISUALIZER_DIM_CONTROLS, prefs.getBoolean(key, true));
+            } else if (key.equals(PREF_KEY_VISUALIZER_DIM_ARTWORK)) {
+                intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_VISUALIZER_DIM_ARTWORK, prefs.getBoolean(key, true));
             }
 
             if (intent.getAction() != null) {
