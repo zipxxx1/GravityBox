@@ -2107,5 +2107,11 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_visualizer_dim_level_title">Karartma seviyesi</string>
     <string name="pref_visualizer_dim_info_title">Medya bilgisini göster</string>
     <string name="pref_visualizer_dim_info_summary">Geçerli medya bilgisini karartılmış ekranda gösterir</string>
+    <string name="pref_visualizer_dim_header_title">Başlığı göster</string>
+    <string name="pref_visualizer_dim_header_summary">Karartılmış ekranda geçerli zaman ve pil seviyesini içeren başlığı gösterir</string>
+    <string name="pref_visualizer_dim_controls_title">Medya kontrollerini göster</string>
+    <string name="pref_visualizer_dim_controls_summary">Karartılmış ekranda medya oynatma kontrollerini gösterir</string>
+    <string name="pref_visualizer_dim_artwork_title">Albüm resmini göster</string>
+    <string name="pref_visualizer_dim_artwork_summary">Karartılmış ekranda kilit ekranı içeriğini kapsayan albüm resmini gösterir</string>
 
 </resources>

@@ -2150,5 +2150,11 @@
     <string name="pref_visualizer_dim_level_title">Уровень затемнения</string>
     <string name="pref_visualizer_dim_info_title">Показать информацию медиа</string>
     <string name="pref_visualizer_dim_info_summary">Отображение текущей информации медиафайла на затемнённом экране</string>
+    <string name="pref_visualizer_dim_header_title">Показать заголовок</string>
+    <string name="pref_visualizer_dim_header_summary">Отображение поля с текущим временем и уровнем батареи на затемнённом экране</string>
+    <string name="pref_visualizer_dim_controls_title">Показать управление медиа</string>
+    <string name="pref_visualizer_dim_controls_summary">Показать кнопки управления медиа на затемнённом экране</string>
+    <string name="pref_visualizer_dim_artwork_title">Показать обложку</string>
+    <string name="pref_visualizer_dim_artwork_summary">Показать обложку поверх экрана блокировки на затемнённом экране</string>
 
 </resources>

@@ -2062,5 +2062,11 @@
     <string name="pref_visualizer_dim_level_title">Úroveň ztlumení</string>
     <string name="pref_visualizer_dim_info_title">Zobrazit informace média</string>
     <string name="pref_visualizer_dim_info_summary">Zobrazí informace o přehrávaném médii na ztlumené obrazovce</string>
+    <string name="pref_visualizer_dim_header_title">Zobrazit hlavičku</string>
+    <string name="pref_visualizer_dim_header_summary">Zobrazí hlavičku obsahující aktuální čas a stav baterie na ztlumené obrazovce</string>
+    <string name="pref_visualizer_dim_controls_title">Zobrazit ovládací tlačítka</string>
+    <string name="pref_visualizer_dim_controls_summary">Zobrazí tlačítka ovládání přehrávání na ztlumené obrazovce</string>
+    <string name="pref_visualizer_dim_artwork_title">Zobrazit grafiku</string>
+    <string name="pref_visualizer_dim_artwork_summary">Zobrazí grafiku aktuální skladby překrývající obsah obrazovky uzamčení</string>
 
 </resources>
