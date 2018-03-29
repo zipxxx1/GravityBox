@@ -2024,7 +2024,13 @@
     <string name="pref_visualizer_dim_title">Stlmiť obrazovku</string>
     <string name="pref_visualizer_dim_summary">Stlmí obrazovku uzamknutia po dobe inaktivity</string>
     <string name="pref_visualizer_dim_level_title">Úroveň stlmenia</string>
-    <string name="pref_visualizer_dim_info_title">Zobraziť informácie média</string>
-    <string name="pref_visualizer_dim_info_summary">Zobrazí informácie o práve prehrávanom médii na stlmenej obrazovke</string>
+    <string name="pref_visualizer_dim_info_title">Zobraziť informácie skladby</string>
+    <string name="pref_visualizer_dim_info_summary">Zobrazí informácie o práve prehrávanej skladbe na stlmenej obrazovke</string>
+    <string name="pref_visualizer_dim_header_title">Zobraziť hlavičku</string>
+    <string name="pref_visualizer_dim_header_summary">Zobrazí hlavičku obsahujúcu aktuálny čas a stav batérie na stlmenej obrazovke</string>
+    <string name="pref_visualizer_dim_controls_title">Zobraziť ovládacie tlačidlá</string>
+    <string name="pref_visualizer_dim_controls_summary">Zobrazí tlačidlá ovládania prehrávania na stlmenej obrazovke</string>
+    <string name="pref_visualizer_dim_artwork_title">Zobraziť grafiku</string>
+    <string name="pref_visualizer_dim_artwork_summary">Zobrazí grafiku aktuálnej skladby prekrývajúc obsah obrazovky uzamknutia</string>
 
 </resources>

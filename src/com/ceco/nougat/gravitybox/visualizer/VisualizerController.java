@@ -34,7 +34,6 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -56,7 +55,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private VisualizerView mView;
+    private VisualizerLayout mView;
     private int mCurrentDrawableHash = -1;
     private boolean mDynamicColorEnabled;
     private int mColor;
@@ -65,6 +64,9 @@ public class VisualizerController implements StatusBarStateChangedListener,
     private boolean mDimEnabled;
     private int mDimLevelPercent;
     private boolean mDimInfoEnabled;
+    private boolean mDimHeaderEnabled;
+    private boolean mDimControlsEnabled;
+    private boolean mDimArtworkEnabled;
 
     public VisualizerController(ClassLoader cl, XSharedPreferences prefs) {
         mDynamicColorEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DYNAMIC_COLOR, true);
@@ -74,6 +76,9 @@ public class VisualizerController implements StatusBarStateChangedListener,
         mDimEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM, true);
         mDimLevelPercent = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_LEVEL, 80);
         mDimInfoEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_INFO, true);
+        mDimHeaderEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_HEADER, true);
+        mDimControlsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_CONTROLS, true);
+        mDimArtworkEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_ARTWORK, true);
 
         createHooks(cl);
     }
@@ -120,7 +125,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
         }
     }
 
-    private void createView(ViewGroup parent) {
+    private void createView(ViewGroup parent) throws Throwable {
         // find suitable position, put as last if failed
         int pos = parent.getChildCount();
         int resId = parent.getResources().getIdentifier("status_bar_container", "id",
@@ -133,11 +138,10 @@ public class VisualizerController implements StatusBarStateChangedListener,
         }
         if (DEBUG) log("Computed view position: " + pos);
 
-        mView = new VisualizerView(parent.getContext(), pos);
+        mView = new VisualizerLayout(parent.getContext(), pos);
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                Gravity.BOTTOM);
+                FrameLayout.LayoutParams.MATCH_PARENT);
         mView.setLayoutParams(lp);
         parent.addView(mView, pos);
 
@@ -147,16 +151,11 @@ public class VisualizerController implements StatusBarStateChangedListener,
         mView.setDimEnabled(mDimEnabled);
         mView.setDimLevelPercent(mDimLevelPercent);
         mView.setDimInfoEnabled(mDimInfoEnabled);
+        mView.setDimHeaderEnabled(mDimHeaderEnabled);
+        mView.setDimControlsEnabled(mDimControlsEnabled);
+        mView.setDimArtworkEnabled(mDimArtworkEnabled);
 
-        if (SysUiManagers.BatteryInfoManager != null) {
-            SysUiManagers.BatteryInfoManager.registerListener(this);
-            if (SysUiManagers.BatteryInfoManager.getCurrentBatteryData() != null) {
-                mView.setPowerSaveMode(SysUiManagers.BatteryInfoManager
-                        .getCurrentBatteryData().isPowerSaving);
-            }
-        }
-
-        if (DEBUG) log("VisualizerView created");
+        if (DEBUG) log("VisualizerLayout created");
     }
 
     private void updateMediaMetaData(Object sb, boolean metaDataChanged) {
@@ -167,48 +166,37 @@ public class VisualizerController implements StatusBarStateChangedListener,
         mView.setPlaying(playing);
 
         if (playing) {
-            mView.setText(getTextFromMetaData(mc.getMetadata()));
-            if (mDynamicColorEnabled) {
-                ImageView backDrop = (ImageView) XposedHelpers.getObjectField(sb, "mBackdropBack");
-                if (backDrop != null) {
-                    Bitmap bitmap = null;
-                    Drawable d = backDrop.getDrawable();
-                    int hash = (d == null ? 0 : d.hashCode());
-                    if (hash != mCurrentDrawableHash) {
-                        if (d instanceof BitmapDrawable) {
-                            bitmap = ((BitmapDrawable)d).getBitmap();
-                        } else if (d != null) {
-                            bitmap = Utils.drawableToBitmap(d);
-                        }
-                        mCurrentDrawableHash = hash;
-                        mView.setBitmap(bitmap);
-                        if (DEBUG) log("updateMediaMetaData: artwork change detected");
+            MediaMetadata md = mc.getMetadata();
+            mView.setArtist(md != null ? md.getString(MediaMetadata.METADATA_KEY_ARTIST) : null);
+            mView.setTitle(md != null ? md.getString(MediaMetadata.METADATA_KEY_TITLE) : null);
+            ImageView backDrop = (ImageView) XposedHelpers.getObjectField(sb, "mBackdropBack");
+            if (backDrop != null) {
+                Bitmap bitmap = null;
+                Drawable d = backDrop.getDrawable();
+                int hash = (d == null ? 0 : d.hashCode());
+                if (hash != mCurrentDrawableHash) {
+                    if (d instanceof BitmapDrawable) {
+                        bitmap = ((BitmapDrawable)d).getBitmap();
+                    } else if (d != null) {
+                        bitmap = Utils.drawableToBitmap(d);
                     }
+                    mCurrentDrawableHash = hash;
+                    mView.setBitmap(bitmap, mDynamicColorEnabled);
+                    if (DEBUG) log("updateMediaMetaData: artwork change detected; bitmap=" + bitmap);
                 }
-            } else {
-                mView.setBitmap(null);
-                mCurrentDrawableHash = 0;
+            }
+            if (SysUiManagers.BatteryInfoManager != null) {
+                SysUiManagers.BatteryInfoManager.registerListener(this);
             }
         } else {
-            mView.setText(null);
-            mView.setBitmap(null);
+            mView.setArtist(null);
+            mView.setTitle(null);
+            mView.setBitmap(null, false);
             mCurrentDrawableHash = 0;
+            if (SysUiManagers.BatteryInfoManager != null) {
+                SysUiManagers.BatteryInfoManager.unregisterListener(this);
+            }
         }
-    }
-
-    private String getTextFromMetaData(MediaMetadata data) {
-        if (data == null)
-            return null;
-
-        String out = "";
-        if (data.containsKey(MediaMetadata.METADATA_KEY_ARTIST)) {
-            out += data.getString(MediaMetadata.METADATA_KEY_ARTIST);
-        }
-        if (data.containsKey(MediaMetadata.METADATA_KEY_TITLE)) {
-            if (!out.isEmpty()) out += " - ";
-            out += data.getString(MediaMetadata.METADATA_KEY_TITLE);
-        }
-        return out;
     }
 
     private void onUserActivity() {
@@ -228,6 +216,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
     public void onBatteryStatusChanged(BatteryData batteryData) {
         if (mView != null) {
             mView.setPowerSaveMode(batteryData.isPowerSaving);
+            mView.setBatteryLevel(batteryData.level);
         }
     }
 
@@ -270,6 +259,18 @@ public class VisualizerController implements StatusBarStateChangedListener,
             if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_INFO)) {
                 mDimInfoEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_INFO, true);
                 if (mView != null) mView.setDimInfoEnabled(mDimInfoEnabled);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_HEADER)) {
+                mDimHeaderEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_HEADER, true);
+                if (mView != null) mView.setDimHeaderEnabled(mDimHeaderEnabled);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_CONTROLS)) {
+                mDimControlsEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_CONTROLS, true);
+                if (mView != null) mView.setDimControlsEnabled(mDimControlsEnabled);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_ARTWORK)) {
+                mDimArtworkEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_ARTWORK, true);
+                if (mView != null) mView.setDimArtworkEnabled(mDimArtworkEnabled);
             }
         }
     }
