@@ -2036,5 +2036,11 @@
     <string name="pref_visualizer_dim_level_title">Sötétítési szint</string>
     <string name="pref_visualizer_dim_info_title">Médiaadatok mutatása</string>
     <string name="pref_visualizer_dim_info_summary">Megjeleníti az aktuális médiaadatokat a sötétített képernyőn</string>
+    <string name="pref_visualizer_dim_header_title">Fejléc mutatása</string>
+    <string name="pref_visualizer_dim_header_summary">Megjeleníti a fejlécet a sötétített képernyőn az aktuális idő és akkumulátor szint információkkal</string>
+    <string name="pref_visualizer_dim_controls_title">Médiavezérlők mutatása</string>
+    <string name="pref_visualizer_dim_controls_summary">Megjeleníti a média lejátszási vezérlőket a sötétített képernyőn</string>
+    <string name="pref_visualizer_dim_artwork_title">Grafika mutatása</string>
+    <string name="pref_visualizer_dim_artwork_summary">Megjeleníti a grafikákat a sötétített képernyőn a zárképernyőt lefedve</string>
 
 </resources>

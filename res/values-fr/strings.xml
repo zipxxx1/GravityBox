@@ -1919,5 +1919,11 @@
     <string name="pref_visualizer_dim_level_title">Niveau d\'opacité</string>
     <string name="pref_visualizer_dim_info_title">Afficher les informations des médias</string>
     <string name="pref_visualizer_dim_info_summary">Affiche les informations du média en cours sur l\'écran tamisé</string>
+    <string name="pref_visualizer_dim_header_title">Afficher l\'en-tête</string>
+    <string name="pref_visualizer_dim_header_summary">Affiche l\'en-tête contenant l\'heure actuelle et le niveau de batterie sur l\'écran tamisé</string>
+    <string name="pref_visualizer_dim_controls_title">Afficher les contrôles multimédia</string>
+    <string name="pref_visualizer_dim_controls_summary">Affiche les contrôles de lecture multimédia sur l\'écran tamisé</string>
+    <string name="pref_visualizer_dim_artwork_title">Afficher la pochette</string>
+    <string name="pref_visualizer_dim_artwork_summary">Affiche la pochette de l\'album au-dessus de l\'écran de verrouillage sur l\'écran tamisé</string>
 
 </resources>
