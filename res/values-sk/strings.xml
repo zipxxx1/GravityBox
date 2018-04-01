@@ -2033,4 +2033,7 @@
     <string name="pref_visualizer_dim_artwork_title">Zobraziť grafiku</string>
     <string name="pref_visualizer_dim_artwork_summary">Zobrazí grafiku aktuálnej skladby prekrývajúc obsah obrazovky uzamknutia</string>
 
+    <!-- Reboot -->
+    <string name="reboot">Reštart</string>
+
 </resources>

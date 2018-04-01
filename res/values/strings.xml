@@ -2096,4 +2096,7 @@
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Heads up</string>
 
+    <!-- Reboot -->
+    <string name="reboot">Reboot</string>
+
 </resources>

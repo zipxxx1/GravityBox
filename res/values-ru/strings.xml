@@ -2092,4 +2092,7 @@
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Всплытие (heads up)</string>
 
+    <!-- Reboot -->
+    <string name="reboot">Перезагрузка</string>
+
 </resources>

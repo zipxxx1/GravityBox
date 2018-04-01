@@ -2096,4 +2096,7 @@
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">浮动</string>
 
+    <!-- Reboot -->
+    <string name="reboot">重启</string>
+
 </resources>
