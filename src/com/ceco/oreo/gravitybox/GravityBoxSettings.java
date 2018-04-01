@@ -1722,13 +1722,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 }
             }
 
-            // Remove preferences not compatible with Lenovo VibeUI ROMs
-            if (Utils.hasLenovoVibeUI()) {
-                getPreferenceScreen().removePreference(mPrefCatLockscreen);
-                mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
-                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifExpandAll);
-            }
-
             // Remove Non-Moto XT preferences
             if (!Utils.isMotoXtDevice()) {
                 Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE);
@@ -1755,13 +1748,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefs.edit().putBoolean(PREF_KEY_MUSIC_VOLUME_STEPS, false).commit();
                 mPrefCatMedia.removePreference(mPrefMusicVolumeSteps);
                 mPrefCatMedia.removePreference(mPrefMusicVolumeStepsValue);
-            }
-
-            // Remove Lenovo preferences
-            if (Utils.hasLenovoCustomUI()) {
-                PreferenceScreen ps = (PreferenceScreen) findPreference(PREF_CAT_KEY_BATTERY_SETTINGS);
-                PreferenceScreen ps2 = (PreferenceScreen) findPreference(PREF_CAT_KEY_BATTERY_PERCENT_TEXT);
-                ps.removePreference(ps2);
             }
 
             // Remove OxygenOS preferences

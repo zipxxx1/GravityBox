@@ -635,10 +635,7 @@ public class ModStatusBar {
                     XposedHelpers.findClass(CLASS_STATUSBAR, classLoader);
             final Class<?> phoneStatusBarPolicyClass = 
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_POLICY, classLoader);
-            Class<?> expandableNotifRowClass = null;
-            if (!Utils.hasLenovoVibeUI()) {
-                expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
-            }
+            final Class<?> expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
             final Class<?> statusBarWmClass = XposedHelpers.findClass(CLASS_STATUSBAR_WM, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
 
@@ -870,19 +867,17 @@ public class ModStatusBar {
             }
 
             // Expanded notifications
-            if (!Utils.hasLenovoVibeUI()) {
-                try {
-                    XposedHelpers.findAndHookMethod(expandableNotifRowClass, "isUserExpanded", new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            if (mNotifExpandAll) {
-                                param.setResult(true);
-                            }
+            try {
+                XposedHelpers.findAndHookMethod(expandableNotifRowClass, "isUserExpanded", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mNotifExpandAll) {
+                            param.setResult(true);
                         }
-                    });
-                } catch (Throwable t) {
-                    GravityBox.log(TAG, "Error setting up always expanded notifications", t);
-                }
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error setting up always expanded notifications", t);
             }
 
             // Hide alarm icon
