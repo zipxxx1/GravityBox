@@ -1,3 +1,19 @@
+Changelog 8.1.0 - 01/04/2018
+--------------------------------------
+- QuickSettings management:
+--- added Ambient Display tile (Controls whether received notifications activate ambient screen)
+--- added Heads Up tile (Controls whether to show heads up for notifications globally)
+- Media tweaks: Visualizer extensions:
+--- added option for header showing current time and battery level on dimmed screen
+--- added option for media controls on dimmed screen
+--- added option to show artwork as background of dimmed screen covering lock screen contents
+--- improved layout and transition animations
+- Power: fixed dynamic theming of Advanced Power Menu
+- Dialer: adjusted for compatibility with the latest Google Dialer app
+- Updated French translations (thanks to Choukajohn)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Turkish translations (thanks to Fatih Firinci)
+
 Changelog 8.0.3 - 26/03/2018
 --------------------------------------
 - Media tweaks: added Visualizer feature (basic functionality ported from LineageOS)
