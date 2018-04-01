@@ -81,6 +81,7 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         put("gb_tile_quiet_hours", QuietHoursTile.Service.class);
         put("gb_tile_compass", CompassTile.Service.class);
         put("gb_tile_bt_tethering", BluetoothTetheringTile.Service.class);
+        put("gb_tile_ambient_display", AmbientDisplayTile.Service.class);
     }};
 
     private ListView mTileListView;
