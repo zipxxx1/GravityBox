@@ -142,6 +142,7 @@
         <item>@string/lc_quiet_hours</item>
         <item>@string/qs_tile_compass</item>
         <item>@string/qs_tile_bt_tethering</item>
+        <item>@string/qs_tile_ambient_display</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
@@ -178,6 +179,7 @@
         <item>gb_tile_quiet_hours</item>
         <item>gb_tile_compass</item>
         <item>gb_tile_bt_tethering</item>
+        <item>gb_tile_ambient_display</item>
     </string-array>
 
     <string-array name="lockscreen_bg_entries" translatable="false">
