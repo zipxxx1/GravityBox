@@ -99,7 +99,7 @@ public class ModDialer26 {
 
                     final String realClassName = param.thisObject.getClass().getName();
                     Method m = null;
-                    for (String mn : new String[] { "showDialpadFragment", "e" }) {
+                    for (String mn : new String[] { "showDialpadFragment", "f" }) {
                         if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY)) {
                             m = XposedHelpers.findMethodExactIfExists(
                                     param.thisObject.getClass(), mn, boolean.class);
