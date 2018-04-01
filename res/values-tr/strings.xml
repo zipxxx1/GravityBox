@@ -2021,5 +2021,22 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_visualizer_opacity_title">Renk opaklığı</string>
     <string name="pref_visualizer_active_mode_title">Etkin mod</string>
     <string name="pref_visualizer_active_mode_summary">Görselleştirici gösterilirken kilit ekranı etkin kalır</string>
+    <string name="pref_visualizer_dim_title">Ekranı karart</string>
+    <string name="pref_visualizer_dim_summary">Kullanıcı hareketsizlik zaman aşımı sonrasında kilit ekranı içeriğini karartır</string>
+    <string name="pref_visualizer_dim_level_title">Karartma seviyesi</string>
+    <string name="pref_visualizer_dim_info_title">Medya bilgisini göster</string>
+    <string name="pref_visualizer_dim_info_summary">Geçerli medya bilgisini karartılmış ekranda gösterir</string>
+    <string name="pref_visualizer_dim_header_title">Başlığı göster</string>
+    <string name="pref_visualizer_dim_header_summary">Karartılmış ekranda geçerli zaman ve pil seviyesini içeren başlığı gösterir</string>
+    <string name="pref_visualizer_dim_controls_title">Medya kontrollerini göster</string>
+    <string name="pref_visualizer_dim_controls_summary">Karartılmış ekranda medya oynatma kontrollerini gösterir</string>
+    <string name="pref_visualizer_dim_artwork_title">Albüm resmini göster</string>
+    <string name="pref_visualizer_dim_artwork_summary">Karartılmış ekranda kilit ekranı içeriğini kapsayan albüm resmini gösterir</string>
+
+    <!-- QS: Ambient Display tile -->
+    <string name="qs_tile_ambient_display">Ortam ekranı</string>
+
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Üst bildirim</string>
 
 </resources>
