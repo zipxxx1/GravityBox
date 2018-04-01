@@ -1802,4 +1802,7 @@
     <!-- QS: Ambient Display tile -->
     <string name="qs_tile_ambient_display">Affichage en mode veille</string>
 
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Notifications flottantes</string>
+
 </resources>

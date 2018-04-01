@@ -470,6 +470,17 @@
             </intent-filter>
         </service>
 
+        <service
+                android:name=".quicksettings.HeadsUpTile$Service"
+                android:label="@string/qs_tile_heads_up"
+                android:icon="@drawable/ic_qs_heads_up_on"
+                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+                android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
         <!-- metadata -->
         <meta-data
             android:name="xposedmodule"

@@ -2048,4 +2048,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <!-- QS: Ambient Display tile -->
     <string name="qs_tile_ambient_display">Ortam ekranı</string>
 
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Üst bildirim</string>
+
 </resources>
