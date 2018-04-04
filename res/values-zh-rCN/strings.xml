@@ -2072,5 +2072,20 @@
     <string name="pref_visualizer_dim_level_title">亮度等级</string>
     <string name="pref_visualizer_dim_info_title">显示媒体信息</string>
     <string name="pref_visualizer_dim_info_summary">在低亮度屏幕上显示当前媒体信息</string>
+    <string name="pref_visualizer_dim_header_title">显示标题</string>
+    <string name="pref_visualizer_dim_header_summary">在低亮度屏幕上显示当前时间和电量等级</string>
+    <string name="pref_visualizer_dim_controls_title">显示媒体控件</string>
+    <string name="pref_visualizer_dim_controls_summary">在低亮度屏幕上显示媒体控件</string>
+    <string name="pref_visualizer_dim_artwork_title">显示专辑封面</string>
+    <string name="pref_visualizer_dim_artwork_summary">在低亮度锁屏上显示专辑封面</string>
+
+    <!-- QS: Ambient Display tile -->
+    <string name="qs_tile_ambient_display">Ambient display</string>
+
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">浮动</string>
+
+    <!-- Reboot -->
+    <string name="reboot">重启</string>
 
 </resources>
