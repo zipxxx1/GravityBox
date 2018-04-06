@@ -161,11 +161,13 @@ public class VisualizerController implements StatusBarStateChangedListener,
     private void updateMediaMetaData(Object sb, boolean metaDataChanged) {
         MediaController mc = (MediaController) XposedHelpers
                 .getObjectField(sb, "mMediaController");
+        boolean keyguardShowingMedia = (boolean) XposedHelpers
+                .getBooleanField(sb, "mKeyguardShowingMedia");
         boolean playing = mc != null && mc.getPlaybackState() != null &&
                 mc.getPlaybackState().getState() == PlaybackState.STATE_PLAYING;
         mView.setPlaying(playing);
 
-        if (playing) {
+        if (keyguardShowingMedia) {
             MediaMetadata md = mc.getMetadata();
             mView.setArtist(md != null ? md.getString(MediaMetadata.METADATA_KEY_ARTIST) : null);
             mView.setTitle(md != null ? md.getString(MediaMetadata.METADATA_KEY_TITLE) : null);
@@ -185,14 +187,18 @@ public class VisualizerController implements StatusBarStateChangedListener,
                     if (DEBUG) log("updateMediaMetaData: artwork change detected; bitmap=" + bitmap);
                 }
             }
-            if (SysUiManagers.BatteryInfoManager != null) {
-                SysUiManagers.BatteryInfoManager.registerListener(this);
-            }
         } else {
             mView.setArtist(null);
             mView.setTitle(null);
             mView.setBitmap(null, false);
             mCurrentDrawableHash = 0;
+        }
+
+        if (playing) {
+            if (SysUiManagers.BatteryInfoManager != null) {
+                SysUiManagers.BatteryInfoManager.registerListener(this);
+            }
+        } else {
             if (SysUiManagers.BatteryInfoManager != null) {
                 SysUiManagers.BatteryInfoManager.unregisterListener(this);
             }

@@ -413,7 +413,7 @@ public class VisualizerLayout extends FrameLayout
                         postDelayed(mEnterDimStateRunnable, DIM_STATE_DELAY);
                     }
                 }
-                mVisualizerView.setPlaying(true);
+                mVisualizerView.setPlaying(true, mVisible);
             }
         } else {
             if (mDisplaying) {
@@ -423,7 +423,7 @@ public class VisualizerLayout extends FrameLayout
                 if (mIsDimmed) {
                     post(mExitDimStateRunnable);
                 }
-                mVisualizerView.setPlaying(false);
+                mVisualizerView.setPlaying(false, mVisible);
             }
         }
     }
