@@ -174,7 +174,7 @@ public class VisualizerView extends View {
         mPaint.setColor(color);
     }
 
-    void setPlaying(boolean playing) {
+    void setPlaying(boolean playing, boolean visible) {
         if (playing) {
             AsyncTask.execute(mLinkVisualizer);
             animate()
@@ -182,10 +182,17 @@ public class VisualizerView extends View {
                 .withEndAction(null)
                 .setDuration(800);
         } else {
-            animate()
-                .alpha(0f)
-                .withEndAction(mAsyncUnlinkVisualizer)
-                .setDuration(600);
+            if (visible) {
+                animate()
+                    .alpha(0f)
+                    .withEndAction(mAsyncUnlinkVisualizer)
+                    .setDuration(600);
+            } else {
+                animate()
+                    .alpha(0f)
+                    .withEndAction(mAsyncUnlinkVisualizer)
+                    .setDuration(0);
+            }
         }
     }
 }
