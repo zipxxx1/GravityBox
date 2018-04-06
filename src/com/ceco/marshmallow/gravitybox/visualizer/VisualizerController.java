@@ -182,15 +182,14 @@ public class VisualizerController implements StatusBarStateChangedListener,
                     mView.setBitmap(bitmap, mDynamicColorEnabled);
                     if (DEBUG) log("updateMediaMetaData: artwork change detected; bitmap=" + bitmap);
                 }
+            } else {
+                mView.setBitmap(null, false);
+                mCurrentDrawableHash = 0;
             }
             if (SysUiManagers.BatteryInfoManager != null) {
                 SysUiManagers.BatteryInfoManager.registerListener(this);
             }
         } else {
-            mView.setArtist(null);
-            mView.setTitle(null);
-            mView.setBitmap(null, false);
-            mCurrentDrawableHash = 0;
             if (SysUiManagers.BatteryInfoManager != null) {
                 SysUiManagers.BatteryInfoManager.unregisterListener(this);
             }
