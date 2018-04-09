@@ -1685,7 +1685,19 @@ Utiliser dans le cas où une autre application nécessite l\'utilisation du capt
     <string name="pref_visualizer_active_mode_summary">Maintient l\'écran de verrouillage actif lorsque le visualiseur est affiché</string>
     <string name="pref_visualizer_dim_title">Écran tamisé</string>
     <string name="pref_visualizer_dim_summary">Assombrir le contenu de l\'écran de verrouillage après un délai d\'inactivité</string>
-    <string name="pref_visualizer_dim_level_title">Niveau de luminosité</string>
+    <string name="pref_visualizer_dim_level_title">Niveau d\'opacité</string>
     <string name="pref_visualizer_dim_info_title">Afficher les informations des médias</string>
     <string name="pref_visualizer_dim_info_summary">Affiche les informations du média en cours sur l\'écran tamisé</string>
+    <string name="pref_visualizer_dim_header_title">Afficher l\'en-tête</string>
+    <string name="pref_visualizer_dim_header_summary">Affiche l\'en-tête contenant l\'heure actuelle et le niveau de batterie sur l\'écran tamisé</string>
+    <string name="pref_visualizer_dim_controls_title">Afficher les contrôles multimédia</string>
+    <string name="pref_visualizer_dim_controls_summary">Affiche les contrôles de lecture multimédia sur l\'écran tamisé</string>
+    <string name="pref_visualizer_dim_artwork_title">Afficher la pochette</string>
+    <string name="pref_visualizer_dim_artwork_summary">Affiche la pochette de l\'album au-dessus de l\'écran de verrouillage sur l\'écran tamisé</string>
+    <!-- QS: Ambient Display tile -->
+    <string name="qs_tile_ambient_display">Affichage en mode veille</string>
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Notifications flottantes</string>
+    <!-- Reboot -->
+    <string name="reboot">Redémarrer</string>
 </resources>
