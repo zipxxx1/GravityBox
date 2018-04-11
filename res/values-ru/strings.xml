@@ -2055,4 +2055,34 @@
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">Включение настройки стиля значка батареии процентов (необходима перезагрузка)</string>
 
+    <!-- Visualizer -->
+    <string name="pref_cat_visualizer_title">Визуалайзер</string>
+    <string name="pref_visualizer_enable_summary">Включение визуалайзера на экране блокировки при воспроизведении музыки (необходима перезагрузка)</string>
+    <string name="pref_visualizer_dynamic_color_title">Динамический цвет</string>
+    <string name="pref_visualizer_dynamic_color_summary">Извлечение цвета из обложки текущей песни</string>
+    <string name="pref_visualizer_color_title">Цвет по умолчанию</string>
+    <string name="pref_visualizer_opacity_title">Непрозрачность цвета</string>
+    <string name="pref_visualizer_active_mode_title">Активный режим</string>
+    <string name="pref_visualizer_active_mode_summary">При отображении визуалайзера экран блокировки остаётся активным</string>
+    <string name="pref_visualizer_dim_title">Затемнение экрана</string>
+    <string name="pref_visualizer_dim_summary">Затемнение содержимого экрана блокировки после периода неактивности</string>
+    <string name="pref_visualizer_dim_level_title">Уровень затемнения</string>
+    <string name="pref_visualizer_dim_info_title">Показать информацию медиа</string>
+    <string name="pref_visualizer_dim_info_summary">Отображение текущей информации медиафайла на затемнённом экране</string>
+    <string name="pref_visualizer_dim_header_title">Показать заголовок</string>
+    <string name="pref_visualizer_dim_header_summary">Отображение поля с текущим временем и уровнем батареи на затемнённом экране</string>
+    <string name="pref_visualizer_dim_controls_title">Показать управление медиа</string>
+    <string name="pref_visualizer_dim_controls_summary">Показать кнопки управления медиа на затемнённом экране</string>
+    <string name="pref_visualizer_dim_artwork_title">Показать обложку</string>
+    <string name="pref_visualizer_dim_artwork_summary">Показать обложку поверх экрана блокировки на затемнённом экране</string>
+
+    <!-- QS: Ambient Display tile -->
+    <string name="qs_tile_ambient_display">Живой дисплей</string>
+
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Всплытие (heads up)</string>
+
+    <!-- Reboot -->
+    <string name="reboot">Перезагрузка</string>
+
 </resources>
