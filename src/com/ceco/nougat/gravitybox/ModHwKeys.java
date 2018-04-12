@@ -1321,6 +1321,7 @@ public class ModHwKeys {
                                     !cn.getPackageName().startsWith(defaultHomePackage)) {
                                 if (DEBUG) log("Force stopping: " + cn.getPackageName());
                                 XposedHelpers.callMethod(am, "removeTask", apps.get(0).id);
+                                XposedHelpers.callMethod(am, "forceStopPackage", cn.getPackageName());
                                 targetKilled = cn.getPackageName();
                             }
                         }
