@@ -544,9 +544,7 @@ public class ModStatusBar {
             final Class<?> phoneStatusBarPolicyClass = 
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_POLICY, classLoader);
             Class<?> expandableNotifRowClass = null;
-            if (!Utils.hasLenovoVibeUI()) {
-                expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
-            }
+            expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
             final Class<?> statusBarWmClass = XposedHelpers.findClass(CLASS_STATUSBAR_WM, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
             final Class<?> sbiCtrlClass = XposedHelpers.findClass(CLASS_SBI_CTRL, classLoader);
@@ -776,16 +774,14 @@ public class ModStatusBar {
                 }
             });
 
-            if (!Utils.hasLenovoVibeUI()) {
-                XposedHelpers.findAndHookMethod(expandableNotifRowClass, "isUserExpanded", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mNotifExpandAll) {
-                            param.setResult(true);
-                        }
+            XposedHelpers.findAndHookMethod(expandableNotifRowClass, "isUserExpanded", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mNotifExpandAll) {
+                        param.setResult(true);
                     }
-                });
-            }
+                }
+            });
 
             // fragment that takes care of notification icon layout for center clock
             try {

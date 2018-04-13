@@ -137,12 +137,9 @@ public class ModPowerMenu {
                    mRebootSoftIcon = gbContext.getDrawable(R.drawable.ic_lock_reboot_soft);
                    mRecoveryIcon = gbContext.getDrawable(R.drawable.ic_lock_recovery);
                    mBootloaderIcon = gbContext.getDrawable(R.drawable.ic_lock_bootloader);
-                   mExpandedDesktopIcon = gbContext.getDrawable(Utils.hasLenovoVibeUI() ?
-                           R.drawable.ic_lock_expanded_desktop_vibeui : R.drawable.ic_lock_expanded_desktop);
-                   mScreenshotIcon = gbContext.getDrawable(Utils.hasLenovoVibeUI() ?
-                           R.drawable.ic_lock_screenshot_vibeui : R.drawable.ic_lock_screenshot);
-                   mScreenrecordIcon = gbContext.getDrawable(Utils.hasLenovoVibeUI() ?
-                           R.drawable.ic_lock_screen_record_vibeui : R.drawable.ic_lock_screen_record);
+                   mExpandedDesktopIcon = gbContext.getDrawable(R.drawable.ic_lock_expanded_desktop);
+                   mScreenshotIcon = gbContext.getDrawable(R.drawable.ic_lock_screenshot);
+                   mScreenrecordIcon = gbContext.getDrawable(R.drawable.ic_lock_screen_record);
 
                    mRebootItemList = new ArrayList<IIconListAdapterItem>();
                    mRebootItemList.add(new BasicIconListItem(mRebootStr, null, mRebootIcon, null));

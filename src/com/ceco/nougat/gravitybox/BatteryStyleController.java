@@ -132,41 +132,39 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         mSystemIcons.addView(mCircleBattery, bIconIndex);
         if (DEBUG) log("CmCircleBattery injected");
 
-        if (!Utils.hasLenovoCustomUI()) {
-            // inject percent text if it doesn't exist
-            if (mContainerType == ContainerType.KEYGUARD) {
-                for (String bptId : batteryPercentTextIds) {
-                    final int bptResId = res.getIdentifier(bptId, "id", PACKAGE_NAME);
-                    if (bptResId != 0) {
-                        View v = mContainer.findViewById(bptResId);
-                        if (v != null && v instanceof TextView) {
-                            mPercentText = new StatusbarBatteryPercentage((TextView) v, mPrefs, this);
-                            if (DEBUG) log("Battery percent text found as: " + bptId);
-                            break;
-                        }
+        // inject percent text if it doesn't exist
+        if (mContainerType == ContainerType.KEYGUARD) {
+            for (String bptId : batteryPercentTextIds) {
+                final int bptResId = res.getIdentifier(bptId, "id", PACKAGE_NAME);
+                if (bptResId != 0) {
+                    View v = mContainer.findViewById(bptResId);
+                    if (v != null && v instanceof TextView) {
+                        mPercentText = new StatusbarBatteryPercentage((TextView) v, mPrefs, this);
+                        if (DEBUG) log("Battery percent text found as: " + bptId);
+                        break;
                     }
                 }
             }
-            if (mPercentText == null || Utils.isOxygenOsRom()) {
-                TextView percentTextView = new TextView(mContext);
-                lParams = new LinearLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                percentTextView.setLayoutParams(lParams);
-                percentTextView.setPadding(
-                        gbRes.getDimensionPixelSize(mBatteryPercentTextOnRight ?
-                                R.dimen.percent_text_padding_right :
-                                R.dimen.percent_text_padding_left),
-                        0,
-                        gbRes.getDimensionPixelSize(mBatteryPercentTextOnRight ?
-                                R.dimen.percent_text_padding_left :
-                                R.dimen.percent_text_padding_right),
-                        0);
-                percentTextView.setTextColor(Color.WHITE);
-                percentTextView.setVisibility(View.GONE);
-                mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
-                mSystemIcons.addView(mPercentText.getView(), mBatteryPercentTextOnRight ? bIconIndex+2 : bIconIndex);
-                if (DEBUG) log("Battery percent text injected");
-            }
+        }
+        if (mPercentText == null || Utils.isOxygenOsRom()) {
+            TextView percentTextView = new TextView(mContext);
+            lParams = new LinearLayout.LayoutParams(
+                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            percentTextView.setLayoutParams(lParams);
+            percentTextView.setPadding(
+                    gbRes.getDimensionPixelSize(mBatteryPercentTextOnRight ?
+                            R.dimen.percent_text_padding_right :
+                            R.dimen.percent_text_padding_left),
+                    0,
+                    gbRes.getDimensionPixelSize(mBatteryPercentTextOnRight ?
+                            R.dimen.percent_text_padding_left :
+                            R.dimen.percent_text_padding_right),
+                    0);
+            percentTextView.setTextColor(Color.WHITE);
+            percentTextView.setVisibility(View.GONE);
+            mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
+            mSystemIcons.addView(mPercentText.getView(), mBatteryPercentTextOnRight ? bIconIndex+2 : bIconIndex);
+            if (DEBUG) log("Battery percent text injected");
         }
     }
 

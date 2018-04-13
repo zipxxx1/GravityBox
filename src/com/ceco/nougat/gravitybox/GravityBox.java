@@ -84,11 +84,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         XposedBridge.log("GB:Is Xperia device: " + Utils.isXperiaDevice());
         XposedBridge.log("GB:Is Moto XT device: " + Utils.isMotoXtDevice());
         XposedBridge.log("GB:Is OxygenOS ROM: " + Utils.isOxygenOsRom());
-        XposedBridge.log("GB:Has Lenovo custom UI: " + Utils.hasLenovoCustomUI());
-        if (Utils.hasLenovoCustomUI()) {
-            XposedBridge.log("GB:Lenovo UI is VIBE: " + Utils.hasLenovoVibeUI());
-            XposedBridge.log("GB:Lenovo ROM is ROW: " + Utils.isLenovoROW());
-        }
         XposedBridge.log("GB:Has telephony support: " + Utils.hasTelephonySupport());
         XposedBridge.log("GB:Has Gemini support: " + Utils.hasGeminiSupport());
         XposedBridge.log("GB:Android SDK: " + Build.VERSION.SDK_INT);
@@ -231,8 +226,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModNavigationBar.init(prefs, lpparam.classLoader);
         }
 
-        if (!Utils.hasLenovoVibeUI() &&
-                lpparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
+        if (lpparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
             ModLockscreen.init(prefs, qhPrefs, lpparam.classLoader);
         }
 
