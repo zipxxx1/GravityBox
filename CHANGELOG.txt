@@ -1,3 +1,27 @@
+Changelog 7.1.1 - 13/04/2018
+--------------------------------------
+- QuickSettings management:
+--- added Ambient Display tile (Controls whether received notifications activate ambient screen)
+--- added Heads Up tile (Controls whether to show heads up for notifications globally)
+- Media tweaks: added Visualizer feature (basic functionality ported from LineageOS)
+--- shows in lock screen during media playback
+--- supports static as well as dynamic color (extracted from artwork of current media)
+--- supports Active mode - keeps lock screen on while Visualizer is showing
+--- supports Lock screen dimming with adjustable dim level (based on user interaction)
+--- supports showing media info on dimmed screen
+--- supports showing header with current time and battery level on dimmed screen
+--- supports media controls on dimmed screen
+--- supports artwork as background of dimmed screen covering lock screen contents
+--- deactivates automatically during power saving mode
+- Strenghtened Kill foreground app action
+- Power: fixed dynamic theming of Advanced Power Menu
+- Dialer: adjusted for compatibility with the latest Google Dialer app
+- Updated French translations (thanks to Choukajohn)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 7.1.0 - 16/03/2018
 --------------------------------------
 - Lockscreen shortcuts:
