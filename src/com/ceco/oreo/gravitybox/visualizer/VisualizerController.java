@@ -19,7 +19,6 @@ import com.ceco.oreo.gravitybox.GravityBox;
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
 import com.ceco.oreo.gravitybox.ModLockscreen;
 import com.ceco.oreo.gravitybox.ModStatusBar;
-import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.ModStatusBar.StatusBarStateChangedListener;
 import com.ceco.oreo.gravitybox.managers.BatteryInfoManager;
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
@@ -29,15 +28,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -56,7 +52,6 @@ public class VisualizerController implements StatusBarStateChangedListener,
     }
 
     private VisualizerLayout mView;
-    private int mCurrentDrawableHash = -1;
     private boolean mDynamicColorEnabled;
     private int mColor;
     private int mOpacityPercent;
@@ -166,27 +161,17 @@ public class VisualizerController implements StatusBarStateChangedListener,
         mView.setPlaying(playing);
 
         if (playing) {
-            MediaMetadata md = mc.getMetadata();
-            mView.setArtist(md != null ? md.getString(MediaMetadata.METADATA_KEY_ARTIST) : null);
-            mView.setTitle(md != null ? md.getString(MediaMetadata.METADATA_KEY_TITLE) : null);
-            ImageView backDrop = (ImageView) XposedHelpers.getObjectField(sb, "mBackdropBack");
-            if (backDrop != null) {
-                Bitmap bitmap = null;
-                Drawable d = backDrop.getDrawable();
-                int hash = (d == null ? 0 : d.hashCode());
-                if (hash != mCurrentDrawableHash) {
-                    if (d instanceof BitmapDrawable) {
-                        bitmap = ((BitmapDrawable)d).getBitmap();
-                    } else if (d != null) {
-                        bitmap = Utils.drawableToBitmap(d);
-                    }
-                    mCurrentDrawableHash = hash;
-                    mView.setBitmap(bitmap, mDynamicColorEnabled);
-                    if (DEBUG) log("updateMediaMetaData: artwork change detected; bitmap=" + bitmap);
+            if (metaDataChanged) {
+                MediaMetadata md = mc.getMetadata();
+                mView.setArtist(md != null ? md.getString(MediaMetadata.METADATA_KEY_ARTIST) : null);
+                mView.setTitle(md != null ? md.getString(MediaMetadata.METADATA_KEY_TITLE) : null);
+                Bitmap artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ART);
+                if (artworkBitmap == null) {
+                    artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
                 }
-            } else {
-                mView.setBitmap(null, false);
-                mCurrentDrawableHash = 0;
+                mView.setBitmap(artworkBitmap, mDynamicColorEnabled);
+                if (DEBUG)
+                    log("updateMediaMetaData: artwork change detected; bitmap=" + artworkBitmap);
             }
             if (SysUiManagers.BatteryInfoManager != null) {
                 SysUiManagers.BatteryInfoManager.registerListener(this);
