@@ -22,6 +22,7 @@ import com.ceco.oreo.gravitybox.ModStatusBar.StatusBarStateChangedListener;
 import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.managers.BatteryInfoManager;
 import com.ceco.oreo.gravitybox.managers.BatteryInfoManager.BatteryData;
+import com.ceco.oreo.gravitybox.managers.SysUiManagers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -164,14 +165,23 @@ public class NavbarVisualizerController implements StatusBarStateChangedListener
                 mc.getPlaybackState().getState() == PlaybackState.STATE_PLAYING;
         mNavbarView.setPlaying(playing);
 
-        if (playing && metaDataChanged) {
-            MediaMetadata md = mc.getMetadata();
-            Bitmap artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ART);
-            if (artworkBitmap == null) {
-                artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
+        if (playing) {
+            if (metaDataChanged) {
+                MediaMetadata md = mc.getMetadata();
+                Bitmap artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ART);
+                if (artworkBitmap == null) {
+                    artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
+                }
+                mNavbarView.setBitmap(artworkBitmap, mDynamicColorEnabled);
+                if (DEBUG) log("updateMediaMetaData: artwork change detected; bitmap=" + artworkBitmap);
             }
-            mNavbarView.setBitmap(artworkBitmap, mDynamicColorEnabled);
-            if (DEBUG) log("updateMediaMetaData: artwork change detected; bitmap=" + artworkBitmap);
+            if (SysUiManagers.BatteryInfoManager != null) {
+                SysUiManagers.BatteryInfoManager.registerListener(this);
+            }
+        } else {
+            if (SysUiManagers.BatteryInfoManager != null) {
+                SysUiManagers.BatteryInfoManager.unregisterListener(this);
+            }
         }
     }
 

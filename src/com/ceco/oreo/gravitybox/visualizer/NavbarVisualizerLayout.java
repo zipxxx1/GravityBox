@@ -227,7 +227,7 @@ public class NavbarVisualizerLayout extends FrameLayout
         } else {
             if (mDisplaying) {
                 mDisplaying = false;
-                mNavbarVisualizerView.setPlaying(false, mVisible);
+                mNavbarVisualizerView.setPlaying(false, mVisible || !mPowerSaveMode);
             }
         }
     }
