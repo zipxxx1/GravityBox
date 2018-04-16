@@ -17,76 +17,100 @@ package com.ceco.oreo.gravitybox.visualizer;
 import com.ceco.oreo.gravitybox.BroadcastSubReceiver;
 import com.ceco.oreo.gravitybox.GravityBox;
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
-import com.ceco.oreo.gravitybox.ModLockscreen;
 import com.ceco.oreo.gravitybox.ModStatusBar;
 import com.ceco.oreo.gravitybox.ModStatusBar.StatusBarStateChangedListener;
+import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.managers.BatteryInfoManager;
-import com.ceco.oreo.gravitybox.managers.SysUiManagers;
 import com.ceco.oreo.gravitybox.managers.BatteryInfoManager.BatteryData;
+import com.ceco.oreo.gravitybox.managers.SysUiManagers;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class VisualizerController implements StatusBarStateChangedListener,
+public class NavbarVisualizerController implements StatusBarStateChangedListener,
                                              BatteryInfoManager.BatteryStatusListener,
                                              BroadcastSubReceiver {
-    private static final String TAG = "GB:VisualizerController";
+    private static final String TAG = "GB:NavbarVisualizerController";
     private static final boolean DEBUG = false;
 
-    private static final String CLASS_STATUSBAR_WINDOW_VIEW = "com.android.systemui.statusbar.phone.StatusBarWindowView";
+    private static final String CLASS_NAVIGATION_BAR_VIEW = "com.android.systemui.statusbar.phone.NavigationBarView";
+    private static final String CLASS_NAVIGATION_BAR_INFLATER_VIEW = "com.android.systemui.statusbar.phone.NavigationBarInflaterView";
+    private static final String CLASS_LIGHT_BAR_CONTROLLER = "com.android.systemui.statusbar.phone.LightBarController";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private VisualizerLayout mView;
+    private NavbarVisualizerLayout mNavbarView;
     private boolean mDynamicColorEnabled;
     private int mColor;
     private int mOpacityPercent;
-    private boolean mActiveMode;
-    private boolean mDimEnabled;
-    private int mDimLevelPercent;
-    private boolean mDimInfoEnabled;
-    private boolean mDimHeaderEnabled;
-    private boolean mDimControlsEnabled;
-    private boolean mDimArtworkEnabled;
 
-    public VisualizerController(ClassLoader cl, XSharedPreferences prefs) {
+    public NavbarVisualizerController(ClassLoader cl, XSharedPreferences prefs) {
         mDynamicColorEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DYNAMIC_COLOR, true);
         mColor = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_COLOR, Color.WHITE);
         mOpacityPercent = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_OPACITY, 50);
-        mActiveMode = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ACTIVE_MODE, false);
-        mDimEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM, true);
-        mDimLevelPercent = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_LEVEL, 80);
-        mDimInfoEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_INFO, true);
-        mDimHeaderEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_HEADER, true);
-        mDimControlsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_CONTROLS, true);
-        mDimArtworkEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_ARTWORK, true);
 
         createHooks(cl);
     }
 
     private void createHooks(ClassLoader cl) {
+
         try {
-            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR_WINDOW_VIEW, cl,
+            XposedHelpers.findAndHookMethod(CLASS_NAVIGATION_BAR_VIEW, cl,
                     "onFinishInflate", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    createView((ViewGroup) param.thisObject);
-                }
-            });
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            createView((ViewGroup) param.thisObject);
+                        }
+                    });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_NAVIGATION_BAR_INFLATER_VIEW, cl,
+                    "setAlternativeOrder", boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            boolean isRight = (boolean) param.args[0];
+                            if (mNavbarView != null) {
+                                mNavbarView.setLeftInLandscape(!isRight);
+                            }
+                        }
+                    });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_LIGHT_BAR_CONTROLLER, cl,
+                    "updateNavigation", new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            Boolean isLight = (Boolean) XposedHelpers
+                                    .getBooleanField(param.thisObject, "mNavigationLight");
+                            if (mNavbarView != null) {
+                                mNavbarView.setLightNavbar(isLight);
+                            }
+                        }
+                    });
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -97,22 +121,10 @@ public class VisualizerController implements StatusBarStateChangedListener,
                         new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mView != null) {
+                    if (mNavbarView != null) {
                         updateMediaMetaData(param.thisObject,
                                 (boolean) param.args[0]);
                     }
-                }
-            });
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
-
-        try {
-            XposedHelpers.findAndHookMethod(ModLockscreen.CLASS_KGVIEW_MEDIATOR, cl,
-                    "userActivity", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    onUserActivity();
                 }
             });
         } catch (Throwable t) {
@@ -123,7 +135,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
     private void createView(ViewGroup parent) throws Throwable {
         // find suitable position, put as last if failed
         int pos = parent.getChildCount();
-        int resId = parent.getResources().getIdentifier("status_bar_container", "id",
+        int resId = parent.getResources().getIdentifier("navigation_bar", "id",
                 parent.getContext().getPackageName());
         if (resId != 0) {
             View v = parent.findViewById(resId);
@@ -133,24 +145,17 @@ public class VisualizerController implements StatusBarStateChangedListener,
         }
         if (DEBUG) log("Computed view position: " + pos);
 
-        mView = new VisualizerLayout(parent.getContext(), pos);
+        mNavbarView = new NavbarVisualizerLayout(parent.getContext());
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
-        mView.setLayoutParams(lp);
-        parent.addView(mView, pos);
+        mNavbarView.setLayoutParams(lp);
+        parent.addView(mNavbarView, pos);
 
-        mView.setOpacityPercent(mOpacityPercent);
-        mView.setDefaultColor(mColor);
-        mView.setActiveMode(mActiveMode);
-        mView.setDimEnabled(mDimEnabled);
-        mView.setDimLevelPercent(mDimLevelPercent);
-        mView.setDimInfoEnabled(mDimInfoEnabled);
-        mView.setDimHeaderEnabled(mDimHeaderEnabled);
-        mView.setDimControlsEnabled(mDimControlsEnabled);
-        mView.setDimArtworkEnabled(mDimArtworkEnabled);
+        mNavbarView.setOpacityPercent(mOpacityPercent);
+        mNavbarView.setDefaultColor(mColor);
 
-        if (DEBUG) log("VisualizerLayout created");
+        if (DEBUG) log("NavbarVisualizerView created");
     }
 
     private void updateMediaMetaData(Object sb, boolean metaDataChanged) {
@@ -158,20 +163,17 @@ public class VisualizerController implements StatusBarStateChangedListener,
                 .getObjectField(sb, "mMediaController");
         boolean playing = mc != null && mc.getPlaybackState() != null &&
                 mc.getPlaybackState().getState() == PlaybackState.STATE_PLAYING;
-        mView.setPlaying(playing);
+        mNavbarView.setPlaying(playing);
 
         if (playing) {
             if (metaDataChanged) {
                 MediaMetadata md = mc.getMetadata();
-                mView.setArtist(md != null ? md.getString(MediaMetadata.METADATA_KEY_ARTIST) : null);
-                mView.setTitle(md != null ? md.getString(MediaMetadata.METADATA_KEY_TITLE) : null);
                 Bitmap artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ART);
                 if (artworkBitmap == null) {
                     artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
                 }
-                mView.setBitmap(artworkBitmap, mDynamicColorEnabled);
-                if (DEBUG)
-                    log("updateMediaMetaData: artwork change detected; bitmap=" + artworkBitmap);
+                mNavbarView.setBitmap(artworkBitmap, mDynamicColorEnabled);
+                if (DEBUG) log("updateMediaMetaData: artwork change detected; bitmap=" + artworkBitmap);
             }
             if (SysUiManagers.BatteryInfoManager != null) {
                 SysUiManagers.BatteryInfoManager.registerListener(this);
@@ -183,36 +185,29 @@ public class VisualizerController implements StatusBarStateChangedListener,
         }
     }
 
-    private void onUserActivity() {
-        if (mView != null) {
-            mView.onUserActivity();
-        }
-    }
-
     @Override
     public void onStatusBarStateChanged(int oldState, int newState) {
-        if (mView != null) {
-            mView.setStatusBarState(newState);
+        if (mNavbarView != null) {
+            mNavbarView.setStatusBarState(newState);
         }
     }
 
     @Override
     public void onBatteryStatusChanged(BatteryData batteryData) {
-        if (mView != null) {
-            mView.setPowerSaveMode(batteryData.isPowerSaving);
-            mView.setBatteryLevel(batteryData.level);
+        if (mNavbarView != null) {
+            mNavbarView.setPowerSaveMode(batteryData.isPowerSaving);
         }
     }
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-            if (mView != null) {
-                mView.setVisible(true);
+            if (mNavbarView != null) {
+                mNavbarView.setVisible(true);
             }
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-            if (mView != null) {
-                mView.setVisible(false);
+            if (mNavbarView != null) {
+                mNavbarView.setVisible(false);
             }
         } else if (intent.getAction().equals(GravityBoxSettings.ACTION_VISUALIZER_SETTINGS_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DYNAMIC_COLOR)) {
@@ -222,39 +217,11 @@ public class VisualizerController implements StatusBarStateChangedListener,
             if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_COLOR)) {
                 mColor = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_VISUALIZER_COLOR, Color.WHITE);
-                if (mView != null) mView.setDefaultColor(mColor);
+                if (mNavbarView != null) mNavbarView.setDefaultColor(mColor);
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_OPACITY)) {
                 mOpacityPercent = intent.getIntExtra(GravityBoxSettings.EXTRA_VISUALIZER_OPACITY, 50);
-                if (mView != null) mView.setOpacityPercent(mOpacityPercent);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_ACTIVE_MODE)) {
-                mActiveMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_ACTIVE_MODE, false);
-                if (mView != null) mView.setActiveMode(mActiveMode);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM)) {
-                mDimEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM, true);
-                if (mView != null) mView.setDimEnabled(mDimEnabled);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_LEVEL)) {
-                mDimLevelPercent = intent.getIntExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_LEVEL, 80);
-                if (mView != null) mView.setDimLevelPercent(mDimLevelPercent);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_INFO)) {
-                mDimInfoEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_INFO, true);
-                if (mView != null) mView.setDimInfoEnabled(mDimInfoEnabled);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_HEADER)) {
-                mDimHeaderEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_HEADER, true);
-                if (mView != null) mView.setDimHeaderEnabled(mDimHeaderEnabled);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_CONTROLS)) {
-                mDimControlsEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_CONTROLS, true);
-                if (mView != null) mView.setDimControlsEnabled(mDimControlsEnabled);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_ARTWORK)) {
-                mDimArtworkEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_ARTWORK, true);
-                if (mView != null) mView.setDimArtworkEnabled(mDimArtworkEnabled);
+                if (mNavbarView != null) mNavbarView.setOpacityPercent(mOpacityPercent);
             }
         }
     }
