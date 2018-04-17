@@ -14,20 +14,18 @@
  */
 package com.ceco.oreo.gravitybox.visualizer;
 
+import com.ceco.oreo.gravitybox.GravityBoxSettings;
 import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.ModStatusBar.StatusBarState;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.graphics.Palette;
 import android.view.LayoutInflater;
-import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 
 import static android.support.v4.graphics.ColorUtils.HSLToColor;
@@ -36,8 +34,7 @@ import static android.support.v4.graphics.ColorUtils.calculateContrast;
 import static android.support.v4.graphics.ColorUtils.colorToHSL;
 import static android.support.v4.graphics.ColorUtils.colorToLAB;
 
-public class NavbarVisualizerLayout extends FrameLayout
-        implements Palette.PaletteAsyncListener {
+public class NavbarVisualizerLayout extends AVisualizerLayout {
 
     private static final String TAG = "GB:NavbarVisualizerLayout";
     private static final boolean DEBUG = false;
@@ -46,189 +43,74 @@ public class NavbarVisualizerLayout extends FrameLayout
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private int mStatusBarState;
-    private boolean mVisible = false;
-    private boolean mPlaying = false;
-    private boolean mPowerSaveMode = false;
-    private boolean mDisplaying = false; // the state we're animating to
-
-    private int mDefaultColor;
-    private int mColor;
     private int mLightColor;
     private int mDarkColor;
-    private boolean mLightNavbar;
-    private ValueAnimator mColorAnimator;
     private int mOpacity;
-
-    private NavbarVisualizerView mNavbarVisualizerView;
+    private boolean mLightNavbar;
 
     public NavbarVisualizerLayout(Context context) throws Throwable {
-        super(context, null, 0);
-
-        mDefaultColor = Color.WHITE;
-        mColor = Color.TRANSPARENT;
-        mOpacity = 140;
-
-        inflateLayout();
-    }
-
-    private void inflateLayout() throws Throwable {
-        LayoutInflater inflater = LayoutInflater.from(Utils.getGbContext(getContext(),
-                getContext().getResources().getConfiguration()));
-        inflater.inflate(R.layout.navbarvisualizer, this);
-        mNavbarVisualizerView = new NavbarVisualizerView(getContext());
-        int idx = indexOfChild(findViewById(R.id.navbarvisualizer));
-        removeViewAt(idx);
-        addView(mNavbarVisualizerView, idx);
-    }
-
-    private void updateViewVisibility() {
-        final int curVis = getVisibility();
-        final int newVis = mStatusBarState == StatusBarState.SHADE ?
-                View.VISIBLE : View.GONE;
-        if (curVis != newVis) {
-            setVisibility(newVis);
-            checkStateChanged();
-        }
-    }
-
-    void setVisible(boolean visible) {
-        if (mVisible != visible) {
-            if (DEBUG) {
-                log("setVisible() called with visible = [" + visible + "]");
-            }
-            mVisible = visible;
-            checkStateChanged();
-        }
-    }
-
-    void setPlaying(boolean playing) {
-        if (mPlaying != playing) {
-            if (DEBUG) {
-                log("setPlaying() called with playing = [" + playing + "]");
-            }
-            mPlaying = playing;
-            checkStateChanged();
-        }
-    }
-
-    void setPowerSaveMode(boolean powerSaveMode) {
-        if (mPowerSaveMode != powerSaveMode) {
-            if (DEBUG) {
-                log("setPowerSaveMode() called with powerSaveMode = [" + powerSaveMode + "]");
-            }
-            mPowerSaveMode = powerSaveMode;
-            checkStateChanged();
-        }
-    }
-
-    void setStatusBarState(int statusBarState) {
-        if (mStatusBarState != statusBarState) {
-            mStatusBarState = statusBarState;
-            updateViewVisibility();
-        }
-    }
-
-    void setBitmap(Bitmap bitmap, boolean extractColor) {
-        if (bitmap != null && extractColor) {
-            Palette.from(bitmap).generate(this);
-        } else {
-            setColor(Color.TRANSPARENT);
-        }
+        super(context);
     }
 
     @Override
-    public void onGenerated(Palette palette) {
-        int color = Color.TRANSPARENT;
-
-        color = palette.getVibrantColor(color);
-        if (color == Color.TRANSPARENT) {
-            color = palette.getLightVibrantColor(color);
-            if (color == Color.TRANSPARENT) {
-                color = palette.getDarkVibrantColor(color);
-            }
-        }
-
-        if (color != Color.TRANSPARENT) {
-            mDarkColor = findContrastColor(color, Color.WHITE, true, 2);
-            mLightColor = findContrastColorAgainstDark(color, Color.BLACK, true, 2);
-        } else {
-            mLightColor = Color.WHITE;
-            mDarkColor = Color.BLACK;
-        }
-
-        setColor();
+    public void initPreferences(XSharedPreferences prefs) {
+        super.initPreferences(prefs);
+        mOpacity = Math.round(255f * ((float)prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_OPACITY, 50)/100f));
     }
 
-    void setDefaultColor(int color) {
-        mDefaultColor = color;
-        setColor(mDefaultColor);
-    }
-
-    void setLeftInLandscape(boolean isLeft) {
-        mNavbarVisualizerView.setLeftInLandscape(isLeft);
-    }
-
-    void setLightNavbar(boolean isLight) {
-        if (mLightNavbar != isLight) {
-            mLightNavbar = isLight;
-            int color = isLight ? mDarkColor : mLightColor;
-            mNavbarVisualizerView.setColor(Color.argb(
-                    mOpacity, Color.red(color),
-                    Color.green(color), Color.blue(color)));
+    @Override
+    public void onPreferenceChanged(Intent intent) {
+        super.onPreferenceChanged(intent);
+        if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_OPACITY)) {
+            mOpacity = Math.round(255f * ((float)intent.getIntExtra(
+                    GravityBoxSettings.EXTRA_VISUALIZER_OPACITY, 50)/100f));
         }
     }
 
-    private void setColor() {
-        int color = mLightNavbar ? mDarkColor : mLightColor;
+
+    @Override
+    public void onCreateView(ViewGroup parent) throws Throwable {
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT);
+        setLayoutParams(lp);
+        parent.addView(this);
+
+        LayoutInflater inflater = LayoutInflater.from(Utils.getGbContext(getContext(),
+                getContext().getResources().getConfiguration()));
+        inflater.inflate(R.layout.navbarvisualizer, this);
+        mVisualizerView = new VisualizerView(getContext());
+        mVisualizerView.setDbCapValue(4f);
+        mVisualizerView.setSupportsVerticalPosition(true);
+        int idx = indexOfChild(findViewById(R.id.visualizer));
+        removeViewAt(idx);
+        addView(mVisualizerView, idx);
+    }
+
+    @Override
+    boolean supportsCurrentStatusBarState() {
+        return mStatusBarState == StatusBarState.SHADE;
+    }
+
+    @Override
+    public void onColorUpdated(int color) {
+        color = Color.rgb(Color.red(color), Color.green(color), Color.blue(color));
+        mDarkColor = findContrastColor(color, Color.WHITE, true, 2);
+        mLightColor = findContrastColorAgainstDark(color, Color.BLACK, true, 2);
+        color = mLightNavbar ? mDarkColor : mLightColor;
+        color = Color.argb(mOpacity, Color.red(color), Color.green(color), Color.blue(color));
         setColor(color);
     }
 
-    private void setColor(int color) {
-        if (color == Color.TRANSPARENT) {
-            color = mDefaultColor;
-        }
-
-        if (mColor != color) {
-            final int oldColor = mColor;
-            mColor = Color.argb(mOpacity, Color.red(color),
-                    Color.green(color), Color.blue(color));
-            if (mColorAnimator != null) {
-                mColorAnimator.cancel();
-            }
-            mColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),
-                    oldColor, mColor);
-            mColorAnimator.setDuration(1200);
-            mColorAnimator.setStartDelay(600);
-            mColorAnimator.addUpdateListener(new AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator va) {
-                    int c = (int) va.getAnimatedValue();
-                    mNavbarVisualizerView.setColor(c);
-                }
-            });
-            mColorAnimator.start();
-        }
-    }
-
-    void setOpacityPercent(int opacityPercent) {
-        mOpacity = Math.round(255f * ((float)opacityPercent/100f));
-        mNavbarVisualizerView.setColor(Color.argb(mOpacity, Color.red(mColor),
-                Color.green(mColor), Color.blue(mColor)));
-    }
-
-    private void checkStateChanged() {
-        if (getVisibility() == View.VISIBLE &&
-                mVisible && mPlaying && !mPowerSaveMode) {
-            if (!mDisplaying) {
-                mDisplaying = true;
-                mNavbarVisualizerView.setPlaying(true, mVisible);
-                }
-        } else {
-            if (mDisplaying) {
-                mDisplaying = false;
-                mNavbarVisualizerView.setPlaying(false, mVisible || !mPowerSaveMode);
-            }
+    @Override
+    public void setLight(boolean light) {
+        super.setLight(light);
+        if (mLightNavbar != light) {
+            mLightNavbar = light;
+            int color = light ? mDarkColor : mLightColor;
+            mVisualizerView.setColor(Color.argb(
+                    mOpacity, Color.red(color),
+                    Color.green(color), Color.blue(color)));
         }
     }
 
