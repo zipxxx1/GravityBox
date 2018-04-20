@@ -54,6 +54,11 @@ abstract class AVisualizerLayout extends FrameLayout implements VisualizerContro
     }
 
     @Override
+    public boolean isAttached() {
+        return isAttachedToWindow();
+    }
+
+    @Override
     public void initPreferences(XSharedPreferences prefs) { }
 
     @Override

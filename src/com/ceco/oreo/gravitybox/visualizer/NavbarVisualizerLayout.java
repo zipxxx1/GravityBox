@@ -74,7 +74,7 @@ public class NavbarVisualizerLayout extends AVisualizerLayout {
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
         setLayoutParams(lp);
-        parent.addView(this);
+        parent.addView(this, 0);
 
         LayoutInflater inflater = LayoutInflater.from(Utils.getGbContext(getContext(),
                 getContext().getResources().getConfiguration()));

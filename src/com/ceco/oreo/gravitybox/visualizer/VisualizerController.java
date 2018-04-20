@@ -36,6 +36,8 @@ import android.media.audiofx.Visualizer;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.graphics.Palette;
 import android.view.ViewGroup;
 import de.robv.android.xposed.XC_MethodHook;
@@ -74,6 +76,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
         void setVerticalLeft(boolean left);
         void setLight(boolean light);
         boolean isEnabled();
+        boolean isAttached();
     }
 
     private XSharedPreferences mPrefs;
@@ -86,12 +89,17 @@ public class VisualizerController implements StatusBarStateChangedListener,
     private int mCurrentColor;
     private int mOpacity;
     private Visualizer mVisualizer;
+    private Handler mHandler;
 
     private final Runnable mLinkVisualizer = new Runnable() {
         @Override
         public void run() {
             if (DEBUG) {
                 log("+++ mLinkVisualizer run()");
+            }
+
+            if (mVisualizer != null) {
+                mUnlinkVisualizer.run();
             }
 
             try {
@@ -129,6 +137,13 @@ public class VisualizerController implements StatusBarStateChangedListener,
             if (DEBUG) {
                 log("--- mUnlinkVisualizer run()");
             }
+        }
+    };
+
+    private final Runnable mAsyncUnlinkVisualizer = new Runnable() {
+        @Override
+        public void run() {
+            AsyncTask.execute(mUnlinkVisualizer);
         }
     };
 
@@ -222,12 +237,34 @@ public class VisualizerController implements StatusBarStateChangedListener,
     }
 
     private void addListener(ViewGroup parent, Listener l) throws Throwable {
+        // cleanup stalled listeners
+        for (int i = mListeners.size()-1; i >= 0; i--) {
+            if (!mListeners.get(i).isAttached()) {
+                mListeners.remove(i);
+                if (DEBUG) log("Removed stalled listener: " + l);
+            }
+        }
+        // add new
         l.onCreateView(parent);
         l.initPreferences(mPrefs);
         l.onColorUpdated(Color.argb(mOpacity, Color.red(mCurrentColor),
                 Color.green(mCurrentColor), Color.blue(mCurrentColor)));
         mListeners.add(l);
-        updateActiveState();
+        if (DEBUG) log("Current number of listeners: " + mListeners.size());
+        updateActiveState(true);
+    }
+
+    private void postRunnable(Runnable r, long delayMs) {
+        if (mHandler == null) {
+            mHandler = new Handler(Looper.getMainLooper());
+        }
+        mHandler.postDelayed(r, delayMs);
+    }
+
+    private void removeRunnable(Runnable r) {
+        if (mHandler != null) {
+            mHandler.removeCallbacks(r);
+        }
     }
 
     private void updateMediaMetaData(Object sb, boolean metaDataChanged) {
@@ -240,27 +277,44 @@ public class VisualizerController implements StatusBarStateChangedListener,
         updateActiveState();
         metaDataChanged |= (mActive && !wasActive);
 
-        if (mPlaying && metaDataChanged) {
-            Bitmap artworkBitmap = null;
-            MediaMetadata md = mc.getMetadata();
-            if (md != null) {
-                artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ART);
-                if (artworkBitmap == null) {
-                    artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
+        if (mPlaying) {
+            if (SysUiManagers.BatteryInfoManager != null) {
+                SysUiManagers.BatteryInfoManager.registerListener(this);
+            }
+            if (metaDataChanged) {
+                Bitmap artworkBitmap = null;
+                MediaMetadata md = mc.getMetadata();
+                if (md != null) {
+                    artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ART);
+                    if (artworkBitmap == null) {
+                        artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
+                    }
+                    if (DEBUG)
+                        log("updateMediaMetaData: artwork change detected; bitmap=" + artworkBitmap);
                 }
-                if (DEBUG)
-                    log("updateMediaMetaData: artwork change detected; bitmap=" + artworkBitmap);
+                if (mDynamicColorEnabled) {
+                    if (artworkBitmap != null) { 
+                        Palette.from(artworkBitmap).generate(this);
+                    } else {
+                        notifyColorUpdated(mDefaultColor);
+                    }
+                }
+                for (Listener l : mListeners) {
+                    l.onMediaMetaDataUpdated(md, artworkBitmap);
+                }
             }
-            if (artworkBitmap != null && mDynamicColorEnabled) {
-                Palette.from(artworkBitmap).generate(this);
-            }
-            for (Listener l : mListeners) {
-                l.onMediaMetaDataUpdated(md, artworkBitmap);
+        } else {
+            if (SysUiManagers.BatteryInfoManager != null) {
+                SysUiManagers.BatteryInfoManager.unregisterListener(this);
             }
         }
     }
 
     private void updateActiveState() {
+        updateActiveState(false);
+    }
+
+    private void updateActiveState(boolean forceNotifyListeners) {
         boolean atLeastOneListenerEnabled = false;
         for (Listener l : mListeners) {
             atLeastOneListenerEnabled |= l.isEnabled();
@@ -268,17 +322,15 @@ public class VisualizerController implements StatusBarStateChangedListener,
         boolean newActive = mPlaying && mIsScreenOn && !isPowerSaving() && atLeastOneListenerEnabled;
         if (newActive != mActive) {
             mActive = newActive;
+            removeRunnable(mAsyncUnlinkVisualizer);
             if (mActive) {
                 AsyncTask.execute(mLinkVisualizer);
-                if (SysUiManagers.BatteryInfoManager != null) {
-                    SysUiManagers.BatteryInfoManager.registerListener(this);
-                }
             } else {
-                AsyncTask.execute(mUnlinkVisualizer);
-                if (SysUiManagers.BatteryInfoManager != null) {
-                    SysUiManagers.BatteryInfoManager.unregisterListener(this);
-                }
+                postRunnable(mAsyncUnlinkVisualizer, 800);
             }
+            forceNotifyListeners = true;
+        }
+        if (forceNotifyListeners) {
             for (Listener l : mListeners) {
                 l.onActiveStateChanged(mActive);
             }
