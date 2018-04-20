@@ -410,6 +410,9 @@ public class VisualizerController implements StatusBarStateChangedListener,
                         GravityBoxSettings.EXTRA_VISUALIZER_OPACITY, 50)/100f));
                 notifyColorUpdated(mCurrentColor);
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_NAVBAR)) {
+                updateActiveState();
+            }
         }
     }
 

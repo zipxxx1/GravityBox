@@ -47,6 +47,7 @@ public class NavbarVisualizerLayout extends AVisualizerLayout {
     private int mDarkColor;
     private int mOpacity;
     private boolean mLightNavbar;
+    private boolean mEnabled;
 
     public NavbarVisualizerLayout(Context context) throws Throwable {
         super(context);
@@ -56,6 +57,7 @@ public class NavbarVisualizerLayout extends AVisualizerLayout {
     public void initPreferences(XSharedPreferences prefs) {
         super.initPreferences(prefs);
         mOpacity = Math.round(255f * ((float)prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_OPACITY, 50)/100f));
+        mEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_NAVBAR, false);
     }
 
     @Override
@@ -64,6 +66,9 @@ public class NavbarVisualizerLayout extends AVisualizerLayout {
         if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_OPACITY)) {
             mOpacity = Math.round(255f * ((float)intent.getIntExtra(
                     GravityBoxSettings.EXTRA_VISUALIZER_OPACITY, 50)/100f));
+        }
+        if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_NAVBAR)) {
+            mEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_NAVBAR, false);
         }
     }
 
@@ -90,6 +95,11 @@ public class NavbarVisualizerLayout extends AVisualizerLayout {
     @Override
     boolean supportsCurrentStatusBarState() {
         return mStatusBarState == StatusBarState.SHADE;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return super.isEnabled() && mEnabled;
     }
 
     @Override

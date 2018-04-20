@@ -2078,6 +2078,8 @@
     <string name="pref_visualizer_dim_controls_summary">Shows media playback controls on dimmed screen</string>
     <string name="pref_visualizer_dim_artwork_title">Show artwork</string>
     <string name="pref_visualizer_dim_artwork_summary">Shows artwork covering lock screen contents on dimmed screen</string>
+    <string name="pref_visualizer_navbar_title">Navigation bar</string>
+    <string name="pref_visualizer_navbar_summary">Shows visualizer also in navigation bar</string>
 
     <!-- QS: Ambient Display tile -->
     <string name="qs_tile_ambient_display">Ambient display</string>
