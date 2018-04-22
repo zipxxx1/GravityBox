@@ -2037,7 +2037,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_visualizer_dim_summary">Kullanıcı hareketsizlik zaman aşımı sonrasında kilit ekranı içeriğini karartır</string>
     <string name="pref_visualizer_dim_level_title">Karartma seviyesi</string>
     <string name="pref_visualizer_dim_info_title">Medya bilgisini göster</string>
-    <string name="pref_visualizer_dim_info_summary">Geçerli medya bilgisini karartılmış ekranda gösterir</string>
+    <string name="pref_visualizer_dim_info_summary">Karartılmış ekranda geçerli medya bilgisini gösterir</string>
     <string name="pref_visualizer_dim_header_title">Başlığı göster</string>
     <string name="pref_visualizer_dim_header_summary">Karartılmış ekranda geçerli zaman ve pil seviyesini içeren başlığı gösterir</string>
     <string name="pref_visualizer_dim_controls_title">Medya kontrollerini göster</string>
