@@ -2114,4 +2114,7 @@
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">浮动</string>
 
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">仅在充电时</string>
+
 </resources>

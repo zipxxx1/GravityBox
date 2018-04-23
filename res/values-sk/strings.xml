@@ -2040,4 +2040,7 @@
     <string name="pref_visualizer_dim_artwork_title">Zobraziť grafiku</string>
     <string name="pref_visualizer_dim_artwork_summary">Zobrazí grafiku aktuálnej skladby prekrývajúc obsah obrazovky uzamknutia</string>
 
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Len počas nabíjania</string>
+
 </resources>

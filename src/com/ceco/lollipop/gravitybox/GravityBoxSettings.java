@@ -841,6 +841,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HIDE_LAUNCHER_ICON = "pref_hide_launcher_icon";
 
     public static final String PREF_KEY_BATTERY_BAR_SHOW = "pref_battery_bar_show";
+    public static final String PREF_KEY_BATTERY_BAR_SHOW_CHARGING = "pref_battery_bar_show_charging";
     public static final String PREF_KEY_BATTERY_BAR_POSITION = "pref_battery_bar_position";
     public static final String PREF_KEY_BATTERY_BAR_MARGIN = "pref_battery_bar_margin";
     public static final String PREF_KEY_BATTERY_BAR_THICKNESS = "pref_battery_bar_thickness";
@@ -853,6 +854,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_BATTERY_BAR_COLOR_CHARGING = "pref_battery_bar_color_charging";
     public static final String ACTION_PREF_BATTERY_BAR_CHANGED = "gravitybox.intent.action.BATTERY_BAR_CHANGED";
     public static final String EXTRA_BBAR_SHOW = "batteryBarShow";
+    public static final String EXTRA_BBAR_SHOW_CHARGING = "batteryBarShowCharging";
     public static final String EXTRA_BBAR_POSITION = "batteryBarPosition";
     public static final String EXTRA_BBAR_MARGIN = "batteryBarMargin";
     public static final String EXTRA_BBAR_THICKNESS = "batteryBarThickness";
@@ -3253,6 +3255,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_BATTERY_BAR_SHOW)) {
                 intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
                 intent.putExtra(EXTRA_BBAR_SHOW, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_SHOW_CHARGING)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_SHOW_CHARGING, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_BATTERY_BAR_POSITION)) {
                 intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
                 intent.putExtra(EXTRA_BBAR_POSITION, prefs.getString(key, "TOP"));
