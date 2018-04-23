@@ -2090,4 +2090,8 @@
     <!-- Reboot -->
     <string name="reboot">Reboot</string>
 
+    <!-- StatusBar: corner padding -->
+    <string name="pref_sb_corner_padding_remove_title">Remove corner padding</string>
+    <string name="pref_sb_corner_padding_remove_summary">Removes padding designed for rounded corner displays (requires reboot)</string>
+
 </resources>

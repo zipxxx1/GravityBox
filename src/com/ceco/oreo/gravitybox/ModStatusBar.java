@@ -38,6 +38,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.content.res.XResources;
 import android.database.ContentObserver;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -282,6 +283,12 @@ public class ModStatusBar {
             StatusbarSignalCluster.initResources(prefs, resparam);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
+        }
+
+        if (Build.VERSION.SDK_INT >= 27 &&
+                prefs.getBoolean(GravityBoxSettings.PREF_KEY_CORNER_PADDING_REMOVE, false)) {
+            resparam.res.setReplacement(PACKAGE_NAME, "dimen", "rounded_corner_content_padding",
+                    new XResources.DimensionReplacement(0, TypedValue.COMPLEX_UNIT_DIP));
         }
     }
 

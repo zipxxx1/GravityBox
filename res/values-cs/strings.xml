@@ -2018,4 +2018,8 @@
     <string name="pref_visualizer_navbar_title">Navigační lišta</string>
     <string name="pref_visualizer_navbar_summary">Zobrazí vizualizátor i v navigační liště</string>
 
+    <!-- StatusBar: corner padding -->
+    <string name="pref_sb_corner_padding_remove_title">Odstranit okraj rohů</string>
+    <string name="pref_sb_corner_padding_remove_summary">Odstraní dodatečný okraj určený pro obrazovky se zaoblenými rohy (vyžaduje restart)</string>
+
 </resources>

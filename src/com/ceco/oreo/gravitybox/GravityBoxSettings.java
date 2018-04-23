@@ -628,6 +628,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_STATUSBAR_BRIGHTNESS = "pref_statusbar_brightness";
     public static final String PREF_KEY_STATUSBAR_DISABLE_PEEK = "pref_statusbar_disable_peek";
     public static final String PREF_KEY_STATUSBAR_DT2S = "pref_statusbar_dt2s";
+    public static final String PREF_KEY_CORNER_PADDING_REMOVE = "pref_sb_corner_padding_remove";
     public static final String ACTION_PREF_STATUSBAR_CHANGED = "gravitybox.intent.action.STATUSBAR_CHANGED";
     public static final String EXTRA_SB_BRIGHTNESS = "sbBrightness";
     public static final String EXTRA_SB_DISABLE_PEEK = "sbDisablePeek";
@@ -942,7 +943,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_LOG_ERRORS,
             PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE,
             PREF_KEY_BATTERY_TWEAKS_ENABLED,
-            PREF_KEY_VISUALIZER_ENABLE
+            PREF_KEY_VISUALIZER_ENABLE,
+            PREF_KEY_CORNER_PADDING_REMOVE
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -1630,7 +1632,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             mPrefPowerCameraVp = (EditTextPreference) findPreference(PREF_KEY_POWER_CAMERA_VP);
 
-            // Disable features not applicable to 8.1
+            // Disable features not applicable to 8.1 / 8.0
             if (Build.VERSION.SDK_INT >= 27) {
                 // Navbar auto fade keys
                 Preference p = findPreference(PREF_KEY_NAVBAR_AUTOFADE_KEYS);
@@ -1644,6 +1646,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 // Direct unlock see-through transparency
                 p = findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL);
                 if (p != null) mPrefCatLsOther.removePreference(p);
+            } else {
+                Preference p = findPreference(PREF_KEY_CORNER_PADDING_REMOVE);
+                if (p != null) mPrefCatStatusbar.removePreference(p);
             }
 
             // Filter preferences according to feature availability 

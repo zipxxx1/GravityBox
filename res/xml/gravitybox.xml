@@ -1309,6 +1309,12 @@
             android:summary="@string/pref_disable_roaming_indicators_summary"
             android:defaultValue="false" />
 
+        <CheckBoxPreference 
+            android:key="pref_sb_corner_padding_remove"
+            android:title="@string/pref_sb_corner_padding_remove_title"
+            android:summary="@string/pref_sb_corner_padding_remove_summary"
+            android:defaultValue="false" />
+
     </PreferenceScreen>
 
     <PreferenceScreen
