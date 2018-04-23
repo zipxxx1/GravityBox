@@ -2022,4 +2022,8 @@
     <string name="pref_sb_corner_padding_remove_title">Odstranit okraj rohů</string>
     <string name="pref_sb_corner_padding_remove_summary">Odstraní dodatečný okraj určený pro obrazovky se zaoblenými rohy (vyžaduje restart)</string>
 
+    <!-- QS: tiles per header -->
+    <string name="pref_qs_tiles_per_header_title">Počet dlaždic v hlavičce</string>
+    <string name="pref_qs_tiles_per_header_summary">Definuje počet dlaždic zobrazených v hlavičce</string>
+
 </resources>
