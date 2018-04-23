@@ -62,6 +62,7 @@ public class QsPanel implements BroadcastSubReceiver {
 
     private XSharedPreferences mPrefs;
     private ViewGroup mQsPanel;
+    private QsPanelQuick mQsPanelQuick;
     private int mNumColumns;
     private int mScaleCorrection;
     private View mBrightnessSlider;
@@ -75,8 +76,9 @@ public class QsPanel implements BroadcastSubReceiver {
     private LockedTileIndicator mLockedTileIndicator;
     private Integer mPanelMarginTopOrig;
 
-    public QsPanel(XSharedPreferences prefs, ClassLoader classLoader) {
+    public QsPanel(XSharedPreferences prefs, ClassLoader classLoader, QsPanelQuick quickPanel) {
         mPrefs = prefs;
+        mQsPanelQuick = quickPanel;
 
         initPreferences();
         createHooks(classLoader);
@@ -126,6 +128,9 @@ public class QsPanel implements BroadcastSubReceiver {
                 mLockedTileIndicator = LockedTileIndicator.valueOf(intent.getStringExtra(
                         GravityBoxSettings.EXTRA_QS_LOCKED_TILE_INDICATOR));
                 if (DEBUG) log("onBroadcastReceived: mLockedTileIndicator=" + mLockedTileIndicator);
+            }
+            if (mQsPanelQuick != null) {
+                mQsPanelQuick.onBroadcastReceived(context, intent);
             }
         } 
     }

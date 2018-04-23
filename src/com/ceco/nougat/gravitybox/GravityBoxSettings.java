@@ -92,6 +92,7 @@ import net.margaritov.preference.colorpicker.ColorPickerPreference;
 public class GravityBoxSettings extends GravityBoxActivity implements GravityBoxResultReceiver.Receiver {
     public static final String PREF_KEY_QUICK_SETTINGS_ENABLE = "pref_qs_management_enable";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row2";
+    public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_HEADER = "pref_qs_tiles_per_header";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE = "pref_qs_tile_label_style";
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE = "pref_qs_hide_on_change";
     public static final String PREF_KEY_QUICK_SETTINGS_HAPTIC_FEEDBACK = "pref_qs_haptic_feedback";
@@ -552,6 +553,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
     public static final String ACTION_PREF_QUICKSETTINGS_CHANGED = "gravitybox.intent.action.QUICKSETTINGS_CHANGED";
     public static final String EXTRA_QS_COLS = "qsCols";
+    public static final String EXTRA_QS_COLS_HEADER = "qsColsHeader";
     public static final String EXTRA_QS_AUTOSWITCH = "qsAutoSwitch";
     public static final String EXTRA_QUICK_PULLDOWN = "quickPulldown";
     public static final String EXTRA_QUICK_PULLDOWN_SIZE = "quickPulldownSize";
@@ -2587,6 +2589,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_COLS, Integer.valueOf(
                         prefs.getString(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0")));
+            } else if (key.equals(PREF_KEY_QUICK_SETTINGS_TILES_PER_HEADER)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QS_COLS_HEADER, Integer.valueOf(prefs.getString(key, "0")));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_TILE_LABEL_STYLE,

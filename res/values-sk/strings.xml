@@ -2038,4 +2038,8 @@
     <!-- Reboot -->
     <string name="reboot">Reštart</string>
 
+    <!-- QS: tiles per header -->
+    <string name="pref_qs_tiles_per_header_title">Počet dlaždíc v hlavičke</string>
+    <string name="pref_qs_tiles_per_header_summary">Definuje počet dlaždíc zobrazených v hlavičke</string>
+
 </resources>

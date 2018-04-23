@@ -2101,4 +2101,8 @@
     <!-- Reboot -->
     <string name="reboot">重启</string>
 
+    <!-- QS: tiles per header -->
+    <string name="pref_qs_tiles_per_header_title">每个标题磁砖</string>
+    <string name="pref_qs_tiles_per_header_summary">在标题中定义显示多少个磁砖</string>
+
 </resources>
