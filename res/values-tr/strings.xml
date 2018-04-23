@@ -2057,4 +2057,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_qs_tiles_per_header_title">Başlık başına kareler</string>
     <string name="pref_qs_tiles_per_header_summary">Başlıkta kaç tane kare görüntüleneceğini tanımlar</string>
 
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Yalnızca şarj olurken</string>
+
 </resources>
