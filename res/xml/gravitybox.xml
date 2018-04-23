@@ -935,6 +935,12 @@
                     android:title="@string/pref_battery_bar_show_title"
                     android:defaultValue="false" />
 
+                <CheckBoxPreference 
+                    android:key="pref_battery_bar_show_charging"
+                    android:title="@string/pref_battery_bar_show_charging_title"
+                    android:defaultValue="false"
+                    android:dependency="pref_battery_bar_show" />
+
                 <ListPreference 
                     android:key="pref_battery_bar_position"
                     android:title="@string/pref_battery_bar_position_title"

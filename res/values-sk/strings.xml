@@ -2032,4 +2032,7 @@
     <string name="pref_qs_tiles_per_header_title">Počet dlaždíc v hlavičke</string>
     <string name="pref_qs_tiles_per_header_summary">Definuje počet dlaždíc zobrazených v hlavičke</string>
 
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Len počas nabíjania</string>
+
 </resources>
