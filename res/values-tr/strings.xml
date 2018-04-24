@@ -2040,5 +2040,19 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
 
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Üst bildirim</string>
+    
+    <!-- Reboot -->
+    <string name="reboot">Yeniden başlat</string>
+
+    <!-- StatusBar: corner padding -->
+    <string name="pref_sb_corner_padding_remove_title">Köşe dolgusunu kaldır</string>
+    <string name="pref_sb_corner_padding_remove_summary">Yuvarlak köşeli ekranlar için tasarlanan dolguyu kaldırır (yeniden başlatma gerektirir)</string>
+
+    <!-- QS: tiles per header -->
+    <string name="pref_qs_tiles_per_header_title">Başlık başına kareler</string>
+    <string name="pref_qs_tiles_per_header_summary">Başlıkta kaç tane kare görüntüleneceğini tanımlar</string>
+
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Yalnızca şarj olurken</string>
 
 </resources>
