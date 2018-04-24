@@ -1,3 +1,22 @@
+Changelog 8.1.1 - 24/04/2018
+--------------------------------------
+- StatusBar: added option for removing rounded corner padding (8.1 only)
+- QuickSettings: added option for number of quick tiles in header
+- BatteryBar: added option to show bar only while charging
+- Visualizer:
+--- added option to show visualizer in navigation bar (thanks to @Dark_Eyes_ )
+--- additional fixes and improvements (thanks to @Dark_Eyes_ )
+- Pie: fixes and improvements:
+--- increased max value for trigger size
+--- fixed previous view flicking on activation
+--- unpin currently pinned task on back long-press (has priority over custom long-press action)
+- Increased lethality of Kill foreground app action
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated French translations (thanks to Choukajohn)
+- Updated Russian translations (thanks to gaich)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Turkish translations (thanks to Fatih Firinci)
+
 Changelog 8.1.0 - 01/04/2018
 --------------------------------------
 - QuickSettings management:
