@@ -28,10 +28,12 @@ import com.ceco.marshmallow.gravitybox.TouchInterceptor;
 import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.ledcontrol.LedSettings;
 
+import android.Manifest.permission;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -289,8 +291,15 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         if ((key.equals("gb_tile_battery") || key.equals("aosp_tile_dnd")) && 
                 isOxygenOs35Rom())
             return false;
+        if (key.equals("gb_tile_quickrecord") && !isAudioRecordingAllowed())
+            return false;
 
         return true;
+    }
+
+    private boolean isAudioRecordingAllowed() {
+        return (checkSelfPermission(permission.RECORD_AUDIO) ==
+                    PackageManager.PERMISSION_GRANTED);
     }
 
     @Override
