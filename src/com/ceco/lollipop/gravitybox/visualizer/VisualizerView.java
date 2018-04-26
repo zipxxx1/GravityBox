@@ -29,7 +29,7 @@ import de.robv.android.xposed.XposedBridge;
 public class VisualizerView extends View {
 
     private static final String TAG = "GB:VisualizerView";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
