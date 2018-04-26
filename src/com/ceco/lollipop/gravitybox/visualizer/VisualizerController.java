@@ -14,6 +14,9 @@
  */
 package com.ceco.lollipop.gravitybox.visualizer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModLockscreen;
@@ -28,11 +31,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.MediaMetadata;
+import android.media.audiofx.Visualizer;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
-import android.view.View;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.v7.graphics.Palette;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -40,7 +46,9 @@ import de.robv.android.xposed.XposedHelpers;
 
 public class VisualizerController implements StatusBarStateChangedListener,
                                              BatteryInfoManager.BatteryStatusListener,
-                                             BroadcastSubReceiver {
+                                             BroadcastSubReceiver,
+                                             Palette.PaletteAsyncListener,
+                                             Visualizer.OnDataCaptureListener {
     private static final String TAG = "GB:VisualizerController";
     private static final boolean DEBUG = false;
 
@@ -50,29 +58,96 @@ public class VisualizerController implements StatusBarStateChangedListener,
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private VisualizerLayout mView;
+    interface Listener {
+        void initPreferences(XSharedPreferences prefs);
+        void onPreferenceChanged(Intent intent);
+        void onCreateView(ViewGroup parent) throws Throwable;
+        void onActiveStateChanged(boolean active);
+        void onMediaMetaDataUpdated(MediaMetadata md, Bitmap artwork);
+        void onUserActivity();
+        void onStatusBarStateChanged(int oldState, int newState);
+        void onBatteryStatusChanged(BatteryData batteryData);
+        void onColorUpdated(int color);
+        void onFftDataCapture(Visualizer visualizer, byte[] fft, int samplingRate);
+        boolean isEnabled();
+        boolean isAttached();
+    }
+
+    private XSharedPreferences mPrefs;
+    private List<Listener> mListeners;
+    private boolean mPlaying = false;
+    private boolean mActive = false;
+    private boolean mIsScreenOn = true;
     private boolean mDynamicColorEnabled;
-    private int mColor;
-    private int mOpacityPercent;
-    private boolean mActiveMode;
-    private boolean mDimEnabled;
-    private int mDimLevelPercent;
-    private boolean mDimInfoEnabled;
-    private boolean mDimHeaderEnabled;
-    private boolean mDimControlsEnabled;
-    private boolean mDimArtworkEnabled;
+    private int mDefaultColor;
+    private int mCurrentColor;
+    private int mOpacity;
+    private Visualizer mVisualizer;
+    private Handler mHandler;
+
+    private final Runnable mLinkVisualizer = new Runnable() {
+        @Override
+        public void run() {
+            if (DEBUG) {
+                log("+++ mLinkVisualizer run()");
+            }
+
+            if (mVisualizer != null) {
+                mUnlinkVisualizer.run();
+            }
+
+            try {
+                mVisualizer = new Visualizer(0);
+            } catch (Exception e) {
+                XposedBridge.log(e);
+                return;
+            }
+
+            mVisualizer.setEnabled(false);
+            mVisualizer.setCaptureSize(66);
+            mVisualizer.setDataCaptureListener(VisualizerController.this, Visualizer.getMaxCaptureRate(),
+                    false, true);
+            mVisualizer.setEnabled(true);
+
+            if (DEBUG) {
+                log("--- mLinkVisualizer run()");
+            }
+        }
+    };
+
+    private final Runnable mUnlinkVisualizer = new Runnable() {
+        @Override
+        public void run() {
+            if (DEBUG) {
+                log("+++ mUnlinkVisualizer run(), mVisualizer: " + mVisualizer);
+            }
+
+            if (mVisualizer != null) {
+                mVisualizer.setEnabled(false);
+                mVisualizer.release();
+                mVisualizer = null;
+            }
+
+            if (DEBUG) {
+                log("--- mUnlinkVisualizer run()");
+            }
+        }
+    };
+
+    private final Runnable mAsyncUnlinkVisualizer = new Runnable() {
+        @Override
+        public void run() {
+            AsyncTask.execute(mUnlinkVisualizer);
+        }
+    };
 
     public VisualizerController(ClassLoader cl, XSharedPreferences prefs) {
+        mPrefs = prefs;
+        mListeners = new ArrayList<>();
         mDynamicColorEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DYNAMIC_COLOR, true);
-        mColor = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_COLOR, Color.WHITE);
-        mOpacityPercent = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_OPACITY, 50);
-        mActiveMode = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ACTIVE_MODE, false);
-        mDimEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM, true);
-        mDimLevelPercent = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_LEVEL, 80);
-        mDimInfoEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_INFO, true);
-        mDimHeaderEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_HEADER, true);
-        mDimControlsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_CONTROLS, true);
-        mDimArtworkEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_DIM_ARTWORK, true);
+        mDefaultColor = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_COLOR, Color.WHITE);
+        mOpacity = Math.round(255f * ((float)prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_OPACITY, 50)/100f));
+        mCurrentColor = mDynamicColorEnabled ? Color.TRANSPARENT : mDefaultColor;
 
         createHooks(cl);
     }
@@ -83,7 +158,8 @@ public class VisualizerController implements StatusBarStateChangedListener,
                     "onAttachedToWindow", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    createView((ViewGroup) param.thisObject);
+                    ViewGroup parent = (ViewGroup) param.thisObject;
+                    addListener(parent, new LockscreenVisualizerLayout(parent.getContext()));
                 }
             });
         } catch (Throwable t) {
@@ -95,10 +171,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
                     "updateMediaMetaData", boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mView != null) {
-                        updateMediaMetaData(param.thisObject,
-                                (boolean) param.args[0]);
-                    }
+                    updateMediaMetaData(param.thisObject, (boolean) param.args[0]);
                 }
             });
         } catch (Throwable t) {
@@ -118,55 +191,54 @@ public class VisualizerController implements StatusBarStateChangedListener,
         }
     }
 
-    private void createView(ViewGroup parent) throws Throwable {
-        // find suitable position, put as last if failed
-        int pos = parent.getChildCount();
-        int resId = parent.getResources().getIdentifier("status_bar", "id",
-                parent.getContext().getPackageName());
-        if (resId != 0) {
-            View v = parent.findViewById(resId);
-            if (v != null) {
-                pos = parent.indexOfChild(v);
+    private void addListener(ViewGroup parent, Listener l) throws Throwable {
+        // cleanup stalled listeners
+        for (int i = mListeners.size()-1; i >= 0; i--) {
+            if (!mListeners.get(i).isAttached()) {
+                mListeners.remove(i);
+                if (DEBUG) log("Removed stalled listener: " + l);
             }
         }
-        if (DEBUG) log("Computed view position: " + pos);
+        // add new
+        l.onCreateView(parent);
+        l.initPreferences(mPrefs);
+        l.onColorUpdated(Color.argb(mOpacity, Color.red(mCurrentColor),
+                Color.green(mCurrentColor), Color.blue(mCurrentColor)));
+        mListeners.add(l);
+        if (DEBUG) log("Current number of listeners: " + mListeners.size());
+        updateActiveState(true);
+    }
 
-        mView = new VisualizerLayout(parent.getContext(), pos);
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT);
-        mView.setLayoutParams(lp);
-        parent.addView(mView, pos);
+    private void postRunnable(Runnable r, long delayMs) {
+        if (mHandler == null) {
+            mHandler = new Handler(Looper.getMainLooper());
+        }
+        mHandler.postDelayed(r, delayMs);
+    }
 
-        mView.setOpacityPercent(mOpacityPercent);
-        mView.setDefaultColor(mColor);
-        mView.setActiveMode(mActiveMode);
-        mView.setDimEnabled(mDimEnabled);
-        mView.setDimLevelPercent(mDimLevelPercent);
-        mView.setDimInfoEnabled(mDimInfoEnabled);
-        mView.setDimHeaderEnabled(mDimHeaderEnabled);
-        mView.setDimControlsEnabled(mDimControlsEnabled);
-        mView.setDimArtworkEnabled(mDimArtworkEnabled);
-
-        if (DEBUG) log("VisualizerLayout created");
+    private void removeRunnable(Runnable r) {
+        if (mHandler != null) {
+            mHandler.removeCallbacks(r);
+        }
     }
 
     private void updateMediaMetaData(Object sb, boolean metaDataChanged) {
         MediaController mc = (MediaController) XposedHelpers
                 .getObjectField(sb, "mMediaController");
-        boolean playing = mc != null && mc.getPlaybackState() != null &&
+        mPlaying = mc != null && mc.getPlaybackState() != null &&
                 mc.getPlaybackState().getState() == PlaybackState.STATE_PLAYING;
-        mView.setPlaying(playing);
 
-        if (playing) {
+        final boolean wasActive = mActive;
+        updateActiveState();
+        metaDataChanged |= (mActive && !wasActive);
+
+        if (mPlaying) {
             if (SysUiManagers.BatteryInfoManager != null) {
                 SysUiManagers.BatteryInfoManager.registerListener(this);
             }
             if (metaDataChanged) {
-                MediaMetadata md = mc.getMetadata();
-                mView.setArtist(md != null ? md.getString(MediaMetadata.METADATA_KEY_ARTIST) : null);
-                mView.setTitle(md != null ? md.getString(MediaMetadata.METADATA_KEY_TITLE) : null);
                 Bitmap artworkBitmap = null;
+                MediaMetadata md = mc.getMetadata();
                 if (md != null) {
                     artworkBitmap = md.getBitmap(MediaMetadata.METADATA_KEY_ART);
                     if (artworkBitmap == null) {
@@ -175,11 +247,15 @@ public class VisualizerController implements StatusBarStateChangedListener,
                     if (DEBUG)
                         log("updateMediaMetaData: artwork change detected; bitmap=" + artworkBitmap);
                 }
-                if (artworkBitmap != null) {
-                    mView.setBitmap(artworkBitmap, mDynamicColorEnabled);
-                    if (DEBUG) log("updateMediaMetaData: artwork change detected; bitmap=" + artworkBitmap);
-                } else {
-                    mView.setBitmap(null, false);
+                if (mDynamicColorEnabled) {
+                    if (artworkBitmap != null) { 
+                        Palette.from(artworkBitmap).generate(this);
+                    } else {
+                        notifyColorUpdated(mDefaultColor);
+                    }
+                }
+                for (Listener l : mListeners) {
+                    l.onMediaMetaDataUpdated(md, artworkBitmap);
                 }
             }
         } else {
@@ -189,79 +265,129 @@ public class VisualizerController implements StatusBarStateChangedListener,
         }
     }
 
+    private void updateActiveState() {
+        updateActiveState(false);
+    }
+
+    private void updateActiveState(boolean forceNotifyListeners) {
+        boolean atLeastOneListenerEnabled = false;
+        for (Listener l : mListeners) {
+            atLeastOneListenerEnabled |= l.isEnabled();
+        }
+        boolean newActive = mPlaying && mIsScreenOn && !isPowerSaving() && atLeastOneListenerEnabled;
+        if (newActive != mActive) {
+            mActive = newActive;
+            removeRunnable(mAsyncUnlinkVisualizer);
+            if (mActive) {
+                AsyncTask.execute(mLinkVisualizer);
+            } else {
+                postRunnable(mAsyncUnlinkVisualizer, 800);
+            }
+            forceNotifyListeners = true;
+        }
+        if (forceNotifyListeners) {
+            for (Listener l : mListeners) {
+                l.onActiveStateChanged(mActive);
+            }
+        }
+    }
+
+    private boolean isPowerSaving() {
+        if (SysUiManagers.BatteryInfoManager != null) {
+            BatteryData bd = SysUiManagers.BatteryInfoManager.getCurrentBatteryData();
+            return (bd != null && bd.isPowerSaving);
+        }
+        return false;
+    }
+
     private void onUserActivity() {
-        if (mView != null) {
-            mView.onUserActivity();
+        for (Listener l : mListeners) {
+            l.onUserActivity();
         }
     }
 
     @Override
     public void onStatusBarStateChanged(int oldState, int newState) {
-        if (mView != null) {
-            mView.setStatusBarState(newState);
+        for (Listener l : mListeners) {
+            l.onStatusBarStateChanged(oldState, newState);
         }
+        updateActiveState();
     }
 
     @Override
     public void onBatteryStatusChanged(BatteryData batteryData) {
-        if (mView != null) {
-            mView.setPowerSaveMode(batteryData.isPowerSaving);
-            mView.setBatteryLevel(batteryData.level);
+        updateActiveState();
+        for (Listener l : mListeners) {
+            l.onBatteryStatusChanged(batteryData);
         }
     }
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-            if (mView != null) {
-                mView.setVisible(true);
-            }
+            mIsScreenOn = true;
+            updateActiveState();
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-            if (mView != null) {
-                mView.setVisible(false);
-            }
+            mIsScreenOn = false;
+            updateActiveState();
         } else if (intent.getAction().equals(GravityBoxSettings.ACTION_VISUALIZER_SETTINGS_CHANGED)) {
+            for (Listener l : mListeners) {
+                l.onPreferenceChanged(intent);
+            }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DYNAMIC_COLOR)) {
                 mDynamicColorEnabled = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_VISUALIZER_DYNAMIC_COLOR, true);
+                if (!mDynamicColorEnabled) {
+                    notifyColorUpdated(mDefaultColor);
+                }
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_COLOR)) {
-                mColor = intent.getIntExtra(
+                mDefaultColor = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_VISUALIZER_COLOR, Color.WHITE);
-                if (mView != null) mView.setDefaultColor(mColor);
+                if (!mDynamicColorEnabled) {
+                    notifyColorUpdated(mDefaultColor);
+                }
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_OPACITY)) {
-                mOpacityPercent = intent.getIntExtra(GravityBoxSettings.EXTRA_VISUALIZER_OPACITY, 50);
-                if (mView != null) mView.setOpacityPercent(mOpacityPercent);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_ACTIVE_MODE)) {
-                mActiveMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_ACTIVE_MODE, false);
-                if (mView != null) mView.setActiveMode(mActiveMode);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM)) {
-                mDimEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM, true);
-                if (mView != null) mView.setDimEnabled(mDimEnabled);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_LEVEL)) {
-                mDimLevelPercent = intent.getIntExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_LEVEL, 80);
-                if (mView != null) mView.setDimLevelPercent(mDimLevelPercent);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_INFO)) {
-                mDimInfoEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_INFO, true);
-                if (mView != null) mView.setDimInfoEnabled(mDimInfoEnabled);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_HEADER)) {
-                mDimHeaderEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_HEADER, true);
-                if (mView != null) mView.setDimHeaderEnabled(mDimHeaderEnabled);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_CONTROLS)) {
-                mDimControlsEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_CONTROLS, true);
-                if (mView != null) mView.setDimControlsEnabled(mDimControlsEnabled);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_ARTWORK)) {
-                mDimArtworkEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VISUALIZER_DIM_ARTWORK, true);
-                if (mView != null) mView.setDimArtworkEnabled(mDimArtworkEnabled);
+                mOpacity = Math.round(255f * ((float)intent.getIntExtra(
+                        GravityBoxSettings.EXTRA_VISUALIZER_OPACITY, 50)/100f));
+                notifyColorUpdated(mCurrentColor);
             }
         }
     }
+
+    @Override
+    public void onGenerated(Palette palette) {
+        int color = palette.getVibrantColor(Color.TRANSPARENT);
+        if (color == Color.TRANSPARENT) {
+            color = palette.getLightVibrantColor(color);
+            if (color == Color.TRANSPARENT) {
+                color = palette.getDarkVibrantColor(color);
+                if (color == Color.TRANSPARENT) {
+                    color = mDefaultColor;
+                }
+            }
+        }
+        notifyColorUpdated(color);
+    }
+
+    private void notifyColorUpdated(int color) {
+        mCurrentColor = color;
+        color = Color.argb(mOpacity, Color.red(color), Color.green(color), Color.blue(color));
+        for (Listener l : mListeners) {
+            l.onColorUpdated(color);
+        }
+    }
+
+    @Override
+    public void onFftDataCapture(Visualizer visualizer, byte[] fft, int samplingRate) {
+        for (Listener l : mListeners) {
+            if (l.isEnabled()) {
+                l.onFftDataCapture(visualizer, fft, samplingRate);
+            }
+        }
+    }
+
+    @Override
+    public void onWaveFormDataCapture(Visualizer visualizer, byte[] bytes, int samplingRate) { }
 }
