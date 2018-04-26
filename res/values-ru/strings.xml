@@ -2160,4 +2160,7 @@
     <!-- QS: Ambient Display tile -->
     <string name="qs_tile_ambient_display">Живой дисплей</string>
 
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Всплытие (heads up)</string>
+
 </resources>
