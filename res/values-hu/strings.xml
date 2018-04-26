@@ -2043,4 +2043,7 @@
     <string name="pref_visualizer_dim_artwork_title">Grafika mutatása</string>
     <string name="pref_visualizer_dim_artwork_summary">Megjeleníti a grafikákat a sötétített képernyőn a zárképernyőt lefedve</string>
 
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Lebegő értesítés</string>
+
 </resources>

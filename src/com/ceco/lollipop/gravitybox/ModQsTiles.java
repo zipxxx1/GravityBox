@@ -57,7 +57,8 @@ public class ModQsTiles {
             "gb_tile_lock_screen",
             "gb_tile_quiet_hours",
             "gb_tile_compass",
-            "gb_tile_bt_tethering"
+            "gb_tile_bt_tethering",
+            "gb_tile_heads_up"
     ));
 
     public static class RES_IDS {

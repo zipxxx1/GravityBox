@@ -130,6 +130,7 @@
         <item>@string/lc_quiet_hours</item>
         <item>@string/qs_tile_compass</item>
         <item>@string/qs_tile_bt_tethering</item>
+        <item>@string/qs_tile_heads_up</item>
         <!-- MTK -->
         <item>@string/qs_tile_mobile_data</item>
         <item>@string/qs_tile_audio_profile</item>
@@ -177,6 +178,7 @@
         <item>gb_tile_quiet_hours</item>
         <item>gb_tile_compass</item>
         <item>gb_tile_bt_tethering</item>
+        <item>gb_tile_heads_up</item>
         <!-- MTK -->
         <item>mtk_tile_mobile_data</item>
         <item>mtk_tile_audio_profile</item>

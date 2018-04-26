@@ -1926,4 +1926,7 @@
     <string name="pref_visualizer_dim_artwork_title">Afficher la pochette</string>
     <string name="pref_visualizer_dim_artwork_summary">Affiche la pochette de l\'album au-dessus de l\'écran de verrouillage sur l\'écran tamisé</string>
 
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Notifications flottantes</string>
+
 </resources>

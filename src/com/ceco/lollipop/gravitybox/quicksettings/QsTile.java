@@ -103,6 +103,8 @@ public abstract class QsTile extends BaseTile {
             return new BatteryTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_bt_tethering"))
             return new BluetoothTetheringTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_heads_up"))
+            return new HeadsUpTile(host, key, prefs, eventDistributor);
 
         return null;
     }

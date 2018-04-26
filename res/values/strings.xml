@@ -2111,4 +2111,7 @@
     <string name="pref_visualizer_dim_artwork_title">Show artwork</string>
     <string name="pref_visualizer_dim_artwork_summary">Shows artwork covering lock screen contents on dimmed screen</string>
 
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Heads up</string>
+
 </resources>
