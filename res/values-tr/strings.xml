@@ -386,7 +386,7 @@
     <string name="pref_cat_clock_settings_title">Saat ayarları</string>
 
     <!-- Clock: hide am/pm -->
-    <string name="pref_clock_ampm_hide_title">AM/PM'i gizle</string>
+    <string name="pref_clock_ampm_hide_title">AM/PM\'i gizle</string>
 
     <!-- Clock: hide clock -->
     <string name="pref_clock_hide_title">Saati gizle</string>
@@ -1412,8 +1412,8 @@
     <string name="qs_tile_audio_profile">Ses Profili</string>
 
     <!-- MTK specific fixes category -->
-    <string name="pref_cat_mtk_fixes_title">MTK'ya özel düzeltmeler</string>
-    <string name="pref_cat_mtk_fixes_summary">MediaTek'e özel düzeltmeleri içerir. Sadece gerekirse kullanın.</string>
+    <string name="pref_cat_mtk_fixes_title">MTK\'ya özel düzeltmeler</string>
+    <string name="pref_cat_mtk_fixes_summary">MediaTek\'e özel düzeltmeleri içerir. Sadece gerekirse kullanın.</string>
 
     <!-- MTK Advanced Developer Options -->
     <string name="pref_mtk_fix_dev_opts_title">Gelişmiş geliştirici seçenekleri</string>
@@ -1490,7 +1490,7 @@
     <string name="compat_warning_title">UYARI</string>
     <string name="compat_warning_message">SADECE SAF ANDROİD VEYA GOOGLE PLAY SÜRÜMÜ CİHAZLARDA KULLANMAK İÇİNDİR!
 
-Touchwiz, Sense, Xperia gibi diğer markalı rom'ların yanı sıra, herhangi bir özel rom'da da kullanımı desteklenmez ve beklenmedik sonuçlara neden olabilir.
+Touchwiz, Sense, Xperia gibi diğer markalı rom\'ların yanı sıra, herhangi bir özel rom\'da da kullanımı desteklenmez ve beklenmedik sonuçlara neden olabilir.
 
 Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek beklentiniz olmadan onaylarsınız. Uyumluluk hakkında daha ayrıntılı bilgi için, "<a href="http://forum.xda-developers.com/showthread.php?t=3653953">XDA destek konusu</a>na bakın.</string>
     <string name="compat_warning_ok_stage1">Tamam. Anladım.</string>
@@ -2056,12 +2056,12 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_lockscreen_direct_unlock_trans_level_title">Şeffaf gör</string>
 
     <!-- Subscription manager -->
-    <string name="sm_choose_voice_sub">Aramalar için varsayılan SIM'i seçin</string>
-    <string name="sm_choose_sms_sub">Mesajlaşma için varsayılan SIM'i seçin</string>
-    <string name="sm_choose_data_sub">Hücresel veriler için varsayılan SIM'i seçin</string>
-    <string name="sm_sub_change_voice_failed">Aramalar için varsayılan SIM'i ayarlama başarısız</string>
-    <string name="sm_sub_change_sms_failed">Mesajlaşma için varsayılan SIM'i ayarlama başarısız</string>
-    <string name="sm_sub_change_data_failed">Hücresel veriler için varsayılan SIM'i ayarlama başarısız</string>
+    <string name="sm_choose_voice_sub">Aramalar için varsayılan SIM\'i seçin</string>
+    <string name="sm_choose_sms_sub">Mesajlaşma için varsayılan SIM\'i seçin</string>
+    <string name="sm_choose_data_sub">Hücresel veriler için varsayılan SIM\'i seçin</string>
+    <string name="sm_sub_change_voice_failed">Aramalar için varsayılan SIM\'i ayarlama başarısız</string>
+    <string name="sm_sub_change_sms_failed">Mesajlaşma için varsayılan SIM\'i ayarlama başarısız</string>
+    <string name="sm_sub_change_data_failed">Hücresel veriler için varsayılan SIM\'i ayarlama başarısız</string>
     <string name="sm_sub_change_voice_ok">Aramalar için varsayılan SIM ayarı:</string>
     <string name="sm_sub_change_sms_ok">Mesajlaşma için varsayılan SIM ayarı:</string>
     <string name="sm_sub_change_data_ok">Hücresel veriler için varsayılan SIM ayarı:</string>
@@ -2072,13 +2072,13 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="shortcut_sm_voice_sim_1">Aramalar için SIM 1</string>
     <string name="shortcut_sm_voice_sim_2">Aramalar için SIM 2</string>
     <string name="shortcut_sm_voice_sim_ask">Arama yaparken sor</string>
-    <string name="shortcut_sm_voice_sim_ui">Aramalar için SIM'i seçin</string>
+    <string name="shortcut_sm_voice_sim_ui">Aramalar için SIM\'i seçin</string>
     <string name="shortcut_sm_sms_sim_1">SMS için SIM 1</string>
     <string name="shortcut_sm_sms_sim_2">SMS için SIM 2</string>
-    <string name="shortcut_sm_sms_sim_ui">SMS için SIM'i seçin</string>
+    <string name="shortcut_sm_sms_sim_ui">SMS için SIM\'i seçin</string>
     <string name="shortcut_sm_data_sim_1">Veri için SIM 1</string>
     <string name="shortcut_sm_data_sim_2">Veri için SIM 2</string>
-    <string name="shortcut_sm_data_sim_ui">Veri için SIM'i seçin</string>
+    <string name="shortcut_sm_data_sim_ui">Veri için SIM\'i seçin</string>
 
     <!-- QuickApp Tile #3 and #4 -->
     <string name="pref_cat_quickapp_tile_3_title">Hızlı Uygulama karesi 3 ayarları</string>
