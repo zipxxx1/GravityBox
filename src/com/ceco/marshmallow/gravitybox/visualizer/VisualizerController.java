@@ -42,7 +42,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
                                              BatteryInfoManager.BatteryStatusListener,
                                              BroadcastSubReceiver {
     private static final String TAG = "GB:VisualizerController";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private static final String CLASS_STATUSBAR_WINDOW_VIEW = "com.android.systemui.statusbar.phone.StatusBarWindowView";
 
