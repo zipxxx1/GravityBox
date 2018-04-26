@@ -29,6 +29,8 @@ import com.ceco.marshmallow.gravitybox.shortcuts.AShortcut;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.HapticFeedbackConstants;
@@ -99,6 +101,11 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
     }
 
     private boolean performActionFor(ButtonType btnType) {
+        if (btnType == ButtonType.BACK && isTaskLocked()) {
+            unlockTask();
+            return true;
+        }
+
         Intent intent = null;
         switch(mActions.get(btnType).actionId) {
             case GravityBoxSettings.HWKEY_ACTION_SEARCH:
@@ -170,5 +177,21 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
         }
 
         return true;
+    }
+
+    private boolean isTaskLocked() {
+        ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        return (am.getLockTaskModeState() != ActivityManager.LOCK_TASK_MODE_NONE);
+    }
+
+    private void unlockTask() {
+        try {
+            Class<?> amnClass = XposedHelpers.findClass("android.app.ActivityManagerNative",
+                    mContext.getClassLoader());
+            Object amn = XposedHelpers.callStaticMethod(amnClass, "getDefault");
+            XposedHelpers.callMethod(amn, "stopLockTaskMode");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 }

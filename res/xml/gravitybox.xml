@@ -1612,7 +1612,7 @@
                 android:key="pref_pie_control_trigger_size"
                 android:title="@string/pie_control_trigger_size_title"
                 minimum="2"
-                maximum="15"
+                maximum="30"
                 interval="1"
                 monitorBoxEnabled="true"
                 monitorBoxUnit="px"
