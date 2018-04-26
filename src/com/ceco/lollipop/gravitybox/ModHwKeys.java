@@ -104,6 +104,7 @@ public class ModHwKeys {
     public static final String ACTION_INAPP_SEARCH = "gravitybox.intent.action.INAPP_SEARCH";
     public static final String ACTION_SET_RINGER_MODE = "gravitybox.intent.action.SET_RINGER_MODE";
     public static final String EXTRA_RINGER_MODE = "ringerMode";
+    public static final String ACTION_UNLOCK_TASK = "gravitybox.intent.action.UNLOCK_TASK";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
     public static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
@@ -384,6 +385,8 @@ public class ModHwKeys {
                 }
             } else if (action.equals(ACTION_TOGGLE_AUTO_BRIGHTNESS)) {
                 changeAutoBrightnessState(intent);
+            } else if (action.equals(ACTION_UNLOCK_TASK)) {
+                unlockTask();
             }
         }
     };
@@ -962,6 +965,7 @@ public class ModHwKeys {
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED);
             intentFilter.addAction(Intent.ACTION_HEADSET_PLUG);
             intentFilter.addAction(ACTION_TOGGLE_AUTO_BRIGHTNESS);
+            intentFilter.addAction(ACTION_UNLOCK_TASK);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -1832,5 +1836,16 @@ public class ModHwKeys {
 
     private static boolean isTaskLocked() {
         return getActivityManager().isInLockTaskMode();
+    }
+
+    private static void unlockTask() {
+        try {
+            Class<?> amnClass = XposedHelpers.findClass("android.app.ActivityManagerNative",
+                    mContext.getClassLoader());
+            Object amn = XposedHelpers.callStaticMethod(amnClass, "getDefault");
+            XposedHelpers.callMethod(amn, "stopLockTaskMode");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 }

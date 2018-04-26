@@ -29,6 +29,7 @@ import com.ceco.lollipop.gravitybox.shortcuts.AShortcut;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.HapticFeedbackConstants;
@@ -99,6 +100,11 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
     }
 
     private boolean performActionFor(ButtonType btnType) {
+        if (btnType == ButtonType.BACK && isTaskLocked()) {
+            unlockTask();
+            return true;
+        }
+
         Intent intent = null;
         switch(mActions.get(btnType).actionId) {
             case GravityBoxSettings.HWKEY_ACTION_SEARCH:
@@ -170,5 +176,14 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
         }
 
         return true;
+    }
+
+    private boolean isTaskLocked() {
+        ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        return (am.isInLockTaskMode());
+    }
+
+    private void unlockTask() {
+        mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_UNLOCK_TASK));
     }
 }
