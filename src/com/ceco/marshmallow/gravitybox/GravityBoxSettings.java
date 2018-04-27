@@ -926,6 +926,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_VISUALIZER_DIM_CONTROLS = "visualizerDimControls";
     public static final String EXTRA_VISUALIZER_DIM_ARTWORK = "visualizerDimArtwork";
 
+    public static final String PREF_KEY_LOG_ERRORS = "pref_log_errors";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -965,7 +967,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_BATTERY_PERCENT_TEXT_POSITION,
             PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE,
             PREF_KEY_BATTERY_TWEAKS_ENABLED,
-            PREF_KEY_VISUALIZER_ENABLE
+            PREF_KEY_VISUALIZER_ENABLE,
+            PREF_KEY_LOG_ERRORS
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(

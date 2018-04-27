@@ -18,6 +18,7 @@ package com.ceco.marshmallow.gravitybox.pie;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModHwKeys;
 import com.ceco.marshmallow.gravitybox.ModLauncher;
@@ -191,7 +192,7 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
             Object amn = XposedHelpers.callStaticMethod(amnClass, "getDefault");
             XposedHelpers.callMethod(amn, "stopLockTaskMode");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

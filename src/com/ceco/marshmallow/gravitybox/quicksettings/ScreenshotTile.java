@@ -15,6 +15,7 @@
 
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.ModHwKeys;
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.ScreenRecordingService;
@@ -61,7 +62,7 @@ public class ScreenshotTile extends QsTile {
             intent.setAction(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING);
             mGbContext.startService(intent);
         } catch (Throwable t) {
-            log(getKey() + ": Error toggling screen recording: " + t.getMessage());
+            GravityBox.log(TAG, getKey() + ": Error toggling screen recording:", t);
         } 
         return true;
     }

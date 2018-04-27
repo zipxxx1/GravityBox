@@ -14,6 +14,7 @@
  */
 package com.ceco.marshmallow.gravitybox.visualizer;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.Utils;
@@ -186,7 +187,7 @@ public class LockscreenVisualizerLayout extends AVisualizerLayout
                     SystemClock.uptimeMillis(), false);
             if (DEBUG) log("Virtual userActivity sent");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

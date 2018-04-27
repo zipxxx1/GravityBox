@@ -72,7 +72,7 @@ public class ModLowBatteryWarning {
         try {
             XposedHelpers.callMethod(mBatteryLed, "updateLightsLocked");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -127,7 +127,7 @@ public class ModLowBatteryWarning {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -170,6 +170,6 @@ public class ModLowBatteryWarning {
                 }
             });
 
-        } catch (Throwable t) { XposedBridge.log(t); }
+        } catch (Throwable t) { GravityBox.log(TAG, t); }
     }
 }

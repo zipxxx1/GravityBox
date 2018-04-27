@@ -15,11 +15,11 @@
 
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.ModHwKeys;
 import com.ceco.marshmallow.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
@@ -48,8 +48,7 @@ public class SleepTile extends QsTile {
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             XposedHelpers.callMethod(pm, "goToSleep", SystemClock.uptimeMillis());
         } catch(Throwable t) {
-            log(getKey() + ": Error calling PowerManager goToSleep(): ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, getKey() + ": Error calling PowerManager goToSleep(): ", t);
         }
         super.handleClick();
     }

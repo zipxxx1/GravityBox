@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -216,7 +215,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -233,7 +232,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
 
@@ -249,7 +248,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
             try {
                 XposedHelpers.findAndHookMethod(mContainer.getClass(),
@@ -273,7 +272,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
             try {
                 XposedHelpers.findAndHookMethod(mContainer.getClass(), "onConfigurationChanged",
@@ -287,7 +286,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }

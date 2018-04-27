@@ -2,6 +2,7 @@ package com.ceco.marshmallow.gravitybox.quicksettings;
 
 import java.lang.reflect.Constructor;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
@@ -9,7 +10,6 @@ import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public abstract class QsTile extends BaseTile {
@@ -164,8 +164,7 @@ public abstract class QsTile extends BaseTile {
         try {
             return XposedHelpers.findClass(CLASS_BASE_TILE+".ResourceIcon", cl);
         } catch (Throwable t) {
-            log("Error getting resource icon class:");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error getting resource icon class:", t);
             return null;
         }
     }
@@ -202,8 +201,7 @@ public abstract class QsTile extends BaseTile {
                 if (DEBUG) log("getting resource icon for " + mKey);
                 return resourceIcon;
             } catch (Throwable t) {
-                log("Error creating resource icon:");
-                XposedBridge.log(t);
+                GravityBox.log(TAG, "Error creating resource icon:", t);
                 return null;
             }
         }

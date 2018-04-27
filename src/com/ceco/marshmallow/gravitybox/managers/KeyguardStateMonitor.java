@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModPower;
 
@@ -148,7 +149,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -232,7 +233,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
             try {
                 XposedHelpers.callMethod(mMediator, "dismiss");
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }
@@ -245,7 +246,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                 XposedHelpers.setBooleanField(mMediator, "mNeedToReshowWhenReenabled", false);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -268,14 +269,14 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                 try {
                     XposedHelpers.callMethod(mUpdateMonitor, "setFingerprintRunningDetectionRunning", false);
                 } catch (Throwable t2) {
-                    XposedBridge.log(t2);
+                    GravityBox.log(TAG, t2);
                 }
             }
 
             try {
                 XposedHelpers.callMethod(mUpdateMonitor, "updateFingerprintListeningState");
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     };
@@ -284,7 +285,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
         try {
             XposedHelpers.callMethod(mUpdateMonitor, "handleFingerprintAuthenticated");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

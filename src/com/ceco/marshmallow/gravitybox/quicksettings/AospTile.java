@@ -15,13 +15,13 @@
 
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public abstract class AospTile extends BaseTile implements QsEventListener {
@@ -87,7 +87,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new OnePlus3TTile(host, aospKey, tile, prefs, eventDistributor);
         }
 
-        log("Unknown stock tile: key=" + aospKey + "; class=" +
+        GravityBox.log(TAG, "Unknown stock tile: key=" + aospKey + "; class=" +
                 (tile == null ? "null" : tile.getClass().getName()));
 
         return null;
@@ -164,7 +164,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

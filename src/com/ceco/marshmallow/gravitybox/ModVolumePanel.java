@@ -172,7 +172,7 @@ public class ModVolumePanel {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -185,7 +185,7 @@ public class ModVolumePanel {
             Object row = rows.get(rows.size()-1);
             XposedHelpers.setAdditionalInstanceField(row, "gbNotifSlider", true);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -199,7 +199,7 @@ public class ModVolumePanel {
             }
             return true;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return true;
         }
     }

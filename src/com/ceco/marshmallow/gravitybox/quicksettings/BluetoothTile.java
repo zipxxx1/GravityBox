@@ -1,5 +1,6 @@
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.Utils;
 
 import android.provider.Settings;
@@ -59,7 +60,7 @@ public class BluetoothTile extends AospTile {
                         mContext.getClassLoader(), "hasDualTargetsDetails", dtHook);
             } catch (Throwable t2) {
                 if (!Utils.isOxygenOs35Rom()) {
-                    log(getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
+                    GravityBox.log(TAG, getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
                 }
             }
         }

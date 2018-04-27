@@ -3,9 +3,9 @@ package com.ceco.marshmallow.gravitybox.quicksettings;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.Utils;
 
 import android.content.Context;
@@ -59,7 +59,7 @@ public class WifiTile extends AospTile {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         // this seems to be unsupported on some custom ROMs. Log one line and continue.
@@ -78,7 +78,7 @@ public class WifiTile extends AospTile {
                         mContext.getClassLoader(), "hasDualTargetsDetails", dtHook);
             } catch (Throwable t2) {
                 if (!Utils.isOxygenOs35Rom()) {
-                    log(getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
+                    GravityBox.log(TAG, getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
                 }
             }
         }

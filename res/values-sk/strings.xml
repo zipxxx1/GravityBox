@@ -2080,4 +2080,8 @@
     <!-- BatteryBar: only while charging -->
     <string name="pref_battery_bar_show_charging_title">Len počas nabíjania</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Logovanie chýb</string>
+    <string name="pref_log_errors_summary">Zapíše všetky chyby do Xposed logu (vyžaduje reštart)</string>
+
 </resources>

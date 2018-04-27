@@ -2170,4 +2170,8 @@
     <!-- BatteryBar: only while charging -->
     <string name="pref_battery_bar_show_charging_title">仅在充电时</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">错误日志</string>
+    <string name="pref_log_errors_summary">启用后所有错误将记录到Xposed日志(需要重新启动)</string>
+
 </resources>

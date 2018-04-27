@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
+
 import android.app.Notification;
 import android.content.Context;
 import android.service.notification.StatusBarNotification;
@@ -98,7 +100,7 @@ public class NotificationDataMonitor {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -164,7 +166,7 @@ public class NotificationDataMonitor {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         if (DEBUG) log("getNotifCountFor: " + pkg + "=" + count);

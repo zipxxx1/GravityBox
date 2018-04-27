@@ -69,7 +69,7 @@ public class SystemPropertyProvider {
             FingerprintManager fpm = (FingerprintManager) ctx.getSystemService(Context.FINGERPRINT_SERVICE);
             return (fpm != null && fpm.isHardwareDetected());
         } catch (Throwable t) {
-            log("Error checkin for fingerprint support: " + t.getMessage());
+            GravityBox.log(TAG, "Error checkin for fingerprint support: ", t);
             return false;
         }
     }
@@ -86,8 +86,7 @@ public class SystemPropertyProvider {
                         if (DEBUG) log("Initializing SystemUI managers");
                         SysUiManagers.init(context, prefs);
                     } catch(Throwable t) {
-                        log("Error initializing SystemUI managers: ");
-                        XposedBridge.log(t);
+                        GravityBox.log(TAG, "Error initializing SystemUI managers:", t);
                     }
                 }
                 @Override
@@ -164,7 +163,7 @@ public class SystemPropertyProvider {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

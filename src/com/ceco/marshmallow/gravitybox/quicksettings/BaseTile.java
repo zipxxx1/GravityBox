@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModQsTiles;
 import com.ceco.marshmallow.gravitybox.Utils;
@@ -304,8 +305,7 @@ public abstract class BaseTile implements QsEventListener {
             XposedHelpers.callMethod(mTile, "refreshState");
             if (DEBUG) log(mKey + ": refreshState called");
         } catch (Throwable t) {
-            log("Error refreshing tile state: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error refreshing tile state:", t);
         }
     }
 
@@ -313,8 +313,7 @@ public abstract class BaseTile implements QsEventListener {
         try {
             XposedHelpers.callMethod(mHost, "startActivityDismissingKeyguard", intent);
         } catch (Throwable t) {
-            log("Error in startSettingsActivity: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error in startSettingsActivity:", t);
         }
     }
 
@@ -326,8 +325,7 @@ public abstract class BaseTile implements QsEventListener {
         try {
             XposedHelpers.callMethod(mHost, "collapsePanels");
         } catch (Throwable t) {
-            log("Error in collapsePanels: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error in collapsePanels:", t);
         }
     }
 
@@ -335,8 +333,7 @@ public abstract class BaseTile implements QsEventListener {
         try {
             XposedHelpers.callMethod(mTile, "showDetail", show);
         } catch (Throwable t) {
-            log("Error in showDetail: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error in showDetail:", t);
         }
     }
 
@@ -344,8 +341,7 @@ public abstract class BaseTile implements QsEventListener {
         try {
             XposedHelpers.callMethod(mTile, "fireToggleStateChanged", state);
         } catch (Throwable t) {
-            log("Error in fireToggleStateChanged: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error in fireToggleStateChanged:", t);
         }
     }
 }

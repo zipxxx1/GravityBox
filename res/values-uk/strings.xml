@@ -2084,4 +2084,8 @@
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">Активує зміну стилю значків батареї та процентів (необхідне перезавантаження)</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Звітування помилок</string>
+    <string name="pref_log_errors_summary">Звітувати всі помилки до звіту Xposed якщо активно (потребує перезавантаження)</string>
+
 </resources>

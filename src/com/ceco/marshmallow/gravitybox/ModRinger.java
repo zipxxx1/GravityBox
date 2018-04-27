@@ -106,7 +106,7 @@ public class ModRinger {
             }
 
             if (mtdHandlePlay == null) {
-                log("Cannot find handlePlay method in " + CLASS_RINGTONE_PLAYER + ". Increasing ringtone disabled");
+                GravityBox.log(TAG, "Cannot find handlePlay method in " + CLASS_RINGTONE_PLAYER + ". Increasing ringtone disabled");
                 return;
             }
 
@@ -165,7 +165,7 @@ public class ModRinger {
             });
 
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

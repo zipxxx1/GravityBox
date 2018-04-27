@@ -138,7 +138,7 @@ public class ConnectivityServiceWrapper {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -148,7 +148,7 @@ public class ConnectivityServiceWrapper {
             XposedHelpers.callMethod(mTelephonyManager, "setDataEnabled", enabled);
             if (DEBUG) log("setDataEnabled called");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -168,7 +168,7 @@ public class ConnectivityServiceWrapper {
                     R.string.mobile_data_off);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -184,7 +184,7 @@ public class ConnectivityServiceWrapper {
                         intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -200,7 +200,7 @@ public class ConnectivityServiceWrapper {
                         intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -229,7 +229,7 @@ public class ConnectivityServiceWrapper {
                 Utils.postToast(mContext, labelResId);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -252,7 +252,7 @@ public class ConnectivityServiceWrapper {
                 Utils.postToast(mContext, msgResId);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -264,7 +264,7 @@ public class ConnectivityServiceWrapper {
         } catch (InvocationTargetError e1) {
             if (DEBUG) log("getNfcAdapter: NFC adapter not available");
         } catch (NoSuchMethodError e2) {
-            log("getNfcAdapter(): method not found");
+            GravityBox.log(TAG, "getNfcAdapter(): method not found");
         }
         return adapter;
     }
@@ -279,7 +279,7 @@ public class ConnectivityServiceWrapper {
                 nfcState = (Integer) XposedHelpers.callMethod(adapter, "getAdapterState");
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         } finally {
             Bundle b = new Bundle();
             b.putInt("nfcState", nfcState);
@@ -312,7 +312,7 @@ public class ConnectivityServiceWrapper {
                 Utils.postToast(mContext, enable ? R.string.nfc_on : R.string.nfc_off);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -326,7 +326,7 @@ public class ConnectivityServiceWrapper {
             }
             if (DEBUG) log("setAirplaneModeEnabled called");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -342,7 +342,7 @@ public class ConnectivityServiceWrapper {
             }
             setAirplaneModeEnabled(enable, intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

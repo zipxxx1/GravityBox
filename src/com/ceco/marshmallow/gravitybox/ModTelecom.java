@@ -36,15 +36,13 @@ public class ModTelecom {
         try {
             MissedCallNotifier.init(classLoader);
         } catch (Throwable t) {
-            log("Error initializing MissedCallNotifier:");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error initializing MissedCallNotifier:", t);
         }
 
         try {
             CallFeatures.init(prefs, classLoader);
         } catch (Throwable t) {
-            log("Error initializing CallFeatures:");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error initializing CallFeatures:", t);
         }
     }
 }

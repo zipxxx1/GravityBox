@@ -19,7 +19,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
@@ -126,7 +125,7 @@ public class ModTelephony {
                 });
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -136,7 +135,7 @@ public class ModTelephony {
                     serviceState, "getOperatorNumeric");
             return equalsMcc(operatorNumeric, defaultRetVal);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return defaultRetVal;
         }
     }
@@ -154,7 +153,7 @@ public class ModTelephony {
 
             return equalsMcc;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return defaultRetVal;
         }
     }

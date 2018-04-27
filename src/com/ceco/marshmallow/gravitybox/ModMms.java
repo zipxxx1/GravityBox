@@ -60,7 +60,7 @@ public class ModMms {
             }
 
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -90,7 +90,7 @@ public class ModMms {
                     });
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     };

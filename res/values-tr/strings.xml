@@ -2123,4 +2123,8 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Üst bildirim</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Hata günlüğü</string>
+    <string name="pref_log_errors_summary">Etkinleştirildiğinde tüm hataları Xposed günlüğe kaydeder (yeniden başlatma gerektirir)</string>
+
 </resources>

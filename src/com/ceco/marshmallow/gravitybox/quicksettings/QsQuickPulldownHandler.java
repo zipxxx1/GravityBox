@@ -3,6 +3,7 @@ package com.ceco.marshmallow.gravitybox.quicksettings;
 import java.util.List;
 
 import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.Utils;
 
@@ -121,7 +122,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -165,7 +166,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
             List<?> list = (List<?>)XposedHelpers.callMethod(mNotificationData, "getActiveNotifications");
             return list.size() > 0;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return true;
         }
     }
@@ -178,7 +179,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
             }
             return (boolean)XposedHelpers.callMethod(mNotificationData, "hasActiveClearableNotifications");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return true;
         }
     }

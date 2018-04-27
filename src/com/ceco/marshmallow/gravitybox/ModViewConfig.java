@@ -20,10 +20,10 @@ import android.view.ViewConfiguration;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class ModViewConfig {
+    private static final String TAG = "GB:ModViewConfig";
     private static final String CLASS_ACTIONBAR_POLICY = "com.android.internal.view.ActionBarPolicy";
     private static final String CLASS_ACTIVITY_MANAGER_SERVICE = "com.android.server.am.ActivityManagerService";
     private static final String CLASS_ACTIVITY_RECORD = "com.android.server.am.ActivityRecord";
@@ -40,7 +40,7 @@ public class ModViewConfig {
                         XC_MethodReplacement.returnConstant("enabled".equals(mode)));
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -57,7 +57,7 @@ public class ModViewConfig {
                 });
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

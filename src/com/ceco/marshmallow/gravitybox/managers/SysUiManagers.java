@@ -15,8 +15,8 @@
 package com.ceco.marshmallow.gravitybox.managers;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.PhoneWrapper;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
@@ -40,10 +40,6 @@ public class SysUiManagers {
     public static GpsStatusMonitor GpsMonitor;
     public static SubscriptionManager SubscriptionMgr;
 
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
-
     public static void init(Context context, XSharedPreferences prefs) {
         if (context == null)
             throw new IllegalArgumentException("Context cannot be null");
@@ -55,53 +51,46 @@ public class SysUiManagers {
         try {
             BatteryInfoManager = new BatteryInfoManager(context, prefs);
         } catch (Throwable t) {
-            log("Error creating BatteryInfoManager: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error creating BatteryInfoManager:", t);
         }
 
         try {
             IconManager = new StatusBarIconManager(context, prefs);
         } catch (Throwable t) {
-            log("Error creating IconManager: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error creating IconManager:", t);
         }
 
         try {
             QuietHoursManager = StatusbarQuietHoursManager.getInstance(context);
         } catch (Throwable t) {
-            log("Error creating QuietHoursManager: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error creating QuietHoursManager:", t);
         }
 
         try {
             AppLauncher = new AppLauncher(context, prefs);
         } catch (Throwable t) {
-            log("Error creating AppLauncher: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error creating AppLauncher:", t);
         }
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE, false)) {
             try {
                 FingerprintLauncher = new FingerprintLauncher(context, prefs);
             } catch (Throwable t) {
-                log("Error creating FingerprintLauncher: ");
-                XposedBridge.log(t);
+                GravityBox.log("Error creating FingerprintLauncher:", t);
             }
         }
 
         try {
             NotifDataMonitor = new NotificationDataMonitor(context);
         } catch (Throwable t) {
-            log("Error creating NotificationDataMonitor: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error creating NotificationDataMonitor:", t);
         }
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, false)) {
             try {
                 GpsMonitor = new GpsStatusMonitor(context);
             } catch (Throwable t) {
-                log("Error creating GpsStatusMonitor: ");
-                XposedBridge.log(t);
+                GravityBox.log(TAG, "Error creating GpsStatusMonitor:", t);
             }
         }
 
@@ -109,8 +98,7 @@ public class SysUiManagers {
             try {
                 SubscriptionMgr = new SubscriptionManager(context);
             } catch (Throwable t) {
-                log("Error creating SubscriptionManager: ");
-                XposedBridge.log(t);
+                GravityBox.log(TAG, "Error creating SubscriptionManager:", t);
             }
         }
 
@@ -165,8 +153,7 @@ public class SysUiManagers {
         try {
             KeyguardMonitor = new KeyguardStateMonitor(ctx, prefs);
         } catch (Throwable t) {
-            log("Error creating KeyguardMonitor: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "Error creating KeyguardMonitor:", t);
         }
     }
 

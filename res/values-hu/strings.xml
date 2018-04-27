@@ -2068,4 +2068,8 @@
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Lebegő értesítés</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Hibanaplózás</string>
+    <string name="pref_log_errors_summary">Naplózza az összes hibát az Xposed naplóba, ha engedélyezve van (újraindítás szükséges)</string>
+
 </resources>

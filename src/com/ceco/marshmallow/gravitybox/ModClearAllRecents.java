@@ -240,7 +240,7 @@ public class ModClearAllRecents {
                                 v.getContext().startActivity(intent);
                                 return true;
                             } catch (Throwable t) {
-                                log("Error launching appplication settings: " + t.getMessage());
+                                GravityBox.log(TAG, "Error launching appplication settings:", t);
                                 return false;
                             }
                         }
@@ -368,7 +368,7 @@ public class ModClearAllRecents {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -422,7 +422,7 @@ public class ModClearAllRecents {
                 mRecentsClearButton.setImageDrawable(mGbContext.getResources().getDrawable(icResId));
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -540,7 +540,7 @@ public class ModClearAllRecents {
             }
             updateRamBarMemoryUsage();
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

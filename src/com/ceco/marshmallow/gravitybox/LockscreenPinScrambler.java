@@ -22,7 +22,6 @@ import java.util.List;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class LockscreenPinScrambler {
@@ -30,10 +29,6 @@ public class LockscreenPinScrambler {
 
     private static final String CLASS_NUMPAD_KEY = "com.android.keyguard.NumPadKey";
     private static List<Integer> NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
-
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
 
     private ViewGroup mContainer;
 
@@ -45,7 +40,7 @@ public class LockscreenPinScrambler {
         Collections.shuffle(NUMBERS);
         List<Object> keys = getNumpadKeys();
         if (keys.size() != NUMBERS.size()) {
-            log("Unexpected size of NumPadKey array (" + keys.size() + ")");
+            GravityBox.log(TAG, "Unexpected size of NumPadKey array (" + keys.size() + ")");
             return;
         }
         for (int i = 0; i < NUMBERS.size(); i++) {

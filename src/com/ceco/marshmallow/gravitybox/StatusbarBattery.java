@@ -16,7 +16,6 @@
 package com.ceco.marshmallow.gravitybox;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager;
@@ -36,10 +35,6 @@ public class StatusbarBattery implements IconManagerListener {
     private int mFrameAlpha;
     private int mDefaultChargeColor;
 
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
-
     public StatusbarBattery(View batteryView) {
         mBattery = batteryView;
         createHooks();
@@ -51,7 +46,7 @@ public class StatusbarBattery implements IconManagerListener {
             mFrameAlpha = framePaint.getAlpha();
             mDefaultChargeColor = XposedHelpers.getIntField(mBattery, "mChargeColor");
         } catch (Throwable t) {
-            log("Error backing up original colors: " + t.getMessage());
+            GravityBox.log(TAG, "Error backing up original colors:", t);
         }
         if (SysUiManagers.IconManager != null) {
             SysUiManagers.IconManager.registerListener(this);
@@ -72,7 +67,7 @@ public class StatusbarBattery implements IconManagerListener {
                     }
                 });
             } catch (Throwable t) {
-                log("Error hooking getFillColor(): " + t.getMessage());
+                GravityBox.log(TAG, "Error hooking getFillColor():", t);
             }
         }
     }
@@ -92,7 +87,7 @@ public class StatusbarBattery implements IconManagerListener {
                 XposedHelpers.setIntField(mBattery, "mChargeColor", chargeColor);
                 XposedHelpers.setIntField(mBattery, "mIconTint", mainColor);
             } catch (Throwable t) {
-                log("Error setting colors: " + t.getMessage());
+                GravityBox.log(TAG, "Error setting colors:", t);
             }
         }
     }
@@ -103,7 +98,7 @@ public class StatusbarBattery implements IconManagerListener {
                 XposedHelpers.setBooleanField(mBattery, "mShowPercent", showPercentage);
                 mBattery.invalidate();
             } catch (Throwable t) {
-                log("Error setting percentage: " + t.getMessage());
+                GravityBox.log(TAG, "Error setting percentage: ", t);
             }
         }
     }

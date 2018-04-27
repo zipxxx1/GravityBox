@@ -2,11 +2,11 @@ package com.ceco.marshmallow.gravitybox.quicksettings;
 
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.Utils;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class ColorInversionTile extends AospTile {
@@ -53,7 +53,7 @@ public class ColorInversionTile extends AospTile {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

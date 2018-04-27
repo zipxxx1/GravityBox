@@ -67,7 +67,7 @@ public class QsPanelQuick {
                     XposedHelpers.findClass(CLASS_QS_PANEL_QUICK, classLoader),
                     "setTiles", filterTilesHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -92,7 +92,7 @@ public class QsPanelQuick {
                                             param.thisObject, "mActivityStarter");
                                     XposedHelpers.callMethod(starter, "startActivity", i, true);
                                 } catch (Throwable t) {
-                                    XposedBridge.log(t);
+                                    GravityBox.log(TAG, t);
                                 }
                             }
                         });
@@ -100,7 +100,7 @@ public class QsPanelQuick {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

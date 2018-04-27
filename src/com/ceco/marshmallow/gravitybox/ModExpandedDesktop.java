@@ -120,7 +120,7 @@ public class ModExpandedDesktop {
 
     private static void logAndMute(String methodName, Throwable t) {
         if (!mLoggedErrors.contains(methodName)) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             mLoggedErrors.add(methodName);
         }
     }
@@ -229,7 +229,7 @@ public class ModExpandedDesktop {
 
             XposedHelpers.callMethod(mPhoneWindowManager, "updateRotation", false);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -248,7 +248,7 @@ public class ModExpandedDesktop {
                     (int) (res.getDimensionPixelSize(resHeightLandscapeId) *mNavbarHeightLandscapeScaleFactor));
             updateSettings();
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -258,7 +258,7 @@ public class ModExpandedDesktop {
                     "areTranslucentBarsAllowed");
             mAreTranslucentBarsAllowed.setAccessible(true);
         } catch (NoSuchMethodException e) {
-            log("could not find areTranslucentBarsAllowed method");
+            GravityBox.log(TAG, "could not find areTranslucentBarsAllowed method");
         }
 
         try {
@@ -266,7 +266,7 @@ public class ModExpandedDesktop {
                     "canHideNavigationBar");
             mCanHideNavigationBar.setAccessible(true);
         } catch (NoSuchMethodException e) {
-            log("could not find canHideNavigationBar method");
+            GravityBox.log(TAG, "could not find canHideNavigationBar method");
         }
 
         try {
@@ -274,7 +274,7 @@ public class ModExpandedDesktop {
                     "isStatusBarKeyguard");
             mIsStatusBarKeyguard.setAccessible(true);
         } catch (NoSuchMethodException e) {
-            log("could not find isStatusBarKeyguard method");
+            GravityBox.log(TAG, "could not find isStatusBarKeyguard method");
         }
 
         try {
@@ -282,7 +282,7 @@ public class ModExpandedDesktop {
                     XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null));
             mRequestTransientBars.setAccessible(true);
         } catch (NoSuchMethodException e) {
-            log("could not find requestTransientBars method");
+            GravityBox.log(TAG, "could not find requestTransientBars method");
         }
 
         try {
@@ -290,7 +290,7 @@ public class ModExpandedDesktop {
                     XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null), int.class, int.class);
             mUpdateSystemBarsLw.setAccessible(true);
         } catch (NoSuchMethodException e) {
-            log("could not find updateSystemBarsLw method");
+            GravityBox.log(TAG, "could not find updateSystemBarsLw method");
         }
 
         try {
@@ -298,7 +298,7 @@ public class ModExpandedDesktop {
                     "updateSystemUiVisibilityLw");
             mUpdateSystemUiVisibilityLw.setAccessible(true);
         } catch (NoSuchMethodException e) {
-            log("could not find updateSystemUiVisibilityLw method");
+            GravityBox.log(TAG, "could not find updateSystemUiVisibilityLw method");
         }
 
         try {
@@ -306,7 +306,7 @@ public class ModExpandedDesktop {
                     "shouldUseOutsets", WindowManager.LayoutParams.class, int.class);
             mShouldUseOutsets.setAccessible(true);
         } catch (NoSuchMethodException e) {
-            log("could not find shouldUseOutsets method");
+            GravityBox.log(TAG, "could not find shouldUseOutsets method");
         }
     }
 
@@ -333,7 +333,7 @@ public class ModExpandedDesktop {
                 mExpandedDesktopMode = Integer.valueOf(prefs.getString(
                         GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
             } catch (NumberFormatException nfe) {
-                log("Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
+                GravityBox.log(TAG, "Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
             }
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "init",
@@ -371,7 +371,7 @@ public class ModExpandedDesktop {
 
                         if (DEBUG) log("Phone window manager initialized");
                     } catch (Throwable t) {
-                        XposedBridge.log(t);
+                        GravityBox.log(TAG, t);
                     }
                 }
             });
@@ -969,7 +969,7 @@ public class ModExpandedDesktop {
                 });
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

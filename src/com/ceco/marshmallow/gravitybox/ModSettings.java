@@ -46,7 +46,7 @@ public class ModSettings {
             resparam.res.setReplacement(PACKAGE_NAME, "array", "animator_duration_scale_values",
                     modRes.fwd(R.array.animator_duration_scale_values));
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -54,7 +54,7 @@ public class ModSettings {
         try {
             // reserved for potential future use
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

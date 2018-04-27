@@ -2075,4 +2075,8 @@
     <!-- BatteryBar: only while charging -->
     <string name="pref_battery_bar_show_charging_title">Jen během nabíjení</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Logování chyb</string>
+    <string name="pref_log_errors_summary">Zapíše všechny chyby do Xposed logu (vyžaduje restart)</string>
+
 </resources>

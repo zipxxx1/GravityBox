@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModQsTiles;
 import com.ceco.marshmallow.gravitybox.PhoneWrapper;
@@ -117,9 +118,8 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 l.getValue().onBroadcastReceived(context, intent);
             }
         } catch (Throwable t) {
-            log("Error notifying listeners of new broadcast: ");
-            XposedBridge.log(t);
-        }        
+            GravityBox.log(TAG, "Error notifying listeners of new broadcast:", t);
+        }
     }
 
     private void recreateTiles() {
@@ -133,7 +133,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                         ModQsTiles.TILES_SETTING, (String)null);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -305,7 +305,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                     XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "hasDualTargetsDetails", dtHook);
                 } catch (Throwable t2) {
                     if (!Utils.isOxygenOs35Rom()) {
-                        log("Your system does not seem to support standard AOSP tile dual mode");
+                        GravityBox.log(TAG, "Your system does not seem to support standard AOSP tile dual mode");
                     }
                 }
             }
@@ -370,7 +370,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                             boolean.class, boolean.class, sdHook);
                 } catch (Throwable t2) {
                     if (!Utils.isOxygenOs35Rom()) {
-                        log("Your system does not seem to support standard AOSP tile dual mode");
+                        GravityBox.log(TAG, "Your system does not seem to support standard AOSP tile dual mode");
                     }
                 }
             }
@@ -394,7 +394,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                         "handleLongClick", longClickHook);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

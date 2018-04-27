@@ -27,6 +27,7 @@ import javax.crypto.SecretKey;
 import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.managers.AppLauncher.AppInfo;
 import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.R;
 import android.content.Context;
@@ -82,7 +83,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -237,7 +238,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
                         Toast.LENGTH_SHORT).show();
             }
         } catch (Throwable t) {
-            log("Error starting activity: " + t.getMessage());
+            GravityBox.log(TAG, "Error starting activity:", t);
         }
     }
 
@@ -363,7 +364,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
                     if (DEBUG) log("getFingerPrintIdFromResult: id=" + id);
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
             return id;
         }
@@ -381,7 +382,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
         return ids;
     }

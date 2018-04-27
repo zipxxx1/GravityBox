@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModQsTiles;
 import com.ceco.marshmallow.gravitybox.R;
@@ -274,8 +275,8 @@ public class RingerModeTile extends QsTile {
 
             // Set the desired state
             setRingerMode(r.mRingerMode, r.mVibrateWhenRinging);
-        } else if (DEBUG) {
-            log(getKey() + ": No suitable ringer mode for toggling found");
+        } else {
+            GravityBox.log(TAG, getKey() + ": No suitable ringer mode for toggling found");
         }
     }
 

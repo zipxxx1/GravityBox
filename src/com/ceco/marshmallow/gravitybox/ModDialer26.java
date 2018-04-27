@@ -110,7 +110,7 @@ public class ModDialer26 {
                         if (m != null) break;
                     }
                     if (m == null) {
-                        log("DialtactsActivity: couldn't identify showDialpadFragment method");
+                        GravityBox.log(TAG, "DialtactsActivity: couldn't identify showDialpadFragment method");
                     } else {
                         m.invoke(param.thisObject, false);
                         if (DEBUG) log("showDialpadFragment() called within " + realClassName);
@@ -118,7 +118,7 @@ public class ModDialer26 {
                 }
             });
         } catch (Throwable t) {
-            log("DialtactsActivity: incompatible version of Dialer app");
+            GravityBox.log(TAG, "DialtactsActivity: incompatible version of Dialer app");
         }
 
         try {
@@ -144,7 +144,7 @@ public class ModDialer26 {
                 }
             });
         } catch (Throwable t) {
-            log("DialpadFragment: incompatible version of Dialer app");
+            GravityBox.log(TAG, "DialpadFragment: incompatible version of Dialer app");
         }
     }
 }

@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModHwKeys;
 import com.ceco.marshmallow.gravitybox.ModQsTiles;
@@ -87,7 +88,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 XposedHelpers.callMethod(mQsPanel, "updateResources");
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -166,7 +167,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 XposedHelpers.callMethod(host, "startActivityDismissingKeyguard", intent);
                 return true;
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
                 return false;
             }
         }
@@ -266,7 +267,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -301,7 +302,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

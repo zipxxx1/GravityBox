@@ -26,7 +26,6 @@ import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager;
 import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager.ColorInfo;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
@@ -187,7 +186,7 @@ public class StatusbarSignalClusterMoto extends StatusbarSignalCluster {
                     mIconSpacingDef.get(spacer);
                 v.setLayoutParams(lp);
             } catch (Throwable t) {
-                if (DEBUG) XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }

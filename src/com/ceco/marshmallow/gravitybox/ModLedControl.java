@@ -113,7 +113,7 @@ public class ModLedControl {
                     performActiveScreen();
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             } finally {
                 try { 
                     mSm.unregisterListener(this, mProxSensor); 
@@ -211,7 +211,7 @@ public class ModLedControl {
             XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_VIBRATOR_SERVICE, classLoader),
                     "startVibrationLocked", startVibrationHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -230,7 +230,7 @@ public class ModLedControl {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -416,7 +416,7 @@ public class ModLedControl {
 
                 if (DEBUG) log("Notification info: defaults=" + n.defaults + "; flags=" + n.flags);
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     };
@@ -435,8 +435,7 @@ public class ModLedControl {
                 }
             }
         } catch (Throwable t) {
-            log("Error in getOldNotificationRecord: " + t.getMessage());
-            if (DEBUG) XposedBridge.log(t);
+            GravityBox.log(TAG, "Error in getOldNotificationRecord:", t);
         }
         if (DEBUG) log("getOldNotificationRecord: has old record: " + (oldNotifRecord != null));
         return oldNotifRecord;
@@ -448,8 +447,7 @@ public class ModLedControl {
             try {
                 notif = (Notification) XposedHelpers.callMethod(record, "getNotification");
             } catch (Throwable t) {
-                log("Error in getNotificationFromRecord: " + t.getMessage());
-                if (DEBUG) XposedBridge.log(t);
+                GravityBox.log(TAG, "Error in getNotificationFromRecord:", t);
             }
         }
         return notif;
@@ -464,8 +462,7 @@ public class ModLedControl {
                         mNotifManagerService, "mLights");
                 hasLight = lights.contains(key);
             } catch (Throwable t) {
-                log("Error in notificationRecordHasLight: " + t.getMessage());
-                if (DEBUG) XposedBridge.log(t);
+                GravityBox.log(TAG, "Error in notificationRecordHasLight: ", t);
             }
         }
         if (DEBUG) log("notificationRecordHasLight: " + hasLight);
@@ -517,7 +514,7 @@ public class ModLedControl {
                 }
             }
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t); 
+            GravityBox.log(TAG, t); 
         }
         return val;
     }
@@ -560,7 +557,7 @@ public class ModLedControl {
                     performActiveScreen();
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     };
@@ -573,7 +570,7 @@ public class ModLedControl {
                     XposedHelpers.setBooleanField(param.thisObject, "mScreenOn", false);
                     if (DEBUG) log("updateLightsLocked: Screen on due to active screen - pretending it's off");
                 } catch (Throwable t) {
-                    XposedBridge.log(t);
+                    GravityBox.log(TAG, t);
                 }
             }
         }
@@ -603,7 +600,7 @@ public class ModLedControl {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -614,7 +611,7 @@ public class ModLedControl {
             }
             return (mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -629,7 +626,7 @@ public class ModLedControl {
             List<String> dndList = Arrays.asList(dnd.split(","));
             return dndList.contains(Integer.toString(zenMode));
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -649,7 +646,7 @@ public class ModLedControl {
             }
             if (DEBUG) log("Active screen feature: " + enable);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -677,7 +674,7 @@ public class ModLedControl {
                         3, (Object)null, true);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -732,7 +729,7 @@ public class ModLedControl {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -830,7 +827,7 @@ public class ModLedControl {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -866,7 +863,7 @@ public class ModLedControl {
             ComponentName cn = taskInfo.get(0).topActivity;
             return cn.getPackageName();
         } catch (Throwable t) {
-            log("Error getting top level package: " + t.getMessage());
+            GravityBox.log(TAG, "Error getting top level package:", t);
             return null;
         }
     }

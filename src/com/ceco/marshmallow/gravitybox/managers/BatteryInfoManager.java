@@ -24,7 +24,6 @@ import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +36,8 @@ import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 
 public class BatteryInfoManager implements BroadcastSubReceiver {
+    private static final String TAG = "GB:BatteryInfoManager";
+
     private BatteryData mBatteryData;
     private ArrayList<BatteryStatusListener> mListeners;
     private Context mContext;
@@ -205,7 +206,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         try {
             XposedHelpers.callMethod(mPowerManager, "setPowerSaveMode", enabled);
         } catch (Throwable t) {
-            XposedBridge.log("Error setting power saving mode: " + t.getMessage());
+            GravityBox.log(TAG, "Error setting power saving mode: ", t);
         }
     }
 
@@ -250,7 +251,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
                 sfx.play();
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -262,7 +263,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
             }
             return (mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return true;
         }
     }

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.adapters.IIconListAdapterItem;
@@ -200,7 +201,7 @@ public class SubscriptionManager implements BroadcastSubReceiver {
             }
             return true;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -214,7 +215,7 @@ public class SubscriptionManager implements BroadcastSubReceiver {
                     subscriptionToPhoneAccountHandle(subInfo));
             return true;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -223,7 +224,7 @@ public class SubscriptionManager implements BroadcastSubReceiver {
         try {
             return (int) XposedHelpers.callMethod(tm, "getSubIdForPhoneAccount", account);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return -1;
         }
     }
@@ -261,7 +262,7 @@ public class SubscriptionManager implements BroadcastSubReceiver {
             }
             return (si == null ? -1 : si.getSimSlotIndex());
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return -1;
         }
     }
@@ -284,7 +285,7 @@ public class SubscriptionManager implements BroadcastSubReceiver {
             }
             return -1;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return -1;
         }
     }

@@ -18,6 +18,7 @@ package com.ceco.marshmallow.gravitybox.quicksettings;
 import java.io.File;
 import java.io.IOException;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxResultReceiver;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.R;
@@ -25,7 +26,6 @@ import com.ceco.marshmallow.gravitybox.RecordingService;
 import com.ceco.marshmallow.gravitybox.GravityBoxResultReceiver.Receiver;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -116,7 +116,7 @@ public class QuickRecordTile extends QsTile {
                     mRecordingState = STATE_NO_RECORDING;
                     mHandler.removeCallbacks(autoStopRecord);
                     String statusMessage = intent.getStringExtra(RecordingService.EXTRA_STATUS_MESSAGE);
-                    log(getKey() + ": Audio recording error: " + statusMessage);
+                    GravityBox.log(TAG, getKey() + ": Audio recording error: " + statusMessage);
                     break;
             }
             refreshState();
@@ -182,8 +182,7 @@ public class QuickRecordTile extends QsTile {
             si.putExtra("receiver", mCurrentStateReceiver);
             mGbContext.startService(si);
         } catch (Throwable t) {
-            log(getKey() + ": Error getting current state: ");
-            XposedBridge.log(t);
+            GravityBox.log(getKey() + ": Error getting current state:", t);
         }
     }
 
@@ -212,7 +211,7 @@ public class QuickRecordTile extends QsTile {
             refreshState();
             mPlayer.setOnCompletionListener(stoppedPlaying);
         } catch (IOException e) {
-            log(getKey() + ": startPlaying failed: " + e.getMessage());
+            GravityBox.log(TAG, getKey() + ": startPlaying failed:", e);
         }
     }
 

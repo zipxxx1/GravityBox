@@ -117,7 +117,7 @@ public class ModStatusbarColor {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -179,7 +179,7 @@ public class ModStatusbarColor {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -196,7 +196,7 @@ public class ModStatusbarColor {
                 settingsButton.clearColorFilter();
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

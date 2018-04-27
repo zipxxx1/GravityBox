@@ -82,7 +82,7 @@ public class SystemWideResources {
                 if (DEBUG) log("config_safe_media_volume_enabled: " + (triState == Utils.TriState.ENABLED));
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

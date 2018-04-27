@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModQsTiles;
 import com.ceco.marshmallow.gravitybox.PhoneWrapper;
@@ -120,7 +121,7 @@ public class NetworkModeTile extends QsTile {
                 mSimSlot = Integer.valueOf(mPrefs.getString(
                         GravityBoxSettings.PREF_KEY_QS_NETWORK_MODE_SIM_SLOT, "0"));
             } catch (NumberFormatException nfe) {
-                log(getKey() + ": Invalid value for SIM Slot preference: " + nfe.getMessage());
+                GravityBox.log(TAG, getKey() + ": Invalid value for SIM Slot preference:", nfe);
             }
             if (DEBUG) log(getKey() + ": mSimSlot = " + mSimSlot);
         }

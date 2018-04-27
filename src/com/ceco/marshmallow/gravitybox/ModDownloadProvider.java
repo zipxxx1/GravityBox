@@ -58,7 +58,7 @@ public class ModDownloadProvider {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

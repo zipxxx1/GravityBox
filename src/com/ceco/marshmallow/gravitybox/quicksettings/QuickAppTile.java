@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.marshmallow.gravitybox.GravityBox;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.Utils;
@@ -166,10 +167,10 @@ public class QuickAppTile extends QsTile {
                 }
                 if (DEBUG) log(getKey() + ": AppInfo initialized for: " + getAppName());
             } catch (NameNotFoundException e) {
-                log(getKey() + ": App not found: " + mIntent);
+                GravityBox.log(TAG, getKey() + ": App not found: " + mIntent);
                 reset();
             } catch (Exception e) {
-                log(getKey() + ": Unexpected error: " + e.getMessage());
+                GravityBox.log(TAG, getKey() + ": Unexpected error: " + e.getMessage());
                 reset();
             }
         }
@@ -205,7 +206,7 @@ public class QuickAppTile extends QsTile {
                     }
                 }
             } catch (Exception e) {
-                log(getKey() + ": Unable to start activity: " + e.getMessage());
+                GravityBox.log(TAG, getKey() + ": Unable to start activity:", e);
                 if (aiProcessing != null) {
                     aiProcessing.initAppInfo(null);
                 }
@@ -326,7 +327,7 @@ public class QuickAppTile extends QsTile {
         try {
             startActivity(mMainApp.getIntent());
         } catch (Exception e) {
-            log(getKey() + ": Unable to start activity: " + e.getMessage());
+            GravityBox.log(TAG, getKey() + ": Unable to start activity:", e);
         }
         super.handleClick();
     }
@@ -359,7 +360,7 @@ public class QuickAppTile extends QsTile {
             try {
                 startActivity(lastAppInfo.getIntent());
             } catch (Throwable t) {
-                log(getKey() + ": Unable to start activity: " + t.getMessage());
+                GravityBox.log(TAG, getKey() + ": Unable to start activity:", t);
             }
         } else if (count > 1) {
             mDialog = new Dialog(mContext, android.R.style.Theme_Material_Dialog_NoActionBar);
