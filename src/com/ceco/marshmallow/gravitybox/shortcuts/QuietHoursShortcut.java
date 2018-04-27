@@ -43,7 +43,7 @@ public class QuietHoursShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_quiet_hours_auto, null);
+        return mContext.getDrawable(R.drawable.shortcut_quiet_hours_auto);
     }
 
     @Override

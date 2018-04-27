@@ -37,7 +37,7 @@ public class SleepShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_sleep);
+        return mContext.getDrawable(R.drawable.shortcut_sleep);
     }
 
     @Override

@@ -40,7 +40,7 @@ public class WifiApShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_wifi_ap, null);
+        return mContext.getDrawable(R.drawable.shortcut_wifi_ap);
     }
 
     @Override

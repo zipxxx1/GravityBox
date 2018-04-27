@@ -316,11 +316,10 @@ public class ModNavigationBar {
                     mResources = context.getResources();
 
                     mGbContext = Utils.getGbContext(context);
-                    final Resources res = mGbContext.getResources();
                     mNavbarColorsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_COLOR_ENABLE, false);
-                    mKeyDefaultColor = res.getColor(R.color.navbar_key_color);
+                    mKeyDefaultColor = mGbContext.getColor(R.color.navbar_key_color);
                     mKeyColor = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_KEY_COLOR, mKeyDefaultColor);
-                    mKeyDefaultGlowColor = res.getColor(R.color.navbar_key_glow_color);
+                    mKeyDefaultGlowColor = mGbContext.getColor(R.color.navbar_key_glow_color);
                     mKeyGlowColor = prefs.getInt(
                             GravityBoxSettings.PREF_KEY_NAVBAR_KEY_GLOW_COLOR, mKeyDefaultGlowColor);
                     mCustomKeyIconStyle = CustomKeyIconStyle.valueOf(prefs.getString(
@@ -349,7 +348,6 @@ public class ModNavigationBar {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final Context context = ((View) param.thisObject).getContext();
-                    final Resources gbRes = mGbContext.getResources();
                     final int recentAppsResId = mResources.getIdentifier("recent_apps", "id", PACKAGE_NAME);
                     final int homeButtonResId = mResources.getIdentifier("home", "id", PACKAGE_NAME);
                     final View[] rotatedViews = 
@@ -394,14 +392,14 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(scaleType);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_left, null));
+                        dpadLeft.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_left));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(scaleType);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_right, null));
+                        dpadRight.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_right));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -424,14 +422,14 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(scaleType);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_left, null));
+                        dpadLeft.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_left));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(scaleType);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_right, null));
+                        dpadRight.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_sysbar_ime_right));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -466,12 +464,11 @@ public class ModNavigationBar {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mGbContext == null) return;
 
-                    final Resources gbRes = mGbContext.getResources();
                     try {
                         mRecentIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentIcon");
                         mRecentLandIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentLandIcon");
-                        mRecentAltIcon = gbRes.getDrawable(R.drawable.ic_sysbar_recent_clear, null);
-                        mRecentAltLandIcon = gbRes.getDrawable(R.drawable.ic_sysbar_recent_clear, null);
+                        mRecentAltIcon = mGbContext.getDrawable(R.drawable.ic_sysbar_recent_clear);
+                        mRecentAltLandIcon = mGbContext.getDrawable(R.drawable.ic_sysbar_recent_clear);
                     } catch (Throwable t) {
                         GravityBox.log(TAG, "getIcons: system does not seem to have standard AOSP recents key?:", t);
                     }

@@ -24,6 +24,7 @@ import java.util.List;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -104,11 +105,12 @@ public class ModDialer {
                     int idx = param.args.length-1;
                     boolean shouldShowUnknownPhoto = param.args[idx] == null;
                     final Fragment frag = (Fragment) param.thisObject;
-                    final Resources res = frag.getResources();
+                    final Context ctx = frag.getContext();
+                    final Resources res = ctx.getResources();
                     if (param.args[idx] != null) {
                         String resName = "img_no_image_automirrored";
-                        Drawable picUnknown = res.getDrawable(res.getIdentifier(resName, "drawable",
-                                        res.getResourcePackageName(frag.getId())), null);
+                        Drawable picUnknown = ctx.getDrawable(res.getIdentifier(resName, "drawable",
+                                        res.getResourcePackageName(frag.getId())));
                         shouldShowUnknownPhoto = ((Drawable)param.args[idx]).getConstantState().equals(
                                                     picUnknown.getConstantState());
                     }

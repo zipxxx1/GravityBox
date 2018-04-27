@@ -28,7 +28,6 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 
 import com.ceco.marshmallow.gravitybox.R;
@@ -56,7 +55,7 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
 
     private static final int TIME_FADEIN = 600;
 
-    private Context mContext;
+    private Context mGbContext;
     private Resources mGbResources;
 
     private Paint mBackgroundPaint = new Paint();
@@ -246,7 +245,7 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
     public PieLayout(Context context, Context gbContext, int triggerSlots, int pieSize) {
         super(context);
 
-        mContext = context;
+        mGbContext = gbContext;
         mGbResources = gbContext.getResources();
 
         mBackgroundAnimator.addUpdateListener(mUpdateListener);
@@ -278,13 +277,13 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
     }
 
     private void getColors() {
-        mSnapPaint.setColor(mGbResources.getColor(R.color.pie_snap_color));
+        mSnapPaint.setColor(mGbContext.getColor(R.color.pie_snap_color));
         mSnapPaint.setStyle(Style.STROKE);
         mSnapPaint.setStrokeWidth(mGbResources.getDimensionPixelSize(R.dimen.pie_snap_outline));
         mSnapPaint.setAntiAlias(true);
-        mSnapActivePaint.setColor(mGbResources.getColor(R.color.pie_snap_color));
+        mSnapActivePaint.setColor(mGbContext.getColor(R.color.pie_snap_color));
 
-        mBackgroundPaint.setColor(mGbResources.getColor(R.color.pie_overlay_color));
+        mBackgroundPaint.setColor(mGbContext.getColor(R.color.pie_overlay_color));
         mBackgroundTargetAlpha = mBackgroundPaint.getAlpha();
     }
 

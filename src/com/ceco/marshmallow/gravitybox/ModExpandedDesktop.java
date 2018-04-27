@@ -27,7 +27,6 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.Surface;

@@ -40,7 +40,7 @@ public class MobileDataShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_mobile_data, null);
+        return mContext.getDrawable(R.drawable.shortcut_mobile_data);
     }
 
     @Override

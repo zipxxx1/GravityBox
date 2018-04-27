@@ -37,7 +37,7 @@ public class VolumePanelShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_volume_panel);
+        return mContext.getDrawable(R.drawable.shortcut_volume_panel);
     }
 
     @Override

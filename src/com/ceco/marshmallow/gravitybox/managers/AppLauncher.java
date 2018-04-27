@@ -357,7 +357,7 @@ public class AppLauncher implements BroadcastSubReceiver {
 
         public Drawable getAppIcon() {
             return (mAppIcon == null ? 
-                    mResources.getDrawable(android.R.drawable.ic_menu_help) : mAppIcon);
+                    mContext.getDrawable(android.R.drawable.ic_menu_help) : mAppIcon);
         }
 
         public void setAppIcon(Drawable d) {
@@ -426,7 +426,7 @@ public class AppLauncher implements BroadcastSubReceiver {
                             mGbResources.getIdentifier(iconResName, "drawable",
                                     mGbContext.getPackageName()) : 0;
                     if (iconResId != 0) {
-                        appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                        appIcon = Utils.drawableToBitmap(mGbContext.getDrawable(iconResId));
                     } else if (mIntent.hasExtra("icon")) {
                         final String appIconPath = mIntent.getStringExtra("icon");
                         if (appIconPath != null) {

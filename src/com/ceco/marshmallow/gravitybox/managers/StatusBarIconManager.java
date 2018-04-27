@@ -32,7 +32,6 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -58,8 +57,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     private static final int FLAG_ALL = 0xFF;
 
     private Context mContext;
-    private Resources mGbResources;
-    private Resources mSystemUiRes;
+    private Context mGbContext;
     private Map<String, Integer[]> mBasicIconIds;
     private Map<String, SoftReference<Drawable>> mIconCache;
     private ColorInfo mColorInfo;
@@ -89,9 +87,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
 
     protected StatusBarIconManager(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
-        mSystemUiRes = mContext.getResources();
-        Context gbContext = Utils.getGbContext(mContext);
-        mGbResources = gbContext.getResources();
+        mGbContext = Utils.getGbContext(mContext);
 
         Map<String, Integer[]> basicIconMap = new HashMap<String, Integer[]>();
         basicIconMap.put("stat_sys_data_bluetooth", new Integer[] 
@@ -133,10 +129,10 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                         getDefaultIconColor()));
         setDataActivityColor(
                 prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR, 
-                        mGbResources.getInteger(R.integer.signal_cluster_data_activity_icon_color)));
+                        mGbContext.getResources().getInteger(R.integer.signal_cluster_data_activity_icon_color)));
         setDataActivityColor(1, 
                 prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, 
-                        mGbResources.getInteger(R.integer.signal_cluster_data_activity_icon_color)));
+                        mGbContext.getResources().getInteger(R.integer.signal_cluster_data_activity_icon_color)));
         try {
             int signalIconMode = Integer.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "1"));
@@ -154,7 +150,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mColorInfo.wasColoringEnabled = false;
         mColorInfo.defaultIconColor = getDefaultIconColor();
         mColorInfo.iconColor = new int[2];
-        mColorInfo.defaultDataActivityColor = mGbResources.getInteger(
+        mColorInfo.defaultDataActivityColor = mGbContext.getResources().getInteger(
                 R.integer.signal_cluster_data_activity_icon_color);
         mColorInfo.dataActivityColor = new int[2];
         mColorInfo.signalIconMode = SI_MODE_STOCK;
@@ -364,7 +360,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         if (resId == 0) return null;
 
         try {
-            String key = mSystemUiRes.getResourceEntryName(resId);
+            String key = mContext.getResources().getResourceEntryName(resId);
             if (!mBasicIconIds.containsKey(key)) {
                 if (DEBUG) log("getBasicIcon: no record for key: " + key);
                 return null;
@@ -374,17 +370,17 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 Drawable d = getCachedDrawable(key);
                 if (d != null) return d;
                 if (mBasicIconIds.get(key)[mColorInfo.iconStyle] != null) {
-                    d = mGbResources.getDrawable(mBasicIconIds.get(key)[mColorInfo.iconStyle]).mutate();
+                    d = mGbContext.getDrawable(mBasicIconIds.get(key)[mColorInfo.iconStyle]).mutate();
                     d = applyColorFilter(d);
                 } else {
-                    d = mSystemUiRes.getDrawable(resId).mutate();
+                    d = mContext.getDrawable(resId).mutate();
                     d = applyColorFilter(d, PorterDuff.Mode.SRC_ATOP);
                 }
                 setCachedDrawable(key, d);
                 if (DEBUG) log("getBasicIcon: returning drawable for key: " + key);
                 return d;
             } else if (mColorInfo.wasColoringEnabled) {
-                return mSystemUiRes.getDrawable(resId);
+                return mContext.getDrawable(resId);
             } else {
                 return null;
             }

@@ -243,15 +243,14 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
     private void updateTrafficDrawable() {
         if (mGbContext == null) return;
 
-        final Resources res = mGbContext.getResources();
         Drawable d = null;
         if (mShowIcon) {
             if (mMode == Mode.IN_OUT) {
-                d = res.getDrawable(R.drawable.stat_sys_network_traffic_updown, null).mutate();
+                d = mGbContext.getDrawable(R.drawable.stat_sys_network_traffic_updown).mutate();
             } else if (mMode == Mode.OUT) {
-                d = res.getDrawable(R.drawable.stat_sys_network_traffic_up, null).mutate();
+                d = mGbContext.getDrawable(R.drawable.stat_sys_network_traffic_up).mutate();
             } else if (mMode == Mode.IN) {
-                d = res.getDrawable(R.drawable.stat_sys_network_traffic_down, null).mutate();
+                d = mGbContext.getDrawable(R.drawable.stat_sys_network_traffic_down).mutate();
             };
         }
 

@@ -25,7 +25,6 @@ import com.ceco.marshmallow.gravitybox.adapters.IconListAdapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.preference.DialogPreference;
@@ -41,13 +40,11 @@ public class NetworkModePreference extends DialogPreference implements OnItemCli
     private Context mContext;
     private ListView mListView;
     private String mDefaultSummaryText;
-    private Resources mResources;
 
     public NetworkModePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         mContext = context;
-        mResources = mContext.getResources();
         mDefaultSummaryText = (String) getSummary();
 
         setDialogLayoutResource(R.layout.network_mode_preference);
@@ -149,7 +146,7 @@ public class NetworkModePreference extends DialogPreference implements OnItemCli
 
         @Override
         public Drawable getIconLeft() {
-            return mIconResId == 0 ? null : mResources.getDrawable(mIconResId);
+            return mIconResId == 0 ? null : mContext.getDrawable(mIconResId);
         }
 
         @Override

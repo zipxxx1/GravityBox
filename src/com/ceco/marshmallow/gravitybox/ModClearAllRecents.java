@@ -409,17 +409,16 @@ public class ModClearAllRecents {
         ModPieControls.setRecentAlt(show);
     }
 
-    @SuppressWarnings("deprecation")
     private static void updateButtonImage() {
         if (mRecentsClearButton == null) return;
         try {
             if (mRecentsClearButtonStockIcon != null) {
-                Drawable d = mClearAllUseAltIcon ? mGbContext.getResources().getDrawable(
+                Drawable d = mClearAllUseAltIcon ? mGbContext.getDrawable(
                         R.drawable.ic_recent_clear) : mRecentsClearButtonStockIcon;
                 mRecentsClearButton.setImageDrawable(d);
             } else {
                 int icResId = mClearAllUseAltIcon ? R.drawable.ic_recent_clear : R.drawable.ic_dismiss_all;
-                mRecentsClearButton.setImageDrawable(mGbContext.getResources().getDrawable(icResId));
+                mRecentsClearButton.setImageDrawable(mGbContext.getDrawable(icResId));
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);

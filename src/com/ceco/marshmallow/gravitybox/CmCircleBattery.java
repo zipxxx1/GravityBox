@@ -111,8 +111,6 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
 
         // initialize and setup all paint variables
         // stroke width is later set in initSizeBasedStuff()
-        Resources res = getResources();
-
         mPaintFont = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaintFont.setDither(true);
         mPaintFont.setStyle(Paint.Style.STROKE);
@@ -140,10 +138,10 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         mPaintRed.setStrokeWidth(0);
         mPaintRed.setStyle(Paint.Style.STROKE);
         // try to use battery saver color; fall back to red in case of problems
-        int resId = res.getIdentifier("battery_saver_mode_color", "color",
+        int resId = getResources().getIdentifier("battery_saver_mode_color", "color",
                 ModStatusBar.PACKAGE_NAME);
-        mPaintRed.setColor(resId != 0 ? res.getColor(resId) :
-                res.getColor(android.R.color.holo_red_light));
+        mPaintRed.setColor(resId != 0 ? context.getColor(resId) :
+            context.getColor(android.R.color.holo_red_light));
 
         mPercentage = false;
 

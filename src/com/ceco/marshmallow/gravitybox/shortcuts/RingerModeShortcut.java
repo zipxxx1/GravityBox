@@ -45,7 +45,7 @@ public class RingerModeShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_ringer_ring_vibrate, null);
+        return mContext.getDrawable(R.drawable.shortcut_ringer_ring_vibrate);
     }
 
     @Override

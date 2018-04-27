@@ -308,7 +308,7 @@ public class BatteryTile extends QsTile {
                 Resources res = getResources();
                 int resId = res.getIdentifier("battery_saver_mode_color", "color", "android");
                 if (resId != 0) {
-                    mBatterySaverColor = res.getColor(resId);
+                    mBatterySaverColor = getContext().getColor(resId);
                 }
             } catch (Throwable t) { /* well... */ }
             return mBatterySaverColor;

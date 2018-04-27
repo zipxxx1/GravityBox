@@ -40,7 +40,7 @@ public class SimSettingsShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_sm_settings, null);
+        return mContext.getDrawable(R.drawable.shortcut_sm_settings);
     }
 
     @Override

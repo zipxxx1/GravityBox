@@ -37,7 +37,7 @@ public class SwitchAppShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_previous_app);
+        return mContext.getDrawable(R.drawable.shortcut_previous_app);
     }
 
     @Override
