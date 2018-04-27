@@ -1982,8 +1982,6 @@
     <string name="pref_cat_fingerprint_launcher_summary">Lehetővé teszi alkalmazás vagy művelet indítását az ujjlenyomat érzékelő használatával, bekapcsolt képernyőnél és feloldott eszköznél</string>
     <string name="pref_fingerprint_launcher_enable_summary">Ujjlenyomat indító funkció ki- és bekapcsolása (újraindítás szükséges)</string>
     <string name="pref_fingerprint_launcher_app_title">Alkalmazás vagy művelet választása</string>
-    <string name="pref_fingerprint_launcher_ignore_auth_title">Gyors érintés mód</string>
-    <string name="pref_fingerprint_launcher_ignore_auth_summary">KÍSÉRLETI: Elfogadja a fel nem ismert ujjlenyomatokat és gyorsabb érintéseket. Átmeneti érzékelő lezárást eredményezhet túl sok újabb hitelesítési hiba esetén.</string>
     <string name="fingerprint_auth_failed">Hitelesítés sikertelen</string>
     <string name="fingerprint_sensor_unavail">Az ujjlenyomat érzékelő elérhetetlenné vált</string>
     <string name="fingerprint_sensor_locked">Az ujjlenyomat érzékelő lezárásra került a túl sok sikertelen hitelesítési próbálkozás miatt. Próbáld meg újra 35 másodperc múlva.</string>
