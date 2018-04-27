@@ -1,3 +1,45 @@
+Changelog 6.5.0 - 27/04/2018
+--------------------------------------
+- Lockscreen shortcuts:
+--- added additional slot
+--- added option for scale correction
+- QuickSettings management:
+--- added option for Haptic feedback (vibrate on tile press)
+--- added Ambient Display tile (Controls whether received notifications activate ambient screen)
+--- added Heads Up tile (Controls whether to show heads up for notifications globally)
+- Battery settings: added master switch for battery settings
+- CircleBattery: decreased size by 1dp
+- BatteryBar: added option to show bar only while charging
+- Pie: fixes and improvements:
+--- increased max value for trigger size
+--- unpin currently pinned task on back long-press (has priority over custom long-press action)
+- GB's App Launcher: added option for choosing theme
+- Actions: improved killing of foreground apps
+--- kills only what's really visible to the user
+--- removes killed task from the recents panel
+- Media tweaks: added Visualizer feature (basic functionality ported from LineageOS)
+--- shows in lock screen during media playback
+--- supports static as well as dynamic color (extracted from artwork of current media)
+--- supports Active mode - keeps lock screen on while Visualizer is showing
+--- supports Lock screen dimming with adjustable dim level (based on user interaction)
+--- supports showing media info on dimmed screen
+--- supports showing header containing current time and battery level on dimmed screen
+--- supports media controls on dimmed screen
+--- supports showing artwork as background of dimmed screen covering lock screen contents
+--- deactivates automatically during power saving mode
+- ImagePicker: cropping is optional when choosing custom icons
+- Dialer: adjusted for compatibility with the latest Google Dialer app
+- Screenshot: use native method if available (e.g. uses OnePlus screenshot on OOS)
+- Added switch for Error logging in About section (off by default):
+--- module logs errors to Xposed log only when switch is enabled
+--- avoids flooding Xposed log happening on unsupported devices
+- Lots of other fixes and improvements backported from GravityBox [N] and [O]
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Ukrainian translations (thanks to burunduk)
+
 Changelog 6.3.8 - 02/09/2017
 --------------------------------------
 - Dialer tweaks: adjusted for compatibility with Google Dialer v11
