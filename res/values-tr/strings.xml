@@ -1984,7 +1984,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
 
     <!-- Error logging -->
     <string name="pref_log_errors_title">Hata günlüğü</string>
-    <string name="pref_log_errors_summary">Etkinleştirildiğinde tüm hataları Xposed günlüğe kaydeder (yeniden başlatma gerektirir)</string>
+    <string name="pref_log_errors_summary">Etkinleştirildiğinde tüm hataları Xposed günlüğüne kaydeder (yeniden başlatma gerektirir)</string>
 
     <!-- SignalCluster: Moto: use AOSP mobile type icon -->
     <string name="pref_signal_cluster_aosp_mobile_type_title">AOSP mobil tipi simgeleri kullan</string>
