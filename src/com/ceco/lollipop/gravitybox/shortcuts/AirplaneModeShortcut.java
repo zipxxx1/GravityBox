@@ -40,7 +40,7 @@ public class AirplaneModeShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_airplane_mode, null);
+        return mContext.getDrawable(R.drawable.shortcut_airplane_mode);
     }
 
     @Override

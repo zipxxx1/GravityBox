@@ -40,7 +40,7 @@ public class ExpandNotificationsShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_notifications, null);
+        return mContext.getDrawable(R.drawable.shortcut_notifications);
     }
 
     @Override

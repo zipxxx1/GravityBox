@@ -120,7 +120,7 @@ public abstract class AMultiShortcut extends AShortcut {
 
         @Override
         public Drawable getIconLeft() {
-            return mContext.getResources().getDrawable(mIconResId, null);
+            return mContext.getDrawable(mIconResId);
         }
 
         @Override

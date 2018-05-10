@@ -177,12 +177,12 @@ public class OngoingNotifPreference extends DialogPreference
             if (mPackage == null || mIconId == 0) return null;
 
             if (mIcon == null) {
-                Resources res = mResources;
+                Context ctx = mContext;
                 if (!mPackage.equals("android") &&
                         !mPackage.equals(mContext.getPackageName())) {
                     try {
-                       res = mContext.createPackageContext(mPackage, 
-                                    Context.CONTEXT_IGNORE_SECURITY).getResources();
+                        ctx = mContext.createPackageContext(mPackage, 
+                                    Context.CONTEXT_IGNORE_SECURITY);
                     } catch (NameNotFoundException e) {
                         e.printStackTrace();
                         return null;
@@ -190,7 +190,7 @@ public class OngoingNotifPreference extends DialogPreference
                 }
 
                 try {
-                    Drawable d = res.getDrawable(mIconId);
+                    Drawable d = ctx.getDrawable(mIconId);
                     if (d != null) {
                         Bitmap b = Utils.drawableToBitmap(d.mutate());
                         b = Bitmap.createScaledBitmap(b, mIconSizePx, mIconSizePx, true);

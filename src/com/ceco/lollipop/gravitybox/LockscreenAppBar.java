@@ -305,7 +305,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
                         mGbResources.getIdentifier(mIntent.getStringExtra("iconResName"),
                         "drawable", mGbContext.getPackageName()) : 0;
                 if (iconResId != 0) {
-                    mIcon = mGbResources.getDrawable(iconResId, null);
+                    mIcon = mGbContext.getDrawable(iconResId);
                 } else {
                     final String appIconPath = mIntent.getStringExtra("icon");
                     if (appIconPath != null) {
@@ -391,7 +391,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             p.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10,
                     mResources.getDisplayMetrics()));
 
-            Drawable bg = mGbResources.getDrawable(R.drawable.ic_notification_overlay, null);
+            Drawable bg = mGbContext.getDrawable(R.drawable.ic_notification_overlay);
 
             final int w = b.getWidth();
             final int h = b.getHeight();

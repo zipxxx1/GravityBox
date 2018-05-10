@@ -18,7 +18,6 @@ package com.ceco.lollipop.gravitybox.shortcuts;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
 import com.ceco.lollipop.gravitybox.adapters.IIconListAdapterItem;
@@ -29,7 +28,6 @@ public abstract class AShortcut implements IIconListAdapterItem {
     public static final String EXTRA_SHOW_TOAST = "showToast";
 
     protected Context mContext;
-    protected Resources mResources;
 
     public interface CreateShortcutListener {
         void onShortcutCreated(Intent intent);
@@ -37,7 +35,6 @@ public abstract class AShortcut implements IIconListAdapterItem {
 
     public AShortcut(Context context) {
         mContext = context;
-        mResources = mContext.getResources();
     }
 
     @Override

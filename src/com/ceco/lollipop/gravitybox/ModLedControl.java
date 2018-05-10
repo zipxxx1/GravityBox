@@ -951,7 +951,7 @@ public class ModLedControl {
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(sizePx, sizePx, 
                 Gravity.BOTTOM | Gravity.END);
         imgButton.setLayoutParams(lp);
-        imgButton.setImageDrawable(gbContext.getResources().getDrawable(R.drawable.ic_heads_up_snooze));
+        imgButton.setImageDrawable(gbContext.getDrawable(R.drawable.ic_heads_up_snooze));
         imgButton.setHapticFeedbackEnabled(true);
         imgButton.setVisibility(View.GONE);
         imgButton.setElevation(30);

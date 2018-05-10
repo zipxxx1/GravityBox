@@ -37,7 +37,7 @@ public class LauncherDrawerShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_launcher_drawer);
+        return mContext.getDrawable(R.drawable.shortcut_launcher_drawer);
     }
 
     @Override

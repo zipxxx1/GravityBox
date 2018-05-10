@@ -40,7 +40,7 @@ public class ExpandQuicksettingsShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_quicksettings, null);
+        return mContext.getDrawable(R.drawable.shortcut_quicksettings);
     }
 
     @Override

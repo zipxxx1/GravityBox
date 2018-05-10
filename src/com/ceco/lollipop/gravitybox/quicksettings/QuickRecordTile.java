@@ -30,7 +30,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
@@ -237,8 +236,6 @@ public class QuickRecordTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        final Resources res = mGbContext.getResources();
-
         if (mAudioFileName == null) {
             mRecordingState = STATE_NO_RECORDING;
         } else {
@@ -251,25 +248,25 @@ public class QuickRecordTile extends QsTile {
         mState.visible = true;
         switch (mRecordingState) {
             case STATE_PLAYING:
-                mState.label = res.getString(R.string.quick_settings_qr_playing);
-                mState.icon = res.getDrawable(R.drawable.ic_qs_qr_playing);
+                mState.label = mGbContext.getString(R.string.quick_settings_qr_playing);
+                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_qr_playing);
                 break;
             case STATE_RECORDING:
-                mState.label = res.getString(R.string.quick_settings_qr_recording);
-                mState.icon = res.getDrawable(R.drawable.ic_qs_qr_recording);
+                mState.label = mGbContext.getString(R.string.quick_settings_qr_recording);
+                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_qr_recording);
                 break;
             case STATE_JUST_RECORDED:
-                mState.label = res.getString(R.string.quick_settings_qr_recorded);
-                mState.icon = res.getDrawable(R.drawable.ic_qs_qr_recorded);
+                mState.label = mGbContext.getString(R.string.quick_settings_qr_recorded);
+                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_qr_recorded);
                 break;
             case STATE_NO_RECORDING:
-                mState.label = res.getString(R.string.quick_settings_qr_record);
-                mState.icon = res.getDrawable(R.drawable.ic_qs_qr_record);
+                mState.label = mGbContext.getString(R.string.quick_settings_qr_record);
+                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_qr_record);
                 break;
             case STATE_IDLE:
             default:
-                mState.label = res.getString(R.string.qs_tile_quickrecord);
-                mState.icon = res.getDrawable(R.drawable.ic_qs_qr_record);
+                mState.label = mGbContext.getString(R.string.qs_tile_quickrecord);
+                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_qr_record);
                 break;
         }
 

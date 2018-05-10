@@ -224,7 +224,7 @@ public class AppPickerPreference extends DialogPreference
         ArrayList<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>(labels.length);
         for (int i = 0; i < labels.length; i++) {
             BasicIconListItem item = new BasicIconListItem(labels[i], null, 
-                    icons.getResourceId(i, 0), 0, mResources);
+                    icons.getResourceId(i, 0), 0, mContext);
             list.add(item);
         }
         sIconPickerAdapter = new IconListAdapter(mContext, list);
@@ -567,7 +567,7 @@ public class AppPickerPreference extends DialogPreference
                     mResources.getIdentifier(intent.getStringExtra("iconResName"),
                     "drawable", mContext.getPackageName()) : 0;
             if (iconResId != 0) {
-                appInfo.icon = mResources.getDrawable(iconResId);
+                appInfo.icon = mContext.getDrawable(iconResId);
             } else if (intent.hasExtra("icon")) {
                 final String appIconPath = intent.getStringExtra("icon");
                 if (appIconPath != null) {

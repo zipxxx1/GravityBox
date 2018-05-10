@@ -90,12 +90,12 @@ public class QuickAppTile extends QsTile {
 
         public Drawable getAppIcon() {
             return (mAppIcon == null ? 
-                    mResources.getDrawable(android.R.drawable.ic_menu_help) : mAppIcon);
+                    mGbContext.getDrawable(android.R.drawable.ic_menu_help) : mAppIcon);
         }
 
         public Drawable getAppIconSmall() {
             return (mAppIconSmall == null ? 
-                    mResources.getDrawable(android.R.drawable.ic_menu_help) : mAppIconSmall);
+                    mGbContext.getDrawable(android.R.drawable.ic_menu_help) : mAppIconSmall);
         }
 
         public String getValue() {
@@ -132,7 +132,7 @@ public class QuickAppTile extends QsTile {
                         mResources.getIdentifier(mIntent.getStringExtra("iconResName"),
                         "drawable", mGbContext.getPackageName()) : 0;
                 if (iconResId != 0) {
-                    appIcon = Utils.drawableToBitmap(mResources.getDrawable(iconResId));
+                    appIcon = Utils.drawableToBitmap(mGbContext.getDrawable(iconResId));
                 } else {
                     final String appIconPath = mIntent.getStringExtra("icon");
                     if (appIconPath != null) {

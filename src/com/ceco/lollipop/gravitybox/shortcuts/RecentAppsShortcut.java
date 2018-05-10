@@ -37,7 +37,7 @@ public class RecentAppsShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_recent_apps);
+        return mContext.getDrawable(R.drawable.shortcut_recent_apps);
     }
 
     @Override

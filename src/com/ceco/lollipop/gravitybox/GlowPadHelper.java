@@ -57,7 +57,7 @@ public class GlowPadHelper {
     private static Hashtable<String, AppInfo> mAppInfoCache = new Hashtable<String, AppInfo>();
     private static Constructor<?> mTargetDrawableConstructor;
     private static Constructor<?> mTargetDrawableConstructorMtk;
-    private static Resources mGbResources;
+    private static Context mGbContext;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -94,8 +94,8 @@ public class GlowPadHelper {
         if (context == null || app == null) return null;
 
         try {
-            if (mGbResources == null) {
-                mGbResources = Utils.getGbContext(context).getResources();
+            if (mGbContext == null) {
+                mGbContext = Utils.getGbContext(context);
             }
             final String key = app + "_" + bgStyle.toString();
             if (mAppInfoCache.containsKey(key)) {
@@ -113,10 +113,10 @@ public class GlowPadHelper {
 
             Bitmap appIcon = null;
             final int iconResId = appInfo.intent.getStringExtra("iconResName") != null ?
-                    mGbResources.getIdentifier(appInfo.intent.getStringExtra("iconResName"),
+                    mGbContext.getResources().getIdentifier(appInfo.intent.getStringExtra("iconResName"),
                     "drawable", GravityBox.PACKAGE_NAME) : 0;
             if (iconResId != 0) {
-                appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                appIcon = Utils.drawableToBitmap(mGbContext.getDrawable(iconResId));
             } else {
                 final String appIconPath = appInfo.intent.getStringExtra("icon");
                 if (appIconPath != null) {
@@ -228,8 +228,8 @@ public class GlowPadHelper {
         if (appInfo.icon == null) return null;
 
         try {
-            if (mGbResources == null) {
-                mGbResources = Utils.getGbContext(context).getResources();
+            if (mGbContext == null) {
+                mGbContext = Utils.getGbContext(context);
             }
 
             Paint paint = new Paint();
@@ -241,7 +241,7 @@ public class GlowPadHelper {
                 paint.setColorFilter(new LightingColorFilter(0xFF999999, 1));
             }
 
-            Bitmap bg = Utils.drawableToBitmap(mGbResources.getDrawable(R.drawable.target_background));
+            Bitmap bg = Utils.drawableToBitmap(mGbContext.getDrawable(R.drawable.target_background));
             Bitmap fg = Utils.drawableToBitmap(appInfo.icon.mutate());
             float left = (bg.getWidth() - fg.getWidth()) / 2f;
             float top = (bg.getHeight() - fg.getHeight()) / 2f;

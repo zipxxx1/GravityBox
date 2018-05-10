@@ -37,7 +37,7 @@ public class GoogleNowShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_google_now);
+        return mContext.getDrawable(R.drawable.shortcut_google_now);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class LocationModeShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_gps_high, null);
+        return mContext.getDrawable(R.drawable.shortcut_gps_high);
     }
 
     @Override

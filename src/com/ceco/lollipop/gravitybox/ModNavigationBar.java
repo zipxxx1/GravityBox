@@ -388,7 +388,6 @@ public class ModNavigationBar {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final Context context = ((View) param.thisObject).getContext();
-                    final Resources gbRes = mGbContext.getResources();
                     final int backButtonResId = mResources.getIdentifier("back", "id", PACKAGE_NAME);
                     final int recentAppsResId = mResources.getIdentifier("recent_apps", "id", PACKAGE_NAME);
                     final int homeButtonResId = mResources.getIdentifier("home", "id", PACKAGE_NAME);
@@ -440,18 +439,18 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(scaleType);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
+                        dpadLeft.setImageDrawable(mGbContext.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_ime_left :
-                                        R.drawable.ic_sysbar_ime_left_lollipop, null));
+                                        R.drawable.ic_sysbar_ime_left_lollipop));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(scaleType);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
+                        dpadRight.setImageDrawable(mGbContext.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_ime_right :
-                                        R.drawable.ic_sysbar_ime_right_lollipop, null));
+                                        R.drawable.ic_sysbar_ime_right_lollipop));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -474,18 +473,18 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(scaleType);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
+                        dpadLeft.setImageDrawable(mGbContext.getDrawable(mUseLargerIcons ?
                                             R.drawable.ic_sysbar_ime_left :
-                                                R.drawable.ic_sysbar_ime_left_lollipop, null));
+                                                R.drawable.ic_sysbar_ime_left_lollipop));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(scaleType);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
+                        dpadRight.setImageDrawable(mGbContext.getDrawable(mUseLargerIcons ?
                                             R.drawable.ic_sysbar_ime_right :
-                                                R.drawable.ic_sysbar_ime_right_lollipop, null));
+                                                R.drawable.ic_sysbar_ime_right_lollipop));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -520,23 +519,22 @@ public class ModNavigationBar {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mGbContext == null) return;
 
-                    final Resources gbRes = mGbContext.getResources();
                     try {
                         mRecentIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentIcon");
                         mRecentLandIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentLandIcon");
-                        mRecentAltIcon = gbRes.getDrawable(mUseLargerIcons ?
-                                R.drawable.ic_sysbar_recent_clear: R.drawable.ic_sysbar_recent_clear_lollipop, null);
-                        mRecentAltLandIcon = gbRes.getDrawable(mUseLargerIcons ?
-                                R.drawable.ic_sysbar_recent_clear_land : R.drawable.ic_sysbar_recent_clear_land_lollipop, null);
+                        mRecentAltIcon = mGbContext.getDrawable(mUseLargerIcons ?
+                                R.drawable.ic_sysbar_recent_clear: R.drawable.ic_sysbar_recent_clear_lollipop);
+                        mRecentAltLandIcon = mGbContext.getDrawable(mUseLargerIcons ?
+                                R.drawable.ic_sysbar_recent_clear_land : R.drawable.ic_sysbar_recent_clear_land_lollipop);
                     } catch (Throwable t) {
                         GravityBox.log(TAG, "getIcons: system does not seem to have standard AOSP recents key?", t);
                     }
 
                     try {
-                        Drawable backIcon = mUseLargerIcons ? gbRes.getDrawable(
-                                R.drawable.ic_sysbar_back_ime_land_large, null) :
+                        Drawable backIcon = mUseLargerIcons ? mGbContext.getDrawable(
+                                R.drawable.ic_sysbar_back_ime_land_large) :
                                     Build.VERSION.SDK_INT >= 22 ? null :
-                                        gbRes.getDrawable(R.drawable.ic_sysbar_back_ime_land, null);
+                                        mGbContext.getDrawable(R.drawable.ic_sysbar_back_ime_land);
                         if (backIcon != null) {
                             XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon", backIcon);
                         }

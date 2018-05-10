@@ -57,6 +57,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     private static final int FLAG_ALL = 0x7F;
 
     private Context mContext;
+    private Context mGbContext;
     private Resources mGbResources;
     private Resources mSystemUiRes;
     private Map<String, Integer[]> mBasicIconIds;
@@ -88,8 +89,8 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     protected StatusBarIconManager(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
         mSystemUiRes = mContext.getResources();
-        Context gbContext = Utils.getGbContext(mContext);
-        mGbResources = gbContext.getResources();
+        mGbContext = Utils.getGbContext(mContext);
+        mGbResources = mGbContext.getResources();
 
         Map<String, Integer[]> basicIconMap = new HashMap<String, Integer[]>();
         basicIconMap.put("stat_sys_data_bluetooth", new Integer[] 
@@ -362,17 +363,17 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 Drawable d = getCachedDrawable(key);
                 if (d != null) return d;
                 if (mBasicIconIds.get(key)[mColorInfo.iconStyle] != null) {
-                    d = mGbResources.getDrawable(mBasicIconIds.get(key)[mColorInfo.iconStyle]).mutate();
+                    d = mGbContext.getDrawable(mBasicIconIds.get(key)[mColorInfo.iconStyle]).mutate();
                     d = applyColorFilter(d);
                 } else {
-                    d = mSystemUiRes.getDrawable(resId).mutate();
+                    d = mContext.getDrawable(resId).mutate();
                     d = applyColorFilter(d, PorterDuff.Mode.SRC_ATOP);
                 }
                 setCachedDrawable(key, d);
                 if (DEBUG) log("getBasicIcon: returning drawable for key: " + key);
                 return d;
             } else if (mColorInfo.wasColoringEnabled) {
-                return mSystemUiRes.getDrawable(resId);
+                return mContext.getDrawable(resId);
             } else {
                 return null;
             }

@@ -317,15 +317,15 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         final Resources res = mContext.getResources();
         Tracker.sDistance = mGbResources.getDimensionPixelSize(R.dimen.pie_trigger_distance);
 
-        mBackIcon = res.getDrawable(context.getResources().getIdentifier(
-                "ic_sysbar_back", "drawable", PACKAGE_NAME), null).mutate();
-        mBackAltIcon = res.getDrawable(context.getResources().getIdentifier(
-                "ic_sysbar_back_ime", "drawable", PACKAGE_NAME), null).mutate();
-        mRecentIcon = res.getDrawable(res.getIdentifier(
-                "ic_sysbar_recent", "drawable", PACKAGE_NAME), null).mutate();
-        mRecentAltIcon = mGbResources.getDrawable(mUseLargerIcons ?
+        mBackIcon = mContext.getDrawable(res.getIdentifier(
+                "ic_sysbar_back", "drawable", PACKAGE_NAME)).mutate();
+        mBackAltIcon = mContext.getDrawable(res.getIdentifier(
+                "ic_sysbar_back_ime", "drawable", PACKAGE_NAME)).mutate();
+        mRecentIcon = mContext.getDrawable(res.getIdentifier(
+                "ic_sysbar_recent", "drawable", PACKAGE_NAME)).mutate();
+        mRecentAltIcon = mGbContext.getDrawable(mUseLargerIcons ?
                 R.drawable.ic_sysbar_recent_clear: 
-                    R.drawable.ic_sysbar_recent_clear_lollipop, null).mutate();
+                    R.drawable.ic_sysbar_recent_clear_lollipop).mutate();
 
         try {
             mBaseStatusBarClass = XposedHelpers.findClass(CLASS_BASE_STATUSBAR, mContext.getClassLoader());
@@ -407,16 +407,16 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
 
         if (mMirroredKeys) {
             mMenuButton = constructItem(1, ButtonType.MENU,
-                    res.getDrawable(res.getIdentifier("ic_sysbar_menu", "drawable", PACKAGE_NAME)),
+                    mContext.getDrawable(res.getIdentifier("ic_sysbar_menu", "drawable", PACKAGE_NAME)),
                     minimumImageSize);
             mNavigationSlice.addItem(mMenuButton);
     
             if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_SEARCH) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.SEARCH,
-                        mGbResources.getDrawable(R.drawable.pie_search), minimumImageSize));
+                        mGbContext.getDrawable(R.drawable.pie_search), minimumImageSize));
             } else if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_APP_LAUNCHER) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.APP_LAUNCHER,
-                        mGbResources.getDrawable(mUseLargerIcons ?
+                        mGbContext.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_apps : R.drawable.ic_sysbar_apps_lollipop),
                                minimumImageSize));
             }
@@ -426,7 +426,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                     minimumImageSize));
     
             mNavigationSlice.addItem(constructItem(2, ButtonType.HOME,
-                    res.getDrawable(res.getIdentifier("ic_sysbar_home", "drawable", PACKAGE_NAME)),
+                    mContext.getDrawable(res.getIdentifier("ic_sysbar_home", "drawable", PACKAGE_NAME)),
                     minimumImageSize));
     
             mNavigationSlice.addItem(constructItem(2, ButtonType.BACK,
@@ -437,23 +437,23 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                     mBackIcon,
                     minimumImageSize));
             mNavigationSlice.addItem(constructItem(2, ButtonType.HOME,
-                    res.getDrawable(res.getIdentifier("ic_sysbar_home", "drawable", PACKAGE_NAME)),
+                    mContext.getDrawable(res.getIdentifier("ic_sysbar_home", "drawable", PACKAGE_NAME)),
                     minimumImageSize));
             mNavigationSlice.addItem(constructItem(2, ButtonType.RECENT,
                     mRecentIcon,
                     minimumImageSize));
             if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_SEARCH) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.SEARCH,
-                        mGbResources.getDrawable(R.drawable.pie_search), minimumImageSize));
+                        mGbContext.getDrawable(R.drawable.pie_search), minimumImageSize));
             } else if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_APP_LAUNCHER) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.APP_LAUNCHER,
-                        mGbResources.getDrawable(mUseLargerIcons ?
+                        mGbContext.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_apps : R.drawable.ic_sysbar_apps_lollipop),
                                 minimumImageSize));
             }
 
             mMenuButton = constructItem(1, ButtonType.MENU,
-                    res.getDrawable(res.getIdentifier("ic_sysbar_menu", "drawable", PACKAGE_NAME)),
+                    mContext.getDrawable(res.getIdentifier("ic_sysbar_menu", "drawable", PACKAGE_NAME)),
                     minimumImageSize);
             mNavigationSlice.addItem(mMenuButton);
         }

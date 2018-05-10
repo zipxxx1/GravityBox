@@ -37,7 +37,7 @@ public class ClearNotificationsShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_notif_clear);
+        return mContext.getDrawable(R.drawable.shortcut_notif_clear);
     }
 
     @Override

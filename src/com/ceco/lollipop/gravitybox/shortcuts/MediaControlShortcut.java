@@ -41,7 +41,7 @@ public class MediaControlShortcut extends AMultiShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_media_play_pause, null);
+        return mContext.getDrawable(R.drawable.shortcut_media_play_pause);
     }
 
     @Override
