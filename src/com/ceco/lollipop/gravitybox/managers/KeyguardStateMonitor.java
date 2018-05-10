@@ -45,7 +45,6 @@ public class KeyguardStateMonitor {
     private boolean mIsShowing;
     private boolean mIsLocked;
     private boolean mIsTrustManaged;
-    private Object mUpdateMonitor;
     private Object mLockPatternUtils;
     private Object mMediator;
     private List<Listener> mListeners = new ArrayList<>();
@@ -74,13 +73,6 @@ public class KeyguardStateMonitor {
         try {
             ClassLoader cl = mContext.getClassLoader();
             Class<?> updateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, cl);
-
-            XposedBridge.hookAllConstructors(updateMonitorClass, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    mUpdateMonitor = param.thisObject;
-                }
-            });
 
             XposedHelpers.findAndHookMethod(updateMonitorClass, "handleKeyguardVisibilityChanged",
                     int.class, new XC_MethodHook() {

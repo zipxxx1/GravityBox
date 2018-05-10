@@ -28,7 +28,6 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 
 import com.ceco.lollipop.gravitybox.R;
@@ -56,7 +55,6 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
 
     private static final int TIME_FADEIN = 600;
 
-    private Context mContext;
     private Resources mGbResources;
 
     private Paint mBackgroundPaint = new Paint();
@@ -246,7 +244,6 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
     public PieLayout(Context context, Context gbContext, int triggerSlots, int pieSize) {
         super(context);
 
-        mContext = context;
         mGbResources = gbContext.getResources();
 
         mBackgroundAnimator.addUpdateListener(mUpdateListener);

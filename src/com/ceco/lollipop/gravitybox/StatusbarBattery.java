@@ -20,7 +20,6 @@ import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.graphics.Paint;
 import android.view.View;
@@ -33,10 +32,6 @@ public class StatusbarBattery implements IconManagerListener {
     private int mDefaultFrameColor;
     private int mFrameAlpha;
     private int mDefaultChargeColor;
-
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
 
     public StatusbarBattery(View batteryView) {
         mBattery = batteryView;

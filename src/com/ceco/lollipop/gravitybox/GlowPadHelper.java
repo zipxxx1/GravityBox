@@ -76,6 +76,7 @@ public class GlowPadHelper {
         DARK("DARK"),
         BLACK("BLACK");
 
+        @SuppressWarnings("unused")
         private String mValue;
         BgStyle(String value) {
             mValue = value;

@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 
 public class SeekBarDialogPreference extends DialogPreference {
+    @SuppressWarnings("unused")
     private static final String TAG = "SeekBarDialogPreference";
 
     private Drawable mMyIcon;

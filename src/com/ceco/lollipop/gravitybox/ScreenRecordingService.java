@@ -268,6 +268,7 @@ public class ScreenRecordingService extends Service {
         super.onDestroy();
     }
 
+    @SuppressWarnings("unused")
     private boolean isIdle() {
         return (mRecordingStatus == STATUS_IDLE);
     }

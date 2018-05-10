@@ -39,6 +39,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 public class TrafficMeterOmni extends TrafficMeterAbstract {
+    @SuppressWarnings("unused")
     private static final int KILOBIT = 1000;
     private static final int KILOBYTE = 1024;
 

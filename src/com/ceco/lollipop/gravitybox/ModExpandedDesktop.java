@@ -69,6 +69,7 @@ public class ModExpandedDesktop {
         static final int SYSTEM_UI_TRANSPARENT = 0x00008000;
     }
 
+    @SuppressWarnings("unused")
     private static class WmLp {
         static final int FIRST_SYSTEM_WINDOW = 2000;
         static final int FLAG_FULLSCREEN = WindowManager.LayoutParams.FLAG_FULLSCREEN;

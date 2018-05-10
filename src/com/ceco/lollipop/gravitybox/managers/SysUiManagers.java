@@ -19,7 +19,6 @@ import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,10 +35,6 @@ public class SysUiManagers {
     public static KeyguardStateMonitor KeyguardMonitor;
     public static NotificationDataMonitor NotifDataMonitor;
     public static GpsStatusMonitor GpsMonitor;
-
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
 
     public static void init(Context context, XSharedPreferences prefs) {
         if (context == null)

@@ -35,6 +35,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class NetworkModePreference extends DialogPreference implements OnItemClickListener {
+    @SuppressWarnings("unused")
     private static final String TAG = "GB:NetworkModePreference";
 
     private Context mContext;

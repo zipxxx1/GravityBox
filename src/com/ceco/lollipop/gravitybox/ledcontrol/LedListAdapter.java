@@ -20,7 +20,6 @@ import java.util.List;
 
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.adapters.BaseListAdapterFilter;
-import com.ceco.lollipop.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.lollipop.gravitybox.adapters.BaseListAdapterFilter.IBaseListAdapterFilterable;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
 

@@ -53,7 +53,6 @@ public class PieItem extends PieLayout.PieDrawable {
     public final int width;
     public final Object tag;
 
-    private Context mContext;
     private Resources mGbResources;
 
     /**
@@ -86,7 +85,6 @@ public class PieItem extends PieLayout.PieDrawable {
 
     public PieItem(Context context, Context gbContext, PieLayout parent, int flags, int width, 
             Object tag, View view, PieController.ColorInfo colorInfo) {
-        mContext = context;
         mGbResources = gbContext.getResources();
         mView = view;
         mPieLayout = parent;
