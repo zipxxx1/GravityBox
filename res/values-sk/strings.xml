@@ -1447,6 +1447,9 @@
     <string name="imgpick_dialog_title">Vybrať obrázok pomocou</string>
     <string name="imgpick_choose_error">Chyba počas vyberania obrázku</string>
     <string name="imgpick_crop_error">Chyba počas orezania obrázku</string>
+    <string name="imgpick_crop_ask_title">Orezať obrázok?</string>
+    <string name="imgpick_crop_ask_msg">Ak zvolíte nie, originálny obrázok bude použitý bez zmeny rozmeru. 
+         Uistite sa, že jeho originálne rozmery sú približne: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Zabrániť nechcenému prebudeniu</string>
@@ -2042,5 +2045,9 @@
 
     <!-- BatteryBar: only while charging -->
     <string name="pref_battery_bar_show_charging_title">Len počas nabíjania</string>
+
+    <!-- Yes/No -->
+    <string name="yes">Áno</string>
+    <string name="no">Nie</string>
 
 </resources>

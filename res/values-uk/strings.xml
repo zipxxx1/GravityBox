@@ -1460,6 +1460,8 @@
     <string name="imgpick_dialog_title">Вибір зображення через</string>
     <string name="imgpick_choose_error">Помилка під час вибору зображення</string>
     <string name="imgpick_crop_error">Помилка під час обрізання зображення</string>
+    <string name="imgpick_crop_ask_title">Обрізати зображення?</string>
+    <string name="imgpick_crop_ask_msg">Якщо відмовитись, буде обрано оригінальне зображення. Переконайтеся, що розмір відповідає вказаному: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Наближення під час пробудження</string>
@@ -2044,5 +2046,9 @@
 
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">Активує зміну стилю значків батареї та процентів (необхідне перезавантаження)</string>
+
+    <!-- Yes/No -->
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
 
 </resources>

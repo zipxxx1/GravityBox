@@ -1480,6 +1480,9 @@
     <string name="imgpick_dialog_title">Pick image using</string>
     <string name="imgpick_choose_error">Error while choosing image</string>
     <string name="imgpick_crop_error">Error while cropping image</string>
+    <string name="imgpick_crop_ask_title">Crop image?</string>
+    <string name="imgpick_crop_ask_msg">If you choose no, original image willl be used as is. 
+        Make sure its dimensions are close to: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Proximity wake-up</string>
@@ -2116,5 +2119,9 @@
 
     <!-- BatteryBar: only while charging -->
     <string name="pref_battery_bar_show_charging_title">Only when charging</string>
+
+    <!-- Yes/No -->
+   <string name="yes">Yes</string>
+   <string name="no">No</string>
 
 </resources>

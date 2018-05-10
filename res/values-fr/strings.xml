@@ -1929,4 +1929,8 @@
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Notifications flottantes</string>
 
+    <!-- Yes/No -->
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+
 </resources>

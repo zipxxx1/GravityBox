@@ -1479,6 +1479,9 @@
     <string name="imgpick_dialog_title">Выбор изображения через</string>
     <string name="imgpick_choose_error">Ошибка при выборе изображения</string>
     <string name="imgpick_crop_error">Ошибка при обрезке изображения</string>
+    <string name="imgpick_crop_ask_title">Обрезать?</string>
+    <string name="imgpick_crop_ask_msg">IЕсли выберете Нет, будет оставлено оригинальное изображение. 
+        Убедитесь, что его размеры примерно соответствуют: %1$dx%2$dpx</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Приближение при пробуждении</string>
@@ -2107,5 +2110,9 @@
 
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Всплытие (heads up)</string>
+
+    <!-- Yes/No -->
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 
 </resources>
