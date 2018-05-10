@@ -3,9 +3,9 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.Utils;
 
@@ -102,7 +102,7 @@ public class WifiTile extends AospTile {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -114,7 +114,7 @@ public class WifiTile extends AospTile {
                 }
             });
         } catch (Throwable t) {
-            log(getKey() + ": Your system does not seem to support standard AOSP dual mode");
+            GravityBox.log(TAG, getKey() + ": Your system does not seem to support standard AOSP dual mode");
         }
 
         try {
@@ -130,7 +130,7 @@ public class WifiTile extends AospTile {
                 });
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -141,7 +141,7 @@ public class WifiTile extends AospTile {
                     UserManager.DISALLOW_CONFIG_WIFI, Utils.getUserHandle(
                             Utils.getCurrentUser()));
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return true;
         }
     }
@@ -162,7 +162,7 @@ public class WifiTile extends AospTile {
             Object state = XposedHelpers.getObjectField(mTile, "mState");
             XposedHelpers.setBooleanField(state, "enabled", enabled);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

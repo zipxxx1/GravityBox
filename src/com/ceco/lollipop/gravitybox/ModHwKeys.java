@@ -238,8 +238,7 @@ public class ModHwKeys {
                             XposedHelpers.setIntField(mPhoneWindowManager, "mDoubleTapOnHomeBehavior",
                                     value == 0 ? mHomeDoubletapDefaultAction : 1);
                         } catch (Throwable t) {
-                            log("PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: " +
-                                    t.getMessage());
+                            GravityBox.log(TAG, "PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: ", t);
                         }
                     }
                     if (DEBUG) log("Home double-tap action set to: " + value);
@@ -253,8 +252,7 @@ public class ModHwKeys {
                                         getActionFor(HwKeyTrigger.HOME_DOUBLETAP).actionId == 0 ? 
                                                 mHomeDoubletapDefaultAction : 1);
                         } catch (Throwable t) {
-                            log("PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: " +
-                                    t.getMessage());
+                            GravityBox.log(TAG, "PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: ", t);
                         }
                     }
                 } else if (GravityBoxSettings.PREF_KEY_HWKEY_BACK_SINGLETAP.equals(key)) {
@@ -323,7 +321,7 @@ public class ModHwKeys {
                     XposedHelpers.setIntField(mPhoneWindowManager, "mAllowAllRotations",
                             allowAllRotations ? 1 : 0);
                 } catch (Throwable t) {
-                    log("Error settings PhoneWindowManager.mAllowAllRotations: " + t.getMessage());
+                    GravityBox.log(TAG, "Error settings PhoneWindowManager.mAllowAllRotations: ", t);
                 }
             } else if (action.equals(ACTION_SHOW_POWER_MENU) && mPhoneWindowManager != null) {
                 showGlobalActionsDialog();
@@ -404,7 +402,7 @@ public class ModHwKeys {
                 mLaunchAssistLongPressAction.setAccessible(true);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -479,7 +477,7 @@ public class ModHwKeys {
                         GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP+"_custom", null));
             } catch (NumberFormatException e) {
-                XposedBridge.log(e);
+                GravityBox.log(TAG, e);
             }
 
             mHomeDoubletapDisabled = prefs.getBoolean(
@@ -493,7 +491,7 @@ public class ModHwKeys {
             try {
                 mPieMode = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_PIE_CONTROL_ENABLE, "0"));
             } catch (NumberFormatException nfe) {
-                log("Invalid preference value for Pie Mode");
+                GravityBox.log(TAG, "Invalid preference value for Pie Mode");
             }
 
             mExpandedDesktopMode = GravityBoxSettings.ED_DISABLED;
@@ -501,7 +499,7 @@ public class ModHwKeys {
                 mExpandedDesktopMode = Integer.valueOf(prefs.getString(
                         GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
             } catch (NumberFormatException nfe) {
-                log("Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
+                GravityBox.log(TAG, "Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
             }
 
             mHeadsetUri[0] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_UNPLUG, null);
@@ -909,7 +907,7 @@ public class ModHwKeys {
                 });
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1115,7 +1113,7 @@ public class ModHwKeys {
                     if (DEBUG) log("Screen brightness reset to manual with level set to 100");
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     };
@@ -1217,7 +1215,7 @@ public class ModHwKeys {
         try {
             mLaunchAssistAction.invoke(mPhoneWindowManager);
         } catch (Exception e) {
-            XposedBridge.log(e);
+            GravityBox.log(TAG, e);
         }
     }
 
@@ -1225,7 +1223,7 @@ public class ModHwKeys {
         try {
             mLaunchAssistLongPressAction.invoke(mPhoneWindowManager);
         } catch (Exception e) {
-            XposedBridge.log(e);
+            GravityBox.log(TAG, e);
         }
     }
 
@@ -1287,7 +1285,7 @@ public class ModHwKeys {
                             Toast.makeText(mContext, mStrNothingToKill, Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {  
-                        XposedBridge.log(e);  
+                        GravityBox.log(TAG, e);  
                     }
                 }
             }
@@ -1337,7 +1335,7 @@ public class ModHwKeys {
         try {
             XposedHelpers.callMethod(getPowerManager(), "goToSleep", SystemClock.uptimeMillis());
         } catch (Exception e) {
-            XposedBridge.log(e);
+            GravityBox.log(TAG, e);
         }
     }
 
@@ -1346,13 +1344,13 @@ public class ModHwKeys {
             XposedHelpers.callMethod(mPhoneWindowManager, "sendCloseSystemWindows", 
                     SYSTEM_DIALOG_REASON_RECENT_APPS);
         } catch (Throwable t) {
-            log("Error executing sendCloseSystemWindows(SYSTEM_DIALOG_REASON_RECENT_APPS): " + t.getMessage());
+            GravityBox.log(TAG, "Error executing sendCloseSystemWindows(SYSTEM_DIALOG_REASON_RECENT_APPS): ", t);
         }
         try {
             final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService"); 
             XposedHelpers.callMethod(sbService, "toggleRecentApps");
         } catch (Throwable t) {
-            log("Error executing toggleRecentApps(): " + t.getMessage());
+            GravityBox.log(TAG, "Error executing toggleRecentApps(): ", t);
         }
     }
 
@@ -1374,7 +1372,7 @@ public class ModHwKeys {
             Intent i = Intent.parseUri(uri, 0);
             launchCustomApp(i);
         } catch (URISyntaxException e) {
-            log("launchCustomApp: error parsing uri: " + e.getMessage());
+            GravityBox.log(TAG, "launchCustomApp: error parsing uri: ", e);
         }
     }
 
@@ -1411,7 +1409,7 @@ public class ModHwKeys {
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(mContext, mStrCustomAppMissing, Toast.LENGTH_SHORT).show();
                     } catch (Throwable t) {
-                        XposedBridge.log(t);
+                        GravityBox.log(TAG, t);
                     }
                 }
             }
@@ -1422,7 +1420,7 @@ public class ModHwKeys {
         try {
             XposedHelpers.callMethod(mPhoneWindowManager, "dismissKeyguardLw");
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
+            if (DEBUG) GravityBox.log(TAG, t);
         }
     }
 
@@ -1444,7 +1442,7 @@ public class ModHwKeys {
                             new KeyEvent(eventTime - 50, eventTime - 25, KeyEvent.ACTION_UP, 
                                     keyCode, 0), 0);
                 } catch (Throwable t) {
-                        XposedBridge.log(t);
+                        GravityBox.log(TAG, t);
                 }
             }
         });
@@ -1473,7 +1471,7 @@ public class ModHwKeys {
             Settings.Global.putInt(resolver, 
                     ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, state);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1483,7 +1481,7 @@ public class ModHwKeys {
             intent.setAction(TorchService.ACTION_TOGGLE_TORCH);
             mGbContext.startService(intent);
         } catch (Throwable t) {
-            log("Error toggling Torch: " + t.getMessage());
+            GravityBox.log(TAG, "Error toggling Torch: ", t);
         }
     }
 
@@ -1491,7 +1489,7 @@ public class ModHwKeys {
         try {
             mContext.sendBroadcast(new Intent(AppLauncher.ACTION_SHOW_APP_LAUCNHER));
         } catch (Throwable t) {
-            log("Error showing AppLauncher: " + t.getMessage());
+            GravityBox.log(TAG, "Error showing AppLauncher: ", t);
         }
     }
 
@@ -1501,7 +1499,7 @@ public class ModHwKeys {
             intent.setAction(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING);
             mGbContext.startService(intent);
         } catch (Throwable t) {
-            log("Error toggling screen recording: " + t.getMessage());
+            GravityBox.log(TAG, "Error toggling screen recording: ", t);
         }
     }
 
@@ -1528,7 +1526,7 @@ public class ModHwKeys {
                     R.string.hwkey_action_auto_rotation_enabled);
             }
         } catch (Throwable t) {
-            log("Error toggling auto rotation: " + t.getMessage());
+            GravityBox.log(TAG, "Error toggling auto rotation: ", t);
         }
     }
 
@@ -1556,7 +1554,7 @@ public class ModHwKeys {
                     try {
                         m.invoke(mPhoneWindowManager);
                     } catch (Throwable t) {
-                        XposedBridge.log(t);
+                        GravityBox.log(TAG, t);
                     }
                 }
             }, delayMs);
@@ -1602,7 +1600,7 @@ public class ModHwKeys {
                                 try {
                                     messenger.send(msg);
                                 } catch (RemoteException e) {
-                                    XposedBridge.log(e);
+                                    GravityBox.log(TAG, e);
                                 }
                             }
                         }, delayMs);
@@ -1640,7 +1638,7 @@ public class ModHwKeys {
                 }
             });
         } catch (Throwable t) {
-            log("Error executing PhoneWindowManager.showGlobalActionsDialog(): " + t.getMessage());
+            GravityBox.log(TAG, "Error executing PhoneWindowManager.showGlobalActionsDialog(): ", t);
         }
     }
 
@@ -1650,7 +1648,7 @@ public class ModHwKeys {
             intent.putExtra(AShortcut.EXTRA_ENABLE, true);
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
-            log("Error executing expandNotificationsPanel(): " + t.getMessage());
+            GravityBox.log(TAG, "Error executing expandNotificationsPanel(): ", t);
         }
     }
 
@@ -1660,7 +1658,7 @@ public class ModHwKeys {
             intent.putExtra(AShortcut.EXTRA_ENABLE, true);
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
-            log("Error executing expandQsPanel(): " + t.getMessage());
+            GravityBox.log(TAG, "Error executing expandQsPanel(): ", t);
         }
     }
 
@@ -1675,7 +1673,7 @@ public class ModHwKeys {
                 }
             });
         } catch (Throwable t) {
-            log("Error executing showVolumePanel: " + t.getMessage());
+            GravityBox.log(TAG, "Error executing showVolumePanel: ", t);
         }
     }
 
@@ -1684,7 +1682,7 @@ public class ModHwKeys {
             Intent intent = new Intent(ModLauncher.ACTION_SHOW_APP_DRAWER);
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
-            log("Error executing showLauncherDrawer: " + t.getMessage());
+            GravityBox.log(TAG, "Error executing showLauncherDrawer: ", t);
         }
     }
 
@@ -1694,7 +1692,7 @@ public class ModHwKeys {
             intent = new Intent(ACTION_RECENTS_CLEAR_ALL_SINGLETAP);
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
-            log("Error executing clearAllRecents(): " + t.getMessage());
+            GravityBox.log(TAG, "Error executing clearAllRecents(): ", t);
         }
     }
 
@@ -1707,7 +1705,7 @@ public class ModHwKeys {
                 mVkVibePattern = Utils.csvToLongArray(pattern);
             }
         } catch (Throwable t) { 
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -1716,7 +1714,7 @@ public class ModHwKeys {
                 XposedHelpers.setObjectField(mPhoneWindowManager, "mVirtualKeyVibePattern", vp);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1732,7 +1730,7 @@ public class ModHwKeys {
                     intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             mGbContext.startService(qhi);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1768,7 +1766,7 @@ public class ModHwKeys {
                 Utils.postToast(mContext, msgResId);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1784,7 +1782,7 @@ public class ModHwKeys {
                     intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             mGbContext.startService(si);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1809,7 +1807,7 @@ public class ModHwKeys {
                         R.string.autobrightness_on : R.string.autobrightness_off);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1845,7 +1843,7 @@ public class ModHwKeys {
             Object amn = XposedHelpers.callStaticMethod(amnClass, "getDefault");
             XposedHelpers.callMethod(amn, "stopLockTaskMode");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

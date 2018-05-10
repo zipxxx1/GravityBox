@@ -84,7 +84,7 @@ public class ModTrustManager {
                 updateTrustAll();
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -100,7 +100,7 @@ public class ModTrustManager {
             }
             return false;
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
+            if (DEBUG) GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -109,7 +109,7 @@ public class ModTrustManager {
         try {
             XposedHelpers.callMethod(mTrustManager, "updateTrustAll");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -202,7 +202,7 @@ public class ModTrustManager {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

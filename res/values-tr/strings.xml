@@ -1306,4 +1306,8 @@ Devam ederseniz, kendi sorumluluğunuz altında ve herhangi bir destek beklentin
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Hata günlüğü</string>
+    <string name="pref_log_errors_summary">Etkinleştirildiğinde tüm hataları Xposed günlüğe kaydeder (yeniden başlatma gerektirir)</string>
+
 </resources>

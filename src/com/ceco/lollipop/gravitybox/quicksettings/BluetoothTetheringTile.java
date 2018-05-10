@@ -15,11 +15,11 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.R;
 
 import android.bluetooth.BluetoothAdapter;
@@ -159,7 +159,7 @@ public class BluetoothTetheringTile extends QsTile {
             return (pan != null &&
                     (boolean) XposedHelpers.callMethod(pan, "isTetheringOn"));
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -183,7 +183,7 @@ public class BluetoothTetheringTile extends QsTile {
                 if (DEBUG) log("setTethering: enabled=" + enabled);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

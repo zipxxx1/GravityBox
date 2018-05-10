@@ -65,7 +65,7 @@ public class SystemIconController implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -79,7 +79,7 @@ public class SystemIconController implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -93,7 +93,7 @@ public class SystemIconController implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -118,7 +118,7 @@ public class SystemIconController implements BroadcastSubReceiver {
                 XposedHelpers.callMethod(mSbService, "setIconVisibility", "bluetooth", visible);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -133,7 +133,7 @@ public class SystemIconController implements BroadcastSubReceiver {
                 XposedHelpers.callMethod(mSbService, "setIconVisibility", "volume", false);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -142,7 +142,7 @@ public class SystemIconController implements BroadcastSubReceiver {
         try {
             XposedHelpers.callMethod(mSbPolicy, "updateVolumeZen");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -153,7 +153,7 @@ public class SystemIconController implements BroadcastSubReceiver {
                 try {
                     mBtMode = BtMode.valueOf(intent.getStringExtra(GravityBoxSettings.EXTRA_SB_BT_VISIBILITY));
                 } catch (Throwable t) { 
-                    log("Invalid Mode value: " + t.getMessage());
+                    GravityBox.log(TAG, "Invalid Mode value: ", t);
                 }
                 updateBtIconVisibility();
             }

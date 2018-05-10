@@ -15,6 +15,7 @@
 
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.PhoneWrapper;
@@ -110,7 +111,7 @@ public class NetworkModeTile extends QsTile {
                 mSimSlot = Integer.valueOf(mPrefs.getString(
                         GravityBoxSettings.PREF_KEY_QS_NETWORK_MODE_SIM_SLOT, "0"));
             } catch (NumberFormatException nfe) {
-                log(getKey() + ": Invalid value for SIM Slot preference: " + nfe.getMessage());
+                GravityBox.log(TAG, getKey() + ": Invalid value for SIM Slot preference: ", nfe);
             }
             if (DEBUG) log(getKey() + ": mSimSlot = " + mSimSlot);
         }

@@ -137,7 +137,7 @@ public class ModVolumePanel {
                         mTimeout = Integer.valueOf(prefs.getString(
                                 GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TIMEOUT, "0"));
                     } catch (NumberFormatException nfe) {
-                        log("Invalid value for PREF_KEY_VOLUME_PANEL_TIMEOUT preference");
+                        GravityBox.log(TAG, "Invalid value for PREF_KEY_VOLUME_PANEL_TIMEOUT preference");
                     }
 
                     if (mExpandable) {
@@ -245,7 +245,7 @@ public class ModVolumePanel {
                 });
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -267,7 +267,7 @@ public class ModVolumePanel {
             XposedHelpers.setObjectField(mVolumePanel, "mSliderPanel", mSliderPanel);
             if (DEBUG) log("Slider panel replaced with linear layout");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -289,7 +289,7 @@ public class ModVolumePanel {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -340,7 +340,7 @@ public class ModVolumePanel {
             }
         }
         catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -383,7 +383,7 @@ public class ModVolumePanel {
             XposedHelpers.callMethod(mVolumePanel, "resetTimeout");
             XposedHelpers.callMethod(mVolumePanel, "updateZenPanelVisible");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -414,7 +414,7 @@ public class ModVolumePanel {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -434,7 +434,7 @@ public class ModVolumePanel {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

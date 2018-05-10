@@ -28,12 +28,33 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     public static final String PACKAGE_NAME = GravityBox.class.getPackage().getName();
     public static String MODULE_PATH = null;
     private static XSharedPreferences prefs;
+    private static boolean LOG_ERRORS;
+
+    public static void log(String tag, String message, Throwable t) {
+        if (LOG_ERRORS) {
+            if (message != null) {
+                XposedBridge.log(tag + ": " + message);
+            }
+            if (t != null) {
+                XposedBridge.log(t);
+            }
+        }
+    }
+
+    public static void log(String tag, String message) {
+        log(tag, message, null);
+    }
+
+    public static void log(String tag, Throwable t) {
+        log(tag, null, t);
+    }
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
         MODULE_PATH = startupParam.modulePath;
         prefs = new XSharedPreferences(PACKAGE_NAME);
         prefs.makeWorldReadable();
+        LOG_ERRORS = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOG_ERRORS, false);
 
         if (!startupParam.startsSystemServer) return;
 
@@ -56,6 +77,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         XposedBridge.log("GB:Android SDK: " + Build.VERSION.SDK_INT);
         XposedBridge.log("GB:Android Release: " + Build.VERSION.RELEASE);
         XposedBridge.log("GB:ROM: " + Build.DISPLAY);
+        XposedBridge.log("GB:Error logging: " + LOG_ERRORS);
 
         if (Build.VERSION.SDK_INT < 21 || Build.VERSION.SDK_INT > 22) {
             XposedBridge.log("!!! GravityBox you are running is not designed for "

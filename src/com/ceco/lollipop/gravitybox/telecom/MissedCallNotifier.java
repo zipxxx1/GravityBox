@@ -14,6 +14,7 @@
  */
 package com.ceco.lollipop.gravitybox.telecom;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.ModTelecom;
 
 import android.app.Notification;
@@ -53,7 +54,7 @@ public class MissedCallNotifier {
                     mNotifOnNextScreenOff.extras.putBoolean(EXTRA_FROM_GB, true);
                     nm.notify(MISSED_CALL_NOTIF_ID, mNotifOnNextScreenOff);
                 } catch (Throwable t) {
-                    XposedBridge.log(t);
+                    GravityBox.log(TAG, t);
                 }
                 mNotifOnNextScreenOff = null;
             }
@@ -72,34 +73,34 @@ public class MissedCallNotifier {
             XposedHelpers.findAndHookMethod(NotificationManager.class, "notify",
                     String.class, int.class, Notification.class, notifyHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
             XposedHelpers.findAndHookMethod(NotificationManager.class, "notifyAsUser",
                     String.class, int.class, Notification.class, UserHandle.class, notifyHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
             XposedHelpers.findAndHookMethod(NotificationManager.class, "cancel",
                     String.class, int.class, cancelHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
             XposedHelpers.findAndHookMethod(NotificationManager.class, "cancelAsUser",
                     String.class, int.class, UserHandle.class, cancelHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
             XposedHelpers.findAndHookMethod(NotificationManager.class, "cancelAll", cancelHook);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -121,7 +122,7 @@ public class MissedCallNotifier {
                     mNotifOnNextScreenOff = n;
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     };
@@ -140,7 +141,7 @@ public class MissedCallNotifier {
                     if (DEBUG) log("Pending missed call notification canceled");
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     };

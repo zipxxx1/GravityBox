@@ -15,7 +15,6 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -29,6 +28,8 @@ import android.os.AsyncTask;
 import android.provider.Settings;
 
 public class WifiManagerWrapper {
+    private static final String TAG = "GB:WifiManagerWrapper";
+
     public static final String WIFI_AP_STATE_CHANGED_ACTION = "android.net.wifi.WIFI_AP_STATE_CHANGED";
     public static final String EXTRA_WIFI_AP_STATE = "wifi_state";
 
@@ -198,7 +199,7 @@ public class WifiManagerWrapper {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

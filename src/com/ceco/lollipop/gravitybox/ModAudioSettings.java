@@ -108,7 +108,7 @@ public class ModAudioSettings {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

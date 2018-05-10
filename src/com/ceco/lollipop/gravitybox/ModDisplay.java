@@ -179,7 +179,7 @@ public class ModDisplay {
                         np, LIGHT_ID_BUTTONS, color, 0, 0, 0, 0);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -192,7 +192,7 @@ public class ModDisplay {
             XposedHelpers.callMethod(lights[lightId],
                     "setLightLocked", 0, 0, 0, 0, 0);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -229,7 +229,7 @@ public class ModDisplay {
                     }
                 }
             } catch(Exception e) {
-                XposedBridge.log(e);
+                GravityBox.log(TAG, e);
             }
         }
     };
@@ -257,12 +257,12 @@ public class ModDisplay {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if (param.args.length < 2) {
-                        log("Unsupported parameters. Aborting.");
+                        GravityBox.log(TAG, "Unsupported parameters. Aborting.");
                         return;
                     }
                     mContext = (Context) param.args[0];
                     if (mContext == null) {
-                        log("Context is null. Aborting.");
+                        GravityBox.log(TAG, "Context is null. Aborting.");
                         return;
                     }
 
@@ -488,10 +488,10 @@ public class ModDisplay {
                                                      }
                                                      mKisService = null;
                                                      mKisServiceConn = null;
-                                                     log("mKisClient: MSG_ERROR received");
+                                                     GravityBox.log(TAG, "mKisClient: MSG_ERROR received");
                                                  }
                                              } catch (Throwable t) {
-                                                 XposedBridge.log(t);
+                                                 GravityBox.log(TAG, t);
                                              }
                                          }
                                      });
@@ -507,7 +507,7 @@ public class ModDisplay {
                                              mKisService.send(msg);
                                              if (DEBUG_KIS) log("mKisServiceConn: onServiceConnected");
                                          } catch (Throwable t) {
-                                             XposedBridge.log(t);;
+                                             GravityBox.log(TAG, t);;
                                          }
                                      }
                                      @Override
@@ -530,7 +530,7 @@ public class ModDisplay {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -595,7 +595,7 @@ public class ModDisplay {
                 }
             } else {
                 XposedHelpers.setBooleanField(mDisplayPowerController, "mUseSoftwareAutoBrightnessConfig", false);
-                log("Error computing auto-brightness spline: lux=" + Utils.intArrayToString(lux) + 
+                GravityBox.log(TAG, "Error computing auto-brightness spline: lux=" + Utils.intArrayToString(lux) + 
                         "; brightnessAdj=" + Utils.intArrayToString(brightnessAdj));
             }
         }

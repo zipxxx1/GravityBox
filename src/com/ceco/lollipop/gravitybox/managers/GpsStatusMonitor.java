@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.Utils;
 
@@ -154,7 +155,7 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
                 XposedHelpers.callStaticMethod(Settings.Secure.class, "putIntForUser",
                         cr, Settings.Secure.LOCATION_MODE, mode, currentUserId);
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }
@@ -174,7 +175,7 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
             if (DEBUG) log("getLocationMode: mode=" + mode);
             return mode;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return Settings.Secure.LOCATION_MODE_OFF;
         }
     }
@@ -186,7 +187,7 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
                     UserManager.DISALLOW_SHARE_LOCATION,
                     Utils.getUserHandle(userId));
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }

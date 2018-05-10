@@ -15,6 +15,7 @@
 
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -91,7 +92,7 @@ public class NfcTile extends QsTile {
                 try {
                     XposedHelpers.callMethod(sNfcAdapter, "disable");
                 } catch (Throwable t) {
-                    if (DEBUG) log(getKey() + ": Error calling disable() on NFC adapter: " + t.getMessage());
+                    GravityBox.log(TAG, getKey() + ": Error calling disable() on NFC adapter: ", t);
                 }
                 break;
             case STATE_OFF:
@@ -100,7 +101,7 @@ public class NfcTile extends QsTile {
                 try {
                     XposedHelpers.callMethod(sNfcAdapter, "enable");
                 } catch (Throwable t) {
-                    if (DEBUG) log(getKey() + ": Error calling enable() on NFC adapter: " + t.getMessage());
+                    GravityBox.log(TAG, getKey() + ": Error calling enable() on NFC adapter: ", t);
                 }
                 break;
         }

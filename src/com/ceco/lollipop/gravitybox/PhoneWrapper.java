@@ -153,7 +153,7 @@ public class PhoneWrapper {
                 mSimSlot = Integer.valueOf(prefs.getString(
                         GravityBoxSettings.PREF_KEY_QS_NETWORK_MODE_SIM_SLOT, "0"));
             } catch (NumberFormatException nfe) {
-                log("Invalid value for SIM Slot preference: " + nfe.getMessage());
+                GravityBox.log(TAG, "Invalid value for SIM Slot preference: ", nfe);
             }
             if (DEBUG) log("mSimSlot = " + mSimSlot);
 
@@ -178,7 +178,7 @@ public class PhoneWrapper {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -220,8 +220,7 @@ public class PhoneWrapper {
             }
             broadcastCurrentNetworkType(mSimSlot, networkType, null);
         } catch (Throwable t) {
-            log("setPreferredNetworkType failed: " + t.getMessage());
-            XposedBridge.log(t);
+            GravityBox.log(TAG, "setPreferredNetworkType failed: ", t);
         }
     }
 
@@ -232,7 +231,7 @@ public class PhoneWrapper {
             if (DEBUG) log("getDefaultNetworkMode: mode=" + mode);
             return mode;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return NT_WCDMA_PREFERRED;
         }
     }
@@ -256,7 +255,7 @@ public class PhoneWrapper {
                     "; networkType=" + getNetworkModeNameFromValue(networkType));
             return networkType;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return NT_WCDMA_PREFERRED;
         }
     }
@@ -271,7 +270,7 @@ public class PhoneWrapper {
             }
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -287,7 +286,7 @@ public class PhoneWrapper {
             Object mtm = XposedHelpers.callStaticMethod(getTelephonyManagerClass(), "getDefault");
             mPhoneCount = (int) XposedHelpers.callMethod(mtm, "getPhoneCount");
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
+            if (DEBUG) GravityBox.log(TAG, t);
             mPhoneCount = -1;
         }
 
@@ -306,7 +305,7 @@ public class PhoneWrapper {
                     (Boolean) XposedHelpers.callMethod(mtm, "isMultiSimEnabled"));
             if (DEBUG) log("getPhoneCount: " + getPhoneCount());
         } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
+            if (DEBUG) GravityBox.log(TAG, t);
             mHasMsimSupport = false;
         }
 

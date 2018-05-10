@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.PhoneWrapper;
@@ -117,9 +118,8 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 l.getValue().onBroadcastReceived(context, intent);
             }
         } catch (Throwable t) {
-            log("Error notifying listeners of new broadcast: ");
-            XposedBridge.log(t);
-        }        
+            GravityBox.log(TAG, "Error notifying listeners of new broadcast: ", t);
+        }
     }
 
     private void recreateTiles() {
@@ -127,7 +127,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
             mPrefs.reload();
             XposedHelpers.callMethod(mHost, "recreateTiles");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -247,7 +247,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                     }
                 });
             } catch (Throwable t) {
-                log("QS: Your system does not seem to support standard AOSP dual mode");
+                GravityBox.log(TAG, "QS: Your system does not seem to support standard AOSP dual mode");
             }
 
             XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "onConfigurationChanged",
@@ -333,7 +333,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 mResourceIconHooked = true;
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

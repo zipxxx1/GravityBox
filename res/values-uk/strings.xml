@@ -2051,4 +2051,8 @@
     <string name="yes">Так</string>
     <string name="no">Ні</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Звітування помилок</string>
+    <string name="pref_log_errors_summary">Звітувати всі помилки до звіту Xposed якщо активно (потребує перезавантаження)</string>
+
 </resources>

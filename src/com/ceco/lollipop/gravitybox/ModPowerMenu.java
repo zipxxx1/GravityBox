@@ -351,7 +351,7 @@ public class ModPowerMenu {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -397,7 +397,7 @@ public class ModPowerMenu {
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
                 dialog.show();
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
 
@@ -449,7 +449,7 @@ public class ModPowerMenu {
                     dialog.show();
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
 
@@ -514,7 +514,7 @@ public class ModPowerMenu {
             try {
                 edMode = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
             } catch(NumberFormatException nfe) {
-                log("Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
+                GravityBox.log(TAG, "Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
             }
             return (edMode != GravityBoxSettings.ED_DISABLED);
         }
@@ -541,7 +541,7 @@ public class ModPowerMenu {
                     }
                 }, 200);
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         };
 
@@ -664,7 +664,7 @@ public class ModPowerMenu {
                 intent.setAction(ScreenRecordingService.ACTION_SCREEN_RECORDING_START);
                 gbContext.startService(intent);
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
 

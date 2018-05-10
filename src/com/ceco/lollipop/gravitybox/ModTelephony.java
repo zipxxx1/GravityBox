@@ -128,7 +128,7 @@ public class ModTelephony {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -138,7 +138,7 @@ public class ModTelephony {
                     serviceState, "getOperatorNumeric");
             return equalsMcc(operatorNumeric, defaultRetVal);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return defaultRetVal;
         }
     }
@@ -156,7 +156,7 @@ public class ModTelephony {
 
             return equalsMcc;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return defaultRetVal;
         }
     }

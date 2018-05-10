@@ -206,7 +206,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -223,7 +223,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
 
@@ -250,7 +250,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
             try {
                 XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
@@ -264,7 +264,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
             try {
                 XposedHelpers.findAndHookMethod(mContainer.getClass(), "onConfigurationChanged",
@@ -278,7 +278,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }

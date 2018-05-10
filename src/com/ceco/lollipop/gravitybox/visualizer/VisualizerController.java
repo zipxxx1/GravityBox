@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModLockscreen;
 import com.ceco.lollipop.gravitybox.ModStatusBar;
@@ -99,7 +100,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
             try {
                 mVisualizer = new Visualizer(0);
             } catch (Exception e) {
-                XposedBridge.log(e);
+                GravityBox.log(TAG, e);
                 return;
             }
 
@@ -163,7 +164,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -175,7 +176,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -187,7 +188,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

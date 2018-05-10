@@ -174,7 +174,7 @@ public class ModLockscreen {
                 if (DEBUG) log("config_disableMenuKeyInLockScreen: " + (triState == Utils.TriState.DISABLED));
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -299,7 +299,7 @@ public class ModLockscreen {
                                 return (triState == Utils.TriState.ENABLED);
                             }
                         } catch (Throwable t) {
-                            XposedBridge.log(t);
+                            GravityBox.log(TAG, t);
                             return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                         }
                     }
@@ -505,7 +505,7 @@ public class ModLockscreen {
                                 carrierTextHook);
                     }
                 } catch (Throwable t) {
-                    log("Unexpected carrier text implementation");
+                    GravityBox.log(TAG, "Unexpected carrier text implementation");
                 }
             }
 
@@ -591,7 +591,7 @@ public class ModLockscreen {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
 
             // Direct unlock see through transparency level
@@ -613,10 +613,10 @@ public class ModLockscreen {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     } 
 
@@ -673,7 +673,7 @@ public class ModLockscreen {
             return (policy == UnlockPolicy.NOTIF_NONE) ?
                     notifCount == 0 : notifClearableCount == 0;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return true;
         }
     }
@@ -702,7 +702,7 @@ public class ModLockscreen {
                 XposedHelpers.callMethod(callback, "dismiss", true);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);;
+            GravityBox.log(TAG, t);;
         }
     }
 
@@ -734,7 +734,7 @@ public class ModLockscreen {
             }
             if (DEBUG) log("prepareCustomBackground: type=" + bgType);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -747,7 +747,7 @@ public class ModLockscreen {
             }
             if (DEBUG_KIS) log("setLastScreenBackground: Last screen background updated");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -788,7 +788,7 @@ public class ModLockscreen {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -805,7 +805,7 @@ public class ModLockscreen {
                 XposedHelpers.callMethod(mCarrierTextView, "updateCarrierText");
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

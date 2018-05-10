@@ -15,10 +15,10 @@
 
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import android.app.KeyguardManager;
 import android.app.KeyguardManager.KeyguardLock;
 import android.content.Context;
@@ -53,8 +53,7 @@ public class LockScreenTile extends QsTile {
                 refreshState();
             }
         } catch (Throwable t) {
-            log(getKey() + ": Error toggling lock screen state: ");
-            XposedBridge.log(t);
+            GravityBox.log(TAG, getKey() + ": Error toggling lock screen state: ", t);
         }
     }
 

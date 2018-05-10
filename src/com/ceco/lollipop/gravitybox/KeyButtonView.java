@@ -37,7 +37,6 @@ import android.widget.ImageView;
 
 import java.lang.Math;
 
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class KeyButtonView extends ImageView {
@@ -202,7 +201,7 @@ public class KeyButtonView extends ImageView {
             XposedHelpers.callMethod(mAudioManager, "playSoundEffect",
                     soundConstant, currentUser);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     };
 
@@ -226,7 +225,7 @@ public class KeyButtonView extends ImageView {
             final Object inputManager = XposedHelpers.callStaticMethod(InputManager.class, "getInstance");
             XposedHelpers.callMethod(inputManager, "injectInputEvent", ev, 0);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

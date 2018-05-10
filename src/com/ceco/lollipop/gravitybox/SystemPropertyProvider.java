@@ -75,8 +75,7 @@ public class SystemPropertyProvider {
                         if (DEBUG) log("Initializing SystemUI managers");
                         SysUiManagers.init(context, prefs);
                     } catch(Throwable t) {
-                        log("Error initializing SystemUI managers: ");
-                        XposedBridge.log(t);
+                        GravityBox.log(TAG, "Error initializing SystemUI managers: ", t);
                     }
                 }
                 @Override
@@ -143,7 +142,7 @@ public class SystemPropertyProvider {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

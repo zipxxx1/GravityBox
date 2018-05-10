@@ -48,7 +48,7 @@ public class StatusbarBattery implements IconManagerListener {
             mFrameAlpha = framePaint.getAlpha();
             mDefaultChargeColor = XposedHelpers.getIntField(mBattery, "mChargeColor");
         } catch (Throwable t) {
-            log("Error backing up original colors: " + t.getMessage());
+            GravityBox.log(TAG, "Error backing up original colors: ", t);
         }
         if (SysUiManagers.IconManager != null) {
             SysUiManagers.IconManager.registerListener(this);
@@ -69,7 +69,7 @@ public class StatusbarBattery implements IconManagerListener {
                 framePaint.setAlpha(mFrameAlpha);
                 XposedHelpers.setIntField(mBattery, "mChargeColor", chargeColor);
             } catch (Throwable t) {
-                log("Error setting colors: " + t.getMessage());
+                GravityBox.log(TAG, "Error setting colors: ", t);
             }
         }
     }
@@ -80,7 +80,7 @@ public class StatusbarBattery implements IconManagerListener {
                 XposedHelpers.setBooleanField(mBattery, "mShowPercent", showPercentage);
                 mBattery.invalidate();
             } catch (Throwable t) {
-                log("Error setting percentage: " + t.getMessage());
+                GravityBox.log(TAG, "Error setting percentage: ", t);
             }
         }
     }

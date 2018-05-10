@@ -16,10 +16,10 @@
 
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -97,7 +97,7 @@ public class UsbTetherTile extends QsTile {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -105,7 +105,7 @@ public class UsbTetherTile extends QsTile {
         try {
             XposedHelpers.callMethod(mCm, "setUsbTethering", enabled);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

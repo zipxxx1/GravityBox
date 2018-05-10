@@ -15,6 +15,7 @@
 
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModExpandedDesktop;
 import com.ceco.lollipop.gravitybox.R;
@@ -70,7 +71,7 @@ public class ExpandedDesktopTile extends QsTile {
         try {
             mMode = Integer.valueOf(mPrefs.getString(GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
         } catch (NumberFormatException nfe) {
-            log(getKey() + ": Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
+            GravityBox.log(TAG, getKey() + ": Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
         }
     }
 

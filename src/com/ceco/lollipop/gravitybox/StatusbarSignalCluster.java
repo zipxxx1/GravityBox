@@ -92,7 +92,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     protected void logAndMute(String key, Throwable t) {
         if (!mErrorsLogged.contains(key)) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             mErrorsLogged.add(key);
         }
     }
@@ -296,7 +296,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     }
                 });
             } catch (Throwable t) {
-                log("Error hooking getOrInflateState: " + t.getMessage());
+                GravityBox.log(TAG, "Error hooking getOrInflateState: ", t);
             }
 
             if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_NOSIM, false) &&
@@ -316,7 +316,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                         }
                     });
                 } catch (Throwable t) {
-                    log("Error hooking setNoSims: " + t.getMessage());
+                    GravityBox.log(TAG, "Error hooking setNoSims: ", t);
                 }
             }
         }
@@ -356,7 +356,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     }
                 });
             } catch (Throwable t) {
-                log("Error hooking SignalActivity related methods: " + t.getMessage());
+                GravityBox.log(TAG, "Error hooking SignalActivity related methods: ", t);
             }
         }
 
@@ -660,7 +660,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             }
             XposedHelpers.setIntField(mView, "mEndPadding", padding);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

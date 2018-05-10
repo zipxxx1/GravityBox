@@ -2050,4 +2050,8 @@
     <string name="yes">Áno</string>
     <string name="no">Nie</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Logovanie chýb</string>
+    <string name="pref_log_errors_summary">Zapíše všetky chyby do Xposed logu (vyžaduje reštart)</string>
+
 </resources>

@@ -2805,6 +2805,12 @@
             android:summary="@string/pref_hide_launcher_icon_summary"
             android:defaultValue="false" />
 
+        <CheckBoxPreference
+            android:key="pref_log_errors"
+            android:title="@string/pref_log_errors_title"
+            android:summary="@string/pref_log_errors_summary"
+            android:defaultValue="false" />
+
         <Preference
             android:key="pref_settings_backup"
             android:title="@string/pref_settings_backup_title"

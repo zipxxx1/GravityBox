@@ -1,5 +1,6 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 
 import android.content.Context;
@@ -8,7 +9,6 @@ import android.os.Build;
 import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 
@@ -93,7 +93,7 @@ public class BluetoothTile extends AospTile {
                 }
             });
         } catch (Throwable t) {
-            log(getKey() + ": Your system does not seem to support standard AOSP dual mode");
+            GravityBox.log(TAG, getKey() + ": Your system does not seem to support standard AOSP dual mode");
         }
 
         try {
@@ -109,7 +109,7 @@ public class BluetoothTile extends AospTile {
                 });
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -129,7 +129,7 @@ public class BluetoothTile extends AospTile {
             Object ctrl = XposedHelpers.getObjectField(mTile, "mController");
             XposedHelpers.callMethod(ctrl, "setBluetoothEnabled", enabled);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
 import com.ceco.lollipop.gravitybox.ConnectivityServiceWrapper;
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.PhoneWrapper;
 import com.ceco.lollipop.gravitybox.R;
@@ -9,7 +10,6 @@ import com.ceco.lollipop.gravitybox.Utils;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.ComponentName;
 import android.content.Context;
@@ -262,7 +262,7 @@ public class CellularTile extends AospTile {
             XposedHelpers.callMethod(mTile, "handleClick");
             return true;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -295,7 +295,7 @@ public class CellularTile extends AospTile {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

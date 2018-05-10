@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.Utils;
@@ -123,7 +124,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                     GravityBoxSettings.PREF_KEY_STATUS_ICON_STYLE, "1"));
             setIconStyle(iconStyle);
         } catch(NumberFormatException nfe) {
-            log("Invalid value for PREF_KEY_STATUS_ICON_STYLE preference");
+            GravityBox.log(TAG, "Invalid value for PREF_KEY_STATUS_ICON_STYLE preference");
         }
         setIconColor(1, prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY,
                         getDefaultIconColor()));
@@ -138,7 +139,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                     GravityBoxSettings.PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "1"));
             setSignalIconMode(signalIconMode);
         } catch (NumberFormatException nfe) {
-            log("Invalid value for PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE preference");
+            GravityBox.log(TAG, "Invalid value for PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE preference");
         }
         setColoringEnabled(prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE, false));
@@ -376,7 +377,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 return null;
             }
         } catch (Throwable t) {
-            log("getBasicIcon: " + t.getMessage());
+            GravityBox.log(TAG, "getBasicIcon: ", t);
             return null;
         }
     }

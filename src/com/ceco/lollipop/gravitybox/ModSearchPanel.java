@@ -126,7 +126,7 @@ public class ModSearchPanel {
                             try {
                                 SysUiManagers.AppLauncher.startActivity(mContext, mTargetAppInfo.getIntent(), opts);
                             } catch (Exception e) {
-                                log("Error starting activity: " + e.getMessage());
+                                GravityBox.log(TAG, "Error starting activity: ", e);
                             }
                         }
                     });
@@ -153,7 +153,7 @@ public class ModSearchPanel {
                 });
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

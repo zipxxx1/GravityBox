@@ -151,7 +151,7 @@ public class GlowPadHelper {
             if (DEBUG) log("AppInfo: storing to cache for " + appInfo.key);
             return appInfo;
         } catch (Throwable t) {
-            log("Error getting app info for " + app + "! Error: " + t.getMessage());
+            GravityBox.log(TAG, "Error getting app info for " + app + "! Error: ", t);
             return null;
         }
     }
@@ -197,7 +197,7 @@ public class GlowPadHelper {
 
             return td;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return null;
         }
     }
@@ -219,7 +219,7 @@ public class GlowPadHelper {
                         Resources.class, int.class);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return null;
         }
     }
@@ -271,7 +271,7 @@ public class GlowPadHelper {
 
             return sld;
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return null;
         }
     }

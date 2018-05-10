@@ -234,7 +234,7 @@ public class ModStatusBar {
                             intent.getStringExtra(GravityBoxSettings.EXTRA_DT_MODE));
                         setTrafficMeterMode(mode);
                     } catch (Throwable t) {
-                        XposedBridge.log(t);
+                        GravityBox.log(TAG, t);
                     }
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_POSITION)) {
@@ -294,7 +294,7 @@ public class ModStatusBar {
                         Settings.System.SCREEN_BRIGHTNESS_MODE, 0, -2);
                 mAutomaticBrightness = brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }
@@ -314,7 +314,7 @@ public class ModStatusBar {
                 resparam.res.setReplacement(PACKAGE_NAME, "bool", "enable_ticker", true);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -371,7 +371,7 @@ public class ModStatusBar {
                         GravityBoxSettings.PREF_KEY_STATUSBAR_CENTER_CLOCK, false));
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -395,7 +395,7 @@ public class ModStatusBar {
                 });
             }
         } catch (Throwable t) {
-            log("Error setting long-press handler on mTime: " + t.getMessage());
+            GravityBox.log(TAG, "Error setting long-press handler on mTime: ", t);
         }
     }
 
@@ -410,7 +410,7 @@ public class ModStatusBar {
                     res.getDisplayMetrics());
             BRIGHTNESS_ON = XposedHelpers.getStaticIntField(powerManagerClass, "BRIGHTNESS_ON");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -420,7 +420,7 @@ public class ModStatusBar {
                     mPrefs.getString(GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_MODE, "OFF"));
             setTrafficMeterMode(mode);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -457,7 +457,7 @@ public class ModStatusBar {
                 log("signal_cluster not found in container type: " + containerType);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -483,7 +483,7 @@ public class ModStatusBar {
                 mBroadcastSubReceivers.add(bsc);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -506,7 +506,7 @@ public class ModStatusBar {
                 new StatusbarQuietHoursView(containerType, container, mContext);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -530,7 +530,7 @@ public class ModStatusBar {
                 mStateChangeListeners.add(bbView);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -554,7 +554,7 @@ public class ModStatusBar {
                 mStateChangeListeners.add(pbView);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -570,7 +570,7 @@ public class ModStatusBar {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -970,13 +970,13 @@ public class ModStatusBar {
                             }
                             return null;
                         } catch (Throwable t) {
-                            log("Error in IconMerger.checkOverflow: " + t.getMessage());
+                            GravityBox.log(TAG, "Error in IconMerger.checkOverflow: ", t);
                             return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                         }
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);;
+                GravityBox.log(TAG, t);;
             }
 
             // Status bar Bluetooth icon policy
@@ -1013,7 +1013,7 @@ public class ModStatusBar {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
 
             // notification ticker policy
@@ -1030,7 +1030,7 @@ public class ModStatusBar {
                         }
                     });
                 } catch (Throwable t) {
-                    XposedBridge.log(t);
+                    GravityBox.log(TAG, t);
                 }
             }
 
@@ -1061,7 +1061,7 @@ public class ModStatusBar {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
 
             // notification drawer wallpaper
@@ -1076,7 +1076,7 @@ public class ModStatusBar {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
 
             // suppress battery saver indication
@@ -1091,7 +1091,7 @@ public class ModStatusBar {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
 
             // Disable peek
@@ -1116,7 +1116,7 @@ public class ModStatusBar {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
 
             // DT2S
@@ -1131,7 +1131,7 @@ public class ModStatusBar {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
 
             // brightness control in lock screen
@@ -1160,11 +1160,11 @@ public class ModStatusBar {
                     }
                 });
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
         catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1307,7 +1307,7 @@ public class ModStatusBar {
                 adjustBrightness(mInitialTouchX);
                 mLinger = BRIGHTNESS_CONTROL_LINGER_THRESHOLD + 1;
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     };
@@ -1360,7 +1360,7 @@ public class ModStatusBar {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1410,7 +1410,7 @@ public class ModStatusBar {
                 handler.removeCallbacks(mLongPressBrightnessChange);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1437,10 +1437,10 @@ public class ModStatusBar {
                 UserHandle uh = (UserHandle) uhConst.newInstance(-2);
                 XposedHelpers.callMethod(mContext, "startActivityAsUser", intent, opts.toBundle(), uh);
             } catch (ActivityNotFoundException e) {
-                log("Activity not found for " + intent.getAction());
+                GravityBox.log(TAG, "Activity not found for " + intent.getAction());
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1457,9 +1457,9 @@ public class ModStatusBar {
                 }
             }
         } catch (ActivityNotFoundException e) {
-            log("Error launching assigned app for long-press on clock: " + e.getMessage());
+            GravityBox.log(TAG, "Error launching assigned app for long-press on clock: ", e);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1484,7 +1484,7 @@ public class ModStatusBar {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

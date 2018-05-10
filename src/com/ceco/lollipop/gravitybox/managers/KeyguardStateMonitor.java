@@ -18,6 +18,8 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
+
 import android.content.Context;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -60,7 +62,7 @@ public class KeyguardStateMonitor {
                     mContext.getClassLoader(), Context.class);
             mLockPatternUtils = c.newInstance(mContext);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -118,7 +120,7 @@ public class KeyguardStateMonitor {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -155,7 +157,7 @@ public class KeyguardStateMonitor {
         try {
             return (int) XposedHelpers.callMethod(mLockPatternUtils, "getCurrentUser");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return 0;
         }
     }
@@ -169,7 +171,7 @@ public class KeyguardStateMonitor {
         try {
             return XposedHelpers.getBooleanField(mMediator, "mOccluded");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
      }
@@ -179,7 +181,7 @@ public class KeyguardStateMonitor {
         try {
             return (boolean) XposedHelpers.callMethod(mLockPatternUtils, "isSecure");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return false;
         }
     }
@@ -197,7 +199,7 @@ public class KeyguardStateMonitor {
             try {
                 XposedHelpers.callMethod(mMediator, "dismiss");
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }

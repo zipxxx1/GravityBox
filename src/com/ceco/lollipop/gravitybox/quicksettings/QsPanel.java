@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModHwKeys;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
@@ -87,7 +88,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 XposedHelpers.callMethod(mQsPanel, "updateResources");
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -159,7 +160,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 XposedHelpers.callMethod(host, "startSettingsActivity", intent);
                 return true;
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
                 return false;
             }
         }
@@ -258,7 +259,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
 
         try {
@@ -293,7 +294,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.Utils;
@@ -260,7 +261,7 @@ public class AppLauncher implements BroadcastSubReceiver {
                 mHandler.postDelayed(mDismissAppDialogRunnable, 4000);
             }
         } catch (Throwable t) {
-            log("Error opening app launcher dialog: " + t.getMessage());
+            GravityBox.log(TAG, "Error opening app launcher dialog: ", t);
         }
     }
 
@@ -277,7 +278,7 @@ public class AppLauncher implements BroadcastSubReceiver {
                     }
                 }
             } catch (Exception e) {
-                log("Unable to start activity: " + e.getMessage());
+                GravityBox.log(TAG, "Unable to start activity: ", e);
             }
         }
     };
@@ -302,7 +303,7 @@ public class AppLauncher implements BroadcastSubReceiver {
                 try {
                     XposedHelpers.callMethod(mStatusBar, "postStartSettingsActivity", intent, 0);
                 } catch (Throwable t) {
-                    XposedBridge.log(t);
+                    GravityBox.log(TAG, t);
                 }
             } else {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -454,10 +455,10 @@ public class AppLauncher implements BroadcastSubReceiver {
                 }
                 if (DEBUG) log("AppInfo initialized for: " + getAppName() + " [" + mPkgName + "]");
             } catch (NameNotFoundException e) {
-                log("App not found: " + mIntent);
+                GravityBox.log(TAG, "App not found: " + mIntent);
                 reset();
             } catch (Exception e) {
-                log("Unexpected error: " + e.getMessage());
+                GravityBox.log(TAG, "Unexpected error: ", e);
                 reset();
             }
         }

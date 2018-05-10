@@ -224,7 +224,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             try {
                 XposedHelpers.callMethod(mStatusBar, "postStartSettingsActivity", intent, 0);
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     }
@@ -236,7 +236,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
                 mDialerPkgName = ((ComponentName) XposedHelpers.callMethod(tm, "getDefaultPhoneApp"))
                         .getPackageName();
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
         return mDialerPkgName;
@@ -250,7 +250,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             Cursor c = mContext.getContentResolver().query(CallLog.Calls.CONTENT_URI, selection, where, null, null);
             return c.getCount();
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
             return 0;
         }
     }
@@ -329,10 +329,10 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
                 mView.setVisibility(View.VISIBLE);
                 if (DEBUG) log("AppInfo initialized for: " + mIntent);
             } catch (NameNotFoundException e) {
-                log("App not found: " + mIntent);
+                GravityBox.log(TAG, "App not found: " + mIntent);
                 reset();
             } catch (Exception e) {
-                log("Unexpected error: " + e.getMessage());
+                GravityBox.log(TAG, "Unexpected error: ", e);
                 reset();
             }
         }

@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 
 import android.content.Context;
@@ -208,7 +209,7 @@ public class CallFeatures {
                         // do nothing
                 }
             } catch (Throwable t) {
-                XposedBridge.log(t);
+                GravityBox.log(TAG, t);
             }
         }
     });
@@ -241,7 +242,7 @@ public class CallFeatures {
             TelecomManager tm = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
             XposedHelpers.callMethod(tm, "silenceRinger");
         } catch(Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -256,8 +257,8 @@ public class CallFeatures {
                 XposedHelpers.callMethod(call, "disconnect");
                 if (DEBUG) log("Call disconnected");
             } catch (Throwable t2) {
-                log("Error rejecting call: ");
-                log("error1: " + t.getMessage() + "; error2: " + t2.getMessage());
+                GravityBox.log(TAG, "Error rejecting call: ", t);
+                GravityBox.log(TAG, t2);
             }
         }
     }
@@ -296,7 +297,7 @@ public class CallFeatures {
                     GravityBoxSettings.PREF_KEY_PHONE_FLIP, "0"));
             if (DEBUG) log("mFlipAction = " + mFlipAction);
         } catch (NumberFormatException e) {
-            XposedBridge.log(e);
+            GravityBox.log(TAG, e);
         }
     }
 }

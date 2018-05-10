@@ -2053,4 +2053,8 @@
     <string name="yes">Igen</string>
     <string name="no">Nem</string>
 
+    <!-- Error logging -->
+    <string name="pref_log_errors_title">Hibanaplózás</string>
+    <string name="pref_log_errors_summary">Naplózza az összes hibát az Xposed naplóba, ha engedélyezve van (újraindítás szükséges)</string>
+
 </resources>

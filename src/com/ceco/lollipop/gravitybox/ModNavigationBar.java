@@ -285,7 +285,7 @@ public class ModNavigationBar {
                     resparam.res.setReplacement(PACKAGE_NAME, "drawable", key,
                             modRes.fwd(ic_map.get(key)));
                 } catch (Throwable t) {
-                    log("Drawable not found: " + key);
+                    GravityBox.log(TAG, "Drawable not found: " + key);
                 }
             }
         }
@@ -318,7 +318,7 @@ public class ModNavigationBar {
                 mHomeLongpressAction = Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS, "0"));
             } catch (NumberFormatException nfe) {
-                XposedBridge.log(nfe);
+                GravityBox.log(TAG, nfe);
             }
 
             mCustomKeyEnabled = prefs.getBoolean(
@@ -529,7 +529,7 @@ public class ModNavigationBar {
                         mRecentAltLandIcon = gbRes.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_recent_clear_land : R.drawable.ic_sysbar_recent_clear_land_lollipop, null);
                     } catch (Throwable t) {
-                        log("getIcons: system does not seem to have standard AOSP recents key? (" + t.getMessage() + ")");
+                        GravityBox.log(TAG, "getIcons: system does not seem to have standard AOSP recents key?", t);
                     }
 
                     try {
@@ -541,7 +541,7 @@ public class ModNavigationBar {
                             XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon", backIcon);
                         }
                     } catch (Throwable t) {
-                        log("getIcons: system does not seem to have standard AOSP IME back key? (" + t.getMessage() + ")");
+                        GravityBox.log(TAG, "getIcons: system does not seem to have standard AOSP IME back key?", t);
                     }
                 }
             });
@@ -646,7 +646,7 @@ public class ModNavigationBar {
                             }
                             return false;
                         } catch (Throwable t) {
-                            XposedBridge.log(t);
+                            GravityBox.log(TAG, t);
                             return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                         }
                     }
@@ -705,7 +705,7 @@ public class ModNavigationBar {
             XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
                     "onTouchEvent", MotionEvent.class, touchEventHook);
         } catch(Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -723,7 +723,7 @@ public class ModNavigationBar {
             Object bt = XposedHelpers.callMethod(mNavigationBarView, "getBarTransitions");
             XposedHelpers.callMethod(bt, "applyMode", mode, true, true);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -780,7 +780,7 @@ public class ModNavigationBar {
                 } else if (ovlp.height >= 0) {
                     lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ovlp.height, 0);
                 } else {
-                    log("Weird layout of placeholder view detected");
+                    GravityBox.log(TAG, "Weird layout of placeholder view detected");
                 }
             } else {
                 // determine layout from Back key
@@ -794,13 +794,13 @@ public class ModNavigationBar {
                         } else if (blp.height >= 0) {
                             lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, blp.height, 0);
                         } else {
-                            log("Weird layout of back button view detected");
+                            GravityBox.log(TAG, "Weird layout of back button view detected");
                         }
                     } else {
-                        log("Could not find back button view");
+                        GravityBox.log(TAG, "Could not find back button view");
                     }
                 } else {
-                    log("Could not find back button resource ID");
+                    GravityBox.log(TAG, "Could not find back button resource ID");
                 }
             }
             // worst case scenario (should never happen, but just to make sure)
@@ -812,7 +812,7 @@ public class ModNavigationBar {
             mNavbarViewInfo[index].dpadLeft.setLayoutParams(lp);
             mNavbarViewInfo[index].dpadRight.setLayoutParams(lp);
         } catch (Throwable t) {
-            log("Error preparing NavbarViewInfo: " + t.getMessage());
+            GravityBox.log(TAG, "Error preparing NavbarViewInfo: ", t);
         }
     }
 
@@ -852,7 +852,7 @@ public class ModNavigationBar {
                 }
             }
         } catch (Throwable t) {
-            log("Error setting app key visibility: " + t.getMessage());
+            GravityBox.log(TAG, "Error setting app key visibility: ", t);
         }
     }
 
@@ -882,7 +882,7 @@ public class ModNavigationBar {
                 }
             }
         } catch (Throwable t) {
-            log("Error setting menu key visibility:" + t.getMessage());
+            GravityBox.log(TAG, "Error setting menu key visibility:", t);
         }
         
     }
@@ -897,7 +897,7 @@ public class ModNavigationBar {
                 }
             }
         } catch (Throwable t) {
-            log("Error hiding IME switcher: " + t.getMessage());
+            GravityBox.log(TAG, "Error hiding IME switcher: ", t);
         }
     }
 
@@ -987,7 +987,7 @@ public class ModNavigationBar {
                 if (DEBUG) log("setDpadKeyVisibility: visible=" + mDpadKeysVisible);
             }
         } catch (Throwable t) {
-            log("Error setting dpad key visibility: " + t.getMessage());
+            GravityBox.log(TAG, "Error setting dpad key visibility: ", t);
         }
     }
 
@@ -1002,7 +1002,7 @@ public class ModNavigationBar {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1024,7 +1024,7 @@ public class ModNavigationBar {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1035,7 +1035,7 @@ public class ModNavigationBar {
                     mResources.getIdentifier("nav_buttons", "id", PACKAGE_NAME));
             setKeyColorRecursive(navButtons);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
@@ -1093,7 +1093,7 @@ public class ModNavigationBar {
             }
         }
         catch (Throwable t) {
-            log("Error swapping back and recents key: " + t.getMessage());
+            GravityBox.log(TAG, "Error swapping back and recents key: ", t);
         }
     }
 
@@ -1120,7 +1120,7 @@ public class ModNavigationBar {
             if (DEBUG) log("swapMenuAndCustom: swapped=" + nvi.menuCustomSwapped);
         }
         catch (Throwable t) {
-            log("Error swapping menu and custom key: " + t.getMessage());
+            GravityBox.log(TAG, "Error swapping menu and custom key: ", t);
         }
     }
 
@@ -1130,7 +1130,7 @@ public class ModNavigationBar {
                 nvi.customKey.setImageDrawable(getCustomKeyIconDrawable());
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 

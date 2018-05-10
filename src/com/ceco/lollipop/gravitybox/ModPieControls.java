@@ -221,7 +221,7 @@ public class ModPieControls {
             try {
                 tslots |= Integer.valueOf(s);
             } catch (NumberFormatException e) {
-                XposedBridge.log(e);
+                GravityBox.log(TAG, e);
             }
         }
         return tslots;
@@ -307,7 +307,7 @@ public class ModPieControls {
             try {
                 mPieMode = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_PIE_CONTROL_ENABLE, "0"));
             } catch (NumberFormatException nfe) {
-                log("Invalid preference value for Pie Mode");
+                GravityBox.log(TAG, "Invalid preference value for Pie Mode");
             }
             mShowMenuItem = prefs.getBoolean(GravityBoxSettings.PREF_KEY_HWKEYS_DISABLE, false);
             mAlwaysShowMenuItem = prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_CONTROL_MENU, false);
@@ -324,7 +324,7 @@ public class ModPieControls {
                 mExpandedDesktopMode = Integer.valueOf(prefs.getString(
                         GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
             } catch (NumberFormatException nfe) {
-                log("Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
+                GravityBox.log(TAG, "Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
             }
 
             XposedHelpers.findAndHookMethod(baseStatusBarClass, "start", new XC_MethodHook() {
@@ -342,7 +342,7 @@ public class ModPieControls {
                         customKeyMode = Integer.valueOf(prefs.getString(
                             GravityBoxSettings.PREF_KEY_PIE_CONTROL_CUSTOM_KEY, "0"));
                     } catch (NumberFormatException nfe) {
-                        log("Invalid value for PREF_KEY_PIE_CONTROL_CUSTOM_KEY preference");
+                        GravityBox.log(TAG, "Invalid value for PREF_KEY_PIE_CONTROL_CUSTOM_KEY preference");
                     }
                     mPieController.setCustomKeyMode(customKeyMode);
                     mPieController.setMirroredKeys(prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_MIRRORED_KEYS, false));
@@ -414,7 +414,7 @@ public class ModPieControls {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            GravityBox.log(TAG, t);
         }
     }
 
