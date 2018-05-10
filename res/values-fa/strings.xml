@@ -489,12 +489,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <string name="unicode_stripping_non_encodable">نوار کاراکترهاي غير يونيکديبل</string>
     <string name="unicode_stripping_all">نوار همه کارکترهاي يونيکد</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">حالت شبکه حالت کاشي</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">مجوز همه چرخش هاي صفحه</string>
 
@@ -677,9 +671,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <string name="pref_about_gplus_title">Google+ community</string>
     <string name="pref_about_gplus_summary">Touch to visit GravityBox Google+ community</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">LTE مجوز حالت شبکه</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">به منظور فعال کردن حالت ها براي نوار پيمايش لازم به ناديده گرفتن قابليتهاي پيشفرض در منو سفارشي نوار پيمايش ميباشد</string>
 
@@ -704,7 +695,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <string name="pref_volume_panel_timeout_title">وقفه پانل ولوم</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">حالت زنگ حالت کاشي</string>
     <string name="ringer_mode_silent">اولويت</string>
     <string name="ringer_mode_vibrate">لرزش</string>
     <string name="ringer_mode_sound">صدا</string>
@@ -793,9 +783,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <string name="pref_signal_cluster_data_activity_title">فعال کردن فعاليت هاي داده</string>
     <string name="pref_signal_cluster_data_activity_summary">نمايش فعاليت هاي داده روي ايکون تلفن همراه و واي فاي (نياز به راه اندازي مجدد سيستم)</string>
 
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">CDMA استفاده از حالت هاي شبکه</string>
-
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">تغيير وضعيت چرخش خودکار</string>
     <string name="hwkey_action_auto_rotation_enabled">چرخش خودکار فعال</string>
@@ -807,7 +794,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">اهدف حلقه نوار پيمايش</string>
-    <string name="pref_navbar_ring_targets_enable_summary">تغيير وضعيت اهداف حلقه نوار پيمايش (نياز به راه اندازي مجدد سيستم)</string>
     <string name="pref_navbar_ring_target_title">%d هدف حلقه</string>
 
     <!-- Shortcut activity title -->
@@ -1093,17 +1079,10 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <string name="tile_label_style_allcaps">همه مراکز</string>
     <string name="tile_label_style_hidden">پنهان</string>
 
-    <!-- Navbar ring: Haptic feedback -->
-    <string name="pref_navbar_ring_haptic_feedback_title">بازخورد لمسي</string>
-    <string name="navring_haptic_feedback_default">پيشفرض</string>
-    <string name="navring_haptic_feedback_enabled">فعال</string>
-    <string name="navring_haptic_feedback_disabled">غير فعال</string>
-
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">اندازه کرکره استاتوس بار</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">کاشي حالت بيداري</string>
     <string name="stay_awake_15s">15s</string>
     <string name="stay_awake_30s">30s</string>
     <string name="stay_awake_1m">1m</string>
@@ -1531,11 +1510,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <string name="pref_signal_cluster_hide_sim_labels_title">عدم نمايش برچسب سيم کارت</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">نياز به راه اندازي مجدد سيستم</string>
 
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G حالت</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA اولويت (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA خودکار (2G/3G)</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">دسکتاپ گسترده در منو پاور</string>
     <string name="pref_powermenu_expanded_desktop_summary">براي جايگزين روش مطمئن شويد حالت گسترش دسکتاپ غيرفعال موجود باشد</string>
@@ -1678,9 +1652,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">فايل پشتيبان نسخه قديمي اندرويد امکان بازگرداني روي نسخه جديد يا متفاوت را ندارد. توصيه ميشود پيکربندي برنامه را از ابتدا انجام دهيد.</string>
 
-    <!-- QS: tile order info -->
-    <string name="tile_order_info">کاشي اول جعبه چک فعال/غيرفعال. کاشي دوم جعبه چک نحوه نمايش در صفحه نمايش قفل مشخص ميکند</string>
-
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">نمايش در قفل صفحه نمايش</string>
     <string name="pref_data_traffic_lockscreen_summary">نمايش هميشگي در مرکز قفل صفحه نمايش</string>
@@ -1759,9 +1730,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <string name="pref_lc_sound_vibrate_title">غيرفعال کردن تبديل صدا به لرزش</string>
     <string name="pref_lc_sound_vibrate_summary">جلوگيري از خاموشي لرزش اطلاعيه ها اجبار به لرزش-فقط حالت زنگ</string>
 
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">بازخورد لمسي غير فعال</string>
-
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">فقط قابل رويت واضح</string>
 
@@ -1776,21 +1744,15 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <string name="pref_statusbar_dt2s_title">لمس دو ضربه اي به حالت خواب</string>
     <string name="pref_statusbar_dt2s_summary">peek نيازمند غير فعال بودن</string>
 
-    <!-- Cellular tile: Dual mode -->
-    <string name="pref_cell_tile_dual_mode_title">حالت دوگانه</string>
-    <string name="pref_cell_tile_dual_mode_summary">مجوز عملکرد مشابه کاشي واي فاي و بلوتوث</string>
-
     <!-- Pie trigger indicator -->
     <string name="pref_pie_control_trigind_title">شاخص ماشه</string>
     <string name="pref_pie_control_trigind_color_title">رنگ شاخص ماشه</string>
 
     <!-- WiFi tile settings -->
     <string name="pref_cat_qs_wifi_tile_title">تنظيمات کاشي واي فاي</string>
-    <string name="pref_wifi_tile_dual_mode_title">حالت دوگانه</string>
 
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">تنظيمات کاشي بلوتوث</string>
-    <string name="pref_bt_tile_dual_mode_title">حالت دوگانه</string>
 
     <!-- MTK tiles: HotKnot -->
     <string name="qs_tile_hotknot">hotknot</string>
