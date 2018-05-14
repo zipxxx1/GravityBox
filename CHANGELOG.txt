@@ -1,3 +1,47 @@
+Changelog 5.5.0 - 14/05/2018
+--------------------------------------
+- Lockscreen tweaks:
+--- Added option for hiding bottom actions
+--- Added option for Direct Unlock See Through transparency level
+--- Shortcuts: added additional slot
+--- Shortcuts: added option for scale correction
+- QuickSettings management:
+--- added another 2 QuickApp tiles
+--- added Bluetooth Tethering tile
+--- added Heads Up tile (Controls whether to show heads up for notifications globally)
+--- added option for Haptic feedback (vibrate on tile press)
+- Battery settings: added master switch for battery settings
+- CircleBattery: decreased size by 1dp
+- BatteryBar: added option to show bar only while charging
+- Pie: fixes and improvements:
+--- increased max value for trigger size
+--- unpin currently pinned task on back long-press (has priority over custom long-press action)
+- Actions: improved killing of foreground apps
+--- kills only what's really visible to the user
+--- removes killed task from the recents panel
+- Media tweaks: added Visualizer feature (basic functionality ported from LineageOS)
+--- shows in lock screen during media playback
+--- supports static as well as dynamic color (extracted from artwork of current media)
+--- supports Active mode - keeps lock screen on while Visualizer is showing
+--- supports Lock screen dimming with adjustable dim level (based on user interaction)
+--- supports showing media info on dimmed screen
+--- supports showing header containing current time and battery level on dimmed screen
+--- supports media controls on dimmed screen
+--- supports showing artwork as background of dimmed screen covering lock screen contents
+--- deactivates automatically during power saving mode
+- GB's App Launcher: added option for choosing theme
+- ImagePicker: cropping is optional when choosing custom icons
+- Screenshot: delay adjustments
+- Screenshot: use native method if available
+- Quiet Hours Wear Mode: don't vibrate watch when user present on a phone
+- Added switch for Error logging in About section (off by default):
+--- module logs errors to Xposed log only when switch is enabled
+--- avoids flooding Xposed log happening on unsupported devices
+- Lots of other fixes and improvements backported from GravityBox [MM]/[N]/[O]
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Ukrainian translations (thanks to burunduk)
+
 Changelog 5.4.7 - 16/04/2017
 --------------------------------------
 - QuickSettings management:
