@@ -2141,6 +2141,13 @@
                 android:dependency="pref_visualizer_enable" />
 
             <CheckBoxPreference 
+                android:key="pref_visualizer_navbar"
+                android:title="@string/pref_visualizer_navbar_title"
+                android:summary="@string/pref_visualizer_navbar_summary"
+                android:defaultValue="false"
+                android:dependency="pref_visualizer_enable" />
+
+            <CheckBoxPreference 
                 android:key="pref_visualizer_active_mode"
                 android:title="@string/pref_visualizer_active_mode_title"
                 android:summary="@string/pref_visualizer_active_mode_summary"

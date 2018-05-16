@@ -2089,6 +2089,8 @@
     <string name="pref_visualizer_dim_controls_summary">在低亮度屏幕上显示媒体控件</string>
     <string name="pref_visualizer_dim_artwork_title">显示专辑封面</string>
     <string name="pref_visualizer_dim_artwork_summary">在低亮度锁屏上显示专辑封面</string>
+    <string name="pref_visualizer_navbar_title">虚拟按键</string>
+    <string name="pref_visualizer_navbar_summary">在虚拟按键内显示视觉效果</string>
 
     <!-- QS: Ambient Display tile -->
     <string name="qs_tile_ambient_display">Ambient display</string>

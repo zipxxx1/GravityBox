@@ -2032,6 +2032,8 @@
     <string name="pref_visualizer_dim_controls_summary">Zobrazí tlačidlá ovládania prehrávania na stlmenej obrazovke</string>
     <string name="pref_visualizer_dim_artwork_title">Zobraziť grafiku</string>
     <string name="pref_visualizer_dim_artwork_summary">Zobrazí grafiku aktuálnej skladby prekrývajúc obsah obrazovky uzamknutia</string>
+    <string name="pref_visualizer_navbar_title">Navigačná lišta</string>
+    <string name="pref_visualizer_navbar_summary">Zobrazí vizualizátor aj v navigačnej lište</string>
 
     <!-- Reboot -->
     <string name="reboot">Reštart</string>

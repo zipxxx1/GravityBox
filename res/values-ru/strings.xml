@@ -2085,6 +2085,8 @@
     <string name="pref_visualizer_dim_controls_summary">Показать кнопки управления медиа на затемнённом экране</string>
     <string name="pref_visualizer_dim_artwork_title">Показать обложку</string>
     <string name="pref_visualizer_dim_artwork_summary">Показать обложку поверх экрана блокировки на затемнённом экране</string>
+    <string name="pref_visualizer_navbar_title">Панель навигации</string>
+    <string name="pref_visualizer_navbar_summary">Отображение визуалайзера и в панели навигации</string>
 
     <!-- QS: Ambient Display tile -->
     <string name="qs_tile_ambient_display">Живой дисплей</string>
