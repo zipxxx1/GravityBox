@@ -69,7 +69,7 @@
     <string name="quick_settings_quiet_hours_off">Sessiz Saatler Kapalı</string>
     <string name="quick_settings_quiet_hours_on">Sessiz Saatler Açık</string>
     <string name="quick_settings_quiet_hours_auto">Sessiz Saatler Otomatik</string>
-	<string name="quick_settings_quiet_hours_wear">Wear Modu</string>
+    <string name="quick_settings_quiet_hours_wear">Wear Modu</string>
 	
 	<!--  QuickSettings settings -->
     <string name="quick_settings_title">Durum çubuğu Hızlı Ayarlar kareleri</string>
