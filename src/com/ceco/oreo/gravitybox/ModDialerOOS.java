@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,6 +15,8 @@
 
 package com.ceco.oreo.gravitybox;
 
+import java.lang.reflect.Method;
+
 import android.content.Context;
 import android.os.SystemClock;
 import de.robv.android.xposed.XC_MethodHook;
@@ -27,37 +29,60 @@ public class ModDialerOOS {
     private static final String TAG = "GB:ModDialerOOS";
     private static final boolean DEBUG = false;
 
-    private static final String CLASS_PHONE_UTILS = "com.android.incallui.oneplus.OPPhoneUtils";
+    private static final String[] CLASS_PHONE_UTILS = new String[] {
+            "com.android.incallui.oneplus.OPPhoneUtils", "com.android.incallui.oneplus.s"
+    };
+
+    private static final String[] METHOD_SUPPORTS_CALL_RECORDING = new String[] {
+            "isSupportCallRecorder", "AN"
+    };
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    private static XSharedPreferences mPrefs;
     private static long mLastPrefReloadMs;
 
     public static void initInCallUi(final XSharedPreferences prefs, final ClassLoader classLoader) {
         if (DEBUG) log("initInCallUi");
-        try {
-            XposedHelpers.findAndHookMethod(CLASS_PHONE_UTILS, classLoader,
-                    "isSupportCallRecorder", Context.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    reloadPrefsIfExpired(prefs);
-                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_OOS_CALL_RECORDING, false)) {
-                        param.setResult(true);
-                        if (DEBUG) log("isSupportCallRecorder: forced to return true");
+        mPrefs = prefs;
+
+        Method method = null;
+        for (String cName : CLASS_PHONE_UTILS) {
+            Class<?> clazz = XposedHelpers.findClassIfExists(cName, classLoader);
+            if (clazz != null) {
+                for (String mName : METHOD_SUPPORTS_CALL_RECORDING) {
+                    method = XposedHelpers.findMethodExactIfExists(
+                            cName, classLoader, mName, Context.class);
+                    if (method != null) {
+                        XposedBridge.hookMethod(method, supportsCallRecordingHook);
+                        if (DEBUG) log("isSupportCallRecorder found in " + cName + " as " + mName);
                     }
                 }
-            });
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
+            }
+        }
+
+        if (method == null) {
+            GravityBox.log(TAG, "Unable to identify isSupportCallRecorder method");
         }
     }
 
-    private static void reloadPrefsIfExpired(final XSharedPreferences prefs) {
+    private static XC_MethodHook supportsCallRecordingHook = new XC_MethodHook() {
+        @Override
+        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+            reloadPrefsIfExpired();
+            if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_OOS_CALL_RECORDING, false)) {
+                param.setResult(true);
+                if (DEBUG) log("isSupportCallRecorder: forced to return true");
+            }
+        }
+    };
+
+    private static void reloadPrefsIfExpired() {
         if (SystemClock.uptimeMillis() - mLastPrefReloadMs > 10000) {
             mLastPrefReloadMs = SystemClock.uptimeMillis();
-            prefs.reload();
+            mPrefs.reload();
             if (DEBUG) log("Expired prefs reloaded");
         }
     }
