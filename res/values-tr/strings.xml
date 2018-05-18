@@ -69,7 +69,7 @@
     <string name="quick_settings_quiet_hours_off">Sessiz Saatler Kapalı</string>
     <string name="quick_settings_quiet_hours_on">Sessiz Saatler Açık</string>
     <string name="quick_settings_quiet_hours_auto">Sessiz Saatler Otomatik</string>
-    <string name="quick_settings_quiet_hours_wear">Wear Modu</string>
+	<string name="quick_settings_quiet_hours_wear">Wear Modu</string>
 	
 	<!--  QuickSettings settings -->
     <string name="quick_settings_title">Durum çubuğu Hızlı Ayarlar kareleri</string>
@@ -864,7 +864,7 @@
     <string name="pref_lockscreen_bg_blur_effect_title">Bulanıklaştırma efekti</string>
 	
 	<!-- Force overflow menu button -->
-    <string name="pref_force_overflow_menu_button_title">Taşma(overflow) menü düğmesini zorla</string>
+    <string name="pref_force_overflow_menu_button_title">Taşma (overflow) menü düğmesini zorla</string>
     <string name="pref_force_overflow_menu_button_summary">Yeniden başlatma gerektirir</string>
 	
 	<!-- Navbar custom key: swap with menu key -->
@@ -1280,7 +1280,7 @@
     <string name="increasing_ring_enable">Etkinleştir</string>
     <string name="increasing_ring_min_volume_title">Zil sesi başlangıç ses seviyesi</string>
     <string name="increasing_ring_volume_notice">"Dikkat:
-Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zil sesi seviyesi kullanarak çalınacak."</string>
+Başlangıç sesi seviyesi zil sesi seviyesinden daha yüksek ayarlandığından, zil sesi tonu zil sesi seviyesi kullanarak çalınacak."</string>
     <string name="increasing_ring_ramp_up_duration_title">Artırma süresi</string>
     <string name="increasing_ring_interval_0">5 saniye</string>
     <string name="increasing_ring_interval_1">10 saniye</string>
@@ -1490,7 +1490,7 @@ Başlangıç sesi zil sesinden daha yüksek ayarlandığından, zil sesi tonu zi
     <string name="sb_download_progress_bottom">Alt kenar</string>
 	
 	<!-- Status bar: disable notification ticker -->
-    <string name="pref_statusbar_ticker_policy_title">Bildirim tabelası politikası</string>
+    <string name="pref_statusbar_ticker_policy_title">Bildirim sayacı ilkesi</string>
     <string name="sb_ticker_policy_default">Varsayılan</string>
     <string name="sb_ticker_policy_disabled">Daima devre dışı bırak</string>
 	
@@ -1831,11 +1831,11 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
 	
 	<!-- UNC: Vibrations replace mode -->
     <string name="pref_lc_vibrate_replace_title">Orijinal titreşimi değiştir</string>
-    <string name="pref_lc_vibrate_replace_summary">Sadece orijinal bildirimde titreşim olması durumunda geçersiz kılınan titreşimi uygular</string>
+    <string name="pref_lc_vibrate_replace_summary">Yalnızca orijinal bildirimde titreşim olması durumunda geçersiz kılınan titreşimi uygular</string>
 	
 	<!-- UNC: Sound replace mode -->
     <string name="pref_lc_sound_replace_title">Orijinal sesi değiştir</string>
-    <string name="pref_lc_sound_replace_summary">Sadece orijinal bildirimin sesli olması durumunda geçersiz kılınan sesi uygular</string>
+    <string name="pref_lc_sound_replace_summary">Yalnızca orijinal bildirimin sesli olması durumunda geçersiz kılınan sesi uygular</string>
 	
 	<!-- Battery tile options -->
     <string name="pref_battery_tile_temp_title">Sıcaklığı göster</string>
