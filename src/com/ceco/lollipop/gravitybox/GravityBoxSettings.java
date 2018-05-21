@@ -2360,7 +2360,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_CELL_TILE_DATA_TOGGLE)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_CELL_TILE_DATA_TOGGLE);
-                p.setSummary(p.getEntry());
+                if (p != null) p.setSummary(p.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_NAVBAR_AUTOFADE_KEYS)) {
