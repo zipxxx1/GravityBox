@@ -1076,7 +1076,7 @@
     <string name="pref_screenrecord_rotate_title">Kaydı döndür</string>
     <string name="pref_screenrecord_rotate_summary">Çıkış dosyasını 90 derece döndürür</string>
     <string name="pref_screenrecord_microphone_title">Mikrofon kullan</string>
-    <string name="pref_screenrecord_microphone_summary">Ses girişi için mikrofon kullanıp kullanmamak</string>
+    <string name="pref_screenrecord_microphone_summary">Ses girişi için mikrofon kullanılıp kullanılmayacağı</string>
 
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
@@ -1752,7 +1752,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_cat_qs_dnd_tile_title">Rahatsız etme karesi ayarları</string>
     <string name="pref_dnd_tile_quick_mode_summary">Kareye tek basmada seçilen rahatsız etme modları arasında dolaşmaya izin verir</string>
     <string name="pref_dnd_tile_enabled_modes_summary">Aralarında dolaşılacak rahatsız etme modlarını ayarlar</string>
-    <string name="dnd_tile_em_priority">Yalnızca öncelik</string>
+    <string name="dnd_tile_em_priority">Yalnızca öncelikliler</string>
     <string name="dnd_tile_em_alarms">Yalnızca alarmlar</string>
     <string name="dnd_tile_em_silence">Tamamen sessiz</string>
     <string name="pref_dnd_tile_duration_mode_title">Öntanımlı süre</string>
