@@ -87,6 +87,7 @@
     <string name="qs_tile_gps_alt">Геоданные (стиль CM)</string>
     <string name="qs_tile_network_mode">Режим сети</string>
     <string name="qs_tile_data_usage">Мобильные данные</string>
+    <string name="qs_tile_data">Мобильные данные</string>
     <string name="qs_tile_sync">Синхронизация</string>
     <string name="qs_tile_wifi_ap">ТД Wi-Fi</string>
     <string name="qs_tile_torch_gb">Фонарик (GravityBox)</string>
@@ -2096,5 +2097,12 @@
 
     <!-- Reboot -->
     <string name="reboot">Перезагрузка</string>
+
+    <!-- QS: tiles per header -->
+    <string name="pref_qs_tiles_per_header_title">Плитки вверху</string>
+    <string name="pref_qs_tiles_per_header_summary">Количество плиток для отображения в верхней строке</string>
+
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Только при зарядке</string>
 
 </resources>
