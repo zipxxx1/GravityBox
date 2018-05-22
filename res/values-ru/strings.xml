@@ -2023,6 +2023,11 @@
     <string name="pref_lc_active_screen_ignore_update_summary">Активный экран не будет срабатывать при 
         обновлении существующих уведомлений</string>
 
+    <!-- UNC: LED: Ignore updated notifications -->
+    <string name="pref_lc_led_ignore_update_title">Игнорировать обновлённые уведомления</string>
+    <string name="pref_lc_led_ignore_update_summary">Светодиод не будет срабатывать для существующих уведомлений
+        при обновлении, если они уже просмотрены пользователем</string>
+
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Развернуть панель быстрых настроек</string>
 
@@ -2111,6 +2116,9 @@
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Всплытие (heads up)</string>
 
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Только при зарядке</string>
+
     <!-- Yes/No -->
     <string name="yes">Да</string>
     <string name="no">Нет</string>
@@ -2120,3 +2128,4 @@
     <string name="pref_log_errors_summary">Логирование всех ошибок в журнале Xposed, если включено(необходима перезагрузка)</string>
 
 </resources>
+
