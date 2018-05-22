@@ -18,7 +18,7 @@
 
     <string name="app_name" translatable="false">GravityBox [N]</string>
 
-    <string name="battery_style_title">Battery indicator style</string>	
+    <string name="battery_style_title">Battery indicator style</string>
     <string name="battery_style_stock">Stock battery indicator</string>
     <string name="battery_style_circle">Circle battery</string>
     <string name="battery_style_circle_percent">Circle battery with percentage</string>
@@ -879,7 +879,7 @@
     <string name="pref_pulse_notification_delay_title">Pulse notification delay</string>
     <string name="pref_pulse_notification_delay_summary">Requires reboot</string>
 
-    <!-- Powe menu: disable on lockscreen -->
+    <!-- Power menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Disable power menu on lockscreen</string>
 
     <!-- Extended force overflow menu button option -->
