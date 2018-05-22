@@ -33,7 +33,7 @@
     <string name="reboot_required">Зміни набудуть чинності після перезавантаження</string>
 
     <string name="poweroff_advanced_title">Розширене меню вимикання</string>
-    <string name="poweroff_advanced_summary">Включає розширене меню вимикання з можливістю перезавантаження у режим «recovery»</string>
+    <string name="poweroff_advanced_summary">Включає розширене меню вимикання з можливістю перезавантаження у режим «Recovery»</string>
     <string name="poweroff_recovery">Recovery</string>
     <string name="poweroff_bootloader">Bootloader</string>
     <string name="poweroff_download">Завантаження</string>
@@ -123,8 +123,8 @@
 
     <!-- Reboot confirmation -->
     <string name="reboot_confirm">%s буде перезавантажено.</string>
-    <string name="reboot_confirm_recovery">%s буде перезавантажений в режим «recovery».</string>
-    <string name="reboot_confirm_bootloader">%s буде перезавантажений в режим «bootloader».</string>
+    <string name="reboot_confirm_recovery">%s буде перезавантажений в режим «Recovery».</string>
+    <string name="reboot_confirm_bootloader">%s буде перезавантажений в режим «Bootloader».</string>
     <string name="reboot_confirm_download">%s буде перезавантажений в режим «download».</string>
 
     <!-- Engineering mode shortcut -->
@@ -1941,9 +1941,9 @@
 
     <!-- QuickApp Tile #3 and #4 -->
     <string name="pref_cat_quickapp_tile_3_title">Плитка QuickApp 3 налаштування</string>
-    <string name="qs_tile_quickapp_3">Quick App 3</string>
+    <string name="qs_tile_quickapp_3">Швидкий запуск 3</string>
     <string name="pref_cat_quickapp_tile_4_title">Плитка QuickApp 4 налаштування</string>
-    <string name="qs_tile_quickapp_4">Quick App 4</string>
+    <string name="qs_tile_quickapp_4">Швидкий запуск 4</string>
 
     <!-- QS Bluetooth Tethering tile -->
     <string name="qs_tile_bt_tethering">Роздача по Bluetooth</string>
@@ -1952,7 +1952,7 @@
     <string name="qs_tile_bt_tethering_error">Помилка</string>
 
     <!-- QS protected when device locked -->
-    <string name="qs_protected_summary">Protected when device locked</string>
+    <string name="qs_protected_summary">Захищено при заблокованому пристрої</string>
 
     <!-- Volume panel: notification stream label -->
     <string name="notification_stream_name">Сповіщення</string>
@@ -1969,7 +1969,7 @@
     <string name="pref_oos_dash_sound_disable_title">Disable Dash charging sound</string>
 
     <!-- Storage permission toast -->
-    <string name="permission_storage_denied">Permission to access Storage was denied</string>
+    <string name="permission_storage_denied">Дозвіл на досуп до сховища даних було відхилено</string>
 
     <!-- QS: Locked tile indicattor -->
     <string name="pref_qs_locked_tile_indicator_title">Locked tile indicator</string>
@@ -1979,10 +1979,10 @@
     <string name="locked_tile_indicator_key">Ключ 🔑</string>
 
     <!-- QS: WiFi quick mode -->
-    <string name="pref_wifi_tile_quick_mode_summary">Allows toggling WiFi on tile single-press</string>
+    <string name="pref_wifi_tile_quick_mode_summary">Дозволяє перемикати WiFi при одиничному дотику по плитці</string>
 
     <!-- QS: BT quick mode -->
-    <string name="pref_bt_tile_quick_mode_summary">Allows toggling Bluetooth on tile single-press</string>
+    <string name="pref_bt_tile_quick_mode_summary">Дозволяє перемикати Bluetooth при одиничному дотику по плитці</string>
 
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Toggle split screen</string>
@@ -2014,5 +2014,44 @@
 
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">Активує зміну стилю значків батареї та процентів (необхідне перезавантаження)</string>
+
+    <!-- Visualizer -->
+    <string name="pref_cat_visualizer_title">Візуалізатор</string>
+    <string name="pref_visualizer_enable_summary">Увімкнути візуалізацію на екрані блокування під час програвання музики (необхідне перезавантаження)</string>
+    <string name="pref_visualizer_dynamic_color_title">Динамічний колір</string>
+    <string name="pref_visualizer_dynamic_color_summary">Брати колір з ілюстрації поточної пісні</string>
+    <string name="pref_visualizer_color_title">Типовий колір</string>
+    <string name="pref_visualizer_opacity_title">Прозорість кольору</string>
+    <string name="pref_visualizer_active_mode_title">Активний режим</string>
+    <string name="pref_visualizer_active_mode_summary">Лишати еран блоківання активним під час відтворення візуалізації</string>
+    <string name="pref_visualizer_dim_title">Згасання екрану</string>
+    <string name="pref_visualizer_dim_summary">Dims contents of lock screen after user inactivity timeout</string>
+    <string name="pref_visualizer_dim_level_title">Рівень згасання</string>
+    <string name="pref_visualizer_dim_info_title">Показати інформацію про медіа</string>
+    <string name="pref_visualizer_dim_info_summary">Показувати інформацію про поточний медіафайл на потямнілому екрані</string>
+    <string name="pref_visualizer_dim_header_title">Показати заголовок</string>
+    <string name="pref_visualizer_dim_header_summary">Показувати заголовок на потямнілому екрані, якій містить поточний час та заряд батареї</string>
+    <string name="pref_visualizer_dim_controls_title">Показувати елементи керування</string>
+    <string name="pref_visualizer_dim_controls_summary">Показувати на потямнілому екрані елементи керування відтворення медіа</string>
+    <string name="pref_visualizer_dim_artwork_title">Показати ілюстрацію</string>
+    <string name="pref_visualizer_dim_artwork_summary">Показувати на потямнілому екрані ілюстрацію з екрану блокування</string>
+    <string name="pref_visualizer_navbar_title">Панель навігації</string>
+    <string name="pref_visualizer_navbar_summary">Показувати візуалізацію і в панелі навігації також</string>
+
+    <!-- QS: Ambient Display tile -->
+    <string name="qs_tile_ambient_display">Ambient display</string>
+
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Зринання</string>
+
+    <!-- Reboot -->
+    <string name="reboot">Перезавантаження</string>
+
+    <!-- QS: tiles per header -->
+    <string name="pref_qs_tiles_per_header_title">Плиток в заголовку</string>
+    <string name="pref_qs_tiles_per_header_summary">Визначає, як багато плиток буде показано в заголовку</string>
+
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Лише під час зарядки</string>
 
 </resources>
