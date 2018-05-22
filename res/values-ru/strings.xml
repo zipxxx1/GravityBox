@@ -2166,6 +2166,13 @@
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Всплытие (heads up)</string>
 
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Только при зарядке</string>
+
+    <!-- Yes/No -->
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
     <!-- Error logging -->
     <string name="pref_log_errors_title">Логирование ошибок</string>
     <string name="pref_log_errors_summary">Логирование всех ошибок в журнале Xposed, если включено(необходима перезагрузка)</string>
