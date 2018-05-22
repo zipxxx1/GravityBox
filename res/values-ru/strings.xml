@@ -2087,4 +2087,15 @@
     <!-- Reboot -->
     <string name="reboot">Перезагрузка</string>
 
+    <!-- StatusBar: corner padding -->
+    <string name="pref_sb_corner_padding_remove_title">Удалить угловой отступ</string>
+    <string name="pref_sb_corner_padding_remove_summary">Удаление отступа, используемого для экранов с закруглёнными углами (необходима перезагрузка)</string>
+
+    <!-- QS: tiles per header -->
+    <string name="pref_qs_tiles_per_header_title">Плитки вверху</string>
+    <string name="pref_qs_tiles_per_header_summary">Количество плиток для отображения в верхней строке</string>
+
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Только при зарядке</string>
+
 </resources>
