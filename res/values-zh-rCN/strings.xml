@@ -2169,6 +2169,10 @@
 
     <!-- BatteryBar: only while charging -->
     <string name="pref_battery_bar_show_charging_title">仅在充电时</string>
+	
+    <!-- Yes/No -->
+    <string name="yes">是</string>
+    <string name="no">否</string>
 
     <!-- Error logging -->
     <string name="pref_log_errors_title">错误日志</string>
