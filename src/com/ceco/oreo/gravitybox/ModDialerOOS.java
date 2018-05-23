@@ -30,11 +30,12 @@ public class ModDialerOOS {
     private static final boolean DEBUG = false;
 
     private static final String[] CLASS_PHONE_UTILS = new String[] {
-            "com.android.incallui.oneplus.OPPhoneUtils", "com.android.incallui.oneplus.s"
+            "com.android.incallui.oneplus.OPPhoneUtils", "com.android.incallui.oneplus.s",
+            "com.android.incallui.oneplus.f"
     };
 
     private static final String[] METHOD_SUPPORTS_CALL_RECORDING = new String[] {
-            "isSupportCallRecorder", "AN"
+            "isSupportCallRecorder", "AN", "SI"
     };
 
     private static void log(String message) {
