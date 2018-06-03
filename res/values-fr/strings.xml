@@ -1694,10 +1694,20 @@ Utiliser dans le cas où une autre application nécessite l\'utilisation du capt
     <string name="pref_visualizer_dim_controls_summary">Affiche les contrôles de lecture multimédia sur l\'écran tamisé</string>
     <string name="pref_visualizer_dim_artwork_title">Afficher la pochette</string>
     <string name="pref_visualizer_dim_artwork_summary">Affiche la pochette de l\'album au-dessus de l\'écran de verrouillage sur l\'écran tamisé</string>
+    <string name="pref_visualizer_navbar_title">Barre de navigation</string>
+    <string name="pref_visualizer_navbar_summary">Affiche le visualiseur également dans la barre de navigation</string>
     <!-- QS: Ambient Display tile -->
     <string name="qs_tile_ambient_display">Affichage en mode veille</string>
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Notifications flottantes</string>
     <!-- Reboot -->
     <string name="reboot">Redémarrer</string>
+    <!-- StatusBar: corner padding -->
+    <string name="pref_sb_corner_padding_remove_title">Supprimer le remplissage d\'angle</string>
+    <string name="pref_sb_corner_padding_remove_summary">Supprime le remplissage destiné à l\'affichage des coins arrondis (nécessite un redémarrage)</string>
+    <!-- QS: tiles per header -->
+    <string name="pref_qs_tiles_per_header_title">Tuiles par en-tête</string>
+    <string name="pref_qs_tiles_per_header_summary">Définit le nombre de tuiles à afficher dans l\'en-tête</string>
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Seulement lors de la charge</string>
 </resources>
