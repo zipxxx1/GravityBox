@@ -29,13 +29,20 @@ public class ModDialerOOS {
     private static final String TAG = "GB:ModDialerOOS";
     private static final boolean DEBUG = false;
 
-    private static final String[] CLASS_PHONE_UTILS = new String[] {
-            "com.android.incallui.oneplus.OPPhoneUtils", "com.android.incallui.oneplus.s",
-            "com.android.incallui.oneplus.f"
-    };
+    private static class CallRecordingInfo {
+       String className;
+       String methodName;
+       CallRecordingInfo(String cn, String mn) {
+           className = cn;
+           methodName = mn;
+       }
+    }
 
-    private static final String[] METHOD_SUPPORTS_CALL_RECORDING = new String[] {
-            "isSupportCallRecorder", "AN", "SI"
+    private static final CallRecordingInfo[] CALL_RECORDING_INFO = new CallRecordingInfo[] {
+            new CallRecordingInfo("com.android.incallui.oneplus.r", "Om"), /* OP3T Beta 28 */
+            new CallRecordingInfo("com.android.incallui.oneplus.f", "SI"), /* OP5T Beta 8 */
+            new CallRecordingInfo("com.android.incallui.oneplus.s", "AN"), /* OP3T Beta 27 */
+            new CallRecordingInfo("com.android.incallui.oneplus.OPPhoneUtils", "isSupportCallRecorder") /* OOS 5.0.2 */
     };
 
     private static void log(String message) {
@@ -50,16 +57,15 @@ public class ModDialerOOS {
         mPrefs = prefs;
 
         Method method = null;
-        for (String cName : CLASS_PHONE_UTILS) {
-            Class<?> clazz = XposedHelpers.findClassIfExists(cName, classLoader);
+        for (CallRecordingInfo crInfo : CALL_RECORDING_INFO) {
+            Class<?> clazz = XposedHelpers.findClassIfExists(crInfo.className, classLoader);
             if (clazz != null) {
-                for (String mName : METHOD_SUPPORTS_CALL_RECORDING) {
-                    method = XposedHelpers.findMethodExactIfExists(
-                            cName, classLoader, mName, Context.class);
-                    if (method != null) {
-                        XposedBridge.hookMethod(method, supportsCallRecordingHook);
-                        if (DEBUG) log("isSupportCallRecorder found in " + cName + " as " + mName);
-                    }
+                method = XposedHelpers.findMethodExactIfExists(
+                            clazz, crInfo.methodName, Context.class);
+                if (method != null) {
+                    XposedBridge.hookMethod(method, supportsCallRecordingHook);
+                    if (DEBUG) log("isSupportCallRecorder found in " + crInfo.className + " as " + crInfo.methodName);
+                    break;
                 }
             }
         }
