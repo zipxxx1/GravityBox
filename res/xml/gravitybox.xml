@@ -592,7 +592,8 @@
                 interval="1"
                 monitorBoxEnabled="true"
                 monitorBoxUnit="%" 
-                android:defaultValue="0" />
+                android:defaultValue="0"
+                android:dependency="pref_qs_management_enable" />
 
             <ListPreference
                 android:key="pref_qs_tiles_per_header" 
