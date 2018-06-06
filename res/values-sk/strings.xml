@@ -2045,4 +2045,10 @@
     <!-- BatteryBar: only while charging -->
     <string name="pref_battery_bar_show_charging_title">Len počas nabíjania</string>
 
+    <!-- Search -->
+    <string name="search">Hľadať</string>
+    <string name="search_reset">Zrušiť filter</string>
+    <string name="search_keyword_short">Kľúčové slovo je krátke</string>
+    <string name="search_no_match">Nenašli sa nastavenia zodpovedajúce zadanému kľúčovému slovu</string>
+
 </resources>
