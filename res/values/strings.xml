@@ -2178,4 +2178,10 @@
     <string name="pref_log_errors_title">Error logging</string>
     <string name="pref_log_errors_summary">Logs all errors to Xposed log when enabled (requires reboot)</string>
 
+    <!-- Search -->
+    <string name="search">Search</string>
+    <string name="search_reset">Reset search</string>
+    <string name="search_keyword_short">Keyword is too short</string>
+    <string name="search_no_match">No preferences found</string>
+
 </resources>

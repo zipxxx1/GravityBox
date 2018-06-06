@@ -2084,4 +2084,10 @@
     <string name="pref_log_errors_title">Logovanie chýb</string>
     <string name="pref_log_errors_summary">Zapíše všetky chyby do Xposed logu (vyžaduje reštart)</string>
 
+    <!-- Search -->
+    <string name="search">Hľadať</string>
+    <string name="search_reset">Zrušiť filter</string>
+    <string name="search_keyword_short">Kľúčové slovo je krátke</string>
+    <string name="search_no_match">Nenašli sa nastavenia zodpovedajúce zadanému kľúčovému slovu</string>
+
 </resources>
