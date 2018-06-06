@@ -2128,4 +2128,10 @@
     <string name="pref_log_errors_title">错误日志</string>
     <string name="pref_log_errors_summary">启用后所有错误将记录到Xposed日志(需要重新启动)</string>
 
+    <!-- Search -->
+    <string name="search">搜索</string>
+    <string name="search_reset">搜索重置</string>
+    <string name="search_keyword_short">关键字太短了</string>
+    <string name="search_no_match">没有找到设置</string>
+
 </resources>

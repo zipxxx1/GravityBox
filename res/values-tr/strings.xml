@@ -2071,4 +2071,10 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_log_errors_title">Hata günlüğü</string>
     <string name="pref_log_errors_summary">Etkinleştirildiğinde tüm hataları Xposed günlüğüne kaydeder (yeniden başlatma gerektirir)</string>
 
+    <!-- Search -->
+    <string name="search">Ara</string>
+    <string name="search_reset">Aramayı sıfırla</string>
+    <string name="search_keyword_short">Anahtar kelime çok kısa</string>
+    <string name="search_no_match">Ayar bulunamadı</string>
+
 </resources>

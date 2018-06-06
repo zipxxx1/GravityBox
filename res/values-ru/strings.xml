@@ -2127,5 +2127,11 @@
     <string name="pref_log_errors_title">Логирование ошибок</string>
     <string name="pref_log_errors_summary">Логирование всех ошибок в журнале Xposed, если включено(необходима перезагрузка)</string>
 
+    <!-- Search -->
+    <string name="search">Поиск</string>
+    <string name="search_reset">Сброс поиска</string>
+    <string name="search_keyword_short">Keyword is too short</string>
+    <string name="search_no_match">Предпочтения не найдены</string>
+
 </resources>
 
