@@ -1209,7 +1209,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     Toast.makeText(GravityBoxSettings.this,
                             R.string.search_keyword_short, Toast.LENGTH_SHORT).show();
                 } else {
-                    mSearchQuery = text.trim();
+                    mSearchQuery = text.trim().toLowerCase(Locale.getDefault());
                     searchView.clearFocus();
                     search.collapseActionView();
                     search.setVisible(false);
