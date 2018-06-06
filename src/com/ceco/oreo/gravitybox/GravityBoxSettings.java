@@ -56,13 +56,21 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
+import android.text.TextUtils.TruncateAt;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest.permission;
@@ -1072,6 +1080,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static SystemProperties sSystemProperties;
     private Dialog mAlertDialog;
     private ProgressDialog mProgressDialog;
+    private String mSearchQuery;
+    private PrefsFragment mPrefsFragment;
+
     private Runnable mGetSystemPropertiesTimeout = new Runnable() {
         @Override
         public void run() {
@@ -1094,6 +1105,14 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            mSearchQuery = savedInstanceState.getString("mSearchQuery", null);
+            mPrefsFragment = (PrefsFragment) getFragmentManager().getFragment(savedInstanceState, "mPrefsFragment");
+            if (mPrefsFragment != null) {
+                mPrefsFragment.setSearchQuery(mSearchQuery);
+            }
+        }
 
         // fix folder permissions
         SettingsManager.getInstance(this).fixFolderPermissionsAsync();
@@ -1127,7 +1146,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             return;
         }
 
-        if (savedInstanceState == null || sSystemProperties == null) {
+        if (savedInstanceState == null || sSystemProperties == null || mPrefsFragment == null) {
             mReceiver = new GravityBoxResultReceiver(new Handler());
             mReceiver.setReceiver(this);
             Intent intent = new Intent();
@@ -1159,6 +1178,79 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     }
 
     @Override
+    public void onSaveInstanceState(Bundle bundle) {
+        bundle.putString("mSearchQuery", mSearchQuery);
+        getFragmentManager().putFragment(bundle, "mPrefsFragment", mPrefsFragment);
+        super.onSaveInstanceState(bundle);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings_menu, menu);
+
+        final MenuItem search = menu.findItem(R.id.search);
+        final SearchView searchView = (SearchView) search.getActionView();
+        final MenuItem searchKeyword = menu.findItem(R.id.searchKeyword);
+        final TextView searchKeywordView = (TextView) searchKeyword.getActionView();
+        final MenuItem searchReset = menu.findItem(R.id.searchReset);
+
+        searchView.setOnQueryTextListener(new OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextChange(String text) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextSubmit(String text) {
+                if (text.trim().length() < 3) {
+                    Toast.makeText(GravityBoxSettings.this,
+                            R.string.search_keyword_short, Toast.LENGTH_SHORT).show();
+                } else {
+                    mSearchQuery = text.trim();
+                    searchView.clearFocus();
+                    search.collapseActionView();
+                    search.setVisible(false);
+                    searchReset.setVisible(true);
+                    searchKeyword.setVisible(true);
+                    searchKeywordView.setText(mSearchQuery);
+                    mPrefsFragment.filterPreferences(mSearchQuery);
+                }
+                return true;
+            }
+        });
+
+        searchReset.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                mSearchQuery = null;
+                search.setVisible(true);
+                searchReset.setVisible(false);
+                searchKeyword.setVisible(false);
+                searchKeywordView.setText(null);
+                mPrefsFragment = new PrefsFragment();
+                getFragmentManager().beginTransaction().replace(android.R.id.content, mPrefsFragment).commit();
+                return true;
+            }
+        });
+
+        searchKeywordView.setSingleLine(true);
+        searchKeywordView.setEllipsize(TruncateAt.END);
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+        searchKeywordView.setMaxWidth(size.x / 3);
+
+        if (mSearchQuery != null) {
+            searchReset.setVisible(true);
+            searchKeyword.setVisible(true);
+            searchKeywordView.setText(mSearchQuery);
+        } else {
+            search.setVisible(true);
+        }
+
+        return true;
+    }
+
+    @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         if (mHandler != null) {
             mHandler.removeCallbacks(mGetSystemPropertiesTimeout);
@@ -1168,7 +1260,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         Log.d("GravityBox", "result received: resultCode=" + resultCode);
         if (resultCode == SystemPropertyProvider.RESULT_SYSTEM_PROPERTIES) {
             sSystemProperties = new SystemProperties(resultData);
-            getFragmentManager().beginTransaction().replace(android.R.id.content, new PrefsFragment()).commit();
+            mPrefsFragment = new PrefsFragment();
+            mPrefsFragment.setSearchQuery(mSearchQuery);
+            getFragmentManager().beginTransaction().replace(android.R.id.content, mPrefsFragment).commit();
         } else {
             finish();
         }
@@ -1350,6 +1444,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         //private PreferenceScreen mPrefCatCellTile;
         private ListPreference mPrefBatteryTileTempUnit;
         private EditTextPreference mPrefPowerCameraVp;
+        private String mSearchQuery;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -1877,6 +1972,52 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             checkPermissions();
         }
 
+        protected void setSearchQuery(String query) {
+            mSearchQuery = query;
+        }
+
+        protected void filterPreferences() {
+            filterPreferences(mSearchQuery);
+        }
+
+        protected void filterPreferences(String query) {
+            setSearchQuery(query);
+            if (filterPreferencesInternal(getPreferenceScreen(), null) == 0) {
+                Toast.makeText(getActivity(), R.string.search_no_match,
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        private int filterPreferencesInternal(PreferenceGroup prefGroup, PreferenceGroup parentGroup) {
+            if (mSearchQuery == null) return -1;
+
+            final int count = prefGroup.getPreferenceCount();
+
+            int matchCount = 0;
+            for (int i = count-1; i >= 0; i--) {
+                Preference p = prefGroup.getPreference(i);
+                p.setDependency(null);
+                if (p instanceof PreferenceGroup && p.getIntent() == null) {
+                    matchCount += filterPreferencesInternal((PreferenceGroup)p, prefGroup);
+                } else {
+                    String title = (p.getTitle() == null ? "null" :
+                        p.getTitle().toString()).toLowerCase(Locale.getDefault());
+                    String summary = (p.getSummary() == null ? "null" :
+                        p.getSummary().toString()).toLowerCase(Locale.getDefault());
+                    if (p.isEnabled() && (title.contains(mSearchQuery) || summary.contains(mSearchQuery))) {
+                        matchCount++;
+                    } else {
+                        prefGroup.removePreference(p);
+                    }
+                }
+            }
+            if (parentGroup != null && matchCount == 0 && prefGroup.getIntent() == null) {
+                parentGroup.removePreference(prefGroup);
+            }
+
+            return matchCount;
+        }
+
         private void initFingerprintLauncher() {
             PreferenceCategory catFingers = (PreferenceCategory) findPreference(
                     PREF_CAT_KEY_FINGERPRINT_LAUNCHER_FINGERS);
@@ -2003,6 +2144,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             super.onStart();
             mPrefs.registerOnSharedPreferenceChangeListener(this);
             updatePreferences(null);
+            filterPreferences();
         }
 
         @Override
@@ -2264,7 +2406,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (key == null || key.equals(PREF_KEY_VOLUME_ROCKER_WAKE)) {
                 mPrefVolumeRockerWake.setSummary(mPrefVolumeRockerWake.getEntry());
                 Preference p = findPreference(PREF_KEY_VOLUME_ROCKER_WAKE_ALLOW_MUSIC);
-                p.setEnabled("enabled".equals(mPrefVolumeRockerWake.getValue()));
+                if (p != null) p.setEnabled("enabled".equals(mPrefVolumeRockerWake.getValue()));
             }
 
             if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_OMNI_MODE)) {
@@ -2407,15 +2549,17 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                     key.equals(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY)) {
                 ListPreference du = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK);
                 ListPreference dup = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY);
-                dup.setEnabled(!"OFF".equals(du.getValue()));
-                dup.setSummary(dup.getEntry());
-                Preference p = findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL);
-                if (p != null) p.setEnabled("SEE_THROUGH".equals(du.getValue()));
+                if (du != null && dup != null) {
+                    dup.setEnabled(!"OFF".equals(du.getValue()));
+                    dup.setSummary(dup.getEntry());
+                    Preference p = findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL);
+                    if (p != null) p.setEnabled("SEE_THROUGH".equals(du.getValue()));
+                }
             }
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY)) {
                 ListPreference sup = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY);
-                sup.setSummary(sup.getEntry());
+                if (sup != null) sup.setSummary(sup.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_IMPRINT_MODE)) {
@@ -2428,7 +2572,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 if (p != null) {
                     p.setSummary(p.getEntry());
                     Preference dp = findPreference(PREF_KEY_DND_TILE_DURATION);
-                    dp.setEnabled(p.isEnabled() && "CUSTOM".equals(p.getValue()));
+                    if (dp != null) dp.setEnabled(p.isEnabled() && "CUSTOM".equals(p.getValue()));
                 }
             }
 
@@ -2459,15 +2603,16 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE) ||
                     key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE);
-                p.setSummary(p.getEntry());
+                if (p != null) p.setSummary(p.getEntry());
                 Preference p2 = findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_IMAGE);
-                p2.setEnabled(mPrefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false) &&
+                if (p != null && p2 != null)
+                    p2.setEnabled(mPrefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false) &&
                         "CUSTOM".equals(p.getValue()));
             }
 
             if (key == null || key.equals(PREF_KEY_FORCE_AOSP)) {
                 CheckBoxPreference p = (CheckBoxPreference) findPreference(PREF_KEY_FORCE_AOSP);
-                p.setChecked(Utils.isAospForced());
+                if (p != null) p.setChecked(Utils.isAospForced());
             }
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE)) {
@@ -2490,16 +2635,18 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             if (key == null || key.equals(PREF_KEY_QS_LOCKED_TILE_INDICATOR)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_QS_LOCKED_TILE_INDICATOR);
-                p.setSummary(p.getEntry());
+                if (p != null) p.setSummary(p.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_APP_LAUNCHER_THEME)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_APP_LAUNCHER_THEME);
-                p.setSummary(p.getEntry());
+                if (p != null) p.setSummary(p.getEntry());
             }
 
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
+                if (caPref == null)
+                    continue;
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
                     caPref.setSummary(mPrefCustomApp.getSummary());
                     Intent intent = new Intent(ACTION_PREF_HWKEY_CHANGED);
@@ -2523,6 +2670,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             for (String rtKey : ringToneKeys) {
                 RingtonePreference rtPref = (RingtonePreference) findPreference(rtKey);
+                if (rtPref == null)
+                    continue;
                 String val = mPrefs.getString(rtKey, null);
                 if (val != null && !val.isEmpty()) {
                     if (rtKey.equals(PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS) &&

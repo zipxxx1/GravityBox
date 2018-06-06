@@ -2101,4 +2101,10 @@
     <!-- BatteryBar: only while charging -->
     <string name="pref_battery_bar_show_charging_title">Only when charging</string>
 
+    <!-- Search -->
+    <string name="search">Search</string>
+    <string name="search_reset">Reset search</string>
+    <string name="search_keyword_short">Keyword is too short</string>
+    <string name="search_no_match">No preferences found</string>
+
 </resources>
