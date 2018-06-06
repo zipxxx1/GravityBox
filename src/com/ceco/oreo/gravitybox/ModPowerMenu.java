@@ -356,7 +356,13 @@ public class ModPowerMenu {
     private static void reboot() {
         try {
             Object wmf = XposedHelpers.getObjectField(mGlobalActionsDialog, "mWindowManagerFuncs");
-            XposedHelpers.callMethod(wmf, "reboot", false);
+            Method m = XposedHelpers.findMethodExactIfExists(wmf.getClass(), "reboot",
+                    boolean.class, String.class);
+            if (m != null) {
+                m.invoke(wmf, false, "reboot");
+            } else {
+                XposedHelpers.callMethod(wmf, "reboot", false);
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
