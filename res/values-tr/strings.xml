@@ -2054,5 +2054,11 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
 
     <!-- BatteryBar: only while charging -->
     <string name="pref_battery_bar_show_charging_title">Yalnızca şarj olurken</string>
+    
+    <!-- Search -->
+    <string name="search">Ara</string>
+    <string name="search_reset">Aramayı sıfırla</string>
+    <string name="search_keyword_short">Anahtar kelime çok kısa</string>
+    <string name="search_no_match">Ayar bulunamadı</string>
 
 </resources>
