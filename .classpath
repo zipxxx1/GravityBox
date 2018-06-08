@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="ext/api-82.jar" sourcepath="ext/api-82-sources.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/android-support-v7-palette"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
