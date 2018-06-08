@@ -101,6 +101,7 @@ public class Utils {
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     private static Boolean mIsOxygenOsRom = null;
+    private static Boolean mIsOnePlus6Rom = null;
     private static Boolean mIsFileBasedEncrypted = null;
 
     // Device features
@@ -269,6 +270,13 @@ public class Utils {
             mIsOxygenOsRom = version != null && !version.isEmpty() &&  !"0".equals(version); 
         }
         return mIsOxygenOsRom;
+    }
+
+    public static boolean isOnePlus6Rom() {
+        if (mIsOnePlus6Rom == null) {
+            mIsOnePlus6Rom = isOxygenOsRom() && Build.MODEL.contains("A600");
+        }
+        return mIsOnePlus6Rom;
     }
 
     public static boolean isFileBasedEncrypted(Context con) {

@@ -1034,6 +1034,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         public boolean supportsFingerprint;
         public int[] fingerprintIds;
         public boolean isOxygenOsRom;
+        public boolean isOnePlus6Rom;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -1071,6 +1072,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             }
             if (data.containsKey("isOxygenOsRom")) {
                 isOxygenOsRom = data.getBoolean("isOxygenOsRom");
+            }
+            if (data.containsKey("isOnePlus6Rom")) {
+                isOnePlus6Rom = data.getBoolean("isOnePlus6Rom");
             }
         }
     }
@@ -1878,6 +1882,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 PreferenceCategory pc = (PreferenceCategory) findPreference(PREF_CAT_RECENTS_PANEL);
                 p = findPreference(PREF_KEY_RECENT_CLEAR_ALWAYS_VISIBLE);
                 if (pc != null && p != null) pc.removePreference(p);
+                if (sSystemProperties.isOnePlus6Rom) {
+                    p = findPreference(PREF_KEY_STATUSBAR_HIDE_VIBRATE_ICON);
+                    if (p != null) mPrefCatStatusbar.removePreference(p);
+                }
             } else {
                 Preference p = findPreference(PREF_KEY_OOS_CALL_RECORDING);
                 if (p != null) mPrefCatPhoneTelephony.removePreference(p);
