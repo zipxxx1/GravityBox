@@ -1391,7 +1391,7 @@
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Приглушити вібрацію сповіщень</string>
-    <string name="pref_lc_qh_mute_vibe_summary">Вимикає вібрацію сповіщень на пристрої та на будь-якому зв\'язаному пристрої Android Wear</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Вимикає вібрацію сповіщень</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Інтерактивний режим</string>
@@ -1734,7 +1734,7 @@
 
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Приглушити вібрацію пристрою</string>
-    <string name="pref_lc_qh_mute_system_vibe_summary">Вимикає ВСІ тактильні відгуки на системному рівні, та вібрацію сповіщень включно на ДАНОМУ пристрої. Сповіщення на зв\'язаному Android Wear пристрої лишаться в тому ж стані, як і були.</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Вимикає ВСІ тактильні відгуки на системному рівні</string>
 
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Очистити лише видиме</string>

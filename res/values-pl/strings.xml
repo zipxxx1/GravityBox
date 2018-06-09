@@ -1360,7 +1360,8 @@
     <string name="pref_headset_action_unplug_title">Przy odłączeniu słuchawek</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Wycisz wibracje</string>
+    <string name="pref_lc_qh_mute_vibe_title">Wycisz wibracje powiadomień</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Wyłącz wibracje powiadomień</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Tryb interaktywny</string>
@@ -1718,6 +1719,10 @@
 
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Tylko wyraźnie widoczny</string>
+
+    <!-- UNC: QuietHours: mute system level vibrations -->
+    <string name="pref_lc_qh_mute_system_vibe_title">Wyłącz wibracje urządzenia</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Wyłącza WSZYSTKIE wibracje na poziomie systemu</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Uśpienie podwójnym kliknięciem</string>

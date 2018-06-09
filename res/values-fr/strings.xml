@@ -1406,8 +1406,7 @@
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Supprimer les vibrations de notification</string>
-    <string name="pref_lc_qh_mute_vibe_summary">Arrête les vibrations de notification sur cet appareil et 
-         tout appareil Android Wear apairé</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Arrête les vibrations de notification</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Mode interactif</string>
@@ -1767,10 +1766,7 @@
 
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Arrêter les vibrations sur cet appareil</string>
-    <string name="pref_lc_qh_mute_system_vibe_summary">Arrête TOUTES les vibrations au niveau système, 
-        en incluant les vibrations de notification sur CET appareil. Les notifications sur un appareil Android Wear apairé peuvent 
-        toujours vibrer dans le cas où les notifications seraient actives
-    </string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Arrête TOUTES les vibrations au niveau système</string>
 
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Effacer les tâches visibles uniquement</string>

@@ -1401,6 +1401,7 @@
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Matikan getaran</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Matikan getaran pada peranti ini</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Mod interaktif</string>
@@ -1754,7 +1755,11 @@
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Tukar mod senyap kepada mod getaran</string>
     <string name="pref_lc_sound_vibrate_summary">Halang notifikasi daripada senyap dari getaran
-        paksa getran ketikan mod getaran sahaja</string>
+        paksa getaran ketikan mod getaran sahaja</string>
+
+    <!-- UNC: QuietHours: mute system level vibrations -->
+    <string name="pref_lc_qh_mute_system_vibe_title">Matikan getaran peranti</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Matikan semua getaran pada tahap sistem</string>
 
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Hapuskan yang jelas sahaja</string>
