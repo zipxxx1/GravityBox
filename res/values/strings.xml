@@ -1337,8 +1337,7 @@
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Mute notification vibrations</string>
-    <string name="pref_lc_qh_mute_vibe_summary">Turns off notification vibrations on this device and
-        any paired Android Wear device</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Turns off notification vibrations</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interactive mode</string>
@@ -1621,9 +1620,7 @@
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Mute device vibrations</string>
     <string name="pref_lc_qh_mute_system_vibe_summary">Turns off ALL vibrations at system level,
-        including notification vibrations on THIS device. Notifications on paired Android Wear device can
-        still vibrate in case notification vibrations are enabled.
-    </string>
+        including notification vibrations, haptic feedback, etc.</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Double-tap to sleep</string>

@@ -1329,8 +1329,7 @@
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Matikan getaran</string>
-    <string name="pref_lc_qh_mute_vibe_summary">Matikan getaran pada peranti ini dan
-        semua sambungan peranti jam</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Matikan getaran pada peranti ini</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Mod interaktif</string>
@@ -1606,10 +1605,7 @@
 
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Matikan getaran peranti</string>
-    <string name="pref_lc_qh_mute_system_vibe_summary">Matikan semua getaran pada tahap sistem,
-        termasuk getaran notifikasi pada peranti INI. Notifikasi pada peranti jam
-        masih aktif jika getaran notifikasi aktif.
-    </string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Matikan semua getaran pada tahap sistem</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Sentuh 2 kali untuk matikan</string>

@@ -1324,7 +1324,7 @@
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Értesítés rezgések némítása</string>
-    <string name="pref_lc_qh_mute_vibe_summary">Kikapcsolja az értesítések rezgő visszajelzéseit ezen a készüléken és bármely párosított Android Wear eszközön</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Kikapcsolja az értesítések rezgő visszajelzéseit</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interaktív mód</string>
@@ -1588,7 +1588,7 @@
 
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Eszköz rezgések némítása</string>
-    <string name="pref_lc_qh_mute_system_vibe_summary">Kikapcsolja az ÖSSZES rezgő visszajelzést rendszer szinten, az értesítések rezgéseit is beleértve EZEN az eszközön. A párosított Android Wear eszköz értesítés rezgései működni fognak, amennyiben engedélyez van a funkció.</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Kikapcsolja az ÖSSZES rezgő visszajelzést rendszer szinten</string>
 
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Dupla érintésre alvás</string>
