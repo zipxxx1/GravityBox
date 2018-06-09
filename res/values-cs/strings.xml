@@ -1298,8 +1298,7 @@
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Zakázat vibrace oznámení</string>
-    <string name="pref_lc_qh_mute_vibe_summary">Vypne vibrace oznámení na tomto zařízení a 
-        také na spárovaném Android Wear zařízení</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Vypne vibrace oznámení</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interaktivní režim</string>
@@ -1682,8 +1681,8 @@
 
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Zakázat vibrace zařízení</string>
-    <string name="pref_lc_qh_mute_system_vibe_summary">Vypne VŠECHNY vibrace, včetně vibrací oznámení na TOMTO zařízení. 
-         Oznámení na spárovaném Android Wear zařízení budou nadále vibrovat v případě, že jsou povoleny vibrace oznámení.
+    <string name="pref_lc_qh_mute_system_vibe_summary">Vypne VŠECHNY vibrace na systémové úrovni,
+        včetně vibrací oznámení, hmatové odezvy, atd.
     </string>
 
     <!-- Lockscreen: Smart unlock policy -->
