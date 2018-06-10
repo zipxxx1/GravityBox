@@ -2028,4 +2028,9 @@
     <!-- BatteryBar: only while charging -->
     <string name="pref_battery_bar_show_charging_title">Jen během nabíjení</string>
 
+    <!-- UNC: ignore QH durine ginteractive mode -->
+    <string name="pref_lc_qh_ignore_interactive_title">Pro interaktivní režim</string>
+    <string name="pref_lc_qh_ignore_interactive_summary">Pokud povoleno, notifikace odpovídající pravidlům ignorování tichých hodin
+        nebudou utlumeny během interaktivního režimu</string>
+
 </resources>

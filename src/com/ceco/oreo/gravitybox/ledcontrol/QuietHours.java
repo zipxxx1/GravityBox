@@ -105,9 +105,10 @@ public class QuietHours {
         }
 
         if (ls.getEnabled() && ls.getQhIgnore()) {
+            boolean defaultIgnoreResult = (interactive && userPresent) ? !ls.getQhIgnoreInteractive() : false;
             if (ls.getQhIgnoreList() == null || ls.getQhIgnoreList().trim().isEmpty()) {
                 if (ModLedControl.DEBUG) ModLedControl.log("QH ignored for all notifications");
-                return false;
+                return defaultIgnoreResult;
             } else {
                 List<CharSequence> notifTexts = getNotificationTexts(n);
                 String[] keywords = ls.getQhIgnoreList().trim().split(",");
@@ -121,7 +122,7 @@ public class QuietHours {
                     }
                 }
                 if (ModLedControl.DEBUG) ModLedControl.log("QH ignore list contains keyword?: " + ignore);
-                return (ignore ? false : (quietHoursActive() || (interactive && userPresent)));
+                return (ignore ? defaultIgnoreResult : (quietHoursActive() || (interactive && userPresent)));
             }
         } else {
             return (quietHoursActive() || (interactive && userPresent));
