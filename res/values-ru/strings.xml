@@ -2179,4 +2179,9 @@
     <string name="search_keyword_short">Keyword is too short</string>
     <string name="search_no_match">Предпочтения не найдены</string>
 
+    <!-- UNC: ignore QH durine ginteractive mode -->
+    <string name="pref_lc_qh_ignore_interactive_title">Для интерактивного режима</string>
+    <string name="pref_lc_qh_ignore_interactive_summary">Если включено, уведомления, подходящие под правила игнорирования,
+        не будут заглушаться интерактивным режимом тихого часа</string>
+
 </resources>

@@ -2132,4 +2132,8 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="search_keyword_short">Anahtar kelime çok kısa</string>
     <string name="search_no_match">Ayar bulunamadı</string>
 
+    <!-- UNC: ignore QH durine ginteractive mode -->
+    <string name="pref_lc_qh_ignore_interactive_title">Etkileşimli mod için</string>
+    <string name="pref_lc_qh_ignore_interactive_summary">Etkinleştirildiğinde, yoksayma kurallarıyla eşleşen bildirimler, sessiz saatlerdeki etkileşimli mod tarafından kapatılmaz</string>
+
 </resources>

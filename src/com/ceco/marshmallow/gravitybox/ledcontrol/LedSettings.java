@@ -77,6 +77,7 @@ public class LedSettings {
     private LedMode mLedMode;
     private boolean mQhIgnore;
     private String mQhIgnoreList;
+    private boolean mQhIgnoreInteractive;
     private HeadsUpMode mHeadsUpMode;
     private boolean mHeadsUpDnd;
     private int mHeadsUpTimeout;
@@ -160,6 +161,8 @@ public class LedSettings {
                 ls.setQhIgnore(Boolean.valueOf(data[1]));
             } else if (data[0].equals("qhIgnoreList")) {
                 ls.setQhIgnoreList(data[1]);
+            } else if (data[0].equals("qhIgnoreInteractive")) {
+                ls.setQhIgnoreInteractive(Boolean.valueOf(data[1]));
             } else if (data[0].equals("headsUpMode")) {
                 ls.setHeadsUpMode(data[1]);
             } else if (data[0].equals("headsUpDnd")) {
@@ -212,6 +215,7 @@ public class LedSettings {
         mLedMode = LedMode.OVERRIDE;
         mQhIgnore = false;
         mQhIgnoreList = null;
+        mQhIgnoreInteractive = true;
         mHeadsUpMode = HeadsUpMode.DEFAULT;
         mHeadsUpDnd = false;
         mHeadsUpTimeout = 5;
@@ -405,6 +409,10 @@ public class LedSettings {
         mQhIgnoreList = ignoreList;
     }
 
+    protected void setQhIgnoreInteractive (boolean ignore) {
+        mQhIgnoreInteractive = ignore;
+    }
+
     protected void setHeadsUpMode(HeadsUpMode mode) {
         mHeadsUpMode = mode;
     }
@@ -553,6 +561,10 @@ public class LedSettings {
         return mQhIgnoreList;
     }
 
+    public boolean getQhIgnoreInteractive() {
+        return mQhIgnoreInteractive;
+    }
+
     public HeadsUpMode getHeadsUpMode() {
         return mHeadsUpMode;
     }
@@ -619,6 +631,7 @@ public class LedSettings {
         if (mQhIgnoreList != null) {
             dataSet.add("qhIgnoreList:" + mQhIgnoreList);
         }
+        dataSet.add("qhIgnoreInteractive:" + mQhIgnoreInteractive);
         dataSet.add("headsUpMode:" + mHeadsUpMode.toString());
         dataSet.add("headsUpDnd:" + mHeadsUpDnd);
         dataSet.add("headsUpTimeout:" + mHeadsUpTimeout);
