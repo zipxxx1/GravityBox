@@ -1317,7 +1317,7 @@
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Bildirim titreşimlerini kapat</string>
-    <string name="pref_lc_qh_mute_vibe_summary">Bu cihazda ve herhangi bir eşleştirilmiş Android Wear cihazda bildirim titreşimini kapatır</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Bildirim titreşimlerini kapatır</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Etkileşimli mod</string>
@@ -1587,7 +1587,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
 
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Cihaz titreşimlerini kapat</string>
-    <string name="pref_lc_qh_mute_system_vibe_summary">BU cihazdaki bildirim titreşimleri de dahil olmak üzere sistem seviyesindeki TÜM titreşimleri kapatır. Eşleştirilen Android Wear cihazındaki bildirimler, bildirim titreşimleri etkinleştirildiğinde yine de titreşim gösterebilir.
+    <string name="pref_lc_qh_mute_system_vibe_summary">Bildirim titreşimleri, dokunma geribildirimi vb. dahil olmak üzere sistem seviyesindeki TÜM titreşimleri kapatır
     </string>
 
     <!-- Lockscreen: doubletap to sleep -->
