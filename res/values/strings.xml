@@ -2111,4 +2111,9 @@
     <string name="search_keyword_short">Keyword is too short</string>
     <string name="search_no_match">No preferences found</string>
 
+    <!-- UNC: ignore QH durine ginteractive mode -->
+    <string name="pref_lc_qh_ignore_interactive_title">For interactive mode</string>
+    <string name="pref_lc_qh_ignore_interactive_summary">When enabled, notifications matching ignoring rules
+        won\'t be muted by quiet hours interactive mode</string>
+
 </resources>

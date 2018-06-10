@@ -207,6 +207,14 @@
             android:defaultValue=""
             android:dependency="pref_lc_qh_ignore" />
 
+        <CheckBoxPreference
+            android:key="pref_lc_qh_ignore_interactive"
+            android:title="@string/pref_lc_qh_ignore_interactive_title"
+            android:summary="@string/pref_lc_qh_ignore_interactive_summary"
+            android:defaultValue="true"
+            android:persistent="false"
+            android:dependency="pref_lc_qh_ignore" />
+
     </PreferenceCategory>
 
     <PreferenceCategory 
