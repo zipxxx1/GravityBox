@@ -2053,4 +2053,9 @@
     <string name="search_keyword_short">Klíčové slovo je krátké</string>
     <string name="search_no_match">Nenašli se nastavení odpovídající zadanému klíčovému slovu</string>
 
+    <!-- UNC: ignore QH durine ginteractive mode -->
+    <string name="pref_lc_qh_ignore_interactive_title">Pro interaktivní režim</string>
+    <string name="pref_lc_qh_ignore_interactive_summary">Pokud povoleno, notifikace odpovídající pravidlům ignorování tichých hodin
+        nebudou utlumeny během interaktivního režimu</string>
+
 </resources>
