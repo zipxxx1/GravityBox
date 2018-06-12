@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,7 @@ public class ModRinger {
     private static final boolean DEBUG = false;
 
     private static final String CLASS_RINGTONE_PLAYER = "com.android.server.telecom.AsyncRingtonePlayer";
+    private static final String CLASS_RINGER = "com.android.server.telecom.Ringer";
 
     private static ConfigStore mRingerConfig;
     private static float mIncrementAmount;
@@ -85,6 +86,11 @@ public class ModRinger {
     };
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        initIncreasingRing(prefs, classLoader);
+        initMutingRing(prefs, classLoader);
+    }
+
+    private static void initIncreasingRing(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final XSharedPreferences qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
             qhPrefs.makeWorldReadable();
@@ -124,14 +130,6 @@ public class ModRinger {
             });
 
             XposedBridge.hookMethod(mtdHandlePlay, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    qhPrefs.reload();
-                    QuietHours qh = new QuietHours(qhPrefs);
-                    if (qh.isSystemSoundMuted(QuietHours.SystemSound.RINGER)) {
-                        param.setResult(null);
-                    }
-                }
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (!mRingerConfig.enabled) return;
@@ -181,6 +179,38 @@ public class ModRinger {
                     
                 }
             }
+        }
+    }
+
+    private static void initMutingRing(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        try {
+            final XSharedPreferences qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+            qhPrefs.makeWorldReadable();
+
+            XposedHelpers.findAndHookMethod(CLASS_RINGER, classLoader,
+                    "shouldRingForContact", Uri.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    qhPrefs.reload();
+                    QuietHours qh = new QuietHours(qhPrefs);
+                    if (qh.isSystemSoundMuted(QuietHours.SystemSound.RINGER)) {
+                        Uri contactUri = (Uri) param.args[0];
+                        if (contactUri != null) {
+                            if (DEBUG) log("Contact URI: " + contactUri);
+                            String key = Utils.getContactLookupKey(
+                                    (Context)XposedHelpers.getObjectField(param.thisObject, "mContext"),
+                                    contactUri);
+                            if (DEBUG) log("Contact lookup key: " + key);
+                            if (key != null && qh.ringerWhitelist.contains(key)) {
+                                return;
+                            }
+                        }
+                        param.setResult(false);
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
         }
     }
 }

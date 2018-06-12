@@ -2134,5 +2134,14 @@
     <string name="pref_lc_qh_ignore_interactive_summary">Если включено, уведомления, подходящие под правила игнорирования,
         не будут заглушаться интерактивным режимом тихого часа</string>
 
+    <!-- QH: Phone ringer whitelist -->
+    <string name="pref_lc_qh_ringer_whitelist_title">Белый список звонка телефона</string>
+    <string name="pref_lc_qh_ringer_whitelist_summary">Управление списком контактов, для которых вызов не приглушается во время тихого часа</string>
+    <string name="search_no_contacts">Не найдено соответстствующих контактов</string>
+    <string name="qhrw_menu_show_all">Показать все</string>
+    <string name="qhrw_menu_show_starred">Показать избранные</string>
+    <string name="qhrw_menu_show_whitelisted">Показать белый список</string>
+    <string name="qhrw_permission_denied">Разрешение на чтение контактов не предоставлено</string>
+
 </resources>
 

@@ -25,6 +25,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XResources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -33,12 +34,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.os.Vibrator;
+import android.provider.ContactsContract.Contacts;
 import android.renderscript.Allocation;
 import android.renderscript.Allocation.MipmapControl;
 import android.renderscript.Element;
@@ -615,6 +618,17 @@ public class Utils {
         int color = arr.getColor(0, -1);
         arr.recycle();
         return color;
+    }
+
+    public static String getContactLookupKey(Context ctx, Uri uri) {
+        String lookupKey = null;
+        String[] projection = new String[] { Contacts.LOOKUP_KEY };
+        Cursor cursor = ctx.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null && cursor.moveToNext()) {
+            lookupKey = cursor.getString(0);
+            cursor.close();
+        }
+        return lookupKey;
     }
 
     static class SystemProp extends Utils {
