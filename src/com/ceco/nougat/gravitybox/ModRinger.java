@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.Ringtone;
+import android.net.Uri;
 import android.os.Handler;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -138,6 +139,20 @@ public class ModRinger {
                     qhPrefs.reload();
                     QuietHours qh = new QuietHours(qhPrefs);
                     if (qh.isSystemSoundMuted(QuietHours.SystemSound.RINGER)) {
+                        Object call = XposedHelpers.getObjectField(param.args[0], "arg2");
+                        if (call != null) {
+                            Uri contactUri = (Uri) XposedHelpers.callMethod(call, "getContactUri");
+                            if (contactUri != null) {
+                                if (DEBUG) log("Contact URI: " + contactUri);
+                                String key = Utils.getContactLookupKey(
+                                        (Context)XposedHelpers.getObjectField(call, "mContext"),
+                                        contactUri);
+                                if (DEBUG) log("Contact lookup key: " + key);
+                                if (key != null && qh.ringerWhitelist.contains(key)) {
+                                    return;
+                                }
+                            }
+                        }
                         param.setResult(null);
                     }
                 }

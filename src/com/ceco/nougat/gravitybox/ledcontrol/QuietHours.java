@@ -59,6 +59,7 @@ public class QuietHours {
     public boolean interactive;
     Set<String> weekDays;
     public boolean muteSystemVibe;
+    public Set<String> ringerWhitelist;
 
     public QuietHours(SharedPreferences prefs) {
         uncLocked = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false);
@@ -77,6 +78,8 @@ public class QuietHours {
         weekDays = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_WEEKDAYS,
                 new HashSet<String>(Arrays.asList("2","3","4","5","6")));
         muteSystemVibe = prefs.getBoolean(QuietHoursActivity.PREF_KEY_MUTE_SYSTEM_VIBE, false);
+        ringerWhitelist = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_RINGER_WHITELIST,
+                new HashSet<String>());
     }
 
     public boolean quietHoursActive(LedSettings ls, Notification n, boolean userPresent) {

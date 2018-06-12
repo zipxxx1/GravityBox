@@ -26,6 +26,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XResources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -39,6 +40,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -46,6 +48,7 @@ import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.Vibrator;
+import android.provider.ContactsContract.Contacts;
 import android.renderscript.Allocation;
 import android.renderscript.Allocation.MipmapControl;
 import android.telecom.TelecomManager;
@@ -719,6 +722,17 @@ public class Utils {
     public static boolean hasFieldOfType(Object o, String name, Class<?> type) {
         Field f = XposedHelpers.findFieldIfExists(o.getClass(), name);
         return (f != null && type.isAssignableFrom(f.getType()));
+    }
+
+    public static String getContactLookupKey(Context ctx, Uri uri) {
+        String lookupKey = null;
+        String[] projection = new String[] { Contacts.LOOKUP_KEY };
+        Cursor cursor = ctx.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null && cursor.moveToNext()) {
+            lookupKey = cursor.getString(0);
+            cursor.close();
+        }
+        return lookupKey;
     }
 
     static class SystemProp extends Utils {

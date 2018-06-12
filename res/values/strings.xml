@@ -2116,4 +2116,13 @@
     <string name="pref_lc_qh_ignore_interactive_summary">When enabled, notifications matching ignoring rules
         won\'t be muted by quiet hours interactive mode</string>
 
+    <!-- QH: Phone ringer whitelist -->
+    <string name="pref_lc_qh_ringer_whitelist_title">Phone ringer whitelist</string>
+    <string name="pref_lc_qh_ringer_whitelist_summary">Manages list of contacts for which not to mute phone ringer during quiet hours</string>
+    <string name="search_no_contacts">No contacts matching keyword found</string>
+    <string name="qhrw_menu_show_all">Show all</string>
+    <string name="qhrw_menu_show_starred">Show starred</string>
+    <string name="qhrw_menu_show_whitelisted">Show whitelisted</string>
+    <string name="qhrw_permission_denied">Permission to read contacts denied</string>
+
 </resources>

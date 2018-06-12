@@ -35,7 +35,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -50,6 +52,7 @@ public class QuietHoursActivity extends GravityBoxActivity {
     public static final String PREF_KEY_QH_MUTE_LED = "pref_lc_qh_mute_led";
     public static final String PREF_KEY_QH_MUTE_VIBE = "pref_lc_qh_mute_vibe";
     public static final String PREF_KEY_QH_MUTE_SYSTEM_SOUNDS = "pref_lc_qh_mute_system_sounds";
+    public static final String PREF_KEY_QH_RINGER_WHITELIST = "pref_lc_qh_ringer_whitelist";
     public static final String PREF_KEY_QH_STATUSBAR_ICON = "pref_lc_qh_statusbar_icon";
     public static final String PREF_KEY_QH_MODE = "pref_lc_qh_mode";
     public static final String PREF_KEY_QH_INTERACTIVE = "pref_lc_qh_interactive";
@@ -138,6 +141,7 @@ public class QuietHoursActivity extends GravityBoxActivity {
         private WorldReadablePrefs mPrefs;
         private MultiSelectListPreference mPrefWeekDays;
         private MultiSelectListPreference mPrefSystemSounds;
+        private Preference mPrefRingerWhitelist;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -152,6 +156,8 @@ public class QuietHoursActivity extends GravityBoxActivity {
             addPreferencesFromResource(R.xml.led_control_quiet_hours_settings);
             setupWeekDaysPref();
             mPrefSystemSounds = (MultiSelectListPreference) findPreference(PREF_KEY_QH_MUTE_SYSTEM_SOUNDS);
+
+            mPrefRingerWhitelist = findPreference(PREF_KEY_QH_RINGER_WHITELIST);
         }
 
         private void setupWeekDaysPref() {
@@ -198,6 +204,8 @@ public class QuietHoursActivity extends GravityBoxActivity {
                 }
             }
             mPrefSystemSounds.setSummary(summary);
+
+            mPrefRingerWhitelist.setEnabled(values != null && values.contains("ringer"));
         }
 
         @Override
@@ -226,6 +234,17 @@ public class QuietHoursActivity extends GravityBoxActivity {
                 Log.d("GravityBox", "QuietHoursActivity: onSharedPreferenceChangeCommited");
             Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
             getActivity().sendBroadcast(intent);            
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
+                Preference preference) {
+            if (preference == mPrefRingerWhitelist) {
+                Intent intent = new Intent(getActivity(), RingerWhitelistActivity.class);
+                getActivity().startActivity(intent);
+                return true;
+            }
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
     }
 }
