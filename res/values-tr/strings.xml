@@ -2136,4 +2136,13 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_lc_qh_ignore_interactive_title">Etkileşimli mod için</string>
     <string name="pref_lc_qh_ignore_interactive_summary">Etkinleştirildiğinde, yoksayma kurallarıyla eşleşen bildirimler, sessiz saatlerdeki etkileşimli mod tarafından kapatılmaz</string>
 
+    <!-- QH: Phone ringer whitelist -->
+    <string name="pref_lc_qh_ringer_whitelist_title">Telefon zili beyaz listesi</string>
+    <string name="pref_lc_qh_ringer_whitelist_summary">Sessiz saatlerde telefon zil sesini kapatmayacak kişilerin listesini yönetir</string>
+    <string name="search_no_contacts">Anahtar kelime kişilerle eşleşmiyor</string>
+    <string name="qhrw_menu_show_all">Tümünü göster</string>
+    <string name="qhrw_menu_show_starred">Yıldızlıyı göster</string>
+    <string name="qhrw_menu_show_whitelisted">Beyaz listedekiyi göster</string>
+    <string name="qhrw_permission_denied">Kişileri okuma izni reddedildi</string>
+
 </resources>

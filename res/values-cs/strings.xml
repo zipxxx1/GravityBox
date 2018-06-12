@@ -2089,4 +2089,13 @@
     <string name="pref_lc_qh_ignore_interactive_summary">Pokud povoleno, notifikace odpovídající pravidlům ignorování tichých hodin
         nebudou utlumeny během interaktivního režimu</string>
 
+    <!-- QH: Phone ringer whitelist -->
+    <string name="pref_lc_qh_ringer_whitelist_title">Povolené kontakty</string>
+    <string name="pref_lc_qh_ringer_whitelist_summary">Umožňuje správu kontaktů, pro které je vyzvánění povoleno během tichých hodin</string>
+    <string name="search_no_contacts">Žádné kontakty pro zadané klíčové slovo</string>
+    <string name="qhrw_menu_show_all">Zobrazit všechny</string>
+    <string name="qhrw_menu_show_starred">Zobrazit oblíbené</string>
+    <string name="qhrw_menu_show_whitelisted">Zobrazit povolené</string>
+    <string name="qhrw_permission_denied">Přístup ke kontaktům byl zamítnut</string>
+
 </resources>

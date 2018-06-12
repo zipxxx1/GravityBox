@@ -2189,4 +2189,13 @@
     <string name="pref_lc_qh_ignore_interactive_summary">当启用后,通知符合忽略规则
                  不会因静音时间与交互模式而被静音</string>
 
+    <!-- QH: Phone ringer whitelist -->
+    <string name="pref_lc_qh_ringer_whitelist_title">电话铃声白名单</string>
+    <string name="pref_lc_qh_ringer_whitelist_summary">管理在安静时间内不静音电话铃声的联系人列表</string>
+    <string name="search_no_contacts">找不到匹配的联系人关键字</string>
+    <string name="qhrw_menu_show_all">显示所有</string>
+    <string name="qhrw_menu_show_starred">显示星标记</string>
+    <string name="qhrw_menu_show_whitelisted">显示白名单</string>
+    <string name="qhrw_permission_denied">读取联系人权限时被拒绝</string>
+
 </resources>

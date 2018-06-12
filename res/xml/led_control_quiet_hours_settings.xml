@@ -49,6 +49,12 @@
         android:defaultValue="@array/empty_array"
         android:dependency="pref_lc_qh_enabled" />
 
+    <Preference 
+        android:key="pref_lc_qh_ringer_whitelist"
+        android:title="@string/pref_lc_qh_ringer_whitelist_title"
+        android:summary="@string/pref_lc_qh_ringer_whitelist_summary"
+        android:persistent="false" />
+
     <CheckBoxPreference
         android:key="pref_lc_qh_statusbar_icon"
         android:title="@string/pref_lc_qh_statusbar_icon_title"
