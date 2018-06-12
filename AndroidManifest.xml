@@ -34,6 +34,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <permission
         android:name="gravitybox.permission.UNLOCK"
@@ -120,6 +121,12 @@
         <activity
             android:name="com.ceco.oreo.gravitybox.ledcontrol.QuietHoursActivity"
             android:label="@string/lc_quiet_hours" >
+        </activity>
+
+        <activity
+            android:name="com.ceco.oreo.gravitybox.ledcontrol.RingerWhitelistActivity"
+            android:label="@string/pref_lc_qh_ringer_whitelist_title"
+            android:theme="@style/AppCompatTheme" >
         </activity>
 
         <activity

@@ -36,7 +36,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -51,6 +53,7 @@ public class QuietHoursActivity extends GravityBoxActivity {
     public static final String PREF_KEY_QH_MUTE_LED = "pref_lc_qh_mute_led";
     public static final String PREF_KEY_QH_MUTE_VIBE = "pref_lc_qh_mute_vibe";
     public static final String PREF_KEY_QH_MUTE_SYSTEM_SOUNDS = "pref_lc_qh_mute_system_sounds";
+    public static final String PREF_KEY_QH_RINGER_WHITELIST = "pref_lc_qh_ringer_whitelist";
     public static final String PREF_KEY_QH_STATUSBAR_ICON = "pref_lc_qh_statusbar_icon";
     public static final String PREF_KEY_QH_MODE = "pref_lc_qh_mode";
     public static final String PREF_KEY_QH_INTERACTIVE = "pref_lc_qh_interactive";
@@ -76,6 +79,7 @@ public class QuietHoursActivity extends GravityBoxActivity {
     public static final String EXTRA_QH_INTERACTIVE = "qhInteractive";
     public static final String EXTRA_QH_WEEKDAYS = "qhWeekDays";
     public static final String EXTRA_QH_MUTE_SYSTEM_VIBE = "qhMuteSystemVibe";
+    public static final String EXTRA_QH_RINGER_WHITELIST = "qhRingerWhitelist";
 
     protected static void broadcastSettings(Context ctx, SharedPreferences prefs) {
         Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
@@ -95,6 +99,8 @@ public class QuietHoursActivity extends GravityBoxActivity {
         intent.putStringArrayListExtra(EXTRA_QH_WEEKDAYS, new ArrayList<String>(prefs.getStringSet(
                 QuietHoursActivity.PREF_KEY_QH_WEEKDAYS, new HashSet<String>(Arrays.asList("2","3","4","5","6")))));
         intent.putExtra(EXTRA_QH_MUTE_SYSTEM_VIBE, prefs.getBoolean(QuietHoursActivity.PREF_KEY_MUTE_SYSTEM_VIBE, false));
+        intent.putStringArrayListExtra(EXTRA_QH_RINGER_WHITELIST, new ArrayList<String>(
+                prefs.getStringSet(PREF_KEY_QH_RINGER_WHITELIST, new HashSet<String>())));
         ctx.sendBroadcast(intent);
     }
 
@@ -173,6 +179,7 @@ public class QuietHoursActivity extends GravityBoxActivity {
         private WorldReadablePrefs mPrefs;
         private MultiSelectListPreference mPrefWeekDays;
         private MultiSelectListPreference mPrefSystemSounds;
+        private Preference mPrefRingerWhitelist;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -187,6 +194,8 @@ public class QuietHoursActivity extends GravityBoxActivity {
             addPreferencesFromResource(R.xml.led_control_quiet_hours_settings);
             setupWeekDaysPref();
             mPrefSystemSounds = (MultiSelectListPreference) findPreference(PREF_KEY_QH_MUTE_SYSTEM_SOUNDS);
+
+            mPrefRingerWhitelist = findPreference(PREF_KEY_QH_RINGER_WHITELIST);
         }
 
         private void setupWeekDaysPref() {
@@ -233,6 +242,8 @@ public class QuietHoursActivity extends GravityBoxActivity {
                 }
             }
             mPrefSystemSounds.setSummary(summary);
+
+            mPrefRingerWhitelist.setEnabled(values != null && values.contains("ringer"));
         }
 
         @Override
@@ -260,6 +271,17 @@ public class QuietHoursActivity extends GravityBoxActivity {
             if (WorldReadablePrefs.DEBUG)
                 Log.d("GravityBox", "QuietHoursActivity: onSharedPreferenceChangeCommited");
             broadcastSettings(getActivity(), mPrefs);
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
+                Preference preference) {
+            if (preference == mPrefRingerWhitelist) {
+                Intent intent = new Intent(getActivity(), RingerWhitelistActivity.class);
+                getActivity().startActivity(intent);
+                return true;
+            }
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
     }
 }
