@@ -1988,18 +1988,16 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             for (int i = count-1; i >= 0; i--) {
                 Preference p = prefGroup.getPreference(i);
                 p.setDependency(null);
-                if (p instanceof PreferenceGroup && p.getIntent() == null) {
+                String title = (p.getTitle() == null ? "" :
+                    p.getTitle().toString()).toLowerCase(Locale.getDefault());
+                String summary = (p.getSummary() == null ? "" :
+                    p.getSummary().toString()).toLowerCase(Locale.getDefault());
+                if (p.isEnabled() && (title.contains(mSearchQuery) || summary.contains(mSearchQuery))) {
+                    matchCount++;
+                } else if (p instanceof PreferenceGroup && p.getIntent() == null) {
                     matchCount += filterPreferencesInternal((PreferenceGroup)p, prefGroup);
                 } else {
-                    String title = (p.getTitle() == null ? "null" :
-                        p.getTitle().toString()).toLowerCase(Locale.getDefault());
-                    String summary = (p.getSummary() == null ? "null" :
-                        p.getSummary().toString()).toLowerCase(Locale.getDefault());
-                    if (p.isEnabled() && (title.contains(mSearchQuery) || summary.contains(mSearchQuery))) {
-                        matchCount++;
-                    } else {
-                        prefGroup.removePreference(p);
-                    }
+                    prefGroup.removePreference(p);
                 }
             }
             if (parentGroup != null && matchCount == 0 && prefGroup.getIntent() == null) {
