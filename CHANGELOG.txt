@@ -1,3 +1,30 @@
+Changelog 8.2.0 - 13/06/2018
+--------------------------------------
+- Settings: added search feature
+--- filters the list of all enabled preferences based on specified keyword
+--- maintains tree structure of filtered preferences for a user to better understand context
+--- matching preference groups will show all child preferences
+- QuickSettings: enabled detail view for CellularTile (non-OOS only)
+- Ultimate notification control:
+--- fixed crash during screen orientation change
+--- redesigned Search functionality in per-app list
+- UNC QuietHours:
+--- added phone ringer whitelist management:
+------ allows to manage list of contacts for which not to mute phone ringer during quiet hours
+--- added per-app option for respecting quiet hours ignore rules during interactive mode
+- Advanced reboot: fixed Reboot not working on LineageOS based ROMs
+- Fixed status bar DnD system icon misbehavior on OP6
+- Call recording on OOS:
+--- adjusted for OP3T Beta 27 and 28
+--- adjusted for OP5T Beta 8
+--- adjusted for OP5 Beta 11
+- APK size increased due to inclusion of necessary Android Support libraries
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Russian translations (thanks to gaich)
+- Updated French translations (thanks to Choukajohn)
+
 Changelog 8.1.1 - 24/04/2018
 --------------------------------------
 - StatusBar: added option for removing rounded corner padding (8.1 only)
