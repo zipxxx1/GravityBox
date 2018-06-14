@@ -39,6 +39,7 @@ public class ModDialerOOS {
     }
 
     private static final CallRecordingInfo[] CALL_RECORDING_INFO = new CallRecordingInfo[] {
+            new CallRecordingInfo("com.android.incallui.oneplus.f", "Td"), /* OP3T Beta 29 */
             new CallRecordingInfo("com.android.incallui.oneplus.a", "bz"), /* OP5 Beta 11 */
             new CallRecordingInfo("com.android.incallui.oneplus.r", "Om"), /* OP3T Beta 28 */
             new CallRecordingInfo("com.android.incallui.oneplus.f", "SI"), /* OP5T Beta 8 */
