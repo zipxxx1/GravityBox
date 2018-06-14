@@ -2085,7 +2085,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     p.getTitle().toString()).toLowerCase(Locale.getDefault());
                 String summary = (p.getSummary() == null ? "" :
                     p.getSummary().toString()).toLowerCase(Locale.getDefault());
-                if (p.isEnabled() && (title.contains(mSearchQuery) || summary.contains(mSearchQuery))) {
+                if ((p.isEnabled() || (p instanceof PreferenceCategory)) && 
+                        (title.contains(mSearchQuery) || summary.contains(mSearchQuery))) {
                     matchCount++;
                 } else if (p instanceof PreferenceGroup && p.getIntent() == null) {
                     matchCount += filterPreferencesInternal((PreferenceGroup)p, prefGroup);
