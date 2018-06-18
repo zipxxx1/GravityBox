@@ -662,7 +662,7 @@
     <string name="hwkey_ls_torch_power_longpress">Güç tuşuna uzun basıldığında</string>
 
     <!-- QuickSettings management master switch -->
-    <string name="pref_qs_management_enable_summary">Hızlı Ayarlar yönetimini açar (yeniden başlatma gerektirir)</string>
+    <string name="pref_qs_management_enable_summary">Hızlı Ayarlar yönetimini açar/kapatır (yeniden başlatma gerektirir)</string>
 
     <!-- AppPickerPreference: shortcut support -->
     <string name="app_picker_applications">Uygulamalar</string>
@@ -1100,7 +1100,7 @@
     <string name="pref_screenrecord_use_stock_summary">Etkinleştirildiğinde, kayıt için stok dosyalar kullanılır. Alternatif dosyalar sorun çıkarırsa kullanın. Stok dosyaların ses kaydına ve 3 dakikadan fazla kayda izin vermediğini unutmayın.</string>
 
     <!-- Clock settings master switch -->
-    <string name="pref_sb_clock_masterswitch_summary">Durum çubuğu saat ayarlarını açar (yeniden başlatma gerektirir)</string>
+    <string name="pref_sb_clock_masterswitch_summary">Durum çubuğu saat ayarlarını açar/kapatır (yeniden başlatma gerektirir)</string>
 
     <!-- Clock: day of week size -->
     <string name="pref_sb_clock_dow_size_title">Haftanın günü boyutu</string>
