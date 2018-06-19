@@ -1,3 +1,21 @@
+Changelog 7.2.0 - 19/06/2018
+--------------------------------------
+- Settings: added search feature
+--- filters the list of all enabled preferences based on specified keyword
+--- maintains tree structure of filtered preferences for a user to better understand context
+--- matching preference groups will show all child preferences
+- Ultimate notification control:
+--- fixed crash during screen orientation change
+--- redesigned Search functionality in per-app list
+- UNC QuietHours:
+--- added phone ringer whitelist management:
+------ allows to manage list of contacts for which not to mute phone ringer during quiet hours
+--- added per-app option for respecting quiet hours ignore rules during interactive mode
+- APK size increased due to inclusion of necessary Android Support libraries
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 7.1.2 - 16/05/2018
 --------------------------------------
 - QuickSettings: added option for number of quick tiles in header
