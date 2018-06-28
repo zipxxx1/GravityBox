@@ -61,6 +61,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.telephony.TelephonyManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -110,6 +111,7 @@ public class ModLedControl {
     private static boolean mProximityWakeUpEnabled;
     private static boolean mScreenOnDueToActiveScreen;
     private static AudioManager mAudioManager;
+    private static TelephonyManager mTelephonyManager;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -260,6 +262,7 @@ public class ModLedControl {
                         param.args[5], param.args[8]);
                 Notification oldN = getNotificationFromRecord(oldRecord);
                 final String pkgName = (String) param.args[0];
+                final boolean userPresent = isUserPresent();
 
                 LedSettings ls;
                 if (n.extras.containsKey("gbUncPreviewNotification")) {
@@ -271,18 +274,18 @@ public class ModLedControl {
                     if (!ls.getEnabled()) {
                         // use default settings in case they are active
                         ls = LedSettings.deserialize(mPrefs.getStringSet("default", null));
-                        if (!ls.getEnabled() && !mQuietHours.quietHoursActive(ls, n, mUserPresent)) {
+                        if (!ls.getEnabled() && !mQuietHours.quietHoursActive(ls, n, userPresent)) {
                             return;
                         }
                     }
                     if (DEBUG) log(pkgName + ": " + ls.toString());
                 }
 
-                final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
+                final boolean qhActive = mQuietHours.quietHoursActive(ls, n, userPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
                 final boolean qhActiveIncludingVibe = qhActive && (
                         (mQuietHours.mode != QuietHours.Mode.WEAR && mQuietHours.muteVibe) ||
-                        (mQuietHours.mode == QuietHours.Mode.WEAR && mUserPresent));
+                        (mQuietHours.mode == QuietHours.Mode.WEAR && userPresent));
                 final boolean qhActiveIncludingActiveScreen = qhActive &&
                         !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
 
@@ -412,6 +415,21 @@ public class ModLedControl {
             }
         }
     };
+
+    private static boolean isUserPresent() {
+        try {
+            if (mTelephonyManager == null) {
+                mTelephonyManager = (TelephonyManager)
+                    mContext.getSystemService(Context.TELEPHONY_SERVICE);
+            }
+            final int callState = mTelephonyManager.getCallState();
+            if (DEBUG) log("isUserPresent: call state: " + callState);
+            return (mUserPresent || callState == TelephonyManager.CALL_STATE_OFFHOOK);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+            return mUserPresent;
+        }
+    }
 
     private static Object getOldNotificationRecord(Object pkg, Object tag, Object id, Object userId) {
         Object oldNotifRecord = null;
