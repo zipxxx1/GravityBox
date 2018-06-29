@@ -1205,10 +1205,6 @@
 
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">充电颜色</string>
-    
-    <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">本周</string>
-    <string name="pref_lc_qh_cat_weekend_title">周末</string>
 
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">强制英语</string>
@@ -1404,9 +1400,6 @@
     <string name="charging_led_emulated">仿真</string>
     <string name="charging_led_constant">不变(需要LED驱动支持)</string>
     <string name="charging_led_disabled">禁用</string>
-
-    <!-- Quiet hours week days -->
-    <string name="pref_lc_qh_weekdays_title">设置工作日</string>
 
     <!-- QuietHours: mute system sounds -->
     <string name="pref_lc_qh_mute_system_sounds_title">静音系统声音</string>
