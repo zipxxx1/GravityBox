@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,12 +16,7 @@
 package com.ceco.marshmallow.gravitybox.ledcontrol;
 
 import java.io.File;
-import java.text.DateFormatSymbols;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
-import java.util.TreeSet;
 
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.R;
@@ -43,10 +38,6 @@ public class QuietHoursActivity extends Activity {
 
     public static final String PREF_KEY_QH_LOCKED = "pref_lc_qh_locked";
     public static final String PREF_KEY_QH_ENABLED = "pref_lc_qh_enabled";
-    public static final String PREF_KEY_QH_START = "pref_lc_qh_start2";
-    public static final String PREF_KEY_QH_END = "pref_lc_qh_end2";
-    public static final String PREF_KEY_QH_START_ALT = "pref_lc_qh_start_alt2";
-    public static final String PREF_KEY_QH_END_ALT = "pref_lc_qh_end_alt2";
     public static final String PREF_KEY_QH_MUTE_LED = "pref_lc_qh_mute_led";
     public static final String PREF_KEY_QH_MUTE_VIBE = "pref_lc_qh_mute_vibe";
     public static final String PREF_KEY_QH_MUTE_SYSTEM_SOUNDS = "pref_lc_qh_mute_system_sounds";
@@ -54,8 +45,8 @@ public class QuietHoursActivity extends Activity {
     public static final String PREF_KEY_QH_STATUSBAR_ICON = "pref_lc_qh_statusbar_icon";
     public static final String PREF_KEY_QH_MODE = "pref_lc_qh_mode";
     public static final String PREF_KEY_QH_INTERACTIVE = "pref_lc_qh_interactive";
-    public static final String PREF_KEY_QH_WEEKDAYS = "pref_lc_qh_weekdays";
     public static final String PREF_KEY_MUTE_SYSTEM_VIBE = "pref_lc_qh_mute_system_vibe";
+    public static final String PREF_KEY_QH_RANGES = "pref_lc_qh_ranges";
 
     public static final String ACTION_QUIET_HOURS_CHANGED = 
             "gravitybox.intent.action.QUIET_HOURS_CHANGED";
@@ -134,9 +125,9 @@ public class QuietHoursActivity extends Activity {
     public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
         private SharedPreferences mPrefs;
-        private MultiSelectListPreference mPrefWeekDays;
         private MultiSelectListPreference mPrefSystemSounds;
         private Preference mPrefRingerWhitelist;
+        private Preference mPrefRanges;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -147,44 +138,17 @@ public class QuietHoursActivity extends Activity {
             mPrefs = getPreferenceManager().getSharedPreferences();
 
             addPreferencesFromResource(R.xml.led_control_quiet_hours_settings);
-            setupWeekDaysPref();
             mPrefSystemSounds = (MultiSelectListPreference) findPreference(PREF_KEY_QH_MUTE_SYSTEM_SOUNDS);
 
             mPrefRingerWhitelist = findPreference(PREF_KEY_QH_RINGER_WHITELIST);
-        }
-
-        private void setupWeekDaysPref() {
-            mPrefWeekDays = (MultiSelectListPreference) findPreference(PREF_KEY_QH_WEEKDAYS); 
-            String[] days = new DateFormatSymbols(Locale.getDefault()).getWeekdays();
-            CharSequence[] entries = new CharSequence[7];
-            CharSequence[] entryValues = new CharSequence[7];
-            for (int i=1; i<=7; i++) {
-                entries[i-1] = days[i];
-                entryValues[i-1] = String.valueOf(i);
-            }
-            mPrefWeekDays.setEntries(entries);
-            mPrefWeekDays.setEntryValues(entryValues);
-            if (mPrefs.getStringSet(PREF_KEY_QH_WEEKDAYS, null) == null) {
-                Set<String> value = new HashSet<String>(Arrays.asList("2","3","4","5","6"));
-                mPrefs.edit().putStringSet(PREF_KEY_QH_WEEKDAYS, value).commit();
-                mPrefWeekDays.setValues(value);
-            }
+            mPrefRanges = findPreference(PREF_KEY_QH_RANGES);
         }
 
         private void updateSummaries() {
-            String[] days = new DateFormatSymbols(Locale.getDefault()).getWeekdays();
-            Set<String> values = new TreeSet<String>(mPrefWeekDays.getValues());
-            String summary = "";
-            for (String wday : values) {
-                if (!summary.isEmpty()) summary += ", ";
-                summary += days[Integer.valueOf(wday)];
-            }
-            mPrefWeekDays.setSummary(summary);
-
             CharSequence[] entries = mPrefSystemSounds.getEntries();
             CharSequence[] entryValues = mPrefSystemSounds.getEntryValues();
-            values = mPrefSystemSounds.getValues();
-            summary = "";
+            Set<String> values = mPrefSystemSounds.getValues();
+            String summary = "";
             if (values != null) {
                 for (String value : values) {
                     for (int i=0; i<entryValues.length; i++) {
@@ -229,6 +193,9 @@ public class QuietHoursActivity extends Activity {
                 Intent intent = new Intent(getActivity(), RingerWhitelistActivity.class);
                 getActivity().startActivity(intent);
                 return true;
+            } else if (preference == mPrefRanges) {
+                Intent intent = new Intent(getActivity(), QuietHoursRangeListActivity.class);
+                getActivity().startActivity(intent);
             }
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
