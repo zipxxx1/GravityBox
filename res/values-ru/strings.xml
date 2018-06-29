@@ -1204,10 +1204,6 @@
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Цвет при зарядке</string>
 
-    <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">Будни</string>
-    <string name="pref_lc_qh_cat_weekend_title">Выходные</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Английский принудительно</string>
 
@@ -1400,9 +1396,6 @@
     <string name="charging_led_emulated">Эмуляция</string>
     <string name="charging_led_constant">Постоянно (необходима поддержка драйвера светодиода)</string>
     <string name="charging_led_disabled">Отключено</string>
-
-    <!-- Quiet hours week days -->
-    <string name="pref_lc_qh_weekdays_title">Установка будней</string>
 
     <!-- QuietHours: mute system sounds -->
     <string name="pref_lc_qh_mute_system_sounds_title">Отключение системных звуков</string>
