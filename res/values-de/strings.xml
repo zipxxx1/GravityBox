@@ -1259,10 +1259,6 @@
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Aufladefarbe</string>
 
-    <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">Werktage</string>
-    <string name="pref_lc_qh_cat_weekend_title">Wochenende</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Englisch erzwingen</string>
 
@@ -1480,9 +1476,6 @@
     <string name="pref_heads_up_snooze_timer_summary">Timer automatisch starten wenn Heads Up Schlummertaste angetippt wird. 
        Schlummertaste gedrückt halten um Timer-Dialog zu öffnen.</string>
     <string name="headsup_snooze_timer_set">Standarddauer für Heads Up Schlummern auf %s gesetzt</string>
-
-    <!-- Quiet hours week days -->
-    <string name="pref_lc_qh_weekdays_title">Wochentage einstellen</string>
 
     <!-- QuietHours: mute system sounds -->
     <string name="pref_lc_qh_mute_system_sounds_title">Systemtöne stumm schalten</string>

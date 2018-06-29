@@ -1263,10 +1263,6 @@
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Colore in carica</string>
 
-    <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">Giorni lavorativi</string>
-    <string name="pref_lc_qh_cat_weekend_title">Giorni festivi</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Imposta Gravitybox in inglese</string>
 
@@ -1479,9 +1475,6 @@
     <string name="pref_heads_up_snooze_timer_summary">La notifica a comparsa viene nascosta automaticamente se si tocca una sola volta l\'apposita icona. 
         Per decidere per quanto nascondere una notifca a comparsa, tenere premuto sull\'apposita icona.</string>
     <string name="headsup_snooze_timer_set">Le notifiche a comparsa saranno nascoste di default per %s</string>
-
-    <!-- Quiet hours week days -->
-    <string name="pref_lc_qh_weekdays_title">Imposta giorni della settimana</string>
 
     <!-- QuietHours: mute system sounds -->
     <string name="pref_lc_qh_mute_system_sounds_title">Silenzia suoni di sistema</string>

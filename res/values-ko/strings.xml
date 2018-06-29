@@ -1020,9 +1020,6 @@
 
     <string name="battery_percent_text_charging_color_title">충전 중 LED</string>
 
-    <string name="pref_lc_qh_cat_weekdays_title">주일</string>
-    <string name="pref_lc_qh_cat_weekend_title">주말</string>
-
     <string name="pref_force_english_locale_title">강제로 영어 사용 (English)</string>
 
     <string name="pref_lc_qh_ignore_title">무음 모드 무시</string>
@@ -1192,8 +1189,6 @@
     <string name="pref_heads_up_snooze_timer_summary">헤드업 알림 창의 스누즈 아이콘을 누르면 타이머가 자동으로 설정됩니다. 
         스누즈 아이콘을 길게 눌러서 타이머를 수동으로 설정해도 됩니다.</string>
     <string name="headsup_snooze_timer_set">%s 앱에 대한 기본 스누즈 타이머</string>
-
-    <string name="pref_lc_qh_weekdays_title">주일 설정</string>
 
     <string name="pref_lc_qh_mute_system_sounds_title">시스템 소리 음소거</string>
     <string name="system_sound_dialpad">다이얼패드 효과음</string>

@@ -1236,10 +1236,6 @@
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Kolor przy ładowaniu</string>
 
-    <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">Dni tygodnia</string>
-    <string name="pref_lc_qh_cat_weekend_title">Weekend</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Wymuś język angielski</string>
 
@@ -1452,9 +1448,6 @@
     <string name="pref_heads_up_snooze_timer_summary">Czas drzemki, który zostanie ustawiony automatycznie po kliknięciu ikony heads up drzemki.
         Długie naciśnięcie ikony drzemki otwiera okno dialogowe ustawień licznika czasu.</string>
     <string name="headsup_snooze_timer_set">Domyślny czas drzemki ustawiony na %s</string>
-
-    <!-- Quiet hours week days -->
-    <string name="pref_lc_qh_weekdays_title">Ustaw dni tygodnia</string>
 
     <!-- QuietHours: mute system sounds -->
     <string name="pref_lc_qh_mute_system_sounds_title">Wycisz dźwięki systemowe</string>

@@ -1256,10 +1256,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">رنگ ال اي دي در زمان شارژ</string>
 
-    <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">روزهاي هفته</string>
-    <string name="pref_lc_qh_cat_weekend_title">اخر هفته</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">مکان انگليسي نيرو</string>
 
@@ -1478,9 +1474,6 @@ Coded by rovo89@XDA.Touch to visit official thread.</string>
     <string name="pref_heads_up_snooze_timer_title">تايمر چرت زدن پيش فرض</string>
     <string name="pref_heads_up_snooze_timer_summary">تايمر بطور خودکار بعد از کليک روي ايکون چرت زدن تنظيم ميشود. روي ايکون چرت زدن براي تنظيمات لمس طولاني کنيد</string>
     <string name="headsup_snooze_timer_set">%s تنظيم تايمر چرت زدن بطور پيشفرض براي</string>
-
-    <!-- Quiet hours week days -->
-    <string name="pref_lc_qh_weekdays_title">تنظيم روزهاي هفته</string>
 
     <!-- QuietHours: mute system sounds -->
     <string name="pref_lc_qh_mute_system_sounds_title">صداهاي سيستم حالت بيصدا</string>

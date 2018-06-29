@@ -133,6 +133,17 @@
         </activity>
 
         <activity
+            android:name="com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursRangeListActivity"
+            android:label="@string/lc_qh_ranges_list_label"
+            android:theme="@style/AppCompatTheme" >
+        </activity>
+
+        <activity
+            android:name="com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursRangeActivity"
+            android:label="@string/lc_qh_ranges_detail_label">
+        </activity>
+
+        <activity
             android:name="com.ceco.lollipop.gravitybox.UnlockActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false"

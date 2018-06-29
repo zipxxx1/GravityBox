@@ -1269,10 +1269,6 @@
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Warna ketika cas</string>
 
-    <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">Hari biasa</string>
-    <string name="pref_lc_qh_cat_weekend_title">Hari minggu</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Paksa bahasa English</string>
 
@@ -1492,9 +1488,6 @@
     <string name="pref_heads_up_snooze_timer_summary">Jangka masa akan diset apabila ikon di klik. 
         Tekan lama untuk paparkan dialog.</string>
     <string name="headsup_snooze_timer_set">Tetapan jangka masa heads up asal diset untuk %s</string>
-
-    <!-- Quiet hours week days -->
-    <string name="pref_lc_qh_weekdays_title">Set hari biasa</string>
 
     <!-- QuietHours: mute system sounds -->
     <string name="pref_lc_qh_mute_system_sounds_title">Matikan bunyi sistem</string>

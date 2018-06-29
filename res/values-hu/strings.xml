@@ -1262,10 +1262,6 @@
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Töltés szín</string>
 
-    <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">Hétköznapok</string>
-    <string name="pref_lc_qh_cat_weekend_title">Hétvége</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Angol lokalizáció kényszerítése</string>
 
@@ -1486,9 +1482,6 @@
     <string name="pref_heads_up_snooze_timer_title">Alapértelmezett szundi időzítő</string>
     <string name="pref_heads_up_snooze_timer_summary">Az időzítő automatikusan beállításra kerül a lebegő felugró ablak szundi gombjára történő kattintással. Hosszú érintéssel a gombra kattintva az egyéni időzítő panel kerül megnyitásra.</string>
     <string name="headsup_snooze_timer_set">Lebegő felugró ablak szundi időzítő beállítva %s-ra</string>
-
-    <!-- Quiet hours week days -->
-    <string name="pref_lc_qh_weekdays_title">Hétköznapok beállítása (munkanapok)</string>
 
     <!-- QuietHours: mute system sounds -->
     <string name="pref_lc_qh_mute_system_sounds_title">Rendszerhangok némítása</string>
