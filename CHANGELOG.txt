@@ -1,3 +1,27 @@
+Changelog 6.5.1 - 09/07/2018
+--------------------------------------
+- Settings: added search feature
+--- filters the list of all enabled preferences based on specified keyword
+--- maintains tree structure of filtered preferences for a user to better understand context
+--- matching preference groups will show all child preferences
+- Ultimate notification control:
+--- fixed crash during screen orientation change
+--- redesigned Search functionality in per-app list
+- QuietHours:
+--- added phone ringer whitelist management:
+------ allows to manage list of contacts for which not to mute phone ringer during quiet hours
+--- added support for multiple time ranges:
+------ allows to set multiple time ranges for automatic quiet hours together with days which they apply to
+------ change requires setting up new time ranges; as the previous ones are not preserved due to design changes
+- QuietHours Interactive Mode:
+--- treat session as interactive when device is locked during phone call
+--- added per-app option for respecting quiet hours ignore rules during interactive mode
+- APK size increased due to inclusion of necessary Android Support libraries
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Russian translations (thanks to gaich)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 6.5.0 - 27/04/2018
 --------------------------------------
 - Lockscreen shortcuts:
