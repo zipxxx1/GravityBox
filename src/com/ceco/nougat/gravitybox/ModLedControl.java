@@ -101,6 +101,7 @@ public class ModLedControl {
     private static Integer mDefaultNotificationLedOn;
     private static Integer mDefaultNotificationLedOff;
     private static TelephonyManager mTelephonyManager;
+    private static boolean mActiveScreenEnabled;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -393,7 +394,8 @@ public class ModLedControl {
                                 ls.getHeadsUpTimeout());
                     }
                     // active screen mode
-                    if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
+                    if (mActiveScreenEnabled &&
+                            ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
                             !(ls.getActiveScreenIgnoreUpdate() && oldN != null) &&
                             n.priority > Notification.PRIORITY_MIN &&
                             ls.getVisibilityLs() != VisibilityLs.CLEARABLE &&
@@ -556,7 +558,8 @@ public class ModLedControl {
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
                 Notification n = (Notification) XposedHelpers.callMethod(param.args[0], "getNotification");
-                if (!n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN) ||
+                if (!mActiveScreenEnabled ||
+                        !n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN) ||
                         !n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) ||
                         isUserPresent()) {
                     n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN);
@@ -664,16 +667,16 @@ public class ModLedControl {
 
     private static void updateActiveScreenFeature() {
         try {
-            final boolean enable = !mUncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
+            mActiveScreenEnabled = !mUncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
                     mUncPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false); 
-            if (enable && mSm == null) {
+            if (mActiveScreenEnabled && mSm == null) {
                 mSm = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
                 mProxSensor = mSm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-            } else if (!enable) {
+            } else if (!mActiveScreenEnabled) {
                 mProxSensor = null;
                 mSm = null;
             }
-            if (DEBUG) log("Active screen feature: " + enable);
+            if (DEBUG) log("Active screen feature: " + mActiveScreenEnabled);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
