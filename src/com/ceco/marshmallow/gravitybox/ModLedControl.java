@@ -101,6 +101,7 @@ public class ModLedControl {
     private static Integer mDefaultNotificationLedOn;
     private static Integer mDefaultNotificationLedOff;
     private static TelephonyManager mTelephonyManager;
+    private static boolean mActiveScreenEnabled;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -397,7 +398,8 @@ public class ModLedControl {
                                 ls.getHeadsUpTimeout());
                     }
                     // active screen mode
-                    if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
+                    if (mActiveScreenEnabled &&
+                            ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
                             !(ls.getActiveScreenIgnoreUpdate() && oldN != null) &&
                             n.priority > Notification.PRIORITY_MIN &&
                             ls.getVisibilityLs() != VisibilityLs.CLEARABLE &&
@@ -561,7 +563,8 @@ public class ModLedControl {
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
                 Notification n = (Notification) XposedHelpers.callMethod(param.args[0], "getNotification");
-                if (!n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN) ||
+                if (!mActiveScreenEnabled ||
+                        !n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN) ||
                         !n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) ||
                         isUserPresent()) {
                     n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN);
@@ -668,8 +671,9 @@ public class ModLedControl {
     }
 
     private static void toggleActiveScreenFeature(boolean enable) {
+        mActiveScreenEnabled = enable;
         try {
-            if (enable && mContext != null) {
+            if (mActiveScreenEnabled && mContext != null) {
                 mSm = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
                 mProxSensor = mSm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
             } else {
