@@ -16,8 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ceco.nougat.gravitybox"
-    android:versionCode="721"
-    android:versionName="7.2.1" >
+    android:versionCode="722"
+    android:versionName="7.2.2" >
 
     <uses-sdk
         android:minSdkVersion="24"
