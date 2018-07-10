@@ -1,3 +1,27 @@
+Changelog 5.5.2 - 10/07/2018
+--------------------------------------
+- Settings: added search feature
+--- filters the list of all enabled preferences based on specified keyword
+--- maintains tree structure of filtered preferences for a user to better understand context
+--- matching preference groups will show all child preferences
+- Ultimate notification control:
+--- fixed crash during screen orientation change
+--- redesigned Search functionality in per-app list
+- QuietHours:
+--- added phone ringer whitelist management:
+------ allows to manage list of contacts for which not to mute phone ringer during quiet hours
+------ requires permission for reading contacts
+--- added support for multiple time ranges:
+------ allows to set multiple time ranges for automatic quiet hours together with days which they apply to
+------ change requires setting up new time ranges; as the previous ones are not preserved due to design changes
+- QuietHours Interactive Mode:
+--- treat session as interactive when device is locked during phone call
+--- added per-app option for respecting quiet hours ignore rules during interactive mode
+- APK size increased due to inclusion of necessary Android Support libraries
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 5.5.1 - 21/05/2018
 --------------------------------------
 - GravityBox Settings: fixed crash on WiFi only devices
