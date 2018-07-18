@@ -1,3 +1,11 @@
+Changelog 6.5.3 - 18/07/2018
+--------------------------------------
+- Image picking/cropping: fixed compatibility issues with various gallery/photo apps
+
+Changelog 6.5.2 - 10/07/2018
+--------------------------------------
+- fixed screen turning on despite Active Screen feature disabled
+
 Changelog 6.5.1 - 09/07/2018
 --------------------------------------
 - Settings: added search feature
