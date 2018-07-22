@@ -875,11 +875,11 @@ public class ModStatusBar {
 
             // Expanded notifications
             try {
-                XposedHelpers.findAndHookMethod(expandableNotifRowClass, "isUserExpanded", new XC_MethodHook() {
+                XposedHelpers.findAndHookMethod(expandableNotifRowClass, "setSystemExpanded", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if (mNotifExpandAll) {
-                            param.setResult(true);
+                            param.args[0] = true;
                         }
                     }
                 });
