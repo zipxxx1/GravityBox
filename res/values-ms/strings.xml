@@ -16,8 +16,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-	<string name="app_name" translatable="false">GravityBox [O]</string>
-
     <string name="battery_style_title">Jenis penunjuk bateri</string>	
     <string name="battery_style_stock">Penunjuk asal</string>
     <string name="battery_style_circle">Jenis bulat</string>
@@ -91,7 +89,6 @@
     <string name="qs_tile_data_usage">Penggunaan data</string>
     <string name="qs_tile_sync">Penyegerakan</string>
     <string name="qs_tile_wifi_ap">Kongsi data</string>
-    <string name="qs_tile_wifi_ap">Hotspot</string>
     <string name="qs_tile_torch_gb">Lampu picit (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Tidur</string>
