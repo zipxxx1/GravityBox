@@ -31,4 +31,31 @@
         android:defaultValue="360"
         android:persistent="false" />
 
+    <CheckBoxPreference
+        android:key="pref_lc_qh_range_mute_led"
+        android:title="@string/pref_lc_qh_mute_led_title"
+        android:defaultValue="false"
+        android:persistent="false" />
+
+    <CheckBoxPreference
+        android:key="pref_lc_qh_range_mute_vibe"
+        android:title="@string/pref_lc_qh_mute_vibe_title"
+        android:summary="@string/pref_lc_qh_mute_vibe_summary"
+        android:defaultValue="true"
+        android:persistent="false" />
+
+    <CheckBoxPreference
+        android:key="pref_lc_qh_range_mute_system_vibe"
+        android:title="@string/pref_lc_qh_mute_system_vibe_title"
+        android:summary="@string/pref_lc_qh_mute_system_vibe_summary"
+        android:defaultValue="false"
+        android:persistent="false" />
+
+    <MultiSelectListPreference 
+        android:key="pref_lc_qh_range_mute_system_sounds"
+        android:title="@string/pref_lc_qh_mute_system_sounds_title"
+        android:entries="@array/system_sound_entries"
+        android:entryValues="@array/system_sound_values"
+        android:defaultValue="@array/empty_array" />
+
 </PreferenceScreen>
