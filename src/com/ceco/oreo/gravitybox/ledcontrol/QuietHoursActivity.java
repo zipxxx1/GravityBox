@@ -67,7 +67,6 @@ public class QuietHoursActivity extends GravityBoxActivity {
     public static final String EXTRA_QH_INTERACTIVE = "qhInteractive";
     public static final String EXTRA_QH_MUTE_SYSTEM_VIBE = "qhMuteSystemVibe";
     public static final String EXTRA_QH_RINGER_WHITELIST = "qhRingerWhitelist";
-    public static final String EXTRA_QH_RANGES = "qhRanges";
 
     protected static void broadcastSettings(Context ctx, SharedPreferences prefs) {
         Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
@@ -83,8 +82,9 @@ public class QuietHoursActivity extends GravityBoxActivity {
         intent.putExtra(EXTRA_QH_MUTE_SYSTEM_VIBE, prefs.getBoolean(QuietHoursActivity.PREF_KEY_MUTE_SYSTEM_VIBE, false));
         intent.putStringArrayListExtra(EXTRA_QH_RINGER_WHITELIST, new ArrayList<String>(
                 prefs.getStringSet(PREF_KEY_QH_RINGER_WHITELIST, new HashSet<String>())));
-        intent.putStringArrayListExtra(EXTRA_QH_RANGES, new ArrayList<String>(prefs.getStringSet(
-                PREF_KEY_QH_RANGES, new HashSet<String>())));
+        for (String rangeId : QuietHours.Range.getIdList(prefs)) {
+            intent.putStringArrayListExtra(rangeId, new ArrayList<>(prefs.getStringSet(rangeId, null)));
+        }
         ctx.sendBroadcast(intent);
     }
 
