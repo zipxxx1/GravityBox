@@ -17,6 +17,7 @@ package com.ceco.lollipop.gravitybox.ledcontrol;
 import java.io.File;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -29,6 +30,7 @@ import com.ceco.lollipop.gravitybox.preference.TimePreference;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -41,6 +43,10 @@ public class QuietHoursRangeActivity extends Activity {
     public static final String PREF_QH_RANGE_DAYS = "pref_lc_qh_range_days";
     public static final String PREF_QH_RANGE_START = "pref_lc_qh_range_start";
     public static final String PREF_QH_RANGE_END = "pref_lc_qh_range_end";
+    public static final String PREF_QH_RANGE_MUTE_LED = "pref_lc_qh_range_mute_led";
+    public static final String PREF_QH_RANGE_MUTE_VIBE = "pref_lc_qh_range_mute_vibe";
+    public static final String PREF_QH_RANGE_MUTE_SYSTEM_VIBE = "pref_lc_qh_range_mute_system_vibe";
+    public static final String PREF_QH_RANGE_MUTE_SYSTEM_SOUNDS = "pref_lc_qh_range_mute_system_sounds";
     public static final String EXTRA_QH_RANGE = "qhRange";
 
     private Button mBtnCancel;
@@ -97,6 +103,10 @@ public class QuietHoursRangeActivity extends Activity {
         private MultiSelectListPreference mPrefDays;
         private TimePreference mPrefStartTime;
         private TimePreference mPrefEndTime;
+        private CheckBoxPreference mPrefMuteLed;
+        private CheckBoxPreference mPrefMuteVibe;
+        private CheckBoxPreference mPrefMuteSystemVibe;
+        private MultiSelectListPreference mPrefMuteSystemSounds;
         private QuietHours.Range mRange;
 
         public PrefsFragment() { }
@@ -123,6 +133,18 @@ public class QuietHoursRangeActivity extends Activity {
 
             mPrefEndTime = (TimePreference) findPreference(PREF_QH_RANGE_END);
             mPrefEndTime.setOnPreferenceChangeListener(this);
+
+            mPrefMuteLed = (CheckBoxPreference) findPreference(PREF_QH_RANGE_MUTE_LED);
+            mPrefMuteLed.setOnPreferenceChangeListener(this);
+
+            mPrefMuteVibe = (CheckBoxPreference) findPreference(PREF_QH_RANGE_MUTE_VIBE);
+            mPrefMuteVibe.setOnPreferenceChangeListener(this);
+
+            mPrefMuteSystemVibe = (CheckBoxPreference) findPreference(PREF_QH_RANGE_MUTE_SYSTEM_VIBE);
+            mPrefMuteSystemVibe.setOnPreferenceChangeListener(this);
+
+            mPrefMuteSystemSounds = (MultiSelectListPreference) findPreference(PREF_QH_RANGE_MUTE_SYSTEM_SOUNDS);
+            mPrefMuteSystemSounds.setOnPreferenceChangeListener(this);
         }
 
         void setRange(QuietHours.Range range) {
@@ -130,6 +152,10 @@ public class QuietHoursRangeActivity extends Activity {
             mPrefDays.setValues(mRange.days);
             mPrefStartTime.setValue(mRange.startTime);
             mPrefEndTime.setValue(mRange.endTime);
+            mPrefMuteLed.setChecked(mRange.muteLED);
+            mPrefMuteVibe.setChecked(mRange.muteVibe || mRange.muteSystemVibe);
+            mPrefMuteSystemVibe.setChecked(mRange.muteSystemVibe);
+            mPrefMuteSystemSounds.setValues(mRange.muteSystemSounds);
             updateSummaries();
         }
 
@@ -151,6 +177,22 @@ public class QuietHoursRangeActivity extends Activity {
 
             mPrefEndTime.setSummarySuffix(mRange.endsNextDay() ?
                     getString(R.string.next_day) : null);
+
+            CharSequence[] entries = mPrefMuteSystemSounds.getEntries();
+            CharSequence[] entryValues = mPrefMuteSystemSounds.getEntryValues();
+            summary = "";
+            for (String value : mRange.muteSystemSounds) {
+                for (int i=0; i<entryValues.length; i++) {
+                    if (entryValues[i].equals(value)) {
+                        if (!summary.isEmpty()) summary += ", ";
+                        summary += entries[i];
+                        break;
+                    }
+                }
+            }
+            mPrefMuteSystemSounds.setSummary(summary);
+
+            mPrefMuteVibe.setEnabled(!mRange.muteSystemVibe);
         }
 
         @SuppressWarnings("unchecked")
@@ -162,6 +204,18 @@ public class QuietHoursRangeActivity extends Activity {
                 mRange.startTime = (int) newValue;
             } else if (preference == mPrefEndTime) {
                 mRange.endTime = (int) newValue;
+            } else if (preference == mPrefMuteLed) {
+                mRange.muteLED = (boolean) newValue;
+            } else if (preference == mPrefMuteVibe) {
+                mRange.muteVibe = (boolean) newValue;
+            } else if (preference == mPrefMuteSystemVibe) {
+                mRange.muteSystemVibe = (boolean) newValue;
+                if (mRange.muteSystemVibe) {
+                    mRange.muteVibe = true;
+                    mPrefMuteVibe.setChecked(true);
+                }
+            } else if (preference == mPrefMuteSystemSounds) {
+                mRange.muteSystemSounds = new HashSet<String>((Collection<? extends String>) newValue);
             }
             updateSummaries();
             return true;

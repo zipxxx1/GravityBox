@@ -88,6 +88,10 @@ public class QuietHoursRangeListActivity extends GravityBoxAppCompatActivity
                 item.getRange().days = range.days;
                 item.getRange().startTime = range.startTime;
                 item.getRange().endTime = range.endTime;
+                item.getRange().muteLED = range.muteLED;
+                item.getRange().muteVibe = range.muteVibe;
+                item.getRange().muteSystemVibe = range.muteSystemVibe;
+                item.getRange().muteSystemSounds = range.muteSystemSounds;
                 isNew = false;
                 break;
             }
