@@ -18,7 +18,7 @@
 
     <string name="app_name">GravityBox [LP]</string>
 
-    <string name="battery_style_title">Battery indicator style</string>	
+    <string name="battery_style_title">Battery indicator style</string>
     <string name="battery_style_stock">Stock battery indicator</string>
     <string name="battery_style_circle">Circle battery</string>
     <string name="battery_style_circle_percent">Circle battery with percentage</string>
@@ -934,7 +934,7 @@
     <string name="pref_pulse_notification_delay_title">Pulse notification delay</string>
     <string name="pref_pulse_notification_delay_summary">Requires reboot</string>
 
-    <!-- Powe menu: disable on lockscreen -->
+    <!-- Power menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Disable power menu on lockscreen</string>
 
     <!-- Extended force overflow menu button option -->
@@ -1904,7 +1904,7 @@
 
     <!-- Navbar: Auto-fade keys -->
     <string name="pref_navbar_autofade_keys_title">Auto-fade keys</string>
-    <string name="pref_navbar_autofade_keys_summary">Fades keys automatically after timeout expires. Seto to 0 to disable.</string>
+    <string name="pref_navbar_autofade_keys_summary">Fades keys automatically after timeout expires. Set to 0 to disable.</string>
     <string name="pref_navbar_autofade_show_keys_title">Show keys on</string>
     <string name="autofade_show_keys_navbar">Navigation bar touch</string>
     <string name="autofade_show_keys_screen">Screen touch</string>
