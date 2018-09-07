@@ -47,6 +47,10 @@ public class QuietHours {
         public Set<String> days;
         public int startTime;
         public int endTime;
+        public boolean muteLED;
+        public boolean muteVibe;
+        public boolean muteSystemVibe;
+        public Set<String> muteSystemSounds;
 
         private Range() { }
 
@@ -65,6 +69,14 @@ public class QuietHours {
                     r.startTime = Integer.valueOf(data[1]);
                 } else if (data[0].equals("endTime")) {
                     r.endTime = Integer.valueOf(data[1]);
+                } else if (data[0].equals("muteLED")) {
+                    r.muteLED = Boolean.valueOf(data[1]);
+                } else if (data[0].equals("muteVibe")) {
+                    r.muteVibe = Boolean.valueOf(data[1]);
+                } else if (data[0].equals("muteSystemVibe")) {
+                    r.muteSystemVibe = Boolean.valueOf(data[1]);
+                } else if (data[0].equals("muteSystemSounds")) {
+                    r.muteSystemSounds = new HashSet<String>(Arrays.asList(data[1].split(",")));
                 }
             }
             return r;
@@ -76,6 +88,10 @@ public class QuietHours {
             r.days = new HashSet<String>(Arrays.asList("1","2","3","4","5","6","7"));
             r.startTime = 1380;
             r.endTime = 360;
+            r.muteLED = false;
+            r.muteVibe = true;
+            r.muteSystemVibe = false;
+            r.muteSystemSounds = new HashSet<String>();
             return r;
         }
 
@@ -90,6 +106,15 @@ public class QuietHours {
             dataSet.add("days:" + buf);
             dataSet.add("startTime:" + String.valueOf(startTime));
             dataSet.add("endTime:" + String.valueOf(endTime));
+            dataSet.add("muteLED:" + String.valueOf(muteLED));
+            dataSet.add("muteVibe:" + String.valueOf(muteVibe));
+            dataSet.add("muteSystemVibe:" + String.valueOf(muteSystemVibe));
+            buf = "";
+            for (String ss : muteSystemSounds) {
+                if (!buf.isEmpty()) buf += ",";
+                buf += ss;
+            }
+            dataSet.add("muteSystemSounds:" + buf);
             return dataSet;
         }
 
@@ -114,13 +139,13 @@ public class QuietHours {
 
     public boolean uncLocked;
     public boolean enabled;
-    public boolean muteLED;
-    public boolean muteVibe;
-    public Set<String> muteSystemSounds;
+    private boolean muteLED;
+    private boolean muteVibe;
+    private Set<String> muteSystemSounds;
     public boolean showStatusbarIcon;
     public Mode mode;
     public boolean interactive;
-    public boolean muteSystemVibe;
+    private boolean muteSystemVibe;
     public Set<String> ringerWhitelist;
     private Set<Range> ranges;
 
@@ -182,7 +207,13 @@ public class QuietHours {
 
         if (mode != Mode.AUTO) {
             return (mode == Mode.ON || mode == Mode.WEAR);
+        } else {
+            return (getActiveRange() != null);
         }
+    }
+
+    public Range getActiveRange() {
+        if (uncLocked || !enabled || mode != Mode.AUTO) return null;
 
         Calendar c = new GregorianCalendar();
         c.setTimeInMillis(System.currentTimeMillis());
@@ -199,15 +230,51 @@ public class QuietHours {
                 active = range.days.contains(String.valueOf(curDay));
             }
             if (active && Utils.isTimeOfDayInRange(c.getTimeInMillis(), range.startTime, range.endTime)) {
-                return true;
+                return range;
             }
         }
 
-        return false;
+        return null;
+    }
+
+    public boolean shouldMuteLed() {
+        if (mode == Mode.AUTO) {
+            Range r = getActiveRange();
+            if (r != null) {
+                return r.muteLED;
+            }
+        }
+        return muteLED;
+     }
+
+    public boolean shouldMuteVibe() {
+        if (mode == Mode.AUTO) {
+            Range r = getActiveRange();
+            if (r != null) {
+                return r.muteVibe;
+            }
+        }
+        return muteVibe;
+    }
+
+    public boolean shouldMuteSystemVibe() {
+        if (mode == Mode.AUTO) {
+            Range r = getActiveRange();
+            if (r != null) {
+                return r.muteSystemVibe;
+            }
+        }
+        return muteSystemVibe;
     }
 
     public boolean isSystemSoundMuted(String systemSound) {
-        return (muteSystemSounds.contains(systemSound) && quietHoursActive());
+        if (mode == Mode.AUTO) {
+            Range r = getActiveRange();
+            if (r != null) {
+                return r.muteSystemSounds.contains(systemSound);
+            }
+        }
+        return muteSystemSounds.contains(systemSound) && quietHoursActive();
     }
 
     private List<CharSequence> getNotificationTexts(Notification notification) {
