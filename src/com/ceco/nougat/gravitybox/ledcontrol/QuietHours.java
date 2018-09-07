@@ -50,41 +50,61 @@ public class QuietHours {
 
         private Range() { }
 
-        public static Range parse(String value) {
-            if (value == null || value.isEmpty())
-                return createDefault();
+        public static Range parse(Set<String> dataSet) {
+            Range r = createDefault();
+            if (dataSet == null || dataSet.isEmpty())
+                return r;
 
-            String[] buf = value.split("\\|");
-            Range r = new Range();
-            r.id = buf[0];
-            r.days = new HashSet<String>(Arrays.asList(buf[1].split(",")));
-            r.startTime = Integer.valueOf(buf[2]);
-            r.endTime = Integer.valueOf(buf[3]);
+            for (String val : dataSet) {
+                String[] data = val.split(":", 2);
+                if (data[0].equals("id")) {
+                    r.id = data[1];
+                } else if (data[0].equals("days")) {
+                    r.days = new HashSet<String>(Arrays.asList(data[1].split(",")));
+                } else if (data[0].equals("startTime")) {
+                    r.startTime = Integer.valueOf(data[1]);
+                } else if (data[0].equals("endTime")) {
+                    r.endTime = Integer.valueOf(data[1]);
+                }
+            }
             return r;
         }
 
         public static Range createDefault() {
             Range r = new Range();
-            r.id = UUID.randomUUID().toString();
+            r.id = String.format("qhr-%s", UUID.randomUUID().toString());
             r.days = new HashSet<String>(Arrays.asList("1","2","3","4","5","6","7"));
             r.startTime = 1380;
             r.endTime = 360;
             return r;
         }
 
-        public String getValue() {
-            String buf = id + "|";
+        public Set<String> getValue() {
+            Set<String> dataSet = new HashSet<String>();
+            dataSet.add("id:" + id);
+            String buf = "";
             for (String day : days) {
-                if (!buf.endsWith("|")) buf += ",";
+                if (!buf.isEmpty()) buf += ",";
                 buf += day;
             }
-            buf += "|" + String.valueOf(startTime);
-            buf += "|" + String.valueOf(endTime);
-            return buf;
+            dataSet.add("days:" + buf);
+            dataSet.add("startTime:" + String.valueOf(startTime));
+            dataSet.add("endTime:" + String.valueOf(endTime));
+            return dataSet;
         }
 
         public boolean endsNextDay() {
             return (endTime < startTime);
+        }
+
+        public static ArrayList<String> getIdList(SharedPreferences prefs) {
+            ArrayList<String> list = new ArrayList<>();
+            for (String key : prefs.getAll().keySet()) {
+                if (key.startsWith("qhr-")) {
+                    list.add(key);
+                }
+            }
+            return list;
         }
     }
 
@@ -102,7 +122,7 @@ public class QuietHours {
     public boolean interactive;
     public boolean muteSystemVibe;
     public Set<String> ringerWhitelist;
-    private Set<String> ranges;
+    private Set<Range> ranges;
 
     public QuietHours(SharedPreferences prefs) {
         uncLocked = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false);
@@ -117,8 +137,12 @@ public class QuietHours {
         muteSystemVibe = prefs.getBoolean(QuietHoursActivity.PREF_KEY_MUTE_SYSTEM_VIBE, false);
         ringerWhitelist = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_RINGER_WHITELIST,
                 new HashSet<String>());
-        ranges = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_RANGES,
-                new HashSet<String>());
+        ranges = new HashSet<Range>();
+        for (String key : prefs.getAll().keySet()) {
+            if (key.startsWith("qhr-")) {
+                ranges.add(Range.parse(new HashSet<>(prefs.getStringSet(key, null))));
+            }
+        }
     }
 
     public boolean quietHoursActive(LedSettings ls, Notification n, boolean userPresent) {
@@ -166,8 +190,7 @@ public class QuietHours {
         int curDay = c.get(Calendar.DAY_OF_WEEK);
         int prevDay = (curDay == 1 ? 7 : curDay - 1);
 
-        for (String rangeValue : ranges) {
-            Range range = Range.parse(rangeValue);
+        for (Range range : ranges) {
             boolean active = false;
             if (range.endsNextDay()) {
                 active = (curMin >= range.startTime && range.days.contains(String.valueOf(curDay)) ||

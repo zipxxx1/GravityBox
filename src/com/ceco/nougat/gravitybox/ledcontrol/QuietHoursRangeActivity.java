@@ -15,6 +15,8 @@
 package com.ceco.nougat.gravitybox.ledcontrol;
 
 import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
@@ -48,10 +50,10 @@ public class QuietHoursRangeActivity extends GravityBoxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String rangeValue = null;
+        Set<String> rangeValue = null;
         final Intent intent = getIntent();
-        if (intent != null) {
-            rangeValue = intent.getStringExtra(EXTRA_QH_RANGE);
+        if (intent != null && intent.hasExtra(EXTRA_QH_RANGE)) {
+            rangeValue = new HashSet<>(intent.getStringArrayListExtra(EXTRA_QH_RANGE));
         }
 
         setContentView(R.layout.quiet_hours_range_activity);
@@ -70,7 +72,8 @@ public class QuietHoursRangeActivity extends GravityBoxActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra(EXTRA_QH_RANGE, getFragment().getRange().getValue());
+                intent.putStringArrayListExtra(EXTRA_QH_RANGE, new ArrayList<String>(
+                        getFragment().getRange().getValue()));
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }

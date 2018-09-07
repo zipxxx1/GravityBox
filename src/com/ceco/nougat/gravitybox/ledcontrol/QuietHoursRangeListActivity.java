@@ -64,10 +64,9 @@ public class QuietHoursRangeListActivity extends GravityBoxAppCompatActivity
 
         mPrefs = SettingsManager.getInstance(this).getQuietHoursPrefs();
         mList = new ArrayList<>();
-        Set<String> data = mPrefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_RANGES,
-                new HashSet<String>());
-        for (String value : data) {
-            mList.add(new QuietHoursRangeListItem(this, QuietHours.Range.parse(value)));
+        for (String id : QuietHours.Range.getIdList(mPrefs)) {
+            mList.add(new QuietHoursRangeListItem(this, QuietHours.Range.parse(
+                    mPrefs.getStringSet(id, null))));
         }
         mListView.setAdapter(new QuietHoursRangeListAdapter(this, mList, this));
     }
@@ -75,13 +74,14 @@ public class QuietHoursRangeListActivity extends GravityBoxAppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            saveRange(data.getStringExtra(QuietHoursRangeActivity.EXTRA_QH_RANGE));
+            saveRange(new HashSet<>(data.getStringArrayListExtra(
+                    QuietHoursRangeActivity.EXTRA_QH_RANGE)));
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void saveRange(String value) {
+    private void saveRange(Set<String> value) {
         QuietHours.Range range = QuietHours.Range.parse(value);
         boolean isNew = true;
         for (QuietHoursRangeListItem item : mList) {
@@ -96,16 +96,7 @@ public class QuietHoursRangeListActivity extends GravityBoxAppCompatActivity
         if (isNew) {
             mList.add(new QuietHoursRangeListItem(this, range));
         }
-        commitChanges();
-        ((QuietHoursRangeListAdapter)mListView.getAdapter()).notifyDataSetChanged();
-    }
-
-    private void commitChanges() {
-        Set<String> newSet = new HashSet<String>();
-        for (QuietHoursRangeListItem item : mList) {
-            newSet.add(item.getRange().getValue());
-        }
-        mPrefs.edit().putStringSet(QuietHoursActivity.PREF_KEY_QH_RANGES, newSet).commit(
+        mPrefs.edit().putStringSet(range.id, range.getValue()).commit(
             new OnPreferencesCommitedListener() {
                 @Override
                 public void onPreferencesCommited() {
@@ -113,6 +104,7 @@ public class QuietHoursRangeListActivity extends GravityBoxAppCompatActivity
                     sendBroadcast(intent);
                 }
         });
+        ((QuietHoursRangeListAdapter)mListView.getAdapter()).notifyDataSetChanged();
     }
 
     @Override
@@ -120,7 +112,8 @@ public class QuietHoursRangeListActivity extends GravityBoxAppCompatActivity
         QuietHoursRangeListItem item = (QuietHoursRangeListItem) mListView.getItemAtPosition(position);
         Intent intent = new Intent(QuietHoursRangeListActivity.this,
                 QuietHoursRangeActivity.class);
-        intent.putExtra(QuietHoursRangeActivity.EXTRA_QH_RANGE, item.getRange().getValue());
+        intent.putStringArrayListExtra(QuietHoursRangeActivity.EXTRA_QH_RANGE,
+                new ArrayList<>(item.getRange().getValue()));
         startActivityForResult(intent, 0);
     }
 
@@ -129,9 +122,16 @@ public class QuietHoursRangeListActivity extends GravityBoxAppCompatActivity
         for (int i = mList.size()-1; i >= 0; i--) {
             if (mList.get(i).getRange().id.equals(item.getRange().id)) {
                 mList.remove(i);
+                mPrefs.edit().remove(item.getRange().id).commit(
+                    new OnPreferencesCommitedListener() {
+                        @Override
+                        public void onPreferencesCommited() {
+                            Intent intent = new Intent(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
+                            sendBroadcast(intent);
+                        }
+                });
+                ((QuietHoursRangeListAdapter)mListView.getAdapter()).notifyDataSetChanged();
             }
         }
-        commitChanges();
-        ((QuietHoursRangeListAdapter)mListView.getAdapter()).notifyDataSetChanged();
     }
 }
