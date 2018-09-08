@@ -28,7 +28,9 @@ import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.preference.TimePreference;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.MultiSelectListPreference;
@@ -36,6 +38,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.view.View;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.widget.Button;
 
 public class QuietHoursRangeActivity extends Activity {
@@ -47,6 +50,7 @@ public class QuietHoursRangeActivity extends Activity {
     public static final String PREF_QH_RANGE_MUTE_VIBE = "pref_lc_qh_range_mute_vibe";
     public static final String PREF_QH_RANGE_MUTE_SYSTEM_VIBE = "pref_lc_qh_range_mute_system_vibe";
     public static final String PREF_QH_RANGE_MUTE_SYSTEM_SOUNDS = "pref_lc_qh_range_mute_system_sounds";
+    public static final String PREF_QH_RANGE_RINGER_WHITELIST = "pref_lc_qh_range_ringer_whitelist";
     public static final String EXTRA_QH_RANGE = "qhRange";
 
     private Button mBtnCancel;
@@ -89,7 +93,7 @@ public class QuietHoursRangeActivity extends Activity {
             }
         });
 
-        getFragment().setRange(QuietHours.Range.parse(rangeValue));
+        getFragment().setRangeValue(rangeValue);
     }
 
     private PrefsFragment getFragment() {
@@ -107,7 +111,9 @@ public class QuietHoursRangeActivity extends Activity {
         private CheckBoxPreference mPrefMuteVibe;
         private CheckBoxPreference mPrefMuteSystemVibe;
         private MultiSelectListPreference mPrefMuteSystemSounds;
+        private Preference mPrefRingerWhitelist;
         private QuietHours.Range mRange;
+        private boolean mIsNew;
 
         public PrefsFragment() { }
 
@@ -145,10 +151,13 @@ public class QuietHoursRangeActivity extends Activity {
 
             mPrefMuteSystemSounds = (MultiSelectListPreference) findPreference(PREF_QH_RANGE_MUTE_SYSTEM_SOUNDS);
             mPrefMuteSystemSounds.setOnPreferenceChangeListener(this);
+
+            mPrefRingerWhitelist = findPreference(PREF_QH_RANGE_RINGER_WHITELIST);
         }
 
-        void setRange(QuietHours.Range range) {
-            mRange = range;
+        void setRangeValue(Set<String> rangeValue) {
+            mIsNew = (rangeValue == null);
+            mRange = QuietHours.Range.parse(rangeValue);
             mPrefDays.setValues(mRange.days);
             mPrefStartTime.setValue(mRange.startTime);
             mPrefEndTime.setValue(mRange.endTime);
@@ -193,6 +202,7 @@ public class QuietHoursRangeActivity extends Activity {
             mPrefMuteSystemSounds.setSummary(summary);
 
             mPrefMuteVibe.setEnabled(!mRange.muteSystemVibe);
+            mPrefRingerWhitelist.setEnabled(mRange.muteSystemSounds.contains("ringer"));
         }
 
         @SuppressWarnings("unchecked")
@@ -219,6 +229,34 @@ public class QuietHoursRangeActivity extends Activity {
             }
             updateSummaries();
             return true;
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+            if (preference == mPrefRingerWhitelist) {
+                Set<String> whiteList = mRange.ringerWhitelist;
+                if (mIsNew) {
+                    SharedPreferences prefs = getActivity().getSharedPreferences(
+                            "quiet_hours", Context.MODE_WORLD_READABLE);
+                    whiteList = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_RINGER_WHITELIST,
+                                new HashSet<String>());
+                }
+                Intent intent = new Intent(getActivity(), RingerWhitelistActivity.class);
+                intent.putStringArrayListExtra(QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST,
+                        new ArrayList<>(whiteList));
+                startActivityForResult(intent, 0);
+                return true;
+            }
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            if (data != null && data.hasExtra(QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST)) {
+                mRange.ringerWhitelist = new HashSet<>(
+                        data.getStringArrayListExtra(QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST));
+            }
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

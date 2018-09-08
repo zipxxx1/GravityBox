@@ -52,6 +52,7 @@ public class QuietHours {
         public boolean muteVibe;
         public boolean muteSystemVibe;
         public Set<String> muteSystemSounds;
+        public Set<String> ringerWhitelist;
 
         private Range() { }
 
@@ -78,6 +79,8 @@ public class QuietHours {
                     r.muteSystemVibe = Boolean.valueOf(data[1]);
                 } else if (data[0].equals("muteSystemSounds")) {
                     r.muteSystemSounds = new HashSet<String>(Arrays.asList(data[1].split(",")));
+                } else if (data[0].equals("ringerWhitelist")) {
+                    r.ringerWhitelist = new HashSet<String>(Arrays.asList(data[1].split(",")));
                 }
             }
             return r;
@@ -93,6 +96,7 @@ public class QuietHours {
             r.muteVibe = true;
             r.muteSystemVibe = false;
             r.muteSystemSounds = new HashSet<String>();
+            r.ringerWhitelist = new HashSet<String>();
             return r;
         }
 
@@ -116,6 +120,12 @@ public class QuietHours {
                 buf += ss;
             }
             dataSet.add("muteSystemSounds:" + buf);
+            buf = "";
+            for (String ss : ringerWhitelist) {
+                if (!buf.isEmpty()) buf += ",";
+                buf += ss;
+            }
+            dataSet.add("ringerWhitelist:" + buf);
             return dataSet;
         }
 
@@ -147,7 +157,7 @@ public class QuietHours {
     public Mode mode;
     public boolean interactive;
     private boolean muteSystemVibe;
-    public Set<String> ringerWhitelist;
+    private Set<String> ringerWhitelist;
     private Set<Range> ranges;
 
     public QuietHours(SharedPreferences prefs) {
@@ -276,6 +286,16 @@ public class QuietHours {
             }
         }
         return muteSystemSounds.contains(systemSound) && quietHoursActive();
+    }
+
+    public Set<String> getRingerWhitelist() {
+        if (mode == Mode.AUTO) {
+            Range r = getActiveRange();
+            if (r != null) {
+                return r.ringerWhitelist;
+            }
+        }
+        return ringerWhitelist;
     }
 
     private List<CharSequence> getNotificationTexts(Notification notification) {
