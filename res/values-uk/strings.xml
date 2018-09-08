@@ -1221,6 +1221,10 @@
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Колір під час зарядки</string>
 
+    <!-- Notification control: Quiet hours for weekends-->
+    <string name="pref_lc_qh_cat_weekdays_title">Будні</string>
+    <string name="pref_lc_qh_cat_weekend_title">Вихідні</string>
+
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Примусово Англійська</string>
 
@@ -1349,7 +1353,7 @@
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Приглушити вібрацію сповіщень</string>
-    <string name="pref_lc_qh_mute_vibe_summary">Вимикає вібрацію сповіщень</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Вимикає вібрацію сповіщень на пристрої та на будь-якому зв\'язаному пристрої Android Wear</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Інтерактивний режим</string>
@@ -1421,6 +1425,9 @@
     <string name="charging_led_emulated">Емуляція</string>
     <string name="charging_led_constant">Постійно (потребує підтримки драйвером LED)</string>
     <string name="charging_led_disabled">Вимкнено</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Встановлення буднів</string>
 
     <!-- QuietHours: mute system sounds -->
     <string name="pref_lc_qh_mute_system_sounds_title">Приглушення системних звуків</string>
@@ -1653,7 +1660,7 @@
 
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Приглушити вібрацію пристрою</string>
-    <string name="pref_lc_qh_mute_system_vibe_summary">Вимикає ВСІ тактильні відгуки на системному рівні</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Вимикає ВСІ тактильні відгуки на системному рівні, та вібрацію сповіщень включно на ДАНОМУ пристрої. Сповіщення на зв\'язаному Android Wear пристрої лишаться в тому ж стані, як і були.</string>
 
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Очистити лише видиме</string>
@@ -1718,8 +1725,8 @@
     <string name="imprint_mode_wake_only">Лише пробудження</string>
 
     <!-- Lockscreen: Bottom-left action -->
-    <string name="pref_lockscreen_bleft_action_title">Дія на зліва знизу</string>
-    <string name="pref_lockscreen_bright_action_title">Дія на зправа знизу</string>
+    <string name="pref_lockscreen_bleft_action_title">Дія на знизу ліворуч</string>
+    <string name="pref_lockscreen_bright_action_title">Дія на знизу праворуч</string>
 
     <!-- Lockscreen: Quick unlock PIN length -->
     <string name="pref_lockscreen_pin_length_title">Довжина PIN</string>
@@ -2025,7 +2032,7 @@
     <string name="bottom_action_right">Приховати праву дію</string>
 
     <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">See through transparency</string>
+    <string name="pref_lockscreen_direct_unlock_trans_level_title">Перегляд через прозорість</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Обрати типову SIM для дзвінків</string>
@@ -2065,7 +2072,7 @@
     <string name="qs_tile_bt_tethering_error">Помилка</string>
 
     <!-- Storage permission toast -->
-    <string name="permission_storage_denied">Дозвіл на досуп до сховища даних було відхилено</string>
+    <string name="permission_storage_denied">Дозвіл на доступ до сховища даних було відхилено</string>
 
     <!-- Theme -->
     <string name="theme_title">Тема</string>
@@ -2088,9 +2095,9 @@
     <string name="pref_visualizer_color_title">Типовий колір</string>
     <string name="pref_visualizer_opacity_title">Прозорість кольору</string>
     <string name="pref_visualizer_active_mode_title">Активний режим</string>
-    <string name="pref_visualizer_active_mode_summary">Лишати еран блоківання активним під час відтворення візуалізації</string>
+    <string name="pref_visualizer_active_mode_summary">Лишати екран блокування активним під час відтворення візуалізації</string>
     <string name="pref_visualizer_dim_title">Згасання екрану</string>
-    <string name="pref_visualizer_dim_summary">Dims contents of lock screen after user inactivity timeout</string>
+    <string name="pref_visualizer_dim_summary">Затемнення вмісту екрану блокування після періоду неактивності</string>
     <string name="pref_visualizer_dim_level_title">Рівень згасання</string>
     <string name="pref_visualizer_dim_info_title">Показати інформацію про медіа</string>
     <string name="pref_visualizer_dim_info_summary">Показувати інформацію про поточний медіафайл на потямнілому екрані</string>
@@ -2099,10 +2106,10 @@
     <string name="pref_visualizer_dim_controls_title">Показувати елементи керування</string>
     <string name="pref_visualizer_dim_controls_summary">Показувати на потямнілому екрані елементи керування відтворення медіа</string>
     <string name="pref_visualizer_dim_artwork_title">Показати ілюстрацію</string>
-    <string name="pref_visualizer_dim_artwork_summary">Показувати на потямнілому екрані ілюстрацію з екрану блокування</string>
+    <string name="pref_visualizer_dim_artwork_summary">Показувати на потямнілому екрані ілюстрацію з екрана блокування</string>
 
     <!-- QS: Ambient Display tile -->
-    <string name="qs_tile_ambient_display">Ambient display</string>
+    <string name="qs_tile_ambient_display">Активний дисплей</string>
 
     <!-- QS: Heads Up tile -->
     <string name="qs_tile_heads_up">Зринання</string>
