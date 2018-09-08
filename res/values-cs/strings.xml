@@ -2100,4 +2100,10 @@
     <string name="pref_lc_qh_range_days_title">Dny</string>
     <string name="next_day">následující den</string>
 
+    <!-- QH: settings categorization -->
+    <string name="pref_lc_qh_cat_general_title">Obecné</string>
+    <string name="pref_lc_qh_cat_rules_title">Pravidla</string>
+    <string name="pref_lc_qh_manual_title">Manuální režim</string>
+    <string name="pref_lc_qh_manual_summary">Umožňuje nastavení pravidel pro manuální tiché hodiny</string>
+
 </resources>

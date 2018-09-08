@@ -1897,4 +1897,10 @@
     <string name="pref_log_errors_title">Erreur de journalisation</string>
     <string name="pref_log_errors_summary">Consigne toutes les erreurs dans le journal Xposed lorsque activé (nécessite un redémarrage)</string>
 
+    <!-- QH: settings categorization -->
+    <string name="pref_lc_qh_cat_general_title">Général</string>
+    <string name="pref_lc_qh_cat_rules_title">Règles</string>
+    <string name="pref_lc_qh_manual_title">Mode manuel</string>
+    <string name="pref_lc_qh_manual_summary">Permet de définir les règles pour les heures silencieuses manuelles</string>
+
 </resources>
