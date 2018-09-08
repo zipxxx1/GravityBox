@@ -58,4 +58,10 @@
         android:entryValues="@array/system_sound_values"
         android:defaultValue="@array/empty_array" />
 
+    <Preference 
+        android:key="pref_lc_qh_range_ringer_whitelist"
+        android:title="@string/pref_lc_qh_ringer_whitelist_title"
+        android:summary="@string/pref_lc_qh_ringer_whitelist_summary"
+        android:persistent="false" />
+
 </PreferenceScreen>

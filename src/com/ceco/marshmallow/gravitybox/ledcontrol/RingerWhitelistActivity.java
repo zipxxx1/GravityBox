@@ -14,6 +14,7 @@
  */
 package com.ceco.marshmallow.gravitybox.ledcontrol;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,8 +23,9 @@ import com.ceco.marshmallow.gravitybox.ledcontrol.RingerWhitelistActivity.Contac
 import com.ceco.marshmallow.gravitybox.R;
 
 import android.Manifest.permission;
+import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Point;
@@ -54,6 +56,7 @@ public class RingerWhitelistActivity extends GravityBoxAppCompatActivity {
 
     static final String KEY_SEARCH_QUERY = "searchQuery";
     static final String KEY_SELECTION_TYPE = "selectionType";
+    static final String KEY_SELECTED_KEYS = "selectedKeys";
 
     private String mSearchQuery;
     private SelectionType mSelectionType;
@@ -229,11 +232,17 @@ public class RingerWhitelistActivity extends GravityBoxAppCompatActivity {
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
 
-            final SharedPreferences prefs = getActivity().getSharedPreferences(
-                    "quiet_hours", Context.MODE_WORLD_READABLE);
-            mSelectedKeys = new HashSet<String>(prefs.getStringSet(
-                    QuietHoursActivity.PREF_KEY_QH_RINGER_WHITELIST,
-                        new HashSet<String>()));
+            Intent intent = getActivity().getIntent();
+            if (savedInstanceState != null && savedInstanceState.containsKey(KEY_SELECTED_KEYS)) {
+                mSelectedKeys = new HashSet<String>(
+                        savedInstanceState.getStringArrayList(KEY_SELECTED_KEYS));
+            } else if (intent != null && intent.hasExtra(QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST)) {
+                mSelectedKeys = new HashSet<String>(intent.getStringArrayListExtra(
+                        QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST));
+            } else {
+                mSelectedKeys = new HashSet<String>();
+            }
+            updateResult();
 
             mCursorAdapter = new CustomCursorAdapter(
                     getActivity(),
@@ -253,6 +262,12 @@ public class RingerWhitelistActivity extends GravityBoxAppCompatActivity {
             fetchData(query);
         }
 
+        private void updateResult() {
+            getActivity().setResult(Activity.RESULT_OK,
+                    (new Intent()).putStringArrayListExtra(QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST,
+                            new ArrayList<>(mSelectedKeys)));
+        }
+
         @Override
         public void onSaveInstanceState(Bundle outState) {
             if (mCurrentQuery != null) {
@@ -261,16 +276,11 @@ public class RingerWhitelistActivity extends GravityBoxAppCompatActivity {
             if (mSelectionType != null) {
                 outState.putString(KEY_SELECTION_TYPE, mSelectionType.toString());
             }
+            if (mSelectedKeys != null) {
+                outState.putStringArrayList(KEY_SELECTED_KEYS,
+                        new ArrayList<>(mSelectedKeys));
+            }
             super.onSaveInstanceState(outState);
-        }
-
-        @Override
-        public void onPause() {
-            final SharedPreferences prefs = getActivity().getSharedPreferences(
-                    "quiet_hours", Context.MODE_WORLD_READABLE);
-            prefs.edit().putStringSet(QuietHoursActivity.PREF_KEY_QH_RINGER_WHITELIST,
-                    mSelectedKeys).commit();
-            super.onPause();
         }
 
         private boolean hasContactReadPermission() {
@@ -397,6 +407,7 @@ public class RingerWhitelistActivity extends GravityBoxAppCompatActivity {
                 cb.setChecked(false);
                 mSelectedKeys.remove(contactKey);
             }
+            updateResult();
         }
 
         private class CustomCursorAdapter extends SimpleCursorAdapter {
