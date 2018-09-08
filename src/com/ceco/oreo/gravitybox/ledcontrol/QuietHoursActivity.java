@@ -204,6 +204,16 @@ public class QuietHoursActivity extends GravityBoxActivity {
         }
 
         @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            if (data != null && data.hasExtra(EXTRA_QH_RINGER_WHITELIST)) {
+                mPrefs.edit().putStringSet(QuietHoursActivity.PREF_KEY_QH_RINGER_WHITELIST,
+                        new HashSet<>(data.getStringArrayListExtra(EXTRA_QH_RINGER_WHITELIST))).commit();
+                broadcastSettings(getActivity(), mPrefs);
+            }
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+
+        @Override
         public void onResume() {
             super.onResume();
             mPrefs.registerOnSharedPreferenceChangeListener(this);
@@ -235,7 +245,10 @@ public class QuietHoursActivity extends GravityBoxActivity {
                 Preference preference) {
             if (preference == mPrefRingerWhitelist) {
                 Intent intent = new Intent(getActivity(), RingerWhitelistActivity.class);
-                getActivity().startActivity(intent);
+                intent.putStringArrayListExtra(EXTRA_QH_RINGER_WHITELIST,
+                        new ArrayList<>(mPrefs.getStringSet(PREF_KEY_QH_RINGER_WHITELIST,
+                                new HashSet<String>())));
+                startActivityForResult(intent, 0);
                 return true;
             } else if (preference == mPrefRanges) {
                 Intent intent = new Intent(getActivity(), QuietHoursRangeListActivity.class);

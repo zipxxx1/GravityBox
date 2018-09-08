@@ -153,7 +153,7 @@ public class ModRinger {
                                         (Context)XposedHelpers.getObjectField(call, "mContext"),
                                         contactUri);
                                 if (DEBUG) log("Contact lookup key: " + key);
-                                if (key != null && mQuietHours.ringerWhitelist.contains(key)) {
+                                if (key != null && mQuietHours.getRingerWhitelist().contains(key)) {
                                     return;
                                 }
                             }

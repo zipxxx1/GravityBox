@@ -92,6 +92,7 @@ public class QuietHoursRangeListActivity extends GravityBoxAppCompatActivity
                 item.getRange().muteVibe = range.muteVibe;
                 item.getRange().muteSystemVibe = range.muteSystemVibe;
                 item.getRange().muteSystemSounds = range.muteSystemSounds;
+                item.getRange().ringerWhitelist = range.ringerWhitelist;
                 isNew = false;
                 break;
             }
