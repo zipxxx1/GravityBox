@@ -1613,12 +1613,6 @@
     <string name="permission_denied_msg">Ви вирішили відкликати деякі дозволи. Майте на увазі, що це вимкне роботу відповідних функцій.</string>
     <string name="permission_denied_hide_title">Не показувати знову</string>
 
-    <!-- Cellular tile Mobile data toggle -->
-    <string name="pref_cell_tile_data_toggle_title">Перемикач мобільних даних</string>
-    <string name="tile_data_toggle_disabled">Вимкнено</string>
-    <string name="tile_data_toggle_singlepress">На один дотик</string>
-    <string name="tile_data_toggle_longpress">На утримання</string>
-
     <!-- Lockscreen: Imprint mode -->
     <string name="pref_lockscreen_imprint_mode_title">Режим відбитку</string>
     <string name="imprint_mode_default">Пробудження та розблокування (типово)</string>
@@ -1655,7 +1649,6 @@
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Налаштування плитки позиціювання (SlimKat)</string>
-    <string name="pref_location_tile_quick_mode_summary">Дозволяє циклічно перемикати режими позиціювання при одиничному дотику по плитці</string>
 
     <!-- Cellular network modes -->
     <string name="network_mode_0">Переважно GSM/WCDMA (3G/2G)</string>
@@ -1685,17 +1678,14 @@
 
     <!-- Network mode tile settings -->
     <string name="pref_nm_tile_enabled_modes_summary">Визначити режими, які підтримувати при перемиканні</string>
-    <string name="pref_nm_tile_quick_mode_summary">Дозволяє циклічно перемикати вибрані режими мережі при одиничному дотику по плитці</string>
 
     <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">Налаштування плитки «Режим дзвінка»</string>
     <string name="pref_rm_tile_enabled_modes_summary">Визначає доступні режими дзвінка</string>
-    <string name="pref_rm_tile_quick_mode_summary">Дозволяє циклічно перемикати обрані режими дзвінку при одиничному дотику по плитці</string>
 
     <!-- Stay awake tile settings -->
     <string name="pref_cat_qs_sa_tile_title">Налаштування плитки «Не засинати»</string>
     <string name="pref_sa_tile_enabled_modes_summary">Визначає доступні часові затримки</string>
-    <string name="pref_sa_tile_quick_mode_summary">Дозволяє циклічно змінювати затримку при одиничному дотику по плитці</string>
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Політика розумного розблокування</string>
@@ -1809,6 +1799,9 @@
 
     <!-- Statusbar: Hide vibrate icon -->
     <string name="pref_sb_hide_vibrate_icon_title">Приховати значок вібрації</string>
+    
+    <!-- Statusbar: Hide data saver icon -->
+    <string name="pref_sb_hide_data_saver_icon_title">Приховати значок обмеження даних</string>
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Показати повідомлення стану</string>
@@ -1950,10 +1943,6 @@
     <!-- Volume panel: notification stream label -->
     <string name="notification_stream_name">Сповіщення</string>
 
-    <!-- OOS: hide dash charge icon -->
-    <string name="pref_battery_hide_dash_icon_title">Приховати значок Dash charge</string>
-    <string name="pref_battery_hide_dash_icon_summary">Для стокового індикатора батареї</string>
-
     <!-- OOS: call recording -->
     <string name="pref_oos_call_recording_title">Увімкнути запис дзвінків</string>
     <string name="pref_oos_call_recording_summary">Увага, запис дзвінків повинно буди дозволено на законодавчому рівні у вашій країні</string>
@@ -1971,12 +1960,6 @@
     <string name="locked_tile_indicator_padlock">Замок 🔒</string>
     <string name="locked_tile_indicator_key">Ключ 🔑</string>
 
-    <!-- QS: WiFi quick mode -->
-    <string name="pref_wifi_tile_quick_mode_summary">Дозволяє перемикати WiFi при одиничному дотику по плитці</string>
-
-    <!-- QS: BT quick mode -->
-    <string name="pref_bt_tile_quick_mode_summary">Дозволяє перемикати Bluetooth при одиничному дотику по плитці</string>
-
     <!-- KeyAction: Toggle split screen -->
     <string name="hwkey_action_split_screen">Перемкнути розділення екрану</string>
 
@@ -1991,6 +1974,12 @@
     <!-- SignalCluster: Moto: use AOSP mobile type icon -->
     <string name="pref_signal_cluster_aosp_mobile_type_title">Використовувати мобільні значки AOSP</string>
     <string name="pref_signal_cluster_aosp_mobile_type_summary">Необхідне перезавантаження</string>
+
+    <!-- Notification channels -->
+    <string name="notif_channel_services_title">Сервіси</string>
+    <string name="notif_channel_services_desc">Для фонових сервісів сповіщення, таких як «Ліхтарик» та «Запис екрану»</string>
+    <string name="notif_channel_unc_title">Попередній перегляд</string>
+    <string name="notif_channel_unc_desc">Попередній перегляд для керування сповіщеннями</string>
 
     <!-- Recents: Clear always visible -->
     <string name="pref_recent_clear_always_visible_title">Завжди показувати кнопку «Очистити все»</string>
@@ -2039,6 +2028,10 @@
 
     <!-- Reboot -->
     <string name="reboot">Перезавантаження</string>
+
+    <!-- StatusBar: corner padding -->
+    <string name="pref_sb_corner_padding_remove_title">Видалити кутовий відступ</string>
+    <string name="pref_sb_corner_padding_remove_summary">Видалення кутового відступу для екранів із заокругленими кутами (потребує перезавантаження)</string>
 
     <!-- QS: tiles per header -->
     <string name="pref_qs_tiles_per_header_title">Плиток в заголовку</string>
