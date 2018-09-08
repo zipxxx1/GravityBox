@@ -35,7 +35,7 @@
     <string name="reboot_required">Зміни набудуть чинності після перезавантаження</string>
 
     <string name="poweroff_advanced_title">Розширене меню вимикання</string>
-    <string name="poweroff_advanced_summary">Включає розширене меню вимикання з можливістю перезавантаження у режим «recovery»</string>
+    <string name="poweroff_advanced_summary">Включає розширене меню вимикання з можливістю перезавантаження у режим «Recovery»</string>
     <string name="poweroff_recovery">Recovery</string>
     <string name="poweroff_bootloader">Bootloader</string>
 
@@ -138,8 +138,8 @@
 
     <!-- Reboot confirmation -->
     <string name="reboot_confirm">%s буде перезавантажено.</string>
-    <string name="reboot_confirm_recovery">%s буде перезавантажений в режим «recovery».</string>
-    <string name="reboot_confirm_bootloader">%s буде перезавантажений в режим «bootloader».</string>
+    <string name="reboot_confirm_recovery">%s буде перезавантажений в режим «Recovery».</string>
+    <string name="reboot_confirm_bootloader">%s буде перезавантажений в режим «Bootloader».</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Інженерний режим</string>
@@ -1259,6 +1259,10 @@
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Колір під час зарядки</string>
 
+    <!-- Notification control: Quiet hours for weekends-->
+    <string name="pref_lc_qh_cat_weekdays_title">Будні</string>
+    <string name="pref_lc_qh_cat_weekend_title">Вихідні</string>
+
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Примусово Англійська</string>
 
@@ -1387,7 +1391,7 @@
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Приглушити вібрацію сповіщень</string>
-    <string name="pref_lc_qh_mute_vibe_summary">Вимикає вібрацію сповіщень</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Вимикає вібрацію сповіщень на пристрої та на будь-якому зв\'язаному пристрої Android Wear</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Інтерактивний режим</string>
@@ -1478,6 +1482,9 @@
     <string name="pref_heads_up_snooze_timer_title">Типовий таймер відкладення</string>
     <string name="pref_heads_up_snooze_timer_summary">Таймер, який автоматично встановлюється при натисканні на значок відкладення зринання. Утримання на значку відкриває діалог встановлення таймеру.</string>
     <string name="headsup_snooze_timer_set">Таймер відкладення, що зринає, встановлено на %s</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Встановлення буднів</string>
 
     <!-- QuietHours: mute system sounds -->
     <string name="pref_lc_qh_mute_system_sounds_title">Приглушення системних звуків</string>
@@ -1727,7 +1734,7 @@
 
     <!-- UNC: QuietHours: mute system level vibrations -->
     <string name="pref_lc_qh_mute_system_vibe_title">Приглушити вібрацію пристрою</string>
-    <string name="pref_lc_qh_mute_system_vibe_summary">Вимикає ВСІ тактильні відгуки на системному рівні</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Вимикає ВСІ тактильні відгуки на системному рівні, та вібрацію сповіщень включно на ДАНОМУ пристрої. Сповіщення на зв\'язаному Android Wear пристрої лишаться в тому ж стані, як і були.</string>
 
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Очистити лише видиме</string>
@@ -1954,8 +1961,8 @@
     <string name="pref_volume_rocker_wake_allow_music_title">Дозволити пробудження при активній музиці</string>
 
     <!-- Lockscreen: bottom actions -->
-    <string name="pref_lockscreen_bleft_action_title">Дія на зліва знизу</string>
-    <string name="pref_lockscreen_bright_action_title">Дія на зправа знизу</string>
+    <string name="pref_lockscreen_bleft_action_title">Дія на знизу ліворуч</string>
+    <string name="pref_lockscreen_bright_action_title">Дія на знизу праворуч</string>
 
     <!-- Wireless charger plugged sound -->
     <string name="pref_charger_plugged_sound_wireless_title">Звук бездротової зарядки</string>
@@ -2013,13 +2020,13 @@
     <string name="bottom_action_right">Приховати праву дію</string>
 
     <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">See through transparency</string>
+    <string name="pref_lockscreen_direct_unlock_trans_level_title">Перегляд через прозорість</string>
 
     <!-- QuickApp Tile #3 and #4 -->
     <string name="pref_cat_quickapp_tile_3_title">Плитка QuickApp 3 налаштування</string>
-    <string name="qs_tile_quickapp_3">Quick App 3</string>
+    <string name="qs_tile_quickapp_3">Швидкий запуск 3</string>
     <string name="pref_cat_quickapp_tile_4_title">Плитка QuickApp 4 налаштування</string>
-    <string name="qs_tile_quickapp_4">Quick App 4</string>
+    <string name="qs_tile_quickapp_4">Швидкий запуск 4</string>
 
     <!-- QS Bluetooth Tethering tile -->
     <string name="qs_tile_bt_tethering">Роздача по Bluetooth</string>
@@ -2039,6 +2046,33 @@
 
     <!-- BatteryStyle: Master switch -->
     <string name="pref_battery_masterswitch_summary">Активує зміну стилю значків батареї та процентів (необхідне перезавантаження)</string>
+
+    <!-- Visualizer -->
+    <string name="pref_cat_visualizer_title">Візуалізатор</string>
+    <string name="pref_visualizer_enable_summary">Увімкнути візуалізацію на екрані блокування під час програвання музики (необхідне перезавантаження)</string>
+    <string name="pref_visualizer_dynamic_color_title">Динамічний колір</string>
+    <string name="pref_visualizer_dynamic_color_summary">Брати колір з ілюстрації поточної пісні</string>
+    <string name="pref_visualizer_color_title">Типовий колір</string>
+    <string name="pref_visualizer_opacity_title">Прозорість кольору</string>
+    <string name="pref_visualizer_active_mode_title">Активний режим</string>
+    <string name="pref_visualizer_active_mode_summary">Лишати екран блокування активним під час відтворення візуалізації</string>
+    <string name="pref_visualizer_dim_title">Згасання екрану</string>
+    <string name="pref_visualizer_dim_summary">Затемнення вмісту екрану блокування після періоду неактивності</string>
+    <string name="pref_visualizer_dim_level_title">Рівень згасання</string>
+    <string name="pref_visualizer_dim_info_title">Показати інформацію про медіа</string>
+    <string name="pref_visualizer_dim_info_summary">Показувати інформацію про поточний медіафайл на потямнілому екрані</string>
+    <string name="pref_visualizer_dim_header_title">Показати заголовок</string>
+    <string name="pref_visualizer_dim_header_summary">Показувати заголовок на потямнілому екрані, якій містить поточний час та заряд батареї</string>
+    <string name="pref_visualizer_dim_controls_title">Показувати елементи керування</string>
+    <string name="pref_visualizer_dim_controls_summary">Показувати на потямнілому екрані елементи керування відтворення медіа</string>
+    <string name="pref_visualizer_dim_artwork_title">Показати ілюстрацію</string>
+    <string name="pref_visualizer_dim_artwork_summary">Показувати на потямнілому екрані ілюстрацію з екрана блокування</string>
+
+    <!-- QS: Heads Up tile -->
+    <string name="qs_tile_heads_up">Зринання</string>
+
+    <!-- BatteryBar: only while charging -->
+    <string name="pref_battery_bar_show_charging_title">Лише під час зарядки</string>
 
     <!-- Yes/No -->
     <string name="yes">Так</string>
