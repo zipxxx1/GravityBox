@@ -14,6 +14,8 @@
  */
 package com.ceco.nougat.gravitybox.ledcontrol;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.ceco.nougat.gravitybox.GravityBoxActivity;
@@ -55,6 +57,7 @@ public class QuietHoursActivity extends GravityBoxActivity {
     public static final String ACTION_SET_QUIET_HOURS_MODE = 
             "gravitybox.intent.action.SET_QUIET_HOURS_MODE";
     public static final String EXTRA_QH_MODE = "qhMode";
+    public static final String EXTRA_QH_RINGER_WHITELIST = "qhRingerWhitelist";
 
     public static void setQuietHoursMode(final Context context, String mode, boolean showToast) {
         try {
@@ -173,6 +176,22 @@ public class QuietHoursActivity extends GravityBoxActivity {
         }
 
         @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            if (data != null && data.hasExtra(EXTRA_QH_RINGER_WHITELIST)) {
+                mPrefs.edit().putStringSet(QuietHoursActivity.PREF_KEY_QH_RINGER_WHITELIST,
+                        new HashSet<>(data.getStringArrayListExtra(EXTRA_QH_RINGER_WHITELIST))).commit(
+                                new OnPreferencesCommitedListener() {
+                                    @Override
+                                    public void onPreferencesCommited() {
+                                        Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
+                                        getActivity().sendBroadcast(intent);
+                                    }
+                                });
+            }
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+
+        @Override
         public void onResume() {
             super.onResume();
             mPrefs.registerOnSharedPreferenceChangeListener(this);
@@ -205,7 +224,10 @@ public class QuietHoursActivity extends GravityBoxActivity {
                 Preference preference) {
             if (preference == mPrefRingerWhitelist) {
                 Intent intent = new Intent(getActivity(), RingerWhitelistActivity.class);
-                getActivity().startActivity(intent);
+                intent.putStringArrayListExtra(EXTRA_QH_RINGER_WHITELIST,
+                        new ArrayList<>(mPrefs.getStringSet(PREF_KEY_QH_RINGER_WHITELIST,
+                                new HashSet<String>())));
+                startActivityForResult(intent, 0);
                 return true;
             } else if (preference == mPrefRanges) {
                 Intent intent = new Intent(getActivity(), QuietHoursRangeListActivity.class);
