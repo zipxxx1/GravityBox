@@ -2201,4 +2201,7 @@
     <string name="pref_lc_qh_manual_title">Ручной режим</string>
     <string name="pref_lc_qh_manual_summary">Возможность установить правила для тихого часа в ручном режиме</string>
 
+    <!-- QH: current mode -->
+    <string name="pref_lc_qh_mode_title">Текущий режим</string>
+
 </resources>

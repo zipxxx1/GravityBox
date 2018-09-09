@@ -17,7 +17,9 @@ package com.ceco.marshmallow.gravitybox.ledcontrol;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
@@ -30,6 +32,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -131,6 +134,7 @@ public class QuietHoursActivity extends Activity {
         private MultiSelectListPreference mPrefSystemSounds;
         private Preference mPrefRingerWhitelist;
         private Preference mPrefRanges;
+        private ListPreference mPrefMode;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -145,6 +149,18 @@ public class QuietHoursActivity extends Activity {
 
             mPrefRingerWhitelist = findPreference(PREF_KEY_QH_RINGER_WHITELIST);
             mPrefRanges = findPreference(PREF_KEY_QH_RANGES);
+
+            mPrefMode = (ListPreference) findPreference(PREF_KEY_QH_MODE);
+            if (!Utils.isAppInstalled(getActivity(), QuietHours.PKG_WEARABLE_APP)) {
+                List<CharSequence> actEntries = new ArrayList<CharSequence>(Arrays.asList(
+                        mPrefMode.getEntries()));
+                List<CharSequence> actEntryValues = new ArrayList<CharSequence>(Arrays.asList(
+                        mPrefMode.getEntryValues()));
+                actEntries.remove(actEntries.size()-1);
+                actEntryValues.remove(actEntryValues.size()-1);
+                mPrefMode.setEntries(actEntries.toArray(new CharSequence[actEntries.size()]));
+                mPrefMode.setEntryValues(actEntryValues.toArray(new CharSequence[actEntryValues.size()]));
+            }
         }
 
         private void updateSummaries() {
@@ -166,6 +182,7 @@ public class QuietHoursActivity extends Activity {
             mPrefSystemSounds.setSummary(summary);
 
             mPrefRingerWhitelist.setEnabled(values != null && values.contains("ringer"));
+            mPrefMode.setSummary(mPrefMode.getEntry());
         }
 
         @Override

@@ -2153,4 +2153,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_lc_qh_manual_title">Manuel mod</string>
     <string name="pref_lc_qh_manual_summary">Manuel sessiz saatler için kurallar belirlemenizi sağlar</string>
 
+    <!-- QH: current mode -->
+    <string name="pref_lc_qh_mode_title">Geçerli mod</string>
+
 </resources>

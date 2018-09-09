@@ -1903,4 +1903,7 @@
     <string name="pref_lc_qh_manual_title">Mode manuel</string>
     <string name="pref_lc_qh_manual_summary">Permet de définir les règles pour les heures silencieuses manuelles</string>
 
+    <!-- QH: current mode -->
+    <string name="pref_lc_qh_mode_title">Mode actuel</string>
+
 </resources>
