@@ -23,7 +23,15 @@
             android:title="@string/pref_lc_qh_enabled_title"
             android:summary="@string/pref_lc_qh_enabled_summary"
             android:defaultValue="false" />
-    
+
+        <ListPreference
+            android:key="pref_lc_qh_mode"
+            android:title="@string/pref_lc_qh_mode_title"
+            android:entries="@array/lc_qh_mode_entries"
+            android:entryValues="@array/lc_qh_mode_values"
+            android:defaultValue="AUTO"
+            android:dependency="pref_lc_qh_enabled" />
+
         <CheckBoxPreference
             android:key="pref_lc_qh_statusbar_icon"
             android:title="@string/pref_lc_qh_statusbar_icon_title"

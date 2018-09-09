@@ -2126,4 +2126,7 @@
     <string name="pref_lc_qh_manual_title">Manual mode</string>
     <string name="pref_lc_qh_manual_summary">Allows to set rules for manual quiet hours</string>
 
+    <!-- QH: current mode -->
+    <string name="pref_lc_qh_mode_title">Current mode</string>
+
 </resources>
