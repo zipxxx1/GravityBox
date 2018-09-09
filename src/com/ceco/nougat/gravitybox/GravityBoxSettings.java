@@ -1773,7 +1773,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PackageInfo pi = null;
             for (String pkg : ModDialer.PACKAGE_NAMES) {
                 pi = Utils.getPackageInfo(getActivity(), pkg);
-                if (pi != null) break;
+                if (pi != null && pi.applicationInfo.targetSdkVersion < 28) break;
+                pi = null;
             }
             if (pi == null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
