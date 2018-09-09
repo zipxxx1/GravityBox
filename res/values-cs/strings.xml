@@ -2036,8 +2036,8 @@
     <string name="qhrw_permission_denied">Přístup ke kontaktům byl zamítnut</string>
 
     <!-- QH: Time ranges -->
-    <string name="pref_lc_qh_ranges_title">Časové rozsahy</string>
-    <string name="pref_lc_qh_ranges_summary">Umožňuje nastavit jeden nebo více časových rozsahů pro automatické tiché hodiny</string>
+    <string name="pref_lc_qh_ranges_title">Automatický režim</string>
+    <string name="pref_lc_qh_ranges_summary">Umožňuje nastavení časových rozsahů a jejich pravidel pro automatické tiché hodiny</string>
     <string name="lc_qh_ranges_list_label">Tiché hodiny - časové rozsahy</string>
     <string name="lc_qh_ranges_list_empty">V současnosti nejsou nastaveny žádné časové rozsahy</string>
     <string name="lc_qh_ranges_detail_label">Tiché hodiny - časový rozsah</string>
@@ -2049,5 +2049,8 @@
     <string name="pref_lc_qh_cat_rules_title">Pravidla</string>
     <string name="pref_lc_qh_manual_title">Manuální režim</string>
     <string name="pref_lc_qh_manual_summary">Umožňuje nastavení pravidel pro manuální tiché hodiny</string>
+
+    <!-- QH: current mode -->
+    <string name="pref_lc_qh_mode_title">Aktuální režim</string>
 
 </resources>
