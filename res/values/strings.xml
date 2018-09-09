@@ -2189,8 +2189,8 @@
     <string name="qhrw_permission_denied">Permission to read contacts denied</string>
 
     <!-- QH: Time ranges -->
-    <string name="pref_lc_qh_ranges_title">Set time ranges</string>
-    <string name="pref_lc_qh_ranges_summary">Allows to set one or more time ranges and their rules for automatic quiet hours</string>
+    <string name="pref_lc_qh_ranges_title">Automatic mode</string>
+    <string name="pref_lc_qh_ranges_summary">Allows to set time ranges and their rules for automatic quiet hours</string>
     <string name="lc_qh_ranges_list_label">Quiet hours - time ranges</string>
     <string name="lc_qh_ranges_list_empty">There are currently no time ranges set</string>
     <string name="lc_qh_ranges_detail_label">Quiet hours - time range</string>

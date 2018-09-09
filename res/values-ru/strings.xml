@@ -2187,8 +2187,8 @@
     <string name="qhrw_permission_denied">Разрешение на чтение контактов не предоставлено</string>
 
     <!-- QH: Time ranges -->
-    <string name="pref_lc_qh_ranges_title">Установить временные промежутки</string>
-    <string name="pref_lc_qh_ranges_summary">Возможность установить один или два временных промежутка для автоматической активации тихого часа</string>
+    <string name="pref_lc_qh_ranges_title">Автоматический режим</string>
+    <string name="pref_lc_qh_ranges_summary">Возможность установить временные промежутки и их правила для автоматической активации тихого часа</string>
     <string name="lc_qh_ranges_list_label">Тихий час - временные промежутки</string>
     <string name="lc_qh_ranges_list_empty">Временные промежутки не установлены</string>
     <string name="lc_qh_ranges_detail_label">Тихий час - время</string>
