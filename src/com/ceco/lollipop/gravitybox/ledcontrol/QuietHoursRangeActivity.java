@@ -162,7 +162,7 @@ public class QuietHoursRangeActivity extends Activity {
             mPrefStartTime.setValue(mRange.startTime);
             mPrefEndTime.setValue(mRange.endTime);
             mPrefMuteLed.setChecked(mRange.muteLED);
-            mPrefMuteVibe.setChecked(mRange.muteVibe || mRange.muteSystemVibe);
+            mPrefMuteVibe.setChecked(mRange.muteVibe);
             mPrefMuteSystemVibe.setChecked(mRange.muteSystemVibe);
             mPrefMuteSystemSounds.setValues(mRange.muteSystemSounds);
             updateSummaries();
@@ -201,7 +201,6 @@ public class QuietHoursRangeActivity extends Activity {
             }
             mPrefMuteSystemSounds.setSummary(summary);
 
-            mPrefMuteVibe.setEnabled(!mRange.muteSystemVibe);
             mPrefRingerWhitelist.setEnabled(mRange.muteSystemSounds.contains("ringer"));
         }
 
@@ -220,10 +219,6 @@ public class QuietHoursRangeActivity extends Activity {
                 mRange.muteVibe = (boolean) newValue;
             } else if (preference == mPrefMuteSystemVibe) {
                 mRange.muteSystemVibe = (boolean) newValue;
-                if (mRange.muteSystemVibe) {
-                    mRange.muteVibe = true;
-                    mPrefMuteVibe.setChecked(true);
-                }
             } else if (preference == mPrefMuteSystemSounds) {
                 mRange.muteSystemSounds = new HashSet<String>((Collection<? extends String>) newValue);
             }
