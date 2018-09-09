@@ -1274,4 +1274,18 @@
         <item>8</item>
     </string-array>
 
+    <string-array name="lc_qh_mode_entries" translatable="false">
+        <item>@string/quiet_hours_on</item>
+        <item>@string/quiet_hours_off</item>
+        <item>@string/quiet_hours_auto</item>
+        <item>@string/quiet_hours_wear</item>
+    </string-array>
+
+    <string-array name="lc_qh_mode_values" translatable="false">
+        <item>ON</item>
+        <item>OFF</item>
+        <item>AUTO</item>
+        <item>WEAR</item>
+    </string-array>
+
 </resources>
