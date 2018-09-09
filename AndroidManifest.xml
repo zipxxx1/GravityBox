@@ -16,8 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ceco.oreo.gravitybox"
-    android:versionCode="821"
-    android:versionName="8.2.1" >
+    android:versionCode="830"
+    android:versionName="8.3.0" >
 
     <uses-sdk
         android:minSdkVersion="26"
