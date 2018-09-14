@@ -1,3 +1,14 @@
+Changelog 7.3.0 - 14/09/2018
+--------------------------------------
+- QuietHours: additional enhancements and redesign
+--- rules for ligts/vibrations/sounds/ringer whitelist can now be set for each time range independently
+--- manual mode has its own set of rules that are independent of automatic time ranges
+--- initial ringer whitelist for newly created time range is inherited from manual mode settings
+--- added option for controlling current mode directly from the QuietHours settings
+--- reorganized settings
+--- !!! data structure changes render existing time ranges incompatible - need to be reconfigured !!!
+- Updated Ukrainian translations (thanks to burunduk)
+
 Changelog 7.2.1 - 09/07/2018
 --------------------------------------
 - QuietHours: added support for multiple time ranges:
