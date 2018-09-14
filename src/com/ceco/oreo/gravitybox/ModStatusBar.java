@@ -875,14 +875,25 @@ public class ModStatusBar {
 
             // Expanded notifications
             try {
-                XposedHelpers.findAndHookMethod(expandableNotifRowClass, "setSystemExpanded", boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mNotifExpandAll) {
-                            param.args[0] = true;
+                if (Utils.isSamsungRom()) {
+                    XposedHelpers.findAndHookMethod(expandableNotifRowClass, "isUserExpanded", new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if (mNotifExpandAll) {
+                                param.setResult(true);
+                            }
                         }
-                    }
-                });
+                    });
+                } else {
+                    XposedHelpers.findAndHookMethod(expandableNotifRowClass, "setSystemExpanded", boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            if (mNotifExpandAll) {
+                                param.args[0] = true;
+                            }
+                        }
+                    });
+                }
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error setting up always expanded notifications", t);
             }
