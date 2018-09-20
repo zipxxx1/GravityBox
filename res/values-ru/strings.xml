@@ -2109,12 +2109,21 @@
     <string name="qhrw_permission_denied">Разрешение на чтение контактов не предоставлено</string>
 
     <!-- QH: Time ranges -->
-    <string name="pref_lc_qh_ranges_title">Установить временные промежутки</string>
-    <string name="pref_lc_qh_ranges_summary">Возможность установить один или два временных промежутка для автоматической активации тихого часа</string>
+    <string name="pref_lc_qh_ranges_title">Автоматический режим</string>
+    <string name="pref_lc_qh_ranges_summary">Возможность установить временные промежутки и их правила для автоматической активации тихого часа</string>
     <string name="lc_qh_ranges_list_label">Тихий час - временные промежутки</string>
     <string name="lc_qh_ranges_list_empty">Временные промежутки не установлены</string>
     <string name="lc_qh_ranges_detail_label">Тихий час - время</string>
     <string name="pref_lc_qh_range_days_title">Дни</string>
     <string name="next_day">след. день</string>
+
+    <!-- QH: settings categorization -->
+    <string name="pref_lc_qh_cat_general_title">Общее</string>
+    <string name="pref_lc_qh_cat_rules_title">Правила</string>
+    <string name="pref_lc_qh_manual_title">Ручной режим</string>
+    <string name="pref_lc_qh_manual_summary">Возможность установить правила для тихого часа в ручном режиме</string>
+
+    <!-- QH: current mode -->
+    <string name="pref_lc_qh_mode_title">Текущий режим</string>
 
 </resources>
