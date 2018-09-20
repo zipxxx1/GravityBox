@@ -2072,12 +2072,22 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="qhrw_permission_denied">Kişileri okuma izni reddedildi</string>
     
     <!-- QH: Time ranges -->
-    <string name="pref_lc_qh_ranges_title">Zaman aralıklarını ayarla</string>
-    <string name="pref_lc_qh_ranges_summary">Otomatik sessiz saatler için bir veya daha fazla zaman aralığı ayarlamanıza izin verir</string>
+    <string name="pref_lc_qh_ranges_title">Otomatik mod</string>
+    <string name="pref_lc_qh_ranges_summary">Otomatik sessiz saatler için zaman aralıkları ve kurallarını belirlemenizi sağlar</string>
     <string name="lc_qh_ranges_list_label">Sessiz saatler - zaman aralıkları</string>
     <string name="lc_qh_ranges_list_empty">Şu anda ayarlanmış zaman aralığı yok</string>
     <string name="lc_qh_ranges_detail_label">Sessiz saatler - zaman aralığı</string>
     <string name="pref_lc_qh_range_days_title">Günler</string>
     <string name="next_day">ertesi gün</string>
 
+    <!-- QH: settings categorization -->
+    <string name="pref_lc_qh_cat_general_title">Genel</string>
+    <string name="pref_lc_qh_cat_rules_title">Kurallar</string>
+    <string name="pref_lc_qh_manual_title">Manuel mod</string>
+    <string name="pref_lc_qh_manual_summary">Manuel sessiz saatler için kurallar belirlemenizi sağlar</string>
+
+    <!-- QH: current mode -->
+    <string name="pref_lc_qh_mode_title">Geçerli mod</string>
+
 </resources>
+
