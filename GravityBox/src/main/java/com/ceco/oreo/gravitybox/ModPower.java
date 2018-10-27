@@ -94,9 +94,15 @@ public class ModPower {
     };
 
     public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        Class<?> pmServiceClass = null;
+        try {
+            pmServiceClass = XposedHelpers.findClass(CLASS_PM_SERVICE, classLoader);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+
         // wake up with proximity feature
         try {
-            Class<?> pmServiceClass = XposedHelpers.findClass(CLASS_PM_SERVICE, classLoader);
             Class<?> pmHandlerClass = XposedHelpers.findClass(CLASS_PM_HANDLER, classLoader);
 
             mIgnoreIncomingCall = prefs.getBoolean(
@@ -190,6 +196,23 @@ public class ModPower {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+
+        // Wake on plug for TouchWiz
+        try {
+            if (Utils.isSamsungRom()) {
+                if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_UNPLUG_TURNS_ON_SCREEN, true)) {
+                    XposedHelpers.findAndHookMethod(pmServiceClass, "shouldWakeUpWhenPluggedOrUnpluggedLocked",
+                        boolean.class, int.class, boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            param.setResult(false);
+                        }
+                    });
+                }
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }

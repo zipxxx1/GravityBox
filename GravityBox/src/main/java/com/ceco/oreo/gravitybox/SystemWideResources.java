@@ -45,10 +45,12 @@ public class SystemWideResources {
                                         "config_showNavigationBar")));
             }
 
-            XResources.setSystemWideReplacement("android", "bool", "config_unplugTurnsOnScreen",
-                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
-                            SystemPropertyProvider.getSystemConfigBool(systemRes,
-                                    "config_unplugTurnsOnScreen")));
+            if (!Utils.isSamsungRom()) {
+                XResources.setSystemWideReplacement("android", "bool", "config_unplugTurnsOnScreen",
+                        prefs.getBoolean(GravityBoxSettings.PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
+                                SystemPropertyProvider.getSystemConfigBool(systemRes,
+                                        "config_unplugTurnsOnScreen")));
+            }
 
             int pulseNotificationDelay = prefs.getInt(GravityBoxSettings.PREF_KEY_PULSE_NOTIFICATION_DELAY, -1);
             if (pulseNotificationDelay != -1) {
