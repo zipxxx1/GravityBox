@@ -34,6 +34,7 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.telephony.TelephonyManager;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -205,12 +206,7 @@ public class ModPower {
             if (Utils.isSamsungRom()) {
                 if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_UNPLUG_TURNS_ON_SCREEN, true)) {
                     XposedHelpers.findAndHookMethod(pmServiceClass, "shouldWakeUpWhenPluggedOrUnpluggedLocked",
-                        boolean.class, int.class, boolean.class, new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            param.setResult(false);
-                        }
-                    });
+                        boolean.class, int.class, boolean.class, XC_MethodReplacement.returnConstant(false));
                 }
             }
         } catch (Throwable t) {
