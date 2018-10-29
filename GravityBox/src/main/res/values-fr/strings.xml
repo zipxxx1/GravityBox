@@ -643,7 +643,6 @@
     <string name="shortcut_google_now">Google Now</string>
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Opacité du fond d\'écran</string>
-    <string name="pref_lockscreen_bg_opacity_summary">S\'applique uniquement au fond d\'écran personnalisé et aux pochettes d\'album</string>
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Contrôle des médias</string>
     <string name="shortcut_media_play_pause">Lecture/pause</string>

@@ -789,7 +789,7 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Background opacity</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Applies to custom wallpaper and album art only</string>
+    <string name="pref_lockscreen_bg_opacity_summary2">Set to zero for default (stock) behavior</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Media control</string>

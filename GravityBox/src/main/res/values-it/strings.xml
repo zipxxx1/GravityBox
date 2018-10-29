@@ -776,7 +776,6 @@
     
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Luminosità sfondo</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Si applica solo allo sfondo personalizzato e alle copertine degli album</string>
 
      <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Controlli multimediali</string>

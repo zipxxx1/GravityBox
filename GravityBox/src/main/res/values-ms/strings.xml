@@ -789,7 +789,6 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Kemalapan latar belakang</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Untuk imej latar belakang album sahaja</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Kawalan media</string>

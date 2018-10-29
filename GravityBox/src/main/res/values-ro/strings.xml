@@ -777,7 +777,6 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Opacitatea fundalului</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Se aplică doar imaginii de fundal și a copertei albumului</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Control media</string>

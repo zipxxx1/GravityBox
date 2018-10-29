@@ -778,7 +778,6 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Deckkraft des Hintergrunds</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Wird nur angewendet auf eigene Hintergründe und Alben-Cover</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Mediensteuerung</string>

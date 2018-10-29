@@ -753,7 +753,6 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Opacidade do fundo</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Aplica-se apenas a papéis de parede personalizados e arte de álbum</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Controles de mídia</string>
