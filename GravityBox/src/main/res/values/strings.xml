@@ -2129,4 +2129,7 @@
     <string name="pref_wifi_trusted_title">Trusted Wi-Fi</string>
     <string name="pref_wifi_trusted_summary">Specifies Wi-Fi networks that are trusted for Smart Lock</string>
 
+    <!-- BatteryBar: lock screen only -->
+    <string name="pref_battery_bar_lockscreen_only_title">Lock screen only</string>
+
 </resources>

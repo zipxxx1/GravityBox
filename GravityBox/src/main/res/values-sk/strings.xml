@@ -2058,4 +2058,7 @@
     <string name="pref_wifi_trusted_title">Dôveryhodné Wi-Fi</string>
     <string name="pref_wifi_trusted_summary">Umožňuje definovať dôveryhodné siete Wi-Fi pre Smart Lock</string>
 
+    <!-- BatteryBar: lock screen only -->
+    <string name="pref_battery_bar_lockscreen_only_title">Len na obrazovke uzamknutia</string>
+
 </resources>

@@ -81,6 +81,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     private ViewGroup mContainer;
     private boolean mHiddenByPolicy;
     private boolean mChargingOnly;
+    private boolean mLockscreenOnly;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -94,6 +95,7 @@ public class BatteryBarView extends View implements IconManagerListener,
 
         mEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_BAR_SHOW, false);
         mChargingOnly = prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_BAR_SHOW_CHARGING, false);
+        mLockscreenOnly = prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_BAR_LOCKSCREEN_ONLY, false);
         mPosition = Position.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_BAR_POSITION, "TOP"));
         mMarginPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
@@ -266,7 +268,8 @@ public class BatteryBarView extends View implements IconManagerListener,
 
     private boolean isValidStatusBarState() {
         return ((mContainerType == ContainerType.STATUSBAR &&
-                    mStatusBarState == StatusBarState.SHADE) ||
+                    mStatusBarState == StatusBarState.SHADE &&
+                    !mLockscreenOnly) ||
                 (mContainerType == ContainerType.KEYGUARD &&
                     mStatusBarState == StatusBarState.KEYGUARD));
     }
@@ -326,6 +329,10 @@ public class BatteryBarView extends View implements IconManagerListener,
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BBAR_SHOW_CHARGING)) {
                 mChargingOnly = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BBAR_SHOW_CHARGING, false);
+                update();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BBAR_LOCKSCREEN_ONLY)) {
+                mLockscreenOnly = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BBAR_LOCKSCREEN_ONLY, false);
                 update();
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BBAR_POSITION)) {

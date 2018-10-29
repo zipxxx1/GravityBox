@@ -942,6 +942,12 @@
                     android:defaultValue="false"
                     android:dependency="pref_battery_bar_show" />
 
+                <CheckBoxPreference
+                    android:key="pref_battery_bar_lockscreen_only"
+                    android:title="@string/pref_battery_bar_lockscreen_only_title"
+                    android:defaultValue="false"
+                    android:dependency="pref_battery_bar_show" />
+
                 <ListPreference 
                     android:key="pref_battery_bar_position"
                     android:title="@string/pref_battery_bar_position_title"
