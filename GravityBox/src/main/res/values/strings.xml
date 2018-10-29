@@ -2136,4 +2136,7 @@
     <!-- QH: current mode -->
     <string name="pref_lc_qh_mode_title">Current mode</string>
 
+    <!-- BatteryBar: lock screen only -->
+    <string name="pref_battery_bar_lockscreen_only_title">Lock screen only</string>
+
 </resources>

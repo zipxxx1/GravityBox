@@ -2069,4 +2069,7 @@
     <!-- QH: current mode -->
     <string name="pref_lc_qh_mode_title">Aktuální režim</string>
 
+    <!-- BatteryBar: lock screen only -->
+    <string name="pref_battery_bar_lockscreen_only_title">Jen na obrazovce uzamčení</string>
+
 </resources>
