@@ -284,20 +284,6 @@ public class ModLockscreen {
                         backDrop.animate().alpha(1f);
                         if (DEBUG) log("updateMediaMetaData: showing custom background");
                     }
-
-                    // opacity
-                    if (hasArtwork || mCustomBg != null) {
-                        backDropBack.getDrawable().clearColorFilter();
-                        final int opacity = mPrefs.getInt(
-                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 100);
-                        if (opacity != 100) {
-                            final int alpha = (int) ((1 - opacity / 100f) * 255);
-                            final int overlayColor = Color.argb(alpha, 0, 0, 0);
-                            backDropBack.getDrawable().mutate()
-                                .setColorFilter(overlayColor, PorterDuff.Mode.SRC_OVER);
-                            if (DEBUG) log("updateMediaMetaData: opacity set");
-                        }
-                    }
                 }
             });
 
@@ -690,6 +676,24 @@ public class ModLockscreen {
                             XposedHelpers.callMethod(param.thisObject, "setScrimInFrontColor", alpha);
                             XposedHelpers.callMethod(param.thisObject, "setScrimBehindColor", 0f);
                             param.setResult(null);
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, t);
+            }
+
+            // Keyguard scrim alpha (Background opacity)
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_SCRIM_CONTROLLER, classLoader,
+                "scheduleUpdate", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        final int opacity = mPrefs.getInt(
+                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 0);
+                        if (opacity != 0) {
+                            final float alpha = (100 - opacity) / 100f;
+                            XposedHelpers.setFloatField(param.thisObject, "mScrimBehindAlphaKeyguard", alpha);
                         }
                     }
                 });

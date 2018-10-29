@@ -781,7 +781,6 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Arkaplan görünürlüğü</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Sadece özel duvar kağıdına ve albüm resmine uygulanır</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Medya kontrolü</string>

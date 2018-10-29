@@ -761,7 +761,6 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">אטימות רקע</string>
-    <string name="pref_lockscreen_bg_opacity_summary">חל על רקע בהתאמה אישית ותמונות אלבום בלבד</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">בקרי מדיה</string>

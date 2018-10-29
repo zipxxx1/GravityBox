@@ -483,7 +483,6 @@
 <string name="pie_control_summary">تنظیمات مربوط به Pie</string>
 <string name="shortcut_google_now">Google Now</string>
 <string name="pref_lockscreen_bg_opacity_title">وضوح پس‌زمینه</string>
-<string name="pref_lockscreen_bg_opacity_summary">قابل اعمال تنها بر تصویر زمینه شخصی و آلبوم هنری</string>
 <string name="shortcut_media_control">کنترل رسانه‌ها</string>
 <string name="shortcut_media_play_pause">پخش/توقف‌</string>
 <string name="shortcut_media_previous">قبلی</string>

@@ -757,7 +757,6 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Opacidade do fundo</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Aplicável apenas a imagens de fundo personalizadas ou de álbuns musicais</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Controlo multimédia</string>

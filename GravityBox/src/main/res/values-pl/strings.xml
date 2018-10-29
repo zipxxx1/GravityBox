@@ -766,7 +766,6 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Widoczność tła</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Dotyczy tylko własnej tapety i okładki albumu</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Kontrola mediów</string>

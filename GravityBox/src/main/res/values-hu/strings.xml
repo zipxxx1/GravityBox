@@ -786,7 +786,6 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Háttér átlátszóság</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Csak egyéni háttérképre és lemezborítóra vonatkozik</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Média vezérlő</string>

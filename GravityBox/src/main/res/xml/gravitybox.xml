@@ -66,13 +66,13 @@
             <com.ceco.nougat.gravitybox.preference.SeekBarPreference
                 android:key="pref_lockscreen_bg_opacity"
                 android:title="@string/pref_lockscreen_bg_opacity_title"
-                android:summary="@string/pref_lockscreen_bg_opacity_summary"
+                android:summary="@string/pref_lockscreen_bg_opacity_summary2"
                 minimum="0"
                 maximum="100"
                 interval="1"
                 monitorBoxEnabled="true"
                 monitorBoxUnit="%" 
-                android:defaultValue="100"
+                android:defaultValue="0"
                 android:order="6" />
 
         </PreferenceCategory>

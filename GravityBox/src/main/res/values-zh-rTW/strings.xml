@@ -794,7 +794,6 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">背景不透明度</string>
-    <string name="pref_lockscreen_bg_opacity_summary">只適用於自訂背景圖片及專輯圖片</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">媒體控制</string>
