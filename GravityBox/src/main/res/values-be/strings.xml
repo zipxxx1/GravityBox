@@ -1456,10 +1456,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="dt_display_mode_dm">Толькі для менеджара загрузкі Андроід</string>
     <string name="dt_display_mode_pt">Пры адлюстраванні шкалы выканання ў радку стану</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Прыярытэт Wi-Fi</string>
-    <string name="pref_wifi_priority_summary">Усталёўка прыярытэту сетак Wi-Fi</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Паласа батарэі</string>
     <string name="pref_battery_bar_show_title">Паказваць паласу</string>

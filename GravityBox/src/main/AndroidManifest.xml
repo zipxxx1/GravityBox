@@ -156,7 +156,7 @@
 
         <activity
             android:name="com.ceco.oreo.gravitybox.WifiPriorityActivity"
-            android:label="@string/pref_wifi_priority_title" >
+            android:label="@string/pref_wifi_trusted_title" >
         </activity>
 
         <service android:name="com.ceco.oreo.gravitybox.GravityBoxService"

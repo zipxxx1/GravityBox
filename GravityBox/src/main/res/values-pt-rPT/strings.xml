@@ -1425,10 +1425,6 @@
     <string name="dt_display_mode_dm">Apenas para gestor de transferências base do Android</string>
     <string name="dt_display_mode_pt">Quando a barra de progresso estiver visível</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Prioridade Wi-Fi</string>
-    <string name="pref_wifi_priority_summary">Permite especificar a prioridade das redes Wi-Fi</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Barra de bateria</string>
     <string name="pref_battery_bar_show_title">Mostrar barra de bateria</string>

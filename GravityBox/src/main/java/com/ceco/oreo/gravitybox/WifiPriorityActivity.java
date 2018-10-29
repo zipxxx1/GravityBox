@@ -30,12 +30,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.ceco.oreo.gravitybox.R;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -47,61 +45,27 @@ public class WifiPriorityActivity extends GravityBoxListActivity implements Grav
     public static final String ACTION_WIFI_TRUSTED_CHANGED = "gravitybox.intent.action.WIFI_TRUSTED_CHANGED";
     public static final String EXTRA_WIFI_TRUSTED = "wifiTrusted";
 
-    private final TouchInterceptor.DropListener mDropListener =
-            new TouchInterceptor.DropListener() {
-        public void drop(int from, int to) {
-            if (from == to) return;
-
-            // Sort networks by user selection
-            List<WifiNetwork> networks = mAdapter.getNetworks();
-            WifiNetwork o = networks.remove(from);
-            networks.add(to, o);
-
-            // Set the new priorities of the networks
-            int cc = networks.size();
-            ArrayList<WifiConfiguration> configList = new ArrayList<>();
-            for (int i = 0; i < cc; i++) {
-                WifiNetwork network = networks.get(i);
-                network.config.priority = cc - i;
-                configList.add(network.config);
-            }
-
-            mNetworksListView.invalidateViews();
-
-            Intent intent = new Intent(ModHwKeys.ACTION_UPDATE_WIFI_CONFIG);
-            intent.putParcelableArrayListExtra(ModHwKeys.EXTRA_WIFI_CONFIG_LIST, configList);
-            intent.putExtra("receiver", mReceiver);
-            WifiPriorityActivity.this.sendBroadcast(intent);
-        }
-    };
-
-    private WifiManager mWifiManager;
-    private TouchInterceptor mNetworksListView;
+    private ListView mNetworksListView;
     private WifiPriorityAdapter mAdapter;
     private SharedPreferences mPrefs;
-    private GravityBoxResultReceiver mReceiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wifi_network_priority);
-        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-
         mPrefs = SettingsManager.getInstance(this).getMainPrefs();
 
         // Set the touchable listview
-        mNetworksListView = (TouchInterceptor)getListView();
-        mNetworksListView.setDropListener(mDropListener);
-        mAdapter = new WifiPriorityAdapter(this, mWifiManager);
+        mNetworksListView = getListView();
+        mAdapter = new WifiPriorityAdapter(this, (WifiManager) getSystemService(Context.WIFI_SERVICE));
         setListAdapter(mAdapter);
 
-        mReceiver = new GravityBoxResultReceiver(new Handler());
-        mReceiver.setReceiver(this);
+        GravityBoxResultReceiver receiver = new GravityBoxResultReceiver(new Handler());
+        receiver.setReceiver(this);
     }
 
     @Override
     public void onDestroy() {
-        mNetworksListView.setDropListener(null);
         setListAdapter(null);
         super.onDestroy();
     }
@@ -136,34 +100,23 @@ public class WifiPriorityActivity extends GravityBoxListActivity implements Grav
         private final LayoutInflater mInflater;
         private List<WifiNetwork> mNetworks;
 
-        public WifiPriorityAdapter(Context ctx, WifiManager wifiManager) {
+        WifiPriorityAdapter(Context ctx, WifiManager wifiManager) {
             mWifiManager = wifiManager;
             mInflater = LayoutInflater.from(ctx);
             reloadNetworks();
         }
 
         private void reloadNetworks() {
-            mNetworks = new ArrayList<WifiNetwork>();
+            mNetworks = new ArrayList<>();
             List<WifiConfiguration> networks = mWifiManager.getConfiguredNetworks();
             if (networks == null) return;
 
-            // Sort network list by priority (or by network id if the priority is the same)
-            Collections.sort(networks, new Comparator<WifiConfiguration>() {
-                @Override
-                public int compare(WifiConfiguration lhs, WifiConfiguration rhs) {
-                    // > priority -- > lower position
-                    if (lhs.priority < rhs.priority) return 1;
-                    if (lhs.priority > rhs.priority) return -1;
-                    // < network id -- > lower position
-                    if (lhs.networkId < rhs.networkId) return -1;
-                    if (lhs.networkId > rhs.networkId) return 1;
-                    return 0;
-                }
-            });
+            // Sort network list by network id
+            networks.sort(Comparator.comparingInt(lhs -> lhs.networkId));
 
             // read trusted SSIDs from prefs
             Set<String> trustedNetworks = mPrefs.getStringSet(PREF_KEY_WIFI_TRUSTED,
-                    new HashSet<String>());
+                    new HashSet<>());
             for (WifiConfiguration c : networks) {
                 WifiNetwork wn = new WifiNetwork(c);
                 wn.trusted = trustedNetworks.contains(filterSSID(c.SSID));
@@ -184,17 +137,17 @@ public class WifiPriorityActivity extends GravityBoxListActivity implements Grav
         }
 
         private void saveTrustedNetworks() {
-            Set<String> trustedNetworks = new HashSet<String>();
+            Set<String> trustedNetworks = new HashSet<>();
             for (WifiNetwork wn : mNetworks) {
                 if (wn.trusted) {
                     trustedNetworks.add(filterSSID(wn.config.SSID));
                 }
             }
-            mPrefs.edit().putStringSet(PREF_KEY_WIFI_TRUSTED, trustedNetworks).apply();
+            mPrefs.edit().putStringSet(PREF_KEY_WIFI_TRUSTED, trustedNetworks).commit();
 
             Intent intent = new Intent(ACTION_WIFI_TRUSTED_CHANGED);
             intent.putExtra(EXTRA_WIFI_TRUSTED, trustedNetworks.toArray(
-                    new String[trustedNetworks.size()]));
+                    new String[0]));
             sendBroadcast(intent);
         }
 
@@ -233,14 +186,11 @@ public class WifiPriorityActivity extends GravityBoxListActivity implements Grav
             if (convertView == null) {
                 v = mInflater.inflate(R.layout.wifi_network_priority_list_item, null);
                 final CheckBox trusted = v.findViewById(R.id.chkTrusted);
-                trusted.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View cv) {
-                        WifiNetwork wn = (WifiNetwork) v.getTag();
-                        wn.trusted = ((CheckBox) cv).isChecked();
-                        saveTrustedNetworks();
-                        mNetworksListView.invalidateViews();
-                    }
+                trusted.setOnClickListener(cv -> {
+                    WifiNetwork wn = (WifiNetwork) v.getTag();
+                    wn.trusted = ((CheckBox) cv).isChecked();
+                    saveTrustedNetworks();
+                    mNetworksListView.invalidateViews();
                 });
             } else {
                 v = convertView;

@@ -1195,9 +1195,6 @@
     <string name="dt_display_mode_always">常時 (ネットワーク接続があるとき)</string>
     <string name="dt_display_mode_dm">Androidのダウンロードマネージャのみ</string>
     <string name="dt_display_mode_pt">ステータスバーにプログレスバーが表示されているとき</string>
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Wi-Fiの優先度</string>
-    <string name="pref_wifi_priority_summary">Wi-Fiネットワークの優先度を指定します。</string>
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">バッテリーバー</string>
     <string name="pref_battery_bar_show_title">バッテリーバーの表示</string>

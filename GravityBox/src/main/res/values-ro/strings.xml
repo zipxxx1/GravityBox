@@ -1431,10 +1431,6 @@
     <string name="dt_display_mode_dm">Numai pentru Managerul de descărcări Android</string>
     <string name="dt_display_mode_pt">Când se afișează bara de progres în bara de stare</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Prioritate Wi-Fi</string>
-    <string name="pref_wifi_priority_summary">Specificaţi prioritatea rețelelor Wi-Fi</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Bară baterie</string>
     <string name="pref_battery_bar_show_title">Afișați bara bateriei</string>

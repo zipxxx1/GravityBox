@@ -1446,10 +1446,6 @@
     <string name="dt_display_mode_dm">Nur für Android-Downloadmanager</string>
     <string name="dt_display_mode_pt">Bei Fortschrittsbalken in der Statusleiste</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">WLAN-Priorität</string>
-    <string name="pref_wifi_priority_summary">Priorität von WLAN-Netzwerken festlegen</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Akkubalken</string>
     <string name="pref_battery_bar_show_title">Akkubalken anzeigen</string>

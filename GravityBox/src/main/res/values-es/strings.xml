@@ -1459,10 +1459,6 @@
     <string name="dt_display_mode_dm">Sólo Para Android Manager Download</string>
     <string name="dt_display_mode_pt">Cuando la barra de progreso en la barra de estado se está mostrand</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Prioridad Wi-Fi</string>
-    <string name="pref_wifi_priority_summary">Especifica la prioridad de las conexiones Wi-Fi</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Barra de batería</string>
     <string name="pref_battery_bar_show_title">Mostrar barra de batería</string>

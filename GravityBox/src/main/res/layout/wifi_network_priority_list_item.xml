@@ -33,23 +33,14 @@
         android:gravity="center_vertical"
         android:ignoreGravity="@+id/icon">
 
-        <!-- left icon, used for the grabber -->
-        <ImageView android:id="@+id/grabber"
-            android:src="@drawable/ic_drag_handle"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_alignParentTop = "true"
             android:layout_alignParentBottom = "true"
-            android:layout_toEndOf="@id/grabber"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/chkTrusted"
             android:gravity="center_vertical">
 
             <!-- The height is set to half the height of the parent, which is 64 dip -->

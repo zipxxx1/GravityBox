@@ -1458,10 +1458,6 @@
     <string name="dt_display_mode_dm">Chỉ dành cho Quản lý tải xuống</string>
     <string name="dt_display_mode_pt">Khi hiện thanh tiến trình trên thanh trạng thái</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Ưu tiên Wi-Fi</string>
-    <string name="pref_wifi_priority_summary">Xác định ưu tiên của mạng Wi-Fi</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Thanh pin</string>
     <string name="pref_battery_bar_show_title">Hiện thanh pin</string>

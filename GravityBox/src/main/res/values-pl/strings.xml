@@ -1439,10 +1439,6 @@
     <string name="dt_display_mode_dm">Tylko dla menedżera pobierania Androida</string>
     <string name="dt_display_mode_pt">Gdy wyświetlany jest pasek postępu na pasku stanu</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Priorytet Wi-Fi</string>
-    <string name="pref_wifi_priority_summary">Określa priorytet sieci Wi-Fi</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Pasek baterii</string>
     <string name="pref_battery_bar_show_title">Pokaż pasek baterii</string>

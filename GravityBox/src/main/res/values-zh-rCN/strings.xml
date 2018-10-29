@@ -1473,10 +1473,6 @@
     <string name="dt_display_mode_dm">仅对于Android下载管理器</string>
     <string name="dt_display_mode_pt">当显示状态栏进度条</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">WiFi优先级</string>
-    <string name="pref_wifi_priority_summary">指定WiFi网络优先级</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">电量栏</string>
     <string name="pref_battery_bar_show_title">显示电量栏</string>

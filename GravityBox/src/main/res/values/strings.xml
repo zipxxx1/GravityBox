@@ -1473,10 +1473,6 @@
     <string name="dt_display_mode_dm">For Android Download Manager only</string>
     <string name="dt_display_mode_pt">When progress bar in status bar is showing</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Wi-Fi priority</string>
-    <string name="pref_wifi_priority_summary">Specifies the priority of the Wi-Fi networks</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Battery bar</string>
     <string name="pref_battery_bar_show_title">Show battery bar</string>
@@ -2128,5 +2124,9 @@
 
     <!-- QH: current mode -->
     <string name="pref_lc_qh_mode_title">Current mode</string>
+
+    <!-- Trusted Wi-Fi -->
+    <string name="pref_wifi_trusted_title">Trusted Wi-Fi</string>
+    <string name="pref_wifi_trusted_summary">Specifies Wi-Fi networks that are trusted for Smart Lock</string>
 
 </resources>

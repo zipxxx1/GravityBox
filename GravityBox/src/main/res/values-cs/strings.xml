@@ -1435,10 +1435,6 @@
     <string name="dt_display_mode_dm">Jen pro Android Download Manager</string>
     <string name="dt_display_mode_pt">Během zobrazení indikátoru progresu</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Wi-Fi priorita</string>
-    <string name="pref_wifi_priority_summary">Umožňuje definovat prioritu sítí Wi-Fi</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Pruh baterie</string>
     <string name="pref_battery_bar_show_title">Zobrazit pruh baterie</string>
@@ -2052,5 +2048,9 @@
 
     <!-- QH: current mode -->
     <string name="pref_lc_qh_mode_title">Aktuální režim</string>
+
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_trusted_title">Důvěryhodné Wi-Fi</string>
+    <string name="pref_wifi_trusted_summary">Umožňuje definovat důvěryhodné sítě Wi-Fi pro Smart Lock</string>
 
 </resources>

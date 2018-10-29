@@ -1208,9 +1208,6 @@ Assurez-vous que ses dimensions soient proches de : %1$dx%2$dpx</string>
     <string name="dt_display_mode_always">Toujours (lorsqu\'une connexion au réseau est disponible)</string>
     <string name="dt_display_mode_dm">Uniquement pour le Gestionnaire de Téléchargement d\'Android</string>
     <string name="dt_display_mode_pt">Lorsqu\'une barre de progression est présente dans la barre d\'état</string>
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Priorité Wi-Fi</string>
-    <string name="pref_wifi_priority_summary">Spécifie la priorité des réseaux Wi-Fi</string>
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Barre de batterie</string>
     <string name="pref_battery_bar_show_title">Afficher la barre de la batterie</string>

@@ -1473,10 +1473,6 @@
     <string name="dt_display_mode_dm">Untuk muat turun sahaja</string>
     <string name="dt_display_mode_pt">Ketika bar status ditunjukkan</string>
 
-    <!-- Wi-Fi priority -->
-    <string name="pref_wifi_priority_title">Keutamaan Wi-Fi</string>
-    <string name="pref_wifi_priority_summary">Set Wi-Fi utama</string>
-
     <!-- Battery bar -->
     <string name="pref_cat_battery_bar_title">Bar bateri</string>
     <string name="pref_battery_bar_show_title">Tunjukkan bar bateri</string>
