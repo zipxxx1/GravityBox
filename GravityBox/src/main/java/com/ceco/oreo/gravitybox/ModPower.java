@@ -34,6 +34,7 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.telephony.TelephonyManager;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -94,9 +95,15 @@ public class ModPower {
     };
 
     public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        Class<?> pmServiceClass = null;
+        try {
+            pmServiceClass = XposedHelpers.findClass(CLASS_PM_SERVICE, classLoader);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+
         // wake up with proximity feature
         try {
-            Class<?> pmServiceClass = XposedHelpers.findClass(CLASS_PM_SERVICE, classLoader);
             Class<?> pmHandlerClass = XposedHelpers.findClass(CLASS_PM_HANDLER, classLoader);
 
             mIgnoreIncomingCall = prefs.getBoolean(
@@ -190,6 +197,18 @@ public class ModPower {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+
+        // Wake on plug for TouchWiz
+        try {
+            if (Utils.isSamsungRom()) {
+                if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_UNPLUG_TURNS_ON_SCREEN, true)) {
+                    XposedHelpers.findAndHookMethod(pmServiceClass, "shouldWakeUpWhenPluggedOrUnpluggedLocked",
+                        boolean.class, int.class, boolean.class, XC_MethodReplacement.returnConstant(false));
+                }
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
