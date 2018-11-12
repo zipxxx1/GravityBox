@@ -1,3 +1,16 @@
+Changelog 8.4.0 - 12/11/2018
+--------------------------------------
+- Migrated from Eclipse to Android Studio
+- Lockscreen: reworked background opacity feature (now also supports default wallpaper)
+- BatteryBar: added option for showing in lock screen only
+- WiFi priority: changed obsolete priority feature to Trusted WiFi
+- Added support for disabling "Wake on plug" on Touchwiz (thanks to Phoenix09)
+- Reverted to old method for always expanded notifications on Samsung devices
+- Updated Malay translations (thanks to zamzameir)
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated French translations (thanks to Choukajohn)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 8.3.0 - 09/09/2018
 --------------------------------------
 - QuietHours: additional enhancements and redesign
