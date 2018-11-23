@@ -102,7 +102,7 @@ public class Utils {
     private static Boolean mIsSamsumgRom = null;
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
-    private static Boolean mIsVerneeApolloDevice;
+    private static Boolean mIsVerneeDevice;
     private static Boolean mIsOxygenOsRom = null;
 
     // Device features
@@ -267,12 +267,11 @@ public class Utils {
     }
 
     @SuppressLint("DefaultLocale")
-    public static boolean isVerneeApolloDevice() {
-        if (mIsVerneeApolloDevice != null) return mIsVerneeApolloDevice;
+    public static boolean isVerneeDevice() {
+        if (mIsVerneeDevice != null) return mIsVerneeDevice;
 
-        mIsVerneeApolloDevice = (Build.BRAND.equalsIgnoreCase("vernee") &&
-                Build.MODEL.toLowerCase().contains("apollo"));
-        return mIsVerneeApolloDevice;
+        mIsVerneeDevice = Build.BRAND.equalsIgnoreCase("vernee");
+        return mIsVerneeDevice;
     }
 
     public static boolean isOxygenOsRom() {
