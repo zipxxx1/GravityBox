@@ -104,6 +104,7 @@ public class Utils {
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     private static Boolean mIsOxygenOsRom = null;
+    private static Boolean mIsOnePlus3Rom = null;
     private static Boolean mIsOnePlus6Rom = null;
     private static Boolean mIsFileBasedEncrypted = null;
 
@@ -273,6 +274,13 @@ public class Utils {
             mIsOxygenOsRom = version != null && !version.isEmpty() &&  !"0".equals(version); 
         }
         return mIsOxygenOsRom;
+    }
+
+    public static boolean isOnePlus3Rom() {
+        if (mIsOnePlus3Rom == null) {
+            mIsOnePlus3Rom = isOxygenOsRom() && Build.MODEL.contains("A300");
+        }
+        return mIsOnePlus3Rom;
     }
 
     public static boolean isOnePlus6Rom() {

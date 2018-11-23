@@ -225,7 +225,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             }
 
             // adjust System Icons end margin on OOS
-            if (mContainerType == ContainerType.STATUSBAR && Utils.isOxygenOsRom()) {
+            if (mContainerType == ContainerType.STATUSBAR && Utils.isOnePlus3Rom()) {
                 Resources gbRes = Utils.getGbContext(mContext).getResources();
                 int systemIconsMarginEnd = gbRes.getDimensionPixelSize(R.dimen.system_icons_margin_end_oos);
                 MarginLayoutParams mlp = (MarginLayoutParams) mSystemIcons.getLayoutParams();
