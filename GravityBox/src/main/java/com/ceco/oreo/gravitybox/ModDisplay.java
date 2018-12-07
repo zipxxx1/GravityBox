@@ -227,8 +227,8 @@ public class ModDisplay {
                         mHandler.postDelayed(mPendingNotifRunnable, mPulseNotifDelay);
                     }
                 }
-            } catch(Exception e) {
-                GravityBox.log(TAG, e);
+            } catch(Throwable t) {
+                GravityBox.log(TAG, t);
             }
         }
     };
