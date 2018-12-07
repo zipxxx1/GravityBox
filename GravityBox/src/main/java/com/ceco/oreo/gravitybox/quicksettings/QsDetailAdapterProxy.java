@@ -22,6 +22,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.ceco.oreo.gravitybox.GravityBox;
+
 import de.robv.android.xposed.XposedHelpers;
 
 /**
@@ -77,15 +80,20 @@ public class QsDetailAdapterProxy implements InvocationHandler {
         } else if (method.getName().equals("getSettingsIntent")) {
             return mCallback.getSettingsIntent();
         } else if (method.getName().equals("setToggleState")) {
-            mCallback.setToggleState((boolean)args[0]);
+            mCallback.setToggleState((boolean) args[0]);
             return null;
         } else if (method.getName().equals("getMetricsCategory")) {
             return 111;
         } else if (method.getName().equals("createDetailView")) {
-            return mCallback.createDetailView((Context)args[0], (View)args[1], (ViewGroup)args[2]);
+            return mCallback.createDetailView((Context) args[0], (View) args[1], (ViewGroup) args[2]);
         } else if (method.getName().equals("getToggleEnabled")) {
             return mCallback.getToggleEnabled();
+        } else if (method.getName().equals("hasHeader")) {
+            return true;
+        } else if (method.getName().equals("showDetailDoneButton")) {
+            return true;
         } else {
+            GravityBox.log("QsDetailAdapterProxy", "Unhandled method: " + method.getName());
             return null;
         }
     }
