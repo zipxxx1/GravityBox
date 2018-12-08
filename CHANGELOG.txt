@@ -1,3 +1,13 @@
+Changelog 8.4.1 - 08/12/2018
+--------------------------------------
+- Improved compatibility with Moto G5 Plus:
+--- QuickSettings: Fixed SystemUI crash when expanding tile detail
+--- Navbar: improved layout related to custom key/cursor control keys
+--- Dialer: fixed Show dialpad automatically feature
+- OnePlus: removed extra padding from the custom battery icons
+- OnePlus: fixed crash related to button backlight notification feature (feature won't work on some OP devices anymore)
+- Potential improvement of custom key/cursor key layout on other devices having extended navbar
+
 Changelog 8.4.0 - 12/11/2018
 --------------------------------------
 - Migrated from Eclipse to Android Studio
