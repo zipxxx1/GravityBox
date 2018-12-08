@@ -16,6 +16,7 @@
 package com.ceco.oreo.gravitybox;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -36,8 +37,6 @@ public class ModDialer26 {
             "com.google.android.dialer", "com.android.dialer"));
 
     private static final String CLASS_DIALTACTS_ACTIVITY = "com.android.dialer.app.DialtactsActivity";
-    private static final String CLASS_DIALTACTS_ACTIVITY_GOOGLE = 
-            "com.google.android.apps.dialer.extensions.GoogleDialtactsActivity";
     private static final boolean DEBUG = false;
 
     private static QuietHours mQuietHours;
@@ -99,12 +98,25 @@ public class ModDialer26 {
                         if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_DIALER_SHOW_DIALPAD, false)) return;
     
                         final String realClassName = param.thisObject.getClass().getName();
+                        if (DEBUG) {
+                            log("DTActivity: realClassName=" + realClassName);
+                            for (Method m : param.thisObject.getClass().getDeclaredMethods()) {
+                                String buf = m.getName() + "(";
+                                for (Parameter p : m.getParameters()) {
+                                    buf += "," + p.getType();
+                                }
+                                buf += ")";
+                                log(buf);
+                            }
+                        }
                         Method m = null;
                         for (String mn : new String[] { "showDialpadFragment", "f" }) {
                             if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY)) {
                                 m = XposedHelpers.findMethodExactIfExists(
                                         param.thisObject.getClass(), mn, boolean.class);
-                            } else if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY_GOOGLE)) {
+                            } else if (param.thisObject.getClass().getSuperclass() != null &&
+                                    param.thisObject.getClass().getSuperclass().getName().equals(
+                                            CLASS_DIALTACTS_ACTIVITY)) {
                                 m = XposedHelpers.findMethodExactIfExists(
                                         param.thisObject.getClass().getSuperclass(), mn, boolean.class);
                             }
