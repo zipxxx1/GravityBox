@@ -36,8 +36,6 @@ public class ModDialer26 {
             "com.google.android.dialer", "com.android.dialer"));
 
     private static final String CLASS_DIALTACTS_ACTIVITY = "com.android.dialer.app.DialtactsActivity";
-    private static final String CLASS_DIALTACTS_ACTIVITY_GOOGLE = 
-            "com.google.android.apps.dialer.extensions.GoogleDialtactsActivity";
     private static final boolean DEBUG = false;
 
     private static QuietHours mQuietHours;
@@ -104,7 +102,9 @@ public class ModDialer26 {
                             if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY)) {
                                 m = XposedHelpers.findMethodExactIfExists(
                                         param.thisObject.getClass(), mn, boolean.class);
-                            } else if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY_GOOGLE)) {
+                            } else if (param.thisObject.getClass().getSuperclass() != null &&
+                                    param.thisObject.getClass().getSuperclass().getName().equals(
+                                            CLASS_DIALTACTS_ACTIVITY)) {
                                 m = XposedHelpers.findMethodExactIfExists(
                                         param.thisObject.getClass().getSuperclass(), mn, boolean.class);
                             }
