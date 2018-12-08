@@ -245,6 +245,7 @@ public class ModExpandedDesktop {
     }
 
     private static void updateNavbarDimensions() {
+        if (mContext == null) return;
         try {
             Resources res = mContext.getResources();
             int resWidthId = res.getIdentifier(
