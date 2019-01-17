@@ -83,6 +83,11 @@ public class SystemWideResources {
                     if (DEBUG) log("config_safe_media_volume_enabled: " + (triState == Utils.TriState.ENABLED));
                 }
             }
+
+            // Allow all rotations
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS, false)) {
+                XResources.setSystemWideReplacement("android", "bool", "config_allowAllRotations", true);
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
