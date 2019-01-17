@@ -656,9 +656,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_SA_AUTO_RESET = "stayAwakeTileAutoReset";
 
     public static final String PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS = "pref_display_allow_all_rotations";
-    public static final String ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED = 
-            "gravitybox.intent.action.DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED";
-    public static final String EXTRA_ALLOW_ALL_ROTATIONS = "allowAllRotations";
 
     public static final String PREF_KEY_QS_NETWORK_MODE_SIM_SLOT = "pref_qs_network_mode_sim_slot";
     public static final String ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED =
@@ -958,7 +955,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE,
             PREF_KEY_BATTERY_TWEAKS_ENABLED,
             PREF_KEY_VISUALIZER_ENABLE,
-            PREF_KEY_CORNER_PADDING_REMOVE
+            PREF_KEY_CORNER_PADDING_REMOVE,
+            PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -3255,10 +3253,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                     sAImodes[i] = Integer.valueOf(sALmodes.get(i));
                 }
                 intent.putExtra(EXTRA_SA_MODE, sAImodes);
-            } else if (key.equals(PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS)) {
-                intent.setAction(ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED);
-                intent.putExtra(EXTRA_ALLOW_ALL_ROTATIONS, 
-                        prefs.getBoolean(PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS, false));
             } else if (key.equals(PREF_KEY_QS_NETWORK_MODE_SIM_SLOT)) {
                 intent.setAction(ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
                 intent.putExtra(EXTRA_SIM_SLOT, Integer.valueOf(

@@ -327,15 +327,6 @@ public class ModHwKeys {
                 }
             } else if (action.equals(ACTION_SCREENSHOT) && mPhoneWindowManager != null) {
                 takeScreenshot(intent.getLongExtra(EXTRA_SCREENSHOT_DELAY_MS, 300L));
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED)) {
-                final boolean allowAllRotations = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_ALLOW_ALL_ROTATIONS, false);
-                try {
-                    XposedHelpers.setIntField(mPhoneWindowManager, "mAllowAllRotations",
-                            allowAllRotations ? 1 : 0);
-                } catch (Throwable t) {
-                    GravityBox.log(TAG, "Error settings PhoneWindowManager.mAllowAllRotations: ", t);
-                }
             } else if (action.equals(ACTION_SHOW_POWER_MENU) && mPhoneWindowManager != null) {
                 showGlobalActionsDialog();
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
@@ -968,8 +959,6 @@ public class ModHwKeys {
             mPhoneWindowManager = param.thisObject;
             mContext = (Context) XposedHelpers.getObjectField(mPhoneWindowManager, "mContext");
             mGbContext = Utils.getGbContext(mContext);
-            XposedHelpers.setIntField(mPhoneWindowManager, "mAllowAllRotations", 
-                    mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS, false) ? 1 : 0);
 
             Resources res = mGbContext.getResources();
             mStrAppKilled = res.getString(R.string.app_killed);
@@ -989,7 +978,6 @@ public class ModHwKeys {
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_PIE_CHANGED);
             intentFilter.addAction(ACTION_SCREENSHOT);
             intentFilter.addAction(ACTION_SHOW_POWER_MENU);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
             intentFilter.addAction(ACTION_TOGGLE_EXPANDED_DESKTOP);

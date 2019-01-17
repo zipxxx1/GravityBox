@@ -1893,6 +1893,7 @@
         <CheckBoxPreference 
             android:key="pref_display_allow_all_rotations"
             android:title="@string/pref_display_allow_all_rotations_title"
+            android:summary="@string/pref_display_allow_all_rotations_summary"
             android:defaultValue="false" />
 
         <CheckBoxPreference 
