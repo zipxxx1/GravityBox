@@ -2140,4 +2140,31 @@
     <!-- BatteryBar: lock screen only -->
     <string name="pref_battery_bar_lockscreen_only_title">Lock screen only</string>
 
+    <!-- Advanced tuning -->
+    <string name="pref_tuner_title">Advanced tuning</string>
+    <string name="pref_tuner_summary">Allows advanced tuning of the Framework and System UI configuration parameters</string>
+    <string name="tuner_info">Advanced tuner dynamically extracts all the configuration parameters from the Framework
+        and System UI including their current values and allows the user to override them with own values.
+        Tuning is currently available for simple types of parameters, such as integers and booleans.
+        Overridden values will be applied during boot. The final result always depends on device type, relevant hardware support
+        and vendor implementation; thus it is normal that changes to some parameters may not have any effect.</string>
+    <string name="tuner_warning">Advanced tuning is designed for power users only. Overriding default values
+        and using incorrect values may lead to stability and performance issues and may even render your system unusable.
+        Changes are not permanent and last only as long as GravityBox Xposed module is active and master switch is enabled.
+        Use with caution and always have a backup plan!</string>
+    <string name="pref_tuner_master_switch_summary">Requires reboot</string>
+    <string name="pref_tuner_framework_title">Framework</string>
+    <string name="pref_tuner_framework_summary">Contains core system configuration parameters</string>
+    <string name="pref_tuner_systemui_title">System UI</string>
+    <string name="pref_tuner_systemui_summary">Contains System UI specific configuration parameters related to status bar, lock screen, etc.</string>
+    <string name="tuner_menu_show_all">Show all items</string>
+    <string name="tuner_menu_show_overridden">Show overridden items</string>
+    <string name="tuner_no_documentation">Documentation not available</string>
+    <string name="pref_tuneable_override_title">Override</string>
+    <string name="tuneable_current_value">Current value</string>
+    <string name="tuneable_overridden_value">Overridden value</string>
+    <string name="tuneable_reboot_required">Reboot required</string>
+    <string name="pref_tuneable_value_int_error">Invalid value. Integer expected</string>
+    <string name="tuner_manager_not_responding">Tuning manager is not responding</string>
+
 </resources>

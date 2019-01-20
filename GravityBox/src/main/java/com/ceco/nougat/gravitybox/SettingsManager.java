@@ -48,6 +48,7 @@ public class SettingsManager {
     private WorldReadablePrefs mPrefsMain;
     private WorldReadablePrefs mPrefsLedControl;
     private WorldReadablePrefs mPrefsQuietHours;
+    private WorldReadablePrefs mPrefsTuner;
     private FileObserver mFileObserver;
     private List<FileObserverListener> mFileObserverListeners;
 
@@ -61,6 +62,8 @@ public class SettingsManager {
         mFileObserverListeners.add(mPrefsLedControl);
         mPrefsQuietHours = new WorldReadablePrefs(mContext, "quiet_hours");
         mFileObserverListeners.add(mPrefsQuietHours);
+        mPrefsTuner = new WorldReadablePrefs(mContext, "tuner");
+        mFileObserverListeners.add(mPrefsTuner);
 
         registerFileObserver();
     }
@@ -109,7 +112,8 @@ public class SettingsManager {
         String[] prefsFileNames = new String[] { 
                 mContext.getPackageName() + "_preferences.xml",
                 "ledcontrol.xml",
-                "quiet_hours.xml"
+                "quiet_hours.xml",
+                "tuner.xml"
         };
         for (String prefsFileName : prefsFileNames) {
             File prefsFile = new File(mContext.getDataDir() + "/shared_prefs/" + prefsFileName);
@@ -220,7 +224,8 @@ public class SettingsManager {
         String[] prefsFileNames = new String[] { 
                 mContext.getPackageName() + "_preferences.xml",
                 "ledcontrol.xml",
-                "quiet_hours.xml"
+                "quiet_hours.xml",
+                "tuner.xml"
         };
         for (String prefsFileName : prefsFileNames) {
             File prefsFile = new File(BACKUP_PATH + "/" + prefsFileName);
@@ -366,6 +371,10 @@ public class SettingsManager {
 
     public WorldReadablePrefs getQuietHoursPrefs() {
         return mPrefsQuietHours;
+    }
+
+    public WorldReadablePrefs getTunerPrefs() {
+        return mPrefsTuner;
     }
 
     private void registerFileObserver() {

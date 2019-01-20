@@ -21,9 +21,11 @@ import java.util.List;
 
 import com.ceco.nougat.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.nougat.gravitybox.managers.SysUiManagers;
+import com.ceco.nougat.gravitybox.managers.TunerManager;
 import com.ceco.nougat.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.nougat.gravitybox.shortcuts.AShortcut;
 import com.ceco.nougat.gravitybox.visualizer.VisualizerController;
+import com.ceco.nougat.gravitybox.tuner.TunerMainActivity;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -274,11 +276,18 @@ public class ModStatusBar {
         }
     }
 
-    public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
+    public static void initResources(final XSharedPreferences prefs, final XSharedPreferences tunerPrefs,
+                                     final InitPackageResourcesParam resparam) {
         try {
             StatusbarSignalCluster.initResources(prefs, resparam);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
+        }
+
+        // Advanced tuning
+        if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
+                !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
+            TunerManager.applySystemUiConfiguration(tunerPrefs, resparam.res);
         }
     }
 

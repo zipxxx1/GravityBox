@@ -138,6 +138,21 @@
         </activity>
 
         <activity
+            android:name="com.ceco.nougat.gravitybox.tuner.TunerMainActivity"
+            android:label="@string/pref_tuner_title" >
+        </activity>
+
+        <activity
+            android:name="com.ceco.nougat.gravitybox.tuner.TunerCategoryActivity"
+            android:label="@string/pref_tuner_title" >
+        </activity>
+
+        <activity
+            android:name="com.ceco.nougat.gravitybox.tuner.TunerDetailActivity"
+            android:label="@string/pref_tuner_title" >
+        </activity>
+
+        <activity
             android:name="com.ceco.nougat.gravitybox.UnlockActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false"

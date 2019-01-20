@@ -18,6 +18,9 @@ package com.ceco.nougat.gravitybox;
 import android.content.res.Resources;
 import android.content.res.XResources;
 
+import com.ceco.nougat.gravitybox.managers.TunerManager;
+import com.ceco.nougat.gravitybox.tuner.TunerMainActivity;
+
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 
@@ -29,7 +32,7 @@ public class SystemWideResources {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static void initResources(final XSharedPreferences prefs) {
+    public static void initResources(final XSharedPreferences prefs, final XSharedPreferences tunerPrefs) {
         try {
             Resources systemRes = XResources.getSystem();
 
@@ -90,6 +93,12 @@ public class SystemWideResources {
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
+        }
+
+        // Advanced tuning
+        if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
+                !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
+            TunerManager.applyFrameworkConfiguration(tunerPrefs);
         }
     }
 
