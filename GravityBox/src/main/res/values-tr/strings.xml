@@ -133,18 +133,18 @@
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Kilit ekranı iyileştirmeleri</string>
     <string name="pref_cat_lockscreen_summary">Çeşitli kilit ekranı iyileştirmelerini içerir</string>
-    <string name="pref_cat_lockscreen_background_title">Kilit ekranı arkaplanı</string>
-    <string name="pref_lockscreen_background_title">Arkaplan stili</string>
+    <string name="pref_cat_lockscreen_background_title">Kilit ekranı arka planı</string>
+    <string name="pref_lockscreen_background_title">Arka plan stili</string>
     <string name="lockscreen_bg_default">Varsayılan duvar kağıdı</string>
     <string name="lockscreen_bg_color">Renk doldur</string>
     <string name="lockscreen_bg_image">Özel resim</string>
     <string name="lockscreen_bg_last_screen">Son ekran</string>
     <string name="pref_lockscreen_bg_color_title">Özel renk ayarla</string>
-    <string name="pref_lockscreen_bg_color_summary">Kilit ekranı için özel arkaplan rengi ayarlamanızı sağlar</string>
+    <string name="pref_lockscreen_bg_color_summary">Kilit ekranı için özel arka plan rengi ayarlamanızı sağlar</string>
     <string name="pref_lockscreen_bg_image_title">Özel resim ayarla</string>
-    <string name="pref_lockscreen_bg_image_summary">Kilit ekranı için özel arkaplan resmi ayarlamanızı sağlar</string>
-    <string name="lockscreen_background_result_successful">Arkaplan değiştirildi</string>
-    <string name="lockscreen_background_result_not_successful">Arkaplan değiştirilmedi</string>
+    <string name="pref_lockscreen_bg_image_summary">Kilit ekranı için özel arka plan resmi ayarlamanızı sağlar</string>
+    <string name="lockscreen_background_result_successful">Arka plan değiştirildi</string>
+    <string name="lockscreen_background_result_not_successful">Arka plan değiştirilmedi</string>
     <string name="pref_cat_lockscreen_other_title">Diğer</string>
 
     <!--  Power tweaks category -->
@@ -213,7 +213,7 @@
     <string name="hwkey_action_search">Arama</string>
     <string name="hwkey_action_voice_search">Sesli arama</string>
     <string name="hwkey_action_prev_app">Önceki uygulama</string>
-    <string name="hwkey_action_kill">Önplan uygulamayı sonlandır</string>
+    <string name="hwkey_action_kill">Ön plan uygulamayı sonlandır</string>
     <string name="hwkey_action_sleep">Uykuya geç</string>
     <string name="pref_hwkey_kill_delay_title">Uyg sonlandırma uzun basma gecikmesi</string>
     <string name="pref_hwkey_kill_delay_summary">Uygulama sonlandırma eylemine uygulanır. Sonlandırmak için tuşa ne kadar uzun basılacağını belirler</string>
@@ -281,14 +281,14 @@
     <string name="pref_cat_notification_drawer_style_title">Bildirim ekranı stili</string>
 
     <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Bildirim ekranı arkaplanı</string>
-    <string name="notif_background_default">Varsayılan arkaplan</string>
+    <string name="pref_notif_background_title">Bildirim ekranı arka planı</string>
+    <string name="notif_background_default">Varsayılan arka plan</string>
     <string name="notif_background_color_fill">Renk doldur</string>
     <string name="notif_background_custom_image">Özel resim</string>
-    <string name="pref_notif_color_title">Arkaplan rengi ayarla</string>
+    <string name="pref_notif_color_title">Arka plan rengi ayarla</string>
     <string name="pref_notif_image_portrait_title">Dikey resmi ayarla</string>
     <string name="pref_notif_image_landscape_title">Yatay resmi ayarla</string>
-    <string name="pref_notif_background_alpha_title">Arkaplan şeffaflığı</string>
+    <string name="pref_notif_background_alpha_title">Arka plan şeffaflığı</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Dolaşım göstergesini devre dışı bırak</string>
@@ -570,8 +570,8 @@
 
     <!-- Pie colors -->
     <string name="pref_cat_pie_colors_title">Pasta dilimi renkleri</string>
-    <string name="pref_pie_color_bg_title">Arkaplan rengi</string>
-    <string name="pref_pie_color_fg_title">Önplan rengi</string>
+    <string name="pref_pie_color_bg_title">Arka plan rengi</string>
+    <string name="pref_pie_color_fg_title">Ön plan rengi</string>
     <string name="pref_pie_color_outline_title">Dış yüzey rengi</string>
     <string name="pref_pie_color_selected_title">Seçilen tuş rengi</string>
     <string name="pref_pie_color_text_title">Yazı rengi</string>
@@ -780,7 +780,7 @@
     <string name="shortcut_google_now">Google Now</string>
 
     <!-- Lockscreen background opacity -->
-    <string name="pref_lockscreen_bg_opacity_title">Arkaplan görünürlüğü</string>
+    <string name="pref_lockscreen_bg_opacity_title">Arka plan görünürlüğü</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Medya kontrolü</string>
@@ -1335,7 +1335,7 @@
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Üst bildirim</string>
     <string name="pref_lc_headsup_dnd_title">Rahatsız etme</string>
-    <string name="pref_lc_headsup_dnd_summary">Bu uygulama önplandayken hiçbir üst bildirimi gösterme</string>
+    <string name="pref_lc_headsup_dnd_summary">Bu uygulama ön plandayken hiçbir üst bildirimi gösterme</string>
 
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Aktif Ekran modu</string>
