@@ -20,8 +20,10 @@ import java.util.List;
 
 import com.ceco.oreo.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
+import com.ceco.oreo.gravitybox.managers.TunerManager;
 import com.ceco.oreo.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.oreo.gravitybox.shortcuts.AShortcut;
+import com.ceco.oreo.gravitybox.tuner.TunerMainActivity;
 import com.ceco.oreo.gravitybox.visualizer.VisualizerController;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -278,7 +280,8 @@ public class ModStatusBar {
         }
     }
 
-    public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
+    public static void initResources(final XSharedPreferences prefs, final XSharedPreferences tunerPrefs,
+                                     final InitPackageResourcesParam resparam) {
         try {
             StatusbarSignalCluster.initResources(prefs, resparam);
         } catch (Throwable t) {
@@ -287,8 +290,18 @@ public class ModStatusBar {
 
         if (Build.VERSION.SDK_INT >= 27 &&
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_CORNER_PADDING_REMOVE, false)) {
-            resparam.res.setReplacement(PACKAGE_NAME, "dimen", "rounded_corner_content_padding",
-                    new XResources.DimensionReplacement(0, TypedValue.COMPLEX_UNIT_DIP));
+            try {
+                resparam.res.setReplacement(PACKAGE_NAME, "dimen", "rounded_corner_content_padding",
+                        new XResources.DimensionReplacement(0, TypedValue.COMPLEX_UNIT_DIP));
+            } catch (Throwable t) {
+                GravityBox.log(TAG, t);
+            }
+        }
+
+        // Advanced tuning
+        if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
+                !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
+            TunerManager.applySystemUiConfiguration(tunerPrefs, resparam.res);
         }
     }
 

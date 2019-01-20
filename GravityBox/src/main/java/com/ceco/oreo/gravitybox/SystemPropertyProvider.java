@@ -16,6 +16,7 @@
 package com.ceco.oreo.gravitybox;
 
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
+import com.ceco.oreo.gravitybox.managers.TunerManager;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -76,7 +77,8 @@ public class SystemPropertyProvider {
         }
     }
 
-    public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {
+    public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs,
+                            final XSharedPreferences tunerPrefs, final ClassLoader classLoader) {
         try {
             final Class<?> classSystemUIService = XposedHelpers.findClass(
                     "com.android.systemui.SystemUIService", classLoader);
@@ -86,7 +88,7 @@ public class SystemPropertyProvider {
                     Context context = (Context) param.thisObject;
                     try {
                         if (DEBUG) log("Initializing SystemUI managers");
-                        SysUiManagers.init(context, prefs, qhPrefs);
+                        SysUiManagers.init(context, prefs, qhPrefs, tunerPrefs);
                     } catch(Throwable t) {
                         GravityBox.log(TAG, "Error initializing SystemUI managers: ", t);
                     }
@@ -126,6 +128,8 @@ public class SystemPropertyProvider {
                                             cr, SETTING_GRAVITYBOX_UUID_TYPE));
                                     data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
                                             SETTING_UNC_TRIAL_COUNTDOWN, 50));
+                                    data.putInt("tunerTrialCountdown", Settings.System.getInt(cr,
+                                            TunerManager.SETTING_TUNER_TRIAL_COUNTDOWN, 50));
                                     data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
                                     data.putBoolean("supportsFingerprint", supportsFingerprint(context));
                                     if (SysUiManagers.FingerprintLauncher != null) {
@@ -143,6 +147,7 @@ public class SystemPropertyProvider {
                                         log("uuidRegistered: " + data.getBoolean("uuidRegistered"));
                                         log("uuidType: " + data.getString("uuidType"));
                                         log("uncTrialCountdown: " + data.getInt("uncTrialCountdown"));
+                                        log("tunerTrialCountdown: " + data.getInt("tunerTrialCountdown"));
                                         log("hasMsimSupport: " + data.getBoolean("hasMsimSupport"));
                                         log("xposedBridgeVersion: " + data.getInt("xposedBridgeVersion"));
                                         log("supportsFingerprint: " + data.getBoolean("supportsFingerprint"));

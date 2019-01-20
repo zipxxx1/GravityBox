@@ -34,9 +34,11 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     private static final File prefsFileProt = new File("/data/user_de/0/com.ceco.oreo.gravitybox/shared_prefs/com.ceco.oreo.gravitybox_preferences.xml");
     private static final File qhPrefsFileProt = new File("/data/user_de/0/com.ceco.oreo.gravitybox/shared_prefs/quiet_hours.xml");
     private static final File uncPrefsFileProt = new File("/data/user_de/0/com.ceco.oreo.gravitybox/shared_prefs/ledcontrol.xml");
+    private static final File tunerPrefsFileProt = new File("/data/user_de/0/com.ceco.oreo.gravitybox/shared_prefs/tuner.xml");
     private static XSharedPreferences prefs;
     private static XSharedPreferences qhPrefs;
     private static XSharedPreferences uncPrefs;
+    private static XSharedPreferences tunerPrefs;
     private static boolean LOG_ERRORS;
 
     public static void log(String tag, String message, Throwable t) {
@@ -65,10 +67,12 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             prefs = new XSharedPreferences(prefsFileProt);
             uncPrefs = new XSharedPreferences(uncPrefsFileProt);
             qhPrefs = new XSharedPreferences(qhPrefsFileProt);
+            tunerPrefs = new XSharedPreferences(tunerPrefsFileProt);
         } else {
             prefs = new XSharedPreferences(PACKAGE_NAME);
-            uncPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
-            qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+            uncPrefs = new XSharedPreferences(PACKAGE_NAME, "ledcontrol");
+            qhPrefs = new XSharedPreferences(PACKAGE_NAME, "quiet_hours");
+            tunerPrefs = new XSharedPreferences(PACKAGE_NAME, "tuner");
         }
         LOG_ERRORS = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOG_ERRORS, false);
 
@@ -97,7 +101,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             return;
         }
 
-        SystemWideResources.initResources(prefs);
+        SystemWideResources.initResources(prefs, tunerPrefs);
 
         // Common
         ModInputMethod.initZygote(prefs);
@@ -112,7 +116,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         }
 
         if (resparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
-            ModStatusBar.initResources(prefs, resparam);
+            ModStatusBar.initResources(prefs, tunerPrefs, resparam);
         }
 
         if (resparam.packageName.equals(ModSettings.PACKAGE_NAME)) {
@@ -166,10 +170,11 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             prefs.reload();
             qhPrefs.reload();
             uncPrefs.reload();
+            tunerPrefs.reload();
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {
-            SystemPropertyProvider.init(prefs, qhPrefs, lpparam.classLoader);
+            SystemPropertyProvider.init(prefs, qhPrefs, tunerPrefs, lpparam.classLoader);
         }
 
         // Common

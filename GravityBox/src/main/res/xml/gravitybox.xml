@@ -2723,6 +2723,11 @@
         android:summary="@string/pref_led_control_summary" />
 
     <Preference
+        android:key="pref_tuner"
+        android:title="@string/pref_tuner_title"
+        android:summary="@string/pref_tuner_summary" />
+
+    <Preference
         android:key="pref_engineering_mode"
         android:title="@string/engineering_mode_title"
         android:summary="@string/engineering_mode_summary" />"

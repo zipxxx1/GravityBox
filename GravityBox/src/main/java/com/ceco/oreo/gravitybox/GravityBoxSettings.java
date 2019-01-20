@@ -36,6 +36,7 @@ import com.ceco.oreo.gravitybox.preference.SeekBarPreference;
 import com.ceco.oreo.gravitybox.quicksettings.TileOrderActivity;
 import com.ceco.oreo.gravitybox.shortcuts.GoHomeShortcut;
 import com.ceco.oreo.gravitybox.shortcuts.ShortcutActivity;
+import com.ceco.oreo.gravitybox.tuner.TunerMainActivity;
 import com.ceco.oreo.gravitybox.webserviceclient.RequestParams;
 import com.ceco.oreo.gravitybox.webserviceclient.TransactionResult;
 import com.ceco.oreo.gravitybox.webserviceclient.WebServiceClient;
@@ -916,6 +917,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_VISUALIZER_DIM_ARTWORK = "visualizerDimArtwork";
     public static final String EXTRA_VISUALIZER_NAVBAR = "visualizerNavbar";
 
+    private static final String PREF_TUNER = "pref_tuner";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -1030,6 +1033,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         public boolean uuidRegistered;
         public String uuidType;
         public int uncTrialCountdown;
+        public int tunerTrialCountdown;
         public boolean hasMsimSupport;
         public boolean supportsFingerprint;
         public int[] fingerprintIds;
@@ -1060,6 +1064,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             }
             if (data.containsKey("uncTrialCountdown")) {
                 uncTrialCountdown = data.getInt("uncTrialCountdown");
+            }
+            if (data.containsKey("tunerTrialCountdown")) {
+                tunerTrialCountdown = data.getInt("tunerTrialCountdown");
             }
             if (data.containsKey("hasMsimSupport")) {
                 hasMsimSupport = data.getBoolean("hasMsimSupport");
@@ -1448,6 +1455,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         //private PreferenceScreen mPrefCatCellTile;
         private ListPreference mPrefBatteryTileTempUnit;
         private EditTextPreference mPrefPowerCameraVp;
+        private Preference mPrefTuner;
+
         private String mSearchQuery;
 
         @Override
@@ -1734,6 +1743,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefBatteryTileTempUnit = (ListPreference) findPreference(PREF_KEY_BATTERY_TILE_TEMP_UNIT); 
 
             mPrefPowerCameraVp = (EditTextPreference) findPreference(PREF_KEY_POWER_CAMERA_VP);
+
+            mPrefTuner = findPreference(PREF_TUNER);
 
             // Disable features not applicable to 8.1 / 8.0
             if (Build.VERSION.SDK_INT >= 27) {
@@ -2249,6 +2260,12 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                     getString(R.string.wsc_trans_required_summary)));
                 LedSettings.lockUnc(getActivity(), true);
             }
+            if (sSystemProperties.tunerTrialCountdown == 0) {
+                mPrefTuner.setEnabled(false);
+                mPrefTuner.setSummary(String.format("%s (%s)", mPrefTuner.getSummary(),
+                        getString(R.string.wsc_trans_required_summary)));
+                TunerMainActivity.lockTuner(getActivity(), true);
+            }
             mPrefs.edit().putString(PREF_KEY_TRANS_VERIFICATION, null).commit();
             mPrefTransVerification.setText(null);
             mPrefTransVerification.getEditText().setText(null);
@@ -2262,6 +2279,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefLedControl.setEnabled(true);
             mPrefLedControl.setSummary(R.string.pref_led_control_summary);
             LedSettings.lockUnc(getActivity(), false);
+            mPrefTuner.setEnabled(true);
+            mPrefTuner.setSummary(R.string.pref_tuner_summary);
+            TunerMainActivity.lockTuner(getActivity(), false);
             mPrefCatAbout.removePreference(mPrefTransVerification);
             mPrefCatAbout.removePreference(mPrefAboutUnlocker);
         }
@@ -3822,6 +3842,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent = new Intent(getActivity(), LedMainActivity.class);
                 intent.putExtra(LedMainActivity.EXTRA_UUID_REGISTERED, sSystemProperties.uuidRegistered);
                 intent.putExtra(LedMainActivity.EXTRA_TRIAL_COUNTDOWN, sSystemProperties.uncTrialCountdown);
+            } else if (PREF_TUNER.equals(pref.getKey())) {
+                intent = new Intent(getActivity(), TunerMainActivity.class);
+                intent.putExtra(TunerMainActivity.EXTRA_UUID_REGISTERED, sSystemProperties.uuidRegistered);
+                intent.putExtra(TunerMainActivity.EXTRA_TRIAL_COUNTDOWN, sSystemProperties.tunerTrialCountdown);
             } else if (PREF_KEY_NAVBAR_CUSTOM_KEY_IMAGE.equals(pref.getKey())) {
                 setNavbarCustomKeyImage();
             } else if (PREF_KEY_FORCE_AOSP.equals(pref.getKey())) {
@@ -4150,6 +4174,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                                                 SettingsManager.getInstance(getActivity()).getOrCreateUuid());
                                         intent.putExtra(SystemPropertyProvider.EXTRA_UUID_TYPE, "PayPal");
                                         getActivity().sendBroadcast(intent);
+                                        LedSettings.lockUnc(getActivity(), false);
+                                        TunerMainActivity.lockTuner(getActivity(), false);
                                         getActivity().finish();
                                     }
                                 }

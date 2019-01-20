@@ -16,6 +16,8 @@ package com.ceco.oreo.gravitybox;
 import java.io.File;
 
 import com.ceco.oreo.gravitybox.R;
+import com.ceco.oreo.gravitybox.ledcontrol.LedSettings;
+import com.ceco.oreo.gravitybox.tuner.TunerMainActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -126,6 +128,8 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
                     SettingsManager.getInstance(this).getOrCreateUuid());
             intent.putExtra(SystemPropertyProvider.EXTRA_UUID_TYPE, "Unlocker");
             sendBroadcast(intent);
+            LedSettings.lockUnc(this, false);
+            TunerMainActivity.lockTuner(this, false);
             AlertDialog.Builder builder = new AlertDialog.Builder(
                     new ContextThemeWrapper(UnlockActivity.this, mDlgThemeId))
                 .setTitle(R.string.app_name)

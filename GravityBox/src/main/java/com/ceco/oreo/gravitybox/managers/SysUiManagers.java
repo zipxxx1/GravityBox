@@ -20,6 +20,7 @@ import com.ceco.oreo.gravitybox.GravityBox;
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
 import com.ceco.oreo.gravitybox.PhoneWrapper;
 import com.ceco.oreo.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.oreo.gravitybox.tuner.TunerMainActivity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -39,8 +40,9 @@ public class SysUiManagers {
     public static NotificationDataMonitor NotifDataMonitor;
     public static GpsStatusMonitor GpsMonitor;
     public static SubscriptionManager SubscriptionMgr;
+    public static TunerManager TunerMgr;
 
-    public static void init(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs) {
+    public static void init(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs, XSharedPreferences tunerPrefs) {
         if (context == null)
             throw new IllegalArgumentException("Context cannot be null");
         if (prefs == null)
@@ -102,6 +104,15 @@ public class SysUiManagers {
             }
         }
 
+        if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
+                !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
+            try {
+                TunerMgr = new TunerManager(context);
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error creating TunerManager: ", t);
+            }
+        }
+
         IntentFilter intentFilter = new IntentFilter();
         // battery info manager
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
@@ -146,6 +157,11 @@ public class SysUiManagers {
             intentFilter.addAction(SubscriptionManager.ACTION_GET_DEFAULT_SIM_SLOT);
         }
 
+        // TunerManager
+        if (TunerMgr != null) {
+            intentFilter.addAction(TunerManager.ACTION_GET_TUNEABLES);
+        }
+
         context.registerReceiver(sBroadcastReceiver, intentFilter);
     }
 
@@ -184,6 +200,9 @@ public class SysUiManagers {
             }
             if (SubscriptionMgr != null) {
                 SubscriptionMgr.onBroadcastReceived(context, intent);
+            }
+            if (TunerMgr != null) {
+                TunerMgr.onBroadcastReceived(context, intent);
             }
         }
     };
