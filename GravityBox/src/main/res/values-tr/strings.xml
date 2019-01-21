@@ -133,18 +133,18 @@
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Kilit ekranı iyileştirmeleri</string>
     <string name="pref_cat_lockscreen_summary">Çeşitli kilit ekranı iyileştirmelerini içerir</string>
-    <string name="pref_cat_lockscreen_background_title">Kilit ekranı arkaplanı</string>
-    <string name="pref_lockscreen_background_title">Arkaplan stili</string>
+    <string name="pref_cat_lockscreen_background_title">Kilit ekranı arka planı</string>
+    <string name="pref_lockscreen_background_title">Arka plan stili</string>
     <string name="lockscreen_bg_default">Varsayılan duvar kağıdı</string>
     <string name="lockscreen_bg_color">Renk doldur</string>
     <string name="lockscreen_bg_image">Özel resim</string>
     <string name="lockscreen_bg_last_screen">Son ekran</string>
     <string name="pref_lockscreen_bg_color_title">Özel renk ayarla</string>
-    <string name="pref_lockscreen_bg_color_summary">Kilit ekranı için özel arkaplan rengi ayarlamanızı sağlar</string>
+    <string name="pref_lockscreen_bg_color_summary">Kilit ekranı için özel arka plan rengi ayarlamanızı sağlar</string>
     <string name="pref_lockscreen_bg_image_title">Özel resim ayarla</string>
-    <string name="pref_lockscreen_bg_image_summary">Kilit ekranı için özel arkaplan resmi ayarlamanızı sağlar</string>
-    <string name="lockscreen_background_result_successful">Arkaplan değiştirildi</string>
-    <string name="lockscreen_background_result_not_successful">Arkaplan değiştirilmedi</string>
+    <string name="pref_lockscreen_bg_image_summary">Kilit ekranı için özel arka plan resmi ayarlamanızı sağlar</string>
+    <string name="lockscreen_background_result_successful">Arka plan değiştirildi</string>
+    <string name="lockscreen_background_result_not_successful">Arka plan değiştirilmedi</string>
     <string name="pref_cat_lockscreen_other_title">Diğer</string>
 
     <!--  Power tweaks category -->
@@ -213,7 +213,7 @@
     <string name="hwkey_action_search">Arama</string>
     <string name="hwkey_action_voice_search">Sesli arama</string>
     <string name="hwkey_action_prev_app">Önceki uygulama</string>
-    <string name="hwkey_action_kill">Önplan uygulamayı sonlandır</string>
+    <string name="hwkey_action_kill">Ön plan uygulamayı sonlandır</string>
     <string name="hwkey_action_sleep">Uykuya geç</string>
     <string name="pref_hwkey_kill_delay_title">Uyg sonlandırma uzun basma gecikmesi</string>
     <string name="pref_hwkey_kill_delay_summary">Uygulama sonlandırma eylemine uygulanır. Sonlandırmak için tuşa ne kadar uzun basılacağını belirler</string>
@@ -281,14 +281,14 @@
     <string name="pref_cat_notification_drawer_style_title">Bildirim ekranı stili</string>
 
     <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Bildirim ekranı arkaplanı</string>
-    <string name="notif_background_default">Varsayılan arkaplan</string>
+    <string name="pref_notif_background_title">Bildirim ekranı arka planı</string>
+    <string name="notif_background_default">Varsayılan arka plan</string>
     <string name="notif_background_color_fill">Renk doldur</string>
     <string name="notif_background_custom_image">Özel resim</string>
-    <string name="pref_notif_color_title">Arkaplan rengi ayarla</string>
+    <string name="pref_notif_color_title">Arka plan rengi ayarla</string>
     <string name="pref_notif_image_portrait_title">Dikey resmi ayarla</string>
     <string name="pref_notif_image_landscape_title">Yatay resmi ayarla</string>
-    <string name="pref_notif_background_alpha_title">Arkaplan şeffaflığı</string>
+    <string name="pref_notif_background_alpha_title">Arka plan şeffaflığı</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Dolaşım göstergesini devre dışı bırak</string>
@@ -457,6 +457,7 @@
 
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Tüm yönlere izin ver</string>
+    <string name="pref_display_allow_all_rotations_summary">Yeniden başlatma gerektirir</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Ağ modu karesi SIM slotu</string>
@@ -569,8 +570,8 @@
 
     <!-- Pie colors -->
     <string name="pref_cat_pie_colors_title">Pasta dilimi renkleri</string>
-    <string name="pref_pie_color_bg_title">Arkaplan rengi</string>
-    <string name="pref_pie_color_fg_title">Önplan rengi</string>
+    <string name="pref_pie_color_bg_title">Arka plan rengi</string>
+    <string name="pref_pie_color_fg_title">Ön plan rengi</string>
     <string name="pref_pie_color_outline_title">Dış yüzey rengi</string>
     <string name="pref_pie_color_selected_title">Seçilen tuş rengi</string>
     <string name="pref_pie_color_text_title">Yazı rengi</string>
@@ -779,7 +780,8 @@
     <string name="shortcut_google_now">Google Now</string>
 
     <!-- Lockscreen background opacity -->
-    <string name="pref_lockscreen_bg_opacity_title">Arkaplan görünürlüğü</string>
+    <string name="pref_lockscreen_bg_opacity_title">Arka plan görünürlüğü</string>
+    <string name="pref_lockscreen_bg_opacity_summary2">Varsayılan (stok) davranış için sıfıra ayarlayın</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Medya kontrolü</string>
@@ -1334,7 +1336,7 @@
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Üst bildirim</string>
     <string name="pref_lc_headsup_dnd_title">Rahatsız etme</string>
-    <string name="pref_lc_headsup_dnd_summary">Bu uygulama önplandayken hiçbir üst bildirimi gösterme</string>
+    <string name="pref_lc_headsup_dnd_summary">Bu uygulama ön plandayken hiçbir üst bildirimi gösterme</string>
 
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Aktif Ekran modu</string>
@@ -1420,7 +1422,7 @@
 
 Touchwiz, Sense, Xperia gibi diğer markalı rom'ların yanı sıra, herhangi bir özel rom'da da kullanımı desteklenmez ve beklenmedik sonuçlara neden olabilir.
 
-Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek beklentiniz olmadan onaylarsınız. Uyumluluk hakkında daha ayrıntılı bilgi için, "<a href="http://forum.xda-developers.com/showthread.php?t=3653953">XDA destek konusu</a>na bakın.</string>
+Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek beklentiniz olmadan onaylarsınız. Uyumluluk hakkında daha ayrıntılı bilgi için, "<a href="http://forum.xda-developers.com/showthread.php?t=3251148">XDA destek konusu</a>na bakın.</string>
     <string name="compat_warning_ok_stage1">Tamam. Anladım.</string>
     <string name="compat_warning_ok_stage2">GERÇEKTEN anladım!</string>
 
@@ -1980,7 +1982,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
 
     <!-- Notification channels -->
     <string name="notif_channel_services_title">Hizmetler</string>
-    <string name="notif_channel_services_desc">Fener ve Ekran Kaydı gibi önplan hizmet bildirimleri için</string>
+    <string name="notif_channel_services_desc">Fener ve Ekran Kaydı gibi ön plan hizmet bildirimleri için</string>
     <string name="notif_channel_unc_title">UNC Önizleme</string>
     <string name="notif_channel_unc_desc">Güçlü Bildirim Kontrolü bildirim önizlemesi için</string>
     
@@ -2079,5 +2081,36 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
 
     <!-- QH: current mode -->
     <string name="pref_lc_qh_mode_title">Geçerli mod</string>
-    
+
+    <!-- Trusted Wi-Fi -->
+    <string name="pref_wifi_trusted_title">Güvenilir Wi-Fi</string>
+    <string name="pref_wifi_trusted_summary">Akıllı Kilit için güvenilir olan Wi-Fi ağlarını belirtir</string>
+
+    <!-- BatteryBar: lock screen only -->
+    <string name="pref_battery_bar_lockscreen_only_title">Yalnızca kilit ekranında</string>
+
+    <!-- Advanced tuning -->
+    <string name="pref_tuner_title">Gelişmiş ayar</string>
+    <string name="pref_tuner_summary">Framework ve Sistem Arayüzü yapılandırma parametrelerinin gelişmiş şekilde ayarlanmasını sağlar</string>
+    <string name="tuner_info">Gelişmiş ayar, geçerli değerler de dahil olmak üzere tüm yapılandırma parametrelerini Framework ve Sistem Arayüzünden dinamik olarak çıkarır ve kullanıcının bunları kendi değerleri ile geçersiz kılmasını sağlar.
+        Ayar şu anda tamsayılar ve booleans gibi basit parametre türleri için kullanılabilir.
+        Geçersiz kılınan değerler önyükleme sırasında uygulanır. Nihai sonuç daima cihaz türüne, ilgili donanım desteğine ve satıcı uygulamasına bağlıdır; bu nedenle bazı parametrelerde yapılan değişikliklerin herhangi bir etkisinin olmaması normaldir.</string>
+    <string name="tuner_warning">Gelişmiş ayar yalnızca uzman kullanıcılar için tasarlanmıştır. Varsayılan değerlerin geçersiz kılınması ve yanlış değerler kullanılması, istikrar ve performans sorunlarına yol açabilir ve hatta sisteminizi kullanılamaz duruma getirebilir.
+        Değişiklikler kalıcı değildir ve yalnızca GravityBox Xposed modülü aktif ve açma/kapama anahtarı etkin olduğu sürece geçerlidir.
+        Dikkatli kullanın ve her zaman bir yedeğiniz olsun!</string>
+    <string name="pref_tuner_master_switch_summary">Yeniden başlatma gerektirir</string>
+    <string name="pref_tuner_framework_title">Framework</string>
+    <string name="pref_tuner_framework_summary">Çekirdek sistem yapılandırma parametrelerini içerir</string>
+    <string name="pref_tuner_systemui_title">Sistem Arayüzü</string>
+    <string name="pref_tuner_systemui_summary">Durum çubuğu, kilit ekranı vb. ile ilgili Sistem Arayüzüne özgü yapılandırma parametrelerini içerir</string>
+    <string name="tuner_menu_show_all">Tüm öğeleri göster</string>
+    <string name="tuner_menu_show_overridden">Geçersiz kılınan öğeleri göster</string>
+    <string name="tuner_no_documentation">Belge mevcut değil</string>
+    <string name="pref_tuneable_override_title">Geçersiz kıl</string>
+    <string name="tuneable_current_value">Mevcut değer</string>
+    <string name="tuneable_overridden_value">Geçersiz kılınan değer</string>
+    <string name="tuneable_reboot_required">Yeniden başlatma gerekli</string>
+    <string name="pref_tuneable_value_int_error">Geçersiz değer. Tamsayı bekleniyor</string>
+    <string name="tuner_manager_not_responding">Ayar yöneticisi yanıt vermiyor</string>
+
 </resources>
