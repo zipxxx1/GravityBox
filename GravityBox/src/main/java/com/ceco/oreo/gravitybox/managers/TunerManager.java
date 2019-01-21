@@ -170,7 +170,8 @@ public class TunerManager implements BroadcastSubReceiver {
         List<TuneableItem> out = new ArrayList<>();
         Map<String, ?> prefMap = prefs.getAll();
         for (Map.Entry<String, ?> pref : prefMap.entrySet()) {
-            if (pref.getKey().startsWith("tuneable:")) {
+            if (pref.getKey().startsWith(category.toString() + ":") ||
+                    pref.getKey().startsWith("tuneable:")) {
                 TuneableItem item = TuneableItem.createUserInstance(pref.getKey(), prefs);
                 if (item != null && item.getCategory() == category && item.isOverridden() &&
                         !TunerBlacklist.isBlacklisted(category, item.getKey())) {

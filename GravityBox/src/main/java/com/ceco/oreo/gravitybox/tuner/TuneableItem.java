@@ -111,6 +111,10 @@ public class TuneableItem implements Parcelable {
     }
 
     private String getPrefKey() {
+        return String.format(Locale.US, "%s:%s", mCategory.toString(), mKey);
+    }
+
+    private String getPrefKeyLegacy() {
         return String.format(Locale.US, "tuneable:%s", mKey);
     }
 
@@ -126,6 +130,10 @@ public class TuneableItem implements Parcelable {
     /* package */
     void loadUserSettings(SharedPreferences prefs) {
         Set<String> dataSet = prefs.getStringSet(getPrefKey(), null);
+        // also check for legacy pref key
+        if (dataSet == null) {
+            dataSet = prefs.getStringSet(getPrefKeyLegacy(), null);
+        }
         if (dataSet != null) {
             for (String val : dataSet) {
                 String[] data = val.split(":", 2);
