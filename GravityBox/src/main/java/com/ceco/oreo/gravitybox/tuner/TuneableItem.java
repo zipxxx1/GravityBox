@@ -134,6 +134,10 @@ public class TuneableItem implements Parcelable {
         if (dataSet == null) {
             dataSet = prefs.getStringSet(getPrefKeyLegacy(), null);
         }
+        applyUserSettings(dataSet);
+    }
+
+    private void applyUserSettings(Set<String> dataSet) {
         if (dataSet != null) {
             for (String val : dataSet) {
                 String[] data = val.split(":", 2);
@@ -196,7 +200,7 @@ public class TuneableItem implements Parcelable {
                 try {
                     Class<?> clazz = Class.forName(type);
                     TuneableItem item = new TuneableItem(clazz, category, key);
-                    item.loadUserSettings(prefs);
+                    item.applyUserSettings(dataSet);
                     return item;
                 } catch (ClassNotFoundException ignore) { }
             }
