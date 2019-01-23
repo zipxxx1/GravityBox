@@ -1,3 +1,14 @@
+Changelog 7.5.0 - 23/01/2019
+--------------------------------------
+- Introducing Advanced tuning (premium feature)
+--- dynamically extracts boolean and integer configuration parameters from the Framework and System UI
+--- presents parameters and their values within GravityBox Settings interface
+--- allows overriding parameters with user-defined values
+--- designed for power users - use with caution
+- Improved Allow all rotations feature
+--- when enabled, it is possible to apply rotation lock to landscape orientation
+- Updated Turkish translations
+
 Changelog 7.4.0 - 13/12/2018
 --------------------------------------
 - Migrated from Eclipse to Android Studio
