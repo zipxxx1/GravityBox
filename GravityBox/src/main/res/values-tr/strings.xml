@@ -457,6 +457,7 @@
 
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Tüm yönlere izin ver</string>
+    <string name="pref_display_allow_all_rotations_summary">Yeniden başlatma gerektirir</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Ağ modu karesi SIM slotu</string>
@@ -2089,14 +2090,14 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_lc_qh_mode_title">Geçerli mod</string>
 
     <!-- Advanced tuning -->
-    <string name="pref_tuner_title">Gelişmiş ayar</string>
+    <string name="pref_tuner_title">Gelişmiş ayarlamalar</string>
     <string name="pref_tuner_summary">Framework ve Sistem Arayüzü yapılandırma parametrelerinin gelişmiş şekilde ayarlanmasını sağlar</string>
-    <string name="tuner_info">Gelişmiş ayar, geçerli değerler de dahil olmak üzere tüm yapılandırma parametrelerini Framework ve Sistem Arayüzünden dinamik olarak çıkarır ve kullanıcının bunları kendi değerleri ile geçersiz kılmasını sağlar.
-        Ayar şu anda tamsayılar ve booleans gibi basit parametre türleri için kullanılabilir.
-        Geçersiz kılınan değerler önyükleme sırasında uygulanır. Nihai sonuç daima cihaz türüne, ilgili donanım desteğine ve satıcı uygulamasına bağlıdır; bu nedenle bazı parametrelerde yapılan değişikliklerin herhangi bir etkisinin olmaması normaldir.</string>
-    <string name="tuner_warning">Gelişmiş ayar yalnızca uzman kullanıcılar için tasarlanmıştır. Varsayılan değerlerin geçersiz kılınması ve yanlış değerler kullanılması, istikrar ve performans sorunlarına yol açabilir ve hatta sisteminizi kullanılamaz duruma getirebilir.
-        Değişiklikler kalıcı değildir ve yalnızca GravityBox Xposed modülü aktif ve açma/kapama anahtarı etkin olduğu sürece geçerlidir.
-        Dikkatli kullanın ve her zaman bir yedeğiniz olsun!</string>
+    <string name="tuner_info">Gelişmiş ayarlamalar, mevcut değerler de dahil olmak üzere tüm yapılandırma parametrelerini Framework ve Sistem Arayüzünden dinamik olarak çıkarır ve kullanıcının bunları kendi değerleri ile geçersiz kılmasını sağlar.
+Ayarlamalar şu anda tamsayılar ve booleans gibi basit parametre türleri için kullanılabilir.
+Geçersiz kılınan değerler önyükleme sırasında uygulanır. Nihai sonuç daima cihaz türüne, ilgili donanım desteğine ve satıcı uygulamasına bağlıdır; bu nedenle bazı parametrelerde yapılan değişikliklerin herhangi bir etkisinin olmaması normaldir.</string>
+    <string name="tuner_warning">Gelişmiş ayarlamalar yalnızca uzman kullanıcılar için tasarlanmıştır. Varsayılan değerlerin geçersiz kılınması ve yanlış değerler kullanılması, istikrar ve performans sorunlarına yol açabilir ve hatta sisteminizi kullanılamaz duruma getirebilir.
+Değişiklikler kalıcı değildir ve yalnızca GravityBox Xposed modülü aktif ve açma/kapama anahtarı etkin olduğu sürece geçerlidir.
+Dikkatli kullanın ve her zaman bir yedeğiniz olsun!</string>
     <string name="pref_tuner_master_switch_summary">Yeniden başlatma gerektirir</string>
     <string name="pref_tuner_framework_title">Framework</string>
     <string name="pref_tuner_framework_summary">Çekirdek sistem yapılandırma parametrelerini içerir</string>
@@ -2110,7 +2111,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="tuneable_overridden_value">Geçersiz kılınan değer</string>
     <string name="tuneable_reboot_required">Yeniden başlatma gerekli</string>
     <string name="pref_tuneable_value_int_error">Geçersiz değer. Tamsayı bekleniyor</string>
-    <string name="tuner_manager_not_responding">Ayar yöneticisi yanıt vermiyor</string>
+    <string name="tuner_manager_not_responding">Ayarlama yöneticisi yanıt vermiyor</string>
 
 </resources>
 
