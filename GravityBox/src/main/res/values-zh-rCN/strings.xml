@@ -124,14 +124,14 @@
     <string name="about_donate_summary">支持开发，点击这里进入PayPal捐赠</string>
 
     <!-- Reboot confirmation -->
-    <string name="reboot_confirm">您的設備将重新启动</string>
-    <string name="reboot_confirm_recovery">您的設備将重新启动至Recovery</string>
-    <string name="reboot_confirm_bootloader">您的設備将重新启动至Bootloader</string>
-    <string name="reboot_confirm_download">您的設備将重新启动进入下载模式</string>
+    <string name="reboot_confirm">您的设备将重新启动</string>
+    <string name="reboot_confirm_recovery">您的设备将重新启动至Recovery</string>
+    <string name="reboot_confirm_bootloader">您的设备将重新启动至Bootloader</string>
+    <string name="reboot_confirm_download">您的设备将重新启动进入下载模式</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">工程模式</string>
-    <string name="engineering_mode_summary">启动“工程模式”应用程序</string>
+    <string name="engineering_mode_summary">启动"工程模式"应用程序</string>
 
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">锁屏画面调整</string>
@@ -460,6 +460,7 @@
 
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允许所有旋转方向</string>
+	    <string name="pref_display_allow_all_rotations_summary">需要重新启动</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">网络模式磁贴SIM卡插槽</string>
@@ -789,6 +790,7 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">背景不透明度</string>
+    <string name="pref_lockscreen_bg_opacity_summary">默认(原厂)设置为零</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">媒体控制</string>
@@ -2125,5 +2127,44 @@
     <string name="lc_qh_ranges_detail_label">静音时间 - 时间范围</string>
     <string name="pref_lc_qh_range_days_title">天</string>
     <string name="next_day">下一天</string>
+
+    <!-- QH: settings categorization -->
+    <string name="pref_lc_qh_cat_general_title">普通</string>
+    <string name="pref_lc_qh_cat_rules_title">规则</string>
+    <string name="pref_lc_qh_manual_title">手动模式</string>
+    <string name="pref_lc_qh_manual_summary">允许为手动静音时间设置规则</string>
+
+    <!-- QH: current mode -->
+    <string name="pref_lc_qh_mode_title">当前模式</string>
+
+    <!-- BatteryBar: lock screen only -->
+    <string name="pref_battery_bar_lockscreen_only_title">仅锁屏</string>
+
+    <!-- Advanced tuning -->
+    <string name="pref_tuner_title">高级调谐器</string>
+    <string name="pref_tuner_summary">允许高级调谐器I配置框架和系统界面参数</string>
+    <string name="tuner_info">高级调整器动态地从框架和系统界面中提取所有配置参数,包括它们的当前值,并允许用户使用自己的值覆盖它们
+         调整当前可用于简单类型的参数,例如整数和布尔值
+         重写的值将在引导期间应用.最终结果取决于设备类型,相关硬件支持和供应商实现; 
+         因此对某些参数的更改可能没有任何影响是正常的</string>
+
+    <string name="tuner_warning">高级调谐器仅适用于高级用户 覆盖默认值并使用不正确的值可能会导致稳定性和性能问题,甚至可能导致系统无法使用
+         更改不是永久的,只有在GravityBox模块处于活动状态并启用主开关的情况下才有效
+         使用时要小心,一定要有备份计划!</string>
+
+    <string name="pref_tuner_master_switch_summary">需要重新启动</string>
+    <string name="pref_tuner_framework_title">框架</string>
+    <string name="pref_tuner_framework_summary">包含核心系统配置参数</string>
+    <string name="pref_tuner_systemui_title">系统界面</string>
+    <string name="pref_tuner_systemui_summary">包含状态栏,锁屏等相关的系统界面特定配置参数</string>
+    <string name="tuner_menu_show_all">显示所有项</string>
+    <string name="tuner_menu_show_overridden">显示覆盖项</string>
+    <string name="tuner_no_documentation">文件不可用</string>
+    <string name="pref_tuneable_override_title">覆盖</string>
+    <string name="tuneable_current_value">当前值</string>
+    <string name="tuneable_overridden_value">覆盖值</string>
+    <string name="tuneable_reboot_required">需要重新启动</string>
+    <string name="pref_tuneable_value_int_error">无效的值,应为整数</string>
+    <string name="tuner_manager_not_responding">调谐管理器没有响应</string>
 
 </resources>
