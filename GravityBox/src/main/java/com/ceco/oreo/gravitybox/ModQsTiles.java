@@ -39,7 +39,9 @@ public class ModQsTiles {
 
     public static void initResources(final InitPackageResourcesParam resparam) {
         if (Utils.isXperiaDevice()) {
-            resparam.res.setReplacement(PACKAGE_NAME, "integer", "config_maxToolItems", 60);
+            try {
+                resparam.res.setReplacement(PACKAGE_NAME, "integer", "config_maxToolItems", 60);
+            } catch (Throwable ignore) {}
         }
     }
 
