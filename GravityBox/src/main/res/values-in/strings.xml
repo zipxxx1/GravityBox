@@ -255,16 +255,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Gaya daftar notifikasi</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Latar belakang daftar notifikasi</string>
-    <string name="notif_background_default">Latar belakang asli</string>
-    <string name="notif_background_color_fill">Warna</string>
-    <string name="notif_background_custom_image">Gambar kustom</string>
-    <string name="pref_notif_color_title">Set Warna latar belakang</string>
-    <string name="pref_notif_image_portrait_title">Set gambar posisi berdiri</string>
-    <string name="pref_notif_image_landscape_title">Set gambar posisi lanskap</string>
-    <string name="pref_notif_background_alpha_title">Transparansi latar belakang</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Matikan indikator roaming</string>
     <string name="pref_disable_roaming_indicators_summary">Ketika dimatikan, indikator berupa huruf R tidak akan ditampilkan ketika sedang roaming. Berhati-hatilah menggunakannya.</string>

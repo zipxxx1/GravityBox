@@ -237,15 +237,6 @@
     <string name="pref_cat_statusbar_qs_title">Gestion des paramètres rapides</string>
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Style du volet de notification</string>
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Fond du volet de notification</string>
-    <string name="notif_background_default">Fond par défaut</string>
-    <string name="notif_background_color_fill">Couleur de remplissage</string>
-    <string name="notif_background_custom_image">Image personnalisée</string>
-    <string name="pref_notif_color_title">Régler la couleur du fond</string>
-    <string name="pref_notif_image_portrait_title">Image en mode portrait</string>
-    <string name="pref_notif_image_landscape_title">Image en mode paysage</string>
-    <string name="pref_notif_background_alpha_title">Transparence de l\'arrière-plan</string>
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Désactiver indic. d\'itinérance</string>
     <string name="pref_disable_roaming_indicators_summary">Cochez pour désactiver l\'indicateur R qui ne sera alors pas visible en cas d\'itinérance de données. À utiliser avec prudence</string>
@@ -1443,12 +1434,6 @@ y compris les vibrations de notification, le retour haptique, etc.</string>
     <string name="pref_lc_notif_hide_persistent_title">Masquer les notifications persistantes</string>
     <string name="pref_lc_notif_hide_persistent_summary">Cache toutes les notifications entrantes et non-effaçables
         provenant de cette application</string>
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Fondu auto des touches</string>
-    <string name="pref_navbar_autofade_keys_summary">Fondu automatique des touches après l\'expiration du délai. Réglez sur 0 pour désactiver.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Afficher les touches</string>
-    <string name="autofade_show_keys_navbar">Barre de navigation tactile</string>
-    <string name="autofade_show_keys_screen">Écran tactile</string>
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Réinitialisation automatique</string>
     <string name="pref_sa_tile_auto_reset_summary">Définit le délai de mise en veille de l\'écran par défaut automatiquement lorsque l\'écran s\'éteint</string>
@@ -1583,8 +1568,6 @@ Utiliser dans le cas où une autre application nécessite l\'utilisation du capt
     <string name="pref_lockscreen_bottom_actions_hide_title">Masquer les actions en bas</string>
     <string name="bottom_action_left">Masquer l\'action de gauche</string>
     <string name="bottom_action_right">Masquer l\'action de droite</string>
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Transparence mode \"voir à travers\"</string>
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Choisissez la carte SIM par défaut pour les appels</string>
     <string name="sm_choose_sms_sub">Choisissez la carte SIM par défaut pour les messages</string>

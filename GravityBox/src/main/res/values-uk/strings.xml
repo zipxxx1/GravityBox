@@ -281,16 +281,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Стиль шторки сповіщень</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Фон шторки сповіщень</string>
-    <string name="notif_background_default">Стандартний фон</string>
-    <string name="notif_background_color_fill">Заповнення кольором</string>
-    <string name="notif_background_custom_image">Користувацьке зображення</string>
-    <string name="pref_notif_color_title">Задати колір фону</string>
-    <string name="pref_notif_image_portrait_title">Задати портретне зображення</string>
-    <string name="pref_notif_image_landscape_title">Задати ландшафтне зображення</string>
-    <string name="pref_notif_background_alpha_title">Прозорість фону</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Вимкнути індикатор роумінгу</string>
     <string name="pref_disable_roaming_indicators_summary">Якщо вимкнено, то R-індикатор не буде показуватися. Використовуйте з обережністю.</string>
@@ -1722,13 +1712,6 @@
     <string name="pref_lc_notif_hide_persistent_title">Приховати постійні сповіщення</string>
     <string name="pref_lc_notif_hide_persistent_summary">Приховувати всі сповіщення, що не очищаються, від даного додатку</string>
 
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Приховувати кнопки</string>
-    <string name="pref_navbar_autofade_keys_summary">Кнопки автоматично зникають через вказаний час. Нуль - для вимикання цієї функції.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Показувати кнопки на</string>
-    <string name="autofade_show_keys_navbar">Сенсорній навігаційній панелі</string>
-    <string name="autofade_show_keys_screen">Сенсорному екрані</string>
-
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Автоматичне скидання</string>
     <string name="pref_sa_tile_auto_reset_summary">Встановлює типову затримку вимкнення екрану після вимкнення екрану</string>
@@ -1891,9 +1874,6 @@
     <string name="pref_lockscreen_bottom_actions_hide_title">Приховати нижні дії</string>
     <string name="bottom_action_left">Приховати ліву дію</string>
     <string name="bottom_action_right">Приховати праву дію</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Перегляд через прозорість</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Обрати типову SIM для дзвінків</string>

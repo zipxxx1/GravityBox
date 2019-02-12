@@ -283,16 +283,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Értesítési terület stílusa</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Értesítési terület háttere</string>
-    <string name="notif_background_default">Alapértelmezett háttér</string>
-    <string name="notif_background_color_fill">Szín kitöltése</string>
-    <string name="notif_background_custom_image">Egyéni kép</string>
-    <string name="pref_notif_color_title">Háttérszín beállítása</string>
-    <string name="pref_notif_image_portrait_title">Álló tájolás hátterének beállítása</string>
-    <string name="pref_notif_image_landscape_title">Fekvő tájolás hátterének beállítása</string>
-    <string name="pref_notif_background_alpha_title">Háttér átlátszóság</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Roaming mutató letiltása</string>
     <string name="pref_disable_roaming_indicators_summary">Amikor ki van kapcsolva, az R mutató nem lesz látható roaming közben. Óvatosan használd.</string>
@@ -1728,13 +1718,6 @@
     <string name="pref_lc_notif_hide_persistent_title">Állandó értesítések elrejtése</string>
     <string name="pref_lc_notif_hide_persistent_summary">Elrejti az összes folyamatban lévő és egyéb nem törölhető értesítét, ami ettől az alkalmazástól érkezik</string>
 
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Gombok auto-úsztatása</string>
-    <string name="pref_navbar_autofade_keys_summary">Gombok automatikus úsztatása meghatározott időkorlát lejárata után. Letiltáshoz állíts be 0-t.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Gombok mutatása bekapcsolva</string>
-    <string name="autofade_show_keys_navbar">Navigációs sáv érintésre</string>
-    <string name="autofade_show_keys_screen">Képernyő érintésre</string>
-
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Auto-visszaállítás</string>
     <string name="pref_sa_tile_auto_reset_summary">Automatikusan beállítja az alapértelmezett képernyő időkorlátot a képernyő kikapcsolásakor</string>
@@ -1898,9 +1881,6 @@
     <string name="pref_lockscreen_bottom_actions_hide_title">Alsó műveletek elrejtése</string>
     <string name="bottom_action_left">Baloldali művelet elrejtése</string>
     <string name="bottom_action_right">Jobboldali művelet elrejtése</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Látható átlátszóság</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Alapértelmezett SIM választása hívásokhoz</string>

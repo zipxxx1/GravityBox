@@ -91,17 +91,10 @@ public class ModFingerprint {
                 }
             };
 
-            if (Build.VERSION.SDK_INT >= 27) {
-                XposedHelpers.findAndHookMethod(CLASS_CLIENT_MONITOR, classLoader,
-                        "vibrateError", vibrateErrorHook);
-                XposedHelpers.findAndHookMethod(CLASS_CLIENT_MONITOR, classLoader,
-                        "vibrateSuccess", vibrateSuccessHook);
-            } else {
-                XposedHelpers.findAndHookMethod(CLASS_FINGERPRINT_UTILS, classLoader,
-                        "vibrateFingerprintError", Context.class, vibrateErrorHook);
-                XposedHelpers.findAndHookMethod(CLASS_FINGERPRINT_UTILS, classLoader,
-                        "vibrateFingerprintSuccess", Context.class, vibrateSuccessHook);
-            }
+            XposedHelpers.findAndHookMethod(CLASS_CLIENT_MONITOR, classLoader,
+                    "vibrateError", vibrateErrorHook);
+            XposedHelpers.findAndHookMethod(CLASS_CLIENT_MONITOR, classLoader,
+                    "vibrateSuccess", vibrateSuccessHook);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }

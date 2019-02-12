@@ -275,16 +275,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Stilul sertarului de notificare</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Conținutul sertarului de notificări</string>
-    <string name="notif_background_default">Fundal implicit</string>
-    <string name="notif_background_color_fill">Culoare</string>
-    <string name="notif_background_custom_image">Imagine particularizată</string>
-    <string name="pref_notif_color_title">Setați culoarea de fundal</string>
-    <string name="pref_notif_image_portrait_title">Setați imaginea portret</string>
-    <string name="pref_notif_image_landscape_title">Setați imaginea peisaj</string>
-    <string name="pref_notif_background_alpha_title">Transparență</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Dezactivați indicatorii de roaming</string>
     <string name="pref_disable_roaming_indicators_summary">Dacă este dezactivat, indicatorul R nu va fi vizibil în timpul roamingului. Utilizați cu prudență.</string>
@@ -1708,13 +1698,6 @@
     <string name="pref_lc_notif_hide_persistent_title">Ascundeți notificările persistente</string>
     <string name="pref_lc_notif_hide_persistent_summary">Ascunde toate notificările în curs și celelalte notificări care nu pot fi șterse din această aplicație</string>
 
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Acundere taste automat</string>
-    <string name="pref_navbar_autofade_keys_summary">Ascunderea automată a tastelor după expirarea timpului. Setați la 0 pentru a dezactiva.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Afişare taste la</string>
-    <string name="autofade_show_keys_navbar">Atingerea barei de navigare</string>
-    <string name="autofade_show_keys_screen">Atingerea ecranului</string>
-
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Autoresetare</string>
     <string name="pref_sa_tile_auto_reset_summary">Setează durata de expirare implicită a ecranului în mod automat atunci când ecranul se oprește</string>
@@ -1874,9 +1857,6 @@
     <string name="pref_lockscreen_bottom_actions_hide_title">Ascundeți comenzile rapide de jos</string>
     <string name="bottom_action_left">Ascundeți comanda rapidă din stânga</string>
     <string name="bottom_action_right">Ascundeți comanda rapidă din dreapta</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Vizualizare prin transparență</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Alegeți SIM-ul implicit pentru apeluri</string>

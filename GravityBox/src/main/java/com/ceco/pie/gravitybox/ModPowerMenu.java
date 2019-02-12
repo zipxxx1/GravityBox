@@ -58,7 +58,7 @@ public class ModPowerMenu {
     public static final String CLASS_GLOBAL_ACTIONS = "com.android.systemui.globalactions.GlobalActionsDialog";
     public static final String CLASS_ACTION = CLASS_GLOBAL_ACTIONS + ".Action";
     private static final boolean DEBUG = false;
-    private static final String ITEM_LAYOUT_PACKAGE = Build.VERSION.SDK_INT >= 27 ? PACKAGE_NAME : "android";
+    private static final String ITEM_LAYOUT_PACKAGE = PACKAGE_NAME;
 
     private static String mRebootStr;
     private static String mRebootSoftStr;
@@ -596,7 +596,7 @@ public class ModPowerMenu {
 
                 mStatus = v.findViewById(res.getIdentifier(
                         "status", "id", "android"));
-                mStatus.setVisibility(Build.VERSION.SDK_INT >= 27 ? View.GONE : View.VISIBLE);
+                mStatus.setVisibility(View.GONE);
                 updateStatus();
 
                 return v;

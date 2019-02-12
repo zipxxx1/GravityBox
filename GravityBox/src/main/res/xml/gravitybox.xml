@@ -166,16 +166,6 @@
                 android:entryValues="@array/direct_unlock_values"
                 android:defaultValue="OFF" />
 
-            <com.ceco.pie.gravitybox.preference.SeekBarPreference
-                android:key="pref_lockscreen_direct_unlock_trans_level"
-                android:title="@string/pref_lockscreen_direct_unlock_trans_level_title"
-                minimum="0"
-                maximum="100"
-                interval="1"
-                monitorBoxEnabled="true"
-                monitorBoxUnit="%" 
-                android:defaultValue="25" />
-
             <ListPreference 
                 android:key="pref_lockscreen_direct_unlock_policy"
                 android:title="@string/pref_lockscreen_direct_unlock_policy_title"
@@ -785,41 +775,6 @@
         <PreferenceScreen
             android:key="pref_cat_notification_drawer_style"
             android:title="@string/pref_cat_notification_drawer_style_title" >
-
-            <ListPreference
-                android:key="pref_notif_background"
-                android:title="@string/pref_notif_background_title"
-                android:entries="@array/notif_background_entries"
-                android:entryValues="@array/notif_background_values"
-                android:defaultValue="default"
-                android:order="1" />
-
-            <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                android:key="pref_notif_color"
-                android:title="@string/pref_notif_color_title"
-                android:defaultValue="@integer/COLOR_BLACK"
-                android:order="2" />
-
-            <Preference
-                android:key="pref_notif_image_portrait"
-                android:title="@string/pref_notif_image_portrait_title"
-                android:order="3" />
-
-            <Preference
-                android:key="pref_notif_image_landscape"
-                android:title="@string/pref_notif_image_landscape_title"
-                android:order="4" />
-
-            <com.ceco.pie.gravitybox.preference.SeekBarPreference
-                android:key="pref_notif_background_alpha"
-                android:title="@string/pref_notif_background_alpha_title"
-                minimum="0"
-                maximum="100"
-                interval="5"
-                monitorBoxEnabled="true"
-                monitorBoxUnit="%"
-                android:order="6"
-                android:defaultValue="0" />
 
             <CheckBoxPreference 
                 android:key="pref_notif_expand_all"
@@ -1433,26 +1388,6 @@
                     android:title="@string/pref_navbar_custom_key_image_title" />
 
             </PreferenceScreen>
-
-            <com.ceco.pie.gravitybox.preference.SeekBarPreference
-                android:key="pref_navbar_autofade_keys"
-                android:title="@string/pref_navbar_autofade_keys_title"
-                android:summary="@string/pref_navbar_autofade_keys_summary"
-                minimum="0"
-                maximum="10"
-                interval="1"
-                monitorBoxEnabled="true"
-                monitorBoxUnit="s"
-                android:defaultValue="0" />
-
-            <!--
-            <ListPreference 
-                android:key="pref_navbar_autofade_show_keys"
-                android:title="@string/pref_navbar_autofade_show_keys_title"
-                android:entries="@array/autofade_show_keys_entries"
-                android:entryValues="@array/autofade_show_keys_values"
-                android:defaultValue="NAVBAR" />
-            -->
 
         </PreferenceCategory>
 

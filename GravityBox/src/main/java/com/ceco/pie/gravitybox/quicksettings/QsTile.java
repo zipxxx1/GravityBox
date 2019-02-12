@@ -157,11 +157,7 @@ public abstract class QsTile extends BaseTile {
         public boolean dualTarget = false;
 
         public void applyTo(Object state) {
-            if (Build.VERSION.SDK_INT >= 27) {
-                XposedHelpers.setObjectField(state, "iconSupplier", newIconSupplier());
-            } else {
-                XposedHelpers.setObjectField(state, "icon", icon);
-            }
+            XposedHelpers.setObjectField(state, "iconSupplier", newIconSupplier());
             String newLabel = label;
             if (locked && (lockedTileIndicator == LockedTileIndicator.PADLOCK ||
                     lockedTileIndicator == LockedTileIndicator.KEY)) {

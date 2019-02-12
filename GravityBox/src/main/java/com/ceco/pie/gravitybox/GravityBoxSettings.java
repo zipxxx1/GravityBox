@@ -262,7 +262,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
     public static final String PREF_KEY_LOCKSCREEN_PIN_LENGTH = "pref_lockscreen_pin_length";
     public static final String PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK = "pref_lockscreen_direct_unlock2";
-    public static final String PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL = "pref_lockscreen_direct_unlock_trans_level";
     public static final String PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY = "pref_lockscreen_direct_unlock_policy";
     public static final String PREF_KEY_LOCKSCREEN_SMART_UNLOCK = "pref_lockscreen_smart_unlock";
     public static final String PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY = "pref_lockscreen_smart_unlock_policy";
@@ -435,20 +434,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_CALL_VIBRATIONS = "callVibrations";
 
     public static final String PREF_CAT_KEY_NOTIF_DRAWER_STYLE = "pref_cat_notification_drawer_style";
-    public static final String PREF_KEY_NOTIF_BACKGROUND = "pref_notif_background";
-    public static final String PREF_KEY_NOTIF_COLOR = "pref_notif_color";
-    public static final String PREF_KEY_NOTIF_IMAGE_PORTRAIT = "pref_notif_image_portrait";
-    public static final String PREF_KEY_NOTIF_IMAGE_LANDSCAPE = "pref_notif_image_landscape";
-    public static final String PREF_KEY_NOTIF_BACKGROUND_ALPHA = "pref_notif_background_alpha";
     public static final String PREF_KEY_NOTIF_EXPAND_ALL = "pref_notif_expand_all";
-    public static final String NOTIF_BG_DEFAULT = "default";
-    public static final String NOTIF_BG_COLOR = "color";
-    public static final String NOTIF_BG_IMAGE = "image";
-    public static final String ACTION_NOTIF_BACKGROUND_CHANGED = "gravitybox.intent.action.NOTIF_BACKGROUND_CHANGED";
     public static final String ACTION_NOTIF_EXPAND_ALL_CHANGED = "gravitybox.intent.action.NOTIF_EXPAND_ALL_CHANGED";
-    public static final String EXTRA_BG_TYPE = "bgType";
-    public static final String EXTRA_BG_COLOR = "bgColor";
-    public static final String EXTRA_BG_ALPHA = "bgAlpha";
     public static final String EXTRA_NOTIF_EXPAND_ALL = "notifExpandAll";
 
     public static final String PREF_KEY_PIE_CONTROL_ENABLE = "pref_pie_control_enable2";
@@ -616,8 +603,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_NAVBAR_COLOR_ENABLE = "pref_navbar_color_enable";
     public static final String PREF_KEY_NAVBAR_KEY_COLOR = "pref_navbar_key_color";
     public static final String PREF_KEY_NAVBAR_KEY_GLOW_COLOR = "pref_navbar_key_glow_color";
-    public static final String PREF_KEY_NAVBAR_AUTOFADE_KEYS = "pref_navbar_autofade_keys";
-    public static final String PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS = "pref_navbar_autofade_show_keys";
     public static final String ACTION_PREF_NAVBAR_CHANGED = "gravitybox.intent.action.ACTION_NAVBAR_CHANGED";
     public static final String ACTION_PREF_NAVBAR_SWAP_KEYS = "gravitybox.intent.action.ACTION_NAVBAR_SWAP_KEYS";
     public static final String EXTRA_NAVBAR_HEIGHT = "navbarHeight";
@@ -632,8 +617,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_NAVBAR_CURSOR_CONTROL = "navbarCursorControl";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_SWAP = "navbarCustomKeySwap";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_ICON_STYLE = "navbarCustomKeyIconStyle";
-    public static final String EXTRA_NAVBAR_AUTOFADE_KEYS = "navbarAutofadeKeys";
-    public static final String EXTRA_NAVBAR_AUTOFADE_SHOW_KEYS = "navbarAutofadeShowKeys";
 
     public static final String PREF_KEY_STATUSBAR_BRIGHTNESS = "pref_statusbar_brightness";
     public static final String PREF_KEY_STATUSBAR_DISABLE_PEEK = "pref_statusbar_disable_peek";
@@ -919,8 +902,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     private static final String PREF_TUNER = "pref_tuner";
 
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
-    private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
-    private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
     private static final int REQ_CALLER_PHOTO = 1027;
     private static final int REQ_OBTAIN_SHORTCUT = 1028;
     private static final int REQ_ICON_PICK = 1029;
@@ -1001,7 +982,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
             PREF_KEY_LOCKSCREEN_PIN_LENGTH,
             PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK,
-            PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL,
             PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY,
             PREF_KEY_LOCKSCREEN_SMART_UNLOCK,
             PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY,
@@ -1317,8 +1297,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private SeekBarPreference mPrefLockscreenBlurIntensity;
         private EditTextPreference mPrefLockscreenCarrierText;
         private File wallpaperImage;
-        private File notifBgImagePortrait;
-        private File notifBgImageLandscape;
         private ListPreference mPrefHwKeyMenuSingletap;
         private ListPreference mPrefHwKeyMenuLongpress;
         private ListPreference mPrefHwKeyMenuDoubletap;
@@ -1342,11 +1320,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private ListPreference mPrefQuickPulldown;
         private SeekBarPreference mPrefQuickPulldownSize;
         private PreferenceScreen mPrefCatNotifDrawerStyle;
-        private ListPreference mPrefNotifBackground;
-        private ColorPickerPreference mPrefNotifColor;
-        private SeekBarPreference mPrefNotifAlpha;
-        private Preference mPrefNotifImagePortrait;
-        private Preference mPrefNotifImageLandscape;
         private CheckBoxPreference mPrefNotifExpandAll;
         private CheckBoxPreference mPrefDisableRoamingIndicators;
         private ListPreference mPrefButtonBacklightMode;
@@ -1526,8 +1499,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                     (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER_TEXT);
 
             wallpaperImage = new File(Utils.getFilesDir(getActivity()) + "/lockwallpaper"); 
-            notifBgImagePortrait = new File(Utils.getFilesDir(getActivity()) + "/notifwallpaper");
-            notifBgImageLandscape = new File(Utils.getFilesDir(getActivity()) + "/notifwallpaper_landscape");
             callerPhotoFile = new File(Utils.getFilesDir(getActivity()) + "/caller_photo");
 
             mPrefHwKeyMenuSingletap = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_SINGLETAP);
@@ -1564,12 +1535,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefQuickPulldownSize = (SeekBarPreference) findPreference(PREF_KEY_QUICK_PULLDOWN_SIZE);
 
             mPrefCatNotifDrawerStyle = (PreferenceScreen) findPreference(PREF_CAT_KEY_NOTIF_DRAWER_STYLE);
-            mPrefNotifBackground = (ListPreference) findPreference(PREF_KEY_NOTIF_BACKGROUND);
-            mPrefNotifColor = (ColorPickerPreference) findPreference(PREF_KEY_NOTIF_COLOR);
-            mPrefNotifImagePortrait = findPreference(PREF_KEY_NOTIF_IMAGE_PORTRAIT);
-            mPrefNotifImageLandscape = findPreference(PREF_KEY_NOTIF_IMAGE_LANDSCAPE);
             mPrefNotifExpandAll = (CheckBoxPreference) findPreference(PREF_KEY_NOTIF_EXPAND_ALL);
-            mPrefNotifAlpha = (SeekBarPreference) findPreference(PREF_KEY_NOTIF_BACKGROUND_ALPHA);
 
             mPrefDisableRoamingIndicators = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_ROAMING_INDICATORS);
             mPrefButtonBacklightMode = (ListPreference) findPreference(PREF_KEY_BUTTON_BACKLIGHT_MODE);
@@ -1744,25 +1710,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefPowerCameraVp = (EditTextPreference) findPreference(PREF_KEY_POWER_CAMERA_VP);
 
             mPrefTuner = findPreference(PREF_TUNER);
-
-            // Disable features not applicable to 8.1 / 8.0
-            if (Build.VERSION.SDK_INT >= 27) {
-                // Navbar auto fade keys
-                Preference p = findPreference(PREF_KEY_NAVBAR_AUTOFADE_KEYS);
-                if (p != null) mPrefCatNavbarKeys.removePreference(p);
-                // Notification drawer background
-                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifBackground);
-                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifColor);
-                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifImagePortrait);
-                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifImageLandscape);
-                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifAlpha);
-                // Direct unlock see-through transparency
-                p = findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL);
-                if (p != null) mPrefCatLsOther.removePreference(p);
-            } else {
-                Preference p = findPreference(PREF_KEY_CORNER_PADDING_REMOVE);
-                if (p != null) mPrefCatStatusbar.removePreference(p);
-            }
 
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {
@@ -2333,15 +2280,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefSbIconColorSecondary.setEnabled(mPrefSbIconColorEnable.isChecked());
             }
 
-            if (key == null || key.equals(PREF_KEY_NOTIF_BACKGROUND)) {
-                mPrefNotifBackground.setSummary(mPrefNotifBackground.getEntry());
-                String option = mPrefs.getString(PREF_KEY_NOTIF_BACKGROUND, NOTIF_BG_DEFAULT);
-                mPrefNotifColor.setEnabled(option.equals(NOTIF_BG_COLOR));
-                mPrefNotifImagePortrait.setEnabled(option.equals(NOTIF_BG_IMAGE));
-                mPrefNotifImageLandscape.setEnabled(option.equals(NOTIF_BG_IMAGE));
-                mPrefNotifAlpha.setEnabled(!option.equals(NOTIF_BG_DEFAULT));
-            }
-
             if (key == null || key.equals(PREF_KEY_BUTTON_BACKLIGHT_MODE)) {
                 mPrefButtonBacklightMode.setSummary(mPrefButtonBacklightMode.getEntry());
             }
@@ -2579,8 +2517,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 if (du != null && dup != null) {
                     dup.setEnabled(!"OFF".equals(du.getValue()));
                     dup.setSummary(dup.getEntry());
-                    Preference p = findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_TRANS_LEVEL);
-                    if (p != null) p.setEnabled("SEE_THROUGH".equals(du.getValue()));
                 }
             }
 
@@ -2615,16 +2551,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                     }
                     p.setSummary(summary);
                 }
-            }
-
-            if (key == null || key.equals(PREF_KEY_NAVBAR_AUTOFADE_KEYS)) {
-                Preference p = findPreference(PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS);
-                if (p != null) p.setEnabled(mPrefs.getInt(PREF_KEY_NAVBAR_AUTOFADE_KEYS, 0) != 0);
-            }
-
-            if (key == null || key.equals(PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS)) {
-                ListPreference p = (ListPreference) findPreference(PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS);
-                if (p != null) p.setSummary(p.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE) ||
@@ -2974,16 +2900,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_LINK_VOLUMES_CHANGED);
                 intent.putExtra(EXTRA_LINKED,
                         prefs.getBoolean(PREF_KEY_LINK_VOLUMES, true));
-            } else if (key.equals(PREF_KEY_NOTIF_BACKGROUND)) {
-                intent.setAction(ACTION_NOTIF_BACKGROUND_CHANGED);
-                intent.putExtra(EXTRA_BG_TYPE, prefs.getString(
-                        PREF_KEY_NOTIF_BACKGROUND, NOTIF_BG_DEFAULT));
-            } else if (key.equals(PREF_KEY_NOTIF_COLOR)) {
-                intent.setAction(ACTION_NOTIF_BACKGROUND_CHANGED);
-                intent.putExtra(EXTRA_BG_COLOR, prefs.getInt(PREF_KEY_NOTIF_COLOR, Color.BLACK));
-            } else if (key.equals(PREF_KEY_NOTIF_BACKGROUND_ALPHA)) {
-                intent.setAction(ACTION_NOTIF_BACKGROUND_CHANGED);
-                intent.putExtra(EXTRA_BG_ALPHA, prefs.getInt(PREF_KEY_NOTIF_BACKGROUND_ALPHA, 0));
             } else if (key.equals(PREF_KEY_NOTIF_EXPAND_ALL)) {
                 intent.setAction(ACTION_NOTIF_EXPAND_ALL_CHANGED);
                 intent.putExtra(EXTRA_NOTIF_EXPAND_ALL,
@@ -3217,12 +3133,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_COLOR_ENABLE,
                         prefs.getBoolean(PREF_KEY_NAVBAR_COLOR_ENABLE, false));
-            } else if (key.equals(PREF_KEY_NAVBAR_AUTOFADE_KEYS)) {
-                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_AUTOFADE_KEYS, prefs.getInt(key, 0));
-            } else if (key.equals(PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS)) {
-                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_AUTOFADE_SHOW_KEYS, prefs.getString(key, "NAVBAR"));
             } else if (key.equals(PREF_KEY_NAVBAR_KEY_COLOR)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_KEY_COLOR,
@@ -3730,12 +3640,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (pref == mPrefLockscreenBgImage) {
                 setCustomLockscreenImage();
                 return true;
-            } else if (pref == mPrefNotifImagePortrait) {
-                setCustomNotifBgPortrait();
-                return true;
-            } else if (pref == mPrefNotifImageLandscape) {
-                setCustomNotifBgLandscape();
-                return true;
             } else if (pref == mPrefGbThemeDark) {
                 File file = new File(Utils.getFilesDir(getActivity()) + "/" + FILE_THEME_DARK_FLAG);
                 if (mPrefGbThemeDark.isChecked()) {
@@ -3916,40 +3820,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             getActivity().startActivityFromFragment(this, intent, REQ_LOCKSCREEN_BACKGROUND);
         }
 
-        private void setCustomNotifBgPortrait() {
-            Display display = getActivity().getWindowManager().getDefaultDisplay();
-            Point displaySize = new Point();
-            display.getRealSize(displaySize);
-            Intent intent = new Intent(getActivity(), PickImageActivity.class);
-            intent.putExtra(PickImageActivity.EXTRA_CROP_MODE, "CROP");
-            boolean isPortrait = getResources()
-                    .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? displaySize.x : displaySize.y);
-            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? displaySize.y : displaySize.x);
-            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, isPortrait ? displaySize.x : displaySize.y);
-            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, isPortrait ? displaySize.y : displaySize.x);
-            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
-            intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
-            startActivityForResult(intent, REQ_NOTIF_BG_IMAGE_PORTRAIT);
-        }
-
-        private void setCustomNotifBgLandscape() {
-            Display display = getActivity().getWindowManager().getDefaultDisplay();
-            Point displaySize = new Point();
-            display.getRealSize(displaySize);
-            Intent intent = new Intent(getActivity(), PickImageActivity.class);
-            intent.putExtra(PickImageActivity.EXTRA_CROP_MODE, "CROP");
-            boolean isPortrait = getResources()
-                  .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? displaySize.y : displaySize.x);
-            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? displaySize.x : displaySize.y);
-            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, isPortrait ? displaySize.y : displaySize.x);
-            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, isPortrait ? displaySize.x : displaySize.y);
-            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
-            intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
-            startActivityForResult(intent, REQ_NOTIF_BG_IMAGE_LANDSCAPE);
-        }
-
         private void setCustomCallerImage() {
             int width = getResources().getDimensionPixelSize(R.dimen.caller_id_photo_width);
             int height = getResources().getDimensionPixelSize(R.dimen.caller_id_photo_height);
@@ -4055,40 +3925,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                             Toast.LENGTH_SHORT).show();
                 }
                 Intent intent = new Intent(ACTION_PREF_LOCKSCREEN_BG_CHANGED);
-                getActivity().sendBroadcast(intent);
-            } else if (requestCode == REQ_NOTIF_BG_IMAGE_PORTRAIT) {
-                if (resultCode == Activity.RESULT_OK) {
-                    File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
-                    if (f.exists()) {
-                        f.renameTo(notifBgImagePortrait);
-                    }
-                    notifBgImagePortrait.setReadable(true, false);
-                    Toast.makeText(getActivity(), getString(
-                            R.string.lockscreen_background_result_successful), 
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), getString(
-                            R.string.lockscreen_background_result_not_successful),
-                            Toast.LENGTH_SHORT).show();
-                }
-                Intent intent = new Intent(ACTION_NOTIF_BACKGROUND_CHANGED);
-                getActivity().sendBroadcast(intent);
-            } else if (requestCode == REQ_NOTIF_BG_IMAGE_LANDSCAPE) {
-                if (resultCode == Activity.RESULT_OK) {
-                    File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
-                    if (f.exists()) {
-                        f.renameTo(notifBgImageLandscape);
-                    }
-                    notifBgImageLandscape.setReadable(true, false);
-                    Toast.makeText(getActivity(), getString(
-                            R.string.lockscreen_background_result_successful), 
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), getString(
-                            R.string.lockscreen_background_result_not_successful),
-                            Toast.LENGTH_SHORT).show();
-                }
-                Intent intent = new Intent(ACTION_NOTIF_BACKGROUND_CHANGED);
                 getActivity().sendBroadcast(intent);
             } else if (requestCode == REQ_CALLER_PHOTO) {
                 if (resultCode == Activity.RESULT_OK) {

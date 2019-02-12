@@ -283,16 +283,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Notification drawer style</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Notification drawer background</string>
-    <string name="notif_background_default">Default background</string>
-    <string name="notif_background_color_fill">Color fill</string>
-    <string name="notif_background_custom_image">Custom image</string>
-    <string name="pref_notif_color_title">Set background color</string>
-    <string name="pref_notif_image_portrait_title">Set portrait image</string>
-    <string name="pref_notif_image_landscape_title">Set landscape image</string>
-    <string name="pref_notif_background_alpha_title">Background transparency</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Disable roaming indicators</string>
     <string name="pref_disable_roaming_indicators_summary">When disabled, R indicator will not be visible while roaming. Use with caution.</string>
@@ -1766,13 +1756,6 @@
     <string name="pref_lc_notif_hide_persistent_summary">Hides all ongoing and other non-clearable notifications 
         coming from this app</string>
 
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Auto-fade keys</string>
-    <string name="pref_navbar_autofade_keys_summary">Fades keys automatically after timeout expires. Set to 0 to disable.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Show keys on</string>
-    <string name="autofade_show_keys_navbar">Navigation bar touch</string>
-    <string name="autofade_show_keys_screen">Screen touch</string>
-
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Auto-reset</string>
     <string name="pref_sa_tile_auto_reset_summary">Sets default screen timeout automatically when screen turns off</string>
@@ -1944,9 +1927,6 @@
     <string name="pref_lockscreen_bottom_actions_hide_title">Hide bottom actions</string>
     <string name="bottom_action_left">Hide left action</string>
     <string name="bottom_action_right">Hide right action</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">See through transparency</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Choose default SIM for calls</string>

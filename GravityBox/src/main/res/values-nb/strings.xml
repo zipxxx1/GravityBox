@@ -273,16 +273,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Notification drawer style</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Notification drawer background</string>
-    <string name="notif_background_default">Default background</string>
-    <string name="notif_background_color_fill">Color fill</string>
-    <string name="notif_background_custom_image">Custom image</string>
-    <string name="pref_notif_color_title">Set background color</string>
-    <string name="pref_notif_image_portrait_title">Set portrait image</string>
-    <string name="pref_notif_image_landscape_title">Set landscape image</string>
-    <string name="pref_notif_background_alpha_title">Background transparency</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Disable roaming indicators</string>
     <string name="pref_disable_roaming_indicators_summary">When disabled, R indicator will not be visible while roaming. Use with caution.</string>

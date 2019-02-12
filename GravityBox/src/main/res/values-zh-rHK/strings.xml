@@ -273,16 +273,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">通知面板風格</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">通知面板背景</string>
-    <string name="notif_background_default">預設背景</string>
-    <string name="notif_background_color_fill">純色</string>
-    <string name="notif_background_custom_image">自訂圖片</string>
-    <string name="pref_notif_color_title">設定背景顏色</string>
-    <string name="pref_notif_image_portrait_title">設定直向圖片</string>
-    <string name="pref_notif_image_landscape_title">設定橫向圖片</string>
-    <string name="pref_notif_background_alpha_title">背景透明度</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">隱藏漫遊數據圖示</string>
     <string name="pref_disable_roaming_indicators_summary">當停用時，狀態列上的 R 漫遊數據圖示會隱藏，請小心使用！</string>

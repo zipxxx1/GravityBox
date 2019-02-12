@@ -178,7 +178,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
             });
 
             XposedHelpers.findAndHookMethod(QsTile.CLASS_CUSTOM_TILE, cl,
-                    Build.VERSION.SDK_INT >= 27 ? "handleSetListening" : "setListening",
+                    "handleSetListening",
                     boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {

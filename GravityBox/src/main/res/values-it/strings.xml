@@ -281,16 +281,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Pannello delle notifiche</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Sfondo pannello delle notifiche</string>
-    <string name="notif_background_default">Sfondo predefinito</string>
-    <string name="notif_background_color_fill">Tinta unica</string>
-    <string name="notif_background_custom_image">Immagine personalizzata</string>
-    <string name="pref_notif_color_title">Imposta colore sfondo</string>
-    <string name="pref_notif_image_portrait_title">Imposta immagine verticale</string>
-    <string name="pref_notif_image_landscape_title">Imposta immagine orizzontale</string>
-    <string name="pref_notif_background_alpha_title">Trasparenza sfondo</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Disattiva indicatori del roaming</string>
     <string name="pref_disable_roaming_indicators_summary">Se disabilitato, l\'indicatore R non sarà visibile durante il roaming. Usare con cautela.</string>
@@ -1762,13 +1752,6 @@
     <string name="pref_lc_notif_hide_persistent_summary">Nasconde tutte le notifiche in corso e altre non cancellabili
          provenienti da questa app</string>
 
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Tasti Auto-dissolvenza</string>
-    <string name="pref_navbar_autofade_keys_summary">Abbassa automaticamente le chiavi dopo che scade il timeout. Impostare su 0 per disabilitare.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Mostra le chiavi</string>
-    <string name="autofade_show_keys_navbar">Touch della navigation bar</string>
-    <string name="autofade_show_keys_screen">Touch dello Schermo</string>
-
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Auto-reset</string>
     <string name="pref_sa_tile_auto_reset_summary">Imposta automaticamente il timeout dello schermo predefinito quando lo schermo si spegne</string>
@@ -1940,9 +1923,6 @@
     <string name="pref_lockscreen_bottom_actions_hide_title">Nascondi azioni in basso</string>
     <string name="bottom_action_left">Nascondi azione sinistra</string>
     <string name="bottom_action_right">Nascondi azione destra</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Vedi attraverso la trasparenza</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Scegli la SIM predefinita per le chiamate</string>

@@ -276,16 +276,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Стыль шторкі паведамленняў</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Фон шторкі паведамленняў</string>
-    <string name="notif_background_default">Стандартны фон</string>
-    <string name="notif_background_color_fill">Запаўненне колерам</string>
-    <string name="notif_background_custom_image">Выява карыстальніка</string>
-    <string name="pref_notif_color_title">Задаць колер фону</string>
-    <string name="pref_notif_image_portrait_title">Задаць партрэтны малюнак</string>
-    <string name="pref_notif_image_landscape_title">Задаць ландшафтны малюнак</string>
-    <string name="pref_notif_background_alpha_title">Празрыстасць фону</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Адключыць індыкатар роўмінгу</string>
     <string name="pref_disable_roaming_indicators_summary">Пры адключэнні, R-індыкатар не будзе адлюстроўвацца. Выкарыстоўвайце з асцярожнасцю.</string>

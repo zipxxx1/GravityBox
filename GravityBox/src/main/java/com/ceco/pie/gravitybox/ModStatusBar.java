@@ -69,8 +69,7 @@ public class ModStatusBar {
     private static final String TAG = "GB:ModStatusBar";
     public static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
-    private static final String CLASS_QS_FOOTER = Build.VERSION.SDK_INT >= 27 ?
-            "com.android.systemui.qs.QSFooterImpl" : "com.android.systemui.qs.QSFooter";
+    private static final String CLASS_QS_FOOTER = "com.android.systemui.qs.QSFooterImpl";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
@@ -288,8 +287,7 @@ public class ModStatusBar {
             GravityBox.log(TAG, t);
         }
 
-        if (Build.VERSION.SDK_INT >= 27 &&
-                prefs.getBoolean(GravityBoxSettings.PREF_KEY_CORNER_PADDING_REMOVE, false)) {
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CORNER_PADDING_REMOVE, false)) {
             try {
                 resparam.res.setReplacement(PACKAGE_NAME, "dimen", "rounded_corner_content_padding",
                         new XResources.DimensionReplacement(0, TypedValue.COMPLEX_UNIT_DIP));
@@ -729,7 +727,6 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_BACKGROUND_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED);
                     intentFilter.addAction(Intent.ACTION_SCREEN_ON);
@@ -962,23 +959,6 @@ public class ModStatusBar {
                 GravityBox.log(TAG, t);
             }
 
-            // notification drawer wallpaper
-            if (Build.VERSION.SDK_INT < 27) {
-                try {
-                    XposedHelpers.findAndHookMethod(notifPanelViewClass, "onFinishInflate", new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            NotificationWallpaper nw = 
-                                    new NotificationWallpaper((FrameLayout) param.thisObject, prefs);
-                            mStateChangeListeners.add(nw);
-                            mBroadcastSubReceivers.add(nw);
-                        }
-                    });
-                } catch (Throwable t) {
-                    GravityBox.log(TAG, t);
-                }
-            }
-
             // suppress battery saver indication
             try {
                 XposedHelpers.findAndHookMethod(CLASS_BAR_TRANSITIONS, classLoader, "transitionTo",
@@ -990,25 +970,23 @@ public class ModStatusBar {
                         }
                     }
                 });
-                if (Build.VERSION.SDK_INT >= 27) {
-                    XposedHelpers.findAndHookMethod(CLASS_LIGHT_BAR_CTRL, classLoader,
-                            "isLight", int.class, int.class, int.class, new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) {
-                            if (mBatterySaverIndicationDisabled && SysUiManagers.BatteryInfoManager != null &&
-                                    SysUiManagers.BatteryInfoManager.getCurrentBatteryData() != null &&
-                                    SysUiManagers.BatteryInfoManager.getCurrentBatteryData().isPowerSaving) {
-                                int vis = (int) param.args[0];
-                                int mode = (int) param.args[1];
-                                int flag = (int) param.args[2];
-                                boolean allowLight = (mode == ModNavigationBar.MODE_TRANSPARENT ||
-                                        mode == ModNavigationBar.MODE_LIGHTS_OUT_TRANSPARENT);
-                                boolean light = (vis & flag) != 0;
-                                param.setResult(allowLight && light);
-                            }
+                XposedHelpers.findAndHookMethod(CLASS_LIGHT_BAR_CTRL, classLoader,
+                        "isLight", int.class, int.class, int.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) {
+                        if (mBatterySaverIndicationDisabled && SysUiManagers.BatteryInfoManager != null &&
+                                SysUiManagers.BatteryInfoManager.getCurrentBatteryData() != null &&
+                                SysUiManagers.BatteryInfoManager.getCurrentBatteryData().isPowerSaving) {
+                            int vis = (int) param.args[0];
+                            int mode = (int) param.args[1];
+                            int flag = (int) param.args[2];
+                            boolean allowLight = (mode == ModNavigationBar.MODE_TRANSPARENT ||
+                                    mode == ModNavigationBar.MODE_LIGHTS_OUT_TRANSPARENT);
+                            boolean light = (vis & flag) != 0;
+                            param.setResult(allowLight && light);
                         }
-                    });
-                }
+                    }
+                });
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
             }

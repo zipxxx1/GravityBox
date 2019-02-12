@@ -277,16 +277,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Stil der Benachrichtigungsleiste</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Hintergrund</string>
-    <string name="notif_background_default">Systemstandard</string>
-    <string name="notif_background_color_fill">Füllfarbe</string>
-    <string name="notif_background_custom_image">Eigenes Bild</string>
-    <string name="pref_notif_color_title">Hintergrundfarbe auswählen</string>
-    <string name="pref_notif_image_portrait_title">Bild für Hochformat auswählen</string>
-    <string name="pref_notif_image_landscape_title">Bild für Querformat auswählen</string>
-    <string name="pref_notif_background_alpha_title">Hintergrundtransparenz</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Roaming-Symbol deaktivieren</string>
     <string name="pref_disable_roaming_indicators_summary">\'R\'-Symbol bei Roaming-Verbindungen ausblenden (Mit Vorsicht benutzen!)</string>
@@ -1729,14 +1719,6 @@
     <!-- UNC: Hide persistent notifications -->
     <string name="pref_lc_notif_hide_persistent_title">Verstecke dauerhafte Benachrichtigungen</string>
     <string name="pref_lc_notif_hide_persistent_summary">Verstecke alle dauerhaften und nicht entfernbaren Benachrichtungen dieser App</string>
-
-
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Ausblenden der Tasten</string>
-    <string name="pref_navbar_autofade_keys_summary">Blendet die Tasten automatisch entprechend des Timeouts aus. Zum Deaktivieren auf 0 setzen.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Anzeige der Tasten bei</string>
-    <string name="autofade_show_keys_navbar">Berühren der Navigationsleiste</string>
-    <string name="autofade_show_keys_screen">Berühren des Bildschirms</string>
 
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Automatisches Zurücksetzen vom Timeout</string>

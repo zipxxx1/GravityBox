@@ -342,13 +342,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                                 param.args[0] = false;
                             }
                         };
-                        if (Build.VERSION.SDK_INT >= 27) {
-                            mHooks.add(XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
-                                    boolean.class, boolean.class, setNoSimsHook));
-                        } else {
-                            mHooks.add(XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
-                                    boolean.class, setNoSimsHook));
-                        }
+                        mHooks.add(XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
+                                boolean.class, boolean.class, setNoSimsHook));
                     }
                 } catch (Throwable t) {
                     GravityBox.log(TAG, "Error hooking setNoSims: ", t);

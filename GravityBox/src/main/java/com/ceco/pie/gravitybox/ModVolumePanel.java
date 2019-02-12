@@ -167,13 +167,8 @@ public class ModVolumePanel {
                     }
                 }
             };
-            if (Build.VERSION.SDK_INT >= 27) {
-                XposedHelpers.findAndHookMethod(classVolumePanel, "shouldBeVisibleH",
-                        CLASS_VOLUME_ROW, CLASS_VOLUME_ROW, shouldBeVisibleHook);
-            } else {
-                XposedHelpers.findAndHookMethod(classVolumePanel, "shouldBeVisibleH",
-                        CLASS_VOLUME_ROW, boolean.class, shouldBeVisibleHook);
-            }
+            XposedHelpers.findAndHookMethod(classVolumePanel, "shouldBeVisibleH",
+                    CLASS_VOLUME_ROW, CLASS_VOLUME_ROW, shouldBeVisibleHook);
 
             XposedHelpers.findAndHookMethod(classVolumePanel, "updateVolumeRowSliderH",
                     CLASS_VOLUME_ROW, boolean.class, int.class, new XC_MethodHook() {

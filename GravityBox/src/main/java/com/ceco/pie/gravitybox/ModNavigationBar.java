@@ -30,15 +30,10 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -62,8 +57,6 @@ public class ModNavigationBar {
     private static final String CLASS_NAVBAR_FRAGMENT = "com.android.systemui.statusbar.phone.NavigationBarFragment";
     private static final String CLASS_KEY_BUTTON_VIEW = "com.android.systemui.statusbar.policy.KeyButtonView";
     private static final String CLASS_KEY_BUTTON_RIPPLE = "com.android.systemui.statusbar.policy.KeyButtonRipple";
-    private static final String CLASS_NAVBAR_TRANSITIONS = 
-            "com.android.systemui.statusbar.phone.NavigationBarTransitions";
     private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_NAVBAR_INFLATER_VIEW = "com.android.systemui.statusbar.phone.NavigationBarInflaterView";
     private static final String CLASS_LIGHT_BAR_CTRL = "com.android.systemui.statusbar.phone.LightBarTransitionsController";
@@ -89,10 +82,6 @@ public class ModNavigationBar {
     private static boolean mDpadKeysVisible;
     private static boolean mHideImeSwitcher;
     private static PowerManager mPm;
-    private static long mLastTouchMs;
-    private static int mBarModeOriginal;
-    private static int mAutofadeTimeoutMs;
-    private static String mAutofadeShowKeysPolicy;
     private static boolean mUpdateDisabledFlags;
     private static boolean mUpdateIconHints;
 
@@ -208,19 +197,6 @@ public class ModNavigationBar {
                     mNavbarWidth = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100);
                     updateIconScaleType();
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_KEYS)) {
-                    mAutofadeTimeoutMs = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_KEYS, 0) * 1000;
-                    mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
-                    if (mAutofadeTimeoutMs == 0) {
-                        setBarMode(mBarModeOriginal);
-                    } else {
-                        mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
-                    }
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_SHOW_KEYS)) {
-                    mAutofadeShowKeysPolicy = intent.getStringExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_SHOW_KEYS);
-                }
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) && 
                     GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP.equals(intent.getStringExtra(
@@ -260,7 +236,6 @@ public class ModNavigationBar {
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> navbarViewClass = XposedHelpers.findClass(CLASS_NAVBAR_VIEW, classLoader);
-            final Class<?> navbarTransitionsClass = XposedHelpers.findClass(CLASS_NAVBAR_TRANSITIONS, classLoader);
 
             mAlwaysShowMenukey = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_MENUKEY, false);
 
@@ -292,9 +267,6 @@ public class ModNavigationBar {
 
             mNavbarHeight = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT, 100);
             mNavbarWidth = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_WIDTH, 100);
-            mAutofadeTimeoutMs = Build.VERSION.SDK_INT >= 27 ? 0 :
-                                 prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_KEYS, 0) * 1000;
-            mAutofadeShowKeysPolicy = "NAVBAR"; //prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS, "NAVBAR");
 
             // for HTC GPE devices having capacitive keys
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false)) {
@@ -366,8 +338,7 @@ public class ModNavigationBar {
                     // prepare keys for rot0 view
                     vRot = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mRot0");
                     if (vRot != null) {
-                        ScaleType scaleType = Build.VERSION.SDK_INT >= 27 ?
-                                ScaleType.FIT_CENTER : getIconScaleType(0, View.NO_ID);
+                        ScaleType scaleType = ScaleType.FIT_CENTER;
                         int[] padding = getIconPaddingPx(0);
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setScaleType(scaleType);
@@ -400,8 +371,7 @@ public class ModNavigationBar {
                     // prepare keys for rot90 view
                     vRot = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mRot90");
                     if (vRot != null) {
-                        ScaleType scaleType = Build.VERSION.SDK_INT >= 27 ?
-                                ScaleType.FIT_CENTER : getIconScaleType(1, View.NO_ID);
+                        ScaleType scaleType = ScaleType.FIT_CENTER;
                         int[] padding = getIconPaddingPx(1);
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setScaleType(scaleType);
@@ -483,25 +453,6 @@ public class ModNavigationBar {
                 }
             });
 
-            if (Build.VERSION.SDK_INT < 27) {
-                XposedHelpers.findAndHookMethod(navbarTransitionsClass, "applyMode",
-                        int.class, boolean.class, boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) {
-                        int barMode = (int)param.args[0];
-                        if (barMode != MODE_LIGHTS_OUT_TRANSPARENT) {
-                            mBarModeOriginal = barMode;
-                        }
-                        if (mAutofadeTimeoutMs > 0 &&
-                                SystemClock.uptimeMillis() - mLastTouchMs >= mAutofadeTimeoutMs &&
-                                    barMode != MODE_LIGHTS_OUT &&
-                                    barMode != MODE_LIGHTS_OUT_TRANSPARENT) {
-                            param.args[0] = MODE_LIGHTS_OUT_TRANSPARENT;
-                        }
-                    }
-                });
-            }
-
             XposedHelpers.findAndHookMethod(CLASS_KEY_BUTTON_RIPPLE, classLoader,
                     "getRipplePaint", new XC_MethodHook() {
                 @Override
@@ -540,32 +491,6 @@ public class ModNavigationBar {
                 }
             });
 
-            if (Build.VERSION.SDK_INT < 27) {
-                XC_MethodHook touchEventHook = new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        if (mAutofadeTimeoutMs == 0) return;
-    
-                        int action = ((MotionEvent)param.args[0]).getAction();
-                        if (action == MotionEvent.ACTION_DOWN ||
-                                (action == MotionEvent.ACTION_OUTSIDE &&
-                                     "SCREEN".equals(mAutofadeShowKeysPolicy))) {
-                            mLastTouchMs = SystemClock.uptimeMillis();
-                            if (mBarModeHandler.hasMessages(MSG_LIGHTS_OUT)) {
-                                mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
-                            } else {
-                                setBarMode(mBarModeOriginal);
-                            }
-                            mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
-                        }
-                    }
-                };
-                XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
-                        "onInterceptTouchEvent", MotionEvent.class, touchEventHook);
-                XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
-                        "onTouchEvent", MotionEvent.class, touchEventHook);
-            }
-
             XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader,
                     "toggleSplitScreenMode", int.class, int.class, new XC_MethodHook() {
                 @Override
@@ -593,24 +518,6 @@ public class ModNavigationBar {
                 }
             });
         } catch(Throwable t) {
-            GravityBox.log(TAG, t);
-        }
-    }
-
-    private static Handler mBarModeHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == MSG_LIGHTS_OUT) {
-                setBarMode(MODE_LIGHTS_OUT_TRANSPARENT);
-            }
-        }
-    };
-
-    private static void setBarMode(int mode) {
-        try {
-            Object bt = XposedHelpers.callMethod(mNavigationBarView, "getBarTransitions");
-            XposedHelpers.callMethod(bt, "applyMode", mode, true, true);
-        } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
     }
@@ -1001,19 +908,17 @@ public class ModNavigationBar {
         int[] p = new int[] { 0, 0, 0, 0 };
         int paddingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5,
                 mResources.getDisplayMetrics()));
-        int threshold = Build.VERSION.SDK_INT >= 27 ? 0 : 75;
+        int threshold = 0;
         boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
         if (index == 0) {
             int paddingPxSdk27 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15,
                     mResources.getDisplayMetrics()) * (mNavbarHeight / (100f+Math.abs(100f-mNavbarHeight))));
-            p[1] = p[3] = mNavbarHeight < threshold ? paddingPx :
-                            Build.VERSION.SDK_INT >= 27 ? paddingPxSdk27 : 0;
+            p[1] = p[3] = mNavbarHeight < threshold ? paddingPx : paddingPxSdk27;
         }
         if (index == 1 && hasVerticalNavbar) {
             int paddingPxSdk27 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15,
                     mResources.getDisplayMetrics()) * (mNavbarWidth / (100f+Math.abs(100f-mNavbarWidth))));
-            p[0] = p[2] = mNavbarWidth < threshold ? paddingPx :
-                            Build.VERSION.SDK_INT >= 27 ? paddingPxSdk27 : 0;
+            p[0] = p[2] = mNavbarWidth < threshold ? paddingPx : paddingPxSdk27;
         }
         return p;
     }
@@ -1034,8 +939,7 @@ public class ModNavigationBar {
                                 mNavbarViewInfo[i].customKeyParent };
                 for (ViewGroup group : groups) {
                     if (group == null || (i == 1 &&
-                            group == mNavbarViewInfo[i].menuImeGroup &&
-                            Build.VERSION.SDK_INT >= 27)) continue;
+                            group == mNavbarViewInfo[i].menuImeGroup)) continue;
                     int childCount = group.getChildCount();
                     for (int j = 0; j < childCount; j++) {
                         View child = group.getChildAt(j);
@@ -1046,9 +950,6 @@ public class ModNavigationBar {
                                     mNavbarViewInfo[i].originalScaleType.get(iv.getId()) == null) {
                                 mNavbarViewInfo[i].originalScaleType.put(iv.getId(),
                                         iv.getScaleType());
-                            }
-                            if (Build.VERSION.SDK_INT < 27) {
-                                iv.setScaleType(getIconScaleType(i, iv.getId()));
                             }
                             if (!Utils.isXperiaDevice()) {
                                 iv.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);

@@ -232,15 +232,6 @@
     <string name="pref_cat_statusbar_qs_title">クイック設定管理</string>
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">通知領域のスタイル</string>
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">通知領域の背景</string>
-    <string name="notif_background_default">標準の背景</string>
-    <string name="notif_background_color_fill">塗りつぶし</string>
-    <string name="notif_background_custom_image">カスタム画像</string>
-    <string name="pref_notif_color_title">色のセット</string>
-    <string name="pref_notif_image_portrait_title">縦画面の画像をセット</string>
-    <string name="pref_notif_image_landscape_title">横画面の画像をセット</string>
-    <string name="pref_notif_background_alpha_title">背景の透過度</string>
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">ローミングアイコンの無効化</string>
     <string name="pref_disable_roaming_indicators_summary">無効にするとローミング中にRアイコンを非表示にします。</string>

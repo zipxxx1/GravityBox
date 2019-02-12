@@ -283,16 +283,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">通知抽屉风格</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">通知抽屉背景</string>
-    <string name="notif_background_default">默认背景</string>
-    <string name="notif_background_color_fill">纯色</string>
-    <string name="notif_background_custom_image">自定义图片</string>
-    <string name="pref_notif_color_title">设置背景颜色</string>
-    <string name="pref_notif_image_portrait_title">设置竖向图片</string>
-    <string name="pref_notif_image_landscape_title">设置横向图片</string>
-    <string name="pref_notif_background_alpha_title">背景透明度</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">禁用漫游指示</string>
     <string name="pref_disable_roaming_indicators_summary">禁用后漫游指示器上（R）不可见，请小心使用</string>
@@ -1762,14 +1752,6 @@
     <!-- UNC: Hide persistent notifications -->
     <string name="pref_lc_notif_hide_persistent_title">隐藏持续的通知</string>
     <string name="pref_lc_notif_hide_persistent_summary">从这个程序来隐藏所有正在进行的和其它非可清除的通知</string>
-    
-    
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">自动渐变按键</string>
-    <string name="pref_navbar_autofade_keys_summary">自动渐变按键超时,设置为0禁用</string>
-    <string name="pref_navbar_autofade_show_keys_title">开启显示按键</string>
-    <string name="autofade_show_keys_navbar">触摸虚拟按键</string>
-    <string name="autofade_show_keys_screen">触摸屏幕</string>
 
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">自动复位</string>
@@ -1942,9 +1924,6 @@
     <string name="pref_lockscreen_bottom_actions_hide_title">隐藏底部动作</string>
     <string name="bottom_action_left">隐藏左侧动作</string>
     <string name="bottom_action_right">隐藏右侧动作</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">透过透明度</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">为通话选择默认SIM卡</string>

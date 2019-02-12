@@ -255,16 +255,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">نمط درج الاشعارات</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">خلفية درج الاشعارات</string>
-    <string name="notif_background_default">الخلفية الافتراضية</string>
-    <string name="notif_background_color_fill">لون مخصص</string>
-    <string name="notif_background_custom_image">صورة مخصصة</string>
-    <string name="pref_notif_color_title">تعيين لون للخلفية</string>
-    <string name="pref_notif_image_portrait_title">تعيين صورة طولية</string>
-    <string name="pref_notif_image_landscape_title">تعيين صورة عرضية</string>
-    <string name="pref_notif_background_alpha_title">شفافية الخلفية</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">تعطيل مؤشرات التجوال</string>
     <string name="pref_disable_roaming_indicators_summary">سيتم اخفاء مؤشر التجوال أثناء الاستخدام</string>

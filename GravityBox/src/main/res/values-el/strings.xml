@@ -268,16 +268,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Στυλ συρταριού ειδοποιήσεων</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Φόντο συρταριού ειδοποιήσεων</string>
-    <string name="notif_background_default">Προεπιλεγμένο φόντο</string>
-    <string name="notif_background_color_fill">Γέμισμα χρώματος</string>
-    <string name="notif_background_custom_image">Προσαρμοσμένη εικόνα</string>
-    <string name="pref_notif_color_title">Ορισμός χρώματος φόντου</string>
-    <string name="pref_notif_image_portrait_title">Ορισμός κατακόρυφης εικόνας</string>
-    <string name="pref_notif_image_landscape_title">Ορισμός οριζόντιας εικόνας</string>
-    <string name="pref_notif_background_alpha_title">Διαφάνεια φόντου</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Απενεργοποίηση εικονιδίου περιαγωγής</string>
     <string name="pref_disable_roaming_indicators_summary">Όντας απενεργοποιημένος, ο δείκτης R δεν θα είναι ορατός κατά την περιαγωγή. Χρησιμοποιήστε με προσοχή.</string>

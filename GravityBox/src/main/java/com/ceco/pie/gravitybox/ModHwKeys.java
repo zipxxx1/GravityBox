@@ -511,7 +511,7 @@ public class ModHwKeys {
             try {
                 mExpandedDesktopMode = Integer.valueOf(prefs.getString(
                         GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
-                if (Build.VERSION.SDK_INT >= 27 && mExpandedDesktopMode > 2) {
+                if (mExpandedDesktopMode > 2) {
                     mExpandedDesktopMode = 2;
                 }
             } catch (NumberFormatException nfe) {
@@ -1457,11 +1457,7 @@ public class ModHwKeys {
 
     private static void dismissKeyguard() {
         try {
-            if (Build.VERSION.SDK_INT >= 27) {
-                XposedHelpers.callMethod(mPhoneWindowManager, "dismissKeyguardLw", (Object)null);
-            } else {
-                XposedHelpers.callMethod(mPhoneWindowManager, "dismissKeyguardLw");
-            }
+            XposedHelpers.callMethod(mPhoneWindowManager, "dismissKeyguardLw", (Object)null);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }

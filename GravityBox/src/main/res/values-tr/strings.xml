@@ -280,16 +280,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Bildirim ekranı stili</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Bildirim ekranı arka planı</string>
-    <string name="notif_background_default">Varsayılan arka plan</string>
-    <string name="notif_background_color_fill">Renk doldur</string>
-    <string name="notif_background_custom_image">Özel resim</string>
-    <string name="pref_notif_color_title">Arka plan rengi ayarla</string>
-    <string name="pref_notif_image_portrait_title">Dikey resmi ayarla</string>
-    <string name="pref_notif_image_landscape_title">Yatay resmi ayarla</string>
-    <string name="pref_notif_background_alpha_title">Arka plan şeffaflığı</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Dolaşım göstergesini devre dışı bırak</string>
     <string name="pref_disable_roaming_indicators_summary">Devre dışı bırakıldığında, dolaşımdayken R(roaming) simgesi gösterilmez. Dikkatli kullanın.</string>
@@ -1731,13 +1721,6 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_lc_notif_hide_persistent_title">Kalıcı bildirimleri gizle</string>
     <string name="pref_lc_notif_hide_persistent_summary">Bu uygulamadan gelen tüm devam eden ve diğer temizlenemeyen bildirimleri gizler</string>
 
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Tuşları otomatik karart</string>
-    <string name="pref_navbar_autofade_keys_summary">"Zaman aşımı dolduktan sonra tuşları otomatik olarak karartır. Devre dışı bırakmak için 0'a ayarlayın."</string>
-    <string name="pref_navbar_autofade_show_keys_title">Tuşları şu durumda göster</string>
-    <string name="autofade_show_keys_navbar">Gezinti çubuğuna dokunulduğunda</string>
-    <string name="autofade_show_keys_screen">Ekrana dokunulduğunda</string>
-
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Otomatik sıfırla</string>
     <string name="pref_sa_tile_auto_reset_summary">Ekran kapandığında otomatik olarak varsayılan ekran zaman aşımını ayarlar</string>
@@ -1901,9 +1884,6 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_lockscreen_bottom_actions_hide_title">Alt eylemleri gizle</string>
     <string name="bottom_action_left">Sol eylemi gizle</string>
     <string name="bottom_action_right">Sağ eylemi gizle</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Şeffaf gör</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Aramalar için varsayılan SIM\'i seçin</string>

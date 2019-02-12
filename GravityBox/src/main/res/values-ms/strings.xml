@@ -283,16 +283,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Jenis drawer notifikasi</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Latar belakang drawer notifikasi</string>
-    <string name="notif_background_default">Latar belakang asal</string>
-    <string name="notif_background_color_fill">Latar warna</string>
-    <string name="notif_background_custom_image">Imej tersendiri</string>
-    <string name="pref_notif_color_title">Set warna latar belakang</string>
-    <string name="pref_notif_image_portrait_title">Set imej potret</string>
-    <string name="pref_notif_image_landscape_title">Set imej lanskap</string>
-    <string name="pref_notif_background_alpha_title">Latar belakang bayang (telus)</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Matikan tanda perayauan</string>
     <string name="pref_disable_roaming_indicators_summary">Apabila debenarkan tanda R akan tersembunyi. Guna dengan berhati-hati</string>
@@ -1763,14 +1753,7 @@
     <string name="pref_lc_notif_hide_persistent_title">Sembunyi notifikasi tetap</string>
     <string name="pref_lc_notif_hide_persistent_summary">Sembunyi notifikasi tetap 
         yang datang dari aplikasi ini</string>
-	
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Kekunci auto pudar</string>
-    <string name="pref_navbar_autofade_keys_summary">Pudar kekunci secara automatik selepas tamat masa tamat. Set 0 untuk tidak aktif</string>
-    <string name="pref_navbar_autofade_show_keys_title">Aktifkan penunjuk kekunci</string>
-    <string name="autofade_show_keys_navbar">Sentuh bar navigasi</string>
-    <string name="autofade_show_keys_screen">Sentuh skrin</string>
-	
+
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Set semula automatik</string>
     <string name="pref_sa_tile_auto_reset_summary">Set tetapan asal masa skrin ketika skrin dimatikan</string>
@@ -1942,9 +1925,6 @@
     <string name="pref_lockscreen_bottom_actions_hide_title">Sembunyi aksi dibawah</string>
     <string name="bottom_action_left">Sembunyi aksi kiri</string>
     <string name="bottom_action_right">Sembunyi aksi kanan</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Lihat tembus</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Pilih SIM utama untuk panggilan</string>

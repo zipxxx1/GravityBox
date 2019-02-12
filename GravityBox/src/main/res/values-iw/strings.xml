@@ -261,16 +261,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">סגנון מגירת ההתראות</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">רקע של מגירת ההתראות</string>
-    <string name="notif_background_default">רקע ברירת מחדל</string>
-    <string name="notif_background_color_fill">צבע אחיד</string>
-    <string name="notif_background_custom_image">תמונה מותאמת אישית</string>
-    <string name="pref_notif_color_title">קבע צבע לרקע</string>
-    <string name="pref_notif_image_portrait_title">קבע תמונה למצג אנכי</string>
-    <string name="pref_notif_image_landscape_title">קבע תמונה למצג אופקי</string>
-    <string name="pref_notif_background_alpha_title">שקיפות הרקע</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">כבה מחוונים של נדידת נתונים</string>
     <string name="pref_disable_roaming_indicators_summary">כאשר המחוון כבוי, ה-R לא יוצג בעת נדידת נתונים. השתמש בזהירות.</string>

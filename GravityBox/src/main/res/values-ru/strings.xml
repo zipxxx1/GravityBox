@@ -281,16 +281,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Стиль шторки уведомлений</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Фон шторки уведомлений</string>
-    <string name="notif_background_default">Стандартный фон</string>
-    <string name="notif_background_color_fill">Заполнение цветом</string>
-    <string name="notif_background_custom_image">Пользовательское изображение</string>
-    <string name="pref_notif_color_title">Задать цвет фона</string>
-    <string name="pref_notif_image_portrait_title">Задать портретную картинку</string>
-    <string name="pref_notif_image_landscape_title">Задать ландшафтную картинку</string>
-    <string name="pref_notif_background_alpha_title">Прозрачность фона</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Отключить индикатор роуминга</string>
     <string name="pref_disable_roaming_indicators_summary">При отключении, R-индикатор не будет отображаться. Используйте с осторожностью.</string>
@@ -1761,13 +1751,6 @@
     <string name="pref_lc_notif_hide_persistent_summary">Скрытие всех текущих и других неочищаемых 
         уведомлений данного приложения</string>
 
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Автоисчезновение кнопок</string>
-    <string name="pref_navbar_autofade_keys_summary">Кнопки автоматически исчезают после истечения установленной задержки. Введите для 0 отключения.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Включение показа кнопок</string>
-    <string name="autofade_show_keys_navbar">Касание нав. панели</string>
-    <string name="autofade_show_keys_screen">Касание экрана</string>
-
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Автосброс</string>
     <string name="pref_sa_tile_auto_reset_summary">Автоматическая установка задержки отключения экрана по умолчанию при выключении экрана</string>
@@ -1939,9 +1922,6 @@
     <string name="pref_lockscreen_bottom_actions_hide_title">Скрыть действия снизу</string>
     <string name="bottom_action_left">Скрыть действие слева</string>
     <string name="bottom_action_right">Скрыть действие справа</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Просмотр через прозрачность</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">SIM-карта по умолчанию для вызовов</string>

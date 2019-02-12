@@ -256,16 +256,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Estilo da gaveta de notificações</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Fundo da gaveta de notificações</string>
-    <string name="notif_background_default">Fundo padrão</string>
-    <string name="notif_background_color_fill">Preenchimento de cor</string>
-    <string name="notif_background_custom_image">Imagem personalizada</string>
-    <string name="pref_notif_color_title">Definir cor de fundo</string>
-    <string name="pref_notif_image_portrait_title">Definir imagem retrato</string>
-    <string name="pref_notif_image_landscape_title">Definir imagem paisagem</string>
-    <string name="pref_notif_background_alpha_title">Transparência do fundo</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Desabilitar indicadores de roaming</string>
     <string name="pref_disable_roaming_indicators_summary">Quando desabilitado, os indicadores não serão visíveis enquanto você estiver em roaming. Use com cuidado.</string>

@@ -277,16 +277,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Estilo del panel de notificaciones</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Seleccionar fondo</string>
-    <string name="notif_background_default">Fondo predeterminado</string>
-    <string name="notif_background_color_fill">Color de relleno</string>
-    <string name="notif_background_custom_image">Imagen personalizada</string>
-    <string name="pref_notif_color_title">Establecer color de fondo</string>
-    <string name="pref_notif_image_portrait_title">Establecer imagen en modo retrato</string>
-    <string name="pref_notif_image_landscape_title">Establecer imagen panorámica</string>
-    <string name="pref_notif_background_alpha_title">Transparencia del fondo</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Desactivar indicadores de roaming</string>
     <string name="pref_disable_roaming_indicators_summary">Cuando se desactiva, el icono \'R\' no será visible en roaming. Usar con precaución.</string>

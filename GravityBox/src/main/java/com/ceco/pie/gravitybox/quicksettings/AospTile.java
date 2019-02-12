@@ -135,7 +135,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             });
 
             mSetListeningHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), cl,
-                    Build.VERSION.SDK_INT >= 27 ? "handleSetListening" : "setListening",
+                    "handleSetListening",
                             boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {

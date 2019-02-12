@@ -265,16 +265,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Styl Panelu Powiadomień</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Tło Panelu Powiadomień</string>
-    <string name="notif_background_default">Domyślne tło</string>
-    <string name="notif_background_color_fill">Kolorowe wypełnienie</string>
-    <string name="notif_background_custom_image">Własny obrazek</string>
-    <string name="pref_notif_color_title">Ustaw kolor tła</string>
-    <string name="pref_notif_image_portrait_title">Ustaw obraz (portret)</string>
-    <string name="pref_notif_image_landscape_title">Ustaw obraz (panorama)</string>
-    <string name="pref_notif_background_alpha_title">Przezroczystość tła</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Wyłącz wskaźniki roamingu</string>
     <string name="pref_disable_roaming_indicators_summary">Gdy wyłączone, wskaźnik R nie będzie widoczny podczas roamingu. Używaj rozważnie.</string>
@@ -1729,13 +1719,6 @@
     <string name="pref_lc_notif_hide_persistent_summary">Ukrywa wszystkie bieżące oraz inne niewymazywalne powiadomienia
         pochodzące z tej aplikacji</string>
 
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Automatyczne wygaszanie klawiszy</string>
-    <string name="pref_navbar_autofade_keys_summary">Wygasza klawisze automatycznie po przekroczeniu określonego czasu. Ustaw na 0 aby wyłączyć.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Pokaż klawisze włączone</string>
-    <string name="autofade_show_keys_navbar">Dotknięcie paska nawigacji</string>
-    <string name="autofade_show_keys_screen">Dotknięcie ekranu</string>
-
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Automatyczny reset</string>
     <string name="pref_sa_tile_auto_reset_summary">Ustawia domyślny czas wyświetlania ekranu gdy ekran zostanie wyłączony</string>
@@ -1902,9 +1885,6 @@
     <string name="pref_lockscreen_bottom_actions_hide_title">Ukryj dolne przyciski akcji</string>
     <string name="bottom_action_left">Ukryj lewy przycisk akcji</string>
     <string name="bottom_action_right">Ukryj prawy przycisk akcji</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Transparentnie</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Wybierz domyślną SIM do dzwonienia</string>

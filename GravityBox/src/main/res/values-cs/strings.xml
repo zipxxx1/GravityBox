@@ -260,16 +260,6 @@
         <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Nastavení notifikačního panelu</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Pozadí notifikačního panelu</string>
-    <string name="notif_background_default">Původní</string>
-    <string name="notif_background_color_fill">Barevná výplň</string>
-    <string name="notif_background_custom_image">Vlastní obrázek</string>
-    <string name="pref_notif_color_title">Nastavit barvu pozadí</string>
-    <string name="pref_notif_image_portrait_title">Nastavit obrázek na výšku</string>
-    <string name="pref_notif_image_landscape_title">Nastavit obázek na šířku</string>
-    <string name="pref_notif_background_alpha_title">Průhlednost pozadí</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Vypnout roaming indikátory</string>
     <string name="pref_disable_roaming_indicators_summary">Pokud vypnuto, R indikátory nebudou zobrazeny během roamingu. Použít s rozmyslem.</string>
@@ -1706,13 +1696,6 @@
     <string name="pref_lc_notif_hide_persistent_summary">Skryje všechny probíhající a jiné nesmazatelné 
          oznámení z této aplikace</string>
 
-    <!-- Navbar: Auto-fade keys -->
-    <string name="pref_navbar_autofade_keys_title">Automatické ztmavení tlačítek</string>
-    <string name="pref_navbar_autofade_keys_summary">Ztmaví tlačítka po vypršení nastaveného času. Nastavte na 0 pro vypnutí funkce.</string>
-    <string name="pref_navbar_autofade_show_keys_title">Zobrazit tlačítka při</string>
-    <string name="autofade_show_keys_navbar">Doteku navigační lišty</string>
-    <string name="autofade_show_keys_screen">Doteku obrazovky</string>
-
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Automatický reset</string>
     <string name="pref_sa_tile_auto_reset_summary">Nastaví výchozí časovač obrazovky po vypnutí obrazovky</string>
@@ -1880,9 +1863,6 @@
     <string name="pref_lockscreen_bottom_actions_hide_title">Skrýt dolní akce</string>
     <string name="bottom_action_left">Skrýt levou akci</string>
     <string name="bottom_action_right">Skrýt pravou akci</string>
-
-    <!-- Lockscreen: Direct unlock see through transparency level -->
-    <string name="pref_lockscreen_direct_unlock_trans_level_title">Úroveň průhlednosti</string>
 
     <!-- Subscription manager -->
     <string name="sm_choose_voice_sub">Vyberte výchozí SIM pro hovory</string>

@@ -185,14 +185,6 @@
 <string name="pref_statusbar_data_activity_color_summary">تنظیم رنگ شاخص داده‌های همراه فعال</string>
 <string name="pref_cat_statusbar_qs_title">مدیریت تنظیمات سریع</string>
 <string name="pref_cat_notification_drawer_style_title">سبک کشو اطلاع‌رسانی</string>
-<string name="pref_notif_background_title">پس‌زمینه کشو اطلاع‌رسانی</string>
-<string name="notif_background_default">پس‌زمینه پیشفرض</string>
-<string name="notif_background_color_fill">فقط رنگ</string>
-<string name="notif_background_custom_image">تصویر شخصی</string>
-<string name="pref_notif_color_title">تنظیم رنگ پس‌زمینه</string>
-<string name="pref_notif_image_portrait_title">تنظیم تصویر پرتره عمودی</string>
-<string name="pref_notif_image_landscape_title">تنظیم تصویر عریض افقی</string>
-<string name="pref_notif_background_alpha_title">شفافیت پس‌زمینه</string>
 <string name="pref_disable_roaming_indicators_title">غیرفعالسازی شاخص رومینگ</string>
 <string name="pref_disable_roaming_indicators_summary">وقتی غیرفعال شود شاخص R هنگام رومینگ نمایش داده نخواهد شد (با احتیاط انتخاب شود)</string>
 <string name="pie_battery_status_charging">در حال شارژ (%d%%)</string>
@@ -1078,11 +1070,6 @@
 <string name="lc_notif_visibility_ls_all">پنهان‌سازی همه اعلان‌ها</string>
 <string name="pref_lc_notif_hide_persistent_title">پنهان‌سازی اعلان‌های مداوم</string>
 <string name="pref_lc_notif_hide_persistent_summary">پنهانسازی همه اعلان‌های ورودی و غیر پاک شونده دریافتی از این برنامه</string>
-<string name="pref_navbar_autofade_keys_title">محو شدن خودکار کلیدها</string>
-<string name="pref_navbar_autofade_keys_summary">محو شدن خودکار کلیدها پس از اتمام وقفه زمانی. برای غیرفعالسازی بروی 0 تنظیم شود</string>
-<string name="pref_navbar_autofade_show_keys_title">طریقه نمایان شدن نوار ناوبری</string>
-<string name="autofade_show_keys_navbar">با لمس محل نوار ناوبری</string>
-<string name="autofade_show_keys_screen">با لمس صفحه نمایش</string>
 <string name="pref_sa_tile_auto_reset_title">ریست خودکار</string>
 <string name="pref_sa_tile_auto_reset_summary">تنظیم پیشفرض مدت زمان توقف خودکار هنگام خاموش بودن صفحه نمایش</string>
 <string name="pref_lockscreen_pin_sramble_title">پین در هم ریخته</string>

@@ -268,16 +268,6 @@
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Notificatiebalk stijl</string>
 
-    <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Notificatiebalk achtergrond</string>
-    <string name="notif_background_default">Standaard achtergrond</string>
-    <string name="notif_background_color_fill">Vulkleur</string>
-    <string name="notif_background_custom_image">Aangepaste afbeelding</string>
-    <string name="pref_notif_color_title">Achtergrondkleur instellen</string>
-    <string name="pref_notif_image_portrait_title">Portret afbeelding instellen</string>
-    <string name="pref_notif_image_landscape_title">Landschap afbeelding instellen</string>
-    <string name="pref_notif_background_alpha_title">Doorzichtigheid van achtergrond</string>
-
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Roaming indicators uitschakelen</string>
     <string name="pref_disable_roaming_indicators_summary">Indien uitgeschakeld is de R indicator niet zichtbaar tijdens roaming. Voorzichtig gebruiken.</string>
