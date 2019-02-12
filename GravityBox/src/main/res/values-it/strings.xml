@@ -16,8 +16,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name" translatable="false">GravityBox [O]</string>
-
     <string name="battery_style_title">Stile indicatore batteria</string>
     <string name="battery_style_stock">Indicatore batteria predefinito</string>
     <string name="battery_style_circle">Batteria circolare senza percentuale</string>
@@ -1532,7 +1530,7 @@
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATTENZIONE</string>
-    <string name="gb_new_package_dialog_message">Trovato GravityBox per Nougat.
+    <string name="gb_new_package_dialog_message">Trovato GravityBox per Oreo.
          Prima di poter utilizzare la nuova versione, è necessario disinstallare la versione precedente. Premere OK per avviare il processo di disinstallazione.
          Dopo la disinstallazione, non dimenticare di attivare il nuovo modulo in Xposed Installer e REBOOT IMMEDIATELY.</string>
 

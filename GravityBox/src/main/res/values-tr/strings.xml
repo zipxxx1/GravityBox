@@ -1506,7 +1506,7 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">DİKKAT</string>
-    <string name="gb_new_package_dialog_message">"Nougat için GravityBox yüklü bulundu. 
+    <string name="gb_new_package_dialog_message">"Oreo için GravityBox yüklü bulundu.
         Yeni sürüm kullanılmadan önce, eski sürümün kaldırılması gerekir. Kaldırmayı başlatmak için Tamam'a basın.
         Kaldırdıktan sonra, Xposed Installer'dan yeni modülü etkinleştirin ve HEMEN YENİDEN BAŞLATIN."</string>
 
