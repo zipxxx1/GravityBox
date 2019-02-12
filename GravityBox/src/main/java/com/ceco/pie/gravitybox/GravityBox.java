@@ -28,7 +28,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
-public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackageResources, IXposedHookLoadPackage {
+public class GravityBox implements IXposedHookZygoteInit, /*IXposedHookInitPackageResources,*/ IXposedHookLoadPackage {
     public static final String PACKAGE_NAME = GravityBox.class.getPackage().getName();
     public static String MODULE_PATH = null;
     private static final File prefsFileProt = new File("/data/user_de/0/com.ceco.pie.gravitybox/shared_prefs/com.ceco.pie.gravitybox_preferences.xml");
@@ -101,7 +101,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             return;
         }
 
-        SystemWideResources.initResources(prefs, tunerPrefs);
+        //SystemWideResources.initResources(prefs, tunerPrefs);
 
         // Common
         ModInputMethod.initZygote(prefs);
@@ -109,7 +109,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModTelephony.initZygote(prefs);
     }
 
-    @Override
+    //@Override
     public void handleInitPackageResources(InitPackageResourcesParam resparam) {
         if (Build.VERSION.SDK_INT != 28) {
             return;

@@ -26,7 +26,6 @@ import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.content.res.XResources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -359,7 +358,7 @@ public class Utils {
     // to be called from system context only
     public static boolean hasTelephonySupport() {
         try {
-            Resources res = XResources.getSystem();
+            Resources res = Resources.getSystem();
             return res.getBoolean(res.getIdentifier("config_voice_capable", "bool", "android"));
         } catch (Throwable t) {
             GravityBox.log(TAG, "hasTelephonySupport(): ", t);
