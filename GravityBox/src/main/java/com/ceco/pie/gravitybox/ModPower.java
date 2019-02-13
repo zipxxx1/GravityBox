@@ -186,13 +186,10 @@ public class ModPower {
                     GravityBoxSettings.PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS, null));
 
             XposedHelpers.findAndHookMethod(CLASS_PM_NOTIFIER, classLoader,
-                    "playWirelessChargingStartedSound", new XC_MethodHook() {
+                    "playChargingStartedSound", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) {
                     if (mIsWirelessChargingSoundCustom) {
-                        Object suspendBlocker = XposedHelpers.getObjectField(
-                                param.thisObject, "mSuspendBlocker");
-                        XposedHelpers.callMethod(suspendBlocker, "release");
                         param.setResult(null);
                     }
                 }

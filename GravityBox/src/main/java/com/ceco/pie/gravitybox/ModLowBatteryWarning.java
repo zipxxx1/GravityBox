@@ -102,7 +102,7 @@ public class ModLowBatteryWarning {
                 protected void beforeHookedMethod(MethodHookParam param) {
                     Object batteryLight = XposedHelpers.getObjectField(param.thisObject, "mBatteryLight");
                     Object o = XposedHelpers.getSurroundingThis(param.thisObject);
-                    Object batteryProps = XposedHelpers.getObjectField(o, "mBatteryProps");
+                    Object batteryProps = XposedHelpers.getObjectField(o, "mHealthInfo");
                     if (DEBUG) {
                         log("BatteryService LED: updateLightsLocked ENTERED");
                         // for debugging purposes - simulate low battery

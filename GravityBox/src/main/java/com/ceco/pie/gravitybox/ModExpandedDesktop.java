@@ -43,9 +43,9 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModExpandedDesktop {
     private static final String TAG = "GB:ModExpandedDesktop";
     private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.server.policy.PhoneWindowManager";
-    private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
+    private static final String CLASS_WINDOW_MANAGER_FUNCS = "com.android.server.policy.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
-    private static final String CLASS_POLICY_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
+    private static final String CLASS_POLICY_WINDOW_STATE = "com.android.server.policy.WindowManagerPolicy$WindowState";
     private static final String CLASS_SCREEN_SHAPE_HELPER = "com.android.internal.util.ScreenShapeHelper";
     private static final String CLASS_POLICY_CONTROL = "com.android.server.policy.PolicyControl";
 
@@ -264,7 +264,7 @@ public class ModExpandedDesktop {
         }
     }
 
-    private static void initReflections(Class<?> classPhoneWindowManager) {
+    private static void initReflections(Class<?> classPhoneWindowManager, ClassLoader classLoader) {
         try {
             mAreTranslucentBarsAllowed = classPhoneWindowManager.getDeclaredMethod(
                     "areTranslucentBarsAllowed");
@@ -291,7 +291,7 @@ public class ModExpandedDesktop {
 
         try {
             mRequestTransientBars = classPhoneWindowManager.getDeclaredMethod("requestTransientBars",
-                    XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null));
+                    XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, classLoader));
             mRequestTransientBars.setAccessible(true);
         } catch (NoSuchMethodException e) {
             GravityBox.log(TAG, "could not find requestTransientBars method");
@@ -299,7 +299,7 @@ public class ModExpandedDesktop {
 
         try {
             mUpdateSystemBarsLw = classPhoneWindowManager.getDeclaredMethod("updateSystemBarsLw",
-                    XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null), int.class, int.class);
+                    XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, classLoader), int.class, int.class);
             mUpdateSystemBarsLw.setAccessible(true);
         } catch (NoSuchMethodException e) {
             GravityBox.log(TAG, "could not find updateSystemBarsLw method");
@@ -322,7 +322,7 @@ public class ModExpandedDesktop {
         }
 
         try {
-            Class<?> windowState = XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null);
+            Class<?> windowState = XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, classLoader);
             mUpdateLightStatusBarLw = classPhoneWindowManager.getDeclaredMethod(
                     "updateLightStatusBarLw", int.class, windowState, windowState);
             mUpdateLightStatusBarLw.setAccessible(true);
@@ -360,7 +360,7 @@ public class ModExpandedDesktop {
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
             final Class<?> classPolicyControl = XposedHelpers.findClass(CLASS_POLICY_CONTROL, classLoader);
             mClsScreenShapeHelper = XposedHelpers.findClass(CLASS_SCREEN_SHAPE_HELPER, classLoader);
-            initReflections(classPhoneWindowManager);
+            initReflections(classPhoneWindowManager, classLoader);
 
             mNavbarOverride = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false);
             if (mNavbarOverride) {

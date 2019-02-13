@@ -33,7 +33,7 @@ public class NotificationDataMonitor {
     private static boolean DEBUG = false;
 
     private static final String CLASS_NOTIF_DATA = "com.android.systemui.statusbar.NotificationData";
-    private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
+    private static final String CLASS_NOTIF_ENTRY_MANAGER = "com.android.systemui.statusbar.NotificationEntryManager";
 
     private static void log(String msg) {
         XposedBridge.log(TAG + ": " + msg);
@@ -60,7 +60,7 @@ public class NotificationDataMonitor {
         try {
             ClassLoader cl = mContext.getClassLoader();
             Class<?> classNotifData = XposedHelpers.findClass(CLASS_NOTIF_DATA, cl);
-            Class<?> classStatusbar = XposedHelpers.findClass(CLASS_STATUSBAR, cl);
+            Class<?> classNotifEntryManager = XposedHelpers.findClass(CLASS_NOTIF_ENTRY_MANAGER, cl);
 
             XposedBridge.hookAllConstructors(classNotifData, new XC_MethodHook() {
                 @Override
@@ -92,7 +92,7 @@ public class NotificationDataMonitor {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classStatusbar, "updateNotification",
+            XposedHelpers.findAndHookMethod(classNotifEntryManager, "updateNotification",
                     StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {

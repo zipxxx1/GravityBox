@@ -310,7 +310,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mBackIcon = mContext.getDrawable(context.getResources().getIdentifier(
                 "ic_sysbar_back", "drawable", PACKAGE_NAME)).mutate();
         mBackAltIcon = mContext.getDrawable(context.getResources().getIdentifier(
-                "ic_sysbar_back_ime", "drawable", PACKAGE_NAME)).mutate();
+                "ic_sysbar_back", "drawable", PACKAGE_NAME)).mutate();
         mRecentIcon = mContext.getDrawable(res.getIdentifier(
                 "ic_sysbar_recent", "drawable", PACKAGE_NAME)).mutate();
 

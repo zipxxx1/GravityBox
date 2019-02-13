@@ -260,8 +260,9 @@ public class ModLockscreen {
                     }
 
                     boolean hasArtwork = false;
-                    MediaMetadata mm = (MediaMetadata) XposedHelpers.getObjectField(
-                            mStatusBar, "mMediaMetadata");
+                    Object mediaManager = XposedHelpers.getObjectField(mStatusBar, "mMediaManager");
+                    MediaMetadata mm = (MediaMetadata) XposedHelpers.callMethod(
+                            mediaManager, "getMediaMetadata");
                     if (mm != null) {
                         hasArtwork = mm.getBitmap(MediaMetadata.METADATA_KEY_ART) != null ||
                                 mm.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART) != null;

@@ -770,7 +770,8 @@ public class ModLedControl {
                     "shouldFilterOut", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
-                    StatusBarNotification sbn = (StatusBarNotification)param.args[0];
+                    StatusBarNotification sbn = (StatusBarNotification)
+                            XposedHelpers.getObjectField(param.args[0], "notification");
                     Notification n = sbn.getNotification();
 
                     // whether to hide persistent everywhere

@@ -47,9 +47,9 @@ public class ModClearAllRecents {
     public static final String PACKAGE_NAME = "com.android.systemui";
     public static final String CLASS_RECENT_VIEW = "com.android.systemui.recents.views.RecentsView";
     public static final String CLASS_RECENT_ACTIVITY = "com.android.systemui.recents.RecentsActivity";
-    public static final String CLASS_TASK_STACK = "com.android.systemui.recents.model.TaskStack";
+    public static final String CLASS_TASK_STACK = "com.android.systemui.shared.recents.model.TaskStack";
     public static final String CLASS_TASK_STACK_VIEW = "com.android.systemui.recents.views.TaskStackView";
-    public static final String CLASS_ANIMATION_PROPS = "com.android.systemui.recents.views.AnimationProps";
+    public static final String CLASS_ANIMATION_PROPS = "com.android.systemui.shared.recents.utilities.AnimationProps";
     public static final String CLASS_EVENT_BUS = "com.android.systemui.recents.events.EventBus";
     public static final String CLASS_SHOW_STACK_ACTION_BUTTON_EVENT = "com.android.systemui.recents.events.activity.ShowStackActionButtonEvent";
 
@@ -202,7 +202,7 @@ public class ModClearAllRecents {
 
             // When to update RAM bar values
             XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_TASK_STACK, classLoader),
-                    "removeTaskImpl", updateRambarHook);
+                    "removeTask", updateRambarHook);
 
             XposedHelpers.findAndHookMethod(recentActivityClass, "dismissRecentsToHome",
                     boolean.class, new XC_MethodHook() {

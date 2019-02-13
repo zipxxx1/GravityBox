@@ -82,6 +82,7 @@ public class ModStatusBar {
     private static final String CLASS_COLLAPSED_SB_FRAGMENT = "com.android.systemui.statusbar.phone.CollapsedStatusBarFragment";
     private static final String CLASS_NOTIF_ICON_CONTAINER = "com.android.systemui.statusbar.phone.NotificationIconContainer";
     private static final String CLASS_QUICK_STATUSBAR_HEADER = "com.android.systemui.qs.QuickStatusBarHeader";
+    private static final String CLASS_NOTIF_ENTRY_MANAGER = "com.android.systemui.statusbar.NotificationEntryManager";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
 
@@ -817,7 +818,7 @@ public class ModStatusBar {
 
             // Ongoing notification blocker and progress bar
             try {
-                XposedHelpers.findAndHookMethod(statusBarClass, "addNotification", 
+                XposedHelpers.findAndHookMethod(CLASS_NOTIF_ENTRY_MANAGER, classLoader, "addNotification",
                         StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) {
@@ -860,7 +861,7 @@ public class ModStatusBar {
                     }
                 });
     
-                XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader, "updateNotification", 
+                XposedHelpers.findAndHookMethod(CLASS_NOTIF_ENTRY_MANAGER, classLoader, "updateNotification",
                         StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) {
@@ -870,7 +871,7 @@ public class ModStatusBar {
                     }
                 });
     
-                XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader, "removeNotificationViews",
+                XposedHelpers.findAndHookMethod(CLASS_NOTIF_ENTRY_MANAGER, classLoader, "removeNotification",
                         String.class, RankingMap.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) {

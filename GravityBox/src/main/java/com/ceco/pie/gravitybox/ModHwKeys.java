@@ -77,8 +77,8 @@ public class ModHwKeys {
     private static final String TAG = "GB:ModHwKeys";
     private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.server.policy.PhoneWindowManager";
     private static final String CLASS_PHONE_WINDOW_MANAGER_OEM = "com.android.server.policy.OemPhoneWindowManager";
-    private static final String CLASS_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
-    private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
+    private static final String CLASS_WINDOW_STATE = "com.android.server.policy.WindowManagerPolicy$WindowState";
+    private static final String CLASS_WINDOW_MANAGER_FUNCS = "com.android.server.policy.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
     private static final String CLASS_VIBRATION_EFFECT = "android.os.VibrationEffect";
     private static final boolean DEBUG = false;

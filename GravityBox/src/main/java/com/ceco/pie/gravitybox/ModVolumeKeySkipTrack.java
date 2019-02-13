@@ -40,7 +40,7 @@ public class ModVolumeKeySkipTrack {
     private static final String TAG = "GB:ModVolumeKeySkipTrack";
     private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.server.policy.PhoneWindowManager";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
-    private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
+    private static final String CLASS_WINDOW_MANAGER_FUNCS = "com.android.server.policy.WindowManagerPolicy.WindowManagerFuncs";
     private static final boolean DEBUG = false;
 
 
