@@ -365,8 +365,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Relógio da barra de status</string>
     <string name="pref_cat_notif_panel_clock_title">Relógio do painel de notificações</string>
-    <string name="pref_clock_link_title">Aplicação ao pressionar</string>
-    <string name="pref_clock_link_summary">Associar a uma aplicação específica em vez das Definições de data e hora</string>
     <string name="pref_clock_longpress_link_title">Aplicação ao manter pressionado</string>
 
     <!-- GravityBox settings startup handling -->

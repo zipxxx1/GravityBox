@@ -359,10 +359,6 @@
     <string name="hwkey_action_custom_app_none">Tidak ada aplikasi kustom yang ditetapkan!</string>
     <string name="hwkey_action_custom_app_missing">Aplikasi kustom tidak ditemukan!</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">Sambungkan ke DeskClock</string>
-    <string name="pref_clock_link_summary">Sambungkan jam di panel notifikasi ke aplikasi DeskClock daripada ke pengaturan Tanggal&amp;Waktu</string>
-
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Menunggu respon dari GravityBox system framework&#8230;</string>
     <string name="gb_startup_error">GravityBox system framework tidak merespon. Keluar.</string>

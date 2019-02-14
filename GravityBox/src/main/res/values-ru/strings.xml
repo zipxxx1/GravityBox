@@ -388,8 +388,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Часы в строке состояния</string>
     <string name="pref_cat_notif_panel_clock_title">Часы в панели уведомлений</string>
-    <string name="pref_clock_link_title">Нажатие на часах</string>
-    <string name="pref_clock_link_summary">Связывает часы в строке состояния с выбранным приложением вместо настроек даты и времени</string>
     <string name="pref_clock_longpress_link_title">Удержание на часах</string>
 
     <!-- GravityBox settings startup handling -->

@@ -390,8 +390,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">状态栏时钟</string>
     <string name="pref_cat_notif_panel_clock_title">通知面板时钟</string>
-    <string name="pref_clock_link_title">单击时钟应用程序</string>
-    <string name="pref_clock_link_summary">启用后通知面板的时间将链接到指定应用而不是日期与时间设置</string>
     <string name="pref_clock_longpress_link_title">长按时钟应用程序</string>
 
     <!-- GravityBox settings startup handling -->

@@ -315,8 +315,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">ステータスバーの時計</string>
     <string name="pref_cat_notif_panel_clock_title">通知領域の時計</string>
-    <string name="pref_clock_link_title">タップで起動するアプリ</string>
-    <string name="pref_clock_link_summary">時計をタップしたときに日付と時刻設定ではなく指定したアプリを起動するようにします。</string>
     <string name="pref_clock_longpress_link_title">長押しで起動するアプリ</string>
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">GravityBoxフレームワークの応答を待っています&#8230;</string>

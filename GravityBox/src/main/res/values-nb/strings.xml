@@ -380,8 +380,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Status bar clock</string>
     <string name="pref_cat_notif_panel_clock_title">Notification panel clock</string>
-    <string name="pref_clock_link_title">Clock single-tap app</string>
-    <string name="pref_clock_link_summary">Links notification panel clock to a specified app instead of Date&amp;Time settings</string>
     <string name="pref_clock_longpress_link_title">Clock long-press app</string>
 
     <!-- GravityBox settings startup handling -->

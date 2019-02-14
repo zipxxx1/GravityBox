@@ -390,8 +390,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Jam di bar status</string>
     <string name="pref_cat_notif_panel_clock_title">Jam di panel notifikasi</string>
-    <string name="pref_clock_link_title">Aplikasi ketika tekan sekali pada jam</string>
-    <string name="pref_clock_link_summary">Sambung jam di panel notifikasi selain terikh&amp;Tetapan masa</string>
     <string name="pref_clock_longpress_link_title">Aplikasi ketika jam ditekan lama</string>
 
     <!-- GravityBox settings startup handling -->

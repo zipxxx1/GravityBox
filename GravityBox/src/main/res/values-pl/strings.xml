@@ -372,8 +372,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Zegar na pasku stanu</string>
     <string name="pref_cat_notif_panel_clock_title">Zegar na panelu powiadomień</string>
-    <string name="pref_clock_link_title">Aplikacja dla pojedynczego kliknięcia zegara</string>
-    <string name="pref_clock_link_summary">Link zegara panelu powiadomień do określonej aplikacji zamiast do ustawień Daty i Czasu</string>
     <string name="pref_clock_longpress_link_title">Aplikacja dla długiego naciśnięcia zegara</string>
 
     <!-- GravityBox settings startup handling -->

@@ -388,8 +388,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Годинник в панелі стану</string>
     <string name="pref_cat_notif_panel_clock_title">Годинник в панелі сповіщень</string>
-    <string name="pref_clock_link_title">Додаток-годинник</string>
-    <string name="pref_clock_link_summary">Пов\'язує годинник на панелі стану з обраним додатком замість налаштувань дати та часу</string>
     <string name="pref_clock_longpress_link_title">Утримання на годиннику</string>
 
     <!-- GravityBox settings startup handling -->

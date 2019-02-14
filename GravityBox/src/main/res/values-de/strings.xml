@@ -384,8 +384,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Uhr in Statusleiste</string>
     <string name="pref_cat_notif_panel_clock_title">Uhr in Benachrichtigungsfeld</string>
-    <string name="pref_clock_link_title">Beim Antippen</string>
-    <string name="pref_clock_link_summary">Uhr im Benachrichtigungsfeld mit einer App statt dem Einstellungsmenü \'Datum &amp; Uhrzeit\' verknüpfen</string>
     <string name="pref_clock_longpress_link_title">Beim gedrückt halten</string>
 
     <!-- GravityBox settings startup handling -->

@@ -360,10 +360,6 @@
     <string name="hwkey_action_custom_app_none">Nenhum aplicativo definido!</string>
     <string name="hwkey_action_custom_app_missing">Aplicativo não encontrado!</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">Aplicativo de relógio do painel de notificações</string>
-    <string name="pref_clock_link_summary">Une o relógio do painel de notificações a outro aplicativo ao invés das configs. de data e hora</string>
-
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Aguardando resposta do framework do GravityBox…</string>
     <string name="gb_startup_error">O framework do GravityBox não responde. Saindo.</string>

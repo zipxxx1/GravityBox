@@ -368,8 +368,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Hodiny stavovej lišty</string>
     <string name="pref_cat_notif_panel_clock_title">Hodiny panelu upozornení</string>
-    <string name="pref_clock_link_title">Aplikácia na ťuknutie</string>
-    <string name="pref_clock_link_summary">Naviaže hodiny notifikačného panelu na zvolenú aplikáciu namiesto nastavenia dátumu a času</string>
     <string name="pref_clock_longpress_link_title">Aplikácia na dlhé podržanie</string>
 
     <!-- GravityBox settings startup handling -->

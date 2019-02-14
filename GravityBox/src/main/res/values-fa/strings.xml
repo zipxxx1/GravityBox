@@ -243,8 +243,6 @@
 <string name="hwkey_action_custom_app_missing">برنامه شخصی پیدا نشد</string>
 <string name="pref_cat_statusbar_clock_title">ساعت در نوار وضعیت</string>
 <string name="pref_cat_notif_panel_clock_title">ساعت در کشو اعلان</string>
-<string name="pref_clock_link_title">تخصیص برنامه برای اجرا هنگام یک بار لمس ساعت</string>
-<string name="pref_clock_link_summary">"اختصاص دادن برنامه دلخواه به ساعت در پنل اعلان  بجای تنظیمات تاریخ و ساعت"</string>
 <string name="pref_clock_longpress_link_title">تخصیص برنامه برای اجرا هنگام لمس طولانی ساعت</string>
 <string name="gb_startup_progress">لطفا تا پردازش فریمورک سیستم برای جعبه جذاب صبر کنید…</string>
 <string name="gb_startup_error">فریمور سیستمی برای جعبه جذاب یافت نشد.از برنامه خارج میشوید</string>

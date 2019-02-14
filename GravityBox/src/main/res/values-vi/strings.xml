@@ -384,8 +384,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Đồng hồ trên thanh trạng thái</string>
     <string name="pref_cat_notif_panel_clock_title">Đồng hồ ở bảng thông báo</string>
-    <string name="pref_clock_link_title">Bấm vào đồng hồ mở ứng dụng</string>
-    <string name="pref_clock_link_summary">Khi bấm vào đồng hồ ở bảng thông báo sẽ mở ra ứng dụng được bạn đặt thay vì mở cài đặt Ngày và Giờ.</string>
     <string name="pref_clock_longpress_link_title">Mở ứng dụng khi bấm-giữ đồng hồ</string>
 
     <!-- GravityBox settings startup handling -->

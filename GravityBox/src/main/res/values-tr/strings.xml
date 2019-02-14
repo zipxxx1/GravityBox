@@ -387,8 +387,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Durum çubuğu saati</string>
     <string name="pref_cat_notif_panel_clock_title">Bildirim paneli saati</string>
-    <string name="pref_clock_link_title">Saate tek tıklama uygulaması</string>
-    <string name="pref_clock_link_summary">Bildirim paneli saatine tıklandığında Tarih&amp;Saat ayarları yerine belirlenen uygulamayı aç</string>
     <string name="pref_clock_longpress_link_title">Saate uzun basma uygulaması</string>
 
     <!-- GravityBox settings startup handling -->

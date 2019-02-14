@@ -390,8 +390,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Állapotsáv óra alkalmazás</string>
     <string name="pref_cat_notif_panel_clock_title">Értesítési panel óra alkalmazás</string>
-    <string name="pref_clock_link_title">Egyszeri érintés alkalmazása</string>
-    <string name="pref_clock_link_summary">Az értesítési panel órájának megérintésével egy meghatározott alkalmazás megnyitása a Dátum&amp;Idő beállításai helyett</string>
     <string name="pref_clock_longpress_link_title">Hosszú érintés alkalmazása</string>
 
     <!-- GravityBox settings startup handling -->

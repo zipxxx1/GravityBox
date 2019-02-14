@@ -365,10 +365,6 @@
     <string name="hwkey_action_custom_app_none">לא הוקצה יישום בהתאמה אישית!</string>
     <string name="hwkey_action_custom_app_missing">יישום בהתאמה אישית לא נמצא!</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">יישום בלחיצה על שעון במגירת ההתראות</string>
-    <string name="pref_clock_link_summary">מקשר את השעון במגירת ההתראות ליישום מוגדר מראש במקום הגדרות תאריך ושעה</string>
-
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">ממתין לתגובה מפריימוורק של המערכת של GravityBox&#8230;</string>
     <string name="gb_startup_error">הפרימוורק של המערכת אינו מגיב. היישום נסגר.</string>

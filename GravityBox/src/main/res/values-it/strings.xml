@@ -388,8 +388,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Orologio barra di stato</string>
     <string name="pref_cat_notif_panel_clock_title">Orologio pannello delle notifiche</string>
-    <string name="pref_clock_link_title">Collegamento singola pressione applicazione orologio</string>
-    <string name="pref_clock_link_summary">Collega l\'orologio del pannello delle notifiche ad un\'app specifica invece delle impostazioni data&amp;ora</string>
     <string name="pref_clock_longpress_link_title">Collegamento pressione prolungata orologio</string>
 
     <!-- GravityBox settings startup handling -->

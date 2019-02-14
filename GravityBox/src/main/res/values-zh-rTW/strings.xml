@@ -380,8 +380,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">狀態列時鐘</string>
     <string name="pref_cat_notif_panel_clock_title">通知面板時鐘</string>
-    <string name="pref_clock_link_title">點選時鐘時執行的應用程式</string>
-    <string name="pref_clock_link_summary">啟動此功能後，點選通知面板的時鐘將執行指定的應用程式而非預設的 [日期與時間] 設定</string>
     <string name="pref_clock_longpress_link_title">長按時鐘時執行的應用程式</string>
 
     <!-- GravityBox settings startup handling -->

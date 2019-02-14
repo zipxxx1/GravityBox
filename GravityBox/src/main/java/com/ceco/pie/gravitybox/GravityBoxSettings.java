@@ -216,7 +216,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_STATUSBAR_CLOCK_AMPM_HIDE = "pref_clock_ampm_hide";
     public static final String PREF_KEY_STATUSBAR_CLOCK_AMPM_SIZE = "pref_sb_clock_ampm_size";
     public static final String PREF_KEY_STATUSBAR_CLOCK_HIDE = "pref_clock_hide";
-    public static final String PREF_KEY_STATUSBAR_CLOCK_LINK = "pref_clock_link_app";
     public static final String PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK = "pref_clock_longpress_link";
     public static final String PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH = "pref_sb_clock_masterswitch";
     public static final String PREF_KEY_ALARM_ICON_HIDE = "pref_alarm_icon_hide";
@@ -576,7 +575,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_AMPM_HIDE = "ampmHide";
     public static final String EXTRA_AMPM_SIZE = "ampmSize";
     public static final String EXTRA_CLOCK_HIDE = "clockHide";
-    public static final String EXTRA_CLOCK_LINK = "clockLink";
     public static final String EXTRA_CLOCK_LONGPRESS_LINK = "clockLongpressLink";
     public static final String EXTRA_ALARM_HIDE = "alarmHide";
 
@@ -1849,9 +1847,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 if (p != null) mPrefCatPhoneTelephony.removePreference(p);
                 p = findPreference(PREF_KEY_OOS_DASH_SOUND_DISABLE);
                 if (p != null) mPrefCatPowerOther.removePreference(p);
-                PreferenceCategory pc = (PreferenceCategory) findPreference(PREF_CAT_KEY_NOTIF_PANEL_CLOCK);
-                p = findPreference(PREF_KEY_STATUSBAR_CLOCK_LINK);
-                if (pc != null && p != null) pc.removePreference(p);
             }
 
             // Remove fingerprint related preferences
@@ -2785,9 +2780,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_HIDE)) {
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_CLOCK_HIDE, prefs.getBoolean(PREF_KEY_STATUSBAR_CLOCK_HIDE, false));
-            } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_LINK)) {
-                intent.setAction(ACTION_PREF_CLOCK_CHANGED);
-                intent.putExtra(EXTRA_CLOCK_LINK, prefs.getString(PREF_KEY_STATUSBAR_CLOCK_LINK, null));
             } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK)) {
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_CLOCK_LONGPRESS_LINK,

@@ -382,8 +382,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Bara de stare</string>
     <string name="pref_cat_notif_panel_clock_title">Ceasul din panoul de notificare</string>
-    <string name="pref_clock_link_title">Aplicație la atingerea ceasului</string>
-    <string name="pref_clock_link_summary">Leagă ceasul din pe panoul de notificare cu o aplicație specificată în locul setărilor Data şi ora</string>
     <string name="pref_clock_longpress_link_title">Aplicaţie la apăsarea lungă a cesului</string>
 
     <!-- GravityBox settings startup handling -->

@@ -384,8 +384,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Reloj de la barra de estado</string>
     <string name="pref_cat_notif_panel_clock_title">Reloj del panel de notificaciones</string>
-    <string name="pref_clock_link_title">App al clickar sobre el reloj</string>
-    <string name="pref_clock_link_summary">Enlaza el reloj que hay en el panel de notificaciones a una app específica en lugar de a los ajustes de fecha y hora</string>
     <string name="pref_clock_longpress_link_title">App al mantener pulsado sobre el reloj</string>
 
     <!-- GravityBox settings startup handling -->

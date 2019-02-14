@@ -372,10 +372,6 @@
     <string name="hwkey_action_custom_app_none">Καμία προσαρμ. εφαρμογή ορισμένη!</string>
     <string name="hwkey_action_custom_app_missing">Η προσαρμ. εφαρμογή δεν βρέθηκε!</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">Εφαρμογή ρολογιού πεδίου ειδοποιήσεων</string>
-    <string name="pref_clock_link_summary">Συνδέει το πεδίο ειδοποιήσεων του ρολογιού με μία συγκεκριμένη εφαρμογή αντί για τις ρυθμίσεις Ημερομηνία &amp; Ώρα ρυθμίσεις</string>
-
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Αναμονή για απάντηση από GravityBox system framework&#8230;</string>
     <string name="gb_startup_error">Το GravityBox system framework δεν αποκρίνεται. Γίνεται έξοδος.</string>

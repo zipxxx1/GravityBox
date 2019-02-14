@@ -43,7 +43,6 @@ import android.content.res.Resources;
 import android.content.res.XResources;
 import android.database.ContentObserver;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -60,7 +59,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -69,7 +67,6 @@ public class ModStatusBar {
     private static final String TAG = "GB:ModStatusBar";
     public static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
-    private static final String CLASS_QS_FOOTER = "com.android.systemui.qs.QSFooterImpl";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
@@ -117,7 +114,6 @@ public class ModStatusBar {
     private static ViewGroup mStatusBarView;
     private static Context mContext;
     private static boolean mClockCentered = false;
-    private static String mClockLink;
     private static boolean mAlarmHide = false;
     private static Object mPhoneStatusBarPolicy;
     private static SettingsObserver mSettingsObserver;
@@ -178,9 +174,6 @@ public class ModStatusBar {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_CENTER_CLOCK)) {
                     setClockPosition(intent.getBooleanExtra(GravityBoxSettings.EXTRA_CENTER_CLOCK, false));
                     updateTrafficMeterPosition();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_LINK)) {
-                    mClockLink = intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_LINK);
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK)) {
                     mClockLongpressLink = intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK);
@@ -410,17 +403,8 @@ public class ModStatusBar {
 
     private static void prepareHeaderTimeView(ViewGroup qsFooter) {
         try {
-            View timeView = (View) XposedHelpers.getObjectField(qsFooter, "mDateTimeGroup");
+            View timeView = (View) XposedHelpers.getObjectField(qsFooter, "mClockView");
             if (timeView != null) {
-                if (Utils.isOxygenOsRom()) {
-                    timeView.setClickable(true);
-                    timeView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            launchClockAction(mClockLink);
-                        }
-                    });
-                }
                 timeView.setLongClickable(true);
                 timeView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
@@ -665,7 +649,6 @@ public class ModStatusBar {
             }
 
             mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
-            mClockLink = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LINK, null);
             mClockLongpressLink = prefs.getString(
                     GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK, null);
             mBrightnessControlEnabled = prefs.getBoolean(
@@ -768,8 +751,7 @@ public class ModStatusBar {
 
             // Long press on QS footer clock
             try {
-                XposedHelpers.findAndHookMethod(Utils.isOxygenOsRom() ?
-                        CLASS_QUICK_STATUSBAR_HEADER : CLASS_QS_FOOTER, classLoader,
+                XposedHelpers.findAndHookMethod(CLASS_QUICK_STATUSBAR_HEADER, classLoader,
                         "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) {

@@ -383,8 +383,6 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Гадзіны ў радку стану</string>
     <string name="pref_cat_notif_panel_clock_title">Гадзіны ў панэлі паведамленняў</string>
-    <string name="pref_clock_link_title">Націск на гадзінах</string>
-    <string name="pref_clock_link_summary">Злучае гадзіны ў радку стану з абраным дадаткам замест налад даты і часу</string>
     <string name="pref_clock_longpress_link_title">Утрыманне на гадзінах</string>
 
     <!-- GravityBox settings startup handling -->
