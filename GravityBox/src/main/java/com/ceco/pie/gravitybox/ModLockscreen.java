@@ -78,6 +78,7 @@ public class ModLockscreen {
     private static final String CLASS_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
     private static final String CLASS_KG_BOTTOM_AREA_VIEW = "com.android.systemui.statusbar.phone.KeyguardBottomAreaView";
     private static final String CLASS_SCRIM_CONTROLLER = "com.android.systemui.statusbar.phone.ScrimController";
+    private static final String CLASS_SCRIM_STATE = "com.android.systemui.statusbar.phone.ScrimState";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
@@ -657,11 +658,16 @@ public class ModLockscreen {
                 "scheduleUpdate", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        final int opacity = mPrefs.getInt(
+                        int opacity = mPrefs.getInt(
                                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 0);
-                        if (opacity != 0) {
-                            final float alpha = (100 - opacity) / 100f;
-                            XposedHelpers.setFloatField(param.thisObject, "mScrimBehindAlphaKeyguard", alpha);
+                        if (opacity == 0) opacity = 55;
+                        Object[] states = (Object[]) XposedHelpers.callStaticMethod(
+                                XposedHelpers.findClass(CLASS_SCRIM_STATE, classLoader),
+                                "values");
+                        final float alpha = (100 - opacity) / 100f;
+                        for (int i = 0; i < states.length; i++) {
+                            XposedHelpers.callMethod(states[i],
+                                    "setScrimBehindAlphaKeyguard", alpha);
                         }
                     }
                 });
