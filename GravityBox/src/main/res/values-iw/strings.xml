@@ -497,9 +497,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">הפעל/כבה פנס</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">הרחב אוטומטית</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">מקש תפריט</string>
     <string name="pref_cat_hwkey_home_title">מקש הבית</string>
@@ -611,9 +608,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">החלפה בין כפתור חזור ובין כפתור יישומים אחרונים</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">פסק זמן של תפריט עוצמת השמע</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">רטט</string>

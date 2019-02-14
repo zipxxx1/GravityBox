@@ -412,8 +412,6 @@
 
     <string name="hwkey_action_torch">손전등 전환</string>
 
-    <string name="pref_volume_panel_autoexpand_title">자동으로 확장하기</string>
-
     <string name="pref_cat_hwkey_menu_title">메뉴 키</string>
     <string name="pref_cat_hwkey_home_title">홈 키</string>
     <string name="pref_cat_hwkey_back_title">뒤로 가기 키</string>
@@ -503,8 +501,6 @@
     <string name="app_picker_shortcut_cancelled">타겟 앱에 의해 바로가기 생성 취소</string>
 
     <string name="pref_navbar_swap_keys_title">Back 키 &amp; Recent 키 자리 변경</string>
-
-    <string name="pref_volume_panel_timeout_title">음량 조절 패널 타임아웃</string>
 
     <string name="ringer_mode_vibrate">진동</string>
     <string name="ringer_mode_sound">소리</string>
@@ -843,9 +839,6 @@
     <string name="shortcut_smart_radio_toggle">스마트 라디오 전환</string>
 	
     <string name="pref_masterswitch_title">마스터 스위치</string>
-
-    <string name="pref_volume_adjust_vibrate_mute_title">볼륨 조절 시 진동 비활성화</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">알림 / 벨소리를 조절할 때 피드백되는 진동을 비활성화 합니다.</string>
 
     <string name="pref_screenrecord_use_stock_title">순정 바이너리 사용</string>
     <string name="pref_screenrecord_use_stock_summary">활성화하면, 화면 녹화 시 Pie 순정 바이너리를 사용하여 녹화합니다.

@@ -127,10 +127,6 @@ public class GravityBox implements IXposedHookZygoteInit, /*IXposedHookInitPacka
             ModLockscreen.initResources(prefs, resparam);
         }
 
-        if (resparam.packageName.equals(ModVolumePanel.PACKAGE_NAME)) {
-            ModVolumePanel.initResources(prefs, resparam);
-        }
-
         if (resparam.packageName.equals(ModQsTiles.PACKAGE_NAME) &&
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, false)) {
             ModQsTiles.initResources(resparam);
@@ -211,10 +207,6 @@ public class GravityBox implements IXposedHookZygoteInit, /*IXposedHookInitPacka
 
         if (lpparam.packageName.equals(ModSettings.PACKAGE_NAME)) {
             ModSettings.init(prefs, lpparam.classLoader);
-        }
-
-        if (lpparam.packageName.equals(ModVolumePanel.PACKAGE_NAME)) {
-            ModVolumePanel.init(prefs, lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(ModPieControls.PACKAGE_NAME)) {

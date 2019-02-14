@@ -504,9 +504,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Przełącz latarkę</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Rozszerz automatycznie panel głośności</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Klawisz MENU</string>
     <string name="pref_cat_hwkey_home_title">Klawisz HOME</string>
@@ -617,10 +614,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Zamień BACK z kl. Ostatnich Aplikacji</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">Czas wyświetlania panelu głośności</string>
-    <string name="pref_volume_panel_timeout_summary">Pozostaw zero dla domyśnego czasu</string>	
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">Wibracje</string>
@@ -1030,10 +1023,6 @@
 
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Główny wyłącznik</string>
-
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">Wyłącz wibracje regulacji głośności</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Wyłącza wibracje podczas regulacji głośności powiadomień/dzwonka za pomocą klawiszy głośności</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Użyj aplikacji systemowej</string>

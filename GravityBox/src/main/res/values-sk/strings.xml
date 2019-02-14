@@ -498,9 +498,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Zapnúť/vypnúť svetlo</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Rozšíriť panel hlasitosti automaticky</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Tlačidlo Menu</string>
     <string name="pref_cat_hwkey_home_title">Tlačidlo Domov</string>
@@ -613,10 +610,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Prehodiť tlačidlá Späť a Zoznam spustených úloh</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">Časovač panela hlasitosti</string>
-    <string name="pref_volume_panel_timeout_summary">Nastavte 0 pre pôvodný časovač</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">Vibrovať</string>
@@ -1030,10 +1023,6 @@
 
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Hlavný prepínač</string>
-
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">Vypnúť vibrácie nastavenia hlasitosti</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Vypne vibrácie pri zmene režimu hlasitosti vyzváňania tlačidlami ovládania hlasitosti</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Použiť originálny nahrávač</string>

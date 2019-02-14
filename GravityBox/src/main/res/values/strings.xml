@@ -525,9 +525,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Toggle torch</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Volume panel auto-expand</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Menu key</string>
     <string name="pref_cat_hwkey_home_title">Home key</string>
@@ -640,10 +637,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Swap Back and Recents keys</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
-    <string name="pref_volume_panel_timeout_summary">Leave zero for default timeout</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">Vibrate</string>
@@ -1058,10 +1051,6 @@
 
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Master switch</string>
-
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">Disable volume adjust vibrate</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Disables vibrate when adjusting notification/ringtone volume using volume keys</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Use stock binary</string>

@@ -524,9 +524,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">手电筒开关</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">自动展开</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">菜单键</string>
     <string name="pref_cat_hwkey_home_title">主页键</string>
@@ -639,10 +636,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">交换返回键和最近任务键</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">音量面板超时</string>
-    <string name="pref_volume_panel_timeout_summary">默认超时为零</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">振动</string>
@@ -1057,10 +1050,6 @@
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">总开关</string>
 
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">禁用音量调整震动</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">禁止使用音量键调整通知/铃声音量时振动</string>
-    
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">使用原厂二进制</string>
     <string name="pref_screenrecord_use_stock_summary">启用后原厂屏幕录制二进制文件用于记录 

@@ -524,9 +524,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Butang lampu picit</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Besarkan automatik</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Butang menu</string>
     <string name="pref_cat_hwkey_home_title">Butang rumah</string>
@@ -639,10 +636,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Tukar butang kembali dengan butang aplikasi sebelum</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">Masa tamat panel nada</string>
-    <string name="pref_volume_panel_timeout_summary">Biarkan kosong untuk nilai asal</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">Getaran sahaja</string>
@@ -1056,10 +1049,6 @@
 
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Butang ibu</string>
-
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">Matikan volume kawal gegaran</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Matikan gegaran ketika mengubah nada notifikasi</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Gunakan binary asal</string>

@@ -514,9 +514,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Comutare lanternă</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Panoul de volum se extinde automat</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Butonul Meniu</string>
     <string name="pref_cat_hwkey_home_title">Butonul Acasă</string>
@@ -627,10 +624,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Schimbați tastele Înapoi și Recente</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">Timpul de expirare a panoului de volum</string>
-    <string name="pref_volume_panel_timeout_summary">Lăsați zero pentru intervalul de timp prestabilit</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">Vibrare</string>
@@ -1041,10 +1034,6 @@
 
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Comutator principal</string>
-
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">Dezactivați vibrațiile de reglare a volumului</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Dezactivează vibrarea când se ajustează volumul de notificare/ton de apel utilizând tastele de volum</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Utilizați binarul stoc</string>

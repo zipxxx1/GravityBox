@@ -327,13 +327,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_VOL_FORCE_MUSIC_CONTROL = "pref_vol_force_music_control";
     public static final String PREF_KEY_SAFE_MEDIA_VOLUME = "pref_safe_media_volume2";
     public static final String PREF_KEY_VOL_SWAP_KEYS = "pref_vol_swap_keys";
-    public static final String PREF_KEY_VOLUME_PANEL_AUTOEXPAND = "pref_volume_panel_autoexpand";
-    public static final String PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE = "pref_volume_adjust_vibrate_mute";
-    public static final String PREF_KEY_VOLUME_PANEL_TIMEOUT = "pref_volume_panel_timeout2";
-    public static final String ACTION_PREF_VOLUME_PANEL_MODE_CHANGED = "gravitybox.intent.action.VOLUME_PANEL_MODE_CHANGED";
-    public static final String EXTRA_AUTOEXPAND = "autoExpand";
-    public static final String EXTRA_VIBRATE_MUTED = "vibrate_muted";
-    public static final String EXTRA_TIMEOUT = "timeout";
     public static final String PREF_KEY_LINK_VOLUMES = "pref_link_volumes";
     public static final String ACTION_PREF_LINK_VOLUMES_CHANGED = "gravitybox.intent.action.LINK_VOLUMES_CHANGED";
     public static final String EXTRA_LINKED = "linked";
@@ -2878,16 +2871,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_TORCH, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_LOCKSCREEN_TORCH, "0")));
-            } else if (key.equals(PREF_KEY_VOLUME_PANEL_AUTOEXPAND)) {
-                intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
-                intent.putExtra(EXTRA_AUTOEXPAND, 
-                        prefs.getBoolean(PREF_KEY_VOLUME_PANEL_AUTOEXPAND, false));
-            } else if (key.equals(PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE)) {
-                intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
-                intent.putExtra(EXTRA_VIBRATE_MUTED, prefs.getBoolean(PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE, false));
-            } else if (key.equals(PREF_KEY_VOLUME_PANEL_TIMEOUT)) {
-                intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
-                intent.putExtra(EXTRA_TIMEOUT, prefs.getInt(key, 0));
             } else if (key.equals(PREF_KEY_LINK_VOLUMES)) {
                 intent.setAction(ACTION_PREF_LINK_VOLUMES_CHANGED);
                 intent.putExtra(EXTRA_LINKED,

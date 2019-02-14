@@ -523,9 +523,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Torcia on/off</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Espandi automaticamente</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Tasto Menù</string>
     <string name="pref_cat_hwkey_home_title">Tasto Home</string>
@@ -638,10 +635,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Scambia tasti Indietro e Recenti</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">Timeout pannello volume</string>
-    <string name="pref_volume_panel_timeout_summary">Lascia zero per il timeout predefinito</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">Vibrazione</string>
@@ -1055,10 +1048,6 @@
 
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Interruttore principale</string>
-
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">Disattiva vibrazione regolazione volume</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Disattiva la vibrazione durante la regolazione del volume</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Usa metodo standard</string>

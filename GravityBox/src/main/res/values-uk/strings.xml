@@ -520,9 +520,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Включити ліхтарик</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Панель гучності розширювати автоматично</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Кнопка «Меню»</string>
     <string name="pref_cat_hwkey_home_title">Кнопка «Додому»</string>
@@ -633,10 +630,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Поміняти «Назад» та «Нещодавні»</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">Затримка панелі гучності</string>
-    <string name="pref_volume_panel_timeout_summary">Лишити 0 для типового значення</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">Вібрація</string>
@@ -1046,10 +1039,6 @@
 
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Увімкнути</string>
-
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">Приглушити вібро</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Приглушення вібрації при регулювання гучності сповіщень/дзвінків кнопками гучності</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Стоковий бінарний файл</string>

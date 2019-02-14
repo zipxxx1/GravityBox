@@ -426,8 +426,6 @@
     <string name="hwkey_recents_longpress_dialog_title">最近のアプリキー長押しアクション</string>
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">トーチトグル</string>
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">自動的に展開</string>
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">メニューキー</string>
     <string name="pref_cat_hwkey_home_title">ホームキー</string>
@@ -518,8 +516,6 @@
     <string name="app_picker_shortcut_cancelled">ショートカットの作成がキャンセルされました。</string>
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">バックと最近のアプリのキーを入れ替える</string>
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">音量パネルを非表示にするまでの時間</string>
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">マナーモード</string>
     <string name="ringer_mode_sound">通常</string>
@@ -861,9 +857,6 @@
     <string name="shortcut_smart_radio_toggle">スマートネットワークトグル</string>
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">有効/無効の切り替え</string>
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">音量変更時のバイブを無効化</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">音量キーで音量を変更したときのバイブを無効化します。</string>
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">標準バイナリを使用</string>
     <string name="pref_screenrecord_use_stock_summary">有効にすると録画する際標準のscreenrecordバイナリを使用するようにします。

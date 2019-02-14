@@ -522,9 +522,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Включить фонарик</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Расширять автоматически</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Кнопка Меню</string>
     <string name="pref_cat_hwkey_home_title">Кнопка Домой</string>
@@ -637,10 +634,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Поменять Назад и Недавние</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">Задержка панели громкости</string>
-    <string name="pref_volume_panel_timeout_summary">Оставьте ноль для задержки по умолчанию</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">Вибрация</string>
@@ -1054,10 +1047,6 @@
 
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Включить</string>
-
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">Откл.вибр.при регулировке</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Отключение вибрации при регулировке громкости уведомлений/звонка клавишами громкости</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Стоковый бинарный файл</string>

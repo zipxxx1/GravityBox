@@ -328,7 +328,6 @@
 <string name="hwkey_recents_singletap_dialog_title">عمل دکمه موارد اخیر با یک لمس</string>
 <string name="hwkey_recents_longpress_dialog_title">عمل دکمه موارد اخیر با لمس طولانی</string>
 <string name="hwkey_action_torch">چراغ قوه</string>
-<string name="pref_volume_panel_autoexpand_title">گسترش خودکار پنل حجم صدا</string>
 <string name="pref_cat_hwkey_menu_title">کلید منو</string>
 <string name="pref_cat_hwkey_home_title">کلید خانه</string>
 <string name="pref_cat_hwkey_back_title">کلید بازگشت</string>
@@ -396,8 +395,6 @@
 <string name="app_picker_shortcut_null_intent">ساختن میانبر قابل اجرا ممکن نیست زیرا فعالیت نمیتواند به‌مقصد میانبر بازگردد</string>
 <string name="app_picker_shortcut_cancelled">ایجاد میانبر توسط برنامه هدف لغو شد</string>
 <string name="pref_navbar_swap_keys_title">تعویض کلید بازگشت با کلید موارد اخیر</string>
-<string name="pref_volume_panel_timeout_title">زمان نمایش پنل حجم‌صدا</string>
-<string name="pref_volume_panel_timeout_summary">برای نمایش با زمان پیشفرض بروی 0 تنظیم شود</string>
 <string name="ringer_mode_vibrate">لرزش</string>
 <string name="ringer_mode_sound">صدا</string>
 <string name="ringer_mode_sound_vibrate">صدا و لرزش</string>
@@ -663,8 +660,6 @@
 <string name="pref_charger_plugged_sound_title">صدای اتصال شارژر</string>
 <string name="shortcut_smart_radio_toggle">سوئیچ وضعیت رادیو هوشمند</string>
 <string name="pref_masterswitch_title">کلید اصلی</string>
-<string name="pref_volume_adjust_vibrate_mute_title">غیرفعالسازی لرزش هنگام تنظیم حجم صدا</string>
-<string name="pref_volume_adjust_vibrate_mute_summary">غیرفعالسازی لرزش هنگام تنظیم حجم صدای اعلان و زنگ تماس توسط دکمه حجم صدا</string>
 <string name="pref_screenrecord_use_stock_title">استفاده از باینری پیشفرض</string>
 <string name="pref_screenrecord_use_stock_summary">از باینری پیشفرض برای تصویربرداری از صفحه نمایش استفاده میشود.استفاده از باینری جایگزین ممکن است مشکلاتی بهمراه داشته باشد.توجه کنید که باینری پیشفرض از صدا پشتیبانی ننموده و همچنین تنها ۳ دقیقه ضبط انجام خواهد داد</string>
 <string name="pref_sb_clock_masterswitch_summary">سوئیچ وضعیت تنظیمات ساعت در نوار وضعیت(نیازمند راه‌اندازی مجدد)</string>

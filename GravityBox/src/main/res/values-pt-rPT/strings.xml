@@ -499,9 +499,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Comutar lanterna</string>
 
-    <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Expandir automaticamente</string>
-
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Tecla Menu</string>
     <string name="pref_cat_hwkey_home_title">Tecla Casa</string>
@@ -613,9 +610,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Trocar posição teclas Atrás e Aplicações recentes</string>
-
-    <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">Temporização do painel de volume</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_vibrate">Vibrar</string>
@@ -1024,10 +1018,6 @@
 
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Interruptor</string>
-
-    <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">Desativar vibração no ajuste de volume</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Permite desativar a vibração durante o ajuste do volume das notificações / toques de chamada com as teclas de volume</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Usar executável de origem</string>
