@@ -45,7 +45,6 @@ import com.ceco.pie.gravitybox.webserviceclient.WebServiceClient.WebServiceTaskL
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -191,7 +190,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_CAT_KEY_STATUSBAR_QS = "pref_cat_statusbar_qs";
     public static final String PREF_CAT_KEY_QS_TILE_SETTINGS = "pref_cat_qs_tile_settings";
     public static final String PREF_CAT_KEY_QS_NM_TILE_SETTINGS = "pref_cat_qs_nm_tile_settings";
-    public static final String PREF_CAT_KEY_QS_DND_TILE_SETTINGS = "pref_cat_qs_dnd_tile";
     public static final String PREF_CAT_KEY_QS_LOCATION_TILE_SETTINGS = "pref_cat_qs_location_tile";
     public static final String PREF_CAT_KEY_QS_RM_TILE_SETTINGS = "pref_cat_qs_rm_tile";
     public static final String PREF_CAT_KEY_QS_SA_TILE_SETTINGS = "pref_cat_qs_sa_tile";
@@ -830,15 +828,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_BATTERY_TILE_TEMP = "batteryTileTemp";
     public static final String EXTRA_BATTERY_TILE_TEMP_UNIT = "batteryTileTempUnit";
     public static final String EXTRA_BATTERY_TILE_VOLTAGE = "batteryTileVoltage";
-
-    public static final String PREF_KEY_DND_TILE_QUICK_MODE = "pref_dnd_tile_quick_mode";
-    public static final String PREF_KEY_DND_TILE_ENABLED_MODES = "pref_dnd_tile_enabled_modes";
-    public static final String PREF_KEY_DND_TILE_DURATION_MODE = "pref_dnd_tile_duration_mode";
-    public static final String PREF_KEY_DND_TILE_DURATION = "pref_dnd_tile_duration";
-    public static final String EXTRA_DND_TILE_QUICK_MODE = "dndTileQuickMode";
-    public static final String EXTRA_DND_TILE_ENABLED_MODES = "dndTileEnabledModes";
-    public static final String EXTRA_DND_TILE_DURATION_MODE = "dndTileDurationMode";
-    public static final String EXTRA_DND_TILE_DURATION = "dndTileDuration";
 
     public static final String PREF_KEY_NM_TILE_ENABLED_MODES = "pref_nm_tile_enabled_modes";
     public static final String EXTRA_NM_TILE_ENABLED_MODES = "nmTileEnabledModes";
@@ -1819,8 +1808,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefCatPower.removePreference(mPrefCatPowerMenu);
                 p = findPreference(PREF_CAT_KEY_BATTERY_TILE);
                 if (p != null) mPrefCatQsTileSettings.removePreference(p);
-                p = findPreference(PREF_CAT_KEY_QS_DND_TILE_SETTINGS);
-                if (p != null) mPrefCatQsTileSettings.removePreference(p);
                 mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
                 mBatteryStyle.setEntries(R.array.battery_style_entries_oos);
                 mBatteryStyle.setEntryValues(R.array.battery_style_values_oos);
@@ -2512,15 +2499,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_IMPRINT_MODE)) {
                 ListPreference p = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
                 if (p != null) p.setSummary(p.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_DND_TILE_DURATION_MODE)) {
-                ListPreference p = (ListPreference) findPreference(PREF_KEY_DND_TILE_DURATION_MODE);
-                if (p != null) {
-                    p.setSummary(p.getEntry());
-                    Preference dp = findPreference(PREF_KEY_DND_TILE_DURATION);
-                    if (dp != null) dp.setEnabled(p.isEnabled() && "CUSTOM".equals(p.getValue()));
-                }
             }
 
             if (key == null || key.equals(PREF_KEY_IMPRINT_VIBE_DISABLE)) {
@@ -3445,26 +3423,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_POWER_CAMERA_VP)) {
                 intent.setAction(ACTION_PREF_POWER_CHANGED);
                 intent.putExtra(EXTRA_POWER_CAMERA_VP, prefs.getString(key, null));
-            } else if (key.equals(PREF_KEY_DND_TILE_QUICK_MODE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_DND_TILE_QUICK_MODE, prefs.getBoolean(key, false));
-            } else if (key.equals(PREF_KEY_DND_TILE_ENABLED_MODES)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                Set<String> modes = prefs.getStringSet(key,
-                        new HashSet<String>(Arrays.asList("1", "2", "3")));
-                List<String> lmodes = new ArrayList<String>(modes);
-                Collections.sort(lmodes);
-                int[] imodes = new int[lmodes.size()];
-                for (int i = 0; i < lmodes.size(); i++) {
-                    imodes[i] = Integer.valueOf(lmodes.get(i));
-                }
-                intent.putExtra(EXTRA_DND_TILE_ENABLED_MODES, imodes);
-            } else if (key.equals(PREF_KEY_DND_TILE_DURATION_MODE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_DND_TILE_DURATION_MODE, prefs.getString(key, "MANUAL"));
-            } else if (key.equals(PREF_KEY_DND_TILE_DURATION)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_DND_TILE_DURATION, prefs.getInt(key, 60));
             } else if (key.equals(PREF_KEY_NM_TILE_ENABLED_MODES)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 Set<String> modes = prefs.getStringSet(key,

@@ -1640,17 +1640,9 @@
     <string name="pref_tile_enabled_modes_title">启用模式</string>
 
     <!-- DND tile settings -->
-    <string name="pref_cat_qs_dnd_tile_title">请勿打扰磁贴设置</string>
-    <string name="pref_dnd_tile_quick_mode_summary">允许在磁贴上循环单击选择打扰模式</string>
-    <string name="pref_dnd_tile_enabled_modes_summary">设置循环不需要的打扰模式</string>
     <string name="dnd_tile_em_priority">仅优先级</string>
     <string name="dnd_tile_em_alarms">仅闹钟</string>
     <string name="dnd_tile_em_silence">完全静音</string>
-    <string name="pref_dnd_tile_duration_mode_title">预定持续时间</string>
-    <string name="dnd_tile_dm_manual">直到手动关闭</string>
-    <string name="dnd_tile_dm_alarm">直到下个闹钟</string>
-    <string name="dnd_tile_dm_custom">自定义</string>
-    <string name="pref_dnd_tile_duration_title">设置自定义时间</string>
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">位置磁贴(SlimKat)设置</string>

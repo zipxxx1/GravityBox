@@ -1640,17 +1640,9 @@
     <string name="pref_tile_enabled_modes_title">Aktifkan mods</string>
 
     <!-- DND tile settings -->
-    <string name="pref_cat_qs_dnd_tile_title">Tetapan tile privasi</string>
-    <string name="pref_dnd_tile_quick_mode_summary">Aktifkan mod privasi pada sekali tekan</string>
-    <string name="pref_dnd_tile_enabled_modes_summary">Set jenis mod privasi</string>
     <string name="dnd_tile_em_priority">Keutamaan sahaja</string>
     <string name="dnd_tile_em_alarms">Penggera sahaja</string>
     <string name="dnd_tile_em_silence">Senyap</string>
-    <string name="pref_dnd_tile_duration_mode_title">Durasi yang ditetapkan</string>
-    <string name="dnd_tile_dm_manual">Sehingga dimatikan</string>
-    <string name="dnd_tile_dm_alarm">Sehingga penggera berikutnya</string>
-    <string name="dnd_tile_dm_custom">Pilihan sendiri</string>
-    <string name="pref_dnd_tile_duration_title">Set durasi tersendiri</string>
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Tetapan tile lokasi (SlimKat)</string>

@@ -1340,17 +1340,9 @@ y compris les vibrations de notification, le retour haptique, etc.</string>
     <string name="pref_tile_quick_mode_title">Activer le mode rapide</string>
     <string name="pref_tile_enabled_modes_title">Modes activés</string>
     <!-- DND tile settings -->
-    <string name="pref_cat_qs_dnd_tile_title">Paramètres de la touche Ne pas déranger</string>
-    <string name="pref_dnd_tile_quick_mode_summary">Permet d\'alterner par simple appui entre les modes choisis Ne pas déranger</string>
-    <string name="pref_dnd_tile_enabled_modes_summary">Programme quel cycle est choisi pour Ne pas déranger</string>
     <string name="dnd_tile_em_priority">Prioritaire seulement</string>
     <string name="dnd_tile_em_alarms">Alarmes seulement</string>
     <string name="dnd_tile_em_silence">Silence total</string>
-    <string name="pref_dnd_tile_duration_mode_title">Durée prédéfinie</string>
-    <string name="dnd_tile_dm_manual">Jusqu\'à extinction manuelle</string>
-    <string name="dnd_tile_dm_alarm">Jusqu\'à la prochaine alarme</string>
-    <string name="dnd_tile_dm_custom">Personnalisé</string>
-    <string name="pref_dnd_tile_duration_title">Règler une durée personnalisée</string>
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Paramètres de la touche localisation (SlimKat)</string>
     <!-- Cellular network modes -->

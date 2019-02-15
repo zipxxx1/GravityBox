@@ -1608,17 +1608,9 @@
     <string name="pref_tile_enabled_modes_title">Podporované typy</string>
 
     <!-- DND tile settings -->
-    <string name="pref_cat_qs_dnd_tile_title">Nastavenia dlaždice Nerušiť</string>
-    <string name="pref_dnd_tile_quick_mode_summary">Umožňuje prepínať medzi typmi nerušenia jednoduchým ťuknutím na dlaždicu</string>
-    <string name="pref_dnd_tile_enabled_modes_summary">Definuje, medzi ktorými typmi nerušenia prepínať</string>
     <string name="dnd_tile_em_priority">Iba prioritné</string>
     <string name="dnd_tile_em_alarms">Iba budíky</string>
     <string name="dnd_tile_em_silence">Úplné ticho</string>
-    <string name="pref_dnd_tile_duration_mode_title">Prednastavená doba trvania</string>
-    <string name="dnd_tile_dm_manual">Dokým nevypnete</string>
-    <string name="dnd_tile_dm_alarm">Do nasledujúceho budíka</string>
-    <string name="dnd_tile_dm_custom">Vlastná</string>
-    <string name="pref_dnd_tile_duration_title">Nastaviť vlastnú dobu trvania</string>
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Nastavenia dlaždice Poloha (SlimKat)</string>

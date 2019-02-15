@@ -1069,18 +1069,6 @@
         <item>2</item>
     </string-array>
 
-    <string-array name="dnd_tile_dm_entries" translatable="false">
-        <item>@string/dnd_tile_dm_manual</item>
-        <item>@string/dnd_tile_dm_alarm</item>
-        <item>@string/dnd_tile_dm_custom</item>
-    </string-array>
-
-    <string-array name="dnd_tile_dm_values" translatable="false">
-        <item>MANUAL</item>
-        <item>ALARM</item>
-        <item>CUSTOM</item>
-    </string-array>
-
     <string-array name="network_mode_entries" translatable="false">
         <item>@string/network_mode_0</item>
         <item>@string/network_mode_1</item>

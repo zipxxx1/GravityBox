@@ -1608,17 +1608,9 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_tile_enabled_modes_title">Etkin modlar</string>
 
     <!-- DND tile settings -->
-    <string name="pref_cat_qs_dnd_tile_title">Rahatsız etme karesi ayarları</string>
-    <string name="pref_dnd_tile_quick_mode_summary">Kareye tek basmada seçilen rahatsız etme modları arasında dolaşmaya izin verir</string>
-    <string name="pref_dnd_tile_enabled_modes_summary">Aralarında dolaşılacak rahatsız etme modlarını ayarlar</string>
     <string name="dnd_tile_em_priority">Yalnızca öncelikliler</string>
     <string name="dnd_tile_em_alarms">Yalnızca alarmlar</string>
     <string name="dnd_tile_em_silence">Tamamen sessiz</string>
-    <string name="pref_dnd_tile_duration_mode_title">Öntanımlı süre</string>
-    <string name="dnd_tile_dm_manual">Elle kapatılana kadar</string>
-    <string name="dnd_tile_dm_alarm">Sonraki alarma kadar</string>
-    <string name="dnd_tile_dm_custom">Özel</string>
-    <string name="pref_dnd_tile_duration_title">Özel süreyi ayarla</string>
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Konum karesi (SlimKat) ayarları</string>

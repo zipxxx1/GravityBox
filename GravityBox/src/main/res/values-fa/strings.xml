@@ -996,17 +996,9 @@
 <string name="pref_power_camera_vibrate_pattern_summary">Defines vibration pattern in form of comma separated list of off/on duration pairs in milliseconds for camera launched from power key. Leave empty for default. Set to 0 to disable vibration.</string>
 <string name="pref_tile_quick_mode_title">فعالسازی حالت سریع</string>
 <string name="pref_tile_enabled_modes_title">حالت‌ها فعال شد</string>
-<string name="pref_cat_qs_dnd_tile_title">تنظیمات کاشی مزاحم نشوید</string>
-<string name="pref_dnd_tile_quick_mode_summary">سوئیچ سریع حالت مزاحم نشوید با یک لمس کاشی</string>
-<string name="pref_dnd_tile_enabled_modes_summary">مجموعه‌ای که در حالت مزاحم نشوید قرار ندارند از طریق حلقه</string>
 <string name="dnd_tile_em_priority">فقط اولویت‌ها</string>
 <string name="dnd_tile_em_alarms">فقط آلارم‌ها</string>
 <string name="dnd_tile_em_silence">سکوت مطلق</string>
-<string name="pref_dnd_tile_duration_mode_title">مدت زمان از پیش تعیین شده</string>
-<string name="dnd_tile_dm_manual">تا زمان خاموش کردن دستی</string>
-<string name="dnd_tile_dm_alarm">تا زمان آلارم بعدی</string>
-<string name="dnd_tile_dm_custom">شخصی</string>
-<string name="pref_dnd_tile_duration_title">تنظیم مدت زمان شخصی</string>
 <string name="pref_cat_qs_location_tile_title">تنظیمات کاشی موقعیت مکانی (SlimKat)</string>
 <string name="network_mode_0">برتر (3G/2G)</string>
 <string name="network_mode_1">فقط (2G)</string>

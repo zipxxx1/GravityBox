@@ -1605,17 +1605,9 @@
     <string name="pref_tile_enabled_modes_title">Engedélyezett módok</string>
 
     <!-- DND tile settings -->
-    <string name="pref_cat_qs_dnd_tile_title">Ne zavarj csempe beállítások</string>
-    <string name="pref_dnd_tile_quick_mode_summary">Lehetővé teszi a Ne zavarj módok közötti váltást a csempe egyszeri érintésére</string>
-    <string name="pref_dnd_tile_enabled_modes_summary">Beállítás, hogy melyik Ne zavarj módok között lehessen váltani</string>
     <string name="dnd_tile_em_priority">Csak prioritást élvező</string>
     <string name="dnd_tile_em_alarms">Csak ébresztés</string>
     <string name="dnd_tile_em_silence">Teljes csend</string>
-    <string name="pref_dnd_tile_duration_mode_title">Előre meghatározott időtartamig</string>
-    <string name="dnd_tile_dm_manual">Manuális kikapcsolásig</string>
-    <string name="dnd_tile_dm_alarm">Következő ébresztésig</string>
-    <string name="dnd_tile_dm_custom">Egyéni</string>
-    <string name="pref_dnd_tile_duration_title">Egyéni időtartam megadása</string>
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Helyzetmeghatározás (SlimKat) csempe beállítások</string>

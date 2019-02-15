@@ -1638,17 +1638,9 @@
     <string name="pref_tile_enabled_modes_title">Modalità abilitate</string>
 
     <!-- DND tile settings -->
-    <string name="pref_cat_qs_dnd_tile_title">Non disturbare le impostazioni delle icone</string>
-    <string name="pref_dnd_tile_quick_mode_summary">Permette di pedalare attraverso le modalità scelte per non disturbare sulla tessera singola pressione</string>
-    <string name="pref_dnd_tile_enabled_modes_summary">Imposta quali modalità non disturbare</string>
     <string name="dnd_tile_em_priority">Unica Priorità</string>
     <string name="dnd_tile_em_alarms">Solo Allarmi</string>
     <string name="dnd_tile_em_silence">Silenzio Totale</string>
-    <string name="pref_dnd_tile_duration_mode_title">Durata predefinita</string>
-    <string name="dnd_tile_dm_manual">Fino allo spegnimento manuale</string>
-    <string name="dnd_tile_dm_alarm">Fino al prossimo allarme</string>
-    <string name="dnd_tile_dm_custom">Personalizzato</string>
-    <string name="pref_dnd_tile_duration_title">Imposta la durata personalizzata</string>
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Riquadro posizione (SlimKat)</string>

@@ -301,42 +301,6 @@
                 </PreferenceScreen>
                 -->
 
-                <PreferenceScreen
-                    android:key="pref_cat_qs_dnd_tile"
-                    android:title="@string/pref_cat_qs_dnd_tile_title">
-
-                    <CheckBoxPreference 
-                        android:key="pref_dnd_tile_quick_mode"
-                        android:title="@string/pref_tile_quick_mode_title"
-                        android:summary="@string/pref_dnd_tile_quick_mode_summary"
-                        android:defaultValue="false" />
-
-                    <MultiSelectListPreference 
-                        android:key="pref_dnd_tile_enabled_modes"
-                        android:title="@string/pref_tile_enabled_modes_title"
-                        android:summary="@string/pref_dnd_tile_enabled_modes_summary"
-                        android:entries="@array/dnd_tile_em_entries"
-                        android:entryValues="@array/dnd_tile_em_values"
-                        android:defaultValue="@array/dnd_tile_em_values"
-                        android:dependency="pref_dnd_tile_quick_mode" />
-
-                    <ListPreference
-                        android:key="pref_dnd_tile_duration_mode" 
-                        android:title="@string/pref_dnd_tile_duration_mode_title"
-                        android:entries="@array/dnd_tile_dm_entries"
-                        android:entryValues="@array/dnd_tile_dm_values"
-                        android:defaultValue="MANUAL"
-                        android:dependency="pref_dnd_tile_quick_mode" />
-
-                    <com.ceco.pie.gravitybox.preference.TimePreference
-                        android:key="pref_dnd_tile_duration"
-                        android:title="@string/pref_dnd_tile_duration_title"
-                        timerMode="true"
-                        android:defaultValue="60"
-                        android:dependency="pref_dnd_tile_quick_mode" />
-
-                </PreferenceScreen>
-
                 <!--
                 <PreferenceScreen
                     android:key="pref_cat_qs_location_tile"
