@@ -1138,10 +1138,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">虚拟键振动模式</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">设置分隔逗号在几毫秒内关闭/开启持续时间，留空为默认振动格式</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">显示格式错误</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">进入错误格式时显示红色足迹</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">此功能是试用模式！如果您觉得它有用您可以解锁高级功能
 	在%d重启后将结束试用期</string>

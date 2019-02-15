@@ -1113,10 +1113,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">Vzorec vibrácie soft tlačidiel</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">Zoznam čiarkou oddelených hodnôt pre dobu vypnutia/zapnutia vibrátora v milisekundách. Ponechajte prázdne pre použitie pedvoleného vzorca.</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Ukázať chybu vzorca</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Zobrazí červenú stopu po zadaní nesprávneho odomykacieho vzorca</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Táto funkcia je v skúšobnom režime. V prípade, ak vyhovuje Vašim potrebám je možné ju aktivovať odomknutím prémiových funkcií. 
         Počet reštartov do skončenia skúšobného režimu: %d</string>

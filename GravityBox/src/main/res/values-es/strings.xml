@@ -1131,10 +1131,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">Patrón de vibración de botón virtual</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">Lista separada por comas de las duraciones activadas/desactivadas en milisegundos. Dejar vacío para desactivar vibraciones.</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Mostrar patrón erróneo</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Mostrar rastro rojo al introducir patrón incorrecto</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Esta herramienta es para usuarios premium. Si la encuentras útil, puedes seguir usándola tras desbloquear el modo premium.
         Esta versión de prueba acaba tras %d reinicios.</string>

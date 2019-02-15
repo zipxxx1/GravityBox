@@ -1122,10 +1122,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">Modelul vibrațiilor tastei virtuale</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">Liste separate prin virgule de perechi de durată pornit/oprit în milisecunde. Lăsați gol pentru modelul de vibrații implicit.</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Afișare eroare de model</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Afișare traseu roșu atunci când este introdus un model greșit</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Această funcție este în modul de încercare. Dacă vi se pare utilă, puteți continua să o utilizați după deblocarea caracteristicilor premium. Perioada de încercare se termină după %d reporniri.</string>
 

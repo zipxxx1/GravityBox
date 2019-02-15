@@ -34,7 +34,6 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
@@ -112,9 +111,6 @@ public class ModLockscreen {
     private static Drawable mRightActionDrawableOrig;
     private static boolean mLeftActionHidden;
     private static boolean mRightActionHidden;
-
-    private static boolean mInStealthMode;
-    private static Object mPatternDisplayMode; 
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -397,18 +393,6 @@ public class ModLockscreen {
                     }
                 });
             }
-
-            XposedHelpers.findAndHookMethod(lockPatternViewClass, "onDraw", Canvas.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) {
-                    beforeLockPatternDraw(displayModeEnum, param.thisObject);
-                }
-
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) {
-                    afterLockPatternDraw(param.thisObject);
-                }
-            });
 
             XposedHelpers.findAndHookMethod(kgViewMediatorClass, "playSounds", boolean.class, new XC_MethodHook() {
                 @Override
@@ -853,31 +837,6 @@ public class ModLockscreen {
             if (DEBUG_KIS) log("setLastScreenBackground: Last screen background updated");
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
-        }
-    }
-
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    private static void beforeLockPatternDraw(final Class<? extends Enum> displayModeEnum, final Object thisObject) {
-        final Object patternDisplayMode = XposedHelpers.getObjectField(thisObject, "mPatternDisplayMode");
-        final Boolean inStealthMode = XposedHelpers.getBooleanField(thisObject, "mInStealthMode");  
-
-        if (!mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR, true) &&
-                    mPatternDisplayMode == null && patternDisplayMode == Enum.valueOf(displayModeEnum, "Wrong")) {
-            mInStealthMode = inStealthMode;
-            mPatternDisplayMode = patternDisplayMode;
-            XposedHelpers.setBooleanField(thisObject, "mInStealthMode", true);
-            XposedHelpers.setObjectField(thisObject, "mPatternDisplayMode", Enum.valueOf(displayModeEnum, "Correct"));
-        } else {
-            mPatternDisplayMode = null;
-        }
-    }
-
-    private static void afterLockPatternDraw(final Object thisObject) {
-        if (null != mPatternDisplayMode) {
-            XposedHelpers.setBooleanField(thisObject, "mInStealthMode", mInStealthMode);
-            XposedHelpers.setObjectField(thisObject, "mPatternDisplayMode", mPatternDisplayMode);
-            mInStealthMode = false;
-            mPatternDisplayMode = null;
         }
     }
 

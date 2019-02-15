@@ -1140,10 +1140,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">Virtual key vibration pattern</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">Comma separated list of off/on duration pairs in milliseconds. Leave empty for default vibration pattern.</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Show pattern error</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Show red trail when wrong pattern is entered</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">This feature is in trial mode. If you find it useful you can continue using it after unlocking premium features. 
         Trial period ends after %d reboots.</string>

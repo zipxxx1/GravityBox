@@ -1127,10 +1127,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">Шаблон вібрації віртуальних клавіш</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">Перелік, який розділено комами, пар вимкнення/увімкнення в мілісекундах. Залиште порожнім для типового шаблону вібрації.</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Показати помилку ключа</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Показувати червоним неправильний шаблон графічного ключа</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Функція працює в випробувальному режимі. Якщо ви вважаєте її корисною, можете продовжувати користуватися нею після розблокування розширених функцій. Пробний період закінчиться через %d перезавантажень.</string>
 

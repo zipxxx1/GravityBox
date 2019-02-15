@@ -1108,10 +1108,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">Vzorec vibrace soft tlačítek</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">Seznam čárkou oddělených hodnot pro dobu vypnutí/zapnutí vibrátoru v milisekundách. Ponechte prázdné pro použití pedvoleného vzorce.</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Ukázat chybu vzorce</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Zobrazí červenou stopu po zadání nesprávného odemykacího vzorce</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Tato funkce je ve zkušebním režimu. V případě, že vyhovuje Vašim potřebám je možné ji aktivovat odemknutím prémiových funkcí. 
         Počet restartů do skončení zkušebního režimu: %d</string>

@@ -256,7 +256,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
     public static final String PREF_CAT_KEY_LOCKSCREEN_OTHER = "pref_cat_lockscreen_other";
     public static final String PREF_KEY_LOCKSCREEN_ROTATION = "pref_lockscreen_rotation2";
-    public static final String PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR = "pref_lockscreen_show_pattern_error";
     public static final String PREF_KEY_LOCKSCREEN_MENU_KEY = "pref_lockscreen_menu_key2";
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
     public static final String PREF_KEY_LOCKSCREEN_PIN_LENGTH = "pref_lockscreen_pin_length";
@@ -979,7 +978,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_LOCKSCREEN_IMPRINT_MODE,
             PREF_KEY_LOCKSCREEN_D2TS,
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
-            PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR,
             PREF_KEY_LOCKSCREEN_BLEFT_ACTION_CUSTOM,
             PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM,
             PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE,

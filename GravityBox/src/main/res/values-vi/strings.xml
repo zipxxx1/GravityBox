@@ -1131,10 +1131,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">Kiểu rung của phím ảo</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">Dấy phẩy tách danh sách của cặp khoảng thời gian bật/tắt tính bằng mili giây. Để trông để dùng kiểu rung mặc định.</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Hiện mẫu hình lỗi</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Hiện đường màu đỏ khi nhập sai mẫu hình</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Tính năng này đang trong chế độ dùng thử. Nếu bạn thấy nó hữu ích bạn có thể sử dụng sau khi mở khóa tính năng Premium. 
         Giai đoạn dùng thử sẽ hết sau %d lần khởi động lại.</string>

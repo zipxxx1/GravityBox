@@ -1137,10 +1137,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">Schema vibrazione tasti virtuali</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">Imposta un valore in millisecondi che indichi la durata tra "acceso" e "spento", separando ogni valore con una virgola. Lascia il campo vuoto per usare il valore predefinito.</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Mostra errori schema</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Mostra un segno rosso quando viene inserito uno schema non valido</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Questa funzione è in Demo. Se la reputi utile puoi continuare ad usarla dopo la registrazione dell\'ID transazione della donazione PayPal.
     Il periodo di prova termina dopo %d riavvii.</string>

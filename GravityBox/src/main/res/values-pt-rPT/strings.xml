@@ -1107,10 +1107,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">Padrão de vibração das teclas</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">Lista de pares de duração (desligado/ligado), em milisegundos, separados por vírgula (deixar vazio para o padrão pré-definido)</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Mostrar erro na sequência</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Permite mostrar um trilho vermelho quando a sequência é introduzida incorretamente</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Esta funcionalidade está em modo de teste. Se a considerar útil pode continuar a utilizá-la assim que desbloquear as funcionalidades avançadas. 
         O período de teste termina após reiniciar %d vezes.</string>

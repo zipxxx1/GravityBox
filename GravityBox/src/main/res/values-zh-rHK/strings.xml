@@ -1117,10 +1117,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">軟體導航鍵震動規律</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">設定震動規律：輸入震動關閉/開啟持續時間 (以微秒作單位)，並請以逗號分隔每一數值。留空為預設震動規律。</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">提示錯誤的解鎖圖形</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">當輸入了錯誤的解鎖圖形時以紅色標記作出提示</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">此功能正在試用階段，如果您覺得實用並想繼續使用此功能，請使用您的 PayPal  捐贈。
 	本功能試用期將在您重新啟動裝置 %d 次後結束。</string>

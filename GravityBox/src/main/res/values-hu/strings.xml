@@ -1132,10 +1132,6 @@
     <string name="pref_virtual_key_vibrate_pattern_title">Virtuális gomb rezgés minta</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">A rezgés ki/be időtartam párok vesszővel elválasztott listája, ezredmásodpercben. Hagyd üresen az alapértelmezett rezgés mintához.</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Feloldó minta hiba mutatása</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Piros mintanyom mutatása hibás feloldó minta megadásakor</string>
-
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Ez a funkció próba üzemmódban van. Ha hasznosnak találja, tovább használhatja a prémium funkciók feloldása után. A próba üzemmód %d újraindítás után véget ér.</string>
 

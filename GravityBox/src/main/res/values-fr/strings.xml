@@ -938,9 +938,6 @@
     <!-- Virtual keys vibrate pattern -->
     <string name="pref_virtual_key_vibrate_pattern_title">Modèle de vibration pour touche virtuelle</string>
     <string name="pref_virtual_key_vibrate_pattern_summary">Liste séparée par une virgule de durées par pair (off,on) en millisecondes. Laisser vide pour le modèle de vibration par défaut</string>
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Afficher l\'erreur du modèle</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Affiche une ligne rouge lorsqu\'une mauvaise entrée est saisie dans le modèle</string>
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Cette option est en mode d\'essai. Si vous la trouvez utile vous pouvez continuer de l\'utiliser après avoir déverrouillé les éléments Premium. 
         La période d\'essai finit dans %d redémarrage(s)</string>
