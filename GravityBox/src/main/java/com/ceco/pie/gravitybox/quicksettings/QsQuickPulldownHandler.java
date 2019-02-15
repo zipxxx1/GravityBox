@@ -166,13 +166,19 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
         return showQsOverride;
     }
 
+    private Object getNotificationData(Object o) {
+        if (mNotificationData == null) {
+            Object entryManager = XposedHelpers.getObjectField(
+                    XposedHelpers.getObjectField(o, "mStatusBar"), "mEntryManager");
+            mNotificationData = XposedHelpers.callMethod(entryManager, "getNotificationData");
+        }
+        return mNotificationData;
+    }
+
     private boolean hasNotifications(Object o) {
         try {
-            if (mNotificationData == null) {
-                mNotificationData = XposedHelpers.getObjectField(
-                        XposedHelpers.getObjectField(o, "mStatusBar"), "mNotificationData");
-            }
-            List<?> list = (List<?>)XposedHelpers.callMethod(mNotificationData, "getActiveNotifications");
+            List<?> list = (List<?>)XposedHelpers.callMethod(getNotificationData(o),
+                    "getActiveNotifications");
             return list.size() > 0;
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
@@ -182,11 +188,8 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
 
     private boolean hasClearableNotifications(Object o) {
         try {
-            if (mNotificationData == null) {
-                mNotificationData = XposedHelpers.getObjectField(
-                        XposedHelpers.getObjectField(o, "mStatusBar"), "mNotificationData");
-            }
-            List<?> list = (List<?>)XposedHelpers.callMethod(mNotificationData, "getActiveNotifications");
+            List<?> list = (List<?>)XposedHelpers.callMethod(getNotificationData(o),
+                    "getActiveNotifications");
             boolean hasClearableNotifications = false;
             for (Object entry : list) {
                 StatusBarNotification sbn = (StatusBarNotification) XposedHelpers.getObjectField(entry, "notification");
