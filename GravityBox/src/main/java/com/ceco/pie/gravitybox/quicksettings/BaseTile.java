@@ -31,6 +31,7 @@ import com.ceco.pie.gravitybox.quicksettings.QsTileEventDistributor.QsEventListe
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
@@ -279,6 +280,26 @@ public abstract class BaseTile implements QsEventListener {
             TextView label = (TextView) XposedHelpers.getObjectField(tileView, "mLabel");
             mStockLayout.labelTextSizePx = label.getTextSize();
             updateTileViewLayout();
+        }
+    }
+
+    @Override
+    public void onViewHandleStateChanged(View tileView, Object state) {
+        try {
+            final boolean dualTarget = XposedHelpers.getBooleanField(state, "dualTarget");
+            View v = (View) XposedHelpers.getObjectField(tileView, "mExpandIndicator");
+            if (v != null) v.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
+            v = (View) XposedHelpers.getObjectField(tileView, "mExpandSpace");
+            if (v != null) v.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
+            v = (View) XposedHelpers.getObjectField(tileView, "mLabelContainer");
+            if (v != null && dualTarget != v.isClickable()) {
+                v.setClickable(dualTarget);
+                v.setLongClickable(dualTarget);
+                v.setBackground((Drawable) (dualTarget ? XposedHelpers.callMethod(
+                                        tileView, "newTileBackground") : (Drawable)null));
+            }
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
         }
     }
 

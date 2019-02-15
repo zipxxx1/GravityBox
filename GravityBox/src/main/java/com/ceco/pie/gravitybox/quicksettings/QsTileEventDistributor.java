@@ -53,6 +53,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         void onKeyguardStateChanged();
         boolean supportsHideOnChange();
         void onViewConfigurationChanged(View tileView, Configuration config);
+        void onViewHandleStateChanged(View tileView, Object state);
         void handleClick();
         boolean handleLongClick();
         void handleUpdateState(Object state, Object arg);
@@ -244,6 +245,18 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                     if (l != null) {
                         l.onViewConfigurationChanged((View)param.thisObject,
                                 (Configuration)param.args[0]);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "handleStateChanged",
+                    BaseTile.CLASS_TILE_STATE, new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        l.onViewHandleStateChanged((View)param.thisObject, param.args[0]);
                     }
                 }
             });
