@@ -267,10 +267,6 @@
     <string name="pref_statusbar_icon_color_title">Colore della barra di stato</string>
     <string name="pref_statusbar_icon_color_summary">Imposta il colore per le icone e orologio</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Colore Attività dati</string>
-    <string name="pref_statusbar_data_activity_color_summary">Imposta colore per indicatori Attività dati</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Gestione del QuickSetting</string>
 
@@ -587,8 +583,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Colore segnale sim2</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Sovrascrivi il colore predefinito arancione dell\'icona</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Colore icona dati sim2</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Imposta colore icone dati sim2</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Stile icone barra di stato</string>
@@ -713,11 +707,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Pulsanti personalizzati</string>
     <string name="pref_navbar_custom_key_enable_title">Abilita pulsanti personalizzati</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Indicatori segnale</string>
-    <string name="pref_signal_cluster_data_activity_title">Mostra attività dati</string>
-    <string name="pref_signal_cluster_data_activity_summary">Indica attività dati su rete mobile o WiFi (richiede riavvio)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Rotazione automatica on/off</string>
@@ -1186,16 +1175,6 @@
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Ore Notturne on/off</string>
 
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">Abilita indicatore H+</string>
-    <string name="pref_signal_cluster_hplus_summary">Richiede riavvio</string>
-
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">Stile indicatore LTE</string>
-    <string name="sc_lte_style_default">Predefinito</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">Modalità aereo on/off</string>
  
@@ -1565,10 +1544,6 @@
     <string name="pref_battery_saver_indication_disable_summary">Disabilita il colore arancione delle barre di sistema
          quando il risparmio della batteria è attivo</string>
 
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Disabilita punti esclamativi</string>
-    <string name="pref_signal_cluster_dem_summary">Richiede il riavvio</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Disattiva la conversione del suono in vibrazione</string>
     <string name="pref_lc_sound_vibrate_summary">Impedisce alle notifiche di disattivare le vibrazioni
@@ -1599,14 +1574,6 @@
 
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Settaggio della icona del BlueTooth</string>
-
-    <!-- MTK: disable network type indicators -->
-    <string name="pref_signal_cluster_dnti_title">Disabilita l\'indicazione del tipo di rete</string>
-    <string name="pref_signal_cluster_dnti_summary">Richiede il riavvio</string>
-
-    <!-- Signal cluster: Disable "No SIM" icon -->
-    <string name="pref_signal_cluster_nosim_title">Disabilita l\'icona \"No SIM\" </string>
-    <string name="pref_signal_cluster_nosim_summary">Richiede il riavvio</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Politica dello sblocco diretto</string>
@@ -1965,10 +1932,6 @@
     <!-- Error logging -->
     <string name="pref_log_errors_title">Registrazione errori</string>
     <string name="pref_log_errors_summary">Registra tutti gli errori nel registro Xposed quando abilitato (richiede il riavvio)</string>
-
-    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
-    <string name="pref_signal_cluster_aosp_mobile_type_title">Usa le icone di tipo mobile AOSP</string>
-    <string name="pref_signal_cluster_aosp_mobile_type_summary">Richiede il riavvio</string>
 
     <!-- Notification channels -->
     <string name="notif_channel_services_title">Servizi</string>

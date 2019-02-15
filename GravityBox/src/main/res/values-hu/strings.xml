@@ -269,10 +269,6 @@
     <string name="pref_statusbar_icon_color_title">Állapotsáv ikon színe</string>
     <string name="pref_statusbar_icon_color_summary">Beállítja az állapotsáv ikonok és az óra színét</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Adattevékenység színe</string>
-    <string name="pref_statusbar_data_activity_color_summary">Beállítja az adattevékenység kijelzők színét</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Gyorsbeállítások menedzsment</string>
 
@@ -588,8 +584,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Másodlagos SIM jelerősség színe</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Felülírja a gyári sárga jelerősség ikonszínt</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Másodlagos SIM adattevékenység színe</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Beállítja a másodlagos adattevékenység jelzőikonok színét</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Állapot ikon stílus</string>
@@ -713,11 +707,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Egyedi gomb (alkalmazásindító) beállítások</string>
     <string name="pref_navbar_custom_key_enable_title">Egyedi gomb engedélyezése</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Jelszint csoport beállítások</string>
-    <string name="pref_signal_cluster_data_activity_title">Adat aktivitás engedélyezése</string>
-    <string name="pref_signal_cluster_data_activity_summary">Kijelzi az adatforgalom aktivitást a mobil és WiFi ikonokon (újraindítás szükséges)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Automata elforgatás ki-bekapcsolása</string>
@@ -1174,16 +1163,6 @@
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Csendes Időszak ki-bekapcsolása</string>
 
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">H+ mutató engedélyezése</string>
-    <string name="pref_signal_cluster_hplus_summary">Újraindítás szükséges</string>
-
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">LTE mutató stílusa</string>
-    <string name="sc_lte_style_default">Rendszer alapértelmezett</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">Repülőgép üzemmód ki-bekapcsolása</string>
 
@@ -1535,10 +1514,6 @@
     <string name="pref_battery_saver_indication_disable_title">Akkukímélés kijelzés letiltása</string>
     <string name="pref_battery_saver_indication_disable_summary">Letiltja a rendszer sávok sárga színezését aktív akkukímélés esetén</string>
 
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Felkiáltójelek letiltása</string>
-    <string name="pref_signal_cluster_dem_summary">Újraindítás szükséges</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Hang rezgésre átalakítás tiltása</string>
     <string name="pref_lc_sound_vibrate_summary">Megakadályozza azon értesítések rezgő visszajelzését, amelyeknél a rezgés le van tiltva, de az Android ezt mégis kényszerítetten használja a csak rezgésre beállított csengés üzemmód alatti értesítési hang rezgésre konvertálása miatt.</string>
@@ -1568,14 +1543,6 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">BlueTooth csempe beállítások</string>
 
-    <!-- MTK: disable network type indicators -->
-    <string name="pref_signal_cluster_dnti_title">Hálózat típusa jelzőikonok letiltása</string>
-    <string name="pref_signal_cluster_dnti_summary">Újraindítás szükséges</string>
-
-    <!-- Signal cluster: Disable "No SIM" icon -->
-    <string name="pref_signal_cluster_nosim_title">\"Nincs SIM kártya\" ikon letiltása</string>
-    <string name="pref_signal_cluster_nosim_summary">Újraindítás szükséges</string>
-    
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Direkt feloldási házirend</string>
     
@@ -1924,10 +1891,6 @@
     <string name="pref_log_errors_title">Hibanaplózás</string>
     <string name="pref_log_errors_summary">Naplózza az összes hibát az Xposed naplóba, ha engedélyezve van (újraindítás szükséges)</string>
 
-    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
-    <string name="pref_signal_cluster_aosp_mobile_type_title">AOSP mobil ikon típus használata</string>
-    <string name="pref_signal_cluster_aosp_mobile_type_summary">Újraindítás szükséges</string>
-	
     <!-- Notification channels -->
     <string name="notif_channel_services_title">Szolgáltatások</string>
     <string name="notif_channel_services_desc">Az előtérben lévő szolgáltatások értesítéséhez, mint pl. a Zseblámpa és Képernyő videofelvétel</string>

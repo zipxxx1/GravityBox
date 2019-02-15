@@ -269,10 +269,6 @@
     <string name="pref_statusbar_icon_color_title">状态栏图标颜色</string>
     <string name="pref_statusbar_icon_color_summary">设置状态栏图标和时钟的颜色</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">数据活动颜色</string>
-    <string name="pref_statusbar_data_activity_color_summary">设置数据活动指示器的颜色</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">管理快速设置</string>
 
@@ -588,9 +584,7 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">第二个信号颜色</string>
     <string name="pref_statusbar_icon_color_secondary_summary">覆盖原厂橙色信号图标</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">第二个数据活动颜色</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">设置为辅助数据活动的指示颜色</string>
-    
+
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">状态栏图标风格</string>
     <string name="pref_status_icon_style_summary">适用于无声、振动、闹钟等状态图标</string>
@@ -715,11 +709,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">自定义键设置</string>
     <string name="pref_navbar_custom_key_enable_title">启用自定义键</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">信号活动设置</string>
-    <string name="pref_signal_cluster_data_activity_title">启用数据活动</string>
-    <string name="pref_signal_cluster_data_activity_summary">在移动和WiFi图标上显示数据活动（需要重新启动）</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">切换自动旋转</string>
@@ -1186,16 +1175,6 @@
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">切换静音时段</string>
 
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">启用H+指示器</string>
-    <string name="pref_signal_cluster_hplus_summary">需要重新启动</string>
-
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">LTE的指示器风格</string>
-    <string name="sc_lte_style_default">系统默认</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-    
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">切换飞行模式</string>
 
@@ -1565,10 +1544,6 @@
     <string name="pref_battery_saver_indication_disable_summary">当省电模式已激活
         禁用系统栏橙色</string>
 
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">关闭惊叹号</string>
-    <string name="pref_signal_cluster_dem_summary">需要重新启动</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">禁用转换声音时振动</string>
     <string name="pref_lc_sound_vibrate_summary">通知关闭时防止振动,只在铃声模式时才振动</string>
@@ -1599,14 +1574,6 @@
 
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">蓝牙磁贴设置</string>
-
-    <!-- MTK: disable network type indicators -->
-    <string name="pref_signal_cluster_dnti_title">禁用网络类型指示器</string>
-    <string name="pref_signal_cluster_dnti_summary">需要重新启动</string>
-
-    <!-- Signal cluster: Disable "No SIM" icon -->
-    <string name="pref_signal_cluster_nosim_title">关闭\"无SIM\"图标</string>
-    <string name="pref_signal_cluster_nosim_summary">需要重新启动</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">直接解锁策略</string>
@@ -1967,9 +1934,6 @@
     <string name="pref_log_errors_title">错误日志</string>
     <string name="pref_log_errors_summary">启用后所有错误将记录到Xposed日志(需要重新启动)</string>
 	
-    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
-    <string name="pref_signal_cluster_aosp_mobile_type_title">使用AOSP移动类型图标</string>
-    <string name="pref_signal_cluster_aosp_mobile_type_summary">需要重新启动</string>
 
     <!-- Notification channels -->
     <string name="notif_channel_services_title">服务</string>

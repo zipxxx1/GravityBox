@@ -214,9 +214,6 @@
     <string name="pref_statusbar_icon_color_title">상단바 아이콘 색깔</string>
     <string name="pref_statusbar_icon_color_summary">상단바의 아이콘과 시계에서 사용될 색깔을 설정합니다.</string>
 
-    <string name="pref_statusbar_data_activity_color_title">데이터 활동 표시기 색깔</string>
-    <string name="pref_statusbar_data_activity_color_summary">데이터 활동 표시기의 색깔을 설정합니다.</string>
-
     <string name="pref_cat_statusbar_qs_title">퀵세팅 관리</string>
 
     <string name="pref_cat_notification_drawer_style_title">알림 패널 배경화면 스타일</string>
@@ -465,8 +462,6 @@
 
     <string name="pref_statusbar_icon_color_secondary_title">2차 신호 표시기 색깔</string>
     <string name="pref_statusbar_icon_color_secondary_summary">순정 오렌지 색깔 대신 사용자 색깔로 덮어씁니다.</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">2차 데이터 활동 표시기 색깔</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">2차 데이터 활동 아이콘 색깔을 사용자 색깔로 덮어씁니다.</string>
 
     <string name="pref_status_icon_style_title">상단바 아이콘 스타일</string>
     <string name="pref_status_icon_style_summary">상단바의 주요 아이콘들의 스타일을 바꿉니다.</string>
@@ -565,10 +560,6 @@
 
     <string name="pref_cat_navbar_custom_key_title">사용자 키 설정</string>
     <string name="pref_navbar_custom_key_enable_title">사용자 키 활성화</string>
-
-    <string name="pref_cat_signal_cluster_title">신호 클러스터 설정</string>
-    <string name="pref_signal_cluster_data_activity_title">데이터 활동 표시</string>
-    <string name="pref_signal_cluster_data_activity_summary">모바일 데이터와 Wi-Fi의 데이터 활동 상태를 표시합니다. (재시작 필요)</string>
 
     <string name="hwkey_action_auto_rotation">자동 회전</string>
     <string name="hwkey_action_auto_rotation_enabled">자동 회전 활성화</string>
@@ -951,14 +942,6 @@
 
     <string name="shortcut_quiet_hours_toggle">무음 모드 토글</string>
 
-    <string name="pref_signal_cluster_hplus_title">H+ 아이콘 표시</string>
-    <string name="pref_signal_cluster_hplus_summary">재시작 필요</string>
-
-    <string name="pref_signal_cluster_lte_style_title">LTE 아이콘 스타일</string>
-    <string name="sc_lte_style_default">시스템 기본값</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-
     <string name="shortcut_airplane_mode">비행기 모드 토글</string>
 
     <string name="pref_sb_bt_visibility_title">블루투스 아이콘 보이기</string>
@@ -1236,9 +1219,6 @@
     <string name="pref_battery_saver_indication_disable_title">배터리 절약 기능 표시 비활성화</string>
     <string name="pref_battery_saver_indication_disable_summary">배터리 절약 기능이 실행되었을 때 시스템 바의 
         배경 색깔을 바꾸지 않습니다.</string>
-
-    <string name="pref_signal_cluster_dem_title">경고(느낌표) 표시 비활성화</string>
-    <string name="pref_signal_cluster_dem_summary">재시작이 필요합니다.</string>
 
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">퀵세팅 패널 확장</string>

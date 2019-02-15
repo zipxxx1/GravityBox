@@ -263,10 +263,6 @@
     <string name="pref_statusbar_icon_color_title">Màu biểu tượng trên thanh trạng thái</string>
     <string name="pref_statusbar_icon_color_summary">Đặt màu cho đồng hồ và các biểu tượng trên thanh trạng thái</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Màu khi dữ liệu bật</string>
-    <string name="pref_statusbar_data_activity_color_summary">Đặt màu khi dữ liệu mạng bật</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Quản lý Cài đặt nhanh</string>
 
@@ -582,8 +578,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Màu cột sóng thứ hai</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Bỏ qua biểu tượng cột sóng gốc màu cam</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Màu khi bật dữ liệu mạng của sim 2</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Đặt màu khi dữ liệu mạng của sim 2 được bật</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Kiểu biểu tượng trạng thái</string>
@@ -708,11 +702,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Cài đặt phím cá nhân</string>
     <string name="pref_navbar_custom_key_enable_title">Cho phép phím cá nhân</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Cài đặt cụm cột sóng</string>
-    <string name="pref_signal_cluster_data_activity_title">Kích hoạt hoạt động dữ liệu</string>
-    <string name="pref_signal_cluster_data_activity_summary">Hiện mũi tên trên biểu tượng điện thoại và Wifi (cần khởi động lại)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Toggle tự động xoay</string>
@@ -1179,16 +1168,6 @@
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Toggle Giờ im lặng</string>
 
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">Hiển thị H+</string>
-    <string name="pref_signal_cluster_hplus_summary">Cần khởi động lại</string>
-
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">Kiểu hiển thị LTE</string>
-    <string name="sc_lte_style_default">Mặc định</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">Toggle chế độ máy bay</string>
 
@@ -1550,10 +1529,6 @@
     <string name="pref_battery_saver_indication_disable_summary">Tắt thanh màu da cam 
         khi bật c.độ tiết kiệm pin</string>
 
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Ẩn dấu chấm than</string>
-    <string name="pref_signal_cluster_dem_summary">Cần khởi động lại</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Tắt âm để chuyển sang rung</string>
     <string name="pref_lc_sound_vibrate_summary">Ngăn các thông báo đã tắt rung khỏi 
@@ -1579,14 +1554,6 @@
 
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Cài đặt tile Bluetooth</string>
-
-    <!-- MTK: disable network type indicators -->
-    <string name="pref_signal_cluster_dnti_title">Tắt chỉ thị loại mạng</string>
-    <string name="pref_signal_cluster_dnti_summary">Cần khởi động lại</string>
-
-    <!-- Signal cluster: Disable "No SIM" icon -->
-    <string name="pref_signal_cluster_nosim_title">Ẩn biểu tượng không có sim</string>
-    <string name="pref_signal_cluster_nosim_summary">Cần khởi động lại</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Chính sách mở khóa nhanh</string>

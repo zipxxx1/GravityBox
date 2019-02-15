@@ -263,10 +263,6 @@
     <string name="pref_statusbar_icon_color_title">Color de los iconos</string>
     <string name="pref_statusbar_icon_color_summary">Establece un color para los iconos y el reloj de la barra de estado</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Color de actividad de datos de red</string>
-    <string name="pref_statusbar_data_activity_color_summary">Establece un color para el indicador de actividad de datos de red</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Gestión de ajustes rápidos</string>
 
@@ -582,8 +578,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Color de señal de la segunda SIM</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Sobreescribe el icono de señal anaranjado predeterminado</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Color de actividad de datos de la segunda SIM</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Establece un color para los indicadores de actividad de datos de la segunda SIM</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Estilo de icono de estado</string>
@@ -708,11 +702,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Ajustes de botón personalizado</string>
     <string name="pref_navbar_custom_key_enable_title">Activar botón personalizado</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Ajustes de señal de red</string>
-    <string name="pref_signal_cluster_data_activity_title">Activar indicadores de actividad de datos</string>
-    <string name="pref_signal_cluster_data_activity_summary">Indica la actividad de datos en los iconos de señal y WiFi (requiere reinicio)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Alternar rotación automática</string>
@@ -1178,17 +1167,7 @@
         
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Activar/desactivar horas tranquilas</string>
-    
-     <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">Activar indicador H+</string>
-    <string name="pref_signal_cluster_hplus_summary">Requiere reinicio</string>
-    
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">Estilo del indicador LTE</string>
-    <string name="sc_lte_style_default">Predeterminado</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-    
+
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">Activar/desactivar modo avión</string>
     
@@ -1550,10 +1529,6 @@
     <string name="pref_battery_saver_indication_disable_summary">Desactivar color naranja de la barra del sistema 
         cuando el indicador de ahorro de batería está activo</string>
 
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Desactivar signos de exclamación</string>
-    <string name="pref_signal_cluster_dem_summary">Requiere reinicio</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Desactivar la conversión de sonido a vibraciones</string>
     <string name="pref_lc_sound_vibrate_summary">Evita que las notificaciones con vibración desactivada
@@ -1581,15 +1556,6 @@
     <string name="pref_cat_qs_bt_tile_title">Celda ajustes Bluetooth</string>
 
     <!-- MTK tiles: HotKnot -->
-
-
-    <!-- MTK: disable network type indicators -->
-    <string name="pref_signal_cluster_dnti_title">Desactivar los indicadores de tipo de red</string>
-    <string name="pref_signal_cluster_dnti_summary">Requiere reinicio</string>
-
-    <!-- Signal cluster: Disable "No SIM" icon -->
-    <string name="pref_signal_cluster_nosim_title">Desactivar icino \"Sin SIM\"</string>
-    <string name="pref_signal_cluster_nosim_summary">Requiere reinicio</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Política de desbloqueo directo</string>

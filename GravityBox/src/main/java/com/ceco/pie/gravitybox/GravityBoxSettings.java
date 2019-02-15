@@ -198,9 +198,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_STATUSBAR_ICON_COLOR = "pref_statusbar_icon_color";
     public static final String PREF_KEY_STATUS_ICON_STYLE = "pref_status_icon_style";
     public static final String PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY = "pref_statusbar_icon_color_secondary";
-    public static final String PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR = "pref_signal_cluster_data_activity_color";
-    public static final String PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY = 
-            "pref_signal_cluster_data_activity_color_secondary";
     public static final String PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE = "pref_statusbar_signal_color_mode";
     public static final String PREF_KEY_STATUSBAR_CENTER_CLOCK = "pref_statusbar_center_clock";
     public static final String PREF_KEY_STATUSBAR_CLOCK_SHOW_SECONDS = "pref_statusbar_clock_show_seconds";
@@ -536,8 +533,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_SB_ICON_COLOR = "iconColor";
     public static final String EXTRA_SB_ICON_STYLE = "iconStyle";
     public static final String EXTRA_SB_ICON_COLOR_SECONDARY = "iconColorSecondary";
-    public static final String EXTRA_SB_DATA_ACTIVITY_COLOR = "dataActivityColor";
-    public static final String EXTRA_SB_DATA_ACTIVITY_COLOR_SECONDARY = "dataActivityColorSecondary";
     public static final String EXTRA_SB_SIGNAL_COLOR_MODE = "signalColorMode";
 
     public static final String ACTION_PREF_QUICKSETTINGS_CHANGED = "gravitybox.intent.action.QUICKSETTINGS_CHANGED";
@@ -684,14 +679,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS = "pref_launcher_desktop_grid_cols";
     public static final String PREF_KEY_LAUNCHER_RESIZE_WIDGET = "pref_launcher_resize_widget";
 
-    public static final String PREF_CAT_KEY_SIGNAL_CLUSTER = "pref_cat_signal_cluster";
-    public static final String PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY = "pref_signal_cluster_data_activity";
-    public static final String PREF_KEY_SIGNAL_CLUSTER_HPLUS = "pref_signal_cluster_hplus";
-    public static final String PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE = "pref_signal_cluster_lte_style";
-    public static final String PREF_KEY_SIGNAL_CLUSTER_DEM = "pref_signal_cluster_dem";
-    public static final String PREF_KEY_SIGNAL_CLUSTER_DNTI = "pref_signal_cluster_dnti";
-    public static final String PREF_KEY_SIGNAL_CLUSTER_NOSIM = "pref_signal_cluster_nosim";
-    public static final String PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE = "pref_signal_cluster_aosp_mobile_type";
     public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
 
     public static final String PREF_KEY_SMART_RADIO_ENABLE = "pref_smart_radio_enable";
@@ -896,23 +883,16 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_NAVBAR_ENABLE,
             PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
             PREF_KEY_QUICK_SETTINGS_ENABLE,
-            PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY,
             PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON,
             PREF_KEY_SMART_RADIO_ENABLE,
             PREF_KEY_PULSE_NOTIFICATION_DELAY,
             PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH,
-            PREF_KEY_SIGNAL_CLUSTER_HPLUS,
-            PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE,
             PREF_KEY_FORCE_LTR_DIRECTION,
             PREF_KEY_HEADS_UP_MASTER_SWITCH,
             PREF_KEY_SAFE_MEDIA_VOLUME,
-            PREF_KEY_SIGNAL_CLUSTER_DEM,
-            PREF_KEY_SIGNAL_CLUSTER_DNTI,
-            PREF_KEY_SIGNAL_CLUSTER_NOSIM,
             PREF_KEY_BATTERY_PERCENT_TEXT_POSITION,
             PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE,
             PREF_KEY_LOG_ERRORS,
-            PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE,
             PREF_KEY_BATTERY_TWEAKS_ENABLED,
             PREF_KEY_VISUALIZER_ENABLE,
             PREF_KEY_CORNER_PADDING_REMOVE,
@@ -1289,7 +1269,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private ListPreference mPrefPhoneFlip;
         private SwitchPreference mPrefSbIconColorEnable;
         private ColorPickerPreference mPrefSbIconColor;
-        private ColorPickerPreference mPrefSbDaColor;
         private PreferenceScreen mPrefCatStatusbar;
         private PreferenceScreen mPrefCatStatusbarQs;
         //private ListPreference mPrefAutoSwitchQs;
@@ -1365,7 +1344,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private Preference mPrefCallerUnknownPhoto;
         private PreferenceScreen mPrefCatStatusbarColors;
         private ColorPickerPreference mPrefSbIconColorSecondary;
-        private ColorPickerPreference mPrefSbDaColorSecondary;
         private ListPreference mPrefHwKeyLockscreenTorch;
         private PreferenceCategory mPrefCatHwKeyOthers;
         private PreferenceCategory mPrefCatLsOther;
@@ -1386,12 +1364,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private Preference mPrefRestore;
         private EditTextPreference mPrefTransVerification;
         private ListPreference mPrefScreenrecordSize;
-        private PreferenceScreen mPrefCatSignalCluster;
         private PreferenceScreen mPrefCatQsTileSettings;
         private PreferenceScreen mPrefCatQsNmTileSettings;
         private Preference mPrefLedControl;
         private EditTextPreference mPrefVkVibratePattern;
-        private ListPreference mPrefScLteStyle;
         private ListPreference mPrefSbBtVisibility;
         private AppPickerPreference mPrefCustomApp;
         private ListPreference mPrefChargingLed;
@@ -1498,7 +1474,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             mPrefSbIconColorEnable = (SwitchPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE);
             mPrefSbIconColor = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR);
-            mPrefSbDaColor = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR);
             mPrefSbSignalColorMode = (ListPreference) findPreference(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE);
 
             mPrefCatStatusbar = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR);
@@ -1613,7 +1588,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             }
 
             mPrefSbIconColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY);
-            mPrefSbDaColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY);
 
             mPrefCatLsOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_OTHER);
             mPrefLsRotation = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_ROTATION);
@@ -1653,15 +1627,11 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             mPrefScreenrecordSize = (ListPreference) findPreference(PREF_KEY_SCREENRECORD_SIZE);
 
-            mPrefCatSignalCluster = (PreferenceScreen) findPreference(PREF_CAT_KEY_SIGNAL_CLUSTER);
-
             mPrefLedControl = findPreference(PREF_LED_CONTROL);
 
             // TODO: Virtual key vibrate pattern
             //mPrefVkVibratePattern = (EditTextPreference) findPreference(PREF_KEY_VK_VIBRATE_PATTERN);
             //mPrefVkVibratePattern.setOnPreferenceChangeListener(this);
-
-            mPrefScLteStyle = (ListPreference) findPreference(PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE);
 
             mPrefSbBtVisibility = (ListPreference) findPreference(PREF_KEY_STATUSBAR_BT_VISIBILITY);
 
@@ -1742,21 +1712,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 if (!sSystemProperties.hasMsimSupport) {
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                 }
-                mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
-                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DNTI);
-                if (p != null) {
-                    mPrefCatSignalCluster.removePreference(p);
-                }
             } else {
-                Preference hPlusPref = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
-                if (hPlusPref != null) {
-                    mPrefCatSignalCluster.removePreference(hPlusPref);
-                }
                 mPrefCatLsOther.removePreference(mPrefLsRotation);
-                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DEM);
-                if (p != null) {
-                    mPrefCatSignalCluster.removePreference(p);
-                }
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {
                     mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
@@ -1764,12 +1721,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 if (!sSystemProperties.hasGeminiSupport && !sSystemProperties.hasMsimSupport) {
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                 }
-            }
-
-            // Remove Non-Moto XT preferences
-            if (!Utils.isMotoXtDevice()) {
-                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE);
-                if (p != null) mPrefCatSignalCluster.removePreference(p);
             }
 
             // Remove MSIM preferences for non-MSIM devices
@@ -1780,12 +1731,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             // Remove Xperia preferences
             if (Utils.isXperiaDevice()) {
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
-                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_NOSIM);
-                if (p != null) mPrefCatSignalCluster.removePreference(p);
             }
-
-            // Features not relevant for KitKat but keep them for potential future use
-            mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
 
             // Remove more music volume steps option if necessary
             if (!Utils.shouldAllowMoreVolumeSteps()) {
@@ -1798,13 +1744,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (sSystemProperties.isOxygenOsRom) {
                 Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
                 if (p != null) mPrefCatLsOther.removePreference(p);
-                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY);
-                if (p != null) mPrefCatSignalCluster.removePreference(p);
-                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE);
-                if (p != null) mPrefCatSignalCluster.removePreference(p);
-                mPrefCatSignalCluster.removePreference(mPrefSbDaColor);
-                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
-                if (p != null) mPrefCatSignalCluster.removePreference(p);
                 mPrefCatPower.removePreference(mPrefCatPowerMenu);
                 p = findPreference(PREF_CAT_KEY_BATTERY_TILE);
                 if (p != null) mPrefCatQsTileSettings.removePreference(p);
@@ -2446,10 +2385,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefDataTrafficDisplayMode.setSummary(mPrefDataTrafficDisplayMode.getEntry());
             }
 
-            if (key == null || key.equals(PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE)) {
-                mPrefScLteStyle.setSummary(mPrefScLteStyle.getEntry());
-            }
-
             if (key == null || key.equals(PREF_KEY_STATUSBAR_BT_VISIBILITY)) {
                 mPrefSbBtVisibility.setSummary(mPrefSbBtVisibility.getEntry());
             }
@@ -2704,16 +2639,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.putExtra(EXTRA_SB_ICON_COLOR_SECONDARY, 
                         prefs.getInt(PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY, 
                         getResources().getInteger(R.integer.COLOR_HOLO_BLUE_LIGHT)));
-            } else if (key.equals(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR)) {
-                intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
-                intent.putExtra(EXTRA_SB_DATA_ACTIVITY_COLOR,
-                        prefs.getInt(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR, 
-                        getResources().getInteger(R.integer.signal_cluster_data_activity_icon_color)));
-            } else if (key.equals(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY)) {
-                intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
-                intent.putExtra(EXTRA_SB_DATA_ACTIVITY_COLOR_SECONDARY,
-                        prefs.getInt(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, 
-                        getResources().getInteger(R.integer.signal_cluster_data_activity_icon_color)));
             } else if (key.equals(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_SIGNAL_COLOR_MODE,

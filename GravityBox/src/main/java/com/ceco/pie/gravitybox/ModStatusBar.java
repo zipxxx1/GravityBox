@@ -132,7 +132,6 @@ public class ModStatusBar {
     private static GestureDetector mGestureDetector;
     private static boolean mDt2sEnabled;
     private static long[] mCameraVp;
-    private static StatusbarSignalCluster mSignalClusterSb;
     private static BatteryStyleController mBatteryStyleCtrlSb;
     private static StatusbarQuietHoursView mQhViewSb;
     private static BatteryBarView mBatteryBarViewSb;
@@ -275,11 +274,6 @@ public class ModStatusBar {
 
     public static void initResources(final XSharedPreferences prefs, final XSharedPreferences tunerPrefs,
                                      final InitPackageResourcesParam resparam) {
-        try {
-            StatusbarSignalCluster.initResources(prefs, resparam);
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CORNER_PADDING_REMOVE, false)) {
             try {
@@ -439,48 +433,6 @@ public class ModStatusBar {
             TrafficMeterMode mode = TrafficMeterMode.valueOf(
                     mPrefs.getString(GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_MODE, "OFF"));
             setTrafficMeterMode(mode);
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
-    }
-
-    private static void prepareSignalCluster(ContainerType containerType) {
-        try {
-            Resources res = mContext.getResources();
-            int scResId = res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
-            ViewGroup container = null;
-            switch (containerType) {
-                case STATUSBAR:
-                    container = mStatusBarView;
-                    break;
-                case KEYGUARD:
-                    container = (ViewGroup) XposedHelpers.getObjectField(
-                            mStatusBar, "mKeyguardStatusBar");
-                    break;
-                default: break;
-            }
-            if (container != null && scResId != 0) {
-                LinearLayout view = container.findViewById(scResId);
-                if (view != null) {
-                    StatusbarSignalCluster sc = StatusbarSignalCluster.create(containerType, view, mPrefs);
-                    if (containerType == ContainerType.STATUSBAR) {
-                        if (mSignalClusterSb != null) {
-                            mBroadcastSubReceivers.remove(mSignalClusterSb);
-                            mSignalClusterSb.destroy();
-                            if (DEBUG) log("prepareSignalCluster: old signal cluster destroyed");
-                        }
-                        mSignalClusterSb = sc;
-                    }
-                    mBroadcastSubReceivers.add(sc);
-                    if (sc.supportsDataActivityIndicators()) {
-                        sc.setNetworkController(XposedHelpers.getObjectField(
-                                mStatusBar, "mNetworkController"));
-                    }
-                    if (DEBUG) log("SignalClusterView constructed for: " + containerType);
-                }
-            } else if (DEBUG) {
-                log("signal_cluster not found in container type: " + containerType);
-            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -661,10 +613,6 @@ public class ModStatusBar {
             mDt2sEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DT2S, false);
             setCameraVibratePattern(prefs.getString(GravityBoxSettings.PREF_KEY_POWER_CAMERA_VP, null));
 
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DEM, false)) {
-                StatusbarSignalCluster.disableSignalExclamationMarks(classLoader);
-            }
-
             XposedBridge.hookAllConstructors(phoneStatusBarPolicyClass, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
@@ -685,7 +633,6 @@ public class ModStatusBar {
                     }
 
                     prepareLayoutKeyguard();
-                    prepareSignalCluster(ContainerType.KEYGUARD);
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TWEAKS_ENABLED, true)) {
                         prepareBatteryStyle(ContainerType.KEYGUARD);
                     }
@@ -738,7 +685,6 @@ public class ModStatusBar {
                     }
                     mStatusBarView = (ViewGroup) param.thisObject;
                     prepareLayoutStatusBar();
-                    prepareSignalCluster(ContainerType.STATUSBAR);
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TWEAKS_ENABLED, true)) {
                         prepareBatteryStyle(ContainerType.STATUSBAR);
                     }

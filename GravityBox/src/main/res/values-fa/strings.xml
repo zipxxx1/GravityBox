@@ -179,8 +179,6 @@
 <string name="pref_statusbar_icon_color_enable_title">تنظیم رنگ شخصی برای آیکون‌ها</string>
 <string name="pref_statusbar_icon_color_title">رنگ آیکون‌های نوار وضعیت</string>
 <string name="pref_statusbar_icon_color_summary">تنظیم رنگ برای آیکون‌های نوار وضعیت و ساعت</string>
-<string name="pref_statusbar_data_activity_color_title">رنگ شاخص داده‌های همراه فعال</string>
-<string name="pref_statusbar_data_activity_color_summary">تنظیم رنگ شاخص داده‌های همراه فعال</string>
 <string name="pref_cat_statusbar_qs_title">مدیریت تنظیمات سریع</string>
 <string name="pref_cat_notification_drawer_style_title">سبک کشو اطلاع‌رسانی</string>
 <string name="pref_disable_roaming_indicators_title">غیرفعالسازی شاخص رومینگ</string>
@@ -370,8 +368,6 @@
 <string name="pref_navbar_key_glow_color_title">رنگ درخشندگی کلیدهای ناوبری</string>
 <string name="pref_statusbar_icon_color_secondary_title">رنگ دومین نماد سیگنال</string>
 <string name="pref_statusbar_icon_color_secondary_summary">نادیده گرفتن نماد پیشفرض نارنجی رنگ سیگنال</string>
-<string name="pref_statusbar_data_activity_color_secondary_title">"رنگ دومین نماد فعالیت داده‌ها "</string>
-<string name="pref_statusbar_data_activity_color_secondary_summary">انتخاب رنگ برای دومین نماد شاخص داده‌های فعال</string>
 <string name="pref_status_icon_style_title">سبک آیکون وضعیت</string>
 <string name="pref_status_icon_style_summary">اعمال کردن بر روی آیکون‌های سایلنت ، ویبره ، آلارم و غیره</string>
 <string name="icon_style_jb">جلی‌بین</string>
@@ -445,9 +441,6 @@
 <string name="inactivity_mode_summary">نمایش خلاصه و پنهان‌سازی در زمان عدم فعالیت</string>
 <string name="pref_cat_navbar_custom_key_title">تنظیمات کلید شخصی</string>
 <string name="pref_navbar_custom_key_enable_title">"فعالسازی کلید شخصی "</string>
-<string name="pref_cat_signal_cluster_title">تنظیمات شاخص‌ داده‌ها</string>
-<string name="pref_signal_cluster_data_activity_title">نمایش فعالیت داده‌های همراه</string>
-<string name="pref_signal_cluster_data_activity_summary">نمایش نماد شاخص وضعیت آپلود و دانلود داده‌ها بروی آیکون وای‌فای و سیگنال شبکه(نیازمند راه‌اندازی مجدد)</string>
 <string name="hwkey_action_auto_rotation">"چرخش خودکار صفحه نمایش "</string>
 <string name="hwkey_action_auto_rotation_enabled">چرخش خودکار فعال شد</string>
 <string name="hwkey_action_auto_rotation_disabled">چرخش خودکار غیرفعال شد</string>
@@ -747,12 +740,6 @@
 <string name="pref_lc_qh_ignore_list_title">برای کلمات کلیدی خاص</string>
 <string name="pref_lc_qh_ignore_list_summary">Comma separated list of keywords for which to ignore Quiet hours. Leave empty for all notifications.</string>
 <string name="shortcut_quiet_hours_toggle">سوئیچ وضعیت ساعات آرامش</string>
-<string name="pref_signal_cluster_hplus_title">فعالسازی شاخص H+</string>
-<string name="pref_signal_cluster_hplus_summary">نیازمند راه‌اندازی مجدد</string>
-<string name="pref_signal_cluster_lte_style_title">سبک شاخص LTE</string>
-<string name="sc_lte_style_default">پیشفرض سیستم</string>
-<string name="sc_lte_style_lte">LTE</string>
-<string name="sc_lte_style_4g">4G</string>
 <string name="shortcut_airplane_mode">سوئیچ وضعیت حالت پرواز</string>
 <string name="pref_sb_bt_visibility_title">نمایش آیکون بلوتوث</string>
 <string name="sb_bt_default">هنگام فعال شدن بلوتوث (پیشفرض)</string>
@@ -964,8 +951,6 @@
 <string name="fahrenheit">فارنهایت</string>
 <string name="pref_battery_saver_indication_disable_title">غیرفعالسازی نشانگر ذخیره نیرو</string>
 <string name="pref_battery_saver_indication_disable_summary">غیرفعالسازی رنگ نارنجی برای نوار سیستم هنگام فعال بودن ذخیره نیرو</string>
-<string name="pref_signal_cluster_dem_title">غیرفعالسازی علامت تعجب</string>
-<string name="pref_signal_cluster_dem_summary">نیازمند راه‌اندازی مجدد</string>
 <string name="pref_lc_sound_vibrate_title">غیرفعالسازی مبدل صدا به لررش</string>
 <string name="pref_lc_sound_vibrate_summary">Prevents notifications having vibrations turned off from being forced to vibrate during vibrate-only ringer mode</string>
 <string name="pref_lc_qh_mute_system_vibe_title">غیرفعالسازی لرزش دستگاه</string>
@@ -979,10 +964,6 @@
 <string name="pref_pie_control_trigind_color_title">رنگ شاخص زبانه</string>
 <string name="pref_cat_qs_wifi_tile_title">تنظیمات کاشی وای‌فای</string>
 <string name="pref_cat_qs_bt_tile_title">تنظیمات کاشی بلوتوث</string>
-<string name="pref_signal_cluster_dnti_title">غیرفعالسازی شاخص نوع شبکه</string>
-<string name="pref_signal_cluster_dnti_summary">نیازمند راه‌اندازی مجدد</string>
-<string name="pref_signal_cluster_nosim_title">غیرفعالسازی آیکون \"No SIM\"</string>
-<string name="pref_signal_cluster_nosim_summary">نیازمند راه‌اندازی مجدد</string>
 <string name="pref_lockscreen_direct_unlock_policy_title">شرایط قفل گشایی مستقیم</string>
 <string name="permission_denied_msg">شما تصمیم به انسداد برخی از مجوزهای دسترسی دارید. توجه داشته باشید که اینکار سبب جلوگیری از بعضی عملکرد ها میشود.</string>
 <string name="permission_denied_hide_title">دوباره نشان نده</string>

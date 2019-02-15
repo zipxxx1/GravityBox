@@ -267,10 +267,6 @@
     <string name="pref_statusbar_icon_color_title">Цвет значков</string>
     <string name="pref_statusbar_icon_color_summary">Установка цвета для значков строки состояния и часов</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Цвет активности данных</string>
-    <string name="pref_statusbar_data_activity_color_summary">Установка цвета для индикаторов активности данных</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Быстрые настройки</string>
     
@@ -586,9 +582,7 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Цвет второго сигнала</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Замена стандартного оранжевого цвета значка</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Цвет активности данных</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Цвет для индикатора активности данных</string>
-    
+
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Стиль значков стр.состояния</string>
     <string name="pref_status_icon_style_summary">Применяется ко всем значкам строки состояния: беззвучный, вибрация, будильник и т.д.</string>
@@ -713,11 +707,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Пользовательская кнопка</string>
     <string name="pref_navbar_custom_key_enable_title">Включить польз. кнопку</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Настройки сигнала</string>
-    <string name="pref_signal_cluster_data_activity_title">Вкл активность данных</string>
-    <string name="pref_signal_cluster_data_activity_summary">Отображение активности данных в значках мобильного сигнала и Wi-Fi (необходима перезагрузка)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Включить автоповорот</string>
@@ -1184,16 +1173,6 @@
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Включение тихого часа</string>
 
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">Вкл индикатор H+</string>
-    <string name="pref_signal_cluster_hplus_summary">Необходима перезагрузка</string>
-
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">Стиль индикатора LTE</string>
-    <string name="sc_lte_style_default">Системный по умолчанию</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">Включение режима полёта</string>
 
@@ -1562,10 +1541,6 @@
     <string name="pref_battery_saver_indication_disable_summary">Отключение оранжевого цвета системных полос 
         при активности энергосбережения</string>
 
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Отключить восклиц. знаки</string>
-    <string name="pref_signal_cluster_dem_summary">Необходима перезагрузка</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Откл.конверсию звука в вибрацию</string>
     <string name="pref_lc_sound_vibrate_summary">Предотвращение вибрации уведомлений с ранее отключенной
@@ -1596,14 +1571,6 @@
 
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Плитка BlueTooth</string>
-
-    <!-- MTK: disable network type indicators -->
-    <string name="pref_signal_cluster_dnti_title">Отключение индикаторов типа сети</string>
-    <string name="pref_signal_cluster_dnti_summary">Необходима перезагрузка</string>
-
-    <!-- Signal cluster: Disable "No SIM" icon -->
-    <string name="pref_signal_cluster_nosim_title">Отключить значок \"Нет SIM\"</string>
-    <string name="pref_signal_cluster_nosim_summary">Необходима перезагрузка</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Политика отображения разблокировки</string>
@@ -1964,10 +1931,6 @@
     <!-- Error logging -->
     <string name="pref_log_errors_title">Логирование ошибок</string>
     <string name="pref_log_errors_summary">Логирование всех ошибок в журнале Xposed, если включено(необходима перезагрузка)</string>
-
-    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
-    <string name="pref_signal_cluster_aosp_mobile_type_title">Использование мобильных значков AOSP</string>
-    <string name="pref_signal_cluster_aosp_mobile_type_summary">Необходима перезагрузка</string>
 
     <!-- Notification channels -->
     <string name="notif_channel_services_title">Службы</string>

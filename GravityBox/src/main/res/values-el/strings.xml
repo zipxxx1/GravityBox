@@ -254,10 +254,6 @@
     <string name="pref_statusbar_icon_color_title">Χρώμα εικονιδίου γραμμής κατάστασης</string>
     <string name="pref_statusbar_icon_color_summary">Ορίζει το χρώμα των εικονιδίων της γραμμής κατάστασης και του ρολογιού</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Χρώμα κίνησης δεδομένων</string>
-    <string name="pref_statusbar_data_activity_color_summary">Ορίζει το χρώμα του δείκτη κίνησης δεδομένων</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Διαχείριση QuickSettings</string>
 
@@ -568,8 +564,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Χρώμα δευτερεύοντος σήματος</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Παρακάμπτει το πορτοκαλί εικονίδιο σήματος</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Χρώμα δευτερεύοντος δραστηριότητας δεδομένων</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">ορίζει το χρώμα για τους δείκτες δευτερεύοντος δραστηριότητας δεδομένων</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Τύπος εικονιδίου κατάστασης</string>
@@ -693,11 +687,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Ρυθμίσεις προσαρμοσμένoυ πλήκτρoυ</string>
     <string name="pref_navbar_custom_key_enable_title">Ενεργοποίηση προσαρμοσμένoυ πλήκτρoυ</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Εικονίδιο σήματος</string>
-    <string name="pref_signal_cluster_data_activity_title">Μεταφορά δεδομένων</string>
-    <string name="pref_signal_cluster_data_activity_summary">Εμφανίζει την μεταφορά δεδομένων στα εικονίδια κινητής και WiFi (απαιτείται επανεκκίνηση)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Εναλλαγή αυτόμ. περιστροφής</string>

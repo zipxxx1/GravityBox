@@ -222,9 +222,6 @@
     <!-- Statusbar icon color -->
     <string name="pref_statusbar_icon_color_title">ステータスバーアイコンの色</string>
     <string name="pref_statusbar_icon_color_summary">ステータスバーアイコンと時計の色を設定します。</string>
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">通信アイコンの色</string>
-    <string name="pref_statusbar_data_activity_color_summary">通信アイコンの色を設定します。</string>
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">クイック設定管理</string>
     <!-- Notification drawer style -->
@@ -480,8 +477,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">セカンダリ電波アイコン色</string>
     <string name="pref_statusbar_icon_color_secondary_summary">オレンジの電波アイコンを上書きします。</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">セカンダリデータ通信色</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">セカンダリデータ通信アクティビティの色を設定します。</string>
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">ステータスアイコンスタイル</string>
     <string name="pref_status_icon_style_summary">マナーモードやアラーム等のアイコンのスタイルを変更します。</string>
@@ -581,10 +576,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">カスタムキー設定</string>
     <string name="pref_navbar_custom_key_enable_title">カスタムキーの有効化</string>
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">電波アイコン設定</string>
-    <string name="pref_signal_cluster_data_activity_title">通信アイコンの表示</string>
-    <string name="pref_signal_cluster_data_activity_summary">データ通信とWi-Fiアイコンに通信アイコンを表示します。(要再起動)</string>
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">自動回転トグル</string>
     <string name="hwkey_action_auto_rotation_enabled">自動回転オン</string>
@@ -974,14 +965,6 @@
         空白にすると全ての通知を対象にします。</string>
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">お休みモードトグル</string>
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">H+表示の有効化</string>
-    <string name="pref_signal_cluster_hplus_summary">再起動してください。</string>
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">LTE表示スタイル</string>
-    <string name="sc_lte_style_default">デフォルト</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">機内モードトグル</string>
     <!-- Statusbar BT icon visibility -->

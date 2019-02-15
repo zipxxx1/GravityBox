@@ -227,9 +227,6 @@
     <!-- Statusbar icon color -->
     <string name="pref_statusbar_icon_color_title">Couleur icônes</string>
     <string name="pref_statusbar_icon_color_summary">Définit la couleur des icônes et de l\'horloge dans la barre d\'état</string>
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Couleur transfert de données</string>
-    <string name="pref_statusbar_data_activity_color_summary">Définit la couleur des indicateurs de transfert de données</string>
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Gestion des paramètres rapides</string>
     <!-- Notification drawer style -->
@@ -485,8 +482,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Couleur signal secondaire</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Remplace l\'icône orange par défaut du signal</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Couleur activité de données secondaire</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Définit la couleur des indicateurs d\'activité de données secondaire</string>
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Style icône d\'état</string>
     <string name="pref_status_icon_style_summary">S\'applique aux icônes d\'état telles que silencieux, vibreur, alarme, etc</string>
@@ -587,10 +582,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Paramètres touche personnalisée</string>
     <string name="pref_navbar_custom_key_enable_title">Active la touche personnalisée</string>
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Paramètres regroupés des signaux</string>
-    <string name="pref_signal_cluster_data_activity_title">Activer l\'activité de données</string>
-    <string name="pref_signal_cluster_data_activity_summary">Indique l\'activité des échanges de données sur les icônes mobile et Wifi (nécessite un redémarrage)</string>
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Interrupteur rotation auto</string>
     <string name="hwkey_action_auto_rotation_enabled">Rotation auto activée</string>
@@ -977,14 +968,6 @@
         Heures silencieuses sont ignorées. Laisser vide pour toutes les notifications.</string>
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Interrupteur Heures silencieuses</string>
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">Activer l\'indicateur H+</string>
-    <string name="pref_signal_cluster_hplus_summary">Nécessite un redémarrage</string>
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">Style de l\'indicateur LTE</string>
-    <string name="sc_lte_style_default">Par défaut</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">Interrupteur mode avion</string>
     <!-- Statusbar BT icon visibility -->
@@ -1283,9 +1266,6 @@ Assurez-vous que ses dimensions soient proches de : %1$dx%2$dpx</string>
     <string name="pref_battery_saver_indication_disable_title">Désactiver l\'indication d\'économiseur de batterie</string>
     <string name="pref_battery_saver_indication_disable_summary">Désactive la couleur orange des barres système
         lorsque l\'économiseur de batterie est actif</string>
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Désactiver les points d\'exclamation</string>
-    <string name="pref_signal_cluster_dem_summary">Nécessite un redémarrage</string>
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Désactiver la bascule son vers vibration</string>
     <string name="pref_lc_sound_vibrate_summary">Evite aux notifications dont les vibrations sont désactivées
@@ -1309,12 +1289,6 @@ y compris les vibrations de notification, le retour haptique, etc.</string>
     <string name="pref_cat_qs_wifi_tile_title">Paramètres de la touche Wifi</string>
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Paramètres de la touche Bluetooth</string>
-    <!-- MTK: disable network type indicators -->
-    <string name="pref_signal_cluster_dnti_title">Désactiver les indicateurs du type de réseau</string>
-    <string name="pref_signal_cluster_dnti_summary">Nécessite un redémarrage</string>
-    <!-- Signal cluster: Disable "No SIM" icon -->
-    <string name="pref_signal_cluster_nosim_title">Désactiver l\'icône \"Aucune SIM\"</string>
-    <string name="pref_signal_cluster_nosim_summary">Nécessite un redémarrage</string>
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Principe de déverrouillage direct</string>
     <!-- Permission denial message -->
@@ -1602,9 +1576,6 @@ Utiliser dans le cas où une autre application nécessite l\'utilisation du capt
     <!-- Error logging -->
     <string name="pref_log_errors_title">Erreur de journalisation</string>
     <string name="pref_log_errors_summary">Consigne toutes les erreurs dans le journal Xposed lorsque activé (nécessite un redémarrage)</string>
-    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
-    <string name="pref_signal_cluster_aosp_mobile_type_title">Utiliser les icônes mobile AOSP</string>
-    <string name="pref_signal_cluster_aosp_mobile_type_summary">Nécessite un redémarrage</string>
     <!-- Notification channels -->
     <string name="notif_channel_services_title">Services</string>
     <string name="notif_channel_services_desc">Pour les notifications de service de premier plan telles que la torche et l\'enregistrement d\'écran</string>

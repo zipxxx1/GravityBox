@@ -259,10 +259,6 @@
     <string name="pref_statusbar_icon_color_title">狀態列圖示顏色</string>
     <string name="pref_statusbar_icon_color_summary">設定狀態列圖示和時鐘的顏色</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">數據傳輸顏色</string>
-    <string name="pref_statusbar_data_activity_color_summary">設定傳輸數據時的顏色</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">管理快速設定選單</string>
 
@@ -573,9 +569,7 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">第二訊號顏色</string>
     <string name="pref_statusbar_icon_color_secondary_summary">覆蓋預設橘色訊號圖示</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">第二數據傳輸活動顏色</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">設定第二數據傳輸指示符顏色</string>
- 
+
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">狀態列圖示風格</string>
     <string name="pref_status_icon_style_summary">套用於無聲、震動、鬧鐘等狀態列圖示。</string>
@@ -695,11 +689,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">自訂按鍵設定</string>
     <string name="pref_navbar_custom_key_enable_title">啟用自訂按鍵</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">訊號指示符設定</string>
-    <string name="pref_signal_cluster_data_activity_title">啟用數據傳輸活動</string>
-    <string name="pref_signal_cluster_data_activity_summary">在流動數據及 Wi-Fi 圖示上顯示數據傳輸活動 (需要重新啟動) </string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">開關自動旋轉</string>
@@ -1167,13 +1156,6 @@
 
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">開關勿擾模式</string>
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">啟用 H+ 圖示</string>
-    <string name="pref_signal_cluster_hplus_summary">需要重新啟動</string>
-
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">LTE 圖示風格</string>
-    <string name="sc_lte_style_default">系統預設</string>
 
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">開關飛航模式</string>

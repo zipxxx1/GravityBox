@@ -241,10 +241,6 @@
     <string name="pref_statusbar_icon_color_title">Warna ikon Statusbar</string>
     <string name="pref_statusbar_icon_color_summary">Men-set warna untuk ikon statusbar dan jam</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Warna aktivitas paket data</string>
-    <string name="pref_statusbar_data_activity_color_summary">Men-set warna untuk indikator aktivitas paket data</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Manajemen QuickSettings</string>
 
@@ -552,7 +548,5 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Warna sinyal kedua</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Merubah warna sinyal oranye</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Warna aktifitas data kedua</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Men-set warna untuk indikator lalu-lintas data kedua</string>
 
 </resources>

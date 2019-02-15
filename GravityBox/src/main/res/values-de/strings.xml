@@ -263,10 +263,6 @@
     <string name="pref_statusbar_icon_color_title">Farbe der Symbole</string>
     <string name="pref_statusbar_icon_color_summary">Farbe für die Elemente der Statusleiste festlegen</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Farbe für Datenaktivität auswählen</string>
-    <string name="pref_statusbar_data_activity_color_summary">Farbe für die Aktivität der Datenverbindung festlegen</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Schnelleinstellungen anpassen</string>
 
@@ -579,8 +575,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Sekundäre Signalfarbe</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Orangenes Standardsymbol überschreiben</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Sekundäre Datenaktivitätsfarbe</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Farbe für sekundäre Datenaktivitäten festlegen</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Statussymbole anpassen</string>
@@ -704,11 +698,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Zusatztaste</string>
     <string name="pref_navbar_custom_key_enable_title">Zusätzliche Taste aktivieren</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Netzwerkaktivität</string>
-    <string name="pref_signal_cluster_data_activity_title">Datenaktivität anzeigen</string>
-    <string name="pref_signal_cluster_data_activity_summary">Datenübertragung an Netzwerksymbolen anzeigen (Neustart erforderlich)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Autom. Drehen an/aus</string>
@@ -1170,16 +1159,6 @@
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Ruhestunden an/aus</string>
 
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">H+ Symbol aktivieren</string>
-    <string name="pref_signal_cluster_hplus_summary">Neustart erforderlich</string>
-
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">LTE-Symbolstil</string>
-    <string name="sc_lte_style_default">Standard</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">Flugmodus an/aus</string>
 
@@ -1535,10 +1514,6 @@
     <string name="pref_battery_saver_indication_disable_summary">Deaktiviert die orangene Farbe der Systemleisten
         wenn der Batteriesparmodus aktiv ist</string>
 
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Deaktiviere Ausrufezeichen</string>
-    <string name="pref_signal_cluster_dem_summary">Neustart erforderlich</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Ton-zu-Vibration Umwandlung deaktivieren</string>
     <string name="pref_lc_sound_vibrate_summary">Erlaubt dass Benachrichtigungen vibrieren, die nur durch den Nur Vibieren Modus vibrieren</string>
@@ -1567,14 +1542,6 @@
 
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Bluetooth Kachel</string>
-
-    <!-- MTK: disable network type indicators -->
-    <string name="pref_signal_cluster_dnti_title">Netzwerktypanzeige deaktivieren</string>
-    <string name="pref_signal_cluster_dnti_summary">Erfordert Neustart</string>
-
-    <!-- Signal cluster: Disable "No SIM" icon -->
-    <string name="pref_signal_cluster_nosim_title">\"Keine SIM\" Symbol deaktivieren</string>
-    <string name="pref_signal_cluster_nosim_summary">Erfordert Neustart</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Regel für direktes Entsperren</string>

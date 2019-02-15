@@ -247,10 +247,6 @@
     <string name="pref_statusbar_icon_color_title">צבע האייקונים של שורת המצב</string>
     <string name="pref_statusbar_icon_color_summary">קובע צבעים עבור האייקונים של שורת המצב והשעון</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">צבע של פעילות גלישה סלולרית</string>
-    <string name="pref_statusbar_data_activity_color_summary">קובע צבע למחוונים של גלישה סלולרית</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">ניהול תפריט QuickSettings</string>
 
@@ -561,8 +557,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">צבע משני של אות רשת לנייד</string>
     <string name="pref_statusbar_icon_color_secondary_summary">עוקף את צבע האות הכתום של ערכת סטוק</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">צבע משני של פעילות גלישה סלולרית</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">קובע צבע עבור מחוונים של גלישה סלולרית</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">סגנון האייקונים של מצב מופעל</string>
@@ -686,11 +680,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">הגדרות מקש מותאם אישית</string>
     <string name="pref_navbar_custom_key_enable_title">הפעל מקש מותאם אישית</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">הגדרות מקבץ האייקונים של אות רשת</string>
-    <string name="pref_signal_cluster_data_activity_title">אפשר תצוגת העברת נתונים</string>
-    <string name="pref_signal_cluster_data_activity_summary">מציג פעילות העברת נתונים באייקונים של גלישה סלולרית וחיבור Wi-Fi (דורש איתחול)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">הפעל/כבה סיבוב אוטומטי</string>

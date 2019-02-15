@@ -262,10 +262,6 @@
     <string name="pref_statusbar_icon_color_title">Колер значкоў</string>
     <string name="pref_statusbar_icon_color_summary">Усталёўка колеру для значкоў радка стану і гадзін</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Колер актыўнасці дадзеных</string>
-    <string name="pref_statusbar_data_activity_color_summary">Усталёўка колеру для індыкатараў актыўнасці дадзеных</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Хуткія налады</string>
 
@@ -581,8 +577,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Колер другога сігналу</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Замена стандартнага памяранцавага колеру значка</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Колер актыўнасці дадзеных</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Колер для індыкатара актыўнасці дадзеных</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Стыль значкоў радка стану</string>
@@ -707,11 +701,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Карыстальніцкая кнопка</string>
     <string name="pref_navbar_custom_key_enable_title">Уключыць кнопку карыстальніка</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Налады сігналу</string>
-    <string name="pref_signal_cluster_data_activity_title">УКЛ актыўнасць дадзеных</string>
-    <string name="pref_signal_cluster_data_activity_summary">Адлюстраванне актыўнасці дадзеных у значках мабільнага сігналу і Wi-Fi (патрэбна перазагрузка)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Уключыць аўта паварот</string>
@@ -1178,16 +1167,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Улучэнне "ціхай гадзіны"</string>
 
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">уключыць індыкатар H+</string>
-    <string name="pref_signal_cluster_hplus_summary">Патрэбна перазагрузка</string>
-
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">Стыль індыкатара LTE</string>
-    <string name="sc_lte_style_default">Сістэмны па змаўчанні</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">Улучэнне рэжыму лёту</string>
 
@@ -1547,10 +1526,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="pref_battery_saver_indication_disable_title">Адключыць індыкацыю энергазахавання</string>
     <string name="pref_battery_saver_indication_disable_summary">Адключэнне памаранчавага колеру сістэмных палос 
 пры актыўнасці энергазахавання</string>
-
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Адключыць клічнікі</string>
-    <string name="pref_signal_cluster_dem_summary">Патрэбна перазагрузка</string>
 
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Адключыць канверсію гуку ў вібрацыю</string>

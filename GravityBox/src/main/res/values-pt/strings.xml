@@ -242,10 +242,6 @@
     <string name="pref_statusbar_icon_color_title">Cor dos icones da barra de status</string>
     <string name="pref_statusbar_icon_color_summary">Define a cor para os icones da barra de status e para o relógio</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Cor de atividade de dados</string>
-    <string name="pref_statusbar_data_activity_color_summary">Define cores para os indicadores de atividade de dados</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Configurações rápidas</string>
 
@@ -553,8 +549,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Cor do ícone de sinal secundário</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Substituir o ícone amarelo (padrão) de sinal</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Cor da atividade de dados secundária</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Define a cor para os indicadores de atividade de dados secundários</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Estilo do ícone de status</string>
@@ -678,11 +672,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Configurações de botões personalizados</string>
     <string name="pref_navbar_custom_key_enable_title">Habilitar botões personalizados</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Configurações do agrupamento de sinal</string>
-    <string name="pref_signal_cluster_data_activity_title">Habilitar atividade de dados</string>
-    <string name="pref_signal_cluster_data_activity_summary">Indica atividade dos dados nos ícones de dados móveis e WiFi (requer reinício)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Alternar rotação automática</string>
@@ -1150,16 +1139,6 @@
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Mudar horas de silêncio</string>
 
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">Ativar indicador H+</string>
-    <string name="pref_signal_cluster_hplus_summary">Necessário reiniciar</string>
-
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">Estilo do indicador LTE</string>
-    <string name="sc_lte_style_default">Predefinido</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">Ativar/desativar modo avião</string>
 
@@ -1511,10 +1490,6 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="pref_battery_saver_indication_disable_title">Desativar indicação de economia de bateria</string>
     <string name="pref_battery_saver_indication_disable_summary">Desativa a cor laranja das barras de sistema
     quando o modo de economia de bateria está ativo</string>
-
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Desativar exclamações</string>
-    <string name="pref_signal_cluster_dem_summary">Necessário reiniciar</string>
 
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Expandir painel de configurações rápidas</string>

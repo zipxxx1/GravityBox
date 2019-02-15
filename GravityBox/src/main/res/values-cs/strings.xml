@@ -246,10 +246,6 @@
     <string name="pref_statusbar_icon_color_title">Barva ikon</string>
     <string name="pref_statusbar_icon_color_summary">Nastaví barvu pro ikony stavového řádku a pro hodiny</string>
 
-    <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">Barva indikátoru datové aktivity</string>
-    <string name="pref_statusbar_data_activity_color_summary">Nastaví barvu pro indikátory datové aktivity</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">QuickSettings nastavení</string>
 
@@ -560,8 +556,6 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Barva sekundárního signálu</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Nahradí původní oranžovou verzi ikony signálu</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Sekundární indikátor datové aktivity</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Nastaví barvu pro sekundární indikátor datové aktivity</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Styl stavových ikon</string>
@@ -686,11 +680,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Volitelné tlačítko</string>
     <string name="pref_navbar_custom_key_enable_title">Povolit volitelné tlačítko</string>
-
-    <!-- Signal cluster settings -->
-    <string name="pref_cat_signal_cluster_title">Nastavení ikon signálu</string>
-    <string name="pref_signal_cluster_data_activity_title">Indikátory datového přenosu</string>
-    <string name="pref_signal_cluster_data_activity_summary">Indikace datového přenosu v ikonách mobilních dat a WiFi (vyžaduje restart)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Přepnout auto rotaci</string>
@@ -1156,16 +1145,6 @@
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Přepnout tiché hodiny</string>
 
-    <!-- Signal cluster: H+ indicator -->
-    <string name="pref_signal_cluster_hplus_title">Povolit H+ indikátor</string>
-    <string name="pref_signal_cluster_hplus_summary">Vyžaduje restart</string>
-
-    <!-- Signal cluster: LTE/4G indicator style -->
-    <string name="pref_signal_cluster_lte_style_title">Styl indikátoru LTE</string>
-    <string name="sc_lte_style_default">Původní</string>
-    <string name="sc_lte_style_lte">LTE</string>
-    <string name="sc_lte_style_4g">4G</string>
-
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">Přepnout režim v letadle</string>
 
@@ -1530,10 +1509,6 @@
     <string name="pref_battery_saver_indication_disable_summary">Zruší vybarvení systémových lišt
         během úsporného režimu</string>
 
-    <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Vypnout vykřičníky</string>
-    <string name="pref_signal_cluster_dem_summary">Vyžaduje restart</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Vypnout konverzi zvuku na vibrace</string>
     <string name="pref_lc_sound_vibrate_summary">Zabrání oznámením, které mají vibrace vypnuté, vibrovat
@@ -1559,14 +1534,6 @@
 
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Nastavení BlueTooth dlaždice</string>
-
-    <!-- MTK: disable network type indicators -->
-    <string name="pref_signal_cluster_dnti_title">Skrýt indikátor typu sítě</string>
-    <string name="pref_signal_cluster_dnti_summary">Vyžaduje restart</string>
-
-    <!-- Signal cluster: Disable "No SIM" icon -->
-    <string name="pref_signal_cluster_nosim_title">Skrýt ikonu nevložené SIM</string>
-    <string name="pref_signal_cluster_nosim_summary">Vyžaduje restart</string>
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Režim přímého odemknutí</string>
@@ -1905,10 +1872,6 @@
     <!-- Error logging -->
     <string name="pref_log_errors_title">Logování chyb</string>
     <string name="pref_log_errors_summary">Zapíše všechny chyby do Xposed logu (vyžaduje restart)</string>
-
-    <!-- SignalCluster: Moto: use AOSP mobile type icon -->
-    <string name="pref_signal_cluster_aosp_mobile_type_title">AOSP ikony pro typ mobilní sítě</string>
-    <string name="pref_signal_cluster_aosp_mobile_type_summary">Vyžaduje restart</string>
 
     <!-- Notification channels -->
     <string name="notif_channel_services_title">Služby</string>

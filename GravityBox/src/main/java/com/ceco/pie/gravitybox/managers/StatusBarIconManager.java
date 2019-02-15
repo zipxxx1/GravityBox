@@ -75,8 +75,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         public boolean wasColoringEnabled;
         public int defaultIconColor;
         public int[] iconColor;
-        public int defaultDataActivityColor;
-        public int[] dataActivityColor;
         public int signalIconMode;
         public int iconStyle;
         public float alphaSignalCluster;
@@ -132,12 +130,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         }
         setIconColor(1, prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY,
                         getDefaultIconColor()));
-        setDataActivityColor(
-                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR, 
-                        mGbResources.getInteger(R.integer.signal_cluster_data_activity_icon_color)));
-        setDataActivityColor(1, 
-                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, 
-                        mGbResources.getInteger(R.integer.signal_cluster_data_activity_icon_color)));
         try {
             int signalIconMode = Integer.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "1"));
@@ -155,9 +147,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mColorInfo.wasColoringEnabled = false;
         mColorInfo.defaultIconColor = getDefaultIconColor();
         mColorInfo.iconColor = new int[2];
-        mColorInfo.defaultDataActivityColor = mGbResources.getInteger(
-                R.integer.signal_cluster_data_activity_icon_color);
-        mColorInfo.dataActivityColor = new int[2];
         mColorInfo.signalIconMode = SI_MODE_STOCK;
         mColorInfo.iconStyle = LOLLIPOP;
         mColorInfo.alphaSignalCluster = 1;
@@ -177,14 +166,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 setIconColor(1, intent.getIntExtra(
                         GravityBoxSettings.EXTRA_SB_ICON_COLOR_SECONDARY, 
                         getDefaultIconColor()));
-            } else if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_DATA_ACTIVITY_COLOR)) {
-                setDataActivityColor(intent.getIntExtra(
-                        GravityBoxSettings.EXTRA_SB_DATA_ACTIVITY_COLOR, 
-                        mColorInfo.defaultDataActivityColor));
-            } else if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_DATA_ACTIVITY_COLOR_SECONDARY)) {
-                setDataActivityColor(1, intent.getIntExtra(
-                        GravityBoxSettings.EXTRA_SB_DATA_ACTIVITY_COLOR_SECONDARY, 
-                        mColorInfo.defaultDataActivityColor));
             } else if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_ICON_COLOR_ENABLE)) {
                 setColoringEnabled(intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_SB_ICON_COLOR_ENABLE, false));
@@ -255,14 +236,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         return getIconColor(0);
     }
 
-    public int getDataActivityColor() {
-        return getDataActivityColor(0);
-    }
-
-    public int getDataActivityColor(int index) {
-        return mColorInfo.dataActivityColor[index];
-    }
-
     public void setIconColor(int index, int color) {
         if (mColorInfo.iconColor[index] != color) {
             mColorInfo.iconColor[index] = color;
@@ -274,17 +247,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
 
     public void setIconColor(int color) {
         setIconColor(0, color);
-    }
-
-    public void setDataActivityColor(int index, int color) {
-        if (mColorInfo.dataActivityColor[index] != color) {
-            mColorInfo.dataActivityColor[index] = color;
-            notifyListeners(FLAG_DATA_ACTIVITY_COLOR_CHANGED);
-        }
-    }
-
-    public void setDataActivityColor(int color) {
-        setDataActivityColor(0, color);
     }
 
     public void setIconStyle(int style) {
@@ -330,15 +292,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
 
     public Drawable applyColorFilter(Drawable drawable, PorterDuff.Mode mode) {
         return applyColorFilter(0, drawable, mode);
-    }
-
-    public Drawable applyDataActivityColorFilter(int index, Drawable drawable) {
-        drawable.setColorFilter(mColorInfo.dataActivityColor[index], PorterDuff.Mode.SRC_IN);
-        return drawable;
-    }
-
-    public Drawable applyDataActivityColorFilter(Drawable drawable) {
-        return applyDataActivityColorFilter(0, drawable);
     }
 
     public void clearCache() {
