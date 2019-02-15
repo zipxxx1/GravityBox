@@ -733,7 +733,7 @@ public class ModLockscreen {
 
     private static void showBouncer() {
         try {
-            XposedHelpers.callMethod(mStatusBar, "showBouncer");
+            XposedHelpers.callMethod(mStatusBar, "showBouncer", true);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
