@@ -309,6 +309,7 @@ public abstract class BaseTile implements QsEventListener {
             float scalingFactor = getQsPanel().getScalingFactor();
 
             // icon frame
+            /*
             Field iconFrameField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
                     mTileView.getContext().getClassLoader()).getDeclaredField("mIconFrame");
             iconFrameField.setAccessible(true);
@@ -327,6 +328,7 @@ public abstract class BaseTile implements QsEventListener {
                     Math.round(mStockLayout.iconSizePx*scalingFactor));
             XposedHelpers.setIntField(iconView, "mTilePaddingBelowIconPx",
                     Math.round(mStockLayout.tilePaddingBelowIconPx*scalingFactor));
+            */
 
             // label
             TextView label = (TextView) XposedHelpers.getObjectField(mTileView, "mLabel");
@@ -337,10 +339,12 @@ public abstract class BaseTile implements QsEventListener {
             }
 
             // Moto SignalTileView
+            /*
             if (Utils.isMotoXtDevice() &&
                     "SignalTileView".equals(iconView.getClass().getSimpleName())) {
                 updateMotoXtSignalTileViewLayout(iconView);
             }
+            */
 
             mTileView.requestLayout();
         } catch (Throwable t) {

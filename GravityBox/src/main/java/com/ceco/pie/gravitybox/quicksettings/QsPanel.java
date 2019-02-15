@@ -300,17 +300,10 @@ public class QsPanel implements BroadcastSubReceiver {
                             XposedHelpers.setIntField(param.thisObject, "mCellHeight", Math.round(ch*factor));
                             XposedHelpers.setIntField(param.thisObject, "mCellWidth",
                                     Math.round(mCellWidthOriginal*factor));
-                            if (Utils.isOxygenOsRom()) {
-                                int cm = XposedHelpers.getIntField(param.thisObject, "mCellMarginRow");
-                                XposedHelpers.setIntField(param.thisObject, "mCellMarginRow", Math.round(cm*factor));
-                                cm = XposedHelpers.getIntField(param.thisObject, "mCellMarginColumn");
-                                XposedHelpers.setIntField(param.thisObject, "mCellMarginColumn", Math.round(cm*factor));
-                                cm = XposedHelpers.getIntField(param.thisObject, "mCellMarginStart");
-                                XposedHelpers.setIntField(param.thisObject, "mCellMarginStart", Math.round(cm*factor));
-                            } else {
-                                int cm = XposedHelpers.getIntField(param.thisObject, "mCellMargin");
-                                XposedHelpers.setIntField(param.thisObject, "mCellMargin", Math.round(cm*factor));
-                            }
+                            int cmH = XposedHelpers.getIntField(param.thisObject, "mCellMarginHorizontal");
+                            XposedHelpers.setIntField(param.thisObject, "mCellMarginHorizontal", Math.round(cmH*factor));
+                            int cmV = XposedHelpers.getIntField(param.thisObject, "mCellMarginVertical");
+                            XposedHelpers.setIntField(param.thisObject, "mCellMarginVertical", Math.round(cmV*factor));
                             int cmTop = XposedHelpers.getIntField(param.thisObject, "mCellMarginTop");
                             XposedHelpers.setIntField(param.thisObject, "mCellMarginTop", Math.round(cmTop*factor));
                             if (DEBUG) log("updateResources: scaling applied with factor=" + factor);
