@@ -173,10 +173,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Vergrendelscherm rotatie inschakelen</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Menuknop inschakelen</string>
-    <string name="pref_lockscreen_menu_key_summary">Laat toe om de menuknop te gebruiken om het toestel snel te ontgrendelen vanop het vergrendelscherm (herstart vereist)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Gecentreerde klok</string>
 

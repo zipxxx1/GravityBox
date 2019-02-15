@@ -181,10 +181,6 @@
     <string name="pref_lockscreen_rotation_title">Rotar en pantalla de bloqueo</string>
     <string name="pref_lockscreen_rotation_summary">Requiere reinicio</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Activar botón menú</string>
-    <string name="pref_lockscreen_menu_key_summary">Permite usar el botón menú para desbloquear rápidamente el dispositivo en la pantalla de bloqueo (requiere reinicio)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Centrar reloj</string>
 

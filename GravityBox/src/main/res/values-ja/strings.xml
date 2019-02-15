@@ -157,9 +157,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">ロック画面での回転を有効化</string>
     <string name="pref_lockscreen_rotation_summary">再起動が必要です。</string>
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">メニューキーを有効化</string>
-    <string name="pref_lockscreen_menu_key_summary">ロック画面でメニューキーを押すとロックを解除するようにします。(要再起動)</string>
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">時計の中央化</string>
     <!-- Media tweaks category -->

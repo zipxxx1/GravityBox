@@ -187,10 +187,6 @@
     <string name="pref_lockscreen_rotation_title">Membolehkan putaran skrin kunci</string>
     <string name="pref_lockscreen_rotation_summary">Perlukan reboot</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Membolehkan kunci menu</string>
-    <string name="pref_lockscreen_menu_key_summary">Aktifkan guna kunci menu untuk buka peranti dengan cepat (perlukan reboot)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Jam di tengah</string>
 

@@ -161,10 +161,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Habilitar rotação da tela de bloqueio</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Habilitar tecla de Menu</string>
-    <string name="pref_lockscreen_menu_key_summary">Permite que a tecla de Menu seja usada para desbloquear rapidamente o dispositivo (necessário reiniciar)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Centralizar relógio</string>
 

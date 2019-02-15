@@ -165,22 +165,6 @@ public class ModLockscreen {
         }
     }
 
-    public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
-        try {
-            // Lockscreen: disable menu key in lock screen
-            Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
-                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, "DEFAULT"));
-            if (DEBUG) log(GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY + ": " + triState);
-            if (triState != Utils.TriState.DEFAULT) {
-                resparam.res.setReplacement(PACKAGE_NAME, "bool", "config_disableMenuKeyInLockScreen",
-                        triState == Utils.TriState.DISABLED);
-                if (DEBUG) log("config_disableMenuKeyInLockScreen: " + (triState == Utils.TriState.DISABLED));
-            }
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
-    }
-
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {
         try {

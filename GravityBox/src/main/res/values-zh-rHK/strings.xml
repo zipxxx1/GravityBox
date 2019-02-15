@@ -178,10 +178,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">啟用鎖定畫面自動旋轉</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">啟用選單鍵</string>
-    <string name="pref_lockscreen_menu_key_summary">啟用後可以用選單鍵在鎖定畫面快速地解鎖裝置 (需要重新啟動) </string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">狀態列時鐘置中</string>
 

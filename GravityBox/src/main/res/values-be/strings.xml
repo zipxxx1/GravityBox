@@ -181,10 +181,6 @@
     <string name="pref_lockscreen_rotation_title">Уключыць паварот экрана</string>
     <string name="pref_lockscreen_rotation_summary">Патрэбна перазагрузка</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Уключыць кнопку меню</string>
-    <string name="pref_lockscreen_menu_key_summary">Хуткая разблакоўка прылады з экрана блакавання кнопкай меню (патрэбна перазагрузка)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Гадзіны ў цэнтры</string>
 

@@ -187,10 +187,6 @@
     <string name="pref_lockscreen_rotation_title">启用锁屏画面旋转</string>
     <string name="pref_lockscreen_rotation_summary">需要重新启动</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">启用菜单键</string>
-    <string name="pref_lockscreen_menu_key_summary">使菜单键在锁屏时可以用来快速解锁设备（需要重新启动）</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">时间居中</string>
 

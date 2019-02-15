@@ -169,10 +169,6 @@
     <string name="pref_lockscreen_rotation_title">Włącz obracanie Ekranu blokady</string>
 	<string name="pref_lockscreen_rotation_summary">Wymaga ponownego uruchomienia</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Włącz klawisz menu</string>
-    <string name="pref_lockscreen_menu_key_summary">Umożliwia wykorzystanie klawisza menu do szybkiego odblokowania urządzenia na Ekranie Blokady (wymagany restart)</string>
- 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Wycentruj zegar</string>
 

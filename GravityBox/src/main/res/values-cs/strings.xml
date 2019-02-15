@@ -167,10 +167,6 @@
     <string name="pref_lockscreen_rotation_title">Rotace obrazovky uzamčení</string>
     <string name="pref_lockscreen_rotation_summary">Vyžaduje restart</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Povolit menu tlačítko</string>
-    <string name="pref_lockscreen_menu_key_summary">Povolí hardwarové menu tlačítko pro rychlé odemknutí (vyžaduje restart)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Vycentrované hodiny</string>
 

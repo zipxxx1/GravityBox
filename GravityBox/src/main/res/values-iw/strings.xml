@@ -167,10 +167,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">הפעל סיבוב של מסך הנעילה</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">פתיחה במקש תפריט</string>
-    <string name="pref_lockscreen_menu_key_summary">מאפשר שימוש במקש תפריט לפתיחה מהירה של מסך הנעילה כאשר המסך כבוי (דורש איתחול)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">שעון במרכז</string>
 

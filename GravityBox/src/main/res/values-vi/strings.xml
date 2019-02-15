@@ -181,10 +181,6 @@
     <string name="pref_lockscreen_rotation_title">Cho phép xoay màn hình khóa</string>
     <string name="pref_lockscreen_rotation_summary">Cần khởi động lại</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Bật phím menu</string>
-    <string name="pref_lockscreen_menu_key_summary">Cho phép phím menu cứng có thể mở khóa điện thoại (cần khởi động lại)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Đồng hồ ở giữa</string>
 

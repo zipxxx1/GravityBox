@@ -129,8 +129,6 @@
 <string name="pref_ab_button_set">تنظیم</string>
 <string name="pref_lockscreen_rotation_title">چرخش خودکار صفحه‌نمایش در صفحه قفل</string>
 <string name="pref_lockscreen_rotation_summary">راه‌اندازی مجدد نیاز است</string>
-<string name="pref_lockscreen_menu_key_title">قفل‌گشایی با کلید منو</string>
-<string name="pref_lockscreen_menu_key_summary">استفاده از کلید منو برای بازگشایی قفل‌ دستگاه(نیازمند راه‌اندازی مجدد)</string>
 <string name="pref_statusbar_center_clock_title">ساعت مرکزی</string>
 <string name="pref_cat_media_title">رسانه‌ها</string>
 <string name="pref_cat_media_summary">ترفندهای گوناگون برای رسانه‌ها و صدای سیستم</string>

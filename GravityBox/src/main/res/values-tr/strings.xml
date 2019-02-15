@@ -184,10 +184,6 @@
     <string name="pref_lockscreen_rotation_title">Kilit ekranı döndürmeyi etkinleştir</string>
     <string name="pref_lockscreen_rotation_summary">Yeniden başlatma gerektirir</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Menü tuşunu etkinleştir</string>
-    <string name="pref_lockscreen_menu_key_summary">Menü tuşu ile kilit açmaya izin verir (yeniden başlatma gerektirir)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Saati ortala</string>
 

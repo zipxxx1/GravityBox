@@ -187,10 +187,6 @@
     <string name="pref_lockscreen_rotation_title">Enable lockscreen rotation</string>
     <string name="pref_lockscreen_rotation_summary">Requires reboot</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Enable menu key</string>
-    <string name="pref_lockscreen_menu_key_summary">Allows hardware menu key to unlock device (requires reboot)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Center clock</string>
 

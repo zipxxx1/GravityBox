@@ -173,10 +173,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Ενεργοποίηση περιστροφής κλειδώματος οθόνης</string>
 
-    <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Ενεργοποίηση του πλήκτρου Μενού</string>
-    <string name="pref_lockscreen_menu_key_summary">Επιτρέπει στο πλήκτρο Μενού να χρησιμοποιείται για γρήγορο ξεκλείδωμα της συσκευής όταν είναι κλειδωμένη η οθόνη (απαιτείται επανεκκίνηση)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Κεντρικό Ρολόι</string>
 
