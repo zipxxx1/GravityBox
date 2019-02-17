@@ -115,11 +115,9 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         // initialize and setup all paint variables
         // stroke width is later set in initSizeBasedStuff()
 
-        mPaintFont = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaintFont.setDither(true);
+        mPaintFont = new Paint();
         mPaintFont.setStyle(Paint.Style.STROKE);
         mPaintFont.setTextAlign(Align.CENTER);
-        mPaintFont.setFakeBoldText(true);
         mPaintFont.setColor(Color.WHITE);
 
         mPaintGray = new Paint(Paint.ANTI_ALIAS_FLAG);
