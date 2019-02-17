@@ -16,6 +16,7 @@
 package com.ceco.pie.gravitybox;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -875,26 +876,32 @@ public class ModLedControl {
             });
 
             XposedHelpers.findAndHookMethod(CLASS_HEADS_UP_MANAGER_ENTRY, classLoader, "updateEntry",
-                    new XC_MethodHook() {
+                    boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
-                    Object huMgr = XposedHelpers.getSurroundingThis(param.thisObject);
-                    Object entry = XposedHelpers.getObjectField(param.thisObject, "entry");
-                    if (entry == null ||
-                            (boolean)XposedHelpers.callMethod(huMgr, "hasFullScreenIntent", entry)) 
-                        return;
+                    try {
+                        Object huMgr = XposedHelpers.getSurroundingThis(param.thisObject);
+                        Object entry = XposedHelpers.getObjectField(param.thisObject, "entry");
+                        Method isSticky = XposedHelpers.findClass(CLASS_HEADS_UP_MANAGER_ENTRY, classLoader)
+                                .getDeclaredMethod("isSticky");
+                        isSticky.setAccessible(true);
+                        if (entry == null || isSticky == null || (boolean)isSticky.invoke(param.thisObject))
+                            return;
 
-                    XposedHelpers.callMethod(param.thisObject, "removeAutoRemovalCallbacks");
-                    StatusBarNotification sbNotif = (StatusBarNotification)
-                            XposedHelpers.getObjectField(entry, "notification");
-                    Notification n = sbNotif.getNotification();
-                    int timeout = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_TIMEOUT) ?
-                            n.extras.getInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT) * 1000 :
+                        XposedHelpers.callMethod(param.thisObject, "removeAutoRemovalCallbacks");
+                        StatusBarNotification sbNotif = (StatusBarNotification)
+                                XposedHelpers.getObjectField(entry, "notification");
+                        Notification n = sbNotif.getNotification();
+                        int timeout = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_TIMEOUT) ?
+                                n.extras.getInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT) * 1000 :
                                 mSysUiPrefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_TIMEOUT, 5) * 1000;
-                    if (timeout > 0) {
-                        Handler H = (Handler) XposedHelpers.getObjectField(huMgr, "mHandler");
-                        H.postDelayed((Runnable)XposedHelpers.getObjectField(
-                                param.thisObject, "mRemoveHeadsUpRunnable"), timeout);
+                        if (timeout > 0) {
+                            Handler H = (Handler) XposedHelpers.getObjectField(huMgr, "mHandler");
+                            H.postDelayed((Runnable)XposedHelpers.getObjectField(
+                                    param.thisObject, "mRemoveHeadsUpRunnable"), timeout);
+                        }
+                    } catch (Throwable t) {
+                        GravityBox.log(TAG, t);
                     }
                 }
             });
