@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,7 +28,6 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.Surface;
@@ -165,7 +164,7 @@ public class ModExpandedDesktop {
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
                 mExpandedDesktopMode = expandedDesktopMode;
                 updateSettings();
-            } else if (intent.getAction().equals(ModStatusbarColor.ACTION_PHONE_STATUSBAR_VIEW_MADE)) {
+            } else if (intent.getAction().equals(ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE)) {
                 updateSettings();
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
@@ -393,7 +392,7 @@ public class ModExpandedDesktop {
 
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
-                        intentFilter.addAction(ModStatusbarColor.ACTION_PHONE_STATUSBAR_VIEW_MADE);
+                        intentFilter.addAction(ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE);
                         if (mNavbarOverride) {
                             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
                         }

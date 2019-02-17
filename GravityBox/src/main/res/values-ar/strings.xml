@@ -231,16 +231,6 @@
     <string name="quick_pulldown_right">الطرف الأيمن</string>
     <string name="quick_pulldown_left">الطرف الأيسر</string>
 
-    <!-- Statusbar colors category -->
-    <string name="pref_cat_statusbar_colors_title">ألوان شريط الحالة</string>
-
-    <!-- Enable icon colors -->
-    <string name="pref_statusbar_icon_color_enable_title">تفعيل ألوان الأيقونات</string>
-
-    <!-- Statusbar icon color -->
-    <string name="pref_statusbar_icon_color_title">لون أيقونات شريط الحالة</string>
-    <string name="pref_statusbar_icon_color_summary">تعيين لون مخصص لأيقونة الساعة والبطارية الموجودة على شريط الحالة</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">ادارة الاعدادات السريعة</string>
 

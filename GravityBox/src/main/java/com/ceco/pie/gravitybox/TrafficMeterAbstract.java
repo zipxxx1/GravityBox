@@ -262,10 +262,7 @@ public abstract class TrafficMeterAbstract extends TextView
 
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
-            setTextColor(colorInfo.coloringEnabled ?
-                    colorInfo.iconColor[0] : colorInfo.defaultIconColor);
-        } else if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+        if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
             setTextColor(colorInfo.iconTint);
         }
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {

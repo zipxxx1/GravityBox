@@ -207,13 +207,6 @@
     <string name="quick_pulldown_right">오른쪽</string>
     <string name="quick_pulldown_left">왼쪽</string>
 
-    <string name="pref_cat_statusbar_colors_title">상단바 색깔</string>
-
-    <string name="pref_statusbar_icon_color_enable_title">아이콘 색깔 사용</string>
-
-    <string name="pref_statusbar_icon_color_title">상단바 아이콘 색깔</string>
-    <string name="pref_statusbar_icon_color_summary">상단바의 아이콘과 시계에서 사용될 색깔을 설정합니다.</string>
-
     <string name="pref_cat_statusbar_qs_title">퀵세팅 관리</string>
 
     <string name="pref_cat_notification_drawer_style_title">알림 패널 배경화면 스타일</string>
@@ -418,10 +411,6 @@
 
     <string name="pref_hwkey_doubletap_disable_title">두 번 터치 비활성화</string>
 
-    <string name="pref_statusbar_signal_color_mode_title">신호 표시기 색깔 모드</string>
-    <string name="signal_color_mode_stock">순정 아이콘 사용</string>
-    <string name="signal_color_mode_disabled">색깔 적용 안함</string>
-
     <string name="pref_cat_app_launcher_title">앱 런처</string>
     <string name="pref_cat_app_launcher_summary">이 대화창은 하드웨어 키 액션이나 네비게이션 키 액션에서 사용될 앱을 선택할 수 있습니다.</string>
     <string name="pref_app_launcher_slot_title">앱 슬롯 %d</string>
@@ -459,14 +448,6 @@
     <string name="pref_navbar_color_enable_summary">활성화 및 비활성화하려면 재시작이 필요 할 수 있습니다.</string>
     <string name="pref_navbar_key_color_title">네비게이션 키 색깔</string>
     <string name="pref_navbar_key_glow_color_title">네비게이션 키 터치 색깔</string>
-
-    <string name="pref_statusbar_icon_color_secondary_title">2차 신호 표시기 색깔</string>
-    <string name="pref_statusbar_icon_color_secondary_summary">순정 오렌지 색깔 대신 사용자 색깔로 덮어씁니다.</string>
-
-    <string name="pref_status_icon_style_title">상단바 아이콘 스타일</string>
-    <string name="pref_status_icon_style_summary">상단바의 주요 아이콘들의 스타일을 바꿉니다.</string>
-    <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Stock</string>
 
     <string name="hwkey_back_doubletap_dialog_title">뒤로 가기 키 두 번 터치 액션</string>
 

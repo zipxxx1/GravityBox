@@ -57,7 +57,7 @@ public class SysUiManagers {
         }
 
         try {
-            IconManager = new StatusBarIconManager(context, prefs);
+            IconManager = new StatusBarIconManager();
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error creating IconManager: ", t);
         }
@@ -120,9 +120,6 @@ public class SysUiManagers {
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOW_BATTERY_WARNING_POLICY_CHANGED);
         intentFilter.addAction(com.ceco.pie.gravitybox.managers.BatteryInfoManager.ACTION_POWER_SAVE_MODE_CHANGING);
 
-        // icon manager
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_COLOR_CHANGED);
-
         // quiet hours manager
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
         intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
@@ -179,9 +176,6 @@ public class SysUiManagers {
         public void onReceive(Context context, Intent intent) {
             if (BatteryInfoManager != null) {
                 BatteryInfoManager.onBroadcastReceived(context, intent);
-            }
-            if (IconManager != null) {
-                IconManager.onBroadcastReceived(context, intent);
             }
             if (QuietHoursManager != null) {
                 QuietHoursManager.onBroadcastReceived(context, intent);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -38,9 +38,8 @@ import android.widget.TextView;
 
 public class StatusbarBatteryPercentage implements IconManagerListener, BatteryStatusListener {
     private TextView mPercentage;
-    private int mDefaultColor;
     private int mDefaultSizePx;
-    private int mIconColor;
+    private int mColor;
     private String mPercentSign;
     private BatteryData mBatteryData;
     private ValueAnimator mChargeAnim;
@@ -56,7 +55,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
             BatteryStyleController controller) {
         mPercentage = view;
         mController = controller;
-        mDefaultColor = mIconColor = mPercentage.getCurrentTextColor();
+        mColor = mPercentage.getCurrentTextColor();
 
         try {
             Resources res = mPercentage.getResources();
@@ -105,7 +104,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
     private boolean startChargingAnimation() {
         if (mChargeAnim == null || !mChargeAnim.isRunning()) {
             mChargeAnim = ValueAnimator.ofObject(new ArgbEvaluator(),
-                    mIconColor, mChargingColor);
+                    mColor, mChargingColor);
 
             mChargeAnim.addUpdateListener(new AnimatorUpdateListener() {
                 @Override
@@ -116,12 +115,12 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
             mChargeAnim.addListener(new AnimatorListener() {
                 @Override
                 public void onAnimationCancel(Animator animation) {
-                    mPercentage.setTextColor(mIconColor);
+                    mPercentage.setTextColor(mColor);
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mPercentage.setTextColor(mIconColor);
+                    mPercentage.setTextColor(mColor);
                 }
 
                 @Override
@@ -156,7 +155,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
     }
 
     public void setTextColor(int color) {
-        mIconColor = color;
+        mColor = color;
         stopChargingAnimation();
         update();
     }
@@ -209,11 +208,11 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
                 startChargingAnimation();
             } else {
                 stopChargingAnimation();
-                mPercentage.setTextColor(mIconColor);
+                mPercentage.setTextColor(mColor);
             }
         } else {
             stopChargingAnimation();
-            mPercentage.setTextColor(mIconColor);
+            mPercentage.setTextColor(mColor);
         }
     }
 
@@ -223,13 +222,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
 
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
-            if (colorInfo.coloringEnabled) {
-                setTextColor(colorInfo.iconColor[0]);
-            } else {
-                setTextColor(mDefaultColor);
-            }
-        } else if (mController.getContainerType() == ContainerType.STATUSBAR &&
+        if (mController.getContainerType() == ContainerType.STATUSBAR &&
                 (flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
             setTextColor(colorInfo.iconTint);
         }

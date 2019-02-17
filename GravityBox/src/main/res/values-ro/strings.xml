@@ -251,16 +251,6 @@
     <string name="quick_pulldown_left">Stângă</string>
     <string name="quick_pulldown_both">Ambele</string>
 
-    <!-- Statusbar colors category -->
-    <string name="pref_cat_statusbar_colors_title">Culorile barei de stare</string>
-
-    <!-- Enable icon colors -->
-    <string name="pref_statusbar_icon_color_enable_title">Activați culorile pictogramelor</string>
-
-    <!-- Statusbar icon color -->
-    <string name="pref_statusbar_icon_color_title">Culorile pictogramelor în bara de stare</string>
-    <string name="pref_statusbar_icon_color_summary">Setează culoarea pentru pictogramele din bara de stare și ceas</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Gestionare Setări rapide</string>
 
@@ -520,11 +510,6 @@
     <!-- Disable double-tap (e.g. for Home Key on Android 4.3+) -->
     <string name="pref_hwkey_doubletap_disable_title">Dezactivați apăsarea dublă</string>
 
-    <!-- Color mode for statusbar signal icons -->
-    <string name="pref_statusbar_signal_color_mode_title">Mod culoare semnal</string>
-    <string name="signal_color_mode_stock">Utilizați pictograme stoc</string>
-    <string name="signal_color_mode_disabled">Nu se aplică culoarea</string>
-
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">Lansator de aplicaţii</string>
     <string name="pref_cat_app_launcher_summary">Dialogul permite definirea a până la 12 aplicații care pot fi atribuite ca acțiuni pentru butoanele HW, sau utilizate ca tastă suplimentară pentru bara de navigare</string>
@@ -569,16 +554,6 @@
     <string name="pref_navbar_color_enable_summary">Poate fi necesară repornirea după dezactivare</string>
     <string name="pref_navbar_key_color_title">Culoarea tastei de navigare</string>
     <string name="pref_navbar_key_glow_color_title">Culoarea strălucirii tasei de navigare</string>
-
-    <!-- Secondary signal icon color for MTK Dual SIMs -->
-    <string name="pref_statusbar_icon_color_secondary_title">Culoare semnal secundar</string>
-    <string name="pref_statusbar_icon_color_secondary_summary">Înlocuieşte pictograma portocalie a semnalului stoc</string>
-
-    <!-- Status icon style -->
-    <string name="pref_status_icon_style_title">Stilul pictogramelor de stare</string>
-    <string name="pref_status_icon_style_summary">Se aplică pictogramelor de stare cum ar fi silenţios, vibrație, alarmă etc.</string>
-    <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Stock</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Acțiune la apăsarea dublă a butonului Înapoi</string>

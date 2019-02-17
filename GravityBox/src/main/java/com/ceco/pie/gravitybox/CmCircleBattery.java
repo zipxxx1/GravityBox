@@ -348,10 +348,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
 
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
-            setColor(colorInfo.coloringEnabled ?
-                    colorInfo.iconColor[0] : colorInfo.defaultIconColor);
-        } else if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0 &&
+        if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0 &&
                 mController.getContainerType() == ContainerType.STATUSBAR) {
             setColor(colorInfo.iconTint);
         }

@@ -231,16 +231,6 @@
     <string name="quick_pulldown_right">Kanan</string>
     <string name="quick_pulldown_left">Kiri</string>
 
-    <!-- Statusbar colors category -->
-    <string name="pref_cat_statusbar_colors_title">Warna Statusbar</string>
-
-    <!-- Enable icon colors -->
-    <string name="pref_statusbar_icon_color_enable_title">Hidupkan warna ikon</string>
-
-    <!-- Statusbar icon color -->
-    <string name="pref_statusbar_icon_color_title">Warna ikon Statusbar</string>
-    <string name="pref_statusbar_icon_color_summary">Men-set warna untuk ikon statusbar dan jam</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Manajemen QuickSettings</string>
 
@@ -494,11 +484,6 @@
     <!-- Disable double-tap (e.g. for Home Key on Android 4.3+) -->
     <string name="pref_hwkey_doubletap_disable_title">Matikan double-tap</string>
 
-    <!-- Color mode for statusbar signal icons -->
-    <string name="pref_statusbar_signal_color_mode_title">Mode pewarnaan sinyal</string>
-    <string name="signal_color_mode_stock">Gunakan ikon bawaan</string>
-    <string name="signal_color_mode_disabled">Jangan terapkan warna</string>
-
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">Launcher aplikasi</string>
     <string name="pref_cat_app_launcher_summary">Dialog yang memperbolehkan pengguna menetapkan sampai 12 aplikasi yang bisa ditetapkan sebagai aksi tombol fisik atau tombol tambahan di navbar.</string>
@@ -544,9 +529,5 @@
     <string name="pref_navbar_color_enable_summary">Mungkin membutuhkan restart setelah dimatikan</string>
     <string name="pref_navbar_key_color_title">Warna tombol navigasi</string>
     <string name="pref_navbar_key_glow_color_title">Warna tombol navigasi ketika menyala</string>
-
-    <!-- Secondary signal icon color for MTK Dual SIMs -->
-    <string name="pref_statusbar_icon_color_secondary_title">Warna sinyal kedua</string>
-    <string name="pref_statusbar_icon_color_secondary_summary">Merubah warna sinyal oranye</string>
 
 </resources>

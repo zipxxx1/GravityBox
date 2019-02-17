@@ -238,16 +238,6 @@
     <string name="quick_pulldown_left">Ľavý okraj</string>
     <string name="quick_pulldown_both">Ľavý aj pravý okraj</string>
 
-    <!-- Statusbar colors category -->
-    <string name="pref_cat_statusbar_colors_title">Farby stavového riadku</string>
-
-    <!-- Enable icon colors -->
-    <string name="pref_statusbar_icon_color_enable_title">Povoliť vyfarbovanie ikon</string>
-
-    <!-- Statusbar icon color -->
-    <string name="pref_statusbar_icon_color_title">Farba ikon</string>
-    <string name="pref_statusbar_icon_color_summary">Nastaví farbu pre ikony stavového riadku a hodiny</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Rýchle nastavenia</string>
 
@@ -504,11 +494,6 @@
     <!-- Disable double-tap (e.g. for Home Key on Android 4.3+) -->
     <string name="pref_hwkey_doubletap_disable_title">Vypnúť dvojité ťuknutie</string>
 
-    <!-- Color mode for statusbar signal icons -->
-    <string name="pref_statusbar_signal_color_mode_title">Režim vyfarbovania signálu</string>
-    <string name="signal_color_mode_stock">Použiť originál ikony</string>
-    <string name="signal_color_mode_disabled">Nevyfarbovať</string>
-
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">Spúšťač aplikácií</string>
     <string name="pref_cat_app_launcher_summary">Dialóg s aplikáciami, ktorý môže byť aktivovaný na akciu tlačidla, alebo cez dodatočné tlačidlo navigačnej lišty, alebo z koláča</string>
@@ -554,16 +539,6 @@
     <string name="pref_navbar_color_enable_summary">Môže vyžadovať reštart po deaktivácii</string>
     <string name="pref_navbar_key_color_title">Farba tlačidiel</string>
     <string name="pref_navbar_key_glow_color_title">Efekt tlačidiel</string>
-
-    <!-- Secondary signal icon color for MTK Dual SIMs -->
-    <string name="pref_statusbar_icon_color_secondary_title">Farba sekundárneho signálu</string>
-    <string name="pref_statusbar_icon_color_secondary_summary">Nahradí pôvodnú oranžovú verziu ikony signálu</string>
-
-    <!-- Status icon style -->
-    <string name="pref_status_icon_style_title">Štýl stavových ikon</string>
-    <string name="pref_status_icon_style_summary">Platí pre stavové ikony ako ikona vypnutého zvonenia, vibrovania, budíka, atď.</string>
-    <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Stock</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Dvojité ťuknutie na Späť</string>

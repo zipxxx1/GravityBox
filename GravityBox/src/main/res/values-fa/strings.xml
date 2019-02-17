@@ -175,10 +175,6 @@
 <string name="quick_pulldown_right">راست</string>
 <string name="quick_pulldown_left">چپ</string>
 <string name="quick_pulldown_both">هردو</string>
-<string name="pref_cat_statusbar_colors_title">رنگ نوار وضعیت</string>
-<string name="pref_statusbar_icon_color_enable_title">تنظیم رنگ شخصی برای آیکون‌ها</string>
-<string name="pref_statusbar_icon_color_title">رنگ آیکون‌های نوار وضعیت</string>
-<string name="pref_statusbar_icon_color_summary">تنظیم رنگ برای آیکون‌های نوار وضعیت و ساعت</string>
 <string name="pref_cat_statusbar_qs_title">مدیریت تنظیمات سریع</string>
 <string name="pref_cat_notification_drawer_style_title">سبک کشو اطلاع‌رسانی</string>
 <string name="pref_disable_roaming_indicators_title">غیرفعالسازی شاخص رومینگ</string>
@@ -334,9 +330,6 @@
 <string name="pref_hwkey_singletap_title">عمل یک لمس</string>
 <string name="pref_hwkey_doubletap_title">عمل دو لمس متوالی</string>
 <string name="pref_hwkey_doubletap_disable_title">غیرفعالسازی دو لمس متوالی</string>
-<string name="pref_statusbar_signal_color_mode_title">حالت رنگ سیگنال</string>
-<string name="signal_color_mode_stock">استفاده از آیکون‌های پیشفرض</string>
-<string name="signal_color_mode_disabled">عدم اعمال رنگ</string>
 <string name="pref_cat_app_launcher_title">لانچر برنامه‌ها</string>
 <string name="pref_cat_app_launcher_summary">این گزینه برای تعیین ۱۲ برنامه شخصی ست که میتوان آنها را با کلیدهای سخت‌افزاری یا اختصاص دادن به کلید خاص از نوار ناوبری اجرا نمود</string>
 <string name="pref_app_launcher_slot_title">برنامه کشوی %d</string>
@@ -366,12 +359,6 @@
 <string name="pref_navbar_color_enable_summary">برای غیرفعالسازی ممکن است راه‌اندازی مجدد نیاز باشد</string>
 <string name="pref_navbar_key_color_title">رنگ کلیدهای ناوبری</string>
 <string name="pref_navbar_key_glow_color_title">رنگ درخشندگی کلیدهای ناوبری</string>
-<string name="pref_statusbar_icon_color_secondary_title">رنگ دومین نماد سیگنال</string>
-<string name="pref_statusbar_icon_color_secondary_summary">نادیده گرفتن نماد پیشفرض نارنجی رنگ سیگنال</string>
-<string name="pref_status_icon_style_title">سبک آیکون وضعیت</string>
-<string name="pref_status_icon_style_summary">اعمال کردن بر روی آیکون‌های سایلنت ، ویبره ، آلارم و غیره</string>
-<string name="icon_style_jb">جلی‌بین</string>
-<string name="icon_style_kk">Stock</string>
 <string name="hwkey_back_doubletap_dialog_title">عمل کلید بازگشت با دو لمس متوالی</string>
 <string name="hwkey_action_home">رفتن به صفحه خانگی</string>
 <string name="hwkey_action_back">بازگشت</string>

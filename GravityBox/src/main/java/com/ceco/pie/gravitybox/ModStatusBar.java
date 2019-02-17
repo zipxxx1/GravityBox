@@ -93,6 +93,7 @@ public class ModStatusBar {
     public static final String ACTION_START_SEARCH_ASSIST = "gravitybox.intent.action.START_SEARCH_ASSIST";
     public static final String ACTION_EXPAND_NOTIFICATIONS = "gravitybox.intent.action.EXPAND_NOTIFICATIONS";
     public static final String ACTION_EXPAND_QUICKSETTINGS = "gravitybox.intent.action.EXPAND_QUICKSETTINGS";
+    public static final String ACTION_PHONE_STATUSBAR_VIEW_MADE = "gravitybox.intent.action.PHONE_STATUSBAR_VIEW_MADE";
 
     public enum ContainerType { STATUSBAR, HEADER, KEYGUARD }
 
@@ -333,9 +334,6 @@ public class ModStatusBar {
                 if (clock != null) {
                     mClock = new StatusbarClock(mPrefs);
                     mClock.setClock(clock);
-                    if (SysUiManagers.IconManager != null) {
-                        SysUiManagers.IconManager.registerListener(mClock);
-                    }
                     mBroadcastSubReceivers.add(mClock);
                 }
                 setClockPosition(mPrefs.getBoolean(
@@ -354,9 +352,6 @@ public class ModStatusBar {
             // destroy clock
             if (mClock != null) {
                 setClockPosition(false);
-                if (SysUiManagers.IconManager != null) {
-                    SysUiManagers.IconManager.unregisterListener(mClock);
-                }
                 mBroadcastSubReceivers.remove(mClock);
                 mClock.destroy();
                 mClock = null;
@@ -673,6 +668,8 @@ public class ModStatusBar {
                     mSettingsObserver = new SettingsObserver(
                             (Handler) XposedHelpers.getObjectField(mStatusBar, "mHandler"));
                     mSettingsObserver.observe();
+
+                    mContext.sendBroadcast(new Intent(ACTION_PHONE_STATUSBAR_VIEW_MADE));
                 }
             });
 

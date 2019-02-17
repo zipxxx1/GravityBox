@@ -253,16 +253,6 @@
     <string name="quick_pulldown_left">Trái</string>
     <string name="quick_pulldown_both">Cả hai</string>
 
-    <!-- Statusbar colors category -->
-    <string name="pref_cat_statusbar_colors_title">Màu thanh trạng thái</string>
-
-    <!-- Enable icon colors -->
-    <string name="pref_statusbar_icon_color_enable_title">Đổi màu biểu tượng</string>
-
-    <!-- Statusbar icon color -->
-    <string name="pref_statusbar_icon_color_title">Màu biểu tượng trên thanh trạng thái</string>
-    <string name="pref_statusbar_icon_color_summary">Đặt màu cho đồng hồ và các biểu tượng trên thanh trạng thái</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Quản lý Cài đặt nhanh</string>
 
@@ -524,11 +514,6 @@
     <!-- Disable double-tap (e.g. for Home Key on Android 4.3+) -->
     <string name="pref_hwkey_doubletap_disable_title">Tắt bấm đúp</string>
 
-    <!-- Color mode for statusbar signal icons -->
-    <string name="pref_statusbar_signal_color_mode_title">Chế độ màu cột sóng</string>
-    <string name="signal_color_mode_stock">Dùng biểu tượng gốc</string>
-    <string name="signal_color_mode_disabled">Không áp dụng màu</string>
-
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">Launcher ứng dụng</string>
     <string name="pref_cat_app_launcher_summary">Hộp thoại cho phép ấn định lên tới 12 ứng dụng có thể được chỉ định như Hành Động Phím Cứng hoặc được sử dụng như thanh điều hướng bổ sung</string>
@@ -574,16 +559,6 @@
     <string name="pref_navbar_color_enable_summary">Có thể phải khởi động lại sau khi tắt chức năng này</string>
     <string name="pref_navbar_key_color_title">Màu phím điều hướng</string>
     <string name="pref_navbar_key_glow_color_title">Màu phím điều hướng khi được bấm</string>
-
-    <!-- Secondary signal icon color for MTK Dual SIMs -->
-    <string name="pref_statusbar_icon_color_secondary_title">Màu cột sóng thứ hai</string>
-    <string name="pref_statusbar_icon_color_secondary_summary">Bỏ qua biểu tượng cột sóng gốc màu cam</string>
-
-    <!-- Status icon style -->
-    <string name="pref_status_icon_style_title">Kiểu biểu tượng trạng thái</string>
-    <string name="pref_status_icon_style_summary">Áp dụng cho biểu tượng trạng thái như im lặng, rung, báo thức, v.v&#8230;</string>
-    <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Stock</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Hành động bấm đúp phím Back</string>

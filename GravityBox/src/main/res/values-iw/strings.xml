@@ -237,16 +237,6 @@
     <string name="quick_pulldown_right">פינה ימנית</string>
     <string name="quick_pulldown_left">פינה שמאלית</string>
 
-    <!-- Statusbar colors category -->
-    <string name="pref_cat_statusbar_colors_title">צבעי שורת המצב</string>
-
-    <!-- Enable icon colors -->
-    <string name="pref_statusbar_icon_color_enable_title">הפעל צבעים של אייקונים</string>
-
-    <!-- Statusbar icon color -->
-    <string name="pref_statusbar_icon_color_title">צבע האייקונים של שורת המצב</string>
-    <string name="pref_statusbar_icon_color_summary">קובע צבעים עבור האייקונים של שורת המצב והשעון</string>
-
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">ניהול תפריט QuickSettings</string>
 
@@ -503,11 +493,6 @@
     <!-- Disable double-tap (e.g. for Home Key on Android 4.3+) -->
     <string name="pref_hwkey_doubletap_disable_title">בטל לחיצה כפולה</string>
 
-    <!-- Color mode for statusbar signal icons -->
-    <string name="pref_statusbar_signal_color_mode_title">מצב צבע בודד</string>
-    <string name="signal_color_mode_stock">השתמש באייקונים של סטוק</string>
-    <string name="signal_color_mode_disabled">אל תחיל צבע</string>
-
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">הפעלת יישומים</string>
     <string name="pref_cat_app_launcher_summary">תיבת דו שיח המאפשרת לקבוע עד 12 יישומים שיוקצו לכפתורים חומרתיים או פתיחתם תאופשר כחלק משורת הניווט</string>
@@ -553,16 +538,6 @@
     <string name="pref_navbar_color_enable_summary">ייתכן ויהיה צורך באיתחול המכשיר לאחר ביטול</string>
     <string name="pref_navbar_key_color_title">צבע מקשי הניווט</string>
     <string name="pref_navbar_key_glow_color_title">צבע זוהר של מקשי הניווט</string>
-
-    <!-- Secondary signal icon color for MTK Dual SIMs -->
-    <string name="pref_statusbar_icon_color_secondary_title">צבע משני של אות רשת לנייד</string>
-    <string name="pref_statusbar_icon_color_secondary_summary">עוקף את צבע האות הכתום של ערכת סטוק</string>
-
-    <!-- Status icon style -->
-    <string name="pref_status_icon_style_title">סגנון האייקונים של מצב מופעל</string>
-    <string name="pref_status_icon_style_summary">חל על האייקונים המתארים מצב מופעל, כגון צליל, שקט, רטט וכו\'</string>
-    <string name="icon_style_jb">סגנון JellyBean</string>
-    <string name="icon_style_kk">סגנון Stock</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">פעולה של הקשה כפולה על מקש חזור</string>

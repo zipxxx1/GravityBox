@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,11 +22,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager;
-import com.ceco.pie.gravitybox.managers.SysUiManagers;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager.ColorInfo;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager.IconManagerListener;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -36,7 +31,6 @@ import de.robv.android.xposed.XposedHelpers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.text.Spannable;
@@ -48,12 +42,11 @@ import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
 import android.widget.TextView;
 
-public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver {
+public class StatusbarClock implements BroadcastSubReceiver {
     private static final String TAG = "GB:StatusbarClock";
     private static final boolean DEBUG = false;
 
     private TextView mClock;
-    private int mDefaultClockColor;
     private int mOriginalPaddingLeft;
     private boolean mAmPmHide;
     private String mClockShowDate = "disabled";
@@ -95,7 +88,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         if (clock == null) throw new IllegalArgumentException("Clock cannot be null");
 
         mClock = clock;
-        mDefaultClockColor = mClock.getCurrentTextColor();
         mOriginalPaddingLeft = mClock.getPaddingLeft();
 
         // use this additional field to identify the instance of Clock that resides in status bar
@@ -119,7 +111,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         });
 
         hookGetSmallTime();
-        hookOnDarkChanged();
     }
 
     private void updateClock() {
@@ -164,12 +155,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
 
     public void setClockVisibility() {
         setClockVisibility(true);
-    }
-
-    public void updateColor(int color) {
-        if (mClock != null) {
-            mClock.setTextColor(color);
-        }
     }
 
     private void hookGetSmallTime() {
@@ -264,24 +249,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         }
     }
 
-    private void hookOnDarkChanged() {
-        try {
-            mHooks.add(XposedHelpers.findAndHookMethod(mClock.getClass(), "onDarkChanged",
-                    Rect.class, float.class, int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) {
-                    if (param.thisObject == mClock &&
-                            SysUiManagers.IconManager != null &&
-                            SysUiManagers.IconManager.isColoringEnabled()) {
-                        param.setResult(null);
-                    }
-                }
-            }));
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
-    }
-
     private String getFormattedDow(String inDow) {
         switch (mClockShowDow) {
             case GravityBoxSettings.DOW_LOWERCASE: 
@@ -315,17 +282,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
             }
         }
     };
-
-    @Override
-    public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if (mClock != null && (flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
-            if (colorInfo.coloringEnabled) {
-                updateColor(colorInfo.iconColor[0]);
-            } else {
-                updateColor(mDefaultClockColor);
-            }
-        }
-    }
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {

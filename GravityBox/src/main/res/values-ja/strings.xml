@@ -215,13 +215,6 @@
     <string name="quick_pulldown_off">オフ</string>
     <string name="quick_pulldown_right">右</string>
     <string name="quick_pulldown_left">左</string>
-    <!-- Statusbar colors category -->
-    <string name="pref_cat_statusbar_colors_title">ステータスバーの色</string>
-    <!-- Enable icon colors -->
-    <string name="pref_statusbar_icon_color_enable_title">アイコンの色を変更</string>
-    <!-- Statusbar icon color -->
-    <string name="pref_statusbar_icon_color_title">ステータスバーアイコンの色</string>
-    <string name="pref_statusbar_icon_color_summary">ステータスバーアイコンと時計の色を設定します。</string>
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">クイック設定管理</string>
     <!-- Notification drawer style -->
@@ -432,10 +425,6 @@
     <string name="pref_hwkey_doubletap_title">ダブルタップアクション</string>
     <!-- Disable double-tap (e.g. for Home Key on Android 4.3+) -->
     <string name="pref_hwkey_doubletap_disable_title">ダブルタップを無効化</string>
-    <!-- Color mode for statusbar signal icons -->
-    <string name="pref_statusbar_signal_color_mode_title">単色モード</string>
-    <string name="signal_color_mode_stock">標準アイコンを使用</string>
-    <string name="signal_color_mode_disabled">色を適用しない</string>
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">アプリランチャー</string>
     <string name="pref_cat_app_launcher_summary">HWキーアクションやナビバーのボタンとして使える、アプリを8個まで登録できるダイアログです。</string>
@@ -474,14 +463,6 @@
     <string name="pref_navbar_color_enable_summary">無効化後は再起動してください。</string>
     <string name="pref_navbar_key_color_title">ナビキーの色</string>
     <string name="pref_navbar_key_glow_color_title">ナビキーのグロー色</string>
-    <!-- Secondary signal icon color for MTK Dual SIMs -->
-    <string name="pref_statusbar_icon_color_secondary_title">セカンダリ電波アイコン色</string>
-    <string name="pref_statusbar_icon_color_secondary_summary">オレンジの電波アイコンを上書きします。</string>
-    <!-- Status icon style -->
-    <string name="pref_status_icon_style_title">ステータスアイコンスタイル</string>
-    <string name="pref_status_icon_style_summary">マナーモードやアラーム等のアイコンのスタイルを変更します。</string>
-    <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Stock</string>
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">バックキーダブルタップ</string>
     <!-- HW Key Actions: Home and Back actions -->

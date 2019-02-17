@@ -269,10 +269,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         super.onIconManagerStatusChanged(flags, colorInfo);
-        if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
-            mIconColor = colorInfo.coloringEnabled ? colorInfo.iconColor[0] : colorInfo.defaultIconColor;
-            updateTrafficDrawableColor();
-        } else if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+        if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
             mIconColor = colorInfo.iconTint;
             updateTrafficDrawableColor();
         }

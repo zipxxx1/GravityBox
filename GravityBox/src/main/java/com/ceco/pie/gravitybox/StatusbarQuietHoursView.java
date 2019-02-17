@@ -105,10 +105,7 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
 
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
-            setImageTintList(ColorStateList.valueOf(colorInfo.coloringEnabled ?
-                    colorInfo.iconColor[0] : colorInfo.defaultIconColor));
-        } else if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+        if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
             setImageTintList(ColorStateList.valueOf(colorInfo.iconTint));
         }
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
