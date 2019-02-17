@@ -169,6 +169,7 @@ public class ModHwKeys {
     private static PowerManager mPowerManager;
     private static Boolean mSupportLongPressPowerWhenNonInteractiveOrig;
     private static long mPostponeWakeUpOnPowerKeyUpEventTime = 0;
+    private static Class<?> mWindowStateClass;
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui"
@@ -521,6 +522,8 @@ public class ModHwKeys {
             mHeadsetUri[0] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_UNPLUG, null);
             mHeadsetUri[1] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_PLUG, null);
 
+            mWindowStateClass = XposedHelpers.findClass(CLASS_WINDOW_STATE, classLoader);
+
             mPhoneWindowManagerClass = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
             Class<?> classPhoneWindowManagerOem = null;
             if (Utils.isOxygenOsRom()) {
@@ -655,7 +658,7 @@ public class ModHwKeys {
                                 }
                                 if (isFromSystem) {
                                     XposedHelpers.callMethod(param.thisObject, "performHapticFeedbackLw",
-                                        new Class<?> [] { Class.forName(CLASS_WINDOW_STATE), int.class, boolean.class },
+                                        new Class<?> [] { mWindowStateClass, int.class, boolean.class },
                                         null, HapticFeedbackConstants.VIRTUAL_KEY, false);
                                 }
                             } else {
@@ -665,7 +668,7 @@ public class ModHwKeys {
                                 if (DEBUG) log("Custom key long-press action");
                                 performAction(HwKeyTrigger.CUSTOM_LONGPRESS);
                                 XposedHelpers.callMethod(param.thisObject, "performHapticFeedbackLw",
-                                        new Class<?> [] { Class.forName(CLASS_WINDOW_STATE), int.class, boolean.class },
+                                        new Class<?> [] { mWindowStateClass, int.class, boolean.class },
                                         null, HapticFeedbackConstants.LONG_PRESS, false);
                             }
                         }
@@ -1319,7 +1322,7 @@ public class ModHwKeys {
                                 //
                             }
                             Class<?>[] paramArgs = new Class<?>[3];
-                            paramArgs[0] = XposedHelpers.findClass(CLASS_WINDOW_STATE, null);
+                            paramArgs[0] = mWindowStateClass;
                             paramArgs[1] = int.class;
                             paramArgs[2] = boolean.class;
                             XposedHelpers.callMethod(mPhoneWindowManager, "performHapticFeedbackLw",

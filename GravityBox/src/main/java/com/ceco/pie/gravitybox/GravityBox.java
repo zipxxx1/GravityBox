@@ -141,7 +141,7 @@ public class GravityBox implements IXposedHookZygoteInit, /*IXposedHookInitPacka
             ModVolumeKeySkipTrack.initAndroid(prefs, lpparam.classLoader);
             ModHwKeys.initAndroid(prefs, lpparam.classLoader);
             // TODO: ExpandedDesktop
-            //ModExpandedDesktop.initAndroid(prefs, lpparam.classLoader);
+            ModExpandedDesktop.initAndroid(prefs, lpparam.classLoader);
             ModAudio.initAndroid(prefs, qhPrefs, lpparam.classLoader);
             PermissionGranter.initAndroid(lpparam.classLoader);
             ModLowBatteryWarning.initAndroid(prefs, qhPrefs, lpparam.classLoader);
