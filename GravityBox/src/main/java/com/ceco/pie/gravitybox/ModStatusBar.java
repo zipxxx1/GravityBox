@@ -107,7 +107,8 @@ public class ModStatusBar {
         void onStatusBarStateChanged(int oldState, int newState);
     }
 
-    private static ViewGroup mIconArea;
+    private static ViewGroup mLeftArea;
+    private static ViewGroup mRightArea;
     private static LinearLayout mLayoutCenter;
     private static LinearLayout mLayoutCenterKg;
     private static StatusbarClock mClock;
@@ -121,8 +122,6 @@ public class ModStatusBar {
     private static String mOngoingNotif;
     private static TrafficMeterAbstract mTrafficMeter;
     private static TrafficMeterMode mTrafficMeterMode = TrafficMeterMode.OFF;
-    private static ViewGroup mSbContents;
-    private static boolean mClockInSbContents = false;
     private static boolean mNotifExpandAll;
     private static String mClockLongpressLink;
     private static XSharedPreferences mPrefs;
@@ -296,7 +295,7 @@ public class ModStatusBar {
         return mStatusBarState;
     }
 
-    public static boolean isCLockOnRight() {
+    public static boolean isCLockOnLeft() {
         if (mClock != null && mClock.getClock() != null) {
             return (!mClockCentered && mClock.getClock().getVisibility() == View.VISIBLE);
         }
@@ -316,21 +315,15 @@ public class ModStatusBar {
             mStatusBarView.addView(mLayoutCenter);
             if (DEBUG) log("mLayoutCenter injected");
 
-            mIconArea = mStatusBarView
-                    .findViewById(res.getIdentifier("system_icon_area", "id", PACKAGE_NAME));
-            mSbContents = mStatusBarView
-                    .findViewById(res.getIdentifier("status_bar_contents", "id", PACKAGE_NAME));
+            mRightArea = mStatusBarView
+                    .findViewById(res.getIdentifier("system_icons", "id", PACKAGE_NAME));
+            mLeftArea = mStatusBarView
+                    .findViewById(res.getIdentifier("status_bar_left_side", "id", PACKAGE_NAME));
 
             if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH, true)) {
                 // find statusbar clock
-                TextView clock = mIconArea.findViewById(
+                TextView clock = mLeftArea.findViewById(
                         res.getIdentifier("clock", "id", PACKAGE_NAME));
-                // the second attempt
-                if (clock == null && mSbContents != null) {
-                    clock = mSbContents.findViewById(
-                            res.getIdentifier("clock", "id", PACKAGE_NAME));
-                    mClockInSbContents = clock != null;
-                }
                 if (clock != null) {
                     mClock = new StatusbarClock(mPrefs);
                     mClock.setClock(clock);
@@ -366,8 +359,8 @@ public class ModStatusBar {
                 if (DEBUG) log("destroyLayoutStatusBar: mLayoutCenter destroyed");
             }
 
-            mIconArea = null;
-            mSbContents = null;
+            mLeftArea = null;
+            mRightArea = null;
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -1046,8 +1039,7 @@ public class ModStatusBar {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) {
                         if (mLayoutCenter != null && mLayoutCenter.getChildCount() > 0 &&
-                                mLayoutCenter.getChildAt(0).getVisibility() == View.VISIBLE &&
-                                XposedHelpers.getBooleanField(param.thisObject, "mShowAllIcons")) {
+                                mLayoutCenter.getChildAt(0).getVisibility() == View.VISIBLE) {
                             int width = Math.round(mLayoutCenter.getWidth()/2f -
                                             mLayoutCenter.getChildAt(0).getWidth()/2f) - 4;
                             if (width > 0) {
@@ -1084,29 +1076,21 @@ public class ModStatusBar {
 
     private static void setClockPosition(boolean center) {
         if (mClockCentered == center || mClock == null || 
-                mIconArea == null || mLayoutCenter == null) {
+                mLeftArea == null || mLayoutCenter == null) {
             return;
         }
 
         if (center) {
             mClock.getClock().setGravity(Gravity.CENTER);
             mClock.getClock().setPadding(0, 0, 0, 0);
-            if (mClockInSbContents) {
-                mSbContents.removeView(mClock.getClock());
-            } else {
-                mIconArea.removeView(mClock.getClock());
-            }
+            mLeftArea.removeView(mClock.getClock());
             mLayoutCenter.addView(mClock.getClock());
             if (DEBUG) log("Clock set to center position");
         } else {
             mClock.getClock().setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
             mClock.resetOriginalPaddingLeft();
             mLayoutCenter.removeView(mClock.getClock());
-            if (mClockInSbContents) {
-                mSbContents.addView(mClock.getClock());
-            } else {
-                mIconArea.addView(mClock.getClock());
-            }
+            mLeftArea.addView(mClock.getClock(), 0);
             if (DEBUG) log("Clock set to normal position");
         }
 
@@ -1146,8 +1130,8 @@ public class ModStatusBar {
 
     private static void removeTrafficMeterView() {
         if (mTrafficMeter != null) {
-            if (mSbContents != null) {
-                mSbContents.removeView(mTrafficMeter);
+            if (mLeftArea != null) {
+                mLeftArea.removeView(mTrafficMeter);
             }
             if (mLayoutCenter != null) {
                 mLayoutCenter.removeView(mTrafficMeter);
@@ -1155,8 +1139,8 @@ public class ModStatusBar {
             if (mLayoutCenterKg != null) {
                 mLayoutCenterKg.removeView(mTrafficMeter);
             }
-            if (mIconArea != null) {
-                mIconArea.removeView(mTrafficMeter);
+            if (mRightArea != null) {
+                mRightArea.removeView(mTrafficMeter);
             }
         }
     }
@@ -1169,14 +1153,16 @@ public class ModStatusBar {
             final int position = mStatusBarState == StatusBarState.SHADE ?
                     mTrafficMeter.getTrafficMeterPosition() :
                         GravityBoxSettings.DT_POSITION_AUTO;
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)
+                    mTrafficMeter.getLayoutParams();
             switch(position) {
                 case GravityBoxSettings.DT_POSITION_AUTO:
+                    lp.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                    lp.weight = 0;
                     if (mStatusBarState == StatusBarState.SHADE) {
                         if (mClockCentered) {
-                            if (mClockInSbContents && mSbContents != null) {
-                                mSbContents.addView(mTrafficMeter);
-                            } else if (mIconArea != null) {
-                                mIconArea.addView(mTrafficMeter, 0);
+                            if (mLeftArea != null) {
+                                mLeftArea.addView(mTrafficMeter, 0);
                             }
                         } else if (mLayoutCenter != null) {
                             mLayoutCenter.addView(mTrafficMeter);
@@ -1186,18 +1172,21 @@ public class ModStatusBar {
                     }
                     break;
                 case GravityBoxSettings.DT_POSITION_LEFT:
-                    if (mSbContents != null) {
-                        mSbContents.addView(mTrafficMeter, 0);
+                    lp.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                    lp.weight = 0;
+                    if (mLeftArea != null) {
+                        mLeftArea.addView(mTrafficMeter, 0);
                     }
                     break;
                 case GravityBoxSettings.DT_POSITION_RIGHT:
-                    if (mClockInSbContents && mSbContents != null) {
-                        mSbContents.addView(mTrafficMeter);
-                    } else if (mIconArea != null) {
-                        mIconArea.addView(mTrafficMeter, 0);
+                    lp.weight = 1;
+                    lp.width = 0;
+                    if (mRightArea != null) {
+                        mRightArea.addView(mTrafficMeter, 0);
                     }
                     break;
             }
+            mTrafficMeter.setLayoutParams(lp);
         }
     }
 

@@ -230,7 +230,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 if (mOosSystemIconsMarginEndOriginal == null) {
                     mOosSystemIconsMarginEndOriginal = mlp.getMarginEnd();
                 }
-                mlp.setMarginEnd(ModStatusBar.isCLockOnRight() &&
+                mlp.setMarginEnd(ModStatusBar.isCLockOnLeft() &&
                             ((mBatteryStyle != GravityBoxSettings.BATTERY_STYLE_STOCK &&
                                     mBatteryStyle != GravityBoxSettings.BATTERY_STYLE_NONE) ||
                              (mBatteryPercentTextEnabledSb && mBatteryPercentTextOnRight)) ?
