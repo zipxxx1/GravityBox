@@ -252,7 +252,6 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
 
         mBackgroundAnimator.addUpdateListener(mUpdateListener);
 
-        setDrawingCacheEnabled(false);
         setVisibility(View.GONE);
 
         getDimensions();

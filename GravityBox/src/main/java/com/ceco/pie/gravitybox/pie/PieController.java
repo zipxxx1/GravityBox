@@ -114,7 +114,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private PieLongPressHandler mLongPressHandler;
     private boolean mSysinfoDisabled;
     private int mLongpressDelay;
-    private Drawable mRecentIcon;
     private boolean mMirroredKeys;
 
     private static void log(String message) {
@@ -307,12 +306,8 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         final Resources res = mContext.getResources();
         Tracker.sDistance = mGbResources.getDimensionPixelSize(R.dimen.pie_trigger_distance);
 
-        mBackIcon = mContext.getDrawable(context.getResources().getIdentifier(
-                "ic_sysbar_back", "drawable", PACKAGE_NAME)).mutate();
-        mBackAltIcon = mContext.getDrawable(context.getResources().getIdentifier(
-                "ic_sysbar_back", "drawable", PACKAGE_NAME)).mutate();
-        mRecentIcon = mContext.getDrawable(res.getIdentifier(
-                "ic_sysbar_recent", "drawable", PACKAGE_NAME)).mutate();
+        mBackIcon = mGbContext.getDrawable(R.drawable.ic_sysbar_back);
+        mBackAltIcon = mGbContext.getDrawable(R.drawable.ic_sysbar_back_ime);
 
         mSysinfoDisabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_SYSINFO_DISABLE, false);
         setLongpressDelay(Integer.valueOf(prefs.getString(
@@ -388,7 +383,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
 
         if (mMirroredKeys) {
             mMenuButton = constructItem(1, ButtonType.MENU,
-                    mContext.getDrawable(res.getIdentifier("ic_sysbar_menu", "drawable", PACKAGE_NAME)),
+                    mGbContext.getDrawable(R.drawable.ic_sysbar_menu),
                     minimumImageSize);
             mNavigationSlice.addItem(mMenuButton);
     
@@ -402,11 +397,11 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
             }
     
             mNavigationSlice.addItem(constructItem(2, ButtonType.RECENT,
-                    mRecentIcon,
+                    mGbContext.getDrawable(R.drawable.ic_sysbar_recent),
                     minimumImageSize));
     
             mNavigationSlice.addItem(constructItem(2, ButtonType.HOME,
-                    mContext.getDrawable(res.getIdentifier("ic_sysbar_home", "drawable", PACKAGE_NAME)),
+                    mGbContext.getDrawable(R.drawable.ic_sysbar_home),
                     minimumImageSize));
     
             mNavigationSlice.addItem(constructItem(2, ButtonType.BACK,
@@ -417,10 +412,10 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                     mBackIcon,
                     minimumImageSize));
             mNavigationSlice.addItem(constructItem(2, ButtonType.HOME,
-                    mContext.getDrawable(res.getIdentifier("ic_sysbar_home", "drawable", PACKAGE_NAME)),
+                    mGbContext.getDrawable(R.drawable.ic_sysbar_home),
                     minimumImageSize));
             mNavigationSlice.addItem(constructItem(2, ButtonType.RECENT,
-                    mRecentIcon,
+                    mGbContext.getDrawable(R.drawable.ic_sysbar_recent),
                     minimumImageSize));
             if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_SEARCH) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.SEARCH,
@@ -432,7 +427,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
             }
 
             mMenuButton = constructItem(1, ButtonType.MENU,
-                    mContext.getDrawable(res.getIdentifier("ic_sysbar_menu", "drawable", PACKAGE_NAME)),
+                    mGbContext.getDrawable(R.drawable.ic_sysbar_menu),
                     minimumImageSize);
             mNavigationSlice.addItem(mMenuButton);
         }
@@ -698,11 +693,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         if (mBackAltIcon != null) {
             mBackAltIcon.setColorFilter(null);
             mBackAltIcon.setColorFilter(mColorInfo.fgColor, Mode.SRC_ATOP);
-        }
-
-        if (mRecentIcon != null) {
-            mRecentIcon.setColorFilter(null);
-            mRecentIcon.setColorFilter(mColorInfo.fgColor, Mode.SRC_ATOP);
         }
 
         if (mNavigationSlice != null) {
