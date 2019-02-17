@@ -78,9 +78,7 @@ public class SystemIconController implements BroadcastSubReceiver {
                     "updateBluetooth", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
-                    if (mBtMode != BtMode.DEFAULT) {
-                        updateBtIconVisibility();
-                    }
+                    updateBtIconVisibility();
                 }
             });
         } catch (Throwable t) {
