@@ -173,9 +173,8 @@ public class ModDisplay {
     
             if (color != null) {
                 Object ls = XposedHelpers.getSurroundingThis(mLight);
-                long np = XposedHelpers.getLongField(ls, "mNativePointer");
                 XposedHelpers.callMethod(ls, "setLight_native",
-                        np, LIGHT_ID_BUTTONS, color, 0, 0, 0, 0);
+                        LIGHT_ID_BUTTONS, color, 0, 0, 0, 0);
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
@@ -206,24 +205,23 @@ public class ModDisplay {
             if (mLight == null) return;
             try {
                 Object ls = XposedHelpers.getSurroundingThis(mLight);
-                long np = XposedHelpers.getLongField(ls, "mNativePointer");
                 if (!mPendingNotif) {
                     mHandler.removeCallbacks(this);
                     mPendingNotifColor = 
                             mButtonBacklightMode.equals(GravityBoxSettings.BB_MODE_ALWAYS_ON) 
                                     && mPm.isInteractive() ? 0xff6e6e6e : 0;
                     XposedHelpers.callMethod(ls, "setLight_native",
-                            np, LIGHT_ID_BUTTONS, mPendingNotifColor, 0, 0, 0, 0);
+                            LIGHT_ID_BUTTONS, mPendingNotifColor, 0, 0, 0, 0);
                 } else {
                     if (mPendingNotifColor == 0) {
                         mPendingNotifColor = 0xff6e6e6e;
                         XposedHelpers.callMethod(ls, "setLight_native",
-                            np, LIGHT_ID_BUTTONS, mPendingNotifColor, 0, 0, 0, 0);
+                            LIGHT_ID_BUTTONS, mPendingNotifColor, 0, 0, 0, 0);
                         mHandler.postDelayed(mPendingNotifRunnable, 500);
                     } else {
                         mPendingNotifColor = 0;
                         XposedHelpers.callMethod(ls, "setLight_native",
-                            np, LIGHT_ID_BUTTONS, mPendingNotifColor, 0, 0, 0, 0);
+                            LIGHT_ID_BUTTONS, mPendingNotifColor, 0, 0, 0, 0);
                         mHandler.postDelayed(mPendingNotifRunnable, mPulseNotifDelay);
                     }
                 }
