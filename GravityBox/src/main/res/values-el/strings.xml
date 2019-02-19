@@ -229,10 +229,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Εμφάνιση ημέρας</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Ένωση εντάσεων Κουδουνίσματος &amp; ειδοποιήσεων</string>
-    <string name="pref_link_volumes_summary">Όταν είναι απενεργοποιημένο, οι εντάσεις των ήχων κλήσης και ειδοποιήσεων μπορούν να οριστούν ανεξάρτητα</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Αυτόματη εναλλαγή QuickSettings</string>
     <string name="pref_auto_switch_qs_summary">Τα QuickSettings θα εμφανίζονται αυτόματα αν τραβηχτεί κάτω η γραμμή κατάστασης ενώ δεν υπάρχουν ειδοποιήσεις</string>
@@ -741,10 +737,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Αυτομ. απενεργ. φακού</string>
     <string name="pref_torch_auto_off_summary">Απενεργοποιεί τον φακό μετά από τον καθορισμένο χρόνο. Ορίστε σε 0 για απενεργοποίηση (δεν συνιστάται)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Αλλαγή προσανατολισμού πλήκτρων έντασης</string>
-    <string name="pref_vol_swap_keys_summary">Swap volume keys when the screen is rotated</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Εφέ θολώματος</string>

@@ -216,10 +216,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Tampilkan hari</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Gabungkan alur ringtone &amp; notifikasi</string>
-    <string name="pref_link_volumes_summary">Ketika dimatikan, alur volume untuk ringtone dan notifikasi bisa di set secara independen</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Otomatis berpindah ke QuickSettings</string>
     <string name="pref_auto_switch_qs_summary">QuickSettings akan ditampilkan secara otomatis ketika statusbar ditarik ke bawah bila tidak ada notifikasi</string>

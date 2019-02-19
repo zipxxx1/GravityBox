@@ -240,10 +240,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Haftanın gününü göster</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Zil sesi ve bildirim seslerini birleştir</string>
-    <string name="pref_link_volumes_summary">Devre dışı bırakıldığında, zil sesi ve bildirimler için sesler ayrı ayrı ayarlanabilir</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Hızlı Ayarları otomatik göster</string>
     <string name="pref_auto_switch_qs_summary">Bildirim yokken durum çubuğu aşağı çekilirse Hızlı Ayarları otomatik göster</string>
@@ -756,10 +752,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Feneri otomatik kapat</string>
     <string name="pref_torch_auto_off_summary">"Feneri belirlenen zaman aşımında kapatır. Devre dışı bırakmak için 0'a ayarlayın (önerilmez)"</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Ses tuşlarının yönünü değiştir</string>
-    <string name="pref_vol_swap_keys_summary">Ekran döndürüldüğünde ses tuşlarının yönlerini değiştirir</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Bulanıklaştırma efekti</string>

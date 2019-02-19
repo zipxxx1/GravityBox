@@ -222,10 +222,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Zobraziť deň v týždni</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Spojiť hlasitosť vyzváňania a notifikácií</string>
-    <string name="pref_link_volumes_summary">Ak je vypnuté, umožňuje nastaviť úrovne hlasitosti zvlášť pre vyzváňanie a notifikácie</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Automatické rýchle nastavenia</string>
     <string name="pref_auto_switch_qs_summary">Rýchle nastavenia budú zobrazené automaticky ak sa v notifikačnom panely nenachádzajú žiadne notifikácie</string>
@@ -737,10 +733,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Automatické vypnutie LED svetla</string>
     <string name="pref_torch_auto_off_summary">Vypne LED svetlo po určitom čase. Nastavte 0 pre zrušenie (neodporúča sa)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Prevrátiť tlačidlá hlasistosti</string>
-    <string name="pref_vol_swap_keys_summary">V prípade otočenia obrazovky bude prevrátené ovládanie tlačidiel hlasitosti</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efekt rozostrenia</string>

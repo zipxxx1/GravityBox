@@ -242,10 +242,6 @@
     
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">显示星期(周X)</string>
-    
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">合并铃声音量与通知音量</string>
-    <string name="pref_link_volumes_summary">禁用后铃声音量与通知音量将可以分别调整</string>
 
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">自动切换快速菜单</string>
@@ -763,10 +759,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">自动关闭手电筒</string>
     <string name="pref_torch_auto_off_summary">设置时间自动关闭手电筒，设置为0将禁用（不推荐）</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">重新调整音量键</string>
-    <string name="pref_vol_swap_keys_summary">当屏幕旋转时交换音量键</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">模糊效果</string>

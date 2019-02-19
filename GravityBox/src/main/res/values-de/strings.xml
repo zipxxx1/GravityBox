@@ -237,10 +237,6 @@
     <!-- Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Wochentag anzeigen</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Anruf- &amp; Benachrichtigungslautstärke verknüpfen</string>
-    <string name="pref_link_volumes_summary">Lautstärke für Anrufe und Benachrichtigungen gemeinsam oder getrennt einstellen</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Autom. anzeigen</string>
     <string name="pref_auto_switch_qs_summary">Schnelleinstellungen anzeigen, wenn die Benachrichtigungsleiste heruntergezogen wird und keine Benachrichtigungen vorliegen</string>
@@ -752,10 +748,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Taschenlampe autom. aus</string>
     <string name="pref_torch_auto_off_summary">Taschenlampe nach festgelegter Zeit abschalten. Wert 0 verhindert autom. Abschalten. (nicht empfohlen)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Lautstärketasten umorientieren</string>
-    <string name="pref_vol_swap_keys_summary">Lautstärketasten je nach Bildschirmdrehung belegen</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Hintergrund weichzeichnen</string>

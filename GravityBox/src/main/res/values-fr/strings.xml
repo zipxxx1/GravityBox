@@ -207,9 +207,6 @@
     <string name="pref_qs_tiles_per_row_summary">Définit le nombre de touches à afficher par rangée</string>
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Afficher le jour de la semaine</string>
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Volumes sonnerie &amp; notifications liés</string>
-    <string name="pref_link_volumes_summary">Si désactivé, les volumes de la sonnerie et des notifications peuvent être réglés indépendamment</string>
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Auto-commutation paramètres rapides</string>
     <string name="pref_auto_switch_qs_summary">Les paramètres rapides seront affichés automatiquement lorsque la barre d\'état est tirée vers le bas s\'il n\'y a pas de notification</string>
@@ -621,9 +618,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Extinction auto de la torche</string>
     <string name="pref_torch_auto_off_summary">Éteint la torche après un laps de temps spécifié. Mettre 0 pour désactiver (non recommandé)</string>
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Réorientation des touches de volume</string>
-    <string name="pref_vol_swap_keys_summary">Permute les touches de volume après une rotation d\'écran</string>
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Effet de floutage</string>
     <!-- Force overflow menu button -->

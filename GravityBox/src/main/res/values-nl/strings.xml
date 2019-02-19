@@ -229,10 +229,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Toon dag van de week</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Link beltoon &amp; meldings volumes</string>
-    <string name="pref_link_volumes_summary">Indien uitgeschakeld kunnen volumes voor beltoon en meldingen apart ingesteld worden</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Auto-switch QuickSettings</string>
     <string name="pref_auto_switch_qs_summary">QuickSettings zullen automatisch verschijnen wanneer er geen nieuwe meldingen zijn</string>
@@ -746,10 +742,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Torch auto off</string>
     <string name="pref_torch_auto_off_summary">Turns off torch after specified amount of time. Set to 0 to disable (not recommended)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Reorient volume keys</string>
-    <string name="pref_vol_swap_keys_summary">Swap volume keys when the screen is rotated</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Blur effect</string>

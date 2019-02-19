@@ -165,8 +165,6 @@
 <string name="pref_qs_tiles_per_row_title">تعداد کاشی‌ها در هر ردیف</string>
 <string name="pref_qs_tiles_per_row_summary">تعیین نمایش تعداد کاشی در هر ردیف</string>
 <string name="pref_statusbar_clock_dow_title">نمایش روز از هفته</string>
-<string name="pref_link_volumes_title">"همتاسازی حجم صدای زنگ تماس و اعلان "</string>
-<string name="pref_link_volumes_summary">هنگام غیرفعال بودن، حجم صدای برای اعلان و زنگ تماس بصورت مستقیم تنظیم میشود</string>
 <string name="pref_auto_switch_qs_title">سوئیچ خودکار تنظیمات سریع</string>
 <string name="pref_auto_switch_qs_summary">نمایش خودکار تنظیمات سریع هنگام پایین کشیدن نوار وضعیت زمانیکه اعلانی وجود نداشته باشد</string>
 <string name="pref_quick_pulldown_title">محدوده اعمال پایین کشیدن</string>
@@ -465,8 +463,6 @@
 <string name="pref_ime_fullscreen_disable_title">غیرفعالسازی صفحه کلید تمام‌صفحه</string>
 <string name="pref_torch_auto_off_title">خاموش کردن خودکار چراغ قوه</string>
 <string name="pref_torch_auto_off_summary">خاموش‌شدن خودکار چراغ قوه پس از مدت زمان تعیین شده. برای غیرفعالسازی بروی 0 تنظیم شود (توصیه نمیگردد)</string>
-<string name="pref_vol_swap_keys_title">تغییر جهت کلیدهای حجم صدا</string>
-<string name="pref_vol_swap_keys_summary">"تعویض عمل کلیدهای حجم صدا هنگام چرخش تصویر صفحه نمایش "</string>
 <string name="pref_lockscreen_bg_blur_effect_title">افکت محو</string>
 <string name="pref_force_overflow_menu_button_title">افزودن دکمه منو</string>
 <string name="pref_force_overflow_menu_button_summary">نیازمند راه‌اندازی مجدد</string>

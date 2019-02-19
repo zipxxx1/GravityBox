@@ -243,10 +243,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">A hét napjának mutatása</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Csengőhang és figyelmeztető hangok értékei</string>
-    <string name="pref_link_volumes_summary">Amikor ki van kapcsolva, a csengőhang és a figyelmeztető hangok értékei egymástól függetlenül állíthatóak</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Automatikus váltás a Gyorsbeállítások panelre</string>
     <string name="pref_auto_switch_qs_summary">A Gyorsbeállítások panel fog megjelenni automatikusan az Állapotsáv megnyitásakor, amennyiben nincsenek értesítések</string>
@@ -762,10 +758,6 @@
     <string name="pref_torch_auto_off_title">Zseblámpa automatikus kikapcsolása</string>
     <string name="pref_torch_auto_off_summary">Kikapcsolja a zseblámpát meghatározott idő után. Letiltáshoz állíts be 0-t (nem javasolt)</string>
 
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Hangerőszabályzó gombok megfordítása</string>
-    <string name="pref_vol_swap_keys_summary">Felcseréli a hangerőszabályzó gombokat elforgatott képernyőnél</string>
-    
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Elmosódás effekt</string>
 

@@ -234,10 +234,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">在狀態列顯示當天是星期幾</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">將鈴聲音量與通知音量連結</string>
-    <string name="pref_link_volumes_summary">當停用時，您可以分別調整鈴聲音量與通知音量</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">自動切換至快速設定</string>
     <string name="pref_auto_switch_qs_summary">當沒有通知時，下拉狀態列會自動切換至快速設定選單</string>
@@ -771,10 +767,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">手電筒自動關閉</string>
     <string name="pref_torch_auto_off_summary">在指定的時間後自動關閉手電筒。當設定為 0 時為停用 (即一直開啟，不推薦使用) </string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">音量鍵互換</string>
-    <string name="pref_vol_swap_keys_summary">當螢幕旋轉時互換音量鍵</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">模糊效果</string>

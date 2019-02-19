@@ -237,10 +237,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Hiện ngày</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Liên kết âm lượng nhạc chuông &amp; âm thông báo</string>
-    <string name="pref_link_volumes_summary">Khi tắt, âm lượng của nhạc chuông và âm thông báo của thể chỉnh riêng rẽ</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Tự chuyển Cài đặt nhanh</string>
     <string name="pref_auto_switch_qs_summary">Cài đặt nhanh sẽ tụ hiện ra khi kéo thanh trạng thái xuống trong khi không có thông báo nào</string>
@@ -756,10 +752,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Đèn pin tự động tắt</string>
     <string name="pref_torch_auto_off_summary">Tắt đèn pin sau thời gian quy định. Đặt là 0 để tắt chức năng này (không khuyến khích)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Định hướng lại phím âm lượng</string>
-    <string name="pref_vol_swap_keys_summary">Hoán đổi các phím âm lượng khi màn hình xoay</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Hiệu ứng mờ</string>

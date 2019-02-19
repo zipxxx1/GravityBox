@@ -237,10 +237,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Mostrar el día de la semana</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Enlazar vol. del tono de llamada con notificaciones</string>
-    <string name="pref_link_volumes_summary">Cuando se desactiva, el volumen del tono de llamada se configura independientemente del de las notificaciones</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Visualizar ajustes rápidos automáticamente</string>
     <string name="pref_auto_switch_qs_summary">Los ajustes rápidos se mostrarán automáticamente cuando se baje la barra de estado y no haya notificaciones</string>
@@ -757,10 +753,6 @@
     <string name="pref_torch_auto_off_title">Apagar linterna automáticamente</string>
     <string name="pref_torch_auto_off_summary">Apaga la linterna tras el tiempo especificado. Establecer a 0 para desactivar (no recomendado)</string>
 
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Reorientar botones de volumen</string>
-    <string name="pref_vol_swap_keys_summary">Intercambiar botones de volumen cuando se rota la pantalla</string>
-    
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efecto de desenfoque</string>
 

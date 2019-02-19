@@ -178,8 +178,4 @@
     <!-- Device type -->
     <string name="device_phone">telefon</string>
 
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Ombyt lydstyrkeknapper</string>
-    <string name="pref_vol_swap_keys_summary">Ombyt lydstyrkeknapper, når skærmen roteres</string>
-
 </resources>

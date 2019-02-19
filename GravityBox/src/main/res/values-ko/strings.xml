@@ -195,9 +195,6 @@
 
     <string name="pref_statusbar_clock_dow_title">오늘의 요일 표시</string>
 
-    <string name="pref_link_volumes_title">벨소리와 알림음 음량 연결</string>
-    <string name="pref_link_volumes_summary">비활성화 시에는 벨소리와 알림음이 각각 따로 음량을 설정할 수 있도록 만듭니다.</string>
-
     <string name="pref_auto_switch_qs_title">퀵세팅 패널 자동 전환</string>
     <string name="pref_auto_switch_qs_summary">알림이 존재하지 않을 때, 상단바를 내리면 퀵세팅 패널을 보이도록 설정합니다.</string>
 
@@ -599,9 +596,6 @@
     
     <string name="pref_torch_auto_off_title">손전등 자동 꺼짐</string>
     <string name="pref_torch_auto_off_summary">손전등이 사용자가 설정한 시간이 지나면 자동으로 꺼집니다. 0으로 설정하면 비활성화됩니다. (추천하지 않음)</string>
-
-    <string name="pref_vol_swap_keys_title">볼륨 키 위치 변경</string>
-    <string name="pref_vol_swap_keys_summary">화면이 회전될 때 볼륨키의 위치도 같이 바뀝니다.</string>
 
     <string name="pref_lockscreen_bg_blur_effect_title">흐림 효과</string>
 

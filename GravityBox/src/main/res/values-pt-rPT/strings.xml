@@ -219,10 +219,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Mostrar dia da semana</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Volumes de toque e notificações interligados</string>
-    <string name="pref_link_volumes_summary">Quando desativado, os volumes de toque e notificações podem ser controlados de forma independente</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Comutação automática das definições rápidas</string>
     <string name="pref_auto_switch_qs_summary">Mostra as definições rápidas automaticamente quando a barra de status é deslizada para baixo e não existem notificações</string>
@@ -732,10 +728,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Desligar lanterna automaticamente</string>
     <string name="pref_torch_auto_off_summary">Permite definir o tempo durante o qual a lanterna permanece ligada. O valor 0 desativa a funcionalidade (não recomendável)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Reorientar teclas de volume</string>
-    <string name="pref_vol_swap_keys_summary">Troca ação das teclas de volume quando o ecrã é rodado</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efeito de desfocagem</string>

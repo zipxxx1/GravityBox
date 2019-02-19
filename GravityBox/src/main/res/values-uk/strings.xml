@@ -241,10 +241,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Показувати день тижня</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Зв\'язати виклик та повідомлення</string>
-    <string name="pref_link_volumes_summary">Коли вимкнено, гучність повідомлень і виклику можна задавати незалежно</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Авто-увімкнення швидких налаштувань</string>
     <string name="pref_auto_switch_qs_summary">Швидкі налаштування будуть показані автоматично при витягуванні панелі стану, при відсутності сповіщень</string>
@@ -756,10 +752,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Авто-вимкнення ліхтаря</string>
     <string name="pref_torch_auto_off_summary">Автоматичне вимикання ліхтаря через заданий проміжок часу. Встановіть нуль для деактивації функції (не рекомендується)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Поміняти кнопки гучності</string>
-    <string name="pref_vol_swap_keys_summary">Кнопки гучності при повороті екрану міняються місцями</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Ефект розмиття</string>

@@ -1999,12 +1999,6 @@
             android:summary="@string/pref_vol_force_music_control_summary"
             android:defaultValue="false" />
 
-        <CheckBoxPreference
-            android:key="pref_vol_swap_keys"
-            android:title="@string/pref_vol_swap_keys_title"
-            android:summary="@string/pref_vol_swap_keys_summary"
-            android:defaultValue="false" />
-
         <ListPreference 
             android:key="pref_safe_media_volume2"
             android:title="@string/pref_safe_media_volume_title"
@@ -2012,12 +2006,6 @@
             android:entries="@array/tri_state_entries"
             android:entryValues="@array/tri_state_values"
             android:defaultValue="DEFAULT" />
-
-        <CheckBoxPreference 
-            android:key="pref_link_volumes"
-            android:title="@string/pref_link_volumes_title"
-            android:summary="@string/pref_link_volumes_summary"
-            android:defaultValue="true" />
 
     </PreferenceScreen>
 

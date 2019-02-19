@@ -234,10 +234,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Show day of week</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Link ringtone &amp; notifications volumes</string>
-    <string name="pref_link_volumes_summary">When disabled, volumes for ringtone and notifications can be set independently</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Auto-switch QuickSettings</string>
     <string name="pref_auto_switch_qs_summary">QuickSettings will show automatically when status bar is pulled down while there are no notifications</string>
@@ -751,10 +747,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Torch auto off</string>
     <string name="pref_torch_auto_off_summary">Turns off torch after specified amount of time. Set to 0 to disable (not recommended)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Reorient volume keys</string>
-    <string name="pref_vol_swap_keys_summary">Swap volume keys when the screen is rotated</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Blur effect</string>

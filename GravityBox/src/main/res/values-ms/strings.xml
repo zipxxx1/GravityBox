@@ -243,10 +243,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Tunjukkan hari dalam seminggu</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Sambung ringtone &amp; nada notifikasi</string>
-    <string name="pref_link_volumes_summary">Bila dimatikan,nada ringtone dan notifikasi boleh di set berasingan</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Automatik-tukar QuickSettings</string>
     <string name="pref_auto_switch_qs_summary">QuickSettings akan ditunjuk secara automatik jika tiada notifikasi</string>
@@ -763,10 +759,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Lampu automatik mati</string>
     <string name="pref_torch_auto_off_summary">Matikan lampu setelah beberapa seketika. Set kepada 0 untuk matikan (tidak disarankan)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Pusingan butang nada</string>
-    <string name="pref_vol_swap_keys_summary">Tukar butang nada apabila skrin dipusing</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efek blur</string>

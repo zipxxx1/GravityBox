@@ -222,10 +222,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">הצג יום בשבוע</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">הצמד עוצמות שמע של צילצולים &amp; התראות</string>
-    <string name="pref_link_volumes_summary">כאשר אפשרות זו מבוטלת, ניתן לקבוע עוצמת שמע עבור צילצולים והתראות בנפרד</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">תפריט QuickSettings אוטומטי</string>
     <string name="pref_auto_switch_qs_summary">תפריט QuickSettings יוצג אוטומטית כאשר מושכים את וילון שורת המצב כלפי מטה. זאת בתנאי שאין התראות פעילות</string>
@@ -734,10 +730,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">כיבוי אוטומטי של פנס</string>
     <string name="pref_torch_auto_off_summary">מכבה את הפנס בתום פרק זמן מוגדר. קבע על 0 לביטול (לא מומלץ)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">החלף בין כפתורי עוצמת שמע</string>
-    <string name="pref_vol_swap_keys_summary">החלף בין כפתורי עוצמת שמע כאשר המסך מסובב הפוך</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">אפקט טשטוש</string>

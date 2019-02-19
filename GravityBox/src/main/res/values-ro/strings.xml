@@ -235,10 +235,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Afișați ziua săptămânii</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Legare volum ton de apel și notificări</string>
-    <string name="pref_link_volumes_summary">Când este dezactivat, volumele pentru tonurile de apel și notificări pot fi setate independent</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Comutarea automată a Setărilor rapide</string>
     <string name="pref_auto_switch_qs_summary">Setările rapide se va afișa automat când bara de stare este trasă în jos în timp ce nu există nicio notificare</string>
@@ -751,10 +747,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Oprire automată lanternă</string>
     <string name="pref_torch_auto_off_summary">Opreşte lanterna după o anumită perioadă de timp. Setați la 0 pentru a dezactiva (nu se recomandă)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Reorientare taste de volum</string>
-    <string name="pref_vol_swap_keys_summary">Schimbați tastele de volum atunci când ecranul este rotit</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efect blurare</string>

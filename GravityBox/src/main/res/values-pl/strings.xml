@@ -225,10 +225,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Pokaż dzień tygodnia</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Połączone ust. głośności dzwonka i powiadomień</string>
-    <string name="pref_link_volumes_summary">Po wyłączeniu głośność dzwonka i powiadomień można ustawiać niezależnie</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Autom. Szybkie Ustawienia</string>
     <string name="pref_auto_switch_qs_summary">Szybkie Ustawienia pokażą się automatycznie, gdy pasek stanu zostanie wysunięty w dół przy braku powiadomień</string>
@@ -740,10 +736,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Auto-wyłączanie latarki</string>
     <string name="pref_torch_auto_off_summary">Ustawia czas, po którym latarka zostanie wyłączona. Wartość 0 wyłącza funkcję (nie zalecane)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Zmiana orientacji kl. głośności</string>
-    <string name="pref_vol_swap_keys_summary">Zamienia klawisze głośności, gdy ekran jest obrócony</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efekt rozmycia</string>

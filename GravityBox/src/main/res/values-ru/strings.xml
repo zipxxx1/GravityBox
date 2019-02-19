@@ -240,10 +240,6 @@
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Отображать день недели</string>
-    
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Связать громкость</string>
-    <string name="pref_link_volumes_summary">Когда отключено, громкость уведомлений и рингтона можно задавать независимо</string>
 
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Автовключение настроек</string>
@@ -761,10 +757,6 @@
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Автоотключение фонарика</string>
     <string name="pref_torch_auto_off_summary">Отключение фонарика через определённый промежуток времени. Установите 0 для деактивации функции (не рекомендуется)</string>
-
-    <!-- Swap volume keys when the screen is rotated -->
-    <string name="pref_vol_swap_keys_title">Поменять кнопки громкости</string>
-    <string name="pref_vol_swap_keys_summary">Кнопки громкости при повороте экрана меняются местами</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Эффект размытия</string>

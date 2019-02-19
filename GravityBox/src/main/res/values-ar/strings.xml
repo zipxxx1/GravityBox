@@ -216,10 +216,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">عرض اليوم</string>
 
-    <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">ربط الاشعارات بنغمة الرنين</string>
-    <string name="pref_link_volumes_summary">عند التعطيل بإمكانك ضبط حجم الصوت لكل منهما على حدة</string>
-
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">تبديل تلقائي إلى الاعدادات السريعة</string>
     <string name="pref_auto_switch_qs_summary">سيتم عرض الاعدادات السريعة عند سحب شريط الحالة للأسفل في حال لم يكن هناك اشعار</string>
