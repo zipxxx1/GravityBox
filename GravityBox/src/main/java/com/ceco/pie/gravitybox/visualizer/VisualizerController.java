@@ -268,8 +268,9 @@ public class VisualizerController implements StatusBarStateChangedListener,
     }
 
     private void updateMediaMetaData(Object sb, boolean metaDataChanged) {
+        Object mediaManager = XposedHelpers.getObjectField(sb, "mMediaManager");
         MediaController mc = (MediaController) XposedHelpers
-                .getObjectField(sb, "mMediaController");
+                .getObjectField(mediaManager, "mMediaController");
         mPlaying = mc != null && mc.getPlaybackState() != null &&
                 mc.getPlaybackState().getState() == PlaybackState.STATE_PLAYING;
 
