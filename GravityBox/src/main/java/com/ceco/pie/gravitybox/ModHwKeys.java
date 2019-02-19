@@ -594,6 +594,61 @@ public class ModHwKeys {
                         return;
                     }
 
+                    if (keyCode == KeyEvent.KEYCODE_BACK && isFromSystem && !isTaskLocked() &&
+                            (hasAction(HwKey.BACK) || !areHwKeysEnabled())) {
+
+                        if (!down) {
+                            mBackKeyPressed = false;
+                            handler.removeCallbacks(mBackLongPress);
+                            if (mIsBackLongPressed) {
+                                mIsBackLongPressed = false;
+                                param.setResult(0);
+                                return;
+                            } else if (event.getRepeatCount() == 0) {
+                                if (!areHwKeysEnabled()) {
+                                    if (DEBUG) log("BACK KeyEvent coming from HW key and keys disabled. Ignoring.");
+                                } else if (mIsBackDoubleTap) {
+                                    // we are still waiting for double-tap
+                                    if (DEBUG) log("BACK doubletap pending. Ignoring.");
+                                } else if (!mWasBackDoubleTap && !event.isCanceled()) {
+                                    if (getActionFor(HwKeyTrigger.BACK_SINGLETAP).actionId !=
+                                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                        performAction(HwKeyTrigger.BACK_SINGLETAP);
+                                    } else {
+                                        if (DEBUG) log("Triggering original DOWN/UP events for BACK key");
+                                        injectKey(KeyEvent.KEYCODE_BACK);
+                                    }
+                                }
+                                param.setResult(0);
+                                return;
+                            }
+                        } else if (event.getRepeatCount() == 0) {
+                            mBackKeyPressed = true;
+                            mWasBackDoubleTap = mIsBackDoubleTap;
+                            if (mIsBackDoubleTap) {
+                                performAction(HwKeyTrigger.BACK_DOUBLETAP);
+                                handler.removeCallbacks(mBackDoubleTapReset);
+                                mIsBackDoubleTap = false;
+                            } else {
+                                mIsBackLongPressed = false;
+                                mIsBackDoubleTap = false;
+                                if (getActionFor(HwKeyTrigger.BACK_DOUBLETAP).actionId !=
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    mIsBackDoubleTap = true;
+                                    handler.postDelayed(mBackDoubleTapReset, mDoubletapSpeed);
+                                }
+                                if (getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId !=
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    handler.postDelayed(mBackLongPress,
+                                            getLongpressTimeoutForAction(
+                                                    getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId));
+                                }
+                            }
+                            param.setResult(0);
+                            return;
+                        }
+                    }
+
                     if (keyCode == KeyEvent.KEYCODE_HOME && !isTaskLocked()) {
                         if (!down) {
                             handler.removeCallbacks(mLockscreenTorchRunnable);
@@ -750,61 +805,6 @@ public class ModHwKeys {
                                     mHandler.postDelayed(mMenuLongPress, 
                                             getLongpressTimeoutForAction(
                                                     getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId));
-                                }
-                            }
-                            param.setResult(-1);
-                            return;
-                        }
-                    }
-
-                    if (keyCode == KeyEvent.KEYCODE_BACK && isFromSystem && !isTaskLocked() &&
-                        (hasAction(HwKey.BACK) || !areHwKeysEnabled())) {
-    
-                        if (!down) {
-                            mBackKeyPressed = false;
-                            mHandler.removeCallbacks(mBackLongPress);
-                            if (mIsBackLongPressed) {
-                                mIsBackLongPressed = false;
-                                param.setResult(-1);
-                                return;
-                            } else if (event.getRepeatCount() == 0) {
-                                if (!areHwKeysEnabled()) {
-                                    if (DEBUG) log("BACK KeyEvent coming from HW key and keys disabled. Ignoring.");
-                                } else if (mIsBackDoubleTap) {
-                                    // we are still waiting for double-tap
-                                    if (DEBUG) log("BACK doubletap pending. Ignoring.");
-                                } else if (!mWasBackDoubleTap && !event.isCanceled()) {
-                                    if (getActionFor(HwKeyTrigger.BACK_SINGLETAP).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                        performAction(HwKeyTrigger.BACK_SINGLETAP);
-                                    } else {
-                                        if (DEBUG) log("Triggering original DOWN/UP events for BACK key");
-                                        injectKey(KeyEvent.KEYCODE_BACK);
-                                    }
-                                }
-                                param.setResult(-1);
-                                return;
-                            }
-                        } else if (event.getRepeatCount() == 0) {
-                            mBackKeyPressed = true;
-                            mWasBackDoubleTap = mIsBackDoubleTap;
-                            if (mIsBackDoubleTap) {
-                                performAction(HwKeyTrigger.BACK_DOUBLETAP);
-                                mHandler.removeCallbacks(mBackDoubleTapReset);
-                                mIsBackDoubleTap = false;
-                            } else {
-                                mIsBackLongPressed = false;
-                                mIsBackDoubleTap = false;
-                                if (getActionFor(HwKeyTrigger.BACK_DOUBLETAP).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                    mIsBackDoubleTap = true;
-                                    mHandler.postDelayed(mBackDoubleTapReset, mDoubletapSpeed);
-                                }
-                                if (getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                    mHandler.postDelayed(mBackLongPress, 
-                                            getLongpressTimeoutForAction(
-                                                    getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId));
                                 }
                             }
                             param.setResult(-1);
@@ -1305,9 +1305,12 @@ public class ModHwKeys {
                             if (!mKillIgnoreList.contains(cn.getPackageName()) &&
                                     !cn.getPackageName().startsWith(defaultHomePackage)) {
                                 if (DEBUG) log("Force stopping: " + cn.getPackageName());
-                                XposedHelpers.callMethod(am, "removeTask", apps.get(0).id);
                                 XposedHelpers.callMethod(am, "forceStopPackage", cn.getPackageName());
                                 targetKilled = cn.getPackageName();
+                                try {
+                                    Object service = XposedHelpers.callMethod(am, "getService");
+                                    XposedHelpers.callMethod(service, "removeTask", apps.get(0).id);
+                                } catch (Throwable ignore) {}
                             }
                         }
         
@@ -1329,8 +1332,8 @@ public class ModHwKeys {
                         } else {
                             Toast.makeText(mContext, mStrNothingToKill, Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e) {  
-                        GravityBox.log(TAG, e);  
+                    } catch (Throwable t) {
+                        GravityBox.log(TAG, t);
                     }
                 }
             }
