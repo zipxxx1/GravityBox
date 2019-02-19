@@ -79,9 +79,6 @@ public class ExpandedDesktopTile extends QsTile {
         mMode = GravityBoxSettings.ED_DISABLED;
         try {
             mMode = Integer.valueOf(mPrefs.getString(GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
-            if (mMode > 2) {
-                mMode = 2;
-            }
         } catch (NumberFormatException nfe) {
             log(getKey() + ": Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
         }

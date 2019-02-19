@@ -324,9 +324,6 @@ public class ModPieControls {
             try {
                 mExpandedDesktopMode = Integer.valueOf(prefs.getString(
                         GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
-                if (mExpandedDesktopMode > 2) {
-                    mExpandedDesktopMode = 2;
-                }
             } catch (NumberFormatException nfe) {
                 GravityBox.log(TAG, "Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
             }
