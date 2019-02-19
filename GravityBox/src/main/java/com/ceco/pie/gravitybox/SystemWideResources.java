@@ -63,6 +63,8 @@ public class SystemWideResources {
 
             XResources.setSystemWideReplacement("android", "bool", "config_sip_wifi_only", false);
 
+            // TODO: Brighntness
+            /*
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BRIGHTNESS_MASTER_SWITCH, false)) {
                 int brightnessMin = prefs.getInt(GravityBoxSettings.PREF_KEY_BRIGHTNESS_MIN, 20);
                 XResources.setSystemWideReplacement(
@@ -74,6 +76,7 @@ public class SystemWideResources {
                         "android", "integer", "config_screenBrightnessDim", screenDim);
                 if (DEBUG) log("Screen dim level set to: " + screenDim);
             }
+            */
 
             // Safe media volume
             if (!Utils.isSamsungRom()) {

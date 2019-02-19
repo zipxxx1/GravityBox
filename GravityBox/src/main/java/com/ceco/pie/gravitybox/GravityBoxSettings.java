@@ -1664,6 +1664,11 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefCatPowerOther.removePreference(mPrefProximityWakeIgnoreCall);
             }
 
+            // remove unsupported features
+            // TODO: Brightness
+            Preference pb = findPreference(PREF_CAT_KEY_BRIGHTNESS);
+            if (pb != null) mPrefCatDisplay.removePreference(pb);
+
             // remove Dialer features if Dialer package unavailable
             PackageInfo pi = null;
             for (String pkg : ModDialer26.PACKAGE_NAMES) {

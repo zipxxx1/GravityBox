@@ -239,8 +239,8 @@ public class ModDisplay {
                     XposedHelpers.findClass(CLASS_DISPLAY_POWER_CONTROLLER, classLoader);
             final Class<?> classLight = XposedHelpers.findClass(CLASS_LIGHT_SERVICE_LIGHT, classLoader);
 
-            final boolean brightnessSettingsEnabled = 
-                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_BRIGHTNESS_MASTER_SWITCH, false);
+            final boolean brightnessSettingsEnabled = false;
+                    //prefs.getBoolean(GravityBoxSettings.PREF_KEY_BRIGHTNESS_MASTER_SWITCH, false);
 
             mButtonBacklightMode = prefs.getString(
                     GravityBoxSettings.PREF_KEY_BUTTON_BACKLIGHT_MODE, GravityBoxSettings.BB_MODE_DEFAULT);
