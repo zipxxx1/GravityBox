@@ -685,6 +685,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON = "pref_force_overflow_menu_button2";
     public static final String PREF_KEY_FORCE_LTR_DIRECTION = "pref_force_ltr_direction";
 
+    public static final String PREF_CAT_KEY_MISC = "pref_cat_misc";
     public static final String PREF_CAT_KEY_MISC_OTHER = "pref_cat_misc_other";
     public static final String PREF_KEY_PULSE_NOTIFICATION_DELAY = "pref_pulse_notification_delay2";
 
@@ -1658,6 +1659,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             // TODO: Brightness
             Preference pb = findPreference(PREF_CAT_KEY_BRIGHTNESS);
             if (pb != null) mPrefCatDisplay.removePreference(pb);
+            // TODO: Recents
+            PreferenceScreen psm = (PreferenceScreen) findPreference(PREF_CAT_KEY_MISC);
+            Preference pr = findPreference(PREF_CAT_RECENTS_PANEL);
+            if (psm != null && pr != null) psm.removePreference(pr);
 
             // remove Dialer features if Dialer package unavailable
             PackageInfo pi = null;

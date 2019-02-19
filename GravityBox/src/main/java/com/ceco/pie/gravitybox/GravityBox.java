@@ -175,9 +175,10 @@ public class GravityBox implements IXposedHookZygoteInit, /*IXposedHookInitPacka
             ModLowBatteryWarning.init(prefs, qhPrefs, lpparam.classLoader);
         }
 
-        if (lpparam.packageName.equals(ModClearAllRecents.PACKAGE_NAME)) {
-            ModClearAllRecents.init(prefs, lpparam.classLoader);
-        }
+        // TODO: Recents
+        //if (lpparam.packageName.equals(ModClearAllRecents.PACKAGE_NAME)) {
+        //    ModClearAllRecents.init(prefs, lpparam.classLoader);
+        //}
 
         if (ModDialer26.PACKAGE_NAMES.contains(lpparam.packageName) && !Utils.isOxygenOsRom()) {
             ModDialer26.init(prefs, qhPrefs, lpparam.classLoader,
