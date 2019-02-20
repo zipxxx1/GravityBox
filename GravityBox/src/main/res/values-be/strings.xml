@@ -935,18 +935,6 @@
     <string name="pref_notif_expand_all_title">Расчыніць усе паведамленні</string>
     <string name="pref_notif_expand_all_summary">Аўтаматычнае разгортванне ўсіх паведамленняў, калі ўключана</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Анімацыя выкл.</string>
-    <string name="animation_scale1">Маштаб .25x</string>
-    <string name="animation_scale2">Маштаб .5x</string>
-    <string name="animation_scale3">Маштаб 1x</string>
-    <string name="animation_scale4">Маштаб 1.5x</string>
-    <string name="animation_scale5">Маштаб 2x</string>
-    <string name="animation_scale6">Маштаб 5x</string>
-    <string name="animation_scale7">Маштаб 10x</string>
-    <string name="animation_scale8">Маштаб .75x</string>
-    <string name="animation_scale9">Маштаб 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Стыль цэтлікаў плітак</string>
     <string name="tile_label_style_normal">Звычайны</string>

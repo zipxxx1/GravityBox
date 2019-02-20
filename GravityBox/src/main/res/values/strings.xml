@@ -945,18 +945,6 @@
     <string name="pref_notif_expand_all_title">Expand all notifications</string>
     <string name="pref_notif_expand_all_summary">Expands all notifications automatically when enabled</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Animation off</string>
-    <string name="animation_scale1">Animation scale .25x</string>
-    <string name="animation_scale2">Animation scale .5x</string>
-    <string name="animation_scale3">Animation scale 1x</string>
-    <string name="animation_scale4">Animation scale 1.5x</string>
-    <string name="animation_scale5">Animation scale 2x</string>
-    <string name="animation_scale6">Animation scale 5x</string>
-    <string name="animation_scale7">Animation scale 10x</string>
-    <string name="animation_scale8">Animation scale .75x</string>
-    <string name="animation_scale9">Animation scale 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Tile label style</string>
     <string name="tile_label_style_normal">Normal</string>

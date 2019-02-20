@@ -942,18 +942,6 @@
     <string name="pref_notif_expand_all_title">Espandi notifiche</string>
     <string name="pref_notif_expand_all_summary">Espande automaticamente tutte le notifiche</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Disattiva animazioni</string>
-    <string name="animation_scale1">Scala animazione .25x</string>
-    <string name="animation_scale2">Scala animazione .5x</string>
-    <string name="animation_scale3">Scala animazione 1x</string>
-    <string name="animation_scale4">Scala animazione 1.5x</string>
-    <string name="animation_scale5">Scala animazione 2x</string>
-    <string name="animation_scale6">Scala animazione 5x</string>
-    <string name="animation_scale7">Scala animazione 10x</string>
-    <string name="animation_scale8">Scala animazione .75x</string>
-    <string name="animation_scale9">Scala animazione 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Stile testo caselle</string>
     <string name="tile_label_style_normal">Normale</string>

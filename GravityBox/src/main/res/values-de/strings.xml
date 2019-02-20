@@ -929,18 +929,6 @@
     <string name="pref_notif_expand_all_title">Benachrichtigungen erweitern</string>
     <string name="pref_notif_expand_all_summary">Alle Benachrichtigungen automatisch erweitern</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Animation aus</string>
-    <string name="animation_scale1">Animation .25x</string>
-    <string name="animation_scale2">Animation .5x</string>
-    <string name="animation_scale3">Animation 1x</string>
-    <string name="animation_scale4">Animation 1.5x</string>
-    <string name="animation_scale5">Animation 2x</string>
-    <string name="animation_scale6">Animation 5x</string>
-    <string name="animation_scale7">Animation 10x</string>
-    <string name="animation_scale8">Animation .75x</string>
-    <string name="animation_scale9">Animation 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Textstil der Symbole</string>
     <string name="tile_label_style_normal">Normal</string>

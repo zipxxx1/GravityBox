@@ -770,17 +770,6 @@
     <!-- Notification drawer: expand all notifications -->
     <string name="pref_notif_expand_all_title">すべての通知を展開</string>
     <string name="pref_notif_expand_all_summary">有効にするとすべての通知を自動的に展開します。</string>
-    <!-- Animation scales -->
-    <string name="animation_scale0">アニメーション無し</string>
-    <string name="animation_scale1">アニメーション速度.25倍</string>
-    <string name="animation_scale2">アニメーション速度.5倍</string>
-    <string name="animation_scale3">アニメーション速度1倍</string>
-    <string name="animation_scale4">アニメーション速度1.5倍</string>
-    <string name="animation_scale5">アニメーション速度2倍</string>
-    <string name="animation_scale6">アニメーション速度5倍</string>
-    <string name="animation_scale7">アニメーション速度10倍</string>
-    <string name="animation_scale8">アニメーション速度.75倍</string>
-    <string name="animation_scale9">アニメーション速度1.25倍</string>
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">タイルのラベル表示</string>
     <string name="tile_label_style_normal">通常</string>

@@ -912,18 +912,6 @@
     <string name="pref_notif_expand_all_title">Rozšířit notifikace</string>
     <string name="pref_notif_expand_all_summary">Rozšíří notifikace automaticky</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Animace vypnuty</string>
-    <string name="animation_scale1">Měřítko animace .25x</string>
-    <string name="animation_scale2">Měřítko animace .5x</string>
-    <string name="animation_scale3">Měřítko animace 1x</string>
-    <string name="animation_scale4">Měřítko animace 1.5x</string>
-    <string name="animation_scale5">Měřítko animace 2x</string>
-    <string name="animation_scale6">Měřítko animace 5x</string>
-    <string name="animation_scale7">Měřítko animace 10x</string>
-    <string name="animation_scale8">Měřítko animace .75x</string>
-    <string name="animation_scale9">Měřítko animace 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Styl textu dlaždice</string>
     <string name="tile_label_style_normal">Normální</string>

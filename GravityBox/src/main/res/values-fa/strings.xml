@@ -593,16 +593,6 @@
 <string name="qs_auto_switch_mode2">زمانیکه اعلان‌های پاک‌شونده‌ای وجود نداشته باشد</string>
 <string name="pref_notif_expand_all_title">گسترش تمام اعلان‌ها</string>
 <string name="pref_notif_expand_all_summary">گسترش یافتن و باز شدن خودکار تمام اعلان‌ها هنگام دریافت</string>
-<string name="animation_scale0">خاموش کردن انیمیشن</string>
-<string name="animation_scale1">مقیاس تحرک 25x</string>
-<string name="animation_scale2">مقیاس تحرک 5x</string>
-<string name="animation_scale3">مقیاس تحرک 1x</string>
-<string name="animation_scale4">مقیاس تحرک 1.5x</string>
-<string name="animation_scale5">مقیاس تحرک 2x</string>
-<string name="animation_scale6">مقیاس تحرک 5x</string>
-<string name="animation_scale7">مقیاس تحرک 10x</string>
-<string name="animation_scale8">مقیاس تحرک 75x</string>
-<string name="animation_scale9">مقیاس تحرک 1.25x</string>
 <string name="pref_qs_tile_label_style_title">سبک برچسب کاشی</string>
 <string name="tile_label_style_normal">نرمال</string>
 <string name="tile_label_style_allcaps">تمام پایتخت‌ها</string>

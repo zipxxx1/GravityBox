@@ -921,18 +921,6 @@
     <string name="pref_notif_expand_all_title">Επέκταση όλων των ειδοποιήσεων</string>
     <string name="pref_notif_expand_all_summary">Επεκτείνει όλες τις ειδοποιήσεις αυτόματα όταν είναι ενεργό</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Κίνηση ανενεργή</string>
-    <string name="animation_scale1">Κλίμακα κίνησης .25x</string>
-    <string name="animation_scale2">Κλίμακα κίνησης .5x</string>
-    <string name="animation_scale3">Κλίμακα κίνησης 1x</string>
-    <string name="animation_scale4">Κλίμακα κίνησης 1.5x</string>
-    <string name="animation_scale5">Κλίμακα κίνησης 2x</string>
-    <string name="animation_scale6">Κλίμακα κίνησης 5x</string>
-    <string name="animation_scale7">Κλίμακα κίνησης 10x</string>
-    <string name="animation_scale8">Κλίμακα κίνησης .75x</string>
-    <string name="animation_scale9">Κλίμακα κίνησης 1.25x</string>
-
     <string name="delete">Διαγραφή</string>
 
     <!-- HW Key Actions: expand quick settings -->

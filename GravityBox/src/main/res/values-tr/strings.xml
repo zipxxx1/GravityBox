@@ -933,18 +933,6 @@
     <string name="pref_notif_expand_all_title">Tüm bildirimleri genişlet</string>
     <string name="pref_notif_expand_all_summary">Tüm bildirimleri otomatik olarak genişletir</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Animasyon kapalı</string>
-    <string name="animation_scale1">Animasyon ölçeği .25x</string>
-    <string name="animation_scale2">Animasyon ölçeği .5x</string>
-    <string name="animation_scale3">Animasyon ölçeği 1x</string>
-    <string name="animation_scale4">Animasyon ölçeği 1.5x</string>
-    <string name="animation_scale5">Animasyon ölçeği 2x</string>
-    <string name="animation_scale6">Animasyon ölçeği 5x</string>
-    <string name="animation_scale7">Animasyon ölçeği 10x</string>
-    <string name="animation_scale8">Animasyon ölçeği .75x</string>
-    <string name="animation_scale9">Animasyon ölçeği 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Kare yazıları stili</string>
     <string name="tile_label_style_normal">Normal</string>

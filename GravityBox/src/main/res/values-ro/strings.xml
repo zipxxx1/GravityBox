@@ -928,18 +928,6 @@
     <string name="pref_notif_expand_all_title">Extindeți toate notificările</string>
     <string name="pref_notif_expand_all_summary">Se extind automat toate notificările când este activată</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Animație dezactivată</string>
-    <string name="animation_scale1">Scară de animație .25x</string>
-    <string name="animation_scale2">Scară de animație .5x</string>
-    <string name="animation_scale3">Scară de animație 1x</string>
-    <string name="animation_scale4">Scară de animație 1,5x</string>
-    <string name="animation_scale5">Scară de animație 2x</string>
-    <string name="animation_scale6">Scară de animație 5x</string>
-    <string name="animation_scale7">Scară de animație 10x</string>
-    <string name="animation_scale8">Scară de animație .75x</string>
-    <string name="animation_scale9">Scară de animație 1,25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Stil etichetă tile</string>
     <string name="tile_label_style_normal">Normal</string>

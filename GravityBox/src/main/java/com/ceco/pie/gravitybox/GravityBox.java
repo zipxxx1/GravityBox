@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,15 +20,13 @@ import java.io.File;
 import com.ceco.pie.gravitybox.managers.FingerprintLauncher;
 
 import android.os.Build;
-import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
-public class GravityBox implements IXposedHookZygoteInit, /*IXposedHookInitPackageResources,*/ IXposedHookLoadPackage {
+public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage {
     public static final String PACKAGE_NAME = GravityBox.class.getPackage().getName();
     public static String MODULE_PATH = null;
     private static final File prefsFileProt = new File("/data/user_de/0/com.ceco.pie.gravitybox/shared_prefs/com.ceco.pie.gravitybox_preferences.xml");
@@ -101,32 +99,10 @@ public class GravityBox implements IXposedHookZygoteInit, /*IXposedHookInitPacka
             return;
         }
 
-        //SystemWideResources.initResources(prefs, tunerPrefs);
-
         // Common
         ModInputMethod.initZygote(prefs);
         PhoneWrapper.initZygote(prefs);
         ModTelephony.initZygote(prefs);
-    }
-
-    //@Override
-    public void handleInitPackageResources(InitPackageResourcesParam resparam) {
-        if (Build.VERSION.SDK_INT != 28) {
-            return;
-        }
-
-        if (resparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
-            ModStatusBar.initResources(prefs, tunerPrefs, resparam);
-        }
-
-        if (resparam.packageName.equals(ModSettings.PACKAGE_NAME)) {
-            ModSettings.initPackageResources(prefs, resparam);
-        }
-
-        if (resparam.packageName.equals(ModQsTiles.PACKAGE_NAME) &&
-                prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, false)) {
-            ModQsTiles.initResources(resparam);
-        }
     }
 
     @Override
@@ -138,9 +114,9 @@ public class GravityBox implements IXposedHookZygoteInit, /*IXposedHookInitPacka
         if (lpparam.packageName.equals("android") &&
                 lpparam.processName.equals("android")) {
             XposedBridge.log("GB:Is AOSP forced: " + Utils.isAospForced());
+            SystemWideResources.initResources(prefs, tunerPrefs);
             ModVolumeKeySkipTrack.initAndroid(prefs, lpparam.classLoader);
             ModHwKeys.initAndroid(prefs, lpparam.classLoader);
-            // TODO: ExpandedDesktop
             ModExpandedDesktop.initAndroid(prefs, lpparam.classLoader);
             ModAudio.initAndroid(prefs, qhPrefs, lpparam.classLoader);
             PermissionGranter.initAndroid(lpparam.classLoader);
@@ -158,12 +134,13 @@ public class GravityBox implements IXposedHookZygoteInit, /*IXposedHookInitPacka
             ModActivityManager.initAndroid(lpparam.classLoader);
         }
 
-        // Force reloading of preferences for SystemUI
+        // Force reloading of preferences for SystemUI and prepare Resource interceptor
         if (lpparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
             prefs.reload();
             qhPrefs.reload();
             uncPrefs.reload();
             tunerPrefs.reload();
+            ModStatusBar.initResources(prefs, tunerPrefs);
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {
@@ -200,10 +177,6 @@ public class GravityBox implements IXposedHookZygoteInit, /*IXposedHookInitPacka
 
         if (lpparam.packageName.equals(ModPowerMenu.PACKAGE_NAME)) {
             ModPowerMenu.init(prefs, lpparam.classLoader);
-        }
-
-        if (lpparam.packageName.equals(ModSettings.PACKAGE_NAME)) {
-            ModSettings.init(prefs, lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(ModPieControls.PACKAGE_NAME)) {

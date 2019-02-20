@@ -938,18 +938,6 @@
     <string name="pref_notif_expand_all_title">Minden értesítés kiterjesztése</string>
     <string name="pref_notif_expand_all_summary">Az összes értesítést automatikusan kiterjeszti, ha engedélyezve van</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Animáció kikapcsolva</string>
-    <string name="animation_scale1">Animáció lépték .25x</string>
-    <string name="animation_scale2">Animáció lépték .5x</string>
-    <string name="animation_scale3">Animáció lépték 1x</string>
-    <string name="animation_scale4">Animáció lépték 1.5x</string>
-    <string name="animation_scale5">Animáció lépték 2x</string>
-    <string name="animation_scale6">Animáció lépték 5x</string>
-    <string name="animation_scale7">Animáció lépték 10x</string>
-    <string name="animation_scale8">Animáció lépték .75x</string>
-    <string name="animation_scale9">Animáció lépték 1.25x</string>
-    
      <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Csempe felirat stílus</string>
     <string name="tile_label_style_normal">Normál</string>

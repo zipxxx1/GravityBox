@@ -941,18 +941,6 @@
     <string name="pref_notif_expand_all_title">Раскрыть все уведомления</string>
     <string name="pref_notif_expand_all_summary">Автоматическое раскрытие всех уведомлений, если включено</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Анимация выкл</string>
-    <string name="animation_scale1">Масштаб .25x</string>
-    <string name="animation_scale2">Масштаб .5x</string>
-    <string name="animation_scale3">Масштаб 1x</string>
-    <string name="animation_scale4">Масштаб 1.5x</string>
-    <string name="animation_scale5">Масштаб 2x</string>
-    <string name="animation_scale6">Масштаб 5x</string>
-    <string name="animation_scale7">Масштаб 10x</string>
-    <string name="animation_scale8">Масштаб .75x</string>
-    <string name="animation_scale9">Масштаб 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Стиль ярлыков плиток</string>
     <string name="tile_label_style_normal">Обычный</string>

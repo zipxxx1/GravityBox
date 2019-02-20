@@ -943,18 +943,6 @@
     <string name="pref_notif_expand_all_title">Kembangkan semua notifikasi</string>
     <string name="pref_notif_expand_all_summary">Kembangkan semua notifikasi secara automatik jika aktif</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Tiada animasi</string>
-    <string name="animation_scale1">Kadar Animasi .25x</string>
-    <string name="animation_scale2">Kadar Animasi .5x</string>
-    <string name="animation_scale3">Kadar Animasi 1x</string>
-    <string name="animation_scale4">Kadar Animasi 1.5x</string>
-    <string name="animation_scale5">Kadar Animasi 2x</string>
-    <string name="animation_scale6">Kadar Animasi 5x</string>
-    <string name="animation_scale7">Kadar Animasi 10x</string>
-    <string name="animation_scale8">Kadar Animasi .75x</string>
-    <string name="animation_scale9">Kadar Animasi 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Jenis label tile</string>
     <string name="tile_label_style_normal">Biasa</string>

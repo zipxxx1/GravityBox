@@ -19,18 +19,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.content.res.XResources;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.provider.Settings;
 
 import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import com.ceco.pie.gravitybox.GravityBox;
+import com.ceco.pie.gravitybox.ResourceProxy;
 import com.ceco.pie.gravitybox.tuner.TuneableItem;
 import com.ceco.pie.gravitybox.tuner.TunerBlacklist;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +52,8 @@ public class TunerManager implements BroadcastSubReceiver {
     private static void log(String msg) {
         XposedBridge.log(TAG + ": " + msg);
     }
+
+    private static Map<Category,List<TuneableItem>> sUserItemsCache = new HashMap<>();
 
     private Context mContext;
 
@@ -150,10 +153,18 @@ public class TunerManager implements BroadcastSubReceiver {
         }
     }
 
+    private static Category getCategoryFor(String pkgName) {
+        switch (pkgName) {
+            case "android": return Category.FRAMEWORK;
+            case "com.android.systemui": return Category.SYSTEMUI;
+            default: return null;
+        }
+    }
+
     private Resources getResourcesFor(Category category) {
         switch (category) {
             default:
-            case FRAMEWORK: return XResources.getSystem();
+            case FRAMEWORK: return Resources.getSystem();
             case SYSTEMUI: return mContext.getResources();
         }
     }
@@ -167,44 +178,52 @@ public class TunerManager implements BroadcastSubReceiver {
     }
 
     private static List<TuneableItem> getUserItemList(Category category, SharedPreferences prefs) {
-        List<TuneableItem> out = new ArrayList<>();
-        Map<String, ?> prefMap = prefs.getAll();
-        for (Map.Entry<String, ?> pref : prefMap.entrySet()) {
-            if (pref.getKey().startsWith(category.toString() + ":") ||
-                    pref.getKey().startsWith("tuneable:")) {
-                TuneableItem item = TuneableItem.createUserInstance(pref.getKey(), prefs);
-                if (item != null && item.getCategory() == category && item.isOverridden() &&
-                        !TunerBlacklist.isBlacklisted(category, item.getKey())) {
-                    out.add(item);
+        if (sUserItemsCache.get(category) == null) {
+            List<TuneableItem> list = new ArrayList<>();
+            Map<String, ?> prefMap = prefs.getAll();
+            for (Map.Entry<String, ?> pref : prefMap.entrySet()) {
+                if (pref.getKey().startsWith(category.toString() + ":") ||
+                        pref.getKey().startsWith("tuneable:")) {
+                    TuneableItem item = TuneableItem.createUserInstance(pref.getKey(), prefs);
+                    if (item != null && item.getCategory() == category && item.isOverridden() &&
+                            !TunerBlacklist.isBlacklisted(category, item.getKey())) {
+                        list.add(item);
+                    }
                 }
             }
+            sUserItemsCache.put(category, list);
         }
-        return out;
+        return sUserItemsCache.get(category);
     }
 
-    public static void applyFrameworkConfiguration(SharedPreferences prefs) {
-        for (TuneableItem item : getUserItemList(Category.FRAMEWORK, prefs)) {
-            try {
-                XResources.setSystemWideReplacement("android",
-                        item.getResourceType(), item.getKey(), item.getUserValue());
-                if (DEBUG) log("Framework replacement: key=" + item.getKey() +
-                        "; value=" + item.getUserValue());
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
+    public static void addUserItemKeysToList(Category category, SharedPreferences prefs, List<String> list) {
+        for (TuneableItem item : TunerManager.getUserItemList(category, prefs)) {
+            if (!list.contains(item.getKey())) {
+                list.add(item.getKey());
             }
         }
     }
 
-    public static void applySystemUiConfiguration(SharedPreferences prefs, XResources res) {
-        for (TuneableItem item : getUserItemList(Category.SYSTEMUI, prefs)) {
-            try {
-                res.setReplacement("com.android.systemui",
-                        item.getResourceType(), item.getKey(), item.getUserValue());
-                if (DEBUG) log("System UI replacement: key=" + item.getKey() +
-                        "; value=" + item.getUserValue());
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
+    private static TuneableItem findUserItemByKey(Category category, SharedPreferences prefs, String key) {
+        for (TuneableItem item : getUserItemList(category, prefs)) {
+            if (item.getKey().equals(key))
+                return item;
+        }
+        return null;
+    }
+
+    public static boolean onIntercept(SharedPreferences prefs,
+                                      ResourceProxy.ResourceSpec spec) {
+        Category category = getCategoryFor(spec.pkgName);
+        if (category != null) {
+            TuneableItem item = findUserItemByKey(category, prefs, spec.name);
+            if (item != null) {
+                spec.value = item.getUserValue();
+                if (DEBUG) log("onIntercept: key=" + spec.name +
+                        "; value=" + spec.value);
+                return true;
             }
         }
+        return false;
     }
 }

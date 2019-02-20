@@ -924,18 +924,6 @@
     <string name="pref_notif_expand_all_title">自動展開所有通知</string>
     <string name="pref_notif_expand_all_summary">當啟用時自動展開所有通知</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">動畫關閉</string>
-    <string name="animation_scale1">動畫刻度 .25x</string>
-    <string name="animation_scale2">動畫刻度 .5x</string>
-    <string name="animation_scale3">動畫刻度 1x</string>
-    <string name="animation_scale4">動畫刻度 1.5x</string>
-    <string name="animation_scale5">動畫刻度 2x</string>
-    <string name="animation_scale6">動畫刻度 5x</string>
-    <string name="animation_scale7">動畫刻度 10x</string>
-    <string name="animation_scale8">動畫刻度 .75x</string>
-    <string name="animation_scale9">動畫刻度 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">瓷貼標題風格</string>
     <string name="tile_label_style_normal">正常</string>

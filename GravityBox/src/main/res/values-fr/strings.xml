@@ -775,17 +775,6 @@
     <!-- Notification drawer: expand all notifications -->
     <string name="pref_notif_expand_all_title">Développer toutes les notifications</string>
     <string name="pref_notif_expand_all_summary">Développe toutes les notifications automatiquement lorsque l\'option est activée</string>
-    <!-- Animation scales -->
-    <string name="animation_scale0">Animation désactivée</string>
-    <string name="animation_scale1">Animation à l\'échelle 0.25x</string>
-    <string name="animation_scale2">Animation à l\'échelle 0.5x</string>
-    <string name="animation_scale3">Animation à l\'échelle 1x</string>
-    <string name="animation_scale4">Animation à l\'échelle 1.5x</string>
-    <string name="animation_scale5">Animation à l\'échelle 2x</string>
-    <string name="animation_scale6">Animation à l\'échelle 5x</string>
-    <string name="animation_scale7">Animation à l\'échelle 10x</string>
-    <string name="animation_scale8">Animation à l\'échelle .75x</string>
-    <string name="animation_scale9">Animation à l\'échelle 1.25x</string>
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Style du nom de la touche</string>
     <string name="tile_label_style_normal">Normal</string>

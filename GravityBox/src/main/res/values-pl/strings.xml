@@ -917,18 +917,6 @@
     <string name="pref_notif_expand_all_title">Rozwiń wszystkie powiadomienia</string>
     <string name="pref_notif_expand_all_summary">Automatycznie rozwija wszystkie powiadomienia, gdy włączone</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Animacja wyłączona</string>
-    <string name="animation_scale1">Skala animacji .25x</string>
-    <string name="animation_scale2">Skala animacji .5x</string>
-    <string name="animation_scale3">Skala animacji 1x</string>
-    <string name="animation_scale4">Skala animacji 1.5x</string>
-    <string name="animation_scale5">Skala animacji 2x</string>
-    <string name="animation_scale6">Skala animacji 5x</string>
-    <string name="animation_scale7">Skala animacji 10x</string>
-    <string name="animation_scale8">Skala animacji .75x</string>
-    <string name="animation_scale9">Skala animacji 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Styl etykiety kafelka</string>
     <string name="tile_label_style_normal">Normalny</string>

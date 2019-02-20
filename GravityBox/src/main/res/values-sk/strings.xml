@@ -917,18 +917,6 @@
     <string name="pref_notif_expand_all_title">Rozšíriť všetky notifikácie</string>
     <string name="pref_notif_expand_all_summary">Rozšíri všetky notifikácie automaticky</string>
 
-    <!-- Animation scales -->
-    <string name="animation_scale0">Animácie vypnuté</string>
-    <string name="animation_scale1">Mierka animácie .25x</string>
-    <string name="animation_scale2">Mierka animácie .5x</string>
-    <string name="animation_scale3">Mierka animácie 1x</string>
-    <string name="animation_scale4">Mierka animácie 1.5x</string>
-    <string name="animation_scale5">Mierka animácie 2x</string>
-    <string name="animation_scale6">Mierka animácie 5x</string>
-    <string name="animation_scale7">Mierka animácie 10x</string>
-    <string name="animation_scale8">Mierka animácie .75x</string>
-    <string name="animation_scale9">Mierka animácie 1.25x</string>
-
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Štýl textu dlaždice</string>
     <string name="tile_label_style_normal">Normálny</string>

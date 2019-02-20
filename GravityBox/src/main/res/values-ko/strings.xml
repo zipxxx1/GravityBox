@@ -753,17 +753,6 @@
     
     <string name="pref_notif_expand_all_title">모든 알림 확장</string>
     <string name="pref_notif_expand_all_summary">모든 알람들을 확장할 수 있으면 기본적으로 확장시킵니다.</string>
-    
-    <string name="animation_scale0">애니메이션 없음</string>
-    <string name="animation_scale1">애니메이션 0.25 배속</string>
-    <string name="animation_scale2">애니메이션 0.5 배속</string>
-    <string name="animation_scale3">애니메이션 1 배속</string>
-    <string name="animation_scale4">애니메이션 1.5 배속</string>
-    <string name="animation_scale5">애니메이션 2 배속</string>
-    <string name="animation_scale6">애니메이션 5 배속</string>
-    <string name="animation_scale7">애니메이션 10 배속</string>
-    <string name="animation_scale8">애니메이션 0.75 배속</string>
-    <string name="animation_scale9">애니메이션 1.25 배속</string>
 
     <string name="pref_qs_tile_label_style_title">타일 이름 스타일</string>
     <string name="tile_label_style_normal">기본</string>
