@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,6 +75,7 @@ public abstract class TrafficMeterAbstract extends TextView
     protected boolean mAllowInLockscreen;
     private Boolean mCanReadFromFile;
     private boolean mHiddenByPolicy;
+    private boolean mHiddenByHeadsUp;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -224,6 +225,11 @@ public abstract class TrafficMeterAbstract extends TextView
         updateState();
     }
 
+    private void setHiddenByHeadsUp(boolean hidden) {
+        mHiddenByHeadsUp = hidden;
+        updateState();
+    }
+
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         String action = intent.getAction();
@@ -268,10 +274,14 @@ public abstract class TrafficMeterAbstract extends TextView
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
             setAlpha(colorInfo.alphaSignalCluster);
         }
+        if ((flags & StatusBarIconManager.FLAG_HEADS_UP_VISIBILITY_CHANGED) != 0) {
+            setHiddenByHeadsUp(colorInfo.headsUpVisible &&
+                    getTrafficMeterPosition() != GravityBoxSettings.DT_POSITION_RIGHT);
+        }
     }
 
     private boolean shoudStartTrafficUpdates() {
-        boolean shouldStart = mAttached && mIsScreenOn && !mHiddenByPolicy &&  getConnectAvailable();
+        boolean shouldStart = mAttached && mIsScreenOn && !mHiddenByPolicy && !mHiddenByHeadsUp &&  getConnectAvailable();
         if (mDisplayMode == DisplayMode.DOWNLOAD_MANAGER) {
             shouldStart &= mIsDownloadActive;
         } else if (mDisplayMode == DisplayMode.PROGRESS_TRACKING) {

@@ -25,6 +25,7 @@ public class ModStatusbarColor {
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String CLASS_SB_TRANSITIONS = "com.android.systemui.statusbar.phone.PhoneStatusBarTransitions";
     private static final String CLASS_SB_DARK_ICON_DISPATCHER = "com.android.systemui.statusbar.phone.DarkIconDispatcherImpl";
+    private static final String CLASS_HEADSUP_APPEARANCE_CTRL = "com.android.systemui.statusbar.phone.HeadsUpAppearanceController";
     private static final boolean DEBUG = false;
 
     private static void log(String message) {
@@ -57,6 +58,17 @@ public class ModStatusbarColor {
                     if (SysUiManagers.IconManager != null) {
                         SysUiManagers.IconManager.setIconTint(
                                 XposedHelpers.getIntField(param.thisObject, "mIconTint"));
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_HEADSUP_APPEARANCE_CTRL, classLoader,
+                    "setShown", boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) {
+                    if (SysUiManagers.IconManager != null) {
+                        SysUiManagers.IconManager.setHeadsUpVisible(
+                                (boolean)param.args[0]);
                     }
                 }
             });

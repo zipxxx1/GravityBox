@@ -27,7 +27,8 @@ public class StatusBarIconManager {
 
     public static final int FLAG_ICON_ALPHA_CHANGED = 1 << 0;
     public static final int FLAG_ICON_TINT_CHANGED = 1 << 1;
-    private static final int FLAG_ALL = 0x3;
+    public static final int FLAG_HEADS_UP_VISIBILITY_CHANGED = 1 << 2;
+    private static final int FLAG_ALL = 0x7;
 
     private ColorInfo mColorInfo;
     private List<IconManagerListener> mListeners;
@@ -40,6 +41,7 @@ public class StatusBarIconManager {
         public float alphaSignalCluster;
         public float alphaTextAndBattery;
         public int iconTint;
+        public boolean headsUpVisible;
     }
 
     private static void log(String message) {
@@ -92,6 +94,13 @@ public class StatusBarIconManager {
         if (mColorInfo.iconTint != iconTint) {
             mColorInfo.iconTint = iconTint;
             notifyListeners(FLAG_ICON_TINT_CHANGED);
+        }
+    }
+
+    public void setHeadsUpVisible(boolean visible) {
+        if (mColorInfo.headsUpVisible != visible) {
+            mColorInfo.headsUpVisible = visible;
+            notifyListeners(FLAG_HEADS_UP_VISIBILITY_CHANGED);
         }
     }
 }
