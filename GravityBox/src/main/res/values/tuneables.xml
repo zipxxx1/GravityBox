@@ -836,6 +836,79 @@
          notification icon or in the notification itself. Will be replaced
          with status_bar_notification_info_overflow when shown in the
          UI.</string>
+    <string name="config_activeTaskDurationHours">The duration in which a recent task is considered in session and should be visible</string>
+    <string name="config_allowStartActivityForLongPressOnPowerInSetup">Allows activities to be launched on a long press on power during device setup</string>
+    <string name="config_battery_percentage_setting_available">Whether or not we should show the option to show battery percentage</string>
+    <string name="config_bluetooth_max_connected_audio_devices">Max number of connected audio devices supported by Bluetooth stack</string>
+    <string name="config_checkWallpaperAtBoot">True if the device should block turning display on at boot until wallpaper is ready</string>
+    <string name="config_defaultHapticFeedbackIntensity">The default intensity level for haptic feedback. See
+         Settings.System.HAPTIC_FEEDBACK_INTENSITY more details on the constant values and
+         meanings.</string>
+    <string name="config_defaultNotificationVibrationIntensity">The default intensity level for notification vibrations. See
+         Settings.System.NOTIFICATION_VIBRATION_INTENSITY more details on the constant values and
+         meanings.</string>
+    <string name="config_disableTransitionAnimation">Flag to disable all transition animations</string>
+    <string name="config_display_no_service_when_sim_unready">Decide whether to display \'No service\' on status bar instead of \'Emergency calls only\'
+         when SIM is unready</string>
+    <string name="config_dozeAfterScreenOffByDefault">If true, the doze component is not started until after the screen has been
+         turned off and the screen off animation has been performed</string>
+    <string name="config_dozeAlwaysOnEnabled">Control whether the always on display mode is enabled by default. This value will be used
+         during initialization when the setting is still null.</string>
+    <string name="config_enableNewAutoSelectNetworkUI">Whether the new Auto Selection Network UI should be shown</string>
+    <string name="config_fillMainBuiltInDisplayCutout">Whether the display cutout region of the main built-in display should be forced to
+         black in software (to avoid aliasing or emulate a cutout that is not physically existent)</string>
+    <string name="config_fingerprintSupportsGestures">Specify if the fingerprint hardware support gestures</string>
+    <string name="config_localDisplaysPrivate">Indicates whether local non-default displays are private.
+         See android.view.Display#FLAG_PRIVATE</string>
+    <string name="config_lowBatteryAutoTriggerDefaultLevel">The default suggested battery % at which we enable battery saver automatically</string>
+    <string name="config_maskMainBuiltInDisplayCutout">If true, and there is a cutout on the main built in display, the cutout will be masked
+         by shrinking the display such that it does not overlap the cutout area</string>
+    <string name="config_maxNumVisibleRecentTasks">The maximum number of visible recent tasks to be presented to the user through the
+         SystemUI. Can be -1 if there is no maximum limit.</string>
+    <string name="config_maxNumVisibleRecentTasks_grid">The maximum number of visible recent tasks to be presented to the user through the
+         SystemUI. Can be -1 if there is no maximum limit.</string>
+    <string name="config_maxNumVisibleRecentTasks_lowRam">The maximum number of visible recent tasks to be presented to the user through the
+         SystemUI. Can be -1 if there is no maximum limit.</string>
+    <string name="config_minNumVisibleRecentTasks">The minimum number of visible recent tasks to be presented to the user through the
+         SystemUI. Can be -1 if there is no minimum limit.</string>
+    <string name="config_minNumVisibleRecentTasks_grid">The minimum number of visible recent tasks to be presented to the user through the
+         SystemUI. Can be -1 if there is no minimum limit.</string>
+    <string name="config_minNumVisibleRecentTasks_lowRam">The minimum number of visible recent tasks to be presented to the user through the
+         SystemUI. Can be -1 if there is no minimum limit.</string>
+    <string name="config_multiuserMaxRunningUsers">Maximum number of users we allow to be running at a time</string>
+    <string name="config_networkDefaultDailyMultipathQuotaBytes">Default daily multipath budget used by ConnectivityManager.getMultipathPreference()
+         on metered networks. This default quota only used if quota could not be determined from
+         data plan or data limit/warning set by the user. The value that is actually used is
+         controlled by Settings.Global.NETWORK_DEFAULT_DAILY_MULTIPATH_QUOTA_BYTES. This is the
+         default value of that setting.</string>
+    <string name="config_num_physical_slots">Number of physical SIM slots on the device. This includes both eSIM and pSIM slots, and
+         is not necessarily the same as the number of phones/logical modems supported by the device.
+         For example, a multi-sim device can have 2 phones/logical modems, but 3 physical slots,
+         or a single SIM device can have 1 phones/logical modems, but 2 physical slots (one eSIM
+         and one pSIM)</string>
+    <string name="config_pinnerHomeApp">True if home app should be pinned via Pinner Service</string>
+    <string name="config_safe_media_disable_on_volume_up">Whether safe headphone volume warning dialog is disabled on Vol+ (operator specific)</string>
+    <string name="config_safe_media_volume_usb_mB">Safe USB headset gain. This value is used to ensure that the SPL on the USB
+    headset output is compliant to EN 60950 requirements for portable music players.</string>
+    <string name="config_smart_battery_available">Flag indicating whether we should enable smart battery</string>
+    <string name="config_swipe_up_gesture_default">Whether or not swipe up gesture is enabled by default</string>
+    <string name="config_swipe_up_gesture_setting_available">Whether or not swipe up gesture\'s opt-in setting is available on this device</string>
+    <string name="config_veryLongPressOnPowerBehavior">Control the behavior when the user long presses the power button for a long time.\n
+            0 - Nothing\n
+            1 - Global actions menu</string>
+    <string name="config_veryLongPressTimeout">Time to wait while a button is pressed before triggering a very long press</string>
+    <string name="config_volumeHushGestureEnabled">Allow the gesture power + volume up to change the ringer mode while the device
+         is interactive</string>
+    <string name="config_wifi_convert_apband_5ghz_to_any">Boolean indicating whether the wifi chipset requires the softap band be
+        converted from 5GHz to ANY due to hardware restrictions</string>
+    <string name="config_wifi_softap_acs_supported">Wifi driver supports Automatic channel selection (ACS) for softap</string>
+    <string name="config_wifi_softap_ieee80211ac_supported">Wifi driver supports IEEE80211AC for softap</string>
+    <string name="config_windowShowCircularMask">Default window ShowCircularMask property</string>
+    <string name="db_compatibility_wal_supported">Enables compatibility WAL mode.
+         In this mode, only database journal mode will be changed, connection pool
+         size will still be limited to a single connection.</string>
+    <string name="db_wal_truncate_size">When opening a database with WAL enabled and if the wal file already exists and larger
+         than this size in bytes, we\'ll truncate it</string>
 
     <!-- System UI -->
     <string name="carrier_network_change_anim_time">Duration of the full carrier network change icon animation</string>
@@ -976,6 +1049,17 @@
     <string name="config_showQuickSettingsRow">Whether or not to display the row of quick settings icons separate from the full quick
          settings panel</string>
     <string name="doze_pickup_vibration_threshold">Doze: duration to avoid false pickup gestures triggered by notification vibrations</string>
-
+    <string name="config_keyguardShowLeftAffordance">Show mic or phone affordance on Keyguard</string>
+    <string name="config_navigation_bar_enable_auto_dim_no_visible_wallpaper">Whether to enable dimming navigation buttons when wallpaper is not visible, should be
+         enabled for OLED devices to reduce/prevent burn in on the navigation bar (because of the
+         black background and static button placements) and disabled for all other devices to
+         prevent wasting cpu cycles on the dimming animation</string>
+    <string name="config_showOperatorNameInStatusBar">Whether to show operator name in the status bar</string>
+    <string name="config_smart_replies_in_notifications_enabled">Smart replies in notifications: Whether smart replies in notifications are enabled.</string>
+    <string name="config_smart_replies_in_notifications_max_squeeze_remeasure_attempts">Smart replies in notifications: Maximum number of times SmartReplyView will try to find a
+         better (narrower) line-break for a double-line smart reply button.</string>
+    <string name="config_smart_replies_in_notifications_requires_targeting_p">Smart replies in notifications: Whether we disable the feature unless the app targets P</string>
+    <string name="enable_safety_warning">Enable the default volume level warning dialog</string>
+    <string name="navigation_bar_deadzone_orientation">Orientation of the dead zone when touches have recently occurred elsewhere on screen</string>
 
 </resources>

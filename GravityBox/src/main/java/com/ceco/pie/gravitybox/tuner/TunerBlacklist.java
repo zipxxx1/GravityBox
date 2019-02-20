@@ -33,7 +33,9 @@ public class TunerBlacklist {
             "target_honeycomb_needs_options_menu",
             "thumbnail_width_tv",
             "time_picker_mode",
-            "use_lock_pattern_drawable"
+            "use_lock_pattern_drawable",
+            "autofill_max_visible_datasets",
+            "config_tether_upstream_automatic"
     );
 
     private static final List<String> sSystemUi = Arrays.asList(
@@ -106,7 +108,16 @@ public class TunerBlacklist {
             "preference_screen_header_scrollbarStyle",
             "preferences_left_pane_weight",
             "preferences_prefer_dual_pane",
-            "preferences_right_pane_weight"
+            "preferences_right_pane_weight",
+            "design_snackbar_text_max_lines",
+            "mtrl_btn_anim_delay_ms",
+            "mtrl_btn_anim_duration_ms",
+            "mtrl_btn_textappearance_all_caps",
+            "mtrl_chip_anim_duration",
+            "qs_footer_actions_weight",
+            "qs_footer_actions_width",
+            "fingerprint_dialog_text_gravity",
+            "watch_heap_limit"
     );
 
     public static boolean isBlacklisted(TunerManager.Category category, String key) {
