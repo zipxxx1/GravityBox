@@ -131,7 +131,6 @@ public class ModStatusBar {
     private static boolean mDt2sEnabled;
     private static long[] mCameraVp;
     private static BatteryStyleController mBatteryStyleCtrlSb;
-    private static StatusbarQuietHoursView mQhViewSb;
     private static BatteryBarView mBatteryBarViewSb;
     private static ProgressBarView mProgressBarViewSb;
     private static VisualizerController mVisualizerCtrl;
@@ -484,36 +483,6 @@ public class ModStatusBar {
         }
     }
 
-    private static void prepareQuietHoursIcon(ContainerType containerType) {
-        if (SysUiManagers.QuietHoursManager == null) return;
-
-        try {
-            ViewGroup container = null;
-            switch (containerType) {
-                case STATUSBAR:
-                    container = mStatusBarView;
-                    break;
-                case KEYGUARD:
-                    container = (ViewGroup) XposedHelpers.getObjectField(
-                            mStatusBar, "mKeyguardStatusBar");
-                    break;
-                default: break;
-            }
-            if (container != null) {
-                StatusbarQuietHoursView qhView = new StatusbarQuietHoursView(containerType, container, mContext);
-                if (containerType == ContainerType.STATUSBAR) {
-                    if (mQhViewSb != null) {
-                        mQhViewSb.destroy();
-                        if (DEBUG) log("prepareQuietHoursIcon: old QuietHoursView destroyed");
-                    }
-                    mQhViewSb = qhView;
-                }
-            }
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
-    }
-
     private static void prepareBatteryBar(ContainerType containerType) {
         try {
             ViewGroup container = null;
@@ -651,7 +620,6 @@ public class ModStatusBar {
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TWEAKS_ENABLED, true)) {
                         prepareBatteryStyle(ContainerType.KEYGUARD);
                     }
-                    prepareQuietHoursIcon(ContainerType.KEYGUARD);
                     prepareBatteryBar(ContainerType.KEYGUARD);
                     prepareProgressBar(ContainerType.KEYGUARD);
                     prepareBrightnessControl();
@@ -705,7 +673,6 @@ public class ModStatusBar {
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TWEAKS_ENABLED, true)) {
                         prepareBatteryStyle(ContainerType.STATUSBAR);
                     }
-                    prepareQuietHoursIcon(ContainerType.STATUSBAR);
                     prepareBatteryBar(ContainerType.STATUSBAR);
                     prepareProgressBar(ContainerType.STATUSBAR);
                     prepareTrafficMeter();

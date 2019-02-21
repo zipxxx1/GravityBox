@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,6 +19,12 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.os.UserHandle;
+
+import com.ceco.pie.gravitybox.managers.SysUiManagers;
+
+import java.lang.reflect.Constructor;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -30,6 +36,7 @@ public class SystemIconController implements BroadcastSubReceiver {
 
     private static final String CLASS_PHONE_STATUSBAR_POLICY = 
             "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
+    private static final String CLASS_STATUS_BAR_ICON = "com.android.internal.statusbar.StatusBarIcon";
 
     private enum BtMode { DEFAULT, CONNECTED, HIDDEN }
 
@@ -66,6 +73,12 @@ public class SystemIconController implements BroadcastSubReceiver {
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     Class<?> PolicyManagerClazz = XposedHelpers.findClass("android.net.NetworkPolicyManager", classLoader);
                     mPolicyManager = XposedHelpers.callStaticMethod(PolicyManagerClazz, "from", mContext);
+
+                    if (SysUiManagers.QuietHoursManager != null) {
+                        StatusbarQuietHoursIcon qhIcon = new StatusbarQuietHoursIcon(
+                                SystemIconController.this);
+                    }
+
                     if (DEBUG) log ("Phone statusbar policy created");
                 }
             });
@@ -179,6 +192,42 @@ public class SystemIconController implements BroadcastSubReceiver {
         if (mSbPolicy == null) return;
         try {
             XposedHelpers.callMethod(mSbPolicy, "updateVolumeZen");
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
+    public void setIcon(String slot, int iconId) {
+        try {
+            XposedHelpers.callMethod(mIconCtrl, "setIcon",
+                    slot, createStatusBarIcon(iconId));
+            if (DEBUG) log("setIcon: slot=" + slot + "; id=" + iconId);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
+    private Object createStatusBarIcon(int iconId) {
+        try {
+            Constructor<?> c = XposedHelpers.findConstructorExact(CLASS_STATUS_BAR_ICON,
+                    mContext.getClassLoader(), String.class, UserHandle.class,
+                    int.class, int.class, int.class, CharSequence.class);
+            Object icon = c.newInstance(GravityBox.PACKAGE_NAME,
+                    Utils.getUserHandle(Utils.getCurrentUser()),
+                    iconId, 0, 0, (CharSequence)null);
+            if (DEBUG) log("createStatusBarIcon: " + icon);
+            return icon;
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+            return null;
+        }
+    }
+
+    public void setIconVisibility(String slot, boolean visible) {
+        try {
+            XposedHelpers.callMethod(mIconCtrl, "setIconVisibility",
+                    slot, visible);
+            if (DEBUG) log("setIconVisibility: slot=" + slot + "; visible=" + visible);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
