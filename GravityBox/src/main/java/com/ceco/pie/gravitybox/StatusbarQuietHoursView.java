@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -49,16 +49,27 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
 
         mContainer = container;
         Resources res = context.getResources();
-        int iconSizeResId = res.getIdentifier("status_bar_icon_size", "dimen", "android");
-        mIconHeightPx = iconSizeResId != 0 ? res.getDimensionPixelSize(iconSizeResId) :
-            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, res.getDisplayMetrics());
+        mIconHeightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, res.getDisplayMetrics());
 
-        LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(mIconHeightPx, mIconHeightPx);
-        setLayoutParams(lParams);
-        setScaleType(ImageView.ScaleType.CENTER);
         mSystemIcons = mContainer.findViewById(
                 context.getResources().getIdentifier("system_icons", "id", ModStatusBar.PACKAGE_NAME));
-        mSystemIcons.addView(this, 0);
+
+        int position = 0;
+        int marginEnd = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6, res.getDisplayMetrics());
+        int statusIconsResId = context.getResources().getIdentifier(
+                "statusIcons", "id", ModStatusBar.PACKAGE_NAME);
+        if (statusIconsResId != 0) {
+            View statusIcons = mSystemIcons.findViewById(statusIconsResId);
+            if (statusIcons != null) {
+                position = mSystemIcons.indexOfChild(statusIcons) + 1;
+                marginEnd = statusIcons.getPaddingEnd();
+            }
+        }
+        LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(mIconHeightPx, mIconHeightPx);
+        lParams.setMarginEnd(marginEnd);
+        setLayoutParams(lParams);
+
+        mSystemIcons.addView(this, position);
 
         mQuietHours = SysUiManagers.QuietHoursManager.getQuietHours();
 
