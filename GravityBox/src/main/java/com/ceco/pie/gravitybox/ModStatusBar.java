@@ -819,9 +819,12 @@ public class ModStatusBar {
                 XposedHelpers.findAndHookMethod(CLASS_NOTIF_ENTRY_MANAGER, classLoader, "removeNotification",
                         String.class, RankingMap.class, new XC_MethodHook() {
                     @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
+                    protected void beforeHookedMethod(MethodHookParam param) {
                         if (mProgressBarCtrl != null) {
-                            mProgressBarCtrl.onNotificationRemoved((StatusBarNotification)param.getResult());
+                            Object notifData = XposedHelpers.getObjectField(param.thisObject, "mNotificationData");
+                            Object entry = XposedHelpers.callMethod(notifData, "get", param.args[0]);
+                            mProgressBarCtrl.onNotificationRemoved((StatusBarNotification)
+                                XposedHelpers.getObjectField(entry, "notification"));
                         }
                     }
                 });
