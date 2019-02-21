@@ -32,7 +32,6 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.PixelFormat;
 import android.inputmethodservice.InputMethodService;
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -325,9 +324,6 @@ public class ModPieControls {
             try {
                 mExpandedDesktopMode = Integer.valueOf(prefs.getString(
                         GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
-                if (Build.VERSION.SDK_INT >= 27 && mExpandedDesktopMode > 2) {
-                    mExpandedDesktopMode = 2;
-                }
             } catch (NumberFormatException nfe) {
                 GravityBox.log(TAG, "Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
             }
