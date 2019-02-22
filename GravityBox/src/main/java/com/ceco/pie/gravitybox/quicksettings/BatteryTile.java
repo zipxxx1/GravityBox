@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -120,24 +120,24 @@ public class BatteryTile extends AospTile {
     @SuppressLint("DefaultLocale")
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        String label = (String) XposedHelpers.getObjectField(state, "label");
-        if (label == null)
-            return;
+        String label = null;
 
         if (mBatteryData == null) {
             if (DEBUG) log(getKey() + ": handleUpdateState: battery data is null");
         } else {
             if (mShowTemp && mShowVoltage) {
-                label = String.format("%s, %.1f\u00b0%s, %dmV", label,
+                label = String.format("%.1f\u00b0%s, %dmV",
                         mBatteryData.getTemp(mTempUnit), mTempUnit, mBatteryData.voltage);
             } else if (mShowTemp) {
-                label = String.format("%s, %.1f\u00b0%s", label,
+                label = String.format("%.1f\u00b0%s",
                         mBatteryData.getTemp(mTempUnit), mTempUnit);
             } else if (mShowVoltage) {
-                label = String.format("%s, %dmV", label, mBatteryData.voltage);
+                label = String.format("%dmV", mBatteryData.voltage);
             }
         }
-        XposedHelpers.setObjectField(state, "label", label);
+        if (label != null) {
+            XposedHelpers.setObjectField(state, "label", label);
+        }
         super.handleUpdateState(state, arg);
     }
 
