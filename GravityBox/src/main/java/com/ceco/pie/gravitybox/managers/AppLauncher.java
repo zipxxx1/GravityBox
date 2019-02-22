@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -52,6 +52,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,21 +77,16 @@ public class AppLauncher implements BroadcastSubReceiver {
     private Handler mHandler;
     private PackageManager mPm;
     private List<AppInfo> mAppSlots;
-    private View mAppView;
     private XSharedPreferences mPrefs;
     private Object mStatusBar;
     private DialogTheme mDialogTheme;
+    private boolean mIsFirstShow = true;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private Runnable mDismissAppDialogRunnable = new Runnable() {
-        @Override
-        public void run() {
-            dismissDialog();
-        }
-    };
+    private Runnable mDismissAppDialogRunnable = this::dismissDialog;
 
     private BroadcastReceiver mPackageRemoveReceiver = new BroadcastReceiver() {
         @Override
@@ -122,7 +118,7 @@ public class AppLauncher implements BroadcastSubReceiver {
         mDialogTheme = DialogTheme.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_APP_LAUNCHER_THEME, "DEFAULT"));
 
-        mAppSlots = new ArrayList<AppInfo>();
+        mAppSlots = new ArrayList<>();
         mAppSlots.add(new AppInfo(R.id.quickapp1));
         mAppSlots.add(new AppInfo(R.id.quickapp2));
         mAppSlots.add(new AppInfo(R.id.quickapp3));
@@ -155,7 +151,6 @@ public class AppLauncher implements BroadcastSubReceiver {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_APP_LAUNCHER_THEME)) {
                 mDialogTheme = DialogTheme.valueOf(intent.getStringExtra(
                         GravityBoxSettings.EXTRA_APP_LAUNCHER_THEME));
-                mDialog = null;
             }
         }
         if (intent.getAction().equals(ACTION_SHOW_APP_LAUCNHER)) {
@@ -167,14 +162,25 @@ public class AppLauncher implements BroadcastSubReceiver {
         mStatusBar = statusBar;
     }
 
-    public boolean dismissDialog() {
+    private boolean dismissDialog() {
         boolean dismissed = false;
         mHandler.removeCallbacks(mDismissAppDialogRunnable);
-        if (mDialog != null && mDialog.isShowing()) {
-            mDialog.dismiss();
-            dismissed = true;
+        if (mDialog != null) {
+            if (mDialog.isShowing()) {
+                mDialog.dismiss();
+                dismissed = true;
+            }
+            mDialog = null;
         }
         return dismissed;
+    }
+
+    private ContextThemeWrapper getThemedContext(int defaultThemeResId) {
+        int resId = mResources.getIdentifier("qs_theme", "style", mContext.getPackageName());
+        if (resId == 0) {
+            resId = defaultThemeResId;
+        }
+        return new ContextThemeWrapper(mContext, resId);
     }
 
     @SuppressLint("InflateParams")
@@ -184,36 +190,39 @@ public class AppLauncher implements BroadcastSubReceiver {
                 return;
             }
 
-            if (mDialog == null) {
+            if (mIsFirstShow) {
                 mPrefs.reload();
                 for (int i = 0; i < GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.size(); i++) {
-                  updateAppSlot(i, mPrefs.getString(
-                          GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.get(i), null));
+                    updateAppSlot(i, mPrefs.getString(
+                            GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.get(i), null));
                 }
-                LayoutInflater inflater = LayoutInflater.from(mGbContext);
-                mAppView = inflater.inflate(R.layout.navbar_app_dialog, null);
-                if (mDialogTheme == DialogTheme.LIGHT) {
-                    mDialog = new Dialog(mContext, android.R.style.Theme_Material_Light_Dialog_NoActionBar);
-                } else if (mDialogTheme == DialogTheme.DARK) {
-                    mDialog = new Dialog(mContext, android.R.style.Theme_Material_Dialog_NoActionBar);
-                } else {
-                    mDialog = new Dialog(mContext);
-                }
-                mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                mDialog.setContentView(mAppView);
-                mDialog.setCanceledOnTouchOutside(true);
-                mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL);
-                int pf = XposedHelpers.getIntField(mDialog.getWindow().getAttributes(), "privateFlags");
-                pf |= 0x00000010;
-                XposedHelpers.setIntField(mDialog.getWindow().getAttributes(), "privateFlags", pf);
-                mDialog.getWindow().getAttributes().gravity = Gravity.BOTTOM;
+                mIsFirstShow = false;
             }
 
-            View appRow1 = mAppView.findViewById(R.id.appRow1);
-            View appRow2 = mAppView.findViewById(R.id.appRow2);
-            View appRow3 = mAppView.findViewById(R.id.appRow3);
-            View separator = mAppView.findViewById(R.id.separator);
-            View separator2 = mAppView.findViewById(R.id.separator2);
+            LayoutInflater inflater = LayoutInflater.from(mGbContext);
+            View appView = inflater.inflate(R.layout.navbar_app_dialog, null);
+            if (mDialogTheme == DialogTheme.LIGHT) {
+                mDialog = new Dialog(mContext, android.R.style.Theme_Material_Light_Dialog_NoActionBar);
+            } else if (mDialogTheme == DialogTheme.DARK) {
+                mDialog = new Dialog(mContext, android.R.style.Theme_Material_Dialog_NoActionBar);
+            } else {
+                mDialog = new Dialog(getThemedContext(
+                        android.R.style.Theme_Material_Light_Dialog_NoActionBar));
+            }
+            mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mDialog.setContentView(appView);
+            mDialog.setCanceledOnTouchOutside(true);
+            mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL);
+            int pf = XposedHelpers.getIntField(mDialog.getWindow().getAttributes(), "privateFlags");
+            pf |= 0x00000010;
+            XposedHelpers.setIntField(mDialog.getWindow().getAttributes(), "privateFlags", pf);
+            mDialog.getWindow().getAttributes().gravity = Gravity.BOTTOM;
+
+            View appRow1 = appView.findViewById(R.id.appRow1);
+            View appRow2 = appView.findViewById(R.id.appRow2);
+            View appRow3 = appView.findViewById(R.id.appRow3);
+            View separator = appView.findViewById(R.id.separator);
+            View separator2 = appView.findViewById(R.id.separator2);
             int appCount = 0;
             boolean appRow1Visible = false;
             boolean appRow2Visible = false;
@@ -221,7 +230,7 @@ public class AppLauncher implements BroadcastSubReceiver {
             TextView lastVisible = null;
             int color = Utils.getColorFromStyleAttr(mDialog.getContext(), android.R.attr.textColorPrimary);
             for (AppInfo ai : mAppSlots) {
-                TextView tv = mAppView.findViewById(ai.getResId());
+                TextView tv = appView.findViewById(ai.getResId());
                 if (ai.getValue() == null || (ai.isUnsafeAction() &&
                         SysUiManagers.KeyguardMonitor.isShowing() &&
                         SysUiManagers.KeyguardMonitor.isLocked())) {
@@ -344,7 +353,7 @@ public class AppLauncher implements BroadcastSubReceiver {
         private String mPkgName;
         private int mSizeDp;
 
-        public AppInfo(int resId) {
+        AppInfo(int resId) {
             mResId = resId;
             mSizeDp = 50;
         }
@@ -366,10 +375,6 @@ public class AppLauncher implements BroadcastSubReceiver {
             mAppIcon = d;
         }
 
-        public void setAppIcon(Bitmap b) {
-            mAppIcon = new BitmapDrawable(mResources, b);
-        }
-
         public void setSizeDp(int sizeDp) {
             mSizeDp = sizeDp;
         }
@@ -386,7 +391,7 @@ public class AppLauncher implements BroadcastSubReceiver {
             return mPkgName;
         }
 
-        public boolean isUnsafeAction() {
+        boolean isUnsafeAction() {
             return (mIntent != null &&
                     !ShortcutActivity.isActionSafe(mIntent.getStringExtra(
                             ShortcutActivity.EXTRA_ACTION)));
@@ -403,7 +408,7 @@ public class AppLauncher implements BroadcastSubReceiver {
             initAppInfo(value, true);
         }
 
-        public void initAppInfo(String value, boolean loadLabelAndIcon) {
+        void initAppInfo(String value, boolean loadLabelAndIcon) {
             mValue = value;
             if (mValue == null) {
                 reset();
