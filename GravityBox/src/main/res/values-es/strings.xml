@@ -1479,11 +1479,6 @@
     <string name="pref_battery_tile_temp_unit_title">Unidad de temperatura</string>
     <string name="celsius">Grados</string>
 
-    <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Desactivar indicación de ahorro de batería</string>
-    <string name="pref_battery_saver_indication_disable_summary">Desactivar color naranja de la barra del sistema 
-        cuando el indicador de ahorro de batería está activo</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Desactivar la conversión de sonido a vibraciones</string>
     <string name="pref_lc_sound_vibrate_summary">Evita que las notificaciones con vibración desactivada

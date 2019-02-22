@@ -53,11 +53,8 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     private boolean mIsCharging;    // whether or not device is currently charging
     private boolean mIsFastCharging; // whether or not device is currently fast charging
     private int     mLevel;         // current battery level
-    private boolean mIsPowerSaving; // whether power saving mode is on
     private int     mAnimOffset;    // current level of charging animation
     private boolean mIsAnimating;   // stores charge-animation status to reliably remove callbacks
-    private int     mDockLevel;     // current dock battery level
-    private boolean mDockIsCharging;// whether or not dock battery is currently charging
     private boolean mPercentage;    // whether to show percentage
     private BatteryStyleController mController;
 
@@ -97,7 +94,6 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         mLevel = batteryData.level;
         mIsCharging = batteryData.charging;
         mIsFastCharging = batteryData.fastCharging;
-        mIsPowerSaving = batteryData.isPowerSaving;
         if (mAttached) {
             invalidate();
         }
@@ -222,11 +218,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     }
 
     private void drawCircle(Canvas canvas, int level, int animOffset, float textX, RectF drawRect) {
-        final Paint usePaint = level <= 15 && 
-                (!mIsPowerSaving ||
-                 mController.getContainerType() != ContainerType.STATUSBAR ||
-                 mController.isBatterySaverIndicationDisabled()) ? 
-                         mPaintRed : mPaintSystem;
+        final Paint usePaint = level <= 15 ? mPaintRed : mPaintSystem;
         usePaint.setAntiAlias(true);
         usePaint.setPathEffect(mPathEffect);
 
@@ -271,7 +263,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
      * uses mInvalidate for delayed invalidate() callbacks
      */
     private void updateChargeAnim() {
-        if (!(mIsCharging || mDockIsCharging) || (mLevel >= 97 && mDockLevel >= 97)) {
+        if (!mIsCharging || mLevel >= 97) {
             if (mIsAnimating) {
                 mIsAnimating = false;
                 mAnimOffset = 0;

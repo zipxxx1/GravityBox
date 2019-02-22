@@ -1491,11 +1491,6 @@
     <string name="celsius">Цельсий</string>
     <string name="fahrenheit">Фаренгейт</string>
 
-    <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Откл.индикацию энергосбережения</string>
-    <string name="pref_battery_saver_indication_disable_summary">Отключение оранжевого цвета системных полос 
-        при активности энергосбережения</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Откл.конверсию звука в вибрацию</string>
     <string name="pref_lc_sound_vibrate_summary">Предотвращение вибрации уведомлений с ранее отключенной

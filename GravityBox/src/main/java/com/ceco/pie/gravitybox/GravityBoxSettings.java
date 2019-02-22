@@ -284,10 +284,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_BLED_FLASHING_DISABLED = "batteryLedFlashingDisabled";
     public static final String EXTRA_BLED_CHARGING = "batteryLedCharging";
 
-    public static final String PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE = "pref_battery_saver_indication_disable";
-    public static final String ACTION_BATTERY_SAVER_CHANGED = "gravitybox.intent.action.BATTERY_SAVER_CHANGED";
-    public static final String EXTRA_BS_INDICATION_DISABLE = "batterySaverIndicationDisable";
-
     public static final String PREF_CAT_KEY_DISPLAY = "pref_cat_display";
     public static final String PREF_KEY_EXPANDED_DESKTOP = "pref_expanded_desktop";
     public static final int ED_DISABLED = 0;
@@ -3248,9 +3244,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_BATTERY_TILE_VOLTAGE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_TILE_VOLTAGE, prefs.getBoolean(key, true));
-            } else if (key.equals(PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE)) {
-                intent.setAction(ACTION_BATTERY_SAVER_CHANGED);
-                intent.putExtra(EXTRA_BS_INDICATION_DISABLE, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_PIE_TRIGIND)) {
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_TRIGIND, prefs.getBoolean(key, false));

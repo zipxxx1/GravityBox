@@ -1459,10 +1459,6 @@
     <string name="celsius">Цельсій</string>
     <string name="fahrenheit">Фаренгейт</string>
 
-    <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Вимкнути індикацію енергоощадження</string>
-    <string name="pref_battery_saver_indication_disable_summary">Вимкнути помаранчеві кольори системних смуг при активності енергоощадження</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Перетворення звуку у вібрацію</string>
     <string name="pref_lc_sound_vibrate_summary">Запобігання вібрації сповіщень з раніше вимкнутою вібрацією при виборі режиму дзвінка «Лише вібрація»</string>

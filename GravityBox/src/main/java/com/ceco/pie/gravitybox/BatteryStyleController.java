@@ -61,7 +61,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private StatusbarBatteryPercentage mPercentText;
     private CmCircleBattery mCircleBattery;
     private StatusbarBattery mStockBattery;
-    private boolean mBatterySaverIndicationDisabled;
     private boolean mIsDashCharging;
     private List<Unhook> mHooks = new ArrayList<>();
     private Integer mOosSystemIconsMarginEndOriginal;
@@ -119,8 +118,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false);
         mBatteryPercentTextKgMode = KeyguardMode.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD, "DEFAULT"));
-        mBatterySaverIndicationDisabled = prefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
         mBatteryPercentTextOnRight = "RIGHT".equals(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"));
     }
@@ -365,10 +362,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                  mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_DASHED_PERCENT));
     }
 
-    public boolean isBatterySaverIndicationDisabled() {
-        return mBatterySaverIndicationDisabled;
-    }
-
     public boolean isDashCharging() {
         return mIsDashCharging;
     }
@@ -421,15 +414,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                         GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_CHARGING_COLOR, Color.GREEN);
                 mPercentText.setChargingColor(chargingColor);
                 if (DEBUG) log("PercentText charging color changed to: " + chargingColor);
-            }
-        } else if (action.equals(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED)) {
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE)) {
-                mBatterySaverIndicationDisabled = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE, false);
-                if (mCircleBattery != null && mCircleBattery.isAttachedToWindow()
-                        && mContainerType == ContainerType.STATUSBAR) {
-                    mCircleBattery.postInvalidate();
-                }
             }
         }
     }

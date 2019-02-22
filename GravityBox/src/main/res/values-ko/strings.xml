@@ -1180,10 +1180,6 @@
     <string name="celsius">섭씨</string>
     <string name="fahrenheit">화씨</string>
 
-    <string name="pref_battery_saver_indication_disable_title">배터리 절약 기능 표시 비활성화</string>
-    <string name="pref_battery_saver_indication_disable_summary">배터리 절약 기능이 실행되었을 때 시스템 바의 
-        배경 색깔을 바꾸지 않습니다.</string>
-
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">퀵세팅 패널 확장</string>
 

@@ -1226,10 +1226,6 @@ Assurez-vous que ses dimensions soient proches de : %1$dx%2$dpx</string>
     <string name="pref_battery_tile_temp_unit_title">Unité de température</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
-    <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Désactiver l\'indication d\'économiseur de batterie</string>
-    <string name="pref_battery_saver_indication_disable_summary">Désactive la couleur orange des barres système
-        lorsque l\'économiseur de batterie est actif</string>
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Désactiver la bascule son vers vibration</string>
     <string name="pref_lc_sound_vibrate_summary">Evite aux notifications dont les vibrations sont désactivées

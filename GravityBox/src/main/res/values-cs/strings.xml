@@ -1459,11 +1459,6 @@
     <string name="celsius">Celzius</string>
     <string name="fahrenheit">Fahrenheit</string>
 
-    <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Vypnout indikaci úsporného režimu</string>
-    <string name="pref_battery_saver_indication_disable_summary">Zruší vybarvení systémových lišt
-        během úsporného režimu</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Vypnout konverzi zvuku na vibrace</string>
     <string name="pref_lc_sound_vibrate_summary">Zabrání oznámením, které mají vibrace vypnuté, vibrovat

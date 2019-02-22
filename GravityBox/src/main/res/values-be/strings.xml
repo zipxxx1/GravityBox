@@ -1477,11 +1477,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="celsius">Цэльсій</string>
     <string name="fahrenheit">Фарэнгейт</string>
 
-    <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Адключыць індыкацыю энергазахавання</string>
-    <string name="pref_battery_saver_indication_disable_summary">Адключэнне памаранчавага колеру сістэмных палос 
-пры актыўнасці энергазахавання</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Адключыць канверсію гуку ў вібрацыю</string>
     <string name="pref_lc_sound_vibrate_summary">Прадухіленне вібрацыі паведамленняў з раней адключанай

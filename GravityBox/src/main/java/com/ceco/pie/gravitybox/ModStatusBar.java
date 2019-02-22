@@ -125,7 +125,6 @@ public class ModStatusBar {
     private static XSharedPreferences mPrefs;
     private static ProgressBarController mProgressBarCtrl;
     private static int mStatusBarState;
-    private static boolean mBatterySaverIndicationDisabled;
     private static boolean mDisablePeek;
     private static GestureDetector mGestureDetector;
     private static boolean mDt2sEnabled;
@@ -227,11 +226,6 @@ public class ModStatusBar {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
                 mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE)) {
-                    mBatterySaverIndicationDisabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE, false);
-                }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_POWER_CAMERA_VP)) {
                 setCameraVibratePattern(intent.getStringExtra(GravityBoxSettings.EXTRA_POWER_CAMERA_VP));
@@ -591,8 +585,6 @@ public class ModStatusBar {
                     GravityBoxSettings.PREF_KEY_STATUSBAR_BRIGHTNESS, false);
             mOngoingNotif = prefs.getString(GravityBoxSettings.PREF_KEY_ONGOING_NOTIFICATIONS, "");
             mNotifExpandAll = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NOTIF_EXPAND_ALL, false);
-            mBatterySaverIndicationDisabled = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
             mDisablePeek = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DISABLE_PEEK, false);
             mDt2sEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DT2S, false);
             setCameraVibratePattern(prefs.getString(GravityBoxSettings.PREF_KEY_POWER_CAMERA_VP, null));
@@ -642,7 +634,6 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED);
                     intentFilter.addAction(Intent.ACTION_SCREEN_ON);
                     intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
@@ -871,38 +862,6 @@ public class ModStatusBar {
                         }
                         // update traffic meter position
                         updateTrafficMeterPosition();
-                    }
-                });
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
-            }
-
-            // suppress battery saver indication
-            try {
-                XposedHelpers.findAndHookMethod(CLASS_BAR_TRANSITIONS, classLoader, "transitionTo",
-                        int.class, boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) {
-                        if (mBatterySaverIndicationDisabled && (int) param.args[0] == 5) {
-                            param.setResult(null);
-                        }
-                    }
-                });
-                XposedHelpers.findAndHookMethod(CLASS_LIGHT_BAR_CTRL, classLoader,
-                        "isLight", int.class, int.class, int.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) {
-                        if (mBatterySaverIndicationDisabled && SysUiManagers.BatteryInfoManager != null &&
-                                SysUiManagers.BatteryInfoManager.getCurrentBatteryData() != null &&
-                                SysUiManagers.BatteryInfoManager.getCurrentBatteryData().isPowerSaving) {
-                            int vis = (int) param.args[0];
-                            int mode = (int) param.args[1];
-                            int flag = (int) param.args[2];
-                            boolean allowLight = (mode == ModNavigationBar.MODE_TRANSPARENT ||
-                                    mode == ModNavigationBar.MODE_LIGHTS_OUT_TRANSPARENT);
-                            boolean light = (vis & flag) != 0;
-                            param.setResult(allowLight && light);
-                        }
                     }
                 });
             } catch (Throwable t) {

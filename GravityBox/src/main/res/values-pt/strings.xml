@@ -1441,11 +1441,6 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
 
-    <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Desativar indicação de economia de bateria</string>
-    <string name="pref_battery_saver_indication_disable_summary">Desativa a cor laranja das barras de sistema
-    quando o modo de economia de bateria está ativo</string>
-
     <!-- HW Key Actions: expand quick settings -->
     <string name="hwkey_action_expand_quicksettings">Expandir painel de configurações rápidas</string>
 

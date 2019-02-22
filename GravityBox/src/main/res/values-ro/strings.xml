@@ -1445,10 +1445,6 @@
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
 
-    <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Dezactivați indicația economisirii de energie</string>
-    <string name="pref_battery_saver_indication_disable_summary">Dezactivează culoarea portocalie a barelor de sistem atunci când economisirea energiei este activă</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Dezactivare conversie sunet în vibrații</string>
     <string name="pref_lc_sound_vibrate_summary">Împiedică notificările cu vibrații oprite să fie forțate să vibreze în timpul modului Doar vibrații</string>

@@ -1465,10 +1465,6 @@
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
 
-    <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Akkukímélés kijelzés letiltása</string>
-    <string name="pref_battery_saver_indication_disable_summary">Letiltja a rendszer sávok sárga színezését aktív akkukímélés esetén</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Hang rezgésre átalakítás tiltása</string>
     <string name="pref_lc_sound_vibrate_summary">Megakadályozza azon értesítések rezgő visszajelzését, amelyeknél a rezgés le van tiltva, de az Android ezt mégis kényszerítetten használja a csak rezgésre beállított csengés üzemmód alatti értesítési hang rezgésre konvertálása miatt.</string>

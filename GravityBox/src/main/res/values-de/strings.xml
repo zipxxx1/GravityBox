@@ -1464,11 +1464,6 @@
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
 
-    <!-- Power: Disable battery saver indication -->
-    <string name="pref_battery_saver_indication_disable_title">Deaktiviere die Batteriesparanzeige</string>
-    <string name="pref_battery_saver_indication_disable_summary">Deaktiviert die orangene Farbe der Systemleisten
-        wenn der Batteriesparmodus aktiv ist</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Ton-zu-Vibration Umwandlung deaktivieren</string>
     <string name="pref_lc_sound_vibrate_summary">Erlaubt dass Benachrichtigungen vibrieren, die nur durch den Nur Vibieren Modus vibrieren</string>
