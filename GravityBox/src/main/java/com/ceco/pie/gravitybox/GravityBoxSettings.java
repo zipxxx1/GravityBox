@@ -58,7 +58,6 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
-import android.preference.SwitchPreference;
 import android.text.TextUtils.TruncateAt;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -1810,6 +1809,14 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefPieAppLongpress.setEntries(actionEntries);
             mPrefPieAppLongpress.setEntryValues(actionEntryValues);
 
+            // special handling for RingtonePreference
+            for (String key : ringToneKeys) {
+                Preference rp = findPreference(key);
+                if (rp != null) {
+                    rp.setOnPreferenceChangeListener(this::onRingtonePreferenceChanged);
+                }
+            }
+
             if (sSystemProperties.fingerprintIds != null) {
                 initFingerprintLauncher();
             }
@@ -3067,25 +3074,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_LOCKSCREEN_BG_CHANGED);
                 intent.putExtra(EXTRA_LOCKSCREEN_BG,
                         prefs.getString(PREF_KEY_LOCKSCREEN_BACKGROUND, LOCKSCREEN_BG_DEFAULT));
-            } else if (key.equals(PREF_KEY_BATTERY_CHARGED_SOUND)) {
-                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_CHARGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_URI,
-                        prefs.getString(PREF_KEY_BATTERY_CHARGED_SOUND, ""));
-            } else if (key.equals(PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS)) {
-                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_WIRELESS);
-                intent.putExtra(EXTRA_BATTERY_SOUND_URI, prefs.getString(key, ""));
-            } else if (key.equals(PREF_KEY_CHARGER_PLUGGED_SOUND)) {
-                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_PLUGGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_URI,
-                        prefs.getString(PREF_KEY_CHARGER_PLUGGED_SOUND, ""));
-            } else if (key.equals(PREF_KEY_CHARGER_UNPLUGGED_SOUND)) {
-                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_UNPLUGGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_URI,
-                        prefs.getString(PREF_KEY_CHARGER_UNPLUGGED_SOUND, ""));
             } else if (key.equals(PREF_KEY_LOW_BATTERY_WARNING_POLICY)) {
                 intent.setAction(ACTION_PREF_LOW_BATTERY_WARNING_POLICY_CHANGED);
                 intent.putExtra(EXTRA_LOW_BATTERY_WARNING_POLICY, prefs.getString(key, "DEFAULT"));
@@ -3155,12 +3143,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN, prefs.getInt(key, 0));
             } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_ENABLE)) {
-                    intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
-                    intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_ENABLE, prefs.getBoolean(key, false));
-            } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
-                intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND,
-                        prefs.getString(key, "content://settings/system/notification_sound"));
+                intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_ENABLE, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_SCREEN_OFF)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND_SCREEN_OFF,
@@ -3375,6 +3359,37 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             if (rebootKeys.contains(key))
                 Toast.makeText(getActivity(), getString(R.string.reboot_required), Toast.LENGTH_SHORT).show();
+        }
+
+        private boolean onRingtonePreferenceChanged(Preference p, Object value) {
+            String key = p.getKey();
+            String uri = String.valueOf(value);
+            Intent intent = new Intent();
+            if (key.equals(PREF_KEY_BATTERY_CHARGED_SOUND)) {
+                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_CHARGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_URI, uri);
+            } else if (key.equals(PREF_KEY_CHARGER_PLUGGED_SOUND)) {
+                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_PLUGGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_URI, uri);
+            } else if (key.equals(PREF_KEY_CHARGER_UNPLUGGED_SOUND)) {
+                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_UNPLUGGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_URI, uri);
+            } else if (key.equals(PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS)) {
+                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_WIRELESS);
+                intent.putExtra(EXTRA_BATTERY_SOUND_URI, uri);
+            } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND)) {
+                intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
+                intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_SOUND, uri);
+            }
+            if (intent.getAction() != null) {
+                getActivity().sendBroadcast(intent);
+                return true;
+            }
+            return false;
         }
 
         @Override
