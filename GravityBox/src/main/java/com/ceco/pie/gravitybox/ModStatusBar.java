@@ -790,8 +790,10 @@ public class ModStatusBar {
                         if (mProgressBarCtrl != null) {
                             Object notifData = XposedHelpers.getObjectField(param.thisObject, "mNotificationData");
                             Object entry = XposedHelpers.callMethod(notifData, "get", param.args[0]);
-                            mProgressBarCtrl.onNotificationRemoved((StatusBarNotification)
-                                XposedHelpers.getObjectField(entry, "notification"));
+                            if (entry != null) {
+                                mProgressBarCtrl.onNotificationRemoved((StatusBarNotification)
+                                        XposedHelpers.getObjectField(entry, "notification"));
+                            }
                         }
                     }
                 });
