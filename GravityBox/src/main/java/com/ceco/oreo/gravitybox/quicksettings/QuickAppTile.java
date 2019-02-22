@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -43,11 +43,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.text.TextUtils.TruncateAt;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
 public class QuickAppTile extends QsTile {
@@ -75,9 +75,8 @@ public class QuickAppTile extends QsTile {
     private List<AppInfo> mAppSlots;
     private PackageManager mPm;
     private Dialog mDialog;
-    private View mAppView;
     private Handler mHandler;
-    private int mId = 1;
+    private int mId;
 
     private final class AppInfo {
         private String mAppName;
@@ -88,7 +87,7 @@ public class QuickAppTile extends QsTile {
         private Intent mIntent;
         private Resources mResources;
 
-        public AppInfo(int resId) {
+        AppInfo(int resId) {
             mResId = resId;
             mResources = mGbContext.getResources();
         }
@@ -97,17 +96,17 @@ public class QuickAppTile extends QsTile {
             return mResId;
         }
 
-        public String getAppName() {
+        String getAppName() {
             return (mAppName == null ? 
                     mGbContext.getString(R.string.qs_tile_quickapp) : mAppName);
         }
 
-        public Drawable getAppIconDrawable() {
+        Drawable getAppIconDrawable() {
             return (mAppIconDrawable == null ? 
                     mGbContext.getDrawable(android.R.drawable.ic_menu_help) : mAppIconDrawable);
         }
 
-        public int getAppIconResId() {
+        int getAppIconResId() {
             return mAppIconResId;
         }
 
@@ -126,7 +125,7 @@ public class QuickAppTile extends QsTile {
             mIntent = null;
         }
 
-        public void initAppInfo(String value) {
+        void initAppInfo(String value) {
             reset();
             mValue = value;
             if (mValue == null)
@@ -187,22 +186,22 @@ public class QuickAppTile extends QsTile {
         }
     }
 
-    private Runnable mDismissDialogRunnable = new Runnable() {
-        @Override
-        public void run() {
-            if (mDialog != null && mDialog.isShowing()) {
+    private void dismissDialog() {
+        mHandler.removeCallbacks(mDismissDialogRunnable);
+        if (mDialog != null) {
+            if (mDialog.isShowing()) {
                 mDialog.dismiss();
             }
+            mDialog = null;
         }
-    };
+    }
 
-    View.OnClickListener mOnSlotClick = new View.OnClickListener() {
+    private Runnable mDismissDialogRunnable = this::dismissDialog;
+
+    private View.OnClickListener mOnSlotClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mHandler.removeCallbacks(mDismissDialogRunnable);
-            if (mDialog != null && mDialog.isShowing()) {
-                mDialog.dismiss();
-            }
+            dismissDialog();
 
             AppInfo aiProcessing = null;
             try {
@@ -222,13 +221,8 @@ public class QuickAppTile extends QsTile {
         }
     };
 
-    
-    public QuickAppTile(Object host, String key, Object tile, XSharedPreferences prefs,
-            QsTileEventDistributor eventDistributor) throws Throwable {
-        this(host, key, tile, prefs, eventDistributor, 1);
-    }
 
-    public QuickAppTile(Object host, String key, Object tile, XSharedPreferences prefs,
+    QuickAppTile(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor, int id) throws Throwable {
         super(host, key, tile, prefs, eventDistributor);
 
@@ -246,7 +240,7 @@ public class QuickAppTile extends QsTile {
         }
 
         mMainApp = new AppInfo(mId);
-        mAppSlots = new ArrayList<AppInfo>();
+        mAppSlots = new ArrayList<>();
         mAppSlots.add(new AppInfo(R.id.quickapp1));
         mAppSlots.add(new AppInfo(R.id.quickapp2));
         mAppSlots.add(new AppInfo(R.id.quickapp3));
@@ -367,28 +361,30 @@ public class QuickAppTile extends QsTile {
         super.handleClick();
     }
 
+    private ContextThemeWrapper getThemedContext(int defaultThemeResId) {
+        int resId = mContext.getResources().getIdentifier("qs_theme",
+                "style", mContext.getPackageName());
+        if (resId == 0) {
+            resId = defaultThemeResId;
+        }
+        return new ContextThemeWrapper(mContext, resId);
+    }
+
     @SuppressLint("InflateParams")
     @Override
     public boolean handleLongClick() {
-        if (mDialog == null) {
-            LayoutInflater inflater = LayoutInflater.from(mGbContext);
-            mAppView = inflater.inflate(R.layout.quick_settings_app_dialog, null);
-            mDialog = new Dialog(mContext, android.R.style.Theme_Material_Dialog_NoActionBar);
-            mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            mDialog.setContentView(mAppView);
-            mDialog.setCanceledOnTouchOutside(true);
-            mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL);
-            int pf = XposedHelpers.getIntField(mDialog.getWindow().getAttributes(), "privateFlags");
-            pf |= 0x00000010;
-            XposedHelpers.setIntField(mDialog.getWindow().getAttributes(), "privateFlags", pf);
-            mDialog.getWindow().clearFlags(LayoutParams.FLAG_DIM_BEHIND);
-        }
-
         int count = 0;
         AppInfo lastAppInfo = null;
-        int color = Utils.getColorFromStyleAttr(mDialog.getContext(), android.R.attr.textColorPrimary);
+        ContextThemeWrapper themedContext = getThemedContext(
+                android.R.style.Theme_Material_Dialog_NoActionBar);
+        int color = Utils.getColorFromStyleAttr(themedContext,
+                android.R.attr.textColorPrimary);
+
+        LayoutInflater inflater = LayoutInflater.from(mGbContext);
+        View appView = inflater.inflate(R.layout.quick_settings_app_dialog, null);
+
         for (AppInfo ai : mAppSlots) {
-            TextView tv = mAppView.findViewById(ai.getResId());
+            TextView tv = appView.findViewById(ai.getResId());
             if (ai.getValue() == null) {
                 tv.setVisibility(View.GONE);
                 continue;
@@ -413,7 +409,15 @@ public class QuickAppTile extends QsTile {
                 log(getKey() + ": Unable to start activity: " + t.getMessage());
             }
         } else if (count > 1) {
-            mHandler.removeCallbacks(mDismissDialogRunnable);
+            dismissDialog();
+            mDialog = new Dialog(themedContext);
+            mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mDialog.setContentView(appView);
+            mDialog.setCanceledOnTouchOutside(true);
+            mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL);
+            int pf = XposedHelpers.getIntField(mDialog.getWindow().getAttributes(), "privateFlags");
+            pf |= 0x00000010;
+            XposedHelpers.setIntField(mDialog.getWindow().getAttributes(), "privateFlags", pf);
             mDialog.show();
             mHandler.postDelayed(mDismissDialogRunnable, 4000);
         }
@@ -430,7 +434,6 @@ public class QuickAppTile extends QsTile {
         }
         mPm = null;
         mDialog = null;
-        mAppView = null;
         mHandler = null;
         mDismissDialogRunnable = null;
         mOnSlotClick = null;
