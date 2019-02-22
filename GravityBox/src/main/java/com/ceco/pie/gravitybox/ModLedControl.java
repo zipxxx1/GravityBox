@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -931,10 +931,11 @@ public class ModLedControl {
         }
     }
 
-    private static boolean isFilteredNotification(StatusBarNotification sbn) {
+    private static boolean isFilteredNotification(Object entry) {
         try {
-            Object notifData = XposedHelpers.getObjectField(mStatusBar, "mNotificationData");
-            return (boolean) XposedHelpers.callMethod(notifData, "shouldFilterOut", sbn);
+            Object entryManager = XposedHelpers.getObjectField(mStatusBar, "mEntryManager");
+            Object notifData = XposedHelpers.callMethod(entryManager, "getNotificationData");
+            return (boolean) XposedHelpers.callMethod(notifData, "shouldFilterOut", entry);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error in isFilteredNotification()", t);
             return false;
@@ -963,7 +964,8 @@ public class ModLedControl {
 
     private static boolean isSnoozedPackage(StatusBarNotification sbn) {
         try {
-            return (boolean) XposedHelpers.callMethod(mStatusBar, "isSnoozedPackage", sbn);
+            Object entryManager = XposedHelpers.getObjectField(mStatusBar, "mEntryManager");
+            return (boolean) XposedHelpers.callMethod(entryManager, "isSnoozedPackage", sbn);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error in isSnoozedPackage()", t);
             return false;
@@ -975,7 +977,7 @@ public class ModLedControl {
 
         return (!sbn.isOngoing() &&
                 !isDeviceInVrMode() &&
-                !isFilteredNotification(sbn) &&
+                !isFilteredNotification(entry) &&
                 isDeviceInUse(context) &&
                 !hasJustLaunchedFullScreenIntent(entry) &&
                 !isSnoozedPackage(sbn) &&
