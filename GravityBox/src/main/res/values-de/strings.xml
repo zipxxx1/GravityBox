@@ -1700,10 +1700,6 @@
     <string name="pref_force_aosp_summary">Behandle System als AOSP. 
         Dies auswählen, wenn Ihr Gerät als ein angepasstes System erkannt wird, obwohl es mit einem alternativen AOSP-basierten System läuft (Neustart erforderlich)</string>
 
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Ton für drahtloses Laden</string>
-    <string name="stock_wireless_sound">Standardton für drahtlosen Laden</string>
-
         <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Dialer</string>
 

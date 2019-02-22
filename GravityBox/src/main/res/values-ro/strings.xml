@@ -1678,10 +1678,6 @@
     <string name="pref_force_aosp_title">Forțare AOSP</string>
     <string name="pref_force_aosp_summary">Tratează sistemul ca AOSP. Utilizați în cazul în care dispozitivul dvs. este identificat ca fiind un sistem de marcă care rulează, în ciuda faptului că acesta rulează de fapt sistem alternativ bazat pe AOSP (necesită repornire)</string>
 
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Sunet încărcător fără fir</string>
-    <string name="stock_wireless_sound">Sunet stoc</string>
-
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Taste numerice</string>
 

@@ -1741,10 +1741,6 @@
         Use in case your device is identified as running branded system despite it is
         actually running alternate AOSP-based system (requires reboot)</string>
 
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Wireless charging sound</string>
-    <string name="stock_wireless_sound">Stock wireless sound</string>
-
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Dialer</string>
 
@@ -2028,5 +2024,8 @@
     <string name="tuneable_reboot_required">Reboot required</string>
     <string name="pref_tuneable_value_int_error">Invalid value. Integer expected</string>
     <string name="tuner_manager_not_responding">Tuning manager is not responding</string>
+
+    <!-- Stock sound -->
+    <string name="stock_sound">Stock sound</string>
 
 </resources>

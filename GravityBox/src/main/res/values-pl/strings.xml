@@ -1701,10 +1701,6 @@
         Użyj w przypadku kiedy twoje urządzenie jest wykrywane jako brandowane pomimo tego, że faktycznie
         działający system oparty jest o AOSP (wymaga ponownego uruchomienia)</string>
 
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Dźwięk bezprzewodowego ładowania</string>
-    <string name="stock_wireless_sound">Standardowy dźwięk bezprzewodowego ładowania</string>
-
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Dialer</string>
 

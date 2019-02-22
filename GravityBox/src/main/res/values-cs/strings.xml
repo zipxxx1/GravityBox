@@ -1678,10 +1678,6 @@
         Použijte v případě pokud GravityBox identifikuje systém s nástavbou výrobce 
         i přesto, že ve skutečnosti je AOSP.</string>
 
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Zvuk bezdrátového nabíjení</string>
-    <string name="stock_wireless_sound">Systémový zvuk bezdrátového nabíjení</string>
-
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Dialer</string>
 
@@ -1925,5 +1921,8 @@
 
     <!-- BatteryBar: lock screen only -->
     <string name="pref_battery_bar_lockscreen_only_title">Jen na obrazovce uzamčení</string>
+
+    <!-- Stock sound -->
+    <string name="stock_sound">Původní zvuk</string>
 
 </resources>

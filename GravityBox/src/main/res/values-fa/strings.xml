@@ -1049,8 +1049,6 @@
 <string name="turn_off">خاموش کردن</string>
 <string name="pref_force_aosp_title">شبیه‌ساز اجباری سیستم AOSP</string>
 <string name="pref_force_aosp_summary">"شبیه ساز سیستم AOSP. در صورتیکه عملکرد دستگاه شما  بعنوان سیستم یک برند و مارک شناسایی شده‌است مورد استفاده قرار می‌گیرد، با این وجود در واقع  با یک سیستم AOSP جایگزین اجرا میشود(نیازمند راه‌اندازی مجدد)"</string>
-<string name="pref_charger_plugged_sound_wireless_title">صدای اتصال شارژر وایرلس</string>
-<string name="stock_wireless_sound">تعیین صدا هنگام اتصال شارژر وایرلس</string>
 <string name="pref_cat_phone_dialer_title">شماره‌گیر</string>
 <string name="pref_qs_brightness_icon_title">نمایش آیکون تنظیم روشنایی</string>
 <string name="pref_qs_brightness_icon_summary">نمایش آیکون نشانگر حالت روشنایی . با یک لمس وضعیت را تغییر داده و با لمس طولانی تنظیمات صفحه نمایش را باز خواهد کرد</string>

@@ -1704,10 +1704,6 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_force_aosp_title">"AOSP'yi zorla"</string>
     <string name="pref_force_aosp_summary">Sistem, AOSP gibi davranır. Cihazınızın alternatif AOSP-tabanlı bir sistem çalıştırmasına rağmen markalı sistem çalıştırıyor gibi tanımlanması durumunda kullanın (yeniden başlatma gerektirir)</string>
 
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Kablosuz şarj sesi</string>
-    <string name="stock_wireless_sound">Stok kablosuz sesi</string>
-
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Çevirici</string>
 

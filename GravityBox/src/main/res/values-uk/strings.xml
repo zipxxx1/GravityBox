@@ -1695,10 +1695,6 @@
     <string name="pref_force_aosp_title">Примусово AOSP</string>
     <string name="pref_force_aosp_summary">Позначити систему як AOSP. Використовуйте, якщо ваш пристрій ідентифікується як брендована система, хоча насправді це кастомна на базі AOSP</string>
 
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Звук бездротової зарядки</string>
-    <string name="stock_wireless_sound">Стоковий звук бездротової зарядки</string>
-
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Набір номеру</string>
 

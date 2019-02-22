@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,6 +16,8 @@
 
 package com.ceco.pie.gravitybox;
 
+import com.ceco.pie.gravitybox.ledcontrol.QuietHours;
+import com.ceco.pie.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.pie.gravitybox.managers.BatteryInfoManager;
 
 import android.content.BroadcastReceiver;
@@ -60,9 +62,10 @@ public class ModPower {
     private static boolean mProxSensorCovered;
     private static WakeLock mWakeLock;
     private static boolean mIgnoreIncomingCall;
-    private static boolean mIsWirelessChargingSoundCustom;
+    private static boolean mIsChargingSoundCustom;
     private static boolean mMotoHooksCreated;
     private static int mLockscreenTorch = 0;
+    private static QuietHours mQh;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -82,19 +85,24 @@ public class ModPower {
                 }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED) &&
                     intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1) == 
-                        BatteryInfoManager.SOUND_WIRELESS) {
-                updateIsWirelessChargingSoundCustom(intent.getStringExtra(
+                        BatteryInfoManager.SOUND_PLUGGED) {
+                updateIsChargingSoundCustom(intent.getStringExtra(
                         GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
                     mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
                             GravityBoxSettings.HWKEY_TORCH_DISABLED);
                 }
+            } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+                mQh = new QuietHours(intent.getExtras());
             }
         }
     };
 
-    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
+    public static void initAndroid(final XSharedPreferences prefs, final XSharedPreferences qhPrefs,
+                                   final ClassLoader classLoader) {
+        mQh = new QuietHours(qhPrefs);
+
         Class<?> pmServiceClass = null;
         try {
             pmServiceClass = XposedHelpers.findClass(CLASS_PM_SERVICE, classLoader);
@@ -123,6 +131,7 @@ public class ModPower {
                     IntentFilter intentFilter = new IntentFilter(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
+                    intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                 }
             });
@@ -180,16 +189,16 @@ public class ModPower {
             GravityBox.log(TAG, t);
         }
 
-        // Wireless charging sound
+        // Charging started
         try {
-            updateIsWirelessChargingSoundCustom(prefs.getString(
-                    GravityBoxSettings.PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS, null));
+            updateIsChargingSoundCustom(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_CHARGER_PLUGGED_SOUND, null));
 
             XposedHelpers.findAndHookMethod(CLASS_PM_NOTIFIER, classLoader,
                     "playChargingStartedSound", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) {
-                    if (mIsWirelessChargingSoundCustom) {
+                    if (mIsChargingSoundCustom || mQh.isSystemSoundMuted(QuietHours.SystemSound.CHARGER)) {
                         param.setResult(null);
                     }
                 }
@@ -296,10 +305,10 @@ public class ModPower {
         public void onAccuracyChanged(Sensor sensor, int accuracy) {}
     };
 
-    private static void updateIsWirelessChargingSoundCustom(String value) {
-        mIsWirelessChargingSoundCustom = (value != null &&
+    private static void updateIsChargingSoundCustom(String value) {
+        mIsChargingSoundCustom = (value != null &&
                 !value.equals("content://settings/system/notification_sound"));
-        if (DEBUG) log("mIsWirelessChargingSoundCustom: " + mIsWirelessChargingSoundCustom + 
+        if (DEBUG) log("mIsChargingSoundCustom: " + mIsChargingSoundCustom +
                 " [" + (value != null && value.isEmpty() ? "silent" : value) + "]");
     }
 

@@ -1739,10 +1739,6 @@
         Guna jika sistem dianggap bukan AOSP
         walaupun anda sedang menggunakan AOSP alternatif (perlukan reboot)</string>
 
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Bunyi cas tanpa wayar</string>
-    <string name="stock_wireless_sound">Bunyi asal caj tanpa wayar</string>
-
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Papan kekunci</string>
 

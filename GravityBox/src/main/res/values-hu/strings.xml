@@ -1702,10 +1702,6 @@
     <string name="pref_force_aosp_summary">Rendszer kezelése AOSP-ként. 
         Akkor használd, ha az eszközöd rendszere gyártóiként került azonosításra annak ellenére, hogy valójában alternatív AOSP-alapú rendszer (újraindítás szükséges)</string>
 
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Vezeték nélküli töltés hang</string>
-    <string name="stock_wireless_sound">Alapértelmezett hang</string>
-	
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Tárcsázó</string>
 	

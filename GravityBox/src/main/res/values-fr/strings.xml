@@ -1417,9 +1417,6 @@ y compris les vibrations de notification, le retour haptique, etc.</string>
     <string name="pref_force_aosp_title">Forcer AOSP</string>
     <string name="pref_force_aosp_summary">Traite le système comme AOSP.
 A utiliser dans le cas où votre appareil est identifié comme étant un système avec surcouche malgré l\'exécution d\'une ROM alternative AOSP (nécessite un redémarrage)</string>
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Son de chargement sans fil</string>
-    <string name="stock_wireless_sound">Son de chargement sans fil d\'origine</string>
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Clavier</string>
     <!-- QS: Brightness control -->

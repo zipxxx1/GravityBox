@@ -136,7 +136,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
     public static final String PREF_KEY_BATTERY_CHARGED_SOUND = "pref_battery_charged_sound2";
     public static final String PREF_KEY_CHARGER_PLUGGED_SOUND = "pref_charger_plugged_sound2";
-    public static final String PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS = "pref_charger_plugged_sound_wireless";
     public static final String PREF_KEY_CHARGER_UNPLUGGED_SOUND = "pref_charger_unplugged_sound";
     public static final String ACTION_PREF_BATTERY_SOUND_CHANGED = 
             "gravitybox.intent.action.BATTERY_SOUND_CHANGED";
@@ -906,7 +905,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_BATTERY_CHARGED_SOUND,
             PREF_KEY_CHARGER_PLUGGED_SOUND,
             PREF_KEY_CHARGER_UNPLUGGED_SOUND,
-            PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS,
             PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND
     ));
 
@@ -2490,9 +2488,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                     continue;
                 String val = mPrefs.getString(rtKey, null);
                 if (val != null && !val.isEmpty()) {
-                    if (rtKey.equals(PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS) &&
+                    if (rtKey.equals(PREF_KEY_CHARGER_PLUGGED_SOUND) &&
                             val.equals("content://settings/system/notification_sound")) {
-                        rtPref.setSummary(R.string.stock_wireless_sound);
+                        rtPref.setSummary(R.string.stock_sound);
                     } else {
                         Uri uri = Uri.parse(val);
                         Ringtone r = RingtoneManager.getRingtone(getActivity(), uri);
@@ -3376,10 +3374,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_CHARGER_UNPLUGGED_SOUND)) {
                 intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_UNPLUGGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_URI, uri);
-            } else if (key.equals(PREF_KEY_CHARGER_PLUGGED_SOUND_WIRELESS)) {
-                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_WIRELESS);
                 intent.putExtra(EXTRA_BATTERY_SOUND_URI, uri);
             } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);

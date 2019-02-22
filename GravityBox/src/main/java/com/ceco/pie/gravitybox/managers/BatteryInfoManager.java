@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -51,7 +51,6 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     public static final int SOUND_CHARGED = 0;
     public static final int SOUND_PLUGGED = 1;
     public static final int SOUND_UNPLUGGED = 2;
-    public static final int SOUND_WIRELESS = 3;
 
     public enum LowBatteryWarningPolicy { DEFAULT, NONINTRUSIVE, OFF }
 
@@ -186,8 +185,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
                 if (newPowerSource == 0) {
                     playSound(SOUND_UNPLUGGED);
                 } else if (mBatteryData.powerSource == 0) {
-                    playSound(newPowerSource == BatteryManager.BATTERY_PLUGGED_WIRELESS ?
-                                SOUND_WIRELESS : SOUND_PLUGGED);
+                    playSound(SOUND_PLUGGED);
                 }
             }
 
@@ -232,7 +230,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     public void setSound(int type, String uri) {
         if (type < 0 || type > (mSounds.length-1)) return;
 
-        if (uri == null || uri.isEmpty() || (type == SOUND_WIRELESS && 
+        if (uri == null || uri.isEmpty() || (type == SOUND_PLUGGED &&
                  uri.equals("content://settings/system/notification_sound"))) {
             mSounds[type] = null;
         } else {

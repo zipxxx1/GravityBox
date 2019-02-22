@@ -1737,10 +1737,6 @@
          Utilizzare nel caso in cui il dispositivo sia identificato come sistema funzionante con marchio nonostante lo sia
          in realtà esegue un sistema alternativo basato su AOSP (richiede il riavvio)</string>
 
-    <!-- Wireless charger plugged sound -->
-    <string name="pref_charger_plugged_sound_wireless_title">Suono di ricarica wireless</string>
-    <string name="stock_wireless_sound">Suono wireless di serie</string>
-
     <!-- Dialer category -->
     <string name="pref_cat_phone_dialer_title">Dialer</string>
 
