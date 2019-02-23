@@ -120,6 +120,8 @@ public class ModNavigationBar {
         View customKeyPlaceHolder;
         ViewGroup customKeyParent;
         boolean customKeyVisible;
+        int customKeySize;
+        boolean isVertical;
         KeyButtonView dpadLeft;
         KeyButtonView dpadRight;
         boolean menuCustomSwapped;
@@ -527,11 +529,48 @@ public class ModNavigationBar {
                     .navButtons.findViewById(resId);
             mNavbarViewInfo[index].endsGroup = endsGroup;
 
+            if (DEBUG) {
+                log("List of children for mNavbarViewInfo[" + index + "].endsGroup:");
+                for (int i = 0; i < mNavbarViewInfo[index].endsGroup.getChildCount(); i++) {
+                    log(mNavbarViewInfo[index].endsGroup.getChildAt(i).toString());
+                }
+            }
+
             // center group
             resId = mResources.getIdentifier("center_group", "id", PACKAGE_NAME);
             ViewGroup centerGroup = mNavbarViewInfo[index]
                     .navButtons.findViewById(resId);
             mNavbarViewInfo[index].centerGroup = centerGroup;
+
+            // find menu key
+            resId = mResources.getIdentifier("menu", "id", PACKAGE_NAME);
+            if (resId != 0) {
+                mNavbarViewInfo[index].menuKey = mNavbarViewInfo[index].endsGroup.findViewById(resId);
+            }
+
+            // find back key
+            resId = mResources.getIdentifier("back", "id", PACKAGE_NAME);
+            if (resId != 0) {
+                mNavbarViewInfo[index].backKey = mNavbarViewInfo[index].endsGroup.findViewById(resId);
+                if (mNavbarViewInfo[index].backKey != null) {
+                    mNavbarViewInfo[index].backView =
+                            mNavbarViewInfo[index].backKey.getParent() == mNavbarViewInfo[index].endsGroup ?
+                                    mNavbarViewInfo[index].backKey :
+                                    (View) mNavbarViewInfo[index].backKey.getParent();
+                }
+            }
+
+            // find recent apps key
+            resId = mResources.getIdentifier("recent_apps", "id", PACKAGE_NAME);
+            if (resId != 0) {
+                mNavbarViewInfo[index].recentsKey = mNavbarViewInfo[index].endsGroup.findViewById(resId);
+                if (mNavbarViewInfo[index].recentsKey != null) {
+                    mNavbarViewInfo[index].recentsView =
+                            mNavbarViewInfo[index].recentsKey.getParent() == mNavbarViewInfo[index].endsGroup ?
+                                    mNavbarViewInfo[index].recentsKey :
+                                    (ViewGroup)mNavbarViewInfo[index].recentsKey.getParent();
+                }
+            }
 
             // find ime switcher, menu group
             resId = mResources.getIdentifier("ime_switcher", "id", PACKAGE_NAME);
@@ -563,62 +602,43 @@ public class ModNavigationBar {
                 mNavbarViewInfo[index].customKeyParent = (ViewGroup) endsGroup.getChildAt(pos2);
             }
             if (DEBUG) log("customKeyPlaceHolder=" + mNavbarViewInfo[index].customKeyPlaceHolder);
+            if (DEBUG) log("customKeyParent=" + mNavbarViewInfo[index].customKeyParent);
 
-            // Add cursor control keys
-            mNavbarViewInfo[index].endsGroup.addView(dpadLeft, 0);
-            mNavbarViewInfo[index].endsGroup.addView(dpadRight, mNavbarViewInfo[index].endsGroup.getChildCount());
+            // determine key size
+            boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
+            final int sizeResId = mResources.getIdentifier(hasVerticalNavbar ?
+                    "navigation_side_padding" : "navigation_extra_key_width", "dimen", PACKAGE_NAME);
+            final int size = sizeResId == 0 ?
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                            36, mResources.getDisplayMetrics()) :
+                    mResources.getDimensionPixelSize(sizeResId);
+            if (DEBUG) log("App key view minimum size=" + size);
+            mNavbarViewInfo[index].customKeySize = size;
+            mNavbarViewInfo[index].isVertical = (index == 1 && hasVerticalNavbar);
+            int w = mNavbarViewInfo[index].isVertical ? ViewGroup.LayoutParams.MATCH_PARENT : size;
+            int h = mNavbarViewInfo[index].isVertical ? size : ViewGroup.LayoutParams.MATCH_PARENT;
 
-            // find menu key
-            resId = mResources.getIdentifier("menu", "id", PACKAGE_NAME);
-            if (resId != 0) {
-                mNavbarViewInfo[index].menuKey = mNavbarViewInfo[index].endsGroup.findViewById(resId);
-            }
-
-            // find back key
-            resId = mResources.getIdentifier("back", "id", PACKAGE_NAME);
-            if (resId != 0) {
-                mNavbarViewInfo[index].backKey = mNavbarViewInfo[index].endsGroup.findViewById(resId);
-                if (mNavbarViewInfo[index].backKey != null) {
-                    mNavbarViewInfo[index].backView =
-                            mNavbarViewInfo[index].backKey.getParent() == mNavbarViewInfo[index].endsGroup ?
-                                    mNavbarViewInfo[index].backKey :
-                                    (View) mNavbarViewInfo[index].backKey.getParent();
-                }
-            }
-
-            // find recent apps key
-            resId = mResources.getIdentifier("recent_apps", "id", PACKAGE_NAME);
-            if (resId != 0) {
-                mNavbarViewInfo[index].recentsKey = mNavbarViewInfo[index].endsGroup.findViewById(resId);
-                if (mNavbarViewInfo[index].recentsKey != null) {
-                    mNavbarViewInfo[index].recentsView =
-                            mNavbarViewInfo[index].recentsKey.getParent() == mNavbarViewInfo[index].endsGroup ?
-                                mNavbarViewInfo[index].recentsKey :
-                                    (ViewGroup)mNavbarViewInfo[index].recentsKey.getParent();
-                }
-            }
+            ViewGroup.LayoutParams lp;
 
             // determine custom key layout
-            Resources res = navButtons.getResources();
-            boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
-            final int sizeResId = res.getIdentifier(hasVerticalNavbar ?
-                    "navigation_side_padding" : "navigation_extra_key_width", "dimen", PACKAGE_NAME);
-            final int size = sizeResId == 0 ? 
-                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    50, res.getDisplayMetrics()) :
-                        res.getDimensionPixelSize(sizeResId);
-            if (DEBUG) log("App key view minimum size=" + size);
-            ViewGroup.LayoutParams lp;
-            int w = (index == 1 && hasVerticalNavbar) ? ViewGroup.LayoutParams.MATCH_PARENT : size;
-            int h = (index == 1 && hasVerticalNavbar) ? size : ViewGroup.LayoutParams.MATCH_PARENT;
-            if (endsGroup instanceof RelativeLayout)
+            if (mNavbarViewInfo[index].customKeyParent instanceof RelativeLayout)
                 lp = new RelativeLayout.LayoutParams(w, h);
-            else if (endsGroup instanceof FrameLayout)
+            else if (mNavbarViewInfo[index].customKeyParent instanceof FrameLayout)
                 lp = new FrameLayout.LayoutParams(w, h);
             else
                 lp = new LinearLayout.LayoutParams(w, h, 0);
             if (DEBUG) log("appView: lpWidth=" + lp.width + "; lpHeight=" + lp.height);
             mNavbarViewInfo[index].customKey.setLayoutParams(lp);
+
+            // Add cursor control keys
+            mNavbarViewInfo[index].endsGroup.addView(dpadLeft, 0);
+            mNavbarViewInfo[index].endsGroup.addView(dpadRight, mNavbarViewInfo[index].endsGroup.getChildCount());
+            if (mNavbarViewInfo[index].endsGroup instanceof RelativeLayout)
+                lp = new RelativeLayout.LayoutParams(w, h);
+            else if (mNavbarViewInfo[index].endsGroup instanceof FrameLayout)
+                lp = new FrameLayout.LayoutParams(w, h);
+            else
+                lp = new LinearLayout.LayoutParams(w, h, 0);
             mNavbarViewInfo[index].dpadLeft.setLayoutParams(lp);
             mNavbarViewInfo[index].dpadRight.setLayoutParams(lp);
         } catch (Throwable t) {
@@ -646,6 +666,37 @@ public class ModNavigationBar {
                     } else {
                         if (visible) {
                             mNavbarViewInfo[i].customKeyParent.addView(mNavbarViewInfo[i].customKey, 0);
+                            // adjust layout in case of Gestured navigation bar
+                            if (mNavbarViewInfo[i].customKeyParent == mNavbarViewInfo[i].backView &&
+                                    mNavbarViewInfo[i].backKey.getLayoutParams()
+                                            instanceof RelativeLayout.LayoutParams) {
+                                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)
+                                        mNavbarViewInfo[i].customKeyParent.getLayoutParams();
+                                RelativeLayout.LayoutParams lpck = (RelativeLayout.LayoutParams)
+                                        mNavbarViewInfo[i].customKey.getLayoutParams();
+                                RelativeLayout.LayoutParams lpbk = (RelativeLayout.LayoutParams)
+                                        mNavbarViewInfo[i].backKey.getLayoutParams();
+                                if (!mNavbarViewInfo[i].isVertical) {
+                                    lp.width = mNavbarViewInfo[i].customKeySize*2;
+                                    lp.weight = 0;
+                                    lpbk.width = mNavbarViewInfo[i].customKeySize;
+                                    lpbk.addRule(mCustomKeySwapEnabled ? RelativeLayout.ALIGN_PARENT_END :
+                                        RelativeLayout.ALIGN_PARENT_START);
+                                    lpck.addRule(mCustomKeySwapEnabled ? RelativeLayout.ALIGN_PARENT_START:
+                                        RelativeLayout.ALIGN_PARENT_END);
+                                } else {
+                                    lp.height = mNavbarViewInfo[i].customKeySize*2;
+                                    lp.weight = 0;
+                                    lpbk.height = mNavbarViewInfo[i].customKeySize;
+                                    lpbk.addRule(mCustomKeySwapEnabled ? RelativeLayout.ALIGN_PARENT_TOP :
+                                        RelativeLayout.ALIGN_PARENT_BOTTOM);
+                                    lpck.addRule(mCustomKeySwapEnabled ? RelativeLayout.ALIGN_PARENT_BOTTOM :
+                                        RelativeLayout.ALIGN_PARENT_TOP);
+                                }
+                                mNavbarViewInfo[i].backKey.setLayoutParams(lpbk);
+                                mNavbarViewInfo[i].customKey.setLayoutParams(lpck);
+                                mNavbarViewInfo[i].customKeyParent.setLayoutParams(lp);
+                            }
                         } else {
                             mNavbarViewInfo[i].customKeyParent.removeView(mNavbarViewInfo[i].customKey);
                         }
@@ -658,7 +709,7 @@ public class ModNavigationBar {
                 if ((!mCustomKeyEnabled || !mCustomKeySwapEnabled) && 
                         mNavbarViewInfo[i].menuCustomSwapped) {
                     swapMenuAndCustom(mNavbarViewInfo[i]);
-                } else if (mCustomKeyEnabled && mCustomKeySwapEnabled && 
+                } else if (mCustomKeyEnabled && mCustomKeySwapEnabled &&
                         !mNavbarViewInfo[i].menuCustomSwapped) {
                     swapMenuAndCustom(mNavbarViewInfo[i]);
                 }
@@ -709,7 +760,8 @@ public class ModNavigationBar {
 
             for (int i = 0; i < mNavbarViewInfo.length; i++) {
                 // hide/unhide app key or whatever view at that position
-                if (mNavbarViewInfo[i].customKeyParent != mNavbarViewInfo[i].endsGroup) {
+                if (mNavbarViewInfo[i].customKeyParent != mNavbarViewInfo[i].endsGroup &&
+                        mNavbarViewInfo[i].customKeyParent != mNavbarViewInfo[i].backView) {
                     mNavbarViewInfo[i].customKeyParent.setVisibility(
                             mDpadKeysVisible ? View.GONE : View.VISIBLE);
                 } else {
