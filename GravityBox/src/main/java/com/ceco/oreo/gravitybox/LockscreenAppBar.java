@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -44,7 +44,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.oreo.gravitybox.managers.NotificationDataMonitor;
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
@@ -115,6 +114,10 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             }
         }
         mContainer.addView(mRootView);
+        mContainer.setClipChildren(false);
+        if (mContainer.getParent() instanceof ViewGroup) {
+            ((ViewGroup)mContainer.getParent()).setClipChildren(false);
+        }
         updateScale();
 
         mAppSlots = new ArrayList<AppInfo>(7);
@@ -188,7 +191,22 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             }
         }
         mIsActive = atLeastOneVisible;
-        mRootView.setVisibility(mIsActive && mIsInteractive ? View.VISIBLE : View.GONE);
+        animateVisibility(mIsActive && mIsInteractive);
+    }
+
+    private void animateVisibility(final boolean visible) {
+        if (!visible) {
+            mRootView.setVisibility(View.GONE);
+            mRootView.setScaleX(0f);
+            mRootView.setScaleY(0f);
+        } else {
+            mRootView.setVisibility(View.VISIBLE);
+            mRootView.animate()
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .setDuration(300)
+                    .start();
+        }
     }
 
     @Override
@@ -206,7 +224,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
     @Override
     public void onScreenStateChanged(boolean interactive) {
         mIsInteractive = interactive;
-        mRootView.setVisibility(mIsActive && mIsInteractive ? View.VISIBLE : View.GONE);
+        animateVisibility(mIsActive && mIsInteractive);
     }
 
     @Override
