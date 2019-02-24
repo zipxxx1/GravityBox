@@ -1,3 +1,21 @@
+Changelog 8.5.1 - 24/02/2019
+--------------------------------------
+- ExpandedDesktop: reworked and greatly simplified
+--- now all modes on 8.1 are supported again
+--- should be compatible with more different devices/systems
+- AppLauncher and QuickAppTile dialogs: added support for dynamic theming
+--- follow current SystemUI theme automatically
+--- not applicable to OxygenOS nor other Android brands that have own theming
+- NavigationBar: improved custom key/cursor control keys layout compatibility
+--- OxygenOS: if navbar contains OOS specific "nav" key it will be replaced by GB custom key
+    in case GB custom key is enabled (thanks JerryGoyal for testing)
+--- maintains complex layout on 8.1
+- LocksreenAppBar: visual improvements
+- Advanced tuning improvements
+- Updated Turkish translations (thanks to Fatih Firinci)
+- Updated Italian translations (thanks to ghost45)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 8.5.0 - 20/01/2019
 --------------------------------------
 - Introducing Advanced tuning (premium feature)
