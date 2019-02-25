@@ -1,3 +1,8 @@
+Changelog 8.5.2 - 25/02/2019
+--------------------------------------
+- Fixed scaling of navbar keys on 8.1
+- Fixed bootloop on OxygenOS related to "hide navbar" vs. custom key button conflict
+
 Changelog 8.5.1 - 24/02/2019
 --------------------------------------
 - ExpandedDesktop: reworked and greatly simplified
