@@ -567,10 +567,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Відрегулюйте нижнє поле</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Спільнота Google+</string>
-    <string name="pref_about_gplus_summary">Торкніться для переходу до спільноти Google+</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">При включенні підтримки дії для панелі навігації необхідно переписати типові налаштування в меню «налаштування панелі навігації»</string>
 

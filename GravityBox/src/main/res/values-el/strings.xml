@@ -552,10 +552,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ρύθμιση κάτω ορίου</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Κοινότητα Google+</string>
-    <string name="pref_about_gplus_summary">Αγγίξτε για την GravityBox Google+ κοινότητα</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Για να ενεργοποιήσετε τις ενέργιες για την γραμμή πλοήγησης, πρέπει να 
         παρακάμψετε τις προεπιλογές συστήματος στο μενού της Γραμμής Κατάστασης</string>

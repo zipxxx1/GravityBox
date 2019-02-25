@@ -572,10 +572,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Tukar margin bawah</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Komuniti Google+</string>
-    <string name="pref_about_gplus_summary">Tekan untuk lawat komuniti Google+ GravityBox</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Demi untuk membenarkan aksi ke atas bar navigasi, adalah perlu
         untuk tukar tetapan asal bar navigasi di modifikasi bar navigasi</string>

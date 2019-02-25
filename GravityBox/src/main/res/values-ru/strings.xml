@@ -570,10 +570,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Настроить отступ снизу</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Сообщество Google+</string>
-    <string name="pref_about_gplus_summary">Нажмите для перехода в сообщество Google+</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">При включении поддержки действия для панели навигации необходимо 
         переписать настройки по умолчанию в меню настроек панели навигации</string>

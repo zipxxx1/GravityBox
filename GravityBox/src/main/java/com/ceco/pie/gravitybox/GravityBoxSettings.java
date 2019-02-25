@@ -211,7 +211,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
     public static final String PREF_CAT_KEY_ABOUT = "pref_cat_about";
     public static final String PREF_KEY_ABOUT_GRAVITYBOX = "pref_about_gb";
-    public static final String PREF_KEY_ABOUT_GPLUS = "pref_about_gplus";
     public static final String PREF_KEY_ABOUT_XPOSED = "pref_about_xposed";
     public static final String PREF_KEY_ABOUT_DONATE = "pref_about_donate";
     public static final String PREF_KEY_ABOUT_UNLOCKER = "pref_about_get_unlocker";
@@ -1214,7 +1213,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private AlertDialog mDialog;
         private PreferenceScreen mPrefCatAbout;
         private Preference mPrefAboutGb;
-        private Preference mPrefAboutGplus;
         private Preference mPrefAboutXposed;
         private Preference mPrefAboutDonate;
         private Preference mPrefAboutUnlocker;
@@ -1394,7 +1392,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefAboutGb.setTitle(getActivity().getTitle() + version);
             }
 
-            mPrefAboutGplus = findPreference(PREF_KEY_ABOUT_GPLUS);
             mPrefAboutXposed = findPreference(PREF_KEY_ABOUT_XPOSED);
             mPrefAboutDonate = findPreference(PREF_KEY_ABOUT_DONATE);
             mPrefAboutUnlocker = findPreference(PREF_KEY_ABOUT_UNLOCKER);
@@ -3413,8 +3410,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             if (pref == mPrefAboutGb) {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_gravitybox)));
-            } else if (pref == mPrefAboutGplus) {
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_gplus)));
             } else if (pref == mPrefAboutXposed) {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_xposed)));
             } else if (pref == mPrefAboutDonate) {

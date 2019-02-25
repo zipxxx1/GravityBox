@@ -467,9 +467,6 @@
     <string name="hwkey_action_back">戻る</string>
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">ボタン下の余白</string>
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Google+コミュニティ</string>
-    <string name="pref_about_gplus_summary">タップでGravityBoxのGoogle+コミュニティを開きます。</string>
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">ナビバーのアクションを有効化するには
         ナビバー設定でシステムの初期値を上書きしないといけません。</string>

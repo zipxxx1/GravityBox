@@ -561,10 +561,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ajustare margine inferioară</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Comunitatea Google+</string>
-    <string name="pref_about_gplus_summary">Atingeți pentru a vizita comunitatea GravityBox Google+</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Pentru a permite activarea acțiunilor pentru bara de navigare, este necesar să înlocuiți setările prestabilite ale sistemului în meniul de configurare a barei de navigare</string>
 

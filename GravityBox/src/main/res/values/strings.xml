@@ -573,10 +573,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Adjust bottom margin</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Google+ community</string>
-    <string name="pref_about_gplus_summary">Touch to visit GravityBox Google+ community</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">In order to enable actions support for navigation bar, it is necessary 
         to override system defaults in Navigation bar tweaks menu</string>
