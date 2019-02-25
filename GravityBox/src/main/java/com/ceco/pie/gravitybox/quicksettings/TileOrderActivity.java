@@ -39,7 +39,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +87,6 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
     private ListView mTileListView;
     private TileAdapter mTileAdapter;
     private Context mContext;
-    private Resources mResources;
     private WorldReadablePrefs mPrefs;
     private Map<String, String> mTileSpecs;
     private Map<String, TileInfo> mTileList;
@@ -109,7 +107,6 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         setContentView(R.layout.order_tile_list_activity);
 
         mContext = this;
-        mResources = mContext.getResources();
         mPrefs = SettingsManager.getInstance(mContext).getMainPrefs();
 
         mBtnSave = findViewById(R.id.btnSave);
@@ -117,9 +114,9 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         mBtnCancel = findViewById(R.id.btnCancel);
         mBtnCancel.setOnClickListener(this);
 
-        String[] allTileKeys = mResources.getStringArray(R.array.qs_tile_values);
-        String[] allTileNames = mResources.getStringArray(R.array.qs_tile_entries);
-        mTileSpecs = new LinkedHashMap<String, String>();
+        String[] allTileKeys = mContext.getResources().getStringArray(R.array.qs_tile_values);
+        String[] allTileNames = mContext.getResources().getStringArray(R.array.qs_tile_entries);
+        mTileSpecs = new LinkedHashMap<>();
         for (int i = 0; i < allTileKeys.length; i++) {
             mTileSpecs.put(allTileKeys[i], allTileNames[i]);
         }
@@ -133,7 +130,7 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
     private void filterOutStoredTileLists() {
         List<String> toRemove = new ArrayList<>();
 
-        List<String> enabledList = new ArrayList<String>(Arrays.asList(
+        List<String> enabledList = new ArrayList<>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
         for (String key : enabledList) {
             if (!mTileList.containsKey(key) || key.startsWith("aosp_tile_"))
@@ -142,12 +139,12 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         if (toRemove.size() > 0) {
             for (String key : toRemove) enabledList.remove(key);
             mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, Utils.join(
-                    enabledList.toArray(new String[enabledList.size()]), ",")).commit();
+                    enabledList.toArray(new String[0]), ",")).commit();
             updateServiceComponents(this);
         }
 
         toRemove.clear();
-        List<String> securedList = new ArrayList<String>(Arrays.asList(
+        List<String> securedList = new ArrayList<>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_SECURED, "").split(",")));
         for (String key : securedList) {
             if (!mTileList.containsKey(key))
@@ -156,14 +153,14 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         if (toRemove.size() > 0) {
             for (String key : toRemove) securedList.remove(key);
             mPrefs.edit().putString(PREF_KEY_TILE_SECURED, Utils.join(
-                    securedList.toArray(new String[securedList.size()]), ",")).commit();
+                    securedList.toArray(new String[0]), ",")).commit();
             broadcastSecuredList();
         }
     }
 
     public static void updateServiceComponents(Context ctx) {
         SharedPreferences prefs = SettingsManager.getInstance(ctx).getMainPrefs();
-        List<String> enabledList = new ArrayList<String>(Arrays.asList(
+        List<String> enabledList = new ArrayList<>(Arrays.asList(
                 prefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
         PackageManager pm = ctx.getPackageManager();
         for (Entry<String,Class<?>> service : SERVICES.entrySet()) {
@@ -207,7 +204,10 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
             return false;
         if (key.equals("gb_tile_quickrecord") && !isAudioRecordingAllowed())
             return false;
-        return !key.equals("aosp_tile_data") || Utils.isMotoXtDevice();
+        if (key.equals("aosp_tile_data") && !Utils.isMotoXtDevice())
+            return false;
+
+        return true;
     }
 
     private boolean isAudioRecordingAllowed() {
@@ -249,9 +249,9 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
     }
 
     private Map<String, TileInfo> getTileList() {
-        List<String> enabledTiles = new ArrayList<String>(Arrays.asList(
+        List<String> enabledTiles = new ArrayList<>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
-        List<String> securedTiles = new ArrayList<String>(Arrays.asList(
+        List<String> securedTiles = new ArrayList<>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_SECURED, "").split(",")));
 
         Map<String, TileInfo> tiles = new LinkedHashMap<>();
@@ -270,23 +270,23 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
     }
 
     private void saveTileList() {
-        String newEnabledList = "";
-        String newSecuredList = "";
+        StringBuilder newEnabledList = new StringBuilder();
+        StringBuilder newSecuredList = new StringBuilder();
 
         for (Entry<String,TileInfo> entry : mTileList.entrySet()) {
             if (entry.getValue().enabled && !entry.getValue().isStock()) {
-                if (!newEnabledList.isEmpty()) newEnabledList += ",";
-                newEnabledList += entry.getKey();
+                if (newEnabledList.length() > 0) newEnabledList.append(",");
+                newEnabledList.append(entry.getKey());
             }
             if (entry.getValue().secured) {
-                if (!newSecuredList.isEmpty()) newSecuredList += ",";
-                newSecuredList += entry.getKey();
+                if (newSecuredList.length() > 0) newSecuredList.append(",");
+                newSecuredList.append(entry.getKey());
             }
         }
 
         mPrefs.edit()
-            .putString(PREF_KEY_TILE_ENABLED, newEnabledList)
-            .putString(PREF_KEY_TILE_SECURED, newSecuredList)
+            .putString(PREF_KEY_TILE_ENABLED, newEnabledList.toString())
+            .putString(PREF_KEY_TILE_SECURED, newSecuredList.toString())
             .commit();
 
         updateServiceComponents(this);
@@ -298,7 +298,7 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         private LayoutInflater mInflater;
         private List<TileInfo> mList;
 
-        public TileAdapter(Context c) {
+        TileAdapter(Context c) {
             mContext = c;
             mInflater = LayoutInflater.from(mContext);
             mList = new ArrayList<>(mTileList.values());
@@ -324,23 +324,17 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
             if (convertView == null) {
                 itemView = mInflater.inflate(R.layout.order_tile_list_item, null);
                 final CheckBox enabled = itemView.findViewById(R.id.chkEnable);
-                enabled.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        TileInfo ti = (TileInfo) itemView.getTag();
-                        ti.enabled = ((CheckBox)v).isChecked();
-                        ti.secured &= ti.enabled || ti.key.equals("gb_tile_lock_screen");
-                        mTileListView.invalidateViews();
-                    }
+                enabled.setOnClickListener(v -> {
+                    TileInfo ti = (TileInfo) itemView.getTag();
+                    ti.enabled = ((CheckBox)v).isChecked();
+                    ti.secured &= ti.enabled || ti.key.equals("gb_tile_lock_screen");
+                    mTileListView.invalidateViews();
                 });
                 final CheckBox secured = itemView.findViewById(R.id.chkProtect);
-                secured.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        TileInfo ti = (TileInfo) itemView.getTag();
-                        ti.secured = ((CheckBox)v).isChecked();
-                        mTileListView.invalidateViews();
-                    }
+                secured.setOnClickListener(v -> {
+                    TileInfo ti = (TileInfo) itemView.getTag();
+                    ti.secured = ((CheckBox)v).isChecked();
+                    mTileListView.invalidateViews();
                 });
             } else {
                 itemView = convertView;
