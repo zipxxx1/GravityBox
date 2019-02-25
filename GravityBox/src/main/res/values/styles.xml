@@ -24,21 +24,21 @@
     <style name="DialogBaseTheme" parent="android:Theme.Material.Light.Dialog" />
     <style name="AlertDialogBaseTheme" parent="android:Theme.Material.Light.Dialog.Alert" />
 
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:colorPrimary">#ff30a6cb</item>
-        <item name="android:colorPrimaryDark">#ff2788a6</item>
-        <item name="android:colorAccent">#ff30a6cb</item>
-        <item name="android:dialogTheme">@style/DialogStyle</item>
-        <item name="android:alertDialogTheme">@style/AlertDialogStyle</item>
-    </style>
-
     <style name="DialogStyle" parent="DialogBaseTheme" >
-        <item name="android:colorAccent">#ff30a6cb</item>
+        <item name="android:colorAccent">#ff2581df</item>
     </style>
 
     <style name="AlertDialogStyle" parent="AlertDialogBaseTheme" >
-        <item name="android:colorAccent">#ff30a6cb</item>
+        <item name="android:colorAccent">#ff2581df</item>
+    </style>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:colorPrimary">#ff2581df</item>
+        <item name="android:colorPrimaryDark">#ff1b5fa4</item>
+        <item name="android:colorAccent">#ff2581df</item>
+        <item name="android:dialogTheme">@style/DialogStyle</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogStyle</item>
     </style>
 
     <!-- Light application AppCompat theme -->
@@ -46,20 +46,39 @@
 
     <style name="AppCompatTheme" parent="AppCompatBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="colorPrimary">#ff30a6cb</item>
-        <item name="colorPrimaryDark">#ff2788a6</item>
-        <item name="colorAccent">#ff30a6cb</item>
+        <item name="colorPrimary">#ff2581df</item>
+        <item name="colorPrimaryDark">#ff1b5fa4</item>
+        <item name="colorAccent">#ff2581df</item>
         <item name="dialogTheme">@style/DialogStyle</item>
         <item name="alertDialogTheme">@style/AlertDialogStyle</item>
     </style>
 
     <!-- Dark application theme -->
     <style name="AppBaseThemeDark" parent="android:Theme.Material" />
-    <style name="AppThemeDark" parent="AppBaseThemeDark" />
+    <style name="DialogBaseThemeDark" parent="android:Theme.Material.Dialog" />
+    <style name="AlertDialogBaseThemeDark" parent="android:Theme.Material.Dialog.Alert" />
+
+    <style name="DialogStyleDark" parent="DialogBaseThemeDark" >
+        <item name="android:colorAccent">#ff2581df</item>
+    </style>
+
+    <style name="AlertDialogStyleDark" parent="AlertDialogBaseThemeDark" >
+        <item name="android:colorAccent">#ff2581df</item>
+    </style>
+
+    <style name="AppThemeDark" parent="AppBaseThemeDark">
+        <item name="android:colorAccent">#ff2581df</item>
+        <item name="android:dialogTheme">@style/DialogStyleDark</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogStyleDark</item>
+    </style>
 
     <!-- Dark application AppCompat theme -->
     <style name="AppCompatBaseThemeDark" parent="Theme.AppCompat" />
-    <style name="AppCompatThemeDark" parent="AppCompatBaseThemeDark" />
+    <style name="AppCompatThemeDark" parent="AppCompatBaseThemeDark">
+        <item name="colorAccent">#ff2581df</item>
+        <item name="dialogTheme">@style/DialogStyleDark</item>
+        <item name="alertDialogTheme">@style/AlertDialogStyleDark</item>
+    </style>
 
     <!-- AppLauncher labels -->
     <style name="AppLauncherTextView">
