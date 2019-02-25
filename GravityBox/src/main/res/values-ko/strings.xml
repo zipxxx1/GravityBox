@@ -497,9 +497,6 @@
 
     <string name="pref_recent_clear_margin_bottom_title">하단 여백</string>
 
-    <string name="pref_about_gplus_title">Google+ 커뮤니티</string>
-    <string name="pref_about_gplus_summary">GravityBox Google+ 커뮤니티에 접속하려면 터치하세요.</string>
-
     <string name="hwkey_navbar_warning">In order to enable actions support for navigation bar, it is necessary 
         to override system defaults in Navigation bar tweaks menu</string>
 
