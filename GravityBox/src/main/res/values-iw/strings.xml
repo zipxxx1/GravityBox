@@ -601,10 +601,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">התאם שוליים תחתונים</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">קהילת Google+</string>
-    <string name="pref_about_gplus_summary">גע על מנת לבקר בקהילת GravityBox ב-Google+</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">על מנת להפעיל תמיכה בפעולות של שורת הניווט, יש צורך 
         בעקיפה של ברירות מחדל מערכת בתפריט שורת הניווט</string>

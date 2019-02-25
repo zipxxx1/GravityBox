@@ -620,10 +620,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ajustar margen inferior</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Comunidad en Google+</string>
-    <string name="pref_about_gplus_summary">Toca para visitar la comunidad en Google+ de GravityBox</string>
-
 	<!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Para habilitar el soporte de acciones en la barra de navegación, es necesario 
         sobreescribir los ajustes predeterminados desde el menú de ajustes de la barra de navegación</string>

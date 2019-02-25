@@ -617,10 +617,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Unteren Rand einstellen</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Google+ Community</string>
-    <string name="pref_about_gplus_summary">Antippen öffnet Community von GravityBox auf Google+</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Für Aktionen in der Navigationsleiste muss der Systemstandard im Anpassungsmenü der Navigationsleiste überschrieben werden.</string>
 

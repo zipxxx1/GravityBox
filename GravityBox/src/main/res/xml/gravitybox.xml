@@ -2741,11 +2741,6 @@
             android:summary="@string/about_gb_summary" />
 
         <Preference
-            android:key="pref_about_gplus" 
-            android:title="@string/pref_about_gplus_title"
-            android:summary="@string/pref_about_gplus_summary" />
-
-        <Preference
             android:key="pref_about_xposed"
             android:title="@string/about_xposed_title"
             android:summary="@string/about_xposed_summary" />"

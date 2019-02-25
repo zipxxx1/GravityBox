@@ -626,10 +626,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">調整底部邊距</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Google+ 社群</string>
-    <string name="pref_about_gplus_summary">輕觸這裡來拜訪 GravityBox 的 Google+ 社群</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">為了能夠支援導航列動作控制，在導航列選項中覆蓋系統預設值是必須的</string>
 

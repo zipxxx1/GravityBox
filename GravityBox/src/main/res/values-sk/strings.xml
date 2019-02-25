@@ -600,10 +600,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Prispôsobiť spodný okraj</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Google+ komunita</string>
-    <string name="pref_about_gplus_summary">Dotykom otvoríte GravityBox Google+ komunitu</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">V prípade potreby použitia akcií pre softvérové tlačidlá navigačnej lišty je 
         potrebné zapnúť \'Obísť systémové nastavenia\' v menu Nastavenia navigačnej lišty</string>

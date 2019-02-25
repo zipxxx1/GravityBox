@@ -627,10 +627,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">调整底部边距</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Google+ 社交</string>
-    <string name="pref_about_gplus_summary">点击这里进入GravityBox的Google+社交</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">为了使实体按键操作支持,这需要覆盖系统默认实体按键中的调整菜单</string>
     

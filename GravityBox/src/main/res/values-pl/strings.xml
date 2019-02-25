@@ -605,10 +605,6 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ustaw dolny margines</string>
 
-    <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Społeczność Google+</string>
-    <string name="pref_about_gplus_summary">Kliknij aby odwiedzić społeczność GravityBox na Google+</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Aby włączyć obsługę akcji dla paska nawigacyjnego, konieczne jest zastąpienie domyślnych ustawień systemowych w menu Poprawek paska nawigacyjnego</string>
 
