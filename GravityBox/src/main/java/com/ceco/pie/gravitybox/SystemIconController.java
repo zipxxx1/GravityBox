@@ -74,11 +74,6 @@ public class SystemIconController implements BroadcastSubReceiver {
                     Class<?> PolicyManagerClazz = XposedHelpers.findClass("android.net.NetworkPolicyManager", classLoader);
                     mPolicyManager = XposedHelpers.callStaticMethod(PolicyManagerClazz, "from", mContext);
 
-                    if (SysUiManagers.QuietHoursManager != null) {
-                        StatusbarQuietHoursIcon qhIcon = new StatusbarQuietHoursIcon(
-                                SystemIconController.this);
-                    }
-
                     if (DEBUG) log ("Phone statusbar policy created");
                 }
             });
@@ -202,6 +197,15 @@ public class SystemIconController implements BroadcastSubReceiver {
             XposedHelpers.callMethod(mIconCtrl, "setIcon",
                     slot, createStatusBarIcon(iconId));
             if (DEBUG) log("setIcon: slot=" + slot + "; id=" + iconId);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
+    public void removeIcon(String slot) {
+        try {
+            XposedHelpers.callMethod(mIconCtrl, "removeIcon", slot);
+            if (DEBUG) log("removeIcon: slot=" + slot);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }

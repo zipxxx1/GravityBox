@@ -134,6 +134,8 @@ public class ModStatusBar {
     private static BatteryBarView mBatteryBarViewSb;
     private static ProgressBarView mProgressBarViewSb;
     private static VisualizerController mVisualizerCtrl;
+    private static SystemIconController mSystemIconController;
+    private static StatusbarQuietHoursIcon mQhIcon;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -380,6 +382,12 @@ public class ModStatusBar {
                 if (DEBUG) log("destroyLayoutStatusBar: mLayoutCenter destroyed");
             }
 
+            // destroy QH icon
+            if (mQhIcon != null) {
+                mQhIcon.destroy();
+                mQhIcon = null;
+            }
+
             mLeftArea = null;
             mRightArea = null;
         } catch (Throwable t) {
@@ -561,6 +569,16 @@ public class ModStatusBar {
         }
     }
 
+    private static void prepareQuietHoursIcon() {
+        try {
+            if (SysUiManagers.QuietHoursManager != null && mSystemIconController != null) {
+                mQhIcon = new StatusbarQuietHoursIcon(mSystemIconController);
+            }
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
@@ -668,6 +686,7 @@ public class ModStatusBar {
                     prepareBatteryBar(ContainerType.STATUSBAR);
                     prepareProgressBar(ContainerType.STATUSBAR);
                     prepareTrafficMeter();
+                    prepareQuietHoursIcon();
                 }
             });
 
@@ -837,7 +856,8 @@ public class ModStatusBar {
             }
 
             // Status bar Bluetooth icon policy
-            mBroadcastSubReceivers.add(new SystemIconController(classLoader, prefs));
+            mSystemIconController = new SystemIconController(classLoader, prefs);
+            mBroadcastSubReceivers.add(mSystemIconController);
 
             // status bar state change handling
             try {

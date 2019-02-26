@@ -49,6 +49,13 @@ public class StatusbarQuietHoursIcon implements  QuietHoursListener {
         mSysIconCtrl.setIconVisibility(SLOT, mQuietHours.showStatusbarIcon && mQuietHours.quietHoursActive());
     }
 
+    public void destroy() {
+        SysUiManagers.QuietHoursManager.unregisterListener(this);
+        mSysIconCtrl.removeIcon(SLOT);
+        mSysIconCtrl = null;
+        mQuietHours = null;
+    }
+
     private void setIconByMode() {
         final int oldDrawableId = mCurrentDrawableId;
         if (mQuietHours.mode == QuietHours.Mode.WEAR) {
