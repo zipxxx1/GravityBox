@@ -1653,6 +1653,12 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PreferenceScreen psm = (PreferenceScreen) findPreference(PREF_CAT_KEY_MISC);
             Preference pr = findPreference(PREF_CAT_RECENTS_PANEL);
             if (psm != null && pr != null) psm.removePreference(pr);
+            // TODO: ModInputMethod
+            PreferenceCategory pcHkVol = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_VOLUME);
+            Preference pHkVol = findPreference(PREF_KEY_VOL_KEY_CURSOR_CONTROL);
+            if (pcHkVol != null && pHkVol != null) pcHkVol.removePreference(pHkVol);
+            Preference pFsIme = findPreference(PREF_KEY_IME_FULLSCREEN_DISABLE);
+            if (pFsIme != null) mPrefCatMiscOther.removePreference(pFsIme);
 
             // remove Dialer features if Dialer package unavailable
             PackageInfo pi = null;
