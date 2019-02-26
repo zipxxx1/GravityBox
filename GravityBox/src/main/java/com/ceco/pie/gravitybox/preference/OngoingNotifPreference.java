@@ -193,6 +193,8 @@ public class OngoingNotifPreference extends DialogPreference
                         Bitmap b = Utils.drawableToBitmap(d.mutate());
                         b = Bitmap.createScaledBitmap(b, mIconSizePx, mIconSizePx, true);
                         mIcon = new BitmapDrawable(mResources, b);
+                        mIcon.setTint(Utils.getColorFromStyleAttr(mContext,
+                                android.R.attr.colorAccent));
                     }
                 } catch (Resources.NotFoundException nfe) {
                     //
