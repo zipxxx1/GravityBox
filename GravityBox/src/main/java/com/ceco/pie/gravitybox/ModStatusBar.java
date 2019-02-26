@@ -41,6 +41,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.hardware.display.DisplayManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -1162,6 +1163,14 @@ public class ModStatusBar {
         }
     };
 
+    private static DisplayManager mDisplayManager;
+    private static DisplayManager getDisplayManager() {
+        if (mDisplayManager == null) {
+            mDisplayManager = (DisplayManager) mContext.getSystemService(Context.DISPLAY_SERVICE);
+        }
+        return mDisplayManager;
+    }
+
     private static void adjustBrightness(int x) {
         try {
             mBrightnessChanged = true;
@@ -1174,18 +1183,34 @@ public class ModStatusBar {
             float value = (padded - BRIGHTNESS_CONTROL_PADDING) /
                     (1 - (2.0f * BRIGHTNESS_CONTROL_PADDING));
 
-            int newBrightness = mMinBrightness + Math.round(value *
-                    (BRIGHTNESS_ON - mMinBrightness));
-            newBrightness = Math.min(newBrightness, BRIGHTNESS_ON);
-            newBrightness = Math.max(newBrightness, mMinBrightness);
-            final int val = newBrightness;
-            AsyncTask.execute(new Runnable() {
-                @Override
-                public void run() {
-                    XposedHelpers.callStaticMethod(Settings.System.class, "putIntForUser",
-                        mContext.getContentResolver(),Settings.System.SCREEN_BRIGHTNESS, val, -2);
-                }
-            });
+            if (mAutomaticBrightness) {
+                float adj = (value * 100) / (BRIGHTNESS_ADJ_RESOLUTION / 2f) - 1;
+                adj = Math.max(adj, -1);
+                adj = Math.min(adj, 1);
+                final float val = adj;
+                XposedHelpers.callMethod(getDisplayManager(), "setTemporaryAutoBrightnessAdjustment", val);
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        XposedHelpers.callStaticMethod(Settings.System.class, "putFloatForUser",
+                                mContext.getContentResolver(),"screen_auto_brightness_adj", val, -2);
+                    }
+                });
+            } else {
+                int newBrightness = mMinBrightness + Math.round(value *
+                        (BRIGHTNESS_ON - mMinBrightness));
+                newBrightness = Math.min(newBrightness, BRIGHTNESS_ON);
+                newBrightness = Math.max(newBrightness, mMinBrightness);
+                final int val = newBrightness;
+                XposedHelpers.callMethod(getDisplayManager(), "setTemporaryBrightness", val);
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        XposedHelpers.callStaticMethod(Settings.System.class, "putIntForUser",
+                                mContext.getContentResolver(),Settings.System.SCREEN_BRIGHTNESS, val, -2);
+                    }
+                });
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
