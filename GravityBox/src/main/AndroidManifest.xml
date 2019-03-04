@@ -220,13 +220,22 @@
         </receiver>
 
         <receiver 
-            android:name="com.ceco.pie.gravitybox.UnlockActivity$PkgManagerReceiver"
+            android:name="com.ceco.pie.gravitybox.UnlockActivity$UnlockerInstalledReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
             <intent-filter>
-                 <action android:name="android.intent.action.PACKAGE_ADDED" />
-                 <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED" />
-                 <data android:scheme="package" />
+                 <action android:name="gravitybox.intent.action.UNLOCKER_INSTALLED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.ceco.pie.gravitybox.UnlockActivity$UnlockReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="gravitybox.permission.UNLOCK">
+            <intent-filter>
+                <action android:name="gravitybox.intent.action.UNLOCK" />
             </intent-filter>
         </receiver>
 

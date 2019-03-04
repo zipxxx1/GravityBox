@@ -41,6 +41,7 @@ public class SysUiManagers {
     public static GpsStatusMonitor GpsMonitor;
     public static SubscriptionManager SubscriptionMgr;
     public static TunerManager TunerMgr;
+    public static PackageManager PackageMgr;
 
     public static void init(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs, XSharedPreferences tunerPrefs) {
         if (context == null)
@@ -111,6 +112,12 @@ public class SysUiManagers {
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error creating TunerManager: ", t);
             }
+        }
+
+        try {
+            PackageMgr = new PackageManager(context);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error creating PackageManager: ", t);
         }
 
         IntentFilter intentFilter = new IntentFilter();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -29,7 +29,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -38,12 +37,11 @@ import android.widget.Toast;
 
 public class UnlockActivity extends GravityBoxActivity implements GravityBoxResultReceiver.Receiver {
     private static final String PKG_UNLOCKER = "com.ceco.gravitybox.unlocker";
-    private static final String ACTION_UNLOCK = "gravitybox.intent.action.UNLOCK";
     private static final String ACTION_CHECK_POLICY = "gravitybox.intent.action.CHECK_POLICY";
     private static final String PERMISSION_UNLOCK = "gravitybox.permission.UNLOCK";
-    private static final int UNLOCKER_VERSION_MIN = 21;
+    private static final int UNLOCKER_VERSION_MIN = 23;
     private static final String PREF_KEY_POLICY_CHECK_TIMESTAMP = "policy_check_timestamp";
-    private static final long POLICY_CHECK_INTERVAL = 86400000;
+    private static final long POLICY_CHECK_INTERVAL = 259200000L;
 
     protected interface CheckPolicyHandler {
         void onPolicyResult(boolean ok);
@@ -63,12 +61,9 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
                     new ContextThemeWrapper(UnlockActivity.this, mDlgThemeId))
                 .setTitle(R.string.app_name)
                 .setMessage(R.string.gb_startup_error)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    dialog.dismiss();
+                    finish();
                 });
             mAlertDialog = builder.create();
             mAlertDialog.show();
@@ -133,12 +128,9 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
                     new ContextThemeWrapper(UnlockActivity.this, mDlgThemeId))
                 .setTitle(R.string.app_name)
                 .setMessage(R.string.premium_unlocked_message)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    dialog.dismiss();
+                    finish();
                 });
             mAlertDialog = builder.create();
             mAlertDialog.show();
@@ -164,28 +156,19 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
     public static class UnlockReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(ACTION_UNLOCK)) {
-                if (intent.getParcelableExtra("receiver") instanceof ResultReceiver) {
-                    ((ResultReceiver)intent.getParcelableExtra("receiver")).send(0, null);
-                }
-                Intent i = new Intent(context, UnlockActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(i);
+            if (intent.getParcelableExtra("receiver") instanceof ResultReceiver) {
+                ((ResultReceiver)intent.getParcelableExtra("receiver")).send(0, null);
             }
+            Intent i = new Intent(context, UnlockActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
         }
     }
 
-    public static class PkgManagerReceiver extends BroadcastReceiver {
+    public static class UnlockerInstalledReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Uri data = intent.getData();
-            String pkgName = data == null ? null : data.getSchemeSpecificPart();
-            if (!PKG_UNLOCKER.equals(pkgName)) return;
-
-            if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED) &&
-                    !intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) {
-                maybeRunUnlocker(context);
-            }
+            maybeRunUnlocker(context);
         }
     }
 
@@ -197,16 +180,13 @@ public class UnlockActivity extends GravityBoxActivity implements GravityBoxResu
                 Toast.makeText(context, context.getString(R.string.msg_unlocker_old),
                         Toast.LENGTH_LONG).show();
             } else {
-                context.registerReceiver(new UnlockReceiver(),
-                        new IntentFilter(ACTION_UNLOCK),
-                        PERMISSION_UNLOCK, null);
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.setPackage(PKG_UNLOCKER);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         } catch (Exception e) { 
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
