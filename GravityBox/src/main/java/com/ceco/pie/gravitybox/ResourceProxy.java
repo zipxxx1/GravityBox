@@ -17,6 +17,7 @@ package com.ceco.pie.gravitybox;
 import android.content.res.Resources;
 import android.util.SparseArray;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -31,9 +32,10 @@ public class ResourceProxy {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static SparseArray<ResourceSpec> sCache = new SparseArray<>();
-
     public static class ResourceSpec {
+        private static SparseArray<ResourceSpec> sCache = new SparseArray<>();
+        private static List<Integer> sCacheUnsupported = new ArrayList<>();
+
         public String pkgName;
         public int id;
         public String name;
@@ -48,6 +50,8 @@ public class ResourceProxy {
         }
 
         static ResourceSpec getOrCreate(String pkgName, Resources res, int id, Object value, Interceptor interceptor) {
+            if (sCacheUnsupported.contains(id))
+                return null;
             if (sCache.get(id) != null)
                 return sCache.get(id);
 
@@ -61,6 +65,8 @@ public class ResourceProxy {
                     return spec;
                 }
             }
+
+            sCacheUnsupported.add(id);
             return null;
         }
 
