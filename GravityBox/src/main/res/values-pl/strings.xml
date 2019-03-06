@@ -716,10 +716,6 @@
     <string name="pref_cat_quickapp_tile_2_title">Ustawienia kafelka Aplikacji 2</string>
     <string name="qs_tile_quickapp_2">Szybkie uruch. Aplikacji 2</string>
 
-    <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">Wymuś kontrolę głośności mediów</string>
-    <string name="pref_vol_force_music_control_summary">Gdy włączone, klawisze głośności regulują głośność mediów zamiast głośności dzwonka</string>
-
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">Panel ostatnich aplikacji</string>
 

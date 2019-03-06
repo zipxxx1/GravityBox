@@ -737,10 +737,6 @@
     <string name="pref_cat_quickapp_tile_2_title">Gyors Programelérés csempe 2 beállítások</string>
     <string name="qs_tile_quickapp_2">Gyors Programelérés 2</string>
 
-    <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">Kényszerített média hangerő vezérlés</string>
-    <string name="pref_vol_force_music_control_summary">Ha engedélyezve van, a hangerő gombok a média hangerőt vezérlik a csengés hangerő helyett</string>
-
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">Nemrég használt alkalmazások panel</string>
 

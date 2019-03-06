@@ -731,10 +731,6 @@
     <!-- QuickApp Tile #2 -->
     <string name="pref_cat_quickapp_tile_2_title">Ajustes de la casilla de app rápida 2</string>
     <string name="qs_tile_quickapp_2">Aplicación rápida 2</string>
-    
-    <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">Forzar control de volumen de multimedia</string>
-    <string name="pref_vol_force_music_control_summary">Al activarlo, los botones de volumen controlan el volumen multimedia en lugar del de llamadas</string>
 
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">Panel de recientes</string>

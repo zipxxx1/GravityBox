@@ -1980,9 +1980,9 @@
             android:dependency="pref_music_volume_steps" />
 
         <CheckBoxPreference 
-            android:key="pref_vol_force_music_control"
-            android:title="@string/pref_vol_force_music_control_title"
-            android:summary="@string/pref_vol_force_music_control_summary"
+            android:key="pref_vol_force_ring_control"
+            android:title="@string/pref_vol_force_ring_control_title"
+            android:summary="@string/pref_vol_force_ring_control_summary"
             android:defaultValue="false" />
 
         <ListPreference 

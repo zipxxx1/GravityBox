@@ -597,9 +597,6 @@
     <!-- QuickApp Tile #2 -->
     <string name="pref_cat_quickapp_tile_2_title">クイックアプリタイル2の設定</string>
     <string name="qs_tile_quickapp_2">クイックアプリ2</string>
-    <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">メディア音量操作を強制</string>
-    <string name="pref_vol_force_music_control_summary">有効にすると音量キーで着信音の代わりにメディアの音量を変更します。</string>
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">最近のアプリパネル</string>
     <!-- Misc tweaks: category for other settings -->

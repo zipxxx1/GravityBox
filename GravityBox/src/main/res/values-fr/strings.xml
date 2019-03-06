@@ -603,9 +603,6 @@
     <!-- QuickApp Tile #2 -->
     <string name="pref_cat_quickapp_tile_2_title">Paramètres de la touche Appli Rapide 2</string>
     <string name="qs_tile_quickapp_2">Appli Rapide 2</string>
-    <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">Forcer le contrôle du volume des médias</string>
-    <string name="pref_vol_force_music_control_summary">Si activé, les touches de volume contrôlent le volume des médias au lieu de celui de la sonnerie</string>
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">Panneau applications récentes</string>
     <!-- Misc tweaks: category for other settings -->

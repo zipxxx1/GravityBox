@@ -741,10 +741,6 @@
     <string name="pref_cat_quickapp_tile_2_title">QuickApp tile 2 settings</string>
     <string name="qs_tile_quickapp_2">Quick App 2</string>
 
-    <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">Force media volume control</string>
-    <string name="pref_vol_force_music_control_summary">When enabled, volume keys control media volume instead of ringer volume</string>
-
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">Recents panel</string>
 
@@ -2018,5 +2014,9 @@
 
     <!-- Stock sound -->
     <string name="stock_sound">Stock sound</string>
+
+    <!-- Force ring volume control -->
+    <string name="pref_vol_force_ring_control_title">Force ring volume control</string>
+    <string name="pref_vol_force_ring_control_summary">When enabled, volume keys control ring volume instead of music volume</string>
 
 </resources>

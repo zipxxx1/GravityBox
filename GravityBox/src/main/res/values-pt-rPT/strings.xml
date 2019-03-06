@@ -708,10 +708,6 @@
     <string name="pref_cat_quickapp_tile_2_title">Definições do painel Aplicação rápida 2</string>
     <string name="qs_tile_quickapp_2">Aplicação rápida 2</string>
 
-    <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">Forçar controlo do volume de média</string>
-    <string name="pref_vol_force_music_control_summary">Quando ativado, as teclas de volume controlam o volume de média em vez do volume de toque de chamada</string>
-
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">Painel de aplicações recentes</string>
 

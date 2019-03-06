@@ -721,10 +721,6 @@
     <string name="pref_cat_quickapp_tile_2_title">快速應用程式瓷貼 2 設定</string>
     <string name="qs_tile_quickapp_2">快速應用程式瓷貼 2</string>
 
-    <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">強制媒體音量控制</string>
-    <string name="pref_vol_force_music_control_summary">當啟用時，音量鍵將會控制媒體音量而不是鈴聲音量</string>
-
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">多工面板</string>
 

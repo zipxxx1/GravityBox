@@ -33,8 +33,10 @@ public class ModAudio {
     private static final String CLASS_AUDIO_SERVICE = "com.android.server.audio.AudioService";
     private static final boolean DEBUG = false;
 
-    private static boolean mVolForceMusicControl;
+    private static Context mContext;
+    private static boolean mVolForceRingControl;
     private static QuietHours mQh;
+    private static AudioManager mAudioManager;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -45,10 +47,11 @@ public class ModAudio {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (DEBUG) log("Broadcast received: " + intent.toString());
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED)) {
-                mVolForceMusicControl = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_VOL_FORCE_MUSIC_CONTROL, false);
-                if (DEBUG) log("Force music volume control set to: " + mVolForceMusicControl);
+            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED) &&
+                    intent.hasExtra(GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL)) {
+                mVolForceRingControl = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL, false);
+                if (DEBUG) log("Force ring volume control set to: " + mVolForceRingControl);
             } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
                 mQh = new QuietHours(intent.getExtras());
             }
@@ -76,12 +79,12 @@ public class ModAudio {
 
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
-                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    if (context != null) {
+                    mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    if (mContext != null) {
                         IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED);
+                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED);
                         intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
-                        context.registerReceiver(mBroadcastReceiver, intentFilter);
+                        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                         if (DEBUG) log("AudioService constructed. Broadcast receiver registered");
                     }
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS, false)) {
@@ -131,18 +134,17 @@ public class ModAudio {
                 });
             }
 
-            mVolForceMusicControl = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_VOL_FORCE_MUSIC_CONTROL, false);
+            mVolForceRingControl = prefs.getBoolean(
+                    GravityBoxSettings.PREF_KEY_VOL_FORCE_RING_CONTROL, false);
             XposedHelpers.findAndHookMethod(classAudioService, "getActiveStreamType",
                     int.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
-                    if (mVolForceMusicControl) {
+                    if (mVolForceRingControl) {
                         int activeStreamType = (int) param.getResult();
-                        if (activeStreamType == AudioManager.STREAM_RING ||
-                                activeStreamType == AudioManager.STREAM_NOTIFICATION) {
-                            param.setResult(AudioManager.STREAM_MUSIC);
-                            if (DEBUG) log("getActiveStreamType: Forcing STREAM_MUSIC");
+                        if (activeStreamType == AudioManager.STREAM_MUSIC && !isMusicActive()) {
+                            param.setResult(AudioManager.STREAM_RING);
+                            if (DEBUG) log("getActiveStreamType: Forcing STREAM_RING");
                         }
                     }
                 }
@@ -160,5 +162,26 @@ public class ModAudio {
         } catch(Throwable t) {
             GravityBox.log(TAG, t);
         }
+    }
+
+    private static AudioManager getAudioManager() {
+        if (mAudioManager == null) {
+            mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        }
+        return mAudioManager;
+    }
+
+    private static boolean isMusicActive() {
+        try {
+            // check local
+            if (getAudioManager().isMusicActive())
+                return true;
+            // check remote
+            if ((boolean) XposedHelpers.callMethod(getAudioManager(), "isMusicActiveRemotely"))
+                return true;
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+        return false;
     }
 }

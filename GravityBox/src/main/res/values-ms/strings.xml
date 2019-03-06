@@ -739,10 +739,6 @@
     <string name="pref_cat_quickapp_tile_2_title">Tetapan aplikasi cepat tile 2</string>
     <string name="qs_tile_quickapp_2">Aplikasi cepat 2</string>
 
-    <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">Paksa kawalan nada untuk media</string>
-    <string name="pref_vol_force_music_control_summary">Apabila aktif, butang nada kawal media selain bunyi nada</string>
-
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">Panel baru-baru</string>
 

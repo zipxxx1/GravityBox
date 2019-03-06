@@ -59,7 +59,8 @@ public class ModVolumeKeySkipTrack {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            if (action.equals(GravityBoxSettings.ACTION_PREF_VOL_MUSIC_CONTROLS_CHANGED)) {
+            if (action.equals(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED) &&
+                    intent.hasExtra(GravityBoxSettings.EXTRA_VOL_MUSIC_CONTROLS)) {
                 mAllowSkipTrack = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_MUSIC_CONTROLS, false);
                 if (DEBUG) log("mAllowSkipTrack=" + mAllowSkipTrack);
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED)) {
@@ -136,7 +137,7 @@ public class ModVolumeKeySkipTrack {
         protected void afterHookedMethod(final MethodHookParam param) {
             Context ctx = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
             IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_MUSIC_CONTROLS_CHANGED);
+            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED);
             ctx.registerReceiver(mBroadcastReceiver, intentFilter);
 

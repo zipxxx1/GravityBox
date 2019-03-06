@@ -702,10 +702,6 @@
     <string name="pref_cat_quickapp_tile_2_title">Configurações de atalhos de aplicativos 2</string>
     <string name="qs_tile_quickapp_2">Aplicativo rápido 2</string>
 
-    <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">Forçar controle de mídia</string>
-    <string name="pref_vol_force_music_control_summary">Quando habilitado, os botões de volume controlam o volume de mídia em vez do volume de toque</string>
-
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">Painel de recentes</string>
 
