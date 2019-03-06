@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -31,7 +31,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
@@ -207,11 +206,8 @@ public class ModPowerMenu {
                                     mRebootActionItem = o;
                                     break;
                                 }
-                            } catch (NoSuchFieldError nfe) {
-                                // continue
-                            } catch (Resources.NotFoundException resnfe) { 
-                                // continue
-                            } catch (IllegalArgumentException iae) {
+                            } catch (NoSuchFieldError | Resources.NotFoundException |
+                                     IllegalArgumentException nfe) {
                                 // continue
                             }
 
@@ -225,11 +221,8 @@ public class ModPowerMenu {
                                         mRebootActionItem = o;
                                         break;
                                     }
-                                } catch (NoSuchFieldError nfe) {
-                                    // continue
-                                } catch (Resources.NotFoundException resnfe) { 
-                                    // continue
-                                } catch (IllegalArgumentException iae) {
+                                } catch (NoSuchFieldError | Resources.NotFoundException |
+                                         IllegalArgumentException nfe) {
                                     // continue
                                 }
                             }
@@ -323,7 +316,7 @@ public class ModPowerMenu {
                                 KeyguardManager km = (KeyguardManager) context.getSystemService(
                                         Context.KEYGUARD_SERVICE);
                                 locked = km.isKeyguardLocked();
-                            } catch (Throwable t) { }
+                            } catch (Throwable ignored) { }
                         }
 
                         if (locked) {

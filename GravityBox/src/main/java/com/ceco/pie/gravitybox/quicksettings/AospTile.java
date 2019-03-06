@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,7 +21,6 @@ import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.quicksettings.QsPanel.LockedTileIndicator;
 import com.ceco.pie.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
-import android.os.Build;
 import android.service.quicksettings.Tile;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;

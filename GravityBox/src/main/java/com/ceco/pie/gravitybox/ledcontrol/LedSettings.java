@@ -685,9 +685,8 @@ public class LedSettings {
     } 
 
     public String toString() {
-        String buf = "[" + mPackageName + "," + mEnabled + "," + mColor + "," + mLedOnMs + 
-                "," + mLedOffMs + "," + mOngoing + ";" + mSoundOverride + ";" + 
+        return "[" + mPackageName + "," + mEnabled + "," + mColor + "," + mLedOnMs +
+                "," + mLedOffMs + "," + mOngoing + ";" + mSoundOverride + ";" +
                 mSoundUri + ";" + mSoundOnlyOnce + ";" + mInsistent + "]";
-        return buf;
     }
 }

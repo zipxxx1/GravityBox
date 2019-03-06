@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
  * Modifications Copyright (C) The OmniROM Project
- * Modifications Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Modifications Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -160,28 +160,13 @@ public class ScreenRecordingService extends Service {
 
                 // Terminate the recording process
                 Runtime.getRuntime().exec(new String[]{ "kill", "-2", String.valueOf(pid) });
-            } catch (IOException e) {
+            } catch (IOException | NoSuchFieldException | IllegalAccessException |
+                     IllegalArgumentException | ClassNotFoundException e) {
                 // Notify something went wrong
                 Message msg = Message.obtain(mHandler, MSG_TASK_ERROR, 0, 0, e.getMessage());
                 mHandler.sendMessage(msg);
 
                 // Log the error as well
-                Log.e(TAG, "Error while starting the screenrecord process", e);
-            } catch (NoSuchFieldException e) {
-                Message msg = Message.obtain(mHandler, MSG_TASK_ERROR, 0, 0, e.getMessage());
-                mHandler.sendMessage(msg);
-                Log.e(TAG, "Error while starting the screenrecord process", e);
-            } catch (IllegalArgumentException e) {
-                Message msg = Message.obtain(mHandler, MSG_TASK_ERROR, 0, 0, e.getMessage());
-                mHandler.sendMessage(msg);
-                Log.e(TAG, "Error while starting the screenrecord process", e);
-            } catch (IllegalAccessException e) {
-                Message msg = Message.obtain(mHandler, MSG_TASK_ERROR, 0, 0, e.getMessage());
-                mHandler.sendMessage(msg);
-                Log.e(TAG, "Error while starting the screenrecord process", e);
-            } catch (ClassNotFoundException e) {
-                Message msg = Message.obtain(mHandler, MSG_TASK_ERROR, 0, 0, e.getMessage());
-                mHandler.sendMessage(msg);
                 Log.e(TAG, "Error while starting the screenrecord process", e);
             }
         }

@@ -541,6 +541,7 @@ public class ModLedControl {
         }
     }
 
+    @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
     private static Object getOldNotificationRecord(String key) {
         Object oldNotifRecord = null;
         try {

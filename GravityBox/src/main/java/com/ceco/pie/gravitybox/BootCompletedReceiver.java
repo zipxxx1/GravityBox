@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,9 +27,11 @@ import android.os.Build;
 public class BootCompletedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        maybePerformTasksAfterRestore(context);
-        //prepareAssets(context);
-        SettingsManager.getInstance(context).fixFolderPermissionsAsync();
+        if (Intent.ACTION_LOCKED_BOOT_COMPLETED.equals(intent.getAction())) {
+            maybePerformTasksAfterRestore(context);
+            //prepareAssets(context);
+            SettingsManager.getInstance(context).fixFolderPermissionsAsync();
+        }
     }
 
     // copies required files from assets to file system

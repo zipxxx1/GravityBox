@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -149,7 +149,7 @@ public class ModTelephony {
                 equalsMcc = simNumeric.substring(0, 3).equals(operatorNumeric.substring(0, 3));
                 if (DEBUG) log("equalsMcc: simNumeric=" + simNumeric +
                         "; operatorNumeric=" + operatorNumeric + "; equalsMcc=" + equalsMcc);
-            } catch (Exception e) { }
+            } catch (Exception ignored) { }
 
             return equalsMcc;
         } catch (Throwable t) {

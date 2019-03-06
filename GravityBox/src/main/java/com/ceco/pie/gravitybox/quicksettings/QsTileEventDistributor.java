@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -34,7 +34,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -48,7 +47,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
     public interface QsEventListener {
         String getKey();
         Object getTile();
-        void onCreateTileView(View tileView) throws Throwable;
+        void onCreateTileView(View tileView);
         void onBroadcastReceived(Context context, Intent intent);
         void onKeyguardStateChanged();
         boolean supportsHideOnChange();
@@ -199,7 +198,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                             .getAdditionalInstanceField(param.args[0], BaseTile.TILE_KEY_NAME);
                 }
                 @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(MethodHookParam param) {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.args[0], BaseTile.TILE_KEY_NAME));
                     if (l != null && !(boolean)param.args[1]) {

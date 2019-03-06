@@ -21,8 +21,6 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.UserHandle;
 
-import com.ceco.pie.gravitybox.managers.SysUiManagers;
-
 import java.lang.reflect.Constructor;
 
 import de.robv.android.xposed.XC_MethodHook;

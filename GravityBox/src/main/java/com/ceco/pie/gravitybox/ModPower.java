@@ -146,7 +146,8 @@ public class ModPower {
                     if (!shouldRunProximityCheck())
                         return;
 
-                    synchronized (mLock) { 
+                    //noinspection SynchronizeOnNonFinalField
+                    synchronized (mLock) {
                         if (mHandler.hasMessages(MSG_WAKE_UP)) {
                             if (DEBUG) log("wakeUpInternal: Wake up message already queued");
                             param.setResult(null);
@@ -160,7 +161,7 @@ public class ModPower {
                                 try {
                                     if (DEBUG) log("Waking up...");
                                     XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                                } catch (Throwable t) {
+                                } catch (Throwable ignored) {
                                 } finally {
                                     Binder.restoreCallingIdentity(ident);
                                 }

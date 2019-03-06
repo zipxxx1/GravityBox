@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -57,7 +57,6 @@ import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModLockscreen {
     private static final String CLASS_PATH = "com.android.keyguard";
@@ -316,7 +315,7 @@ public class ModLockscreen {
 
             XposedHelpers.findAndHookMethod(kgPINViewClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(final MethodHookParam param) {
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false)) {
                         mPinScrambler = new LockscreenPinScrambler((ViewGroup)param.thisObject);
                         if (Utils.isXperiaDevice()) {
@@ -337,7 +336,7 @@ public class ModLockscreen {
             if (!Utils.isXperiaDevice()) {
                 XposedHelpers.findAndHookMethod(kgPINViewClass, "resetState", new XC_MethodHook() {
                     @Override
-                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    protected void afterHookedMethod(final MethodHookParam param) {
                         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false) &&
                                 mPinScrambler != null) {
                             mPinScrambler.scramble();

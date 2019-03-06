@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -106,7 +106,7 @@ public class ModRinger {
                     mtdHandlePlay = clsRingtonePlayer.getDeclaredMethod("access$000",
                             clsRingtonePlayer, XposedHelpers.findClass("com.android.internal.os.SomeArgs", classLoader));
                     if (DEBUG) log("handlePlay found as access$000");
-                } catch (NoSuchMethodException nme2) { }
+                } catch (NoSuchMethodException ignored) { }
             }
 
             if (mtdHandlePlay == null) {

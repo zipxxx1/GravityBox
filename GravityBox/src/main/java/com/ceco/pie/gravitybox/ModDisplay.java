@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -433,7 +433,7 @@ public class ModDisplay {
                                  tmpBmp.compress(CompressFormat.PNG, 100, os);
                                  try {
                                     os.close();
-                                 } catch (IOException e1) { }
+                                 } catch (IOException ignored) { }
                                  bmp.recycle();
                                  tmpBmp.recycle();
                                  mKisImageStream = new ByteArrayInputStream(os.toByteArray());

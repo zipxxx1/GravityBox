@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project (Jens Doll)
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * This code is loosely based on portions of the ParanoidAndroid Project source, Copyright (C) 2012.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -32,7 +32,6 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.PixelFormat;
 import android.inputmethodservice.InputMethodService;
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;

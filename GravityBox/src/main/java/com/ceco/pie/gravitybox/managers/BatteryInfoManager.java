@@ -85,6 +85,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
                 return 0f; 
         }
 
+        @SuppressWarnings("MethodDoesntCallSuperMethod")
         public BatteryData clone() {
             BatteryData bd = new BatteryData();
             bd.charging = this.charging;

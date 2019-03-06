@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 rovo89@xda
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -194,9 +194,7 @@ public class ModVolumeKeySkipTrack {
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
-        // bluetooth A2DP? (not sure here)
-        return mAudioManager.isBluetoothA2dpOn();
-
+        return false;
     }
 
     private static void sendMediaButtonEvent(Object phoneWindowManager, int code) {

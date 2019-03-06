@@ -394,7 +394,7 @@ public abstract class TrafficMeterAbstract extends TextView
             // fallback to TrafficStats
             bytes = getTotalRxTxBytesFromStats();
         } finally {
-            if (in != null) try { in.close(); } catch(IOException e) {}
+            if (in != null) try { in.close(); } catch(IOException ignored) {}
         }
         return bytes;
     }

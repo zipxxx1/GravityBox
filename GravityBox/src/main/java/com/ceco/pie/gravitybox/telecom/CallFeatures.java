@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -50,7 +50,7 @@ public class CallFeatures {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static CallFeatures init(XSharedPreferences prefs, ClassLoader classLoader) throws Throwable {
+    public static CallFeatures init(XSharedPreferences prefs, ClassLoader classLoader) {
         return new CallFeatures(prefs, classLoader);
     }
 
@@ -68,7 +68,7 @@ public class CallFeatures {
 
     private CallFeatures() { /* must be created by calling init() */ }
 
-    private CallFeatures(XSharedPreferences prefs, ClassLoader classLoader) throws Throwable {
+    private CallFeatures(XSharedPreferences prefs, ClassLoader classLoader) {
         initPrefs(prefs);
         createHooks(classLoader);
     }

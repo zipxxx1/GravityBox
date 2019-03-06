@@ -142,9 +142,7 @@ public class ColorPickerPreference
 		setPreviewColor();
 		try {
 			getOnPreferenceChangeListener().onPreferenceChange(this, color);
-		} catch (NullPointerException e) {
-
-		}
+		} catch (NullPointerException ignored) { }
 	}
 
 	public int getValue() {
@@ -299,7 +297,7 @@ public class ColorPickerPreference
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        if (state == null || !(state instanceof SavedState)) {
+        if (!(state instanceof SavedState)) {
             // Didn't save state for us in onSaveInstanceState
             super.onRestoreInstanceState(state);
             return;

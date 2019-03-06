@@ -89,8 +89,7 @@ public class MemInfoReader {
                     i++;
                 }
             }
-        } catch (java.io.FileNotFoundException e) {
-        } catch (java.io.IOException e) {
+        } catch (java.io.IOException ignored) {
         } finally {
             StrictMode.setThreadPolicy(savedPolicy);
         }

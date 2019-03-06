@@ -860,7 +860,7 @@
     <string name="config_fingerprintSupportsGestures">Specify if the fingerprint hardware support gestures</string>
     <string name="config_localDisplaysPrivate">Indicates whether local non-default displays are private.
          See android.view.Display#FLAG_PRIVATE</string>
-    <string name="config_lowBatteryAutoTriggerDefaultLevel">The default suggested battery % at which we enable battery saver automatically</string>
+    <string name="config_lowBatteryAutoTriggerDefaultLevel">The default suggested battery %% at which we enable battery saver automatically</string>
     <string name="config_maskMainBuiltInDisplayCutout">If true, and there is a cutout on the main built in display, the cutout will be masked
          by shrinking the display such that it does not overlap the cutout area</string>
     <string name="config_maxNumVisibleRecentTasks">The maximum number of visible recent tasks to be presented to the user through the
