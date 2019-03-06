@@ -1119,9 +1119,9 @@
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Bluetooth ikon láthatósága</string>
-    <string name="sb_bt_default">BT engedélyezésekor (alapértelmezett)</string>
+    <string name="sb_bt_default">BT engedélyezésekor</string>
     <string name="sb_bt_connected">BT csatlakozásakor</string>
-    <string name="sb_bt_hidden">Elrejtve</string>
+    <string name="sb_bt_hidden">Elrejtve (alapértelmezett)</string>
     
     <!-- Increasing ringtone volume -->
     <string name="pref_increasing_ring_title">Növekvő hangerejű csengőhang</string>

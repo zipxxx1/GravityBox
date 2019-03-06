@@ -3097,7 +3097,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_STATUSBAR_BT_VISIBILITY)) {
                 intent.setAction(ACTION_PREF_SYSTEM_ICON_CHANGED);
                 intent.putExtra(EXTRA_SB_BT_VISIBILITY,
-                        prefs.getString(PREF_KEY_STATUSBAR_BT_VISIBILITY, "DEFAULT"));
+                        prefs.getString(PREF_KEY_STATUSBAR_BT_VISIBILITY, "HIDDEN"));
             } else if (key.equals(PREF_KEY_STATUSBAR_HIDE_VIBRATE_ICON)) {
                 intent.setAction(ACTION_PREF_SYSTEM_ICON_CHANGED);
                 intent.putExtra(EXTRA_SB_HIDE_VIBRATE_ICON, prefs.getBoolean(key, false));

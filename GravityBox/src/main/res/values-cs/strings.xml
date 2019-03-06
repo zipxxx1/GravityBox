@@ -1101,9 +1101,9 @@
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Viditelnost Bluetooth ikony</string>
-    <string name="sb_bt_default">Pokud je BT zapnuto (výchozí)</string>
+    <string name="sb_bt_default">Pokud je BT zapnuto</string>
     <string name="sb_bt_connected">Pokud je BT připojeno</string>
-    <string name="sb_bt_hidden">Skrýt</string>
+    <string name="sb_bt_hidden">Skrýt (výchozí)</string>
 
     <!-- Increasing ringtone volume -->
     <string name="pref_increasing_ring_title">Zvyšování hlasitosti vyzvánění</string>

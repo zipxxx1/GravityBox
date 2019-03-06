@@ -1114,9 +1114,9 @@
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Видимість значку Bluetooth</string>
-    <string name="sb_bt_default">Коли BT увімкнуто (типово)</string>
+    <string name="sb_bt_default">Коли BT увімкнуто</string>
     <string name="sb_bt_connected">Коли BT з\'єднано</string>
-    <string name="sb_bt_hidden">Прихований</string>
+    <string name="sb_bt_hidden">Прихований (типово)</string>
 
     <!-- Increasing ringtone volume -->
     <string name="pref_increasing_ring_title">Гучність, що поступово збільшується</string>

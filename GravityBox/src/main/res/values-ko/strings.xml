@@ -906,9 +906,9 @@
     <string name="shortcut_airplane_mode">비행기 모드 토글</string>
 
     <string name="pref_sb_bt_visibility_title">블루투스 아이콘 보이기</string>
-    <string name="sb_bt_default">블루투스가 켜진 경우 (기본값)</string>
+    <string name="sb_bt_default">블루투스가 켜진 경우</string>
     <string name="sb_bt_connected">블루투스가 연결된 경우에만</string>
-    <string name="sb_bt_hidden">무조건 숨기기</string>
+    <string name="sb_bt_hidden">무조건 숨기기 (기본값)</string>
 
     <string name="pref_increasing_ring_title">벨소리 다단계 증가</string>
     <string name="increasing_ring_enable">활성화</string>

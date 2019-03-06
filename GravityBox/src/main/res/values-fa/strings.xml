@@ -713,9 +713,9 @@
 <string name="shortcut_quiet_hours_toggle">سوئیچ وضعیت ساعات آرامش</string>
 <string name="shortcut_airplane_mode">سوئیچ وضعیت حالت پرواز</string>
 <string name="pref_sb_bt_visibility_title">نمایش آیکون بلوتوث</string>
-<string name="sb_bt_default">هنگام فعال شدن بلوتوث (پیشفرض)</string>
+<string name="sb_bt_default">هنگام فعال شدن بلوتوث</string>
 <string name="sb_bt_connected">هنگام اتصال بلوتوث</string>
-<string name="sb_bt_hidden">پنهان</string>
+<string name="sb_bt_hidden">پنهان (پیشفرض)</string>
 <string name="pref_increasing_ring_title">صدای صعودی زنگ تماس</string>
 <string name="increasing_ring_enable">فعال کردن</string>
 <string name="increasing_ring_min_volume_title">شروع حجم صدای زنگ</string>

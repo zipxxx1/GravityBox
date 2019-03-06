@@ -1114,9 +1114,9 @@
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Bluetooth simgesi görünürlüğü</string>
-    <string name="sb_bt_default">BT etkinleştirildiğinde (varsayılan)</string>
+    <string name="sb_bt_default">BT etkinleştirildiğinde</string>
     <string name="sb_bt_connected">BT bağlandığında</string>
-    <string name="sb_bt_hidden">Gizli</string>
+    <string name="sb_bt_hidden">Gizli (varsayılan)</string>
 
     <!-- Increasing ringtone volume -->
     <string name="pref_increasing_ring_title">Artan zil sesi</string>

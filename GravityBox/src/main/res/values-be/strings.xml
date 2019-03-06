@@ -1123,9 +1123,9 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Бачнасць значка Bluetooth</string>
-    <string name="sb_bt_default">Пры ўключаным BT (па змаўчанні)</string>
+    <string name="sb_bt_default">Пры ўключаным BT</string>
     <string name="sb_bt_connected">Пры спалучаным BT</string>
-    <string name="sb_bt_hidden">Утоены</string>
+    <string name="sb_bt_hidden">Утоены (па змаўчанні)</string>
 
     <!-- Increasing ringtone volume -->
     <string name="pref_increasing_ring_title">Нарастальная гучнасць</string>

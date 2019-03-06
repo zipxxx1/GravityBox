@@ -1131,9 +1131,9 @@
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">蓝牙图标可见性</string>
-    <string name="sb_bt_default">当蓝牙启用（默认）</string>
+    <string name="sb_bt_default">当蓝牙启用</string>
     <string name="sb_bt_connected">当蓝牙连接</string>
-    <string name="sb_bt_hidden">隐藏</string>
+    <string name="sb_bt_hidden">隐藏（默认）</string>
 
     <!-- Increasing ringtone volume -->
     <string name="pref_increasing_ring_title">渐变铃声</string>

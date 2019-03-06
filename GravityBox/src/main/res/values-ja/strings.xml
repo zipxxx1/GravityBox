@@ -930,9 +930,9 @@
     <string name="shortcut_airplane_mode">機内モードトグル</string>
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Bluetoothアイコン表示</string>
-    <string name="sb_bt_default">BT有効時(デフォルト)</string>
+    <string name="sb_bt_default">BT有効時</string>
     <string name="sb_bt_connected">BT接続時</string>
-    <string name="sb_bt_hidden">非表示</string>
+    <string name="sb_bt_hidden">非表示(デフォルト)</string>
     <!-- Increasing ringtone volume -->
     <string name="pref_increasing_ring_title">ステップアップ着信音量</string>
     <string name="increasing_ring_enable">有効</string>

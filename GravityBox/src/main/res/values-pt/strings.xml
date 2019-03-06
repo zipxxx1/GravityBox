@@ -1095,9 +1095,9 @@
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Visibilidade do indicador Bluetooth</string>
-    <string name="sb_bt_default">Sempre que estiver ativado (predefinido)</string>
+    <string name="sb_bt_default">Sempre que estiver ativado</string>
     <string name="sb_bt_connected">Quando algum dispositivo estiver conectado</string>
-    <string name="sb_bt_hidden">Oculto</string>
+    <string name="sb_bt_hidden">Oculto (predefinido)</string>
 
     <!-- Increasing ringtone volume -->
     <string name="pref_increasing_ring_title">Toque crescente</string>

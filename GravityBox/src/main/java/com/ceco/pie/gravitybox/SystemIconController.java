@@ -54,7 +54,7 @@ public class SystemIconController implements BroadcastSubReceiver {
 
     public SystemIconController(ClassLoader classLoader, XSharedPreferences prefs) {
         mBtMode = BtMode.valueOf(prefs.getString(
-                GravityBoxSettings.PREF_KEY_STATUSBAR_BT_VISIBILITY, "DEFAULT"));
+                GravityBoxSettings.PREF_KEY_STATUSBAR_BT_VISIBILITY, "HIDDEN"));
         mHideVibrateIcon = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_STATUSBAR_HIDE_VIBRATE_ICON, false);
         mHideDataSaverIcon = prefs.getBoolean(

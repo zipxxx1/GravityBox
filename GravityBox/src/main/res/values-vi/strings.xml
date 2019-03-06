@@ -1124,9 +1124,9 @@
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Hiện biểu tượng Bluetooth</string>
-    <string name="sb_bt_default">Khi bật BT (mặc định)</string>
+    <string name="sb_bt_default">Khi bật BT</string>
     <string name="sb_bt_connected">Khi BT được kết nối</string>
-    <string name="sb_bt_hidden">Ẩn</string>
+    <string name="sb_bt_hidden">Ẩn (mặc định)</string>
 
     <!-- Increasing ringtone volume -->
     <string name="pref_increasing_ring_title">Nhạc chuông to dần</string>

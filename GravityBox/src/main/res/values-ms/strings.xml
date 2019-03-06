@@ -1131,9 +1131,9 @@
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Paparan ikon Bluetooth</string>
-    <string name="sb_bt_default">Ketika BT dihidupkan (asal)</string>
+    <string name="sb_bt_default">Ketika BT dihidupkan</string>
     <string name="sb_bt_connected">Ketika BT disambung</string>
-    <string name="sb_bt_hidden">Tersembunyi</string>
+    <string name="sb_bt_hidden">Tersembunyi (asal)</string>
 
     <!-- Increasing ringtone volume -->
     <string name="pref_increasing_ring_title">Nada menaik</string>
