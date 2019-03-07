@@ -18,13 +18,11 @@ package com.ceco.pie.gravitybox.quicksettings;
 import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.GravityBoxResultReceiver;
 import com.ceco.pie.gravitybox.GravityBoxService;
-import com.ceco.pie.gravitybox.GravityBoxResultReceiver.Receiver;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SyncStatusObserver;
-import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 

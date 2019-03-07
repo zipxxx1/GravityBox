@@ -23,7 +23,6 @@ import com.ceco.pie.gravitybox.ModStatusBar.StatusBarState;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;

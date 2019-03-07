@@ -18,7 +18,6 @@ import com.ceco.pie.gravitybox.managers.BatteryInfoManager.BatteryData;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;

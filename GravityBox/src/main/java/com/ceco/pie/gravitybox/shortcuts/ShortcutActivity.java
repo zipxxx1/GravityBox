@@ -25,7 +25,6 @@ import com.ceco.pie.gravitybox.Utils;
 import com.ceco.pie.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.pie.gravitybox.adapters.IconListAdapter;
 import com.ceco.pie.gravitybox.ledcontrol.LedSettings;
-import com.ceco.pie.gravitybox.shortcuts.AShortcut.CreateShortcutListener;
 
 import android.content.Context;
 import android.content.Intent;

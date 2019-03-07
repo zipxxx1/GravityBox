@@ -22,7 +22,6 @@ import java.util.Set;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.SettingsManager;
 import com.ceco.pie.gravitybox.WorldReadablePrefs;
-import com.ceco.pie.gravitybox.WorldReadablePrefs.OnPreferencesCommitedListener;
 
 import android.app.Notification;
 import android.content.Context;

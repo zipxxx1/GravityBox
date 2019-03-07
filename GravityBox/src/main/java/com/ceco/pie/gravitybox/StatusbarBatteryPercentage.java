@@ -29,7 +29,6 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.Color;

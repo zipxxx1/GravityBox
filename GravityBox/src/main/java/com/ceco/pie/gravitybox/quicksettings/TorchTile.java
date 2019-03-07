@@ -18,14 +18,12 @@ package com.ceco.pie.gravitybox.quicksettings;
 import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.GravityBoxResultReceiver;
 import com.ceco.pie.gravitybox.TorchService;
-import com.ceco.pie.gravitybox.GravityBoxResultReceiver.Receiver;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Bundle;
 import android.os.Handler;
 
 public class TorchTile extends QsTile {

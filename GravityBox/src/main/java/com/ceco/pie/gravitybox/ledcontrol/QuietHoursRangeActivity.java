@@ -35,7 +35,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.view.View;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.widget.Button;

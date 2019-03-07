@@ -25,7 +25,6 @@ import com.ceco.pie.gravitybox.GravityBoxActivity;
 import com.ceco.pie.gravitybox.SettingsManager;
 import com.ceco.pie.gravitybox.Utils;
 import com.ceco.pie.gravitybox.WorldReadablePrefs;
-import com.ceco.pie.gravitybox.WorldReadablePrefs.OnPreferencesCommitedListener;
 import com.ceco.pie.gravitybox.WorldReadablePrefs.OnSharedPreferenceChangeCommitedListener;
 
 import android.content.Context;

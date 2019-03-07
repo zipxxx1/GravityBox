@@ -20,7 +20,6 @@ import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxResultReceiver;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.RecordingService;
-import com.ceco.pie.gravitybox.GravityBoxResultReceiver.Receiver;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.BroadcastReceiver;
@@ -30,7 +29,6 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.os.Bundle;
 import android.os.Handler;
 
 public class QuickRecordTile extends QsTile {
