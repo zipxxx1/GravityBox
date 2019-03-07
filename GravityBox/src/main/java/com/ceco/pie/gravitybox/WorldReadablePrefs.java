@@ -120,6 +120,8 @@ public class WorldReadablePrefs implements SharedPreferences,
         mOnSharedPreferenceChangeCommitedListener = listener;
     }
 
+    @SuppressLint("SetWorldReadable")
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void maybePreCreateFile() {
         try {
             File sharedPrefsFolder = new File(mContext.getDataDir().getAbsolutePath() + "/shared_prefs");
@@ -138,6 +140,8 @@ public class WorldReadablePrefs implements SharedPreferences,
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("SetWorldReadable")
     private void fixPermissions(boolean force) {
         File sharedPrefsFolder = new File(mContext.getDataDir().getAbsolutePath() + "/shared_prefs");
         if (sharedPrefsFolder.exists()) {

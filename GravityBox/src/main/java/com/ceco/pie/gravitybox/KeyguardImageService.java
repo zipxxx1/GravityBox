@@ -105,6 +105,8 @@ public class KeyguardImageService extends Service {
         return mMessenger.getBinder();
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("SetWorldReadable")
     private boolean saveImage() {
         try {
             Bitmap tmpBmp = BitmapFactory.decodeStream(

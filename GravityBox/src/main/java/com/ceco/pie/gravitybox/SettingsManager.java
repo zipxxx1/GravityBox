@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.UUID;
 
 import android.Manifest.permission;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -203,6 +204,8 @@ public class SettingsManager {
                 !isBackupAvailable();
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("SetWorldReadable")
     public boolean restoreSettings() {
         if (mContext.checkSelfPermission(permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
                 mContext.checkSelfPermission(permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -330,6 +333,8 @@ public class SettingsManager {
 
     public void fixFolderPermissionsAsync() {
         AsyncTask.execute(new Runnable() {
+            @SuppressWarnings("ResultOfMethodCallIgnored")
+            @SuppressLint("SetWorldReadable")
             @Override
             public void run() {
                 // main dir

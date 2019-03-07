@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -42,6 +42,7 @@ import com.ceco.pie.gravitybox.webserviceclient.WebServiceClient;
 import com.ceco.pie.gravitybox.webserviceclient.TransactionResult.TransactionStatus;
 import com.ceco.pie.gravitybox.webserviceclient.WebServiceClient.WebServiceTaskListener;
 
+import android.annotation.SuppressLint;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -3408,6 +3409,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             return true;
         }
 
+        @SuppressWarnings("ResultOfMethodCallIgnored")
+        @SuppressLint("SetWorldReadable")
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen prefScreen, Preference pref) {
             Intent intent = null;
@@ -3626,6 +3629,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             int width = getResources().getDimensionPixelSize(R.dimen.navbar_custom_key_image_width);
             int height = getResources().getDimensionPixelSize(R.dimen.navbar_custom_key_image_height);
             pickIcon(width, height, new IconPickHandler() {
+                @SuppressWarnings("ResultOfMethodCallIgnored")
+                @SuppressLint("SetWorldReadable")
                 @Override
                 public void onIconPicked(Bitmap icon) {
                     try {
@@ -3692,6 +3697,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             startActivityForResult(intent, REQ_ICON_PICK);
         }
 
+        @SuppressWarnings("ResultOfMethodCallIgnored")
+        @SuppressLint("SetWorldReadable")
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);

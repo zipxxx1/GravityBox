@@ -41,6 +41,7 @@ import com.ceco.pie.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.pie.gravitybox.adapters.IconListAdapter;
 import com.ceco.pie.gravitybox.shortcuts.ShortcutActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -413,6 +414,8 @@ public class AppPickerPreference extends DialogPreference
                 getPersistedString(null) == null) return true;
 
         sPrefsFragment.pickIcon(mIconPickSizePx, new IconPickHandler() {
+            @SuppressWarnings("ResultOfMethodCallIgnored")
+            @SuppressLint("SetWorldReadable")
             @Override
             public void onIconPicked(Bitmap icon) {
                 try {
@@ -751,6 +754,8 @@ public class AppPickerPreference extends DialogPreference
             return mCreateShortcutIntent;
         }
 
+        @SuppressWarnings("ResultOfMethodCallIgnored")
+        @SuppressLint("SetWorldReadable")
         @Override
         public void onHandleShortcut(Intent intent, String name, String localIconResName, Bitmap icon) {
             if (intent == null) {
