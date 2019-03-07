@@ -61,7 +61,7 @@ public class CallFeatures {
     private boolean mSensorListenerAttached = false;
     private Object mIncomingCall;
     private Object mOutgoingCall;
-    private List<Object> mActiveCallList = new ArrayList<Object>();
+    private List<Object> mActiveCallList = new ArrayList<>();
     private Vibrator mVibrator;
     private Handler mHandler;
     private WakeLock mWakeLock;
@@ -81,7 +81,7 @@ public class CallFeatures {
                 if (DEBUG) log("mFlipAction=" + mFlipAction);
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_CALL_VIBRATIONS)) {
-                mCallVibrations = new HashSet<String>(intent.getStringArrayListExtra(
+                mCallVibrations = new HashSet<>(intent.getStringArrayListExtra(
                         GravityBoxSettings.EXTRA_CALL_VIBRATIONS));
                 if (DEBUG) log("mCallVibrations=" + mCallVibrations);
             }
@@ -90,7 +90,7 @@ public class CallFeatures {
 
     private void initPrefs(XSharedPreferences prefs) {
         mCallVibrations = prefs.getStringSet(
-                GravityBoxSettings.PREF_KEY_CALL_VIBRATIONS, new HashSet<String>());
+                GravityBoxSettings.PREF_KEY_CALL_VIBRATIONS, new HashSet<>());
         if (DEBUG) log("mCallVibrations = " + mCallVibrations.toString());
 
         mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;

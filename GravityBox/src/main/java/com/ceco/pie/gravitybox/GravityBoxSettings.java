@@ -261,7 +261,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_IMPRINT_VIBE_DISABLE = "imprintVibeDisable";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN_SHORTCUTS = "pref_cat_lockscreen_shortcuts";
-    public static final List<String> PREF_KEY_LOCKSCREEN_SHORTCUT = new ArrayList<String>(Arrays.asList(
+    public static final List<String> PREF_KEY_LOCKSCREEN_SHORTCUT = new ArrayList<>(Arrays.asList(
             "pref_lockscreen_shortcut0", "pref_lockscreen_shortcut1", "pref_lockscreen_shortcut2",
             "pref_lockscreen_shortcut3", "pref_lockscreen_shortcut4", "pref_lockscreen_shortcut5",
             "pref_lockscreen_shortcut6"));
@@ -635,7 +635,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_DT_OMNI_AUTOHIDE_TH = "dtOmniAutohideTh";
 
     public static final String PREF_CAT_KEY_APP_LAUNCHER = "pref_cat_app_launcher";
-    public static final List<String> PREF_KEY_APP_LAUNCHER_SLOT = new ArrayList<String>(Arrays.asList(
+    public static final List<String> PREF_KEY_APP_LAUNCHER_SLOT = new ArrayList<>(Arrays.asList(
             "pref_app_launcher_slot0", "pref_app_launcher_slot1", "pref_app_launcher_slot2",
             "pref_app_launcher_slot3", "pref_app_launcher_slot4", "pref_app_launcher_slot5",
             "pref_app_launcher_slot6", "pref_app_launcher_slot7", "pref_app_launcher_slot8",
@@ -844,7 +844,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     private static final int REQ_OBTAIN_SHORTCUT = 1028;
     private static final int REQ_ICON_PICK = 1029;
 
-    private static final List<String> rebootKeys = new ArrayList<String>(Arrays.asList(
+    private static final List<String> rebootKeys = new ArrayList<>(Arrays.asList(
             PREF_KEY_BRIGHTNESS_MIN,
             PREF_KEY_LOCKSCREEN_ROTATION,
             PREF_KEY_MUSIC_VOLUME_STEPS,
@@ -872,7 +872,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS
     ));
 
-    private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
+    private static final List<String> customAppKeys = new ArrayList<>(Arrays.asList(
             PREF_KEY_HWKEY_MENU_SINGLETAP,
             PREF_KEY_HWKEY_MENU_LONGPRESS,
             PREF_KEY_HWKEY_MENU_DOUBLETAP,
@@ -895,14 +895,14 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_PIE_SEARCH_LONGPRESS
     ));
 
-    private static final List<String> ringToneKeys = new ArrayList<String>(Arrays.asList(
+    private static final List<String> ringToneKeys = new ArrayList<>(Arrays.asList(
             PREF_KEY_BATTERY_CHARGED_SOUND,
             PREF_KEY_CHARGER_PLUGGED_SOUND,
             PREF_KEY_CHARGER_UNPLUGGED_SOUND,
             PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND
     ));
 
-    private static final List<String> lockscreenKeys = new ArrayList<String>(Arrays.asList(
+    private static final List<String> lockscreenKeys = new ArrayList<>(Arrays.asList(
             PREF_KEY_LOCKSCREEN_BACKGROUND,
             PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR,
             PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT,
@@ -924,7 +924,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE
     ));
 
-    private static final List<String> headsUpKeys = new ArrayList<String>(Arrays.asList(
+    private static final List<String> headsUpKeys = new ArrayList<>(Arrays.asList(
             PREF_KEY_HEADS_UP_TIMEOUT
 //            PREF_KEY_HEADS_UP_ALPHA,
 //            PREF_KEY_HEADS_UP_SNOOZE,
@@ -1727,9 +1727,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             // Remove actions for HW keys based on device features
             mPrefHwKeyMenuLongpress.setEntries(R.array.hwkey_action_entries);
             mPrefHwKeyMenuLongpress.setEntryValues(R.array.hwkey_action_values);
-            List<CharSequence> actEntries = new ArrayList<CharSequence>(Arrays.asList(
+            List<CharSequence> actEntries = new ArrayList<>(Arrays.asList(
                     mPrefHwKeyMenuLongpress.getEntries()));
-            List<CharSequence> actEntryValues = new ArrayList<CharSequence>(Arrays.asList(
+            List<CharSequence> actEntryValues = new ArrayList<>(Arrays.asList(
                     mPrefHwKeyMenuLongpress.getEntryValues()));
             if (!Utils.hasFlash(getActivity())) {
                 actEntries.remove(getString(R.string.hwkey_action_torch));
@@ -2371,7 +2371,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 MultiSelectListPreference p = (MultiSelectListPreference) findPreference(PREF_KEY_IMPRINT_VIBE_DISABLE);
                 if (p != null) {
                     String summary = "";
-                    Set<String> values = p.getValues() == null ? new HashSet<String>() : p.getValues();
+                    Set<String> values = p.getValues() == null ? new HashSet<>() : p.getValues();
                     if (values.contains("SUCCESS")) summary += getString(R.string.imprint_vibe_disable_success);
                     if (values.contains("ERROR")) {
                         if (!summary.isEmpty()) summary += ", ";
@@ -2400,7 +2400,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 MultiSelectListPreference p = (MultiSelectListPreference) findPreference(PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE);
                 if (p != null) {
                     String summary = "";
-                    Set<String> values = p.getValues() == null ? new HashSet<String>() : p.getValues();
+                    Set<String> values = p.getValues() == null ? new HashSet<>() : p.getValues();
                     if (values.contains("LEFT")) summary += getString(R.string.bottom_action_left);
                     if (values.contains("RIGHT")) {
                         if (!summary.isEmpty()) summary += ", ";
@@ -2702,7 +2702,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_PIE_CONTROL_TRIGGERS)) {
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 String[] triggers = prefs.getStringSet(
-                        PREF_KEY_PIE_CONTROL_TRIGGERS, new HashSet<String>()).toArray(new String[0]);
+                        PREF_KEY_PIE_CONTROL_TRIGGERS, new HashSet<>()).toArray(new String[0]);
                 intent.putExtra(EXTRA_PIE_TRIGGERS, triggers);
             } else if (key.equals(PREF_KEY_PIE_CONTROL_TRIGGER_SIZE)) {
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
@@ -2940,8 +2940,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_RINGER_MODE_TILE_MODE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 Set<String> modes = prefs.getStringSet(PREF_KEY_RINGER_MODE_TILE_MODE,
-                        new HashSet<String>(Arrays.asList("1", "2", "3")));
-                List<String> lmodes = new ArrayList<String>(modes);
+                        new HashSet<>(Arrays.asList("1", "2", "3")));
+                List<String> lmodes = new ArrayList<>(modes);
                 Collections.sort(lmodes);
                 int[] imodes = new int[lmodes.size()];
                 for (int i = 0; i < lmodes.size(); i++) {
@@ -2951,8 +2951,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_STAY_AWAKE_TILE_MODE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 Set<String> sAModes = prefs.getStringSet(PREF_STAY_AWAKE_TILE_MODE,
-                        new HashSet<String>(Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7")));
-                List<String> sALmodes = new ArrayList<String>(sAModes);
+                        new HashSet<>(Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7")));
+                List<String> sALmodes = new ArrayList<>(sAModes);
                 Collections.sort(sALmodes);
                 int[] sAImodes = new int[sALmodes.size()];
                 for (int i = 0; i < sALmodes.size(); i++) {
@@ -3118,7 +3118,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_LOCKSCREEN_SETTINGS_CHANGED);
                 if (key.equals(PREF_KEY_IMPRINT_VIBE_DISABLE)) {
                     intent.putStringArrayListExtra(EXTRA_IMPRINT_VIBE_DISABLE,
-                            new ArrayList<String>(prefs.getStringSet(key, new HashSet<String>())));
+                            new ArrayList<>(prefs.getStringSet(key, new HashSet<>())));
                 }
                 delayedBroadcast = true;
             } else if (headsUpKeys.contains(key)) {
@@ -3228,8 +3228,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_NM_TILE_ENABLED_MODES)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 Set<String> modes = prefs.getStringSet(key,
-                        new HashSet<String>(Arrays.asList("0", "1", "2", "10")));
-                List<String> lmodes = new ArrayList<String>(modes);
+                        new HashSet<>(Arrays.asList("0", "1", "2", "10")));
+                List<String> lmodes = new ArrayList<>(modes);
                 Collections.sort(lmodes);
                 int[] imodes = new int[lmodes.size()];
                 for (int i = 0; i < lmodes.size(); i++) {
@@ -3260,7 +3260,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_CALL_VIBRATIONS)) {
                 intent.setAction(ACTION_PREF_CALL_FEATURES_CHANGED);
                 intent.putStringArrayListExtra(EXTRA_CALL_VIBRATIONS,
-                        new ArrayList<String>(prefs.getStringSet(key, new HashSet<String>())));
+                        new ArrayList<>(prefs.getStringSet(key, new HashSet<>())));
             } else if (key.equals(PREF_KEY_VISUALIZER_DYNAMIC_COLOR)) {
                 intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
                 intent.putExtra(EXTRA_VISUALIZER_DYNAMIC_COLOR, prefs.getBoolean(key, true));
@@ -3735,32 +3735,32 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         }
 
         private void checkTransaction(String transactionId) {
-            mTransWebServiceClient = new WebServiceClient<TransactionResult>(getActivity(),
+            mTransWebServiceClient = new WebServiceClient<>(getActivity(),
                     new WebServiceTaskListener<TransactionResult>() {
                         @Override
                         public void onWebServiceTaskCompleted(final TransactionResult result) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                            .setTitle(R.string.app_name)
-                            .setMessage(result.getTransactionStatusMessage())
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                dialog.dismiss();
-                                if (result.getTransactionStatus() == TransactionStatus.TRANSACTION_VALID) {
-                                    Intent intent = new Intent(SystemPropertyProvider.ACTION_REGISTER_UUID);
-                                    intent.putExtra(SystemPropertyProvider.EXTRA_UUID,
-                                            SettingsManager.getInstance(getActivity()).getOrCreateUuid());
-                                    intent.putExtra(SystemPropertyProvider.EXTRA_UUID_TYPE, "PayPal");
-                                    getActivity().sendBroadcast(intent);
-                                    LedSettings.lockUnc(getActivity(), false);
-                                    TunerMainActivity.lockTuner(getActivity(), false);
-                                    getActivity().finish();
-                                }
-                            });
+                                    .setTitle(R.string.app_name)
+                                    .setMessage(result.getTransactionStatusMessage())
+                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                        dialog.dismiss();
+                                        if (result.getTransactionStatus() == TransactionStatus.TRANSACTION_VALID) {
+                                            Intent intent = new Intent(SystemPropertyProvider.ACTION_REGISTER_UUID);
+                                            intent.putExtra(SystemPropertyProvider.EXTRA_UUID,
+                                                    SettingsManager.getInstance(getActivity()).getOrCreateUuid());
+                                            intent.putExtra(SystemPropertyProvider.EXTRA_UUID_TYPE, "PayPal");
+                                            getActivity().sendBroadcast(intent);
+                                            LedSettings.lockUnc(getActivity(), false);
+                                            TunerMainActivity.lockTuner(getActivity(), false);
+                                            getActivity().finish();
+                                        }
+                                    });
                             mDialog = builder.create();
                             mDialog.show();
                         }
 
                         @Override
-                        public void onWebServiceTaskCancelled() { 
+                        public void onWebServiceTaskCancelled() {
                             Toast.makeText(getActivity(), R.string.wsc_task_cancelled, Toast.LENGTH_SHORT).show();
                         }
 
@@ -3772,9 +3772,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                         @Override
                         public void onWebServiceTaskError(TransactionResult result) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                            .setTitle(R.string.app_name)
-                            .setMessage(result.getMessage())
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss());
+                                    .setTitle(R.string.app_name)
+                                    .setMessage(result.getMessage())
+                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss());
                             mDialog = builder.create();
                             mDialog.show();
                         }

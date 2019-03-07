@@ -312,7 +312,7 @@ public class ModPieControls {
             mShowMenuItem = prefs.getBoolean(GravityBoxSettings.PREF_KEY_HWKEYS_DISABLE, false);
             mAlwaysShowMenuItem = prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_CONTROL_MENU, false);
             Set<String> triggerSet = prefs.getStringSet(
-                    GravityBoxSettings.PREF_KEY_PIE_CONTROL_TRIGGERS, new HashSet<String>());
+                    GravityBoxSettings.PREF_KEY_PIE_CONTROL_TRIGGERS, new HashSet<>());
             mPieTriggerSlots = getTriggerSlotsFromArray(triggerSet.toArray(new String[triggerSet.size()]));
             mPieSize = prefs.getInt(GravityBoxSettings.PREF_KEY_PIE_CONTROL_SIZE, 1000);
             mPieTriggerSize = prefs.getInt(GravityBoxSettings.PREF_KEY_PIE_CONTROL_TRIGGER_SIZE, 5);

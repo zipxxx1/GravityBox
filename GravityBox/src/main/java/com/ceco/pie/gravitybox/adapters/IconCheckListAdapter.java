@@ -37,7 +37,7 @@ public class IconCheckListAdapter extends ArrayAdapter<IIconCheckListAdapterItem
         super(context, R.layout.simple_list_item_2_multiple_choice, objects);
 
         mContext = context;
-        mData = new ArrayList<IIconCheckListAdapterItem>(objects);
+        mData = new ArrayList<>(objects);
         mSubtextEnabled = true;
     }
 

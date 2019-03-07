@@ -66,7 +66,7 @@ public class QuietHours {
                 if (data[0].equals("id")) {
                     r.id = data[1];
                 } else if (data[0].equals("days")) {
-                    r.days = new HashSet<String>(Arrays.asList(data[1].split(",")));
+                    r.days = new HashSet<>(Arrays.asList(data[1].split(",")));
                 } else if (data[0].equals("startTime")) {
                     r.startTime = Integer.valueOf(data[1]);
                 } else if (data[0].equals("endTime")) {
@@ -78,9 +78,9 @@ public class QuietHours {
                 } else if (data[0].equals("muteSystemVibe")) {
                     r.muteSystemVibe = Boolean.valueOf(data[1]);
                 } else if (data[0].equals("muteSystemSounds")) {
-                    r.muteSystemSounds = new HashSet<String>(Arrays.asList(data[1].split(",")));
+                    r.muteSystemSounds = new HashSet<>(Arrays.asList(data[1].split(",")));
                 } else if (data[0].equals("ringerWhitelist")) {
-                    r.ringerWhitelist = new HashSet<String>(Arrays.asList(data[1].split(",")));
+                    r.ringerWhitelist = new HashSet<>(Arrays.asList(data[1].split(",")));
                 }
             }
             return r;
@@ -89,19 +89,19 @@ public class QuietHours {
         public static Range createDefault() {
             Range r = new Range();
             r.id = String.format("qhr-%s", UUID.randomUUID().toString());
-            r.days = new HashSet<String>(Arrays.asList("1","2","3","4","5","6","7"));
+            r.days = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7"));
             r.startTime = 1380;
             r.endTime = 360;
             r.muteLED = false;
             r.muteVibe = true;
             r.muteSystemVibe = false;
-            r.muteSystemSounds = new HashSet<String>();
-            r.ringerWhitelist = new HashSet<String>();
+            r.muteSystemSounds = new HashSet<>();
+            r.ringerWhitelist = new HashSet<>();
             return r;
         }
 
         public Set<String> getValue() {
-            Set<String> dataSet = new HashSet<String>();
+            Set<String> dataSet = new HashSet<>();
             dataSet.add("id:" + id);
             String buf = "";
             for (String day : days) {
@@ -165,13 +165,13 @@ public class QuietHours {
         enabled = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_ENABLED);
         muteLED = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_MUTE_LED);
         muteVibe = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_MUTE_VIBE);
-        muteSystemSounds = new HashSet<String>(prefs.getStringArrayList(QuietHoursActivity.EXTRA_QH_MUTE_SYSTEM_SOUNDS));
+        muteSystemSounds = new HashSet<>(prefs.getStringArrayList(QuietHoursActivity.EXTRA_QH_MUTE_SYSTEM_SOUNDS));
         showStatusbarIcon = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_STATUSBAR_ICON);
         mode = Mode.valueOf(prefs.getString(QuietHoursActivity.EXTRA_QH_MODE));
         interactive = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_INTERACTIVE);
         muteSystemVibe = prefs.getBoolean(QuietHoursActivity.EXTRA_QH_MUTE_SYSTEM_VIBE);
-        ringerWhitelist = new HashSet<String>(prefs.getStringArrayList(QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST));
-        ranges = new HashSet<Range>();
+        ringerWhitelist = new HashSet<>(prefs.getStringArrayList(QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST));
+        ranges = new HashSet<>();
         for (String key : prefs.keySet()) {
             if (key.startsWith("qhr-")) {
                 ranges.add(Range.parse(new HashSet<>(prefs.getStringArrayList(key))));
@@ -185,14 +185,14 @@ public class QuietHours {
         muteLED = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_LED, false);
         muteVibe = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_VIBE, true);
         muteSystemSounds = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_MUTE_SYSTEM_SOUNDS,
-                new HashSet<String>());
+                new HashSet<>());
         showStatusbarIcon = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_STATUSBAR_ICON, true);
         mode = Mode.valueOf(prefs.getString(QuietHoursActivity.PREF_KEY_QH_MODE, "AUTO"));
         interactive = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_INTERACTIVE, false);
         muteSystemVibe = prefs.getBoolean(QuietHoursActivity.PREF_KEY_MUTE_SYSTEM_VIBE, false);
         ringerWhitelist = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_RINGER_WHITELIST,
-                new HashSet<String>());
-        ranges = new HashSet<Range>();
+                new HashSet<>());
+        ranges = new HashSet<>();
         for (String key : prefs.getAll().keySet()) {
             if (key.startsWith("qhr-")) {
                 ranges.add(Range.parse(new HashSet<>(prefs.getStringSet(key, null))));

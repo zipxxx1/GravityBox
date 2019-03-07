@@ -94,7 +94,7 @@ public class ModLedControl {
     private static KeyguardManager mKm;
     private static Sensor mProxSensor;
     private static QuietHours mQuietHours;
-    private static Map<String, Long> mNotifTimestamps = new HashMap<String, Long>();
+    private static Map<String, Long> mNotifTimestamps = new HashMap<>();
     private static Object mNotifManagerService;
     private static boolean mProximityWakeUpEnabled;
     private static boolean mScreenOnDueToActiveScreen;

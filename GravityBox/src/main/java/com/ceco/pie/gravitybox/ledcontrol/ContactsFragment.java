@@ -77,13 +77,13 @@ public class ContactsFragment extends Fragment
 
         Intent intent = getActivity().getIntent();
         if (savedInstanceState != null && savedInstanceState.containsKey(KEY_SELECTED_KEYS)) {
-            mSelectedKeys = new HashSet<String>(
+            mSelectedKeys = new HashSet<>(
                     savedInstanceState.getStringArrayList(KEY_SELECTED_KEYS));
         } else if (intent != null && intent.hasExtra(QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST)) {
-            mSelectedKeys = new HashSet<String>(intent.getStringArrayListExtra(
+            mSelectedKeys = new HashSet<>(intent.getStringArrayListExtra(
                     QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST));
         } else {
-            mSelectedKeys = new HashSet<String>();
+            mSelectedKeys = new HashSet<>();
         }
         updateResult();
 

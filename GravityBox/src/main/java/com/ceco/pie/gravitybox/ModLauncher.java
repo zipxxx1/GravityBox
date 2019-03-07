@@ -36,7 +36,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.XposedHelpers.ClassNotFoundError;
 
 public class ModLauncher {
-    public static final List<String> PACKAGE_NAMES = new ArrayList<String>(Arrays.asList(
+    public static final List<String> PACKAGE_NAMES = new ArrayList<>(Arrays.asList(
             "com.android.launcher3", "com.google.android.googlequicksearchbox"));
     private static final String TAG = "GB:ModLauncher";
 
@@ -84,7 +84,7 @@ public class ModLauncher {
     }
 
     static {
-        CLASS_DYNAMIC_GRID = new ArrayList<DynamicGrid>();
+        CLASS_DYNAMIC_GRID = new ArrayList<>();
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.DynamicGrid", "mProfile", "numRows", "numColumns"));
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("nw", "Bq", "yx", "yy"));
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("rf", "DU", "AW", "AX"));
@@ -100,7 +100,7 @@ public class ModLauncher {
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.bf", "Mf", "Je", "Jf"));
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.Launcher", "mDeviceProfile", "numRows", "numColumns", "com.android.launcher3.InvariantDeviceProfile"));
 
-        METHOD_SHOW_ALL_APPS = new ArrayList<ShowAllApps>();
+        METHOD_SHOW_ALL_APPS = new ArrayList<>();
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("onClickAllAppsButton",
                 new Object[] { View.class },
                 new Object[] { null } ));

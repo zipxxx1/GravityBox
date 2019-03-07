@@ -170,7 +170,7 @@ public class ModHwKeys {
     private static long mPostponeWakeUpOnPowerKeyUpEventTime = 0;
     private static Class<?> mWindowStateClass;
 
-    private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
+    private static List<String> mKillIgnoreList = new ArrayList<>(Arrays.asList(
             "com.android.systemui"
     ));
 

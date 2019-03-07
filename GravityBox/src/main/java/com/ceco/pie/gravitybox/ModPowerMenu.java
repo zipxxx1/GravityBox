@@ -143,7 +143,7 @@ public class ModPowerMenu {
                    mScreenshotIcon = gbContext.getDrawable(R.drawable.ic_lock_screenshot);
                    mScreenrecordIcon = gbContext.getDrawable(R.drawable.ic_lock_screen_record);
 
-                   mRebootItemList = new ArrayList<IIconListAdapterItem>();
+                   mRebootItemList = new ArrayList<>();
                    mRebootItemList.add(new BasicIconListItem(mRebootStr, null, mRebootIcon, null));
                    mRebootItemList.add(new BasicIconListItem(mRebootSoftStr, null, mRebootSoftIcon, null));
                    mRebootItemList.add(new BasicIconListItem(mRecoveryStr, null, mRecoveryIcon, null));
@@ -377,8 +377,8 @@ public class ModPowerMenu {
             try {
                 if (DEBUG) log("about to build reboot dialog");
 
-                List<IIconListAdapterItem> list = 
-                        new ArrayList<IIconListAdapterItem>(mRebootItemList);
+                List<IIconListAdapterItem> list =
+                        new ArrayList<>(mRebootItemList);
                 if (!mAllowSoftReboot) {
                     list.remove(1);
                 }

@@ -846,7 +846,7 @@ public class ModLockscreen {
     private static void prepareBottomActions() {
         Set<String> hiddenActions = mPrefs.getStringSet(
                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE,
-                new HashSet<String>());
+                new HashSet<>());
         mLeftActionHidden = hiddenActions.contains("LEFT");
         mRightActionHidden = hiddenActions.contains("RIGHT");
         prepareLeftAction(mLeftActionHidden ? null : mPrefs.getString(

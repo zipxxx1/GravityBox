@@ -65,7 +65,7 @@ public class RingerModeShortcut extends AMultiShortcut {
 
     @Override
     protected List<IIconListAdapterItem> getShortcutList() {
-        final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
+        final List<IIconListAdapterItem> list = new ArrayList<>();
         list.add(new ShortcutItem(mContext, R.string.ringer_mode_sound, 
                 R.drawable.shortcut_ringer_ring, intent -> intent.putExtra(ModHwKeys.EXTRA_RINGER_MODE, MODE_RING)));
         list.add(new ShortcutItem(mContext, R.string.ringer_mode_sound_vibrate,

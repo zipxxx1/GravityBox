@@ -89,7 +89,7 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
     private ValueAnimator mBackgroundAnimator
             = ValueAnimator.ofFloat(0.0f, 1.0f).setDuration(TIME_FADEIN);
     private List<ValueAnimator.AnimatorUpdateListener> mAnimationListenerCache
-            = new ArrayList<ValueAnimator.AnimatorUpdateListener>();
+            = new ArrayList<>();
 
     private ValueAnimator.AnimatorUpdateListener mUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
         @Override
@@ -180,8 +180,8 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
 
     }
 
-    private List<PieSlice> mSlices = new ArrayList<PieSlice>();
-    private List<PieDrawable> mDrawableCache = new ArrayList<PieDrawable>();
+    private List<PieSlice> mSlices = new ArrayList<>();
+    private List<PieDrawable> mDrawableCache = new ArrayList<>();
     private PieItem mActiveItem;
 
     private class SnapPoint {

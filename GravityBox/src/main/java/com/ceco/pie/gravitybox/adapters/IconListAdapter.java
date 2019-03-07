@@ -43,8 +43,8 @@ public class IconListAdapter extends ArrayAdapter<IIconListAdapterItem>
         super(context, android.R.layout.simple_list_item_1, objects);
 
         mContext = context;
-        mData = new ArrayList<IIconListAdapterItem>(objects);
-        mFilteredData = new ArrayList<IIconListAdapterItem>(objects);
+        mData = new ArrayList<>(objects);
+        mFilteredData = new ArrayList<>(objects);
     }
 
     static class ViewHolder {
@@ -82,7 +82,7 @@ public class IconListAdapter extends ArrayAdapter<IIconListAdapterItem>
     @Override
     public android.widget.Filter getFilter() {
         if(mFilter == null)
-            mFilter = new BaseListAdapterFilter<IIconListAdapterItem>(this);
+            mFilter = new BaseListAdapterFilter<>(this);
 
         return mFilter;
     }

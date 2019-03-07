@@ -47,7 +47,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
         decimalFormat.setMaximumIntegerDigits(4);
         decimalFormat.setMaximumFractionDigits(1);
 
-        SYMBOLS = new HashMap<String,String>();
+        SYMBOLS = new HashMap<>();
         SYMBOLS.put("b/s", "b/s");
         SYMBOLS.put("B/s", "B/s");
         SYMBOLS.put("k", "k");

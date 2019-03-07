@@ -49,8 +49,8 @@ public class LedListAdapter extends ArrayAdapter<LedListItem>
         super(context, R.layout.led_control_list_item, objects);
 
         mContext = context;
-        mData = new ArrayList<LedListItem>(objects);
-        mFilteredData = new ArrayList<LedListItem>(objects);
+        mData = new ArrayList<>(objects);
+        mFilteredData = new ArrayList<>(objects);
         mActionHandler = handler;
     }
 
@@ -117,7 +117,7 @@ public class LedListAdapter extends ArrayAdapter<LedListItem>
     @Override
     public android.widget.Filter getFilter() {
         if(mFilter == null) {
-            mFilter = new BaseListAdapterFilter<LedListItem>(this);
+            mFilter = new BaseListAdapterFilter<>(this);
         }
 
         return mFilter;

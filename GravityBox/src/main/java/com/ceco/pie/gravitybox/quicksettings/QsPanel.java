@@ -213,7 +213,7 @@ public class QsPanel implements BroadcastSubReceiver {
                     Collection<?> tiles = (Collection<?>)param.args[0];
 
                     // destroy wrappers for removed tiles
-                    for (String ourKey : new ArrayList<String>(mTiles.keySet())) {
+                    for (String ourKey : new ArrayList<>(mTiles.keySet())) {
                         boolean removed = true;
                         for (Object tile : tiles) {
                             String key = (String) XposedHelpers.getObjectField(tile, "mTileSpec");

@@ -53,7 +53,7 @@ public class ProgressBarController implements BroadcastSubReceiver {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static final List<String> SUPPORTED_PACKAGES = new ArrayList<String>(Arrays.asList(
+    public static final List<String> SUPPORTED_PACKAGES = new ArrayList<>(Arrays.asList(
             "com.android.providers.downloads",
             "com.android.bluetooth",
             "com.mediatek.bluetooth"
@@ -97,9 +97,9 @@ public class ProgressBarController implements BroadcastSubReceiver {
     public enum Mode { OFF, TOP, BOTTOM }
 
     private Context mContext;
-    private final List<ProgressStateListener> mListeners = new ArrayList<ProgressStateListener>();
+    private final List<ProgressStateListener> mListeners = new ArrayList<>();
     private Mode mMode;
-    private final Map<String, ProgressInfo> mProgressList = new LinkedHashMap<String, ProgressInfo>();
+    private final Map<String, ProgressInfo> mProgressList = new LinkedHashMap<>();
     private boolean mSoundEnabled;
     private String mSoundUri;
     private boolean mSoundWhenScreenOffOnly;

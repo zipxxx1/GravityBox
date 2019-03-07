@@ -71,7 +71,7 @@ public class QuietHoursRangeListItem implements IBaseListAdapterItem {
     @Override
     public String getSubText() {
         String[] days = new DateFormatSymbols(Locale.getDefault()).getShortWeekdays();
-        Set<String> values = new TreeSet<String>(mRange.days);
+        Set<String> values = new TreeSet<>(mRange.days);
         String summary = "";
         for (String wday : values) {
             if (!summary.isEmpty()) summary += ", ";

@@ -573,7 +573,7 @@ public class Utils {
 
         bmp.getPixels(pixels, 0, width, 0, 0, width, height);
 
-        Map<Integer, Integer> tmpMap = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> tmpMap = new HashMap<>();
         for (int i=0; i < pixels.length ; i++) {
             Integer counter = tmpMap.get(pixels[i]);
             if (counter == null) counter = 0;

@@ -150,9 +150,9 @@ public class ModStatusBar {
     private static int mInitialTouchY;
     private static int BRIGHTNESS_ON = 255;
 
-    private static List<BroadcastSubReceiver> mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
-    private static List<StatusBarStateChangedListener> mStateChangeListeners = 
-            new ArrayList<StatusBarStateChangedListener>();
+    private static List<BroadcastSubReceiver> mBroadcastSubReceivers = new ArrayList<>();
+    private static List<StatusBarStateChangedListener> mStateChangeListeners =
+            new ArrayList<>();
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);

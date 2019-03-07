@@ -54,7 +54,7 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
     private StatusbarQuietHoursManager(Context context, XSharedPreferences qhPrefs) {
         mContext = context;
         mQuietHours = new QuietHours(qhPrefs);
-        mListeners = new ArrayList<QuietHoursListener>();
+        mListeners = new ArrayList<>();
     }
 
     @Override

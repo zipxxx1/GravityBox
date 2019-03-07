@@ -38,13 +38,13 @@ public class BaseListAdapterFilter<T extends IBaseListAdapterItem> extends Filte
     protected FilterResults performFiltering(CharSequence constraint) {
         FilterResults results = new FilterResults();
         String search = constraint.toString().toLowerCase(Locale.getDefault());
-        ArrayList<T> original = new ArrayList<T>(mTarget.getOriginalData());
+        ArrayList<T> original = new ArrayList<>(mTarget.getOriginalData());
 
         if(search == null || search.length() == 0) {
             results.values = original;
             results.count = original.size();
         } else {
-            final ArrayList<T> nlist = new ArrayList<T>();
+            final ArrayList<T> nlist = new ArrayList<>();
             for (int i = 0; i < original.size(); i++) {
                 final T item = original.get(i);
                 final String val = item.getText().toLowerCase(Locale.getDefault());

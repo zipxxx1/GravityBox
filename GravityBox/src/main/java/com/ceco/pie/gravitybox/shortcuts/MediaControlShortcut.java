@@ -56,7 +56,7 @@ public class MediaControlShortcut extends AMultiShortcut {
 
     @Override
     protected List<IIconListAdapterItem> getShortcutList() {
-        final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
+        final List<IIconListAdapterItem> list = new ArrayList<>();
         list.add(new ShortcutItem(mContext, R.string.shortcut_media_play_pause, 
                 R.drawable.shortcut_media_play_pause, intent -> intent.putExtra(ModHwKeys.EXTRA_MEDIA_CONTROL,
                         KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE)));

@@ -63,7 +63,7 @@ public class QuietHoursShortcut extends AMultiShortcut {
 
     @Override
     protected List<IIconListAdapterItem> getShortcutList() {
-        final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
+        final List<IIconListAdapterItem> list = new ArrayList<>();
         list.add(new ShortcutItem(mContext, R.string.shortcut_quiet_hours_toggle, 
                 R.drawable.shortcut_quiet_hours, null));
         list.add(new ShortcutItem(mContext, R.string.quiet_hours_on, 

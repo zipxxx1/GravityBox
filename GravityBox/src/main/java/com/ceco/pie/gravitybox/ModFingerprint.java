@@ -46,7 +46,7 @@ public class ModFingerprint {
             String action = intent.getAction();
             if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_IMPRINT_VIBE_DISABLE)) {
-                mImprintVibeDisable = new HashSet<String>(intent.getStringArrayListExtra(
+                mImprintVibeDisable = new HashSet<>(intent.getStringArrayListExtra(
                         GravityBoxSettings.EXTRA_IMPRINT_VIBE_DISABLE));
                 if (DEBUG) log("mImprintVibeDisable=" + mImprintVibeDisable);
             }
@@ -57,7 +57,7 @@ public class ModFingerprint {
         try {
             mImprintVibeDisable = prefs.getStringSet(
                     GravityBoxSettings.PREF_KEY_IMPRINT_VIBE_DISABLE,
-                        new HashSet<String>());
+                    new HashSet<>());
 
             XposedBridge.hookAllConstructors(XposedHelpers.findClass(
                     CLASS_FINGERPRINT_SERVICE, classLoader), new XC_MethodHook() {

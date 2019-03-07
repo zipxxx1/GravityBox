@@ -154,13 +154,13 @@ public class AutoBrightnessDialogPreference extends DialogPreference
     }
 
     private void setData() {
-        List<String> items = new ArrayList<String>();
+        List<String> items = new ArrayList<>();
         String level = getContext().getString(R.string.level);
 
         for(int i = 1; i <= mLuxArray.length; i++) {
             items.add(level + " " + i);
         }
-        mSpinLevelsAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, items);
+        mSpinLevelsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, items);
         mSpinLevelsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         if (mSpinLevels != null) {
             mSpinLevels.setAdapter(mSpinLevelsAdapter);

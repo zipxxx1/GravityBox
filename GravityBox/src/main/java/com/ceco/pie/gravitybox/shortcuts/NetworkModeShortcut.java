@@ -55,7 +55,7 @@ public class NetworkModeShortcut extends AMultiShortcut {
 
     @Override
     protected List<IIconListAdapterItem> getShortcutList() {
-        final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
+        final List<IIconListAdapterItem> list = new ArrayList<>();
         list.add(new ShortcutItem(mContext, R.string.network_mode_1,
                 R.drawable.shortcut_network_mode_2g, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
                         PhoneWrapper.NT_GSM_ONLY)));

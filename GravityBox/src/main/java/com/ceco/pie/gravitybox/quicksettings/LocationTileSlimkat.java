@@ -51,7 +51,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
 
     private int mLastActiveMode;
     private QsDetailAdapterProxy mDetailAdapter;
-    private List<Integer> mLocationList = new ArrayList<Integer>();
+    private List<Integer> mLocationList = new ArrayList<>();
 
     public LocationTileSlimkat(Object host, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {

@@ -40,7 +40,7 @@ import android.telephony.TelephonyManager;
 public class BatteryInfoManager implements BroadcastSubReceiver {
     private static final String TAG = "GB:BatteryInfoManager";
     private BatteryData mBatteryData;
-    private final ArrayList<BatteryStatusListener> mListeners = new ArrayList<BatteryStatusListener>();
+    private final ArrayList<BatteryStatusListener> mListeners = new ArrayList<>();
     private Context mContext;
     private Uri[] mSounds;
     private TelephonyManager mTelephonyManager;

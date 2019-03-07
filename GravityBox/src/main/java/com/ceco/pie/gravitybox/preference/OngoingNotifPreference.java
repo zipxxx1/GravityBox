@@ -119,7 +119,7 @@ public class OngoingNotifPreference extends DialogPreference
 
     private void setData() {
         mListView.setAdapter(null);
-        mListData = new ArrayList<IIconCheckListAdapterItem>();
+        mListData = new ArrayList<>();
         mBtnResetList.setVisibility(View.GONE);
         final String prefData = getPersistedString(null);
 
@@ -127,7 +127,7 @@ public class OngoingNotifPreference extends DialogPreference
                 ModStatusBar.SETTING_ONGOING_NOTIFICATIONS);
         if (notifData != null && !notifData.isEmpty()) {
             final String[] notifications = notifData.split("#C3C0#");
-            mListData = new ArrayList<IIconCheckListAdapterItem>();
+            mListData = new ArrayList<>();
             for (String n : notifications) {
                 final String[] nd = n.split(",");
                 if (nd.length == 2) {

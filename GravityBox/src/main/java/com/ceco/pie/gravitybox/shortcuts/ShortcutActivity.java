@@ -48,7 +48,7 @@ public class ShortcutActivity extends GravityBoxListActivity {
     private boolean mAllowUnlockAction;
     private boolean mLaunchesFromLockscreen;
 
-    private static List<String> UNSAFE_ACTIONS = new ArrayList<String>(Arrays.asList(
+    private static List<String> UNSAFE_ACTIONS = new ArrayList<>(Arrays.asList(
             NetworkModeShortcut.ACTION,
             MobileDataShortcut.ACTION,
             WifiShortcut.ACTION,
@@ -115,7 +115,7 @@ public class ShortcutActivity extends GravityBoxListActivity {
     }
 
     private void setData() {
-        ArrayList<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
+        ArrayList<IIconListAdapterItem> list = new ArrayList<>();
         if (mAllowUnlockAction) {
             list.add(new UnlockShortcut(mContext));
         }

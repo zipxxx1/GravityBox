@@ -141,7 +141,7 @@ public class LedControlActivity extends GravityBoxListActivity implements ListIt
 
             @Override
             protected ArrayList<LedListItem> doInBackground(Void... arg0) {
-                ArrayList<LedListItem> itemList = new ArrayList<LedListItem>();
+                ArrayList<LedListItem> itemList = new ArrayList<>();
 
                 PackageManager pm = LedControlActivity.this.getPackageManager();
                 List<ApplicationInfo> packages = pm.getInstalledApplications(0);

@@ -31,7 +31,7 @@ import com.ceco.pie.gravitybox.pie.PieLayout.PieDrawable;
 public class PieSliceContainer extends PieLayout.PieSlice {
 
     protected PieLayout mPieLayout;
-    private List<PieItem> mItems = new ArrayList<PieItem>();
+    private List<PieItem> mItems = new ArrayList<>();
 
     private static void log(String message) {
         XposedBridge.log(PieLayout.TAG + ": " + message);

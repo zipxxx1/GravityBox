@@ -140,7 +140,7 @@ public class AppPickerPreference extends DialogPreference
             @Override
             protected Void doInBackground(Void... params) {
                 try {
-                    List<String> usedFileNameList = new ArrayList<String>();
+                    List<String> usedFileNameList = new ArrayList<>();
                     SharedPreferences prefs = SettingsManager.getInstance(context).getMainPrefs();
                     // populate list of used icon files
                     Map<String, ?> keys = prefs.getAll();
@@ -236,7 +236,7 @@ public class AppPickerPreference extends DialogPreference
             return;
         }
 
-        ArrayList<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>(labels.length);
+        ArrayList<IIconListAdapterItem> list = new ArrayList<>(labels.length);
         for (int i = 0; i < labels.length; i++) {
             BasicIconListItem item = new BasicIconListItem(labels[i], null, 
                     icons.getResourceId(i, 0), 0, mContext);
@@ -299,11 +299,11 @@ public class AppPickerPreference extends DialogPreference
         mProgressBar = view.findViewById(R.id.progress_bar);
 
         mModeSpinner = view.findViewById(R.id.mode_spinner);
-        ArrayAdapter<String> mModeSpinnerAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> mModeSpinnerAdapter = new ArrayAdapter<>(
                 getContext(), android.R.layout.simple_spinner_item,
-                        new ArrayList<String>(Arrays.asList(
-                                mContext.getString(R.string.app_picker_applications), 
-                                mContext.getString(R.string.app_picker_shortcuts))));
+                new ArrayList<>(Arrays.asList(
+                        mContext.getString(R.string.app_picker_applications),
+                        mContext.getString(R.string.app_picker_shortcuts))));
         mModeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mModeSpinner.setAdapter(mModeSpinnerAdapter);
         mModeSpinner.setOnItemSelectedListener(this);
@@ -483,8 +483,8 @@ public class AppPickerPreference extends DialogPreference
 
             @Override
             protected ArrayList<IIconListAdapterItem> doInBackground(Void... arg0) {
-                ArrayList<IIconListAdapterItem> itemList = new ArrayList<IIconListAdapterItem>();
-                List<ResolveInfo> appList = new ArrayList<ResolveInfo>();
+                ArrayList<IIconListAdapterItem> itemList = new ArrayList<>();
+                List<ResolveInfo> appList = new ArrayList<>();
 
                 List<PackageInfo> packages = mPackageManager.getInstalledPackages(0);
                 Intent mainIntent = new Intent();

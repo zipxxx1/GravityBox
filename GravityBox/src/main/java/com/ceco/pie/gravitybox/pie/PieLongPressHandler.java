@@ -50,7 +50,7 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
     public PieLongPressHandler(Context context, XSharedPreferences prefs) {
         mContext = context;
 
-        mActions = new HashMap<ButtonType, ModHwKeys.HwKeyAction>();
+        mActions = new HashMap<>();
         mActions.put(ButtonType.BACK, new ModHwKeys.HwKeyAction(Integer.valueOf(
                 prefs.getString(GravityBoxSettings.PREF_KEY_PIE_BACK_LONGPRESS, "0")),
                 prefs.getString(GravityBoxSettings.PREF_KEY_PIE_BACK_LONGPRESS+"_custom", null)));

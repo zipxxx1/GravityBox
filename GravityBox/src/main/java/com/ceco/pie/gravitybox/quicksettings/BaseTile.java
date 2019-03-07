@@ -103,7 +103,7 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     protected void initPreferences() {
-        List<String> securedTiles = new ArrayList<String>(Arrays.asList(
+        List<String> securedTiles = new ArrayList<>(Arrays.asList(
                 mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_SECURED, "").split(",")));
         mProtected = securedTiles.contains(getSettingsKey());
 
@@ -251,7 +251,7 @@ public abstract class BaseTile implements QsEventListener {
                         GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
             }
             if (intent.hasExtra(TileOrderActivity.EXTRA_TILE_SECURED_LIST)) {
-                List<String> securedTiles = new ArrayList<String>(Arrays.asList(
+                List<String> securedTiles = new ArrayList<>(Arrays.asList(
                         intent.getStringExtra(TileOrderActivity.EXTRA_TILE_SECURED_LIST).split(",")));
                 mProtected = securedTiles.contains(getSettingsKey());
             }

@@ -79,8 +79,8 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
     public QsTileEventDistributor(Object host, XSharedPreferences prefs) {
         mHost = host;
         mPrefs = prefs;
-        mListeners = new LinkedHashMap<String,QsEventListener>();
-        mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
+        mListeners = new LinkedHashMap<>();
+        mBroadcastSubReceivers = new ArrayList<>();
         SysUiManagers.KeyguardMonitor.registerListener(this);
 
         createHooks();

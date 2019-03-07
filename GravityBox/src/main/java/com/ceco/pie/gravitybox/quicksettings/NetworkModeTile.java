@@ -104,8 +104,8 @@ public class NetworkModeTile extends QsTile {
 
         Set<String> smodes = mPrefs.getStringSet(
                 GravityBoxSettings.PREF_KEY_NM_TILE_ENABLED_MODES,
-                new HashSet<String>(Arrays.asList("0", "1", "2", "10")));
-        List<String> lmodes = new ArrayList<String>(smodes);
+                new HashSet<>(Arrays.asList("0", "1", "2", "10")));
+        List<String> lmodes = new ArrayList<>(smodes);
         Collections.sort(lmodes);
         int modes[] = new int[lmodes.size()];
         for (int i=0; i<lmodes.size(); i++) {

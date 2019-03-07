@@ -76,7 +76,7 @@ public class QuietHoursRangeActivity extends GravityBoxActivity {
         mBtnSave = findViewById(R.id.btnSave);
         mBtnSave.setOnClickListener(v -> {
             Intent intent1 = new Intent();
-            intent1.putStringArrayListExtra(EXTRA_QH_RANGE, new ArrayList<String>(
+            intent1.putStringArrayListExtra(EXTRA_QH_RANGE, new ArrayList<>(
                     getFragment().getRange().getValue()));
             setResult(Activity.RESULT_OK, intent1);
             finish();
@@ -166,7 +166,7 @@ public class QuietHoursRangeActivity extends GravityBoxActivity {
 
         private void updateSummaries() {
             String[] days = new DateFormatSymbols(Locale.getDefault()).getWeekdays();
-            Set<String> values = new TreeSet<String>(mRange.days);
+            Set<String> values = new TreeSet<>(mRange.days);
             String summary = "";
             for (String wday : values) {
                 if (!summary.isEmpty()) summary += ", ";
@@ -212,7 +212,7 @@ public class QuietHoursRangeActivity extends GravityBoxActivity {
             } else if (preference == mPrefMuteSystemVibe) {
                 mRange.muteSystemVibe = (boolean) newValue;
             } else if (preference == mPrefMuteSystemSounds) {
-                mRange.muteSystemSounds = new HashSet<String>((Collection<? extends String>) newValue);
+                mRange.muteSystemSounds = new HashSet<>((Collection<? extends String>) newValue);
             }
             updateSummaries();
             return true;
@@ -225,7 +225,7 @@ public class QuietHoursRangeActivity extends GravityBoxActivity {
                 if (mIsNew) {
                     whiteList = SettingsManager.getInstance(getActivity()).getQuietHoursPrefs()
                         .getStringSet(QuietHoursActivity.PREF_KEY_QH_RINGER_WHITELIST,
-                                new HashSet<String>());
+                                new HashSet<>());
                 }
                 Intent intent = new Intent(getActivity(), RingerWhitelistActivity.class);
                 intent.putStringArrayListExtra(QuietHoursActivity.EXTRA_QH_RINGER_WHITELIST,

@@ -172,8 +172,8 @@ public class RingerModeTile extends QsTile {
 
         Set<String> smodes = mPrefs.getStringSet(
                 GravityBoxSettings.PREF_KEY_RINGER_MODE_TILE_MODE,
-                new HashSet<String>(Arrays.asList("1", "2", "3")));
-        List<String> lmodes = new ArrayList<String>(smodes);
+                new HashSet<>(Arrays.asList("1", "2", "3")));
+        List<String> lmodes = new ArrayList<>(smodes);
         Collections.sort(lmodes);
         int modes[] = new int[lmodes.size()];
         for (int i=0; i<lmodes.size(); i++) {

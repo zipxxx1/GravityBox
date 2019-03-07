@@ -61,7 +61,7 @@ public class LocationModeShortcut extends AMultiShortcut {
 
     @Override
     public List<IIconListAdapterItem> getShortcutList() {
-        final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
+        final List<IIconListAdapterItem> list = new ArrayList<>();
         list.add(new ShortcutItem(mContext, R.string.location_mode_high_accuracy, 
                     R.drawable.shortcut_gps_high, intent -> intent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
                             Settings.Secure.LOCATION_MODE_HIGH_ACCURACY)));

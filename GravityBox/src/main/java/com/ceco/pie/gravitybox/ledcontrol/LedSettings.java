@@ -121,7 +121,7 @@ public class LedSettings {
     }
 
     public static LedSettings deserialize(String pkg, ArrayList<String> list) {
-        return deserialize(null, pkg, new HashSet<String>(list));
+        return deserialize(null, pkg, new HashSet<>(list));
     }
 
     private static LedSettings deserialize(Context context, String packageName, Set<String> dataSet) {
@@ -610,7 +610,7 @@ public class LedSettings {
     }
 
     private Set<String> createDataSet() {
-        Set<String> dataSet = new HashSet<String>();
+        Set<String> dataSet = new HashSet<>();
 
         dataSet.add("enabled:" + mEnabled);
         dataSet.add("ongoing:" + mOngoing);
@@ -662,7 +662,7 @@ public class LedSettings {
                 Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
                 intent.putExtra(EXTRA_UNC_PACKAGE_NAME, mPackageName);
                 intent.putStringArrayListExtra(EXTRA_UNC_PACKAGE_SETTINGS,
-                        new ArrayList<String>(dataSet));
+                        new ArrayList<>(dataSet));
                 mContext.sendBroadcast(intent);
             });
         } catch (Throwable t) {

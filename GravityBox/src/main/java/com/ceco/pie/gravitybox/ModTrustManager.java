@@ -60,7 +60,7 @@ public class ModTrustManager {
                     if (mWifiTrusted.size() > 0 && values.length == 0) {
                         mForceRefreshAgentList = true;
                     }
-                    mWifiTrusted = new HashSet<String>(Arrays.asList(values));
+                    mWifiTrusted = new HashSet<>(Arrays.asList(values));
                     if (DEBUG) log("ACTION_WIFI_TRUSTED_CHANGED: mWifiTrusted=" + mWifiTrusted +
                             "; mForceRefreshAgentList=" + mForceRefreshAgentList);
                     updateTrustAll();
@@ -117,7 +117,7 @@ public class ModTrustManager {
     public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mWifiTrusted = prefs.getStringSet(WifiPriorityActivity.PREF_KEY_WIFI_TRUSTED,
-                    new HashSet<String>());
+                    new HashSet<>());
             if (DEBUG) log("initAndroid: mWifiTrusted=" + mWifiTrusted);
 
             XposedBridge.hookAllConstructors(XposedHelpers.findClass(

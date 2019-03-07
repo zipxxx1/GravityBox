@@ -77,14 +77,14 @@ public class QuietHoursActivity extends GravityBoxActivity {
         intent.putExtra(EXTRA_QH_ENABLED, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false));
         intent.putExtra(EXTRA_QH_MUTE_LED, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_LED, false));
         intent.putExtra(EXTRA_QH_MUTE_VIBE, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_VIBE, true));
-        intent.putStringArrayListExtra(EXTRA_QH_MUTE_SYSTEM_SOUNDS, new ArrayList<String>(
-                 prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_MUTE_SYSTEM_SOUNDS, new HashSet<String>())));
+        intent.putStringArrayListExtra(EXTRA_QH_MUTE_SYSTEM_SOUNDS, new ArrayList<>(
+                prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_MUTE_SYSTEM_SOUNDS, new HashSet<>())));
         intent.putExtra(EXTRA_QH_STATUSBAR_ICON, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_STATUSBAR_ICON, true));
         intent.putExtra(EXTRA_QH_MODE, prefs.getString(QuietHoursActivity.PREF_KEY_QH_MODE, "AUTO"));
         intent.putExtra(EXTRA_QH_INTERACTIVE, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_INTERACTIVE, false));
         intent.putExtra(EXTRA_QH_MUTE_SYSTEM_VIBE, prefs.getBoolean(QuietHoursActivity.PREF_KEY_MUTE_SYSTEM_VIBE, false));
-        intent.putStringArrayListExtra(EXTRA_QH_RINGER_WHITELIST, new ArrayList<String>(
-                prefs.getStringSet(PREF_KEY_QH_RINGER_WHITELIST, new HashSet<String>())));
+        intent.putStringArrayListExtra(EXTRA_QH_RINGER_WHITELIST, new ArrayList<>(
+                prefs.getStringSet(PREF_KEY_QH_RINGER_WHITELIST, new HashSet<>())));
         for (String rangeId : QuietHours.Range.getIdList(prefs)) {
             intent.putStringArrayListExtra(rangeId, new ArrayList<>(prefs.getStringSet(rangeId, null)));
         }
@@ -184,9 +184,9 @@ public class QuietHoursActivity extends GravityBoxActivity {
 
             mPrefMode = (ListPreference) findPreference(PREF_KEY_QH_MODE);
             if (!Utils.isAppInstalled(getActivity(), QuietHours.PKG_WEARABLE_APP)) {
-                List<CharSequence> actEntries = new ArrayList<CharSequence>(Arrays.asList(
+                List<CharSequence> actEntries = new ArrayList<>(Arrays.asList(
                         mPrefMode.getEntries()));
-                List<CharSequence> actEntryValues = new ArrayList<CharSequence>(Arrays.asList(
+                List<CharSequence> actEntryValues = new ArrayList<>(Arrays.asList(
                         mPrefMode.getEntryValues()));
                 actEntries.remove(actEntries.size()-1);
                 actEntryValues.remove(actEntryValues.size()-1);
@@ -261,7 +261,7 @@ public class QuietHoursActivity extends GravityBoxActivity {
                 Intent intent = new Intent(getActivity(), RingerWhitelistActivity.class);
                 intent.putStringArrayListExtra(EXTRA_QH_RINGER_WHITELIST,
                         new ArrayList<>(mPrefs.getStringSet(PREF_KEY_QH_RINGER_WHITELIST,
-                                new HashSet<String>())));
+                                new HashSet<>())));
                 startActivityForResult(intent, 0);
                 return true;
             } else if (preference == mPrefRanges) {

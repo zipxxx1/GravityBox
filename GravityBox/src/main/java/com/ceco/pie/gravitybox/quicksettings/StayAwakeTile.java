@@ -127,8 +127,8 @@ public class StayAwakeTile extends QsTile {
 
         Set<String> smodes = mPrefs.getStringSet(
                 GravityBoxSettings.PREF_STAY_AWAKE_TILE_MODE,
-                new HashSet<String>(Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7")));
-        List<String> lmodes = new ArrayList<String>(smodes);
+                new HashSet<>(Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7")));
+        List<String> lmodes = new ArrayList<>(smodes);
         Collections.sort(lmodes);
         int modes[] = new int[lmodes.size()];
         for (int i = 0; i < lmodes.size(); i++) {

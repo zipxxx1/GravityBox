@@ -33,7 +33,7 @@ import de.robv.android.xposed.XposedHelpers;
 
 public class ModDialer26 {
     private static final String TAG = "GB:ModDialer26";
-    public static final List<String> PACKAGE_NAMES = new ArrayList<String>(Arrays.asList(
+    public static final List<String> PACKAGE_NAMES = new ArrayList<>(Arrays.asList(
             "com.google.android.dialer", "com.android.dialer"));
 
     private static final String CLASS_DIALTACTS_ACTIVITY = "com.android.dialer.app.DialtactsActivity";
