@@ -632,8 +632,8 @@ public class ModLockscreen {
                                 XposedHelpers.findClass(CLASS_SCRIM_STATE, classLoader),
                                 "values");
                         final float alpha = (100 - opacity) / 100f;
-                        for (int i = 0; i < states.length; i++) {
-                            XposedHelpers.callMethod(states[i],
+                        for (Object state : states) {
+                            XposedHelpers.callMethod(state,
                                     "setScrimBehindAlphaKeyguard", alpha);
                         }
                     }

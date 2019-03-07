@@ -574,11 +574,11 @@ public class Utils {
         bmp.getPixels(pixels, 0, width, 0, 0, width, height);
 
         Map<Integer, Integer> tmpMap = new HashMap<>();
-        for (int i=0; i < pixels.length ; i++) {
-            Integer counter = tmpMap.get(pixels[i]);
+        for (int pixel : pixels) {
+            Integer counter = tmpMap.get(pixel);
             if (counter == null) counter = 0;
             counter++;
-            tmpMap.put(pixels[i], counter);
+            tmpMap.put(pixel, counter);
         }
 
         Entry<Integer, Integer> maxEntry = null;
@@ -638,9 +638,9 @@ public class Utils {
 
     public static String intArrayToString(int[] array) {
         String buf = "[";
-        for (int i = 0; i < array.length; i++) {
+        for (int item : array) {
             if (buf.length() > 1) buf += ",";
-            buf += array[i];
+            buf += item;
         }
         buf += "]";
         return buf;

@@ -168,8 +168,8 @@ public class NetworkModeTile extends QsTile {
 
         // enable only those present in the list
         if (modes != null && modes.length > 0) {
-            for (int i=0; i<modes.length; i++) {
-                NetworkMode nm = findNetworkMode(modes[i]);
+            for (int mode : modes) {
+                NetworkMode nm = findNetworkMode(mode);
                 if (nm != null) {
                     nm.enabled = true;
                 }

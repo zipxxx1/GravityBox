@@ -228,8 +228,7 @@ public class RingerModeTile extends QsTile {
 
         // enable only those present in the list taking into account if device has vibrator
         if (modes != null && modes.length > 0) {
-            for (int i=0; i<modes.length; i++) {
-                int index = modes[i];
+            for (int index : modes) {
                 Ringer r = index < RINGERS.length ? RINGERS[index] : null;
                 if (r != null && (mHasVibrator || !r.mVibrateWhenRinging)) {
                     r.mEnabled = true;

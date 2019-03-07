@@ -149,8 +149,8 @@ public class KeyButtonRipple extends Drawable {
     @Override
     protected boolean onStateChange(int[] state) {
         boolean pressed = false;
-        for (int i = 0; i < state.length; i++) {
-            if (state[i] == android.R.attr.state_pressed) {
+        for (int aState : state) {
+            if (aState == android.R.attr.state_pressed) {
                 pressed = true;
                 break;
             }

@@ -166,8 +166,7 @@ public class StayAwakeTile extends QsTile {
         for (ScreenTimeout s : SCREEN_TIMEOUT) {
             s.mEnabled = (s.mMillis == NEVER_SLEEP);
         }
-        for (int i=0; i<modes.length; i++) {
-            int index = modes[i];
+        for (int index : modes) {
             ScreenTimeout s = index < SCREEN_TIMEOUT.length ? SCREEN_TIMEOUT[index] : null;
             if (s != null) {
                 s.mEnabled = true;

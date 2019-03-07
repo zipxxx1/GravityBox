@@ -329,9 +329,9 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
             mBackgroundPaint.setAlpha((int) (mBackgroundFraction * mBackgroundTargetAlpha));
             canvas.drawPaint(mBackgroundPaint);
 
-            for (int i = 0; i < mSnapPoints.length; i++) {
-                if (mSnapPoints[i] != null) {
-                    mSnapPoints[i].draw(canvas);
+            for (SnapPoint snapPoint : mSnapPoints) {
+                if (snapPoint != null) {
+                    snapPoint.draw(canvas);
                 }
             }
 
@@ -387,10 +387,10 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
                 mPointerId = event.getPointerId(0);
             } else if (action == MotionEvent.ACTION_MOVE || action == MotionEvent.ACTION_UP) {
                 mActiveSnap = null;
-                for (int i = 0; i < mSnapPoints.length; i++) {
-                    if (mSnapPoints[i] != null) {
-                        if (mSnapPoints[i].interact(x, y)) {
-                            mActiveSnap = mSnapPoints[i];
+                for (SnapPoint snapPoint : mSnapPoints) {
+                    if (snapPoint != null) {
+                        if (snapPoint.interact(x, y)) {
+                            mActiveSnap = snapPoint;
                         }
                     }
                 }
@@ -583,9 +583,9 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
         mBackgroundAnimator.cancel();
 
         mActiveSnap = null;
-        for (int i = 0; i < mSnapPoints.length; i++) {
-            if (mSnapPoints[i] != null) {
-                mSnapPoints[i].reset();
+        for (SnapPoint snapPoint : mSnapPoints) {
+            if (snapPoint != null) {
+                snapPoint.reset();
             }
         }
 

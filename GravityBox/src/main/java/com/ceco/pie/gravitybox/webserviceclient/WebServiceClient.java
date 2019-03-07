@@ -199,9 +199,9 @@ public class WebServiceClient<T extends WebServiceResult> extends AsyncTask<Requ
 
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] array = md.digest(bb.array());
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < array.length; ++i) {
-              sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+            StringBuilder sb = new StringBuilder();
+            for (byte b : array) {
+                sb.append(Integer.toHexString((b & 0xFF) | 0x100).substring(1, 3));
             }
             Log.d("GravityBox", sb.toString());
             return sb.toString();
