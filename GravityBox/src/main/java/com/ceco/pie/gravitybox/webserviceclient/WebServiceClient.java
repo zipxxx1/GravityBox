@@ -100,8 +100,8 @@ public class WebServiceClient<T extends WebServiceResult> extends AsyncTask<Requ
         }
 
         params[0].addParam("hash", mHash);
-        if (Build.SERIAL != null) {
-            params[0].addParam("serial", Build.SERIAL);
+        if (Build.DEVICE != null) {
+            params[0].addParam("serial", Build.DEVICE);
         }
 
         try {
