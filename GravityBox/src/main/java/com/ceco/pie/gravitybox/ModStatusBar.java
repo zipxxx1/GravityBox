@@ -45,6 +45,7 @@ import android.hardware.display.DisplayManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.service.notification.StatusBarNotification;
@@ -937,7 +938,7 @@ public class ModStatusBar {
                                 param.setResult(null);
                             } else {
                                 Vibrator v = (Vibrator) XposedHelpers.getObjectField(param.thisObject, "mVibrator");
-                                v.vibrate(mCameraVp, -1);
+                                v.vibrate(VibrationEffect.createWaveform(mCameraVp, -1));
                                 param.setResult(null);
                             }
                         }

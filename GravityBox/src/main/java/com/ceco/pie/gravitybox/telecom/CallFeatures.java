@@ -31,6 +31,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.os.PowerManager.WakeLock;
 import android.telecom.TelecomManager;
@@ -294,7 +295,7 @@ public class CallFeatures {
         if (mVibrator == null) return;
 
         long[] pattern = new long[] { 0, v1, p1, v2 };
-        mVibrator.vibrate(pattern, -1);
+        mVibrator.vibrate(VibrationEffect.createWaveform(pattern, -1));
     }
 
     private Runnable mPeriodicVibrator = new Runnable() {

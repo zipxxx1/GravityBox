@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -35,6 +35,7 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.os.Handler;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.view.View;
@@ -240,7 +241,8 @@ public class RingerModeTile extends QsTile {
     private void setRingerMode(int mode, boolean vibrate) {
         // If we are setting a vibrating state, vibrate to indicate it
         if (vibrate && mHasVibrator) {
-            mVibrator.vibrate(150);
+            mVibrator.vibrate(VibrationEffect.createOneShot(150,
+                    VibrationEffect.DEFAULT_AMPLITUDE));
         }
 
         ContentResolver resolver = mContext.getContentResolver();
