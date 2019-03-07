@@ -167,12 +167,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
         }
     };
 
-    private Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mTrafficHandler.sendEmptyMessage(0);
-        }
-    };
+    private Runnable mRunnable = () -> mTrafficHandler.sendEmptyMessage(0);
 
     public TrafficMeterOmni(Context context) {
         super(context);

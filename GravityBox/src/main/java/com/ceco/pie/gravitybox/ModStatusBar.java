@@ -417,12 +417,9 @@ public class ModStatusBar {
             View timeView = (View) XposedHelpers.getObjectField(qsFooter, "mClockView");
             if (timeView != null) {
                 timeView.setLongClickable(true);
-                timeView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        launchClockAction(mClockLongpressLink);
-                        return true;
-                    }
+                timeView.setOnLongClickListener(v -> {
+                    launchClockAction(mClockLongpressLink);
+                    return true;
                 });
             }
         } catch (Throwable t) {
@@ -1209,13 +1206,9 @@ public class ModStatusBar {
                 adj = Math.min(adj, 1);
                 final float val = adj;
                 XposedHelpers.callMethod(getDisplayManager(), "setTemporaryAutoBrightnessAdjustment", val);
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
+                AsyncTask.execute(() ->
                         XposedHelpers.callStaticMethod(Settings.System.class, "putFloatForUser",
-                                mContext.getContentResolver(),"screen_auto_brightness_adj", val, -2);
-                    }
-                });
+                        mContext.getContentResolver(),"screen_auto_brightness_adj", val, -2));
             } else {
                 int newBrightness = mMinBrightness + Math.round(value *
                         (BRIGHTNESS_ON - mMinBrightness));
@@ -1223,13 +1216,9 @@ public class ModStatusBar {
                 newBrightness = Math.max(newBrightness, mMinBrightness);
                 final int val = newBrightness;
                 XposedHelpers.callMethod(getDisplayManager(), "setTemporaryBrightness", val);
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
+                AsyncTask.execute(() ->
                         XposedHelpers.callStaticMethod(Settings.System.class, "putIntForUser",
-                                mContext.getContentResolver(),Settings.System.SCREEN_BRIGHTNESS, val, -2);
-                    }
-                });
+                        mContext.getContentResolver(),Settings.System.SCREEN_BRIGHTNESS, val, -2));
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);

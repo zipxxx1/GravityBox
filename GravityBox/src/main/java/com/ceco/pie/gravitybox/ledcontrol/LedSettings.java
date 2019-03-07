@@ -296,26 +296,20 @@ public class LedSettings {
     public static void lockUnc(final Context context, final boolean lock) {
         try {
             final WorldReadablePrefs prefsUnc = SettingsManager.getInstance(context).getLedControlPrefs();
-            prefsUnc.edit().putBoolean(PREF_KEY_LOCKED, lock).commit(new OnPreferencesCommitedListener() {
-                @Override
-                public void onPreferencesCommited() {
-                    if (WorldReadablePrefs.DEBUG)
-                        Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited UNC");
-                    Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
-                    intent.putExtra(PREF_KEY_LOCKED, lock);
-                    context.sendBroadcast(intent);
-                }
+            prefsUnc.edit().putBoolean(PREF_KEY_LOCKED, lock).commit(() -> {
+                if (WorldReadablePrefs.DEBUG)
+                    Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited UNC");
+                Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
+                intent.putExtra(PREF_KEY_LOCKED, lock);
+                context.sendBroadcast(intent);
             });
             final WorldReadablePrefs prefsQh = SettingsManager.getInstance(context).getQuietHoursPrefs();
             prefsQh.edit().putBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, lock).commit(
-                    new OnPreferencesCommitedListener() {
-                @Override
-                public void onPreferencesCommited() {
-                    if (WorldReadablePrefs.DEBUG)
-                        Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited QH");
-                    QuietHoursActivity.broadcastSettings(context, prefsQh);
-                }
-            });
+                    () -> {
+                        if (WorldReadablePrefs.DEBUG)
+                            Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited QH");
+                        QuietHoursActivity.broadcastSettings(context, prefsQh);
+                    });
         } catch (Throwable t) {
             t.printStackTrace();
         }
@@ -662,18 +656,14 @@ public class LedSettings {
         try {
             final Set<String> dataSet = createDataSet();
             WorldReadablePrefs prefs = SettingsManager.getInstance(mContext).getLedControlPrefs();
-            prefs.edit().putStringSet(mPackageName, dataSet).commit(new OnPreferencesCommitedListener() {
-                @Override
-                public void onPreferencesCommited() {
-                    if (WorldReadablePrefs.DEBUG)
-                        Log.d("GravityBox", "LedSettings: serialize() onPreferencesCommited");
-                    Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
-                    intent.putExtra(EXTRA_UNC_PACKAGE_NAME, mPackageName);
-                    intent.putStringArrayListExtra(EXTRA_UNC_PACKAGE_SETTINGS,
-                            new ArrayList<String>(dataSet));
-                    mContext.sendBroadcast(intent);
-                }
-                
+            prefs.edit().putStringSet(mPackageName, dataSet).commit(() -> {
+                if (WorldReadablePrefs.DEBUG)
+                    Log.d("GravityBox", "LedSettings: serialize() onPreferencesCommited");
+                Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
+                intent.putExtra(EXTRA_UNC_PACKAGE_NAME, mPackageName);
+                intent.putStringArrayListExtra(EXTRA_UNC_PACKAGE_SETTINGS,
+                        new ArrayList<String>(dataSet));
+                mContext.sendBroadcast(intent);
             });
         } catch (Throwable t) {
             t.printStackTrace();

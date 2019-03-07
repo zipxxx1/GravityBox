@@ -64,19 +64,9 @@ public class RotationLockShortcut extends AMultiShortcut {
         list.add(new ShortcutItem(mContext, R.string.hwkey_action_auto_rotation,
                 R.drawable.shortcut_rotation_lock, null));
         list.add(new ShortcutItem(mContext, R.string.auto_rotation_on,
-                R.drawable.shortcut_rotation_lock_enable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, true);
-                }
-        }));
+                R.drawable.shortcut_rotation_lock_enable, intent -> intent.putExtra(EXTRA_ENABLE, true)));
         list.add(new ShortcutItem(mContext, R.string.auto_rotation_off,
-                R.drawable.shortcut_rotation_lock_disable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, false);
-                }
-        }));
+                R.drawable.shortcut_rotation_lock_disable, intent -> intent.putExtra(EXTRA_ENABLE, false)));
         return list;
     }
 

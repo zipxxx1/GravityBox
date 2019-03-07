@@ -80,12 +80,9 @@ public class VisualizerView extends View {
             }
             mValueAnimators[i] = new ValueAnimator();
             mValueAnimators[i].setDuration(128);
-            mValueAnimators[i].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    mFFTPoints[j] = (float) animation.getAnimatedValue();
-                    postInvalidate();
-                }
+            mValueAnimators[i].addUpdateListener(animation -> {
+                mFFTPoints[j] = (float) animation.getAnimatedValue();
+                postInvalidate();
             });
         }
     }

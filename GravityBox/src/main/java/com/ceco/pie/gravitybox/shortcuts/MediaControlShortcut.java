@@ -58,29 +58,14 @@ public class MediaControlShortcut extends AMultiShortcut {
     protected List<IIconListAdapterItem> getShortcutList() {
         final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShortcutItem(mContext, R.string.shortcut_media_play_pause, 
-                R.drawable.shortcut_media_play_pause, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ModHwKeys.EXTRA_MEDIA_CONTROL,
-                                KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
-                    }
-                }));
+                R.drawable.shortcut_media_play_pause, intent -> intent.putExtra(ModHwKeys.EXTRA_MEDIA_CONTROL,
+                        KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE)));
         list.add(new ShortcutItem(mContext, R.string.shortcut_media_previous,
-                R.drawable.shortcut_media_previous, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ModHwKeys.EXTRA_MEDIA_CONTROL,
-                                KeyEvent.KEYCODE_MEDIA_PREVIOUS);
-                    }
-                }));
+                R.drawable.shortcut_media_previous, intent -> intent.putExtra(ModHwKeys.EXTRA_MEDIA_CONTROL,
+                        KeyEvent.KEYCODE_MEDIA_PREVIOUS)));
         list.add(new ShortcutItem(mContext, R.string.shortcut_media_next,
-                R.drawable.shortcut_media_next, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ModHwKeys.EXTRA_MEDIA_CONTROL,
-                                KeyEvent.KEYCODE_MEDIA_NEXT);
-                    }
-                }));
+                R.drawable.shortcut_media_next, intent -> intent.putExtra(ModHwKeys.EXTRA_MEDIA_CONTROL,
+                        KeyEvent.KEYCODE_MEDIA_NEXT)));
 
         return list;
     }

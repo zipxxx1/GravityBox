@@ -356,12 +356,9 @@ public class QsPanel implements BroadcastSubReceiver {
         }
     }
 
-    private View.OnClickListener mBrightnessIconOnClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(ModHwKeys.ACTION_TOGGLE_AUTO_BRIGHTNESS);
-            v.getContext().sendBroadcast(intent);
-        }
+    private View.OnClickListener mBrightnessIconOnClick = v -> {
+        Intent intent = new Intent(ModHwKeys.ACTION_TOGGLE_AUTO_BRIGHTNESS);
+        v.getContext().sendBroadcast(intent);
     };
 
     private View.OnLongClickListener mBrightnessIconOnLongClick = new View.OnLongClickListener() {

@@ -106,12 +106,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
             mChargeAnim = ValueAnimator.ofObject(new ArgbEvaluator(),
                     mColor, mChargingColor);
 
-            mChargeAnim.addUpdateListener(new AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator va) {
-                    mPercentage.setTextColor((Integer)va.getAnimatedValue());
-                }
-            });
+            mChargeAnim.addUpdateListener(va -> mPercentage.setTextColor((Integer)va.getAnimatedValue()));
             mChargeAnim.addListener(new AnimatorListener() {
                 @Override
                 public void onAnimationCancel(Animator animation) {

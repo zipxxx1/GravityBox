@@ -94,12 +94,7 @@ public class ShortcutActivity extends GravityBoxListActivity {
         } else if (intent.getAction().equals(Intent.ACTION_CREATE_SHORTCUT)) {
             setContentView(R.layout.shortcut_activity);
             mBtnCancel = findViewById(R.id.btnCancel);
-            mBtnCancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+            mBtnCancel.setOnClickListener(v -> finish());
             mInvokedFromGb = intent.hasExtra("gravitybox");
             mAllowUnlockAction = intent.getBooleanExtra(EXTRA_ALLOW_UNLOCK_ACTION, false);
             mLaunchesFromLockscreen = intent.getBooleanExtra(EXTRA_LAUNCHES_FROM_LOCKSCREEN, false);
@@ -188,12 +183,9 @@ public class ShortcutActivity extends GravityBoxListActivity {
     @Override
     protected void onListItemClick(ListView list, View view, int position, long id) {
         AShortcut s = (AShortcut) mListAdapter.getItem(position);
-        s.createShortcut(new CreateShortcutListener() {
-            @Override
-            public void onShortcutCreated(Intent intent) {
-                ShortcutActivity.this.setResult(RESULT_OK, intent);
-                finish();
-            }
+        s.createShortcut(intent -> {
+            ShortcutActivity.this.setResult(RESULT_OK, intent);
+            finish();
         });
     }
 }

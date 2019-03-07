@@ -154,17 +154,14 @@ public class ModPower {
                             return;
                         }
 
-                        mWakeUpRunnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                final long ident = Binder.clearCallingIdentity();
-                                try {
-                                    if (DEBUG) log("Waking up...");
-                                    XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                                } catch (Throwable ignored) {
-                                } finally {
-                                    Binder.restoreCallingIdentity(ident);
-                                }
+                        mWakeUpRunnable = () -> {
+                            final long ident = Binder.clearCallingIdentity();
+                            try {
+                                if (DEBUG) log("Waking up...");
+                                XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                            } catch (Throwable ignored) {
+                            } finally {
+                                Binder.restoreCallingIdentity(ident);
                             }
                         };
                         runWithProximityCheck();

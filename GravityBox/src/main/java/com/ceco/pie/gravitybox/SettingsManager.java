@@ -332,42 +332,37 @@ public class SettingsManager {
     }
 
     public void fixFolderPermissionsAsync() {
-        AsyncTask.execute(new Runnable() {
-            @SuppressWarnings("ResultOfMethodCallIgnored")
-            @SuppressLint("SetWorldReadable")
-            @Override
-            public void run() {
-                // main dir
-                File pkgFolder = mContext.getDataDir();
-                if (pkgFolder.exists()) {
-                    pkgFolder.setExecutable(true, false);
-                    pkgFolder.setReadable(true, false);
+        AsyncTask.execute(() -> {
+            // main dir
+            File pkgFolder = mContext.getDataDir();
+            if (pkgFolder.exists()) {
+                pkgFolder.setExecutable(true, false);
+                pkgFolder.setReadable(true, false);
+            }
+            // cache dir
+            File cacheFolder = mContext.getCacheDir();
+            if (cacheFolder.exists()) {
+                cacheFolder.setExecutable(true, false);
+                cacheFolder.setReadable(true, false);
+            }
+            // files dir
+            File filesFolder = mContext.getFilesDir();
+            if (filesFolder.exists()) {
+                filesFolder.setExecutable(true, false);
+                filesFolder.setReadable(true, false);
+                for (File f : filesFolder.listFiles()) {
+                    f.setExecutable(true, false);
+                    f.setReadable(true, false);
                 }
-                // cache dir
-                File cacheFolder = mContext.getCacheDir();
-                if (cacheFolder.exists()) {
-                    cacheFolder.setExecutable(true, false);
-                    cacheFolder.setReadable(true, false);
-                }
-                // files dir
-                File filesFolder = mContext.getFilesDir();
-                if (filesFolder.exists()) {
-                    filesFolder.setExecutable(true, false);
-                    filesFolder.setReadable(true, false);
-                    for (File f : filesFolder.listFiles()) {
-                        f.setExecutable(true, false);
-                        f.setReadable(true, false);
-                    }
-                }
-                // app picker
-                File appPickerFolder = new File(mContext.getFilesDir() + "/app_picker");
-                if (appPickerFolder.exists()) {
-                    appPickerFolder.setExecutable(true, false);
-                    appPickerFolder.setReadable(true, false);
-                    for (File f : appPickerFolder.listFiles()) {
-                        f.setExecutable(true, false);
-                        f.setReadable(true, false);
-                    }
+            }
+            // app picker
+            File appPickerFolder = new File(mContext.getFilesDir() + "/app_picker");
+            if (appPickerFolder.exists()) {
+                appPickerFolder.setExecutable(true, false);
+                appPickerFolder.setReadable(true, false);
+                for (File f : appPickerFolder.listFiles()) {
+                    f.setExecutable(true, false);
+                    f.setReadable(true, false);
                 }
             }
         });

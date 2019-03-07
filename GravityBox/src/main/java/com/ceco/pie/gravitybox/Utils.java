@@ -694,12 +694,7 @@ public class Utils {
         if (msgResId == 0) return;
         try {
             final String msg = Utils.getGbContext(ctx).getString(msgResId);
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
-                }
-            });
+            new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show());
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error showing toast: ", t);
         }

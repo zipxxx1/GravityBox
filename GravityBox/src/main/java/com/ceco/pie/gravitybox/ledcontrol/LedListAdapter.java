@@ -81,13 +81,10 @@ public class LedListAdapter extends ArrayAdapter<LedListItem>
             holder.appDescView = row.findViewById(R.id.led_app_desc);
             holder.colorView = row.findViewById(R.id.led_color);
             holder.enabledView = row.findViewById(R.id.led_checkbox);
-            holder.enabledView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mActionHandler != null) {
-                        mActionHandler.onItemCheckedChanged((LedListItem) v.getTag(),
-                                ((CheckBox)v).isChecked());
-                    }
+            holder.enabledView.setOnClickListener(v -> {
+                if (mActionHandler != null) {
+                    mActionHandler.onItemCheckedChanged((LedListItem) v.getTag(),
+                            ((CheckBox)v).isChecked());
                 }
             });
             holder.insistentView = row.findViewById(R.id.led_alert);

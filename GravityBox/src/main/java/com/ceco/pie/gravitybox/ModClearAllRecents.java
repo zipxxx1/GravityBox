@@ -273,12 +273,9 @@ public class ModClearAllRecents {
             .alpha(0f)
             .setInterpolator(mExitAnimInterpolator)
             .setDuration(mExitAnimDuration)
-            .withEndAction(new Runnable() {
-                @Override
-                public void run() {
-                    view.setVisibility(View.GONE);
-                    view.setAlpha(1f);
-                }
+            .withEndAction(() -> {
+                view.setVisibility(View.GONE);
+                view.setAlpha(1f);
             })
             .start();
         } catch (Throwable t) {

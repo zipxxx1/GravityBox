@@ -67,39 +67,19 @@ public class QuietHoursShortcut extends AMultiShortcut {
         list.add(new ShortcutItem(mContext, R.string.shortcut_quiet_hours_toggle, 
                 R.drawable.shortcut_quiet_hours, null));
         list.add(new ShortcutItem(mContext, R.string.quiet_hours_on, 
-                R.drawable.shortcut_quiet_hours_enable, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
-                                QuietHours.Mode.ON.toString());
-                    }
-                }));
+                R.drawable.shortcut_quiet_hours_enable, intent -> intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
+                        QuietHours.Mode.ON.toString())));
         list.add(new ShortcutItem(mContext, R.string.quiet_hours_off, 
-                R.drawable.shortcut_quiet_hours_disable, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
-                                QuietHours.Mode.OFF.toString());
-                    }
-                }));
+                R.drawable.shortcut_quiet_hours_disable, intent -> intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
+                        QuietHours.Mode.OFF.toString())));
         if (Utils.isAppInstalled(mContext, QuietHours.PKG_WEARABLE_APP)) {
             list.add(new ShortcutItem(mContext, R.string.quiet_hours_wear,
-                    R.drawable.shortcut_quiet_hours_wear, new ExtraDelegate() {
-                        @Override
-                        public void addExtraTo(Intent intent) {
-                            intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
-                                    QuietHours.Mode.WEAR.toString());
-                        }
-                    }));
+                    R.drawable.shortcut_quiet_hours_wear, intent -> intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
+                            QuietHours.Mode.WEAR.toString())));
         }
         list.add(new ShortcutItem(mContext, R.string.quiet_hours_auto, 
-                R.drawable.shortcut_quiet_hours_auto, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
-                                QuietHours.Mode.AUTO.toString());
-                    }
-                }));
+                R.drawable.shortcut_quiet_hours_auto, intent -> intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
+                        QuietHours.Mode.AUTO.toString())));
 
         return list;
     }

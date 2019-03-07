@@ -1008,12 +1008,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             AlertDialog.Builder builder = new AlertDialog.Builder(GravityBoxSettings.this)
                 .setTitle(R.string.app_name)
                 .setMessage(R.string.gb_startup_error)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    dialog.dismiss();
+                    finish();
                 });
             mAlertDialog = builder.create();
             mAlertDialog.show();
@@ -1042,23 +1039,15 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             .setCancelable(false)
             .setTitle(R.string.gb_new_package_dialog_title)
             .setMessage(R.string.gb_new_package_dialog_message)
-            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    // try to uninstall old package
-                    Uri oldGbUri = Uri.parse("package:com.ceco.oreo.gravitybox");
-                    Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, oldGbUri);
-                    startActivity(uninstallIntent);
-                    finish();
-                }
+            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                dialog.dismiss();
+                // try to uninstall old package
+                Uri oldGbUri = Uri.parse("package:com.ceco.oreo.gravitybox");
+                Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, oldGbUri);
+                startActivity(uninstallIntent);
+                finish();
             })
-            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
+            .setNegativeButton(android.R.string.cancel, (dialog, which) -> finish());
             mAlertDialog = builder.create();
             mAlertDialog.show();
             return;
@@ -1137,18 +1126,15 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             }
         });
 
-        searchReset.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                mSearchQuery = null;
-                search.setVisible(true);
-                searchReset.setVisible(false);
-                searchKeyword.setVisible(false);
-                searchKeywordView.setText(null);
-                mPrefsFragment = new PrefsFragment();
-                getFragmentManager().beginTransaction().replace(android.R.id.content, mPrefsFragment).commit();
-                return true;
-            }
+        searchReset.setOnMenuItemClickListener(item -> {
+            mSearchQuery = null;
+            search.setVisible(true);
+            searchReset.setVisible(false);
+            searchKeyword.setVisible(false);
+            searchKeywordView.setText(null);
+            mPrefsFragment = new PrefsFragment();
+            getFragmentManager().beginTransaction().replace(android.R.id.content, mPrefsFragment).commit();
+            return true;
         });
 
         searchKeywordView.setSingleLine(true);
@@ -1953,18 +1939,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 .setTitle(R.string.important)
                 .setMessage(R.string.permission_denied_msg)
                 .setPositiveButton(android.R.string.ok, null)
-                .setNegativeButton(R.string.permission_denied_hide_title, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mPrefs.edit().putBoolean("permission_denied_hide", true).commit();
-                    }
-                })
-                .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        maybeShowCompatWarningDialog();
-                    }
-                });
+                .setNegativeButton(R.string.permission_denied_hide_title, (dialog, which) -> mPrefs.edit().putBoolean("permission_denied_hide", true).commit())
+                .setOnDismissListener(dialog -> maybeShowCompatWarningDialog());
                 mDialog = builder.create();
                 mDialog.show();
             } else {
@@ -2013,12 +1989,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 builder.setTitle(R.string.compat_warning_title);
                 builder.setView(msgView);
                 builder.setPositiveButton(stage == 0 ? R.string.compat_warning_ok_stage1 :
-                    R.string.compat_warning_ok_stage2, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            mPrefs.edit().putInt("compat_warning_stage", (stage+1)).commit();
-                        }
-                    });
+                    R.string.compat_warning_ok_stage2, (dialog, which) ->
+                        mPrefs.edit().putInt("compat_warning_stage", (stage+1)).commit());
                 builder.setNegativeButton(android.R.string.cancel, null);
                 mDialog = builder.create();
                 mDialog.show();
@@ -2052,20 +2024,17 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 if ("PayPal".equals(sSystemProperties.uuidType)) {
                     unrestrictFeatures();
                 } else {
-                    UnlockActivity.checkPolicyOk(getContext(), new UnlockActivity.CheckPolicyHandler() {
-                        @Override
-                        public void onPolicyResult(boolean ok) {
-                            if (ok) {
-                                unrestrictFeatures();
-                                mPrefs.edit().putInt("policy_counter", 0).commit();
+                    UnlockActivity.checkPolicyOk(getContext(), ok -> {
+                        if (ok) {
+                            unrestrictFeatures();
+                            mPrefs.edit().putInt("policy_counter", 0).commit();
+                        } else {
+                            int cnt = mPrefs.getInt("policy_counter", 0) + 1;
+                            if (cnt > 3) {
+                                SettingsManager.getInstance(getContext()).resetUuid();
                             } else {
-                                int cnt = mPrefs.getInt("policy_counter", 0) + 1;
-                                if (cnt > 3) {
-                                    SettingsManager.getInstance(getContext()).resetUuid();
-                                } else {
-                                    mPrefs.edit().putInt("policy_counter", cnt).commit();
-                                    unrestrictFeatures();
-                                }
+                                mPrefs.edit().putInt("policy_counter", cnt).commit();
+                                unrestrictFeatures();
                             }
                         }
                     });
@@ -3329,12 +3298,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
             if (intent.getAction() != null) {
                 if (delayedBroadcast) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            getActivity().sendBroadcast(intent);
-                        }
-                    }, 200);
+                    new Handler().postDelayed(() -> getActivity().sendBroadcast(intent), 200);
                 } else {
                     getActivity().sendBroadcast(intent);
                 }
@@ -3472,12 +3436,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.app_name)
                 .setMessage(R.string.hwkey_navbar_warning)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        mPrefs.edit().putBoolean("hw_keys_navbar_warning_shown", true).commit();
-                    }
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    dialog.dismiss();
+                    mPrefs.edit().putBoolean("hw_keys_navbar_warning_shown", true).commit();
                 });
                 mDialog = builder.create();
                 mDialog.show();
@@ -3498,33 +3459,22 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                     .setTitle(R.string.app_name)
                     .setMessage(R.string.settings_restore_confirm)
                     .setCancelable(true)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            if (sm.restoreSettings()) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                                .setTitle(R.string.app_name)
-                                .setMessage(R.string.settings_restore_reboot)
-                                .setCancelable(false)
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        getActivity().finish();
-                                    }
-                                });
-                                mDialog = builder.create();
-                                mDialog.show();
-                            }
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        dialog.dismiss();
+                        if (sm.restoreSettings()) {
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.app_name)
+                            .setMessage(R.string.settings_restore_reboot)
+                            .setCancelable(false)
+                            .setPositiveButton(android.R.string.ok, (dialog1, which1) -> {
+                                dialog1.dismiss();
+                                getActivity().finish();
+                            });
+                            mDialog = builder1.create();
+                            mDialog.show();
                         }
                     })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+                    .setNegativeButton(android.R.string.no, (dialog, which) -> dialog.dismiss());
                     mDialog = builder.create();
                     mDialog.show();
                 } else {
@@ -3792,20 +3742,17 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                             .setTitle(R.string.app_name)
                             .setMessage(result.getTransactionStatusMessage())
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    if (result.getTransactionStatus() == TransactionStatus.TRANSACTION_VALID) {
-                                        Intent intent = new Intent(SystemPropertyProvider.ACTION_REGISTER_UUID);
-                                        intent.putExtra(SystemPropertyProvider.EXTRA_UUID,
-                                                SettingsManager.getInstance(getActivity()).getOrCreateUuid());
-                                        intent.putExtra(SystemPropertyProvider.EXTRA_UUID_TYPE, "PayPal");
-                                        getActivity().sendBroadcast(intent);
-                                        LedSettings.lockUnc(getActivity(), false);
-                                        TunerMainActivity.lockTuner(getActivity(), false);
-                                        getActivity().finish();
-                                    }
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                dialog.dismiss();
+                                if (result.getTransactionStatus() == TransactionStatus.TRANSACTION_VALID) {
+                                    Intent intent = new Intent(SystemPropertyProvider.ACTION_REGISTER_UUID);
+                                    intent.putExtra(SystemPropertyProvider.EXTRA_UUID,
+                                            SettingsManager.getInstance(getActivity()).getOrCreateUuid());
+                                    intent.putExtra(SystemPropertyProvider.EXTRA_UUID_TYPE, "PayPal");
+                                    getActivity().sendBroadcast(intent);
+                                    LedSettings.lockUnc(getActivity(), false);
+                                    TunerMainActivity.lockTuner(getActivity(), false);
+                                    getActivity().finish();
                                 }
                             });
                             mDialog = builder.create();
@@ -3827,12 +3774,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                             .setTitle(R.string.app_name)
                             .setMessage(result.getMessage())
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss());
                             mDialog = builder.create();
                             mDialog.show();
                         }

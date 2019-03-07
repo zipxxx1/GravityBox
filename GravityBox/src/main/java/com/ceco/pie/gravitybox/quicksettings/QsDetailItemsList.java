@@ -53,15 +53,11 @@ public class QsDetailItemsList {
         mView = view;
 
         mListView = mView.findViewById(android.R.id.list);
-        mListView.setOnTouchListener(new OnTouchListener() {
-            // Setting on Touch Listener for handling the touch inside ScrollView
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Disallow the touch request for parent scroll on touch of child view
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
+        // Setting on Touch Listener for handling the touch inside ScrollView
+        mListView.setOnTouchListener((v, event) -> {
+            // Disallow the touch request for parent scroll on touch of child view
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            return false;
         });
         mEmpty = mView.findViewById(android.R.id.empty);
         mEmpty.setVisibility(View.GONE);

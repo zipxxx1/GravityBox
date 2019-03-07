@@ -64,19 +64,9 @@ public class SyncShortcut extends AMultiShortcut {
         list.add(new ShortcutItem(mContext, R.string.shortcut_sync,
                 R.drawable.shortcut_sync, null));
         list.add(new ShortcutItem(mContext, R.string.sync_on,
-                R.drawable.shortcut_sync_enable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, true);
-                }
-        }));
+                R.drawable.shortcut_sync_enable, intent -> intent.putExtra(EXTRA_ENABLE, true)));
         list.add(new ShortcutItem(mContext, R.string.sync_off,
-                R.drawable.shortcut_sync_disable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, false);
-                }
-        }));
+                R.drawable.shortcut_sync_disable, intent -> intent.putExtra(EXTRA_ENABLE, false)));
         return list;
     }
 

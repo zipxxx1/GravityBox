@@ -724,16 +724,13 @@ public class ModLedControl {
     }
 
     private static void performActiveScreen() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                long ident = Binder.clearCallingIdentity();
-                try {
-                    XposedHelpers.callMethod(getPowerManager(), "wakeUp", SystemClock.uptimeMillis());
-                    mScreenOnDueToActiveScreen = true;
-                } finally {
-                    Binder.restoreCallingIdentity(ident);
-                }
+        new Handler().postDelayed(() -> {
+            long ident = Binder.clearCallingIdentity();
+            try {
+                XposedHelpers.callMethod(getPowerManager(), "wakeUp", SystemClock.uptimeMillis());
+                mScreenOnDueToActiveScreen = true;
+            } finally {
+                Binder.restoreCallingIdentity(ident);
             }
         }, 1000);
     }

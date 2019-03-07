@@ -69,21 +69,11 @@ public class GravityBoxService extends IntentService {
     }
 
     private void setQuietHoursMode(final String mode, final boolean showToast) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                QuietHoursActivity.setQuietHoursMode(getApplicationContext(), mode, showToast);
-            }
-        });
+        mHandler.post(() -> QuietHoursActivity.setQuietHoursMode(getApplicationContext(), mode, showToast));
     }
 
     private void showToast(final int messageResId) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(), messageResId, 
-                            Toast.LENGTH_SHORT).show();
-            }
-        });
+        mHandler.post(() -> Toast.makeText(getApplicationContext(), messageResId,
+                    Toast.LENGTH_SHORT).show());
     }
 }

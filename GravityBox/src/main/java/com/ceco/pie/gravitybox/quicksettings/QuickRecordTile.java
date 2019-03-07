@@ -60,33 +60,30 @@ public class QuickRecordTile extends QsTile {
         mHandler = new Handler();
 
         mCurrentStateReceiver = new GravityBoxResultReceiver(mHandler);
-        mCurrentStateReceiver.setReceiver(new Receiver() {
-            @Override
-            public void onReceiveResult(int resultCode, Bundle resultData) {
-                final int oldState = mRecordingState;
-                final int newState = resultData.getInt(RecordingService.EXTRA_RECORDING_STATUS);
-                if (resultData.containsKey(RecordingService.EXTRA_AUDIO_FILENAME)) {
-                    mAudioFileName = resultData.getString(RecordingService.EXTRA_AUDIO_FILENAME);
-                }
-                switch(newState) {
-                case RecordingService.RECORDING_STATUS_IDLE:
-                    mRecordingState = mAudioFileName == null ? 
-                            STATE_NO_RECORDING : STATE_IDLE;
-                    break;
-                case RecordingService.RECORDING_STATUS_STARTED:
-                    mRecordingState = STATE_RECORDING;
-                    break;
-                case RecordingService.RECORDING_STATUS_STOPPED:
-                    mRecordingState = STATE_JUST_RECORDED;
-                    break;
-                default:
-                    mRecordingState = STATE_NO_RECORDING;
-                    break;
-                }
-                if (DEBUG) log(getKey() + ": received current state: " + mRecordingState);
-                if (mRecordingState != oldState) {
-                    refreshState();
-                }
+        mCurrentStateReceiver.setReceiver((resultCode, resultData) -> {
+            final int oldState = mRecordingState;
+            final int newState = resultData.getInt(RecordingService.EXTRA_RECORDING_STATUS);
+            if (resultData.containsKey(RecordingService.EXTRA_AUDIO_FILENAME)) {
+                mAudioFileName = resultData.getString(RecordingService.EXTRA_AUDIO_FILENAME);
+            }
+            switch(newState) {
+            case RecordingService.RECORDING_STATUS_IDLE:
+                mRecordingState = mAudioFileName == null ?
+                        STATE_NO_RECORDING : STATE_IDLE;
+                break;
+            case RecordingService.RECORDING_STATUS_STARTED:
+                mRecordingState = STATE_RECORDING;
+                break;
+            case RecordingService.RECORDING_STATUS_STOPPED:
+                mRecordingState = STATE_JUST_RECORDED;
+                break;
+            default:
+                mRecordingState = STATE_NO_RECORDING;
+                break;
+            }
+            if (DEBUG) log(getKey() + ": received current state: " + mRecordingState);
+            if (mRecordingState != oldState) {
+                refreshState();
             }
         });
     }
@@ -195,19 +192,15 @@ public class QuickRecordTile extends QsTile {
         }
     }
 
-    final Runnable autoStopRecord = new Runnable() {
-        public void run() {
-            if (mRecordingState == STATE_RECORDING) {
-                stopRecording();
-            }
+    final Runnable autoStopRecord = () -> {
+        if (mRecordingState == STATE_RECORDING) {
+            stopRecording();
         }
     };
 
-    final OnCompletionListener stoppedPlaying = new OnCompletionListener(){
-        public void onCompletion(MediaPlayer mp) {
-            mRecordingState = STATE_IDLE;
-            refreshState();
-        }
+    final OnCompletionListener stoppedPlaying = mp -> {
+        mRecordingState = STATE_IDLE;
+        refreshState();
     };
 
     private void startPlaying() {

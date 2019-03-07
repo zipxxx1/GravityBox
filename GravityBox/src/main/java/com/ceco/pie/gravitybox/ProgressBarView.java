@@ -246,14 +246,11 @@ public class ProgressBarView extends View implements
         animate()
             .alpha(0f)
             .setDuration(ANIM_DURATION / 2)
-            .withEndAction(new Runnable() {
-                @Override
-                public void run() {
-                    setScaleX(newScaleX);
-                    animate()
-                        .alpha(1f)
-                        .setDuration(ANIM_DURATION / 2);
-                }
+            .withEndAction(() -> {
+                setScaleX(newScaleX);
+                animate()
+                    .alpha(1f)
+                    .setDuration(ANIM_DURATION / 2);
             });
     }
 
@@ -270,13 +267,10 @@ public class ProgressBarView extends View implements
         animate()
             .alpha(0f)
             .setDuration(ANIM_DURATION)
-            .withEndAction(new Runnable() {
-                @Override
-                public void run() {
-                    setVisibility(View.GONE);
-                    setScaleX(0f);
-                    setAlpha(1f);
-                }
+            .withEndAction(() -> {
+                setVisibility(View.GONE);
+                setScaleX(0f);
+                setAlpha(1f);
             });
     }
 

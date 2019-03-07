@@ -172,12 +172,7 @@ public abstract class QsTile extends BaseTile {
         }
 
         private Supplier<Object> newIconSupplier() {
-            return new Supplier<Object>() {
-                @Override
-                public Object get() {
-                    return icon;
-                }
-            };
+            return () -> icon;
         }
     }
 }

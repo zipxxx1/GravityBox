@@ -63,37 +63,17 @@ public class LocationModeShortcut extends AMultiShortcut {
     public List<IIconListAdapterItem> getShortcutList() {
         final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShortcutItem(mContext, R.string.location_mode_high_accuracy, 
-                    R.drawable.shortcut_gps_high, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
-                                Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
-                    }
-                }));
+                    R.drawable.shortcut_gps_high, intent -> intent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
+                            Settings.Secure.LOCATION_MODE_HIGH_ACCURACY)));
         list.add(new ShortcutItem(mContext,R.string.location_mode_battery_saving,
-                R.drawable.shortcut_gps_saving, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
-                                Settings.Secure.LOCATION_MODE_BATTERY_SAVING);
-                    }
-                }));
+                R.drawable.shortcut_gps_saving, intent -> intent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
+                        Settings.Secure.LOCATION_MODE_BATTERY_SAVING)));
         list.add(new ShortcutItem(mContext, R.string.location_mode_device_only,
-                R.drawable.shortcut_gps_sensors, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
-                                Settings.Secure.LOCATION_MODE_SENSORS_ONLY);
-                    }
-                }));
+                R.drawable.shortcut_gps_sensors, intent -> intent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
+                        Settings.Secure.LOCATION_MODE_SENSORS_ONLY)));
         list.add(new ShortcutItem(mContext, R.string.location_mode_off,
-                R.drawable.shortcut_gps_off, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
-                                Settings.Secure.LOCATION_MODE_OFF);
-                    }
-                }));
+                R.drawable.shortcut_gps_off, intent -> intent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
+                        Settings.Secure.LOCATION_MODE_OFF)));
         return list;
     }
 

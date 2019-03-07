@@ -64,12 +64,9 @@ public class QuietHoursRangeListAdapter extends ArrayAdapter<QuietHoursRangeList
             holder.nameView = row.findViewById(R.id.name);
             holder.descView = row.findViewById(R.id.desc);
             holder.deleteView = row.findViewById(R.id.btnDelete);
-            holder.deleteView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mActionHandler != null) {
-                        mActionHandler.onItemDeleted((QuietHoursRangeListItem) v.getTag());
-                    }
+            holder.deleteView.setOnClickListener(v -> {
+                if (mActionHandler != null) {
+                    mActionHandler.onItemDeleted((QuietHoursRangeListItem) v.getTag());
                 }
             });
 

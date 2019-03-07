@@ -376,7 +376,7 @@ public class ScreenRecordingService extends Service {
         }
 
         // Give a second to screenrecord to process the file
-        mHandler.postDelayed(new Runnable() { public void run() {
+        mHandler.postDelayed(() -> {
             mCaptureThread = null;
 
             String fileName = "SCR_" + new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date()) + ".mp4";
@@ -406,7 +406,7 @@ public class ScreenRecordingService extends Service {
                 copyFileUsingStream(input, output);
                 input.delete();
                 Toast.makeText(ScreenRecordingService.this,
-                        String.format(getString(R.string.screenrecord_toast_saved), 
+                        String.format(getString(R.string.screenrecord_toast_saved),
                                 output.getPath()), Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 Log.e(TAG, "Unable to copy output file", e);
@@ -417,14 +417,10 @@ public class ScreenRecordingService extends Service {
             // Make it appear in gallery, run MediaScanner
             MediaScannerConnection.scanFile(ScreenRecordingService.this,
                 new String[] { output.getAbsolutePath() }, null,
-                new MediaScannerConnection.OnScanCompletedListener() {
-                public void onScanCompleted(String path, Uri uri) {
-                    Log.i(TAG, "MediaScanner done scanning " + path);
-                }
-            });
+                    (path, uri) -> Log.i(TAG, "MediaScanner done scanning " + path));
 
             updateStatus(STATUS_IDLE);
-        } }, 3000);
+        }, 3000);
     }
 
     private String getBinaryPath() {

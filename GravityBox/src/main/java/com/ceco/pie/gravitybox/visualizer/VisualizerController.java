@@ -140,12 +140,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
         }
     };
 
-    private final Runnable mAsyncUnlinkVisualizer = new Runnable() {
-        @Override
-        public void run() {
-            AsyncTask.execute(mUnlinkVisualizer);
-        }
-    };
+    private final Runnable mAsyncUnlinkVisualizer = () -> AsyncTask.execute(mUnlinkVisualizer);
 
     public VisualizerController(ClassLoader cl, XSharedPreferences prefs) {
         mPrefs = prefs;

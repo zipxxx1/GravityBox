@@ -64,19 +64,9 @@ public class NfcShortcut extends AMultiShortcut {
         list.add(new ShortcutItem(mContext, R.string.shortcut_nfc,
                 R.drawable.shortcut_nfc, null));
         list.add(new ShortcutItem(mContext, R.string.nfc_on,
-                R.drawable.shortcut_nfc_enable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, true);
-                }
-        }));
+                R.drawable.shortcut_nfc_enable, intent -> intent.putExtra(EXTRA_ENABLE, true)));
         list.add(new ShortcutItem(mContext, R.string.nfc_off,
-                R.drawable.shortcut_nfc_disable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, false);
-                }
-        }));
+                R.drawable.shortcut_nfc_disable, intent -> intent.putExtra(EXTRA_ENABLE, false)));
         return list;
     }
 

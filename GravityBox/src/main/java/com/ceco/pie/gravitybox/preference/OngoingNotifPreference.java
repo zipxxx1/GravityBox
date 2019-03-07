@@ -254,24 +254,21 @@ public class OngoingNotifPreference extends DialogPreference
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             builder.setMessage(R.string.ongoing_notif_reset_alert);
             builder.setNegativeButton(android.R.string.no, null);
-            builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    mAlertDialog = null;
-                    Intent intent = new Intent();
-                    intent.setAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
-                    intent.putExtra(GravityBoxSettings.EXTRA_ONGOING_NOTIF_RESET, true);
-                    mContext.sendBroadcast(intent);
-                    persistString("");
-                    mListData.clear();
-                    if (mListView.getAdapter() != null) {
-                        ((IconCheckListAdapter) mListView.getAdapter()).notifyDataSetChanged();
-                    }
-                    mBtnResetList.setVisibility(View.GONE);
-                    mDescription.setVisibility(View.VISIBLE);
-                    mDivider.setVisibility(View.VISIBLE);
+            builder.setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                dialog.dismiss();
+                mAlertDialog = null;
+                Intent intent = new Intent();
+                intent.setAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
+                intent.putExtra(GravityBoxSettings.EXTRA_ONGOING_NOTIF_RESET, true);
+                mContext.sendBroadcast(intent);
+                persistString("");
+                mListData.clear();
+                if (mListView.getAdapter() != null) {
+                    ((IconCheckListAdapter) mListView.getAdapter()).notifyDataSetChanged();
                 }
+                mBtnResetList.setVisibility(View.GONE);
+                mDescription.setVisibility(View.VISIBLE);
+                mDivider.setVisibility(View.VISIBLE);
             });
             mAlertDialog = builder.create();
             mAlertDialog.show();

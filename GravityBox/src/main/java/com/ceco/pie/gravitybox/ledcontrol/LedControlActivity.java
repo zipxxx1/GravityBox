@@ -108,12 +108,7 @@ public class LedControlActivity extends GravityBoxListActivity implements ListIt
         if (closeBtnResId != 0) {
             View closeBtn = mSearchView.findViewById(closeBtnResId);
             if (closeBtn != null) {
-                closeBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        search.collapseActionView();
-                    }
-                });
+                closeBtn.setOnClickListener(v -> search.collapseActionView());
             }
         }
 

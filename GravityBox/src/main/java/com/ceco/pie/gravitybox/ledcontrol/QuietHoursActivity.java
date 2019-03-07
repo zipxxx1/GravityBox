@@ -125,14 +125,11 @@ public class QuietHoursActivity extends GravityBoxActivity {
                 }
             }
             prefs.edit().putString(QuietHoursActivity.PREF_KEY_QH_MODE,
-                    qhMode.toString()).commit(new OnPreferencesCommitedListener() {
-                @Override
-                public void onPreferencesCommited() {
-                    if (WorldReadablePrefs.DEBUG)
-                        Log.d("GravityBox", "QuietHoursActivity: setQuietHoursMode() onPreferencesCommited");
-                    broadcastSettings(context, prefs);
-                }
-            });
+                    qhMode.toString()).commit(() -> {
+                        if (WorldReadablePrefs.DEBUG)
+                            Log.d("GravityBox", "QuietHoursActivity: setQuietHoursMode() onPreferencesCommited");
+                        broadcastSettings(context, prefs);
+                    });
             if (showToast) {
                 Toast.makeText(context, QuietHoursActivity.getToastResIdFromMode(qhMode),
                         Toast.LENGTH_SHORT).show();

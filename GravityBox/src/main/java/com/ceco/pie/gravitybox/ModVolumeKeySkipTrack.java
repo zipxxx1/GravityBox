@@ -144,29 +144,23 @@ public class ModVolumeKeySkipTrack {
             /**
              * When a volumeup-key longpress expires, skip songs based on key press
              */
-            Runnable mVolumeUpLongPress = new Runnable() {
-                @Override
-                public void run() {
-                    // set the long press flag to true
-                    mIsLongPress = true;
+            Runnable mVolumeUpLongPress = () -> {
+                // set the long press flag to true
+                mIsLongPress = true;
 
-                    // Shamelessly copied from Kmobs LockScreen controls, works for Pandora, etc...
-                    sendMediaButtonEvent(param.thisObject, KeyEvent.KEYCODE_MEDIA_NEXT);
-                }
+                // Shamelessly copied from Kmobs LockScreen controls, works for Pandora, etc...
+                sendMediaButtonEvent(param.thisObject, KeyEvent.KEYCODE_MEDIA_NEXT);
             };
 
             /**
              * When a volumedown-key longpress expires, skip songs based on key press
              */
-            Runnable mVolumeDownLongPress = new Runnable() {
-                @Override
-                public void run() {
-                    // set the long press flag to true
-                    mIsLongPress = true;
+            Runnable mVolumeDownLongPress = () -> {
+                // set the long press flag to true
+                mIsLongPress = true;
 
-                    // Shamelessly copied from Kmobs LockScreen controls, works for Pandora, etc...
-                    sendMediaButtonEvent(param.thisObject, KeyEvent.KEYCODE_MEDIA_PREVIOUS);
-                }
+                // Shamelessly copied from Kmobs LockScreen controls, works for Pandora, etc...
+                sendMediaButtonEvent(param.thisObject, KeyEvent.KEYCODE_MEDIA_PREVIOUS);
             };
 
             setAdditionalInstanceField(param.thisObject, "mVolumeUpLongPress", mVolumeUpLongPress);

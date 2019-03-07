@@ -64,19 +64,9 @@ public class WifiApShortcut extends AMultiShortcut {
         list.add(new ShortcutItem(mContext, R.string.shortcut_wifi_ap,
                 R.drawable.shortcut_wifi_ap, null));
         list.add(new ShortcutItem(mContext, R.string.hotspot_on,
-                R.drawable.shortcut_wifi_ap_enable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, true);
-                }
-        }));
+                R.drawable.shortcut_wifi_ap_enable, intent -> intent.putExtra(EXTRA_ENABLE, true)));
         list.add(new ShortcutItem(mContext, R.string.hotspot_off,
-                R.drawable.shortcut_wifi_ap_disable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, false);
-                }
-        }));
+                R.drawable.shortcut_wifi_ap_disable, intent -> intent.putExtra(EXTRA_ENABLE, false)));
         return list;
     }
 

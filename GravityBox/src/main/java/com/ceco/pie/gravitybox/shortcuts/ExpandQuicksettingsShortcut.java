@@ -59,19 +59,9 @@ public class ExpandQuicksettingsShortcut extends AMultiShortcut {
         list.add(new ShortcutItem(mContext, R.string.qs_panel_toggle,
                 R.drawable.shortcut_quicksettings, null));
         list.add(new ShortcutItem(mContext, R.string.hwkey_action_expand_quicksettings,
-                R.drawable.shortcut_quicksettings_expand, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, true);
-                }
-        }));
+                R.drawable.shortcut_quicksettings_expand, intent -> intent.putExtra(EXTRA_ENABLE, true)));
         list.add(new ShortcutItem(mContext, R.string.qs_panel_collapse,
-                R.drawable.shortcut_quicksettings_collapse, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, false);
-                }
-        }));
+                R.drawable.shortcut_quicksettings_collapse, intent -> intent.putExtra(EXTRA_ENABLE, false)));
 
         return list;
     }

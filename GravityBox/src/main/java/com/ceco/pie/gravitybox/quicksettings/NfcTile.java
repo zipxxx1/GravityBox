@@ -61,15 +61,12 @@ public class NfcTile extends QsTile {
 
         mHandler = new Handler();
         mReceiver = new GravityBoxResultReceiver(mHandler);
-        mReceiver.setReceiver(new Receiver() {
-            @Override
-            public void onReceiveResult(int resultCode, Bundle resultData) {
-                if (resultData != null && resultData.containsKey("nfcState")) {
-                    int newState = resultData.getInt("nfcState");
-                    if (mNfcState != newState) {
-                        mNfcState = newState;
-                        refreshState();
-                    }
+        mReceiver.setReceiver((resultCode, resultData) -> {
+            if (resultData != null && resultData.containsKey("nfcState")) {
+                int newState = resultData.getInt("nfcState");
+                if (mNfcState != newState) {
+                    mNfcState = newState;
+                    refreshState();
                 }
             }
         });

@@ -64,19 +64,9 @@ public class BluetoothShortcut extends AMultiShortcut {
         list.add(new ShortcutItem(mContext, R.string.shortcut_bluetooth,
                 R.drawable.shortcut_bluetooth, null));
         list.add(new ShortcutItem(mContext, R.string.bluetooth_on,
-                R.drawable.shortcut_bluetooth_enable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, true);
-                }
-        }));
+                R.drawable.shortcut_bluetooth_enable, intent -> intent.putExtra(EXTRA_ENABLE, true)));
         list.add(new ShortcutItem(mContext, R.string.bluetooth_off,
-                R.drawable.shortcut_bluetooth_disable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, false);
-                }
-        }));
+                R.drawable.shortcut_bluetooth_disable, intent -> intent.putExtra(EXTRA_ENABLE, false)));
 
         return list;
     }

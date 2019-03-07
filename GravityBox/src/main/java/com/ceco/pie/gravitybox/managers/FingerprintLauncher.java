@@ -291,12 +291,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
             }
         }
 
-        private Runnable mStartListeningRunnable = new Runnable() {
-            @Override
-            public void run() {
-                startListening();
-            }
-        };
+        private Runnable mStartListeningRunnable = this::startListening;
 
         @Override
         public void onAuthenticationError(int errMsgId, CharSequence errString) {

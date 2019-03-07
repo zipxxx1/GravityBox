@@ -126,14 +126,9 @@ public class ExpandedDesktopTile extends QsTile {
         if (mMode != GravityBoxSettings.ED_DISABLED) {
             collapsePanels();
             // give panels chance to collapse before changing expanded desktop state
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Settings.Global.putInt(mContext.getContentResolver(),
-                            ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
-                            (mExpanded ? 0 : 1));
-                }
-            }, 800);
+            mHandler.postDelayed(() -> Settings.Global.putInt(mContext.getContentResolver(),
+                    ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
+                    (mExpanded ? 0 : 1)), 800);
         }
         super.handleClick();
     }

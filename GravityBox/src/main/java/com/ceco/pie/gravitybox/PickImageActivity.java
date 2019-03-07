@@ -155,19 +155,11 @@ public class PickImageActivity extends GravityBoxActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
                     .setTitle(R.string.imgpick_crop_ask_title)
                     .setMessage(getString(R.string.imgpick_crop_ask_msg, mOutputSize.x, mOutputSize.y))
-                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            cropImage(result.file);
-                        }
-                    })
-                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            setResult(Activity.RESULT_OK, 
-                                    new Intent().putExtra(EXTRA_FILE_PATH, result.file.getAbsolutePath()));
-                            finish();
-                        }
+                    .setPositiveButton(R.string.yes, (dialog, which) -> cropImage(result.file))
+                    .setNegativeButton(R.string.no, (dialog, which) -> {
+                        setResult(Activity.RESULT_OK,
+                                new Intent().putExtra(EXTRA_FILE_PATH, result.file.getAbsolutePath()));
+                        finish();
                     });
             mAlertDialog = builder.create();
             mAlertDialog.show();

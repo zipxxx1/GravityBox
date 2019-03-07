@@ -44,16 +44,13 @@ public class SyncTile extends QsTile {
 
         mHandler = new Handler();
         mReceiver = new GravityBoxResultReceiver(mHandler);
-        mReceiver.setReceiver(new Receiver() {
-            @Override
-            public void onReceiveResult(int resultCode, Bundle resultData) {
-                if (resultCode == GravityBoxService.RESULT_SYNC_STATUS) {
-                    final boolean oldState = mSyncState;
-                    mSyncState = resultData.getBoolean(GravityBoxService.KEY_SYNC_STATUS);
-                    if (mSyncState != oldState) { 
-                        refreshState();
-                        if (DEBUG) log(getKey() + ": onReceiveResult: mSyncState=" + mSyncState);
-                    }
+        mReceiver.setReceiver((resultCode, resultData) -> {
+            if (resultCode == GravityBoxService.RESULT_SYNC_STATUS) {
+                final boolean oldState = mSyncState;
+                mSyncState = resultData.getBoolean(GravityBoxService.KEY_SYNC_STATUS);
+                if (mSyncState != oldState) {
+                    refreshState();
+                    if (DEBUG) log(getKey() + ": onReceiveResult: mSyncState=" + mSyncState);
                 }
             }
         });
@@ -129,12 +126,7 @@ public class SyncTile extends QsTile {
     private SyncStatusObserver mSyncObserver = new SyncStatusObserver() {
         public void onStatusChanged(int which) {
             // update state/view if something happened
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    getSyncState();
-                }
-            });
+            mHandler.post(() -> getSyncState());
         }
     };
 }

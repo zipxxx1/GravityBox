@@ -59,19 +59,9 @@ public class ExpandNotificationsShortcut extends AMultiShortcut {
         list.add(new ShortcutItem(mContext, R.string.notification_panel_toggle,
                 R.drawable.shortcut_notifications, null));
         list.add(new ShortcutItem(mContext, R.string.hwkey_action_expand_notifications,
-                R.drawable.shortcut_notifications_expand, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, true);
-                }
-        }));
+                R.drawable.shortcut_notifications_expand, intent -> intent.putExtra(EXTRA_ENABLE, true)));
         list.add(new ShortcutItem(mContext, R.string.notification_panel_collapse,
-                R.drawable.shortcut_notifications_collapse, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, false);
-                }
-        }));
+                R.drawable.shortcut_notifications_collapse, intent -> intent.putExtra(EXTRA_ENABLE, false)));
 
         return list;
     }

@@ -59,12 +59,9 @@ public class ScreenrecordShortcut extends AShortcut {
     public static void launchAction(final Context context, Intent intent) {
         // delay screenrecord action by half a second
         Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent launchIntent = new Intent(ACTION);
-                context.sendBroadcast(launchIntent);
-            }
+        h.postDelayed(() -> {
+            Intent launchIntent = new Intent(ACTION);
+            context.sendBroadcast(launchIntent);
         }, 500);
     }
 }

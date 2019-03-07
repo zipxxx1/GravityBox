@@ -111,19 +111,15 @@ public class RecordingService extends Service {
         return START_NOT_STICKY;
     }
 
-    MediaRecorder.OnErrorListener mOnErrorListener = new MediaRecorder.OnErrorListener() {
+    MediaRecorder.OnErrorListener mOnErrorListener = (mr, what, extra) -> {
+        mRecordingStatus = RECORDING_STATUS_ERROR;
 
-        @Override
-        public void onError(MediaRecorder mr, int what, int extra) {
-            mRecordingStatus = RECORDING_STATUS_ERROR;
-
-            String statusMessage = "Error in MediaRecorder while recording: " + what + "; " + extra;
-            Intent i = new Intent(ACTION_RECORDING_STATUS_CHANGED);
-            i.putExtra(EXTRA_RECORDING_STATUS, mRecordingStatus);
-            i.putExtra(EXTRA_STATUS_MESSAGE, statusMessage);
-            sendBroadcast(i);
-            stopForeground(true);
-        }
+        String statusMessage = "Error in MediaRecorder while recording: " + what + "; " + extra;
+        Intent i = new Intent(ACTION_RECORDING_STATUS_CHANGED);
+        i.putExtra(EXTRA_RECORDING_STATUS, mRecordingStatus);
+        i.putExtra(EXTRA_STATUS_MESSAGE, statusMessage);
+        sendBroadcast(i);
+        stopForeground(true);
     };
 
     private String prepareOutputFile() {

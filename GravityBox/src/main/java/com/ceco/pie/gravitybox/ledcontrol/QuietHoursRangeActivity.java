@@ -68,24 +68,18 @@ public class QuietHoursRangeActivity extends GravityBoxActivity {
         setContentView(R.layout.quiet_hours_range_activity);
 
         mBtnCancel = findViewById(R.id.btnCancel);
-        mBtnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(Activity.RESULT_CANCELED);
-                finish();
-            }
+        mBtnCancel.setOnClickListener(v -> {
+            setResult(Activity.RESULT_CANCELED);
+            finish();
         });
 
         mBtnSave = findViewById(R.id.btnSave);
-        mBtnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putStringArrayListExtra(EXTRA_QH_RANGE, new ArrayList<String>(
-                        getFragment().getRange().getValue()));
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-            }
+        mBtnSave.setOnClickListener(v -> {
+            Intent intent1 = new Intent();
+            intent1.putStringArrayListExtra(EXTRA_QH_RANGE, new ArrayList<String>(
+                    getFragment().getRange().getValue()));
+            setResult(Activity.RESULT_OK, intent1);
+            finish();
         });
 
         getFragment().setRangeValue(rangeValue);

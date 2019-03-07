@@ -146,16 +146,13 @@ public class SubscriptionManager implements BroadcastSubReceiver {
                 mContext, getSubItemList(subType));
         AlertDialog d = new AlertDialog.Builder(mContext)
                 .setTitle(getDialogTitleFor(subType))
-                .setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        SubListItem item = (SubListItem) arrayAdapter.getItem(which);
-                        if (DEBUG) log("Dialog onClick: which=" + item.getText());
-                        dialog.dismiss();
-                        int simSlot = item.getSubInfo() == null ? -1 :
-                            item.getSubInfo().getSimSlotIndex();
-                        changeDefaultSub(subType, simSlot, showToast);
-                    }
+                .setAdapter(arrayAdapter, (dialog, which) -> {
+                    SubListItem item = (SubListItem) arrayAdapter.getItem(which);
+                    if (DEBUG) log("Dialog onClick: which=" + item.getText());
+                    dialog.dismiss();
+                    int simSlot = item.getSubInfo() == null ? -1 :
+                        item.getSubInfo().getSimSlotIndex();
+                    changeDefaultSub(subType, simSlot, showToast);
                 })
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();

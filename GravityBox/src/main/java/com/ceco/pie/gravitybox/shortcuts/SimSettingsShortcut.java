@@ -62,82 +62,46 @@ public class SimSettingsShortcut extends AMultiShortcut {
     protected List<IIconListAdapterItem> getShortcutList() {
         final List<IIconListAdapterItem> list = new ArrayList<>();
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_voice_sim_1,
-                R.drawable.shortcut_sm_voice_sim_1, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
-                        intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 0);
-                    }
-            }));
+                R.drawable.shortcut_sm_voice_sim_1, intent -> {
+                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
+                    intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 0);
+                }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_voice_sim_2,
-                R.drawable.shortcut_sm_voice_sim_2, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
+                R.drawable.shortcut_sm_voice_sim_2, intent -> {
                     intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
                     intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 1);
-                }
-        }));
+                }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_voice_sim_ask,
-                R.drawable.shortcut_sm_voice_sim_ask, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
+                R.drawable.shortcut_sm_voice_sim_ask, intent -> {
                     intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
                     intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 2);
-                }
-        }));
+                }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_voice_sim_ui,
-                R.drawable.shortcut_sm_voice_sim_ui, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
-                }
-        }));
+                R.drawable.shortcut_sm_voice_sim_ui, intent -> intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "VOICE")));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_sms_sim_1,
-                R.drawable.shortcut_sm_sms_sim_1, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
+                R.drawable.shortcut_sm_sms_sim_1, intent -> {
                     intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "SMS");
                     intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 0);
-                }
-        }));
+                }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_sms_sim_2,
-                R.drawable.shortcut_sm_sms_sim_2, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
+                R.drawable.shortcut_sm_sms_sim_2, intent -> {
                     intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "SMS");
                     intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 1);
-                }
-        }));
+                }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_sms_sim_ui,
-                R.drawable.shortcut_sm_sms_sim_ui, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "SMS");
-                }
-        }));
+                R.drawable.shortcut_sm_sms_sim_ui, intent -> intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "SMS")));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_data_sim_1,
-                R.drawable.shortcut_sm_data_sim_1, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
+                R.drawable.shortcut_sm_data_sim_1, intent -> {
                     intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "DATA");
                     intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 0);
-                }
-        }));
+                }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_data_sim_2,
-                R.drawable.shortcut_sm_data_sim_2, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
+                R.drawable.shortcut_sm_data_sim_2, intent -> {
                     intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "DATA");
                     intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 1);
-                }
-        }));
+                }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_data_sim_ui,
-                R.drawable.shortcut_sm_data_sim_ui, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "DATA");
-                }
-        }));
+                R.drawable.shortcut_sm_data_sim_ui, intent -> intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "DATA")));
         return list;
     }
 

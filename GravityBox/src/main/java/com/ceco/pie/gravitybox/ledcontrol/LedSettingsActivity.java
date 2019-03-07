@@ -173,12 +173,7 @@ public class LedSettingsActivity extends GravityBoxActivity implements OnClickLi
         n.extras.putStringArrayList(LedSettings.EXTRA_UNC_PACKAGE_SETTINGS, settings.toArrayList());
         Intent intent = new Intent(ModHwKeys.ACTION_SLEEP);
         sendBroadcast(intent);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                nm.notify(++NOTIF_ID,  n);
-            }
-        }, 1000);
+        new Handler().postDelayed(() -> nm.notify(++NOTIF_ID,  n), 1000);
     }
 
     private void saveSettings() {

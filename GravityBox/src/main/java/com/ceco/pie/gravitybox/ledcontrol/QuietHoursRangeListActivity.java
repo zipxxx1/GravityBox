@@ -52,13 +52,10 @@ public class QuietHoursRangeListActivity extends GravityBoxAppCompatActivity
         mListView.setEmptyView(findViewById(R.id.empty));
 
         mFab = findViewById(R.id.fab);
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QuietHoursRangeListActivity.this,
-                        QuietHoursRangeActivity.class);
-                startActivityForResult(intent, 0);
-            }
+        mFab.setOnClickListener(v -> {
+            Intent intent = new Intent(QuietHoursRangeListActivity.this,
+                    QuietHoursRangeActivity.class);
+            startActivityForResult(intent, 0);
         });
 
         mPrefs = SettingsManager.getInstance(this).getQuietHoursPrefs();

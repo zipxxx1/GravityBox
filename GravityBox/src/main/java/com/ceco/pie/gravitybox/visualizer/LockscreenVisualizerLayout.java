@@ -204,19 +204,9 @@ public class LockscreenVisualizerLayout extends AVisualizerLayout
         }
     };
 
-    private final Runnable mEnterDimStateRunnable = new Runnable() {
-        @Override
-        public void run() {
-            setDimState(true);
-        }
-    };
+    private final Runnable mEnterDimStateRunnable = () -> setDimState(true);
 
-    private final Runnable mExitDimStateRunnable = new Runnable() {
-        @Override
-        public void run() {
-            setDimState(false);
-        }
-    };
+    private final Runnable mExitDimStateRunnable = () -> setDimState(false);
 
     private void setDimState(final boolean dim) {
         mIsDimmed = dim;
@@ -260,12 +250,9 @@ public class LockscreenVisualizerLayout extends AVisualizerLayout
             mBgColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),
                     mBgColor, Color.argb(mDimLevel, 0, 0, 0));
             mBgColorAnimator.setDuration(1200);
-            mBgColorAnimator.addUpdateListener(new AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator va) {
-                    mBgColor = (int) va.getAnimatedValue();
-                    mScrim.setBackgroundColor(mBgColor);
-                }
+            mBgColorAnimator.addUpdateListener(va -> {
+                mBgColor = (int) va.getAnimatedValue();
+                mScrim.setBackgroundColor(mBgColor);
             });
             mBgColorAnimator.start();
         } else {

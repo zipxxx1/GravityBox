@@ -57,93 +57,38 @@ public class NetworkModeShortcut extends AMultiShortcut {
     protected List<IIconListAdapterItem> getShortcutList() {
         final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShortcutItem(mContext, R.string.network_mode_1,
-                R.drawable.shortcut_network_mode_2g, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_GSM_ONLY);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_2g, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_GSM_ONLY)));
         list.add(new ShortcutItem(mContext, R.string.network_mode_3,
-                R.drawable.shortcut_network_mode_2g3g, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_GSM_WCDMA_AUTO);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_2g3g, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_GSM_WCDMA_AUTO)));
         list.add(new ShortcutItem(mContext, R.string.network_mode_0,
-                R.drawable.shortcut_network_mode_3g2g, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_WCDMA_PREFERRED);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_3g2g, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_WCDMA_PREFERRED)));
         list.add(new ShortcutItem(mContext, R.string.network_mode_2,
-                R.drawable.shortcut_network_mode_3g, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_WCDMA_ONLY);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_3g, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_WCDMA_ONLY)));
         list.add(new ShortcutItem(mContext, R.string.network_mode_4,
-                R.drawable.shortcut_network_mode_cdma_evdo, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_CDMA_EVDO);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_cdma_evdo, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_CDMA_EVDO)));
         list.add(new ShortcutItem(mContext, R.string.network_mode_5,
-                R.drawable.shortcut_network_mode_cdma, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_CDMA_ONLY);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_cdma, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_CDMA_ONLY)));
         list.add(new ShortcutItem(mContext, R.string.network_mode_6,
-                R.drawable.shortcut_network_mode_evdo, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_EVDO_ONLY);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_evdo, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_EVDO_ONLY)));
         list.add(new ShortcutItem(mContext, R.string.network_mode_7,
-                R.drawable.shortcut_network_mode_2g3g, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_GLOBAL);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_2g3g, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_GLOBAL)));
         list.add(new ShortcutItem(mContext, R.string.network_mode_8,
-                R.drawable.shortcut_network_mode_lte_cdma, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_LTE_CDMA_EVDO);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_lte_cdma, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_LTE_CDMA_EVDO)));
         list.add(new ShortcutItem(mContext, R.string.network_mode_9,
-                R.drawable.shortcut_network_mode_lte_gsm, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_LTE_GSM_WCDMA);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_lte_gsm, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_LTE_GSM_WCDMA)));
         list.add(new ShortcutItem(mContext, R.string.network_mode_10,
-                R.drawable.shortcut_network_mode_lte_global, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                PhoneWrapper.NT_LTE_CMDA_EVDO_GSM_WCDMA);
-                    }
-                }));
+                R.drawable.shortcut_network_mode_lte_global, intent -> intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
+                        PhoneWrapper.NT_LTE_CMDA_EVDO_GSM_WCDMA)));
 
         return list;
     }

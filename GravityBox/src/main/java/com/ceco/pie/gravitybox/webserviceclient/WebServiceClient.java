@@ -71,12 +71,7 @@ public class WebServiceClient<T extends WebServiceResult> extends AsyncTask<Requ
         mProgressDialog.setMessage(mContext.getString(R.string.wsc_please_wait));
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(true);
-        mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dlgInterface) {
-                abortTaskIfRunning();
-            }
-        });
+        mProgressDialog.setOnCancelListener(dlgInterface -> abortTaskIfRunning());
 
         mHash = getAppSignatureHash(mContext);
     }

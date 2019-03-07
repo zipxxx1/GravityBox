@@ -64,19 +64,9 @@ public class AirplaneModeShortcut extends AMultiShortcut {
         list.add(new ShortcutItem(mContext, R.string.shortcut_airplane_mode,
                 R.drawable.shortcut_airplane_mode, null));
         list.add(new ShortcutItem(mContext, R.string.airplane_mode_on,
-                R.drawable.shortcut_airplane_mode_enable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, true);
-                }
-        }));
+                R.drawable.shortcut_airplane_mode_enable, intent -> intent.putExtra(EXTRA_ENABLE, true)));
         list.add(new ShortcutItem(mContext, R.string.airplane_mode_off,
-                R.drawable.shortcut_airplane_mode_disable, new ExtraDelegate() {
-                @Override
-                public void addExtraTo(Intent intent) {
-                    intent.putExtra(EXTRA_ENABLE, false);
-                }
-        }));
+                R.drawable.shortcut_airplane_mode_disable, intent -> intent.putExtra(EXTRA_ENABLE, false)));
 
         return list;
     }

@@ -106,17 +106,14 @@ public class RingerWhitelistActivity extends GravityBoxAppCompatActivity {
             }
         });
 
-        searchReset.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                mSearchQuery = null;
-                search.setVisible(true);
-                searchReset.setVisible(false);
-                searchKeyword.setVisible(false);
-                searchKeywordView.setText(null);
-                getFragment().fetchData();
-                return true;
-            }
+        searchReset.setOnMenuItemClickListener(item -> {
+            mSearchQuery = null;
+            search.setVisible(true);
+            searchReset.setVisible(false);
+            searchKeyword.setVisible(false);
+            searchKeywordView.setText(null);
+            getFragment().fetchData();
+            return true;
         });
 
         searchKeywordView.setSingleLine(true);
@@ -125,28 +122,24 @@ public class RingerWhitelistActivity extends GravityBoxAppCompatActivity {
         getWindowManager().getDefaultDisplay().getSize(size);
         searchKeywordView.setMaxWidth(size.x / 3);
 
-        final OnMenuItemClickListener selectionTypeClickListener =
-                new OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item == showStarred) {
-                    mSelectionType = SelectionType.STARRED;
-                    showAll.setEnabled(true);
-                    showWhitelisted.setEnabled(true);
-                } else if (item == showWhitelisted) {
-                    mSelectionType = SelectionType.WHITELISTED;
-                    showAll.setEnabled(true);
-                    showStarred.setEnabled(true);
-                } else {
-                    mSelectionType = SelectionType.DEFAULT;
-                    showStarred.setEnabled(true);
-                    showWhitelisted.setEnabled(true);
-                }
-                item.setEnabled(false);
-                getFragment().setSelectionType(mSelectionType);
-                getFragment().fetchData(mSearchQuery);
-                return true;
+        final OnMenuItemClickListener selectionTypeClickListener = item -> {
+            if (item == showStarred) {
+                mSelectionType = SelectionType.STARRED;
+                showAll.setEnabled(true);
+                showWhitelisted.setEnabled(true);
+            } else if (item == showWhitelisted) {
+                mSelectionType = SelectionType.WHITELISTED;
+                showAll.setEnabled(true);
+                showStarred.setEnabled(true);
+            } else {
+                mSelectionType = SelectionType.DEFAULT;
+                showStarred.setEnabled(true);
+                showWhitelisted.setEnabled(true);
             }
+            item.setEnabled(false);
+            getFragment().setSelectionType(mSelectionType);
+            getFragment().fetchData(mSearchQuery);
+            return true;
         };
         showAll.setOnMenuItemClickListener(selectionTypeClickListener);
         showAll.setEnabled(mSelectionType != null && mSelectionType != SelectionType.DEFAULT);

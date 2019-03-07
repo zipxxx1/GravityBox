@@ -390,22 +390,14 @@ public class ModPowerMenu {
                 mBootloaderIcon.setTint(color);
                 AlertDialog.Builder builder = new AlertDialog.Builder(ctw)
                     .setTitle(mRebootStr)
-                    .setAdapter(new IconListAdapter(ctw, list), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            if (DEBUG) log("onClick() item = " + which);
-                            handleReboot(ctw, mRebootStr, 
-                                    (which > 0 && !mAllowSoftReboot) ? (which+1) : which);
-                        }
+                    .setAdapter(new IconListAdapter(ctw, list), (dialog, which) -> {
+                        dialog.dismiss();
+                        if (DEBUG) log("onClick() item = " + which);
+                        handleReboot(ctw, mRebootStr,
+                                (which > 0 && !mAllowSoftReboot) ? (which+1) : which);
                     })
                     .setNegativeButton(android.R.string.no,
-                            new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+                            (dialog, which) -> dialog.dismiss());
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
                 dialog.show();
@@ -443,21 +435,11 @@ public class ModPowerMenu {
                             context,android.R.style.Theme_Material_Dialog_Alert))
                         .setTitle(caption)
                         .setMessage(message)
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-    
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                doReboot(context, mode);
-                            }
+                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            dialog.dismiss();
+                            doReboot(context, mode);
                         })
-                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                            
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
+                        .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss());
                     AlertDialog dialog = builder.create();
                     dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
                     dialog.show();
@@ -546,14 +528,11 @@ public class ModPowerMenu {
 
         private void toggleStatus() {
             try {
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Settings.Global.putInt(mContext.getContentResolver(),
-                                ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
-                                isExpandedDesktopOn(mContext) ? 0 : 1);
-                        updateStatus();
-                    }
+                mHandler.postDelayed(() -> {
+                    Settings.Global.putInt(mContext.getContentResolver(),
+                            ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
+                            isExpandedDesktopOn(mContext) ? 0 : 1);
+                    updateStatus();
                 }, 200);
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);

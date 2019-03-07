@@ -58,12 +58,7 @@ public abstract class AMultiShortcut extends AShortcut {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
             .setTitle(getText())
             .setView(view)
-            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+            .setNegativeButton(android.R.string.no, (dialog, which) -> dialog.dismiss());
         final AlertDialog dialog = builder.create();
 
         final CheckBox chkShowToast = view.findViewById(R.id.chkShowToast);
@@ -71,27 +66,24 @@ public abstract class AMultiShortcut extends AShortcut {
         ListView listView = view.findViewById(R.id.listview);
         final List<IIconListAdapterItem> list = getShortcutList();
         listView.setAdapter(new IconListAdapter(mContext, list));
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ShortcutItem item = (ShortcutItem) list.get(position);
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
+            ShortcutItem item = (ShortcutItem) list.get(position);
 
-                Intent launchIntent = new Intent(mContext, LaunchActivity.class);
-                launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                launchIntent.setAction(ShortcutActivity.ACTION_LAUNCH_ACTION);
-                launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION, getAction());
-                launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION_TYPE, getActionType());
-                launchIntent.putExtra(EXTRA_SHOW_TOAST, (supportsToast() && chkShowToast.isChecked()));
-                item.addExtraTo(launchIntent);
+            Intent launchIntent = new Intent(mContext, LaunchActivity.class);
+            launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            launchIntent.setAction(ShortcutActivity.ACTION_LAUNCH_ACTION);
+            launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION, getAction());
+            launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION_TYPE, getActionType());
+            launchIntent.putExtra(EXTRA_SHOW_TOAST, (supportsToast() && chkShowToast.isChecked()));
+            item.addExtraTo(launchIntent);
 
-                Intent intent = new Intent();
-                intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, launchIntent);
-                intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, item.getText());
-                intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, item.getIconResource());
+            Intent intent = new Intent();
+            intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, launchIntent);
+            intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, item.getText());
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, item.getIconResource());
 
-                AMultiShortcut.this.onShortcutCreated(intent, listener);
-                dialog.dismiss();
-            }
+            AMultiShortcut.this.onShortcutCreated(intent, listener);
+            dialog.dismiss();
         });
 
         dialog.show();

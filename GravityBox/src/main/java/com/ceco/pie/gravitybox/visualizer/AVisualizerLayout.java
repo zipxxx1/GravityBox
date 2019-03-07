@@ -116,12 +116,9 @@ abstract class AVisualizerLayout extends FrameLayout implements VisualizerContro
                     oldColor, color);
             mColorAnimator.setDuration(1200);
             mColorAnimator.setStartDelay(600);
-            mColorAnimator.addUpdateListener(new AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator va) {
-                    mColor = (int) va.getAnimatedValue();
-                    onColorAnimatedValueUpdated(mColor);
-                }
+            mColorAnimator.addUpdateListener(va -> {
+                mColor = (int) va.getAnimatedValue();
+                onColorAnimatedValueUpdated(mColor);
             });
             mColorAnimator.start();
         }

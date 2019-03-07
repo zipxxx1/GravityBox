@@ -377,31 +377,23 @@ public class AppPickerPreference extends DialogPreference
         if (mIconPickerDialog == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
                 .setTitle(R.string.icon_picker_choose_icon_title)
-                .setAdapter(sIconPickerAdapter, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        try {
-                            BasicIconListItem item = (BasicIconListItem) sIconPickerAdapter.getItem(which);
-                            Intent intent = Intent.parseUri(getPersistedString(null), 0);
-                            if (intent.hasExtra("icon")) {
-                                intent.removeExtra("icon");
-                            }
-                            intent.putExtra("iconResName", mResources.getResourceEntryName(
-                                    item.getIconLeftId()));
-                            setValue(intent.toUri(0));
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                .setAdapter(sIconPickerAdapter, (dialog, which) -> {
+                    dialog.dismiss();
+                    try {
+                        BasicIconListItem item = (BasicIconListItem) sIconPickerAdapter.getItem(which);
+                        Intent intent = Intent.parseUri(getPersistedString(null), 0);
+                        if (intent.hasExtra("icon")) {
+                            intent.removeExtra("icon");
                         }
-                        
+                        intent.putExtra("iconResName", mResources.getResourceEntryName(
+                                item.getIconLeftId()));
+                        setValue(intent.toUri(0));
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+
                 })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                .setNegativeButton(android.R.string.no, (dialog, which) -> dialog.dismiss());
             mIconPickerDialog = builder.create();
         }
 
@@ -574,15 +566,12 @@ public class AppPickerPreference extends DialogPreference
                 setValue(null);
                 getDialog().dismiss();
             } else {
-                si.setShortcutCreatedListener(new ShortcutCreatedListener() {
-                    @Override
-                    public void onShortcutCreated(ShortcutItem sir) {
-                        setValue(sir.getValue());
-                        // we have to call this explicitly for some yet unknown reason...
-                        sPrefsFragment.onSharedPreferenceChanged(
-                                SettingsManager.getInstance(mContext).getMainPrefs(), getKey());
-                        getDialog().dismiss();
-                    }
+                si.setShortcutCreatedListener(sir -> {
+                    setValue(sir.getValue());
+                    // we have to call this explicitly for some yet unknown reason...
+                    sPrefsFragment.onSharedPreferenceChanged(
+                            SettingsManager.getInstance(mContext).getMainPrefs(), getKey());
+                    getDialog().dismiss();
                 });
                 sPrefsFragment.obtainShortcut((ShortcutItem) item);
             }

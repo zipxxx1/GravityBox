@@ -54,15 +54,12 @@ public class TorchTile extends QsTile {
         super(host, key, tile, prefs, eventDistributor);
 
         mReceiver = new GravityBoxResultReceiver(new Handler());
-        mReceiver.setReceiver(new Receiver() {
-            @Override
-            public void onReceiveResult(int resultCode, Bundle resultData) {
-                final int oldState = mTorchStatus;
-                mTorchStatus = resultData.getInt(TorchService.EXTRA_TORCH_STATUS);
-                if (mTorchStatus != oldState) { 
-                    refreshState();
-                    if (DEBUG) log(getKey() + ": onReceiveResult: mTorchStatus=" + mTorchStatus);
-                }
+        mReceiver.setReceiver((resultCode, resultData) -> {
+            final int oldState = mTorchStatus;
+            mTorchStatus = resultData.getInt(TorchService.EXTRA_TORCH_STATUS);
+            if (mTorchStatus != oldState) {
+                refreshState();
+                if (DEBUG) log(getKey() + ": onReceiveResult: mTorchStatus=" + mTorchStatus);
             }
         });
     }

@@ -411,105 +411,102 @@ public class ModDisplay {
                         if (bmp == null) return;
 
                         final Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
-                        new Thread(new Runnable() {
-                             @Override
-                             public void run() {
-                                 final WakeLock wakeLock = mPm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-                                 wakeLock.acquire(10000);
-                                 Bitmap tmpBmp = bmp;
-                                 int width = bmp.getWidth();
-                                 int height = bmp.getHeight();
-                                 // scale image (keeping aspect ratio) if it is too large
-                                 if (width * height > 1440000) {
-                                     int newWidth = (width < height) ? 900 : 1600;
-                                     float factor = newWidth / (float) width;
-                                     int newHeight = (int) (height * factor);
-                                     if (DEBUG_KIS) log("requestPowerState: scaled image res (WxH):"
-                                             + newWidth + "x" + newHeight);
-                                     tmpBmp = Bitmap.createScaledBitmap(bmp, newWidth, newHeight, true);
-                                 }
-        
-                                 final ByteArrayOutputStream os = new ByteArrayOutputStream();
-                                 tmpBmp.compress(CompressFormat.PNG, 100, os);
-                                 try {
-                                    os.close();
-                                 } catch (IOException ignored) { }
-                                 bmp.recycle();
-                                 tmpBmp.recycle();
-                                 mKisImageStream = new ByteArrayInputStream(os.toByteArray());
+                        new Thread(() -> {
+                            final WakeLock wakeLock = mPm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+                            wakeLock.acquire(10000);
+                            Bitmap tmpBmp = bmp;
+                            int width = bmp.getWidth();
+                            int height = bmp.getHeight();
+                            // scale image (keeping aspect ratio) if it is too large
+                            if (width * height > 1440000) {
+                                int newWidth = (width < height) ? 900 : 1600;
+                                float factor = newWidth / (float) width;
+                                int newHeight = (int) (height * factor);
+                                if (DEBUG_KIS) log("requestPowerState: scaled image res (WxH):"
+                                        + newWidth + "x" + newHeight);
+                                tmpBmp = Bitmap.createScaledBitmap(bmp, newWidth, newHeight, true);
+                            }
 
-                                 if (mKisClient == null) {
-                                     mKisClient = new Messenger(new Handler(h.getLooper()) {
-                                         @Override
-                                         public void handleMessage(Message msg) {
-                                             if (DEBUG_KIS) log("mKisClient: got reply: what=" + msg.what);
-                                             try {
-                                                 if (msg.what == KeyguardImageService.MSG_GET_NEXT_CHUNK) {
-                                                     byte[] data = new byte[204800];
-                                                     if (mKisImageStream.read(data) != -1) {
-                                                         Bundle bundle = new Bundle();
-                                                         bundle.putByteArray("data", data);
-                                                         Message dataMsg = Message.obtain(null, KeyguardImageService.MSG_WRITE_OUTPUT);
-                                                         dataMsg.setData(bundle);
-                                                         dataMsg.replyTo = mKisClient;
-                                                         mKisService.send(dataMsg);
-                                                         if (DEBUG_KIS) log("mKisClient: MSG_WRITE_OUTPUT sent");
-                                                     } else {
-                                                         msg = Message.obtain(null, KeyguardImageService.MSG_FINISH_OUTPUT);
-                                                         mKisService.send(msg);
-                                                         mContext.unbindService(mKisServiceConn);
-                                                         if (wakeLock != null && wakeLock.isHeld()) {
-                                                             wakeLock.release();
-                                                         }
-                                                         mKisService = null;
-                                                         mKisServiceConn = null;
-                                                         if (DEBUG_KIS) log("mKisClient: MSG_FINISH_OUTPUT sent");
-                                                     }
-                                                 } else if (msg.what == KeyguardImageService.MSG_ERROR) {
-                                                     mContext.unbindService(mKisServiceConn);
-                                                     if (wakeLock != null && wakeLock.isHeld()) {
-                                                         wakeLock.release();
-                                                     }
-                                                     mKisService = null;
-                                                     mKisServiceConn = null;
-                                                     GravityBox.log(TAG, "mKisClient: MSG_ERROR received");
-                                                 }
-                                             } catch (Throwable t) {
-                                                 GravityBox.log(TAG, t);
-                                             }
-                                         }
-                                     });
-                                 }
+                            final ByteArrayOutputStream os = new ByteArrayOutputStream();
+                            tmpBmp.compress(CompressFormat.PNG, 100, os);
+                            try {
+                               os.close();
+                            } catch (IOException ignored) { }
+                            bmp.recycle();
+                            tmpBmp.recycle();
+                            mKisImageStream = new ByteArrayInputStream(os.toByteArray());
 
-                                 mKisServiceConn = new ServiceConnection() {
-                                     @Override
-                                     public void onServiceConnected(ComponentName cn, IBinder binder) {
-                                         try {
-                                             mKisService = new Messenger(binder);
-                                             Message msg = Message.obtain(null, KeyguardImageService.MSG_BEGIN_OUTPUT);
-                                             msg.replyTo = mKisClient;
-                                             mKisService.send(msg);
-                                             if (DEBUG_KIS) log("mKisServiceConn: onServiceConnected");
-                                         } catch (Throwable t) {
-                                             GravityBox.log(TAG, t);
-                                         }
-                                     }
-                                     @Override
-                                     public void onServiceDisconnected(ComponentName cn) {
-                                         if (wakeLock != null && wakeLock.isHeld()) {
-                                             wakeLock.release();
-                                         }
-                                         mKisService = null;
-                                         mKisServiceConn = null;
-                                         if (DEBUG_KIS) log("mKisServiceConn: onServiceDisconnected");
-                                     } 
-                                 };
-                                 ComponentName cn = new ComponentName(GravityBox.PACKAGE_NAME, KeyguardImageService.class.getName());
-                                 Intent intent = new Intent();
-                                 intent.setComponent(cn);
-                                 mContext.bindService(intent, mKisServiceConn, Context.BIND_AUTO_CREATE);
-                             }
-                         }).start();
+                            if (mKisClient == null) {
+                                mKisClient = new Messenger(new Handler(h.getLooper()) {
+                                    @Override
+                                    public void handleMessage(Message msg) {
+                                        if (DEBUG_KIS) log("mKisClient: got reply: what=" + msg.what);
+                                        try {
+                                            if (msg.what == KeyguardImageService.MSG_GET_NEXT_CHUNK) {
+                                                byte[] data = new byte[204800];
+                                                if (mKisImageStream.read(data) != -1) {
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putByteArray("data", data);
+                                                    Message dataMsg = Message.obtain(null, KeyguardImageService.MSG_WRITE_OUTPUT);
+                                                    dataMsg.setData(bundle);
+                                                    dataMsg.replyTo = mKisClient;
+                                                    mKisService.send(dataMsg);
+                                                    if (DEBUG_KIS) log("mKisClient: MSG_WRITE_OUTPUT sent");
+                                                } else {
+                                                    msg = Message.obtain(null, KeyguardImageService.MSG_FINISH_OUTPUT);
+                                                    mKisService.send(msg);
+                                                    mContext.unbindService(mKisServiceConn);
+                                                    if (wakeLock != null && wakeLock.isHeld()) {
+                                                        wakeLock.release();
+                                                    }
+                                                    mKisService = null;
+                                                    mKisServiceConn = null;
+                                                    if (DEBUG_KIS) log("mKisClient: MSG_FINISH_OUTPUT sent");
+                                                }
+                                            } else if (msg.what == KeyguardImageService.MSG_ERROR) {
+                                                mContext.unbindService(mKisServiceConn);
+                                                if (wakeLock != null && wakeLock.isHeld()) {
+                                                    wakeLock.release();
+                                                }
+                                                mKisService = null;
+                                                mKisServiceConn = null;
+                                                GravityBox.log(TAG, "mKisClient: MSG_ERROR received");
+                                            }
+                                        } catch (Throwable t) {
+                                            GravityBox.log(TAG, t);
+                                        }
+                                    }
+                                });
+                            }
+
+                            mKisServiceConn = new ServiceConnection() {
+                                @Override
+                                public void onServiceConnected(ComponentName cn, IBinder binder) {
+                                    try {
+                                        mKisService = new Messenger(binder);
+                                        Message msg = Message.obtain(null, KeyguardImageService.MSG_BEGIN_OUTPUT);
+                                        msg.replyTo = mKisClient;
+                                        mKisService.send(msg);
+                                        if (DEBUG_KIS) log("mKisServiceConn: onServiceConnected");
+                                    } catch (Throwable t) {
+                                        GravityBox.log(TAG, t);
+                                    }
+                                }
+                                @Override
+                                public void onServiceDisconnected(ComponentName cn) {
+                                    if (wakeLock != null && wakeLock.isHeld()) {
+                                        wakeLock.release();
+                                    }
+                                    mKisService = null;
+                                    mKisServiceConn = null;
+                                    if (DEBUG_KIS) log("mKisServiceConn: onServiceDisconnected");
+                                }
+                            };
+                            ComponentName cn = new ComponentName(GravityBox.PACKAGE_NAME, KeyguardImageService.class.getName());
+                            Intent intent = new Intent();
+                            intent.setComponent(cn);
+                            mContext.bindService(intent, mKisServiceConn, Context.BIND_AUTO_CREATE);
+                        }).start();
                     }
                 }
             });

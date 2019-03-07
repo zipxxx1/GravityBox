@@ -750,30 +750,24 @@ public class ModLockscreen {
         if (entry.length() != mPrefs.getInt(
                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_LENGTH, 4)) return;
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final Object lockPatternUtils = XposedHelpers.getObjectField(securityView, "mLockPatternUtils");
-                    final int userId = mKgMonitor.getCurrentUserId();
-                    final boolean valid = (boolean) XposedHelpers.callMethod(lockPatternUtils, "checkPassword", entry, userId);
-                    if (valid) {
-                        final Object callback = XposedHelpers.getObjectField(securityView, "mCallback");
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    XposedHelpers.callMethod(callback, "reportUnlockAttempt", userId, true, 0);
-                                    XposedHelpers.callMethod(callback, "dismiss", true, userId);
-                                } catch (Throwable t) {
-                                    GravityBox.log(TAG, "Error dimissing keyguard: ", t);
-                                }
-                            }
-                        });
-                    }
-                } catch (Throwable t) {
-                    GravityBox.log(TAG, t);
+        AsyncTask.execute(() -> {
+            try {
+                final Object lockPatternUtils = XposedHelpers.getObjectField(securityView, "mLockPatternUtils");
+                final int userId = mKgMonitor.getCurrentUserId();
+                final boolean valid = (boolean) XposedHelpers.callMethod(lockPatternUtils, "checkPassword", entry, userId);
+                if (valid) {
+                    final Object callback = XposedHelpers.getObjectField(securityView, "mCallback");
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        try {
+                            XposedHelpers.callMethod(callback, "reportUnlockAttempt", userId, true, 0);
+                            XposedHelpers.callMethod(callback, "dismiss", true, userId);
+                        } catch (Throwable t) {
+                            GravityBox.log(TAG, "Error dimissing keyguard: ", t);
+                        }
+                    });
                 }
+            } catch (Throwable t) {
+                GravityBox.log(TAG, t);
             }
         });
     }

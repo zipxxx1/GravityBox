@@ -67,33 +67,13 @@ public class RingerModeShortcut extends AMultiShortcut {
     protected List<IIconListAdapterItem> getShortcutList() {
         final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShortcutItem(mContext, R.string.ringer_mode_sound, 
-                R.drawable.shortcut_ringer_ring, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ModHwKeys.EXTRA_RINGER_MODE, MODE_RING);
-                    }
-                }));
+                R.drawable.shortcut_ringer_ring, intent -> intent.putExtra(ModHwKeys.EXTRA_RINGER_MODE, MODE_RING)));
         list.add(new ShortcutItem(mContext, R.string.ringer_mode_sound_vibrate,
-                R.drawable.shortcut_ringer_ring_vibrate, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ModHwKeys.EXTRA_RINGER_MODE, MODE_RING_VIBRATE);
-                    }
-                }));
+                R.drawable.shortcut_ringer_ring_vibrate, intent -> intent.putExtra(ModHwKeys.EXTRA_RINGER_MODE, MODE_RING_VIBRATE)));
         list.add(new ShortcutItem(mContext, R.string.dnd_tile_em_alarms,
-                R.drawable.shortcut_ringer_silent, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ModHwKeys.EXTRA_RINGER_MODE, MODE_SILENT);
-                    }
-                }));
+                R.drawable.shortcut_ringer_silent, intent -> intent.putExtra(ModHwKeys.EXTRA_RINGER_MODE, MODE_SILENT)));
         list.add(new ShortcutItem(mContext, R.string.ringer_mode_vibrate,
-                R.drawable.shortcut_ringer_vibrate, new ExtraDelegate() {
-                    @Override
-                    public void addExtraTo(Intent intent) {
-                        intent.putExtra(ModHwKeys.EXTRA_RINGER_MODE, MODE_VIBRATE);
-                    }
-                }));
+                R.drawable.shortcut_ringer_vibrate, intent -> intent.putExtra(ModHwKeys.EXTRA_RINGER_MODE, MODE_VIBRATE)));
 
         return list;
     }
