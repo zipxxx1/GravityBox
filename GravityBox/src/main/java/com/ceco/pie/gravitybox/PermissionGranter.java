@@ -107,6 +107,12 @@ public class PermissionGranter {
                                     permission.MODIFY_AUDIO_SETTINGS);
                             XposedHelpers.callMethod(ps, "grantInstallPermission", p);
                         }
+                        // Add permission needed by SubscriptionManager
+                        if (!grantedPerms.contains(permission.WRITE_APN_SETTINGS)) {
+                            final Object p = XposedHelpers.callMethod(permissions, "get",
+                                    permission.WRITE_APN_SETTINGS);
+                            XposedHelpers.callMethod(ps, "grantInstallPermission", p);
+                        }
                     }
                 }
             });
