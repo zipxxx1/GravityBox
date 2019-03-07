@@ -1974,6 +1974,12 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             super.onStop();
         }
 
+        @Override
+        public void onDestroy() {
+            AppPickerPreference.sPrefsFragment = null;
+            super.onDestroy();
+        }
+
         private void maybeShowCompatWarningDialog() {
             final int stage = mPrefs.getInt("compat_warning_stage", 0);
             if (stage < 2) {

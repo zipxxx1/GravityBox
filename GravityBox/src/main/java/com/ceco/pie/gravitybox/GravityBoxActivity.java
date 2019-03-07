@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,10 +25,13 @@ import android.os.Bundle;
 @SuppressLint("Registered")
 public class GravityBoxActivity extends Activity {
 
+    private boolean mIsThemeDark;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         File file = new File(Utils.getFilesDir(this) + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
-        if (file.exists()) {
+        mIsThemeDark = file.exists();
+        if (mIsThemeDark) {
             setTheme(R.style.AppThemeDark);
         }
         super.onCreate(savedInstanceState);
@@ -44,5 +47,9 @@ public class GravityBoxActivity extends Activity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(GravityBoxContextWrapper.wrap(newBase));
+    }
+
+    protected final boolean isThemeDark() {
+        return mIsThemeDark;
     }
 }

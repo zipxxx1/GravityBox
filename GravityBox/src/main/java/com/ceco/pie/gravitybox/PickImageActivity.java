@@ -31,6 +31,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore.Images;
+import android.view.ContextThemeWrapper;
 import android.widget.Toast;
 
 public class PickImageActivity extends GravityBoxActivity {
@@ -151,15 +152,16 @@ public class PickImageActivity extends GravityBoxActivity {
         } else if (mCropMode == CropMode.CROP) {
             cropImage(result.file);
         } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                    .setTitle(R.string.imgpick_crop_ask_title)
-                    .setMessage(getString(R.string.imgpick_crop_ask_msg, mOutputSize.x, mOutputSize.y))
-                    .setPositiveButton(R.string.yes, (dialog, which) -> cropImage(result.file))
-                    .setNegativeButton(R.string.no, (dialog, which) -> {
-                        setResult(Activity.RESULT_OK,
-                                new Intent().putExtra(EXTRA_FILE_PATH, result.file.getAbsolutePath()));
-                        finish();
-                    });
+            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(
+                    this, isThemeDark() ? R.style.AlertDialogStyleDark : R.style.AlertDialogStyle))
+                .setTitle(R.string.imgpick_crop_ask_title)
+                .setMessage(getString(R.string.imgpick_crop_ask_msg, mOutputSize.x, mOutputSize.y))
+                .setPositiveButton(R.string.yes, (dialog, which) -> cropImage(result.file))
+                .setNegativeButton(R.string.no, (dialog, which) -> {
+                    setResult(Activity.RESULT_OK,
+                            new Intent().putExtra(EXTRA_FILE_PATH, result.file.getAbsolutePath()));
+                    finish();
+                });
             mAlertDialog = builder.create();
             mAlertDialog.show();
         }

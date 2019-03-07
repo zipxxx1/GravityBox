@@ -95,7 +95,6 @@ public class AppPickerPreference extends DialogPreference
     public static final int MODE_SHORTCUT = 1;
 
     public static PrefsFragment sPrefsFragment;
-    private static IconListAdapter sIconPickerAdapter;
 
     private Context mContext;
     private ListView mListView;
@@ -121,6 +120,7 @@ public class AppPickerPreference extends DialogPreference
     private boolean mForceCustomIcon;
     private boolean mAllowGravityBoxActions;
     private Bundle mExtraData;
+    private IconListAdapter mIconPickerAdapter;
 
     private static LruCache<String, BitmapDrawable> sAppIconCache;
     static {
@@ -221,10 +221,7 @@ public class AppPickerPreference extends DialogPreference
 
         setDialogLayoutResource(R.layout.app_picker_preference);
         setPositiveButtonText(null);
-
-        if (sIconPickerAdapter == null) {
-            initializeIconPickerAdapter();
-        }
+        initializeIconPickerAdapter();
     }
 
     private void initializeIconPickerAdapter() {
@@ -241,8 +238,8 @@ public class AppPickerPreference extends DialogPreference
                     icons.getResourceId(i, 0), 0, mContext);
             list.add(item);
         }
-        sIconPickerAdapter = new IconListAdapter(mContext, list);
-        sIconPickerAdapter.setAutoTintIcons(true);
+        mIconPickerAdapter = new IconListAdapter(mContext, list);
+        mIconPickerAdapter.setAutoTintIcons(true);
         icons.recycle();
     }
 
@@ -370,16 +367,15 @@ public class AppPickerPreference extends DialogPreference
     @Override
     public void onClick(View v) {
         if (v != mBtnAppIcon || 
-                sIconPickerAdapter == null ||
                 getPersistedString(null) == null) return;
 
         if (mIconPickerDialog == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
                 .setTitle(R.string.icon_picker_choose_icon_title)
-                .setAdapter(sIconPickerAdapter, (dialog, which) -> {
+                .setAdapter(mIconPickerAdapter, (dialog, which) -> {
                     dialog.dismiss();
                     try {
-                        BasicIconListItem item = (BasicIconListItem) sIconPickerAdapter.getItem(which);
+                        BasicIconListItem item = (BasicIconListItem) mIconPickerAdapter.getItem(which);
                         Intent intent = Intent.parseUri(getPersistedString(null), 0);
                         if (intent.hasExtra("icon")) {
                             intent.removeExtra("icon");
