@@ -117,6 +117,7 @@
         <item>@string/qs_tile_airplane_mode</item>
         <item>@string/qs_tile_gps</item>
         <item>@string/qs_tile_wifi_ap</item>
+        <item>@string/qs_tile_nfc_aosp</item>
         <!-- GB -->
         <item>@string/qs_tile_nfc</item>
         <item>@string/qs_tile_gps_slimkat</item>
@@ -155,6 +156,7 @@
         <item>aosp_tile_airplane_mode</item>
         <item>aosp_tile_location</item>
         <item>aosp_tile_hotspot</item>
+        <item>aosp_tile_nfc</item>
         <!-- GB -->
         <item>gb_tile_nfc</item>
         <item>gb_tile_gps_slimkat</item>

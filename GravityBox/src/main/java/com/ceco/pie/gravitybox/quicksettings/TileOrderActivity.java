@@ -191,7 +191,8 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         if ((key.equals("aosp_tile_cell") || key.equals("gb_tile_network_mode") ||
                 key.equals("gb_tile_smart_radio")) && Utils.isWifiOnly(mContext))
             return false;
-        if (key.equals("gb_tile_nfc") && !Utils.hasNfc(mContext))
+        if ((key.equals("gb_tile_nfc") || key.equals("aosp_tile_nfc")) &&
+                !Utils.hasNfc(mContext))
             return false;
         if (key.equals("gb_tile_quiet_hours") &&
                 (LedSettings.isUncLocked(mContext) ||

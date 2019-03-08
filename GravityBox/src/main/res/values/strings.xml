@@ -101,6 +101,7 @@
     <string name="qs_tile_stay_awake">Stay Awake</string>
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_nfc_aosp">NFC (Stock)</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Lock screen</string>

@@ -56,6 +56,8 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new BluetoothTile(host, aospKey, tile, prefs, eventDistributor);
         else if (WifiTile.AOSP_KEY.equals(aospKey))
             return new WifiTile(host, aospKey, tile, prefs, eventDistributor);
+        else if (NfcTileAosp.AOSP_KEY.equals(aospKey))
+            return new NfcTileAosp(host, aospKey, tile, prefs, eventDistributor);
         // Default wrapper for all other stock tiles we do not modify
         else
             return new AospTileDefault(host, aospKey, tile, prefs, eventDistributor);
@@ -78,6 +80,11 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         if (isLocked()) {
+            // workaround for AOSP bug in NFC tile (and maybe in others)
+            if (XposedHelpers.getObjectField(state, "label") == null) {
+                if (DEBUG) log("handleUpdateState: setting null label to empty string for " + mKey);
+                XposedHelpers.setObjectField(state, "label", "");
+            }
             final LockedTileIndicator lti = getQsPanel().getLockedTileIndicator();
             if (lti == LockedTileIndicator.DIM) {
                 XposedHelpers.setIntField(state, "state", Tile.STATE_UNAVAILABLE);
