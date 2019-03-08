@@ -1,8 +1,8 @@
 GravityBox
 ==========
 
-XPosed Tweak Box for devices running Android 8.x (Oreo)
+XPosed Tweak Box for devices running Android 9 (Pie)
 
-Visit the [official support thread](https://forum.xda-developers.com/xposed/modules/app-gravitybox-v8-0-0-beta-1-tweak-box-t3739929) at XDA for more info.
+Visit the [official support thread](http://forum.xda-developers.com/showthread.php?t=3908768) at XDA for more info.
 
-Copyright (C) 2018 Peter Gregus (xgravitybox@gmail.com)
+Copyright (C) 2019 Peter Gregus (xgravitybox@gmail.com)
