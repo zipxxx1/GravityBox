@@ -98,6 +98,7 @@
     <string name="qs_tile_stay_awake">Uyanık Kal</string>
     <string name="qs_tile_screenshot">Ekran Görüntüsü</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_nfc_aosp">NFC (Stok)</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
     <string name="qs_tile_smart_radio">Akıllı Radyo</string>
     <string name="qs_tile_lock_screen">Ekranı kilitle</string>
@@ -1965,5 +1966,12 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="tuneable_reboot_required">Yeniden başlatma gerekli</string>
     <string name="pref_tuneable_value_int_error">Geçersiz değer. Tamsayı bekleniyor</string>
     <string name="tuner_manager_not_responding">Ayar yöneticisi yanıt vermiyor</string>
+
+    <!-- Stock sound -->
+    <string name="stock_sound">Stok ses</string>
+
+    <!-- Force ring volume control -->
+    <string name="pref_vol_force_ring_control_title">Zil sesi kontrolünü zorla</string>
+    <string name="pref_vol_force_ring_control_summary">Etkinleştirildiğinde, ses tuşları müzik sesi yerine zil sesini kontrol eder</string>
 
 </resources>
