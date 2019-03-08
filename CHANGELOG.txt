@@ -1,3 +1,7 @@
+Changelog 9.0.0-beta-1 - 08/03/2019
+--------------------------------------
+- Migrated to Android Pie
+
 Changelog 8.5.0 - 20/01/2019
 --------------------------------------
 - Introducing Advanced tuning (premium feature)
