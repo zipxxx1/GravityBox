@@ -3043,6 +3043,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_LOCKSCREEN_BG_CHANGED);
                 intent.putExtra(EXTRA_LOCKSCREEN_BG,
                         prefs.getString(PREF_KEY_LOCKSCREEN_BACKGROUND, LOCKSCREEN_BG_DEFAULT));
+                delayedBroadcast = true;
             } else if (key.equals(PREF_KEY_LOW_BATTERY_WARNING_POLICY)) {
                 intent.setAction(ACTION_PREF_LOW_BATTERY_WARNING_POLICY_CHANGED);
                 intent.putExtra(EXTRA_LOW_BATTERY_WARNING_POLICY, prefs.getString(key, "DEFAULT"));

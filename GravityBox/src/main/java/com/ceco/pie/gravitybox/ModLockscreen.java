@@ -40,7 +40,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -68,8 +67,6 @@ public class ModLockscreen {
     private static final String CLASS_KG_PASSWORD_TEXT_VIEW = CLASS_PATH + ".PasswordTextView";
     private static final String CLASS_KG_PASSWORD_TEXT_VIEW_PIN = CLASS_PATH + ".PasswordTextViewForPin";
     public static final String CLASS_KGVIEW_MEDIATOR = "com.android.systemui.keyguard.KeyguardViewMediator";
-    private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
-    private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
     private static final String CLASS_SB_WINDOW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
     private static final String CLASS_KG_VIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
@@ -122,7 +119,7 @@ public class ModLockscreen {
             if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED)
                  || action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED)) {
                 mPrefs.reload();
-                prepareCustomBackground();
+                prepareCustomBackground(true);
                 prepareBottomActions();
                 if (DEBUG) log("Settings reloaded");
             } else if (action.equals(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED)) {
@@ -158,28 +155,25 @@ public class ModLockscreen {
         }
     };
 
-    public static String getUmcInsecureFieldName() {
-        switch (Build.VERSION.SDK_INT) {
-            default: return "mCanSkipBouncer";
-        }
-    }
-
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs, final ClassLoader classLoader) {
+        // main setup - mandatory - nothing else will work if this fails
+        final Class<?> kgPasswordViewClass;
+        final Class<?> kgPINViewClass;
+        final Class<?> kgPasswordTextViewClass;
+        final Class<?> kgViewMediatorClass;
+        final Class<?> sbWindowManagerClass;
         try {
             mPrefs = prefs;
             mQuietHours = new QuietHours(qhPrefs);
 
-            final Class<?> kgPasswordViewClass = XposedHelpers.findClass(CLASS_KG_PASSWORD_VIEW, classLoader);
-            final Class<?> kgPINViewClass = XposedHelpers.findClass(CLASS_KG_PIN_VIEW, classLoader);
-            final Class<?> kgPasswordTextViewClass = XposedHelpers.findClass(CLASS_KG_PASSWORD_TEXT_VIEW, classLoader);
-            final Class<?> kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, classLoader);
-            final Class<?> lockPatternViewClass = XposedHelpers.findClass(CLASS_LOCK_PATTERN_VIEW, classLoader);
-            final Class<? extends Enum> displayModeEnum = (Class<? extends Enum>) XposedHelpers.findClass(ENUM_DISPLAY_MODE, classLoader);
-            final Class<?> sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader); 
+            kgPasswordViewClass = XposedHelpers.findClass(CLASS_KG_PASSWORD_VIEW, classLoader);
+            kgPINViewClass = XposedHelpers.findClass(CLASS_KG_PIN_VIEW, classLoader);
+            kgPasswordTextViewClass = XposedHelpers.findClass(CLASS_KG_PASSWORD_TEXT_VIEW, classLoader);
+            kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, classLoader);
+            sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader);
 
-            String setupMethodName = "setupLocked";
-            XposedHelpers.findAndHookMethod(kgViewMediatorClass, setupMethodName, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(kgViewMediatorClass, "setupLocked", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
@@ -216,7 +210,13 @@ public class ModLockscreen {
                     if (DEBUG) log("Keyguard mediator constructed");
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up Lockscreen tweaks:", t);
+            return;
+        }
 
+        // custom background
+        try {
             XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_STATUSBAR, classLoader,
                     "updateMediaMetaData", boolean.class, boolean.class, new XC_MethodHook() {
                 @Override
@@ -227,7 +227,8 @@ public class ModLockscreen {
 
                     int state = XposedHelpers.getIntField(mStatusBar, "mState");
                     if (state != StatusBarState.KEYGUARD && state != StatusBarState.SHADE_LOCKED) {
-                        if (DEBUG) log("updateMediaMetaData: Invalid status bar state: " + state);
+                        if (DEBUG)
+                            log("updateMediaMetaData: Invalid status bar state: " + state);
                         return;
                     }
 
@@ -263,11 +264,17 @@ public class ModLockscreen {
                         }
                         backDrop.setVisibility(View.VISIBLE);
                         backDrop.animate().alpha(1f);
-                        if (DEBUG) log("updateMediaMetaData: showing custom background");
+                        if (DEBUG)
+                            log("updateMediaMetaData: showing custom background");
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up updateMediaMetaData hook:", t);
+        }
 
+        // lockscreen rotation
+        try {
             final Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_ROTATION, "DEFAULT"));
             if (triState != Utils.TriState.DEFAULT) {
@@ -289,14 +296,19 @@ public class ModLockscreen {
                     }
                 });
             }
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up shouldEnableKeyguardScreenRotation hook:", t);
+        }
 
+        // quick unlock for password view
+        try {
             XposedHelpers.findAndHookMethod(kgPasswordViewClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
                     if (!mPrefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) return;
 
-                    final TextView passwordEntry = 
+                    final TextView passwordEntry =
                             (TextView) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
                     if (passwordEntry == null) return;
 
@@ -312,7 +324,12 @@ public class ModLockscreen {
                     });
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up onFinishInflate hook of PasswordView:", t);
+        }
 
+        // PIN scramble and quick unlock for PIN view and Password view
+        try {
             XposedHelpers.findAndHookMethod(kgPINViewClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
@@ -323,7 +340,7 @@ public class ModLockscreen {
                         }
                     }
                     if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) {
-                        final View passwordEntry = 
+                        final View passwordEntry =
                                 (View) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
                         if (passwordEntry != null) {
                             XposedHelpers.setAdditionalInstanceField(passwordEntry, "gbPINView",
@@ -332,8 +349,12 @@ public class ModLockscreen {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up onFinishInflate hook of PINView:", t);
+        }
 
-            if (!Utils.isXperiaDevice()) {
+        if (!Utils.isXperiaDevice()) {
+            try {
                 XposedHelpers.findAndHookMethod(kgPINViewClass, "resetState", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(final MethodHookParam param) {
@@ -343,8 +364,12 @@ public class ModLockscreen {
                         }
                     }
                 });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error setting up resetState hook of PINView:", t);
             }
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(kgPasswordTextViewClass, "append", char.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
@@ -359,8 +384,12 @@ public class ModLockscreen {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up append hook of PasswordTextView:", t);
+        }
 
-            if (Utils.isOxygenOsRom()) {
+        if (Utils.isOxygenOsRom()) {
+            try {
                 XposedHelpers.findAndHookMethod(CLASS_KG_PASSWORD_TEXT_VIEW_PIN, classLoader,
                         "append", char.class, new XC_MethodHook() {
                     @Override
@@ -375,8 +404,13 @@ public class ModLockscreen {
                         }
                     }
                 });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error setting up append hook of OnePlus PasswordTextViewForPin:", t);
             }
+        }
 
+        // Suppress lockscreen sounds during QuietHours
+        try {
             XposedHelpers.findAndHookMethod(kgViewMediatorClass, "playSounds", boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) {
@@ -385,7 +419,12 @@ public class ModLockscreen {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up playSounds hook of KeyguardViewMediator:", t);
+        }
 
+        // Direct unlock and Smart unlock
+        try {
             XposedHelpers.findAndHookMethod(CLASS_KG_VIEW_MANAGER, classLoader, "onScreenTurnedOff",
                     new XC_MethodHook() {
                 @Override
@@ -433,7 +472,12 @@ public class ModLockscreen {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up Direct/Smart unlock hooks:", t);
+        }
 
+        // Lockscreen App Bar
+        try {
             XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_NOTIF_PANEL_VIEW, classLoader,
                     "onFinishInflate", new XC_MethodHook() {
                 @Override
@@ -461,7 +505,12 @@ public class ModLockscreen {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up Lockscreen App Bar:", t);
+        }
 
+        // double-tap to sleep
+        try {
             XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_NOTIF_PANEL_VIEW, classLoader,
                     "onTouchEvent", MotionEvent.class, new XC_MethodHook() {
                 @Override
@@ -475,176 +524,177 @@ public class ModLockscreen {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up DT2S:", t);
+        }
 
-            if (!Utils.isXperiaDevice()) {
-                XC_MethodHook carrierTextHook = new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(final MethodHookParam param) {
-                        if (!mCarrierTextViews.contains(param.thisObject)) {
-                            mCarrierTextViews.add((TextView) param.thisObject);
-                        }
-                        String text = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, "");
-                        if (!text.isEmpty()) {
-                            ((TextView)param.thisObject).setText(text.trim().isEmpty() ? "" : text);
-                        }
+        // Carrier text
+        if (!Utils.isXperiaDevice()) {
+            XC_MethodHook carrierTextHook = new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) {
+                    if (!mCarrierTextViews.contains(param.thisObject)) {
+                        mCarrierTextViews.add((TextView) param.thisObject);
                     }
-                };
-                try {
-                    XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT,
-                            classLoader, "updateCarrierText", carrierTextHook);
-                } catch (Throwable t) {
-                    GravityBox.log(TAG, t);
+                    String text = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, "");
+                    if (!text.isEmpty()) {
+                        ((TextView)param.thisObject).setText(text.trim().isEmpty() ? "" : text);
+                    }
                 }
-            }
-
-            // bottom actions
+            };
             try {
-                if (!Utils.isSamsungRom()) {
-                    XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                            "updateLeftAffordanceIcon", new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(final MethodHookParam param) {
-                            ImageView v = (ImageView) XposedHelpers.getObjectField(
-                                    param.thisObject, "mLeftAffordanceView");
-                            if (mLeftActionHidden) {
-                                v.setVisibility(View.GONE);
-                            } else if (mLeftAction != null) {
-                                v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
-                                        View.VISIBLE : View.GONE);
-                                if (mLeftActionDrawableOrig == null) {
-                                    mLeftActionDrawableOrig = v.getDrawable();
-                                }
-                                v.setImageDrawable(mLeftAction.getAppIcon());
-                                v.setContentDescription(mLeftAction.getAppName());
-                            } else if (mLeftActionDrawableOrig != null) {
-                                v.setImageDrawable(mLeftActionDrawableOrig);
-                                mLeftActionDrawableOrig = null;
-                            }
-                        }
-                    });
+                XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT,
+                        classLoader, "updateCarrierText", carrierTextHook);
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error setting up carrier text hook:", t);
+            }
+        }
 
-                    XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                            "launchLeftAffordance", new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                            if (mLeftAction != null) {
-                                SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
-                                param.setResult(null);
-                            }
-                        }
-                    });
-                } else {
-                    XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                            "launchPhone", new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                            if (mLeftAction != null) {
-                                SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
-                                param.setResult(null);
-                            }
-                        }
-                    });
-                }
-
+        // bottom actions
+        try {
+            if (!Utils.isSamsungRom()) {
                 XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                         "updateCameraVisibility", new XC_MethodHook() {
+                        "updateLeftAffordanceIcon", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(final MethodHookParam param) {
-                        ImageView v;
-                        if (Utils.isSamsungRom()) {
-                            v = (ImageView) XposedHelpers.getObjectField(
-                                    param.thisObject, "mLeftAffordanceView");
-                            if (mLeftActionHidden) {
-                                v.setVisibility(View.GONE);
-                            } else if (mLeftAction != null) {
-                                v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
-                                        View.VISIBLE : View.GONE);
-                                if (mLeftActionDrawableOrig == null) {
-                                    mLeftActionDrawableOrig = v.getDrawable();
-                                }
-                                v.setImageDrawable(mLeftAction.getAppIcon());
-                                v.setContentDescription(mLeftAction.getAppName());
-                            } else if (mLeftActionDrawableOrig != null) {
-                                v.setImageDrawable(mLeftActionDrawableOrig);
-                                mLeftActionDrawableOrig = null;
-                            }
-                            v = (ImageView) XposedHelpers.getObjectField(
-                                    param.thisObject, "mRightAffordanceView");
-                        } else {
-                            v = (ImageView) XposedHelpers.getObjectField(
-                                   param.thisObject, "mRightAffordanceView");
-                        }
-                        if (mRightActionHidden) {
+                        ImageView v = (ImageView) XposedHelpers.getObjectField(
+                                param.thisObject, "mLeftAffordanceView");
+                        if (mLeftActionHidden) {
                             v.setVisibility(View.GONE);
-                        } else if (mRightAction != null) {
+                        } else if (mLeftAction != null) {
                             v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
                                     View.VISIBLE : View.GONE);
-                            if (mRightActionDrawableOrig == null) {
-                                mRightActionDrawableOrig = v.getDrawable();
+                            if (mLeftActionDrawableOrig == null) {
+                                mLeftActionDrawableOrig = v.getDrawable();
                             }
-                            v.setImageDrawable(mRightAction.getAppIcon());
-                            v.setContentDescription(mRightAction.getAppName());
-                        } else if (mRightActionDrawableOrig != null) {
-                            v.setImageDrawable(mRightActionDrawableOrig);
-                            mRightActionDrawableOrig = null;
+                            v.setImageDrawable(mLeftAction.getAppIcon());
+                            v.setContentDescription(mLeftAction.getAppName());
+                        } else if (mLeftActionDrawableOrig != null) {
+                            v.setImageDrawable(mLeftActionDrawableOrig);
+                            mLeftActionDrawableOrig = null;
                         }
                     }
                 });
 
-                XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_KG_BOTTOM_AREA_VIEW, classLoader),
-                         "launchCamera", new XC_MethodHook() {
+                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                        "launchLeftAffordance", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                        if (mRightAction != null) {
-                            SysUiManagers.AppLauncher.startActivity(mContext, mRightAction.getIntent());
+                        if (mLeftAction != null) {
+                            SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
                             param.setResult(null);
                         }
                     }
                 });
-
+            } else {
                 XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                        "onVisibilityChanged", View.class, int.class, new XC_MethodHook() {
+                        "launchPhone", new XC_MethodHook() {
                     @Override
-                    protected void afterHookedMethod(final MethodHookParam param) {
-                        if (param.thisObject == param.args[0] &&
-                                (int)param.args[1] == View.VISIBLE &&
-                                (mLeftAction != null || mLeftActionDrawableOrig != null)) {
-                            XposedHelpers.callMethod(param.thisObject, Utils.isSamsungRom() ?
-                                    "updateCameraVisibility" : "updateLeftAffordanceIcon");
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mLeftAction != null) {
+                            SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
+                            param.setResult(null);
                         }
                     }
                 });
-
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
             }
 
-            // Keyguard scrim alpha (Background opacity)
-            try {
-                XposedHelpers.findAndHookMethod(CLASS_SCRIM_CONTROLLER, classLoader,
-                "scheduleUpdate", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        int opacity = mPrefs.getInt(
-                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 0);
-                        if (opacity == 0) opacity = 55;
-                        Object[] states = (Object[]) XposedHelpers.callStaticMethod(
-                                XposedHelpers.findClass(CLASS_SCRIM_STATE, classLoader),
-                                "values");
-                        final float alpha = (100 - opacity) / 100f;
-                        for (Object state : states) {
-                            XposedHelpers.callMethod(state,
-                                    "setScrimBehindAlphaKeyguard", alpha);
+            XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                     "updateCameraVisibility", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) {
+                    ImageView v;
+                    if (Utils.isSamsungRom()) {
+                        v = (ImageView) XposedHelpers.getObjectField(
+                                param.thisObject, "mLeftAffordanceView");
+                        if (mLeftActionHidden) {
+                            v.setVisibility(View.GONE);
+                        } else if (mLeftAction != null) {
+                            v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
+                                    View.VISIBLE : View.GONE);
+                            if (mLeftActionDrawableOrig == null) {
+                                mLeftActionDrawableOrig = v.getDrawable();
+                            }
+                            v.setImageDrawable(mLeftAction.getAppIcon());
+                            v.setContentDescription(mLeftAction.getAppName());
+                        } else if (mLeftActionDrawableOrig != null) {
+                            v.setImageDrawable(mLeftActionDrawableOrig);
+                            mLeftActionDrawableOrig = null;
                         }
+                        v = (ImageView) XposedHelpers.getObjectField(
+                                param.thisObject, "mRightAffordanceView");
+                    } else {
+                        v = (ImageView) XposedHelpers.getObjectField(
+                               param.thisObject, "mRightAffordanceView");
                     }
-                });
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
-            }
+                    if (mRightActionHidden) {
+                        v.setVisibility(View.GONE);
+                    } else if (mRightAction != null) {
+                        v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
+                                View.VISIBLE : View.GONE);
+                        if (mRightActionDrawableOrig == null) {
+                            mRightActionDrawableOrig = v.getDrawable();
+                        }
+                        v.setImageDrawable(mRightAction.getAppIcon());
+                        v.setContentDescription(mRightAction.getAppName());
+                    } else if (mRightActionDrawableOrig != null) {
+                        v.setImageDrawable(mRightActionDrawableOrig);
+                        mRightActionDrawableOrig = null;
+                    }
+                }
+            });
+
+            XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_KG_BOTTOM_AREA_VIEW, classLoader),
+                     "launchCamera", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mRightAction != null) {
+                        SysUiManagers.AppLauncher.startActivity(mContext, mRightAction.getIntent());
+                        param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                    "onVisibilityChanged", View.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) {
+                    if (param.thisObject == param.args[0] &&
+                            (int)param.args[1] == View.VISIBLE &&
+                            (mLeftAction != null || mLeftActionDrawableOrig != null)) {
+                        XposedHelpers.callMethod(param.thisObject, Utils.isSamsungRom() ?
+                                "updateCameraVisibility" : "updateLeftAffordanceIcon");
+                    }
+                }
+            });
+
         } catch (Throwable t) {
-            GravityBox.log(TAG, t);
+            GravityBox.log(TAG, "Error setting up bottom actions:", t);
         }
-    } 
+
+        // Keyguard scrim alpha (Background opacity)
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_SCRIM_CONTROLLER, classLoader,
+            "scheduleUpdate", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) {
+                    int opacity = mPrefs.getInt(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 0);
+                    if (opacity == 0) opacity = 55;
+                    Object[] states = (Object[]) XposedHelpers.callStaticMethod(
+                            XposedHelpers.findClass(CLASS_SCRIM_STATE, classLoader),
+                            "values");
+                    final float alpha = (100 - opacity) / 100f;
+                    for (Object state : states) {
+                        XposedHelpers.callMethod(state,
+                                "setScrimBehindAlphaKeyguard", alpha);
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up background opacity hook:", t);
+        }
+    }
 
     private static KeyguardStateMonitor.Listener mKgStateListener = new KeyguardStateMonitor.Listener() {
         @Override
@@ -773,6 +823,10 @@ public class ModLockscreen {
     }
 
     private static synchronized void prepareCustomBackground() {
+        prepareCustomBackground(false);
+    }
+
+    private static synchronized void prepareCustomBackground(boolean updateMediaMetadata) {
         try {
             if (mCustomBg != null) {
                 mCustomBg = null;
@@ -798,6 +852,13 @@ public class ModLockscreen {
                 mCustomBg = Utils.blurBitmap(mContext, mCustomBg, mPrefs.getInt(
                           GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
             }
+
+            if (updateMediaMetadata && mStatusBar != null) {
+                try {
+                    XposedHelpers.callMethod(mStatusBar, "updateMediaMetaData", false, false);
+                } catch (Throwable ignore) { }
+            }
+
             if (DEBUG) log("prepareCustomBackground: type=" + bgType);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);

@@ -150,7 +150,7 @@ public class NotificationDataMonitor {
     }
 
     public int getNotifCountFor(String pkg) {
-        if (pkg == null) return 0;
+        if (pkg == null || mNotifData == null) return 0;
 
         int count = 0;
 
