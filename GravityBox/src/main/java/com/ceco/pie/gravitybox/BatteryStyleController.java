@@ -261,7 +261,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                if (Utils.isSamsungRom()) {
                    mHooks.add(XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
                           int.class, boolean.class, boolean.class, int.class, int.class, int.class,
-                          int.class, boolean.class, new XC_MethodHook() {
+                          new XC_MethodHook() {
                        @Override
                        protected void afterHookedMethod(MethodHookParam param) {
                            updateBatteryStyle();
