@@ -17,8 +17,6 @@ package com.ceco.pie.gravitybox;
 
 import java.io.File;
 
-import com.ceco.pie.gravitybox.managers.FingerprintLauncher;
-
 import android.os.Build;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
@@ -129,9 +127,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage
             ModLedControl.initAndroid(prefs, uncPrefs, qhPrefs, lpparam.classLoader);
             ModTrustManager.initAndroid(prefs, lpparam.classLoader);
             ModFingerprint.initAndroid(prefs, lpparam.classLoader);
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE, false)) {
-                FingerprintLauncher.initAndroid(lpparam.classLoader);
-            }
             ModActivityManager.initAndroid(lpparam.classLoader);
         }
 

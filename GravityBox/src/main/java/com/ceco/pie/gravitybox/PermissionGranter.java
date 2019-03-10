@@ -113,6 +113,12 @@ public class PermissionGranter {
                                     permission.WRITE_APN_SETTINGS);
                             XposedHelpers.callMethod(ps, "grantInstallPermission", p);
                         }
+                        // Add permission needed by Fingerprint Launcher
+                        if (!grantedPerms.contains("android.permission.MANAGE_FINGERPRINT")) {
+                            final Object p = XposedHelpers.callMethod(permissions, "get",
+                                    "android.permission.MANAGE_FINGERPRINT");
+                            XposedHelpers.callMethod(ps, "grantInstallPermission", p);
+                        }
                     }
                 }
             });
