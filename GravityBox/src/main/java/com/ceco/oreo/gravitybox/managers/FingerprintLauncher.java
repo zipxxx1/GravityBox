@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -37,14 +37,12 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.AuthenticationResult;
 import android.hardware.fingerprint.FingerprintManager.CryptoObject;
-import android.os.Binder;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.widget.Toast;
-import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -53,46 +51,14 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
     private static final String TAG = "GB:FingerprintLauncher";
     private static final boolean DEBUG = false;
     private static final String KEY_NAME = "gravitybox.fingeprint.launcher";
-    private static final String CLASS_FP_SERVICE_WRAPPER = 
-            "com.android.server.fingerprint.FingerprintService.FingerprintServiceWrapper";
-    private static final String UID_SYSTEM_UI = "android.uid.systemui";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    // Fingerprint service
-    public static final void initAndroid(final ClassLoader classLoader) {
-        if (DEBUG) log("service init");
-
-        try {
-            XposedHelpers.findAndHookMethod(CLASS_FP_SERVICE_WRAPPER, classLoader,
-                    "isRestricted", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) {
-                    Object service = XposedHelpers.getSurroundingThis(param.thisObject);
-                    Context ctx = (Context) XposedHelpers.getObjectField(service, "mContext");
-                    String pkg = ctx.getPackageManager().getNameForUid(Binder.getCallingUid());
-                    if (pkg != null) {
-                        if (pkg.contains(":")) {
-                            pkg = pkg.split(":")[0];
-                        }
-                        if (DEBUG) log("service: isRestricted: pkg=" + pkg);
-                        if (UID_SYSTEM_UI.equals(pkg)) {
-                            param.setResult(false);
-                        }
-                    }
-                }
-            });
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
-    }
-
     // SystemUI
     private Context mContext;
     private Context mGbContext;
-    private XSharedPreferences mPrefs;
     private FingerprintManager mFpManager;
     private FingerprintHandler mFpHandler;
     private String mQuickApp;
@@ -101,16 +67,15 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
     private boolean mShowToast;
     private PowerManager mPm;
 
-    public FingerprintLauncher(Context ctx, XSharedPreferences prefs) throws Throwable {
+    FingerprintLauncher(Context ctx, XSharedPreferences prefs) throws Throwable {
         if (ctx == null)
             throw new IllegalArgumentException("Context cannot be null");
 
         mContext = ctx;
         mGbContext = Utils.getGbContext(mContext);
-        mPrefs = prefs;
 
-        mQuickApp = mPrefs.getString(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_APP, null);
-        mShowToast = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_SHOW_TOAST, true);
+        mQuickApp = prefs.getString(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_APP, null);
+        mShowToast = prefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_SHOW_TOAST, true);
 
         mPm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
 
@@ -291,12 +256,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
             }
         }
 
-        private Runnable mStartListeningRunnable = new Runnable() {
-            @Override
-            public void run() {
-                startListening();
-            }
-        };
+        private Runnable mStartListeningRunnable = this::startListening;
 
         @Override
         public void onAuthenticationError(int errMsgId, CharSequence errString) {

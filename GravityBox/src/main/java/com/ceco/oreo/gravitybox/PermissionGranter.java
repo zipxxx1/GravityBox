@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -103,6 +103,12 @@ public class PermissionGranter {
                         if (!grantedPerms.contains(permission.MODIFY_AUDIO_SETTINGS)) {
                             final Object p = XposedHelpers.callMethod(permissions, "get",
                                     permission.MODIFY_AUDIO_SETTINGS);
+                            XposedHelpers.callMethod(ps, "grantInstallPermission", p);
+                        }
+                        // Add permission needed by Fingerprint Launcher
+                        if (!grantedPerms.contains("android.permission.MANAGE_FINGERPRINT")) {
+                            final Object p = XposedHelpers.callMethod(permissions, "get",
+                                    "android.permission.MANAGE_FINGERPRINT");
                             XposedHelpers.callMethod(ps, "grantInstallPermission", p);
                         }
                     }
