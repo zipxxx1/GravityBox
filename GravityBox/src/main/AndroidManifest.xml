@@ -18,7 +18,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ceco.oreo.gravitybox"
     android:versionCode="852"
-    android:versionName="8.5.2" >
+    android:versionName="8.5.2-edxposed" >
 
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
