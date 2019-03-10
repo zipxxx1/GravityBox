@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,27 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox;
-
-import java.util.List;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.XModuleResources;
-import android.content.res.XResources;
-import android.media.AudioManager;
-import android.os.Build;
-import android.view.View;
 import android.widget.ImageButton;
-import com.ceco.oreo.gravitybox.R;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModVolumePanel {
     private static final String TAG = "GB:ModVolumePanel";
@@ -79,6 +69,8 @@ public class ModVolumePanel {
         
     };
 
+    // EdXposed unsupported
+    /*
     public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
         XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
 
@@ -87,6 +79,7 @@ public class ModVolumePanel {
         mIconNotifMuteResId = XResources.getFakeResId(modRes, R.drawable.ic_audio_notification_mute);
         resparam.res.setReplacement(mIconNotifMuteResId, modRes.fwd(R.drawable.ic_audio_notification_mute));
     }
+    */
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
@@ -114,6 +107,8 @@ public class ModVolumePanel {
                 }
             });
 
+            // EdXposed unsupported
+            /*
             XposedHelpers.findAndHookMethod(classVolumePanel, "initDialog", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
@@ -122,6 +117,7 @@ public class ModVolumePanel {
                     }
                 }
             });
+            */
 
             XposedHelpers.findAndHookMethod(CLASS_VOLUME_DIALOG_MOTION, classLoader,
                     "setShowing", boolean.class, new XC_MethodHook() {
@@ -156,6 +152,8 @@ public class ModVolumePanel {
                 });
             }
 
+            // EdXposed unsupported
+            /*
             XC_MethodHook shouldBeVisibleHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
@@ -188,11 +186,14 @@ public class ModVolumePanel {
                     }
                 }
             });
+            */
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
     }
 
+    // EdXposed unsupported
+    /*
     private static void prepareNotificationRow() {
         try {
             XposedHelpers.callMethod(mVolumePanel, "addRow",
@@ -220,4 +221,5 @@ public class ModVolumePanel {
             return true;
         }
     }
+    */
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -166,22 +166,6 @@ public class ModLockscreen {
     public static String getUmcInsecureFieldName() {
         switch (Build.VERSION.SDK_INT) {
             default: return "mCanSkipBouncer";
-        }
-    }
-
-    public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
-        try {
-            // Lockscreen: disable menu key in lock screen
-            Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
-                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, "DEFAULT"));
-            if (DEBUG) log(GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY + ": " + triState);
-            if (triState != Utils.TriState.DEFAULT) {
-                resparam.res.setReplacement(PACKAGE_NAME, "bool", "config_disableMenuKeyInLockScreen",
-                        triState == Utils.TriState.DISABLED);
-                if (DEBUG) log("config_disableMenuKeyInLockScreen: " + (triState == Utils.TriState.DISABLED));
-            }
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
         }
     }
 

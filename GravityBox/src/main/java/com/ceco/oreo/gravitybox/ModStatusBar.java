@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,6 +16,7 @@
 package com.ceco.oreo.gravitybox;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.ceco.oreo.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
@@ -30,7 +31,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.content.ActivityNotFoundException;
@@ -40,7 +40,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.content.res.XResources;
 import android.database.ContentObserver;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -280,29 +279,70 @@ public class ModStatusBar {
         }
     }
 
-    public static void initResources(final XSharedPreferences prefs, final XSharedPreferences tunerPrefs,
-                                     final InitPackageResourcesParam resparam) {
+    private static List<String> sSupportedResourceNames;
+    public static void initResources(final XSharedPreferences prefs, final XSharedPreferences tunerPrefs) {
+        new ResourceProxy(PACKAGE_NAME, new ResourceProxy.Interceptor() {
+            @Override
+            public List<String> getSupportedResourceNames() {
+                if (sSupportedResourceNames == null) {
+                    sSupportedResourceNames = new ArrayList<>();
+                    sSupportedResourceNames.addAll(Arrays.asList(
+                            "rounded_corner_content_padding",
+                            "config_disableMenuKeyInLockScreen"
+                    ));
+                    // add overriden items from Advanced tuning if applicable
+                    if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
+                            !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
+                        TunerManager.addUserItemKeysToList(TunerManager.Category.FRAMEWORK,
+                                tunerPrefs, sSupportedResourceNames);
+                        TunerManager.addUserItemKeysToList(TunerManager.Category.SYSTEMUI,
+                                tunerPrefs, sSupportedResourceNames);
+                    }
+                }
+                return sSupportedResourceNames;
+            }
+
+            @Override
+            public boolean onIntercept(ResourceProxy.ResourceSpec resourceSpec) {
+                // Advanced tuning has priority
+                if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
+                        !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
+                    if (TunerManager.onIntercept(tunerPrefs, resourceSpec)) {
+                        return true;
+                    }
+                }
+
+                if (!resourceSpec.pkgName.equals(PACKAGE_NAME))
+                    return false;
+
+                switch (resourceSpec.name) {
+                    case "rounded_corner_content_padding":
+                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CORNER_PADDING_REMOVE, false)) {
+                            resourceSpec.value = 0;
+                            return true;
+                        }
+                        break;
+                    case "config_disableMenuKeyInLockScreen":
+                        Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
+                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, "DEFAULT"));
+                        if (triState != Utils.TriState.DEFAULT) {
+                            resourceSpec.value = (triState == Utils.TriState.DISABLED);
+                            return true;
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
+
+        // EdXposed unsupported
+        /*
         try {
             StatusbarSignalCluster.initResources(prefs, resparam);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
-
-        if (Build.VERSION.SDK_INT >= 27 &&
-                prefs.getBoolean(GravityBoxSettings.PREF_KEY_CORNER_PADDING_REMOVE, false)) {
-            try {
-                resparam.res.setReplacement(PACKAGE_NAME, "dimen", "rounded_corner_content_padding",
-                        new XResources.DimensionReplacement(0, TypedValue.COMPLEX_UNIT_DIP));
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
-            }
-        }
-
-        // Advanced tuning
-        if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
-                !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
-            TunerManager.applySystemUiConfiguration(tunerPrefs, resparam.res);
-        }
+        */
     }
 
     public static int getStatusBarState() {

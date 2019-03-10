@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.ledcontrol.LedMainActivity;
 import com.ceco.oreo.gravitybox.ledcontrol.LedSettings;
 import com.ceco.oreo.gravitybox.managers.BatteryInfoManager;
@@ -1745,6 +1744,11 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefPowerCameraVp = (EditTextPreference) findPreference(PREF_KEY_POWER_CAMERA_VP);
 
             mPrefTuner = findPreference(PREF_TUNER);
+
+            // Remove EdXposed unsupported preferences
+            Preference pEdXp = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
+            if (pEdXp != null) mPrefCatSignalCluster.removePreference(pEdXp);
+            mPrefCatMedia.removePreference(mPrefLinkVolumes);
 
             // Disable features not applicable to 8.1 / 8.0
             if (Build.VERSION.SDK_INT >= 27) {

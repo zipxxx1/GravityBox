@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,10 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -23,7 +21,6 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.oreo.gravitybox.managers.StatusBarIconManager;
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
@@ -35,17 +32,12 @@ import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.res.XModuleResources;
-import android.content.res.XResources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.telephony.TelephonyManager;
-import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -182,6 +174,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     } 
 
+    // EdXposed unsupported
+    /*
     public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
         XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
 
@@ -212,6 +206,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     lteStyle.equals("4G"));
         }
     }
+    */
 
     public static StatusbarSignalCluster create(ContainerType containerType,
             LinearLayout view, XSharedPreferences prefs) throws Throwable {
@@ -391,6 +386,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 "com.android.systemui.statusbar.policy.MobileSignalController", 
                 mView.getContext().getClassLoader());
 
+        // EdXposed unsupported
+        /*
         if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
                 !Utils.isMtkDevice() && !Utils.isOxygenOsRom()) {
             try {
@@ -426,6 +423,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 GravityBox.log(TAG, "updateDataNetType", t);
             }
         }
+        */
 
         if (Utils.isMotoXtDevice() && sPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_AOSP_MOBILE_TYPE, false)) {
