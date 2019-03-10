@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -29,6 +29,7 @@ public class QsPanelQuick {
     private static final boolean DEBUG = false;
 
     private static final String CLASS_QS_PANEL_QUICK = "com.android.systemui.qs.QuickQSPanel";
+    private static final String CLASS_TUNER_SERVICE_IMPL = "com.android.systemui.tuner.TunerServiceImpl";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -67,11 +68,12 @@ public class QsPanelQuick {
                 }
             });
     
-            XposedHelpers.findAndHookMethod(CLASS_QS_PANEL_QUICK, cl,
-                    "getNumQuickTiles", Context.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_TUNER_SERVICE_IMPL, cl,
+                    "getValue", String.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
-                    if (mNumTiles > 0) {
+                    if (DEBUG) log("TunerServiceImpl: getValue: key=" + param.args[0]);
+                    if (mNumTiles > 0 && "sysui_qqs_count".equals(param.args[0])) {
                         param.setResult(mNumTiles);
                     }
                 }
