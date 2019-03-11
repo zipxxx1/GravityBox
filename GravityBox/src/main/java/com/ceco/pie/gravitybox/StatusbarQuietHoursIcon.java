@@ -45,8 +45,20 @@ public class StatusbarQuietHoursIcon implements  QuietHoursListener {
     }
 
     private void updateIcon() {
-        setIconByMode();
-        mSysIconCtrl.setIconVisibility(SLOT, mQuietHours.showStatusbarIcon && mQuietHours.quietHoursActive());
+        if (mQuietHours.showStatusbarIcon && mQuietHours.quietHoursActive()) {
+            final int oldDrawableId = mCurrentDrawableId;
+            if (mQuietHours.mode == QuietHours.Mode.WEAR) {
+                mCurrentDrawableId = R.drawable.stat_sys_quiet_hours_wear;
+            } else {
+                mCurrentDrawableId = R.drawable.stat_sys_quiet_hours;
+            }
+            if (oldDrawableId != mCurrentDrawableId) {
+                mSysIconCtrl.setIcon(SLOT, mCurrentDrawableId);
+            }
+        } else {
+            mCurrentDrawableId = 0;
+            mSysIconCtrl.removeIcon(SLOT);
+        }
     }
 
     public void destroy() {
@@ -54,17 +66,5 @@ public class StatusbarQuietHoursIcon implements  QuietHoursListener {
         mSysIconCtrl.removeIcon(SLOT);
         mSysIconCtrl = null;
         mQuietHours = null;
-    }
-
-    private void setIconByMode() {
-        final int oldDrawableId = mCurrentDrawableId;
-        if (mQuietHours.mode == QuietHours.Mode.WEAR) {
-            mCurrentDrawableId = R.drawable.stat_sys_quiet_hours_wear;
-        } else {
-            mCurrentDrawableId = R.drawable.stat_sys_quiet_hours;
-        }
-        if (oldDrawableId != mCurrentDrawableId) {
-            mSysIconCtrl.setIcon(SLOT, mCurrentDrawableId);
-        }
     }
 }
