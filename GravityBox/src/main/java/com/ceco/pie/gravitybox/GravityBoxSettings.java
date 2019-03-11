@@ -1692,7 +1692,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (sSystemProperties.isOxygenOsRom) {
                 Preference p = findPreference(PREF_KEY_LOCKSCREEN_IMPRINT_MODE);
                 if (p != null) mPrefCatLsOther.removePreference(p);
-                mPrefCatPower.removePreference(mPrefCatPowerMenu);
                 p = findPreference(PREF_CAT_KEY_BATTERY_TILE);
                 if (p != null) mPrefCatQsTileSettings.removePreference(p);
                 mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
