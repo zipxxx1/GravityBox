@@ -1486,13 +1486,18 @@ public class ModHwKeys {
         }
     }
 
-    private static Method getNativeScreenshotMethod() {
+    private static boolean tryNativeScreenshot(final Handler handler, final long delayMs) {
         try {
-            Method m = mPhoneWindowManagerClass.getDeclaredMethod("takeScreenshot", int.class);
-            m.setAccessible(true);
-            return m;
+            Runnable r = (Runnable) XposedHelpers.getObjectField(mPhoneWindowManager,
+                    "mScreenshotRunnable");
+            handler.removeCallbacks(r);
+            try {
+                XposedHelpers.callMethod(r, "setScreenshotType", 1);
+            } catch (Throwable ignore) { }
+            handler.postDelayed(r, delayMs);
+            return true;
         } catch (Throwable t) {
-            return null;
+            return false;
         }
     }
 
@@ -1502,25 +1507,18 @@ public class ModHwKeys {
         final Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
         if (handler == null) return;
 
-        final Method m = getNativeScreenshotMethod();
-        if (m != null) {
-            handler.postDelayed(() -> {
-                try {
-                    m.invoke(mPhoneWindowManager, 1);
-                } catch (Throwable t) {
-                    GravityBox.log(TAG, t);
-                }
-            }, delayMs);
+        if (tryNativeScreenshot(handler, delayMs)) {
+            if (DEBUG) log("Used native screenshot method");
             return;
         }
 
-        synchronized (mScreenshotLock) {  
+        synchronized (mScreenshotLock) {
             if (mScreenshotConnection != null) {  
                 return;  
             }  
             ComponentName cn = new ComponentName("com.android.systemui",  
                     "com.android.systemui.screenshot.TakeScreenshotService");  
-            Intent intent = new Intent();  
+            Intent intent = new Intent();
             intent.setComponent(cn);  
             ServiceConnection conn = new ServiceConnection() {  
                 @Override  
