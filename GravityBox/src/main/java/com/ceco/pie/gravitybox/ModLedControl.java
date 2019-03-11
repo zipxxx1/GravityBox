@@ -252,7 +252,7 @@ public class ModLedControl {
                     SystemPropertyProvider.SETTING_UNC_TRIAL_COUNTDOWN, -1);
             if (uncTrialCountdown == -1) {
                 Settings.System.putInt(cr,
-                        SystemPropertyProvider.SETTING_UNC_TRIAL_COUNTDOWN, 50);
+                        SystemPropertyProvider.SETTING_UNC_TRIAL_COUNTDOWN, 100);
             } else {
                 if (--uncTrialCountdown >= 0) {
                     Settings.System.putInt(cr,

@@ -42,7 +42,7 @@ public class TunerManager implements BroadcastSubReceiver {
     public static final String TAG="GB:TunerManager";
     private static boolean DEBUG = false;
 
-    public static final String SETTING_TUNER_TRIAL_COUNTDOWN = "gravitybox_tuner_trial_countdown";
+    public static final String SETTING_TUNER_TRIAL_COUNTDOWN = "gravitybox_tuner_trial_countdown_v2";
     public static final String ACTION_GET_TUNEABLES = "gravitybox.intent.action.TUNER_GET_TUNABLES";
     public static final String EXTRA_TUNER_CATEGORY = "tunerCategory";
     public static final String EXTRA_TUNEABLES = "tunerTuneables";
@@ -71,7 +71,7 @@ public class TunerManager implements BroadcastSubReceiver {
                     SETTING_TUNER_TRIAL_COUNTDOWN, -1);
             if (trialCountdown == -1) {
                 Settings.System.putInt(cr,
-                        SETTING_TUNER_TRIAL_COUNTDOWN, 30);
+                        SETTING_TUNER_TRIAL_COUNTDOWN, 100);
             } else {
                 if (--trialCountdown >= 0) {
                     Settings.System.putInt(cr,

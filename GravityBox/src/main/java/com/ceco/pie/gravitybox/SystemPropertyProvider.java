@@ -48,7 +48,7 @@ public class SystemPropertyProvider {
     public static final String EXTRA_UUID_TYPE = "uuidType";
     private static final String SETTING_GRAVITYBOX_UUID = "gravitybox_uuid";
     private static final String SETTING_GRAVITYBOX_UUID_TYPE = "gravitybox_uuid_type";
-    public static final String SETTING_UNC_TRIAL_COUNTDOWN = "gravitybox_unc_trial_countdown";
+    public static final String SETTING_UNC_TRIAL_COUNTDOWN = "gravitybox_unc_trial_countdown_v2";
 
     private static String mSettingsUuid;
 
@@ -127,9 +127,9 @@ public class SystemPropertyProvider {
                                     data.putString("uuidType", Settings.System.getString(
                                             cr, SETTING_GRAVITYBOX_UUID_TYPE));
                                     data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
-                                            SETTING_UNC_TRIAL_COUNTDOWN, 50));
+                                            SETTING_UNC_TRIAL_COUNTDOWN, 100));
                                     data.putInt("tunerTrialCountdown", Settings.System.getInt(cr,
-                                            TunerManager.SETTING_TUNER_TRIAL_COUNTDOWN, 50));
+                                            TunerManager.SETTING_TUNER_TRIAL_COUNTDOWN, 100));
                                     data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
                                     data.putBoolean("supportsFingerprint", supportsFingerprint(context));
                                     if (SysUiManagers.FingerprintLauncher != null) {
