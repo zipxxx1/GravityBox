@@ -1,3 +1,17 @@
+Changelog 9.0.0-beta-2 - 11/03/2019
+--------------------------------------
+- Fixed Fingerprint Launcher not working on some systems
+- Key Actions: fixed haptic feedback issues
+- CircleBattery: improved percentage font style
+- Potential fix for tile protection not working on some systems
+- Settings: allow Advanced Power Menu settings on OxygenOS
+- Potential fix for Tiles per header option not working on some systems
+- Attempt to fix QuietHours icon showing on some systems when it shouldn't
+- Attempt to use native system screenshot functionality
+- Reset of trial periods of UNC and Advanced Tuning
+- Fixed showing battery style on lockscreen for Samsung devices (thanks to firefds)
+- Updated Turkish translations (thanks to Fatih Firinci)
+
 Changelog 9.0.0-beta-1 - 08/03/2019
 --------------------------------------
 - Migrated to Android Pie
