@@ -644,6 +644,7 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId));
                                 }
                             }
+                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
                             param.setResult(0);
                             return;
                         }
@@ -731,6 +732,7 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.RECENTS_LONGPRESS).actionId));
                                 }
                             }
+                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
                             param.setResult(0);
                         }
                     }
@@ -784,6 +786,7 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId));
                                 }
                             }
+                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
                             param.setResult(0);
                             return;
                         }
@@ -814,9 +817,7 @@ public class ModHwKeys {
                                     handler.postDelayed(mCustomKeyDoubletapReset, mDoubletapSpeed);
                                 }
                                 if (isFromSystem) {
-                                    XposedHelpers.callMethod(param.thisObject, "performHapticFeedbackLw",
-                                        new Class<?> [] { mWindowStateClass, int.class, boolean.class },
-                                        null, HapticFeedbackConstants.VIRTUAL_KEY, false);
+                                    performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
                                 }
                             } else {
                                 handler.removeCallbacks(mCustomKeyDoubletapReset);
@@ -824,9 +825,7 @@ public class ModHwKeys {
                                 mIsCustomKeyLongPressed = true;
                                 if (DEBUG) log("Custom key long-press action");
                                 performAction(HwKeyTrigger.CUSTOM_LONGPRESS);
-                                XposedHelpers.callMethod(param.thisObject, "performHapticFeedbackLw",
-                                        new Class<?> [] { mWindowStateClass, int.class, boolean.class },
-                                        null, HapticFeedbackConstants.LONG_PRESS, false);
+                                performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
                             }
                         }
                         param.setResult(0);
@@ -987,6 +986,7 @@ public class ModHwKeys {
         if (DEBUG) log("mMenuLongPress runnable launched");
         mIsMenuLongPressed = true;
         performAction(HwKeyTrigger.MENU_LONGPRESS);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
     };
 
     private static Runnable mMenuDoubleTapReset = () -> {
@@ -1010,6 +1010,7 @@ public class ModHwKeys {
         if (DEBUG) log("mBackLongPress runnable launched");
         mIsBackLongPressed = true;
         performAction(HwKeyTrigger.BACK_LONGPRESS);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
     };
 
     private static Runnable mBackDoubleTapReset = () -> {
@@ -1033,6 +1034,7 @@ public class ModHwKeys {
         if (DEBUG) log("mRecentsLongPress runnable launched");
         mIsRecentsLongPressed = true;
         performAction(HwKeyTrigger.RECENTS_LONGPRESS);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
     };
 
     private static Runnable mRecentsDoubleTapReset = () -> {
@@ -1067,6 +1069,7 @@ public class ModHwKeys {
         if (DEBUG) log("mLockscreenTorchRunnable runnable launched");
         if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
             mIsHomeLongPressed = true;
+            performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
         }
         toggleTorch();
     };
@@ -1075,6 +1078,7 @@ public class ModHwKeys {
         if (DEBUG) log("mHomeLongPress runnable launched");
         mIsHomeLongPressed = true;
         performAction(HwKeyTrigger.HOME_LONGPRESS);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
     };
 
     private static Runnable mResetBrightnessRunnable = () -> {
@@ -1182,6 +1186,16 @@ public class ModHwKeys {
         }
     }
 
+    private static void performHapticFeedback(int effect, boolean always) {
+        try {
+            XposedHelpers.callMethod(mPhoneWindowManager, "performHapticFeedbackLw",
+                    new Class<?> [] { mWindowStateClass, int.class, boolean.class },
+                    null, effect, always);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error calling performHapticFeedbackLw:", t);
+        }
+    }
+
     private static void launchSearchActivity() {
         try {
             mLaunchAssistAction.invoke(mPhoneWindowManager, null, 0);
@@ -1243,8 +1257,7 @@ public class ModHwKeys {
                     paramArgs[0] = mWindowStateClass;
                     paramArgs[1] = int.class;
                     paramArgs[2] = boolean.class;
-                    XposedHelpers.callMethod(mPhoneWindowManager, "performHapticFeedbackLw",
-                            paramArgs, null, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING, true);
+                    performHapticFeedback(HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING, true);
                     Toast.makeText(mContext,
                             String.format(mStrAppKilled, targetKilled), Toast.LENGTH_SHORT).show();
                 } else {
