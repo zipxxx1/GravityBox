@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -109,15 +109,14 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_KG_MONITOR_IMPL, cl,
-                    "notifyKeyguardChanged", new XC_MethodHook() {
+            XC_MethodHook stateChangeHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
                     boolean showing = XposedHelpers.getBooleanField(param.thisObject, "mShowing");
                     boolean secured = XposedHelpers.getBooleanField(param.thisObject, "mSecure");
                     boolean locked = !XposedHelpers.getBooleanField(param.thisObject, "mCanSkipBouncer");
                     boolean managed = getIsTrustManaged();
-                    if (showing != mIsShowing || secured != mIsSecured || 
+                    if (showing != mIsShowing || secured != mIsSecured ||
                             locked != mIsLocked || managed != mIsTrustManaged) {
                         mIsShowing = showing;
                         mIsSecured = secured;
@@ -126,7 +125,9 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                         notifyStateChanged();
                     }
                 }
-            });
+            };
+            XposedHelpers.findAndHookMethod(monitorClass, "notifyKeyguardChanged", stateChangeHook);
+            XposedBridge.hookAllMethods(monitorClass, "notifyKeyguardState", stateChangeHook);
 
             XposedHelpers.findAndHookMethod(CLASS_KG_VIEW_MEDIATOR, cl,
                     "setKeyguardEnabled", boolean.class, new XC_MethodHook() {
