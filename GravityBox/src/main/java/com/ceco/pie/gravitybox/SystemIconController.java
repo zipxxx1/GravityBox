@@ -157,24 +157,11 @@ public class SystemIconController implements BroadcastSubReceiver {
     }
 
     private void updateVibrateIcon() {
-        if (mIconCtrl == null || mContext == null || Utils.isOnePlus6Rom()) return;
+        if (mIconCtrl == null || mContext == null || Utils.isOxygenOsRom()) return;
         try {
             AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-            if (Utils.isOxygenOsRom()) {
-                final Object zenCtrl = XposedHelpers.getObjectField(mSbPolicy, "mZenController");
-                final int zen = (int) XposedHelpers.callMethod(zenCtrl, "getZen");
-                final boolean vibrateWhenMute = (XposedHelpers.getIntField(mSbPolicy, "mVibrateWhenMute") == 1);
-                final boolean zenVibrateShowing = (zen == 3 && vibrateWhenMute);
-                final boolean hideZen = (zen == 0 || (mHideVibrateIcon && zenVibrateShowing));
-                XposedHelpers.callMethod(mIconCtrl, "setIconVisibility",
-                        XposedHelpers.getObjectField(mSbPolicy, "mSlotZen"), !hideZen);
-                final boolean showNative = !zenVibrateShowing && !mHideVibrateIcon &&
-                        am.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE;
-                XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "volume", showNative);
-            } else {
-                if (am.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
-                    XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "volume", !mHideVibrateIcon);
-                }
+            if (am.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
+                XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "volume", !mHideVibrateIcon);
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);

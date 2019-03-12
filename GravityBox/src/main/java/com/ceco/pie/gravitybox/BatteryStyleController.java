@@ -63,7 +63,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private StatusbarBattery mStockBattery;
     private boolean mIsDashCharging;
     private List<Unhook> mHooks = new ArrayList<>();
-    private Integer mOosSystemIconsMarginEndOriginal;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -217,22 +216,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                         break;
                     default: break;
                 }
-            }
-
-            // adjust System Icons end margin on OOS
-            if (mContainerType == ContainerType.STATUSBAR && Utils.isOnePlus3Rom()) {
-                Resources gbRes = Utils.getGbContext(mContext).getResources();
-                int systemIconsMarginEnd = gbRes.getDimensionPixelSize(R.dimen.system_icons_margin_end_oos);
-                MarginLayoutParams mlp = (MarginLayoutParams) mSystemIcons.getLayoutParams();
-                if (mOosSystemIconsMarginEndOriginal == null) {
-                    mOosSystemIconsMarginEndOriginal = mlp.getMarginEnd();
-                }
-                mlp.setMarginEnd(ModStatusBar.isCLockOnLeft() &&
-                            ((mBatteryStyle != GravityBoxSettings.BATTERY_STYLE_STOCK &&
-                                    mBatteryStyle != GravityBoxSettings.BATTERY_STYLE_NONE) ||
-                             (mBatteryPercentTextEnabledSb && mBatteryPercentTextOnRight)) ?
-                        systemIconsMarginEnd : mOosSystemIconsMarginEndOriginal);
-                mSystemIcons.setLayoutParams(mlp);
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);

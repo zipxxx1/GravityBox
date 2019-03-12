@@ -136,7 +136,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_BATTERY_CHARGED_SOUND = "pref_battery_charged_sound2";
     public static final String PREF_KEY_CHARGER_PLUGGED_SOUND = "pref_charger_plugged_sound2";
     public static final String PREF_KEY_CHARGER_UNPLUGGED_SOUND = "pref_charger_unplugged_sound";
-    public static final String ACTION_PREF_BATTERY_SOUND_CHANGED = 
+    public static final String ACTION_PREF_BATTERY_SOUND_CHANGED =
             "gravitybox.intent.action.BATTERY_SOUND_CHANGED";
     public static final String EXTRA_BATTERY_SOUND_TYPE = "batterySoundType";
     public static final String EXTRA_BATTERY_SOUND_URI = "batterySoundUri";
@@ -943,7 +943,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         public boolean supportsFingerprint;
         public int[] fingerprintIds;
         public boolean isOxygenOsRom;
-        public boolean isOnePlus6Rom;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -984,9 +983,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             }
             if (data.containsKey("isOxygenOsRom")) {
                 isOxygenOsRom = data.getBoolean("isOxygenOsRom");
-            }
-            if (data.containsKey("isOnePlus6Rom")) {
-                isOnePlus6Rom = data.getBoolean("isOnePlus6Rom");
             }
         }
     }
@@ -1700,7 +1696,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 PreferenceCategory pc = (PreferenceCategory) findPreference(PREF_CAT_RECENTS_PANEL);
                 p = findPreference(PREF_KEY_RECENT_CLEAR_ALWAYS_VISIBLE);
                 if (pc != null && p != null) pc.removePreference(p);
-                if (sSystemProperties.isOnePlus6Rom) {
+                if (sSystemProperties.isOxygenOsRom) {
                     p = findPreference(PREF_KEY_STATUSBAR_HIDE_VIBRATE_ICON);
                     if (p != null) mPrefCatStatusbar.removePreference(p);
                 }
