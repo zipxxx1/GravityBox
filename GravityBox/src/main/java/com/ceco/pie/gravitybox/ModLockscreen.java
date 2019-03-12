@@ -493,8 +493,13 @@ public class ModLockscreen {
                         containerId = res.getIdentifier("keyguard_clock_container", "id", PACKAGE_NAME);
                     }
                     if (containerId != 0) {
-                        ViewGroup container = kgStatusView.findViewById(containerId);
-                        container = (ViewGroup) container.getParent();
+                        ViewGroup container;
+                        if (Utils.isSamsungRom()) {
+                            container = (ViewGroup) kgStatusView.getChildAt(0);
+                        } else {
+                            container = kgStatusView.findViewById(containerId);
+                            container = (ViewGroup) container.getParent();
+                        }
                         if (container != null) {
                             mAppBar = new LockscreenAppBar(mContext, mGbContext, container,
                                     param.thisObject, prefs);
