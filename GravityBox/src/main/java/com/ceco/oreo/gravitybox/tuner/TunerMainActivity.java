@@ -17,6 +17,7 @@ package com.ceco.oreo.gravitybox.tuner;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -66,10 +67,22 @@ public class TunerMainActivity extends GravityBoxActivity {
         }
     }
 
+    public static boolean isTunerLocked(Context context) {
+        try {
+            SharedPreferences prefs = SettingsManager.getInstance(context).getTunerPrefs();
+            return prefs.getBoolean(PREF_KEY_LOCKED, false);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return true;
+        }
+    }
+
     public static void lockTuner(final Context context, final boolean lock) {
         try {
-            final WorldReadablePrefs prefs = SettingsManager.getInstance(context).getTunerPrefs();
-            prefs.edit().putBoolean(PREF_KEY_LOCKED, lock).commit();
+            if (isTunerLocked(context) != lock) {
+                final WorldReadablePrefs prefs = SettingsManager.getInstance(context).getTunerPrefs();
+                prefs.edit().putBoolean(PREF_KEY_LOCKED, lock).commit();
+            }
         } catch (Throwable t) {
             t.printStackTrace();
         }
