@@ -171,7 +171,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage
             ModStatusBar.init(prefs, lpparam.classLoader);
         }
 
-        if (lpparam.packageName.equals(ModPowerMenu.PACKAGE_NAME)) {
+        if (lpparam.packageName.equals(ModPowerMenu.PACKAGE_NAME) && !Utils.isSamsungRom()) {
             ModPowerMenu.init(prefs, lpparam.classLoader);
         }
 
