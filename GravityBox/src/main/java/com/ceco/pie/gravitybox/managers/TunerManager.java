@@ -31,6 +31,7 @@ import com.ceco.pie.gravitybox.tuner.TunerBlacklist;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,46 +99,48 @@ public class TunerManager implements BroadcastSubReceiver {
     private void sendTuneables(Category category, ResultReceiver receiver) {
         String pkgName = getPackageNameFor(category);
         Resources res = getResourcesFor(category);
-        String className = getResourceClassNameFor(category);
+        List<String> classNameList = getResourceClassNamesFor(category);
         ArrayList<TuneableItem> tiList = new ArrayList<>();
         Bundle data = new Bundle();
         Class<?> clazz;
 
-        // bools
-        clazz = XposedHelpers.findClassIfExists(className + ".bool",
+        for (String className : classNameList) {
+            // bools
+            clazz = XposedHelpers.findClassIfExists(className + ".bool",
                     mContext.getClassLoader());
-        if (clazz != null) {
-            for (Field f : clazz.getDeclaredFields()) {
-                if (TunerBlacklist.isBlacklisted(category, f.getName()))
-                    continue;
-                try {
-                    TuneableItem ti = new TuneableItem(Boolean.class, category, f.getName(),
-                            res.getBoolean(res.getIdentifier(f.getName(), "bool", pkgName)));
-                    tiList.add(ti);
-                } catch (Resources.NotFoundException ignore) {
+            if (clazz != null) {
+                for (Field f : clazz.getDeclaredFields()) {
+                    if (TunerBlacklist.isBlacklisted(category, f.getName()))
+                        continue;
+                    try {
+                        TuneableItem ti = new TuneableItem(Boolean.class, category, f.getName(),
+                                res.getBoolean(res.getIdentifier(f.getName(), "bool", pkgName)));
+                        tiList.add(ti);
+                    } catch (Resources.NotFoundException ignore) {
+                    }
                 }
             }
-        } else {
-            GravityBox.log(TAG, "Boolean resource class name not found for " + category);
+
+            // integers
+            clazz = XposedHelpers.findClassIfExists(className + ".integer",
+                    mContext.getClassLoader());
+            if (clazz != null) {
+                for (Field f : clazz.getDeclaredFields()) {
+                    if (TunerBlacklist.isBlacklisted(category, f.getName()))
+                        continue;
+                    try {
+                        TuneableItem ti = new TuneableItem(Integer.class, category, f.getName(),
+                                res.getInteger(res.getIdentifier(
+                                        f.getName(), "integer", pkgName)));
+                        tiList.add(ti);
+                    } catch (Resources.NotFoundException ignore) {
+                    }
+                }
+            }
         }
 
-        // integers
-        clazz = XposedHelpers.findClassIfExists(className + ".integer",
-                mContext.getClassLoader());
-        if (clazz != null) {
-            for (Field f : clazz.getDeclaredFields()) {
-                if (TunerBlacklist.isBlacklisted(category, f.getName()))
-                    continue;
-                try {
-                    TuneableItem ti = new TuneableItem(Integer.class, category, f.getName(),
-                            res.getInteger(res.getIdentifier(
-                                    f.getName(), "integer", pkgName)));
-                    tiList.add(ti);
-                } catch (Resources.NotFoundException ignore) {
-                }
-            }
-        } else {
-            GravityBox.log(TAG, "Integer resource class name not found for " + category);
+        if (tiList.isEmpty()) {
+            GravityBox.log(TAG, "Didn't find any tuneables in " + category);
         }
 
         data.putParcelableArrayList(EXTRA_TUNEABLES, tiList);
@@ -169,11 +172,14 @@ public class TunerManager implements BroadcastSubReceiver {
         }
     }
 
-    private String getResourceClassNameFor(Category category) {
+    private List<String> getResourceClassNamesFor(Category category) {
         switch (category) {
             default:
-            case FRAMEWORK: return "com.android.internal.R";
-            case SYSTEMUI: return "com.android.systemui.plugins.R";
+            case FRAMEWORK: return Arrays.asList(
+                    "com.android.internal.R");
+            case SYSTEMUI: return Arrays.asList(
+                    "com.android.systemui.plugins.R",
+                    "com.android.systemui.R");
         }
     }
 
