@@ -2002,13 +2002,18 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
         private void setDefaultValues() {
             if (!mPrefs.getBoolean(PREF_KEY_NAVBAR_ENABLE + "_set", false)) {
-                mPrefs.edit().putBoolean(PREF_KEY_NAVBAR_ENABLE, sSystemProperties.hasNavigationBar).commit();
+                mPrefs.edit()
+                        .putBoolean(PREF_KEY_NAVBAR_ENABLE, sSystemProperties.hasNavigationBar)
+                        .putBoolean(PREF_KEY_NAVBAR_ENABLE + "_set", true)
+                        .commit();
                 mPrefNavbarEnable.setChecked(sSystemProperties.hasNavigationBar);
             }
 
             if (!mPrefs.getBoolean(PREF_KEY_UNPLUG_TURNS_ON_SCREEN + "_set", false)) {
-                mPrefs.edit().putBoolean(PREF_KEY_UNPLUG_TURNS_ON_SCREEN, 
-                        sSystemProperties.unplugTurnsOnScreen).commit();
+                mPrefs.edit()
+                        .putBoolean(PREF_KEY_UNPLUG_TURNS_ON_SCREEN, sSystemProperties.unplugTurnsOnScreen)
+                        .putBoolean(PREF_KEY_UNPLUG_TURNS_ON_SCREEN + "_set", true)
+                        .commit();
                 mPrefUnplugTurnsOnScreen.setChecked(sSystemProperties.unplugTurnsOnScreen);
             }
 
@@ -2158,7 +2163,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (key == null || key.equals(PREF_KEY_NAVBAR_OVERRIDE)
                     || key.equals(PREF_KEY_NAVBAR_ENABLE)) {
                 final boolean override = mPrefs.getBoolean(PREF_KEY_NAVBAR_OVERRIDE, false);
-                mPrefNavbarEnable.setEnabled(override);
                 mPrefCatNavbarKeys.setEnabled(override && mPrefNavbarEnable.isChecked());
                 mPrefCatNavbarColor.setEnabled(override && mPrefNavbarEnable.isChecked());
                 mPrefCatNavbarDimen.setEnabled(override && mPrefNavbarEnable.isChecked());
