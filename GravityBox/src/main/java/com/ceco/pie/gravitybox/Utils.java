@@ -261,7 +261,7 @@ public class Utils {
     public static boolean isSamsungRom() {
         if (mIsSamsumgRom != null) return mIsSamsumgRom;
 
-        mIsSamsumgRom = new File("/system/framework/samsung-services.jar").isFile();
+        mIsSamsumgRom = new File("/system/framework/com.samsung.device.jar").isFile();
         return mIsSamsumgRom;
     }
 
