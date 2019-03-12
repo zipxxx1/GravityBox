@@ -100,20 +100,6 @@ public class ModPowerMenu {
             final Class<?> globalActionsClass = XposedHelpers.findClass(CLASS_GLOBAL_ACTIONS, classLoader);
             final Class<?> actionClass = XposedHelpers.findClass(CLASS_ACTION, classLoader);
 
-            //hides reboot confirmation screen for Samsung roms
-            if (Utils.isSamsungRom()) {
-                XposedBridge.hookAllMethods(globalActionsClass, "initValueForShow", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        prefs.reload();
-                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWEROFF_ADVANCED, false)) {
-                            XposedHelpers.setIntField(param.thisObject, "mRestartIconResId",0);
-                            XposedHelpers.setIntField(param.thisObject, "mConfirmRestartIconResId",0);
-                        }
-                    }
-                });
-            }
-
             XposedBridge.hookAllConstructors(globalActionsClass, new XC_MethodHook() {
                @Override
                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
@@ -126,8 +112,7 @@ public class ModPowerMenu {
                    mRebootStr  = (rebootStrId == 0) ? gbContext.getString(R.string.reboot) : res.getString(rebootStrId);
                    mRebootSoftStr = gbContext.getString(R.string.reboot_soft);
                    mRecoveryStr = gbContext.getString(R.string.poweroff_recovery);
-                   mBootloaderStr = gbContext.getString(Utils.isSamsungRom() ? 
-                           R.string.poweroff_download : R.string.poweroff_bootloader);
+                   mBootloaderStr = gbContext.getString(R.string.poweroff_bootloader);
                    mExpandedDesktopStr = gbContext.getString(R.string.action_expanded_desktop_title);
                    mExpandedDesktopOnStr = gbContext.getString(R.string.action_expanded_desktop_on);
                    mExpandedDesktopOffStr = gbContext.getString(R.string.action_expanded_desktop_off);
@@ -150,8 +135,7 @@ public class ModPowerMenu {
 
                    mRebootConfirmStr = gbContext.getString(R.string.reboot_confirm);
                    mRebootConfirmRecoveryStr = gbContext.getString(R.string.reboot_confirm_recovery);
-                   mRebootConfirmBootloaderStr = gbContext.getString(Utils.isSamsungRom() ?
-                           R.string.reboot_confirm_download : R.string.reboot_confirm_bootloader);
+                   mRebootConfirmBootloaderStr = gbContext.getString(R.string.reboot_confirm_bootloader);
 
                    if (DEBUG) log("GlobalActions constructed, resources set.");
                }
@@ -414,7 +398,7 @@ public class ModPowerMenu {
             } else if (mode == 2) {
                 pm.reboot("recovery");
             } else if (mode == 3) {
-                pm.reboot(Utils.isSamsungRom() ? "download" : "bootloader");
+                pm.reboot("bootloader");
             }
         }
 
