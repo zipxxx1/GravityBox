@@ -292,23 +292,37 @@ public class LedSettings {
         }
     }
 
+    public static boolean isQhLocked(Context context) {
+        try {
+            SharedPreferences prefs = SettingsManager.getInstance(context).getQuietHoursPrefs();
+            return prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return true;
+        }
+    }
+
     public static void lockUnc(final Context context, final boolean lock) {
         try {
-            final WorldReadablePrefs prefsUnc = SettingsManager.getInstance(context).getLedControlPrefs();
-            prefsUnc.edit().putBoolean(PREF_KEY_LOCKED, lock).commit(() -> {
-                if (WorldReadablePrefs.DEBUG)
-                    Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited UNC");
-                Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
-                intent.putExtra(PREF_KEY_LOCKED, lock);
-                context.sendBroadcast(intent);
-            });
-            final WorldReadablePrefs prefsQh = SettingsManager.getInstance(context).getQuietHoursPrefs();
-            prefsQh.edit().putBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, lock).commit(
-                    () -> {
-                        if (WorldReadablePrefs.DEBUG)
-                            Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited QH");
-                        QuietHoursActivity.broadcastSettings(context, prefsQh);
-                    });
+            if (isUncLocked(context) != lock) {
+                final WorldReadablePrefs prefsUnc = SettingsManager.getInstance(context).getLedControlPrefs();
+                prefsUnc.edit().putBoolean(PREF_KEY_LOCKED, lock).commit(() -> {
+                    if (WorldReadablePrefs.DEBUG)
+                        Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited UNC");
+                    Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
+                    intent.putExtra(PREF_KEY_LOCKED, lock);
+                    context.sendBroadcast(intent);
+                });
+            }
+            if (isQhLocked(context) != lock) {
+                final WorldReadablePrefs prefsQh = SettingsManager.getInstance(context).getQuietHoursPrefs();
+                prefsQh.edit().putBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, lock).commit(
+                        () -> {
+                            if (WorldReadablePrefs.DEBUG)
+                                Log.d("GravityBox", "LedSettings: lockUnc onPreferencesCommited QH");
+                            QuietHoursActivity.broadcastSettings(context, prefsQh);
+                        });
+            }
         } catch (Throwable t) {
             t.printStackTrace();
         }

@@ -2060,12 +2060,16 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefLedControl.setSummary(String.format("%s (%s)", mPrefLedControl.getSummary(),
                     getString(R.string.wsc_trans_required_summary)));
                 LedSettings.lockUnc(getActivity(), true);
+            } else {
+                LedSettings.lockUnc(getActivity(), false);
             }
             if (sSystemProperties.tunerTrialCountdown == 0) {
                 mPrefTuner.setEnabled(false);
                 mPrefTuner.setSummary(String.format("%s (%s)", mPrefTuner.getSummary(),
                         getString(R.string.wsc_trans_required_summary)));
                 TunerMainActivity.lockTuner(getActivity(), true);
+            } else {
+                TunerMainActivity.lockTuner(getActivity(), false);
             }
             mPrefs.edit().putString(PREF_KEY_TRANS_VERIFICATION, null).commit();
             mPrefTransVerification.setText(null);
