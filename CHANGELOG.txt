@@ -1,3 +1,15 @@
+Changelog 9.0.0-beta-3 - 14/03/2019
+--------------------------------------
+- Fixed missing Alert Slider statusbar icons on OxygenOS
+- Settings: Removed Advanced Power Menu options on Samsung devices
+- Fixed Samsung device detection logic (thanks to Firefds)
+- Fixed Lockscreen App Bar on Samsung devices (thanks to Firefds)
+- Advanced Tuning: fixed missing SystemUI parameters on some devices
+- Fixed dynamic color tinting of GravityBox related icons/views in statusbar
+- CircleBattery: adjusted outline color for visibility on white background
+- QuickSettings: fixed Tiles Per Header in landscape orientation
+- Settings: fixed incorrect value of "Enable navigation bar" option
+
 Changelog 9.0.0-beta-2 - 11/03/2019
 --------------------------------------
 - Fixed Fingerprint Launcher not working on some systems
