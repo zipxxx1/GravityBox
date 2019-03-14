@@ -19,6 +19,8 @@ import com.ceco.pie.gravitybox.GravityBoxSettings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -29,14 +31,16 @@ public class QsPanelQuick {
     private static final boolean DEBUG = false;
 
     private static final String CLASS_QS_PANEL_QUICK = "com.android.systemui.qs.QuickQSPanel";
+    private static final String CLASS_QS_PANEL_QUICK_LAYOUT = "com.android.systemui.qs.QuickQSPanel.HeaderTileLayout";
     private static final String CLASS_TUNER_SERVICE_IMPL = "com.android.systemui.tuner.TunerServiceImpl";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    private int mNumTilesOrig;
     private int mNumTiles;
-    private Object mPanel;
+    private View mPanel;
 
     public QsPanelQuick(XSharedPreferences prefs, ClassLoader classLoader) {
         initPreferences(prefs);
@@ -63,7 +67,7 @@ public class QsPanelQuick {
                     CLASS_QS_PANEL_QUICK, cl), new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
-                    mPanel = param.thisObject;
+                    mPanel = (View) param.thisObject;
                     if (DEBUG) log("QuickQSPanel constructed");
                 }
             });
@@ -71,10 +75,27 @@ public class QsPanelQuick {
             XposedHelpers.findAndHookMethod(CLASS_TUNER_SERVICE_IMPL, cl,
                     "getValue", String.class, int.class, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) {
-                    if (DEBUG) log("TunerServiceImpl: getValue: key=" + param.args[0]);
-                    if (mNumTiles > 0 && "sysui_qqs_count".equals(param.args[0])) {
-                        param.setResult(mNumTiles);
+                protected void afterHookedMethod(MethodHookParam param) {
+                    if ("sysui_qqs_count".equals(param.args[0])) {
+                        mNumTilesOrig = (int) param.getResult();
+                        if (DEBUG) log("TunerServiceImpl: getValue: key=" + param.args[0] +
+                                "; originalValue=" + mNumTilesOrig +
+                                "; newValue=" + mNumTiles);
+                        if (mNumTiles > 0) {
+                            param.setResult(mNumTiles);
+                        }
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_QS_PANEL_QUICK_LAYOUT, cl,
+                    "generateSpaceLayoutParams", int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (DEBUG) log("generateSpaceLayoutParams: mNumTiles=" + mNumTiles +
+                            "; mNumTilesOrig=" + mNumTilesOrig);
+                    if (mNumTiles > mNumTilesOrig) {
+                        param.args[0] = 0;
                     }
                 }
             });
