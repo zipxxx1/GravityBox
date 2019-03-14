@@ -1191,7 +1191,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     @Override
     public void onSaveInstanceState(Bundle bundle) {
         bundle.putString("mSearchQuery", mSearchQuery);
-        getFragmentManager().putFragment(bundle, "mPrefsFragment", mPrefsFragment);
+        if (mPrefsFragment != null) {
+            getFragmentManager().putFragment(bundle, "mPrefsFragment", mPrefsFragment);
+        }
         super.onSaveInstanceState(bundle);
     }
 
