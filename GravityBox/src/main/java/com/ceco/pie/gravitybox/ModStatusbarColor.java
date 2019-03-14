@@ -35,10 +35,8 @@ public class ModStatusbarColor {
     // in process hooks
     public static void init(final ClassLoader classLoader) {
         try {
-            final Class<?> sbTransitionsClass = XposedHelpers.findClass(CLASS_SB_TRANSITIONS, classLoader);
-
-            XposedHelpers.findAndHookMethod(sbTransitionsClass, "applyMode",
-                    int.class, boolean.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_SB_TRANSITIONS, classLoader,
+                    "applyMode", int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     if (SysUiManagers.IconManager != null) {
@@ -50,9 +48,13 @@ public class ModStatusbarColor {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking applyMode:", t);
+        }
 
-            XposedHelpers.findAndHookMethod(CLASS_SB_DARK_ICON_DISPATCHER, classLoader,
-                    "applyIconTint", new XC_MethodHook() {
+        try {
+            XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_SB_DARK_ICON_DISPATCHER, classLoader),
+                    "setIconTintInternal", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     if (SysUiManagers.IconManager != null) {
@@ -61,7 +63,11 @@ public class ModStatusbarColor {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking setIconTintInternal:", t);
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(CLASS_HEADSUP_APPEARANCE_CTRL, classLoader,
                     "setShown", boolean.class, new XC_MethodHook() {
                 @Override
@@ -73,7 +79,7 @@ public class ModStatusbarColor {
                 }
             });
         } catch (Throwable t) {
-            GravityBox.log(TAG, t);
+            GravityBox.log(TAG, "Error hooking setShown:", t);
         }
     }
 }
