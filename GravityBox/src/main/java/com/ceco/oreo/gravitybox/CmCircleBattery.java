@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2012 Sven Dawitz for the CyanogenMod Project
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -127,7 +127,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         mPaintGray.setDither(true);
         mPaintGray.setStrokeWidth(0);
         mPaintGray.setStyle(Paint.Style.STROKE);
-        mPaintGray.setColor(0x4DFFFFFF);
+        mPaintGray.setColor(0x80D4D4D4);
 
         mPaintSystem = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaintSystem.setStrokeCap(Paint.Cap.BUTT);
