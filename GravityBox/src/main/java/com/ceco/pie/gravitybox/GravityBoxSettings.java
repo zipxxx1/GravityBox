@@ -160,6 +160,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final int VOL_KEY_CURSOR_CONTROL_OFF = 0;
     public static final int VOL_KEY_CURSOR_CONTROL_ON = 1;
     public static final int VOL_KEY_CURSOR_CONTROL_ON_REVERSE = 2;
+    public static final String PREF_KEY_IME_FULLSCREEN_DISABLE = "pref_ime_fullscreen_disable";
+    public static final String ACTION_PREF_IME_CHANGED = "gravitybox.intent.action.IME_CHANGED";
+    public static final String EXTRA_IME_VOL_KEY_CURSOR_CONTROL = "imeVolKeyCursorControl";
+    public static final String EXTRA_IME_FULLSCREEN_DISABLE = "imeFullscreenDisable";
 
     public static final String PREF_CAT_RECENTS_PANEL = "pref_cat_misc_recents_panel";
     public static final String PREF_KEY_RECENT_CLEAR_ALWAYS_VISIBLE = "pref_recent_clear_always_visible";
@@ -670,7 +674,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_SR_MDA_IGNORE = "smartRadioMdaIgnore";
     public static final String EXTRA_SR_ADAPTIVE_DELAY = "smartRadioAdaptiveDelay";
 
-    public static final String PREF_KEY_IME_FULLSCREEN_DISABLE = "pref_ime_fullscreen_disable";
     public static final String PREF_KEY_TORCH_AUTO_OFF = "pref_torch_auto_off";
     public static final String PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON = "pref_force_overflow_menu_button2";
     public static final String PREF_KEY_FORCE_LTR_DIRECTION = "pref_force_ltr_direction";
@@ -1634,12 +1637,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PreferenceScreen psm = (PreferenceScreen) findPreference(PREF_CAT_KEY_MISC);
             Preference pr = findPreference(PREF_CAT_RECENTS_PANEL);
             if (psm != null && pr != null) psm.removePreference(pr);
-            // TODO: ModInputMethod
-            PreferenceCategory pcHkVol = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_VOLUME);
-            Preference pHkVol = findPreference(PREF_KEY_VOL_KEY_CURSOR_CONTROL);
-            if (pcHkVol != null && pHkVol != null) pcHkVol.removePreference(pHkVol);
-            Preference pFsIme = findPreference(PREF_KEY_IME_FULLSCREEN_DISABLE);
-            if (pFsIme != null) mPrefCatMiscOther.removePreference(pFsIme);
 
             // remove Dialer features if Dialer package unavailable
             PackageInfo pi = null;
@@ -3309,6 +3306,13 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_VISUALIZER_NAVBAR)) {
                 intent.setAction(ACTION_VISUALIZER_SETTINGS_CHANGED);
                 intent.putExtra(EXTRA_VISUALIZER_NAVBAR, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_VOL_KEY_CURSOR_CONTROL)) {
+                intent.setAction(ACTION_PREF_IME_CHANGED);
+                intent.putExtra(EXTRA_IME_VOL_KEY_CURSOR_CONTROL, Integer.valueOf(
+                        prefs.getString(key, "0")));
+            } else if (key.equals(PREF_KEY_IME_FULLSCREEN_DISABLE)) {
+                intent.setAction(ACTION_PREF_IME_CHANGED);
+                intent.putExtra(EXTRA_IME_FULLSCREEN_DISABLE, prefs.getBoolean(key, false));
             }
 
             if (intent.getAction() != null) {
