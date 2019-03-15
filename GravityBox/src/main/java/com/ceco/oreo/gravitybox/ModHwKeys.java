@@ -866,7 +866,6 @@ public class ModHwKeys {
 
             XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, 
                     "isWakeKeyWhenScreenOff", int.class, new XC_MethodHook() {
-
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     int keyCode = (Integer) param.args[0];
@@ -908,25 +907,16 @@ public class ModHwKeys {
             });
 
             XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
-                    "powerLongPress", new XC_MethodHook() {
+                    "wakeUp", long.class, boolean.class, String.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS &&
-                            !getPowerManager().isInteractive()) {
-                        mPostponeWakeUpOnPowerKeyUpEventTime = 0;
-                        toggleTorch(true);
-                        param.setResult(null);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
-                    "wakeUpFromPowerKey", long.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) {
-                    if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS &&
-                            mPostponeWakeUpOnPowerKeyUpEventTime == 0) {
+                            mPostponeWakeUpOnPowerKeyUpEventTime == 0 &&
+                                "android.policy:POWER".equals(param.args[2])) {
                         mPostponeWakeUpOnPowerKeyUpEventTime = (long)param.args[0];
+                        Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
+                        h.postDelayed(mLockscreenTorchRunnable, ViewConfiguration.getLongPressTimeout());
+                        if (DEBUG) log("wakeUp: torch runnable scheduled");
                         param.setResult(null);
                     }
                 }
@@ -937,11 +927,14 @@ public class ModHwKeys {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mPostponeWakeUpOnPowerKeyUpEventTime > 0) {
+                        Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
+                        h.removeCallbacks(mLockscreenTorchRunnable);
                         Method m = mPhoneWindowManagerClass.getDeclaredMethod(
                                 "wakeUpFromPowerKey", long.class);
                         m.setAccessible(true);
                         m.invoke(param.thisObject, mPostponeWakeUpOnPowerKeyUpEventTime);
                         mPostponeWakeUpOnPowerKeyUpEventTime = 0;
+                        if (DEBUG) log("interceptPowerKeyUp: calling wakeUpFromPowerKey");
                     }
                 }
             });
@@ -1127,6 +1120,8 @@ public class ModHwKeys {
             if (DEBUG) log("mLockscreenTorchRunnable runnable launched");
             if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
                 mIsHomeLongPressed = true;
+            } else if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS) {
+                mPostponeWakeUpOnPowerKeyUpEventTime = 0;
             }
             toggleTorch();
         }
