@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox;
 
 import java.lang.reflect.Method;
@@ -61,7 +60,6 @@ import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 import android.widget.Toast;
 
-import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.oreo.gravitybox.managers.AppLauncher;
 import com.ceco.oreo.gravitybox.shortcuts.AShortcut;
@@ -170,8 +168,9 @@ public class ModHwKeys {
     private static PowerManager mPowerManager;
     private static Boolean mSupportLongPressPowerWhenNonInteractiveOrig;
     private static long mPostponeWakeUpOnPowerKeyUpEventTime = 0;
+    private static Class<?> mWindowStateClass;
 
-    private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
+    private static List<String> mKillIgnoreList = new ArrayList<>(Arrays.asList(
             "com.android.systemui"
     ));
 
@@ -211,6 +210,7 @@ public class ModHwKeys {
             actionId = id;
             customApp = cApp;
         }
+        @SuppressWarnings("MethodDoesntCallSuperMethod")
         public HwKeyAction clone() {
             return new HwKeyAction(actionId, customApp);
         }
@@ -424,7 +424,7 @@ public class ModHwKeys {
         try {
             mPrefs = prefs;
 
-            Map<HwKeyTrigger, HwKeyAction> map = new HashMap<HwKeyTrigger, HwKeyAction>();
+            Map<HwKeyTrigger, HwKeyAction> map = new HashMap<>();
             map.put(HwKeyTrigger.MENU_SINGLETAP, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.MENU_DOUBLETAP, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.MENU_LONGPRESS, new HwKeyAction(0, null));
@@ -519,6 +519,8 @@ public class ModHwKeys {
             mHeadsetUri[0] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_UNPLUG, null);
             mHeadsetUri[1] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_PLUG, null);
 
+            mWindowStateClass = XposedHelpers.findClass(CLASS_WINDOW_STATE, classLoader);
+
             mPhoneWindowManagerClass = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
             Class<?> classPhoneWindowManagerOem = null;
             if (Utils.isOxygenOsRom()) {
@@ -535,7 +537,7 @@ public class ModHwKeys {
                     KeyEvent.class, int.class, new XC_MethodHook(XCallback.PRIORITY_HIGHEST) {
                 @SuppressLint("PrivateApi")
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                protected void beforeHookedMethod(MethodHookParam param) {
                     KeyEvent event = (KeyEvent) param.args[0];
 
                     int keyCode = event.getKeyCode();
@@ -592,6 +594,62 @@ public class ModHwKeys {
                         return;
                     }
 
+                    if (keyCode == KeyEvent.KEYCODE_BACK && isFromSystem && !isTaskLocked() &&
+                            (hasAction(HwKey.BACK) || !areHwKeysEnabled())) {
+
+                        if (!down) {
+                            mBackKeyPressed = false;
+                            handler.removeCallbacks(mBackLongPress);
+                            if (mIsBackLongPressed) {
+                                mIsBackLongPressed = false;
+                                param.setResult(0);
+                                return;
+                            } else if (event.getRepeatCount() == 0) {
+                                if (!areHwKeysEnabled()) {
+                                    if (DEBUG) log("BACK KeyEvent coming from HW key and keys disabled. Ignoring.");
+                                } else if (mIsBackDoubleTap) {
+                                    // we are still waiting for double-tap
+                                    if (DEBUG) log("BACK doubletap pending. Ignoring.");
+                                } else if (!mWasBackDoubleTap && !event.isCanceled()) {
+                                    if (getActionFor(HwKeyTrigger.BACK_SINGLETAP).actionId !=
+                                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                        performAction(HwKeyTrigger.BACK_SINGLETAP);
+                                    } else {
+                                        if (DEBUG) log("Triggering original DOWN/UP events for BACK key");
+                                        injectKey(KeyEvent.KEYCODE_BACK);
+                                    }
+                                }
+                                param.setResult(0);
+                                return;
+                            }
+                        } else if (event.getRepeatCount() == 0) {
+                            mBackKeyPressed = true;
+                            mWasBackDoubleTap = mIsBackDoubleTap;
+                            if (mIsBackDoubleTap) {
+                                performAction(HwKeyTrigger.BACK_DOUBLETAP);
+                                handler.removeCallbacks(mBackDoubleTapReset);
+                                mIsBackDoubleTap = false;
+                            } else {
+                                mIsBackLongPressed = false;
+                                mIsBackDoubleTap = false;
+                                if (getActionFor(HwKeyTrigger.BACK_DOUBLETAP).actionId !=
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    mIsBackDoubleTap = true;
+                                    handler.postDelayed(mBackDoubleTapReset, mDoubletapSpeed);
+                                }
+                                if (getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId !=
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    handler.postDelayed(mBackLongPress,
+                                            getLongpressTimeoutForAction(
+                                                    getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId));
+                                }
+                            }
+                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
+                            param.setResult(0);
+                            return;
+                        }
+                    }
+
                     if (keyCode == KeyEvent.KEYCODE_HOME && !isTaskLocked()) {
                         if (!down) {
                             handler.removeCallbacks(mLockscreenTorchRunnable);
@@ -607,7 +665,7 @@ public class ModHwKeys {
                                if (DEBUG) log("HOME KeyEvent coming from HW key and keys disabled. Ignoring.");
                                param.setResult(0);
                                return;
-                           }
+                            }
                         } else {
                             if (event.getRepeatCount() == 0) {
                                 mIsHomeLongPressed = false;
@@ -623,6 +681,113 @@ public class ModHwKeys {
                                     param.setResult(0);
                                 }
                             }
+                            return;
+                        }
+                    }
+
+                    if (keyCode == KeyEvent.KEYCODE_APP_SWITCH && isFromSystem && !isTaskLocked() &&
+                            (hasAction(HwKey.RECENTS) || !areHwKeysEnabled())) {
+                        if (!down) {
+                            mRecentsKeyPressed = false;
+                            handler.removeCallbacks(mRecentsLongPress);
+                            if (mIsRecentsLongPressed) {
+                                mIsRecentsLongPressed = false;
+                                param.setResult(0);
+                            } else if (event.getRepeatCount() == 0) {
+                                if (!areHwKeysEnabled()) {
+                                    if (DEBUG) log("RECENTS KeyEvent coming from HW key and keys disabled. Ignoring.");
+                                } else if (mIsRecentsDoubleTap) {
+                                    // we are still waiting for double-tap
+                                    if (DEBUG) log("RECENTS doubletap pending. Ignoring.");
+                                } else if (!mWasRecentsDoubleTap && !event.isCanceled()) {
+                                    if (getActionFor(HwKeyTrigger.RECENTS_SINGLETAP).actionId !=
+                                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                        performAction(HwKeyTrigger.RECENTS_SINGLETAP);
+                                    } else {
+                                        if (DEBUG) log("Triggering original DOWN/UP events for RECENTS key");
+                                        injectKey(KeyEvent.KEYCODE_APP_SWITCH);
+                                    }
+                                }
+                                param.setResult(0);
+                            }
+                        } else if (event.getRepeatCount() == 0) {
+                            mRecentsKeyPressed = true;
+                            mWasRecentsDoubleTap = mIsRecentsDoubleTap;
+                            if (mIsRecentsDoubleTap) {
+                                performAction(HwKeyTrigger.RECENTS_DOUBLETAP);
+                                handler.removeCallbacks(mRecentsDoubleTapReset);
+                                mIsRecentsDoubleTap = false;
+                            } else {
+                                mIsRecentsLongPressed = false;
+                                mIsRecentsDoubleTap = false;
+                                if (getActionFor(HwKeyTrigger.RECENTS_DOUBLETAP).actionId !=
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    mIsRecentsDoubleTap = true;
+                                    handler.postDelayed(mRecentsDoubleTapReset, mDoubletapSpeed);
+                                }
+                                if (getActionFor(HwKeyTrigger.RECENTS_LONGPRESS).actionId !=
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    handler.postDelayed(mRecentsLongPress,
+                                            getLongpressTimeoutForAction(
+                                                    getActionFor(HwKeyTrigger.RECENTS_LONGPRESS).actionId));
+                                }
+                            }
+                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
+                            param.setResult(0);
+                        }
+                    }
+
+                    if (keyCode == KeyEvent.KEYCODE_MENU && isFromSystem && !isTaskLocked() &&
+                            (hasAction(HwKey.MENU) || !areHwKeysEnabled())) {
+                        if (!down) {
+                            mMenuKeyPressed = false;
+                            handler.removeCallbacks(mMenuLongPress);
+                            if (mIsMenuLongPressed) {
+                                mIsMenuLongPressed = false;
+                                param.setResult(0);
+                                return;
+                            } else if (event.getRepeatCount() == 0) {
+                                if (!areHwKeysEnabled()) {
+                                    if (DEBUG) log("MENU KeyEvent coming from HW key and keys disabled. Ignoring.");
+                                } else if (mIsMenuDoubleTap) {
+                                    // we are still waiting for double-tap
+                                    if (DEBUG) log("MENU doubletap pending. Ignoring.");
+                                } else if (!mWasMenuDoubleTap && !event.isCanceled()) {
+                                    if (getActionFor(HwKeyTrigger.MENU_SINGLETAP).actionId !=
+                                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                        performAction(HwKeyTrigger.MENU_SINGLETAP);
+                                    } else {
+                                        if (DEBUG) log("Triggering original DOWN/UP events for MENU key");
+                                        injectKey(KeyEvent.KEYCODE_MENU);
+                                    }
+                                }
+                                param.setResult(0);
+                                return;
+                            }
+                        } else if (event.getRepeatCount() == 0) {
+                            mMenuKeyPressed = true;
+                            mWasMenuDoubleTap = mIsMenuDoubleTap;
+                            if (mIsMenuDoubleTap) {
+                                performAction(HwKeyTrigger.MENU_DOUBLETAP);
+                                handler.removeCallbacks(mMenuDoubleTapReset);
+                                mIsMenuDoubleTap = false;
+                            } else {
+                                mIsMenuLongPressed = false;
+                                mIsMenuDoubleTap = false;
+                                if (getActionFor(HwKeyTrigger.MENU_DOUBLETAP).actionId !=
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    mIsMenuDoubleTap = true;
+                                    handler.postDelayed(mMenuDoubleTapReset, mDoubletapSpeed);
+                                }
+                                if (getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId !=
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    handler.postDelayed(mMenuLongPress,
+                                            getLongpressTimeoutForAction(
+                                                    getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId));
+                                }
+                            }
+                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
+                            param.setResult(0);
                             return;
                         }
                     }
@@ -652,9 +817,7 @@ public class ModHwKeys {
                                     handler.postDelayed(mCustomKeyDoubletapReset, mDoubletapSpeed);
                                 }
                                 if (isFromSystem) {
-                                    XposedHelpers.callMethod(param.thisObject, "performHapticFeedbackLw",
-                                        new Class<?> [] { Class.forName(CLASS_WINDOW_STATE), int.class, boolean.class },
-                                        null, HapticFeedbackConstants.VIRTUAL_KEY, false);
+                                    performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
                                 }
                             } else {
                                 handler.removeCallbacks(mCustomKeyDoubletapReset);
@@ -662,9 +825,7 @@ public class ModHwKeys {
                                 mIsCustomKeyLongPressed = true;
                                 if (DEBUG) log("Custom key long-press action");
                                 performAction(HwKeyTrigger.CUSTOM_LONGPRESS);
-                                XposedHelpers.callMethod(param.thisObject, "performHapticFeedbackLw",
-                                        new Class<?> [] { Class.forName(CLASS_WINDOW_STATE), int.class, boolean.class },
-                                        null, HapticFeedbackConstants.LONG_PRESS, false);
+                                performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
                             }
                         }
                         param.setResult(0);
@@ -672,200 +833,9 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManagerOem != null ?
-                    classPhoneWindowManagerOem : mPhoneWindowManagerClass, "interceptKeyBeforeDispatching", 
-                    CLASS_WINDOW_STATE, KeyEvent.class, int.class, new XC_MethodHook() {
-
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) {
-                    if ((Boolean) XposedHelpers.callMethod(mPhoneWindowManager, "keyguardOn"))
-                        return;
-
-                    KeyEvent event = (KeyEvent) param.args[1];
-                    int keyCode = event.getKeyCode();
-                    boolean down = event.getAction() == KeyEvent.ACTION_DOWN;
-                    boolean isFromSystem = (event.getFlags() & KeyEvent.FLAG_FROM_SYSTEM) != 0;
-                    if (DEBUG) log("interceptKeyBeforeDispatching: keyCode=" + keyCode +
-                            "; isInjected=" + (((Integer)param.args[2] & 0x01000000) != 0) +
-                            "; fromSystem=" + isFromSystem +
-                            "; flags=" + Integer.toHexString(event.getFlags()) +
-                            "; source=" + event.getSource());
-
-                    if (event.getSource() == InputDevice.SOURCE_UNKNOWN ||
-                            event.getSource() == PA_SOURCE_CUSTOM) {
-                        // ignore unknown source events, e.g. events injected from GB itself
-                        if (DEBUG) log("interceptKeyBeforeDispatching: ignoring event from unknown source");
-                        return;
-                    }
-
-                    Handler mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
-
-                    if (keyCode == KeyEvent.KEYCODE_MENU && isFromSystem && !isTaskLocked() &&
-                        (hasAction(HwKey.MENU) || !areHwKeysEnabled())) {
-
-                        if (!down) {
-                            mMenuKeyPressed = false;
-                            mHandler.removeCallbacks(mMenuLongPress);
-                            if (mIsMenuLongPressed) {
-                                mIsMenuLongPressed = false;
-                                param.setResult(-1);
-                                return;
-                            } else if (event.getRepeatCount() == 0) {
-                                if (!areHwKeysEnabled()) {
-                                    if (DEBUG) log("MENU KeyEvent coming from HW key and keys disabled. Ignoring.");
-                                } else if (mIsMenuDoubleTap) {
-                                    // we are still waiting for double-tap
-                                    if (DEBUG) log("MENU doubletap pending. Ignoring.");
-                                } else if (!mWasMenuDoubleTap && !event.isCanceled()) {
-                                    if (getActionFor(HwKeyTrigger.MENU_SINGLETAP).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                        performAction(HwKeyTrigger.MENU_SINGLETAP);
-                                    } else {
-                                        if (DEBUG) log("Triggering original DOWN/UP events for MENU key");
-                                        injectKey(KeyEvent.KEYCODE_MENU);
-                                    }
-                                }
-                                param.setResult(-1);
-                                return;
-                            }
-                        } else if (event.getRepeatCount() == 0) {
-                            mMenuKeyPressed = true;
-                            mWasMenuDoubleTap = mIsMenuDoubleTap;
-                            if (mIsMenuDoubleTap) {
-                                performAction(HwKeyTrigger.MENU_DOUBLETAP);
-                                mHandler.removeCallbacks(mMenuDoubleTapReset);
-                                mIsMenuDoubleTap = false;
-                            } else {
-                                mIsMenuLongPressed = false;
-                                mIsMenuDoubleTap = false;
-                                if (getActionFor(HwKeyTrigger.MENU_DOUBLETAP).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                    mIsMenuDoubleTap = true;
-                                    mHandler.postDelayed(mMenuDoubleTapReset, mDoubletapSpeed);
-                                }
-                                if (getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                    mHandler.postDelayed(mMenuLongPress, 
-                                            getLongpressTimeoutForAction(
-                                                    getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId));
-                                }
-                            }
-                            param.setResult(-1);
-                            return;
-                        }
-                    }
-
-                    if (keyCode == KeyEvent.KEYCODE_BACK && isFromSystem && !isTaskLocked() &&
-                        (hasAction(HwKey.BACK) || !areHwKeysEnabled())) {
-    
-                        if (!down) {
-                            mBackKeyPressed = false;
-                            mHandler.removeCallbacks(mBackLongPress);
-                            if (mIsBackLongPressed) {
-                                mIsBackLongPressed = false;
-                                param.setResult(-1);
-                                return;
-                            } else if (event.getRepeatCount() == 0) {
-                                if (!areHwKeysEnabled()) {
-                                    if (DEBUG) log("BACK KeyEvent coming from HW key and keys disabled. Ignoring.");
-                                } else if (mIsBackDoubleTap) {
-                                    // we are still waiting for double-tap
-                                    if (DEBUG) log("BACK doubletap pending. Ignoring.");
-                                } else if (!mWasBackDoubleTap && !event.isCanceled()) {
-                                    if (getActionFor(HwKeyTrigger.BACK_SINGLETAP).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                        performAction(HwKeyTrigger.BACK_SINGLETAP);
-                                    } else {
-                                        if (DEBUG) log("Triggering original DOWN/UP events for BACK key");
-                                        injectKey(KeyEvent.KEYCODE_BACK);
-                                    }
-                                }
-                                param.setResult(-1);
-                                return;
-                            }
-                        } else if (event.getRepeatCount() == 0) {
-                            mBackKeyPressed = true;
-                            mWasBackDoubleTap = mIsBackDoubleTap;
-                            if (mIsBackDoubleTap) {
-                                performAction(HwKeyTrigger.BACK_DOUBLETAP);
-                                mHandler.removeCallbacks(mBackDoubleTapReset);
-                                mIsBackDoubleTap = false;
-                            } else {
-                                mIsBackLongPressed = false;
-                                mIsBackDoubleTap = false;
-                                if (getActionFor(HwKeyTrigger.BACK_DOUBLETAP).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                    mIsBackDoubleTap = true;
-                                    mHandler.postDelayed(mBackDoubleTapReset, mDoubletapSpeed);
-                                }
-                                if (getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                    mHandler.postDelayed(mBackLongPress, 
-                                            getLongpressTimeoutForAction(
-                                                    getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId));
-                                }
-                            }
-                            param.setResult(-1);
-                            return;
-                        }
-                    }
-
-                    if (keyCode == KeyEvent.KEYCODE_APP_SWITCH && isFromSystem && !isTaskLocked() &&
-                        (hasAction(HwKey.RECENTS) || !areHwKeysEnabled())) {
-    
-                        if (!down) {
-                            mRecentsKeyPressed = false;
-                            mHandler.removeCallbacks(mRecentsLongPress);
-                            if (mIsRecentsLongPressed) {
-                                mIsRecentsLongPressed = false;
-                                param.setResult(-1);
-                            } else if (event.getRepeatCount() == 0) {
-                                if (!areHwKeysEnabled()) {
-                                    if (DEBUG) log("RECENTS KeyEvent coming from HW key and keys disabled. Ignoring.");
-                                } else if (mIsRecentsDoubleTap) {
-                                    // we are still waiting for double-tap
-                                    if (DEBUG) log("RECENTS doubletap pending. Ignoring.");
-                                } else if (!mWasRecentsDoubleTap && !event.isCanceled()) {
-                                    if (getActionFor(HwKeyTrigger.RECENTS_SINGLETAP).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                        performAction(HwKeyTrigger.RECENTS_SINGLETAP);
-                                    } else {
-                                        if (DEBUG) log("Triggering original DOWN/UP events for RECENTS key");
-                                        injectKey(KeyEvent.KEYCODE_APP_SWITCH);
-                                    }
-                                }
-                                param.setResult(-1);
-                            }
-                        } else if (event.getRepeatCount() == 0) {
-                            mRecentsKeyPressed = true;
-                            mWasRecentsDoubleTap = mIsRecentsDoubleTap;
-                            if (mIsRecentsDoubleTap) {
-                                performAction(HwKeyTrigger.RECENTS_DOUBLETAP);
-                                mHandler.removeCallbacks(mRecentsDoubleTapReset);
-                                mIsRecentsDoubleTap = false;
-                            } else {
-                                mIsRecentsLongPressed = false;
-                                mIsRecentsDoubleTap = false;
-                                if (getActionFor(HwKeyTrigger.RECENTS_DOUBLETAP).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                    mIsRecentsDoubleTap = true;
-                                    mHandler.postDelayed(mRecentsDoubleTapReset, mDoubletapSpeed);
-                                }
-                                if (getActionFor(HwKeyTrigger.RECENTS_LONGPRESS).actionId != 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                    mHandler.postDelayed(mRecentsLongPress, 
-                                            getLongpressTimeoutForAction(
-                                                    getActionFor(HwKeyTrigger.RECENTS_LONGPRESS).actionId));
-                                }
-                            }
-                            param.setResult(-1);
-                        }
-                    }
-                }
-            });
-
             XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, 
                     "isWakeKeyWhenScreenOff", int.class, new XC_MethodHook() {
+
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     int keyCode = (Integer) param.args[0];
@@ -1006,157 +976,116 @@ public class ModHwKeys {
                   !ModPieControls.isPieEnabled(mContext, mPieMode, mExpandedDesktopMode));
     }
 
-    private static Runnable mMenuLongPress = new Runnable() {
-
-        @Override
-        public void run() {
-            if (DEBUG) log("mMenuLongPress runnable launched");
-            mIsMenuLongPressed = true;
-            performAction(HwKeyTrigger.MENU_LONGPRESS);
-        }
+    private static Runnable mMenuLongPress = () -> {
+        if (DEBUG) log("mMenuLongPress runnable launched");
+        mIsMenuLongPressed = true;
+        performAction(HwKeyTrigger.MENU_LONGPRESS);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
     };
 
-    private static Runnable mMenuDoubleTapReset = new Runnable() {
-
-        @Override
-        public void run() {
-            mIsMenuDoubleTap = false;
-            // doubletap timed out and since we blocked default MENU key action while waiting for doubletap
-            // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
-            // for long-press action
-            if (!mMenuKeyPressed && areHwKeysEnabled()) {
-                if (getActionFor(HwKeyTrigger.MENU_SINGLETAP).actionId != 
-                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                    if (DEBUG) log("MENU key double tap timed out and key not pressed; performing singletap action");
-                    performAction(HwKeyTrigger.MENU_SINGLETAP);
-                } else {
-                    if (DEBUG) log("MENU key double tap timed out and key not pressed; injecting MENU key");
-                    injectKey(KeyEvent.KEYCODE_MENU);
-                }
+    private static Runnable mMenuDoubleTapReset = () -> {
+        mIsMenuDoubleTap = false;
+        // doubletap timed out and since we blocked default MENU key action while waiting for doubletap
+        // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
+        // for long-press action
+        if (!mMenuKeyPressed && areHwKeysEnabled()) {
+            if (getActionFor(HwKeyTrigger.MENU_SINGLETAP).actionId !=
+                    GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                if (DEBUG) log("MENU key double tap timed out and key not pressed; performing singletap action");
+                performAction(HwKeyTrigger.MENU_SINGLETAP);
+            } else {
+                if (DEBUG) log("MENU key double tap timed out and key not pressed; injecting MENU key");
+                injectKey(KeyEvent.KEYCODE_MENU);
             }
         }
     };
 
-    private static Runnable mBackLongPress = new Runnable() {
-
-        @Override
-        public void run() {
-            if (DEBUG) log("mBackLongPress runnable launched");
-            mIsBackLongPressed = true;
-            performAction(HwKeyTrigger.BACK_LONGPRESS);
-        }
+    private static Runnable mBackLongPress = () -> {
+        if (DEBUG) log("mBackLongPress runnable launched");
+        mIsBackLongPressed = true;
+        performAction(HwKeyTrigger.BACK_LONGPRESS);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
     };
 
-    private static Runnable mBackDoubleTapReset = new Runnable() {
-
-        @Override
-        public void run() {
-            mIsBackDoubleTap = false;
-            // doubletap timed out and since we blocked default BACK key action while waiting for doubletap
-            // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
-            // for long-press action
-            if (!mBackKeyPressed && areHwKeysEnabled()) {
-                if (getActionFor(HwKeyTrigger.BACK_SINGLETAP).actionId != 
-                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                    if (DEBUG) log("BACK key double tap timed out and key not pressed; performing singletap action");
-                    performAction(HwKeyTrigger.BACK_SINGLETAP);
-                } else {
-                    if (DEBUG) log("BACK key double tap timed out and key not pressed; injecting BACK key");
-                    injectKey(KeyEvent.KEYCODE_BACK);
-                }
+    private static Runnable mBackDoubleTapReset = () -> {
+        mIsBackDoubleTap = false;
+        // doubletap timed out and since we blocked default BACK key action while waiting for doubletap
+        // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
+        // for long-press action
+        if (!mBackKeyPressed && areHwKeysEnabled()) {
+            if (getActionFor(HwKeyTrigger.BACK_SINGLETAP).actionId !=
+                    GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                if (DEBUG) log("BACK key double tap timed out and key not pressed; performing singletap action");
+                performAction(HwKeyTrigger.BACK_SINGLETAP);
+            } else {
+                if (DEBUG) log("BACK key double tap timed out and key not pressed; injecting BACK key");
+                injectKey(KeyEvent.KEYCODE_BACK);
             }
         }
     };
 
-    private static Runnable mRecentsLongPress = new Runnable() {
-
-        @Override
-        public void run() {
-            if (DEBUG) log("mRecentsLongPress runnable launched");
-            mIsRecentsLongPressed = true;
-            performAction(HwKeyTrigger.RECENTS_LONGPRESS);
-        }
+    private static Runnable mRecentsLongPress = () -> {
+        if (DEBUG) log("mRecentsLongPress runnable launched");
+        mIsRecentsLongPressed = true;
+        performAction(HwKeyTrigger.RECENTS_LONGPRESS);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
     };
 
-    private static Runnable mRecentsDoubleTapReset = new Runnable() {
-
-        @Override
-        public void run() {
-            mIsRecentsDoubleTap = false;
-            // doubletap timed out and since we blocked default RECENTS key action while waiting for doubletap
-            // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
-            // for long-press action
-            if (!mRecentsKeyPressed && areHwKeysEnabled()) {
-                if (getActionFor(HwKeyTrigger.RECENTS_SINGLETAP).actionId != 
-                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                    if (DEBUG) log("RECENTS key double tap timed out and key not pressed; performing singletap action");
-                    performAction(HwKeyTrigger.RECENTS_SINGLETAP);
-                } else {
-                    if (DEBUG) log("RECENTS key double tap timed out and key not pressed; injecting RECENTS key");
-                    injectKey(KeyEvent.KEYCODE_APP_SWITCH);
-                }
+    private static Runnable mRecentsDoubleTapReset = () -> {
+        mIsRecentsDoubleTap = false;
+        // doubletap timed out and since we blocked default RECENTS key action while waiting for doubletap
+        // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
+        // for long-press action
+        if (!mRecentsKeyPressed && areHwKeysEnabled()) {
+            if (getActionFor(HwKeyTrigger.RECENTS_SINGLETAP).actionId !=
+                    GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                if (DEBUG) log("RECENTS key double tap timed out and key not pressed; performing singletap action");
+                performAction(HwKeyTrigger.RECENTS_SINGLETAP);
+            } else {
+                if (DEBUG) log("RECENTS key double tap timed out and key not pressed; injecting RECENTS key");
+                injectKey(KeyEvent.KEYCODE_APP_SWITCH);
             }
         }
     };
 
-    private static Runnable mCustomKeyDoubletapReset = new Runnable() {
-        @Override
-        public void run() {
-            mCustomKeyDoubletapPending = false;
-            // doubletap timed out and since we blocked single-tap action while waiting for doubletap
-            // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
-            // for long-press action
-            if (!mCustomKeyPressed) {
-                if (DEBUG) log("Custom key double tap timed out and key not pressed; injecting key");
-                performAction(HwKeyTrigger.CUSTOM_SINGLETAP);
-            }
+    private static Runnable mCustomKeyDoubletapReset = () -> {
+        mCustomKeyDoubletapPending = false;
+        // doubletap timed out and since we blocked single-tap action while waiting for doubletap
+        // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
+        // for long-press action
+        if (!mCustomKeyPressed) {
+            if (DEBUG) log("Custom key double tap timed out and key not pressed; injecting key");
+            performAction(HwKeyTrigger.CUSTOM_SINGLETAP);
         }
     };
 
-    private static Runnable mLockscreenTorchRunnable = new Runnable() {
-
-        @Override
-        public void run() {
-            if (DEBUG) log("mLockscreenTorchRunnable runnable launched");
-            if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
-                mIsHomeLongPressed = true;
-            } else if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS) {
-                mPostponeWakeUpOnPowerKeyUpEventTime = 0;
-            }
-            toggleTorch();
-        }
-    };
-
-    private static Runnable mHomeLongPress = new Runnable() {
-        @Override
-        public void run() {
-            if (DEBUG) log("mHomeLongPress runnable launched");
+    private static Runnable mLockscreenTorchRunnable = () -> {
+        if (DEBUG) log("mLockscreenTorchRunnable runnable launched");
+        if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
             mIsHomeLongPressed = true;
-            performAction(HwKeyTrigger.HOME_LONGPRESS);
+            performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
+        } else if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS) {
+            mPostponeWakeUpOnPowerKeyUpEventTime = 0;
         }
+        toggleTorch();
     };
 
-    private static Runnable mResetBrightnessRunnable = new Runnable() {
+    private static Runnable mHomeLongPress = () -> {
+        if (DEBUG) log("mHomeLongPress runnable launched");
+        mIsHomeLongPressed = true;
+        performAction(HwKeyTrigger.HOME_LONGPRESS);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
+    };
 
-        @Override
-        public void run() {
-            try {
-                Class<?> classSm = XposedHelpers.findClass("android.os.ServiceManager", null);
-                Class<?> classIpm = XposedHelpers.findClass("android.os.IPowerManager.Stub", null);
-                IBinder b = (IBinder) XposedHelpers.callStaticMethod(
-                        classSm, "getService", Context.POWER_SERVICE);
-                Object power = XposedHelpers.callStaticMethod(classIpm, "asInterface", b);
-                if (power != null) {
-                    Settings.System.putInt(mContext.getContentResolver(),
-                            Settings.System.SCREEN_BRIGHTNESS_MODE, 0);
-                    XposedHelpers.callMethod(power, "setTemporaryScreenBrightnessSettingOverride", 100);
-                    Settings.System.putInt(mContext.getContentResolver(),
-                            Settings.System.SCREEN_BRIGHTNESS, 100);
-                    if (DEBUG) log("Screen brightness reset to manual with level set to 100");
-                }
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
-            }
+    private static Runnable mResetBrightnessRunnable = () -> {
+        try {
+            XposedHelpers.callStaticMethod(Settings.System.class, "putIntForUser",
+                    mContext.getContentResolver(),Settings.System.SCREEN_BRIGHTNESS_MODE, 0, -2);
+            XposedHelpers.callStaticMethod(Settings.System.class, "putIntForUser",
+                    mContext.getContentResolver(),Settings.System.SCREEN_BRIGHTNESS, 100, -2);
+            if (DEBUG) log("Screen brightness reset to manual with level set to 100");
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
         }
     };
 
@@ -1253,6 +1182,16 @@ public class ModHwKeys {
         }
     }
 
+    private static void performHapticFeedback(int effect, boolean always) {
+        try {
+            XposedHelpers.callMethod(mPhoneWindowManager, "performHapticFeedbackLw",
+                    new Class<?> [] { mWindowStateClass, int.class, boolean.class },
+                    null, effect, always);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error calling performHapticFeedbackLw:", t);
+        }
+    }
+
     private static void launchSearchActivity() {
         try {
             mLaunchAssistAction.invoke(mPhoneWindowManager, null, 0);
@@ -1269,105 +1208,91 @@ public class ModHwKeys {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private static void killForegroundApp() {
         Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
         if (handler == null) return;
 
-        handler.post(
-            new Runnable() {
-                @SuppressWarnings("deprecation")
-                @Override
-                public void run() {
-                    try {
-                        final Intent intent = new Intent(Intent.ACTION_MAIN);
-                        final PackageManager pm = mContext.getPackageManager();
-                        String defaultHomePackage = "com.android.launcher";
-                        intent.addCategory(Intent.CATEGORY_HOME);
+        handler.post(() -> {
+            try {
+                final Intent intent = new Intent(Intent.ACTION_MAIN);
+                final PackageManager pm = mContext.getPackageManager();
+                String defaultHomePackage = "com.android.launcher";
+                intent.addCategory(Intent.CATEGORY_HOME);
 
-                        final ResolveInfo res = pm.resolveActivity(intent, 0);
-                        if (res.activityInfo != null && !res.activityInfo.packageName.equals("android")) {
-                            defaultHomePackage = res.activityInfo.packageName;
-                        }
+                final ResolveInfo res = pm.resolveActivity(intent, 0);
+                if (res.activityInfo != null && !res.activityInfo.packageName.equals("android")) {
+                    defaultHomePackage = res.activityInfo.packageName;
+                }
 
-                        ActivityManager am = getActivityManager();
-                        List<RunningTaskInfo> apps = am.getRunningTasks(1);
+                ActivityManager am = getActivityManager();
+                List<RunningTaskInfo> apps = am.getRunningTasks(1);
 
-                        String targetKilled = null;
-                        if (apps.size() > 0 && apps.get(0).numRunning > 0) {
-                            ComponentName cn = apps.get(0).topActivity;
-                            if (!mKillIgnoreList.contains(cn.getPackageName()) &&
-                                    !cn.getPackageName().startsWith(defaultHomePackage)) {
-                                if (DEBUG) log("Force stopping: " + cn.getPackageName());
-                                XposedHelpers.callMethod(am, "removeTask", apps.get(0).id);
-                                XposedHelpers.callMethod(am, "forceStopPackage", cn.getPackageName());
-                                targetKilled = cn.getPackageName();
-                            }
-                        }
-        
-                        if (targetKilled != null) {
-                            try {
-                                targetKilled = (String) pm.getApplicationLabel(
-                                        pm.getApplicationInfo(targetKilled, 0));
-                            } catch (PackageManager.NameNotFoundException nfe) {
-                                //
-                            }
-                            Class<?>[] paramArgs = new Class<?>[3];
-                            paramArgs[0] = XposedHelpers.findClass(CLASS_WINDOW_STATE, null);
-                            paramArgs[1] = int.class;
-                            paramArgs[2] = boolean.class;
-                            XposedHelpers.callMethod(mPhoneWindowManager, "performHapticFeedbackLw",
-                                    paramArgs, null, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING, true);
-                            Toast.makeText(mContext, 
-                                    String.format(mStrAppKilled, targetKilled), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(mContext, mStrNothingToKill, Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (Exception e) {  
-                        GravityBox.log(TAG, e);  
+                String targetKilled = null;
+                if (apps.size() > 0 && apps.get(0).numRunning > 0) {
+                    ComponentName cn = apps.get(0).topActivity;
+                    if (!mKillIgnoreList.contains(cn.getPackageName()) &&
+                            !cn.getPackageName().startsWith(defaultHomePackage)) {
+                        if (DEBUG) log("Force stopping: " + cn.getPackageName());
+                        XposedHelpers.callMethod(am, "removeTask", apps.get(0).id);
+                        XposedHelpers.callMethod(am, "forceStopPackage", cn.getPackageName());
+                        targetKilled = cn.getPackageName();
                     }
                 }
+
+                if (targetKilled != null) {
+                    try {
+                        targetKilled = (String) pm.getApplicationLabel(
+                                pm.getApplicationInfo(targetKilled, 0));
+                    } catch (PackageManager.NameNotFoundException nfe) {
+                        //
+                    }
+                    performHapticFeedback(HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING, true);
+                    Toast.makeText(mContext,
+                            String.format(mStrAppKilled, targetKilled), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mContext, mStrNothingToKill, Toast.LENGTH_SHORT).show();
+                }
+            } catch (Throwable t) {
+                GravityBox.log(TAG, t);
             }
-         );
+        });
     }
 
+    @SuppressWarnings("deprecation")
+    @SuppressLint("MissingPermission")
     private static void switchToLastApp() {
         Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
         if (handler == null) return;
 
-        handler.post(
-            new Runnable() {
-                @SuppressLint("MissingPermission")
-                @Override
-                public void run() {
-                    int lastAppId = 0;
-                    int looper = 1;
-                    String packageName;
-                    final Intent intent = new Intent(Intent.ACTION_MAIN);
-                    final ActivityManager am = getActivityManager();
-                    String defaultHomePackage = "com.android.launcher";
-                    intent.addCategory(Intent.CATEGORY_HOME);
-                    final ResolveInfo res = mContext.getPackageManager().resolveActivity(intent, 0);
-                    if (res.activityInfo != null && !res.activityInfo.packageName.equals("android")) {
-                        defaultHomePackage = res.activityInfo.packageName;
-                    }
-                    List <ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(5);
-                    // lets get enough tasks to find something to switch to
-                    // Note, we'll only get as many as the system currently has - up to 5
-                    while ((lastAppId == 0) && (looper < tasks.size())) {
-                        packageName = tasks.get(looper).topActivity.getPackageName();
-                        if (!packageName.equals(defaultHomePackage) && !packageName.equals("com.android.systemui")) {
-                            lastAppId = tasks.get(looper).id;
-                        }
-                        looper++;
-                    }
-                    if (lastAppId != 0) {
-                        am.moveTaskToFront(lastAppId, ActivityManager.MOVE_TASK_NO_USER_ACTION);
-                    } else {
-                        Toast.makeText(mContext, mStrNoPrevApp, Toast.LENGTH_SHORT).show();
-                    }
-                }
+        handler.post(() -> {
+            int lastAppId = 0;
+            int looper = 1;
+            String packageName;
+            final Intent intent = new Intent(Intent.ACTION_MAIN);
+            final ActivityManager am = getActivityManager();
+            String defaultHomePackage = "com.android.launcher";
+            intent.addCategory(Intent.CATEGORY_HOME);
+            final ResolveInfo res = mContext.getPackageManager().resolveActivity(intent, 0);
+            if (res.activityInfo != null && !res.activityInfo.packageName.equals("android")) {
+                defaultHomePackage = res.activityInfo.packageName;
             }
-        );
+            List <RunningTaskInfo> tasks = am.getRunningTasks(5);
+            // lets get enough tasks to find something to switch to
+            // Note, we'll only get as many as the system currently has - up to 5
+            while ((lastAppId == 0) && (looper < tasks.size())) {
+                packageName = tasks.get(looper).topActivity.getPackageName();
+                if (!packageName.equals(defaultHomePackage) && !packageName.equals("com.android.systemui")) {
+                    lastAppId = tasks.get(looper).id;
+                }
+                looper++;
+            }
+            if (lastAppId != 0) {
+                am.moveTaskToFront(lastAppId, ActivityManager.MOVE_TASK_NO_USER_ACTION);
+            } else {
+                Toast.makeText(mContext, mStrNoPrevApp, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private static void goToSleep() {
@@ -1390,13 +1315,8 @@ public class ModHwKeys {
         if (uri == null) {
             try {
                 Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(mContext, mStrCustomAppNone, Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (Throwable t) { }
+                handler.post(() -> Toast.makeText(mContext, mStrCustomAppNone, Toast.LENGTH_SHORT).show());
+            } catch (Throwable ignore) { }
             return;
         }
 
@@ -1412,40 +1332,35 @@ public class ModHwKeys {
         Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
         if (handler == null) return;
 
-        handler.post(
-            new Runnable() {
-                @Override
-                public void run() {
+        handler.post(() -> {
+            try {
+                // if intent is a GB action of broadcast type, handle it directly here
+                if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
+                    boolean isLaunchBlocked;
                     try {
-                        // if intent is a GB action of broadcast type, handle it directly here
-                        if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
-                            boolean isLaunchBlocked = false;
-                            try {
-                                KeyguardManager kgManager = 
-                                        (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
-                                isLaunchBlocked = kgManager != null && 
-                                    kgManager.isKeyguardLocked() && kgManager.isKeyguardSecure() &&
-                                        !ShortcutActivity.isActionSafe(intent.getStringExtra(
-                                                ShortcutActivity.EXTRA_ACTION));
-                            } catch (Throwable t) { }
-                            if (DEBUG) log("isLaunchBlocked: " + isLaunchBlocked);
-                            Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
-                            newIntent.putExtras(intent);
-                            mContext.sendBroadcast(newIntent);
-                        // otherwise start activity (dismissing keyguard if necessary)
-                        } else {
-                            dismissKeyguard();
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            mContext.startActivity(intent);
-                        }
-                    } catch (ActivityNotFoundException e) {
-                        Toast.makeText(mContext, mStrCustomAppMissing, Toast.LENGTH_SHORT).show();
-                    } catch (Throwable t) {
-                        GravityBox.log(TAG, t);
-                    }
+                        KeyguardManager kgManager =
+                                (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
+                        isLaunchBlocked = kgManager != null &&
+                            kgManager.isKeyguardLocked() && kgManager.isKeyguardSecure() &&
+                                !ShortcutActivity.isActionSafe(intent.getStringExtra(
+                                        ShortcutActivity.EXTRA_ACTION));
+                    } catch (Throwable ignore) { }
+                    if (DEBUG) log("isLaunchBlocked: " + isLaunchBlocked);
+                    Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+                    newIntent.putExtras(intent);
+                    mContext.sendBroadcast(newIntent);
+                // otherwise start activity (dismissing keyguard if necessary)
+                } else {
+                    dismissKeyguard();
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    mContext.startActivity(intent);
                 }
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(mContext, mStrCustomAppMissing, Toast.LENGTH_SHORT).show();
+            } catch (Throwable t) {
+                GravityBox.log(TAG, t);
             }
-        );
+        });
     }
 
     private static void dismissKeyguard() {
@@ -1460,29 +1375,26 @@ public class ModHwKeys {
         }
     }
 
-    public static void injectKey(final int keyCode) {
+    private static void injectKey(final int keyCode) {
         Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
         if (handler == null) return;
 
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final long eventTime = SystemClock.uptimeMillis();
-                    final InputManager inputManager = (InputManager)
-                            mContext.getSystemService(Context.INPUT_SERVICE);
-                    int flags = KeyEvent.FLAG_FROM_SYSTEM;
-                    XposedHelpers.callMethod(inputManager, "injectInputEvent",
-                            new KeyEvent(eventTime - 50, eventTime - 50, KeyEvent.ACTION_DOWN, 
-                                    keyCode, 0, 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags,
-                                    InputDevice.SOURCE_UNKNOWN), 0);
-                    XposedHelpers.callMethod(inputManager, "injectInputEvent",
-                            new KeyEvent(eventTime - 50, eventTime - 25, KeyEvent.ACTION_UP, 
-                                    keyCode, 0, 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags,
-                                    InputDevice.SOURCE_UNKNOWN), 0);
-                } catch (Throwable t) {
-                        GravityBox.log(TAG, t);
-                }
+        handler.post(() -> {
+            try {
+                final long eventTime = SystemClock.uptimeMillis();
+                final InputManager inputManager = (InputManager)
+                        mContext.getSystemService(Context.INPUT_SERVICE);
+                int flags = KeyEvent.FLAG_FROM_SYSTEM;
+                XposedHelpers.callMethod(inputManager, "injectInputEvent",
+                        new KeyEvent(eventTime - 50, eventTime - 50, KeyEvent.ACTION_DOWN,
+                                keyCode, 0, 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags,
+                                InputDevice.SOURCE_UNKNOWN), 0);
+                XposedHelpers.callMethod(inputManager, "injectInputEvent",
+                        new KeyEvent(eventTime - 50, eventTime - 25, KeyEvent.ACTION_UP,
+                                keyCode, 0, 0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags,
+                                InputDevice.SOURCE_UNKNOWN), 0);
+            } catch (Throwable t) {
+                    GravityBox.log(TAG, t);
             }
         });
     }
@@ -1515,10 +1427,6 @@ public class ModHwKeys {
     }
 
     private static void toggleTorch() {
-        toggleTorch(false);
-    }
-
-    private static void toggleTorch(boolean goToSleep) {
         try {
             Intent intent = new Intent(mGbContext, TorchService.class);
             intent.setAction(TorchService.ACTION_TOGGLE_TORCH);
@@ -1591,14 +1499,11 @@ public class ModHwKeys {
 
         final Method m = getNativeScreenshotMethod();
         if (m != null) {
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        m.invoke(mPhoneWindowManager, 1);
-                    } catch (Throwable t) {
-                        GravityBox.log(TAG, t);
-                    }
+            handler.postDelayed(() -> {
+                try {
+                    m.invoke(mPhoneWindowManager, 1);
+                } catch (Throwable t) {
+                    GravityBox.log(TAG, t);
                 }
             }, delayMs);
             return;
@@ -1637,14 +1542,11 @@ public class ModHwKeys {
                         };  
                         msg.replyTo = new Messenger(h);  
                         msg.arg1 = msg.arg2 = 0;  
-                        h.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    messenger.send(msg);
-                                } catch (RemoteException e) {
-                                    GravityBox.log(TAG, e);
-                                }
+                        h.postDelayed(() -> {
+                            try {
+                                messenger.send(msg);
+                            } catch (RemoteException e) {
+                                GravityBox.log(TAG, e);
                             }
                         }, delayMs);
                     }  
@@ -1659,14 +1561,11 @@ public class ModHwKeys {
         }
     }
     
-    private static final Runnable mScreenshotTimeout = new Runnable() {
-        @Override
-        public void run() {
-            synchronized (mScreenshotLock) {
-                if (mScreenshotConnection != null) {
-                    mContext.unbindService(mScreenshotConnection);
-                    mScreenshotConnection = null;
-                }
+    private static final Runnable mScreenshotTimeout = () -> {
+        synchronized (mScreenshotLock) {
+            if (mScreenshotConnection != null) {
+                mContext.unbindService(mScreenshotConnection);
+                mScreenshotConnection = null;
             }
         }
     };
@@ -1674,12 +1573,7 @@ public class ModHwKeys {
     private static void showGlobalActionsDialog() {
         try {
             Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    XposedHelpers.callMethod(mPhoneWindowManager, "showGlobalActions");
-                }
-            });
+            handler.post(() -> XposedHelpers.callMethod(mPhoneWindowManager, "showGlobalActions"));
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error executing PhoneWindowManager.showGlobalActionsDialog(): ", t);
         }
@@ -1708,12 +1602,9 @@ public class ModHwKeys {
     private static void showVolumePanel() {
         try {
             Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-                    am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
-                }
+            handler.post(() -> {
+                AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+                am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
             });
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error executing showVolumePanel: ", t);
@@ -1847,6 +1738,7 @@ public class ModHwKeys {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private static void updateWifiConfig(ArrayList<WifiConfiguration> configList, ResultReceiver receiver) {
         try {
             WifiManager wm = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
