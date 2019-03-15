@@ -458,6 +458,7 @@
 
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Разрешить все повороты</string>
+    <string name="pref_display_allow_all_rotations_summary">Необходима перезагрузка</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">SIM для режима сети</string>
@@ -787,6 +788,7 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Непрозрачность фона</string>
+    <string name="pref_lockscreen_bg_opacity_summary2">Установите на ноль для стоковой политики по умолчанию</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Управление медиа</string>
@@ -2131,5 +2133,35 @@
 
     <!-- QH: current mode -->
     <string name="pref_lc_qh_mode_title">Текущий режим</string>
+
+    <!-- BatteryBar: lock screen only -->
+    <string name="pref_battery_bar_lockscreen_only_title">Только экран блокировки</string>
+
+    <!-- Advanced tuning -->
+    <string name="pref_tuner_title">Дополнительная настройка</string>
+    <string name="pref_tuner_summary">Дополнительная настройка параметров конфигурации фреймворка и интерфейса</string>
+    <string name="tuner_info">Дополнительная настройка динамически извлекает все параметры конфигурации из фреймворка
+        и системного интерфейса пользователя, включая их стоковые значения, и позволяет заменить их своими.
+        Настройка пока доступна для простых параметров, таких как целочисленные и логические данные.
+        Переписанные значения будут применены во время загрузки. Конечный результат всегда зависит от типа устройства, соответствующей поддержки
+        оборудования и параметров производителя; поэтому возможнго, что изменения будут применены не ко всем параметрам.</string>
+    <string name="tuner_warning">Дополнительная настройка доступна только для опытных пользователей. Замена значений по умолчанию
+        и использование некорректных величин может привести к проблемам со стабильностью и производительностью и даже к сбою в системе.
+        Изменения не являются перманентными и работают только пока активирован модуль Xposed GravityBox и включен главный переключатель.
+        Используйте с осторожностью и всегда предусматривайте план восстановления!</string>
+    <string name="pref_tuner_master_switch_summary">Необходима перезагрузка</string>
+    <string name="pref_tuner_framework_title">Фреймворк</string>
+    <string name="pref_tuner_framework_summary">Содержит основные параметры конфигурации системы</string>
+    <string name="pref_tuner_systemui_title">Системный интерфейс пользователя</string>
+    <string name="pref_tuner_systemui_summary">Содержит специфичные параметры конфигурации системного интерфейса, относящиеся к строке состояния, экрану блокировки и др.</string>
+    <string name="tuner_menu_show_all">Показать все элементы</string>
+    <string name="tuner_menu_show_overridden">Показать заменённые</string>
+    <string name="tuner_no_documentation">Документация недоступна</string>
+    <string name="pref_tuneable_override_title">Заменить</string>
+    <string name="tuneable_current_value">Текущее значение</string>
+    <string name="tuneable_overridden_value">Заменённое значение</string>
+    <string name="tuneable_reboot_required">Необходима перезагрузка</string>
+    <string name="pref_tuneable_value_int_error">Неверное значение. Введите целочисленную величину</string>
+    <string name="tuner_manager_not_responding">Менеджер настройки не отвечает</string>
 
 </resources>
