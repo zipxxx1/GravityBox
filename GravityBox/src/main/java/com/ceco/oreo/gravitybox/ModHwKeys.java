@@ -166,9 +166,8 @@ public class ModHwKeys {
     private static ActivityManager mActivityManager;
     private static AudioManager mAudioManager;
     private static PowerManager mPowerManager;
-    private static Boolean mSupportLongPressPowerWhenNonInteractiveOrig;
-    private static long mPostponeWakeUpOnPowerKeyUpEventTime = 0;
     private static Class<?> mWindowStateClass;
+    private static boolean mPowerLongPressInterceptedByTorch;
 
     private static List<String> mKillIgnoreList = new ArrayList<>(Arrays.asList(
             "com.android.systemui"
@@ -315,7 +314,6 @@ public class ModHwKeys {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
                     mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
                             GravityBoxSettings.HWKEY_TORCH_DISABLED);
-                    adjustLongPressPowerWhenNonInteractive();
                     if (DEBUG) log("Lockscreen torch set to: " + mLockscreenTorch);
                 }
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED)) {
@@ -564,6 +562,29 @@ public class ModHwKeys {
                             event = KeyEvent.changeFlags(event, event.getFlags() | KeyEvent.FLAG_VIRTUAL_HARD_KEY);
                             event.setSource(PA_SOURCE_CUSTOM);
                             param.args[0] = event;
+                        }
+                        return;
+                    }
+
+                    if (keyCode == KeyEvent.KEYCODE_POWER &&
+                            mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS &&
+                            !getPowerManager().isInteractive()) {
+                        if (!down) {
+                            handler.removeCallbacks(mLockscreenTorchRunnable);
+                            if (mPowerLongPressInterceptedByTorch) {
+                                mPowerLongPressInterceptedByTorch = false;
+                                param.setResult(0);
+                                if (DEBUG) log("Power key long-press intercepted by torch, ignoring original event");
+                            } else {
+                                injectKey(KeyEvent.KEYCODE_POWER);
+                                if (DEBUG) log("Injecting original down/up event");
+                            }
+                        } else if (event.getRepeatCount() == 0) {
+                            mPowerLongPressInterceptedByTorch = false;
+                            handler.postDelayed(mLockscreenTorchRunnable, getLongpressTimeoutForAction(
+                                    GravityBoxSettings.HWKEY_ACTION_TORCH));
+                            param.setResult(0);
+                            if (DEBUG) log("Scheduled torch runnable, ignoring original event");
                         }
                         return;
                     }
@@ -875,45 +896,6 @@ public class ModHwKeys {
                     }
                 }
             });
-
-            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
-                    "powerLongPress", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) {
-                    if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS &&
-                            !getPowerManager().isInteractive()) {
-                        mPostponeWakeUpOnPowerKeyUpEventTime = 0;
-                        toggleTorch();
-                        param.setResult(null);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
-                    "wakeUpFromPowerKey", long.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) {
-                    if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS &&
-                            mPostponeWakeUpOnPowerKeyUpEventTime == 0) {
-                        mPostponeWakeUpOnPowerKeyUpEventTime = (long)param.args[0];
-                        param.setResult(null);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, "interceptPowerKeyUp",
-                    KeyEvent.class, boolean.class, boolean.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mPostponeWakeUpOnPowerKeyUpEventTime > 0) {
-                        Method m = mPhoneWindowManagerClass.getDeclaredMethod(
-                                "wakeUpFromPowerKey", long.class);
-                        m.setAccessible(true);
-                        m.invoke(param.thisObject, mPostponeWakeUpOnPowerKeyUpEventTime);
-                        mPostponeWakeUpOnPowerKeyUpEventTime = 0;
-                    }
-                }
-            });
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -934,7 +916,6 @@ public class ModHwKeys {
             mStrCustomAppMissing = res.getString(R.string.hwkey_action_custom_app_missing);
 
             setVirtualKeyVibePattern(mPrefs.getString(GravityBoxSettings.PREF_KEY_VK_VIBRATE_PATTERN, null));
-            adjustLongPressPowerWhenNonInteractive();
 
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
@@ -1069,8 +1050,10 @@ public class ModHwKeys {
         if (DEBUG) log("mLockscreenTorchRunnable runnable launched");
         if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
             mIsHomeLongPressed = true;
-			performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
+        } else if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS) {
+            mPowerLongPressInterceptedByTorch = true;
         }
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
         toggleTorch();
     };
 
@@ -1782,22 +1765,6 @@ public class ModHwKeys {
     private static boolean isTaskLocked() {
         return getActivityManager().getLockTaskModeState() !=
                 ActivityManager.LOCK_TASK_MODE_NONE;
-    }
-
-    private static void adjustLongPressPowerWhenNonInteractive() {
-        try {
-            if (mSupportLongPressPowerWhenNonInteractiveOrig == null) {
-                mSupportLongPressPowerWhenNonInteractiveOrig =
-                        XposedHelpers.getBooleanField(mPhoneWindowManager,
-                                "mSupportLongPressPowerWhenNonInteractive");
-            }
-            XposedHelpers.setBooleanField(mPhoneWindowManager,
-                    "mSupportLongPressPowerWhenNonInteractive",
-                    mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS ?
-                            true : mSupportLongPressPowerWhenNonInteractiveOrig);
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
     }
 
     private static void toggleSplitScreen() {
