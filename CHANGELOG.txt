@@ -1,3 +1,11 @@
+Changelog 8.5.3-edxposed - 17/03/2019
+--------------------------------------
+- Key Actions: fixed torch on power-long press
+- Phone tweaks: fixed Increasing ring feature
+- Advanced Tuning: fixed missing SystemUI parameters on some devices (e.g. Asus)
+- CircleBattery: adjusted outline color for visibility on white background
+- Other minor fixes and improvements backported from Pie branch
+
 Changelog 8.5.2 - 25/02/2019
 --------------------------------------
 - Fixed scaling of navbar keys on 8.1
