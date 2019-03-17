@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.net.Uri;
 import android.os.Handler;
@@ -45,7 +46,6 @@ public class ModRinger {
     private static float mCurrentIncrementVolume;
     private static Ringtone mRingtone;
     private static Handler mHandler;
-    private static Object mAsyncRinger;
     private static QuietHours mQuietHours;
 
     private static void log(String message) {
@@ -106,7 +106,7 @@ public class ModRinger {
                     mtdHandlePlay = clsRingtonePlayer.getDeclaredMethod("access$000",
                             clsRingtonePlayer, XposedHelpers.findClass("com.android.internal.os.SomeArgs", classLoader));
                     if (DEBUG) log("handlePlay found as access$000");
-                } catch (NoSuchMethodException ignored) { }
+                } catch (NoSuchMethodException ignore) { }
             }
 
             if (mtdHandlePlay == null) {
@@ -129,14 +129,6 @@ public class ModRinger {
                     intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     context.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("TelecomServiceImpl created; broadcast receiver registered");
-                }
-            });
-
-            XposedBridge.hookAllConstructors(clsRingtonePlayer, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) {
-                    mAsyncRinger = param.thisObject;
-                    if (DEBUG) log("Ringtone player created");
                 }
             });
 
@@ -165,7 +157,7 @@ public class ModRinger {
                 protected void afterHookedMethod(MethodHookParam param) {
                     if (!mRingerConfig.enabled) return;
 
-                    mRingtone = (Ringtone) XposedHelpers.getObjectField(mAsyncRinger, "mRingtone");
+                    mRingtone = (Ringtone) XposedHelpers.getObjectField(param.thisObject, "mRingtone");
                     if (mRingtone == null) {
                         if (DEBUG) log("handlePlay called but ringtone is null");
                         return;
@@ -174,7 +166,7 @@ public class ModRinger {
                     setVolume(mRingerConfig.minVolume);
                     mIncrementAmount = (1f - mRingerConfig.minVolume) / (float) mRingerConfig.rampUpDuration;
                     mCurrentIncrementVolume = mRingerConfig.minVolume;
-                    mHandler = (Handler) XposedHelpers.getObjectField(mAsyncRinger, "mHandler");
+                    mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
                     mHandler.postDelayed(mRunnable, 1000);
                     if (DEBUG) log("Starting increasing ring");
                 }
@@ -196,14 +188,14 @@ public class ModRinger {
     }
 
     private static void setVolume(float volume) {
-        Object player = XposedHelpers.getObjectField(mRingtone, "mLocalPlayer");
+        MediaPlayer player = (MediaPlayer) XposedHelpers.getObjectField(mRingtone, "mLocalPlayer");
         if (player != null) {
-            XposedHelpers.callMethod(player, "setVolume", volume);
+            player.setVolume(volume, volume);
         } else if (XposedHelpers.getBooleanField(mRingtone, "mAllowRemote")) {
-            player = XposedHelpers.getObjectField(mRingtone, "mRemotePlayer");
-            if (player != null) {
+            Object remotePlayer = XposedHelpers.getObjectField(mRingtone, "mRemotePlayer");
+            if (remotePlayer != null) {
                 try {
-                    XposedHelpers.callMethod(player, "setPlaybackProperties",
+                    XposedHelpers.callMethod(remotePlayer, "setPlaybackProperties",
                             XposedHelpers.getObjectField(mRingtone, "mRemoteToken"),
                             volume, false);
                 } catch (Throwable t) {
