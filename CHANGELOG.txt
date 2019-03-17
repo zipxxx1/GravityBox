@@ -1,3 +1,14 @@
+Changelog 8.5.3 - 17/03/2019
+--------------------------------------
+- Improved Fingerprint Launcher compatibility
+- GravityBox Actions: fixed SIM Settings actions compatibility
+- Advanced Tuning: fixed missing SystemUI parameters on some devices (e.g. Asus)
+- CircleBattery: adjusted outline color for visibility on white background
+- Key Actions: redesigned Torch on Power Longpress for better compatibility
+- Phone tweaks: optimized Increasing ring feature
+- Other minor fixes and improvements backported from Pie branch
+- Updated Russian translations (thanks to gaich)
+
 Changelog 8.5.2 - 25/02/2019
 --------------------------------------
 - Fixed scaling of navbar keys on 8.1
