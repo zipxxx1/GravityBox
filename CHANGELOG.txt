@@ -1,3 +1,14 @@
+Changelog 9.0.0-beta-4 - 18/03/2019
+--------------------------------------
+- Volume key cursor control is back
+- Fixed Torch on Power long-press
+- Phone tweaks: fixed Increasing ring feature
+- Clock: redesigned positioning in status bar
+--- now supports default/left/right/center positions
+- Fixed double-tap on Home button for Samsung devices (thanks to Firefds)
+- About: PayPal donation now allows custom amount in case premium is already unlocked
+- Updated Russian translations (thanks to gaich)
+
 Changelog 9.0.0-beta-3 - 14/03/2019
 --------------------------------------
 - Fixed missing Alert Slider statusbar icons on OxygenOS
