@@ -56,9 +56,6 @@ public class ModStatusbarColor {
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> statusbarClass = XposedHelpers.findClass(CLASS_STATUSBAR, classLoader);
-            final Class<?> statusbarIconViewClass = XposedHelpers.findClass(CLASS_STATUSBAR_ICON_VIEW, classLoader);
-            final Class<?> sbTransitionsClass = XposedHelpers.findClass(CLASS_SB_TRANSITIONS, classLoader);
-
             XposedHelpers.findAndHookMethod(statusbarClass, 
                     "makeStatusBarView", new XC_MethodHook(XCallback.PRIORITY_LOWEST) {
                 @Override
@@ -74,7 +71,12 @@ public class ModStatusbarColor {
                     context.sendBroadcast(i);
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
 
+        try {
+            final Class<?> statusbarIconViewClass = XposedHelpers.findClass(CLASS_STATUSBAR_ICON_VIEW, classLoader);
             XposedHelpers.findAndHookMethod(statusbarIconViewClass, "getIcon",
                     CLASS_STATUSBAR_ICON, new XC_MethodHook() {
                 @Override
@@ -92,7 +94,12 @@ public class ModStatusbarColor {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
 
+        try {
+            final Class<?> sbTransitionsClass = XposedHelpers.findClass(CLASS_SB_TRANSITIONS, classLoader);
             XposedHelpers.findAndHookMethod(sbTransitionsClass, "applyMode",
                     int.class, boolean.class, new XC_MethodHook() {
                 @Override
@@ -103,16 +110,25 @@ public class ModStatusbarColor {
                         final float textAndBatteryAlpha = (Float) XposedHelpers.callMethod(
                                 param.thisObject, "getBatteryClockAlpha", (Integer) param.args[0]);
                         SysUiManagers.IconManager.setIconAlpha(signalClusterAlpha, textAndBatteryAlpha);
+                        if (DEBUG) log("SbTransitions: applyMode: signalClusterAlpha=" + signalClusterAlpha +
+                                "; textAndBatteryAlpha=" + textAndBatteryAlpha);
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
 
-            XposedHelpers.findAndHookMethod(CLASS_SB_DARK_ICON_DISPATCHER, classLoader, "applyIconTint", new XC_MethodHook() {
+        try {
+            XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_SB_DARK_ICON_DISPATCHER, classLoader),
+                    "setIconTintInternal", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     if (SysUiManagers.IconManager != null) {
                         SysUiManagers.IconManager.setIconTint(
                                 XposedHelpers.getIntField(param.thisObject, "mIconTint"));
+                        if (DEBUG) log("DarkIconDispatcher: setIconTintInternal: iconTint = " + Integer.toHexString(
+                                XposedHelpers.getIntField(param.thisObject, "mIconTint")));
                     }
                 }
             });
