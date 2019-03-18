@@ -185,9 +185,6 @@
     <string name="pref_lockscreen_rotation_title">Kilit ekranı döndürmeyi etkinleştir</string>
     <string name="pref_lockscreen_rotation_summary">Yeniden başlatma gerektirir</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Saati ortala</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Medya iyileştirmeleri</string>
     <string name="pref_cat_media_summary">Medya ve ses sistemi için çeşitli iyileştirmeleri içerir</string>

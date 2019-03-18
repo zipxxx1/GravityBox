@@ -173,9 +173,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Vergrendelscherm rotatie inschakelen</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Gecentreerde klok</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Media tweaks</string>
     <string name="pref_cat_media_summary">Bevat verschillende tweaks voor media en audio</string>

@@ -73,8 +73,6 @@ public class ModStatusBar {
     private static final String CLASS_STATUSBAR_WM = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
     private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
     public static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
-    private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
-    private static final String CLASS_LIGHT_BAR_CTRL = "com.android.systemui.statusbar.phone.LightBarController";
     private static final String CLASS_ASSIST_MANAGER = "com.android.systemui.assist.AssistManager";
     private static final String CLASS_COLLAPSED_SB_FRAGMENT = "com.android.systemui.statusbar.phone.CollapsedStatusBarFragment";
     private static final String CLASS_NOTIF_ICON_CONTAINER = "com.android.systemui.statusbar.phone.NotificationIconContainer";
@@ -115,7 +113,6 @@ public class ModStatusBar {
     private static Object mStatusBar;
     private static ViewGroup mStatusBarView;
     private static Context mContext;
-    private static boolean mClockCentered = false;
     private static boolean mAlarmHide = false;
     private static Object mPhoneStatusBarPolicy;
     private static SettingsObserver mSettingsObserver;
@@ -170,8 +167,8 @@ public class ModStatusBar {
             }
 
             if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_CENTER_CLOCK)) {
-                    setClockPosition(intent.getBooleanExtra(GravityBoxSettings.EXTRA_CENTER_CLOCK, false));
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_POSITION)) {
+                    setClockPosition(intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_POSITION));
                     updateTrafficMeterPosition();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK)) {
@@ -319,13 +316,6 @@ public class ModStatusBar {
         return mStatusBarState;
     }
 
-    public static boolean isCLockOnLeft() {
-        if (mClock != null && mClock.getClock() != null) {
-            return (!mClockCentered && mClock.getClock().getVisibility() == View.VISIBLE);
-        }
-        return true;
-    }
-
     private static void prepareLayoutStatusBar() {
         try {
             Resources res = mContext.getResources();
@@ -346,15 +336,15 @@ public class ModStatusBar {
 
             if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH, true)) {
                 // find statusbar clock
-                TextView clock = mLeftArea.findViewById(
+                TextView clock = mStatusBarView.findViewById(
                         res.getIdentifier("clock", "id", PACKAGE_NAME));
                 if (clock != null) {
                     mClock = new StatusbarClock(mPrefs);
-                    mClock.setClock(clock);
+                    mClock.setClock((ViewGroup)clock.getParent(), mLeftArea, mRightArea, mLayoutCenter, clock);
                     mBroadcastSubReceivers.add(mClock);
                 }
-                setClockPosition(mPrefs.getBoolean(
-                        GravityBoxSettings.PREF_KEY_STATUSBAR_CENTER_CLOCK, false));
+                setClockPosition(mPrefs.getString(
+                        GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_POSITION, "DEFAULT"));
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
@@ -368,7 +358,7 @@ public class ModStatusBar {
 
             // destroy clock
             if (mClock != null) {
-                setClockPosition(false);
+                setClockPosition(StatusbarClock.ClockPosition.DEFAULT);
                 mBroadcastSubReceivers.remove(mClock);
                 mClock.destroy();
                 mClock = null;
@@ -1051,27 +1041,18 @@ public class ModStatusBar {
         }
     }
 
-    private static void setClockPosition(boolean center) {
-        if (mClockCentered == center || mClock == null || 
-                mLeftArea == null || mLayoutCenter == null) {
-            return;
+    private static void setClockPosition(String position) {
+        try {
+            setClockPosition(StatusbarClock.ClockPosition.valueOf(position));
+        } catch (IllegalArgumentException e) {
+            log("Invalid value for clock position: " + position);
         }
+    }
 
-        if (center) {
-            mClock.getClock().setGravity(Gravity.CENTER);
-            mClock.getClock().setPadding(0, 0, 0, 0);
-            mLeftArea.removeView(mClock.getClock());
-            mLayoutCenter.addView(mClock.getClock());
-            if (DEBUG) log("Clock set to center position");
-        } else {
-            mClock.getClock().setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-            mClock.resetOriginalPaddingLeft();
-            mLayoutCenter.removeView(mClock.getClock());
-            mLeftArea.addView(mClock.getClock(), 0);
-            if (DEBUG) log("Clock set to normal position");
+    private static void setClockPosition(StatusbarClock.ClockPosition position) {
+        if (mClock != null) {
+            mClock.moveToPosition(position);
         }
-
-        mClockCentered = center;
     }
 
     private static void setTrafficMeterMode(TrafficMeterMode mode) throws Throwable {
@@ -1137,7 +1118,7 @@ public class ModStatusBar {
                     lp.width = LinearLayout.LayoutParams.WRAP_CONTENT;
                     lp.weight = 0;
                     if (mStatusBarState == StatusBarState.SHADE) {
-                        if (mClockCentered) {
+                        if (mClock != null && mClock.getCurrentPosition() == StatusbarClock.ClockPosition.CENTER) {
                             if (mLeftArea != null) {
                                 mLeftArea.addView(mTrafficMeter, 0);
                             }

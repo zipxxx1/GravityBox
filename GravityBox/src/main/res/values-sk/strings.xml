@@ -169,9 +169,6 @@
     <string name="pref_lockscreen_rotation_title">Rotácia obrazovky uzamknutia</string>
     <string name="pref_lockscreen_rotation_summary">Vyžaduje reštart</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Vycentrované hodiny</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Nastavenia médií</string>
     <string name="pref_cat_media_summary">Obsahuje rôzne nastavenia týkajúce sa médií a audio systému</string>
@@ -1920,5 +1917,11 @@
     <!-- Force ring volume control -->
     <string name="pref_vol_force_ring_control_title">Vynútiť ovládanie hlasitosti zvonenia</string>
     <string name="pref_vol_force_ring_control_summary">Ak povolené, tlačidlá hlasitosti budú ovládať úroveň hlasitosti zvonenia namiesto úrovne hlasitosti médií</string>
+
+    <!-- Clock position -->
+    <string name="pref_clock_position_title">Pozícia hodín</string>
+    <string name="clock_pos_left">Vľavo</string>
+    <string name="clock_pos_right">Vpravo</string>
+    <string name="clock_pos_center">Stred</string>
 
 </resources>

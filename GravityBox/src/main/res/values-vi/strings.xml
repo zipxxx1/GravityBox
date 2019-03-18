@@ -181,9 +181,6 @@
     <string name="pref_lockscreen_rotation_title">Cho phép xoay màn hình khóa</string>
     <string name="pref_lockscreen_rotation_summary">Cần khởi động lại</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Đồng hồ ở giữa</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Tinh chỉnh đa phương tiện</string>
     <string name="pref_cat_media_summary">Bao gồm các tinh chỉnh cho hệ thống đa phương tiện và âm thanh</string>

@@ -178,9 +178,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Enable lockscreen rotation</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Center clock</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Media tweaks</string>
     <string name="pref_cat_media_summary">Contains various tweaks for media and audio system</string>

@@ -181,9 +181,6 @@
     <string name="pref_lockscreen_rotation_title">Уключыць паварот экрана</string>
     <string name="pref_lockscreen_rotation_summary">Патрэбна перазагрузка</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Гадзіны ў цэнтры</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Налады мультымедыя</string>
     <string name="pref_cat_media_summary">Розныя налады для медыя- і аўдыясістэмы</string>

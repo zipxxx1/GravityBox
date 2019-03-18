@@ -181,9 +181,6 @@
     <string name="pref_lockscreen_rotation_title">Autom. Drehen</string>
     <string name="pref_lockscreen_rotation_summary">Neustart erforderlich</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Uhr mittig positionieren</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Medieneinstellungen anpassen</string>
     <string name="pref_cat_media_summary">Enthält Medien- und Audioeinstellungen</string>

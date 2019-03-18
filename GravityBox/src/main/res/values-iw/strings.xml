@@ -167,9 +167,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">הפעל סיבוב של מסך הנעילה</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">שעון במרכז</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">אפשרויות מדיה</string>
     <string name="pref_cat_media_summary">כולל הגדרות שונות הקשורות במערכת השמע והמדיה</string>

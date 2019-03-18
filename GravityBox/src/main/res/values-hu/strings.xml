@@ -186,9 +186,6 @@
     <string name="pref_lockscreen_rotation_title">Zárképernyő elforgatás engedélyezése</string>
     <string name="pref_lockscreen_rotation_summary">Újraindítás szükséges</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Óra középen</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Média módosítások</string>
     <string name="pref_cat_media_summary">Különböző beállításokat tartalmaz a média és hangbeállítási rendszerhez</string>

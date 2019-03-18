@@ -185,9 +185,6 @@
     <string name="pref_lockscreen_rotation_title">Включити поворот екрану блокування</string>
     <string name="pref_lockscreen_rotation_summary">Необхідне перезавантаження</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Годинник в центрі</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Налаштування мультимедіа</string>
     <string name="pref_cat_media_summary">Містить різні налаштування для медіа- та аудіо-системи</string>

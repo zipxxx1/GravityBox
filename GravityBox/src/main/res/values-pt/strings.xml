@@ -161,9 +161,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Habilitar rotação da tela de bloqueio</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Centralizar relógio</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Ajustes de multimídia</string>
     <string name="pref_cat_media_summary">Contém diversos ajustes relacionados a multimídia</string>

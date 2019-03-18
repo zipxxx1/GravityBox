@@ -185,9 +185,6 @@
     <string name="pref_lockscreen_rotation_title">Abilita rotazione</string>
     <string name="pref_lockscreen_rotation_summary">Richiede il riavvio</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Centra orologio</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Audio e Volume</string>
     <string name="pref_cat_media_summary">Permette di personalizzare l\'audio e il volume</string>

@@ -181,9 +181,6 @@
     <string name="pref_lockscreen_rotation_title">Rotar en pantalla de bloqueo</string>
     <string name="pref_lockscreen_rotation_summary">Requiere reinicio</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Centrar reloj</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Ajustes multimedia</string>
     <string name="pref_cat_media_summary">Contiene ajustes del sistema multimedia</string>

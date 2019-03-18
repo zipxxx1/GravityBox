@@ -126,9 +126,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotation af låseskærm til</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Ur i midten</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Medie-tweaks</string>
     <string name="pref_cat_media_summary">Indeholder diverse tweaks for medie- og lydsystem</string>

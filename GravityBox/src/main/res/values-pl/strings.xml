@@ -169,9 +169,6 @@
     <string name="pref_lockscreen_rotation_title">Włącz obracanie Ekranu blokady</string>
 	<string name="pref_lockscreen_rotation_summary">Wymaga ponownego uruchomienia</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Wycentruj zegar</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Poprawki multimediów</string>
     <string name="pref_cat_media_summary">Zawiera dodatkowe poprawki związane z multimediami i dźwiękiem</string>

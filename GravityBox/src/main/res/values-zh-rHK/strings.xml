@@ -178,9 +178,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">啟用鎖定畫面自動旋轉</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">狀態列時鐘置中</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">媒體選項</string>
     <string name="pref_cat_media_summary">包含各種媒體與聲音系統選項</string>

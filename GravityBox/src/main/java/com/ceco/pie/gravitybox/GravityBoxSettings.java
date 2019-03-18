@@ -194,7 +194,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_CAT_KEY_QS_LOCATION_TILE_SETTINGS = "pref_cat_qs_location_tile";
     public static final String PREF_CAT_KEY_QS_RM_TILE_SETTINGS = "pref_cat_qs_rm_tile";
     public static final String PREF_CAT_KEY_QS_SA_TILE_SETTINGS = "pref_cat_qs_sa_tile";
-    public static final String PREF_KEY_STATUSBAR_CENTER_CLOCK = "pref_statusbar_center_clock";
+    public static final String PREF_KEY_STATUSBAR_CLOCK_POSITION = "pref_statusbar_clock_position";
     public static final String PREF_KEY_STATUSBAR_CLOCK_SHOW_SECONDS = "pref_statusbar_clock_show_seconds";
     public static final String PREF_KEY_STATUSBAR_CLOCK_DOW = "pref_statusbar_clock_dow2";
     public static final String PREF_KEY_STATUSBAR_CLOCK_DATE = "pref_statusbar_clock_date2";
@@ -525,7 +525,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_QS_LOCKED_TILE_INDICATOR = "qsLockedTileIndicator";
 
     public static final String ACTION_PREF_CLOCK_CHANGED = "gravitybox.intent.action.CENTER_CLOCK_CHANGED";
-    public static final String EXTRA_CENTER_CLOCK = "centerClock";
+    public static final String EXTRA_CLOCK_POSITION = "clockPosition";
     public static final String EXTRA_CLOCK_SHOW_SECONDS = "clockShowSeconds";
     public static final String EXTRA_CLOCK_DOW = "clockDow";
     public static final String EXTRA_CLOCK_DOW_SIZE = "clockDowSize";
@@ -2435,6 +2435,11 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 if (p != null) p.setSummary(p.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_STATUSBAR_CLOCK_POSITION)) {
+                ListPreference p = (ListPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_POSITION);
+                if (p != null) p.setSummary(p.getEntry());
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if (caPref == null)
@@ -2565,10 +2570,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_QS_BRIGHTNESS_ICON)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_BRIGHTNESS_ICON, prefs.getBoolean(key, false));
-            } else if (key.equals(PREF_KEY_STATUSBAR_CENTER_CLOCK)) {
+            } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_POSITION)) {
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
-                intent.putExtra(EXTRA_CENTER_CLOCK, 
-                        prefs.getBoolean(PREF_KEY_STATUSBAR_CENTER_CLOCK, false));
+                intent.putExtra(EXTRA_CLOCK_POSITION, prefs.getString(key, "DEFAULT"));
             } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_SHOW_SECONDS)) {
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_CLOCK_SHOW_SECONDS, prefs.getBoolean(key, false));

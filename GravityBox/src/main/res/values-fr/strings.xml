@@ -161,8 +161,6 @@
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotation écran de déverrouillage</string>
     <string name="pref_lockscreen_rotation_summary">Nécessite un redémarrage</string>
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Centrer l\'horloge</string>
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Modifications audio</string>
     <string name="pref_cat_media_summary">Regroupe diverses modifications pour les médias et le système audio</string>

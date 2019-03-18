@@ -187,9 +187,6 @@
     <string name="pref_lockscreen_rotation_title">启用锁屏画面旋转</string>
     <string name="pref_lockscreen_rotation_summary">需要重新启动</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">时间居中</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">媒体调整</string>
     <string name="pref_cat_media_summary">包含各种媒体和声音系统的调整选项</string>

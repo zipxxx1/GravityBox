@@ -149,8 +149,6 @@
     <string name="pref_lockscreen_rotation_title">잠금 화면 회전 사용</string>
     <string name="pref_lockscreen_rotation_summary">재시작 필요</string>
 
-    <string name="pref_statusbar_center_clock_title">시계 중앙</string>
-
     <string name="pref_cat_media_title">미디어 트윅</string>
     <string name="pref_cat_media_summary">소리와 오디오 시스템에 관한 트윅이 포함되어 있습니다.</string>
 

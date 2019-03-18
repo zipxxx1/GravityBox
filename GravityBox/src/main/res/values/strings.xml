@@ -188,9 +188,6 @@
     <string name="pref_lockscreen_rotation_title">Enable lockscreen rotation</string>
     <string name="pref_lockscreen_rotation_summary">Requires reboot</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Center clock</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Media tweaks</string>
     <string name="pref_cat_media_summary">Contains various tweaks for media and audio system</string>
@@ -2019,5 +2016,11 @@
     <!-- Force ring volume control -->
     <string name="pref_vol_force_ring_control_title">Force ring volume control</string>
     <string name="pref_vol_force_ring_control_summary">When enabled, volume keys control ring volume instead of music volume</string>
+
+    <!-- Clock position -->
+    <string name="pref_clock_position_title">Clock position</string>
+    <string name="clock_pos_left">Left</string>
+    <string name="clock_pos_right">Right</string>
+    <string name="clock_pos_center">Center</string>
 
 </resources>

@@ -1128,4 +1128,18 @@
         <item>WEAR</item>
     </string-array>
 
+    <string-array name="clock_position_entries" translatable="false">
+        <item>@string/state_default</item>
+        <item>@string/clock_pos_left</item>
+        <item>@string/clock_pos_right</item>
+        <item>@string/clock_pos_center</item>
+    </string-array>
+
+    <string-array name="clock_position_values" translatable="false">
+        <item>DEFAULT</item>
+        <item>LEFT</item>
+        <item>RIGHT</item>
+        <item>CENTER</item>
+    </string-array>
+
 </resources>

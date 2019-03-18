@@ -12,14 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -38,19 +39,22 @@ import android.text.SpannableStringBuilder;
 import android.text.format.DateFormat;
 import android.text.style.RelativeSizeSpan;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class StatusbarClock implements BroadcastSubReceiver {
     private static final String TAG = "GB:StatusbarClock";
     private static final boolean DEBUG = false;
 
+    public enum ClockPosition { DEFAULT, LEFT, RIGHT, CENTER }
+
     private TextView mClock;
-    private int mOriginalPaddingLeft;
     private boolean mAmPmHide;
-    private String mClockShowDate = "disabled";
-    private int mClockShowDow = GravityBoxSettings.DOW_DISABLED;
+    private String mClockShowDate;
+    private int mClockShowDow;
     private boolean mClockHidden;
     private float mDowSize;
     private float mAmPmSize;
@@ -58,9 +62,26 @@ public class StatusbarClock implements BroadcastSubReceiver {
     private SimpleDateFormat mSecondsFormat;
     private Handler mSecondsHandler;
     private List<Unhook> mHooks = new ArrayList<>();
+    private Map<ClockPosition, ClockPositionInfo> mPositions;
+    private ClockPosition mCurrentPosition = ClockPosition.DEFAULT;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
+    }
+
+    private static class ClockPositionInfo {
+        ViewGroup parent;
+        int position;
+        int gravity;
+        int paddingStart;
+        int paddingEnd;
+        ClockPositionInfo(ViewGroup parent, int position, int gravity, int paddingStart, int paddingEnd) {
+            this.parent = parent;
+            this.position = position;
+            this.gravity = gravity;
+            this.paddingStart = paddingStart;
+            this.paddingEnd = paddingEnd;
+        }
     }
 
     public StatusbarClock(XSharedPreferences prefs) {
@@ -78,17 +99,37 @@ public class StatusbarClock implements BroadcastSubReceiver {
         return mClock;
     }
 
-    public void resetOriginalPaddingLeft() {
-        if (mClock != null) {
-            mClock.setPadding(mOriginalPaddingLeft, 0, 0, 0);
-        }
-    }
-
-    public void setClock(TextView clock) {
+    public void setClock(ViewGroup parentOriginal, ViewGroup parentLeft, ViewGroup parentRight,
+                         ViewGroup parentCenter, TextView clock) {
         if (clock == null) throw new IllegalArgumentException("Clock cannot be null");
 
         mClock = clock;
-        mOriginalPaddingLeft = mClock.getPaddingLeft();
+        mPositions = new HashMap<>();
+
+        if (parentOriginal != null) {
+            mPositions.put(ClockPosition.DEFAULT,
+                    new ClockPositionInfo(parentOriginal, parentOriginal.indexOfChild(mClock),
+                            mClock.getGravity(), mClock.getPaddingStart(),
+                            mClock.getPaddingEnd()));
+        }
+        if (parentLeft != null) {
+            mPositions.put(ClockPosition.LEFT,
+                    new ClockPositionInfo(parentLeft, 0,
+                            Gravity.START | Gravity.CENTER_VERTICAL,
+                            mClock.getPaddingStart(), mClock.getPaddingEnd()));
+        }
+        if (parentRight != null) {
+            mPositions.put(ClockPosition.RIGHT,
+                    new ClockPositionInfo(parentRight, -1,
+                            Gravity.END | Gravity.CENTER_VERTICAL,
+                            mClock.getPaddingEnd(), mClock.getPaddingStart()));
+        }
+        if (parentCenter != null) {
+            mPositions.put(ClockPosition.CENTER,
+                    new ClockPositionInfo(parentCenter, -1,
+                            Gravity.CENTER | Gravity.CENTER_VERTICAL,
+                            0, 0));
+        }
 
         // use this additional field to identify the instance of Clock that resides in status bar
         XposedHelpers.setAdditionalInstanceField(mClock, "sbClock", true);
@@ -111,6 +152,31 @@ public class StatusbarClock implements BroadcastSubReceiver {
         });
 
         hookGetSmallTime();
+    }
+
+    public ClockPosition getCurrentPosition() {
+        return mCurrentPosition;
+    }
+
+    public void moveToPosition(ClockPosition position) {
+        if (mClock != null && mCurrentPosition != position) {
+            for (ClockPositionInfo i : mPositions.values()) {
+                i.parent.removeView(mClock);
+            }
+            ClockPositionInfo info = mPositions.get(position);
+            if (info != null) {
+                mClock.setPaddingRelative(info.paddingStart, 0, info.paddingEnd, 0);
+                mClock.setGravity(info.gravity);
+                if (info.position == -1) {
+                    info.parent.addView(mClock);
+                } else {
+                    info.parent.addView(mClock, info.position);
+                }
+                mCurrentPosition = position;
+            } else {
+                log("Unsupported clock position: " + position);
+            }
+        }
     }
 
     private void updateClock() {
@@ -268,6 +334,8 @@ public class StatusbarClock implements BroadcastSubReceiver {
         for (Unhook hook : mHooks) {
             hook.unhook();
         }
+        mPositions.clear();
+        mPositions = null;
         mHooks.clear();
         mHooks = null;
         mClock = null;

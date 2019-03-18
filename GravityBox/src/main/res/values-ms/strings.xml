@@ -187,9 +187,6 @@
     <string name="pref_lockscreen_rotation_title">Membolehkan putaran skrin kunci</string>
     <string name="pref_lockscreen_rotation_summary">Perlukan reboot</string>
 
-    <!-- Statusbar center clock -->
-    <string name="pref_statusbar_center_clock_title">Jam di tengah</string>
-
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Modifikasi media</string>
     <string name="pref_cat_media_summary">Mengandungi pelbagai modifikasi media dan audio dalam sistem</string>
