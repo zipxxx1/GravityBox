@@ -884,8 +884,7 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
-                    "handleDoubleTapOnHome", new XC_MethodHook() {
+            XC_MethodHook doubleTapOnHomeHook = new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     if (!isTaskLocked() && getActionFor(HwKeyTrigger.HOME_DOUBLETAP).actionId != 
@@ -895,7 +894,15 @@ public class ModHwKeys {
                         param.setResult(null);
                     }
                 }
-            });
+            };
+
+            if (Utils.isSamsungRom()) {
+                XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
+                        "handleDoubleTapOnHome", int.class, doubleTapOnHomeHook);
+            } else {
+                XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
+                        "handleDoubleTapOnHome", doubleTapOnHomeHook);
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
