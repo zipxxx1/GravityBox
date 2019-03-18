@@ -1457,6 +1457,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private Preference mPrefTuner;
 
         private String mSearchQuery;
+        private int mDonateUrlResId;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -2281,6 +2282,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefs.edit().putString(PREF_KEY_TRANS_VERIFICATION, null).commit();
             mPrefTransVerification.setText(null);
             mPrefTransVerification.getEditText().setText(null);
+            mDonateUrlResId = R.string.url_donate_fixed_amount;
         }
 
         private void unrestrictFeatures() {
@@ -2296,6 +2298,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             TunerMainActivity.lockTuner(getActivity(), false);
             mPrefCatAbout.removePreference(mPrefTransVerification);
             mPrefCatAbout.removePreference(mPrefAboutUnlocker);
+            mDonateUrlResId = R.string.url_donate_free_amount;
         }
 
         private void updatePreferences(String key) {
@@ -3731,7 +3734,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (pref == mPrefAboutXposed) {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_xposed)));
             } else if (pref == mPrefAboutDonate) {
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_donate)));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(mDonateUrlResId)));
             } else if (pref == mPrefAboutUnlocker) {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_gravitybox_unlocker)));
             } else if (pref == mPrefEngMode) {
