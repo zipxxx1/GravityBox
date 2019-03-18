@@ -1,3 +1,7 @@
+Changelog 8.5.3.1-edxposed - 18/03/2019
+--------------------------------------
+- CircleBattery: fixed dynamic color tinting not working on some systems
+
 Changelog 8.5.3-edxposed - 17/03/2019
 --------------------------------------
 - Key Actions: fixed torch on power-long press
