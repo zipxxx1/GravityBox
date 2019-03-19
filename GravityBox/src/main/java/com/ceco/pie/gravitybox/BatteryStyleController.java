@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -69,12 +69,17 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     }
 
     public BatteryStyleController(ContainerType containerType, ViewGroup container,
-            XSharedPreferences prefs) throws Throwable {
+                                  XSharedPreferences prefs) throws Throwable {
+        this(containerType, container, "system_icons", prefs);
+    }
+
+    public BatteryStyleController(ContainerType containerType, ViewGroup container,
+                   String systemIconsResName, XSharedPreferences prefs) throws Throwable {
         mContainerType = containerType;
         mContainer = container;
         mContext = container.getContext();
         mSystemIcons = mContainer.findViewById(
-                mContext.getResources().getIdentifier("system_icons", "id", PACKAGE_NAME));
+                mContext.getResources().getIdentifier(systemIconsResName, "id", PACKAGE_NAME));
 
         if (mSystemIcons != null) {
             initPreferences(prefs);
@@ -210,6 +215,14 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                             mPercentText.setVisibility(View.GONE);
                         }
                         break;
+                    case HEADER:
+                        if (mBatteryPercentTextEnabledSb && isCurrentStyleCircleBattery()) {
+                            mPercentText.setVisibility(View.VISIBLE);
+                            mPercentText.updateText();
+                        } else {
+                            mPercentText.setVisibility(View.GONE);
+                        }
+                        break;
                     case KEYGUARD:
                         mPercentText.updateText();
                         XposedHelpers.callMethod(mContainer, "updateVisibilities");
@@ -223,7 +236,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     }
 
     private void createHooks() {
-        if (mContainerType == ContainerType.STATUSBAR) {
+        if (mContainerType == ContainerType.STATUSBAR || mContainerType == ContainerType.HEADER) {
             try {
                 Class<?> batteryControllerClass = XposedHelpers.findClass(CLASS_BATTERY_CONTROLLER,
                         mContext.getClassLoader());

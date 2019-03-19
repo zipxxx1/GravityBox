@@ -75,6 +75,7 @@ public class ModStatusBar {
     private static final String CLASS_COLLAPSED_SB_FRAGMENT = "com.android.systemui.statusbar.phone.CollapsedStatusBarFragment";
     private static final String CLASS_NOTIF_ICON_CONTAINER = "com.android.systemui.statusbar.phone.NotificationIconContainer";
     private static final String CLASS_NOTIF_ENTRY_MANAGER = "com.android.systemui.statusbar.NotificationEntryManager";
+    private static final String CLASS_QS_FRAGMENT = "com.android.systemui.qs.QSFragment";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
 
@@ -125,6 +126,7 @@ public class ModStatusBar {
     private static boolean mDt2sEnabled;
     private static long[] mCameraVp;
     private static BatteryStyleController mBatteryStyleCtrlSb;
+    private static BatteryStyleController mBatteryStyleCtrlSbHeader;
     private static BatteryBarView mBatteryBarViewSb;
     private static ProgressBarView mProgressBarViewSb;
     private static VisualizerController mVisualizerCtrl;
@@ -456,6 +458,23 @@ public class ModStatusBar {
         }
     }
 
+    private static void prepareBatteryStyleHeader(ViewGroup container) {
+        try {
+            BatteryStyleController bsc = new BatteryStyleController(
+                    ContainerType.HEADER, container, "quick_status_bar_system_icons", mPrefs);
+            if (mBatteryStyleCtrlSbHeader != null) {
+                mBroadcastSubReceivers.remove(mBatteryStyleCtrlSbHeader);
+                mBatteryStyleCtrlSbHeader.destroy();
+                if (DEBUG) log("prepareBatteryStyleHeader: old BatteryStyleController destroyed");
+            }
+            mBatteryStyleCtrlSbHeader = bsc;
+            mBroadcastSubReceivers.add(bsc);
+            if (DEBUG) log("prepareBatteryStyleHeader: BatteryStyleController crated");
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
     private static void prepareBatteryBar(ContainerType containerType) {
         try {
             ViewGroup container = null;
@@ -662,6 +681,22 @@ public class ModStatusBar {
                     prepareQuietHoursIcon();
                 }
             });
+
+            // Header
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_QS_FRAGMENT, classLoader, "onViewCreated",
+                        View.class, Bundle.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) {
+                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TWEAKS_ENABLED, true)) {
+                            prepareBatteryStyleHeader((ViewGroup) XposedHelpers.getObjectField(
+                                    param.thisObject, "mHeader"));
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error setting up header:" + t);
+            }
 
             // brightness control
             try {
