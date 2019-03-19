@@ -126,8 +126,7 @@ public class StatusbarClock implements BroadcastSubReceiver {
         }
         if (parentCenter != null) {
             mPositions.put(ClockPosition.CENTER,
-                    new ClockPositionInfo(parentCenter, -1,
-                            Gravity.CENTER | Gravity.CENTER_VERTICAL,
+                    new ClockPositionInfo(parentCenter, -1, Gravity.CENTER,
                             0, 0));
         }
 
@@ -233,6 +232,7 @@ public class StatusbarClock implements BroadcastSubReceiver {
                     // yes, if it contains our additional sbClock field
                     if (DEBUG) log("getSmallTime() called. mAmPmHide=" + mAmPmHide);
                     Object sbClock = XposedHelpers.getAdditionalInstanceField(param.thisObject, "sbClock");
+                    Object headerClock = XposedHelpers.getAdditionalInstanceField(param.thisObject, "headerClock");
                     if (DEBUG) log("Is statusbar clock: " + (sbClock == null ? "false" : "true"));
                     // hide and finish if sb clock hidden
                     if (sbClock != null && mClockHidden) {
@@ -276,7 +276,7 @@ public class StatusbarClock implements BroadcastSubReceiver {
                     }
                     CharSequence date = "";
                     // apply date to statusbar clock, not the notification panel clock
-                    if (!mClockShowDate.equals("disabled") && sbClock != null) {
+                    if (!mClockShowDate.equals("disabled") && (sbClock != null || headerClock != null)) {
                         SimpleDateFormat df = (SimpleDateFormat) SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT);
                         String pattern = mClockShowDate.equals("localized") ?
                                 df.toLocalizedPattern().replaceAll(".?[Yy].?", "") : mClockShowDate;
@@ -285,7 +285,7 @@ public class StatusbarClock implements BroadcastSubReceiver {
                     clockText = date + clockText;
                     CharSequence dow = "";
                     // apply day of week only to statusbar clock, not the notification panel clock
-                    if (mClockShowDow != GravityBoxSettings.DOW_DISABLED && sbClock != null) {
+                    if (mClockShowDow != GravityBoxSettings.DOW_DISABLED && (sbClock != null || headerClock != null)) {
                         dow = getFormattedDow(calendar.getDisplayName(
                                 Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault())) + " ";
                     }

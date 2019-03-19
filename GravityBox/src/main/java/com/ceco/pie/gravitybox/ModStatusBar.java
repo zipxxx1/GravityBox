@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox;
 
 import java.util.ArrayList;
@@ -33,7 +32,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.app.AlarmManager;
 import android.app.Notification;
-import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -76,7 +74,6 @@ public class ModStatusBar {
     private static final String CLASS_ASSIST_MANAGER = "com.android.systemui.assist.AssistManager";
     private static final String CLASS_COLLAPSED_SB_FRAGMENT = "com.android.systemui.statusbar.phone.CollapsedStatusBarFragment";
     private static final String CLASS_NOTIF_ICON_CONTAINER = "com.android.systemui.statusbar.phone.NotificationIconContainer";
-    private static final String CLASS_QUICK_STATUSBAR_HEADER = "com.android.systemui.qs.QuickStatusBarHeader";
     private static final String CLASS_NOTIF_ENTRY_MANAGER = "com.android.systemui.statusbar.NotificationEntryManager";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
@@ -120,7 +117,6 @@ public class ModStatusBar {
     private static TrafficMeterAbstract mTrafficMeter;
     private static TrafficMeterMode mTrafficMeterMode = TrafficMeterMode.OFF;
     private static boolean mNotifExpandAll;
-    private static String mClockLongpressLink;
     private static XSharedPreferences mPrefs;
     private static ProgressBarController mProgressBarCtrl;
     private static int mStatusBarState;
@@ -172,7 +168,8 @@ public class ModStatusBar {
                     updateTrafficMeterPosition();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK)) {
-                    mClockLongpressLink = intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK);
+                    QuickStatusBarHeader.setClockLongpressLink(
+                        intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK));
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_ALARM_HIDE)) {
                     mAlarmHide = intent.getBooleanExtra(GravityBoxSettings.EXTRA_ALARM_HIDE, false);
@@ -403,21 +400,6 @@ public class ModStatusBar {
         }
     }
 
-    private static void prepareHeaderTimeView(ViewGroup qsFooter) {
-        try {
-            View timeView = (View) XposedHelpers.getObjectField(qsFooter, "mClockView");
-            if (timeView != null) {
-                timeView.setLongClickable(true);
-                timeView.setOnLongClickListener(v -> {
-                    launchClockAction(mClockLongpressLink);
-                    return true;
-                });
-            }
-        } catch (Throwable t) {
-            GravityBox.log(TAG, "Error setting long-press handler on mTime: ", t);
-        }
-    }
-
     private static void prepareBrightnessControl() {
         try {
             Class<?> powerManagerClass = XposedHelpers.findClass(CLASS_POWER_MANAGER,
@@ -579,6 +561,8 @@ public class ModStatusBar {
             final Class<?> statusBarWmClass = XposedHelpers.findClass(CLASS_STATUSBAR_WM, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
 
+            QuickStatusBarHeader.init(classLoader);
+
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ENABLE, false)) {
                 mVisualizerCtrl = new VisualizerController(classLoader, prefs);
                 mStateChangeListeners.add(mVisualizerCtrl);
@@ -586,8 +570,8 @@ public class ModStatusBar {
             }
 
             mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
-            mClockLongpressLink = prefs.getString(
-                    GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK, null);
+            QuickStatusBarHeader.setClockLongpressLink(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK, null));
             mBrightnessControlEnabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_STATUSBAR_BRIGHTNESS, false);
             mOngoingNotif = prefs.getString(GravityBoxSettings.PREF_KEY_ONGOING_NOTIFICATIONS, "");
@@ -610,6 +594,7 @@ public class ModStatusBar {
                     mContext = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
                     mProgressBarCtrl = new ProgressBarController(mContext, mPrefs);
                     mBroadcastSubReceivers.add(mProgressBarCtrl);
+                    QuickStatusBarHeader.setStatusBar(mStatusBar);
 
                     if (SysUiManagers.AppLauncher != null) {
                         SysUiManagers.AppLauncher.setStatusBar(mStatusBar);
@@ -677,19 +662,6 @@ public class ModStatusBar {
                     prepareQuietHoursIcon();
                 }
             });
-
-            // Long press on QS footer clock
-            try {
-                XposedHelpers.findAndHookMethod(CLASS_QUICK_STATUSBAR_HEADER, classLoader,
-                        "onFinishInflate", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        prepareHeaderTimeView((ViewGroup)param.thisObject);
-                    }
-                });
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "Error setting up long-press on QS footer clock", t);
-            }
 
             // brightness control
             try {
@@ -1052,6 +1024,7 @@ public class ModStatusBar {
     private static void setClockPosition(StatusbarClock.ClockPosition position) {
         if (mClock != null) {
             mClock.moveToPosition(position);
+            QuickStatusBarHeader.setClockPosition(position);
         }
     }
 
@@ -1261,25 +1234,6 @@ public class ModStatusBar {
             Object assistManager = XposedHelpers.getObjectField(mStatusBar, "mAssistManager");
             XposedHelpers.callMethod(assistManager, "startAssist", new Bundle());
             XposedHelpers.callMethod(mStatusBar, "awakenDreams");
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
-    }
-
-    private static void launchClockAction(String uri) {
-        if (mContext == null) return;
-
-        try {
-            final Intent intent = Intent.parseUri(uri, 0);
-            if (intent != null) {
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                mContext.startActivity(intent);
-                if (mStatusBar != null) {
-                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
-                }
-            }
-        } catch (ActivityNotFoundException e) {
-            GravityBox.log(TAG, "Error launching assigned app for long-press on clock: ", e);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
