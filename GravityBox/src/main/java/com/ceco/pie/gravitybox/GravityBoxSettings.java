@@ -1710,6 +1710,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             // Remove Samsung preferences
             if (Utils.isSamsungRom()) {
                 mPrefCatPower.removePreference(mPrefCatPowerMenu);
+                Preference p = findPreference(PREF_KEY_INCREASING_RING);
+                if (p != null) mPrefCatPhoneTelephony.removePreference(p);
             }
 
             // Remove fingerprint related preferences
