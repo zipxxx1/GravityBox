@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox;
 
 import android.content.BroadcastReceiver;
@@ -142,7 +141,7 @@ public class ModTelephony {
 
     private static boolean equalsMcc(String operatorNumeric, boolean defaultRetVal) {
         try {
-            String simNumeric = Utils.SystemProp.get("gsm.sim.operator.numeric", "");
+            String simNumeric = SystemPropertyProvider.get("gsm.sim.operator.numeric", "");
 
             boolean equalsMcc = defaultRetVal;
             try {
