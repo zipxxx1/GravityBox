@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -130,16 +131,21 @@ public class ModNavigationBar {
         View menuKey;
         View backKey;
         View recentsKey;
-        void setDarkIntensity(float intensity) {
-            if (intensity == 0f) {
-                if (customKey != null) customKey.clearColorFilter();
-                if (dpadLeft != null) dpadLeft.clearColorFilter();
-                if (dpadRight != null) dpadRight.clearColorFilter();
-            } else {
-                if (customKey != null) customKey.setColorFilter(0xff707070, PorterDuff.Mode.SRC_ATOP);
-                if (dpadLeft != null) dpadLeft.setColorFilter(0xff707070, PorterDuff.Mode.SRC_ATOP);
-                if (dpadRight != null) dpadRight.setColorFilter(0xff707070, PorterDuff.Mode.SRC_ATOP);
+        Integer mLightColor;
+        Integer mDarkColor;
+        void setDarkIntensity(Context ctx, float intensity) {
+            if (mLightColor == null) {
+                mLightColor = Utils.getSystemUiSingleToneColor(ctx, "lightIconTheme", Color.WHITE);
             }
+            if (mDarkColor == null) {
+                mDarkColor = Utils.getSystemUiSingleToneColor(ctx, "darkIconTheme", Color.BLACK);
+            }
+            final int intermediateColor = Utils.compositeColors(
+                    Utils.blendAlpha(mDarkColor, intensity),
+                    Utils.blendAlpha(mLightColor, (1f - intensity)));
+            if (customKey != null) customKey.setImageTintList(ColorStateList.valueOf(intermediateColor));
+            if (dpadLeft != null) dpadLeft.setImageTintList(ColorStateList.valueOf(intermediateColor));
+            if (dpadRight != null) dpadRight.setImageTintList(ColorStateList.valueOf(intermediateColor));
         }
     }
 
@@ -544,7 +550,7 @@ public class ModNavigationBar {
                     float intensity = (float)param.args[0];
                     for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
                         if (navbarViewInfo != null) {
-                            navbarViewInfo.setDarkIntensity(intensity);
+                            navbarViewInfo.setDarkIntensity(mNavigationBarView.getContext(), intensity);
                         }
                     }
                 }

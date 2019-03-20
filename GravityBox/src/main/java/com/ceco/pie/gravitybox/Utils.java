@@ -15,6 +15,7 @@
 
 package com.ceco.pie.gravitybox;
 
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -58,6 +59,7 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -717,6 +719,75 @@ public class Utils {
         int color = arr.getColor(0, -1);
         arr.recycle();
         return color;
+    }
+
+    public static int getThemeAttr(Context ctx, int attrId) {
+        if (attrId == 0)
+            return 0;
+
+        TypedArray ta = ctx.obtainStyledAttributes(new int[]{attrId});
+        int theme = ta.getResourceId(0, 0);
+        ta.recycle();
+        return theme;
+    }
+
+    public static int getSystemUiSingleToneColor(Context ctx, String iconThemeName, int defaultColor) {
+        try {
+            int color = defaultColor;
+            final int themeId = Utils.getThemeAttr(ctx, ctx.getResources().getIdentifier(
+                    iconThemeName, "attr", ctx.getPackageName()));
+            if (DEBUG) XposedBridge.log(iconThemeName + " ID=" + themeId);
+            final int colorResId = ctx.getResources().getIdentifier(
+                    "singleToneColor", "attr", ctx.getPackageName());
+            if (DEBUG) XposedBridge.log("singleToneColor Res ID=" + colorResId);
+            if (themeId != 0 && colorResId != 0) {
+                Context themedCtx = new ContextThemeWrapper(ctx, themeId);
+                color = getColorFromStyleAttr(themedCtx, colorResId);
+            }
+            if (DEBUG) XposedBridge.log("getSystemUiSingleToneColor: color=" +
+                    Integer.toHexString(color));
+            return color;
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "getSystemUiSingleToneColor:", t);
+            return defaultColor;
+        }
+    }
+
+    public static int compositeColors(int foreground, int background) {
+        int bgAlpha = Color.alpha(background);
+        int fgAlpha = Color.alpha(foreground);
+        int a = compositeAlpha(fgAlpha, bgAlpha);
+        int r = compositeComponent(Color.red(foreground), fgAlpha,
+                Color.red(background), bgAlpha, a);
+        int g = compositeComponent(Color.green(foreground), fgAlpha,
+                Color.green(background), bgAlpha, a);
+        int b = compositeComponent(Color.blue(foreground), fgAlpha,
+                Color.blue(background), bgAlpha, a);
+        return Color.argb(a, r, g, b);
+    }
+
+    private static int compositeAlpha(int foregroundAlpha, int backgroundAlpha) {
+        return 0xFF - (((0xFF - backgroundAlpha) * (0xFF - foregroundAlpha)) / 0xFF);
+    }
+
+    private static int compositeComponent(int fgC, int fgA, int bgC, int bgA, int a) {
+        if (a == 0) return 0;
+        return ((0xFF * fgC * fgA) + (bgC * bgA * (0xFF - fgA))) / (a * 0xFF);
+    }
+
+    public static int blendAlpha(int color, float alpha) {
+        final float newAlpha = alpha < 0f ? 0f : (alpha > 1f ? 1f : alpha);
+        final float colorAlpha = Color.alpha(color) / 255f;
+        final int alphaInt = (int) (255 * newAlpha * colorAlpha); // Blend by multiplying
+        // Ensure alpha is clamped [0-255] or ColorUtils will crash
+        return setAlphaComponent(color, alphaInt);
+    }
+
+    public static int setAlphaComponent(int color, int alpha) {
+        if (alpha < 0 || alpha > 255) {
+            throw new IllegalArgumentException("alpha must be between 0 and 255.");
+        }
+        return (color & 0x00ffffff) | (alpha << 24);
     }
 
     public static boolean hasFieldOfType(Object o, String name, Class<?> type) {
