@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox.managers;
 
 import java.io.File;
@@ -21,6 +20,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.pie.gravitybox.ColorUtils;
 import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import com.ceco.pie.gravitybox.GravityBox;
@@ -228,7 +228,7 @@ public class AppLauncher implements BroadcastSubReceiver {
             boolean appRow2Visible = false;
             boolean appRow3Visible = false;
             TextView lastVisible = null;
-            int color = Utils.getColorFromStyleAttr(mDialog.getContext(), android.R.attr.textColorPrimary);
+            int color = ColorUtils.getColorFromStyleAttr(mDialog.getContext(), android.R.attr.textColorPrimary);
             for (AppInfo ai : mAppSlots) {
                 TextView tv = appView.findViewById(ai.getResId());
                 if (ai.getValue() == null || (ai.isUnsafeAction() &&

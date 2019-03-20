@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox.quicksettings;
 
 import java.io.File;
@@ -20,6 +19,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.pie.gravitybox.ColorUtils;
 import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.Utils;
@@ -379,7 +379,7 @@ public class QuickAppTile extends QsTile {
 
         ContextThemeWrapper themedContext = getThemedContext(
                 android.R.style.Theme_Material_Dialog_NoActionBar);
-        int color = Utils.getColorFromStyleAttr(themedContext,
+        int color = ColorUtils.getColorFromStyleAttr(themedContext,
                 android.R.attr.textColorPrimary);
 
         LayoutInflater inflater = LayoutInflater.from(mGbContext);

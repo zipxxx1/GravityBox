@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,6 +16,7 @@ package com.ceco.pie.gravitybox.quicksettings;
 
 import java.util.List;
 
+import com.ceco.pie.gravitybox.ColorUtils;
 import com.ceco.pie.gravitybox.Utils;
 
 import android.annotation.SuppressLint;
@@ -42,11 +43,11 @@ public abstract class QsDetailItemsListAdapter<T> extends ArrayAdapter<T> {
         label.setText(getListItemText(getItem(position)));
         label.setTextColor(Utils.isOxygenOsRom() ?
                 OOSThemeColorUtils.getColorTextPrimary(getContext()) :
-                Utils.getColorFromStyleAttr(getContext(), android.R.attr.textColorPrimary));
+                ColorUtils.getColorFromStyleAttr(getContext(), android.R.attr.textColorPrimary));
         label.setCheckMarkTintList(ColorStateList.valueOf(
                 Utils.isOxygenOsRom() ?
                         OOSThemeColorUtils.getColorAccent(getContext()) :
-                        Utils.getColorFromStyleAttr(getContext(), android.R.attr.colorAccent)));
+                        ColorUtils.getColorFromStyleAttr(getContext(), android.R.attr.colorAccent)));
         return label;
     }
 

@@ -135,14 +135,14 @@ public class ModNavigationBar {
         Integer mDarkColor;
         void setDarkIntensity(Context ctx, float intensity) {
             if (mLightColor == null) {
-                mLightColor = Utils.getSystemUiSingleToneColor(ctx, "lightIconTheme", Color.WHITE);
+                mLightColor = ColorUtils.getSystemUiSingleToneColor(ctx, "lightIconTheme", Color.WHITE);
             }
             if (mDarkColor == null) {
-                mDarkColor = Utils.getSystemUiSingleToneColor(ctx, "darkIconTheme", Color.BLACK);
+                mDarkColor = ColorUtils.getSystemUiSingleToneColor(ctx, "darkIconTheme", Color.BLACK);
             }
-            final int intermediateColor = Utils.compositeColors(
-                    Utils.blendAlpha(mDarkColor, intensity),
-                    Utils.blendAlpha(mLightColor, (1f - intensity)));
+            final int intermediateColor = ColorUtils.compositeColors(
+                    ColorUtils.blendAlpha(mDarkColor, intensity),
+                    ColorUtils.blendAlpha(mLightColor, (1f - intensity)));
             if (customKey != null) customKey.setImageTintList(ColorStateList.valueOf(intermediateColor));
             if (dpadLeft != null) dpadLeft.setImageTintList(ColorStateList.valueOf(intermediateColor));
             if (dpadRight != null) dpadRight.setImageTintList(ColorStateList.valueOf(intermediateColor));

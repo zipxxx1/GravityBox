@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox.quicksettings;
 
 import android.content.Context;
@@ -28,6 +27,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.ceco.pie.gravitybox.ColorUtils;
 import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.Utils;
 
@@ -61,7 +61,7 @@ public class QsDetailItemsList {
         mEmptyText = mEmpty.findViewById(android.R.id.title);
         mEmptyText.setTextColor(Utils.isOxygenOsRom() ?
                 OOSThemeColorUtils.getColorTextSecondary(mSysUiContext) :
-                Utils.getColorFromStyleAttr(mSysUiContext, android.R.attr.textColorSecondary));
+                ColorUtils.getColorFromStyleAttr(mSysUiContext, android.R.attr.textColorSecondary));
         mEmptyIcon = mEmpty.findViewById(android.R.id.icon);
         mListView.setEmptyView(mEmpty);
     }

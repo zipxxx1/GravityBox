@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,8 +14,8 @@
  */
 package com.ceco.pie.gravitybox.quicksettings;
 
+import com.ceco.pie.gravitybox.ColorUtils;
 import com.ceco.pie.gravitybox.GravityBox;
-import com.ceco.pie.gravitybox.Utils;
 
 import android.content.Context;
 import de.robv.android.xposed.XposedHelpers;
@@ -37,7 +37,7 @@ class OOSThemeColorUtils {
             return (int) XposedHelpers.callStaticMethod(tcuClass, "getColor", spec);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error getting OOS theme specific color", t);
-            return Utils.getColorFromStyleAttr(ctx, defaultColorStyleAttr);
+            return ColorUtils.getColorFromStyleAttr(ctx, defaultColorStyleAttr);
         }
     }
 
