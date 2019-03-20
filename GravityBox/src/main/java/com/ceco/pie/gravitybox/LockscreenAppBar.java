@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox;
 
 import java.io.File;
@@ -404,7 +403,7 @@ public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
             NumberFormat f = NumberFormat.getIntegerInstance();
             String countStr = count > 99 ? "99+" : f.format(count);
 
-            Bitmap b = Utils.drawableToBitmap(d);
+            Bitmap b = BitmapUtils.drawableToBitmap(d);
             b = b.copy(Bitmap.Config.ARGB_8888, true);
             Canvas c = new Canvas(b);
 

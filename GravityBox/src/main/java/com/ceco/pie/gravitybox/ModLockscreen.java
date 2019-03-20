@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox;
 
 import java.util.ArrayList;
@@ -843,7 +842,7 @@ public class ModLockscreen {
             if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_COLOR)) {
                 int color = mPrefs.getInt(
                       GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR, Color.BLACK);
-                mCustomBg = Utils.drawableToBitmap(new ColorDrawable(color));
+                mCustomBg = BitmapUtils.drawableToBitmap(new ColorDrawable(color));
             } else if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_IMAGE)) {
                 String wallpaperFile = mGbContext.getFilesDir() + "/lockwallpaper";
                 mCustomBg = BitmapFactory.decodeFile(wallpaperFile);
@@ -854,7 +853,7 @@ public class ModLockscreen {
             if (!bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN) &&
                     mCustomBg != null && mPrefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                mCustomBg = Utils.blurBitmap(mContext, mCustomBg, mPrefs.getInt(
+                mCustomBg = BitmapUtils.blurBitmap(mContext, mCustomBg, mPrefs.getInt(
                           GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
             }
 

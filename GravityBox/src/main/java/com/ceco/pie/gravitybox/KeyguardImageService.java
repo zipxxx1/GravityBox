@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox;
 
 import java.io.ByteArrayInputStream;
@@ -113,7 +112,7 @@ public class KeyguardImageService extends Service {
                     new ByteArrayInputStream(mOutputStream.toByteArray()));
             if (tmpBmp != null) {
                 if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                    tmpBmp = Utils.blurBitmap(this, tmpBmp, mPrefs.getInt(
+                    tmpBmp = BitmapUtils.blurBitmap(this, tmpBmp, mPrefs.getInt(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
                 }
                 tmpBmp.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(mKisImageFile));

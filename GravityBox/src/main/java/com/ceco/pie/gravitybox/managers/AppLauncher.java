@@ -20,6 +20,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.pie.gravitybox.BitmapUtils;
 import com.ceco.pie.gravitybox.ColorUtils;
 import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.BroadcastSubReceiver;
@@ -433,7 +434,7 @@ public class AppLauncher implements BroadcastSubReceiver {
                             mGbResources.getIdentifier(iconResName, "drawable",
                                     mGbContext.getPackageName()) : 0;
                     if (iconResId != 0) {
-                        appIcon = Utils.drawableToBitmap(mGbContext.getDrawable(iconResId));
+                        appIcon = BitmapUtils.drawableToBitmap(mGbContext.getDrawable(iconResId));
                     } else if (mIntent.hasExtra("icon")) {
                         final String appIconPath = mIntent.getStringExtra("icon");
                         if (appIconPath != null) {
@@ -450,7 +451,7 @@ public class AppLauncher implements BroadcastSubReceiver {
                         ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
                         mAppName = ai.loadLabel(mPm).toString();
                         if (appIcon == null) {
-                            appIcon = Utils.drawableToBitmap(ai.loadIcon(mPm));
+                            appIcon = BitmapUtils.drawableToBitmap(ai.loadIcon(mPm));
                         }
                     } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                         mAppName = mIntent.getStringExtra("label");

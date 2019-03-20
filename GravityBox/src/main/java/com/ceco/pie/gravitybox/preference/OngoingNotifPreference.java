@@ -16,11 +16,11 @@ package com.ceco.pie.gravitybox.preference;
 
 import java.util.ArrayList;
 
+import com.ceco.pie.gravitybox.BitmapUtils;
 import com.ceco.pie.gravitybox.ColorUtils;
 import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.ModStatusBar;
-import com.ceco.pie.gravitybox.Utils;
 import com.ceco.pie.gravitybox.adapters.IIconCheckListAdapterItem;
 import com.ceco.pie.gravitybox.adapters.IconCheckListAdapter;
 
@@ -189,7 +189,7 @@ public class OngoingNotifPreference extends DialogPreference
                 try {
                     Drawable d = context.getDrawable(mIconId);
                     if (d != null) {
-                        Bitmap b = Utils.drawableToBitmap(d.mutate());
+                        Bitmap b = BitmapUtils.drawableToBitmap(d.mutate());
                         b = Bitmap.createScaledBitmap(b, mIconSizePx, mIconSizePx, true);
                         mIcon = new BitmapDrawable(mResources, b);
                         mIcon.setTint(ColorUtils.getColorFromStyleAttr(mContext,

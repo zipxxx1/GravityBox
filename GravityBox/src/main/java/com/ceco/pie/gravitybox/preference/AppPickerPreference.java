@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox.preference;
 
 import java.io.File;
@@ -28,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import com.ceco.pie.gravitybox.BitmapUtils;
 import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.SettingsManager;
@@ -682,7 +682,7 @@ public class AppPickerPreference extends DialogPreference
                 final String key = getKey();
                 mAppIcon = sAppIconCache.get(key);
                 if (mAppIcon == null) {
-                    Bitmap bitmap = Utils.drawableToBitmap(mResolveInfo.loadIcon(mPackageManager));
+                    Bitmap bitmap = BitmapUtils.drawableToBitmap(mResolveInfo.loadIcon(mPackageManager));
                     bitmap = Bitmap.createScaledBitmap(bitmap, mAppIconSizePx, mAppIconSizePx, false);
                     mAppIcon = new BitmapDrawable(mResources, bitmap);
                     sAppIconCache.put(key, mAppIcon);
