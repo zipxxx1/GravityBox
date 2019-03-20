@@ -69,6 +69,7 @@ public class ModNavigationBar {
 
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
     private static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
+    private static final int STATUS_BAR_DISABLE_SEARCH = 0x02000000;
 
     private static boolean mAlwaysShowMenukey;
     private static View mNavigationBarView;
@@ -472,11 +473,14 @@ public class ModNavigationBar {
             });
 
             XposedHelpers.findAndHookMethod(CLASS_NAVBAR_FRAGMENT, classLoader,
-                    "shouldDisableNavbarGestures", new XC_MethodHook() {
+                    "onHomeLongClick", View.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     if (mHomeLongpressAction != 0) {
-                        param.setResult(true);
+                        int disabledFlags1 = XposedHelpers.getIntField(param.thisObject, "mDisabledFlags1");
+                        disabledFlags1 |= STATUS_BAR_DISABLE_SEARCH;
+                        XposedHelpers.setIntField(param.thisObject, "mDisabledFlags1", disabledFlags1);
+                        if (DEBUG) log("onHomeLongClick: disabled search due to active long-press action");
                     }
                 }
             });
