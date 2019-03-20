@@ -1,3 +1,15 @@
+Changelog 9.0.0-beta-5 - 20/03/2019
+--------------------------------------
+- Clock: added positioning support to clock in header of expanded statusbar
+--- for consistency with statusbar clock
+--- also inherits features such as "Show date", "Day of week"
+--- (does not support hiding clock nor showing seconds)
+- BatteryStyle: added support for battery style in header of expanded statusbar
+--- for consistency with status bar battery
+- Navbar: fixed long-press action on Home key invoking original action after custom action
+- Navbar: improved dynamic tinting of custom key and cursor control keys
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 9.0.0-beta-4 - 18/03/2019
 --------------------------------------
 - Volume key cursor control is back
