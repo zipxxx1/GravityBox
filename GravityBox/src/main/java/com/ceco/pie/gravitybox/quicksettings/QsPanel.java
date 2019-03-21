@@ -175,7 +175,15 @@ public class QsPanel implements BroadcastSubReceiver {
 
     private View getBrightnessSlider() {
         if (mBrightnessSlider != null) return mBrightnessSlider;
-        mBrightnessSlider = (ViewGroup)XposedHelpers.getObjectField(mQsPanel, "mBrightnessView");
+        if (Utils.isSamsungRom()) {
+            Object barController = XposedHelpers.getObjectField(mQsPanel, "mBarController");
+            if (barController != null) {
+                Object barItem = XposedHelpers.callMethod(barController, "getBarItem", "Brightness");
+                mBrightnessSlider = (ViewGroup) XposedHelpers.getObjectField(barItem, "mBarRootView");
+            }
+        } else {
+            mBrightnessSlider = (ViewGroup) XposedHelpers.getObjectField(mQsPanel, "mBrightnessView");
+        }
         return mBrightnessSlider;
     }
 
@@ -316,12 +324,11 @@ public class QsPanel implements BroadcastSubReceiver {
         }
 
         try {
-            XposedHelpers.findAndHookMethod(CLASS_BRIGHTNESS_CTRL, classLoader,
-                    "updateIcon", boolean.class, new XC_MethodHook() {
+            XC_MethodHook updateIconHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (DEBUG) log("BrightnessController: updateIcon");
-                    ImageView icon = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mIcon");                      
+                    ImageView icon = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mIcon");
                     if (icon != null) {
                         if (!icon.hasOnClickListeners()) {
                             icon.setOnClickListener(mBrightnessIconOnClick);
@@ -340,7 +347,14 @@ public class QsPanel implements BroadcastSubReceiver {
                         icon.setVisibility(mBrightnessIconEnabled ? View.VISIBLE : View.GONE);
                     }
                 }
-            });
+            };
+            if (Utils.isSamsungRom()) {
+                XposedHelpers.findAndHookMethod(CLASS_BRIGHTNESS_CTRL, classLoader,
+                        "updateSlider", int.class, boolean.class, updateIconHook);
+            } else {
+                XposedHelpers.findAndHookMethod(CLASS_BRIGHTNESS_CTRL, classLoader,
+                        "updateIcon", boolean.class, updateIconHook);
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -367,7 +381,12 @@ public class QsPanel implements BroadcastSubReceiver {
             try {
                 Intent intent = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
                 Object host = XposedHelpers.getObjectField(mQsPanel, "mHost");
-                XposedHelpers.callMethod(host, "startActivityDismissingKeyguard", intent);
+                if (Utils.isSamsungRom()) {
+                    Object statusBar = XposedHelpers.getObjectField(host, "mStatusBar");
+                    XposedHelpers.callMethod(statusBar, "startActivity", intent, true);
+                } else {
+                    XposedHelpers.callMethod(host, "startActivityDismissingKeyguard", intent);
+                }
                 return true;
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
