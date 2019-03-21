@@ -16,6 +16,7 @@ package com.ceco.pie.gravitybox.quicksettings;
 
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
+import com.ceco.pie.gravitybox.Utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -69,6 +70,9 @@ public class QsPanelQuick {
                 protected void afterHookedMethod(MethodHookParam param) {
                     mPanel = (View) param.thisObject;
                     if (DEBUG) log("QuickQSPanel constructed");
+                    if (Utils.isSamsungRom()) {
+                        updateMaxTiles();
+                    }
                 }
             });
     
