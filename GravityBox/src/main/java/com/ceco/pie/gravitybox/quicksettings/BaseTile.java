@@ -287,10 +287,13 @@ public abstract class BaseTile implements QsEventListener {
     public void onViewHandleStateChanged(View tileView, Object state) {
         try {
             final boolean dualTarget = XposedHelpers.getBooleanField(state, "dualTarget");
-            View v = (View) XposedHelpers.getObjectField(tileView, "mExpandIndicator");
-            if (v != null) v.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
-            v = (View) XposedHelpers.getObjectField(tileView, "mExpandSpace");
-            if (v != null) v.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
+            View v;
+            if (!Utils.isSamsungRom()) {
+                v = (View) XposedHelpers.getObjectField(tileView, "mExpandIndicator");
+                if (v != null) v.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
+                v = (View) XposedHelpers.getObjectField(tileView, "mExpandSpace");
+                if (v != null) v.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
+            }
             v = (View) XposedHelpers.getObjectField(tileView, "mLabelContainer");
             if (v != null && dualTarget != v.isClickable()) {
                 v.setClickable(dualTarget);
