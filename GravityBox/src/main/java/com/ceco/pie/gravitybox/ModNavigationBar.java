@@ -845,7 +845,7 @@ public class ModNavigationBar {
     }
 
     private static void updateRecentsKeyCode() {
-        if (mNavbarViewInfo == null || Utils.isParanoidRom()) return;
+        if (mNavbarViewInfo == null || Utils.isParanoidRom() || Utils.isSamsungRom()) return;
 
         try {
             final boolean hasAction = recentsKeyHasAction();
