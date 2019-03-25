@@ -1646,4 +1646,9 @@ Utiliser dans le cas où une autre application nécessite l\'utilisation du capt
     <!-- Force ring volume control -->
     <string name="pref_vol_force_ring_control_title">Forcer le contrôle du volume de la sonnerie</string>
 <string name="pref_vol_force_ring_control_summary">Quand l'option est activée, les touches volume contrôlent le volume de la sonnerie au lieu du volume de la musique.</string>
+    <!-- Clock position -->
+    <string name="pref_clock_position_title">Position de l'horloge</string>
+    <string name="clock_pos_left">À gauche</string>
+    <string name="clock_pos_right">À droite</string>
+    <string name="clock_pos_center">Centrée</string>
 </resources>
