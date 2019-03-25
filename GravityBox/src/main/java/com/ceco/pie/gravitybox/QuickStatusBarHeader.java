@@ -126,9 +126,6 @@ public class QuickStatusBarHeader {
                     launchClockAction(mClockLongpressLink);
                     return true;
                 });
-                // use this additional field to identify the instance of Clock that resides in status bar header
-                XposedHelpers.setAdditionalInstanceField(mClockView, "headerClock", true);
-                if (DEBUG) log("prepareHeaderTimeView: mClockView long-press listener set");
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error setting long-press handler on mClockView:", t);
