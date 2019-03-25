@@ -169,6 +169,10 @@ public class ModStatusBar {
                     setClockPosition(intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_POSITION));
                     updateTrafficMeterPosition();
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_POSITION_HEADER)) {
+                    setClockPositionHeader(intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_CLOCK_POSITION_HEADER));
+                }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK)) {
                     QuickStatusBarHeader.setClockLongpressLink(
                         intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK));
@@ -344,6 +348,8 @@ public class ModStatusBar {
                 }
                 setClockPosition(mPrefs.getString(
                         GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_POSITION, "DEFAULT"));
+                setClockPositionHeader(mPrefs.getString(
+                        GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_POSITION_HEADER, "DEFAULT"));
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
@@ -1059,8 +1065,19 @@ public class ModStatusBar {
     private static void setClockPosition(StatusbarClock.ClockPosition position) {
         if (mClock != null) {
             mClock.moveToPosition(position);
-            QuickStatusBarHeader.setClockPosition(position);
         }
+    }
+
+    private static void setClockPositionHeader(String position) {
+        try {
+            setClockPositionHeader(StatusbarClock.ClockPosition.valueOf(position));
+        } catch (IllegalArgumentException e) {
+            log("Invalid value for clock position: " + position);
+        }
+    }
+
+    private static void setClockPositionHeader(StatusbarClock.ClockPosition position) {
+        QuickStatusBarHeader.setClockPosition(position);
     }
 
     private static void setTrafficMeterMode(TrafficMeterMode mode) throws Throwable {

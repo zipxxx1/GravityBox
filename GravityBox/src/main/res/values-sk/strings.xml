@@ -1920,6 +1920,7 @@
 
     <!-- Clock position -->
     <string name="pref_clock_position_title">Pozícia hodín</string>
+    <string name="pref_clock_position_header_title">Pozícia hodín v hlavičke</string>
     <string name="clock_pos_left">Vľavo</string>
     <string name="clock_pos_right">Vpravo</string>
     <string name="clock_pos_center">Stred</string>

@@ -2019,6 +2019,7 @@
 
     <!-- Clock position -->
     <string name="pref_clock_position_title">Clock position</string>
+    <string name="pref_clock_position_header_title">Clock position in header</string>
     <string name="clock_pos_left">Left</string>
     <string name="clock_pos_right">Right</string>
     <string name="clock_pos_center">Center</string>

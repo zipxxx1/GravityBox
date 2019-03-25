@@ -1915,6 +1915,7 @@
 
     <!-- Clock position -->
     <string name="pref_clock_position_title">Pozice hodin</string>
+    <string name="pref_clock_position_header_title">Pozice hodin v záhlaví</string>
     <string name="clock_pos_left">Vlevo</string>
     <string name="clock_pos_right">Vpravo</string>
     <string name="clock_pos_center">Střed</string>
