@@ -2024,4 +2024,9 @@
     <string name="clock_pos_right">Right</string>
     <string name="clock_pos_center">Center</string>
 
+    <!-- Battery percent text - statusbar header -->
+    <string name="battery_percent_text_statusbar_header_title">Show in status bar header</string>
+    <string name="battery_percent_text_statusbar_header_summary">Shows battery percent text in status bar header.
+        Applies only in case of custom battery style.</string>
+
 </resources>

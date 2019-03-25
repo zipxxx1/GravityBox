@@ -685,6 +685,12 @@
                     android:summary="@string/battery_percent_text_statusbar_summary"
                     android:defaultValue="false" />
 
+                <CheckBoxPreference
+                    android:key="pref_battery_percent_text_statusbar_header"
+                    android:title="@string/battery_percent_text_statusbar_header_title"
+                    android:summary="@string/battery_percent_text_statusbar_header_summary"
+                    android:defaultValue="false" />
+
                 <ListPreference 
                     android:key="pref_battery_percent_text_position"
                     android:title="@string/pref_battery_percent_text_position_title"

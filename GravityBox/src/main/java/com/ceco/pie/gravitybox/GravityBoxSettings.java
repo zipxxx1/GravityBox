@@ -118,6 +118,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_BATTERY_TWEAKS_ENABLED = "pref_battery_masterswitch";
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR = "pref_battery_percent_text_statusbar";
+    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR_HEADER = "pref_battery_percent_text_statusbar_header";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_POSITION = "pref_battery_percent_text_position";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD = "pref_battery_percent_text_keyguard";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_SIZE = "pref_battery_percent_text_size";
@@ -500,6 +501,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED =
             "gravitybox.intent.action.BATTERY_PERCENT_TEXT_CHANGED";
     public static final String EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR = "batteryPercentTextSb";
+    public static final String EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR_HEADER = "batteryPercentTextSbHeader";
     public static final String EXTRA_BATTERY_PERCENT_TEXT_KEYGUARD = "batteryPercentTextKg";
     public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED =
             "gravitybox.intent.action.BATTERY_PERCENT_TEXT_SIZE_CHANGED";
@@ -2105,6 +2107,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private void updatePreferences(String key) {
             if (key == null || key.equals(PREF_KEY_BATTERY_STYLE)) {
                 mBatteryStyle.setSummary(mBatteryStyle.getEntry());
+                String value = mBatteryStyle.getValue();
+                Preference p = findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR_HEADER);
+                if (p != null) p.setEnabled(!"1".equals(value) && !"4".equals(value));
             }
 
             if (key == null || key.equals(PREF_KEY_LOW_BATTERY_WARNING_POLICY)) {
@@ -2527,6 +2532,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR)) {
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR_HEADER)) {
+                intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR_HEADER, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD)) {
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_KEYGUARD, prefs.getString(key, "DEFAULT"));

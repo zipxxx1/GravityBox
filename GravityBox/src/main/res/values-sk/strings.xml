@@ -1925,4 +1925,9 @@
     <string name="clock_pos_right">Vpravo</string>
     <string name="clock_pos_center">Stred</string>
 
+    <!-- Battery percent text - statusbar header -->
+    <string name="battery_percent_text_statusbar_header_title">Zobraziť v hlavičke</string>
+    <string name="battery_percent_text_statusbar_header_summary">Zobrazí percentuálny text v hlavičke stavovej lišty.
+        Platí len v prípade použitia vlastného štýlu batérie.</string>
+
 </resources>

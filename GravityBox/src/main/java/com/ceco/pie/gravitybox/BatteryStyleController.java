@@ -56,6 +56,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private XSharedPreferences mPrefs;
     private int mBatteryStyle;
     private boolean mBatteryPercentTextEnabledSb;
+    private boolean mBatteryPercentTextEnabledSbHeader;
     private boolean mBatteryPercentTextOnRight;
     private KeyguardMode mBatteryPercentTextKgMode;
     private StatusbarBatteryPercentage mPercentText;
@@ -120,6 +121,8 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
         mBatteryPercentTextEnabledSb = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false);
+        mBatteryPercentTextEnabledSbHeader = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR_HEADER, false);
         mBatteryPercentTextKgMode = KeyguardMode.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD, "DEFAULT"));
         mBatteryPercentTextOnRight = "RIGHT".equals(prefs.getString(
@@ -216,7 +219,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                         }
                         break;
                     case HEADER:
-                        if (mBatteryPercentTextEnabledSb && isCurrentStyleCircleBattery()) {
+                        if (isPercentTextInHeaderAllowed()) {
                             mPercentText.setVisibility(View.VISIBLE);
                             mPercentText.updateText();
                         } else {
@@ -358,6 +361,12 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                  mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_DASHED_PERCENT));
     }
 
+    private boolean isPercentTextInHeaderAllowed() {
+        return (mBatteryPercentTextEnabledSbHeader &&
+                (isCurrentStyleCircleBattery() ||
+                  mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_NONE));
+    }
+
     public boolean isDashCharging() {
         return mIsDashCharging;
     }
@@ -380,6 +389,11 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 mBatteryPercentTextEnabledSb = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, false);
                 if (DEBUG) log("mBatteryPercentTextEnabledSb changed to: " + mBatteryPercentTextEnabledSb);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR_HEADER)) {
+                mBatteryPercentTextEnabledSbHeader = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR_HEADER, false);
+                if (DEBUG) log("mBatteryPercentTextEnabledSbHeader changed to: " + mBatteryPercentTextEnabledSbHeader);
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_KEYGUARD)) {
                 mBatteryPercentTextKgMode = KeyguardMode.valueOf(intent.getStringExtra(

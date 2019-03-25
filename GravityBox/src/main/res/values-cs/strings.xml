@@ -1920,4 +1920,9 @@
     <string name="clock_pos_right">Vpravo</string>
     <string name="clock_pos_center">Střed</string>
 
+    <!-- Battery percent text - statusbar header -->
+    <string name="battery_percent_text_statusbar_header_title">Zobrazit v záhlaví</string>
+    <string name="battery_percent_text_statusbar_header_summary">Zobrazí percentuální text v záhlaví stavové lišty.
+        Platí pouze v případě použití vlastního stylu baterie.</string>
+
 </resources>
