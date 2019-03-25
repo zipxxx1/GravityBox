@@ -1613,23 +1613,23 @@ Utiliser dans le cas où une autre application nécessite l\'utilisation du capt
     <string name="pref_wifi_trusted_title">Wi-Fi approuvé</string>
     <string name="pref_wifi_trusted_summary">Spécifie les réseaux Wi-Fi approuvés pour Smart Lock</string>
     <!-- BatteryBar: lock screen only -->
-    <string name="pref_battery_bar_lockscreen_only_title">Uniquement sur l'écran de verrouillage</string>
+    <string name="pref_battery_bar_lockscreen_only_title">Uniquement sur l\'écran de verrouillage</string>
     <!-- Advanced tuning -->
     <string name="pref_tuner_title">Réglages avancés</string>
-    <string name="pref_tuner_summary">Permet un réglage avancé des paramètres de configuration du Framework et de l'interface utilisateur système</string>
-    <string name="tuner_info">Le gestionnaire des réglages avancés extrait dynamiquement tous les paramètres de configuration du Framework et de l'interface utilisateur système, y compris leurs valeurs actuelles, et permet à l'utilisateur de les remplacer par leurs propres valeurs.
+    <string name="pref_tuner_summary">Permet un réglage avancé des paramètres de configuration du Framework et de l\'interface utilisateur système</string>
+    <string name="tuner_info">Le gestionnaire des réglages avancés extrait dynamiquement tous les paramètres de configuration du Framework et de l\'interface utilisateur système, y compris leurs valeurs actuelles, et permet à l\'utilisateur de les remplacer par leurs propres valeurs.
         Les réglages sont actuellement disponibles pour des types de paramètres simples, tels que des nombres entiers et des booléens.
         Les valeurs écrasées seront appliquées lors du démarrage.
         Le résultat final dépend toujours du type de périphérique, du support du matériel concerné et de la mise en œuvre du constructeur, il est donc normal que des modifications apportées à certains paramètres n’aient aucun effet.</string>
     <string name="tuner_warning">Les réglages avancés sont conçus pour les utilisateurs expérimentés uniquement.
         Remplacer les valeurs par défaut et utiliser des valeurs incorrectes peut entraîner des problèmes de stabilité et de performances, voire rendre votre système inutilisable.
-        Les modifications ne sont pas permanentes et ne durent que tant que le module GravityBox Xposed est actif et que l'interrupteur principal est activé.
+        Les modifications ne sont pas permanentes et ne durent que tant que le module GravityBox Xposed est actif et que l\'interrupteur principal est activé.
         Utilisez avec prudence et ayez toujours un plan de sauvegarde !</string>
     <string name="pref_tuner_master_switch_summary">Nécessite un redémarrage</string>
     <string name="pref_tuner_framework_title">Framework</string>
     <string name="pref_tuner_framework_summary">Contient les paramètres de configuration principaux du système</string>
     <string name="pref_tuner_systemui_title">Interface utilisateur</string>
-    <string name="pref_tuner_systemui_summary">Contient les paramètres de configuration spécifiques à l'interface utilisateur du système liés à la barre d'état, l'écran de verrouillage, etc.</string>
+    <string name="pref_tuner_systemui_summary">Contient les paramètres de configuration spécifiques à l\'interface utilisateur du système liés à la barre d\'état, l\'écran de verrouillage, etc.</string>
     <string name="tuner_menu_show_all">afficher tous les éléments</string>
     <string name="tuner_menu_show_overridden">Afficher les éléments remplacés</string>
     <string name="tuner_no_documentation">Documentation non disponible</string>
@@ -1643,9 +1643,9 @@ Utiliser dans le cas où une autre application nécessite l\'utilisation du capt
     <string name="stock_sound">Son système</string>
     <!-- Force ring volume control -->
     <string name="pref_vol_force_ring_control_title">Forcer le contrôle du volume de la sonnerie</string>
-<string name="pref_vol_force_ring_control_summary">Quand l'option est activée, les touches volume contrôlent le volume de la sonnerie au lieu du volume de la musique.</string>
+<string name="pref_vol_force_ring_control_summary">Quand l\'option est activée, les touches volume contrôlent le volume de la sonnerie au lieu du volume de la musique.</string>
     <!-- Clock position -->
-    <string name="pref_clock_position_title">Position de l'horloge</string>
+    <string name="pref_clock_position_title">Position de l\'horloge</string>
     <string name="clock_pos_left">À gauche</string>
     <string name="clock_pos_right">À droite</string>
     <string name="clock_pos_center">Centrée</string>
