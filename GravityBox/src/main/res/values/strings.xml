@@ -2029,4 +2029,8 @@
     <string name="battery_percent_text_statusbar_header_summary">Shows battery percent text in status bar header.
         Applies only in case of custom battery style.</string>
 
+    <!-- Battery indicator - statusbar header -->
+    <string name="pref_battery_style_header_title">Apply to status bar header</string>
+    <string name="pref_battery_style_header_summary">Applies chosen battery indicator also to status bar header</string>
+
 </resources>

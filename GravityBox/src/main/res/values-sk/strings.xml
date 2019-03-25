@@ -1930,4 +1930,8 @@
     <string name="battery_percent_text_statusbar_header_summary">Zobrazí percentuálny text v hlavičke stavovej lišty.
         Platí len v prípade použitia vlastného štýlu batérie.</string>
 
+    <!-- Battery indicator - statusbar header -->
+    <string name="pref_battery_style_header_title">Aplikovať v hlavičke</string>
+    <string name="pref_battery_style_header_summary">Aplikuje zvolený štýl indikátora batérie aj v hlavičke stavovej lišty</string>
+
 </resources>

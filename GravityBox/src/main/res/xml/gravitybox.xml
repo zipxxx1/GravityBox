@@ -674,6 +674,13 @@
                 android:defaultValue="1"
                 android:dependency="pref_battery_masterswitch" />
 
+            <CheckBoxPreference
+                android:key="pref_battery_style_header"
+                android:title="@string/pref_battery_style_header_title"
+                android:summary="@string/pref_battery_style_header_summary"
+                android:defaultValue="false"
+                android:dependency="pref_battery_masterswitch" />
+
             <PreferenceScreen
                 android:key="pref_cat_battery_percent_text"
                 android:title="@string/battery_percent_text_title"

@@ -117,6 +117,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_CAT_KEY_BATTERY_PERCENT_TEXT = "pref_cat_battery_percent_text";
     public static final String PREF_KEY_BATTERY_TWEAKS_ENABLED = "pref_battery_masterswitch";
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
+    public static final String PREF_KEY_BATTERY_STYLE_HEADER = "pref_battery_style_header";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR = "pref_battery_percent_text_statusbar";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR_HEADER = "pref_battery_percent_text_statusbar_header";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_POSITION = "pref_battery_percent_text_position";
@@ -498,6 +499,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
     public static final String ACTION_PREF_BATTERY_STYLE_CHANGED = "gravitybox.intent.action.BATTERY_STYLE_CHANGED";
     public static final String EXTRA_BATTERY_STYLE = "batteryStyle";
+    public static final String EXTRA_BATTERY_STYLE_HEADER = "batteryStyleHeader";
     public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED =
             "gravitybox.intent.action.BATTERY_PERCENT_TEXT_CHANGED";
     public static final String EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR = "batteryPercentTextSb";
@@ -2528,7 +2530,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (key.equals(PREF_KEY_BATTERY_STYLE)) {
                 intent.setAction(ACTION_PREF_BATTERY_STYLE_CHANGED);
                 int batteryStyle = Integer.valueOf(prefs.getString(PREF_KEY_BATTERY_STYLE, "1"));
-                intent.putExtra("batteryStyle", batteryStyle);
+                intent.putExtra(EXTRA_BATTERY_STYLE, batteryStyle);
+            } else if (key.equals(PREF_KEY_BATTERY_STYLE_HEADER)) {
+                intent.setAction(ACTION_PREF_BATTERY_STYLE_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_STYLE_HEADER, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR)) {
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, prefs.getBoolean(key, false));

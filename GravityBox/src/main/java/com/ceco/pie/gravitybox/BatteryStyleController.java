@@ -55,6 +55,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private Context mContext;
     private XSharedPreferences mPrefs;
     private int mBatteryStyle;
+    private boolean mBatteryStyleHeaderEnabled;
     private boolean mBatteryPercentTextEnabledSb;
     private boolean mBatteryPercentTextEnabledSbHeader;
     private boolean mBatteryPercentTextOnRight;
@@ -119,6 +120,8 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         mPrefs = prefs;
         mBatteryStyle = Integer.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
+        mBatteryStyleHeaderEnabled = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_BATTERY_STYLE_HEADER, false);
         mBatteryPercentTextEnabledSb = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false);
         mBatteryPercentTextEnabledSbHeader = prefs.getBoolean(
@@ -186,14 +189,10 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private void updateBatteryStyle() {
         try {
             if (mStockBattery != null) {
-                if (mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK ||
-                        mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK_PERCENT) {
-                    mStockBattery.setVisibility(View.VISIBLE);
-                    mStockBattery.setShowPercentage(mBatteryStyle == 
+                mStockBattery.setVisibility(isCurrentStyleStockBattery() ?
+                        View.VISIBLE : View.GONE);
+                mStockBattery.setShowPercentage(mBatteryStyle ==
                             GravityBoxSettings.BATTERY_STYLE_STOCK_PERCENT);
-                } else {
-                    mStockBattery.setVisibility(View.GONE);
-                }
             }
 
             if (mCircleBattery != null) {
@@ -353,8 +352,17 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         }
     }
 
+    private boolean isCurrentStyleStockBattery() {
+        return (mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK ||
+                        mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK_PERCENT ||
+                (mContainerType == ContainerType.HEADER && !mBatteryStyleHeaderEnabled));
+    }
+
     private boolean isCurrentStyleCircleBattery() {
         return (mCircleBattery != null &&
+                (mContainerType == ContainerType.STATUSBAR ||
+                        mContainerType == ContainerType.KEYGUARD ||
+                            mBatteryStyleHeaderEnabled) &&
                 (mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE ||
                  mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_PERCENT ||
                  mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_DASHED ||
@@ -364,7 +372,8 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private boolean isPercentTextInHeaderAllowed() {
         return (mBatteryPercentTextEnabledSbHeader &&
                 (isCurrentStyleCircleBattery() ||
-                  mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_NONE));
+                  (mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_NONE &&
+                          mBatteryStyleHeaderEnabled)));
     }
 
     public boolean isDashCharging() {
@@ -382,6 +391,11 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE)) {
                 mBatteryStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE, 1);
                 if (DEBUG) log("mBatteryStyle changed to: " + mBatteryStyle);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE_HEADER)) {
+                mBatteryStyleHeaderEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_STYLE_HEADER, false);
+                if (DEBUG) log("mBatteryStyleHeaderEnabled changed to: " + mBatteryStyleHeaderEnabled);
             }
             updateBatteryStyle();
         } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED)) {
