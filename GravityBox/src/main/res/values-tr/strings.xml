@@ -1977,4 +1977,14 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="clock_pos_left">Sol</string>
     <string name="clock_pos_right">Sağ</string>
     <string name="clock_pos_center">Orta</string>
+
+    <!-- Battery percent text - statusbar header -->
+    <string name="battery_percent_text_statusbar_header_title">Durum çubuğu başlığında göster</string>
+    <string name="battery_percent_text_statusbar_header_summary">Pil yüzde metnini durum çubuğu başlığında gösterir.
+        Yalnızca özel pil stili için geçerlidir.</string>
+
+    <!-- Battery indicator - statusbar header -->
+    <string name="pref_battery_style_header_title">Durum çubuğu başlığına uygula</string>
+    <string name="pref_battery_style_header_summary">Seçilen pil göstergesini durum çubuğu başlığına da uygular</string>
+
 </resources>
