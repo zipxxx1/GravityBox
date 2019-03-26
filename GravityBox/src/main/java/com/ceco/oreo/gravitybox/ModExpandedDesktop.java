@@ -270,7 +270,7 @@ public class ModExpandedDesktop {
                         vis &= ~(View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                                 ViewConst.STATUS_BAR_TRANSLUCENT);
                     }
-                    if (isNavbarImmersive()) {
+                    if (isNavbarImmersive() || isNavbarHidden()) {
                         vis |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
@@ -291,7 +291,7 @@ public class ModExpandedDesktop {
                         flags &= ~(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN |
                                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                     }
-                    if (isNavbarImmersive()) {
+                    if (isNavbarImmersive() || isNavbarHidden()) {
                         flags &= ~WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
                     }
                     param.setResult(flags);
