@@ -105,17 +105,17 @@ public class ModExpandedDesktop {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
                     mNavbarHeightScaleFactor = 
                             (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT, 100) / 100f;
-                    updateNavbarDimensions();
+                    updateNavbarDimensions(true);
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT_LANDSCAPE)) {
                     mNavbarHeightLandscapeScaleFactor = (float)intent.getIntExtra(
                                     GravityBoxSettings.EXTRA_NAVBAR_HEIGHT_LANDSCAPE,  100) / 100f;
-                    updateNavbarDimensions();
+                    updateNavbarDimensions(true);
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH)) {
                     mNavbarWidthScaleFactor = 
                             (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100) / 100f;
-                    updateNavbarDimensions();
+                    updateNavbarDimensions(true);
                 }
             }
         }
@@ -178,7 +178,7 @@ public class ModExpandedDesktop {
         }
     }
 
-    private static void updateNavbarDimensions() {
+    private static void updateNavbarDimensions(boolean updateSettings) {
         if (mContext == null) return;
         try {
             Resources res = mContext.getResources();
@@ -192,7 +192,9 @@ public class ModExpandedDesktop {
                     (int) (res.getDimensionPixelSize(resWidthId) * mNavbarWidthScaleFactor),
                     (int) (res.getDimensionPixelSize(resHeightId) * mNavbarHeightScaleFactor),
                     (int) (res.getDimensionPixelSize(resHeightLandscapeId) *mNavbarHeightLandscapeScaleFactor));
-            updateSettings();
+            if (updateSettings) {
+                updateSettings();
+            }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -247,33 +249,12 @@ public class ModExpandedDesktop {
                 }
             });
 
-            if (mNavbarOverride) {
-                XposedBridge.hookAllMethods(classPhoneWindowManager, "onConfigurationChanged", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        updateNavbarDimensions();
-                    }
-                });
-            } else {
-                XposedBridge.hookAllMethods(classPhoneWindowManager, "setInitialDisplaySize", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        int[] navigationBarWidthForRotation = (int[]) XposedHelpers.getObjectField(
-                                param.thisObject, "mNavigationBarWidthForRotationDefault");
-                        int[] navigationBarHeightForRotation = (int[]) XposedHelpers.getObjectField(
-                                param.thisObject, "mNavigationBarHeightForRotationDefault");
-                        int portraitRotation = XposedHelpers.getIntField(param.thisObject, "mPortraitRotation");
-                        int landscapeRotation = XposedHelpers.getIntField(param.thisObject, "mLandscapeRotation");
-                        if (navigationBarWidthForRotation != null &&
-                                navigationBarHeightForRotation != null) {
-                            mNavbarDimensions = new NavbarDimensions(
-                                navigationBarWidthForRotation[portraitRotation],
-                                navigationBarHeightForRotation[portraitRotation],
-                                navigationBarHeightForRotation[landscapeRotation]);
-                        }
-                    }
-                });
-            }
+            XposedBridge.hookAllMethods(classPhoneWindowManager, "onConfigurationChanged", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) {
+                    updateNavbarDimensions(mNavbarOverride || isNavbarHidden());
+                }
+            });
 
             XposedHelpers.findAndHookMethod(CLASS_POLICY_CONTROL, classLoader,"getSystemUiVisibility",
                     CLASS_POLICY_WINDOW_STATE, WindowManager.LayoutParams.class, new XC_MethodHook() {
