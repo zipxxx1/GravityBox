@@ -15,45 +15,58 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:focusable="true"
-    android:focusableInTouchMode="true" >
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/info"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:text="@string/tuner_info"/>
+        android:layout_height="0dp"
+        android:layout_weight="1.3"
+        android:layout_marginBottom="5dp">
 
-    <TextView
-        android:id="@+id/warning"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#ff0000"
-        android:paddingTop="8dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:text="@string/tuner_warning"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/tuner_info"/>
 
-    <TextView
-        android:id="@+id/trial_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#ff0000"
-        android:paddingTop="8dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:paddingBottom="15dp"
-        android:visibility="gone" />
+            <TextView
+                android:id="@+id/warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000"
+                android:paddingTop="8dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/tuner_warning"/>
+
+            <TextView
+                android:id="@+id/trial_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000"
+                android:paddingTop="8dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <View style="@style/Divider" />
 
     <fragment android:name="com.ceco.oreo.gravitybox.tuner.TunerMainActivity$PrefsFragment"
         android:id="@+id/prefs_fragment"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>
