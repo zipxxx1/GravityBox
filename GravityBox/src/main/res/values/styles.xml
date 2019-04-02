@@ -97,12 +97,20 @@
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
+    <!-- Visualizer -->
     <style name="VisualizerControl">
         <item name="android:layout_width">60dp</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:layout_marginStart">10dp</item>
         <item name="android:layout_marginEnd">10dp</item>
         <item name="android:clickable">true</item>
+    </style>
+
+    <!-- Divider -->
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
     </style>
 
 </resources>
