@@ -131,22 +131,30 @@ public class ResourceProxy {
         if (name == null)
             return null;
 
+        ResourceSpec spec = null;
         synchronized (mInterceptors) {
             for (Map.Entry<String,Interceptor> entry : mInterceptors.entrySet()) {
                 if (entry.getKey().equals(resPkgName) &&
                         entry.getValue().getSupportedResourceNames().contains(name)) {
-                    ResourceSpec spec = new ResourceSpec(resPkgName, id, name, value);
-                    if (sCache.get(resPkgName) == null) {
-                        sCache.put(resPkgName, new SparseArray<>());
-                    }
-                    sCache.get(resPkgName).put(id, spec);
+                    spec = new ResourceSpec(resPkgName, id, name, value);
                     if (DEBUG) log("New " + spec.toString());
-                    return spec;
                 }
+            }
+            // handle potential alias pointing to Framework res
+            if (spec == null && mInterceptors.containsKey("android") &&
+                    mInterceptors.get("android").getSupportedResourceNames().contains(name)) {
+                spec = new ResourceSpec("android", id, name, value);
+                if (DEBUG) log("Using android interceptor for " + resPkgName + ": " + spec.toString());
+            }
+            if (spec != null) {
+                if (sCache.get(resPkgName) == null) {
+                    sCache.put(resPkgName, new SparseArray<>());
+                }
+                sCache.get(resPkgName).put(id, spec);
             }
         }
 
-        return null;
+        return spec;
     }
 
     private static String getResourcePackageName(Resources res, int id) {
