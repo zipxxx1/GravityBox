@@ -216,7 +216,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
 
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if (mController.getContainerType() == ContainerType.STATUSBAR &&
+        if (mController.getContainerType() != ContainerType.HEADER &&
                 (flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
             setTextColor(colorInfo.iconTint);
         }
