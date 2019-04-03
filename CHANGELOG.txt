@@ -1,3 +1,20 @@
+Changelog 9.0.0-beta-7 - 03/04/2019
+--------------------------------------
+- Resource replacement:
+--- redesigned for better compatibility and performance
+--- implemented support for aliased resources pointing to Framework resources
+- BatteryStyle: added action to open power usage summary to custom battery icon/percentage in header
+- Fixed tinting of GravityBox status bar elements when notch is hidden on OxygenOS
+- Fixed circle battery and percent text tinting when lockscreen is in dark mode
+- Fixed stock battery icon not refreshing when switching between Stock and Stock with percentage
+- Fixed SystemUI crash when power menu disabled in lock screen
+- Display: fixed "Unplug turns on screen" not working on some devices
+- Advanced tuning:
+--- fixed main screen preferences not fitting the screen on devices with large font size
+--- better compatibility thanks to resource replacement redesign (e.g. config_enableLockScreenRotation now works)
+- Updated Russian translations (thanks to gaich)
+- Updated Turkish translations (thanks to Fatih Firinci)
+
 Changelog 9.0.0-beta-6 - 26/03/2019
 --------------------------------------
 - Clock: do not propagate date and day of week to statusbar header clock (was redundant)
