@@ -996,7 +996,8 @@ public class ModStatusBar {
             mLayoutCenter.setVisibility(hidden ? View.GONE : View.VISIBLE);
         }
         if (mTrafficMeter != null) {
-            mTrafficMeter.setHiddenByPolicy(hidden);
+            mTrafficMeter.setHiddenByPolicy(hidden &&
+                    mStatusBarState == StatusBarState.SHADE);
         }
         if (mBatteryBarViewSb != null) {
             mBatteryBarViewSb.setHiddenByPolicy(hidden);
