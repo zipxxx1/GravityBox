@@ -99,6 +99,7 @@
     <string name="qs_tile_stay_awake">Timeout Display</string>
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_nfc_aosp">NFC (Stock)</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
     <string name="qs_tile_smart_radio">Modem Intelligente</string>
     <string name="qs_tile_lock_screen">Schermata di blocco</string>
@@ -653,7 +654,7 @@
     
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Nascondi al tocco</string>
-    <string name="pref_qs_hide_on_change_summary">Al tocco di una casella Quicksetting verrà nascosto automaticamente il pannello notifiche. Si applica solo alle caselle modificate con GravityBox.</string>
+    <string name="pref_qs_hide_on_change_summary">Comprime e nasconde automaticamente la casella Quicksetting e il pannello notifiche. Si applica solo alle caselle modificate con la GravityBox.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menù spegnimento</string>
@@ -1646,8 +1647,8 @@
     <string name="wifi_off">WiFi off</string>
 
     <!-- Airplane mode shortcut -->
-    <string name="airplane_mode_on">Modalità Airplane on</string>
-    <string name="airplane_mode_off">Modalità Airplane off</string>
+    <string name="airplane_mode_on">Modalità Aereo on</string>
+    <string name="airplane_mode_off">Modalità Aereo off</string>
 
     <!-- Autobrightness mode shortcut -->
     <string name="autobrightness_on">Luminosità automatica on</string>
@@ -2002,5 +2003,28 @@
     <string name="tuneable_reboot_required">Richiede il riavvio</string>
     <string name="pref_tuneable_value_int_error">Valore non valido. Previsto numero intero</string>
     <string name="tuner_manager_not_responding">La consolle del Sintonizzatore manager non risponde</string>
+    <!-- Stock sound -->
+    <string name="stock_sound">Suoneria standard</string>
+
+    <!-- Force ring volume control -->
+    <string name="pref_vol_force_ring_control_title">Forza il controllo del volume della suoneria</string>
+    <string name="pref_vol_force_ring_control_summary">Se abilitato, i tasti del volume controllano il volume della suoneria invece del volume della musica</string>
+
+    <!-- Clock position -->
+    <string name="pref_clock_position_title">Positione dell orologio</string>
+    <string name="pref_clock_position_header_title">Posizione dell orologio nell intestazione</string>
+    <string name="clock_pos_left">Sinistra</string>
+    <string name="clock_pos_right">Destra</string>
+    <string name="clock_pos_center">Centra</string>
+
+    <!-- Battery percent text - statusbar header -->
+    <string name="battery_percent_text_statusbar_header_title">Mostra nell\'intestazione della barra di stato</string>
+    <string name="battery_percent_text_statusbar_header_summary">Mostra il testo percentuale della batteria nell\'intestazione della barra di stato.
+         Si applica solo in caso di stile batteria personalizzato.</string>
+
+    <!-- Battery indicator - statusbar header -->
+    <string name="pref_battery_style_header_title">Applica all\'intestazione della barra di stato</string>
+    <string name="pref_battery_style_header_summary">Applica l\'indicatore della batteria scelto anche all\'intestazione della barra di stato</string>
+
 
 </resources>
