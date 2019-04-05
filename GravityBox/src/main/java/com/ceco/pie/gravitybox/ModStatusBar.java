@@ -129,6 +129,7 @@ public class ModStatusBar {
     private static VisualizerController mVisualizerCtrl;
     private static SystemIconController mSystemIconController;
     private static StatusbarQuietHoursIcon mQhIcon;
+    private static int mHomeLongpressAction = 0;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -230,6 +231,11 @@ public class ModStatusBar {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_POWER_CAMERA_VP)) {
                 setCameraVibratePattern(intent.getStringExtra(GravityBoxSettings.EXTRA_POWER_CAMERA_VP));
+            } else if (intent.getAction().equals(
+                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
+                    GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS.equals(intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_HWKEY_KEY))) {
+                mHomeLongpressAction = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
             }
         }
     };
@@ -554,6 +560,13 @@ public class ModStatusBar {
             mDt2sEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DT2S, false);
             setCameraVibratePattern(prefs.getString(GravityBoxSettings.PREF_KEY_POWER_CAMERA_VP, null));
 
+            try {
+                mHomeLongpressAction = Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS, "0"));
+            } catch (NumberFormatException nfe) {
+                GravityBox.log(TAG, "Invalid value for mHomeLongpressAction");
+            }
+
             XposedBridge.hookAllConstructors(phoneStatusBarPolicyClass, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
@@ -604,6 +617,7 @@ public class ModStatusBar {
                     intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                     intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ENABLE, false)) {
                         intentFilter.addAction(GravityBoxSettings.ACTION_VISUALIZER_SETTINGS_CHANGED);
                     }
@@ -984,6 +998,24 @@ public class ModStatusBar {
                 });
             } catch (Throwable t) {
                 GravityBox.log(TAG, t);
+            }
+
+            // Disable navigation bar home long-press when custom long-press action defined
+            try {
+                XposedHelpers.findAndHookMethod(ModNavigationBar.CLASS_NAVBAR_FRAGMENT, classLoader,
+                        "onHomeLongClick", View.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) {
+                        if (mHomeLongpressAction != 0) {
+                            int disabledFlags1 = XposedHelpers.getIntField(param.thisObject, "mDisabledFlags1");
+                            disabledFlags1 |= ModNavigationBar.STATUS_BAR_DISABLE_SEARCH;
+                            XposedHelpers.setIntField(param.thisObject, "mDisabledFlags1", disabledFlags1);
+                            if (DEBUG) log("onHomeLongClick: disabled search due to active long-press action");
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error hooking onHomeLongClick:", t);
             }
         }
         catch (Throwable t) {

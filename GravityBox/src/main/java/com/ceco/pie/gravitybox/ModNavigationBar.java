@@ -53,7 +53,7 @@ public class ModNavigationBar {
     private static final boolean DEBUG = false;
 
     private static final String CLASS_NAVBAR_VIEW = "com.android.systemui.statusbar.phone.NavigationBarView";
-    private static final String CLASS_NAVBAR_FRAGMENT = "com.android.systemui.statusbar.phone.NavigationBarFragment";
+    static final String CLASS_NAVBAR_FRAGMENT = "com.android.systemui.statusbar.phone.NavigationBarFragment";
     private static final String CLASS_KEY_BUTTON_VIEW = "com.android.systemui.statusbar.policy.KeyButtonView";
     private static final String CLASS_KEY_BUTTON_RIPPLE = "com.android.systemui.statusbar.policy.KeyButtonRipple";
     private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
@@ -67,16 +67,15 @@ public class ModNavigationBar {
     public static final int MODE_LIGHTS_OUT_TRANSPARENT = 6;
     private static final int MSG_LIGHTS_OUT = 1;
 
-    private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
-    private static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
-    private static final int STATUS_BAR_DISABLE_SEARCH = 0x02000000;
+    static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
+    static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
+    static final int STATUS_BAR_DISABLE_SEARCH = 0x02000000;
 
     private static boolean mAlwaysShowMenukey;
     private static View mNavigationBarView;
     private static ModHwKeys.HwKeyAction mRecentsSingletapAction = new ModHwKeys.HwKeyAction(0, null);
     private static ModHwKeys.HwKeyAction mRecentsLongpressAction = new ModHwKeys.HwKeyAction(0, null);
     private static ModHwKeys.HwKeyAction mRecentsDoubletapAction = new ModHwKeys.HwKeyAction(0, null);
-    private static int mHomeLongpressAction = 0;
     private static boolean mHwKeysEnabled;
     private static boolean mCursorControlEnabled;
     private static boolean mDpadKeysVisible;
@@ -227,12 +226,7 @@ public class ModNavigationBar {
                 mRecentsDoubletapAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
                 mRecentsDoubletapAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
                 updateRecentsKeyCode();
-            } else if (intent.getAction().equals(
-                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
-                    GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS.equals(intent.getStringExtra(
-                            GravityBoxSettings.EXTRA_HWKEY_KEY))) {
-                mHomeLongpressAction = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED) && 
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE)) {
                 mHwKeysEnabled = !intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE, false);
                 updateRecentsKeyCode();
@@ -265,12 +259,6 @@ public class ModNavigationBar {
                     prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP + "_custom", null));
         } catch (NumberFormatException nfe) {
             GravityBox.log(TAG, "Invalid value for mRecentsDoubletapAction");
-        }
-        try {
-            mHomeLongpressAction = Integer.valueOf(
-                    prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS, "0"));
-        } catch (NumberFormatException nfe) {
-            GravityBox.log(TAG, "Invalid value for mHomeLongpressAction");
         }
 
         mCustomKeyEnabled = prefs.getBoolean(
@@ -505,23 +493,6 @@ public class ModNavigationBar {
             });
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error hooking sendEvent:", t);
-        }
-
-        try {
-            XposedHelpers.findAndHookMethod(CLASS_NAVBAR_FRAGMENT, classLoader,
-                    "onHomeLongClick", View.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) {
-                    if (mHomeLongpressAction != 0) {
-                        int disabledFlags1 = XposedHelpers.getIntField(param.thisObject, "mDisabledFlags1");
-                        disabledFlags1 |= STATUS_BAR_DISABLE_SEARCH;
-                        XposedHelpers.setIntField(param.thisObject, "mDisabledFlags1", disabledFlags1);
-                        if (DEBUG) log("onHomeLongClick: disabled search due to active long-press action");
-                    }
-                }
-            });
-        } catch (Throwable t) {
-            GravityBox.log(TAG, "Error hooking onHomeLongClick:", t);
         }
 
         try {
