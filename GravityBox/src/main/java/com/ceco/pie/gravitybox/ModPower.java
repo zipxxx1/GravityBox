@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.pie.gravitybox;
 
 import com.ceco.pie.gravitybox.ledcontrol.QuietHours;
 import com.ceco.pie.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.pie.gravitybox.managers.BatteryInfoManager;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -46,6 +46,7 @@ public class ModPower {
     private static final String CLASS_PM_SERVICE = "com.android.server.power.PowerManagerService";
     private static final String CLASS_PM_HANDLER = "com.android.server.power.PowerManagerService$PowerManagerHandler";
     private static final String CLASS_PM_NOTIFIER = "com.android.server.power.Notifier";
+    private static final String CLASS_SHUTDOWN_THREAD = "com.android.server.power.ShutdownThread";
     private static final boolean DEBUG = false;
 
     private static final int MSG_WAKE_UP = 100;
@@ -66,6 +67,7 @@ public class ModPower {
     private static boolean mMotoHooksCreated;
     private static int mLockscreenTorch = 0;
     private static QuietHours mQh;
+    private static boolean mAdvancedPowerMenuEnabled;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -82,6 +84,10 @@ public class ModPower {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL)) {
                     mIgnoreIncomingCall = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_ADVANCED)) {
+                    mAdvancedPowerMenuEnabled = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_POWER_ADVANCED, false);
                 }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED) &&
                     intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1) == 
@@ -211,6 +217,45 @@ public class ModPower {
                 XposedHelpers.findAndHookMethod(pmServiceClass, "shouldWakeUpWhenPluggedOrUnpluggedLocked",
                     boolean.class, int.class, boolean.class, XC_MethodReplacement.returnConstant(false));
             }
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+
+        // Advanced power menu: Adjust reboot dialog titles
+        try {
+            mAdvancedPowerMenuEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWEROFF_ADVANCED, false);
+            final Class<?> classShutdownThread = XposedHelpers.findClass(CLASS_SHUTDOWN_THREAD, classLoader);
+            XposedHelpers.findAndHookMethod(classShutdownThread, "showShutdownDialog",
+                    Context.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) {
+                    if (mAdvancedPowerMenuEnabled) {
+                        String reason = (String) XposedHelpers.getStaticObjectField(classShutdownThread, "mReason");
+                        Dialog d = (Dialog) param.getResult();
+                        if (d != null) {
+                            if ("recovery".equals(reason)) {
+                                d.setTitle("Recovery");
+                            } else if ("bootloader".equals(reason)) {
+                                d.setTitle("Bootloader");
+                            }
+                            if (DEBUG) log("showShutdownDialog: mReason=" + reason + "; dialog title replaced");
+                        }
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classShutdownThread, "showSysuiReboot", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) {
+                    if (mAdvancedPowerMenuEnabled) {
+                        String reason = (String) XposedHelpers.getStaticObjectField(classShutdownThread, "mReason");
+                        if ("recovery".equals(reason) || "bootloader".equals(reason)) {
+                            if (DEBUG) log("showSysuiReboot: mReason=" + reason + "; SysUI dialog disabled");
+                            param.setResult(false);
+                        }
+                    }
+                }
+            });
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }

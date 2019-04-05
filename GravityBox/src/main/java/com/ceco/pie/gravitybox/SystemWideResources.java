@@ -38,7 +38,6 @@ class SystemWideResources {
                 "config_defaultNotificationLedOff",
                 "config_sip_wifi_only",
                 "config_safe_media_volume_enabled",
-                "reboot_to_reset_title",
                 "config_allowAllRotations"
         ));
         // add overriden items from Advanced tuning if applicable
@@ -104,9 +103,6 @@ class SystemWideResources {
                             return true;
                         }
                         break;
-                    case "reboot_to_reset_title":
-                        resourceSpec.value = "Recovery";
-                        return true;
                 }
                 return false;
             }

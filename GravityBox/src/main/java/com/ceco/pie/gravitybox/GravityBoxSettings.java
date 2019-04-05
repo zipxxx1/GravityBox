@@ -732,6 +732,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_POWER_PROXIMITY_WAKE = "powerProximityWake";
     public static final String EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL = "powerProximityWakeIgnoreCall";
     public static final String EXTRA_POWER_CAMERA_VP = "powerCameraVibratePattern";
+    public static final String EXTRA_POWER_ADVANCED = "powerAdvanced";
 
     public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS = "pref_statusbar_download_progress";
     public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED = "pref_statusbar_download_progress_animated";
@@ -3345,6 +3346,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_IME_FULLSCREEN_DISABLE)) {
                 intent.setAction(ACTION_PREF_IME_CHANGED);
                 intent.putExtra(EXTRA_IME_FULLSCREEN_DISABLE, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_POWEROFF_ADVANCED)) {
+                intent.setAction(ACTION_PREF_POWER_CHANGED);
+                intent.putExtra(EXTRA_POWER_ADVANCED, prefs.getBoolean(key, false));
             }
 
             if (intent.getAction() != null) {
