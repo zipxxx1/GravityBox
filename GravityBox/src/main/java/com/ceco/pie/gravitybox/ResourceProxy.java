@@ -222,7 +222,7 @@ public class ResourceProxy {
 
     private void createStringHook() {
         try {
-            XposedHelpers.findAndHookMethod(Resources.class, "getString",
+            XposedHelpers.findAndHookMethod(Resources.class, "getText",
                     int.class, mInterceptHook);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
