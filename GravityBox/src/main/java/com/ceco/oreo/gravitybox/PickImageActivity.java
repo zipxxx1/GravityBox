@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox;
 
 import java.io.File;
@@ -27,13 +26,14 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore.Images;
 import android.widget.Toast;
-import com.ceco.oreo.gravitybox.R;
 
 public class PickImageActivity extends GravityBoxActivity {
 
@@ -180,7 +180,7 @@ public class PickImageActivity extends GravityBoxActivity {
             setResult(Activity.RESULT_CANCELED);
         } else {
             try {
-                File f = createFileFromUri(uri);
+                File f = createFileFromUri(uri, false);
                 setResult(Activity.RESULT_OK, 
                         new Intent().putExtra(EXTRA_FILE_PATH, f.getAbsolutePath()));
             } catch (Exception e) {
@@ -198,24 +198,44 @@ public class PickImageActivity extends GravityBoxActivity {
         finish();
     }
 
-    private File createFileFromUri(Uri uri) throws Exception {
+    private File createFileFromUri(Uri uri, boolean downscale) throws Exception {
         File outFile = new File(Utils.getCacheDir(PickImageActivity.this) + "/" + UUID.randomUUID().toString());
         InputStream in = null;
         FileOutputStream out = null;
+        BitmapFactory.Options options = null;
         try {
-            in = getContentResolver().openInputStream(uri);
-            out = new FileOutputStream(outFile);
-            final byte[] buffer = new byte[1024];
-            int read;
-            while((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
+            if (downscale) {
+                // downscale to maxWidth/maxHeight of display
+                in = getContentResolver().openInputStream(uri);
+                options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeStream(in, null, options);
+                options.inSampleSize = BitmapUtils.calculateInSampleSize(
+                        options, getMaxWidth(), getMaxHeight());
+                options.inJustDecodeBounds = false;
+                in.close();
             }
+
+            // save bitmap
+            in = getContentResolver().openInputStream(uri);
+            Bitmap bitmap = BitmapFactory.decodeStream(in, null, options);
+            out = new FileOutputStream(outFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.flush();
+            bitmap.recycle();
         } finally {
             try { in.close(); } catch (Exception e) { }
             try { out.close(); } catch (Exception e) { }
         }
         return outFile;
+    }
+
+    private int getMaxWidth() {
+        return getResources().getDisplayMetrics().widthPixels;
+    }
+
+    private int getMaxHeight() {
+        return getResources().getDisplayMetrics().heightPixels;
     }
 
     private void cropImage(File file) {
@@ -280,7 +300,7 @@ public class PickImageActivity extends GravityBoxActivity {
         protected LoadResult doInBackground(Uri... params) {
             LoadResult result = new LoadResult();
             try { 
-                result.file = createFileFromUri(params[0]);
+                result.file = createFileFromUri(params[0], true);
             } catch (Exception e) {
                 result.exception = e;
                 e.printStackTrace();
