@@ -31,6 +31,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.ceco.oreo.gravitybox.ColorUtils;
 import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.Utils;
 
@@ -68,7 +69,7 @@ public class QsDetailItemsList {
         mEmptyText = mEmpty.findViewById(android.R.id.title);
         mEmptyText.setTextColor(Utils.isOxygenOsRom() ?
                 OOSThemeColorUtils.getColorTextSecondary(mSysUiContext) :
-                Utils.getColorFromStyleAttr(mSysUiContext, android.R.attr.textColorSecondary));
+                ColorUtils.getColorFromStyleAttr(mSysUiContext, android.R.attr.textColorSecondary));
         mEmptyIcon = mEmpty.findViewById(android.R.id.icon);
         mListView.setEmptyView(mEmpty);
     }

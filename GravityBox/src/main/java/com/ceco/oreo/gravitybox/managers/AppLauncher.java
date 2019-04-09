@@ -21,6 +21,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.oreo.gravitybox.ColorUtils;
 import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.BroadcastSubReceiver;
 import com.ceco.oreo.gravitybox.GravityBox;
@@ -228,7 +229,7 @@ public class AppLauncher implements BroadcastSubReceiver {
             boolean appRow2Visible = false;
             boolean appRow3Visible = false;
             TextView lastVisible = null;
-            int color = Utils.getColorFromStyleAttr(mDialog.getContext(), android.R.attr.textColorPrimary);
+            int color = ColorUtils.getColorFromStyleAttr(mDialog.getContext(), android.R.attr.textColorPrimary);
             for (AppInfo ai : mAppSlots) {
                 TextView tv = appView.findViewById(ai.getResId());
                 if (ai.getValue() == null || (ai.isUnsafeAction() &&

@@ -16,6 +16,7 @@ package com.ceco.oreo.gravitybox.quicksettings;
 
 import java.util.List;
 
+import com.ceco.oreo.gravitybox.ColorUtils;
 import com.ceco.oreo.gravitybox.Utils;
 
 import android.annotation.SuppressLint;
@@ -42,11 +43,11 @@ public abstract class QsDetailItemsListAdapter<T> extends ArrayAdapter<T> {
         label.setText(getListItemText(getItem(position)));
         label.setTextColor(Utils.isOxygenOsRom() ?
                 OOSThemeColorUtils.getColorTextPrimary(getContext()) :
-                Utils.getColorFromStyleAttr(getContext(), android.R.attr.textColorPrimary));
+                ColorUtils.getColorFromStyleAttr(getContext(), android.R.attr.textColorPrimary));
         label.setCheckMarkTintList(ColorStateList.valueOf(
                 Utils.isOxygenOsRom() ?
                         OOSThemeColorUtils.getColorAccent(getContext()) :
-                        Utils.getColorFromStyleAttr(getContext(), android.R.attr.colorAccent)));
+                        ColorUtils.getColorFromStyleAttr(getContext(), android.R.attr.colorAccent)));
         return label;
     }
 

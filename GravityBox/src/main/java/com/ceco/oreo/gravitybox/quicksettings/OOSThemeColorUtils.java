@@ -14,8 +14,8 @@
  */
 package com.ceco.oreo.gravitybox.quicksettings;
 
+import com.ceco.oreo.gravitybox.ColorUtils;
 import com.ceco.oreo.gravitybox.GravityBox;
-import com.ceco.oreo.gravitybox.Utils;
 
 import android.content.Context;
 import de.robv.android.xposed.XposedHelpers;
@@ -37,7 +37,7 @@ class OOSThemeColorUtils {
             return (int) XposedHelpers.callStaticMethod(tcuClass, "getColor", spec);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error getting OOS theme specific color", t);
-            return Utils.getColorFromStyleAttr(ctx, defaultColorStyleAttr);
+            return ColorUtils.getColorFromStyleAttr(ctx, defaultColorStyleAttr);
         }
     }
 

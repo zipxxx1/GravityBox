@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.oreo.gravitybox.ColorUtils;
 import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
 import com.ceco.oreo.gravitybox.Utils;
@@ -377,7 +378,7 @@ public class QuickAppTile extends QsTile {
         AppInfo lastAppInfo = null;
         ContextThemeWrapper themedContext = getThemedContext(
                 android.R.style.Theme_Material_Dialog_NoActionBar);
-        int color = Utils.getColorFromStyleAttr(themedContext,
+        int color = ColorUtils.getColorFromStyleAttr(themedContext,
                 android.R.attr.textColorPrimary);
 
         LayoutInflater inflater = LayoutInflater.from(mGbContext);
