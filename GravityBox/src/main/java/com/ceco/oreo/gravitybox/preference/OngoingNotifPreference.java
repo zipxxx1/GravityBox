@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,15 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox.preference;
 
 import java.util.ArrayList;
 
+import com.ceco.oreo.gravitybox.BitmapUtils;
 import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
 import com.ceco.oreo.gravitybox.ModStatusBar;
-import com.ceco.oreo.gravitybox.Utils;
 import com.ceco.oreo.gravitybox.adapters.IIconCheckListAdapterItem;
 import com.ceco.oreo.gravitybox.adapters.IconCheckListAdapter;
 
@@ -190,7 +189,7 @@ public class OngoingNotifPreference extends DialogPreference
                 try {
                     Drawable d = context.getDrawable(mIconId);
                     if (d != null) {
-                        Bitmap b = Utils.drawableToBitmap(d.mutate());
+                        Bitmap b = BitmapUtils.drawableToBitmap(d.mutate());
                         b = Bitmap.createScaledBitmap(b, mIconSizePx, mIconSizePx, true);
                         mIcon = new BitmapDrawable(mResources, b);
                     }
