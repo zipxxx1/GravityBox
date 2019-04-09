@@ -229,8 +229,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
             } else {
                 setTextColor(mDefaultColor);
             }
-        } else if (mController.getContainerType() == ContainerType.STATUSBAR &&
-                (flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+        } else if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
             setTextColor(colorInfo.iconTint);
         }
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
