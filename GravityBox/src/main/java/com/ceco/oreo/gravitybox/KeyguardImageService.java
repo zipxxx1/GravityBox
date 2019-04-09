@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox;
 
 import java.io.ByteArrayInputStream;
@@ -111,7 +110,7 @@ public class KeyguardImageService extends Service {
                     new ByteArrayInputStream(mOutputStream.toByteArray()));
             if (tmpBmp != null) {
                 if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                    tmpBmp = Utils.blurBitmap(this, tmpBmp, mPrefs.getInt(
+                    tmpBmp = BitmapUtils.blurBitmap(this, tmpBmp, mPrefs.getInt(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
                 }
                 tmpBmp.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(mKisImageFile));

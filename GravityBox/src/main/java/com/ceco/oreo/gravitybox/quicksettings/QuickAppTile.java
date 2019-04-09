@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox.quicksettings;
 
 import java.io.File;
@@ -20,6 +19,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.oreo.gravitybox.BitmapUtils;
 import com.ceco.oreo.gravitybox.ColorUtils;
 import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.GravityBoxSettings;
@@ -147,7 +147,7 @@ public class QuickAppTile extends QsTile {
                                 mGbContext.getPackageName()) : 0;
                 if (iconResId != 0) {
                     mAppIconResId = iconResId;
-                    appIcon = Utils.drawableToBitmap(mGbContext.getDrawable(iconResId));
+                    appIcon = BitmapUtils.drawableToBitmap(mGbContext.getDrawable(iconResId));
                 } else {
                     final String appIconPath = mIntent.getStringExtra("icon");
                     if (appIconPath != null) {
@@ -164,7 +164,7 @@ public class QuickAppTile extends QsTile {
                     ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
                     mAppName = ai.loadLabel(mPm).toString();
                     if (appIcon == null) {
-                        appIcon = Utils.drawableToBitmap(ai.loadIcon(mPm));
+                        appIcon = BitmapUtils.drawableToBitmap(ai.loadIcon(mPm));
                     }
                 } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                     mAppName = mIntent.getStringExtra("label");

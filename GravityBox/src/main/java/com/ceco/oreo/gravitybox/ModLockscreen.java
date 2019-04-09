@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox;
 
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -59,7 +57,6 @@ import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModLockscreen {
     private static final String CLASS_PATH = "com.android.keyguard";
@@ -826,7 +823,7 @@ public class ModLockscreen {
             if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_COLOR)) {
                 int color = mPrefs.getInt(
                       GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR, Color.BLACK);
-                mCustomBg = Utils.drawableToBitmap(new ColorDrawable(color));
+                mCustomBg = BitmapUtils.drawableToBitmap(new ColorDrawable(color));
             } else if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_IMAGE)) {
                 String wallpaperFile = mGbContext.getFilesDir() + "/lockwallpaper";
                 mCustomBg = BitmapFactory.decodeFile(wallpaperFile);
@@ -837,7 +834,7 @@ public class ModLockscreen {
             if (!bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN) &&
                     mCustomBg != null && mPrefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                mCustomBg = Utils.blurBitmap(mContext, mCustomBg, mPrefs.getInt(
+                mCustomBg = BitmapUtils.blurBitmap(mContext, mCustomBg, mPrefs.getInt(
                           GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
             }
             if (DEBUG) log("prepareCustomBackground: type=" + bgType);
