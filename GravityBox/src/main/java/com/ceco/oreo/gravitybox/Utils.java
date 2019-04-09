@@ -27,6 +27,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -52,9 +53,6 @@ import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.*;
-
-import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
-import static de.robv.android.xposed.XposedHelpers.findClass;
 
 public class Utils {
     private static final String TAG = "GB:Utils";
@@ -249,7 +247,7 @@ public class Utils {
 
     public static boolean isOxygenOsRom() {
         if (mIsOxygenOsRom == null) {
-            String version = SystemProp.get("ro.oxygen.version", "0");
+            String version = SystemPropertyProvider.get("ro.oxygen.version", "0");
             mIsOxygenOsRom = version != null && !version.isEmpty() &&  !"0".equals(version); 
         }
         return mIsOxygenOsRom;
@@ -425,10 +423,21 @@ public class Utils {
         }
     }
 
+    @SuppressLint("MissingPermission")
+    public static boolean supportsFingerprint(Context ctx) {
+        try {
+            FingerprintManager fpm = (FingerprintManager) ctx.getSystemService(Context.FINGERPRINT_SERVICE);
+            return (fpm != null && fpm.isHardwareDetected());
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error checkin for fingerprint support: ", t);
+            return false;
+        }
+    }
+
     public static String getDeviceCharacteristics() {
         if (mDeviceCharacteristics != null) return mDeviceCharacteristics;
 
-        mDeviceCharacteristics = SystemProp.get("ro.build.characteristics");
+        mDeviceCharacteristics = SystemPropertyProvider.get("ro.build.characteristics");
         return mDeviceCharacteristics;
     }
 
@@ -511,8 +520,8 @@ public class Utils {
             XposedHelpers.callMethod(ipm, "crash", "Hot reboot");
         } catch (Throwable t) {
             try {
-                SystemProp.set("ctl.restart", "surfaceflinger");
-                SystemProp.set("ctl.restart", "zygote");
+                SystemPropertyProvider.set("ctl.restart", "surfaceflinger");
+                SystemPropertyProvider.set("ctl.restart", "zygote");
             } catch (Throwable t2) {
                 GravityBox.log(TAG, t);
                 GravityBox.log(TAG, t2);
@@ -618,109 +627,5 @@ public class Utils {
             cursor.close();
         }
         return lookupKey;
-    }
-
-    static class SystemProp extends Utils {
-        
-        private SystemProp() {
-
-        }
-
-        // Get the value for the given key
-        // @param key: key to lookup
-        // @return null if the key isn't found
-        public static String get(String key) {
-            String ret;
-
-            try {
-                Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
-                ret = (String) callStaticMethod(classSystemProperties, "get", key);
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "SystemProp.get failed: ", t);
-                ret = null;
-            }
-            return ret;
-        }
-
-        // Get the value for the given key
-        // @param key: key to lookup
-        // @param def: default value to return
-        // @return if the key isn't found, return def if it isn't null, or an empty string otherwise
-        public static String get(String key, String def) {
-            String ret = def;
-            
-            try {
-                Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
-                ret = (String) callStaticMethod(classSystemProperties, "get", key, def);
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "SystemProp.get failed: ", t);
-                ret = def;
-            }
-            return ret;
-        }
-
-        // Get the value for the given key, and return as an integer
-        // @param key: key to lookup
-        // @param def: default value to return
-        // @return the key parsed as an integer, or def if the key isn't found or cannot be parsed
-        public static Integer getInt(String key, Integer def) {
-            Integer ret = def;
-            
-            try {
-                Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
-                ret = (Integer) callStaticMethod(classSystemProperties, "getInt", key, def);
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "SystemProp.getInt failed: ", t);
-                ret = def;
-            }
-            return ret;
-        }
-
-        // Get the value for the given key, and return as a long
-        // @param key: key to lookup
-        // @param def: default value to return
-        // @return the key parsed as a long, or def if the key isn't found or cannot be parsed
-        public static Long getLong(String key, Long def) {
-            Long ret = def;
-            
-            try {
-                Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
-                ret = (Long) callStaticMethod(classSystemProperties, "getLong", key, def);
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "SystemProp.getLong failed: ", t);
-                ret = def;
-            }
-            return ret;
-        }
-
-        // Get the value (case insensitive) for the given key, returned as a boolean
-        // Values 'n', 'no', '0', 'false' or 'off' are considered false
-        // Values 'y', 'yes', '1', 'true' or 'on' are considered true
-        // If the key does not exist, or has any other value, then the default result is returned
-        // @param key: key to lookup
-        // @param def: default value to return
-        // @return the key parsed as a boolean, or def if the key isn't found or cannot be parsed
-        public static Boolean getBoolean(String key, boolean def) {
-            Boolean ret = def;
-            
-            try {
-                Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
-                ret = (Boolean) callStaticMethod(classSystemProperties, "getBoolean", key, def);
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "SystemProp.getBoolean failed: ", t);
-                ret = def;
-            }
-            return ret;
-        }
-
-        // Set the value for the given key
-        public static void set(String key, String val) {
-            try{
-                Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
-                callStaticMethod(classSystemProperties, "set", key, val);
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "SystemProp.set failed: ", t);
-            }
-        }
     }
 }
