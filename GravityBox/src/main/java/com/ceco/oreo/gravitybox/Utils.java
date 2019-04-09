@@ -670,12 +670,6 @@ public class Utils {
         }
     }
 
-    public static int alphaPercentToInt(int percentAlpha) {
-        percentAlpha = Math.min(Math.max(percentAlpha, 0), 100);
-        float alpha = (float)percentAlpha / 100f;
-        return (alpha == 0 ? 255 : (int)(1-alpha * 255));
-    }
-
     public static int getCurrentUser() {
         try {
             return (int) XposedHelpers.callStaticMethod(ActivityManager.class, "getCurrentUser");
@@ -724,20 +718,6 @@ public class Utils {
             }
         }
         return mDefaultDialerPkgName;
-    }
-
-    public static int getColorFromStyleAttr(Context ctx, int attrId) {
-        if (attrId == 0)
-            return 0;
-
-        TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = ctx.getTheme();
-        theme.resolveAttribute(attrId, typedValue, true);
-        TypedArray arr = ctx.obtainStyledAttributes(
-                typedValue.data, new int[] { attrId });
-        int color = arr.getColor(0, -1);
-        arr.recycle();
-        return color;
     }
 
     public static boolean hasFieldOfType(Object o, String name, Class<?> type) {

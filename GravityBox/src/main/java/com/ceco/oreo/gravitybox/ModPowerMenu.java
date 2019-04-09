@@ -50,7 +50,6 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-import com.ceco.oreo.gravitybox.R;
 import com.ceco.oreo.gravitybox.adapters.*;
 
 public class ModPowerMenu {
@@ -395,7 +394,7 @@ public class ModPowerMenu {
                     list.remove(1);
                 }
                 final ContextThemeWrapper ctw = getThemedContext(context, android.R.style.Theme_Material_Dialog_Alert);
-                int color = Utils.getColorFromStyleAttr(ctw, android.R.attr.colorControlNormal);
+                int color = ColorUtils.getColorFromStyleAttr(ctw, android.R.attr.colorControlNormal);
                 mRebootIcon.setTint(color);
                 mRebootSoftIcon.setTint(color);
                 mRecoveryIcon.setTint(color);
@@ -493,7 +492,7 @@ public class ModPowerMenu {
 
                 ImageView icon = v.findViewById(res.getIdentifier(
                         "icon", "id", "android"));
-                mRebootIcon.setTint(Utils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
+                mRebootIcon.setTint(ColorUtils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
                 icon.setImageDrawable(mRebootIcon);
 
                 TextView messageView = v.findViewById(res.getIdentifier(
@@ -588,7 +587,7 @@ public class ModPowerMenu {
 
                 ImageView icon = v.findViewById(res.getIdentifier(
                         "icon", "id", "android"));
-                mExpandedDesktopIcon.setTint(Utils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
+                mExpandedDesktopIcon.setTint(ColorUtils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
                 icon.setImageDrawable(mExpandedDesktopIcon);
 
                 TextView messageView = v.findViewById(res.getIdentifier(
@@ -646,7 +645,7 @@ public class ModPowerMenu {
 
                 ImageView icon = v.findViewById(res.getIdentifier(
                         "icon", "id", "android"));
-                mScreenshotIcon.setTint(Utils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
+                mScreenshotIcon.setTint(ColorUtils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
                 icon.setImageDrawable(mScreenshotIcon);
 
                 TextView messageView = v.findViewById(res.getIdentifier(
@@ -711,7 +710,7 @@ public class ModPowerMenu {
 
                 ImageView icon = v.findViewById(res.getIdentifier(
                         "icon", "id", "android"));
-                mScreenrecordIcon.setTint(Utils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
+                mScreenrecordIcon.setTint(ColorUtils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
                 icon.setImageDrawable(mScreenrecordIcon);
 
                 TextView messageView = v.findViewById(res.getIdentifier(
