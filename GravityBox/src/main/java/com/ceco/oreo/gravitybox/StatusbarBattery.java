@@ -154,7 +154,11 @@ public class StatusbarBattery implements IconManagerListener {
         if (mBattery != null && getDrawable() != null) {
             try {
                 XposedHelpers.setBooleanField(getDrawable(), "mShowPercent", showPercentage);
-                mBattery.invalidate();
+                try {
+                    XposedHelpers.callMethod(getDrawable(), "postInvalidate");
+                } catch (Throwable t) {
+                    mBattery.postInvalidate();
+                }
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error setting percentage: ", t);
             }
