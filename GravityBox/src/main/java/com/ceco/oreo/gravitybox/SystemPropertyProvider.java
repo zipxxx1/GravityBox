@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,20 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox;
 
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
 import com.ceco.oreo.gravitybox.managers.TunerManager;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.provider.Settings;
@@ -33,6 +30,9 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+
+import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
 
 public class SystemPropertyProvider {
     private static final String TAG = "GB:SystemPropertyProvider";
@@ -66,21 +66,111 @@ public class SystemPropertyProvider {
         return (resId == 0 ? -1 : res.getInteger(resId));
     }
 
-    @SuppressLint("MissingPermission")
-    public static boolean supportsFingerprint(Context ctx) {
+    // System properties
+    /**
+     * Get the value for the given key
+     * @param key key to lookup
+     * @return null if the key isn't found
+     */
+    public static String get(String key) {
+        String ret = null;
         try {
-            FingerprintManager fpm = (FingerprintManager) ctx.getSystemService(Context.FINGERPRINT_SERVICE);
-            return (fpm != null && fpm.isHardwareDetected());
+            Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
+            ret = (String) callStaticMethod(classSystemProperties, "get", key);
         } catch (Throwable t) {
-            GravityBox.log(TAG, "Error checkin for fingerprint support: ", t);
-            return false;
+            GravityBox.log(TAG, "SystemProp.get failed:", t);
+        }
+        return ret;
+    }
+
+    /**
+     * Get the value for the given key
+     * @param key: key to lookup
+     * @param def: default value to return
+     * @return if the key isn't found, return def if it isn't null, or an empty string otherwise
+     */
+    public static String get(String key, String def) {
+        String ret = def;
+        try {
+            Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
+            ret = (String) callStaticMethod(classSystemProperties, "get", key, def);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "SystemProp.get failed: ", t);
+        }
+        return ret;
+    }
+
+    /**
+     * Get the value for the given key, and return as an integer
+     * @param key: key to lookup
+     * @param def: default value to return
+     * @return the key parsed as an integer, or def if the key isn't found or cannot be parsed
+     */
+    public static int getInt(String key, int def) {
+        int ret = def;
+        try {
+            Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
+            ret = (int) callStaticMethod(classSystemProperties, "getInt", key, def);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "SystemProp.getInt failed: ", t);
+        }
+        return ret;
+    }
+
+    /**
+     * Get the value for the given key, and return as a long
+     * @param key: key to lookup
+     * @param def: default value to return
+     * @return the key parsed as a long, or def if the key isn't found or cannot be parsed
+     */
+    public static long getLong(String key, long def) {
+        long ret = def;
+        try {
+            Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
+            ret = (long) callStaticMethod(classSystemProperties, "getLong", key, def);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "SystemProp.getLong failed: ", t);
+        }
+        return ret;
+    }
+
+    /**
+     * Get the value (case insensitive) for the given key, returned as a boolean<br>
+     *     Values 'n', 'no', '0', 'false' or 'off' are considered false<br>
+     *     Values 'y', 'yes', '1', 'true' or 'on' are considered true<br>
+     *     If the key does not exist, or has any other value, then the default result is returned
+     * @param key: key to lookup
+     * @param def: default value to return
+     * @return the key parsed as a boolean, or def if the key isn't found or cannot be parsed
+     */
+    public static boolean getBoolean(String key, boolean def) {
+        boolean ret = def;
+        try {
+            Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
+            ret = (boolean) callStaticMethod(classSystemProperties, "getBoolean", key, def);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "SystemProp.getBoolean failed: ", t);
+        }
+        return ret;
+    }
+
+    /**
+     * Set the value for the given key
+     */
+    public static void set(String key, String val) {
+        try{
+            Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
+            callStaticMethod(classSystemProperties, "set", key, val);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "SystemProp.set failed: ", t);
         }
     }
 
+    // SystemUI service hook that provides system properties to GravityBoxSettings
     public static void init(final XSharedPreferences prefs, final XSharedPreferences qhPrefs,
                             final XSharedPreferences tunerPrefs, final ClassLoader classLoader) {
         try {
-            final Class<?> classSystemUIService = XposedHelpers.findClass(
+            final Class<?> classSystemUIService = findClass(
                     "com.android.systemui.SystemUIService", classLoader);
             XposedHelpers.findAndHookMethod(classSystemUIService, "onCreate", new XC_MethodHook() {
                 @Override
@@ -131,7 +221,7 @@ public class SystemPropertyProvider {
                                     data.putInt("tunerTrialCountdown", Settings.System.getInt(cr,
                                             TunerManager.SETTING_TUNER_TRIAL_COUNTDOWN, 50));
                                     data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
-                                    data.putBoolean("supportsFingerprint", supportsFingerprint(context));
+                                    data.putBoolean("supportsFingerprint", Utils.supportsFingerprint(context));
                                     if (SysUiManagers.FingerprintLauncher != null) {
                                         data.putIntArray("fingerprintIds",
                                                 SysUiManagers.FingerprintLauncher.getEnrolledFingerprintIds());
