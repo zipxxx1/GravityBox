@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox;
 
 import java.io.File;
@@ -261,53 +260,54 @@ public class ModNavigationBar {
     };
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        mAlwaysShowMenukey = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_MENUKEY, false);
+
         try {
-            final Class<?> navbarViewClass = XposedHelpers.findClass(CLASS_NAVBAR_VIEW, classLoader);
-            final Class<?> navbarTransitionsClass = XposedHelpers.findClass(CLASS_NAVBAR_TRANSITIONS, classLoader);
+            mRecentsSingletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
+                    prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP, "0")),
+                    prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP+"_custom", null));
+        } catch (NumberFormatException nfe) {
+            GravityBox.log(TAG, "Invalid value for mRecentsSingletapAction");
+        }
+        try {
+            mRecentsLongpressAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
+                    prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
+                    prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
+        } catch (NumberFormatException nfe) {
+            GravityBox.log(TAG, "Invalid value for mRecentsLongpressAction");
+        }
+        try {
+            mRecentsDoubletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
+                    prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP, "0")),
+                    prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP+"_custom", null));
+        } catch (NumberFormatException nfe) {
+            GravityBox.log(TAG, "Invalid value for mRecentsDoubletapAction");
+        }
+        try {
+            mHomeLongpressAction = Integer.valueOf(
+                    prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS, "0"));
+        } catch (NumberFormatException nfe) {
+            GravityBox.log(TAG, "Invalid value for mHomeLongpressAction");
+        }
 
-            mAlwaysShowMenukey = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_MENUKEY, false);
+        mCustomKeyEnabled = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false);
+        mHwKeysEnabled = !prefs.getBoolean(GravityBoxSettings.PREF_KEY_HWKEYS_DISABLE, false);
+        mCursorControlEnabled = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_NAVBAR_CURSOR_CONTROL, false);
+        mCustomKeySwapEnabled = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP, false);
+        mHideImeSwitcher = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_HIDE_IME, false);
 
-            try {
-                mRecentsSingletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP, "0")),
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP+"_custom", null));
-                mRecentsLongpressAction = new ModHwKeys.HwKeyAction(0, null);
-                mRecentsLongpressAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
-                mRecentsDoubletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP, "0")),
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP+"_custom", null));
-                mHomeLongpressAction = Integer.valueOf(
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS, "0"));
-            } catch (NumberFormatException nfe) {
-                GravityBox.log(TAG, nfe);
-            }
+        mNavbarHeight = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT, 100);
+        mNavbarWidth = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_WIDTH, 100);
+        mAutofadeTimeoutMs = Build.VERSION.SDK_INT >= 27 ? 0 :
+                             prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_KEYS, 0) * 1000;
+        mAutofadeShowKeysPolicy = "NAVBAR"; //prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS, "NAVBAR");
 
-            mCustomKeyEnabled = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false);
-            mHwKeysEnabled = !prefs.getBoolean(GravityBoxSettings.PREF_KEY_HWKEYS_DISABLE, false);
-            mCursorControlEnabled = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_NAVBAR_CURSOR_CONTROL, false);
-            mCustomKeySwapEnabled = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP, false);
-            mHideImeSwitcher = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_HIDE_IME, false);
-
-            mNavbarHeight = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT, 100);
-            mNavbarWidth = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_WIDTH, 100);
-            mAutofadeTimeoutMs = Build.VERSION.SDK_INT >= 27 ? 0 :
-                                 prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_KEYS, 0) * 1000;
-            mAutofadeShowKeysPolicy = "NAVBAR"; //prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS, "NAVBAR");
-
-            // for HTC GPE devices having capacitive keys
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false)) {
-                try {
-                    Class<?> sbFlagClass = XposedHelpers.findClass(
-                            "com.android.systemui.statusbar.StatusBarFlag", classLoader);
-                    XposedHelpers.setStaticBooleanField(sbFlagClass, "supportHWNav", false);
-                } catch (Throwable ignore) { }
-            }
-
+        final Class<?> navbarViewClass;
+        try {
+            navbarViewClass = XposedHelpers.findClass(CLASS_NAVBAR_VIEW, classLoader);
             XposedBridge.hookAllConstructors(navbarViewClass, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -336,7 +336,12 @@ public class ModNavigationBar {
                     if (DEBUG) log("NavigationBarView constructed; Broadcast receiver registered");
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log("Error hooking navbar constructor, navbar tweaks disabled:", t);
+            return;
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(navbarViewClass, "setMenuVisibility",
                     boolean.class, boolean.class, new XC_MethodHook() {
                 @Override
@@ -344,7 +349,11 @@ public class ModNavigationBar {
                     setMenuKeyVisibility();
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log("Error hooking setMenuVisibility:", t);
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(CLASS_NAVBAR_INFLATER_VIEW, classLoader, "inflateLayout",
                     String.class, new XC_MethodHook() {
                 @Override
@@ -432,7 +441,11 @@ public class ModNavigationBar {
                     setCustomKeyVisibility();
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking inflateLayout:", t);
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(navbarViewClass, "setDisabledFlags",
                     int.class, boolean.class, new XC_MethodHook() {
                 @Override
@@ -454,7 +467,11 @@ public class ModNavigationBar {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking setDisabledFlags:", t);
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(navbarViewClass, "setNavigationIconHints",
                     int.class, boolean.class, new XC_MethodHook() {
                 @Override
@@ -474,9 +491,13 @@ public class ModNavigationBar {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking setNavigationIconHints:", t);
+        }
 
-            if (Build.VERSION.SDK_INT < 27) {
-                XposedHelpers.findAndHookMethod(navbarTransitionsClass, "applyMode",
+        if (Build.VERSION.SDK_INT < 27) {
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_NAVBAR_TRANSITIONS, classLoader, "applyMode",
                         int.class, boolean.class, boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) {
@@ -492,8 +513,12 @@ public class ModNavigationBar {
                         }
                     }
                 });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error hooking applyMode:", t);
             }
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(CLASS_KEY_BUTTON_RIPPLE, classLoader,
                     "getRipplePaint", new XC_MethodHook() {
                 @Override
@@ -503,7 +528,11 @@ public class ModNavigationBar {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking getRipplePaint:", t);
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(CLASS_KEY_BUTTON_VIEW, classLoader,
                     "sendEvent", int.class, int.class, long.class, new XC_MethodHook() {
                 @Override
@@ -521,7 +550,11 @@ public class ModNavigationBar {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking sendEvent:", t);
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(CLASS_NAVBAR_FRAGMENT, classLoader,
                     "shouldDisableNavbarGestures", new XC_MethodHook() {
                 @Override
@@ -531,33 +564,45 @@ public class ModNavigationBar {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking onHomeLongClick:", t);
+        }
 
-            if (Build.VERSION.SDK_INT < 27) {
-                XC_MethodHook touchEventHook = new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        if (mAutofadeTimeoutMs == 0) return;
-    
-                        int action = ((MotionEvent)param.args[0]).getAction();
-                        if (action == MotionEvent.ACTION_DOWN ||
-                                (action == MotionEvent.ACTION_OUTSIDE &&
-                                     "SCREEN".equals(mAutofadeShowKeysPolicy))) {
-                            mLastTouchMs = SystemClock.uptimeMillis();
-                            if (mBarModeHandler.hasMessages(MSG_LIGHTS_OUT)) {
-                                mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
-                            } else {
-                                setBarMode(mBarModeOriginal);
-                            }
-                            mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
+        if (Build.VERSION.SDK_INT < 27) {
+            XC_MethodHook touchEventHook = new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) {
+                    if (mAutofadeTimeoutMs == 0) return;
+
+                    int action = ((MotionEvent)param.args[0]).getAction();
+                    if (action == MotionEvent.ACTION_DOWN ||
+                            (action == MotionEvent.ACTION_OUTSIDE &&
+                                 "SCREEN".equals(mAutofadeShowKeysPolicy))) {
+                        mLastTouchMs = SystemClock.uptimeMillis();
+                        if (mBarModeHandler.hasMessages(MSG_LIGHTS_OUT)) {
+                            mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
+                        } else {
+                            setBarMode(mBarModeOriginal);
                         }
+                        mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
                     }
-                };
+                }
+            };
+            try {
                 XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
                         "onInterceptTouchEvent", MotionEvent.class, touchEventHook);
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error hooking onInterceptTouchEvent:", t);
+            }
+            try {
                 XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
                         "onTouchEvent", MotionEvent.class, touchEventHook);
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error hooking onTouchEvent:", t);
             }
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader,
                     "toggleSplitScreenMode", int.class, int.class, new XC_MethodHook() {
                 @Override
@@ -568,7 +613,11 @@ public class ModNavigationBar {
                     }
                 }
             });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking toggleSplitScreenMode:", t);
+        }
 
+        try {
             XposedHelpers.findAndHookMethod(CLASS_LIGHT_BAR_CTRL, classLoader,
                     "setIconTintInternal", float.class, new XC_MethodHook() {
                 @Override
@@ -584,8 +633,8 @@ public class ModNavigationBar {
                     }
                 }
             });
-        } catch(Throwable t) {
-            GravityBox.log(TAG, t);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking setIconTintInternal:", t);
         }
     }
 
