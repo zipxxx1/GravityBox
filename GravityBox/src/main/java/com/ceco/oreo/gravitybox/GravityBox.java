@@ -16,7 +16,7 @@ package com.ceco.oreo.gravitybox;
 
 import java.io.File;
 
-import com.ceco.oreo.gravitybox.managers.FingerprintLauncher;
+import com.ceco.oreo.gravitybox.managers.TunerManager;
 
 import android.os.Build;
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -98,6 +98,9 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage
             return;
         }
 
+        TunerManager.initUserItemsCache(tunerPrefs);
+        SystemWideResources.initResources(prefs, tunerPrefs);
+
         // Common
         ModInputMethod.initZygote(prefs);
         PhoneWrapper.initZygote(prefs);
@@ -144,7 +147,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage
         if (lpparam.packageName.equals("android") &&
                 lpparam.processName.equals("android")) {
             XposedBridge.log("GB:Is AOSP forced: " + Utils.isAospForced());
-            SystemWideResources.initResources(prefs, tunerPrefs);
             ModVolumeKeySkipTrack.initAndroid(prefs, lpparam.classLoader);
             ModHwKeys.initAndroid(prefs, lpparam.classLoader);
             ModExpandedDesktop.initAndroid(prefs, lpparam.classLoader);
@@ -167,7 +169,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage
             qhPrefs.reload();
             uncPrefs.reload();
             tunerPrefs.reload();
-            ModStatusBar.initResources(prefs, tunerPrefs);
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {

@@ -25,40 +25,36 @@ import de.robv.android.xposed.XSharedPreferences;
 
 public class SystemWideResources {
 
-    private static List<String> sSupportedResourceNames;
+    private static ResourceProxy sResourceProxy;
 
     public static void initResources(final XSharedPreferences prefs, final XSharedPreferences tunerPrefs) {
-        new ResourceProxy("android", new ResourceProxy.Interceptor() {
-            @Override
-            public List<String> getSupportedResourceNames() {
-                if (sSupportedResourceNames == null) {
-                    sSupportedResourceNames = new ArrayList<>();
-                    sSupportedResourceNames.addAll(Arrays.asList(
-                            "config_enableTranslucentDecor",
-                            "config_showNavigationBar",
-                            "config_unplugTurnsOnScreen",
-                            "config_defaultNotificationLedOff",
-                            "config_sip_wifi_only",
-                            "config_safe_media_volume_enabled",
-                            "reboot_to_reset_title",
-                            "config_allowAllRotations"
-                    ));
-                    // add overriden items from Advanced tuning if applicable
-                    if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
-                            !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
-                        TunerManager.addUserItemKeysToList(TunerManager.Category.FRAMEWORK,
-                                tunerPrefs, sSupportedResourceNames);
-                    }
-                }
-                return sSupportedResourceNames;
-            }
+        sResourceProxy = new ResourceProxy();
+        List<String> resourceNames;
 
+        // Framework resources
+        resourceNames = new ArrayList<>(Arrays.asList(
+                "config_enableTranslucentDecor",
+                "config_showNavigationBar",
+                "config_unplugTurnsOnScreen",
+                "config_defaultNotificationLedOff",
+                "config_sip_wifi_only",
+                "config_safe_media_volume_enabled",
+                "reboot_to_reset_title",
+                "config_allowAllRotations"
+        ));
+        // add overriden items from Advanced tuning if applicable
+        if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
+                !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
+            TunerManager.addUserItemKeysToList(TunerManager.Category.FRAMEWORK, resourceNames);
+        }
+        sResourceProxy.addInterceptor("android",
+                new ResourceProxy.Interceptor(resourceNames) {
             @Override
             public boolean onIntercept(ResourceProxy.ResourceSpec resourceSpec) {
                 // Advanced tuning has priority
                 if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
                         !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
-                    if (TunerManager.onIntercept(tunerPrefs, resourceSpec)) {
+                    if (TunerManager.onIntercept(resourceSpec)) {
                         return true;
                     }
                 }
@@ -124,6 +120,47 @@ public class SystemWideResources {
                     case "config_screenBrightnessDim":
                         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BRIGHTNESS_MASTER_SWITCH, false)) {
                             resourceSpec.value = prefs.getInt(GravityBoxSettings.PREF_KEY_SCREEN_DIM_LEVEL, 10);
+                            return true;
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
+
+        // SystemUI resources
+        resourceNames = new ArrayList<>(Arrays.asList(
+                "rounded_corner_content_padding",
+                "config_disableMenuKeyInLockScreen"
+        ));
+        if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
+                !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
+            TunerManager.addUserItemKeysToList(TunerManager.Category.SYSTEMUI, resourceNames);
+        }
+        sResourceProxy.addInterceptor("com.android.systemui",
+                new ResourceProxy.Interceptor(resourceNames) {
+            @Override
+            public boolean onIntercept(ResourceProxy.ResourceSpec resourceSpec) {
+                // Advanced tuning has priority
+                if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
+                        !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
+                    if (TunerManager.onIntercept(resourceSpec)) {
+                        return true;
+                    }
+                }
+
+                switch (resourceSpec.name) {
+                    case "rounded_corner_content_padding":
+                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CORNER_PADDING_REMOVE, false)) {
+                            resourceSpec.value = 0;
+                            return true;
+                        }
+                        break;
+                    case "config_disableMenuKeyInLockScreen":
+                        Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
+                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, "DEFAULT"));
+                        if (triState != Utils.TriState.DEFAULT) {
+                            resourceSpec.value = (triState == Utils.TriState.DISABLED);
                             return true;
                         }
                         break;

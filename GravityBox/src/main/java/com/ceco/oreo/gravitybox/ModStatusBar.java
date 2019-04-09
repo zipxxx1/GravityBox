@@ -12,19 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.ceco.oreo.gravitybox;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.ceco.oreo.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.oreo.gravitybox.managers.SysUiManagers;
-import com.ceco.oreo.gravitybox.managers.TunerManager;
 import com.ceco.oreo.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.oreo.gravitybox.shortcuts.AShortcut;
-import com.ceco.oreo.gravitybox.tuner.TunerMainActivity;
 import com.ceco.oreo.gravitybox.visualizer.VisualizerController;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -277,72 +273,6 @@ public class ModStatusBar {
                 GravityBox.log(TAG, t);
             }
         }
-    }
-
-    private static List<String> sSupportedResourceNames;
-    public static void initResources(final XSharedPreferences prefs, final XSharedPreferences tunerPrefs) {
-        new ResourceProxy(PACKAGE_NAME, new ResourceProxy.Interceptor() {
-            @Override
-            public List<String> getSupportedResourceNames() {
-                if (sSupportedResourceNames == null) {
-                    sSupportedResourceNames = new ArrayList<>();
-                    sSupportedResourceNames.addAll(Arrays.asList(
-                            "rounded_corner_content_padding",
-                            "config_disableMenuKeyInLockScreen"
-                    ));
-                    // add overriden items from Advanced tuning if applicable
-                    if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
-                            !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
-                        TunerManager.addUserItemKeysToList(TunerManager.Category.FRAMEWORK,
-                                tunerPrefs, sSupportedResourceNames);
-                        TunerManager.addUserItemKeysToList(TunerManager.Category.SYSTEMUI,
-                                tunerPrefs, sSupportedResourceNames);
-                    }
-                }
-                return sSupportedResourceNames;
-            }
-
-            @Override
-            public boolean onIntercept(ResourceProxy.ResourceSpec resourceSpec) {
-                // Advanced tuning has priority
-                if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
-                        !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
-                    if (TunerManager.onIntercept(tunerPrefs, resourceSpec)) {
-                        return true;
-                    }
-                }
-
-                if (!resourceSpec.pkgName.equals(PACKAGE_NAME))
-                    return false;
-
-                switch (resourceSpec.name) {
-                    case "rounded_corner_content_padding":
-                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CORNER_PADDING_REMOVE, false)) {
-                            resourceSpec.value = 0;
-                            return true;
-                        }
-                        break;
-                    case "config_disableMenuKeyInLockScreen":
-                        Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
-                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, "DEFAULT"));
-                        if (triState != Utils.TriState.DEFAULT) {
-                            resourceSpec.value = (triState == Utils.TriState.DISABLED);
-                            return true;
-                        }
-                        break;
-                }
-                return false;
-            }
-        });
-
-        // EdXposed unsupported
-        /*
-        try {
-            StatusbarSignalCluster.initResources(prefs, resparam);
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
-        */
     }
 
     public static int getStatusBarState() {
