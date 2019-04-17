@@ -556,94 +556,59 @@ public class ModLockscreen {
 
         // bottom actions
         try {
-            if (!Utils.isSamsungRom()) {
-                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                        "updateLeftAffordanceIcon", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(final MethodHookParam param) {
-                        ImageView v = (ImageView) XposedHelpers.getObjectField(
-                                param.thisObject, "mLeftAffordanceView");
-                        if (mLeftActionHidden) {
-                            v.setVisibility(View.GONE);
-                        } else if (mLeftAction != null) {
-                            v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
-                                    View.VISIBLE : View.GONE);
-                            if (mLeftActionDrawableOrig == null) {
-                                mLeftActionDrawableOrig = v.getDrawable();
+            XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                    "onFinishInflate", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) {
+                    final View camView = (View) XposedHelpers.getObjectField(param.thisObject, "mRightAffordanceView");
+                    camView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+                        if (camView.getTag() == null || camView.getVisibility() != (int)camView.getTag()) {
+                            camView.setTag(camView.getVisibility());
+                            ImageView v;
+                            v = (ImageView) camView;
+                            if (mRightActionHidden) {
+                                v.setVisibility(View.GONE);
+                            } else if (mRightAction != null) {
+                                v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
+                                        View.VISIBLE : View.GONE);
+                                if (mRightActionDrawableOrig == null) {
+                                    mRightActionDrawableOrig = v.getDrawable();
+                                }
+                                v.setImageDrawable(mRightAction.getAppIcon());
+                                v.setContentDescription(mRightAction.getAppName());
+                            } else if (mRightActionDrawableOrig != null) {
+                                v.setImageDrawable(mRightActionDrawableOrig);
+                                mRightActionDrawableOrig = null;
                             }
-                            v.setImageDrawable(mLeftAction.getAppIcon());
-                            v.setContentDescription(mLeftAction.getAppName());
-                        } else if (mLeftActionDrawableOrig != null) {
-                            v.setImageDrawable(mLeftActionDrawableOrig);
-                            mLeftActionDrawableOrig = null;
+                            v = (ImageView) XposedHelpers.getObjectField(
+                                    param.thisObject, "mLeftAffordanceView");
+                            if (mLeftActionHidden) {
+                                v.setVisibility(View.GONE);
+                            } else if (mLeftAction != null) {
+                                v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
+                                        View.VISIBLE : View.GONE);
+                                if (mLeftActionDrawableOrig == null) {
+                                    mLeftActionDrawableOrig = v.getDrawable();
+                                }
+                                v.setImageDrawable(mLeftAction.getAppIcon());
+                                v.setContentDescription(mLeftAction.getAppName());
+                            } else if (mLeftActionDrawableOrig != null) {
+                                v.setImageDrawable(mLeftActionDrawableOrig);
+                                mLeftActionDrawableOrig = null;
+                            }
                         }
-                    }
-                });
-
-                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                        "launchLeftAffordance", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                        if (mLeftAction != null) {
-                            SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
-                            param.setResult(null);
-                        }
-                    }
-                });
-            } else {
-                XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                        "launchPhone", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                        if (mLeftAction != null) {
-                            SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
-                            param.setResult(null);
-                        }
-                    }
-                });
-            }
+                    });
+                }
+            });
 
             XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                     "updateCameraVisibility", new XC_MethodHook() {
+                    Utils.isSamsungRom() ? "launchPhone" : "launchLeftAffordance",
+                    new XC_MethodHook() {
                 @Override
-                protected void afterHookedMethod(final MethodHookParam param) {
-                    ImageView v;
-                    if (Utils.isSamsungRom()) {
-                        v = (ImageView) XposedHelpers.getObjectField(
-                                param.thisObject, "mLeftAffordanceView");
-                        if (mLeftActionHidden) {
-                            v.setVisibility(View.GONE);
-                        } else if (mLeftAction != null) {
-                            v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
-                                    View.VISIBLE : View.GONE);
-                            if (mLeftActionDrawableOrig == null) {
-                                mLeftActionDrawableOrig = v.getDrawable();
-                            }
-                            v.setImageDrawable(mLeftAction.getAppIcon());
-                            v.setContentDescription(mLeftAction.getAppName());
-                        } else if (mLeftActionDrawableOrig != null) {
-                            v.setImageDrawable(mLeftActionDrawableOrig);
-                            mLeftActionDrawableOrig = null;
-                        }
-                        v = (ImageView) XposedHelpers.getObjectField(
-                                param.thisObject, "mRightAffordanceView");
-                    } else {
-                        v = (ImageView) XposedHelpers.getObjectField(
-                               param.thisObject, "mRightAffordanceView");
-                    }
-                    if (mRightActionHidden) {
-                        v.setVisibility(View.GONE);
-                    } else if (mRightAction != null) {
-                        v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
-                                View.VISIBLE : View.GONE);
-                        if (mRightActionDrawableOrig == null) {
-                            mRightActionDrawableOrig = v.getDrawable();
-                        }
-                        v.setImageDrawable(mRightAction.getAppIcon());
-                        v.setContentDescription(mRightAction.getAppName());
-                    } else if (mRightActionDrawableOrig != null) {
-                        v.setImageDrawable(mRightActionDrawableOrig);
-                        mRightActionDrawableOrig = null;
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mLeftAction != null) {
+                        SysUiManagers.AppLauncher.startActivity(mContext, mLeftAction.getIntent());
+                        param.setResult(null);
                     }
                 }
             });
@@ -658,20 +623,6 @@ public class ModLockscreen {
                     }
                 }
             });
-
-            XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
-                    "onVisibilityChanged", View.class, int.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) {
-                    if (param.thisObject == param.args[0] &&
-                            (int)param.args[1] == View.VISIBLE &&
-                            (mLeftAction != null || mLeftActionDrawableOrig != null)) {
-                        XposedHelpers.callMethod(param.thisObject, Utils.isSamsungRom() ?
-                                "updateCameraVisibility" : "updateLeftAffordanceIcon");
-                    }
-                }
-            });
-
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error setting up bottom actions:", t);
         }
