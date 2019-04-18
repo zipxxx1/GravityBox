@@ -106,6 +106,7 @@ public class ModLockscreen {
     private static Drawable mRightActionDrawableOrig;
     private static boolean mLeftActionHidden;
     private static boolean mRightActionHidden;
+    private static boolean mKgBottomAreaLayoutChanging;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -560,43 +561,44 @@ public class ModLockscreen {
                     "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
-                    final View camView = (View) XposedHelpers.getObjectField(param.thisObject, "mRightAffordanceView");
-                    camView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-                        if (camView.getTag() == null || camView.getVisibility() != (int)camView.getTag()) {
-                            camView.setTag(camView.getVisibility());
-                            ImageView v;
-                            v = (ImageView) camView;
+                    ((View)param.thisObject).getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+                        if (mKgBottomAreaLayoutChanging) return;
+                        mKgBottomAreaLayoutChanging = true;
+                        final ImageView camView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mRightAffordanceView");
+                        if (camView != null) {
                             if (mRightActionHidden) {
-                                v.setVisibility(View.GONE);
+                                camView.setVisibility(View.GONE);
                             } else if (mRightAction != null) {
-                                v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
+                                camView.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
                                         View.VISIBLE : View.GONE);
                                 if (mRightActionDrawableOrig == null) {
-                                    mRightActionDrawableOrig = v.getDrawable();
+                                    mRightActionDrawableOrig = camView.getDrawable();
                                 }
-                                v.setImageDrawable(mRightAction.getAppIcon());
-                                v.setContentDescription(mRightAction.getAppName());
+                                camView.setImageDrawable(mRightAction.getAppIcon());
+                                camView.setContentDescription(mRightAction.getAppName());
                             } else if (mRightActionDrawableOrig != null) {
-                                v.setImageDrawable(mRightActionDrawableOrig);
+                                camView.setImageDrawable(mRightActionDrawableOrig);
                                 mRightActionDrawableOrig = null;
                             }
-                            v = (ImageView) XposedHelpers.getObjectField(
-                                    param.thisObject, "mLeftAffordanceView");
+                        }
+                        final ImageView phoneView = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mLeftAffordanceView");
+                        if (phoneView != null) {
                             if (mLeftActionHidden) {
-                                v.setVisibility(View.GONE);
+                                phoneView.setVisibility(View.GONE);
                             } else if (mLeftAction != null) {
-                                v.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
+                                phoneView.setVisibility(!XposedHelpers.getBooleanField(param.thisObject, "mDozing") ?
                                         View.VISIBLE : View.GONE);
                                 if (mLeftActionDrawableOrig == null) {
-                                    mLeftActionDrawableOrig = v.getDrawable();
+                                    mLeftActionDrawableOrig = phoneView.getDrawable();
                                 }
-                                v.setImageDrawable(mLeftAction.getAppIcon());
-                                v.setContentDescription(mLeftAction.getAppName());
+                                phoneView.setImageDrawable(mLeftAction.getAppIcon());
+                                phoneView.setContentDescription(mLeftAction.getAppName());
                             } else if (mLeftActionDrawableOrig != null) {
-                                v.setImageDrawable(mLeftActionDrawableOrig);
+                                phoneView.setImageDrawable(mLeftActionDrawableOrig);
                                 mLeftActionDrawableOrig = null;
                             }
                         }
+                        mKgBottomAreaLayoutChanging = false;
                     });
                 }
             });
