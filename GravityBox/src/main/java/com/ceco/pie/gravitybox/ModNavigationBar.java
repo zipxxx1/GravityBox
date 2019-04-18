@@ -602,10 +602,14 @@ public class ModNavigationBar {
             }
 
             // find potential placeholder for custom key
+            int oosNavResId = mResources.getIdentifier("nav", "id", PACKAGE_NAME);
             mNavbarViewInfo[index].customKeyParent = endsGroup;
             int pos1 = 0;
             int pos2 = endsGroup.getChildCount()-1;
-            if (endsGroup.getChildAt(pos1) instanceof Space) {
+            if (endsGroup.getChildAt(0).getClass().getName().equals(CLASS_KEY_BUTTON_VIEW) &&
+                    endsGroup.getChildAt(0).getId() == oosNavResId) {
+                mNavbarViewInfo[index].customKeyPlaceHolder = endsGroup.getChildAt(0);
+            } else if (endsGroup.getChildAt(pos1) instanceof Space) {
                 mNavbarViewInfo[index].customKeyPlaceHolder = endsGroup.getChildAt(pos1);
             } else if (endsGroup.getChildAt(pos2) instanceof Space) {
                 mNavbarViewInfo[index].customKeyPlaceHolder = endsGroup.getChildAt(pos2);
