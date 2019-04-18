@@ -1,3 +1,15 @@
+Changelog 9.0.0-beta-8 - 18/04/2019
+--------------------------------------
+- TrafficMeter: fixed visibility in lock screen
+- Advanced power menu: fixed scary "Factory data reset" dialog title when rebooting to recovery
+- Key actions: fixed default home key long-press action triggering after custom action when navbar master switch is disabled
+- Lockscreen:
+--- fixed SystemUI crash loop in case of using very large images for custom lockscreen background
+--- fixed custom bottom actions not working on some systems due to ART optimizations
+- Media: improved compatibility of More music volume steps feature
+- Navbar: fixed navbar layout in case of using custom navbar key on OxygenOS
+- Updated Italian translations (thanks to ghost-45)
+
 Changelog 9.0.0-beta-7 - 03/04/2019
 --------------------------------------
 - Resource replacement:
