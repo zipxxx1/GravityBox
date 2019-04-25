@@ -1847,7 +1847,7 @@
 
     <!-- OOS: call recording -->
     <string name="pref_oos_call_recording_title">Enable call recording</string>
-    <string name="pref_oos_call_recording_summary">Note, that call recording may be illegal in your country</string>
+    <string name="pref_oos_call_recording_summary">Note, that call recording may be illegal in your country (requires reboot)</string>
 
     <!-- OOS: disable dash charging sound -->
     <string name="pref_oos_dash_sound_disable_title">Disable Dash charging sound</string>

@@ -879,7 +879,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_BATTERY_TWEAKS_ENABLED,
             PREF_KEY_VISUALIZER_ENABLE,
             PREF_KEY_CORNER_PADDING_REMOVE,
-            PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS
+            PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS,
+            PREF_KEY_OOS_CALL_RECORDING
     ));
 
     private static final List<String> customAppKeys = new ArrayList<>(Arrays.asList(

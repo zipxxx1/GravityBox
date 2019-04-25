@@ -1782,7 +1782,7 @@
 
     <!-- OOS: call recording -->
     <string name="pref_oos_call_recording_title">Povolit nahrávání hovorů</string>
-    <string name="pref_oos_call_recording_summary">Pozor, nahrávání hovorů může být ilegální ve Vaší zemi</string>
+    <string name="pref_oos_call_recording_summary">Pozor, nahrávání hovorů může být ilegální ve Vaší zemi (vyžaduje restart)</string>
 
     <!-- OOS: disable dash charging sound -->
     <string name="pref_oos_dash_sound_disable_title">Vypnout zvuk Dash nabíjení</string>
