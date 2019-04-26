@@ -39,6 +39,7 @@ public class ModVolumePanel {
     private static Object mVolumePanel;
     private static boolean mVolForceRingControl;
     private static boolean mVolumesLinked;
+    private static boolean mVolumePanelExpanded;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -57,6 +58,10 @@ public class ModVolumePanel {
                     mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_LINKED, true);
                     if (DEBUG) log("mVolumesLinked set to: " + mVolumesLinked);
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED)) {
+                    mVolumePanelExpanded = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED, false);
+                    if (DEBUG) log("mVolumePanelExpanded set to: " + mVolumesLinked);
+                }
             }
         }
     };
@@ -68,6 +73,7 @@ public class ModVolumePanel {
             mVolForceRingControl = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_VOL_FORCE_RING_CONTROL, false);
             mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
+            mVolumePanelExpanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_EXPANDED, false);
 
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
                 @Override
@@ -95,7 +101,14 @@ public class ModVolumePanel {
             XC_MethodHook shouldBeVisibleHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
-                    if (XposedHelpers.getAdditionalInstanceField(
+                    int streamType = XposedHelpers.getIntField(param.args[0], "stream");
+                    if (mVolumePanelExpanded && (streamType == AudioManager.STREAM_MUSIC ||
+                            streamType == AudioManager.STREAM_RING ||
+                            streamType == AudioManager.STREAM_NOTIFICATION ||
+                            streamType == AudioManager.STREAM_ALARM ||
+                            streamType == AudioManager.STREAM_VOICE_CALL)) {
+                        param.setResult(true);
+                    } else if (XposedHelpers.getAdditionalInstanceField(
                             param.args[0], "gbNotifSlider") != null) {
                         boolean visible = (boolean) param.getResult();
                         visible &= !mVolumesLinked;

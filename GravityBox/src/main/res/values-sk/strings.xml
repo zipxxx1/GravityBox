@@ -1942,4 +1942,8 @@
     <string name="pref_link_volumes_title">Spojiť hlasitosť vyzváňania a notifikácií</string>
     <string name="pref_link_volumes_summary">Ak je vypnuté, umožňuje nastaviť úrovne hlasitosti zvlášť pre vyzváňanie a notifikácie</string>
 
+    <!-- Expanded volume panel -->
+    <string name="pref_volume_panel_expanded_title">Rozšírený panel hlasitosti</string>
+    <string name="pref_volume_panel_expanded_summary">Zobrazí ovládanie všetkých bežných zvukových kanálov, aj keď nie sú momentálne aktívne</string>
+
 </resources>

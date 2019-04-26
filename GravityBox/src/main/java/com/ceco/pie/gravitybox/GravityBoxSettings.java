@@ -313,11 +313,13 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_VOL_FORCE_RING_CONTROL = "pref_vol_force_ring_control";
     public static final String PREF_KEY_SAFE_MEDIA_VOLUME = "pref_safe_media_volume2";
     public static final String PREF_KEY_LINK_VOLUMES = "pref_link_volumes";
+    public static final String PREF_KEY_VOL_EXPANDED = "pref_volume_panel_expanded";
     public static final String ACTION_PREF_MEDIA_CONTROL_CHANGED =
             "gravitybox.intent.action.MEDIA_CONTROL_CHANGED";
     public static final String EXTRA_VOL_FORCE_RING_CONTROL = "volForceRingControl";
     public static final String EXTRA_VOL_MUSIC_CONTROLS = "extraVolMusicControls";
     public static final String EXTRA_VOL_LINKED = "linked";
+    public static final String EXTRA_VOL_EXPANDED = "volPanelExpanded";
 
     public static final String PREF_CAT_HWKEY_ACTIONS = "pref_cat_hwkey_actions";
     public static final String PREF_CAT_HWKEY_MENU = "pref_cat_hwkey_menu";
@@ -3364,6 +3366,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_STATUSBAR_MAX_NOTIF_ICONS)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_CHANGED);
                 intent.putExtra(EXTRA_SB_MAX_NOTIF_ICONS, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_VOL_EXPANDED)) {
+                intent.setAction(ACTION_PREF_MEDIA_CONTROL_CHANGED);
+                intent.putExtra(EXTRA_VOL_EXPANDED, prefs.getBoolean(key, false));
             }
 
             if (intent.getAction() != null) {
