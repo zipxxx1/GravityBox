@@ -104,7 +104,7 @@ public class ModVolumePanel {
                     int streamType = XposedHelpers.getIntField(param.args[0], "stream");
                     if (mVolumePanelExpanded && (streamType == AudioManager.STREAM_MUSIC ||
                             streamType == AudioManager.STREAM_RING ||
-                            streamType == AudioManager.STREAM_NOTIFICATION ||
+                            (streamType == AudioManager.STREAM_NOTIFICATION && !mVolumesLinked) ||
                             streamType == AudioManager.STREAM_ALARM ||
                             streamType == AudioManager.STREAM_VOICE_CALL)) {
                         param.setResult(true);
