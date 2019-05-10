@@ -115,11 +115,11 @@ public class ModVolumePanel {
                     if (mVolumePanelExpanded && (streamType == AudioManager.STREAM_MUSIC ||
                             streamType == AudioManager.STREAM_RING ||
                             (streamType == AudioManager.STREAM_NOTIFICATION &&
-                                    shouldShowNotificationRow(visible)) ||
+                                    shouldShowNotificationRow(true)) ||
                             streamType == AudioManager.STREAM_ALARM ||
                             streamType == AudioManager.STREAM_VOICE_CALL ||
                             (streamType == AudioManager.STREAM_SYSTEM &&
-                                    shouldShowSystemRow(visible)))) {
+                                    shouldShowSystemRow(true)))) {
                         param.setResult(true);
                     } else if (streamType == AudioManager.STREAM_NOTIFICATION) {
                         param.setResult(shouldShowNotificationRow(visible));
@@ -171,18 +171,13 @@ public class ModVolumePanel {
     }
 
     private static boolean shouldShowNotificationRow(boolean visible) {
-        return visible & (mNotificationStreamRowAddedByGb ?
+        return visible && (mNotificationStreamRowAddedByGb ?
                 mRingNotifVolumesLinked == ModAudio.StreamLink.UNLINKED :
                 mRingNotifVolumesLinked != ModAudio.StreamLink.LINKED);
     }
 
     private static boolean shouldShowSystemRow(boolean visible) {
-        switch (mRingSystemVolumesLinked) {
-            default:
-            case DEFAULT: return visible;
-            case LINKED: return false;
-            case UNLINKED: return mVolumePanelExpanded;
-        }
+        return visible && (mRingSystemVolumesLinked != ModAudio.StreamLink.LINKED);
     }
 
     private static boolean isRingerSliderEnabled() {
