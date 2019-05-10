@@ -1949,4 +1949,7 @@
     <string name="volumes_linked">Hlasitosti spojené</string>
     <string name="volumes_unlinked">Hlasitosti rozdelené</string>
 
+    <!-- Link ringtone & system volumes -->
+    <string name="pref_link_ringer_system_volumes_title">Spojiť hlasitosť vyzváňania a systémových zvukov</string>
+
 </resources>

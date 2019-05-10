@@ -2048,4 +2048,7 @@
     <string name="volumes_linked">Volumes linked</string>
     <string name="volumes_unlinked">Volumes unlinked</string>
 
+    <!-- Link ringtone & system volumes -->
+    <string name="pref_link_ringer_system_volumes_title">Link ringtone &amp; system volumes</string>
+
 </resources>

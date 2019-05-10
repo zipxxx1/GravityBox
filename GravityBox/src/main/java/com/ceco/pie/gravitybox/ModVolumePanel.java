@@ -39,6 +39,7 @@ public class ModVolumePanel {
     private static Object mVolumePanel;
     private static boolean mVolForceRingControl;
     private static ModAudio.StreamLink mRingNotifVolumesLinked;
+    private static ModAudio.StreamLink mRingSystemVolumesLinked;
     private static boolean mVolumePanelExpanded;
     private static boolean mNotificationStreamRowAddedByGb;
 
@@ -60,6 +61,11 @@ public class ModVolumePanel {
                             intent.getStringExtra(GravityBoxSettings.EXTRA_VOL_LINKED));
                     if (DEBUG) log("mRingNotifVolumesLinked set to: " + mRingNotifVolumesLinked);
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_RINGER_SYSTEM_LINKED)) {
+                    mRingSystemVolumesLinked = ModAudio.StreamLink.valueOf(
+                            intent.getStringExtra(GravityBoxSettings.EXTRA_VOL_RINGER_SYSTEM_LINKED));
+                    if (DEBUG) log("mRingSystemVolumesLinked set to: " + mRingSystemVolumesLinked);
+                }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED)) {
                     mVolumePanelExpanded = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED, false);
                     if (DEBUG) log("mVolumePanelExpanded set to: " + mVolumePanelExpanded);
@@ -76,6 +82,8 @@ public class ModVolumePanel {
                     GravityBoxSettings.PREF_KEY_VOL_FORCE_RING_CONTROL, false);
             mRingNotifVolumesLinked = ModAudio.StreamLink.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_LINK_VOLUMES, "DEFAULT"));
+            mRingSystemVolumesLinked = ModAudio.StreamLink.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_LINK_RINGER_SYSTEM_VOLUMES, "DEFAULT"));
             mVolumePanelExpanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_EXPANDED, false);
 
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
@@ -109,10 +117,14 @@ public class ModVolumePanel {
                             (streamType == AudioManager.STREAM_NOTIFICATION &&
                                     shouldShowNotificationRow(visible)) ||
                             streamType == AudioManager.STREAM_ALARM ||
-                            streamType == AudioManager.STREAM_VOICE_CALL)) {
+                            streamType == AudioManager.STREAM_VOICE_CALL ||
+                            (streamType == AudioManager.STREAM_SYSTEM &&
+                                    shouldShowSystemRow(visible)))) {
                         param.setResult(true);
                     } else if (streamType == AudioManager.STREAM_NOTIFICATION) {
                         param.setResult(shouldShowNotificationRow(visible));
+                    } else if (streamType == AudioManager.STREAM_SYSTEM) {
+                        param.setResult(shouldShowSystemRow(visible));
                     }
                 }
             };
@@ -162,6 +174,15 @@ public class ModVolumePanel {
         return visible & (mNotificationStreamRowAddedByGb ?
                 mRingNotifVolumesLinked == ModAudio.StreamLink.UNLINKED :
                 mRingNotifVolumesLinked != ModAudio.StreamLink.LINKED);
+    }
+
+    private static boolean shouldShowSystemRow(boolean visible) {
+        switch (mRingSystemVolumesLinked) {
+            default:
+            case DEFAULT: return visible;
+            case LINKED: return false;
+            case UNLINKED: return mVolumePanelExpanded;
+        }
     }
 
     private static boolean isRingerSliderEnabled() {

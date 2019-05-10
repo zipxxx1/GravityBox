@@ -2032,6 +2032,13 @@
             android:entryValues="@array/volume_link_values"
             android:defaultValue="DEFAULT" />
 
+        <ListPreference
+            android:key="pref_link_ringer_system_volumes"
+            android:title="@string/pref_link_ringer_system_volumes_title"
+            android:entries="@array/volume_link_entries"
+            android:entryValues="@array/volume_link_values"
+            android:defaultValue="DEFAULT" />
+
         <CheckBoxPreference
             android:key="pref_volume_panel_expanded"
             android:title="@string/pref_volume_panel_expanded_title"

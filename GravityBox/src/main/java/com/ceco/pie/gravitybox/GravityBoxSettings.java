@@ -313,12 +313,14 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_VOL_FORCE_RING_CONTROL = "pref_vol_force_ring_control";
     public static final String PREF_KEY_SAFE_MEDIA_VOLUME = "pref_safe_media_volume2";
     public static final String PREF_KEY_LINK_VOLUMES = "pref_link_volumes_v2";
+    public static final String PREF_KEY_LINK_RINGER_SYSTEM_VOLUMES = "pref_link_ringer_system_volumes";
     public static final String PREF_KEY_VOL_EXPANDED = "pref_volume_panel_expanded";
     public static final String ACTION_PREF_MEDIA_CONTROL_CHANGED =
             "gravitybox.intent.action.MEDIA_CONTROL_CHANGED";
     public static final String EXTRA_VOL_FORCE_RING_CONTROL = "volForceRingControl";
     public static final String EXTRA_VOL_MUSIC_CONTROLS = "extraVolMusicControls";
     public static final String EXTRA_VOL_LINKED = "linked";
+    public static final String EXTRA_VOL_RINGER_SYSTEM_LINKED = "linkedRingerSystem";
     public static final String EXTRA_VOL_EXPANDED = "volPanelExpanded";
 
     public static final String PREF_CAT_HWKEY_ACTIONS = "pref_cat_hwkey_actions";
@@ -1304,6 +1306,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private CheckBoxPreference mPrefDataTrafficActiveMobileOnly;
         private ListPreference mPrefDataTrafficDisplayMode;
         private ListPreference mPrefLinkVolumes;
+        private ListPreference mPrefLinkRingerSystemVolumes;
         private PreferenceScreen mPrefCatAppLauncher;
         private AppPickerPreference[] mPrefAppLauncherSlot;
         private File callerPhotoFile;
@@ -1492,6 +1495,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefMusicVolumeSteps = (CheckBoxPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS);
             mPrefMusicVolumeStepsValue = (SeekBarPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS_VALUE);
             mPrefLinkVolumes = (ListPreference) findPreference(PREF_KEY_LINK_VOLUMES);
+            mPrefLinkRingerSystemVolumes = (ListPreference) findPreference(PREF_KEY_LINK_RINGER_SYSTEM_VOLUMES);
             mPrefTranclucentDecor =  (ListPreference) findPreference(PREF_KEY_TRANSLUCENT_DECOR);
 
             mPrefExpandedDesktop = (ListPreference) findPreference(PREF_KEY_EXPANDED_DESKTOP);
@@ -1630,6 +1634,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             if (!Utils.hasTelephonySupport(getActivity())) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
                 mPrefCatMedia.removePreference(mPrefLinkVolumes);
+                mPrefCatMedia.removePreference(mPrefLinkRingerSystemVolumes);
             }
             // TODO: launcher tweaks? probably not...
             //if (!(Utils.isAppInstalled(getActivity(), APP_GOOGLE_NOW) &&
@@ -2320,6 +2325,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefLinkVolumes.setSummary(mPrefLinkVolumes.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_LINK_RINGER_SYSTEM_VOLUMES)) {
+                mPrefLinkRingerSystemVolumes.setSummary(mPrefLinkRingerSystemVolumes.getEntry());
+            }
+
             if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_MODE)) {
                 mPrefDataTrafficMode.setSummary(mPrefDataTrafficMode.getEntry());
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficPosition);
@@ -2739,6 +2748,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_MEDIA_CONTROL_CHANGED);
                 intent.putExtra(EXTRA_VOL_LINKED,
                         prefs.getString(PREF_KEY_LINK_VOLUMES, "DEFAULT"));
+            } else if (key.equals(PREF_KEY_LINK_RINGER_SYSTEM_VOLUMES)) {
+                    intent.setAction(ACTION_PREF_MEDIA_CONTROL_CHANGED);
+                    intent.putExtra(EXTRA_VOL_RINGER_SYSTEM_LINKED,
+                            prefs.getString(PREF_KEY_LINK_RINGER_SYSTEM_VOLUMES, "DEFAULT"));
             } else if (key.equals(PREF_KEY_NOTIF_EXPAND_ALL)) {
                 intent.setAction(ACTION_NOTIF_EXPAND_ALL_CHANGED);
                 intent.putExtra(EXTRA_NOTIF_EXPAND_ALL,
