@@ -312,7 +312,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_MUSIC_VOLUME_STEPS_VALUE = "pref_music_volume_steps_value";
     public static final String PREF_KEY_VOL_FORCE_RING_CONTROL = "pref_vol_force_ring_control";
     public static final String PREF_KEY_SAFE_MEDIA_VOLUME = "pref_safe_media_volume2";
-    public static final String PREF_KEY_LINK_VOLUMES = "pref_link_volumes";
+    public static final String PREF_KEY_LINK_VOLUMES = "pref_link_volumes_v2";
     public static final String PREF_KEY_VOL_EXPANDED = "pref_volume_panel_expanded";
     public static final String ACTION_PREF_MEDIA_CONTROL_CHANGED =
             "gravitybox.intent.action.MEDIA_CONTROL_CHANGED";
@@ -1303,7 +1303,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private SeekBarPreference mPrefDataTrafficOmniAutohideTh;
         private CheckBoxPreference mPrefDataTrafficActiveMobileOnly;
         private ListPreference mPrefDataTrafficDisplayMode;
-        private CheckBoxPreference mPrefLinkVolumes;
+        private ListPreference mPrefLinkVolumes;
         private PreferenceScreen mPrefCatAppLauncher;
         private AppPickerPreference[] mPrefAppLauncherSlot;
         private File callerPhotoFile;
@@ -1491,7 +1491,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             mPrefCatMedia = (PreferenceScreen) findPreference(PREF_CAT_KEY_MEDIA);
             mPrefMusicVolumeSteps = (CheckBoxPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS);
             mPrefMusicVolumeStepsValue = (SeekBarPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS_VALUE);
-            mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
+            mPrefLinkVolumes = (ListPreference) findPreference(PREF_KEY_LINK_VOLUMES);
             mPrefTranclucentDecor =  (ListPreference) findPreference(PREF_KEY_TRANSLUCENT_DECOR);
 
             mPrefExpandedDesktop = (ListPreference) findPreference(PREF_KEY_EXPANDED_DESKTOP);
@@ -2316,6 +2316,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 mPrefScreenrecordSize.setSummary(mPrefScreenrecordSize.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_LINK_VOLUMES)) {
+                mPrefLinkVolumes.setSummary(mPrefLinkVolumes.getEntry());
+            }
+
             if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_MODE)) {
                 mPrefDataTrafficMode.setSummary(mPrefDataTrafficMode.getEntry());
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficPosition);
@@ -2734,7 +2738,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_LINK_VOLUMES)) {
                 intent.setAction(ACTION_PREF_MEDIA_CONTROL_CHANGED);
                 intent.putExtra(EXTRA_VOL_LINKED,
-                        prefs.getBoolean(PREF_KEY_LINK_VOLUMES, true));
+                        prefs.getString(PREF_KEY_LINK_VOLUMES, "DEFAULT"));
             } else if (key.equals(PREF_KEY_NOTIF_EXPAND_ALL)) {
                 intent.setAction(ACTION_NOTIF_EXPAND_ALL_CHANGED);
                 intent.putExtra(EXTRA_NOTIF_EXPAND_ALL,
