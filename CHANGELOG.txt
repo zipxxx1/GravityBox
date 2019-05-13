@@ -1,3 +1,19 @@
+Changelog 8.5.4 - 13/05/2019
+--------------------------------------
+- Fixed circle battery and percent text tinting when lockscreen is in dark mode
+- Fixed stock battery icon not refreshing when switching between Stock and Stock with percentage
+- Fixed SystemUI crash loop in case of using very large images for custom lockscreen background
+- Navbar: fixed expanded desktop behavior when navbar tweaks master switch is off
+- ExpandedDesktop: improved layout when navigation bar hidden by expanded desktop
+- Display: fixed "Unplug turns on screen" not working on some devices
+- Key actions: fixed default home key long-press action triggering after custom action when navbar master switch is disabled
+- Media: improved compatibility of More music volume steps feature
+- Phone: make missed call LED workaround optional
+- Advanced tuning: fixed main screen preferences not fitting the screen on devices with large font size
+- About: PayPal donation now allows custom amount in case premium is already unlocked
+- About: removed link to Google+ community
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 8.5.3 - 17/03/2019
 --------------------------------------
 - Improved Fingerprint Launcher compatibility
