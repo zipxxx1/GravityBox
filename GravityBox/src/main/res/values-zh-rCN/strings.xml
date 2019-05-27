@@ -2019,11 +2019,36 @@
 
     <!-- Clock position -->
     <string name="pref_clock_position_title">时钟位置</string>
+    <string name="pref_clock_position_header_title">时钟位置标题</string>
     <string name="clock_pos_left">左</string>
     <string name="clock_pos_right">右</string>
     <string name="clock_pos_center">中心</string>
+	
+    <!-- Battery percent text - statusbar header -->
+    <string name="battery_percent_text_statusbar_header_title">在状态栏标题中显示</string>
+    <string name="battery_percent_text_statusbar_header_summary">在状态栏标题中显示电池百分比文本.
+        仅适用于自定义电池类型的情况下.</string>
+
+    <!-- Battery indicator - statusbar header -->
+    <string name="pref_battery_style_header_title">应用于状态栏标题</string>
+    <string name="pref_battery_style_header_summary">将所选的电池指示器也应用于状态栏标题</string>
+
+    <!-- Statusbar: max notification icons -->
+    <string name="pref_sb_max_notif_icons_title">更多通知图标数量</string>
+    <string name="pref_sb_max_notif_icons_summary">尝试移除状态栏中可见通知图标数量的限制</string>
 
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">合并铃声音量与通知音量</string>
+	
+    <!-- Expanded volume panel -->
+    <string name="pref_volume_panel_expanded_title">扩展的音量面板</string>
+    <string name="pref_volume_panel_expanded_summary">显示所有常规类型的音量滑块,即使它们当前未处于活动状态</string>
+
+    <!-- Link/unlink audio stream volumes -->
+    <string name="volumes_linked">音量已连接</string>
+    <string name="volumes_unlinked">音量已移除</string>
+
+    <!-- Link ringtone & system volumes -->
+    <string name="pref_link_ringer_system_volumes_title">链接铃声&amp;系统音量</string>
 
 </resources>
