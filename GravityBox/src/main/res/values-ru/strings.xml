@@ -2031,6 +2031,10 @@
     <string name="pref_battery_style_header_summary">Применение выбранного индикатора батареи и к заголовку строки состояния</string>
 
     <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Связать громкость</string>
+    <string name="volumes_linked">Связанные уровни громкости</string>
+    <string name="volumes_unlinked">Несвязанные уровни громкости</string>
+
+    <!-- Link ringtone & system volumes -->
+    <string name="pref_link_ringer_system_volumes_title">Связать громкость мелодии и системных звуков</string>
 
 </resources>
