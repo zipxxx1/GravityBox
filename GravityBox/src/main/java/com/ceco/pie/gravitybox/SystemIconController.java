@@ -32,9 +32,16 @@ public class SystemIconController implements BroadcastSubReceiver {
     private static final String TAG = "GB:SystemIconController";
     private static final boolean DEBUG = false;
 
-    private static final String CLASS_PHONE_STATUSBAR_POLICY = 
+    private static final String CLASS_PHONE_STATUSBAR_POLICY =
             "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_STATUS_BAR_ICON = "com.android.internal.statusbar.StatusBarIcon";
+    private static final String CLASS_SB_ICON_CONTROLLER =
+            "com.android.systemui.statusbar.phone.StatusBarIconControllerImpl";
+
+    public static final String SLOT_BLUETOOTH = "bluetooth";
+    public static final String SLOT_VOLUME = "volume";
+    public static final String SLOT_DATA_SAVER = "data_saver";
+    public static final String SLOT_ALARM_CLOCK = "alarm_clock";
 
     private enum BtMode { DEFAULT, CONNECTED, HIDDEN }
 
@@ -45,6 +52,7 @@ public class SystemIconController implements BroadcastSubReceiver {
     private BtMode mBtMode;
     private boolean mHideVibrateIcon;
     private boolean mHideDataSaverIcon;
+    private boolean mHideAlarmIcon;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -57,6 +65,9 @@ public class SystemIconController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_STATUSBAR_HIDE_VIBRATE_ICON, false);
         mHideDataSaverIcon = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_STATUSBAR_HIDE_DATA_SAVER_ICON, false);
+        mHideAlarmIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH, true) &&
+                prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
+
         createHooks(classLoader);
     }
 
@@ -67,11 +78,6 @@ public class SystemIconController implements BroadcastSubReceiver {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     mSbPolicy = param.thisObject;
-                    mIconCtrl = XposedHelpers.getObjectField(param.thisObject, "mIconController");
-                    mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    Class<?> PolicyManagerClazz = XposedHelpers.findClass("android.net.NetworkPolicyManager", classLoader);
-                    mPolicyManager = XposedHelpers.callStaticMethod(PolicyManagerClazz, "from", mContext);
-
                     if (DEBUG) log ("Phone statusbar policy created");
                 }
             });
@@ -80,11 +86,15 @@ public class SystemIconController implements BroadcastSubReceiver {
         }
 
         try {
-            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR_POLICY, classLoader, 
-                    "updateBluetooth", new XC_MethodHook() {
+            XposedBridge.hookAllConstructors(XposedHelpers.findClass(
+                    CLASS_SB_ICON_CONTROLLER, classLoader), new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
-                    updateBtIconVisibility();
+                    mIconCtrl = param.thisObject;
+                    mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    Class<?> PolicyManagerClazz = XposedHelpers.findClass("android.net.NetworkPolicyManager", classLoader);
+                    mPolicyManager = XposedHelpers.callStaticMethod(PolicyManagerClazz, "from", mContext);
+                    if (DEBUG) log ("Phone statusbar icon controller created");
                 }
             });
         } catch (Throwable t) {
@@ -92,89 +102,80 @@ public class SystemIconController implements BroadcastSubReceiver {
         }
 
         try {
-            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR_POLICY, classLoader, 
-                    "updateVolumeZen", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) {
-                    updateVibrateIcon();
-                }
-            });
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
-        
-        try {
-            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR_POLICY, classLoader, 
-                    "onDataSaverChanged", boolean.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_SB_ICON_CONTROLLER, classLoader,
+                    "setIconVisibility", String.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
-                    boolean isDataSaving = (boolean) param.args[0];
-                    boolean show = !mHideDataSaverIcon && isDataSaving;
-                    param.args[0] = show;
+                    boolean origVisibility = (boolean)param.args[1];
+                    boolean newVisibility = onSetIconVisibility((String)param.args[0], origVisibility);
+                    if (DEBUG) log("setIconVisibility: slot=" + param.args[0] +
+                            "; orig=" + origVisibility + "; new=" + newVisibility);
+                    param.args[1] = newVisibility;
                 }
             });
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
     }
-    
-    private void updateDataSaverIcon() {
-        if (mIconCtrl == null || mPolicyManager == null) return;
-        
-        try {
-            boolean isDataSaving = (boolean) XposedHelpers.callMethod(mPolicyManager, "getRestrictBackground");
-            boolean show = !mHideDataSaverIcon && isDataSaving;
-            XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "data_saver", show);
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
+
+    private boolean onSetIconVisibility(String slot, boolean visible) {
+        switch (slot) {
+            case SLOT_BLUETOOTH:
+                return getBtIconVisibility(visible);
+            case SLOT_VOLUME:
+                return getVolumeIconVisibility(visible);
+            case SLOT_DATA_SAVER:
+                return (visible && !mHideDataSaverIcon);
+            case SLOT_ALARM_CLOCK:
+                return (visible && !mHideAlarmIcon);
+            default:
+                return visible;
         }
     }
 
     @SuppressLint("MissingPermission")
-    private void updateBtIconVisibility() {
-        if (mIconCtrl == null || mBtMode == null) return;
+    private boolean getBtIconVisibility(boolean defaultVisibility) {
+        boolean visible = defaultVisibility;
+        if (mIconCtrl == null || mBtMode == null)
+            return visible;
 
-        try {
-            BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-            if (btAdapter != null) {
-                boolean enabled = btAdapter.getState() == BluetoothAdapter.STATE_ON;
-                boolean connected = (Integer) XposedHelpers.callMethod(btAdapter, "getConnectionState") ==
-                        BluetoothAdapter.STATE_CONNECTED;
-                boolean visible;
-                switch (mBtMode) {
-                    default:
-                    case DEFAULT: visible = enabled; break;
-                    case CONNECTED: visible = connected; break;
-                    case HIDDEN: visible = false; break;
-                }
-                if (DEBUG) log("updateBtIconVisibility: enabled=" + enabled + "; connected=" + connected +
-                        "; visible=" + visible);
-                XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "bluetooth", visible);
-            }
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
+        switch (mBtMode) {
+            case DEFAULT:
+            case CONNECTED:
+                try {
+                    BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+                    if (btAdapter != null) {
+                        boolean enabled = btAdapter.getState() == BluetoothAdapter.STATE_ON;
+                        boolean connected = (Integer) XposedHelpers.callMethod(btAdapter,
+                                "getConnectionState") ==  BluetoothAdapter.STATE_CONNECTED;
+                        visible = (mBtMode == BtMode.DEFAULT && enabled) ||
+                                (mBtMode == BtMode.CONNECTED && connected);
+                    }
+                } catch (Throwable t) { GravityBox.log(TAG, t); }
+                break;
+            case HIDDEN:
+                visible = false;
+                break;
         }
+
+        return visible;
     }
 
-    private void updateVibrateIcon() {
-        if (mIconCtrl == null || mContext == null || Utils.isOxygenOsRom()) return;
+    private boolean getVolumeIconVisibility(boolean defaultVisibility) {
+        boolean visible = defaultVisibility;
+        if (mIconCtrl == null || mContext == null || Utils.isOxygenOsRom())
+            return visible;
+
         try {
             AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
             if (am.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE) {
-                XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", "volume", !mHideVibrateIcon);
+                visible &= !mHideVibrateIcon;
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
-    }
 
-    private void updateVolumeZen() {
-        if (mSbPolicy == null) return;
-        try {
-            XposedHelpers.callMethod(mSbPolicy, "updateVolumeZen");
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
-        }
+        return visible;
     }
 
     public void setIcon(String slot, int iconId) {
@@ -222,6 +223,47 @@ public class SystemIconController implements BroadcastSubReceiver {
         }
     }
 
+    private void updateBluetooth() {
+        if (mSbPolicy == null) return;
+        try {
+            XposedHelpers.callMethod(mSbPolicy, "updateBluetooth");
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
+    private void updateVolumeZen() {
+        if (mSbPolicy == null) return;
+        try {
+            XposedHelpers.setBooleanField(mSbPolicy, "mVolumeVisible",
+                    !XposedHelpers.getBooleanField(mSbPolicy, "mVolumeVisible"));
+        } catch (Throwable ignore) {}
+        try {
+            XposedHelpers.callMethod(mSbPolicy, "updateVolumeZen");
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
+    private void updateDataSaver() {
+        if (mIconCtrl == null || mPolicyManager == null) return;
+        try {
+            boolean isDataSaving = (boolean) XposedHelpers.callMethod(mPolicyManager, "getRestrictBackground");
+            XposedHelpers.callMethod(mIconCtrl, "setIconVisibility", SLOT_DATA_SAVER, isDataSaving);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
+    private void updateAlarm() {
+        if (mSbPolicy == null) return;
+        try {
+            XposedHelpers.callMethod(mSbPolicy, "updateAlarm");
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+    }
+
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_SYSTEM_ICON_CHANGED)) {
@@ -231,7 +273,7 @@ public class SystemIconController implements BroadcastSubReceiver {
                 } catch (Throwable t) { 
                     GravityBox.log(TAG, "Invalid Mode value: ", t);
                 }
-                updateBtIconVisibility();
+                updateBluetooth();
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_HIDE_VIBRATE_ICON)) {
                 mHideVibrateIcon = intent.getBooleanExtra(
@@ -241,7 +283,12 @@ public class SystemIconController implements BroadcastSubReceiver {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_HIDE_DATA_SAVER_ICON)) {
                 mHideDataSaverIcon = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_SB_HIDE_DATA_SAVER_ICON, false);
-                updateDataSaverIcon();
+                updateDataSaver();
+            }
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_ALARM_HIDE)) {
+                mHideAlarmIcon = intent.getBooleanExtra(GravityBoxSettings.EXTRA_ALARM_HIDE, false);
+                updateAlarm();
             }
         }
     }

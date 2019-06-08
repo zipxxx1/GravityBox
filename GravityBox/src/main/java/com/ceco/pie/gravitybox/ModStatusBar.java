@@ -27,7 +27,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -66,7 +65,6 @@ public class ModStatusBar {
     private static final String TAG = "GB:ModStatusBar";
     public static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
-    private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
     private static final String CLASS_STATUSBAR_WM = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
@@ -112,8 +110,6 @@ public class ModStatusBar {
     private static Object mStatusBar;
     private static ViewGroup mStatusBarView;
     private static Context mContext;
-    private static boolean mAlarmHide = false;
-    private static Object mPhoneStatusBarPolicy;
     private static SettingsObserver mSettingsObserver;
     private static String mOngoingNotif;
     private static TrafficMeterAbstract mTrafficMeter;
@@ -182,12 +178,6 @@ public class ModStatusBar {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK)) {
                     QuickStatusBarHeader.setClockLongpressLink(
                         intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_ALARM_HIDE)) {
-                    mAlarmHide = intent.getBooleanExtra(GravityBoxSettings.EXTRA_ALARM_HIDE, false);
-                    if (mPhoneStatusBarPolicy != null) {
-                        XposedHelpers.callMethod(mPhoneStatusBarPolicy, "updateAlarm");
-                    }
                 }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_BRIGHTNESS)) {
@@ -546,8 +536,6 @@ public class ModStatusBar {
 
             final Class<?> statusBarClass =
                     XposedHelpers.findClass(CLASS_STATUSBAR, classLoader);
-            final Class<?> phoneStatusBarPolicyClass = 
-                    XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_POLICY, classLoader);
             final Class<?> expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
             final Class<?> statusBarWmClass = XposedHelpers.findClass(CLASS_STATUSBAR_WM, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
@@ -560,7 +548,6 @@ public class ModStatusBar {
                 mBroadcastSubReceivers.add(mVisualizerCtrl);
             }
 
-            mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
             QuickStatusBarHeader.setClockLongpressLink(prefs.getString(
                     GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK, null));
             mBrightnessControlEnabled = prefs.getBoolean(
@@ -578,13 +565,6 @@ public class ModStatusBar {
             } catch (NumberFormatException nfe) {
                 GravityBox.log(TAG, "Invalid value for mHomeLongpressAction");
             }
-
-            XposedBridge.hookAllConstructors(phoneStatusBarPolicyClass, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) {
-                    mPhoneStatusBarPolicy = param.thisObject;
-                }
-            });
 
             XposedHelpers.findAndHookMethod(statusBarClass, "makeStatusBarView", new XC_MethodHook() {
                 @Override
@@ -814,25 +794,7 @@ public class ModStatusBar {
                 GravityBox.log(TAG, "Error setting up always expanded notifications", t);
             }
 
-            // Hide alarm icon
-            try {
-                XposedHelpers.findAndHookMethod(phoneStatusBarPolicyClass, "updateAlarm", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) {
-                        Object iconCtrl = XposedHelpers.getObjectField(param.thisObject, "mIconController");
-                        if (iconCtrl != null) {
-                            AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-                            boolean alarmSet = (alarmManager.getNextAlarmClock() != null);
-                            XposedHelpers.callMethod(iconCtrl, "setIconVisibility", "alarm_clock",
-                                    (alarmSet && !mAlarmHide));
-                        }
-                    }
-                });
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "Error setting up Hide alarm icon", t);
-            }
-
-            // Status bar Bluetooth icon policy
+            // Status bar system icon policy
             mSystemIconController = new SystemIconController(classLoader, prefs);
             mBroadcastSubReceivers.add(mSystemIconController);
 
