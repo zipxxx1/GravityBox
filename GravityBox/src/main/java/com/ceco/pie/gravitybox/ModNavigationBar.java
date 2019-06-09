@@ -609,6 +609,12 @@ public class ModNavigationBar {
             if (endsGroup.getChildAt(0).getClass().getName().equals(CLASS_KEY_BUTTON_VIEW) &&
                     endsGroup.getChildAt(0).getId() == oosNavResId) {
                 mNavbarViewInfo[index].customKeyPlaceHolder = endsGroup.getChildAt(0);
+                ViewGroup.LayoutParams lp = mNavbarViewInfo[index].customKeyPlaceHolder.getLayoutParams();
+                if (lp.width > 0) {
+                    mNavbarViewInfo[index].customKeySize = lp.width;
+                } else if (lp.height > 0) {
+                    mNavbarViewInfo[index].customKeySize = lp.height;
+                }
             } else if (endsGroup.getChildAt(pos1) instanceof Space) {
                 mNavbarViewInfo[index].customKeyPlaceHolder = endsGroup.getChildAt(pos1);
             } else if (endsGroup.getChildAt(pos2) instanceof Space) {
@@ -625,17 +631,21 @@ public class ModNavigationBar {
 
             // determine key size
             boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
-            final int sizeResId = mResources.getIdentifier(hasVerticalNavbar ?
-                    "navigation_side_padding" : "navigation_extra_key_width", "dimen", PACKAGE_NAME);
-            final int size = sizeResId == 0 ?
-                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                            36, mResources.getDisplayMetrics()) :
-                    mResources.getDimensionPixelSize(sizeResId);
-            if (DEBUG) log("App key view minimum size=" + size);
-            mNavbarViewInfo[index].customKeySize = size;
+            if (mNavbarViewInfo[index].customKeySize == 0) {
+                final int sizeResId = mResources.getIdentifier(hasVerticalNavbar ?
+                        "navigation_side_padding" : "navigation_extra_key_width", "dimen", PACKAGE_NAME);
+                final int size = sizeResId == 0 ?
+                        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                                36, mResources.getDisplayMetrics()) :
+                        mResources.getDimensionPixelSize(sizeResId);
+                if (DEBUG) log("App key view minimum size=" + size);
+                mNavbarViewInfo[index].customKeySize = size;
+            }
             mNavbarViewInfo[index].isVertical = (index == 1 && hasVerticalNavbar);
-            int w = mNavbarViewInfo[index].isVertical ? ViewGroup.LayoutParams.MATCH_PARENT : size;
-            int h = mNavbarViewInfo[index].isVertical ? size : ViewGroup.LayoutParams.MATCH_PARENT;
+            int w = mNavbarViewInfo[index].isVertical ?
+                    ViewGroup.LayoutParams.MATCH_PARENT : mNavbarViewInfo[index].customKeySize;
+            int h = mNavbarViewInfo[index].isVertical ?
+                    mNavbarViewInfo[index].customKeySize : ViewGroup.LayoutParams.MATCH_PARENT;
 
             ViewGroup.LayoutParams lp;
 
