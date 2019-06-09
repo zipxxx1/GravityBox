@@ -87,7 +87,8 @@ public class QsPanel implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0"));
         mScaleCorrection = mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0);
         mHideBrightness = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS, false);
-        mBrightnessIconEnabled = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BRIGHTNESS_ICON, false);
+        mBrightnessIconEnabled = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BRIGHTNESS_ICON,
+                Utils.isOxygenOsRom());
         mLockedTileIndicator = LockedTileIndicator.valueOf(
                 mPrefs.getString(GravityBoxSettings.PREF_KEY_QS_LOCKED_TILE_INDICATOR, "DIM"));
         if (DEBUG) log("initPreferences: mNumColumns=" + mNumColumns +
@@ -324,18 +325,23 @@ public class QsPanel implements BroadcastSubReceiver {
         }
 
         try {
-            XC_MethodHook updateIconHook = new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_BRIGHTNESS_CTRL, classLoader,
+                    "registerCallbacks", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (DEBUG) log("BrightnessController: updateIcon");
+                    if (DEBUG) log("BrightnessController: registerCallbacks");
                     ImageView icon = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mIcon");
                     if (icon != null) {
+                        if (Utils.isOxygenOsRom()) {
+                            View parent = (View) icon.getParent();
+                            parent.setVisibility(mHideBrightness ? View.GONE : View.VISIBLE);
+                        }
                         if (!icon.hasOnClickListeners()) {
                             icon.setOnClickListener(mBrightnessIconOnClick);
                             icon.setOnLongClickListener(mBrightnessIconOnLongClick);
                             icon.setBackground(Utils.getGbContext(
                                     icon.getContext()).getDrawable(
-                                            R.drawable.ripple));
+                                    R.drawable.ripple));
                         }
                         boolean automatic = XposedHelpers.getBooleanField(param.thisObject, "mAutomatic");
                         int resId = icon.getResources().getIdentifier(
@@ -347,14 +353,7 @@ public class QsPanel implements BroadcastSubReceiver {
                         icon.setVisibility(mBrightnessIconEnabled ? View.VISIBLE : View.GONE);
                     }
                 }
-            };
-            if (Utils.isSamsungRom()) {
-                XposedHelpers.findAndHookMethod(CLASS_BRIGHTNESS_CTRL, classLoader,
-                        "updateSlider", int.class, boolean.class, updateIconHook);
-            } else {
-                XposedHelpers.findAndHookMethod(CLASS_BRIGHTNESS_CTRL, classLoader,
-                        "updateIcon", boolean.class, updateIconHook);
-            }
+            });
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
