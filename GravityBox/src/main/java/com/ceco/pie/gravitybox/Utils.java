@@ -84,6 +84,7 @@ public class Utils {
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     private static Boolean mIsOxygenOsRom = null;
+    private static Boolean mIsOxygenOs7Rom = null;
     private static Boolean mIsFileBasedEncrypted = null;
 
     // Device features
@@ -249,9 +250,18 @@ public class Utils {
     public static boolean isOxygenOsRom() {
         if (mIsOxygenOsRom == null) {
             String version = SystemPropertyProvider.get("ro.oxygen.version", "0");
-            mIsOxygenOsRom = version != null && !version.isEmpty() &&  !"0".equals(version); 
+            mIsOxygenOsRom = version != null && !version.isEmpty() &&  !"0".equals(version);
+            mIsOxygenOsRom |= isOxygenOs7Rom();
         }
         return mIsOxygenOsRom;
+    }
+
+    public static boolean isOxygenOs7Rom() {
+        if (mIsOxygenOs7Rom == null) {
+            mIsOxygenOs7Rom = "OnePlus".equals(Build.MANUFACTURER) &&
+                    Build.DISPLAY != null && Build.DISPLAY.startsWith("GM19");
+        }
+        return mIsOxygenOs7Rom;
     }
 
     public static boolean isFileBasedEncrypted(Context con) {
