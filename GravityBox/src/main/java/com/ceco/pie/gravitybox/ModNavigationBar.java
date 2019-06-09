@@ -42,6 +42,7 @@ import android.widget.RelativeLayout;
 import android.widget.Space;
 import android.widget.ImageView.ScaleType;
 
+import androidx.core.widget.ImageViewCompat;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -142,9 +143,12 @@ public class ModNavigationBar {
             final int intermediateColor = ColorUtils.compositeColors(
                     ColorUtils.blendAlpha(mDarkColor, intensity),
                     ColorUtils.blendAlpha(mLightColor, (1f - intensity)));
-            if (customKey != null) customKey.setImageTintList(ColorStateList.valueOf(intermediateColor));
-            if (dpadLeft != null) dpadLeft.setImageTintList(ColorStateList.valueOf(intermediateColor));
-            if (dpadRight != null) dpadRight.setImageTintList(ColorStateList.valueOf(intermediateColor));
+            setKeyButtonViewColorStateList(ColorStateList.valueOf(intermediateColor));
+        }
+        void setKeyButtonViewColorStateList(ColorStateList csl) {
+            if (customKey != null) customKey.setImageTintList(csl);
+            if (dpadLeft != null) dpadLeft.setImageTintList(csl);
+            if (dpadRight != null) dpadRight.setImageTintList(csl);
         }
     }
 
@@ -510,24 +514,47 @@ public class ModNavigationBar {
             GravityBox.log(TAG, "Error hooking toggleSplitScreenMode:", t);
         }
 
-        try {
-            XposedHelpers.findAndHookMethod(CLASS_LIGHT_BAR_CTRL, classLoader,
-                    "setIconTintInternal", float.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) {
-                    if (mNavbarColorsEnabled)
-                        return;
+        if (Utils.isOxygenOsRom() && XposedHelpers.findMethodExactIfExists(
+                CLASS_KEY_BUTTON_VIEW, classLoader, "updateThemeColorInternal") != null) {
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_KEY_BUTTON_VIEW, classLoader,
+                        "updateThemeColorInternal", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) {
+                        if (mNavbarColorsEnabled)
+                            return;
 
-                    float intensity = (float)param.args[0];
-                    for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
-                        if (navbarViewInfo != null) {
-                            navbarViewInfo.setDarkIntensity(mNavigationBarView.getContext(), intensity);
+                        ColorStateList csl = ImageViewCompat.getImageTintList((ImageView) param.thisObject);
+                        for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
+                            if (navbarViewInfo != null) {
+                                navbarViewInfo.setKeyButtonViewColorStateList(csl);
+                            }
                         }
                     }
-                }
-            });
-        } catch (Throwable t) {
-            GravityBox.log(TAG, "Error hooking setIconTintInternal:", t);
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error hooking updateThemeColorInternal:", t);
+            }
+        } else {
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_LIGHT_BAR_CTRL, classLoader,
+                        "setIconTintInternal", float.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) {
+                        if (mNavbarColorsEnabled)
+                            return;
+
+                        float intensity = (float) param.args[0];
+                        for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
+                            if (navbarViewInfo != null) {
+                                navbarViewInfo.setDarkIntensity(mNavigationBarView.getContext(), intensity);
+                            }
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, "Error hooking setIconTintInternal:", t);
+            }
         }
     }
 
