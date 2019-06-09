@@ -84,6 +84,7 @@ public class ModNavigationBar {
     private static PowerManager mPm;
     private static boolean mUpdateDisabledFlags;
     private static boolean mUpdateIconHints;
+    private static Integer mRecentsKeyCodeOriginal;
 
     // Navbar dimensions
     private static int mNavbarHeight;
@@ -863,8 +864,13 @@ public class ModNavigationBar {
             final boolean hasAction = recentsKeyHasAction();
             for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
                 if (navbarViewInfo != null && navbarViewInfo.recentsKey != null) {
+                    if (mRecentsKeyCodeOriginal == null) {
+                        mRecentsKeyCodeOriginal = XposedHelpers.getIntField(
+                                navbarViewInfo.recentsKey, "mCode");
+                    }
                     XposedHelpers.setIntField(navbarViewInfo.recentsKey,
-                            "mCode", hasAction ? KeyEvent.KEYCODE_APP_SWITCH : 0);
+                            "mCode", hasAction ? KeyEvent.KEYCODE_APP_SWITCH :
+                                    mRecentsKeyCodeOriginal);
                 }
             }
         } catch (Throwable t) {
