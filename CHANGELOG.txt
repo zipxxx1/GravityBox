@@ -1,3 +1,21 @@
+Changelog 9.1.0 - 10/06/2019
+--------------------------------------
+- Oneplus 7/7Pro OxygenOs fixes and adjustments:
+--- fixed OnePlus 7/7Pro OOS system detection logic
+--- fixed theming of QuickSettings tile detail dialogs
+--- fixed navigation bar custom key layout (for standard navigation bar only)
+--- fixed dynamic color tinting of GravityBox navigation bar elements
+--- fixed option for hiding brightness slider in QS panel
+--- fixed recents key default single-press action not working when navbar master switch is enabled
+--- fixed double vibrations when using Key actions
+--- fixed muting Dialpad tones during Quiet Hours
+--- Visualizer: adjusted margins of header elements in dimmed screen
+- StatusBar: redesigned and improved logic related to hiding system icons
+--- fixes mysterious Alarm icon showing on some systems
+- Keys: improved reliability of Torch on power long-press
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 9.0.0-beta-11 - 17/05/2019
 --------------------------------------
 - Fixed volume panel sliders visibility logic
