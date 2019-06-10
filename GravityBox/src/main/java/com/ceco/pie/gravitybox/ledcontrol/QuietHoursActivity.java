@@ -70,6 +70,11 @@ public class QuietHoursActivity extends GravityBoxActivity {
     public static final String EXTRA_QH_MUTE_SYSTEM_VIBE = "qhMuteSystemVibe";
     public static final String EXTRA_QH_RINGER_WHITELIST = "qhRingerWhitelist";
 
+    public static void broadcastSettings(Context ctx) {
+        SharedPreferences prefs = SettingsManager.getInstance(ctx).getQuietHoursPrefs();
+        broadcastSettings(ctx, prefs);
+    }
+
     protected static void broadcastSettings(Context ctx, SharedPreferences prefs) {
         Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
         intent.putExtra(EXTRA_QH_LOCKED, prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false));

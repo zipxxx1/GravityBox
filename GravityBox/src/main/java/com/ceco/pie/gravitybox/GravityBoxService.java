@@ -65,6 +65,8 @@ public class GravityBoxService extends IntentService {
         } else if (intent.getAction().equals(QuietHoursActivity.ACTION_SET_QUIET_HOURS_MODE)) {
             setQuietHoursMode(intent.getStringExtra(QuietHoursActivity.EXTRA_QH_MODE),
                     intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
+        } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+            broadcastQuietHoursSettings();
         }
     }
 
@@ -75,5 +77,9 @@ public class GravityBoxService extends IntentService {
     private void showToast(final int messageResId) {
         mHandler.post(() -> Toast.makeText(getApplicationContext(), messageResId,
                     Toast.LENGTH_SHORT).show());
+    }
+
+    private void broadcastQuietHoursSettings() {
+        mHandler.post(() -> QuietHoursActivity.broadcastSettings(getApplicationContext()));
     }
 }

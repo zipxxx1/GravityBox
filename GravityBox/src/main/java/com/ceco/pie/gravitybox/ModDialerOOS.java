@@ -14,10 +14,17 @@
  */
 package com.ceco.pie.gravitybox;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.provider.Settings;
+
+import com.ceco.pie.gravitybox.ledcontrol.QuietHours;
+import com.ceco.pie.gravitybox.ledcontrol.QuietHoursActivity;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -27,6 +34,7 @@ public class ModDialerOOS {
     public static final String PACKAGE_NAME_DIALER = "com.android.dialer";
     public static final String CLASS_DIALER_SETTINGS_ACTIVITY = "com.android.dialer.oneplus.activity.OPDialerSettingsActivity";
     public static final String CLASS_IN_CALL_ACTIVITY = "com.android.incallui.InCallActivity";
+    public static final String CLASS_DIALPAD_FRAGMENT = "com.android.dialer.dialpadview.DialpadFragment";
     private static final String TAG = "GB:ModDialerOOS";
     private static final boolean DEBUG = false;
 
@@ -34,28 +42,89 @@ public class ModDialerOOS {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    private static QuietHours mQuietHours;
+
+    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+                mQuietHours = new QuietHours(intent.getExtras());
+                if (DEBUG) log("QuietHours updated");
+            }
+        }
+    };
+
     public static void initDialer(final XSharedPreferences prefs, final ClassLoader classLoader) {
         if (DEBUG) log("initDialer");
 
-        XposedHelpers.findAndHookMethod(CLASS_DIALER_SETTINGS_ACTIVITY, classLoader,
-                "onCreate", Bundle.class, new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) {
-                if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_OOS_CALL_RECORDING, false)) {
-                    enableCallRecording((Context)param.thisObject);
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_DIALER_SETTINGS_ACTIVITY, classLoader,
+                    "onCreate", Bundle.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) {
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_OOS_CALL_RECORDING, false)) {
+                        enableCallRecording((Context) param.thisObject);
+                    }
                 }
-            }
-        });
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
 
-        XposedHelpers.findAndHookMethod(CLASS_IN_CALL_ACTIVITY, classLoader,
-        "onCreate", Bundle.class, new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) {
-                if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_OOS_CALL_RECORDING, false)) {
-                    enableCallRecording((Context)param.thisObject);
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_IN_CALL_ACTIVITY, classLoader,
+                    "onCreate", Bundle.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) {
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_OOS_CALL_RECORDING, false)) {
+                        enableCallRecording((Context) param.thisObject);
+                    }
                 }
-            }
-        });
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_DIALPAD_FRAGMENT, classLoader,
+                    "onResume", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) {
+                    if (DEBUG) log("DialpadFragment: onResume");
+                    Context ctx = ((android.app.Fragment) param.thisObject).getContext();
+                    ctx.registerReceiver(mBroadcastReceiver,
+                            new IntentFilter(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED));
+                    Intent i = new Intent(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
+                    i.setComponent(new ComponentName(GravityBox.PACKAGE_NAME,
+                            GravityBoxService.class.getName()));
+                    ctx.startService(i);
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_DIALPAD_FRAGMENT, classLoader,
+                    "onPause", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) {
+                    if (DEBUG) log("DialpadFragment: onPause");
+                    Context ctx = ((android.app.Fragment) param.thisObject).getContext();
+                    ctx.unregisterReceiver(mBroadcastReceiver);
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_DIALPAD_FRAGMENT, classLoader,
+                    "playTone", int.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) {
+                    if (DEBUG) log("DialpadFragment: playTone");
+                    if (mQuietHours != null &&
+                            mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.DIALPAD)) {
+                        param.setResult(null);
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+        }
     }
 
     private static void enableCallRecording(Context ctx) {
