@@ -2051,4 +2051,8 @@
     <!-- Link ringtone & system volumes -->
     <string name="pref_link_ringer_system_volumes_title">Link ringtone &amp; system volumes</string>
 
+    <!-- QS: OP screen refresh tile -->
+    <string name="qs_tile_op_screen_refresh_rate">Screen refresh rate</string>
+    <string name="qs_tile_label_auto">Auto</string>
+
 </resources>

@@ -527,6 +527,17 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name="com.ceco.pie.gravitybox.quicksettings.OpScreenRefreshRateTile$Service"
+            android:label="@string/qs_tile_op_screen_refresh_rate"
+            android:icon="@drawable/ic_qs_op_screen_refresh_rate"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
         <!-- metadata -->
         <meta-data
             android:name="xposedmodule"

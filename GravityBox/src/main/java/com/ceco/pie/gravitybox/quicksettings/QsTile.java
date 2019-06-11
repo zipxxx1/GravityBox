@@ -90,6 +90,8 @@ public abstract class QsTile extends BaseTile {
             return new AmbientDisplayTile(host, key, tile, prefs, eventDistributor);
         else if (key.contains(HeadsUpTile.Service.KEY))
             return new HeadsUpTile(host, key, tile, prefs, eventDistributor);
+        else if (key.contains(OpScreenRefreshRateTile.Service.KEY))
+            return new OpScreenRefreshRateTile(host, key, tile, prefs, eventDistributor);
 
         return null;
     }

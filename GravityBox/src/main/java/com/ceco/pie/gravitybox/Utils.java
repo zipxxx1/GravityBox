@@ -85,6 +85,7 @@ public class Utils {
     private static String mDeviceCharacteristics = null;
     private static Boolean mIsOxygenOsRom = null;
     private static Boolean mIsOxygenOs7Rom = null;
+    private static Boolean mIsOxygenOs7ProRom = null;
     private static Boolean mIsFileBasedEncrypted = null;
 
     // Device features
@@ -251,7 +252,7 @@ public class Utils {
         if (mIsOxygenOsRom == null) {
             String version = SystemPropertyProvider.get("ro.oxygen.version", "0");
             mIsOxygenOsRom = version != null && !version.isEmpty() &&  !"0".equals(version);
-            mIsOxygenOsRom |= isOxygenOs7Rom();
+            mIsOxygenOsRom |= isOxygenOs7Rom() || isOxygenOs7ProRom();
         }
         return mIsOxygenOsRom;
     }
@@ -259,9 +260,17 @@ public class Utils {
     public static boolean isOxygenOs7Rom() {
         if (mIsOxygenOs7Rom == null) {
             mIsOxygenOs7Rom = "OnePlus".equals(Build.MANUFACTURER) &&
-                    Build.DISPLAY != null && Build.DISPLAY.startsWith("GM19");
+                    Build.DISPLAY != null && Build.DISPLAY.startsWith("GM190");
         }
         return mIsOxygenOs7Rom;
+    }
+
+    public static boolean isOxygenOs7ProRom() {
+        if (mIsOxygenOs7ProRom == null) {
+            mIsOxygenOs7ProRom = "OnePlus".equals(Build.MANUFACTURER) &&
+                    Build.DISPLAY != null && Build.DISPLAY.startsWith("GM191");
+        }
+        return mIsOxygenOs7ProRom;
     }
 
     public static boolean isFileBasedEncrypted(Context con) {

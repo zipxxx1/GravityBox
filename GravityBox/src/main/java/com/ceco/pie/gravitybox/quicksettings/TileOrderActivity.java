@@ -82,6 +82,7 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         put("gb_tile_bt_tethering", BluetoothTetheringTile.Service.class);
         put("gb_tile_ambient_display", AmbientDisplayTile.Service.class);
         put("gb_tile_heads_up", HeadsUpTile.Service.class);
+        put("gb_tile_op_screen_refresh_rate", OpScreenRefreshRateTile.Service.class);
     }};
 
     private ListView mTileListView;
@@ -207,6 +208,8 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         if (key.equals("gb_tile_quickrecord") && !isAudioRecordingAllowed())
             return false;
         if (key.equals("aosp_tile_data") && !Utils.isMotoXtDevice())
+            return false;
+        if (key.equals("gb_tile_op_screen_refresh_rate") && !Utils.isOxygenOs7ProRom())
             return false;
 
         return true;
