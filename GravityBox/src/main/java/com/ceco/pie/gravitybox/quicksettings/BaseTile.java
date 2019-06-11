@@ -30,6 +30,7 @@ import com.ceco.pie.gravitybox.quicksettings.QsTileEventDistributor.QsEventListe
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
@@ -37,6 +38,7 @@ import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -290,7 +292,13 @@ public abstract class BaseTile implements QsEventListener {
             View v;
             if (!Utils.isSamsungRom()) {
                 v = (View) XposedHelpers.getObjectField(tileView, "mExpandIndicator");
-                if (v != null) v.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
+                if (v != null) {
+                    v.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
+                    if (Utils.isOxygenOsRom() && v instanceof ImageView) {
+                        ((ImageView)v).setImageTintList(ColorStateList.valueOf(
+                                OOSThemeColorUtils.getColorTextPrimary(v.getContext())));
+                    }
+                }
                 v = (View) XposedHelpers.getObjectField(tileView, "mExpandSpace");
                 if (v != null) v.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
             }
