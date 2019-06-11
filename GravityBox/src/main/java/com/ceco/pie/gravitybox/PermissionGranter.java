@@ -119,6 +119,12 @@ public class PermissionGranter {
                                     "android.permission.MANAGE_FINGERPRINT");
                             XposedHelpers.callMethod(ps, "grantInstallPermission", p);
                         }
+                        // Add permission needed by OpScreenResolutionTile
+                        if (Utils.isOxygenOs7ProRom() && !grantedPerms.contains("android.permission.KILL_UID")) {
+                            final Object p = XposedHelpers.callMethod(permissions, "get",
+                                    "android.permission.KILL_UID");
+                            XposedHelpers.callMethod(ps, "grantInstallPermission", p);
+                        }
                     }
                 }
             });

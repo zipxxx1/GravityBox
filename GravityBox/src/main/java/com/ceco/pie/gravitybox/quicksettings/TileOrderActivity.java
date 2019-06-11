@@ -83,6 +83,7 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         put("gb_tile_ambient_display", AmbientDisplayTile.Service.class);
         put("gb_tile_heads_up", HeadsUpTile.Service.class);
         put("gb_tile_op_screen_refresh_rate", OpScreenRefreshRateTile.Service.class);
+        put("gb_tile_op_screen_resolution", OpScreenResolutionTile.Service.class);
     }};
 
     private ListView mTileListView;
@@ -210,6 +211,8 @@ public class TileOrderActivity extends GravityBoxListActivity implements View.On
         if (key.equals("aosp_tile_data") && !Utils.isMotoXtDevice())
             return false;
         if (key.equals("gb_tile_op_screen_refresh_rate") && !Utils.isOxygenOs7ProRom())
+            return false;
+        if (key.equals("gb_tile_op_screen_resolution") && !Utils.isOxygenOs7ProRom())
             return false;
 
         return true;

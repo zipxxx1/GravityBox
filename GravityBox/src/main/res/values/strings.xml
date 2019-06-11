@@ -2055,4 +2055,7 @@
     <string name="qs_tile_op_screen_refresh_rate">Screen refresh rate</string>
     <string name="qs_tile_label_auto">Auto</string>
 
+    <!-- QS: OP screen resolution tile -->
+    <string name="qs_tile_op_screen_resolution">Screen resolution</string>
+
 </resources>

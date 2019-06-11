@@ -146,6 +146,7 @@
         <item>@string/qs_tile_ambient_display</item>
         <item>@string/qs_tile_heads_up</item>
         <item>@string/qs_tile_op_screen_refresh_rate</item>
+        <item>@string/qs_tile_op_screen_resolution</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
@@ -186,6 +187,7 @@
         <item>gb_tile_ambient_display</item>
         <item>gb_tile_heads_up</item>
         <item>gb_tile_op_screen_refresh_rate</item>
+        <item>gb_tile_op_screen_resolution</item>
     </string-array>
 
     <string-array name="lockscreen_bg_entries" translatable="false">

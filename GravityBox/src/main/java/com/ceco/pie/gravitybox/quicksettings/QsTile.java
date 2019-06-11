@@ -92,6 +92,8 @@ public abstract class QsTile extends BaseTile {
             return new HeadsUpTile(host, key, tile, prefs, eventDistributor);
         else if (key.contains(OpScreenRefreshRateTile.Service.KEY))
             return new OpScreenRefreshRateTile(host, key, tile, prefs, eventDistributor);
+        else if (key.contains(OpScreenResolutionTile.Service.KEY))
+            return new OpScreenResolutionTile(host, key, tile, prefs, eventDistributor);
 
         return null;
     }
