@@ -1436,4 +1436,7 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Unir volumes de ringtone e de notificações</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Tempo-limite do painel de volumes</string>
+
 </resources>

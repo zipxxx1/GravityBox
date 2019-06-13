@@ -315,6 +315,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_LINK_VOLUMES = "pref_link_volumes_v2";
     public static final String PREF_KEY_LINK_RINGER_SYSTEM_VOLUMES = "pref_link_ringer_system_volumes";
     public static final String PREF_KEY_VOL_EXPANDED = "pref_volume_panel_expanded";
+    public static final String PREF_KEY_VOLUME_PANEL_TIMEOUT = "pref_volume_panel_timeout2";
     public static final String ACTION_PREF_MEDIA_CONTROL_CHANGED =
             "gravitybox.intent.action.MEDIA_CONTROL_CHANGED";
     public static final String EXTRA_VOL_FORCE_RING_CONTROL = "volForceRingControl";
@@ -322,6 +323,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String EXTRA_VOL_LINKED = "linked";
     public static final String EXTRA_VOL_RINGER_SYSTEM_LINKED = "linkedRingerSystem";
     public static final String EXTRA_VOL_EXPANDED = "volPanelExpanded";
+    public static final String EXTRA_VOL_PANEL_TIMEOUT = "volPanelTimeout";
 
     public static final String PREF_CAT_HWKEY_ACTIONS = "pref_cat_hwkey_actions";
     public static final String PREF_CAT_HWKEY_MENU = "pref_cat_hwkey_menu";
@@ -3388,6 +3390,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_VOL_EXPANDED)) {
                 intent.setAction(ACTION_PREF_MEDIA_CONTROL_CHANGED);
                 intent.putExtra(EXTRA_VOL_EXPANDED, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_VOLUME_PANEL_TIMEOUT)) {
+                intent.setAction(ACTION_PREF_MEDIA_CONTROL_CHANGED);
+                intent.putExtra(EXTRA_VOL_PANEL_TIMEOUT, prefs.getInt(key, 0));
             }
 
             if (intent.getAction() != null) {

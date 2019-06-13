@@ -1177,4 +1177,6 @@
 
     <string name="pref_link_volumes_title">벨소리와 알림음 음량 연결</string>
 
+    <string name="pref_volume_panel_timeout_title">음량 조절 패널 타임아웃</string>
+
 </resources>

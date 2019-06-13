@@ -42,6 +42,7 @@ public class ModVolumePanel {
     private static ModAudio.StreamLink mRingSystemVolumesLinked;
     private static boolean mVolumePanelExpanded;
     private static boolean mNotificationStreamRowAddedByGb;
+    private static int mTimeout;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -70,6 +71,9 @@ public class ModVolumePanel {
                     mVolumePanelExpanded = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED, false);
                     if (DEBUG) log("mVolumePanelExpanded set to: " + mVolumePanelExpanded);
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_PANEL_TIMEOUT)) {
+                    mTimeout = intent.getIntExtra(GravityBoxSettings.EXTRA_VOL_PANEL_TIMEOUT, 0);
+                }
             }
         }
     };
@@ -85,6 +89,7 @@ public class ModVolumePanel {
             mRingSystemVolumesLinked = ModAudio.StreamLink.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_LINK_RINGER_SYSTEM_VOLUMES, "DEFAULT"));
             mVolumePanelExpanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_EXPANDED, false);
+            mTimeout = prefs.getInt(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TIMEOUT, 0);
 
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
                 @Override
@@ -142,6 +147,15 @@ public class ModVolumePanel {
                         slider.setEnabled(isRingerSliderEnabled());
                         View icon = (View) XposedHelpers.getObjectField(param.args[0], "icon");
                         icon.setEnabled(slider.isEnabled());
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classVolumePanel, "computeTimeoutH", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) {
+                    if (mTimeout != 0) {
+                        param.setResult(mTimeout);
                     }
                 }
             });

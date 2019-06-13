@@ -2029,4 +2029,8 @@
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Collega volumi suoneria &amp; notifiche</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Timeout pannello volume</string>
+    <string name="pref_volume_panel_timeout_summary">Lascia zero per il timeout predefinito</string>
+
 </resources>

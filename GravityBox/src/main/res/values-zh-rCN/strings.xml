@@ -2051,4 +2051,8 @@
     <!-- Link ringtone & system volumes -->
     <string name="pref_link_ringer_system_volumes_title">链接铃声&amp;系统音量</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">音量面板超时</string>
+    <string name="pref_volume_panel_timeout_summary">默认超时为零</string>
+
 </resources>

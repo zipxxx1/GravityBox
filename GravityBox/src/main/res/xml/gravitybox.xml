@@ -2045,6 +2045,17 @@
             android:summary="@string/pref_volume_panel_expanded_summary"
             android:defaultValue="false" />
 
+        <com.ceco.pie.gravitybox.preference.SeekBarPreference
+            android:key="pref_volume_panel_timeout2"
+            android:title="@string/pref_volume_panel_timeout_title"
+            android:summary="@string/pref_volume_panel_timeout_summary"
+            minimum="0"
+            maximum="10000"
+            interval="500"
+            monitorBoxEnabled="true"
+            monitorBoxUnit="ms"
+            android:defaultValue="0" />
+
     </PreferenceScreen>
 
     <PreferenceScreen 

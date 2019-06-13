@@ -1513,4 +1513,7 @@
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Liên kết âm lượng nhạc chuông &amp; âm thông báo</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Thời gian hiện bảng âm lượng</string>
+
 </resources>

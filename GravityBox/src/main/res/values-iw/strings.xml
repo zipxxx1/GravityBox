@@ -845,4 +845,7 @@
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">הצמד עוצמות שמע של צילצולים &amp; התראות</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">פסק זמן של תפריט עוצמת השמע</string>
+
 </resources>

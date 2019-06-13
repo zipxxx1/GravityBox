@@ -1952,4 +1952,8 @@
     <!-- Link ringtone & system volumes -->
     <string name="pref_link_ringer_system_volumes_title">Spojiť hlasitosť vyzváňania a systémových zvukov</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Časovač panela hlasitosti</string>
+    <string name="pref_volume_panel_timeout_summary">Nastavte 0 pre pôvodný časovač</string>
+
 </resources>

@@ -1509,4 +1509,7 @@
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Enlazar vol. del tono de llamada con notificaciones</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Tiempo de espera para ocultar el panel de volumen</string>
+
 </resources>

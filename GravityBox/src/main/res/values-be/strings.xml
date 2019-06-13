@@ -1485,4 +1485,7 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Звязаць гучнасць</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Затрымка панэлі гучнасці</string>
+
 </resources>

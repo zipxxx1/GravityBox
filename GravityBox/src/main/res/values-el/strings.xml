@@ -918,4 +918,7 @@
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Ένωση εντάσεων Κουδουνίσματος &amp; ειδοποιήσεων</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Χρονικό όριο πεδίου έντασης</string>
+
 </resources>

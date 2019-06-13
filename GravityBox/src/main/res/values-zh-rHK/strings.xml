@@ -1321,4 +1321,7 @@
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">將鈴聲音量與通知音量連結</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">音量面板逾時時間</string>
+
 </resources>

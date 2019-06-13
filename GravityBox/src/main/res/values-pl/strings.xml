@@ -1825,4 +1825,8 @@
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Połączone ust. głośności dzwonka i powiadomień</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Czas wyświetlania panelu głośności</string>
+    <string name="pref_volume_panel_timeout_summary">Pozostaw zero dla domyśnego czasu</string>
+
 </resources>

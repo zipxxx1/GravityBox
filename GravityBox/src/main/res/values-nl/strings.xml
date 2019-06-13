@@ -1091,4 +1091,7 @@
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Link beltoon &amp; meldings volumes</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
+
 </resources>

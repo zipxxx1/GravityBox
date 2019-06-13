@@ -2058,4 +2058,8 @@
     <!-- QS: OP screen resolution tile -->
     <string name="qs_tile_op_screen_resolution">Screen resolution</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
+    <string name="pref_volume_panel_timeout_summary">Leave zero for default timeout</string>
+
 </resources>

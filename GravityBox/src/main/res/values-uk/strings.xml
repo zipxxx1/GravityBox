@@ -1916,4 +1916,8 @@
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Зв\'язати виклик та повідомлення</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Затримка панелі гучності</string>
+    <string name="pref_volume_panel_timeout_summary">Лишити 0 для типового значення</string>
+
 </resources>
