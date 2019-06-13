@@ -431,7 +431,7 @@
         <service
                 android:name="com.ceco.pie.gravitybox.quicksettings.StayAwakeTile$Service"
                 android:label="@string/qs_tile_stay_awake"
-                android:icon="@drawable/ic_qs_stayawake_on"
+                android:icon="@drawable/ic_qs_stayawake_off"
                 android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
                 android:enabled="false">
             <intent-filter>

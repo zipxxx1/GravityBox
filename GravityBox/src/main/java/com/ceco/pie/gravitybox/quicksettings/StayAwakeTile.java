@@ -217,7 +217,9 @@ public class StayAwakeTile extends QsTile {
     @SuppressLint("DefaultLocale")
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.icon = iconFromResId(R.drawable.ic_qs_stayawake_on);
+        mState.booleanValue = mCurrentTimeout == NEVER_SLEEP;
+        mState.icon = iconFromResId(mCurrentTimeout == NEVER_SLEEP ?
+                R.drawable.ic_qs_stayawake_on : R.drawable.ic_qs_stayawake_off);
         int currentIndex = getIndexFromValue(mCurrentTimeout);
         if (currentIndex == -1) {
             mState.label = mCurrentTimeout == NEVER_SLEEP ?
