@@ -514,6 +514,18 @@
 
                 </PreferenceScreen>
 
+                <PreferenceScreen
+                    android:key="pref_cat_qs_op_screen_refresh_rate"
+                    android:title="@string/qs_tile_op_screen_refresh_rate">
+
+                    <CheckBoxPreference
+                        android:key="pref_op_screen_refresh_rate_full90"
+                        android:title="@string/pref_qs_op_screen_refresh_rate_full90_title"
+                        android:summary="@string/pref_qs_op_screen_refresh_rate_full90_summary"
+                        android:defaultValue="false" />
+
+                </PreferenceScreen>
+
             </PreferenceScreen>
 
             <ListPreference

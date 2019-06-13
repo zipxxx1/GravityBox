@@ -857,6 +857,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
     private static final String PREF_TUNER = "pref_tuner";
 
+    public static final String PREF_CAT_KEY_OP_SCREEN_REFRESH_RATE = "pref_cat_qs_op_screen_refresh_rate";
+    public static final String PREF_KEY_OP_SCREEN_REFRESH_RATE_FULL90 = "pref_op_screen_refresh_rate_full90";
+    public static final String EXTRA_OP_SCREEN_REFRESH_RATE_FULL90 = "opScreenRefreshRateFull90";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_CALLER_PHOTO = 1027;
     private static final int REQ_OBTAIN_SHORTCUT = 1028;
@@ -1731,6 +1735,12 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 if (p != null) mPrefCatPhoneTelephony.removePreference(p);
                 p = findPreference(PREF_KEY_OOS_DASH_SOUND_DISABLE);
                 if (p != null) mPrefCatPowerOther.removePreference(p);
+            }
+
+            // Remove non-OP7Pro preferences
+            if (!Utils.isOxygenOs7ProRom()) {
+                Preference p = findPreference(PREF_CAT_KEY_OP_SCREEN_REFRESH_RATE);
+                if (p != null) mPrefCatQsTileSettings.removePreference(p);
             }
 
             // Remove Samsung preferences
@@ -3393,6 +3403,9 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_VOLUME_PANEL_TIMEOUT)) {
                 intent.setAction(ACTION_PREF_MEDIA_CONTROL_CHANGED);
                 intent.putExtra(EXTRA_VOL_PANEL_TIMEOUT, prefs.getInt(key, 0));
+            } else if (key.equals(PREF_KEY_OP_SCREEN_REFRESH_RATE_FULL90)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_OP_SCREEN_REFRESH_RATE_FULL90, prefs.getBoolean(key, false));
             }
 
             if (intent.getAction() != null) {

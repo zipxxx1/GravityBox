@@ -2062,4 +2062,10 @@
     <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
     <string name="pref_volume_panel_timeout_summary">Leave zero for default timeout</string>
 
+    <!-- QS: OP screen refresh tile allow real 90Hz mode -->
+    <string name="pref_qs_op_screen_refresh_rate_full90_title">Allow real 90Hz mode</string>
+    <string name="pref_qs_op_screen_refresh_rate_full90_summary">Experimental: Enables hidden real 90Hz mode.
+        Tile will switch between Auto/90Hz/60Hz where Auto mode is the stock 90Hz mode and 90Hz mode is real 90Hz mode.
+        There will be no option selected in Display settings in case of real 90Hz mode as it is not currently available there.</string>
+
 </resources>

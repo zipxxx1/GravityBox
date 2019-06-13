@@ -14,10 +14,13 @@
  */
 package com.ceco.pie.gravitybox.quicksettings;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
 
+import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -34,6 +37,7 @@ public class OpScreenRefreshRateTile extends QsTile {
 
     private Handler mHandler;
     private SettingsObserver mSettingsObserver;
+    private boolean mFull90HzModeEnabled;
 
     protected OpScreenRefreshRateTile(Object host, String key, Object tile, XSharedPreferences prefs,
                           QsTileEventDistributor eventDistributor) throws Throwable {
@@ -64,6 +68,23 @@ public class OpScreenRefreshRateTile extends QsTile {
         }
     }
 
+    @Override
+    protected void initPreferences() {
+        super.initPreferences();
+        mFull90HzModeEnabled = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_OP_SCREEN_REFRESH_RATE_FULL90, false);
+    }
+
+    @Override
+    public void onBroadcastReceived(Context context, Intent intent) {
+        super.onBroadcastReceived(context, intent);
+
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_OP_SCREEN_REFRESH_RATE_FULL90)) {
+            mFull90HzModeEnabled = intent.getBooleanExtra(
+                    GravityBoxSettings.EXTRA_OP_SCREEN_REFRESH_RATE_FULL90, false);
+        }
+    }
+
     private int getCurrentMode() {
         return Settings.Global.getInt(mContext.getContentResolver(),
                     SETTING_SCREEN_REFRESH_RATE, MODE_AUTO);
@@ -72,7 +93,7 @@ public class OpScreenRefreshRateTile extends QsTile {
     private String getLabelForMode(int state) {
         switch (state) {
             default:
-            case MODE_AUTO: return mGbContext.getString(R.string.qs_tile_label_auto);
+            case MODE_AUTO: return mFull90HzModeEnabled ? mGbContext.getString(R.string.qs_tile_label_auto) : "90Hz";
             case MODE_60HZ: return "60Hz";
             case MODE_90HZ: return "90Hz";
         }
@@ -102,6 +123,7 @@ public class OpScreenRefreshRateTile extends QsTile {
     public void handleClick() {
         int nextMode = getCurrentMode() + 1;
         if (nextMode > MODE_AUTO) nextMode = MODE_90HZ;
+        if (nextMode == MODE_90HZ && !mFull90HzModeEnabled) nextMode++;
         Settings.Global.putInt(mContext.getContentResolver(), SETTING_SCREEN_REFRESH_RATE, nextMode);
         super.handleClick();
     }
