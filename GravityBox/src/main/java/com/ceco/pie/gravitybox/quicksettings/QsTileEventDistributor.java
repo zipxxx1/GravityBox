@@ -26,6 +26,7 @@ import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.ModQsTiles;
 import com.ceco.pie.gravitybox.PhoneWrapper;
 import com.ceco.pie.gravitybox.Utils;
+import com.ceco.pie.gravitybox.managers.ConfigurationChangeMonitor;
 import com.ceco.pie.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 
@@ -40,7 +41,8 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
+public class QsTileEventDistributor implements KeyguardStateMonitor.Listener,
+                                               ConfigurationChangeMonitor.ConfigChangeListener {
     private static final String TAG = "GB:QsTileEventDistributor";
     private static final boolean DEBUG = ModQsTiles.DEBUG;
 
@@ -61,6 +63,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         boolean handleSecondaryClick();
         Object getDetailAdapter();
         boolean isLocked();
+        void onDensityDpiChanged(Configuration config);
     }
 
     private static void log(String message) {
@@ -334,4 +337,9 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
 
     @Override
     public void onScreenStateChanged(boolean interactive) { }
+
+    @Override
+    public void onDensityDpiChanged(Configuration config) {
+        mListeners.values().forEach(l -> l.onDensityDpiChanged(config));
+    }
 }

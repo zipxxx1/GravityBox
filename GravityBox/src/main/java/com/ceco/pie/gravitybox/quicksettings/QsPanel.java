@@ -28,6 +28,7 @@ import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.ModHwKeys;
 import com.ceco.pie.gravitybox.ModQsTiles;
 import com.ceco.pie.gravitybox.Utils;
+import com.ceco.pie.gravitybox.managers.SysUiManagers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -217,6 +218,9 @@ public class QsPanel implements BroadcastSubReceiver {
                         mEventDistributor.setQsPanel(QsPanel.this);
                         mQuickPulldownHandler = new QsQuickPulldownHandler(
                                 mQsPanel.getContext(), mPrefs, mEventDistributor);
+                        if (SysUiManagers.ConfigChangeMonitor != null) {
+                            SysUiManagers.ConfigChangeMonitor.addConfigChangeListener(mEventDistributor);
+                        }
                     }
 
                     Collection<?> tiles = (Collection<?>)param.args[0];
