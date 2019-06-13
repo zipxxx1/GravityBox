@@ -262,6 +262,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM = "pref_lockscreen_bright_action_custom";
     public static final String PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE = "pref_lockscreen_bottom_actions_hide";
     public static final String PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE = "pref_lockscreen_pin_sramble";
+    public static final String PREF_KEY_LOCKSCREEN_ALARM_INFO_DISABLE = "pref_lockscreen_alarm_info_disable";
     public static final String ACTION_LOCKSCREEN_SETTINGS_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SETTINGS_CHANGED";
     public static final String EXTRA_IMPRINT_VIBE_DISABLE = "imprintVibeDisable";
 
@@ -944,7 +945,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_LOCKSCREEN_BRIGHT_ACTION_CUSTOM,
             PREF_KEY_LOCKSCREEN_BOTTOM_ACTIONS_HIDE,
             PREF_KEY_IMPRINT_VIBE_DISABLE,
-            PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE
+            PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE,
+            PREF_KEY_LOCKSCREEN_ALARM_INFO_DISABLE
     ));
 
     private static final List<String> headsUpKeys = new ArrayList<>(Arrays.asList(

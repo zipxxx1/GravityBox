@@ -219,6 +219,11 @@
                 forceCustomIcon="true"
                 allowGravityBoxActions="false" />
 
+            <CheckBoxPreference
+                android:key="pref_lockscreen_alarm_info_disable"
+                android:title="@string/pref_lockscreen_alarm_info_disable_title"
+                android:defaultValue="false" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>

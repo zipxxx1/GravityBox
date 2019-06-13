@@ -73,6 +73,7 @@ public class ModLockscreen {
     private static final String CLASS_KG_BOTTOM_AREA_VIEW = "com.android.systemui.statusbar.phone.KeyguardBottomAreaView";
     private static final String CLASS_SCRIM_CONTROLLER = "com.android.systemui.statusbar.phone.ScrimController";
     private static final String CLASS_SCRIM_STATE = "com.android.systemui.statusbar.phone.ScrimState";
+    private static final String CLASS_KG_SLICE_PROVIDER = "com.android.systemui.keyguard.KeyguardSliceProvider";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
@@ -666,6 +667,21 @@ public class ModLockscreen {
             });
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error setting up background opacity hook:", t);
+        }
+
+        // Disable Alarm info
+        try {
+            Class<?> classKgSliceProvider = XposedHelpers.findClass(CLASS_KG_SLICE_PROVIDER, classLoader);
+            XposedBridge.hookAllMethods(classKgSliceProvider, "addNextAlarm", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) {
+                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ALARM_INFO_DISABLE, false)) {
+                        XposedHelpers.setObjectField(param.thisObject, "mNextAlarm", null);
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error setting up alarm info disabler:", t);
         }
     }
 
