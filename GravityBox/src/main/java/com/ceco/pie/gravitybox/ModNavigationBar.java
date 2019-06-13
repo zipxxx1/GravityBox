@@ -211,7 +211,7 @@ public class ModNavigationBar {
                     updateIconScaleType();
                 }
             } else if (intent.getAction().equals(
-                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) && 
+                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
                     GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP.equals(intent.getStringExtra(
                             GravityBoxSettings.EXTRA_HWKEY_KEY))) {
                 mRecentsSingletapAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
@@ -409,7 +409,7 @@ public class ModNavigationBar {
                     }
 
                     updateIconScaleType();
-                    setCustomKeyVisibility();
+                    ((View)param.thisObject).postDelayed(ModNavigationBar::setCustomKeyVisibility, 1000);
                 }
             });
         } catch (Throwable t) {
@@ -559,7 +559,7 @@ public class ModNavigationBar {
         }
     }
 
-    private static void prepareNavbarViewInfo(ViewGroup navButtons, int index, 
+    private static void prepareNavbarViewInfo(ViewGroup navButtons, int index,
             KeyButtonView appView, KeyButtonView dpadLeft, KeyButtonView dpadRight) {
         try {
             mNavbarViewInfo[index] = new NavbarViewInfo();
@@ -913,7 +913,7 @@ public class ModNavigationBar {
                 if (imgv.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW) &&
                     !mNavbarColorsEnabled) {
                     Drawable ripple = imgv.getBackground();
-                    if (ripple != null && 
+                    if (ripple != null &&
                             ripple.getClass().getName().equals(CLASS_KEY_BUTTON_RIPPLE)) {
                         Paint paint = (Paint)XposedHelpers.getObjectField(ripple, "mRipplePaint");
                         if (paint != null) {
