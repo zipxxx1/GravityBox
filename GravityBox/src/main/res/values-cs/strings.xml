@@ -1951,4 +1951,19 @@
     <string name="pref_volume_panel_timeout_title">Časovač panelu hlasitosti</string>
     <string name="pref_volume_panel_timeout_summary">Nastavte 0 pro původní časovač</string>
 
+    <!-- QS: OP screen refresh tile -->
+    <string name="qs_tile_op_screen_refresh_rate">Obnovovací frekvence obrazovky</string>
+    <string name="qs_tile_label_auto">Auto</string>
+
+    <!-- QS: OP screen resolution tile -->
+    <string name="qs_tile_op_screen_resolution">Rozlišení obrazovky</string>
+
+    <!-- QS: OP screen refresh tile allow real 90Hz mode -->
+    <string name="pref_qs_op_screen_refresh_rate_full90_title">Povolit skutečný 90Hz režim</string>
+    <string name="pref_qs_op_screen_refresh_rate_full90_summary">Experimentální: Povolí skrytý skutečný 90Hz režim.
+         Dlaždice bude přepínat mezi Auto/90Hz/60Hz kde Auto znamená původní 90Hz režim a 90Hz je skutečný 90Hz režim.</string>
+
+    <!-- Lockscreen: Disable alarm info -->
+    <string name="pref_lockscreen_alarm_info_disable_title">Skrýt info o budíku</string>
+
 </resources>
