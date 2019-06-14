@@ -1,3 +1,15 @@
+Changelog 9.1.1 - 14/06/2019
+--------------------------------------
+- QuickSettings:
+--- fixed dual tile expand indicator color tinting/visibility (OxygenOS)
+--- added tile for toggling screen refresh rate (OnePlus 7 Pro)
+------ experimental full 90Hz mode can be enabled in Tile specific settings
+--- added tile for toggling screen resolution (OnePlus 7 Pro)
+--- added new icon for Stay Awake tile active mode
+- Fixed layout/scaling of all GravityBox view elements affected by DPI change when screen resolution changes
+- Media: option for setting volume panel timeout is back
+- Lockscreen: added option for turning off alarm info showing in lockscreen status area
+
 Changelog 9.1.0 - 10/06/2019
 --------------------------------------
 - Oneplus 7/7Pro OxygenOs fixes and adjustments:
