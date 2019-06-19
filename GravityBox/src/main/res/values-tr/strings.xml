@@ -1987,6 +1987,10 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_battery_style_header_title">Durum çubuğu başlığına uygula</string>
     <string name="pref_battery_style_header_summary">Seçilen pil göstergesini durum çubuğu başlığına da uygular</string>
 
+    <!-- Statusbar: max notification icons -->
+    <string name="pref_sb_max_notif_icons_title">Maksimum bildirim simgeleri</string>
+    <string name="pref_sb_max_notif_icons_summary">Durum çubuğundaki görünür bildirim simgeleri sayısındaki kısıtlamayı kaldırmayı dener</string>
+
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Zil sesi ve bildirim seslerini birleştir</string>
 
@@ -1994,8 +1998,31 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="pref_volume_panel_expanded_title">Genişletilmiş ses paneli</string>
     <string name="pref_volume_panel_expanded_summary">O anda etkin olmasalar bile, tüm genel akış türleri için ses kaydırıcılarını gösterir</string>
 
+    <!-- Link/unlink audio stream volumes -->
+    <string name="volumes_linked">Sesler birleştirildi</string>
+    <string name="volumes_unlinked">Sesler ayrıldı</string>
+
+    <!-- Link ringtone & system volumes -->
+    <string name="pref_link_ringer_system_volumes_title">Zil sesi &amp; sistem seslerini birleştir</string>
+
+    <!-- QS: OP screen refresh tile -->
+    <string name="qs_tile_op_screen_refresh_rate">Ekran yenileme hızı</string>
+    <string name="qs_tile_label_auto">Otomatik</string>
+
+    <!-- QS: OP screen resolution tile -->
+    <string name="qs_tile_op_screen_resolution">Ekran çözünürlüğü</string>
+
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Ses paneli zaman aşımı</string>
     <string name="pref_volume_panel_timeout_summary">Varsayılan zaman aşımı için sıfıra getirin</string>
+
+    <!-- QS: OP screen refresh tile allow real 90Hz mode -->
+    <string name="pref_qs_op_screen_refresh_rate_full90_title">Gerçek 90Hz moduna izin ver</string>
+    <string name="pref_qs_op_screen_refresh_rate_full90_summary">Deneysel: Gizli gerçek 90Hz modunu etkinleştirir.
+        Kare, Otomatik /90Hz/60Hz arasında geçiş yapacaktır, burada Otomatik mod stok 90Hz moddur ve 90Hz mod gerçek 90Hz moddur.
+        Şu anda mevcut olmadığı için, gerçek 90Hz modu durumunda ekran ayarlarında hiçbir seçenek seçilmeyecektir.</string>
+
+    <!-- Lockscreen: Disable alarm info -->
+    <string name="pref_lockscreen_alarm_info_disable_title">Alarm bilgisini devre dışı bırak</string>
 
  </resources>
