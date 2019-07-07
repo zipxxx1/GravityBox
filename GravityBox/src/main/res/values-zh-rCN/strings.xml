@@ -2050,9 +2050,25 @@
 
     <!-- Link ringtone & system volumes -->
     <string name="pref_link_ringer_system_volumes_title">链接铃声&amp;系统音量</string>
+	
+    <!-- QS: OP screen refresh tile -->
+    <string name="qs_tile_op_screen_refresh_rate">屏幕刷新率</string>
+    <string name="qs_tile_label_auto">自动</string>
+	
+    <!-- QS: OP screen resolution tile -->
+    <string name="qs_tile_op_screen_resolution">屏幕分辨率</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">音量面板超时</string>
     <string name="pref_volume_panel_timeout_summary">默认超时为零</string>
+
+    <!-- QS: OP screen refresh tile allow real 90Hz mode -->
+    <string name="pref_qs_op_screen_refresh_rate_full90_title">允许真实90Hz模式</string>
+    <string name="pref_qs_op_screen_refresh_rate_full90_summary">实验:启用隐藏的真实90Hz模式
+        磁砖将在自动/90Hz/60Hz之间切换,其中自动模式为原厂90Hz模式,而90Hz模式为真实90Hz模式
+        如果是真实的90Hz模式,则不会在显示设置中选择任何选项,因为该模式目前不可用</string>
+
+    <!-- Lockscreen: Disable alarm info -->
+    <string name="pref_lockscreen_alarm_info_disable_title">禁用报警信息</string>
 
 </resources>
