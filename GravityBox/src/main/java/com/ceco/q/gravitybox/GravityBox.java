@@ -95,7 +95,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage
         XposedBridge.log("GB:ROM: " + Build.DISPLAY);
         XposedBridge.log("GB:Error logging: " + LOG_ERRORS);
 
-        if (Build.VERSION.SDK_INT != 28) {
+        if (Build.VERSION.SDK_INT != 29) {
             XposedBridge.log("!!! GravityBox you are running is not designed for "
                     + "Android SDK " + Build.VERSION.SDK_INT + " !!!");
             return;
@@ -112,7 +112,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage
 
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) {
-        if (Build.VERSION.SDK_INT != 28) {
+        if (Build.VERSION.SDK_INT != 29) {
             return;
         }
 
