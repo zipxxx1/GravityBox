@@ -1422,7 +1422,7 @@
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATTENZIONE</string>
-    <string name="gb_new_package_dialog_message">Trovato GravityBox per Oreo.
+    <string name="gb_new_package_dialog_message">Trovato GravityBox per Pie.
          Prima di poter utilizzare la nuova versione, è necessario disinstallare la versione precedente. Premere OK per avviare il processo di disinstallazione.
          Dopo la disinstallazione, non dimenticare di attivare il nuovo modulo in Xposed Installer e REBOOT IMMEDIATELY.</string>
 

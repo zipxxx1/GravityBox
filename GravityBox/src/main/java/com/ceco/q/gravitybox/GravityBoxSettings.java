@@ -1055,7 +1055,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
 
         // refuse to run if there's GB with old package name still installed
         // prompt to uninstall previous package and finish
-        if (Utils.isAppInstalled(this, "com.ceco.oreo.gravitybox")) {
+        if (Utils.isAppInstalled(this, "com.ceco.pie.gravitybox")) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
             .setCancelable(false)
             .setTitle(R.string.gb_new_package_dialog_title)
@@ -1063,7 +1063,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                 dialog.dismiss();
                 // try to uninstall old package
-                Uri oldGbUri = Uri.parse("package:com.ceco.oreo.gravitybox");
+                Uri oldGbUri = Uri.parse("package:com.ceco.pie.gravitybox");
                 Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, oldGbUri);
                 startActivity(uninstallIntent);
                 finish();
