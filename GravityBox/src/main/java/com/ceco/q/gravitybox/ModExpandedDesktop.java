@@ -35,8 +35,9 @@ public class ModExpandedDesktop {
     private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.server.policy.PhoneWindowManager";
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "com.android.server.policy.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
-    private static final String CLASS_POLICY_WINDOW_STATE = "com.android.server.policy.WindowManagerPolicy$WindowState";
-    private static final String CLASS_POLICY_CONTROL = "com.android.server.policy.PolicyControl";
+    private static final String CLASS_WINDOW_STATE = "com.android.server.wm.WindowState";
+    private static final String CLASS_POLICY_CONTROL = "com.android.server.wm.PolicyControl";
+    private static final String CLASS_DISPLAY_POLICY = "com.android.server.wm.DisplayPolicy";
 
     private static final boolean DEBUG = false;
 
@@ -138,15 +139,19 @@ public class ModExpandedDesktop {
             }
 
             XposedHelpers.callMethod(mPhoneWindowManager, "updateSettings");
+            Object displayPolicy = XposedHelpers.getObjectField(mPhoneWindowManager, "mDefaultDisplayPolicy");
+            Object displayRotation = XposedHelpers.callMethod(
+                    XposedHelpers.getObjectField(displayPolicy, "mDisplayContent"),
+                    "getDisplayRotation");
 
             int[] navigationBarWidthForRotation = (int[]) XposedHelpers.getObjectField(
-                    mPhoneWindowManager, "mNavigationBarWidthForRotationDefault");
+                    displayPolicy, "mNavigationBarWidthForRotationDefault");
             int[] navigationBarHeightForRotation = (int[]) XposedHelpers.getObjectField(
-                    mPhoneWindowManager, "mNavigationBarHeightForRotationDefault");
-            final int portraitRotation = XposedHelpers.getIntField(mPhoneWindowManager, "mPortraitRotation");
-            final int upsideDownRotation = XposedHelpers.getIntField(mPhoneWindowManager, "mUpsideDownRotation");
-            final int landscapeRotation = XposedHelpers.getIntField(mPhoneWindowManager, "mLandscapeRotation");
-            final int seascapeRotation = XposedHelpers.getIntField(mPhoneWindowManager, "mSeascapeRotation");
+                    displayPolicy, "mNavigationBarHeightForRotationDefault");
+            final int portraitRotation = (int) XposedHelpers.callMethod(displayRotation, "getPortraitRotation");
+            final int upsideDownRotation = (int) XposedHelpers.callMethod(displayRotation, "getUpsideDownRotation");
+            final int landscapeRotation = (int) XposedHelpers.callMethod(displayRotation, "getLandscapeRotation");
+            final int seascapeRotation = (int) XposedHelpers.callMethod(displayRotation, "getSeascapeRotation");
 
             if (isNavbarHidden()) {
                 navigationBarWidthForRotation[portraitRotation]
@@ -249,7 +254,8 @@ public class ModExpandedDesktop {
                 }
             });
 
-            XposedBridge.hookAllMethods(classPhoneWindowManager, "onConfigurationChanged", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_DISPLAY_POLICY, classLoader,
+                    "onConfigurationChanged", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     updateNavbarDimensions(mNavbarOverride || isNavbarHidden());
@@ -257,7 +263,7 @@ public class ModExpandedDesktop {
             });
 
             XposedHelpers.findAndHookMethod(CLASS_POLICY_CONTROL, classLoader,"getSystemUiVisibility",
-                    CLASS_POLICY_WINDOW_STATE, WindowManager.LayoutParams.class, new XC_MethodHook() {
+                    CLASS_WINDOW_STATE, WindowManager.LayoutParams.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     int vis = (int) param.getResult();
@@ -280,7 +286,7 @@ public class ModExpandedDesktop {
             });
 
             XposedHelpers.findAndHookMethod(CLASS_POLICY_CONTROL, classLoader, "getWindowFlags",
-                    CLASS_POLICY_WINDOW_STATE, WindowManager.LayoutParams.class, new XC_MethodHook() {
+                    CLASS_WINDOW_STATE, WindowManager.LayoutParams.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     int flags = (int) param.getResult();
@@ -297,7 +303,7 @@ public class ModExpandedDesktop {
             });
 
             XposedHelpers.findAndHookMethod(CLASS_POLICY_CONTROL, classLoader, "adjustClearableFlags",
-                    CLASS_POLICY_WINDOW_STATE, int.class, new XC_MethodHook() {
+                    CLASS_WINDOW_STATE, int.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     int clearableFlags = (int) param.getResult();
@@ -308,8 +314,8 @@ public class ModExpandedDesktop {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "requestTransientBars",
-                    CLASS_POLICY_WINDOW_STATE, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_DISPLAY_POLICY, classLoader, "requestTransientBars",
+                    CLASS_WINDOW_STATE, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     if (param.args[0] == XposedHelpers.getObjectField(param.thisObject, "mNavigationBar")
