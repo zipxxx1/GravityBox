@@ -66,14 +66,13 @@ public class ModStatusBar {
     public static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
-    private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
-    private static final String CLASS_STATUSBAR_WM = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
+    private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.notification.row.ExpandableNotificationRow";
+    private static final String CLASS_STATUSBAR_WC = "com.android.systemui.statusbar.phone.StatusBarWindowController";
     private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
     public static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
-    private static final String CLASS_ASSIST_MANAGER = "com.android.systemui.assist.AssistManager";
     private static final String CLASS_COLLAPSED_SB_FRAGMENT = "com.android.systemui.statusbar.phone.CollapsedStatusBarFragment";
     private static final String CLASS_NOTIF_ICON_CONTAINER = "com.android.systemui.statusbar.phone.NotificationIconContainer";
-    private static final String CLASS_NOTIF_ENTRY_MANAGER = "com.android.systemui.statusbar.NotificationEntryManager";
+    private static final String CLASS_NOTIF_ENTRY_MANAGER = "com.android.systemui.statusbar.notification.NotificationEntryManager";
     private static final String CLASS_QS_FRAGMENT = "com.android.systemui.qs.QSFragment";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
@@ -275,6 +274,11 @@ public class ModStatusBar {
         return mStatusBarState;
     }
 
+    private static ViewGroup getKeyguardStatusBar() {
+        Object notifPanel = XposedHelpers.getObjectField(mStatusBar, "mNotificationPanel");
+        return (ViewGroup) XposedHelpers.getObjectField(notifPanel, "mKeyguardStatusBar");
+    }
+
     private static void prepareLayoutStatusBar() {
         try {
             Resources res = mContext.getResources();
@@ -356,8 +360,7 @@ public class ModStatusBar {
             mLayoutCenterKg.setGravity(Gravity.CENTER);
             mLayoutCenterKg.setVisibility(View.GONE);
             if (DEBUG_LAYOUT) mLayoutCenterKg.setBackgroundColor(0x4d0000ff);
-            ((ViewGroup) XposedHelpers.getObjectField(
-                    mStatusBar, "mKeyguardStatusBar")).addView(mLayoutCenterKg);
+            getKeyguardStatusBar().addView(mLayoutCenterKg);
             if (DEBUG) log("mLayoutCenterKg injected");
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
@@ -397,8 +400,7 @@ public class ModStatusBar {
                     container = mStatusBarView;
                     break;
                 case KEYGUARD:
-                    container = (ViewGroup) XposedHelpers.getObjectField(
-                            mStatusBar, "mKeyguardStatusBar");
+                    container = getKeyguardStatusBar();
                     break;
                 default: break;
             }
@@ -423,7 +425,9 @@ public class ModStatusBar {
     private static void prepareBatteryStyleHeader(ViewGroup container) {
         try {
             BatteryStyleController bsc = new BatteryStyleController(
-                    ContainerType.HEADER, container, "quick_status_bar_system_icons", mPrefs);
+                    ContainerType.HEADER, container,
+                    Utils.isOxygenOsRom() ? "quick_status_bar_system_icons" : "quick_qs_status_icons",
+                    mPrefs);
             if (mBatteryStyleCtrlSbHeader != null) {
                 mBroadcastSubReceivers.remove(mBatteryStyleCtrlSbHeader);
                 mBatteryStyleCtrlSbHeader.destroy();
@@ -445,8 +449,7 @@ public class ModStatusBar {
                     container = mStatusBarView;
                     break;
                 case KEYGUARD:
-                    container = (ViewGroup) XposedHelpers.getObjectField(
-                            mStatusBar, "mKeyguardStatusBar");
+                    container = getKeyguardStatusBar();
                     break;
                 default: break;
             }
@@ -479,8 +482,7 @@ public class ModStatusBar {
                     container = mStatusBarView;
                     break;
                 case KEYGUARD:
-                    container = (ViewGroup) XposedHelpers.getObjectField(
-                            mStatusBar, "mKeyguardStatusBar");
+                    container = getKeyguardStatusBar();
                     break;
                 default: break;
             }
@@ -537,7 +539,7 @@ public class ModStatusBar {
             final Class<?> statusBarClass =
                     XposedHelpers.findClass(CLASS_STATUSBAR, classLoader);
             final Class<?> expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
-            final Class<?> statusBarWmClass = XposedHelpers.findClass(CLASS_STATUSBAR_WM, classLoader);
+            final Class<?> statusBarWcClass = XposedHelpers.findClass(CLASS_STATUSBAR_WC, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
 
             QuickStatusBarHeader.init(classLoader);
@@ -566,7 +568,7 @@ public class ModStatusBar {
                 GravityBox.log(TAG, "Invalid value for mHomeLongpressAction");
             }
 
-            XposedHelpers.findAndHookMethod(statusBarClass, "makeStatusBarView", new XC_MethodHook() {
+            XposedBridge.hookAllMethods(statusBarClass, "makeStatusBarView", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     mStatusBar = param.thisObject;
@@ -752,7 +754,7 @@ public class ModStatusBar {
                 });
     
                 XposedHelpers.findAndHookMethod(CLASS_NOTIF_ENTRY_MANAGER, classLoader, "removeNotification",
-                        String.class, RankingMap.class, new XC_MethodHook() {
+                        String.class, RankingMap.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) {
                         if (mProgressBarCtrl != null) {
@@ -800,7 +802,7 @@ public class ModStatusBar {
 
             // status bar state change handling
             try {
-                XposedHelpers.findAndHookMethod(statusBarWmClass, "setStatusBarState",
+                XposedHelpers.findAndHookMethod(statusBarWcClass, "setStatusBarState",
                         int.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) {
@@ -887,26 +889,6 @@ public class ModStatusBar {
                 });
             } catch (Throwable t) {
                 // ignore as some earlier 6.0 releases lack that functionality
-            }
-
-            // Search assist SystemUI crash workaround for disabled navbar
-            try {
-                XposedHelpers.findAndHookMethod(CLASS_ASSIST_MANAGER, classLoader,
-                        "startAssist", Bundle.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) {
-                        Object orbView = XposedHelpers.getObjectField(param.thisObject, "mView");
-                        if (orbView == null) {
-                            XposedHelpers.callMethod(param.thisObject, "updateAssistInfo");
-                            if (XposedHelpers.getObjectField(param.thisObject, "mAssistComponent") != null) {
-                                XposedHelpers.callMethod(param.thisObject, "startAssistInternal", param.args[0]);
-                                param.setResult(null);
-                            }
-                        }
-                    }
-                });
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
             }
 
             // brightness control in lock screen

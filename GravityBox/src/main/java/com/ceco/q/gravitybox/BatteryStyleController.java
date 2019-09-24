@@ -142,8 +142,9 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         int bIconMarginEnd = gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right);
 
         // find stock battery
+        String batteryResName = mContainerType == ContainerType.HEADER ? "batteryRemainingIcon" : "battery";
         View stockBatteryView = mSystemIcons.findViewById(
-                res.getIdentifier("battery", "id", PACKAGE_NAME));
+                res.getIdentifier(batteryResName, "id", PACKAGE_NAME));
         if (stockBatteryView != null) {
             bIconIndex = mSystemIcons.indexOfChild(stockBatteryView);
             bIconMarginStart = ((MarginLayoutParams) stockBatteryView.getLayoutParams()).getMarginStart();
