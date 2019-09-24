@@ -27,7 +27,7 @@ public class PermissionGranter {
     public static final boolean DEBUG = false;
 
     private static final String CLASS_PERMISSION_MANAGER_SERVICE = "com.android.server.pm.permission.PermissionManagerService";
-    private static final String CLASS_PERMISSION_CALLBACK = "com.android.server.pm.permission.PermissionManagerInternal.PermissionCallback";
+    private static final String CLASS_PERMISSION_CALLBACK = "com.android.server.pm.permission.PermissionManagerServiceInternal.PermissionCallback";
     private static final String CLASS_PACKAGE_PARSER_PACKAGE = "android.content.pm.PackageParser.Package";
     private static final String PERM_ACCESS_SURFACE_FLINGER = "android.permission.ACCESS_SURFACE_FLINGER";
 
@@ -39,7 +39,7 @@ public class PermissionGranter {
         try {
             final Class<?> pmServiceClass = XposedHelpers.findClass(CLASS_PERMISSION_MANAGER_SERVICE, classLoader);
 
-            XposedHelpers.findAndHookMethod(pmServiceClass, "grantPermissions",
+            XposedHelpers.findAndHookMethod(pmServiceClass, "restorePermissionState",
                     CLASS_PACKAGE_PARSER_PACKAGE, boolean.class, String.class,
                     CLASS_PERMISSION_CALLBACK, new XC_MethodHook() {
                 @SuppressWarnings("unchecked")
