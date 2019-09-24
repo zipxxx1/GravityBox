@@ -372,13 +372,13 @@ public class ModPieControls {
             });
 
             XposedHelpers.findAndHookMethod(statusBarClass, "disable", 
-                    int.class, int.class, boolean.class, new XC_MethodHook() {
+                    int.class, int.class, int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     if (mPieController == null) return;
 
                     final int old = XposedHelpers.getIntField(param.thisObject, "mDisabled1");
-                    final int state = (Integer) param.args[0];
+                    final int state = (Integer) param.args[1];
                     final int diff = state ^ old;
                     if ((diff & (STATUS_BAR_DISABLE_HOME
                             | STATUS_BAR_DISABLE_RECENT
@@ -390,13 +390,13 @@ public class ModPieControls {
             });
 
             XposedHelpers.findAndHookMethod(CLASS_COMMAND_QUEUE, classLoader, "setImeWindowStatus",
-                    IBinder.class, int.class, int.class, boolean.class, new XC_MethodHook() {
+                    int.class, IBinder.class, int.class, int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     if (mPieController != null) {
                         int hints = 0;
-                        boolean imeShown = ((int)param.args[1] & 0x2) != 0;
-                        if ((int)param.args[2] == InputMethodService.BACK_DISPOSITION_WILL_DISMISS || imeShown) {
+                        boolean imeShown = ((int)param.args[2] & 0x2) != 0;
+                        if ((int)param.args[3] == InputMethodService.BACK_DISPOSITION_WILL_DISMISS || imeShown) {
                             hints |= (1 << 0);
                         }
                         mPieController.setNavigationIconHints(hints);
@@ -404,14 +404,13 @@ public class ModPieControls {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(statusBarClass,
-                    "topAppWindowChanged", boolean.class, new XC_MethodHook() {
-
+            XposedHelpers.findAndHookMethod(CLASS_COMMAND_QUEUE, classLoader,
+                    "topAppWindowChanged", int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     if (mPieController == null) return;
 
-                    mPieController.setMenuVisibility((Boolean)param.args[0] 
+                    mPieController.setMenuVisibility((Boolean)param.args[1]
                             | mShowMenuItem
                             | mAlwaysShowMenuItem);
                 }
