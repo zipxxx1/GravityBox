@@ -29,9 +29,9 @@ import de.robv.android.xposed.XSharedPreferences;
 
 public class ModFingerprint {
     private static final String TAG = "GB:ModFingerprint";
-    private static final String CLASS_FINGERPRINT_SERVICE = "com.android.server.fingerprint.FingerprintService";
-    private static final String CLASS_FINGERPRINT_UTILS = "com.android.server.fingerprint.FingerprintUtils";
-    private static final String CLASS_CLIENT_MONITOR = "com.android.server.fingerprint.ClientMonitor";
+    private static final String CLASS_FINGERPRINT_SERVICE = "com.android.server.biometrics.fingerprint.FingerprintService";
+    private static final String CLASS_FINGERPRINT_UTILS = "com.android.server.biometrics.fingerprint.FingerprintUtils";
+    private static final String CLASS_CLIENT_MONITOR = "com.android.server.biometrics.ClientMonitor";
     private static final boolean DEBUG = false;
 
     private static void log(String message) {
