@@ -247,7 +247,6 @@
 <string name="action_expanded_desktop_title">صفحه نمایش گسترده</string>
 <string name="action_expanded_desktop_on">صفحه نمایش گسترده فعال است</string>
 <string name="action_expanded_desktop_off">صفحه نمایش گسترده غیرفعال شد</string>
-<string name="screenshot">تصویربردار صفحه‌نمایش</string>
 <string name="hwkey_action_menu">نمایش منو</string>
 <string name="hwkey_action_expanded_desktop">صفحه نمایش گسترده</string>
 <string name="hwkey_action_expanded_desktop_disabled">حالت صفحه نمایش گسترده خاموش است!</string>
@@ -262,7 +261,6 @@
 <string name="pref_navbar_width_title">عرض نوار ناوبری</string>
 <string name="pref_navbar_width_summary">تنظیم عرض نوار پیمایش</string>
 <string name="pref_navbar_menukey_title">همیشه دکمه منو را نمایش بده</string>
-<string name="pref_powermenu_screenshot_title">تصویربرداری از صفحه‌نمایش در منو پاور</string>
 <string name="pref_statusbar_brightness_title">کنترل روشنایی صفحه نمایش</string>
 <string name="pref_statusbar_brightness_summary">"تنظیم روشنایی صفحه نمایش با کشیدن انگشت بصورت افقی بروی نوار وضعیت "</string>
 <string name="pref_cat_phone_telephony_title">تلفن</string>
@@ -382,8 +380,6 @@
 <string name="screenrecord_toast_processing">شروع ضبط جدید تا پایان پردازش ضبط قبلی ممکن نیست</string>
 <string name="screenrecord_toast_saved">مورد ضبط شده در %s ذخیره شد</string>
 <string name="screenrecord_toast_save_error">ناتوان در ذخیره مورد ضبط شده در فایل خروجی</string>
-<string name="action_screenrecord">ضبط تصاویر صفحه‌نمایش</string>
-<string name="pref_powermenu_screenrecord_title">ضبط تصاویر صفحه‌نمایش در منو پاور</string>
 <string name="pref_dialer_show_dialpad_title">نمایش خودکار صفحه کلید شماره‌گیری</string>
 <string name="pref_dialer_show_dialpad_summary">نمایش خودکار کلید شماره‌گیری پس از باز کردن برنامه تلفن</string>
 <string name="pref_cat_launcher_tweaks_title">ترفندهای لانچر</string>

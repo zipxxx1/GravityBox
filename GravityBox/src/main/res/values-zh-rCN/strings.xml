@@ -388,9 +388,6 @@
     <string name="action_expanded_desktop_on">扩展桌面已开启</string>
     <string name="action_expanded_desktop_off">扩展桌面已关闭</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">屏幕截图</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">显示菜单</string>
 
@@ -410,9 +407,6 @@
     <string name="pref_navbar_width_title">虚拟按键宽度</string>
     <string name="pref_navbar_width_summary">应用于垂直导航栏</string>
     <string name="pref_navbar_menukey_title">总是显示菜单键</string>
-    
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">电源键菜单屏幕截图</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">启用亮度控制</string>
@@ -607,8 +601,6 @@
     <string name="screenrecord_toast_processing">无法开始新的录制,之前的录制仍在处理中</string>
     <string name="screenrecord_toast_saved">录制文件已保存到 %s</string>
     <string name="screenrecord_toast_save_error">无法保存录制文件</string>
-    <string name="action_screenrecord">屏幕录制</string>
-    <string name="pref_powermenu_screenrecord_title">电源键菜单屏幕录制</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">自动显示拨号盘</string>

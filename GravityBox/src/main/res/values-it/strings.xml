@@ -386,9 +386,6 @@
     <string name="action_expanded_desktop_on">Desktop esteso è ACCESO</string>
     <string name="action_expanded_desktop_off">Desktop esteso è SPENTO</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Screenshot</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Mostra menù</string>
 
@@ -408,9 +405,6 @@
     <string name="pref_navbar_width_title">Larghezza barra di navigazione</string>
     <string name="pref_navbar_width_summary">Applica alla visualizzazione orizzontale</string>
     <string name="pref_navbar_menukey_title">Mostra sempre tasto menù</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Screenshot in menù spegnimento</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Abilita controllo luminosità</string>
@@ -605,8 +599,6 @@
     <string name="screenrecord_toast_processing">Non si può iniziare una nuova registrazione perchè già in corso</string>
     <string name="screenrecord_toast_saved">Registrazione salvata come %s</string>
     <string name="screenrecord_toast_save_error">Impossibile salvare</string>
-    <string name="action_screenrecord">Registra schermo</string>
-    <string name="pref_powermenu_screenrecord_title">Registra schermo in menù spegnimento</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostra sempre tastierino numerico</string>

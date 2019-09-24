@@ -377,9 +377,6 @@
     <string name="action_expanded_desktop_on">全螢幕模式已開啟</string>
     <string name="action_expanded_desktop_off">全螢幕模式已關閉</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">螢幕截圖</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">顯示選單</string>
 
@@ -399,9 +396,6 @@
     <string name="pref_navbar_width_title">導航列寬度</string>
     <string name="pref_navbar_width_summary">適用於垂直導航列</string>
     <string name="pref_navbar_menukey_title">永遠顯示選單鍵</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">電源選單顯示 [螢幕截圖] 選項</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">啟用亮度控制</string>
@@ -588,8 +582,6 @@
     <string name="screenrecord_toast_processing">因為前一個錄製尚在處理中，無法開始新的錄製</string>
     <string name="screenrecord_toast_saved">螢幕錄製已儲存至 %s</string>
     <string name="screenrecord_toast_save_error">無法將螢幕錄製輸出成檔案</string>
-    <string name="action_screenrecord">螢幕錄製</string>
-    <string name="pref_powermenu_screenrecord_title">電源選單顯示 [螢幕錄製]選項</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">自動顯示撥號鍵盤</string>

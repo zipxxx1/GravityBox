@@ -360,9 +360,6 @@
     <string name="action_expanded_desktop_on">מסך הבית מורחב מופעל</string>
     <string name="action_expanded_desktop_off">מסך הבית מורחב כבוי</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">צילום מסך</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">הצג תפריט</string>
 
@@ -382,9 +379,6 @@
     <string name="pref_navbar_width_title">רוחב שורת ניווט</string>
     <string name="pref_navbar_width_summary">חל על שורת ניווט אנכית</string>
     <string name="pref_navbar_menukey_title">תמיד הצג מקש תפריט</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">צילום מסך בתפריט הפעלה/כיבוי</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">הפעל בקרת בהירות</string>
@@ -577,8 +571,6 @@
     <string name="screenrecord_toast_processing">לא ניתן להפעיל הקלטת מסך בעת שהקלטה קודמת עדיין בשלבי עיבוד</string>
     <string name="screenrecord_toast_saved">הקלטה נשמרה בתור %s</string>
     <string name="screenrecord_toast_save_error">לא ניתן ליצור קובץ פלט של הקלטה</string>
-    <string name="action_screenrecord">הקלטת מסך</string>
-    <string name="pref_powermenu_screenrecord_title">הקלטת מסך בתפריט הפעלה/כיבוי</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">הצג חייגן באופן אוטומטי</string>

@@ -387,9 +387,6 @@
     <string name="action_expanded_desktop_on">Kiterjesztett asztal bekapcsolva</string>
     <string name="action_expanded_desktop_off">Kiterjesztett asztal kikapcsolva</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Képernyőkép</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Menü mutatása</string>
 
@@ -409,9 +406,6 @@
     <string name="pref_navbar_width_title">Navigációs sáv szélessége</string>
     <string name="pref_navbar_width_summary">Függőleges navigációs sávra vonatkozik</string>
     <string name="pref_navbar_menukey_title">Menü gomb állandó megjelenítése</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Képernyőkép a kikapcsoló menüben</string>    
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Fényerő szabályozás engedélyezése</string>
@@ -604,8 +598,6 @@
     <string name="screenrecord_toast_processing">Nem kezdhető új felvétel, amíg az előző rögzítés feldolgozás alatt van</string>
     <string name="screenrecord_toast_saved">A rögzítés %s-ként elmentésre került</string>
     <string name="screenrecord_toast_save_error">Nem lehetséges a felvétel elmentése kimeneti fájlba</string>
-    <string name="action_screenrecord">Képernyő rögzítés</string>
-    <string name="pref_powermenu_screenrecord_title">Képernyő rögzítés a kikapcsoló menüben</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Tárcsázó gombok automatikus megjelenítése</string>

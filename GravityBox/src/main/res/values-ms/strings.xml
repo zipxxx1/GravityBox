@@ -387,9 +387,6 @@
     <string name="action_expanded_desktop_on">Skrin penuh diaktifkan</string>
     <string name="action_expanded_desktop_off">Skrin penuh tidak aktif</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Tangkap skrin</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Tunjukkan menu</string>
 
@@ -409,9 +406,6 @@
     <string name="pref_navbar_width_title">Lebar bar navigasi</string>
     <string name="pref_navbar_width_summary">Berlaku untuk bar nagivasi memanjang ke atas</string>
     <string name="pref_navbar_menukey_title">Sentiasa tunjuk butang menu</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Tile tangkap skrin di menu kuasa</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Aktifkan kawal kecerahan</string>
@@ -605,8 +599,6 @@
     <string name="screenrecord_toast_processing">Rakaman tidak boleh dijalankan kerana rakaman terdahulu masih diproses</string>
     <string name="screenrecord_toast_saved">Rakaman disimpan sebagai %s</string>
     <string name="screenrecord_toast_save_error">Rakaman tidak boleh disimpan.Ralat</string>
-    <string name="action_screenrecord">Rakaman skrin</string>
-    <string name="pref_powermenu_screenrecord_title">Rakaman skrin di butang menu</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Tunjuk pad nombor automatik</string>

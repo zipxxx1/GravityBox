@@ -351,9 +351,6 @@
     <string name="action_expanded_desktop_on">سطح المكتب الموسع مفعل</string>
     <string name="action_expanded_desktop_off">سطح المكتب الموسع معطل</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">تصوير الشاشة</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">عرض القائمة</string>
 
@@ -373,9 +370,6 @@
     <string name="pref_navbar_width_title">عرض شريط التنقل</string>
     <string name="pref_navbar_width_summary">يتم التطبيق على الشريط في الوضع العمودي</string>
     <string name="pref_navbar_menukey_title">اظهار زر القائمة دائماً</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">تصوير الشاشة بقائمة الطاقة</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">تفعيل التحكم بالسطوع</string>

@@ -381,9 +381,6 @@
     <string name="action_expanded_desktop_on">Mở rộng desktop đang BẬT</string>
     <string name="action_expanded_desktop_off">Mở rộng desktop đang TẮT</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Chụp màn hình</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Hiện menu</string>
 
@@ -403,9 +400,6 @@
     <string name="pref_navbar_width_title">Chiều rộng thanh điều hướng</string>
     <string name="pref_navbar_width_summary">Áp dụng cho thanh điều hướng dọc</string>
     <string name="pref_navbar_menukey_title">Luôn hiện phím menu</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Chụp ảnh màn hình trong menu phím nguồn</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Bật điều khiển độ sáng</string>
@@ -598,8 +592,6 @@
     <string name="screenrecord_toast_processing">Không thể quay mới màn hình vì vẫn đang quay màn hình từ trước.</string>
     <string name="screenrecord_toast_saved">Đã lưu như %s</string>
     <string name="screenrecord_toast_save_error">Không thể lưu</string>
-    <string name="action_screenrecord">Quay phim màn hình</string>
-    <string name="pref_powermenu_screenrecord_title">Quay phim MH trong menu phím nguồn</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Tự động hiện bàn quay số</string>

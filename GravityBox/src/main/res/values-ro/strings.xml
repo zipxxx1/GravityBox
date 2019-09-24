@@ -379,9 +379,6 @@
     <string name="action_expanded_desktop_on">Desktop extins activat</string>
     <string name="action_expanded_desktop_off">Desktop extins dezactivat</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Captură ecran</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Afișare meniu</string>
 
@@ -401,9 +398,6 @@
     <string name="pref_navbar_width_title">Lățimea barei de navigare</string>
     <string name="pref_navbar_width_summary">Se aplică barei de navigare verticale</string>
     <string name="pref_navbar_menukey_title">Afișați întotdeauna tasta meniu</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Captură de ecran în meniul de alimentare</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Activați controlul luminozității</string>
@@ -593,8 +587,6 @@
     <string name="screenrecord_toast_processing">Nu se poate porni o înregistrarea nouă, deoarece înregistrarea anterioară este încă procesată</string>
     <string name="screenrecord_toast_saved">Înregistrarea a fost salvată ca %s</string>
     <string name="screenrecord_toast_save_error">Imposibil de salvat înregistrarea în fișierul de ieșire</string>
-    <string name="action_screenrecord">Înregistrare ecran</string>
-    <string name="pref_powermenu_screenrecord_title">Înregistrare ecran în meniul de alimentare</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Afișați automat tastatura</string>

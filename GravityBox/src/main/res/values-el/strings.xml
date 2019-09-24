@@ -367,9 +367,6 @@
     <string name="action_expanded_desktop_on">Διευρυμένη οθόνη ενεργή</string>
     <string name="action_expanded_desktop_off">Διευρυμένη οθόνη ανενεργή</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Στιγμιότυπο οθόνης</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Εμφάνιση μενού</string>
 
@@ -389,9 +386,6 @@
     <string name="pref_navbar_width_title">Πλάτος γραμμής πλοήγησης</string>
     <string name="pref_navbar_width_summary">Εφαρμόζεται σε κάθετη γραμμή πλοήγησης</string>
     <string name="pref_navbar_menukey_title">Εμφάνιση πάντα του πλήκτρου μενού</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Στιγμιότυπο οθόνης στο μενού λειτουργίας</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Ενεργοποίηση ελέγχου φωτεινότητας</string>
@@ -584,8 +578,6 @@
     <string name="screenrecord_toast_processing">Αδυναμία εκ νέου εγγραφής διότι η προηγούμενη επεξεργάζεται ακόμα</string>
     <string name="screenrecord_toast_saved">Η εγγραφή αποθηκεύθηκε ως %s</string>
     <string name="screenrecord_toast_save_error">Αδυναμία αποθήκευσης εγγραφής στο αρχείο εξαγωγής</string>
-    <string name="action_screenrecord">Εγγραφή οθόνης</string>
-    <string name="pref_powermenu_screenrecord_title">Εγγραφή οθόνης στο μενού λειτουργίας</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Εμφάνιση πληκτρολογίου αυτόματα</string>

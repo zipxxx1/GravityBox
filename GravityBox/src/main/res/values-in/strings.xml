@@ -351,9 +351,6 @@
     <string name="action_expanded_desktop_on">Perluasan desktop HIDUP</string>
     <string name="action_expanded_desktop_off">Perluasan desktop MATI</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Screenshot</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Tampilkan menu</string>
 
@@ -373,9 +370,6 @@
     <string name="pref_navbar_width_title">Lebar navigation bar</string>
     <string name="pref_navbar_width_summary">Berlaku untuk orientasi lanskap/tidur</string>
     <string name="pref_navbar_menukey_title">Selalu tampilkan tombol menu</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Screenshot di menu power</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Hidupkan kontrol kecerahan</string>

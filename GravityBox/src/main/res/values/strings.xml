@@ -388,9 +388,6 @@
     <string name="action_expanded_desktop_on">Expanded desktop is ON</string>
     <string name="action_expanded_desktop_off">Expanded desktop is OFF</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Screenshot</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Show menu</string>
 
@@ -410,9 +407,6 @@
     <string name="pref_navbar_width_title">Navigation bar width</string>
     <string name="pref_navbar_width_summary">Applies to vertical navigation bar</string>
     <string name="pref_navbar_menukey_title">Always show menu key</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Screenshot in power menu</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Enable brightness control</string>
@@ -607,8 +601,6 @@
     <string name="screenrecord_toast_processing">Cannot start new recording as previous recording is still being processed</string>
     <string name="screenrecord_toast_saved">Recording saved as %s</string>
     <string name="screenrecord_toast_save_error">Unable to save recording to output file</string>
-    <string name="action_screenrecord">Screen record</string>
-    <string name="pref_powermenu_screenrecord_title">Screen record in power menu</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Show dialpad automatically</string>

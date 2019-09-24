@@ -381,9 +381,6 @@
     <string name="action_expanded_desktop_on">El escritorio expandido está ACTIVADO</string>
     <string name="action_expanded_desktop_off">El escritorio expandido está DESACTIVADO</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Captura de pantalla</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Mostrar menú</string>
 
@@ -403,9 +400,6 @@
     <string name="pref_navbar_width_title">Anchura de la barra de navegación</string>
     <string name="pref_navbar_width_summary">Se aplica a la barra de navegación vertical</string>
     <string name="pref_navbar_menukey_title">Mostrar siempre botón menú</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Captura de pantalla en el menú de apagado</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Habilitar control de brillo</string>
@@ -598,8 +592,6 @@
     <string name="screenrecord_toast_processing">No se puede grabar aún porque la grabación anterior se está procesando</string>
     <string name="screenrecord_toast_saved">Grabación guardada como %s</string>
     <string name="screenrecord_toast_save_error">Imposible guardar grabación en el archivo de salida</string>
-    <string name="action_screenrecord">Grabar pantalla</string>
-    <string name="pref_powermenu_screenrecord_title">Grabar pantalla en menú de apagado</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostrar teclado numérico automáticamente</string>

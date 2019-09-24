@@ -320,8 +320,6 @@
     <string name="action_expanded_desktop_title">Bureau étendu</string>
     <string name="action_expanded_desktop_on">Bureau étendu : ON</string>
     <string name="action_expanded_desktop_off">Bureau étendu : OFF</string>
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Capture d\'écran</string>
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Afficher le menu</string>
     <!-- HW Key Action: Expanded desktop -->
@@ -339,8 +337,6 @@
     <string name="pref_navbar_width_title">Largeur barre de navigation</string>
     <string name="pref_navbar_width_summary">Valable pour la barre de navigation verticale</string>
     <string name="pref_navbar_menukey_title">Toujours afficher la touche menu</string>
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Capture d\'écran dans le menu d\'extinction</string>
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Activer le contrôle de la luminosité</string>
     <string name="pref_statusbar_brightness_summary">Ajuste la luminosité en glissant le doigt sur la barre d\'état</string>
@@ -500,8 +496,6 @@
     <string name="screenrecord_toast_processing">Impossible de démarrer un nouvel enregistrement alors que le précédent n\'est pas encore terminé</string>
     <string name="screenrecord_toast_saved">Enregistrement sauvegardé sous %s</string>
     <string name="screenrecord_toast_save_error">Impossible de sauvegarder l\'enregistrement vers le fichier de destination</string>
-    <string name="action_screenrecord">Enregistrer l\'écran</string>
-    <string name="pref_powermenu_screenrecord_title">Enregistrer l\'écran depuis le menu d\'extinction</string>
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Afficher le pavé numérique automatiquement</string>
     <string name="pref_dialer_show_dialpad_summary">Affiche le pavé numérique automatiquement à l\'ouverture de l\'application de numérotation</string>

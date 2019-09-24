@@ -352,9 +352,6 @@
     <string name="action_expanded_desktop_on">Área de trabalho expandida ativada</string>
     <string name="action_expanded_desktop_off">Área de trabalho expandida desativada</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Captura de tela</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Exibir menu</string>
 
@@ -374,9 +371,6 @@
     <string name="pref_navbar_width_title">Largura da barra de navegação</string>
     <string name="pref_navbar_width_summary">Aplicável à barra de navegação vertical</string>
     <string name="pref_navbar_menukey_title">Sempre mostrar a tecla de menu</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Captura de tela no menu de opções de energia</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Habilitar controle de brilho</string>
@@ -569,8 +563,6 @@
     <string name="screenrecord_toast_processing">Não pôde iniciar a gravação de tela porque a gravação anterior ainda está sendo processada.</string>
     <string name="screenrecord_toast_saved">Gravação salva como %s</string>
     <string name="screenrecord_toast_save_error">Não pôde salvar o arquivo da gravação</string>
-    <string name="action_screenrecord">Gravação de tela</string>
-    <string name="pref_powermenu_screenrecord_title">Gravação de tela no menu de energia</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostrar teclado automaticamente</string>

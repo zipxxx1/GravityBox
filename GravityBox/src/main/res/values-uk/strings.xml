@@ -385,9 +385,6 @@
     <string name="action_expanded_desktop_on">Розширений стіл УВІМКНУТО</string>
     <string name="action_expanded_desktop_off">Розширений стіл ВИМКНЕНО</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Знімок екрану</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Показати меню</string>
 
@@ -407,9 +404,6 @@
     <string name="pref_navbar_width_title">Ширина панелі навігації</string>
     <string name="pref_navbar_width_summary">Застосовувати до вертикальної панелі навігації</string>
     <string name="pref_navbar_menukey_title">Завжди показувати кнопку меню</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Знімок екрану в меню вимкнення</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Включити контроль яскравості</string>
@@ -599,8 +593,6 @@
     <string name="screenrecord_toast_processing">Неможливо почати новий запис, оскільки триває обробка попередньої</string>
     <string name="screenrecord_toast_saved">Запис збережено як %s</string>
     <string name="screenrecord_toast_save_error">Неможливо зберегти запис у вихідний файл</string>
-    <string name="action_screenrecord">Запис екрану</string>
-    <string name="pref_powermenu_screenrecord_title">Запис екрану в меню вимикання</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Показати панель набору</string>

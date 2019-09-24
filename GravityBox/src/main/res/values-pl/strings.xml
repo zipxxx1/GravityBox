@@ -369,9 +369,6 @@
     <string name="action_expanded_desktop_on">Rozszerzony pulpit jest Włączony</string>
     <string name="action_expanded_desktop_off">Rozszerzony pulpit jest Wyłączony</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Zrzut ekranu</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Pokaż menu</string>
 
@@ -391,9 +388,6 @@
     <string name="pref_navbar_width_title">Szerokość paska nawigacji</string>
     <string name="pref_navbar_width_summary">Dotyczy orientacji poziomej</string>
     <string name="pref_navbar_menukey_title">Zawsze pokazuj klawisz menu</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Zrzut ekranu w menu zasilania</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Włącz kontrolę jasności</string>
@@ -583,8 +577,6 @@
     <string name="screenrecord_toast_processing">Nie można rozpocząć nowego nagrania jeśli poprzednie nagranie jest nadal przetwarzane</string>
     <string name="screenrecord_toast_saved">Nagranie zapisane jako %s</string>
     <string name="screenrecord_toast_save_error">Nie można zapisać nagrania do pliku wyjściowego</string>
-    <string name="action_screenrecord">Nagrywanie ekranu</string>
-    <string name="pref_powermenu_screenrecord_title">Nagrywanie ekranu w menu zasilania</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Automatycznie pokaż klawiaturę telefonu</string>

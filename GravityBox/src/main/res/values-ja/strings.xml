@@ -315,8 +315,6 @@
     <string name="action_expanded_desktop_title">拡張デスクトップ</string>
     <string name="action_expanded_desktop_on">拡張デスクトップはオンです</string>
     <string name="action_expanded_desktop_off">拡張デスクトップはオフです</string>
-    <!-- Power menu screenshot -->
-    <string name="screenshot">スクリーンショット</string>
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">メニューを表示</string>
     <!-- HW Key Action: Expanded desktop -->
@@ -334,8 +332,6 @@
     <string name="pref_navbar_width_title">ナビバーの幅</string>
     <string name="pref_navbar_width_summary">縦向きのナビバーの幅を変更します。</string>
     <string name="pref_navbar_menukey_title">メニューキーを常時表示</string>
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">電源メニューにスクリーンショットを追加</string>
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">明るさ操作を有効化</string>
     <string name="pref_statusbar_brightness_summary">ステータスバー上でスライドして明るさ調整できるようにします。</string>
@@ -494,8 +490,6 @@
     <string name="screenrecord_toast_processing">前回の録画が進行中なので録画できません。</string>
     <string name="screenrecord_toast_saved">録画を保存しました： %s</string>
     <string name="screenrecord_toast_save_error">録画を保存できませんでした</string>
-    <string name="action_screenrecord">画面の録画</string>
-    <string name="pref_powermenu_screenrecord_title">電源メニューに画面の録画を追加</string>
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">ダイアルパッドを自動表示</string>
     <string name="pref_dialer_show_dialpad_summary">電話アプリを開いた時に自動的にダイアルパッドを表示します。</string>

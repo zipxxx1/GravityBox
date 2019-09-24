@@ -381,9 +381,6 @@
     <string name="action_expanded_desktop_on">Erweiterter Desktop ist AN</string>
     <string name="action_expanded_desktop_off">Erweiterter Desktop ist AUS</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Screenshot</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Menü anzeigen</string>
 
@@ -403,9 +400,6 @@
     <string name="pref_navbar_width_title">Breite der Navigationsleiste</string>
     <string name="pref_navbar_width_summary">Breite der vertikalen Navigationsleiste festlegen</string>
     <string name="pref_navbar_menukey_title">Menü-Taste immer anzeigen</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Screenshot im Ausschaltmenü</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Helligkeitsregelung aktivieren</string>
@@ -595,8 +589,6 @@
     <string name="screenrecord_toast_processing">Kann Aufnahme nicht starten da die vorherige Aufnahme noch bearbeitet wird</string>
     <string name="screenrecord_toast_saved">Aufnahme gespeichert als %s</string>
     <string name="screenrecord_toast_save_error">Kann Aufnahme nicht speichern</string>
-    <string name="action_screenrecord">Bildschirmaufnahme</string>
-    <string name="pref_powermenu_screenrecord_title">Bildschirmaufnahme im Ausschaltmenü</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Wählfeld anzeigen</string>

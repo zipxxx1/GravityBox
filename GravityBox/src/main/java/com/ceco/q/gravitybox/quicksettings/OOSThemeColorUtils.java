@@ -20,9 +20,9 @@ import com.ceco.q.gravitybox.GravityBox;
 import android.content.Context;
 import de.robv.android.xposed.XposedHelpers;
 
-class OOSThemeColorUtils {
+public class OOSThemeColorUtils {
     private static final String TAG = "GB:OOSThemeColorUtils";
-    private static final String CLASS_THEME_COLOR_UTILS = "com.android.systemui.util.ThemeColorUtils";
+    private static final String CLASS_THEME_COLOR_UTILS = "com.oneplus.util.ThemeColorUtils";
 
     private static final int QS_PRIMARY_TEXT = 0x1;
     private static final int QS_SECONDARY_TEXT = 0x2;

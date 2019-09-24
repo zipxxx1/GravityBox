@@ -301,8 +301,6 @@
     <string name="action_expanded_desktop_on">화면 확장이 활성화 되었습니다.</string>
     <string name="action_expanded_desktop_off">화면 확장이 비활성화 되었습니다.</string>
 
-    <string name="screenshot">스크린샷</string>
-
     <string name="hwkey_action_menu">메뉴 표시</string>
 
     <string name="hwkey_action_expanded_desktop">화면 확장 모드 전환</string>
@@ -319,8 +317,6 @@
     <string name="pref_navbar_width_title">네비게이션 바 폭</string>
     <string name="pref_navbar_width_summary">네비게이션 바가 왼쪽 (혹은 오른쪽)에 놓여져 있을 때 적용됩니다.</string>
     <string name="pref_navbar_menukey_title">항상 메뉴 키 보이기</string>
-
-    <string name="pref_powermenu_screenshot_title">전원 옵션에서 스크린샷 표시</string>
 
     <string name="pref_statusbar_brightness_title">밝기 컨트롤 사용</string>
     <string name="pref_statusbar_brightness_summary">상단바를 슬라이드하면 밝기가 조절됩니다. (자동 밝기 조절이 비활성화 되어야함)</string>
@@ -479,8 +475,6 @@
     <string name="screenrecord_toast_processing">이전 녹화가 처리 중이여서 새로 녹화를 할 수 없습니다. 잠시만 기다려 주세요.</string>
     <string name="screenrecord_toast_saved">화면 녹화 저장됨 : %s</string>
     <string name="screenrecord_toast_save_error">녹화된 파일을 저장 할 수 없습니다.</string>
-    <string name="action_screenrecord">화면 녹화</string>
-    <string name="pref_powermenu_screenrecord_title">전원 옵션에서 화면 녹화 보이기</string>
 
     <string name="pref_dialer_show_dialpad_title">다이얼패드 보이기</string>
     <string name="pref_dialer_show_dialpad_summary">전화 앱을 실행하면 다이얼패드를 바로 보여지게 합니다.</string>

@@ -386,9 +386,6 @@
     <string name="action_expanded_desktop_on">Расшир.рабочий стол ВКЛ</string>
     <string name="action_expanded_desktop_off">Расшир.рабочий стол ВЫКЛ</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Снимок экрана</string>
-    
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Показать меню</string>
 
@@ -408,9 +405,6 @@
     <string name="pref_navbar_width_title">Ширина панели навигации</string>
     <string name="pref_navbar_width_summary">Применимо к вертикальной панели</string>
     <string name="pref_navbar_menukey_title">Показывать кнопку меню</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Снимок экрана в меню</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Включить контроль яркости</string>
@@ -605,8 +599,6 @@
     <string name="screenrecord_toast_processing">Невозможно начать новую запись, так как идёт обработка предыдущей</string>
     <string name="screenrecord_toast_saved">Запись сохранена как %s</string>
     <string name="screenrecord_toast_save_error">Невозможно сохранить запись в исходный файл</string>
-    <string name="action_screenrecord">Запись экрана</string>
-    <string name="pref_powermenu_screenrecord_title">Запись экрана в меню</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Показать панель набора</string>

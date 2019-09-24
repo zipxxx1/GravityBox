@@ -385,9 +385,6 @@
     <string name="action_expanded_desktop_on">Genişletilmiş masaüstü AÇIK</string>
     <string name="action_expanded_desktop_off">Genişletilmiş masaüstü KAPALI</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Ekran görüntüsü</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Menüyü göster</string>
 
@@ -407,9 +404,6 @@
     <string name="pref_navbar_width_title">Gezinti çubuğu genişliği</string>
     <string name="pref_navbar_width_summary">Dikey gezinti çubuğuna uygulanır</string>
     <string name="pref_navbar_menukey_title">Menü tuşunu her zaman göster</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Güç menüsünde ekran görüntüsü</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Parlaklık kontrolünü etkinleştir</string>
@@ -599,8 +593,6 @@
     <string name="screenrecord_toast_processing">Eski kayıt devam ettiği sürece yeni kayıt başlatılamaz</string>
     <string name="screenrecord_toast_saved">Kayıt şuraya kaydedildi %s</string>
     <string name="screenrecord_toast_save_error">Kayıt çıkış dosyasına yazılamıyor</string>
-    <string name="action_screenrecord">Ekran kaydı</string>
-    <string name="pref_powermenu_screenrecord_title">Güç menüsünde ekran kaydı</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Tuş takımını otomatik göster</string>

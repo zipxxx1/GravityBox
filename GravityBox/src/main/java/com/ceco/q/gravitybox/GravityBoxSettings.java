@@ -153,8 +153,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_REBOOT_ALLOW_ON_LOCKSCREEN = "pref_reboot_allow_on_lockscreen";
     public static final String PREF_KEY_REBOOT_ALLOW_SOFTREBOOT = "pref_reboot_allow_softreboot";
     public static final String PREF_KEY_REBOOT_CONFIRM_REQUIRED = "pref_reboot_confirm_required";
-    public static final String PREF_KEY_POWERMENU_SCREENSHOT = "pref_powermenu_screenshot";
-    public static final String PREF_KEY_POWERMENU_SCREENRECORD = "pref_powermenu_screenrecord";
     public static final String PREF_KEY_POWERMENU_DISABLE_ON_LOCKSCREEN = "pref_powermenu_disable_on_lockscreen";
     public static final String PREF_KEY_POWERMENU_EXPANDED_DESKTOP = "pref_powermenu_expanded_desktop";
 

@@ -26,7 +26,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -48,6 +47,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 import com.ceco.q.gravitybox.adapters.*;
+import com.ceco.q.gravitybox.quicksettings.OOSThemeColorUtils;
 
 public class ModPowerMenu {
     private static final String TAG = "GB:ModPowerMenu";
@@ -66,8 +66,6 @@ public class ModPowerMenu {
     private static Drawable mRecoveryIcon;
     private static Drawable mBootloaderIcon;
     private static Drawable mExpandedDesktopIcon;
-    private static Drawable mScreenshotIcon;
-    private static Drawable mScreenrecordIcon;
     private static List<IIconListAdapterItem> mRebootItemList;
     private static String mRebootConfirmStr;
     private static String mRebootConfirmRecoveryStr;
@@ -75,14 +73,10 @@ public class ModPowerMenu {
     private static String mExpandedDesktopStr;
     private static String mExpandedDesktopOnStr;
     private static String mExpandedDesktopOffStr;
-    private static String mScreenshotStr;
-    private static String mScreenrecordStr;
     private static Unhook mRebootActionHook;
     private static Unhook mRebootActionShowHook;
     private static Object mRebootActionItem;
     private static boolean mRebootActionItemStockExists;
-    private static Object mScreenshotAction;
-    private static Object mScreenrecordAction;
     private static Object mExpandedDesktopAction;
     private static boolean mRebootConfirmRequired;
     private static boolean mRebootAllowOnLockscreen;
@@ -115,16 +109,12 @@ public class ModPowerMenu {
                    mExpandedDesktopStr = gbContext.getString(R.string.action_expanded_desktop_title);
                    mExpandedDesktopOnStr = gbContext.getString(R.string.action_expanded_desktop_on);
                    mExpandedDesktopOffStr = gbContext.getString(R.string.action_expanded_desktop_off);
-                   mScreenshotStr = gbContext.getString(R.string.screenshot);
-                   mScreenrecordStr = gbContext.getString(R.string.action_screenrecord);
 
                    mRebootIcon = gbContext.getDrawable(R.drawable.ic_lock_reboot);
                    mRebootSoftIcon = gbContext.getDrawable(R.drawable.ic_lock_reboot_soft);
                    mRecoveryIcon = gbContext.getDrawable(R.drawable.ic_lock_recovery);
                    mBootloaderIcon = gbContext.getDrawable(R.drawable.ic_lock_bootloader);
                    mExpandedDesktopIcon = gbContext.getDrawable(R.drawable.ic_lock_expanded_desktop);
-                   mScreenshotIcon = gbContext.getDrawable(R.drawable.ic_lock_screenshot);
-                   mScreenrecordIcon = gbContext.getDrawable(R.drawable.ic_lock_screen_record);
 
                    mRebootItemList = new ArrayList<>();
                    mRebootItemList.add(new BasicIconListItem(mRebootStr, null, mRebootIcon, null));
@@ -141,7 +131,6 @@ public class ModPowerMenu {
             });
 
             XposedHelpers.findAndHookMethod(globalActionsClass, "createDialog", new XC_MethodHook() {
-
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) {
                     if (mRebootActionHook != null) {
@@ -248,26 +237,6 @@ public class ModPowerMenu {
                         index++;
                     }
 
-                    // Add screenshot action if enabled
-                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWERMENU_SCREENSHOT, false)) {
-                        if (mScreenshotAction == null) {
-                            mScreenshotAction = Proxy.newProxyInstance(classLoader, new Class<?>[] { actionClass },
-                                new ScreenshotAction());
-                            if (DEBUG) log("mScreenshotAction created");
-                        }
-                        mItems.add(index++, mScreenshotAction);
-                    }
-
-                    // Add screenrecord action if enabled
-                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWERMENU_SCREENRECORD, false)) {
-                        if (mScreenrecordAction == null) {
-                            mScreenrecordAction = Proxy.newProxyInstance(classLoader, new Class<?>[] { actionClass },
-                                new ScreenrecordAction());
-                            if (DEBUG) log("mScreenrecordAction created");
-                        }
-                        mItems.add(index++, mScreenrecordAction);
-                    }
-
                     // Add Expanded Desktop action if enabled
                     if (ExpandedDesktopAction.isExpandedDesktopEnabled(prefs) &&
                             prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWERMENU_EXPANDED_DESKTOP, true)) {
@@ -310,13 +279,7 @@ public class ModPowerMenu {
                     }
                 }
             };
-            if (Utils.isParanoidRom()) {
-                XposedHelpers.findAndHookMethod(globalActionsClass, "showDialog", 
-                        boolean.class, boolean.class, boolean.class, showDialogHook);
-            } else {
-                XposedHelpers.findAndHookMethod(globalActionsClass, "showDialog", 
-                        boolean.class, boolean.class, showDialogHook);
-            }
+            XposedBridge.hookAllMethods(globalActionsClass, "showDialog", showDialogHook);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -377,7 +340,9 @@ public class ModPowerMenu {
                     list.remove(1);
                 }
                 final ContextThemeWrapper ctw = getThemedContext(context, android.R.style.Theme_Material_Dialog_Alert);
-                int color = ColorUtils.getColorFromStyleAttr(ctw, android.R.attr.colorControlNormal);
+                int color = Utils.isOxygenOsRom() ?
+                        OOSThemeColorUtils.getColorAccent(context) :
+                        ColorUtils.getColorFromStyleAttr(ctw, android.R.attr.colorControlNormal);
                 mRebootIcon.setTint(color);
                 mRebootSoftIcon.setTint(color);
                 mRecoveryIcon.setTint(color);
@@ -452,12 +417,11 @@ public class ModPowerMenu {
                 Resources res = mContext.getResources();
                 LayoutInflater li = (LayoutInflater) args[3];
                 int layoutId = res.getIdentifier(
-                        "global_actions_item", "layout", ITEM_LAYOUT_PACKAGE);
+                        "global_actions_grid_item", "layout", ITEM_LAYOUT_PACKAGE);
                 View v = li.inflate(layoutId, (ViewGroup) args[2], false);
 
                 ImageView icon = v.findViewById(res.getIdentifier(
                         "icon", "id", "android"));
-                mRebootIcon.setTint(ColorUtils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
                 icon.setImageDrawable(mRebootIcon);
 
                 TextView messageView = v.findViewById(res.getIdentifier(
@@ -485,6 +449,8 @@ public class ModPowerMenu {
                 return true;
             } else if (methodName.equals("getLabelForAccessibility")) {
                 return null;
+            } else if (methodName.equals("shouldBeSeparated")) {
+                return false;
             } else {
                 GravityBox.log(TAG, "RebootAction: Unhandled invocation method: " + methodName);
                 return null;
@@ -544,12 +510,11 @@ public class ModPowerMenu {
                 Resources res = mContext.getResources();
                 LayoutInflater li = (LayoutInflater) args[3];
                 int layoutId = res.getIdentifier(
-                        "global_actions_item", "layout", ITEM_LAYOUT_PACKAGE);
+                        "global_actions_grid_item", "layout", ITEM_LAYOUT_PACKAGE);
                 View v = li.inflate(layoutId, (ViewGroup) args[2], false);
 
                 ImageView icon = v.findViewById(res.getIdentifier(
                         "icon", "id", "android"));
-                mExpandedDesktopIcon.setTint(ColorUtils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
                 icon.setImageDrawable(mExpandedDesktopIcon);
 
                 TextView messageView = v.findViewById(res.getIdentifier(
@@ -577,130 +542,10 @@ public class ModPowerMenu {
                 return true;
             } else if (methodName.equals("getLabelForAccessibility")) {
                 return null;
+            } else if (methodName.equals("shouldBeSeparated")) {
+                return false;
             } else {
                 GravityBox.log(TAG, "ExpandedDesktopAction: Unhandled invocation method: " + methodName);
-                return null;
-            }
-        }
-    }
-
-    private static class ScreenshotAction implements InvocationHandler {
-        private Context mContext;
-
-        private void takeScreenshot() {
-            Intent intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
-            intent.putExtra(ModHwKeys.EXTRA_SCREENSHOT_DELAY_MS, 300L);
-            mContext.sendBroadcast(intent);
-        }
-
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) {
-            String methodName = method.getName();
-
-            if (methodName.equals("create")) {
-                mContext = (Context) args[0];
-                Resources res = mContext.getResources();
-                LayoutInflater li = (LayoutInflater) args[3];
-                int layoutId = res.getIdentifier(
-                        "global_actions_item", "layout", ITEM_LAYOUT_PACKAGE);
-                View v = li.inflate(layoutId, (ViewGroup) args[2], false);
-
-                ImageView icon = v.findViewById(res.getIdentifier(
-                        "icon", "id", "android"));
-                mScreenshotIcon.setTint(ColorUtils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
-                icon.setImageDrawable(mScreenshotIcon);
-
-                TextView messageView = v.findViewById(res.getIdentifier(
-                        "message", "id", "android"));
-                messageView.setText(mScreenshotStr);
-
-                TextView statusView = v.findViewById(res.getIdentifier(
-                        "status", "id", "android"));
-                statusView.setVisibility(View.GONE);
-
-                return v;
-            } else if (methodName.equals("onPress")) {
-                takeScreenshot();
-                return null;
-            } else if (methodName.equals("onLongPress")) {
-                return true;
-            } else if (methodName.equals("showDuringKeyguard")) {
-                return true;
-            } else if (methodName.equals("showBeforeProvisioning")) {
-                return true;
-            } else if (methodName.equals("isEnabled")) {
-                return true;
-            } else if (methodName.equals("showConditional")) {
-                return true;
-            } else if (methodName.equals("getLabelForAccessibility")) {
-                return null;
-            } else {
-                GravityBox.log(TAG, "ScreenshotAction: Unhandled invocation method: " + methodName);
-                return null;
-            }
-        }
-    }
-
-    private static class ScreenrecordAction implements InvocationHandler {
-        private Context mContext;
-
-        public ScreenrecordAction() {
-        }
-
-        private void takeScreenrecord() {
-            try {
-                Context gbContext = Utils.getGbContext(mContext);
-                Intent intent = new Intent(gbContext, ScreenRecordingService.class);
-                intent.setAction(ScreenRecordingService.ACTION_SCREEN_RECORDING_START);
-                gbContext.startService(intent);
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
-            }
-        }
-
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) {
-            String methodName = method.getName();
-
-            if (methodName.equals("create")) {
-                mContext = (Context) args[0];
-                Resources res = mContext.getResources();
-                LayoutInflater li = (LayoutInflater) args[3];
-                int layoutId = res.getIdentifier(
-                        "global_actions_item", "layout", ITEM_LAYOUT_PACKAGE);
-                View v = li.inflate(layoutId, (ViewGroup) args[2], false);
-
-                ImageView icon = v.findViewById(res.getIdentifier(
-                        "icon", "id", "android"));
-                mScreenrecordIcon.setTint(ColorUtils.getColorFromStyleAttr(mContext, android.R.attr.colorControlNormal));
-                icon.setImageDrawable(mScreenrecordIcon);
-
-                TextView messageView = v.findViewById(res.getIdentifier(
-                        "message", "id", "android"));
-                messageView.setText(mScreenrecordStr);
-
-                TextView statusView = v.findViewById(res.getIdentifier(
-                        "status", "id", "android"));
-                statusView.setVisibility(View.GONE);
-
-                return v;
-            } else if (methodName.equals("onPress")) {
-                takeScreenrecord();
-                return null;
-            } else if (methodName.equals("onLongPress")) {
-                return true;
-            } else if (methodName.equals("showDuringKeyguard")) {
-                return true;
-            } else if (methodName.equals("showBeforeProvisioning")) {
-                return true;
-            } else if (methodName.equals("isEnabled")) {
-                return true;
-            } else if (methodName.equals("showConditional")) {
-                return true;
-            } else if (methodName.equals("getLabelForAccessibility")) {
-                return null;
-            } else {
-                GravityBox.log(TAG, "ScreenrecordAction: Unhandled invocation method: " + methodName);
                 return null;
             }
         }

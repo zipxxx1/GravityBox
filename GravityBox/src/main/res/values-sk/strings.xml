@@ -365,9 +365,6 @@
     <string name="action_expanded_desktop_on">Rozšírená plocha je ZAP</string>
     <string name="action_expanded_desktop_off">Rozšírená plocha je VYP</string>
 
-    <!-- Power menu screenshot -->
-    <string name="screenshot">Screenshot</string>
-
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Vyvolať menu</string>
 
@@ -387,9 +384,6 @@
     <string name="pref_navbar_width_title">Šírka navigačnej lišty</string>
     <string name="pref_navbar_width_summary">Pre vertikálnu navigačnú lištu</string>
     <string name="pref_navbar_menukey_title">Vždy zobraziť menu tlačidlo</string>
-
-    <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Screenshot v menu napájania</string>
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Povoliť ovládanie jasu</string>
@@ -579,8 +573,6 @@
     <string name="screenrecord_toast_processing">Nie je možné začať nový záznam, pretože prebieha spracovanie predošlého záznamu</string>
     <string name="screenrecord_toast_saved">Záznam uložený ako %s</string>
     <string name="screenrecord_toast_save_error">Nie je možné uložiť záznam do výstupného súboru</string>
-    <string name="action_screenrecord">Záznam obrazovky</string>
-    <string name="pref_powermenu_screenrecord_title">Záznam obrazovky v ponuke napájania</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Zobraziť ciferník automaticky</string>
