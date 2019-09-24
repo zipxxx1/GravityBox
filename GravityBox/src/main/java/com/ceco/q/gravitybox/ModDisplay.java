@@ -407,7 +407,7 @@ public class ModDisplay {
                         Prevents status bar and navigation bar from being captured.*/
                         Class<?> surfaceCtrl = XposedHelpers.findClass("android.view.SurfaceControl", classLoader);
                         final Bitmap bmp = (Bitmap) XposedHelpers.callStaticMethod(surfaceCtrl, "screenshot",
-                             new Rect(), naturalW, naturalH, 0, 22000, false, Surface.ROTATION_0);
+                             new Rect(), naturalW, naturalH, false, Surface.ROTATION_0);
                         if (bmp == null) return;
 
                         final Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");

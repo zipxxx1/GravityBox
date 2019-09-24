@@ -270,6 +270,10 @@ public class ModStatusBar {
         }
     }
 
+    public static Object getStatusBar() {
+        return mStatusBar;
+    }
+
     public static int getStatusBarState() {
         return mStatusBarState;
     }

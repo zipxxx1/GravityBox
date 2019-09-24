@@ -14,9 +14,7 @@
  */
 package com.ceco.q.gravitybox;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.ceco.q.gravitybox.ModStatusBar.StatusBarState;
@@ -34,7 +32,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
@@ -64,16 +61,17 @@ public class ModLockscreen {
     private static final String CLASS_KG_PASSWORD_VIEW = CLASS_PATH + ".KeyguardPasswordView";
     private static final String CLASS_KG_PIN_VIEW = CLASS_PATH + ".KeyguardPINView";
     private static final String CLASS_KG_PASSWORD_TEXT_VIEW = CLASS_PATH + ".PasswordTextView";
-    private static final String CLASS_KG_PASSWORD_TEXT_VIEW_PIN = CLASS_PATH + ".PasswordTextViewForPin";
     public static final String CLASS_KGVIEW_MEDIATOR = "com.android.systemui.keyguard.KeyguardViewMediator";
-    private static final String CLASS_SB_WINDOW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
+    private static final String CLASS_SB_WINDOW_CONTROLLER = "com.android.systemui.statusbar.phone.StatusBarWindowController";
     private static final String CLASS_KG_VIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
-    private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
-    private static final String CLASS_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
+    private static final String CLASS_CARRIER_TEXT_CTRL = CLASS_PATH + ".CarrierTextController";
+    private static final String CLASS_CARRIER_TEXT_INFO = CLASS_CARRIER_TEXT_CTRL + ".CarrierTextCallbackInfo";
+    private static final String CLASS_NOTIF_ROW = "com.android.systemui.statusbar.notification.row.ExpandableNotificationRow";
     private static final String CLASS_KG_BOTTOM_AREA_VIEW = "com.android.systemui.statusbar.phone.KeyguardBottomAreaView";
     private static final String CLASS_SCRIM_CONTROLLER = "com.android.systemui.statusbar.phone.ScrimController";
     private static final String CLASS_SCRIM_STATE = "com.android.systemui.statusbar.phone.ScrimState";
     private static final String CLASS_KG_SLICE_PROVIDER = "com.android.systemui.keyguard.KeyguardSliceProvider";
+    private static final String CLASS_NOTIF_MEDIA_MANAGER = "com.android.systemui.statusbar.NotificationMediaManager";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
@@ -90,7 +88,6 @@ public class ModLockscreen {
     private static Context mGbContext;
     private static Bitmap mCustomBg;
     private static QuietHours mQuietHours;
-    private static Object mStatusBar;
     private static DirectUnlock mDirectUnlock = DirectUnlock.OFF;
     private static UnlockPolicy mDirectUnlockPolicy = UnlockPolicy.DEFAULT;
     private static LockscreenAppBar mAppBar;
@@ -98,7 +95,6 @@ public class ModLockscreen {
     private static UnlockPolicy mSmartUnlockPolicy;
     private static UnlockHandler mUnlockHandler;
     private static GestureDetector mGestureDetector;
-    private static List<TextView> mCarrierTextViews = new ArrayList<>();
     private static KeyguardStateMonitor mKgMonitor;
     private static LockscreenPinScrambler mPinScrambler;
     private static AppLauncher.AppInfo mLeftAction;
@@ -163,7 +159,7 @@ public class ModLockscreen {
         final Class<?> kgPINViewClass;
         final Class<?> kgPasswordTextViewClass;
         final Class<?> kgViewMediatorClass;
-        final Class<?> sbWindowManagerClass;
+        final Class<?> sbWindowControllerClass;
         try {
             mPrefs = prefs;
             mQuietHours = new QuietHours(qhPrefs);
@@ -172,7 +168,7 @@ public class ModLockscreen {
             kgPINViewClass = XposedHelpers.findClass(CLASS_KG_PIN_VIEW, classLoader);
             kgPasswordTextViewClass = XposedHelpers.findClass(CLASS_KG_PASSWORD_TEXT_VIEW, classLoader);
             kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, classLoader);
-            sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader);
+            sbWindowControllerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_CONTROLLER, classLoader);
 
             XposedHelpers.findAndHookMethod(kgViewMediatorClass, "setupLocked", new XC_MethodHook() {
                 @Override
@@ -226,15 +222,11 @@ public class ModLockscreen {
 
         // custom background
         try {
-            XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_STATUSBAR, classLoader,
+            XposedHelpers.findAndHookMethod(CLASS_NOTIF_MEDIA_MANAGER, classLoader,
                     "updateMediaMetaData", boolean.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
-                    if (mStatusBar == null) {
-                        mStatusBar = param.thisObject;
-                    }
-
-                    int state = XposedHelpers.getIntField(mStatusBar, "mState");
+                    int state = XposedHelpers.getIntField(ModStatusBar.getStatusBar(), "mState");
                     if (state != StatusBarState.KEYGUARD && state != StatusBarState.SHADE_LOCKED) {
                         if (DEBUG)
                             log("updateMediaMetaData: Invalid status bar state: " + state);
@@ -246,18 +238,17 @@ public class ModLockscreen {
                         return;
                     }
 
-                    View backDrop = (View) XposedHelpers.getObjectField(mStatusBar, "mBackdrop");
+                    View backDrop = (View) XposedHelpers.getObjectField(param.thisObject, "mBackdrop");
                     ImageView backDropBack = (ImageView) XposedHelpers.getObjectField(
-                            mStatusBar, "mBackdropBack");
+                            param.thisObject, "mBackdropBack");
                     if (backDrop == null || backDropBack == null) {
                         if (DEBUG) log("updateMediaMetaData: called too early");
                         return;
                     }
 
                     boolean hasArtwork = false;
-                    Object mediaManager = XposedHelpers.getObjectField(mStatusBar, "mMediaManager");
                     MediaMetadata mm = (MediaMetadata) XposedHelpers.callMethod(
-                            mediaManager, "getMediaMetadata");
+                            param.thisObject, "getMediaMetadata");
                     if (mm != null) {
                         hasArtwork = mm.getBitmap(MediaMetadata.METADATA_KEY_ART) != null ||
                                 mm.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART) != null;
@@ -269,13 +260,6 @@ public class ModLockscreen {
                         backDrop.animate().cancel();
                         backDropBack.animate().cancel();
                         backDropBack.setImageBitmap(mCustomBg);
-                        if (XposedHelpers.getBooleanField(
-                                mStatusBar, "mScrimSrcModeEnabled")) {
-                            PorterDuffXfermode xferMode = (PorterDuffXfermode) XposedHelpers
-                                    .getObjectField(mStatusBar, "mSrcXferMode");
-                            XposedHelpers.callMethod(backDropBack.getDrawable().mutate(),
-                                    "setXfermode", xferMode);
-                        }
                         backDrop.setVisibility(View.VISIBLE);
                         backDrop.animate().alpha(1f);
                         if (DEBUG)
@@ -292,7 +276,7 @@ public class ModLockscreen {
             final Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_ROTATION, "DEFAULT"));
             if (triState != Utils.TriState.DEFAULT) {
-                XposedHelpers.findAndHookMethod(sbWindowManagerClass, "shouldEnableKeyguardScreenRotation",
+                XposedHelpers.findAndHookMethod(sbWindowControllerClass, "shouldEnableKeyguardScreenRotation",
                         new XC_MethodReplacement() {
                     @Override
                     protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
@@ -402,27 +386,6 @@ public class ModLockscreen {
             GravityBox.log(TAG, "Error setting up append hook of PasswordTextView:", t);
         }
 
-        if (Utils.isOxygenOsRom()) {
-            try {
-                XposedHelpers.findAndHookMethod(CLASS_KG_PASSWORD_TEXT_VIEW_PIN, classLoader,
-                        "append", char.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(final MethodHookParam param) {
-                        if (!mPrefs.getBoolean(
-                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) return;
-                        Object pinView = XposedHelpers.getAdditionalInstanceField(param.thisObject, "gbPINView");
-                        if (pinView != null) {
-                            if (DEBUG) log("quickUnlock: OnePlus3T PasswordTextViewForPin");
-                            String entry = (String) XposedHelpers.getObjectField(param.thisObject, "mText");
-                            doQuickUnlock(pinView, entry);
-                        }
-                    }
-                });
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "Error setting up append hook of OnePlus PasswordTextViewForPin:", t);
-            }
-        }
-
         // Suppress lockscreen sounds during QuietHours
         try {
             XposedHelpers.findAndHookMethod(kgViewMediatorClass, "playSounds", boolean.class, new XC_MethodHook() {
@@ -439,7 +402,7 @@ public class ModLockscreen {
 
         // Direct unlock and Smart unlock
         try {
-            XposedHelpers.findAndHookMethod(CLASS_KG_VIEW_MANAGER, classLoader, "onScreenTurnedOff",
+            XposedHelpers.findAndHookMethod(CLASS_KG_VIEW_MANAGER, classLoader, "onFinishedGoingToSleep",
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
@@ -457,7 +420,6 @@ public class ModLockscreen {
                         mUnlockHandler.removeMessages(MSG_DIRECT_UNLOCK);
                         mUnlockHandler.removeMessages(MSG_SMART_UNLOCK);
                     }
-                    updateCarrierText();
                 }
             });
 
@@ -465,6 +427,13 @@ public class ModLockscreen {
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
+                    final String bgType = mPrefs.getString(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND,
+                            GravityBoxSettings.LOCKSCREEN_BG_DEFAULT);
+                    if (!bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_DEFAULT)) {
+                        updateMediaMetaData();
+                    }
+
                     if (!mKgMonitor.isSecured() || mUnlockHandler == null) {
                         if (DEBUG) log("onScreenTurnedOn: noop as keyguard is not secured");
                         return;
@@ -554,19 +523,17 @@ public class ModLockscreen {
         if (!Utils.isXperiaDevice()) {
             XC_MethodHook carrierTextHook = new XC_MethodHook() {
                 @Override
-                protected void afterHookedMethod(final MethodHookParam param) {
-                    if (!mCarrierTextViews.contains(param.thisObject)) {
-                        mCarrierTextViews.add((TextView) param.thisObject);
-                    }
+                protected void beforeHookedMethod(final MethodHookParam param) {
                     String text = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, "");
                     if (!text.isEmpty()) {
-                        ((TextView)param.thisObject).setText(text.trim().isEmpty() ? "" : text);
+                        XposedHelpers.setObjectField(param.args[0], "carrierText",
+                            text.trim().isEmpty() ? "" : text);
                     }
                 }
             };
             try {
-                XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT,
-                        classLoader, "updateCarrierText", carrierTextHook);
+                XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT_CTRL,
+                        classLoader, "postToCallback", CLASS_CARRIER_TEXT_INFO, carrierTextHook);
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error setting up carrier text hook:", t);
             }
@@ -672,7 +639,7 @@ public class ModLockscreen {
         // Disable Alarm info
         try {
             Class<?> classKgSliceProvider = XposedHelpers.findClass(CLASS_KG_SLICE_PROVIDER, classLoader);
-            XposedBridge.hookAllMethods(classKgSliceProvider, "addNextAlarm", new XC_MethodHook() {
+            XposedBridge.hookAllMethods(classKgSliceProvider, "addNextAlarmLocked", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ALARM_INFO_DISABLE, false)) {
@@ -724,7 +691,7 @@ public class ModLockscreen {
         if (policy == UnlockPolicy.DEFAULT) return true;
 
         try {
-            ViewGroup stack = (ViewGroup) XposedHelpers.getObjectField(mStatusBar, "mStackScroller");
+            ViewGroup stack = (ViewGroup) XposedHelpers.getObjectField(ModStatusBar.getStatusBar(), "mStackScroller");
             int childCount = stack.getChildCount();
             int notifCount = 0;
             int notifClearableCount = 0;
@@ -771,7 +738,7 @@ public class ModLockscreen {
 
     private static void showBouncer() {
         try {
-            XposedHelpers.callMethod(mStatusBar, "showBouncer", true);
+            XposedHelpers.callMethod(ModStatusBar.getStatusBar(), "showBouncer", true);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -779,7 +746,7 @@ public class ModLockscreen {
 
     private static void makeExpandedInvisible() {
         try {
-            XposedHelpers.callMethod(mStatusBar, "makeExpandedInvisible");
+            XposedHelpers.callMethod(ModStatusBar.getStatusBar(), "makeExpandedInvisible");
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -842,10 +809,8 @@ public class ModLockscreen {
                           GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
             }
 
-            if (updateMediaMetadata && mStatusBar != null) {
-                try {
-                    XposedHelpers.callMethod(mStatusBar, "updateMediaMetaData", false, false);
-                } catch (Throwable ignore) { }
+            if (updateMediaMetadata) {
+                updateMediaMetaData();
             }
 
             if (DEBUG) log("prepareCustomBackground: type=" + bgType);
@@ -854,12 +819,21 @@ public class ModLockscreen {
         }
     }
 
+    private static void updateMediaMetaData() {
+        if (ModStatusBar.getStatusBar() != null) {
+            try {
+                Object presenter = XposedHelpers.getObjectField(ModStatusBar.getStatusBar(), "mPresenter");
+                XposedHelpers.callMethod(presenter, "updateMediaMetaData", false, false);
+            } catch (Throwable ignore) { }
+        }
+    }
+
     private static synchronized void setLastScreenBackground(boolean refresh) {
         try {
             String kisImageFile = mGbContext.getFilesDir() + "/kis_image.png";
             mCustomBg = BitmapFactory.decodeFile(kisImageFile);
-            if (refresh && mStatusBar != null) {
-                XposedHelpers.callMethod(mStatusBar, "updateMediaMetaData", false, false);
+            if (refresh) {
+                updateMediaMetaData();
             }
             if (DEBUG_KIS) log("setLastScreenBackground: Last screen background updated");
         } catch (Throwable t) {
@@ -880,16 +854,6 @@ public class ModLockscreen {
             });
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
-        }
-    }
-
-    private static void updateCarrierText() {
-        for (TextView tv : mCarrierTextViews) {
-            try {
-                XposedHelpers.callMethod(tv, "updateCarrierText");
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
-            }
         }
     }
 
