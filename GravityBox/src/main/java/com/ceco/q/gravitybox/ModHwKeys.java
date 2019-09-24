@@ -75,11 +75,11 @@ import de.robv.android.xposed.callbacks.XCallback;
 public class ModHwKeys {
     private static final String TAG = "GB:ModHwKeys";
     private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.server.policy.PhoneWindowManager";
-    private static final String CLASS_PHONE_WINDOW_MANAGER_OEM = "com.android.server.policy.OemPhoneWindowManager";
     private static final String CLASS_WINDOW_STATE = "com.android.server.policy.WindowManagerPolicy$WindowState";
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "com.android.server.policy.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
     private static final String CLASS_VIBRATION_EFFECT = "android.os.VibrationEffect";
+    private static final String CLASS_HOME_BUTTON_HANDLER = CLASS_PHONE_WINDOW_MANAGER + ".DisplayHomeButtonHandler";
     private static final boolean DEBUG = false;
 
     private static final int FLAG_WAKE = 0x00000001;
@@ -521,18 +521,12 @@ public class ModHwKeys {
             mWindowStateClass = XposedHelpers.findClass(CLASS_WINDOW_STATE, classLoader);
 
             mPhoneWindowManagerClass = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
-            Class<?> classPhoneWindowManagerOem = null;
-            if (Utils.isOxygenOsRom()) {
-                classPhoneWindowManagerOem = XposedHelpers.findClass(
-                        CLASS_PHONE_WINDOW_MANAGER_OEM, classLoader);
-            }
             initReflections(mPhoneWindowManagerClass);
 
             XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, "init",
                 Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS, phoneWindowManagerInitHook);
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManagerOem != null ?
-                    classPhoneWindowManagerOem : mPhoneWindowManagerClass, "interceptKeyBeforeQueueing", 
+            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass, "interceptKeyBeforeQueueing",
                     KeyEvent.class, int.class, new XC_MethodHook(XCallback.PRIORITY_HIGHEST) {
                 @SuppressLint("PrivateApi")
                 @Override
@@ -676,7 +670,8 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId));
                                 }
                             }
-                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
+                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false,
+                                    "GravityBox - Back Key");
                             param.setResult(0);
                             return;
                         }
@@ -764,7 +759,8 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.RECENTS_LONGPRESS).actionId));
                                 }
                             }
-                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
+                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false,
+                                    "GravityBox - Recents Key");
                             param.setResult(0);
                         }
                     }
@@ -818,7 +814,8 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId));
                                 }
                             }
-                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
+                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false,
+                                    "GravityBox - Menu Key");
                             param.setResult(0);
                             return;
                         }
@@ -849,7 +846,8 @@ public class ModHwKeys {
                                     handler.postDelayed(mCustomKeyDoubletapReset, mDoubletapSpeed);
                                 }
                                 if (isFromSystem) {
-                                    performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false);
+                                    performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false,
+                                            "GravityBox - Custom Key");
                                 }
                             } else {
                                 handler.removeCallbacks(mCustomKeyDoubletapReset);
@@ -857,7 +855,8 @@ public class ModHwKeys {
                                 mIsCustomKeyLongPressed = true;
                                 if (DEBUG) log("Custom key long-press action");
                                 performAction(HwKeyTrigger.CUSTOM_LONGPRESS);
-                                performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
+                                performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false,
+                                        "GravityBox - Custom Key");
                             }
                         }
                         param.setResult(0);
@@ -879,8 +878,7 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManagerOem != null ?
-                    classPhoneWindowManagerOem : mPhoneWindowManagerClass, 
+            XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
                     "readConfigurationDependentBehaviors", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
@@ -908,10 +906,10 @@ public class ModHwKeys {
             };
 
             if (Utils.isSamsungRom()) {
-                XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
+                XposedHelpers.findAndHookMethod(CLASS_HOME_BUTTON_HANDLER, classLoader,
                         "handleDoubleTapOnHome", int.class, doubleTapOnHomeHook);
             } else {
-                XposedHelpers.findAndHookMethod(mPhoneWindowManagerClass,
+                XposedHelpers.findAndHookMethod(CLASS_HOME_BUTTON_HANDLER, classLoader,
                         "handleDoubleTapOnHome", doubleTapOnHomeHook);
             }
         } catch (Throwable t) {
@@ -985,7 +983,8 @@ public class ModHwKeys {
         if (DEBUG) log("mMenuLongPress runnable launched");
         mIsMenuLongPressed = true;
         performAction(HwKeyTrigger.MENU_LONGPRESS);
-        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false,
+                "GravityBox - Menu Key Longpress");
     };
 
     private static Runnable mMenuDoubleTapReset = () -> {
@@ -1009,7 +1008,8 @@ public class ModHwKeys {
         if (DEBUG) log("mBackLongPress runnable launched");
         mIsBackLongPressed = true;
         performAction(HwKeyTrigger.BACK_LONGPRESS);
-        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false,
+                "GravityBox - Back Key Longpress");
     };
 
     private static Runnable mBackDoubleTapReset = () -> {
@@ -1033,7 +1033,8 @@ public class ModHwKeys {
         if (DEBUG) log("mRecentsLongPress runnable launched");
         mIsRecentsLongPressed = true;
         performAction(HwKeyTrigger.RECENTS_LONGPRESS);
-        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false,
+                "GravityBox - Recents Key Longpress");
     };
 
     private static Runnable mRecentsDoubleTapReset = () -> {
@@ -1071,7 +1072,8 @@ public class ModHwKeys {
         } else if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS) {
             mPowerLongPressInterceptedByTorch = true;
         }
-        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false,
+                "GravityBox - Home Key Torch");
         toggleTorch();
     };
 
@@ -1079,7 +1081,8 @@ public class ModHwKeys {
         if (DEBUG) log("mHomeLongPress runnable launched");
         mIsHomeLongPressed = true;
         performAction(HwKeyTrigger.HOME_LONGPRESS);
-        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false);
+        performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false,
+                "GravityBox - Home Key Longpress");
     };
 
     private static Runnable mResetBrightnessRunnable = () -> {
@@ -1187,13 +1190,13 @@ public class ModHwKeys {
         }
     }
 
-    private static void performHapticFeedback(int effect, boolean always) {
+    private static void performHapticFeedback(int effect, boolean always, String reason) {
         try {
-            XposedHelpers.callMethod(mPhoneWindowManager, "performHapticFeedbackLw",
-                    new Class<?> [] { mWindowStateClass, int.class, boolean.class },
-                    null, effect, always);
+            XposedHelpers.callMethod(mPhoneWindowManager, "performHapticFeedback",
+                    new Class<?> [] { int.class, boolean.class, String.class },
+                    effect, always, reason);
         } catch (Throwable t) {
-            GravityBox.log(TAG, "Error calling performHapticFeedbackLw:", t);
+            GravityBox.log(TAG, "Error calling performHapticFeedback:", t);
         }
     }
 
@@ -1258,7 +1261,8 @@ public class ModHwKeys {
                     paramArgs[0] = mWindowStateClass;
                     paramArgs[1] = int.class;
                     paramArgs[2] = boolean.class;
-                    performHapticFeedback(HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING, true);
+                    performHapticFeedback(HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING, true,
+                            "GravityBox - App killed");
                     Toast.makeText(mContext,
                             String.format(mStrAppKilled, targetKilled), Toast.LENGTH_SHORT).show();
                 } else {
@@ -1375,7 +1379,7 @@ public class ModHwKeys {
 
     private static void dismissKeyguard() {
         try {
-            XposedHelpers.callMethod(mPhoneWindowManager, "dismissKeyguardLw", (Object)null);
+            XposedHelpers.callMethod(mPhoneWindowManager, "dismissKeyguardLw", (Object)null, (String)null);
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
         }
@@ -1745,6 +1749,7 @@ public class ModHwKeys {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private static void updateWifiConfig(ArrayList<WifiConfiguration> configList, ResultReceiver receiver) {
         try {
             WifiManager wm = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
