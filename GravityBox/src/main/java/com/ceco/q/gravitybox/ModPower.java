@@ -143,7 +143,7 @@ public class ModPower {
             });
 
             XposedHelpers.findAndHookMethod(pmServiceClass, "wakeUpInternal",
-                    long.class, String.class, int.class, String.class, int.class, new XC_MethodHook() {
+                    long.class, int.class, String.class, int.class, String.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) {
                     if (Utils.isMotoXtDevice()) {
@@ -199,7 +199,7 @@ public class ModPower {
                     GravityBoxSettings.PREF_KEY_CHARGER_PLUGGED_SOUND, null));
 
             XposedHelpers.findAndHookMethod(CLASS_PM_NOTIFIER, classLoader,
-                    "playChargingStartedSound", new XC_MethodHook() {
+                    "playChargingStartedFeedback", int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) {
                     if (mIsChargingSoundCustom || mQh.isSystemSoundMuted(QuietHours.SystemSound.CHARGER)) {
