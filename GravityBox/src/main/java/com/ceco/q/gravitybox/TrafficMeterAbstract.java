@@ -344,7 +344,7 @@ public abstract class TrafficMeterAbstract extends TextView
 
     protected boolean canReadFromFile() {
         if (mCanReadFromFile == null) {
-            File f = new File("/proc/net/dev");
+            File f = new File("/proc/net/xt_qtaguid/iface_stat_fmt");
             mCanReadFromFile = (f.exists() && f.canRead());
         }
         return mCanReadFromFile;
