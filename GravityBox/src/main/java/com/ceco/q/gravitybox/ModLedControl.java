@@ -16,7 +16,6 @@
 package com.ceco.q.gravitybox;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -68,10 +67,12 @@ public class ModLedControl {
     private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.notification.NotificationManagerService";
     private static final String CLASS_VIBRATOR_SERVICE = "com.android.server.VibratorService";
     private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
-    private static final String CLASS_NOTIF_DATA = "com.android.systemui.statusbar.NotificationData";
-    private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData.Entry";
+    private static final String CLASS_NOTIF_FILTER = "com.android.systemui.statusbar.notification.NotificationFilter";
+    private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.notification.collection.NotificationEntry";
     private static final String CLASS_NOTIFICATION_RECORD = "com.android.server.notification.NotificationRecord";
     private static final String CLASS_HEADS_UP_MANAGER_ENTRY = "com.android.systemui.statusbar.policy.HeadsUpManager.HeadsUpEntry";
+    private static final String CLASS_ALERT_ENTRY = "com.android.systemui.statusbar.AlertingNotificationManager.AlertEntry";
+    private static final String CLASS_NOTIF_INTERRUPTION_STATE_PROVIDER = "com.android.systemui.statusbar.notification.NotificationInterruptionStateProvider";
     public static final String PACKAGE_NAME_SYSTEMUI = "com.android.systemui";
 
     private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
@@ -765,7 +766,7 @@ public class ModLedControl {
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             XposedBridge.hookAllMethods(
-                    XposedHelpers.findClass(CLASS_NOTIF_DATA, classLoader),
+                    XposedHelpers.findClass(CLASS_NOTIF_FILTER, classLoader),
                     "shouldFilterOut", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
@@ -822,21 +823,15 @@ public class ModLedControl {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR, classLoader, "shouldPeek",
-                    CLASS_NOTIF_DATA_ENTRY, StatusBarNotification.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_NOTIF_INTERRUPTION_STATE_PROVIDER, classLoader,
+                    "canHeadsUpCommon", CLASS_NOTIF_DATA_ENTRY, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
-                    // disable heads up if notification is for different user in multi-user environment
-                    if (!(Boolean)XposedHelpers.callMethod(param.thisObject, "isNotificationForCurrentProfiles",
-                            param.args[1])) {
-                        if (DEBUG) log("HeadsUp: Notification is not for current user");
-                        return;
-                    }
-
-                    StatusBarNotification sbn = (StatusBarNotification) param.args[1];
+                    StatusBarNotification sbn = (StatusBarNotification) XposedHelpers
+                            .getObjectField(param.args[0], "notification");
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     Notification n = sbn.getNotification();
-                    int statusBarWindowState = XposedHelpers.getIntField(param.thisObject, "mStatusBarWindowState");
+                    int statusBarWindowState = XposedHelpers.getIntField(mStatusBar, "mStatusBarWindowState");
 
                     boolean showHeadsUp = false;
 
@@ -873,17 +868,15 @@ public class ModLedControl {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_HEADS_UP_MANAGER_ENTRY, classLoader, "updateEntry",
+            XposedHelpers.findAndHookMethod(CLASS_ALERT_ENTRY, classLoader, "updateEntry",
                     boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     try {
                         Object huMgr = XposedHelpers.getSurroundingThis(param.thisObject);
-                        Object entry = XposedHelpers.getObjectField(param.thisObject, "entry");
-                        Method isSticky = XposedHelpers.findClass(CLASS_HEADS_UP_MANAGER_ENTRY, classLoader)
-                                .getDeclaredMethod("isSticky");
-                        isSticky.setAccessible(true);
-                        if (entry == null || isSticky == null || (boolean)isSticky.invoke(param.thisObject))
+                        Object entry = XposedHelpers.getObjectField(param.thisObject, "mEntry");
+                        boolean isSticky = (boolean) XposedHelpers.callMethod(param.thisObject, "isSticky");
+                        if (entry == null || isSticky)
                             return;
 
                         XposedHelpers.callMethod(param.thisObject, "removeAutoRemovalCallbacks");
@@ -933,7 +926,8 @@ public class ModLedControl {
         try {
             Object entryManager = XposedHelpers.getObjectField(mStatusBar, "mEntryManager");
             Object notifData = XposedHelpers.callMethod(entryManager, "getNotificationData");
-            return (boolean) XposedHelpers.callMethod(notifData, "shouldFilterOut", entry);
+            Object filter = XposedHelpers.getObjectField(notifData, "mNotificationFilter");
+            return (boolean) XposedHelpers.callMethod(filter, "shouldFilterOut", entry);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error in isFilteredNotification()", t);
             return false;
@@ -962,10 +956,10 @@ public class ModLedControl {
 
     private static boolean isSnoozedPackage(StatusBarNotification sbn) {
         try {
-            Object entryManager = XposedHelpers.getObjectField(mStatusBar, "mEntryManager");
-            return (boolean) XposedHelpers.callMethod(entryManager, "isSnoozedPackage", sbn);
+            Object huManager = XposedHelpers.getObjectField(mStatusBar, "mHeadsUpManager");
+            return (boolean) XposedHelpers.callMethod(huManager, "isSnoozed", sbn.getPackageName());
         } catch (Throwable t) {
-            GravityBox.log(TAG, "Error in isSnoozedPackage()", t);
+            GravityBox.log(TAG, "Error in isSnoozed()", t);
             return false;
         }
     }
