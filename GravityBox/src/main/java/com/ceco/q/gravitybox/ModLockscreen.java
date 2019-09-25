@@ -508,9 +508,9 @@ public class ModLockscreen {
                 protected void beforeHookedMethod(final MethodHookParam param) {
                     if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_D2TS, false) &&
                             mGestureDetector != null &&
-                            (int) XposedHelpers.callMethod(
+                            (int) XposedHelpers.getIntField(
                                 XposedHelpers.getObjectField(param.thisObject, "mStatusBar"),
-                                "getBarState") == StatusBarState.KEYGUARD) {
+                                "mState") == StatusBarState.KEYGUARD) {
                         mGestureDetector.onTouchEvent((MotionEvent) param.args[0]);
                     }
                 }
@@ -701,7 +701,8 @@ public class ModLockscreen {
                         !v.getClass().getName().equals(CLASS_NOTIF_ROW))
                     continue;
                 notifCount++;
-                if ((boolean) XposedHelpers.callMethod(v, "isClearable")) {
+                Object entry = XposedHelpers.getObjectField(v, "mEntry");
+                if ((boolean) XposedHelpers.callMethod(entry, "isClearable")) {
                     notifClearableCount++;
                 }
             }
