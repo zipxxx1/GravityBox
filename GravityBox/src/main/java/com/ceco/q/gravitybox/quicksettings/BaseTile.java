@@ -15,7 +15,6 @@
 
 package com.ceco.q.gravitybox.quicksettings;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +36,6 @@ import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import de.robv.android.xposed.XSharedPreferences;
@@ -64,14 +62,7 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     static class StockLayout {
-        int iconFrameWidthPx;
-        int iconFrameHeightPx;
-        int iconSizePx;
-        int tilePaddingBelowIconPx;
         float labelTextSizePx;
-        int baseIconWidth;
-        int iconHeight;
-        int doubleWideIconWidth;
     }
 
     protected String mKey;
@@ -213,35 +204,8 @@ public abstract class BaseTile implements QsEventListener {
             TextView label = (TextView) XposedHelpers.getObjectField(mTileView, "mLabel");
             float labelTextSizePx = label.getTextSize();
 
-            Field iconFrameField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
-                    tileView.getContext().getClassLoader()).getDeclaredField("mIconFrame");
-            iconFrameField.setAccessible(true);
-            ViewGroup iconFrameView = (ViewGroup) iconFrameField.get(tileView);
-            int iconFrameWidthPx = iconFrameView.getLayoutParams().width;
-            int iconFrameHeightPx = iconFrameView.getLayoutParams().height;
-
-            Field iconField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
-                    tileView.getContext().getClassLoader()).getDeclaredField("mIcon");
-            iconField.setAccessible(true);
-            Object iconView = iconField.get(tileView);
-            int iconSizePx = XposedHelpers.getIntField(iconView, "mIconSizePx");
-            int tilePaddingBelowIconPx = XposedHelpers.getIntField(iconView, "mTilePaddingBelowIconPx");
-            int baseIconWidth = Utils.hasFieldOfType(iconView, "mBaseIconWidth", int.class) ?
-                    XposedHelpers.getIntField(iconView, "mBaseIconWidth") : 0;
-            int iconHeight = Utils.hasFieldOfType(iconView, "mIconHeight", int.class) ?
-                    XposedHelpers.getIntField(iconView, "mIconHeight") : 0;
-            int doubleWideIconWidth = Utils.hasFieldOfType(iconView, "mDoubleWideIconWidth", int.class) ?
-                    XposedHelpers.getIntField(iconView, "mDoubleWideIconWidth") : 0;
-
             mStockLayout = new StockLayout();
             mStockLayout.labelTextSizePx = labelTextSizePx;
-            mStockLayout.iconFrameWidthPx = iconFrameWidthPx;
-            mStockLayout.iconFrameHeightPx = iconFrameHeightPx;
-            mStockLayout.iconSizePx = iconSizePx;
-            mStockLayout.tilePaddingBelowIconPx = tilePaddingBelowIconPx;
-            mStockLayout.baseIconWidth = baseIconWidth;
-            mStockLayout.iconHeight = iconHeight;
-            mStockLayout.doubleWideIconWidth = doubleWideIconWidth;
 
             updateTileViewLayout();
         } catch (Throwable t) {
@@ -328,28 +292,6 @@ public abstract class BaseTile implements QsEventListener {
         try {
             float scalingFactor = getQsPanel().getScalingFactor();
 
-            // icon frame
-            /*
-            Field iconFrameField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
-                    mTileView.getContext().getClassLoader()).getDeclaredField("mIconFrame");
-            iconFrameField.setAccessible(true);
-            ViewGroup iconFrameView = (ViewGroup) iconFrameField.get(mTileView);
-            ViewGroup.LayoutParams lp = iconFrameView.getLayoutParams();
-            lp.width = Math.round(mStockLayout.iconFrameWidthPx*scalingFactor);
-            lp.height = Math.round(mStockLayout.iconFrameHeightPx*scalingFactor);
-            iconFrameView.setLayoutParams(lp);
-
-            // icon
-            Field iconField = XposedHelpers.findClass(CLASS_TILE_VIEW_BASE,
-                    mTileView.getContext().getClassLoader()).getDeclaredField("mIcon");
-            iconField.setAccessible(true);
-            Object iconView = iconField.get(mTileView);
-            XposedHelpers.setIntField(iconView, "mIconSizePx",
-                    Math.round(mStockLayout.iconSizePx*scalingFactor));
-            XposedHelpers.setIntField(iconView, "mTilePaddingBelowIconPx",
-                    Math.round(mStockLayout.tilePaddingBelowIconPx*scalingFactor));
-            */
-
             // label
             TextView label = (TextView) XposedHelpers.getObjectField(mTileView, "mLabel");
             if (label != null) {
@@ -358,49 +300,9 @@ public abstract class BaseTile implements QsEventListener {
                         mStockLayout.labelTextSizePx*scalingFactor);
             }
 
-            // Moto SignalTileView
-            /*
-            if (Utils.isMotoXtDevice() &&
-                    "SignalTileView".equals(iconView.getClass().getSimpleName())) {
-                updateMotoXtSignalTileViewLayout(iconView);
-            }
-            */
-
             mTileView.requestLayout();
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
-        }
-    }
-
-    private void updateMotoXtSignalTileViewLayout(Object signalTileView) {
-        try {
-            float scalingFactor = getQsPanel().getScalingFactor();
-            for (String vName : new String[] { "mSignal", "mOverlay", "mSimStatusImageView",
-                    "mRoamingAnimatedImageView", "mDataActivityAnimatedImageView" }) {
-                if (!Utils.hasFieldOfType(signalTileView, vName, View.class))
-                    continue;
-                View v = (View) XposedHelpers.getObjectField(signalTileView, vName);
-                if (v == null)
-                    continue;
-                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) v.getLayoutParams();
-                lp.width = Math.round(mStockLayout.baseIconWidth*scalingFactor);
-                lp.height = Math.round(mStockLayout.iconHeight*scalingFactor);
-                v.setLayoutParams(lp);
-            }
-            for (String vName : new String[] { "mOverlayDoubleWideImageView",
-                    "mDataActivityDoubleWideAnimatedImageView" }) {
-                if (!Utils.hasFieldOfType(signalTileView, vName, View.class))
-                    continue;
-                View v = (View) XposedHelpers.getObjectField(signalTileView, vName);
-                if (v == null)
-                    continue;
-                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) v.getLayoutParams();
-                lp.width = Math.round(mStockLayout.doubleWideIconWidth*scalingFactor);
-                lp.height = Math.round(mStockLayout.iconHeight*scalingFactor);
-                v.setLayoutParams(lp);
-            }
-        } catch (Throwable t) {
-            GravityBox.log(TAG, "updateMotoXtSignalTileViewLayout:", t);
         }
     }
 
