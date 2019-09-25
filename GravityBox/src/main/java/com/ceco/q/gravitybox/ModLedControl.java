@@ -889,7 +889,7 @@ public class ModLedControl {
                         if (timeout > 0) {
                             Handler H = (Handler) XposedHelpers.getObjectField(huMgr, "mHandler");
                             H.postDelayed((Runnable)XposedHelpers.getObjectField(
-                                    param.thisObject, "mRemoveHeadsUpRunnable"), timeout);
+                                    param.thisObject, "mRemoveAlertRunnable"), timeout);
                         }
                     } catch (Throwable t) {
                         GravityBox.log(TAG, t);
