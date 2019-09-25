@@ -15,6 +15,8 @@
 
 package com.ceco.q.gravitybox;
 
+import android.graphics.Rect;
+
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -24,7 +26,7 @@ public class ModStatusbarColor {
     private static final String TAG = "GB:ModStatusbarColor";
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String CLASS_SB_TRANSITIONS = "com.android.systemui.statusbar.phone.PhoneStatusBarTransitions";
-    private static final String CLASS_SB_DARK_ICON_DISPATCHER = "com.android.systemui.statusbar.phone.DarkIconDispatcherImpl";
+    private static final String CLASS_NOTIF_ICON_AREA_CTRL = "com.android.systemui.statusbar.phone.NotificationIconAreaController";
     private static final String CLASS_HEADSUP_APPEARANCE_CTRL = "com.android.systemui.statusbar.phone.HeadsUpAppearanceController";
     private static final boolean DEBUG = false;
 
@@ -53,18 +55,17 @@ public class ModStatusbarColor {
         }
 
         try {
-            XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_SB_DARK_ICON_DISPATCHER, classLoader),
-                    "setIconTintInternal", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_NOTIF_ICON_AREA_CTRL, classLoader,
+                    "onDarkChanged", Rect.class, float.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     if (SysUiManagers.IconManager != null) {
-                        SysUiManagers.IconManager.setIconTint(
-                                XposedHelpers.getIntField(param.thisObject, "mIconTint"));
+                        SysUiManagers.IconManager.setIconTint((int) param.args[2]);
                     }
                 }
             });
         } catch (Throwable t) {
-            GravityBox.log(TAG, "Error hooking setIconTintInternal:", t);
+            GravityBox.log(TAG, "Error hooking onDarkChanged:", t);
         }
 
         try {
