@@ -29,6 +29,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
 import android.os.Handler;
 
 public class QuickRecordTile extends QsTile {
@@ -42,7 +43,7 @@ public class QuickRecordTile extends QsTile {
     private static final int STATE_JUST_RECORDED = 3;
     private static final int STATE_NO_RECORDING = 4;
 
-    private String mAudioFileName;
+    private Uri mAudioFileUri;
     private int mRecordingState = STATE_NO_RECORDING;
     private MediaPlayer mPlayer;
     private Handler mHandler;
@@ -61,12 +62,12 @@ public class QuickRecordTile extends QsTile {
         mCurrentStateReceiver.setReceiver((resultCode, resultData) -> {
             final int oldState = mRecordingState;
             final int newState = resultData.getInt(RecordingService.EXTRA_RECORDING_STATUS);
-            if (resultData.containsKey(RecordingService.EXTRA_AUDIO_FILENAME)) {
-                mAudioFileName = resultData.getString(RecordingService.EXTRA_AUDIO_FILENAME);
+            if (resultData.containsKey(RecordingService.EXTRA_AUDIO_URI)) {
+                mAudioFileUri = Uri.parse(resultData.getString(RecordingService.EXTRA_AUDIO_URI));
             }
             switch(newState) {
             case RecordingService.RECORDING_STATUS_IDLE:
-                mRecordingState = mAudioFileName == null ?
+                mRecordingState = mAudioFileUri == null ?
                         STATE_NO_RECORDING : STATE_IDLE;
                 break;
             case RecordingService.RECORDING_STATUS_STARTED:
@@ -99,16 +100,18 @@ public class QuickRecordTile extends QsTile {
                     break;
                 case RecordingService.RECORDING_STATUS_STARTED:
                     mRecordingState = STATE_RECORDING;
-                    mAudioFileName = intent.getStringExtra(RecordingService.EXTRA_AUDIO_FILENAME);
                     if (mAutoStopDelay > 0) {
                         mHandler.postDelayed(autoStopRecord, mAutoStopDelay);
                     }
-                    if (DEBUG) log(getKey() + ": Audio recording started; mAudioFileName=" + mAudioFileName);
+                    if (DEBUG) log(getKey() + ": Audio recording started;");
                     break;
                 case RecordingService.RECORDING_STATUS_STOPPED:
                     mRecordingState = STATE_JUST_RECORDED;
                     mHandler.removeCallbacks(autoStopRecord);
-                    if (DEBUG) log(getKey() + ": Audio recording stopped");
+                    if (intent.hasExtra(RecordingService.EXTRA_AUDIO_URI)) {
+                        mAudioFileUri = Uri.parse(intent.getStringExtra(RecordingService.EXTRA_AUDIO_URI));
+                    }
+                    if (DEBUG) log(getKey() + ": Audio recording stopped; mAudioFileUri=" + mAudioFileUri.toString());
                     break;
                 case RecordingService.RECORDING_STATUS_ERROR:
                 default:
@@ -204,7 +207,7 @@ public class QuickRecordTile extends QsTile {
     private void startPlaying() {
         mPlayer = new MediaPlayer();
         try {
-            mPlayer.setDataSource(mAudioFileName);
+            mPlayer.setDataSource(mContext, mAudioFileUri);
             mPlayer.prepare();
             mPlayer.start();
             mRecordingState = STATE_PLAYING;
