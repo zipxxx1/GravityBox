@@ -32,7 +32,6 @@ public class QsPanelQuick {
     private static final boolean DEBUG = false;
 
     private static final String CLASS_QS_PANEL_QUICK = "com.android.systemui.qs.QuickQSPanel";
-    private static final String CLASS_QS_PANEL_QUICK_LAYOUT = "com.android.systemui.qs.QuickQSPanel.HeaderTileLayout";
     private static final String CLASS_TUNER_SERVICE_IMPL = "com.android.systemui.tuner.TunerServiceImpl";
 
     private static void log(String message) {
@@ -88,18 +87,6 @@ public class QsPanelQuick {
                         if (mNumTiles > 0) {
                             param.setResult(mNumTiles);
                         }
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_QS_PANEL_QUICK_LAYOUT, cl,
-                    "generateSpaceLayoutParams", int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (DEBUG) log("generateSpaceLayoutParams: mNumTiles=" + mNumTiles +
-                            "; mNumTilesOrig=" + mNumTilesOrig);
-                    if (mNumTiles > mNumTilesOrig) {
-                        param.args[0] = 0;
                     }
                 }
             });
