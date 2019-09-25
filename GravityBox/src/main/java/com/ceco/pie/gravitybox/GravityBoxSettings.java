@@ -3645,7 +3645,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
         private void setCustomLockscreenImage() {
             Intent intent = new Intent(getActivity(), PickImageActivity.class);
             intent.putExtra(PickImageActivity.EXTRA_CROP_MODE, "CROP");
-            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
             Display display = getActivity().getWindowManager().getDefaultDisplay();
             Point displaySize = new Point();
             display.getRealSize(displaySize);
@@ -3656,14 +3655,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 WallpaperManager wpManager = WallpaperManager.getInstance(getActivity());
                 int wpWidth = wpManager.getDesiredMinimumWidth();
                 int wpHeight = wpManager.getDesiredMinimumHeight();
-                float spotlightX = (float) displaySize.x / wpWidth;
-                float spotlightY = (float) displaySize.y / wpHeight;
                 intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, wpWidth);
                 intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, wpHeight);
                 intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, wpWidth);
                 intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, wpHeight);
-                intent.putExtra(PickImageActivity.EXTRA_SPOTLIGHT_X, spotlightX);
-                intent.putExtra(PickImageActivity.EXTRA_SPOTLIGHT_Y, spotlightY);
             } else {
                 boolean isPortrait = getResources().getConfiguration().orientation ==
                     Configuration.ORIENTATION_PORTRAIT;
@@ -3684,8 +3679,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? height : width);
             intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, isPortrait ? width : height);
             intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, isPortrait ? height : width);
-            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
-            intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
             startActivityForResult(intent, REQ_CALLER_PHOTO);
         }
 
@@ -3756,8 +3749,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, height);
             intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, width);
             intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, height);
-            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
-            intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
             startActivityForResult(intent, REQ_ICON_PICK);
         }
 
