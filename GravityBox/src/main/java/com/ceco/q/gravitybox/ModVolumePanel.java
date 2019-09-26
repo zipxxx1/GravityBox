@@ -33,7 +33,9 @@ public class ModVolumePanel {
     private static final String CLASS_VOLUME_PANEL = Utils.isSamsungRom() ?
             "com.android.systemui.volume.SecVolumeDialogImpl" :
             "com.android.systemui.volume.VolumeDialogImpl";
-    private static final String CLASS_VOLUME_ROW = CLASS_VOLUME_PANEL + ".VolumeRow";
+    private static final String CLASS_VOLUME_ROW = Utils.isOxygenOsRom() ?
+            "com.oneplus.volume.OpVolumeDialogImpl.VolumeRow" :
+            CLASS_VOLUME_PANEL + ".VolumeRow";
     private static final boolean DEBUG = false;
 
     private static Object mVolumePanel;
