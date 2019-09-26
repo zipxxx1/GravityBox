@@ -2042,36 +2042,42 @@
             android:entryValues="@array/tri_state_values"
             android:defaultValue="DEFAULT" />
 
-        <ListPreference
-            android:key="pref_link_volumes_v2"
-            android:title="@string/pref_link_volumes_title"
-            android:entries="@array/volume_link_entries"
-            android:entryValues="@array/volume_link_values"
-            android:defaultValue="DEFAULT" />
+        <PreferenceCategory
+            android:key="pref_cat_volume_panel"
+            android:title="@string/pref_cat_volume_panel_title">
 
-        <ListPreference
-            android:key="pref_link_ringer_system_volumes"
-            android:title="@string/pref_link_ringer_system_volumes_title"
-            android:entries="@array/volume_link_entries"
-            android:entryValues="@array/volume_link_values"
-            android:defaultValue="DEFAULT" />
+            <ListPreference
+                android:key="pref_link_volumes_v2"
+                android:title="@string/pref_link_volumes_title"
+                android:entries="@array/volume_link_entries"
+                android:entryValues="@array/volume_link_values"
+                android:defaultValue="DEFAULT" />
 
-        <CheckBoxPreference
-            android:key="pref_volume_panel_expanded"
-            android:title="@string/pref_volume_panel_expanded_title"
-            android:summary="@string/pref_volume_panel_expanded_summary"
-            android:defaultValue="false" />
+            <ListPreference
+                android:key="pref_link_ringer_system_volumes"
+                android:title="@string/pref_link_ringer_system_volumes_title"
+                android:entries="@array/volume_link_entries"
+                android:entryValues="@array/volume_link_values"
+                android:defaultValue="DEFAULT" />
 
-        <com.ceco.pie.gravitybox.preference.SeekBarPreference
-            android:key="pref_volume_panel_timeout2"
-            android:title="@string/pref_volume_panel_timeout_title"
-            android:summary="@string/pref_volume_panel_timeout_summary"
-            minimum="0"
-            maximum="10000"
-            interval="500"
-            monitorBoxEnabled="true"
-            monitorBoxUnit="ms"
-            android:defaultValue="0" />
+            <CheckBoxPreference
+                android:key="pref_volume_panel_expanded"
+                android:title="@string/pref_volume_panel_expanded_title"
+                android:summary="@string/pref_volume_panel_expanded_summary"
+                android:defaultValue="false" />
+
+            <com.ceco.pie.gravitybox.preference.SeekBarPreference
+                android:key="pref_volume_panel_timeout2"
+                android:title="@string/pref_volume_panel_timeout_title"
+                android:summary="@string/pref_volume_panel_timeout_summary"
+                minimum="0"
+                maximum="10000"
+                interval="500"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="ms"
+                android:defaultValue="0" />
+
+        </PreferenceCategory>
 
     </PreferenceScreen>
 

@@ -2071,4 +2071,7 @@
     <!-- Lockscreen: Disable alarm info -->
     <string name="pref_lockscreen_alarm_info_disable_title">Disable alarm info</string>
 
+    <!-- Media / Vulume panel category -->
+    <string name="pref_cat_volume_panel_title">Volume panel</string>
+
 </resources>

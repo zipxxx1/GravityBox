@@ -313,6 +313,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_MUSIC_VOLUME_STEPS_VALUE = "pref_music_volume_steps_value";
     public static final String PREF_KEY_VOL_FORCE_RING_CONTROL = "pref_vol_force_ring_control";
     public static final String PREF_KEY_SAFE_MEDIA_VOLUME = "pref_safe_media_volume2";
+    public static final String PREF_CAT_KEY_VOLUME_PANEL = "pref_cat_volume_panel";
     public static final String PREF_KEY_LINK_VOLUMES = "pref_link_volumes_v2";
     public static final String PREF_KEY_LINK_RINGER_SYSTEM_VOLUMES = "pref_link_ringer_system_volumes";
     public static final String PREF_KEY_VOL_EXPANDED = "pref_volume_panel_expanded";
