@@ -32,8 +32,8 @@ public class NotificationDataMonitor {
     public static final String TAG="GB:NotificationDataMonitor";
     private static boolean DEBUG = false;
 
-    private static final String CLASS_NOTIF_DATA = "com.android.systemui.statusbar.NotificationData";
-    private static final String CLASS_NOTIF_ENTRY_MANAGER = "com.android.systemui.statusbar.NotificationEntryManager";
+    private static final String CLASS_NOTIF_DATA = "com.android.systemui.statusbar.notification.collection.NotificationData";
+    private static final String CLASS_NOTIF_ENTRY_MANAGER = "com.android.systemui.statusbar.notification.NotificationEntryManager";
 
     private static void log(String msg) {
         XposedBridge.log(TAG + ": " + msg);
