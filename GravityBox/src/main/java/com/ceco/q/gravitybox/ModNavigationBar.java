@@ -42,7 +42,6 @@ import android.widget.RelativeLayout;
 import android.widget.Space;
 import android.widget.ImageView.ScaleType;
 
-import androidx.core.widget.ImageViewCompat;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -60,6 +59,7 @@ public class ModNavigationBar {
     private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_NAVBAR_INFLATER_VIEW = "com.android.systemui.statusbar.phone.NavigationBarInflaterView";
     private static final String CLASS_LIGHT_BAR_CTRL = "com.android.systemui.statusbar.phone.LightBarTransitionsController";
+    private static final String CLASS_CONTEXTUAL_BTN_GRP = "com.android.systemui.statusbar.phone.ContextualButtonGroup";
 
     @SuppressWarnings("unused")
     public static final int MODE_OPAQUE = 0;
@@ -82,8 +82,6 @@ public class ModNavigationBar {
     private static boolean mDpadKeysVisible;
     private static boolean mHideImeSwitcher;
     private static PowerManager mPm;
-    private static boolean mUpdateDisabledFlags;
-    private static boolean mUpdateIconHints;
     private static Integer mRecentsKeyCodeOriginal;
 
     // Navbar dimensions
@@ -150,6 +148,7 @@ public class ModNavigationBar {
             if (customKey != null) customKey.setImageTintList(csl);
             if (dpadLeft != null) dpadLeft.setImageTintList(csl);
             if (dpadRight != null) dpadRight.setImageTintList(csl);
+            if (menuKey instanceof ImageView) ((ImageView) menuKey).setImageTintList(csl);
         }
     }
 
@@ -315,18 +314,6 @@ public class ModNavigationBar {
         }
 
         try {
-            XposedHelpers.findAndHookMethod(navbarViewClass, "setMenuVisibility",
-                    boolean.class, boolean.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) {
-                    setMenuKeyVisibility();
-                }
-            });
-        } catch (Throwable t) {
-            GravityBox.log("Error hooking setMenuVisibility:", t);
-        }
-
-        try {
             XposedHelpers.findAndHookMethod(CLASS_NAVBAR_INFLATER_VIEW, classLoader, "inflateLayout",
                     String.class, new XC_MethodHook() {
                 @Override
@@ -337,7 +324,7 @@ public class ModNavigationBar {
                     ViewGroup vRot, navButtons;
 
                     // prepare keys for rot0 view
-                    vRot = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mRot0");
+                    vRot = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mHorizontal");
                     if (vRot != null) {
                         ScaleType scaleType = ScaleType.FIT_CENTER;
                         int[] padding = getIconPaddingPx(0);
@@ -370,7 +357,7 @@ public class ModNavigationBar {
                     }
 
                     // prepare keys for rot90 view
-                    vRot = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mRot90");
+                    vRot = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mVertical");
                     if (vRot != null) {
                         ScaleType scaleType = ScaleType.FIT_CENTER;
                         int[] padding = getIconPaddingPx(1);
@@ -417,51 +404,20 @@ public class ModNavigationBar {
         }
 
         try {
-            XposedHelpers.findAndHookMethod(navbarViewClass, "setDisabledFlags",
-                    int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) {
-                    mUpdateDisabledFlags = XposedHelpers.getIntField(param.thisObject,
-                            "mDisabledFlags") != (int)param.args[0];
-                }
+            XposedHelpers.findAndHookMethod(navbarViewClass, "updateNavButtonIcons",
+                    new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
-                    if (mUpdateDisabledFlags) {
-                        mUpdateDisabledFlags = false;
-                        setDpadKeyVisibility();
-                        setCustomKeyVisibility();
-                        setMenuKeyVisibility();
-                        if (mNavbarColorsEnabled) {
-                            setKeyColor();
-                        }
+                    setDpadKeyVisibility();
+                    setCustomKeyVisibility();
+                    setMenuKeyVisibility();
+                    if (mHideImeSwitcher) {
+                        hideImeSwitcher();
                     }
                 }
             });
         } catch (Throwable t) {
-            GravityBox.log(TAG, "Error hooking setDisabledFlags:", t);
-        }
-
-        try {
-            XposedHelpers.findAndHookMethod(navbarViewClass, "setNavigationIconHints",
-                    int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) {
-                    mUpdateIconHints = XposedHelpers.getIntField(param.thisObject,
-                            "mNavigationIconHints") != (int)param.args[0];
-                }
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) {
-                    if (mUpdateIconHints) {
-                        mUpdateIconHints = false;
-                        if (mHideImeSwitcher) {
-                            hideImeSwitcher();
-                        }
-                        setDpadKeyVisibility();
-                    }
-                }
-            });
-        } catch (Throwable t) {
-            GravityBox.log(TAG, "Error hooking setNavigationIconHints:", t);
+            GravityBox.log(TAG, "Error hooking updateNavButtonIcons:", t);
         }
 
         try {
@@ -516,19 +472,21 @@ public class ModNavigationBar {
         }
 
         if (Utils.isOxygenOsRom() && XposedHelpers.findMethodExactIfExists(
-                CLASS_KEY_BUTTON_VIEW, classLoader, "updateThemeColorInternal") != null) {
+                CLASS_NAVBAR_VIEW, classLoader, "updateButtonColor",
+                    int.class, int.class, boolean.class) != null) {
             try {
-                XposedHelpers.findAndHookMethod(CLASS_KEY_BUTTON_VIEW, classLoader,
-                        "updateThemeColorInternal", new XC_MethodHook() {
+                XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
+                        "updateButtonColor", int.class, int.class, boolean.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) {
-                        if (mNavbarColorsEnabled)
-                            return;
-
-                        ColorStateList csl = ImageViewCompat.getImageTintList((ImageView) param.thisObject);
-                        for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
-                            if (navbarViewInfo != null) {
-                                navbarViewInfo.setKeyButtonViewColorStateList(csl);
+                        if (mNavbarColorsEnabled) {
+                            setKeyColor();
+                        } else {
+                            ColorStateList csl = ColorStateList.valueOf((int) param.args[0]);
+                            for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
+                                if (navbarViewInfo != null) {
+                                    navbarViewInfo.setKeyButtonViewColorStateList(csl);
+                                }
                             }
                         }
                     }
@@ -542,19 +500,48 @@ public class ModNavigationBar {
                         "setIconTintInternal", float.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) {
-                        if (mNavbarColorsEnabled)
-                            return;
-
-                        float intensity = (float) param.args[0];
-                        for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
-                            if (navbarViewInfo != null) {
-                                navbarViewInfo.setDarkIntensity(mNavigationBarView.getContext(), intensity);
+                        if (mNavbarColorsEnabled) {
+                            setKeyColor();
+                        } else {
+                            float intensity = (float) param.args[0];
+                            for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
+                                if (navbarViewInfo != null) {
+                                    navbarViewInfo.setDarkIntensity(mNavigationBarView.getContext(), intensity);
+                                }
                             }
                         }
                     }
                 });
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error hooking setIconTintInternal:", t);
+            }
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_CONTEXTUAL_BTN_GRP, classLoader,
+                    "setButtonVisibility", int.class, boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) {
+                    if (mAlwaysShowMenukey) {
+                        XposedHelpers.callMethod(param.thisObject, "setVisibility",
+                                View.VISIBLE);
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            GravityBox.log(TAG, "Error hooking setButtonVisibility:", t);
+        }
+    }
+
+    private static void logChildren(ViewGroup parent) {
+        if (parent == null) return;
+        log("List of children for parent: " + parent);
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            View child = parent.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                logChildren((ViewGroup) child);
+            } else {
+                log(child.toString() +"; visible=" + (child.getVisibility() == View.VISIBLE));
             }
         }
     }
@@ -575,10 +562,7 @@ public class ModNavigationBar {
             mNavbarViewInfo[index].endsGroup = endsGroup;
 
             if (DEBUG) {
-                log("List of children for mNavbarViewInfo[" + index + "].endsGroup:");
-                for (int i = 0; i < mNavbarViewInfo[index].endsGroup.getChildCount(); i++) {
-                    log(mNavbarViewInfo[index].endsGroup.getChildAt(i).toString());
-                }
+                logChildren(mNavbarViewInfo[index].endsGroup);
             }
 
             // center group
@@ -589,6 +573,13 @@ public class ModNavigationBar {
             resId = mResources.getIdentifier("menu", "id", PACKAGE_NAME);
             if (resId != 0) {
                 mNavbarViewInfo[index].menuKey = endsGroup.findViewById(resId);
+                if (mNavbarViewInfo[index].menuKey instanceof ImageView) {
+                    ImageView iv = (ImageView) mNavbarViewInfo[index].menuKey;
+                    if (iv.getDrawable() == null) {
+                        iv.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_navbar_menu));
+                        if (DEBUG) log("Setting menu key drawable explicitly");
+                    }
+                }
             }
 
             // find back key
@@ -778,22 +769,30 @@ public class ModNavigationBar {
 
     private static void setMenuKeyVisibility() {
         try {
-            final boolean showMenu = XposedHelpers.getBooleanField(mNavigationBarView, "mShowMenu");
             final int disabledFlags = XposedHelpers.getIntField(mNavigationBarView, "mDisabledFlags");
-            final boolean visible = (showMenu || mAlwaysShowMenukey) &&
+            boolean visible = mAlwaysShowMenukey && !mDpadKeysVisible &&
                     (disabledFlags & STATUS_BAR_DISABLE_RECENT) == 0;
             for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
-                if (navbarViewInfo == null || navbarViewInfo.menuKey == null) continue;
-
-                boolean isImeSwitcherVisible = navbarViewInfo.imeSwitcher != null &&
-                        navbarViewInfo.imeSwitcher.getVisibility() == View.VISIBLE;
-                navbarViewInfo.menuKey.setVisibility(
-                        mDpadKeysVisible || isImeSwitcherVisible ? View.GONE :
-                                visible ? View.VISIBLE : View.INVISIBLE);
+                if (navbarViewInfo != null && navbarViewInfo.menuKey != null) {
+                    visible &= !isThereAChildVisible((ViewGroup) navbarViewInfo.menuKey.getParent(),
+                            navbarViewInfo.menuKey);
+                    navbarViewInfo.menuKey.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+                }
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error setting menu key visibility:", t);
         }
+    }
+
+    private static boolean isThereAChildVisible(ViewGroup group, View excluded) {
+        for (int i = 0; i < group.getChildCount(); i++) {
+            View child = group.getChildAt(i);
+            if (child == excluded)
+                continue;
+            if (child.getVisibility() == View.VISIBLE)
+                return true;
+        }
+        return false;
     }
 
     private static void hideImeSwitcher() {
