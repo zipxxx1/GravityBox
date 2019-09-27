@@ -49,11 +49,13 @@ public class ModExpandedDesktop {
     }
 
     private static class NavbarDimensions {
-        int wPort, hPort, hLand;
-        NavbarDimensions(int wp, int hp, int hl) {
+        int wPort, hPort, hPortFrame, hLand, hLandFrame;
+        NavbarDimensions(int wp, int hp, int hpf, int hl, int hlf) {
             wPort = wp;
             hPort = hp;
+            hPortFrame = hpf;
             hLand = hl;
+            hLandFrame = hlf;
         }
     }
 
@@ -62,10 +64,6 @@ public class ModExpandedDesktop {
     private static SettingsObserver mSettingsObserver;
     private static boolean mExpandedDesktop;
     private static int mExpandedDesktopMode;
-    private static boolean mNavbarOverride;
-    private static float mNavbarHeightScaleFactor = 1;
-    private static float mNavbarHeightLandscapeScaleFactor = 1;
-    private static float mNavbarWidthScaleFactor = 1;
     private static NavbarDimensions mNavbarDimensions;
 
     private static void log(String message) {
@@ -102,22 +100,6 @@ public class ModExpandedDesktop {
                 updateSettings();
             } else if (intent.getAction().equals(ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE)) {
                 updateSettings();
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
-                    mNavbarHeightScaleFactor = 
-                            (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT, 100) / 100f;
-                    updateNavbarDimensions(true);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT_LANDSCAPE)) {
-                    mNavbarHeightLandscapeScaleFactor = (float)intent.getIntExtra(
-                                    GravityBoxSettings.EXTRA_NAVBAR_HEIGHT_LANDSCAPE,  100) / 100f;
-                    updateNavbarDimensions(true);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH)) {
-                    mNavbarWidthScaleFactor = 
-                            (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100) / 100f;
-                    updateNavbarDimensions(true);
-                }
             }
         }
     };
@@ -138,7 +120,6 @@ public class ModExpandedDesktop {
                 mExpandedDesktop = expandedDesktop;
             }
 
-            XposedHelpers.callMethod(mPhoneWindowManager, "updateSettings");
             Object displayPolicy = XposedHelpers.getObjectField(mPhoneWindowManager, "mDefaultDisplayPolicy");
             Object displayRotation = XposedHelpers.callMethod(
                     XposedHelpers.getObjectField(displayPolicy, "mDisplayContent"),
@@ -148,6 +129,8 @@ public class ModExpandedDesktop {
                     displayPolicy, "mNavigationBarWidthForRotationDefault");
             int[] navigationBarHeightForRotation = (int[]) XposedHelpers.getObjectField(
                     displayPolicy, "mNavigationBarHeightForRotationDefault");
+            int[] navigationBarFrameHeightForRotation = (int[]) XposedHelpers.getObjectField(
+                    displayPolicy, "mNavigationBarFrameHeightForRotationDefault");
             final int portraitRotation = (int) XposedHelpers.callMethod(displayRotation, "getPortraitRotation");
             final int upsideDownRotation = (int) XposedHelpers.callMethod(displayRotation, "getUpsideDownRotation");
             final int landscapeRotation = (int) XposedHelpers.callMethod(displayRotation, "getLandscapeRotation");
@@ -161,7 +144,11 @@ public class ModExpandedDesktop {
                         = navigationBarHeightForRotation[portraitRotation]
                         = navigationBarHeightForRotation[upsideDownRotation]
                         = navigationBarHeightForRotation[landscapeRotation]
-                        = navigationBarHeightForRotation[seascapeRotation] = 0;
+                        = navigationBarHeightForRotation[seascapeRotation]
+                        = navigationBarFrameHeightForRotation[portraitRotation]
+                        = navigationBarFrameHeightForRotation[upsideDownRotation]
+                        = navigationBarFrameHeightForRotation[landscapeRotation]
+                        = navigationBarFrameHeightForRotation[seascapeRotation] = 0;
             } else if (mNavbarDimensions != null) {
                 navigationBarHeightForRotation[portraitRotation] =
                 navigationBarHeightForRotation[upsideDownRotation] =
@@ -169,6 +156,13 @@ public class ModExpandedDesktop {
                 navigationBarHeightForRotation[landscapeRotation] =
                 navigationBarHeightForRotation[seascapeRotation] =
                         mNavbarDimensions.hLand;
+
+                navigationBarFrameHeightForRotation[portraitRotation] =
+                navigationBarFrameHeightForRotation[upsideDownRotation] =
+                                mNavbarDimensions.hPortFrame;
+                navigationBarFrameHeightForRotation[landscapeRotation] =
+                navigationBarFrameHeightForRotation[seascapeRotation] =
+                                mNavbarDimensions.hLandFrame;
 
                 navigationBarWidthForRotation[portraitRotation] =
                 navigationBarWidthForRotation[upsideDownRotation] =
@@ -191,12 +185,18 @@ public class ModExpandedDesktop {
                     "navigation_bar_width", "dimen", "android");
             int resHeightId = res.getIdentifier(
                     "navigation_bar_height", "dimen", "android");
+            int resHeightFrameId = res.getIdentifier(
+                    "navigation_bar_frame_height", "dimen", "android");
             int resHeightLandscapeId = res.getIdentifier(
                     "navigation_bar_height_landscape", "dimen", "android");
+            int resHeightLandscapeFrameId = res.getIdentifier(
+                    "navigation_bar_frame_height_landscape", "dimen", "android");
             mNavbarDimensions = new NavbarDimensions(
-                    (int) (res.getDimensionPixelSize(resWidthId) * mNavbarWidthScaleFactor),
-                    (int) (res.getDimensionPixelSize(resHeightId) * mNavbarHeightScaleFactor),
-                    (int) (res.getDimensionPixelSize(resHeightLandscapeId) *mNavbarHeightLandscapeScaleFactor));
+                    res.getDimensionPixelSize(resWidthId),
+                    res.getDimensionPixelSize(resHeightId),
+                    res.getDimensionPixelSize(resHeightFrameId),
+                    res.getDimensionPixelSize(resHeightLandscapeId),
+                    res.getDimensionPixelSize(resHeightLandscapeFrameId));
             if (updateSettings) {
                 updateSettings();
             }
@@ -208,16 +208,6 @@ public class ModExpandedDesktop {
     public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
-
-            mNavbarOverride = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false);
-            if (mNavbarOverride) {
-                mNavbarHeightScaleFactor = 
-                        (float) prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT, 100) / 100f;
-                mNavbarHeightLandscapeScaleFactor = 
-                        (float) prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE, 100) / 100f;
-                mNavbarWidthScaleFactor = 
-                        (float) prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_WIDTH, 100) / 100f;
-            }
 
             mExpandedDesktopMode = GravityBoxSettings.ED_DISABLED;
             try {
@@ -238,9 +228,6 @@ public class ModExpandedDesktop {
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
                         intentFilter.addAction(ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE);
-                        if (mNavbarOverride) {
-                            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
-                        }
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                         mSettingsObserver = new SettingsObserver(
@@ -258,7 +245,7 @@ public class ModExpandedDesktop {
                     "onConfigurationChanged", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
-                    updateNavbarDimensions(mNavbarOverride || isNavbarHidden());
+                    updateNavbarDimensions(isNavbarHidden());
                 }
             });
 

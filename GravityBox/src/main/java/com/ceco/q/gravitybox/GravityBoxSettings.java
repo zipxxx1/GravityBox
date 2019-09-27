@@ -575,9 +575,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_NAVBAR_KEY_GLOW_COLOR = "pref_navbar_key_glow_color";
     public static final String ACTION_PREF_NAVBAR_CHANGED = "gravitybox.intent.action.ACTION_NAVBAR_CHANGED";
     public static final String ACTION_PREF_NAVBAR_SWAP_KEYS = "gravitybox.intent.action.ACTION_NAVBAR_SWAP_KEYS";
-    public static final String EXTRA_NAVBAR_HEIGHT = "navbarHeight";
-    public static final String EXTRA_NAVBAR_HEIGHT_LANDSCAPE = "navbarHeightLandscape";
-    public static final String EXTRA_NAVBAR_WIDTH = "navbarWidth";
     public static final String EXTRA_NAVBAR_MENUKEY = "navbarMenukey";
     public static final String EXTRA_NAVBAR_HIDE_IME = "navbarHideIme";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_ENABLE = "navbarCustomKeyEnable";
@@ -892,7 +889,10 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             PREF_KEY_VISUALIZER_ENABLE,
             PREF_KEY_CORNER_PADDING_REMOVE,
             PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS,
-            PREF_KEY_OOS_CALL_RECORDING
+            PREF_KEY_OOS_CALL_RECORDING,
+            PREF_KEY_NAVBAR_HEIGHT,
+            PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE,
+            PREF_KEY_NAVBAR_WIDTH
     ));
 
     private static final List<String> customAppKeys = new ArrayList<>(Arrays.asList(
@@ -2942,16 +2942,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 intent.setAction(ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
                 intent.putExtra(EXTRA_ED_MODE, Integer.valueOf(
                         prefs.getString(PREF_KEY_EXPANDED_DESKTOP, "0")));
-            } else if (key.equals(PREF_KEY_NAVBAR_HEIGHT)) {
-                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_HEIGHT, prefs.getInt(PREF_KEY_NAVBAR_HEIGHT, 100));
-            } else if (key.equals(PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE)) {
-                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_HEIGHT_LANDSCAPE, 
-                        prefs.getInt(PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE, 100));
-            } else if (key.equals(PREF_KEY_NAVBAR_WIDTH)) {
-                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_WIDTH, prefs.getInt(PREF_KEY_NAVBAR_WIDTH, 100));
             } else if (key.equals(PREF_KEY_NAVBAR_MENUKEY)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_MENUKEY, prefs.getBoolean(PREF_KEY_NAVBAR_MENUKEY, false));

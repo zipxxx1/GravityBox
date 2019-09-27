@@ -201,14 +201,6 @@ public class ModNavigationBar {
                     mHideImeSwitcher = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_NAVBAR_HIDE_IME, false);
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
-                    mNavbarHeight = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT, 100);
-                    updateIconScaleType();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH)) {
-                    mNavbarWidth = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100);
-                    updateIconScaleType();
-                }
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
                     GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP.equals(intent.getStringExtra(

@@ -43,6 +43,26 @@ class SystemWideResources {
                 "reboot_to_reset_title",
                 "config_allowAllRotations"
         ));
+
+        // Navbar dimensions
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false)) {
+            if (prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT, 100) != 100) {
+                resourceNames.addAll(Arrays.asList(
+                        "navigation_bar_height",
+                        "navigation_bar_frame_height"
+                ));
+            }
+            if (prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE, 100) != 100) {
+                resourceNames.addAll(Arrays.asList(
+                        "navigation_bar_height_landscape",
+                        "navigation_bar_frame_height_landscape"
+                ));
+            }
+            if (prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_WIDTH, 100) != 100) {
+                resourceNames.add("navigation_bar_width");
+            }
+        }
+
         // add overriden items from Advanced tuning if applicable
         if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
                 !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
@@ -107,6 +127,20 @@ class SystemWideResources {
                         break;
                     case "reboot_to_reset_title":
                         resourceSpec.value = "Recovery";
+                        return true;
+                    case "navigation_bar_height":
+                    case "navigation_bar_frame_height":
+                        resourceSpec.value = (int)((int)resourceSpec.value *
+                                prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT, 100) / 100f);
+                        return true;
+                    case "navigation_bar_height_landscape":
+                    case "navigation_bar_frame_height_landscape":
+                        resourceSpec.value = (int)((int)resourceSpec.value *
+                                prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE, 100) / 100f);
+                        return true;
+                    case "navigation_bar_width":
+                        resourceSpec.value = (int)((int)resourceSpec.value *
+                                prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_WIDTH, 100) / 100f);
                         return true;
                 }
                 return false;
