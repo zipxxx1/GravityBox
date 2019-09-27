@@ -21,7 +21,6 @@ import com.ceco.q.gravitybox.BroadcastSubReceiver;
 import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.ModLockscreen;
-import com.ceco.q.gravitybox.ModStatusBar;
 import com.ceco.q.gravitybox.ModStatusBar.StatusBarStateChangedListener;
 import com.ceco.q.gravitybox.managers.BatteryInfoManager;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
@@ -57,6 +56,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
     private static final String CLASS_NAVIGATION_BAR_VIEW = "com.android.systemui.statusbar.phone.NavigationBarView";
     private static final String CLASS_NAVIGATION_BAR_INFLATER_VIEW = "com.android.systemui.statusbar.phone.NavigationBarInflaterView";
     private static final String CLASS_LIGHT_BAR_CONTROLLER = "com.android.systemui.statusbar.phone.LightBarController";
+    private static final String CLASS_NOTIF_MEDIA_MANAGER = "com.android.systemui.statusbar.NotificationMediaManager";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -168,7 +168,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
         }
 
         try {
-            XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_STATUSBAR, cl,
+            XposedHelpers.findAndHookMethod(CLASS_NOTIF_MEDIA_MANAGER, cl,
                     "updateMediaMetaData", boolean.class, boolean.class,
                         new XC_MethodHook() {
                 @Override
@@ -263,9 +263,8 @@ public class VisualizerController implements StatusBarStateChangedListener,
     }
 
     private void updateMediaMetaData(Object sb, boolean metaDataChanged) {
-        Object mediaManager = XposedHelpers.getObjectField(sb, "mMediaManager");
         MediaController mc = (MediaController) XposedHelpers
-                .getObjectField(mediaManager, "mMediaController");
+                .getObjectField(sb, "mMediaController");
         mPlaying = mc != null && mc.getPlaybackState() != null &&
                 mc.getPlaybackState().getState() == PlaybackState.STATE_PLAYING;
 
