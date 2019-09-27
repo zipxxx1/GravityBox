@@ -17,14 +17,15 @@
 
 package com.ceco.q.gravitybox;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.wifi.WifiConfiguration;
+import android.content.pm.PackageManager;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class WifiPriorityActivity extends GravityBoxListActivity implements GravityBoxResultReceiver.Receiver {
+public class WifiPriorityActivity extends GravityBoxListActivity {
 
     public static final String PREF_KEY_WIFI_TRUSTED = "pref_wifi_trusted";
     public static final String ACTION_WIFI_TRUSTED_CHANGED = "gravitybox.intent.action.WIFI_TRUSTED_CHANGED";
@@ -57,11 +58,6 @@ public class WifiPriorityActivity extends GravityBoxListActivity implements Grav
 
         // Set the touchable listview
         mNetworksListView = getListView();
-        mAdapter = new WifiPriorityAdapter(this, (WifiManager) getSystemService(Context.WIFI_SERVICE));
-        setListAdapter(mAdapter);
-
-        GravityBoxResultReceiver receiver = new GravityBoxResultReceiver(new Handler());
-        receiver.setReceiver(this);
     }
 
     @Override
@@ -71,25 +67,38 @@ public class WifiPriorityActivity extends GravityBoxListActivity implements Grav
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
 
-        // Reload the networks
-        mAdapter.reloadNetworks();
-        mNetworksListView.invalidateViews();
+        if (!hasLocationPermission()) {
+            requestPermissions(new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, 0);
+            return;
+        }
+
+        loadNetworks();
+    }
+
+    private void loadNetworks() {
+        mAdapter = new WifiPriorityAdapter(this, (WifiManager) getSystemService(Context.WIFI_SERVICE));
+        setListAdapter(mAdapter);
     }
 
     @Override
-    public void onReceiveResult(int resultCode, Bundle resultData) {
-        // Reload the networks
-        mAdapter.reloadNetworks();
-        mNetworksListView.invalidateViews();
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            loadNetworks();
+        }
+    }
+
+    private boolean hasLocationPermission() {
+        return checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED;
     }
 
     private class WifiNetwork {
-        WifiConfiguration config;
+        ScanResult config;
         boolean trusted;
-        WifiNetwork(WifiConfiguration c) {
+        WifiNetwork(ScanResult c) {
             config = c;
         }
     }
@@ -108,16 +117,19 @@ public class WifiPriorityActivity extends GravityBoxListActivity implements Grav
 
         private void reloadNetworks() {
             mNetworks = new ArrayList<>();
-            List<WifiConfiguration> networks = mWifiManager.getConfiguredNetworks();
+            List<ScanResult> networks = mWifiManager.getScanResults();
             if (networks == null) return;
 
             // Sort network list by network id
-            networks.sort(Comparator.comparingInt(lhs -> lhs.networkId));
+            networks.sort(Comparator.comparing(lhs -> lhs.SSID));
 
             // read trusted SSIDs from prefs
             Set<String> trustedNetworks = mPrefs.getStringSet(PREF_KEY_WIFI_TRUSTED,
                     new HashSet<>());
-            for (WifiConfiguration c : networks) {
+            for (ScanResult c : networks) {
+                if (mNetworks.stream().filter(w ->
+                        w.config.SSID.equals(filterSSID(c.SSID))).count() > 0)
+                    continue;
                 WifiNetwork wn = new WifiNetwork(c);
                 wn.trusted = trustedNetworks.contains(filterSSID(c.SSID));
                 mNetworks.add(wn);

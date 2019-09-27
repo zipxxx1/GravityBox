@@ -33,6 +33,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <permission
         android:name="gravitybox.permission.UNLOCK"
