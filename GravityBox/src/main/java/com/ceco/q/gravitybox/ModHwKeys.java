@@ -670,8 +670,10 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId));
                                 }
                             }
-                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false,
-                                    "GravityBox - Back Key");
+                            if (!Utils.isOxygenOsRom()) {
+                                performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false,
+                                        "GravityBox - Back Key");
+                            }
                             param.setResult(0);
                             return;
                         }
@@ -759,8 +761,10 @@ public class ModHwKeys {
                                                     getActionFor(HwKeyTrigger.RECENTS_LONGPRESS).actionId));
                                 }
                             }
-                            performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false,
-                                    "GravityBox - Recents Key");
+                            if (!Utils.isOxygenOsRom()) {
+                                performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, false,
+                                        "GravityBox - Recents Key");
+                            }
                             param.setResult(0);
                         }
                     }
