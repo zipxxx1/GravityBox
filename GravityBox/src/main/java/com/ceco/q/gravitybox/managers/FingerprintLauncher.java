@@ -325,7 +325,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
             try {
                 Object fp = XposedHelpers.callMethod(result, "getFingerprint");
                 if (fp != null) {
-                    id = String.valueOf(XposedHelpers.callMethod(fp, "getFingerId"));
+                    id = String.valueOf(XposedHelpers.callMethod(fp, "getBiometricId"));
                     if (DEBUG) log("getFingerPrintIdFromResult: id=" + id);
                 }
             } catch (Throwable t) {
@@ -343,7 +343,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
             if (fpList.size() > 0) {
                 ids = new int[fpList.size()];
                 for (int i = 0; i < fpList.size(); i++) {
-                    ids[i] = (int) XposedHelpers.callMethod(fpList.get(i), "getFingerId");
+                    ids[i] = (int) XposedHelpers.callMethod(fpList.get(i), "getBiometricId");
                 }
             }
         } catch (Throwable t) {
