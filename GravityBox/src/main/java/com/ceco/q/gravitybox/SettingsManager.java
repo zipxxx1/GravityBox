@@ -39,6 +39,7 @@ public class SettingsManager {
     private static final String MM_PREFERENCES = "com.ceco.marshmallow.gravitybox_preferences.xml";
     private static final String N_PREFERENCES = "com.ceco.nougat.gravitybox_preferences.xml";
     private static final String O_PREFERENCES = "com.ceco.oreo.gravitybox_preferences.xml";
+    private static final String P_PREFERENCES = "com.ceco.pie.gravitybox_preferences.xml";
 
     public interface FileObserverListener {
         void onFileUpdated(String path);
@@ -233,6 +234,9 @@ public class SettingsManager {
         };
         for (String prefsFileName : prefsFileNames) {
             File prefsFile = new File(BACKUP_PATH + "/" + prefsFileName);
+            // try P preferences if no Q prefs file exists
+            if (prefsFileName.equals(prefsFileNames[0]) && !prefsFile.exists())
+                prefsFile = new File(BACKUP_PATH + "/" + P_PREFERENCES);
             // try O preferences if no P prefs file exists
             if (prefsFileName.equals(prefsFileNames[0]) && !prefsFile.exists())
                 prefsFile = new File(BACKUP_PATH + "/" + O_PREFERENCES);
