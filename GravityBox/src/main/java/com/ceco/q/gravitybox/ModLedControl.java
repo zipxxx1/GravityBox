@@ -234,7 +234,7 @@ public class ModLedControl {
                     createNotificationRecordHook);
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
-                    "applyZenModeLocked", CLASS_NOTIFICATION_RECORD, applyZenModeHook);
+                    "buzzBeepBlinkLocked", CLASS_NOTIFICATION_RECORD, buzzBeepBlinkLockedHook);
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
                     "updateLightsLocked", updateLightsLockedHook);
@@ -596,7 +596,7 @@ public class ModLedControl {
         return shouldIgnore;
     }
 
-    private static XC_MethodHook applyZenModeHook = new XC_MethodHook() {
+    private static XC_MethodHook buzzBeepBlinkLockedHook = new XC_MethodHook() {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) {
             try {
@@ -609,14 +609,6 @@ public class ModLedControl {
                     return;
                 }
                 n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN);
-
-                // check if intercepted by Zen
-                if (!mUncActiveScreenIgnoreQh &&
-                        (boolean) XposedHelpers.callMethod(param.args[0], "isIntercepted")) {
-                    if (DEBUG) log("Active screen: intercepted by Zen - ignoring");
-                    n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN_MODE);
-                    return;
-                }
 
                 // set additional params
                 final ActiveScreenMode asMode = ActiveScreenMode.valueOf(
