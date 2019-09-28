@@ -2066,4 +2066,12 @@
     <!-- Media / Vulume panel category -->
     <string name="pref_cat_volume_panel_title">Volume panel</string>
 
+    <!-- About EdXposed -->
+    <string name="about_edxposed_title">EdXposed framework</string>
+    <string name="about_edxposed_summary">Coded by solohsu &amp; MlgmXyysd. Touch to visit official page.</string>
+
+    <!-- About Riru -->
+    <string name="about_riru_title">Riru</string>
+    <string name="about_riru_summary">Coded by RikkaW. Touch to visit official page.</string>
+
 </resources>
