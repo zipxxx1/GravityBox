@@ -1974,4 +1974,12 @@
     <!-- Media / Vulume panel category -->
     <string name="pref_cat_volume_panel_title">Panel hlasitosti</string>
 
+    <!-- About EdXposed -->
+    <string name="about_edxposed_title">EdXposed framework</string>
+    <string name="about_edxposed_summary">Naprogramoval solohsu &amp; MlgmXyysd. Dotykom otvoríte oficiálnu stránku.</string>
+
+    <!-- About Riru -->
+    <string name="about_riru_title">Riru</string>
+    <string name="about_riru_summary">Naprogramoval RikkaW. Dotykom otvoríte oficiálnu stránku.</string>
+
 </resources>
