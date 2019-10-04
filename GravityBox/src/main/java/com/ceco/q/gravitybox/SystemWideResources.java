@@ -160,7 +160,8 @@ class SystemWideResources {
                 resourceNames,
                 new ArrayList<>(Arrays.asList(
                         ResourceProxy.getFakeResId("ic_audio_notification"),
-                        ResourceProxy.getFakeResId("ic_audio_notification_mute")))) {
+                        ResourceProxy.getFakeResId("ic_audio_notification_mute"),
+                        ResourceProxy.getFakeResId("ic_navbar_menu")))) {
             @Override
             public boolean onIntercept(ResourceProxy.ResourceSpec resourceSpec) {
                 // Advanced tuning has priority
@@ -188,6 +189,8 @@ class SystemWideResources {
                     return gbContext.getDrawable(R.drawable.ic_audio_notification);
                 } else if (fakeResId == ResourceProxy.getFakeResId("ic_audio_notification_mute")) {
                     return gbContext.getDrawable(R.drawable.ic_audio_notification_mute);
+                } else if (fakeResId == ResourceProxy.getFakeResId("ic_navbar_menu")) {
+                    return gbContext.getDrawable(R.drawable.ic_navbar_menu);
                 }
                 return null;
             }

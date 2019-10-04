@@ -56,6 +56,7 @@ public class ModNavigationBar {
     static final String CLASS_NAVBAR_FRAGMENT = "com.android.systemui.statusbar.phone.NavigationBarFragment";
     private static final String CLASS_KEY_BUTTON_VIEW = "com.android.systemui.statusbar.policy.KeyButtonView";
     private static final String CLASS_KEY_BUTTON_RIPPLE = "com.android.systemui.statusbar.policy.KeyButtonRipple";
+    private static final String CLASS_KEY_BUTTON_DRAWABLE = "com.android.systemui.statusbar.policy.KeyButtonDrawable";
     private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_NAVBAR_INFLATER_VIEW = "com.android.systemui.statusbar.phone.NavigationBarInflaterView";
     private static final String CLASS_LIGHT_BAR_CTRL = "com.android.systemui.statusbar.phone.LightBarTransitionsController";
@@ -142,13 +143,21 @@ public class ModNavigationBar {
             final int intermediateColor = ColorUtils.compositeColors(
                     ColorUtils.blendAlpha(mDarkColor, intensity),
                     ColorUtils.blendAlpha(mLightColor, (1f - intensity)));
+            if (!Utils.isOxygenOsRom() && menuKey != null) {
+                try {
+                    XposedHelpers.callMethod(menuKey, "setDarkIntensity", intensity);
+                } catch (Throwable t) {
+                    if (DEBUG) GravityBox.log(TAG, t);
+                }
+            }
             setKeyButtonViewColorStateList(ColorStateList.valueOf(intermediateColor));
         }
         void setKeyButtonViewColorStateList(ColorStateList csl) {
             if (customKey != null) customKey.setImageTintList(csl);
             if (dpadLeft != null) dpadLeft.setImageTintList(csl);
             if (dpadRight != null) dpadRight.setImageTintList(csl);
-            if (menuKey instanceof ImageView) ((ImageView) menuKey).setImageTintList(csl);
+            if (Utils.isOxygenOsRom() && menuKey instanceof ImageView)
+                ((ImageView) menuKey).setImageTintList(csl);
         }
     }
 
@@ -517,6 +526,7 @@ public class ModNavigationBar {
                     if (mAlwaysShowMenukey) {
                         XposedHelpers.callMethod(param.thisObject, "setVisibility",
                                 View.VISIBLE);
+                        setMenuKeyVisibility();
                     }
                 }
             });
@@ -535,6 +545,22 @@ public class ModNavigationBar {
             } else {
                 log(child.toString() +"; visible=" + (child.getVisibility() == View.VISIBLE));
             }
+        }
+    }
+
+    private static Drawable getMenuKeyDrawable(Context ctx) {
+        try {
+            if (Utils.isOxygenOsRom()) {
+                return mGbContext.getDrawable(R.drawable.ic_navbar_menu);
+            } else {
+                Class<?> classKbd = XposedHelpers.findClass(CLASS_KEY_BUTTON_DRAWABLE,
+                    ctx.getClassLoader());
+                return (Drawable) XposedHelpers.callStaticMethod(classKbd, "create",
+                        ctx.getApplicationContext(), ResourceProxy.getFakeResId("ic_navbar_menu"), false);
+            }
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+            return null;
         }
     }
 
@@ -568,7 +594,7 @@ public class ModNavigationBar {
                 if (mNavbarViewInfo[index].menuKey instanceof ImageView) {
                     ImageView iv = (ImageView) mNavbarViewInfo[index].menuKey;
                     if (iv.getDrawable() == null) {
-                        iv.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_navbar_menu));
+                        iv.setImageDrawable(getMenuKeyDrawable(iv.getContext()));
                         if (DEBUG) log("Setting menu key drawable explicitly");
                     }
                 }
@@ -686,10 +712,19 @@ public class ModNavigationBar {
         }
     }
 
+    private static boolean isNavbarModeGestural() {
+        try {
+            return XposedHelpers.getIntField(mNavigationBarView, "mNavBarMode") == 2;
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+            return false;
+        }
+    }
+
     private static void setCustomKeyVisibility() {
         try {
             final int disabledFlags = XposedHelpers.getIntField(mNavigationBarView, "mDisabledFlags");
-            final boolean visible = mCustomKeyEnabled &&
+            final boolean visible = mCustomKeyEnabled && !isNavbarModeGestural() &&
                     (disabledFlags & STATUS_BAR_DISABLE_RECENT) == 0;
             for (NavbarViewInfo navbarViewInfo : mNavbarViewInfo) {
                 if (navbarViewInfo == null) continue;
