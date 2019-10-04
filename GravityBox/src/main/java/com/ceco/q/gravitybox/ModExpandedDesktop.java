@@ -306,7 +306,7 @@ public class ModExpandedDesktop {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
                     if (param.args[0] == XposedHelpers.getObjectField(param.thisObject, "mNavigationBar")
-                            && isNavbarHidden()) {
+                            && isNavbarHidden() && !isNavbarGestural()) {
                         if (DEBUG) log("requestTransientBars: ignoring since navbar is hidden");
                         param.setResult(null);
                     }
@@ -314,6 +314,17 @@ public class ModExpandedDesktop {
             });
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
+        }
+    }
+
+    private static boolean isNavbarGestural() {
+        try {
+            int mode = Integer.valueOf(Settings.Secure.getString(
+                    mContext.getContentResolver(), "navigation_mode"));
+            return (mode == 2);
+        } catch (Throwable t) {
+            GravityBox.log(TAG, t);
+            return false;
         }
     }
 
