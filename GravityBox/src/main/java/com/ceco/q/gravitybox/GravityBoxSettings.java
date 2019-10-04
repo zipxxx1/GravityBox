@@ -1739,6 +1739,8 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 if (p != null) mPrefCatPhoneTelephony.removePreference(p);
                 p = findPreference(PREF_KEY_OOS_DASH_SOUND_DISABLE);
                 if (p != null) mPrefCatPowerOther.removePreference(p);
+                p = findPreference(PREF_KEY_QS_BRIGHTNESS_ICON);
+                if (p != null) mPrefCatStatusbarQs.removePreference(p);
             }
 
             // Remove non-OP7Pro preferences

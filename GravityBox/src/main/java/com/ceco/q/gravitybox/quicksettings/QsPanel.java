@@ -21,18 +21,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.BroadcastSubReceiver;
 import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxSettings;
-import com.ceco.q.gravitybox.ModHwKeys;
-import com.ceco.q.gravitybox.ModQsTiles;
 import com.ceco.q.gravitybox.Utils;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -119,7 +115,7 @@ public class QsPanel implements BroadcastSubReceiver {
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_BRIGHTNESS_ICON)) {
                 mBrightnessIconEnabled = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_QS_BRIGHTNESS_ICON, false);
+                        GravityBoxSettings.EXTRA_QS_BRIGHTNESS_ICON, Utils.isOxygenOsRom());
                 if (DEBUG) log("onBroadcastReceived: mBrightnessIconEnabled=" + mBrightnessIconEnabled);
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_LOCKED_TILE_INDICATOR)) {
@@ -328,38 +324,24 @@ public class QsPanel implements BroadcastSubReceiver {
             GravityBox.log(TAG, t);
         }
 
-        try {
-            XposedHelpers.findAndHookMethod(CLASS_BRIGHTNESS_CTRL, classLoader,
-                    "registerCallbacks", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (DEBUG) log("BrightnessController: registerCallbacks");
-                    ImageView icon = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mIcon");
-                    if (icon != null) {
-                        if (Utils.isOxygenOsRom()) {
+        if (Utils.isOxygenOsRom()) {
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_BRIGHTNESS_CTRL, classLoader,
+                        "registerCallbacks", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (DEBUG) log("BrightnessController: registerCallbacks");
+                        ImageView icon = (ImageView) XposedHelpers.getObjectField(param.thisObject, "mIcon");
+                        if (icon != null) {
                             View parent = (View) icon.getParent();
                             parent.setVisibility(mHideBrightness ? View.GONE : View.VISIBLE);
+                            icon.setVisibility(mBrightnessIconEnabled ? View.VISIBLE : View.GONE);
                         }
-                        if (!icon.hasOnClickListeners()) {
-                            icon.setOnClickListener(mBrightnessIconOnClick);
-                            icon.setOnLongClickListener(mBrightnessIconOnLongClick);
-                            icon.setBackground(Utils.getGbContext(
-                                    icon.getContext()).getDrawable(
-                                    R.drawable.ripple));
-                        }
-                        boolean automatic = XposedHelpers.getBooleanField(param.thisObject, "mAutomatic");
-                        int resId = icon.getResources().getIdentifier(
-                                (automatic ? "ic_qs_brightness_auto_on" : "ic_qs_brightness_auto_off"),
-                                "drawable", ModQsTiles.PACKAGE_NAME);
-                        if (resId != 0) {
-                            icon.setImageResource(resId);
-                        }
-                        icon.setVisibility(mBrightnessIconEnabled ? View.VISIBLE : View.GONE);
                     }
-                }
-            });
-        } catch (Throwable t) {
-            GravityBox.log(TAG, t);
+                });
+            } catch (Throwable t) {
+                GravityBox.log(TAG, t);
+            }
         }
     }
 
@@ -372,29 +354,4 @@ public class QsPanel implements BroadcastSubReceiver {
             }
         }
     }
-
-    private View.OnClickListener mBrightnessIconOnClick = v -> {
-        Intent intent = new Intent(ModHwKeys.ACTION_TOGGLE_AUTO_BRIGHTNESS);
-        v.getContext().sendBroadcast(intent);
-    };
-
-    private View.OnLongClickListener mBrightnessIconOnLongClick = new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v) {
-            try {
-                Intent intent = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
-                Object host = XposedHelpers.getObjectField(mQsPanel, "mHost");
-                if (Utils.isSamsungRom()) {
-                    Object statusBar = XposedHelpers.getObjectField(host, "mStatusBar");
-                    XposedHelpers.callMethod(statusBar, "startActivity", intent, true);
-                } else {
-                    XposedHelpers.callMethod(host, "startActivityDismissingKeyguard", intent);
-                }
-                return true;
-            } catch (Throwable t) {
-                GravityBox.log(TAG, t);
-                return false;
-            }
-        }
-    };
 }
