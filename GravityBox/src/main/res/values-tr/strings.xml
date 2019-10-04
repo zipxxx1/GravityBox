@@ -1372,9 +1372,6 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <string name="state_enabled">Etkin</string>
     <string name="state_disabled">Devre dışı</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Yüzdeli stok pil göstergesi</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">Durum çubuğunda göster</string>
     <string name="battery_percent_text_statusbar_summary">Standart durum çubuğunda pil yüzde metnini gösterir (cihaz kilitli değilken)</string>

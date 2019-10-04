@@ -1104,8 +1104,6 @@
     <string name="state_enabled">활성화</string>
     <string name="state_disabled">비활성화</string>
 
-    <string name="battery_style_stock_percent">순정 배터리 아이콘 (퍼센트 표시)</string>
-
     <string name="battery_percent_text_statusbar_title">상단바에 보이기</string>
     <string name="battery_percent_text_statusbar_summary">기본 상단바에 배터리 잔량 퍼센트 항목을 추가합니다. (기기가 잠금 해제 되었을 때만)</string>
     <string name="battery_percent_text_keyguard_title">Keyguard 모드</string>

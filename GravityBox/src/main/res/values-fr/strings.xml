@@ -1147,8 +1147,6 @@ Assurez-vous que ses dimensions soient proches de : %1$dx%2$dpx</string>
     <string name="state_default">Par défaut</string>
     <string name="state_enabled">Activé</string>
     <string name="state_disabled">Désactivé</string>
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Batterie par défaut avec pourcentage</string>
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">Afficher dans la barre d\'état</string>
     <string name="battery_percent_text_statusbar_summary">Affiche le pourcentage de batterie au format texte dans la barre d\'état standard (lorsque l\'appareil est déverrouillé)</string>

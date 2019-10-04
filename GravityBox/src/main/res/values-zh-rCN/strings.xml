@@ -1397,9 +1397,6 @@
     <string name="state_enabled">开启</string>
     <string name="state_disabled">关闭</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">原厂电量百分比</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">在状态栏显示</string>
     <string name="battery_percent_text_statusbar_summary">在标准状态栏显示电量百分比文字(当设备解锁时)</string>

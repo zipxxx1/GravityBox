@@ -1394,9 +1394,6 @@
     <string name="state_enabled">Attivato</string>
     <string name="state_disabled">Disattivato</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Battery Standard con Percentuale</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">Mostra nella status bar</string>
     <string name="battery_percent_text_statusbar_summary">Mostra la percentuale della batteria nella standard status bar (Quando il device è sbloccato)</string>

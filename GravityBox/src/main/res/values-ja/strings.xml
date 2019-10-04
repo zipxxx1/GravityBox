@@ -1136,8 +1136,6 @@
     <string name="state_default">デフォルト</string>
     <string name="state_enabled">有効</string>
     <string name="state_disabled">無効</string>
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">標準バッテリー＋％</string>
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">ステータスバーに表示</string>
     <string name="battery_percent_text_statusbar_summary">ロック解除時の通常のステータスバーにバッテリーのパーセントテキストを表示します。</string>

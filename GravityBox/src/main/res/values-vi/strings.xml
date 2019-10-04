@@ -1380,9 +1380,6 @@
     <string name="state_enabled">Bật</string>
     <string name="state_disabled">Tắt</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Pin gốc với phần trăm</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">Hiện trên thanh trạng thái</string>
     <string name="battery_percent_text_statusbar_summary">Hiện phần trăm pin trên thanh trạng thái chuẩn (khi thiết bị được mở khóa)</string>

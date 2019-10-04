@@ -1394,10 +1394,7 @@
     <string name="state_enabled">Вкл</string>
     <string name="state_disabled">Откл</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Стоковая батарея с процентами</string>
-
-     <!-- Battery percent text -->
+    <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">В строке состояния</string>
     <string name="battery_percent_text_statusbar_summary">Отображение текста процентов батареи в стандартной строке состояния (на разблокированном устройстве)</string>
     <string name="battery_percent_text_keyguard_title">Защищённый режим</string>

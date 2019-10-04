@@ -871,7 +871,6 @@
 <string name="state_default">پیشفرض</string>
 <string name="state_enabled">فعال</string>
 <string name="state_disabled">غیرفعال</string>
-<string name="battery_style_stock_percent">نشانگر باطری پیشفرض با درصد شارژ</string>
 <string name="battery_percent_text_statusbar_title">نمایش در نوار وضعیت</string>
 <string name="battery_percent_text_statusbar_summary">نمایش متن درصد شارژ باطری در نوار وضعیت استاندارد(هنگام قفل‌گشایی)</string>
 <string name="battery_percent_text_keyguard_title">نمایش در صفحه قفل</string>

@@ -1352,9 +1352,6 @@
     <string name="state_enabled">Activat</string>
     <string name="state_disabled">Dezactivat</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Baterie stoc cu procentaj</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">Afișare în bara de stare</string>
     <string name="battery_percent_text_statusbar_summary">Afișează textul bateriei procentuale în bara de stare standard (când dispozitivul este deblocat)</string>

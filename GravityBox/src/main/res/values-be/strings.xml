@@ -1378,9 +1378,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="state_enabled">Уключана</string>
     <string name="state_disabled">Выключана</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Батарэя па змаўчанні з адсоткамі</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">У радку стану</string>
     <string name="battery_percent_text_statusbar_summary">Адлюстраванне тэксту адсоткаў батарэі ў стандартным радку стану (на разблакаванай прыладзе)</string>

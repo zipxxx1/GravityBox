@@ -127,7 +127,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING = "battery_percent_text_charging";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING_COLOR = "pref_battery_percent_text_charging_color";
     public static final int BATTERY_STYLE_STOCK = 1;
-    public static final int BATTERY_STYLE_STOCK_PERCENT = 4;
     public static final int BATTERY_STYLE_CIRCLE = 2;
     public static final int BATTERY_STYLE_CIRCLE_PERCENT = 3;
     public static final int BATTERY_STYLE_CIRCLE_DASHED = 6;
@@ -1728,8 +1727,6 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
                 p = findPreference(PREF_CAT_KEY_BATTERY_TILE);
                 if (p != null) mPrefCatQsTileSettings.removePreference(p);
                 mPrefCatPhone.removePreference(mPrefCatPhoneDialer);
-                mBatteryStyle.setEntries(R.array.battery_style_entries_oos);
-                mBatteryStyle.setEntryValues(R.array.battery_style_values_oos);
                 PreferenceCategory pc = (PreferenceCategory) findPreference(PREF_CAT_RECENTS_PANEL);
                 p = findPreference(PREF_KEY_RECENT_CLEAR_ALWAYS_VISIBLE);
                 if (pc != null && p != null) pc.removePreference(p);

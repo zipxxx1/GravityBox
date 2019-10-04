@@ -1358,9 +1358,6 @@
     <string name="state_enabled">Zapnout</string>
     <string name="state_disabled">Vypnout</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Základní s procenty</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">Zobrazit ve stavové liště</string>
     <string name="battery_percent_text_statusbar_summary">Zobrazí procentuální text v hlavní stavové liště (když je zařízení odemčeno)</string>

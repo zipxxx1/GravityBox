@@ -1372,9 +1372,6 @@
     <string name="state_enabled">Engedélyezve</string>
     <string name="state_disabled">Letiltva</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Gyári akku kijelzés százalékkal</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">Megjelenítés az állapotsávon</string>
     <string name="battery_percent_text_statusbar_summary">Megjeleníti az akkumulátor százalék szövegét a szabványos állapotsávon (a készülék feloldott állapotában)</string>

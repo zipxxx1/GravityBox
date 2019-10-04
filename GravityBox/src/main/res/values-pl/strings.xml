@@ -1360,9 +1360,6 @@
     <string name="state_enabled">Włączony</string>
     <string name="state_disabled">Wyłączony</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Standardowy z procentami</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">Pokaż na pasku stanu</string>
     <string name="battery_percent_text_statusbar_summary">Pokazuje tekstowy procentowy wskaźnik baterii na standardowym pasku stanu (gdy telefon jest odblokowany)</string>

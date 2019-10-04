@@ -119,8 +119,11 @@ public class BatteryStyleController implements BroadcastSubReceiver {
 
     private void initPreferences(XSharedPreferences prefs) {
         mPrefs = prefs;
+
         mBatteryStyle = Integer.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
+        if (mBatteryStyle == 4) mBatteryStyle = 1;
+
         mBatteryStyleHeaderEnabled = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_BATTERY_STYLE_HEADER, false);
         mBatteryPercentTextEnabledSb = prefs.getBoolean(
@@ -210,8 +213,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             if (mStockBattery != null) {
                 mStockBattery.setVisibility(isCurrentStyleStockBattery() ?
                         View.VISIBLE : View.GONE);
-                mStockBattery.setShowPercentage(mBatteryStyle ==
-                            GravityBoxSettings.BATTERY_STYLE_STOCK_PERCENT);
             }
 
             if (mCircleBattery != null) {
@@ -373,7 +374,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
 
     private boolean isCurrentStyleStockBattery() {
         return (mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK ||
-                        mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK_PERCENT ||
                 (mContainerType == ContainerType.HEADER && !mBatteryStyleHeaderEnabled));
     }
 

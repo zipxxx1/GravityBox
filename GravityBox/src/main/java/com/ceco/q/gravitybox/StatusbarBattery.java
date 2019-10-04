@@ -50,19 +50,4 @@ public class StatusbarBattery {
     public void setVisibility(int visibility) {
         mBattery.setVisibility(visibility);
     }
-
-    public void setShowPercentage(boolean showPercentage) {
-        if (mBattery != null && getDrawable() != null) {
-            try {
-                XposedHelpers.setBooleanField(getDrawable(), "mShowPercent", showPercentage);
-                try {
-                    XposedHelpers.callMethod(getDrawable(), "postInvalidate");
-                } catch (Throwable t) {
-                    mBattery.postInvalidate();
-                }
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "Error setting percentage: ", t);
-            }
-        }
-    }
 }

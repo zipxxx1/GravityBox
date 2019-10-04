@@ -1366,9 +1366,6 @@
     <string name="state_enabled">Увімкнено</string>
     <string name="state_disabled">Вимкнено</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Стокова батарея з відсотками</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">В панелі стану</string>
     <string name="battery_percent_text_statusbar_summary">Показ тексту відсотків батареї в стандартній панелі стану (на розблокованому пристрої)</string>

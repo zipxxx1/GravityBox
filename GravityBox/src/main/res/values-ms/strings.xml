@@ -1394,9 +1394,6 @@
     <string name="state_enabled">Aktif</string>
     <string name="state_disabled">Tidak aktif</string>
 
-    <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Bateri asal dengan peratusan</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">Tunjuk di bar status</string>
     <string name="battery_percent_text_statusbar_summary">Tunjuk di bar status (ketika henfon tidak dikunci)</string>
