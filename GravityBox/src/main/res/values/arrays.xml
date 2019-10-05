@@ -1138,4 +1138,30 @@
         <item>UNLINKED</item>
     </string-array>
 
+    <string-array name="volume_stream_entries">
+        <item>@string/stream_music</item>
+        <item>@string/stream_ring</item>
+        <item>@string/stream_notification</item>
+        <item>@string/stream_alarm</item>
+        <item>@string/stream_call</item>
+        <item>@string/stream_bluetooth</item>
+        <item>@string/stream_system</item>
+    </string-array>
+
+    <string-array name="volume_stream_values" translatable="false">
+        <item>3</item>
+        <item>2</item>
+        <item>5</item>
+        <item>4</item>
+        <item>0</item>
+        <item>6</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="volume_streams_default">
+        <item>3</item>
+        <item>2</item>
+        <item>4</item>
+    </string-array>
+
 </resources>
