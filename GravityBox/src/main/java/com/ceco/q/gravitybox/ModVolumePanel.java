@@ -25,6 +25,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.view.View;
+import android.widget.ImageButton;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -40,6 +42,12 @@ public class ModVolumePanel {
             "com.oneplus.volume.OpVolumeDialogImpl.VolumeRow" :
             CLASS_VOLUME_PANEL + ".VolumeRow";
     private static final boolean DEBUG = false;
+
+    private static List<Integer> EXPANDABLE_STREAMS = Arrays.asList(
+            AudioManager.STREAM_MUSIC, AudioManager.STREAM_RING,
+            AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_ALARM,
+            AudioManager.STREAM_VOICE_CALL, 6 /* BLUETOOTH_SCO */,
+            AudioManager.STREAM_SYSTEM);
 
     private static Object mVolumePanel;
     private static boolean mVolForceRingControl;
@@ -130,14 +138,8 @@ public class ModVolumePanel {
                 protected void afterHookedMethod(final MethodHookParam param) {
                     int streamType = XposedHelpers.getIntField(param.args[0], "stream");
                     boolean visible = (boolean) param.getResult();
-                    if (mVolumePanelExpanded && (
-                            streamType == AudioManager.STREAM_MUSIC ||
-                            streamType == AudioManager.STREAM_RING ||
-                            streamType == AudioManager.STREAM_NOTIFICATION ||
-                            streamType == AudioManager.STREAM_ALARM ||
-                            streamType == AudioManager.STREAM_VOICE_CALL ||
-                            streamType == 6 /* BLUETOOTH_SCO */ ||
-                            streamType == AudioManager.STREAM_SYSTEM)) {
+                    if (mVolumePanelExpanded && !Utils.isOxygenOsRom() &&
+                            EXPANDABLE_STREAMS.contains(streamType)) {
                         param.setResult(mVolumePanelExpandedStreams.contains(String.valueOf(streamType)));
                     } else if (streamType == AudioManager.STREAM_NOTIFICATION) {
                         param.setResult(shouldShowNotificationRow(visible));
@@ -148,6 +150,40 @@ public class ModVolumePanel {
             };
             XposedHelpers.findAndHookMethod(classVolumePanel, "shouldBeVisibleH",
                     CLASS_VOLUME_ROW, CLASS_VOLUME_ROW, shouldBeVisibleHook);
+
+            if (Utils.isOxygenOsRom()) {
+                XposedHelpers.findAndHookMethod(classVolumePanel, "showH",
+                        int.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) {
+                        if (mVolumePanelExpanded && !XposedHelpers.getBooleanField(
+                                param.thisObject, "mOpForceExpandState")) {
+                            ImageButton btn = (ImageButton) XposedHelpers.getObjectField(
+                                    param.thisObject, "mSettingsIcon");
+                            btn.performClick();
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(classVolumePanel, "updateRowsH",
+                        CLASS_VOLUME_ROW, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) {
+                        if (mVolumePanelExpanded && XposedHelpers.getBooleanField(
+                                param.thisObject, "mOpForceExpandState")) {
+                            List<?> rows = (List<?>) XposedHelpers.getObjectField(mVolumePanel, "mRows");
+                            for (Object row : rows) {
+                                int stream = XposedHelpers.getIntField(row, "stream");
+                                if (EXPANDABLE_STREAMS.contains(stream)) {
+                                    ((View)XposedHelpers.getObjectField(row, "view"))
+                                            .setVisibility(mVolumePanelExpandedStreams.contains(
+                                                    String.valueOf(stream)) ? View.VISIBLE : View.GONE);
+                                }
+                            }
+                        }
+                    }
+                });
+            }
 
             XposedHelpers.findAndHookMethod(classVolumePanel, "updateVolumeRowSliderH",
                     CLASS_VOLUME_ROW, boolean.class, int.class, new XC_MethodHook() {
