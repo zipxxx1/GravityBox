@@ -59,7 +59,7 @@ public class ModNavigationBar {
     private static final String CLASS_KEY_BUTTON_DRAWABLE = "com.android.systemui.statusbar.policy.KeyButtonDrawable";
     private static final String CLASS_STATUSBAR = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String CLASS_NAVBAR_INFLATER_VIEW = "com.android.systemui.statusbar.phone.NavigationBarInflaterView";
-    private static final String CLASS_LIGHT_BAR_CTRL = "com.android.systemui.statusbar.phone.LightBarTransitionsController";
+    private static final String CLASS_NAVBAR_TRANSITIONS = "com.android.systemui.statusbar.phone.NavigationBarTransitions";
     private static final String CLASS_CONTEXTUAL_BTN_GRP = "com.android.systemui.statusbar.phone.ContextualButtonGroup";
 
     @SuppressWarnings("unused")
@@ -497,8 +497,8 @@ public class ModNavigationBar {
             }
         } else {
             try {
-                XposedHelpers.findAndHookMethod(CLASS_LIGHT_BAR_CTRL, classLoader,
-                        "setIconTintInternal", float.class, new XC_MethodHook() {
+                XposedHelpers.findAndHookMethod(CLASS_NAVBAR_TRANSITIONS, classLoader,
+                        "applyDarkIntensity", float.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) {
                         if (mNavbarColorsEnabled) {
