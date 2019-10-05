@@ -1240,7 +1240,7 @@ public class ModHwKeys {
                 List<RunningTaskInfo> apps = am.getRunningTasks(1);
 
                 String targetKilled = null;
-                if (apps.size() > 0 && apps.get(0).numRunning > 0) {
+                if (apps.size() > 0) {
                     ComponentName cn = apps.get(0).topActivity;
                     if (!mKillIgnoreList.contains(cn.getPackageName()) &&
                             !cn.getPackageName().startsWith(defaultHomePackage)) {
