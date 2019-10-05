@@ -14,7 +14,10 @@
  */
 package com.ceco.pie.gravitybox;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -41,6 +44,7 @@ public class ModVolumePanel {
     private static ModAudio.StreamLink mRingNotifVolumesLinked;
     private static ModAudio.StreamLink mRingSystemVolumesLinked;
     private static boolean mVolumePanelExpanded;
+    private static Set<String> mVolumePanelExpandedStreams;
     private static boolean mNotificationStreamRowAddedByGb;
     private static int mTimeout;
 
@@ -71,6 +75,11 @@ public class ModVolumePanel {
                     mVolumePanelExpanded = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED, false);
                     if (DEBUG) log("mVolumePanelExpanded set to: " + mVolumePanelExpanded);
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED_STREAMS)) {
+                    mVolumePanelExpandedStreams = new HashSet<>(intent.getStringArrayListExtra(
+                            GravityBoxSettings.EXTRA_VOL_EXPANDED_STREAMS));
+                    if (DEBUG) log("mVolumePanelExpandedStreams set to: " + mVolumePanelExpandedStreams);
+                }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_PANEL_TIMEOUT)) {
                     mTimeout = intent.getIntExtra(GravityBoxSettings.EXTRA_VOL_PANEL_TIMEOUT, 0);
                 }
@@ -89,6 +98,8 @@ public class ModVolumePanel {
             mRingSystemVolumesLinked = ModAudio.StreamLink.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_LINK_RINGER_SYSTEM_VOLUMES, "DEFAULT"));
             mVolumePanelExpanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_EXPANDED, false);
+            mVolumePanelExpandedStreams = prefs.getStringSet(GravityBoxSettings.PREF_KEY_VOL_EXPANDED_STREAMS,
+                new HashSet<>(Arrays.asList("3", "2", "4")));
             mTimeout = prefs.getInt(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TIMEOUT, 0);
 
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
@@ -117,15 +128,15 @@ public class ModVolumePanel {
                 protected void afterHookedMethod(final MethodHookParam param) {
                     int streamType = XposedHelpers.getIntField(param.args[0], "stream");
                     boolean visible = (boolean) param.getResult();
-                    if (mVolumePanelExpanded && (streamType == AudioManager.STREAM_MUSIC ||
+                    if (mVolumePanelExpanded && (
+                            streamType == AudioManager.STREAM_MUSIC ||
                             streamType == AudioManager.STREAM_RING ||
-                            (streamType == AudioManager.STREAM_NOTIFICATION &&
-                                    shouldShowNotificationRow(true)) ||
+                            streamType == AudioManager.STREAM_NOTIFICATION ||
                             streamType == AudioManager.STREAM_ALARM ||
                             streamType == AudioManager.STREAM_VOICE_CALL ||
-                            (streamType == AudioManager.STREAM_SYSTEM &&
-                                    shouldShowSystemRow(true)))) {
-                        param.setResult(true);
+                            streamType == 6 /* BLUETOOTH_SCO */ ||
+                            streamType == AudioManager.STREAM_SYSTEM)) {
+                        param.setResult(mVolumePanelExpandedStreams.contains(String.valueOf(streamType)));
                     } else if (streamType == AudioManager.STREAM_NOTIFICATION) {
                         param.setResult(shouldShowNotificationRow(visible));
                     } else if (streamType == AudioManager.STREAM_SYSTEM) {

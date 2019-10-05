@@ -2066,6 +2066,15 @@
                 android:summary="@string/pref_volume_panel_expanded_summary"
                 android:defaultValue="false" />
 
+            <MultiSelectListPreference
+                android:key="pref_volume_panel_expanded_streams"
+                android:title="@string/pref_volume_panel_expanded_streams_title"
+                android:summary="@string/pref_volume_panel_expanded_streams_summary"
+                android:entries="@array/volume_stream_entries"
+                android:entryValues="@array/volume_stream_values"
+                android:defaultValue="@array/volume_streams_default"
+                android:dependency="pref_volume_panel_expanded" />
+
             <com.ceco.pie.gravitybox.preference.SeekBarPreference
                 android:key="pref_volume_panel_timeout2"
                 android:title="@string/pref_volume_panel_timeout_title"

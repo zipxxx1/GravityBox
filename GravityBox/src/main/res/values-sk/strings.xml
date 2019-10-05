@@ -1982,4 +1982,15 @@
     <string name="about_riru_title">Riru</string>
     <string name="about_riru_summary">Naprogramoval RikkaW. Dotykom otvoríte oficiálnu stránku.</string>
 
+    <!-- Volume panel: Visible streams -->
+    <string name="pref_volume_panel_expanded_streams_title">Zvoľte zvukové kanály</string>
+    <string name="pref_volume_panel_expanded_streams_summary">Definuje, ktoré zvukové kanály zobraziť v rozšírenom panely hlasitosti</string>
+    <string name="stream_music">Hudba</string>
+    <string name="stream_ring">Vyzváňanie</string>
+    <string name="stream_notification">Oznámenia</string>
+    <string name="stream_alarm">Budík</string>
+    <string name="stream_call">Hovory</string>
+    <string name="stream_bluetooth">Bluetooth</string>
+    <string name="stream_system">Systém</string>
+
 </resources>
