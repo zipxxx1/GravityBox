@@ -490,7 +490,7 @@
                     android:title="@string/pref_cat_qs_rm_tile_title">
 
                     <MultiSelectListPreference 
-                        android:key="pref_qs_ringer_mode2"
+                        android:key="pref_qs_ringer_mode3"
                         android:title="@string/pref_tile_enabled_modes_title"
                         android:summary="@string/pref_rm_tile_enabled_modes_summary"
                         android:entries="@array/ringer_mode_entries"

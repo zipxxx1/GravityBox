@@ -603,7 +603,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
     public static final String PREF_CAT_KEY_PHONE_DIALER = "pref_cat_phone_dialer";
     public static final String PREF_CAT_KEY_PHONE_MOBILE_DATA = "pref_cat_phone_mobile_data";
 
-    public static final String PREF_KEY_RINGER_MODE_TILE_MODE = "pref_qs_ringer_mode2";
+    public static final String PREF_KEY_RINGER_MODE_TILE_MODE = "pref_qs_ringer_mode3";
     public static final String PREF_STAY_AWAKE_TILE_MODE = "pref_qs_stay_awake";
     public static final String PREF_KEY_STAY_AWAKE_TILE_AUTO_RESET = "pref_sa_tile_auto_reset";
     public static final String EXTRA_RMT_MODE = "ringerModeTileMode";
@@ -3027,7 +3027,7 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             } else if (key.equals(PREF_KEY_RINGER_MODE_TILE_MODE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 Set<String> modes = prefs.getStringSet(PREF_KEY_RINGER_MODE_TILE_MODE,
-                        new HashSet<>(Arrays.asList("1", "2", "3")));
+                        new HashSet<>(Arrays.asList("0", "1", "2", "3")));
                 List<String> lmodes = new ArrayList<>(modes);
                 Collections.sort(lmodes);
                 int[] imodes = new int[lmodes.size()];
