@@ -569,6 +569,7 @@
     <string name="ringer_mode_vibrate">Vibrovať</string>
     <string name="ringer_mode_sound">Zvoniť</string>
     <string name="ringer_mode_sound_vibrate">Zvoniť a vibrovať</string>
+    <string name="ringer_mode_muted">Vypnutý</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Prebieha záznam obrazovky</string>

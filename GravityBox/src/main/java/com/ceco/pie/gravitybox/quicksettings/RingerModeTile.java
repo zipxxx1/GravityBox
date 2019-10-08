@@ -27,6 +27,8 @@ import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
+import de.robv.android.xposed.XposedHelpers;
+
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -50,26 +52,17 @@ public class RingerModeTile extends QsTile {
     }
 
     public static final String SETTING_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
-    public static final String SETTING_ZEN_MODE = "zen_mode";
-    public static final int ZEN_MODE_OFF = 0;
-    public static final int ZEN_MODE_IMPORTANT = 1;
-    public static final int ZEN_MODE_NONE = 2;
-    public static final int ZEN_MODE_ALARMS = 3;
 
     // Define the available ringer modes
     private static final Ringer[] RINGERS = new Ringer[] {
-        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.string.dnd_tile_em_priority,
-                R.drawable.ic_qs_ring_off, ZEN_MODE_IMPORTANT),
         new Ringer(AudioManager.RINGER_MODE_VIBRATE, true, R.string.ringer_mode_vibrate,
-                R.drawable.ic_qs_vibrate_on, ZEN_MODE_OFF),
+                R.drawable.ic_qs_vibrate_on),
         new Ringer(AudioManager.RINGER_MODE_NORMAL, false, R.string.ringer_mode_sound,
-                R.drawable.ic_qs_ring_on, ZEN_MODE_OFF),
+                R.drawable.ic_qs_ring_on),
         new Ringer(AudioManager.RINGER_MODE_NORMAL, true, R.string.ringer_mode_sound_vibrate,
-                R.drawable.ic_qs_ring_vibrate_on, ZEN_MODE_OFF),
-        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.string.dnd_tile_em_silence,
-                R.drawable.ic_qs_dnd_on_total_silence, ZEN_MODE_NONE),
-        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.string.dnd_tile_em_alarms,
-                R.drawable.ic_qs_ring_none, ZEN_MODE_ALARMS)
+                R.drawable.ic_qs_ring_vibrate_on),
+        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.string.ringer_mode_muted,
+                R.drawable.ic_qs_ring_off)
     };
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -173,7 +166,7 @@ public class RingerModeTile extends QsTile {
 
         Set<String> smodes = mPrefs.getStringSet(
                 GravityBoxSettings.PREF_KEY_RINGER_MODE_TILE_MODE,
-                new HashSet<>(Arrays.asList("1", "2", "3")));
+                new HashSet<>(Arrays.asList("0", "1", "2", "3")));
         List<String> lmodes = new ArrayList<>(smodes);
         Collections.sort(lmodes);
         int modes[] = new int[lmodes.size()];
@@ -250,7 +243,7 @@ public class RingerModeTile extends QsTile {
                 vibrate ? 1 : 0);
 
         if (mAudioManager.getRingerMode() != mode) {
-            mAudioManager.setRingerMode(mode);
+            XposedHelpers.callMethod(mAudioManager, "setRingerModeInternal", mode);
         }
     }
 
@@ -281,15 +274,13 @@ public class RingerModeTile extends QsTile {
     private void findCurrentState() {
         ContentResolver cr = mContext.getContentResolver();
         boolean vibrateWhenRinging = Settings.System.getInt(cr, SETTING_VIBRATE_WHEN_RINGING, 0) == 1;
-        int zenMode = Settings.Global.getInt(cr, SETTING_ZEN_MODE, ZEN_MODE_OFF);
         int ringerMode = mAudioManager.getRingerMode();
 
         mRingerIndex = 0;
 
         for (int i = 0; i < RINGERS.length; i++) {
             Ringer r = RINGERS[i];
-            if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_SILENT) &&
-                    (zenMode == r.mZenMode)) {
+            if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_SILENT)) {
                 mRingerIndex = i;
                 break;
             }
@@ -303,7 +294,10 @@ public class RingerModeTile extends QsTile {
                 break;
             }
         }
-        if (DEBUG) log(getKey() + ": Current ringerIndex=" + mRingerIndex + ", ringerMode=" + ringerMode);
+        if (DEBUG) log(getKey() + ": Current ringerIndex=" + mRingerIndex + ", " +
+                "; ringerMode=" + ringerMode +
+                "; vibrateWhenRinging=" + vibrateWhenRinging);
+
     }
 
     private class SettingsObserver extends ContentObserver {
@@ -315,8 +309,6 @@ public class RingerModeTile extends QsTile {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(Settings.System.getUriFor(
                         SETTING_VIBRATE_WHEN_RINGING), false, this);
-            resolver.registerContentObserver(Settings.Global.getUriFor(
-                        SETTING_ZEN_MODE), false, this);
         }
 
         void unobserve() {
@@ -327,13 +319,14 @@ public class RingerModeTile extends QsTile {
         @Override
         public void onChange(boolean selfChange) {
             ContentResolver resolver = mContext.getContentResolver();
-            int zenMode = Settings.Global.getInt(resolver, SETTING_ZEN_MODE, ZEN_MODE_OFF);
             int ringerMode = mAudioManager.getRingerMode();
+            boolean vibrateWhenRinging = Settings.System.getInt(resolver,
+                    SETTING_VIBRATE_WHEN_RINGING, 0) == 1;
 
             findCurrentState();
             refreshState();
             if (DEBUG) log(getKey() + ": SettingsObserver onChange(); "
-                    + "ringerMode=" + ringerMode + "; zenMode=" + zenMode);
+                    + "ringerMode=" + ringerMode + "; vibrateWhenRinging=" + vibrateWhenRinging);
         }
     }
 
@@ -342,15 +335,13 @@ public class RingerModeTile extends QsTile {
         final int mRingerMode;
         final int mLabel;
         final int mDrawable;
-        final int mZenMode;
-        boolean mEnabled; 
+        boolean mEnabled;
 
-        Ringer(int ringerMode, boolean vibrateWhenRinging, int label, int drawable, int zenMode) {
+        Ringer(int ringerMode, boolean vibrateWhenRinging, int label, int drawable) {
             mVibrateWhenRinging = vibrateWhenRinging;
             mRingerMode = ringerMode;
             mLabel = label;
             mDrawable = drawable;
-            mZenMode = zenMode;
             mEnabled = false;
         }
     }
