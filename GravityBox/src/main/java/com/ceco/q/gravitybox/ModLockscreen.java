@@ -213,21 +213,16 @@ public class ModLockscreen {
         // custom background
         try {
             XposedHelpers.findAndHookMethod(CLASS_NOTIF_MEDIA_MANAGER, classLoader,
-                    "updateMediaMetaData", boolean.class, boolean.class, new XC_MethodHook() {
+                    "finishUpdateMediaMetaData", boolean.class, boolean.class,
+                    Bitmap.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) {
+                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_MEDIA_ART_DISABLE, false)) {
+                        param.args[2] = null;
+                    }
+                }
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
-                    int state = XposedHelpers.getIntField(ModStatusBar.getStatusBar(), "mState");
-                    if (state != StatusBarState.KEYGUARD && state != StatusBarState.SHADE_LOCKED) {
-                        if (DEBUG)
-                            log("updateMediaMetaData: Invalid status bar state: " + state);
-                        return;
-                    }
-
-                    if (!mKgMonitor.isInteractive()) {
-                        if (DEBUG) log("updateMediaMetaData: device not interactive");
-                        return;
-                    }
-
                     View backDrop = (View) XposedHelpers.getObjectField(param.thisObject, "mBackdrop");
                     ImageView backDropBack = (ImageView) XposedHelpers.getObjectField(
                             param.thisObject, "mBackdropBack");
@@ -236,24 +231,21 @@ public class ModLockscreen {
                         return;
                     }
 
-                    boolean hasArtwork = false;
-                    MediaMetadata mm = (MediaMetadata) XposedHelpers.callMethod(
-                            param.thisObject, "getMediaMetadata");
-                    if (mm != null) {
-                        hasArtwork = mm.getBitmap(MediaMetadata.METADATA_KEY_ART) != null ||
-                                mm.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART) != null;
-                    }
-                    if (DEBUG) log("updateMediaMetaData: hasArtwork=" + hasArtwork);
+                    boolean hasMediaArtwork = param.args[2] != null;
+                    if (DEBUG) log("finishUpdateMediaMetaData: hasMediaArtwork=" + hasMediaArtwork);
 
                     // custom background
-                    if (!hasArtwork && mCustomBg != null) {
+                    Object stateCtrl = XposedHelpers.getObjectField(param.thisObject, "mStatusBarStateController");
+                    int state = (int) XposedHelpers.callMethod(stateCtrl, "getState");
+                    if (!hasMediaArtwork && mCustomBg != null && state != StatusBarState.SHADE &&
+                            mKgMonitor.isInteractive()) {
                         backDrop.animate().cancel();
                         backDropBack.animate().cancel();
                         backDropBack.setImageBitmap(mCustomBg);
                         backDrop.setVisibility(View.VISIBLE);
                         backDrop.animate().alpha(1f);
                         if (DEBUG)
-                            log("updateMediaMetaData: showing custom background");
+                            log("finishUpdateMediaMetaData: showing custom background");
                     }
                 }
             });

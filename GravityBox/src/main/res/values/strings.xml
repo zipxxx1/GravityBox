@@ -2083,4 +2083,7 @@
     <string name="stream_bluetooth">Bluetooth</string>
     <string name="stream_system">System</string>
 
+    <!-- Lockscreen: disable media art -->
+    <string name="pref_lockscreen_media_art_disable_title">Disable media art</string>
+
 </resources>
