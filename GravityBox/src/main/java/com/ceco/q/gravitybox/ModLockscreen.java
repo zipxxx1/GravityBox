@@ -21,7 +21,7 @@ import com.ceco.q.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.q.gravitybox.ledcontrol.QuietHours;
 import com.ceco.q.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.q.gravitybox.managers.SysUiAppLauncher;
-import com.ceco.q.gravitybox.managers.KeyguardStateMonitor;
+import com.ceco.q.gravitybox.managers.SysUiKeyguardStateMonitor;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import android.content.BroadcastReceiver;
@@ -95,7 +95,7 @@ public class ModLockscreen {
     private static UnlockPolicy mSmartUnlockPolicy;
     private static UnlockHandler mUnlockHandler;
     private static GestureDetector mGestureDetector;
-    private static KeyguardStateMonitor mKgMonitor;
+    private static SysUiKeyguardStateMonitor mKgMonitor;
     private static LockscreenPinScrambler mPinScrambler;
     private static SysUiAppLauncher.AppInfo mLeftAction;
     private static SysUiAppLauncher.AppInfo mRightAction;
@@ -652,7 +652,7 @@ public class ModLockscreen {
         }
     }
 
-    private static KeyguardStateMonitor.Listener mKgStateListener = new KeyguardStateMonitor.Listener() {
+    private static SysUiKeyguardStateMonitor.Listener mKgStateListener = new SysUiKeyguardStateMonitor.Listener() {
         @Override
         public void onKeyguardStateChanged() {
             final boolean trustManaged = mKgMonitor.isTrustManaged();

@@ -34,7 +34,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 
-public class KeyguardStateMonitor implements BroadcastSubReceiver {
+public class SysUiKeyguardStateMonitor implements BroadcastSubReceiver {
     public static final String TAG="GB:KeyguardStateMonitor";
     public static final String CLASS_KG_MONITOR_IMPL =
             "com.android.systemui.statusbar.policy.KeyguardMonitorImpl";
@@ -74,7 +74,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
     private final List<Listener> mListeners = new ArrayList<>();
     private boolean mIsInteractive;
 
-    protected KeyguardStateMonitor(Context context, XSharedPreferences prefs) {
+    protected SysUiKeyguardStateMonitor(Context context, XSharedPreferences prefs) {
         mContext = context;
         mPrefs = prefs;
         mPm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);

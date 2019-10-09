@@ -23,7 +23,7 @@ import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.ModQsTiles;
 import com.ceco.q.gravitybox.Utils;
-import com.ceco.q.gravitybox.managers.KeyguardStateMonitor;
+import com.ceco.q.gravitybox.managers.SysUiKeyguardStateMonitor;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
@@ -35,7 +35,6 @@ import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import de.robv.android.xposed.XSharedPreferences;
@@ -75,7 +74,7 @@ public abstract class BaseTile implements QsEventListener {
     protected boolean mProtected;
     protected boolean mHideOnChange;
     protected boolean mHapticFeedback;
-    protected KeyguardStateMonitor mKgMonitor;
+    protected SysUiKeyguardStateMonitor mKgMonitor;
     private StockLayout mStockLayout;
     private View mTileView;
 
