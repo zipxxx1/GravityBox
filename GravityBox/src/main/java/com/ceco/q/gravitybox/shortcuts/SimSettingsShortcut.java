@@ -20,14 +20,14 @@ import java.util.List;
 
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.adapters.IIconListAdapterItem;
-import com.ceco.q.gravitybox.managers.SubscriptionManager;
+import com.ceco.q.gravitybox.managers.SysUiSubscriptionManager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 public class SimSettingsShortcut extends AMultiShortcut {
-    protected static final String ACTION =  SubscriptionManager.ACTION_CHANGE_DEFAULT_SIM_SLOT;
+    protected static final String ACTION =  SysUiSubscriptionManager.ACTION_CHANGE_DEFAULT_SIM_SLOT;
 
     public SimSettingsShortcut(Context context) {
         super(context);
@@ -63,45 +63,45 @@ public class SimSettingsShortcut extends AMultiShortcut {
         final List<IIconListAdapterItem> list = new ArrayList<>();
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_voice_sim_1,
                 R.drawable.shortcut_sm_voice_sim_1, intent -> {
-                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
-                    intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 0);
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SIM_SLOT, 0);
                 }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_voice_sim_2,
                 R.drawable.shortcut_sm_voice_sim_2, intent -> {
-                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
-                    intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 1);
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SIM_SLOT, 1);
                 }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_voice_sim_ask,
                 R.drawable.shortcut_sm_voice_sim_ask, intent -> {
-                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
-                    intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 2);
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SUB_TYPE, "VOICE");
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SIM_SLOT, 2);
                 }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_voice_sim_ui,
-                R.drawable.shortcut_sm_voice_sim_ui, intent -> intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "VOICE")));
+                R.drawable.shortcut_sm_voice_sim_ui, intent -> intent.putExtra(SysUiSubscriptionManager.EXTRA_SUB_TYPE, "VOICE")));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_sms_sim_1,
                 R.drawable.shortcut_sm_sms_sim_1, intent -> {
-                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "SMS");
-                    intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 0);
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SUB_TYPE, "SMS");
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SIM_SLOT, 0);
                 }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_sms_sim_2,
                 R.drawable.shortcut_sm_sms_sim_2, intent -> {
-                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "SMS");
-                    intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 1);
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SUB_TYPE, "SMS");
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SIM_SLOT, 1);
                 }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_sms_sim_ui,
-                R.drawable.shortcut_sm_sms_sim_ui, intent -> intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "SMS")));
+                R.drawable.shortcut_sm_sms_sim_ui, intent -> intent.putExtra(SysUiSubscriptionManager.EXTRA_SUB_TYPE, "SMS")));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_data_sim_1,
                 R.drawable.shortcut_sm_data_sim_1, intent -> {
-                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "DATA");
-                    intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 0);
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SUB_TYPE, "DATA");
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SIM_SLOT, 0);
                 }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_data_sim_2,
                 R.drawable.shortcut_sm_data_sim_2, intent -> {
-                    intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "DATA");
-                    intent.putExtra(SubscriptionManager.EXTRA_SIM_SLOT, 1);
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SUB_TYPE, "DATA");
+                    intent.putExtra(SysUiSubscriptionManager.EXTRA_SIM_SLOT, 1);
                 }));
         list.add(new ShortcutItem(mContext, R.string.shortcut_sm_data_sim_ui,
-                R.drawable.shortcut_sm_data_sim_ui, intent -> intent.putExtra(SubscriptionManager.EXTRA_SUB_TYPE, "DATA")));
+                R.drawable.shortcut_sm_data_sim_ui, intent -> intent.putExtra(SysUiSubscriptionManager.EXTRA_SUB_TYPE, "DATA")));
         return list;
     }
 
