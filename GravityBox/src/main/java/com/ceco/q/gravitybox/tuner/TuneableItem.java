@@ -19,7 +19,7 @@ import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.ceco.q.gravitybox.managers.TunerManager;
+import com.ceco.q.gravitybox.managers.SysUiTunerManager;
 
 import java.util.HashSet;
 import java.util.Locale;
@@ -28,13 +28,13 @@ import java.util.Set;
 public class TuneableItem implements Parcelable {
 
     private Class<?> mType;
-    private TunerManager.Category mCategory;
+    private SysUiTunerManager.Category mCategory;
     private String mKey;
     private Object mValue;
     private Object mUserValue;
     private boolean mOverridden;
 
-    public TuneableItem(Class<?> type, TunerManager.Category category, String key, Object value) {
+    public TuneableItem(Class<?> type, SysUiTunerManager.Category category, String key, Object value) {
         mType = type;
         mCategory = category;
         mKey = key;
@@ -42,7 +42,7 @@ public class TuneableItem implements Parcelable {
         mUserValue = value;
     }
 
-    private TuneableItem(Class<?> type, TunerManager.Category category, String key) {
+    private TuneableItem(Class<?> type, SysUiTunerManager.Category category, String key) {
         mType = type;
         mCategory = category;
         mKey = key;
@@ -51,7 +51,7 @@ public class TuneableItem implements Parcelable {
     private TuneableItem(Parcel in) {
         try {
             mType = Class.forName(in.readString());
-            mCategory = TunerManager.Category.valueOf(in.readString());
+            mCategory = SysUiTunerManager.Category.valueOf(in.readString());
             mKey = in.readString();
             mValue = in.readValue(mType.getClassLoader());
             mUserValue = in.readValue(mType.getClassLoader());
@@ -90,7 +90,7 @@ public class TuneableItem implements Parcelable {
         return mType;
     }
 
-    public TunerManager.Category getCategory() {
+    public SysUiTunerManager.Category getCategory() {
         return mCategory;
     }
 
@@ -179,14 +179,14 @@ public class TuneableItem implements Parcelable {
     public static TuneableItem createUserInstance(String prefKey, SharedPreferences prefs) {
         Set<String> dataSet = prefs.getStringSet(prefKey, null);
         if (dataSet != null) {
-            TunerManager.Category category = null;
+            SysUiTunerManager.Category category = null;
             String key = null;
             String type = null;
             for (String val : dataSet) {
                 String[] data = val.split(":", 2);
                 switch (data[0]) {
                     case "category":
-                        category = TunerManager.Category.valueOf(data[1]);
+                        category = SysUiTunerManager.Category.valueOf(data[1]);
                         break;
                     case "key":
                         key = data[1];

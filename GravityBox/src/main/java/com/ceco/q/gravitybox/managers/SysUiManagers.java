@@ -40,7 +40,7 @@ public class SysUiManagers {
     public static SysUiNotificationDataMonitor NotifDataMonitor;
     public static SysUiGpsStatusMonitor GpsMonitor;
     public static SysUiSubscriptionManager SubscriptionMgr;
-    public static TunerManager TunerMgr;
+    public static SysUiTunerManager TunerMgr;
     public static PackageManager PackageMgr;
     public static SysUiConfigChangeMonitor ConfigChangeMonitor;
 
@@ -118,7 +118,7 @@ public class SysUiManagers {
         if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
                 !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
             try {
-                TunerMgr = new TunerManager(context);
+                TunerMgr = new SysUiTunerManager(context);
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error creating TunerManager: ", t);
             }
@@ -177,7 +177,7 @@ public class SysUiManagers {
 
         // TunerManager
         if (TunerMgr != null) {
-            intentFilter.addAction(TunerManager.ACTION_GET_TUNEABLES);
+            intentFilter.addAction(SysUiTunerManager.ACTION_GET_TUNEABLES);
         }
 
         context.registerReceiver(sBroadcastReceiver, intentFilter);

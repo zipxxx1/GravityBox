@@ -31,7 +31,7 @@ import com.ceco.q.gravitybox.GravityBoxListActivity;
 import com.ceco.q.gravitybox.GravityBoxResultReceiver;
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.SettingsManager;
-import com.ceco.q.gravitybox.managers.TunerManager;
+import com.ceco.q.gravitybox.managers.SysUiTunerManager;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -47,7 +47,7 @@ public class TunerCategoryActivity extends GravityBoxListActivity implements
     private static final String KEY_ACTIVE_ONLY = "showActiveOnly";
     private static final String KEY_SEARCH_QUERY = "searchQuery";
 
-    private TunerManager.Category mCategory;
+    private SysUiTunerManager.Category mCategory;
     private ListView mList;
     private TuneableListItem mCurrentItem;
     private boolean mShowActiveOnly;
@@ -61,12 +61,12 @@ public class TunerCategoryActivity extends GravityBoxListActivity implements
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            mCategory = TunerManager.Category.valueOf(
+            mCategory = SysUiTunerManager.Category.valueOf(
                     savedInstanceState.getString(KEY_CATEGORY, "FRAMEWORK"));
             mShowActiveOnly = savedInstanceState.getBoolean(KEY_ACTIVE_ONLY, false);
             mSearchQuery = savedInstanceState.getString(KEY_SEARCH_QUERY, null);
-        } else if (getIntent() != null && getIntent().hasExtra(TunerManager.EXTRA_TUNER_CATEGORY)) {
-            mCategory = TunerManager.Category.valueOf(getIntent().getStringExtra(TunerManager.EXTRA_TUNER_CATEGORY));
+        } else if (getIntent() != null && getIntent().hasExtra(SysUiTunerManager.EXTRA_TUNER_CATEGORY)) {
+            mCategory = SysUiTunerManager.Category.valueOf(getIntent().getStringExtra(SysUiTunerManager.EXTRA_TUNER_CATEGORY));
         } else {
             finish();
             return;
@@ -81,8 +81,8 @@ public class TunerCategoryActivity extends GravityBoxListActivity implements
         mHandler.postDelayed(mNoResponseRunnable, 3000);
         GravityBoxResultReceiver receiver = new GravityBoxResultReceiver(mHandler);
         receiver.setReceiver(this);
-        Intent intent = new Intent(TunerManager.ACTION_GET_TUNEABLES);
-        intent.putExtra(TunerManager.EXTRA_TUNER_CATEGORY, mCategory.toString());
+        Intent intent = new Intent(SysUiTunerManager.ACTION_GET_TUNEABLES);
+        intent.putExtra(SysUiTunerManager.EXTRA_TUNER_CATEGORY, mCategory.toString());
         intent.putExtra("receiver", receiver);
         sendBroadcast(intent);
     }
@@ -166,7 +166,7 @@ public class TunerCategoryActivity extends GravityBoxListActivity implements
         mHandler.removeCallbacks(mNoResponseRunnable);
         if (!isDestroyed() && resultData != null) {
             resultData.setClassLoader(getClassLoader());
-            mItems = resultData.getParcelableArrayList(TunerManager.EXTRA_TUNEABLES);
+            mItems = resultData.getParcelableArrayList(SysUiTunerManager.EXTRA_TUNEABLES);
             mItems.sort(Comparator.comparing(TuneableItem::getKey));
             setData();
         }
