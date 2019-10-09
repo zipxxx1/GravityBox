@@ -37,7 +37,7 @@ public class SysUiManagers {
     public static SysUiAppLauncher AppLauncher;
     public static SysUiKeyguardStateMonitor KeyguardMonitor;
     public static SysUiFingerprintLauncher FingerprintLauncher;
-    public static NotificationDataMonitor NotifDataMonitor;
+    public static SysUiNotificationDataMonitor NotifDataMonitor;
     public static GpsStatusMonitor GpsMonitor;
     public static SubscriptionManager SubscriptionMgr;
     public static TunerManager TunerMgr;
@@ -94,7 +94,7 @@ public class SysUiManagers {
         }
 
         try {
-            NotifDataMonitor = new NotificationDataMonitor(context);
+            NotifDataMonitor = new SysUiNotificationDataMonitor(context);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error creating NotificationDataMonitor: ", t);
         }

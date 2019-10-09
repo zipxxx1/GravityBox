@@ -46,7 +46,7 @@ import android.widget.RelativeLayout;
 
 import com.ceco.q.gravitybox.managers.SysUiConfigChangeMonitor;
 import com.ceco.q.gravitybox.managers.SysUiKeyguardStateMonitor;
-import com.ceco.q.gravitybox.managers.NotificationDataMonitor;
+import com.ceco.q.gravitybox.managers.SysUiNotificationDataMonitor;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.preference.AppPickerPreference;
 import com.ceco.q.gravitybox.shortcuts.ShortcutActivity;
@@ -56,7 +56,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class LockscreenAppBar implements SysUiKeyguardStateMonitor.Listener,
-                                         NotificationDataMonitor.Listener,
+                                         SysUiNotificationDataMonitor.Listener,
                                          SysUiConfigChangeMonitor.ConfigChangeListener {
     private static final String TAG = "GB:LockscreenAppBar";
     private static final boolean DEBUG = false;
@@ -80,7 +80,7 @@ public class LockscreenAppBar implements SysUiKeyguardStateMonitor.Listener,
     private AppInfo mPendingAction;
     private Handler mHandler;
     private SysUiKeyguardStateMonitor mKgMonitor;
-    private NotificationDataMonitor mNdMonitor;
+    private SysUiNotificationDataMonitor mNdMonitor;
     private boolean mIsActive;
     private boolean mIsInteractive = true;
     private int mScale;
