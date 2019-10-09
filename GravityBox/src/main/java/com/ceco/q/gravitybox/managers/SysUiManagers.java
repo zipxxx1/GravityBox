@@ -42,7 +42,7 @@ public class SysUiManagers {
     public static SubscriptionManager SubscriptionMgr;
     public static TunerManager TunerMgr;
     public static PackageManager PackageMgr;
-    public static ConfigurationChangeMonitor ConfigChangeMonitor;
+    public static SysUiConfigChangeMonitor ConfigChangeMonitor;
 
     public static void init(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs, XSharedPreferences tunerPrefs) {
         if (context == null)
@@ -51,7 +51,7 @@ public class SysUiManagers {
             throw new IllegalArgumentException("Prefs cannot be null");
 
         try {
-            ConfigChangeMonitor = new ConfigurationChangeMonitor(context);
+            ConfigChangeMonitor = new SysUiConfigChangeMonitor(context);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error creating ConfigurationChangeMonitor: ", t);
         }

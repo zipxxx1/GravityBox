@@ -44,7 +44,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.ceco.q.gravitybox.managers.ConfigurationChangeMonitor;
+import com.ceco.q.gravitybox.managers.SysUiConfigChangeMonitor;
 import com.ceco.q.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.q.gravitybox.managers.NotificationDataMonitor;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
@@ -57,7 +57,7 @@ import de.robv.android.xposed.XposedHelpers;
 
 public class LockscreenAppBar implements KeyguardStateMonitor.Listener,
                                          NotificationDataMonitor.Listener,
-                                         ConfigurationChangeMonitor.ConfigChangeListener {
+                                         SysUiConfigChangeMonitor.ConfigChangeListener {
     private static final String TAG = "GB:LockscreenAppBar";
     private static final boolean DEBUG = false;
 
