@@ -1,3 +1,16 @@
+Changelog 9.1.2 - 09/10/2019
+--------------------------------------
+- Lockscreen: added option for hiding media art
+- QS: RingerModeTile: synchronized with native ringer mode management
+- StatusbarClock: respect time zone changes when showing seconds
+- Media: added option for choosing audio streams in expanded volume panel
+- ImagePicker: use dedicated library for cropping images instead of unreliable camera CROP intent
+- About: added references to EdXposed and Riru
+- Other minor fixes backported from Q branch
+- Added Japanese translations (thanks to noriokun4649)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Turkish translations (thanks to Fatih Firinci)
+
 Changelog 9.1.1 - 14/06/2019
 --------------------------------------
 - QuickSettings:
