@@ -38,7 +38,7 @@ public class SysUiManagers {
     public static SysUiKeyguardStateMonitor KeyguardMonitor;
     public static SysUiFingerprintLauncher FingerprintLauncher;
     public static SysUiNotificationDataMonitor NotifDataMonitor;
-    public static GpsStatusMonitor GpsMonitor;
+    public static SysUiGpsStatusMonitor GpsMonitor;
     public static SubscriptionManager SubscriptionMgr;
     public static TunerManager TunerMgr;
     public static PackageManager PackageMgr;
@@ -101,7 +101,7 @@ public class SysUiManagers {
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, false)) {
             try {
-                GpsMonitor = new GpsStatusMonitor(context);
+                GpsMonitor = new SysUiGpsStatusMonitor(context);
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error creating GpsStatusMonitor: ", t);
             }

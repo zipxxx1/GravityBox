@@ -16,13 +16,13 @@
 package com.ceco.q.gravitybox.quicksettings;
 
 import com.ceco.q.gravitybox.R;
-import com.ceco.q.gravitybox.managers.GpsStatusMonitor;
+import com.ceco.q.gravitybox.managers.SysUiGpsStatusMonitor;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.provider.Settings;
 
-public class GpsTile extends QsTile implements GpsStatusMonitor.Listener {
+public class GpsTile extends QsTile implements SysUiGpsStatusMonitor.Listener {
     public static final class Service extends QsTileServiceBase {
         static final String KEY = GpsTile.class.getSimpleName()+"$Service";
     }
