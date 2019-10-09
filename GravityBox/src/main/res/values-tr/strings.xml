@@ -2014,4 +2014,26 @@ Devam ederseniz, kendi sorumluluğunuz altındadır ve herhangi bir destek bekle
     <!-- Lockscreen: Disable alarm info -->
     <string name="pref_lockscreen_alarm_info_disable_title">Alarm bilgisini devre dışı bırak</string>
 
+    <!-- Media / Vulume panel category -->
+    <string name="pref_cat_volume_panel_title">Ses paneli</string>
+
+    <!-- About EdXposed -->
+    <string name="about_edxposed_title">EdXposed framework</string>
+    <string name="about_edxposed_summary">Kodlama: solohsu &amp; MlgmXyysd. Resmi sayfayı ziyaret etmek için dokunun.</string>
+
+    <!-- About Riru -->
+    <string name="about_riru_title">Riru</string>
+    <string name="about_riru_summary">Kodlama: RikkaW. Resmi sayfayı ziyaret etmek için dokunun.</string>
+
+    <!-- Volume panel: Visible streams -->
+    <string name="pref_volume_panel_expanded_streams_title">Ses akışlarını seç</string>
+    <string name="pref_volume_panel_expanded_streams_summary">Genişletilmiş ses panelinde gösterilecek ses akışlarını seçmenizi sağlar</string>
+    <string name="stream_music">Medya</string>
+    <string name="stream_ring">Zil Sesi</string>
+    <string name="stream_notification">Bildirim</string>
+    <string name="stream_alarm">Alarm</string>
+    <string name="stream_call">Sesli Arama</string>
+    <string name="stream_bluetooth">Bluetooth</string>
+    <string name="stream_system">Sistem</string>
+
  </resources>
