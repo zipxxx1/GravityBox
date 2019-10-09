@@ -28,10 +28,10 @@ import de.robv.android.xposed.XSharedPreferences;
 import android.content.Context;
 import android.content.Intent;
 
-public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
+public class SysUiStatusbarQuietHoursManager implements BroadcastSubReceiver {
     private static final String TAG = "GB:StatusbarQuietHoursManager";
     private static final Object lock = new Object();
-    private static StatusbarQuietHoursManager sManager;
+    private static SysUiStatusbarQuietHoursManager sManager;
 
     private Context mContext;
     private QuietHours mQuietHours;
@@ -42,16 +42,16 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
         void onTimeTick();
     }
 
-    protected static StatusbarQuietHoursManager getInstance(Context context, XSharedPreferences qhPrefs) {
+    protected static SysUiStatusbarQuietHoursManager getInstance(Context context, XSharedPreferences qhPrefs) {
         synchronized(lock) {
             if (sManager == null) {
-                sManager = new StatusbarQuietHoursManager(context, qhPrefs);
+                sManager = new SysUiStatusbarQuietHoursManager(context, qhPrefs);
             }
             return sManager;
         }
     }
 
-    private StatusbarQuietHoursManager(Context context, XSharedPreferences qhPrefs) {
+    private SysUiStatusbarQuietHoursManager(Context context, XSharedPreferences qhPrefs) {
         mContext = context;
         mQuietHours = new QuietHours(qhPrefs);
         mListeners = new ArrayList<>();

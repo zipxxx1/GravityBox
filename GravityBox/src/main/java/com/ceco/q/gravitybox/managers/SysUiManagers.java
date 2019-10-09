@@ -33,7 +33,7 @@ public class SysUiManagers {
 
     public static SysUiBatteryInfoManager BatteryInfoManager;
     public static SysUiStatusBarIconManager IconManager;
-    public static StatusbarQuietHoursManager QuietHoursManager;
+    public static SysUiStatusbarQuietHoursManager QuietHoursManager;
     public static SysUiAppLauncher AppLauncher;
     public static KeyguardStateMonitor KeyguardMonitor;
     public static FingerprintLauncher FingerprintLauncher;
@@ -71,7 +71,7 @@ public class SysUiManagers {
         }
 
         try {
-            QuietHoursManager = StatusbarQuietHoursManager.getInstance(context, qhPrefs);
+            QuietHoursManager = SysUiStatusbarQuietHoursManager.getInstance(context, qhPrefs);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error creating QuietHoursManager: ", t);
         }

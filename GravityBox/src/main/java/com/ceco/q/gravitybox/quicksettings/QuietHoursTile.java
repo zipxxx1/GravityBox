@@ -21,7 +21,7 @@ import com.ceco.q.gravitybox.Utils;
 import com.ceco.q.gravitybox.ledcontrol.QuietHours;
 import com.ceco.q.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
-import com.ceco.q.gravitybox.managers.StatusbarQuietHoursManager.QuietHoursListener;
+import com.ceco.q.gravitybox.managers.SysUiStatusbarQuietHoursManager.QuietHoursListener;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.Intent;
