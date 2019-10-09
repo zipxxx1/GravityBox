@@ -18,12 +18,12 @@ package com.ceco.q.gravitybox;
 import de.robv.android.xposed.XSharedPreferences;
 
 import com.ceco.q.gravitybox.ModStatusBar.ContainerType;
-import com.ceco.q.gravitybox.managers.StatusBarIconManager;
+import com.ceco.q.gravitybox.managers.SysUiStatusBarIconManager;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
 import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager.BatteryStatusListener;
-import com.ceco.q.gravitybox.managers.StatusBarIconManager.ColorInfo;
-import com.ceco.q.gravitybox.managers.StatusBarIconManager.IconManagerListener;
+import com.ceco.q.gravitybox.managers.SysUiStatusBarIconManager.ColorInfo;
+import com.ceco.q.gravitybox.managers.SysUiStatusBarIconManager.IconManagerListener;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -217,10 +217,10 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         if (mController.getContainerType() != ContainerType.HEADER &&
-                (flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+                (flags & SysUiStatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
             setTextColor(colorInfo.iconTint);
         }
-        if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
+        if ((flags & SysUiStatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
             mPercentage.setAlpha(colorInfo.alphaTextAndBattery);
         }
     }

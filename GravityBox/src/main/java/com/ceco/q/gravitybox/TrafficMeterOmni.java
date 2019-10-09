@@ -21,8 +21,8 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ceco.q.gravitybox.managers.StatusBarIconManager;
-import com.ceco.q.gravitybox.managers.StatusBarIconManager.ColorInfo;
+import com.ceco.q.gravitybox.managers.SysUiStatusBarIconManager;
+import com.ceco.q.gravitybox.managers.SysUiStatusBarIconManager.ColorInfo;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.annotation.SuppressLint;
@@ -264,7 +264,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         super.onIconManagerStatusChanged(flags, colorInfo);
-        if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+        if ((flags & SysUiStatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
             mIconColor = colorInfo.iconTint;
             updateTrafficDrawableColor();
         }
