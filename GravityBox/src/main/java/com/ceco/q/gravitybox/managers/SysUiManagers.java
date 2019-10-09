@@ -41,7 +41,7 @@ public class SysUiManagers {
     public static SysUiGpsStatusMonitor GpsMonitor;
     public static SysUiSubscriptionManager SubscriptionMgr;
     public static SysUiTunerManager TunerMgr;
-    public static PackageManager PackageMgr;
+    public static SysUiPackageManager PackageMgr;
     public static SysUiConfigChangeMonitor ConfigChangeMonitor;
 
     public static void init(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs, XSharedPreferences tunerPrefs) {
@@ -125,7 +125,7 @@ public class SysUiManagers {
         }
 
         try {
-            PackageMgr = new PackageManager(context);
+            PackageMgr = new SysUiPackageManager(context);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error creating PackageManager: ", t);
         }

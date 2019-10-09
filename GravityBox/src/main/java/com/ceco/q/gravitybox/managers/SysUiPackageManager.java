@@ -24,7 +24,7 @@ import com.ceco.q.gravitybox.GravityBox;
 
 import de.robv.android.xposed.XposedBridge;
 
-public class PackageManager {
+public class SysUiPackageManager {
     private static final String TAG="GB:PackageManager";
     private static final String PKG_UNLOCKER = "com.ceco.gravitybox.unlocker";
     private static final String ACTION_UNLOCKER_INSTALLED = "gravitybox.intent.action.UNLOCKER_INSTALLED";
@@ -34,7 +34,7 @@ public class PackageManager {
         XposedBridge.log(TAG + ": " + msg);
     }
 
-    PackageManager(Context context) {
+    SysUiPackageManager(Context context) {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
         intentFilter.addDataScheme("package");
         intentFilter.addDataSchemeSpecificPart(PKG_UNLOCKER, PatternMatcher.PATTERN_LITERAL);
