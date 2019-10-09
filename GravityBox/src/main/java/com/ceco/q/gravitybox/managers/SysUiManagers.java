@@ -34,7 +34,7 @@ public class SysUiManagers {
     public static SysUiBatteryInfoManager BatteryInfoManager;
     public static StatusBarIconManager IconManager;
     public static StatusbarQuietHoursManager QuietHoursManager;
-    public static AppLauncher AppLauncher;
+    public static SysUiAppLauncher AppLauncher;
     public static KeyguardStateMonitor KeyguardMonitor;
     public static FingerprintLauncher FingerprintLauncher;
     public static NotificationDataMonitor NotifDataMonitor;
@@ -77,7 +77,7 @@ public class SysUiManagers {
         }
 
         try {
-            AppLauncher = new AppLauncher(context, prefs);
+            AppLauncher = new SysUiAppLauncher(context, prefs);
             if (ConfigChangeMonitor != null) {
                 ConfigChangeMonitor.addConfigChangeListener(AppLauncher);
             }
@@ -149,7 +149,7 @@ public class SysUiManagers {
 
         // AppLauncher
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED);
-        intentFilter.addAction(com.ceco.q.gravitybox.managers.AppLauncher.ACTION_SHOW_APP_LAUCNHER);
+        intentFilter.addAction(SysUiAppLauncher.ACTION_SHOW_APP_LAUCNHER);
 
         // KeyguardStateMonitor
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);

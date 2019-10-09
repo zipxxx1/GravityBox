@@ -16,7 +16,7 @@
 package com.ceco.q.gravitybox.shortcuts;
 
 import com.ceco.q.gravitybox.R;
-import com.ceco.q.gravitybox.managers.AppLauncher;
+import com.ceco.q.gravitybox.managers.SysUiAppLauncher;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
 
 public class AppLauncherShortcut extends AShortcut {
-    protected static final String ACTION =  AppLauncher.ACTION_SHOW_APP_LAUCNHER;
+    protected static final String ACTION =  SysUiAppLauncher.ACTION_SHOW_APP_LAUCNHER;
 
     public AppLauncherShortcut(Context context) {
         super(context);
