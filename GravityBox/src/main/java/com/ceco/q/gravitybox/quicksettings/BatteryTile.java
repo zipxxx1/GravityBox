@@ -20,8 +20,8 @@ import de.robv.android.xposed.XposedHelpers;
 
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
-import com.ceco.q.gravitybox.managers.BatteryInfoManager.BatteryData;
-import com.ceco.q.gravitybox.managers.BatteryInfoManager.BatteryStatusListener;
+import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
+import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager.BatteryStatusListener;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

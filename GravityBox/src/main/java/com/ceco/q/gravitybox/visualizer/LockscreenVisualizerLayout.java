@@ -18,7 +18,7 @@ import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.Utils;
-import com.ceco.q.gravitybox.managers.BatteryInfoManager.BatteryData;
+import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
 import com.ceco.q.gravitybox.ModStatusBar.StatusBarState;
 
 import android.animation.ArgbEvaluator;

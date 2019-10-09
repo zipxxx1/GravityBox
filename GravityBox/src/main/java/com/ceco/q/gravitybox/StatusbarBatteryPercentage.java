@@ -20,8 +20,8 @@ import de.robv.android.xposed.XSharedPreferences;
 import com.ceco.q.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.q.gravitybox.managers.StatusBarIconManager;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
-import com.ceco.q.gravitybox.managers.BatteryInfoManager.BatteryData;
-import com.ceco.q.gravitybox.managers.BatteryInfoManager.BatteryStatusListener;
+import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
+import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager.BatteryStatusListener;
 import com.ceco.q.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.q.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 

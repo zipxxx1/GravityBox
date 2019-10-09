@@ -17,7 +17,7 @@ package com.ceco.q.gravitybox;
 
 import com.ceco.q.gravitybox.ledcontrol.QuietHours;
 import com.ceco.q.gravitybox.ledcontrol.QuietHoursActivity;
-import com.ceco.q.gravitybox.managers.BatteryInfoManager;
+import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager;
 
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -91,7 +91,7 @@ public class ModPower {
                 }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED) &&
                     intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1) == 
-                        BatteryInfoManager.SOUND_PLUGGED) {
+                        SysUiBatteryInfoManager.SOUND_PLUGGED) {
                 updateIsChargingSoundCustom(intent.getStringExtra(
                         GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED)) {

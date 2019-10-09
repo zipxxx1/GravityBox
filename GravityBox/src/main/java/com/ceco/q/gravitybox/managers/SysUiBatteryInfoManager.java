@@ -37,7 +37,7 @@ import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 
-public class BatteryInfoManager implements BroadcastSubReceiver {
+public class SysUiBatteryInfoManager implements BroadcastSubReceiver {
     private static final String TAG = "GB:BatteryInfoManager";
     private BatteryData mBatteryData;
     private final ArrayList<BatteryStatusListener> mListeners = new ArrayList<>();
@@ -113,7 +113,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         void onBatteryStatusChanged(BatteryData batteryData);
     }
 
-    protected BatteryInfoManager(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs) {
+    protected SysUiBatteryInfoManager(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs) {
         mContext = context;
         mQuietHours = new QuietHours(qhPrefs);
         mBatteryData = new BatteryData();
@@ -121,11 +121,11 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mBatteryData.isPowerSaving = mPowerManager.isPowerSaveMode();
 
-        setSound(BatteryInfoManager.SOUND_CHARGED,
+        setSound(SysUiBatteryInfoManager.SOUND_CHARGED,
                 prefs.getString(GravityBoxSettings.PREF_KEY_BATTERY_CHARGED_SOUND, ""));
-        setSound(BatteryInfoManager.SOUND_PLUGGED,
+        setSound(SysUiBatteryInfoManager.SOUND_PLUGGED,
                 prefs.getString(GravityBoxSettings.PREF_KEY_CHARGER_PLUGGED_SOUND, ""));
-        setSound(BatteryInfoManager.SOUND_UNPLUGGED,
+        setSound(SysUiBatteryInfoManager.SOUND_UNPLUGGED,
                 prefs.getString(GravityBoxSettings.PREF_KEY_CHARGER_UNPLUGGED_SOUND, ""));
 
         try {

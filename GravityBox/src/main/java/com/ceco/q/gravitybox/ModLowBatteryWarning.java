@@ -20,7 +20,7 @@ import static de.robv.android.xposed.XposedHelpers.findClass;
 
 import com.ceco.q.gravitybox.ledcontrol.QuietHours;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
-import com.ceco.q.gravitybox.managers.BatteryInfoManager.LowBatteryWarningPolicy;
+import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager.LowBatteryWarningPolicy;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

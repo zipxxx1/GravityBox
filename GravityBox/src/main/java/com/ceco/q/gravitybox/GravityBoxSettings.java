@@ -29,7 +29,7 @@ import java.util.Set;
 
 import com.ceco.q.gravitybox.ledcontrol.LedMainActivity;
 import com.ceco.q.gravitybox.ledcontrol.LedSettings;
-import com.ceco.q.gravitybox.managers.BatteryInfoManager;
+import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager;
 import com.ceco.q.gravitybox.preference.AppPickerPreference;
 import com.ceco.q.gravitybox.preference.SeekBarPreference;
 import com.ceco.q.gravitybox.quicksettings.TileOrderActivity;
@@ -3438,15 +3438,15 @@ public class GravityBoxSettings extends GravityBoxActivity implements GravityBox
             Intent intent = new Intent();
             if (key.equals(PREF_KEY_BATTERY_CHARGED_SOUND)) {
                 intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_CHARGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, SysUiBatteryInfoManager.SOUND_CHARGED);
                 intent.putExtra(EXTRA_BATTERY_SOUND_URI, uri);
             } else if (key.equals(PREF_KEY_CHARGER_PLUGGED_SOUND)) {
                 intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_PLUGGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, SysUiBatteryInfoManager.SOUND_PLUGGED);
                 intent.putExtra(EXTRA_BATTERY_SOUND_URI, uri);
             } else if (key.equals(PREF_KEY_CHARGER_UNPLUGGED_SOUND)) {
                 intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_UNPLUGGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, SysUiBatteryInfoManager.SOUND_UNPLUGGED);
                 intent.putExtra(EXTRA_BATTERY_SOUND_URI, uri);
             } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_SOUND)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
