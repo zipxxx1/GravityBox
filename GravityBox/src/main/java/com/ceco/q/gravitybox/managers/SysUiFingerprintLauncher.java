@@ -48,7 +48,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 @SuppressWarnings("deprecation")
-public class FingerprintLauncher implements BroadcastSubReceiver {
+public class SysUiFingerprintLauncher implements BroadcastSubReceiver {
     private static final String TAG = "GB:FingerprintLauncher";
     private static final boolean DEBUG = false;
     private static final String KEY_NAME = "gravitybox.fingeprint.launcher";
@@ -68,7 +68,7 @@ public class FingerprintLauncher implements BroadcastSubReceiver {
     private boolean mShowToast;
     private PowerManager mPm;
 
-    FingerprintLauncher(Context ctx, XSharedPreferences prefs) throws Throwable {
+    SysUiFingerprintLauncher(Context ctx, XSharedPreferences prefs) throws Throwable {
         if (ctx == null)
             throw new IllegalArgumentException("Context cannot be null");
 
