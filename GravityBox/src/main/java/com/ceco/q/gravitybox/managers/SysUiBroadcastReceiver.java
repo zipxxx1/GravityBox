@@ -28,7 +28,7 @@ import de.robv.android.xposed.XposedBridge;
 
 public class SysUiBroadcastReceiver {
     public static final String TAG="GB:SysUiBroadcastReceiver";
-    private static boolean DEBUG = true;
+    private static boolean DEBUG = false;
 
     private static void log(String msg) {
         XposedBridge.log(TAG + ": " + msg);

@@ -18,10 +18,7 @@
 package com.ceco.q.gravitybox.pie;
 
 import android.annotation.SuppressLint;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -54,6 +51,7 @@ import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.ModHwKeys;
 import com.ceco.q.gravitybox.ModPieControls;
 import com.ceco.q.gravitybox.ModStatusBar;
+import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.pie.PieLayout.PieDrawable;
 import com.ceco.q.gravitybox.pie.PieLayout.PieSlice;
@@ -68,7 +66,8 @@ import de.robv.android.xposed.XposedHelpers;
  * This class is responsible for setting up the pie control, activating it, and defining and
  * executing the actions that can be triggered by the pie control.
  */
-public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnClickListener {
+public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnClickListener,
+                                      SysUiBatteryInfoManager.BatteryStatusListener {
     public static final String PACKAGE_NAME = "com.android.systemui";
     public static final String TAG = "GB:PieController";
     public static final boolean DEBUG = false;
@@ -266,16 +265,11 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mHandler.sendMessageDelayed(Message.obtain(mHandler, MSG_INJECT_KEY, keycode, 0), 50);
     }
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Intent.ACTION_BATTERY_CHANGED)) {
-                mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-                mBatteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS,
-                        BatteryManager.BATTERY_STATUS_UNKNOWN);
-            }
-        }
-    };
+    @Override
+    public void onBatteryStatusChanged(SysUiBatteryInfoManager.BatteryData batteryData) {
+        mBatteryLevel = batteryData.level;
+        mBatteryStatus = batteryData.status;
+    }
 
     private PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         @Override
@@ -363,9 +357,9 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mPieContainer.addSlice(mSysInfo);
 
         // start listening for changes
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+        if (SysUiManagers.BatteryInfoManager != null) {
+            SysUiManagers.BatteryInfoManager.registerListener(this);
+        }
 
         if (mHasTelephony) {
             TelephonyManager telephonyManager =
