@@ -21,14 +21,14 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.GravityBox;
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 
 public class BluetoothTetheringTile extends QsTile {
@@ -93,37 +93,33 @@ public class BluetoothTetheringTile extends QsTile {
         }
     };
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
-                int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
-                        BluetoothAdapter.ERROR);
-                if (DEBUG) log("Bluetooth state changed: state=" + state +
-                        "; mBluetoothEnableForTether=" + mBluetoothEnableForTether);
-                switch (state) {
-                    case BluetoothAdapter.STATE_ON:
-                        registerServiceListener();
-                        break;
-                    case BluetoothAdapter.STATE_OFF:
-                    case BluetoothAdapter.ERROR:
-                        unregisterServiceListener();
-                        break;
-                    default:
-                        // ignore transition states
-                }
+    private SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (intent.getAction().equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+            int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
+                    BluetoothAdapter.ERROR);
+            if (DEBUG) log("Bluetooth state changed: state=" + state +
+                    "; mBluetoothEnableForTether=" + mBluetoothEnableForTether);
+            switch (state) {
+                case BluetoothAdapter.STATE_ON:
+                    registerServiceListener();
+                    break;
+                case BluetoothAdapter.STATE_OFF:
+                case BluetoothAdapter.ERROR:
+                    unregisterServiceListener();
+                    break;
+                default:
+                    // ignore transition states
             }
-            refreshState();
         }
+        refreshState();
     };
 
     private void registerListeners() {
         if (!mIsListening) {
             registerServiceListener();
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(ACTION_TETHER_STATE_CHANGED);
-            intentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-            mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+            SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+                    ACTION_TETHER_STATE_CHANGED,
+                    BluetoothAdapter.ACTION_STATE_CHANGED);
             mIsListening = true;
             if (DEBUG) log("listeners registered");
         }
@@ -132,7 +128,7 @@ public class BluetoothTetheringTile extends QsTile {
     private void unregisterListeners() {
         if (mIsListening) {
             unregisterServiceListener();
-            mContext.unregisterReceiver(mBroadcastReceiver);
+            SysUiManagers.BroadcastReceiver.unsubscribe(mBroadcastReceiver);
             mIsListening = false;
             if (DEBUG) log("listeners unregistered");
         }

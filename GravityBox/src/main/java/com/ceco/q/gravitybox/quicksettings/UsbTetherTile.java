@@ -18,13 +18,13 @@ package com.ceco.q.gravitybox.quicksettings;
 
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.GravityBox;
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedHelpers;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 
 public class UsbTetherTile extends QsTile {
@@ -49,24 +49,20 @@ public class UsbTetherTile extends QsTile {
         mCm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log(getKey() + ": onReceive: " + intent);
-            if (intent.getAction().equals(ACTION_USB_STATE)) {
-                mUsbConnected = intent.getBooleanExtra(USB_CONNECTED, false);
-            }
-            updateState();
-            refreshState();
+    private SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (DEBUG) log(getKey() + ": onReceive: " + intent);
+        if (intent.getAction().equals(ACTION_USB_STATE)) {
+            mUsbConnected = intent.getBooleanExtra(USB_CONNECTED, false);
         }
+        updateState();
+        refreshState();
     };
 
     private void registerReceiver() {
         if (!mIsReceiving) {
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(ACTION_TETHER_STATE_CHANGED);
-            intentFilter.addAction(ACTION_USB_STATE);
-            mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+            SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+                    ACTION_TETHER_STATE_CHANGED,
+                    ACTION_USB_STATE);
             mIsReceiving = true;
             if (DEBUG) log(getKey() + ": receiver registered");
         }
@@ -74,7 +70,7 @@ public class UsbTetherTile extends QsTile {
 
     private void unregisterReceiver() {
         if (mIsReceiving) {
-            mContext.unregisterReceiver(mBroadcastReceiver);
+            SysUiManagers.BroadcastReceiver.unsubscribe(mBroadcastReceiver);
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": receiver unregistered");
         }

@@ -18,12 +18,11 @@ package com.ceco.q.gravitybox.quicksettings;
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.q.gravitybox.GravityBoxResultReceiver;
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Handler;
 import android.provider.Settings;
 
@@ -41,15 +40,12 @@ public class NfcTile extends QsTile {
     private int mNfcState = ConnectivityServiceWrapper.NFC_STATE_UNKNOWN;
     private boolean mIsReceiving;
 
-    private BroadcastReceiver mStateChangeReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            int newState = intent.getIntExtra(EXTRA_STATE,
-                    ConnectivityServiceWrapper.NFC_STATE_UNKNOWN);
-            if (mNfcState != newState) {
-                mNfcState = newState;
-                refreshState();
-            }
+    private SysUiBroadcastReceiver.Receiver mStateChangeReceiver = (context, intent) -> {
+        int newState = intent.getIntExtra(EXTRA_STATE,
+                ConnectivityServiceWrapper.NFC_STATE_UNKNOWN);
+        if (mNfcState != newState) {
+            mNfcState = newState;
+            refreshState();
         }
     };
 
@@ -72,8 +68,8 @@ public class NfcTile extends QsTile {
 
     private void registerNfcReceiver() {
         if (!mIsReceiving) {
-            IntentFilter intentFilter = new IntentFilter(ACTION_ADAPTER_STATE_CHANGED);
-            mContext.registerReceiver(mStateChangeReceiver, intentFilter);
+            SysUiManagers.BroadcastReceiver.subscribe(mStateChangeReceiver,
+                    ACTION_ADAPTER_STATE_CHANGED);
             mIsReceiving = true;
             getNfcState();
             if (DEBUG) log(getKey() + ": registerNfcReceiver");
@@ -82,7 +78,7 @@ public class NfcTile extends QsTile {
 
     private void unregisterNfcReceiver() {
         if (mIsReceiving) {
-            mContext.unregisterReceiver(mStateChangeReceiver);
+            SysUiManagers.BroadcastReceiver.unsubscribe(mStateChangeReceiver);
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": unregisterNfcReceiver");
         }

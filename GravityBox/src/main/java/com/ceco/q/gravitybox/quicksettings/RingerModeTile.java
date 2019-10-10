@@ -25,15 +25,15 @@ import java.util.Set;
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.Utils;
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedHelpers;
 
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.os.Handler;
@@ -65,13 +65,10 @@ public class RingerModeTile extends QsTile {
                 R.drawable.ic_qs_ring_off)
     };
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(AudioManager.RINGER_MODE_CHANGED_ACTION)) {
-                findCurrentState();
-                refreshState();
-            }
+    private SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (intent.getAction().equals(AudioManager.RINGER_MODE_CHANGED_ACTION)) {
+            findCurrentState();
+            refreshState();
         }
     };
 
@@ -196,9 +193,8 @@ public class RingerModeTile extends QsTile {
 
     private void registerReceiver() {
         if (!mIsReceiving) {
-            IntentFilter intentFilter = new IntentFilter(
+            SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
                     AudioManager.RINGER_MODE_CHANGED_ACTION);
-            mContext.registerReceiver(mBroadcastReceiver, intentFilter);
             mSettingsObserver.observe();
             mIsReceiving = true;
             if (DEBUG) log(getKey() + ": receiver registered");
@@ -207,7 +203,7 @@ public class RingerModeTile extends QsTile {
 
     private void unregisterReceiver() {
         if (mIsReceiving) {
-            mContext.unregisterReceiver(mBroadcastReceiver);
+            SysUiManagers.BroadcastReceiver.unsubscribe(mBroadcastReceiver);
             mSettingsObserver.unobserve();
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": receiver unregistered");
