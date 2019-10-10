@@ -15,16 +15,16 @@
 
 package com.ceco.q.gravitybox;
 
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.shortcuts.AShortcut;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.KeyguardManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -71,90 +71,83 @@ public class ModSmartRadio {
     private static boolean mIsPhoneIdle = true;
     private static int mAdaptiveDelayThreshold;
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_SMART_RADIO_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_NORMAL_MODE)) {
-                    setNewModeValue(State.NORMAL, 
-                            intent.getIntExtra(GravityBoxSettings.EXTRA_SR_NORMAL_MODE, -1));
-                    if (DEBUG) log("mNormalMode = " + mNormalMode);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_POWER_SAVING_MODE)) {
-                    setNewModeValue(State.POWER_SAVING,
-                            intent.getIntExtra(GravityBoxSettings.EXTRA_SR_POWER_SAVING_MODE, -1));
-                    if (DEBUG) log("mPowerSavingMode = " + mPowerSavingMode);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF)) {
-                    mPowerSaveWhenScreenOff = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF, false);
-                    if (DEBUG) log("mPowerSaveWhenScreenOff = " + mPowerSaveWhenScreenOff);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_IGNORE_LOCKED)) {
-                    mIgnoreWhileLocked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SR_IGNORE_LOCKED, true);
-                    if (DEBUG) log("mIgnoreWhileLocked = " + mIgnoreWhileLocked);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_MODE_CHANGE_DELAY)) {
-                    mModeChangeDelay = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_MODE_CHANGE_DELAY, 5);
-                    if (DEBUG) log("mModeChangeDelay = " + mModeChangeDelay);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF_DELAY)) {
-                    mScreenOffDelay = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF_DELAY, 0);
-                    if (DEBUG) log("mScreenOffDelay = " + mScreenOffDelay);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_MDA_IGNORE)) {
-                    mIgnoreMobileDataAvailability = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_SR_MDA_IGNORE, false);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_ADAPTIVE_DELAY)) {
-                    mAdaptiveDelayThreshold = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_ADAPTIVE_DELAY, 0);
-                    if (DEBUG) log("mAdaptiveDelay = " + mAdaptiveDelayThreshold);
-                }
-            } else if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                int nwType = intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, -1);
-                if (DEBUG) log("Received CONNECTIVITY_ACTION broadcast; networkType=" + nwType);
-                if (nwType == ConnectivityManager.TYPE_WIFI ||
-                        nwType == ConnectivityManager.TYPE_MOBILE) {
-                    if (shouldSwitchToNormalState()) {
-                        switchToState(State.NORMAL);
-                    } else {
-                        switchToState(State.POWER_SAVING);
-                    }
-                }
-            } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-                if (DEBUG) log("Screen turning off");
-                mIsScreenOff = true;
-                if (mPowerSaveWhenScreenOff && !isTetheringViaMobileNetwork()) {
-                    switchToState(State.POWER_SAVING, true);
-                }
-            } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-                if (DEBUG) log("Screen turning on");
-                mIsScreenOff = false;
+    private static SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_SMART_RADIO_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_NORMAL_MODE)) {
+                setNewModeValue(State.NORMAL,
+                        intent.getIntExtra(GravityBoxSettings.EXTRA_SR_NORMAL_MODE, -1));
+                if (DEBUG) log("mNormalMode = " + mNormalMode);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_POWER_SAVING_MODE)) {
+                setNewModeValue(State.POWER_SAVING,
+                        intent.getIntExtra(GravityBoxSettings.EXTRA_SR_POWER_SAVING_MODE, -1));
+                if (DEBUG) log("mPowerSavingMode = " + mPowerSavingMode);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF)) {
+                mPowerSaveWhenScreenOff = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF, false);
+                if (DEBUG) log("mPowerSaveWhenScreenOff = " + mPowerSaveWhenScreenOff);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_IGNORE_LOCKED)) {
+                mIgnoreWhileLocked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SR_IGNORE_LOCKED, true);
+                if (DEBUG) log("mIgnoreWhileLocked = " + mIgnoreWhileLocked);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_MODE_CHANGE_DELAY)) {
+                mModeChangeDelay = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_MODE_CHANGE_DELAY, 5);
+                if (DEBUG) log("mModeChangeDelay = " + mModeChangeDelay);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF_DELAY)) {
+                mScreenOffDelay = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF_DELAY, 0);
+                if (DEBUG) log("mScreenOffDelay = " + mScreenOffDelay);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_MDA_IGNORE)) {
+                mIgnoreMobileDataAvailability = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_SR_MDA_IGNORE, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_ADAPTIVE_DELAY)) {
+                mAdaptiveDelayThreshold = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_ADAPTIVE_DELAY, 0);
+                if (DEBUG) log("mAdaptiveDelay = " + mAdaptiveDelayThreshold);
+            }
+        } else if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+            int nwType = intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, -1);
+            if (DEBUG) log("Received CONNECTIVITY_ACTION broadcast; networkType=" + nwType);
+            if (nwType == ConnectivityManager.TYPE_WIFI ||
+                    nwType == ConnectivityManager.TYPE_MOBILE) {
                 if (shouldSwitchToNormalState()) {
                     switchToState(State.NORMAL);
-                }
-            } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
-                if (DEBUG) log("Keyguard unlocked");
-                if (shouldSwitchToNormalState()) {
-                    switchToState(State.NORMAL);
-                }
-            } else if (intent.getAction().equals(ACTION_TOGGLE_SMART_RADIO)) {
-                changeSmartRadioState(intent);
-            } else if (intent.getAction().equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
-                final boolean wasPhoneBusy = !mIsPhoneIdle;
-                mIsPhoneIdle = TelephonyManager.EXTRA_STATE_IDLE.equals(
-                        intent.getStringExtra(TelephonyManager.EXTRA_STATE));
-                if (DEBUG) log("ACTION_PHONE_STATE_CHANGED: mIsPhoneIdle=" + mIsPhoneIdle);
-                if (wasPhoneBusy && mIsPhoneIdle) {
-                    if (shouldSwitchToNormalState()) {
-                        switchToState(State.NORMAL);
-                    } else {
-                        switchToState(State.POWER_SAVING);
-                    }
+                } else {
+                    switchToState(State.POWER_SAVING);
                 }
             }
-
-            if (mNetworkModeChanger != null) {
-                mNetworkModeChanger.onBroadcastReceived(context, intent);
+        } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+            if (DEBUG) log("Screen turning off");
+            mIsScreenOff = true;
+            if (mPowerSaveWhenScreenOff && !isTetheringViaMobileNetwork()) {
+                switchToState(State.POWER_SAVING, true);
+            }
+        } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+            if (DEBUG) log("Screen turning on");
+            mIsScreenOff = false;
+            if (shouldSwitchToNormalState()) {
+                switchToState(State.NORMAL);
+            }
+        } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
+            if (DEBUG) log("Keyguard unlocked");
+            if (shouldSwitchToNormalState()) {
+                switchToState(State.NORMAL);
+            }
+        } else if (intent.getAction().equals(ACTION_TOGGLE_SMART_RADIO)) {
+            changeSmartRadioState(intent);
+        } else if (intent.getAction().equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
+            final boolean wasPhoneBusy = !mIsPhoneIdle;
+            mIsPhoneIdle = TelephonyManager.EXTRA_STATE_IDLE.equals(
+                    intent.getStringExtra(TelephonyManager.EXTRA_STATE));
+            if (DEBUG) log("ACTION_PHONE_STATE_CHANGED: mIsPhoneIdle=" + mIsPhoneIdle);
+            if (wasPhoneBusy && mIsPhoneIdle) {
+                if (shouldSwitchToNormalState()) {
+                    switchToState(State.NORMAL);
+                } else {
+                    switchToState(State.POWER_SAVING);
+                }
             }
         }
     };
@@ -351,7 +344,7 @@ public class ModSmartRadio {
         }
     }
 
-    private static class NetworkModeChanger implements Runnable, BroadcastSubReceiver {
+    private static class NetworkModeChanger implements Runnable, SysUiBroadcastReceiver.Receiver {
         public static final String ACTION_CHANGE_MODE_ALARM = "gravitybox.smartradio.intent.action.CHANGE_MODE_ALARM";
 
         private Context mContext;
@@ -379,6 +372,10 @@ public class ModSmartRadio {
 
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GB:SmartRadio");
+
+            SysUiManagers.BroadcastReceiver.subscribe(this,
+                    ACTION_CHANGE_MODE_ALARM,
+                    PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED);
         }
 
         @Override
@@ -512,17 +509,14 @@ public class ModSmartRadio {
                         Settings.System.putString(mContext.getContentResolver(), 
                                 SETTING_SMART_RADIO_STATE, mCurrentState.toString());
 
-                        IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SMART_RADIO_CHANGED);
-                        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-                        intentFilter.addAction(Intent.ACTION_SCREEN_ON);
-                        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-                        intentFilter.addAction(Intent.ACTION_USER_PRESENT);
-                        intentFilter.addAction(NetworkModeChanger.ACTION_CHANGE_MODE_ALARM);
-                        intentFilter.addAction(ACTION_TOGGLE_SMART_RADIO);
-                        intentFilter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
-                        intentFilter.addAction(PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED);
-                        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+                        SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+                                GravityBoxSettings.ACTION_PREF_SMART_RADIO_CHANGED,
+                                ConnectivityManager.CONNECTIVITY_ACTION,
+                                Intent.ACTION_SCREEN_ON,
+                                Intent.ACTION_SCREEN_OFF,
+                                Intent.ACTION_USER_PRESENT,
+                                ACTION_TOGGLE_SMART_RADIO,
+                                TelephonyManager.ACTION_PHONE_STATE_CHANGED);
                     }
                 }
             });

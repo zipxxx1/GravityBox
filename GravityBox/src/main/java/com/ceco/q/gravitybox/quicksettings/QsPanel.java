@@ -21,10 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ceco.q.gravitybox.BroadcastSubReceiver;
 import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.Utils;
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import android.content.Context;
@@ -37,7 +37,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class QsPanel implements BroadcastSubReceiver {
+public class QsPanel implements SysUiBroadcastReceiver.Receiver {
     private static final String TAG = "GB:QsPanel";
     private static final boolean DEBUG = false;
 
@@ -75,6 +75,9 @@ public class QsPanel implements BroadcastSubReceiver {
 
         initPreferences();
         createHooks(classLoader);
+
+        SysUiManagers.BroadcastReceiver.subscribe(this,
+                GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
 
         if (DEBUG) log("QsPanel wrapper created");
     }

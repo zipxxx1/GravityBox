@@ -23,7 +23,6 @@ import java.util.List;
 import com.ceco.q.gravitybox.BitmapUtils;
 import com.ceco.q.gravitybox.ColorUtils;
 import com.ceco.q.gravitybox.R;
-import com.ceco.q.gravitybox.BroadcastSubReceiver;
 import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.Utils;
@@ -63,7 +62,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SysUiAppLauncher implements BroadcastSubReceiver, SysUiConfigChangeMonitor.ConfigChangeListener {
+public class SysUiAppLauncher implements SysUiBroadcastReceiver.Receiver, SysUiConfigChangeMonitor.ConfigChangeListener {
     private static final String TAG = "GB:AppLauncher";
     private static final boolean DEBUG = false;
 
@@ -137,6 +136,10 @@ public class SysUiAppLauncher implements BroadcastSubReceiver, SysUiConfigChange
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_PACKAGE_FULLY_REMOVED);
         intentFilter.addDataScheme("package");
         mContext.registerReceiver(mPackageRemoveReceiver, intentFilter);
+
+        SysUiManagers.BroadcastReceiver.subscribe(this,
+                GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED,
+                ACTION_SHOW_APP_LAUCNHER);
     }
 
     @Override

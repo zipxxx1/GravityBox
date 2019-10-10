@@ -141,6 +141,11 @@ public class StayAwakeTile extends QsTile {
     }
 
     @Override
+    protected List<String> onProvideAdditionalBroadcastListenerActions() {
+        return Collections.singletonList(Intent.ACTION_SCREEN_OFF);
+    }
+
+    @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         super.onBroadcastReceived(context, intent);
 

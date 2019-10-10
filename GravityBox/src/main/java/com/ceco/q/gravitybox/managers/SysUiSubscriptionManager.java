@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Locale;
 
 import com.ceco.q.gravitybox.R;
-import com.ceco.q.gravitybox.BroadcastSubReceiver;
 import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.Utils;
 import com.ceco.q.gravitybox.adapters.IIconListAdapterItem;
@@ -46,7 +45,7 @@ import android.widget.Toast;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class SysUiSubscriptionManager implements BroadcastSubReceiver {
+public class SysUiSubscriptionManager implements SysUiBroadcastReceiver.Receiver {
     public static final String TAG="GB:SubscriptionManager";
     private static boolean DEBUG = false;
 
@@ -80,6 +79,11 @@ public class SysUiSubscriptionManager implements BroadcastSubReceiver {
         mContext = context;
         mHandler = new H();
         mSubMgr = android.telephony.SubscriptionManager.from(mContext);
+
+        SysUiManagers.BroadcastReceiver.subscribe(this,
+                ACTION_CHANGE_DEFAULT_SIM_SLOT,
+                ACTION_GET_DEFAULT_SIM_SLOT);
+
         if (DEBUG) log("SubscriptionManager created");
     }
 

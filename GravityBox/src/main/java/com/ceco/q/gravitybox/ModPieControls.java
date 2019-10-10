@@ -21,11 +21,8 @@ package com.ceco.q.gravitybox;
 import java.util.HashSet;
 import java.util.Set;
 
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -41,6 +38,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.pie.PieController;
 import com.ceco.q.gravitybox.pie.PieLayout;
 import com.ceco.q.gravitybox.pie.PieController.Position;
@@ -92,109 +91,105 @@ public class ModPieControls {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("Broadcast received: " + intent.toString());
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_ENABLE)) {
-                    mPieMode = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_ENABLE, 0);
-                    attachPie();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_CUSTOM_KEY_MODE)) {
-                    mPieController.setCustomKeyMode(intent.getIntExtra(
-                            GravityBoxSettings.EXTRA_PIE_CUSTOM_KEY_MODE,
-                            GravityBoxSettings.PIE_CUSTOM_KEY_OFF));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGGERS)) {
-                    String[] triggers = intent.getStringArrayExtra(
-                            GravityBoxSettings.EXTRA_PIE_TRIGGERS);
-                    mPieTriggerSlots = getTriggerSlotsFromArray(triggers);
-                    if (mPieContainer != null) {
-                        mPieContainer.setTriggerSlots(mPieTriggerSlots);
-                    }
-                    attachPie();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGGER_SIZE)) {
-                    mPieTriggerSize = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_TRIGGER_SIZE, 5);
-                    attachPie();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_SIZE)) {
-                    mPieSize = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_SIZE, 1000);
-                    if (mPieContainer != null) {
-                        mPieContainer.setPieSize(mPieSize);
-                    }
-                    attachPie();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE)) {
-                    mShowMenuItem = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE, false);
-                    mPieController.setMenuVisibility(mShowMenuItem | mAlwaysShowMenuItem);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_MENU)) {
-                    mAlwaysShowMenuItem = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_PIE_MENU, false);
-                    mPieController.setMenuVisibility(mShowMenuItem | mAlwaysShowMenuItem);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_BG)) {
-                    mPieController.setBackgroundColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_BG,
-                            mGbContext.getColor(R.color.pie_background_color)));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_FG)) {
-                    mPieController.setForegroundColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_FG,
-                            mGbContext.getColor(R.color.pie_foreground_color)));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_OUTLINE)) {
-                    mPieController.setOutlineColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_OUTLINE,
-                            mGbContext.getColor(R.color.pie_outline_color)));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_SELECTED)) {
-                    mPieController.setSelectedColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_SELECTED,
-                            mGbContext.getColor(R.color.pie_selected_color)));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_TEXT)) {
-                    mPieController.setTextColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_TEXT,
-                            mGbContext.getColor(R.color.pie_text_color)));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_SYSINFO_DISABLE)) {
-                    mPieController.setSysinfoDisabled(intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_PIE_SYSINFO_DISABLE, false));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_LONGPRESS_DELAY)) {
-                    mPieController.setLongpressDelay(intent.getIntExtra(
-                            GravityBoxSettings.EXTRA_PIE_LONGPRESS_DELAY, 0));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_MIRRORED_KEYS)) {
-                    mPieController.setMirroredKeys(intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_PIE_MIRRORED_KEYS, false));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_CENTER_TRIGGER)) {
-                    mCenterTrigger = intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_CENTER_TRIGGER, false);
-                    attachPie();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND)) {
-                    mTrigindEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND, false);
-                    attachPie();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND_COLOR)) {
-                    mTrigindColor = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND_COLOR,
-                            mGbContext.getColor(R.color.pie_trigind_color));
-                    attachPie();
-                }
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
-                mExpandedDesktopMode = intent.getIntExtra(
-                        GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
+    private static SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (DEBUG) log("Broadcast received: " + intent.toString());
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_ENABLE)) {
+                mPieMode = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_ENABLE, 0);
                 attachPie();
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED)) {
-                String key = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_KEY);
-                String btnName = getButtonNameFromKey(key);
-                if (btnName != null) {
-                    int value = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 
-                        GravityBoxSettings.HWKEY_ACTION_DEFAULT);
-                    String customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
-                    mPieController.setLongPressAction(getButtonNameFromKey(key), value, customApp);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_CUSTOM_KEY_MODE)) {
+                mPieController.setCustomKeyMode(intent.getIntExtra(
+                        GravityBoxSettings.EXTRA_PIE_CUSTOM_KEY_MODE,
+                        GravityBoxSettings.PIE_CUSTOM_KEY_OFF));
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGGERS)) {
+                String[] triggers = intent.getStringArrayExtra(
+                        GravityBoxSettings.EXTRA_PIE_TRIGGERS);
+                mPieTriggerSlots = getTriggerSlotsFromArray(triggers);
+                if (mPieContainer != null) {
+                    mPieContainer.setTriggerSlots(mPieTriggerSlots);
                 }
+                attachPie();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGGER_SIZE)) {
+                mPieTriggerSize = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_TRIGGER_SIZE, 5);
+                attachPie();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_SIZE)) {
+                mPieSize = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_SIZE, 1000);
+                if (mPieContainer != null) {
+                    mPieContainer.setPieSize(mPieSize);
+                }
+                attachPie();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE)) {
+                mShowMenuItem = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE, false);
+                mPieController.setMenuVisibility(mShowMenuItem | mAlwaysShowMenuItem);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_MENU)) {
+                mAlwaysShowMenuItem = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_PIE_MENU, false);
+                mPieController.setMenuVisibility(mShowMenuItem | mAlwaysShowMenuItem);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_BG)) {
+                mPieController.setBackgroundColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_BG,
+                        mGbContext.getColor(R.color.pie_background_color)));
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_FG)) {
+                mPieController.setForegroundColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_FG,
+                        mGbContext.getColor(R.color.pie_foreground_color)));
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_OUTLINE)) {
+                mPieController.setOutlineColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_OUTLINE,
+                        mGbContext.getColor(R.color.pie_outline_color)));
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_SELECTED)) {
+                mPieController.setSelectedColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_SELECTED,
+                        mGbContext.getColor(R.color.pie_selected_color)));
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_COLOR_TEXT)) {
+                mPieController.setTextColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_TEXT,
+                        mGbContext.getColor(R.color.pie_text_color)));
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_SYSINFO_DISABLE)) {
+                mPieController.setSysinfoDisabled(intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_PIE_SYSINFO_DISABLE, false));
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_LONGPRESS_DELAY)) {
+                mPieController.setLongpressDelay(intent.getIntExtra(
+                        GravityBoxSettings.EXTRA_PIE_LONGPRESS_DELAY, 0));
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_MIRRORED_KEYS)) {
+                mPieController.setMirroredKeys(intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_PIE_MIRRORED_KEYS, false));
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_CENTER_TRIGGER)) {
+                mCenterTrigger = intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_CENTER_TRIGGER, false);
+                attachPie();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND)) {
+                mTrigindEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND, false);
+                attachPie();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND_COLOR)) {
+                mTrigindColor = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND_COLOR,
+                        mGbContext.getColor(R.color.pie_trigind_color));
+                attachPie();
+            }
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
+            mExpandedDesktopMode = intent.getIntExtra(
+                    GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
+            attachPie();
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED)) {
+            String key = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_KEY);
+            String btnName = getButtonNameFromKey(key);
+            if (btnName != null) {
+                int value = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE,
+                    GravityBoxSettings.HWKEY_ACTION_DEFAULT);
+                String customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
+                mPieController.setLongPressAction(getButtonNameFromKey(key), value, customApp);
             }
         }
     };
@@ -350,11 +345,10 @@ public class ModPieControls {
 
                     mPieController.attachTo(param.thisObject);
 
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_PIE_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
-                    mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+                    SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+                            GravityBoxSettings.ACTION_PREF_PIE_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
 
                     mSettingsObserver = new PieSettingsObserver(new Handler());
                     mSettingsObserver.onChange(true);

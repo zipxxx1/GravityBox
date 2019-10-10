@@ -17,6 +17,7 @@ package com.ceco.q.gravitybox.quicksettings;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.ceco.q.gravitybox.BitmapUtils;
@@ -285,6 +286,22 @@ public class QuickAppTile extends QsTile {
     @Override
     public String getSettingsKey() {
         return mId > 1 ? "gb_tile_quickapp" + mId : "gb_tile_quickapp";
+    }
+
+    @Override
+    protected List<String> onProvideAdditionalBroadcastListenerActions() {
+        List<String> list = Arrays.asList(
+            GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED,
+            GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_2,
+            GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_3,
+            GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_4);
+        if (!Utils.isUserUnlocked(mContext)) {
+            if (DEBUG) log("File-based encryption enabled device. Using ACTION_USER_UNLOCKED intent to init QuickApp Tiles after unlock.");
+            list.add(Intent.ACTION_USER_UNLOCKED);
+        } else {
+            list.add(Intent.ACTION_LOCKED_BOOT_COMPLETED);
+        }
+        return list;
     }
 
     @Override

@@ -21,6 +21,9 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.UserHandle;
 
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.SysUiManagers;
+
 import java.lang.reflect.Constructor;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -28,7 +31,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class SystemIconController implements BroadcastSubReceiver {
+public class SystemIconController implements SysUiBroadcastReceiver.Receiver {
     private static final String TAG = "GB:SystemIconController";
     private static final boolean DEBUG = false;
 
@@ -67,6 +70,10 @@ public class SystemIconController implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_STATUSBAR_HIDE_DATA_SAVER_ICON, false);
         mHideAlarmIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH, true) &&
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
+
+        SysUiManagers.BroadcastReceiver.subscribe(this,
+                GravityBoxSettings.ACTION_PREF_SYSTEM_ICON_CHANGED,
+                GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED);
 
         createHooks(classLoader);
     }

@@ -126,6 +126,13 @@ public class NetworkModeTile extends QsTile {
     }
 
     @Override
+    protected List<String> onProvideAdditionalBroadcastListenerActions() {
+        return Arrays.asList(
+                PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED,
+                GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
+    }
+
+    @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         super.onBroadcastReceived(context, intent);
 

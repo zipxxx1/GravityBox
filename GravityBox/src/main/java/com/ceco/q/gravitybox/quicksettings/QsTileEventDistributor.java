@@ -14,26 +14,17 @@
  */
 package com.ceco.q.gravitybox.quicksettings;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.ceco.q.gravitybox.BroadcastSubReceiver;
 import com.ceco.q.gravitybox.GravityBox;
-import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.ModQsTiles;
-import com.ceco.q.gravitybox.PhoneWrapper;
-import com.ceco.q.gravitybox.Utils;
 import com.ceco.q.gravitybox.managers.SysUiConfigChangeMonitor;
 import com.ceco.q.gravitybox.managers.SysUiKeyguardStateMonitor;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
@@ -50,7 +41,6 @@ public class QsTileEventDistributor implements SysUiKeyguardStateMonitor.Listene
         String getKey();
         Object getTile();
         void onCreateTileView(View tileView);
-        void onBroadcastReceived(Context context, Intent intent);
         void onKeyguardStateChanged();
         boolean supportsHideOnChange();
         void onViewConfigurationChanged(View tileView, Configuration config);
@@ -75,7 +65,6 @@ public class QsTileEventDistributor implements SysUiKeyguardStateMonitor.Listene
     @SuppressWarnings("unused")
     private XSharedPreferences mPrefs;
     private Map<String,QsEventListener> mListeners;
-    private List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private String mCreateTileViewTileKey;
     private QsPanel mQsPanel;
 
@@ -83,66 +72,17 @@ public class QsTileEventDistributor implements SysUiKeyguardStateMonitor.Listene
         mHost = host;
         mPrefs = prefs;
         mListeners = new LinkedHashMap<>();
-        mBroadcastSubReceivers = new ArrayList<>();
         SysUiManagers.KeyguardMonitor.registerListener(this);
 
         createHooks();
-        prepareBroadcastReceiver();
     }
 
     public void setQsPanel(QsPanel qsPanel) {
         mQsPanel = qsPanel;
-        registerBroadcastSubReceiver(mQsPanel);
     }
 
     public QsPanel getQsPanel() {
         return mQsPanel;
-    }
-
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            notifyTilesOfBroadcast(context, intent);
-            final String action = intent.getAction();
-            if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
-                for (BroadcastSubReceiver receiver : mBroadcastSubReceivers) {
-                    receiver.onBroadcastReceived(context, intent);
-                }
-            }
-        }
-    };
-
-    private void prepareBroadcastReceiver() {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED);
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_2);
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_3);
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_4);
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
-        intentFilter.addAction(PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED);
-        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-
-        if (!Utils.isUserUnlocked(mContext)) {
-            if (DEBUG) log("File-based encryption enabled device. Using ACTION_USER_UNLOCKED intent to init QuickApp Tiles after unlock.");
-            intentFilter.addAction(Intent.ACTION_USER_UNLOCKED);
-        }
-        else {
-            intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
-        }
-
-        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
-    }
-
-    private void notifyTilesOfBroadcast(Context context, Intent intent) {
-        for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
-            try {
-                l.getValue().onBroadcastReceived(context, intent);
-            } catch (Throwable t) {
-                GravityBox.log(TAG, "Error notifying listener " + l.getKey() + " of new broadcast: ", t);
-            }
-        }
     }
 
     private void createHooks() {
@@ -310,22 +250,6 @@ public class QsTileEventDistributor implements SysUiKeyguardStateMonitor.Listene
 
         final String key = listener.getKey();
         mListeners.remove(key);
-    }
-
-    public synchronized void registerBroadcastSubReceiver(BroadcastSubReceiver receiver) {
-        if (receiver == null) 
-            throw new IllegalArgumentException("registerBroadcastSubReceiver: receiver cannot be null");
-
-        if (!mBroadcastSubReceivers.contains(receiver)) {
-            mBroadcastSubReceivers.add(receiver);
-        }
-    }
-
-    public synchronized void unregisterBroadcastSubReceiver(BroadcastSubReceiver receiver) {
-        if (receiver == null)
-            throw new IllegalArgumentException("unregisterBroadcastSubReceiver: receiver cannot be null");
-
-        mBroadcastSubReceivers.remove(receiver);
     }
 
     @Override

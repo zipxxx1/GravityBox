@@ -17,11 +17,8 @@ package com.ceco.q.gravitybox;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.managers.SysUiTunerManager;
 
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.ResultReceiver;
@@ -179,85 +176,76 @@ public class SystemPropertyProvider {
                     Context context = (Context) param.thisObject;
                     try {
                         if (DEBUG) log("Initializing SystemUI managers");
-                        SysUiManagers.init(context, prefs, qhPrefs, tunerPrefs);
+                        SysUiManagers.initContext(context, prefs, qhPrefs, tunerPrefs);
                     } catch(Throwable t) {
                         GravityBox.log(TAG, "Error initializing SystemUI managers: ", t);
                     }
                 }
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
-                    Context context = (Context) param.thisObject;
-                    if (context != null) {
-                        if (DEBUG) log("SystemUIService created. Registering BroadcastReceiver");
-                        final ContentResolver cr = context.getContentResolver();
+                    if (DEBUG) log("SystemUIService created. Registering BroadcastReceiver");
 
-                        IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction(ACTION_GET_SYSTEM_PROPERTIES);
-                        intentFilter.addAction(ACTION_REGISTER_UUID);
-                        context.registerReceiver(new BroadcastReceiver() {
-                            @Override
-                            public void onReceive(Context context, Intent intent) {
-                                if (DEBUG) log("Broadcast received: " + intent.toString());
-                                if (intent.getAction().equals(ACTION_GET_SYSTEM_PROPERTIES)
-                                        && intent.hasExtra("receiver")) {
-                                    mSettingsUuid = intent.getStringExtra("settings_uuid");
-                                    final Resources res = context.getResources();
-                                    ResultReceiver receiver = intent.getParcelableExtra("receiver");
-                                    Bundle data = new Bundle();
-                                    data.putBoolean("hasGeminiSupport", Utils.hasGeminiSupport());
-                                    data.putBoolean("isTablet", Utils.isTablet());
-                                    data.putBoolean("hasNavigationBar",
-                                            getSystemConfigBool(res, "config_showNavigationBar"));
-                                    data.putBoolean("unplugTurnsOnScreen", 
-                                            getSystemConfigBool(res, "config_unplugTurnsOnScreen"));
-                                    data.putInt("defaultNotificationLedOff",
-                                            getSystemConfigInteger(res, "config_defaultNotificationLedOff"));
-                                    data.putBoolean("uuidRegistered", (mSettingsUuid != null &&
-                                            mSettingsUuid.equals(Settings.System.getString(
-                                                    cr, SETTING_GRAVITYBOX_UUID))));
-                                    data.putString("uuidType", Settings.System.getString(
-                                            cr, SETTING_GRAVITYBOX_UUID_TYPE));
-                                    data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
-                                            SETTING_UNC_TRIAL_COUNTDOWN, 100));
-                                    data.putInt("tunerTrialCountdown", Settings.System.getInt(cr,
-                                            SysUiTunerManager.SETTING_TUNER_TRIAL_COUNTDOWN, 100));
-                                    data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
-                                    data.putBoolean("supportsFingerprint", Utils.supportsFingerprint(context));
-                                    if (SysUiManagers.FingerprintLauncher != null) {
-                                        data.putIntArray("fingerprintIds",
-                                                SysUiManagers.FingerprintLauncher.getEnrolledFingerprintIds());
-                                    }
-                                    data.putBoolean("isOxygenOsRom", Utils.isOxygenOsRom());
-                                    if (DEBUG) {
-                                        log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
-                                        log("isTablet: " + data.getBoolean("isTablet"));
-                                        log("hasNavigationBar: " + data.getBoolean("hasNavigationBar"));
-                                        log("unplugTurnsOnScreen: " + data.getBoolean("unplugTurnsOnScreen"));
-                                        log("defaultNotificationLedOff: " + data.getInt("defaultNotificationLedOff"));
-                                        log("uuidRegistered: " + data.getBoolean("uuidRegistered"));
-                                        log("uuidType: " + data.getString("uuidType"));
-                                        log("uncTrialCountdown: " + data.getInt("uncTrialCountdown"));
-                                        log("tunerTrialCountdown: " + data.getInt("tunerTrialCountdown"));
-                                        log("hasMsimSupport: " + data.getBoolean("hasMsimSupport"));
-                                        log("xposedBridgeVersion: " + data.getInt("xposedBridgeVersion"));
-                                        log("supportsFingerprint: " + data.getBoolean("supportsFingerprint"));
-                                        if (data.containsKey("fingerprintIds")) {
-                                            log("fingerprintIds: " + data.getIntArray("fingerprintIds"));
-                                        }
-                                        log("isOxygenOsRom: " + data.getBoolean("isOxygenOsRom"));
-                                    }
-                                    receiver.send(RESULT_SYSTEM_PROPERTIES, data);
-                                } else if (intent.getAction().equals(ACTION_REGISTER_UUID) && 
-                                            intent.hasExtra(EXTRA_UUID) && 
-                                            intent.getStringExtra(EXTRA_UUID).equals(mSettingsUuid) &&
-                                            intent.hasExtra(EXTRA_UUID_TYPE)) {
-                                    Settings.System.putString(cr, SETTING_GRAVITYBOX_UUID, mSettingsUuid);
-                                    Settings.System.putString(cr, SETTING_GRAVITYBOX_UUID_TYPE,
-                                            intent.getStringExtra(EXTRA_UUID_TYPE));
-                                }
+                    SysUiManagers.BroadcastReceiver.subscribe((context, intent) -> {
+                        final ContentResolver cr = context.getContentResolver();
+                        if (DEBUG) log("Broadcast received: " + intent.toString());
+                        if (intent.getAction().equals(ACTION_GET_SYSTEM_PROPERTIES)
+                                && intent.hasExtra("receiver")) {
+                            mSettingsUuid = intent.getStringExtra("settings_uuid");
+                            final Resources res = context.getResources();
+                            ResultReceiver receiver = intent.getParcelableExtra("receiver");
+                            Bundle data = new Bundle();
+                            data.putBoolean("hasGeminiSupport", Utils.hasGeminiSupport());
+                            data.putBoolean("isTablet", Utils.isTablet());
+                            data.putBoolean("hasNavigationBar",
+                                    getSystemConfigBool(res, "config_showNavigationBar"));
+                            data.putBoolean("unplugTurnsOnScreen",
+                                    getSystemConfigBool(res, "config_unplugTurnsOnScreen"));
+                            data.putInt("defaultNotificationLedOff",
+                                    getSystemConfigInteger(res, "config_defaultNotificationLedOff"));
+                            data.putBoolean("uuidRegistered", (mSettingsUuid != null &&
+                                    mSettingsUuid.equals(Settings.System.getString(
+                                            cr, SETTING_GRAVITYBOX_UUID))));
+                            data.putString("uuidType", Settings.System.getString(
+                                    cr, SETTING_GRAVITYBOX_UUID_TYPE));
+                            data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
+                                    SETTING_UNC_TRIAL_COUNTDOWN, 100));
+                            data.putInt("tunerTrialCountdown", Settings.System.getInt(cr,
+                                    SysUiTunerManager.SETTING_TUNER_TRIAL_COUNTDOWN, 100));
+                            data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
+                            data.putBoolean("supportsFingerprint", Utils.supportsFingerprint(context));
+                            if (SysUiManagers.FingerprintLauncher != null) {
+                                data.putIntArray("fingerprintIds",
+                                        SysUiManagers.FingerprintLauncher.getEnrolledFingerprintIds());
                             }
-                        }, intentFilter);
-                    }
+                            data.putBoolean("isOxygenOsRom", Utils.isOxygenOsRom());
+                            if (DEBUG) {
+                                log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
+                                log("isTablet: " + data.getBoolean("isTablet"));
+                                log("hasNavigationBar: " + data.getBoolean("hasNavigationBar"));
+                                log("unplugTurnsOnScreen: " + data.getBoolean("unplugTurnsOnScreen"));
+                                log("defaultNotificationLedOff: " + data.getInt("defaultNotificationLedOff"));
+                                log("uuidRegistered: " + data.getBoolean("uuidRegistered"));
+                                log("uuidType: " + data.getString("uuidType"));
+                                log("uncTrialCountdown: " + data.getInt("uncTrialCountdown"));
+                                log("tunerTrialCountdown: " + data.getInt("tunerTrialCountdown"));
+                                log("hasMsimSupport: " + data.getBoolean("hasMsimSupport"));
+                                log("xposedBridgeVersion: " + data.getInt("xposedBridgeVersion"));
+                                log("supportsFingerprint: " + data.getBoolean("supportsFingerprint"));
+                                if (data.containsKey("fingerprintIds")) {
+                                    log("fingerprintIds: " + data.getIntArray("fingerprintIds"));
+                                }
+                                log("isOxygenOsRom: " + data.getBoolean("isOxygenOsRom"));
+                            }
+                            receiver.send(RESULT_SYSTEM_PROPERTIES, data);
+                        } else if (intent.getAction().equals(ACTION_REGISTER_UUID) &&
+                                intent.hasExtra(EXTRA_UUID) &&
+                                intent.getStringExtra(EXTRA_UUID).equals(mSettingsUuid) &&
+                                intent.hasExtra(EXTRA_UUID_TYPE)) {
+                            Settings.System.putString(cr, SETTING_GRAVITYBOX_UUID, mSettingsUuid);
+                            Settings.System.putString(cr, SETTING_GRAVITYBOX_UUID_TYPE,
+                                    intent.getStringExtra(EXTRA_UUID_TYPE));
+                        }
+                    }, ACTION_GET_SYSTEM_PROPERTIES, ACTION_REGISTER_UUID);
                 }
             });
         } catch (Throwable t) {

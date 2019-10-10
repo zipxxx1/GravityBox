@@ -16,9 +16,10 @@ package com.ceco.q.gravitybox.quicksettings;
 
 import java.util.List;
 
-import com.ceco.q.gravitybox.BroadcastSubReceiver;
 import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxSettings;
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,7 +31,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class QsQuickPulldownHandler implements BroadcastSubReceiver {
+public class QsQuickPulldownHandler implements SysUiBroadcastReceiver.Receiver {
     private static final String TAG = "GB:QsQuickPulldownHandler";
     private static final boolean DEBUG = false;
 
@@ -61,7 +62,9 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
             QsTileEventDistributor eventDistributor) {
         mContext = context;
         mPrefs = prefs;
-        eventDistributor.registerBroadcastSubReceiver(this);
+
+        SysUiManagers.BroadcastReceiver.subscribe(this,
+                GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
 
         initPreferences();
         createHooks();

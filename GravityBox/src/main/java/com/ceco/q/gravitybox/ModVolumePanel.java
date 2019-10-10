@@ -19,13 +19,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.view.View;
 import android.widget.ImageButton;
+
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -62,37 +61,34 @@ public class ModVolumePanel {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static BroadcastReceiver mBrodcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL)) {
-                    mVolForceRingControl = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL, false);
-                    updateDefaultStream();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_LINKED)) {
-                    mRingNotifVolumesLinked = ModAudio.StreamLink.valueOf(
-                            intent.getStringExtra(GravityBoxSettings.EXTRA_VOL_LINKED));
-                    if (DEBUG) log("mRingNotifVolumesLinked set to: " + mRingNotifVolumesLinked);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_RINGER_SYSTEM_LINKED)) {
-                    mRingSystemVolumesLinked = ModAudio.StreamLink.valueOf(
-                            intent.getStringExtra(GravityBoxSettings.EXTRA_VOL_RINGER_SYSTEM_LINKED));
-                    if (DEBUG) log("mRingSystemVolumesLinked set to: " + mRingSystemVolumesLinked);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED)) {
-                    mVolumePanelExpanded = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED, false);
-                    if (DEBUG) log("mVolumePanelExpanded set to: " + mVolumePanelExpanded);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED_STREAMS)) {
-                    mVolumePanelExpandedStreams = new HashSet<>(intent.getStringArrayListExtra(
-                            GravityBoxSettings.EXTRA_VOL_EXPANDED_STREAMS));
-                    if (DEBUG) log("mVolumePanelExpandedStreams set to: " + mVolumePanelExpandedStreams);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_PANEL_TIMEOUT)) {
-                    mTimeout = intent.getIntExtra(GravityBoxSettings.EXTRA_VOL_PANEL_TIMEOUT, 0);
-                }
+    private static SysUiBroadcastReceiver.Receiver mBrodcastListener = (context, intent) -> {
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL)) {
+                mVolForceRingControl = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL, false);
+                updateDefaultStream();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_LINKED)) {
+                mRingNotifVolumesLinked = ModAudio.StreamLink.valueOf(
+                        intent.getStringExtra(GravityBoxSettings.EXTRA_VOL_LINKED));
+                if (DEBUG) log("mRingNotifVolumesLinked set to: " + mRingNotifVolumesLinked);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_RINGER_SYSTEM_LINKED)) {
+                mRingSystemVolumesLinked = ModAudio.StreamLink.valueOf(
+                        intent.getStringExtra(GravityBoxSettings.EXTRA_VOL_RINGER_SYSTEM_LINKED));
+                if (DEBUG) log("mRingSystemVolumesLinked set to: " + mRingSystemVolumesLinked);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED)) {
+                mVolumePanelExpanded = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED, false);
+                if (DEBUG) log("mVolumePanelExpanded set to: " + mVolumePanelExpanded);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_EXPANDED_STREAMS)) {
+                mVolumePanelExpandedStreams = new HashSet<>(intent.getStringArrayListExtra(
+                        GravityBoxSettings.EXTRA_VOL_EXPANDED_STREAMS));
+                if (DEBUG) log("mVolumePanelExpandedStreams set to: " + mVolumePanelExpandedStreams);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_PANEL_TIMEOUT)) {
+                mTimeout = intent.getIntExtra(GravityBoxSettings.EXTRA_VOL_PANEL_TIMEOUT, 0);
             }
         }
     };
@@ -116,12 +112,10 @@ public class ModVolumePanel {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
                     mVolumePanel = param.thisObject;
-                    Context context = (Context) XposedHelpers.getObjectField(mVolumePanel, "mContext");
                     if (DEBUG) log("VolumePanel constructed; mVolumePanel set");
 
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED);
-                    context.registerReceiver(mBrodcastReceiver, intentFilter);
+                    SysUiManagers.BroadcastReceiver.subscribe(mBrodcastListener,
+                            GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED);
                 }
             });
 

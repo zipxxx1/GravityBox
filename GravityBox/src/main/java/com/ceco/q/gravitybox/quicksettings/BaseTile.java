@@ -23,6 +23,7 @@ import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.ModQsTiles;
 import com.ceco.q.gravitybox.Utils;
+import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
 import com.ceco.q.gravitybox.managers.SysUiKeyguardStateMonitor;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
@@ -41,7 +42,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public abstract class BaseTile implements QsEventListener {
+public abstract class BaseTile implements QsEventListener, SysUiBroadcastReceiver.Receiver {
     protected static String TAG = "GB:BaseTile";
     protected static final boolean DEBUG = ModQsTiles.DEBUG;
 
@@ -92,6 +93,8 @@ public abstract class BaseTile implements QsEventListener {
         mEventDistributor.registerListener(this);
         initPreferences();
         setTile(tile);
+
+        SysUiManagers.BroadcastReceiver.subscribe(this, getBroadcastListenerActions());
     }
 
     protected void initPreferences() {
@@ -101,6 +104,20 @@ public abstract class BaseTile implements QsEventListener {
 
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
         mHapticFeedback = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HAPTIC_FEEDBACK, false);
+    }
+
+    private List<String> getBroadcastListenerActions() {
+        List<String> actions = new ArrayList<>();
+        actions.add(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
+        List<String> additionalActions = onProvideAdditionalBroadcastListenerActions();
+        if (additionalActions != null && additionalActions.size() > 0) {
+            actions.addAll(additionalActions);
+        }
+        return actions;
+    }
+
+    protected List<String> onProvideAdditionalBroadcastListenerActions() {
+        return null;
     }
 
     protected final QsPanel getQsPanel() {
@@ -178,6 +195,7 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     public void handleDestroy() {
+        SysUiManagers.BroadcastReceiver.unsubscribe(this);
         setListening(false);
         XposedHelpers.removeAdditionalInstanceField(mTile, BaseTile.TILE_KEY_NAME);
         mEventDistributor.unregisterListener(this);
