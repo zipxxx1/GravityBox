@@ -20,10 +20,8 @@ import static de.robv.android.xposed.XposedHelpers.getAdditionalInstanceField;
 import static de.robv.android.xposed.XposedHelpers.getObjectField;
 import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Binder;
 import android.os.Handler;
@@ -31,6 +29,10 @@ import android.os.PowerManager;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
+
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
+import com.ceco.q.gravitybox.managers.FrameworkManagers;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -55,24 +57,21 @@ public class ModVolumeKeySkipTrack {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_VOL_MUSIC_CONTROLS)) {
-                mAllowSkipTrack = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_MUSIC_CONTROLS, false);
-                if (DEBUG) log("mAllowSkipTrack=" + mAllowSkipTrack);
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE)) {
-                    mVolumeRockerWakeMode = intent.getStringExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE);
-                    if (DEBUG) log("mVolumeRockerWakeMode=" + mVolumeRockerWakeMode);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC)) {
-                    mVolumeRockerWakeAllowMusic = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC, false);
-                    if (DEBUG) log("mVolumeRockerWakeAllowMusic=" + mVolumeRockerWakeAllowMusic);
-                }
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        final String action = intent.getAction();
+        if (action.equals(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_VOL_MUSIC_CONTROLS)) {
+            mAllowSkipTrack = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_MUSIC_CONTROLS, false);
+            if (DEBUG) log("mAllowSkipTrack=" + mAllowSkipTrack);
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE)) {
+                mVolumeRockerWakeMode = intent.getStringExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE);
+                if (DEBUG) log("mVolumeRockerWakeMode=" + mVolumeRockerWakeMode);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC)) {
+                mVolumeRockerWakeAllowMusic = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC, false);
+                if (DEBUG) log("mVolumeRockerWakeAllowMusic=" + mVolumeRockerWakeAllowMusic);
             }
         }
     };
@@ -135,11 +134,9 @@ public class ModVolumeKeySkipTrack {
     private static XC_MethodHook handleConstructPhoneWindowManager = new XC_MethodHook() {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) {
-            Context ctx = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED);
-            ctx.registerReceiver(mBroadcastReceiver, intentFilter);
+            FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                    GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED,
+                    GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED);
 
             /**
              * When a volumeup-key longpress expires, skip songs based on key press

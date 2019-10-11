@@ -30,12 +30,10 @@ import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ActivityNotFoundException;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -61,6 +59,8 @@ import android.view.ViewConfiguration;
 import android.widget.Toast;
 
 import com.ceco.q.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
+import com.ceco.q.gravitybox.managers.FrameworkManagers;
 import com.ceco.q.gravitybox.managers.SysUiAppLauncher;
 import com.ceco.q.gravitybox.shortcuts.AShortcut;
 import com.ceco.q.gravitybox.shortcuts.RingerModeShortcut;
@@ -216,189 +216,185 @@ public class ModHwKeys {
         }
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (DEBUG) log("Broadcast received: " + intent.toString());
 
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("Broadcast received: " + intent.toString());
+        String action = intent.getAction();
+        int value = GravityBoxSettings.HWKEY_ACTION_DEFAULT;
+        if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE)) {
+            value = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, value);
+        }
+        String key = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_KEY);
+        String customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
 
-            String action = intent.getAction();
-            int value = GravityBoxSettings.HWKEY_ACTION_DEFAULT;
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE)) {
-                value = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, value);
-            }
-            String key = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_KEY);
-            String customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
-
-            if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED)) {
-                if (GravityBoxSettings.PREF_KEY_HWKEY_MENU_SINGLETAP.equals(key)) {
-                    setActionFor(HwKeyTrigger.MENU_SINGLETAP, value, customApp);
-                    if (DEBUG) log("Menu singletap action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_HWKEY_MENU_LONGPRESS.equals(key)) {
-                    setActionFor(HwKeyTrigger.MENU_LONGPRESS, value, customApp);
-                    if (DEBUG) log("Menu long-press action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_HWKEY_MENU_DOUBLETAP.equals(key)) {
-                    setActionFor(HwKeyTrigger.MENU_DOUBLETAP, value, customApp);
-                    if (DEBUG) log("Menu double-tap action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS.equals(key)) {
-                    setActionFor(HwKeyTrigger.HOME_LONGPRESS, value, customApp);
-                    if (DEBUG) log("Home long-press action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_HWKEY_HOME_DOUBLETAP.equals(key)) {
-                    setActionFor(HwKeyTrigger.HOME_DOUBLETAP, value, customApp);
-                    if (mPhoneWindowManager != null) {
-                        try {
-                            XposedHelpers.setIntField(mPhoneWindowManager, "mDoubleTapOnHomeBehavior",
-                                    value == 0 ? mHomeDoubletapDefaultAction : 1);
-                        } catch (Throwable t) {
-                            GravityBox.log(TAG, "PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: ", t);
-                        }
+        if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED)) {
+            if (GravityBoxSettings.PREF_KEY_HWKEY_MENU_SINGLETAP.equals(key)) {
+                setActionFor(HwKeyTrigger.MENU_SINGLETAP, value, customApp);
+                if (DEBUG) log("Menu singletap action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_HWKEY_MENU_LONGPRESS.equals(key)) {
+                setActionFor(HwKeyTrigger.MENU_LONGPRESS, value, customApp);
+                if (DEBUG) log("Menu long-press action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_HWKEY_MENU_DOUBLETAP.equals(key)) {
+                setActionFor(HwKeyTrigger.MENU_DOUBLETAP, value, customApp);
+                if (DEBUG) log("Menu double-tap action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS.equals(key)) {
+                setActionFor(HwKeyTrigger.HOME_LONGPRESS, value, customApp);
+                if (DEBUG) log("Home long-press action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_HWKEY_HOME_DOUBLETAP.equals(key)) {
+                setActionFor(HwKeyTrigger.HOME_DOUBLETAP, value, customApp);
+                if (mPhoneWindowManager != null) {
+                    try {
+                        XposedHelpers.setIntField(mPhoneWindowManager, "mDoubleTapOnHomeBehavior",
+                                value == 0 ? mHomeDoubletapDefaultAction : 1);
+                    } catch (Throwable t) {
+                        GravityBox.log(TAG, "PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: ", t);
                     }
-                    if (DEBUG) log("Home double-tap action set to: " + value);
-                } else if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE)) {
-                    mHomeDoubletapDisabled = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE, false);
-                    if (mPhoneWindowManager != null) {
-                        try {
-                            XposedHelpers.setIntField(mPhoneWindowManager, "mDoubleTapOnHomeBehavior",
-                                    mHomeDoubletapDisabled ? 0 : 
-                                        getActionFor(HwKeyTrigger.HOME_DOUBLETAP).actionId == 0 ? 
-                                                mHomeDoubletapDefaultAction : 1);
-                        } catch (Throwable t) {
-                            GravityBox.log(TAG, "PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: ", t);
-                        }
+                }
+                if (DEBUG) log("Home double-tap action set to: " + value);
+            } else if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE)) {
+                mHomeDoubletapDisabled = intent.getBooleanExtra(
+                    GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE, false);
+                if (mPhoneWindowManager != null) {
+                    try {
+                        XposedHelpers.setIntField(mPhoneWindowManager, "mDoubleTapOnHomeBehavior",
+                                mHomeDoubletapDisabled ? 0 :
+                                    getActionFor(HwKeyTrigger.HOME_DOUBLETAP).actionId == 0 ?
+                                            mHomeDoubletapDefaultAction : 1);
+                    } catch (Throwable t) {
+                        GravityBox.log(TAG, "PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: ", t);
                     }
-                } else if (GravityBoxSettings.PREF_KEY_HWKEY_BACK_SINGLETAP.equals(key)) {
-                    setActionFor(HwKeyTrigger.BACK_SINGLETAP, value, customApp);
-                    if (DEBUG) log("Back single-tap action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_HWKEY_BACK_LONGPRESS.equals(key)) {
-                    setActionFor(HwKeyTrigger.BACK_LONGPRESS, value, customApp);
-                    if (DEBUG) log("Back long-press action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_HWKEY_BACK_DOUBLETAP.equals(key)) {
-                    setActionFor(HwKeyTrigger.BACK_DOUBLETAP, value, customApp);
-                    if (DEBUG) log("Back double-tap action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP.equals(key)) {
-                    setActionFor(HwKeyTrigger.RECENTS_SINGLETAP, value, customApp);
-                    if (DEBUG) log("Recents single-tap action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS.equals(key)) {
-                    setActionFor(HwKeyTrigger.RECENTS_LONGPRESS, value, customApp);
-                    if (DEBUG) log("Recents long-press action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP.equals(key)) {
-                    setActionFor(HwKeyTrigger.RECENTS_DOUBLETAP, value, customApp);
-                    if (DEBUG) log("Recents double-tap action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP.equals(key)) {
-                    setActionFor(HwKeyTrigger.CUSTOM_SINGLETAP, value, customApp);
-                    if (DEBUG) log("Custom key singletap action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS.equals(key)) {
-                    setActionFor(HwKeyTrigger.CUSTOM_LONGPRESS, value, customApp);
-                    if (DEBUG) log("Custom key longpress action set to: " + value);
-                } else if (GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP.equals(key)) {
-                    setActionFor(HwKeyTrigger.CUSTOM_DOUBLETAP, value, customApp);
-                    if (DEBUG) log("Custom key doubletap action set to: " + value);
                 }
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_DOUBLETAP_SPEED_CHANGED)) {
-                mDoubletapSpeed = value;
-                if (DEBUG) log("Doubletap speed set to: " + value);
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_KILL_DELAY_CHANGED)) {
-                mKillDelay = value;
-                if (DEBUG) log("Kill delay set to: " + value);
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE)) {
-                    mVolumeRockerWake = intent.getStringExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE);
-                    if (DEBUG) log("mVolumeRockerWake set to: " + mVolumeRockerWake);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC)) {
-                    mVolumeRockerWakeAllowMusic = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC, false);
-                    if (DEBUG) log("mVolumeRockerWakeAllowMusic set to: " + mVolumeRockerWakeAllowMusic);
-                }
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
-                    mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
-                            GravityBoxSettings.HWKEY_TORCH_DISABLED);
-                    if (DEBUG) log("Lockscreen torch set to: " + mLockscreenTorch);
-                }
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE)) {
-                    mHwKeysEnabled = !intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE, false);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_ENABLE)) {
-                    mPieMode = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_ENABLE, 0);
-                }
-            } else if (action.equals(ACTION_SCREENSHOT) && mPhoneWindowManager != null) {
-                takeScreenshot(intent.getLongExtra(EXTRA_SCREENSHOT_DELAY_MS, 300L));
-            } else if (action.equals(ACTION_SHOW_POWER_MENU) && mPhoneWindowManager != null) {
-                showGlobalActionsDialog();
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
-                mExpandedDesktopMode = intent.getIntExtra(
-                        GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
-            } else if (action.equals(ACTION_TOGGLE_EXPANDED_DESKTOP) && mPhoneWindowManager != null) {
-                changeExpandedDesktopState(intent);
-            } else if (action.equals(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING)) {
-                toggleScreenRecording();
-            } else if (action.equals(ACTION_TOGGLE_TORCH)) {
-                toggleTorch();
-            } else if (action.equals(ACTION_SHOW_RECENT_APPS)) {
-                toggleRecentApps();
-            } else if (action.equals(ACTION_TOGGLE_ROTATION_LOCK)) {
-                changeAutoRotationState(intent);
-            } else if (action.equals(ACTION_SLEEP)) {
-                goToSleep();
-            } else if (action.equals(ACTION_MEDIA_CONTROL) && intent.hasExtra(EXTRA_MEDIA_CONTROL)) {
-                final int keyCode = intent.getIntExtra(EXTRA_MEDIA_CONTROL, 0);
-                if (DEBUG) log("MEDIA CONTROL: keycode=" + keyCode);
-                if (keyCode == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE ||
-                        keyCode == KeyEvent.KEYCODE_MEDIA_PREVIOUS ||
-                        keyCode == KeyEvent.KEYCODE_MEDIA_NEXT) {
-                    injectKey(keyCode);
-                }
-            } else if (action.equals(ACTION_KILL_FOREGROUND_APP) && mPhoneWindowManager != null) {
-                killForegroundApp();
-            } else if (action.equals(ACTION_SWITCH_PREVIOUS_APP) && mPhoneWindowManager != null) {
-                switchToLastApp();
-            } else if (action.equals(ACTION_SEARCH)) {
-                launchSearchActivity();
-            } else if (action.equals(ACTION_VOICE_SEARCH)) {
-                launchVoiceSearchActivity();
-            } else if (action.equals(ACTION_LAUNCH_APP) && intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP)) {
-                launchCustomApp(intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP));
-            } else if (action.equals(ACTION_SHOW_VOLUME_PANEL)) {
-                showVolumePanel();
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_VK_VIBRATE_PATTERN_CHANGED)) {
-                setVirtualKeyVibePattern(intent.getStringExtra(
-                        GravityBoxSettings.EXTRA_VK_VIBRATE_PATTERN));
-            } else if (action.equals(ACTION_TOGGLE_QUIET_HOURS)) {
-                changeQuietHoursState(intent);
-            } else if (action.equals(ACTION_INAPP_SEARCH)) {
-                injectKey(KeyEvent.KEYCODE_SEARCH);
-            } else if (action.equals(ACTION_SET_RINGER_MODE)) {
-                changeRingerMode(intent);
-            } else if (action.equals(GravityBoxService.ACTION_TOGGLE_SYNC)) {
-                changeSyncState(intent);
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED)) {
-                int state = intent.getIntExtra(GravityBoxSettings.EXTRA_HSA_STATE, 0);
-                if (state == 0 || state == 1) {
-                    mHeadsetUri[state] = intent.getStringExtra(GravityBoxSettings.EXTRA_HSA_URI);
-                }
-            } else if (action.equals(Intent.ACTION_HEADSET_PLUG)) {
-                int state = intent.getIntExtra("state", 0);
-                if ((state == 0 || state == 1) && mHeadsetUri[state] != null) {
-                    launchCustomApp(mHeadsetUri[state]);
-                }
-            } else if (action.equals(ACTION_TOGGLE_AUTO_BRIGHTNESS)) {
-                changeAutoBrightnessState(intent);
-            } else if (action.equals(ACTION_TOGGLE_SHOW_TOUCHES)) {
-                toggleShowTouches(intent.getIntExtra(EXTRA_SHOW_TOUCHES, -1)); 
-            } else if (action.equals(ACTION_UPDATE_WIFI_CONFIG) &&
-                    intent.hasExtra(EXTRA_WIFI_CONFIG_LIST) &&
-                    intent.hasExtra("receiver")) {
-                ArrayList<WifiConfiguration> wcl =
-                        intent.getParcelableArrayListExtra(EXTRA_WIFI_CONFIG_LIST);
-                updateWifiConfig(wcl, intent.getParcelableExtra("receiver"));
-            } else if (action.equals(ACTION_GO_HOME)) {
-                injectKey(KeyEvent.KEYCODE_HOME);
-            } else if (action.equals(ACTION_TOGGLE_SPLIT_SCREEN)) {
-                toggleSplitScreen();
+            } else if (GravityBoxSettings.PREF_KEY_HWKEY_BACK_SINGLETAP.equals(key)) {
+                setActionFor(HwKeyTrigger.BACK_SINGLETAP, value, customApp);
+                if (DEBUG) log("Back single-tap action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_HWKEY_BACK_LONGPRESS.equals(key)) {
+                setActionFor(HwKeyTrigger.BACK_LONGPRESS, value, customApp);
+                if (DEBUG) log("Back long-press action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_HWKEY_BACK_DOUBLETAP.equals(key)) {
+                setActionFor(HwKeyTrigger.BACK_DOUBLETAP, value, customApp);
+                if (DEBUG) log("Back double-tap action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP.equals(key)) {
+                setActionFor(HwKeyTrigger.RECENTS_SINGLETAP, value, customApp);
+                if (DEBUG) log("Recents single-tap action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS.equals(key)) {
+                setActionFor(HwKeyTrigger.RECENTS_LONGPRESS, value, customApp);
+                if (DEBUG) log("Recents long-press action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP.equals(key)) {
+                setActionFor(HwKeyTrigger.RECENTS_DOUBLETAP, value, customApp);
+                if (DEBUG) log("Recents double-tap action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP.equals(key)) {
+                setActionFor(HwKeyTrigger.CUSTOM_SINGLETAP, value, customApp);
+                if (DEBUG) log("Custom key singletap action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS.equals(key)) {
+                setActionFor(HwKeyTrigger.CUSTOM_LONGPRESS, value, customApp);
+                if (DEBUG) log("Custom key longpress action set to: " + value);
+            } else if (GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP.equals(key)) {
+                setActionFor(HwKeyTrigger.CUSTOM_DOUBLETAP, value, customApp);
+                if (DEBUG) log("Custom key doubletap action set to: " + value);
             }
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_DOUBLETAP_SPEED_CHANGED)) {
+            mDoubletapSpeed = value;
+            if (DEBUG) log("Doubletap speed set to: " + value);
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_KILL_DELAY_CHANGED)) {
+            mKillDelay = value;
+            if (DEBUG) log("Kill delay set to: " + value);
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE)) {
+                mVolumeRockerWake = intent.getStringExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE);
+                if (DEBUG) log("mVolumeRockerWake set to: " + mVolumeRockerWake);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC)) {
+                mVolumeRockerWakeAllowMusic = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC, false);
+                if (DEBUG) log("mVolumeRockerWakeAllowMusic set to: " + mVolumeRockerWakeAllowMusic);
+            }
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
+                mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
+                        GravityBoxSettings.HWKEY_TORCH_DISABLED);
+                if (DEBUG) log("Lockscreen torch set to: " + mLockscreenTorch);
+            }
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE)) {
+                mHwKeysEnabled = !intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_ENABLE)) {
+                mPieMode = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_ENABLE, 0);
+            }
+        } else if (action.equals(ACTION_SCREENSHOT) && mPhoneWindowManager != null) {
+            takeScreenshot(intent.getLongExtra(EXTRA_SCREENSHOT_DELAY_MS, 300L));
+        } else if (action.equals(ACTION_SHOW_POWER_MENU) && mPhoneWindowManager != null) {
+            showGlobalActionsDialog();
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
+            mExpandedDesktopMode = intent.getIntExtra(
+                    GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
+        } else if (action.equals(ACTION_TOGGLE_EXPANDED_DESKTOP) && mPhoneWindowManager != null) {
+            changeExpandedDesktopState(intent);
+        } else if (action.equals(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING)) {
+            toggleScreenRecording();
+        } else if (action.equals(ACTION_TOGGLE_TORCH)) {
+            toggleTorch();
+        } else if (action.equals(ACTION_SHOW_RECENT_APPS)) {
+            toggleRecentApps();
+        } else if (action.equals(ACTION_TOGGLE_ROTATION_LOCK)) {
+            changeAutoRotationState(intent);
+        } else if (action.equals(ACTION_SLEEP)) {
+            goToSleep();
+        } else if (action.equals(ACTION_MEDIA_CONTROL) && intent.hasExtra(EXTRA_MEDIA_CONTROL)) {
+            final int keyCode = intent.getIntExtra(EXTRA_MEDIA_CONTROL, 0);
+            if (DEBUG) log("MEDIA CONTROL: keycode=" + keyCode);
+            if (keyCode == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE ||
+                    keyCode == KeyEvent.KEYCODE_MEDIA_PREVIOUS ||
+                    keyCode == KeyEvent.KEYCODE_MEDIA_NEXT) {
+                injectKey(keyCode);
+            }
+        } else if (action.equals(ACTION_KILL_FOREGROUND_APP) && mPhoneWindowManager != null) {
+            killForegroundApp();
+        } else if (action.equals(ACTION_SWITCH_PREVIOUS_APP) && mPhoneWindowManager != null) {
+            switchToLastApp();
+        } else if (action.equals(ACTION_SEARCH)) {
+            launchSearchActivity();
+        } else if (action.equals(ACTION_VOICE_SEARCH)) {
+            launchVoiceSearchActivity();
+        } else if (action.equals(ACTION_LAUNCH_APP) && intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP)) {
+            launchCustomApp(intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP));
+        } else if (action.equals(ACTION_SHOW_VOLUME_PANEL)) {
+            showVolumePanel();
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_VK_VIBRATE_PATTERN_CHANGED)) {
+            setVirtualKeyVibePattern(intent.getStringExtra(
+                    GravityBoxSettings.EXTRA_VK_VIBRATE_PATTERN));
+        } else if (action.equals(ACTION_TOGGLE_QUIET_HOURS)) {
+            changeQuietHoursState(intent);
+        } else if (action.equals(ACTION_INAPP_SEARCH)) {
+            injectKey(KeyEvent.KEYCODE_SEARCH);
+        } else if (action.equals(ACTION_SET_RINGER_MODE)) {
+            changeRingerMode(intent);
+        } else if (action.equals(GravityBoxService.ACTION_TOGGLE_SYNC)) {
+            changeSyncState(intent);
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED)) {
+            int state = intent.getIntExtra(GravityBoxSettings.EXTRA_HSA_STATE, 0);
+            if (state == 0 || state == 1) {
+                mHeadsetUri[state] = intent.getStringExtra(GravityBoxSettings.EXTRA_HSA_URI);
+            }
+        } else if (action.equals(Intent.ACTION_HEADSET_PLUG)) {
+            int state = intent.getIntExtra("state", 0);
+            if ((state == 0 || state == 1) && mHeadsetUri[state] != null) {
+                launchCustomApp(mHeadsetUri[state]);
+            }
+        } else if (action.equals(ACTION_TOGGLE_AUTO_BRIGHTNESS)) {
+            changeAutoBrightnessState(intent);
+        } else if (action.equals(ACTION_TOGGLE_SHOW_TOUCHES)) {
+            toggleShowTouches(intent.getIntExtra(EXTRA_SHOW_TOUCHES, -1));
+        } else if (action.equals(ACTION_UPDATE_WIFI_CONFIG) &&
+                intent.hasExtra(EXTRA_WIFI_CONFIG_LIST) &&
+                intent.hasExtra("receiver")) {
+            ArrayList<WifiConfiguration> wcl =
+                    intent.getParcelableArrayListExtra(EXTRA_WIFI_CONFIG_LIST);
+            updateWifiConfig(wcl, intent.getParcelableExtra("receiver"));
+        } else if (action.equals(ACTION_GO_HOME)) {
+            injectKey(KeyEvent.KEYCODE_HOME);
+        } else if (action.equals(ACTION_TOGGLE_SPLIT_SCREEN)) {
+            toggleSplitScreen();
         }
     };
 
@@ -937,42 +933,41 @@ public class ModHwKeys {
 
             setVirtualKeyVibePattern(mPrefs.getString(GravityBoxSettings.PREF_KEY_VK_VIBRATE_PATTERN, null));
 
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_DOUBLETAP_SPEED_CHANGED);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_KILL_DELAY_CHANGED);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_PIE_CHANGED);
-            intentFilter.addAction(ACTION_SCREENSHOT);
-            intentFilter.addAction(ACTION_SHOW_POWER_MENU);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
-            intentFilter.addAction(ACTION_TOGGLE_EXPANDED_DESKTOP);
-            intentFilter.addAction(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING);
-            intentFilter.addAction(ACTION_TOGGLE_TORCH);
-            intentFilter.addAction(ACTION_SHOW_RECENT_APPS);
-            intentFilter.addAction(ACTION_TOGGLE_ROTATION_LOCK);
-            intentFilter.addAction(ACTION_SLEEP);
-            intentFilter.addAction(ACTION_MEDIA_CONTROL);
-            intentFilter.addAction(ACTION_KILL_FOREGROUND_APP);
-            intentFilter.addAction(ACTION_SWITCH_PREVIOUS_APP);
-            intentFilter.addAction(ACTION_SEARCH);
-            intentFilter.addAction(ACTION_VOICE_SEARCH);
-            intentFilter.addAction(ACTION_LAUNCH_APP);
-            intentFilter.addAction(ACTION_SHOW_VOLUME_PANEL);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VK_VIBRATE_PATTERN_CHANGED);
-            intentFilter.addAction(ACTION_TOGGLE_QUIET_HOURS);
-            intentFilter.addAction(ACTION_INAPP_SEARCH);
-            intentFilter.addAction(ACTION_SET_RINGER_MODE);
-            intentFilter.addAction(GravityBoxService.ACTION_TOGGLE_SYNC);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED);
-            intentFilter.addAction(Intent.ACTION_HEADSET_PLUG);
-            intentFilter.addAction(ACTION_TOGGLE_AUTO_BRIGHTNESS);
-            intentFilter.addAction(ACTION_TOGGLE_SHOW_TOUCHES);
-            intentFilter.addAction(ACTION_UPDATE_WIFI_CONFIG);
-            intentFilter.addAction(ACTION_GO_HOME);
-            intentFilter.addAction(ACTION_TOGGLE_SPLIT_SCREEN);
-            mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+            FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED,
+                GravityBoxSettings.ACTION_PREF_HWKEY_DOUBLETAP_SPEED_CHANGED,
+                GravityBoxSettings.ACTION_PREF_HWKEY_KILL_DELAY_CHANGED,
+                GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED,
+                GravityBoxSettings.ACTION_PREF_PIE_CHANGED,
+                ACTION_SCREENSHOT,
+                ACTION_SHOW_POWER_MENU,
+                GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED,
+                GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED,
+                ACTION_TOGGLE_EXPANDED_DESKTOP,
+                ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING,
+                ACTION_TOGGLE_TORCH,
+                ACTION_SHOW_RECENT_APPS,
+                ACTION_TOGGLE_ROTATION_LOCK,
+                ACTION_SLEEP,
+                ACTION_MEDIA_CONTROL,
+                ACTION_KILL_FOREGROUND_APP,
+                ACTION_SWITCH_PREVIOUS_APP,
+                ACTION_SEARCH,
+                ACTION_VOICE_SEARCH,
+                ACTION_LAUNCH_APP,
+                ACTION_SHOW_VOLUME_PANEL,
+                GravityBoxSettings.ACTION_PREF_VK_VIBRATE_PATTERN_CHANGED,
+                ACTION_TOGGLE_QUIET_HOURS,
+                ACTION_INAPP_SEARCH,
+                ACTION_SET_RINGER_MODE,
+                GravityBoxService.ACTION_TOGGLE_SYNC,
+                GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED,
+                Intent.ACTION_HEADSET_PLUG,
+                ACTION_TOGGLE_AUTO_BRIGHTNESS,
+                ACTION_TOGGLE_SHOW_TOUCHES,
+                ACTION_UPDATE_WIFI_CONFIG,
+                ACTION_GO_HOME,
+                ACTION_TOGGLE_SPLIT_SCREEN);
 
             if (DEBUG) log("Phone window manager initialized");
         }

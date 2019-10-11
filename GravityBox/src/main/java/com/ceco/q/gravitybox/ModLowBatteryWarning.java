@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,13 +19,11 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 
 import com.ceco.q.gravitybox.ledcontrol.QuietHours;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
+import com.ceco.q.gravitybox.managers.FrameworkManagers;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager.LowBatteryWarningPolicy;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.BatteryManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -51,20 +49,17 @@ public class ModLowBatteryWarning {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_BLED_FLASHING_DISABLED)) {
-                    mFlashingLedDisabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_BLED_FLASHING_DISABLED, false);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_BLED_CHARGING)) {
-                    mChargingLed = ChargingLed.valueOf(intent.getStringExtra(
-                            GravityBoxSettings.EXTRA_BLED_CHARGING));
-                }
-                updateLightsLocked();
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BLED_FLASHING_DISABLED)) {
+                mFlashingLedDisabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BLED_FLASHING_DISABLED, false);
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BLED_CHARGING)) {
+                mChargingLed = ChargingLed.valueOf(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_BLED_CHARGING));
+            }
+            updateLightsLocked();
         }
     };
 
@@ -90,11 +85,8 @@ public class ModLowBatteryWarning {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     mBatteryLed = param.thisObject;
-                    Context context = (Context) XposedHelpers.getObjectField(
-                            XposedHelpers.getSurroundingThis(param.thisObject), "mContext");
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED);
-                    context.registerReceiver(mBroadcastReceiver, intentFilter);
+                    FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                            GravityBoxSettings.ACTION_BATTERY_LED_CHANGED);
                 }
             });
 

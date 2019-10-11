@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,13 +20,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import android.annotation.SuppressLint;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
+
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
+import com.ceco.q.gravitybox.managers.FrameworkManagers;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -50,26 +51,23 @@ public class ModTrustManager {
     private static boolean mForceRefreshAgentList;
     private static boolean mWifiConnected;
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(WifiPriorityActivity.ACTION_WIFI_TRUSTED_CHANGED)) {
-                if (intent.hasExtra(WifiPriorityActivity.EXTRA_WIFI_TRUSTED)) {
-                    String[] values = intent.getStringArrayExtra(WifiPriorityActivity.EXTRA_WIFI_TRUSTED);
-                    if (mWifiTrusted.size() > 0 && values.length == 0) {
-                        mForceRefreshAgentList = true;
-                    }
-                    mWifiTrusted = new HashSet<>(Arrays.asList(values));
-                    if (DEBUG) log("ACTION_WIFI_TRUSTED_CHANGED: mWifiTrusted=" + mWifiTrusted +
-                            "; mForceRefreshAgentList=" + mForceRefreshAgentList);
-                    updateTrustAll();
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        String action = intent.getAction();
+        if (action.equals(WifiPriorityActivity.ACTION_WIFI_TRUSTED_CHANGED)) {
+            if (intent.hasExtra(WifiPriorityActivity.EXTRA_WIFI_TRUSTED)) {
+                String[] values = intent.getStringArrayExtra(WifiPriorityActivity.EXTRA_WIFI_TRUSTED);
+                if (mWifiTrusted.size() > 0 && values.length == 0) {
+                    mForceRefreshAgentList = true;
                 }
-            } else if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                if (intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, -1) ==
-                        ConnectivityManager.TYPE_WIFI) {
-                    onWifiConnectivityChanged();
-                }
+                mWifiTrusted = new HashSet<>(Arrays.asList(values));
+                if (DEBUG) log("ACTION_WIFI_TRUSTED_CHANGED: mWifiTrusted=" + mWifiTrusted +
+                        "; mForceRefreshAgentList=" + mForceRefreshAgentList);
+                updateTrustAll();
+            }
+        } else if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+            if (intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, -1) ==
+                    ConnectivityManager.TYPE_WIFI) {
+                onWifiConnectivityChanged();
             }
         }
     };
@@ -130,10 +128,9 @@ public class ModTrustManager {
                     mConnectivityManager = (ConnectivityManager) context.getSystemService(
                             Context.CONNECTIVITY_SERVICE);
 
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(WifiPriorityActivity.ACTION_WIFI_TRUSTED_CHANGED);
-                    intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-                    context.registerReceiver(mBroadcastReceiver, intentFilter);
+                    FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                            WifiPriorityActivity.ACTION_WIFI_TRUSTED_CHANGED,
+                            ConnectivityManager.CONNECTIVITY_ACTION);
 
                     if (DEBUG) log("Trust manager constructed");
                 }

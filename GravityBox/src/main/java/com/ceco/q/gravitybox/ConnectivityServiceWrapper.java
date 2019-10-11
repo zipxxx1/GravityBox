@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
+* Copyright (C) 2019 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,15 +15,15 @@
 
 package com.ceco.q.gravitybox;
 
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
+import com.ceco.q.gravitybox.managers.FrameworkManagers;
 import com.ceco.q.gravitybox.shortcuts.AShortcut;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.ResultReceiver;
@@ -71,33 +71,30 @@ public class ConnectivityServiceWrapper {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("Broadcast received: " + intent.toString());
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (DEBUG) log("Broadcast received: " + intent.toString());
 
-            if (intent.getAction().equals(ACTION_SET_MOBILE_DATA_ENABLED)) {
-                final boolean enabled = intent.getBooleanExtra(EXTRA_ENABLED, false);
-                setMobileDataEnabled(enabled);
-            } else if (intent.getAction().equals(ACTION_TOGGLE_MOBILE_DATA)) {
-                changeMobileDataState(intent);
-            } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI)) {
-                changeWifiState(intent);
-            } else if (intent.getAction().equals(ACTION_TOGGLE_BLUETOOTH)) {
-                changeBluetoothState(intent);
-            } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI_AP)) {
-                changeWiFiApState(intent);
-            } else if (intent.getAction().equals(ACTION_SET_LOCATION_MODE)) {
-                setLocationMode(intent);
-            } else if (intent.getAction().equals(ACTION_TOGGLE_NFC)) {
-                changeNfcState(intent);
-            } else if (intent.getAction().equals(ACTION_GET_NFC_STATE)) {
-                if (intent.hasExtra("receiver")) {
-                    sendNfcState(intent.getParcelableExtra("receiver"));
-                }
-            } else if (intent.getAction().equals(ACTION_TOGGLE_AIRPLANE_MODE)) {
-                changeAirplaneModeState(intent);
+        if (intent.getAction().equals(ACTION_SET_MOBILE_DATA_ENABLED)) {
+            final boolean enabled = intent.getBooleanExtra(EXTRA_ENABLED, false);
+            setMobileDataEnabled(enabled);
+        } else if (intent.getAction().equals(ACTION_TOGGLE_MOBILE_DATA)) {
+            changeMobileDataState(intent);
+        } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI)) {
+            changeWifiState(intent);
+        } else if (intent.getAction().equals(ACTION_TOGGLE_BLUETOOTH)) {
+            changeBluetoothState(intent);
+        } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI_AP)) {
+            changeWiFiApState(intent);
+        } else if (intent.getAction().equals(ACTION_SET_LOCATION_MODE)) {
+            setLocationMode(intent);
+        } else if (intent.getAction().equals(ACTION_TOGGLE_NFC)) {
+            changeNfcState(intent);
+        } else if (intent.getAction().equals(ACTION_GET_NFC_STATE)) {
+            if (intent.hasExtra("receiver")) {
+                sendNfcState(intent.getParcelableExtra("receiver"));
             }
+        } else if (intent.getAction().equals(ACTION_TOGGLE_AIRPLANE_MODE)) {
+            changeAirplaneModeState(intent);
         }
     };
 
@@ -109,32 +106,33 @@ public class ConnectivityServiceWrapper {
             XposedBridge.hookAllConstructors(connServiceClass, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
-                    if (DEBUG) log("ConnectivityService constructed.");
-                    mConnectivityService = param.thisObject;
+                    if (mConnectivityService == null) {
+                        if (DEBUG) log("ConnectivityService constructed.");
+                        mConnectivityService = param.thisObject;
 
-                    Context context = (Context) XposedHelpers.getObjectField(
-                            param.thisObject, "mContext");
-                    if (context == null && param.args.length != 0) {
-                        context = (Context) param.args[0];
-                    }
-                    
-                    if (context != null) {
-                        mContext = context;
-                        mWifiManager = new WifiManagerWrapper(context);
-                        mTelephonyManager = (TelephonyManager) context.getSystemService(
-                                Context.TELEPHONY_SERVICE);
+                        Context context = (Context) XposedHelpers.getObjectField(
+                                param.thisObject, "mContext");
+                        if (context == null && param.args.length != 0) {
+                            context = (Context) param.args[0];
+                        }
 
-                        IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction(ACTION_SET_MOBILE_DATA_ENABLED);
-                        intentFilter.addAction(ACTION_TOGGLE_MOBILE_DATA);
-                        intentFilter.addAction(ACTION_TOGGLE_WIFI);
-                        intentFilter.addAction(ACTION_TOGGLE_BLUETOOTH);
-                        intentFilter.addAction(ACTION_TOGGLE_WIFI_AP);
-                        intentFilter.addAction(ACTION_SET_LOCATION_MODE);
-                        intentFilter.addAction(ACTION_TOGGLE_NFC);
-                        intentFilter.addAction(ACTION_GET_NFC_STATE);
-                        intentFilter.addAction(ACTION_TOGGLE_AIRPLANE_MODE);
-                        context.registerReceiver(mBroadcastReceiver, intentFilter);
+                        if (context != null) {
+                            mContext = context;
+                            mWifiManager = new WifiManagerWrapper(context);
+                            mTelephonyManager = (TelephonyManager) context.getSystemService(
+                                    Context.TELEPHONY_SERVICE);
+
+                            FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                                    ACTION_SET_MOBILE_DATA_ENABLED,
+                                    ACTION_TOGGLE_MOBILE_DATA,
+                                    ACTION_TOGGLE_WIFI,
+                                    ACTION_TOGGLE_BLUETOOTH,
+                                    ACTION_TOGGLE_WIFI_AP,
+                                    ACTION_SET_LOCATION_MODE,
+                                    ACTION_TOGGLE_NFC,
+                                    ACTION_GET_NFC_STATE,
+                                    ACTION_TOGGLE_AIRPLANE_MODE);
+                        }
                     }
                 }
             });

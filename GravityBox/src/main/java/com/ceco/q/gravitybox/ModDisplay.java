@@ -19,15 +19,17 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
 
 import com.ceco.q.gravitybox.ModLowBatteryWarning.ChargingLed;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
+import com.ceco.q.gravitybox.managers.FrameworkManagers;
 
 import android.app.KeyguardManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -87,17 +89,16 @@ public class ModDisplay {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-
+    private static BroadcastMediator.Receiver mBroadcastReceiver = new BroadcastMediator.Receiver() {
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onBroadcastReceived(Context context, Intent intent) {
             if (DEBUG) log("Broadcast received: " + intent.toString());
             if(intent.getAction().equals(ACTION_GET_AUTOBRIGHTNESS_CONFIG) &&
                     intent.hasExtra("receiver")) {
                 ResultReceiver receiver = intent.getParcelableExtra("receiver");
                 Bundle data = new Bundle();
                 Resources res = context.getResources();
-                data.putIntArray("config_autoBrightnessLevels", 
+                data.putIntArray("config_autoBrightnessLevels",
                         res.getIntArray(res.getIdentifier(
                                 "config_autoBrightnessLevels", "array", "android")));
                 data.putIntArray("config_autoBrightnessLcdBacklightValues",
@@ -283,18 +284,19 @@ public class ModDisplay {
                         }
                     }
 
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(ACTION_GET_AUTOBRIGHTNESS_CONFIG);
+                    List<String> actions = Arrays.asList(
+                        ACTION_GET_AUTOBRIGHTNESS_CONFIG,
+                        GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED,
+                        GravityBoxSettings.ACTION_PREF_BUTTON_BACKLIGHT_CHANGED,
+                        Intent.ACTION_SCREEN_ON,
+                        Intent.ACTION_SCREEN_OFF,
+                        GravityBoxSettings.ACTION_BATTERY_LED_CHANGED,
+                        Intent.ACTION_BATTERY_CHANGED);
                     if (brightnessSettingsEnabled) {
-                        intentFilter.addAction(ACTION_SET_AUTOBRIGHTNESS_CONFIG);
+                        actions.add(ACTION_SET_AUTOBRIGHTNESS_CONFIG);
                     }
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BUTTON_BACKLIGHT_CHANGED);
-                    intentFilter.addAction(Intent.ACTION_SCREEN_ON);
-                    intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED);
-                    intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-                    mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+                    FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver, actions);
+
                     if (DEBUG) log("DisplayPowerController constructed");
                 }
             });

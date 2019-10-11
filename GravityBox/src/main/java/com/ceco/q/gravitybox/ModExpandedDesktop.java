@@ -14,17 +14,18 @@
  */
 package com.ceco.q.gravitybox;
 
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
 import android.view.WindowManager;
+
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
+import com.ceco.q.gravitybox.managers.FrameworkManagers;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -89,18 +90,15 @@ public class ModExpandedDesktop {
         }
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("Broadcast received: " + intent.toString());
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)
-                    && intent.hasExtra(GravityBoxSettings.EXTRA_ED_MODE)) {
-                mExpandedDesktopMode = intent.getIntExtra(
-                        GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
-                updateSettings();
-            } else if (intent.getAction().equals(ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE)) {
-                updateSettings();
-            }
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (DEBUG) log("Broadcast received: " + intent.toString());
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)
+                && intent.hasExtra(GravityBoxSettings.EXTRA_ED_MODE)) {
+            mExpandedDesktopMode = intent.getIntExtra(
+                    GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
+            updateSettings();
+        } else if (intent.getAction().equals(ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE)) {
+            updateSettings();
         }
     };
 
@@ -225,10 +223,9 @@ public class ModExpandedDesktop {
                         mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                         mPhoneWindowManager = param.thisObject;
 
-                        IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
-                        intentFilter.addAction(ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE);
-                        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+                        FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                            GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED,
+                            ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE);
 
                         mSettingsObserver = new SettingsObserver(
                                 (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler"));

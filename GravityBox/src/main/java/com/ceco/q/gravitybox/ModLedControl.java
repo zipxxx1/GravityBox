@@ -32,6 +32,7 @@ import com.ceco.q.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.q.gravitybox.ledcontrol.LedSettings.Visibility;
 import com.ceco.q.gravitybox.ledcontrol.LedSettings.VisibilityLs;
 import com.ceco.q.gravitybox.managers.BroadcastMediator;
+import com.ceco.q.gravitybox.managers.FrameworkManagers;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import android.app.ActivityManager;
@@ -39,12 +40,10 @@ import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -137,54 +136,51 @@ public class ModLedControl {
         public void onAccuracyChanged(Sensor sensor, int accuracy) { }
     };
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(LedSettings.ACTION_UNC_SETTINGS_CHANGED)) {
-                if (intent.hasExtra(LedSettings.PREF_KEY_LOCKED)) {
-                    mUncLocked = intent.getBooleanExtra(LedSettings.PREF_KEY_LOCKED, false);
-                    if (DEBUG) log("mUncLocked=" + mUncLocked);
-                }
-                if (intent.hasExtra(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED)) {
-                    mUncActiveScreenEnabled = intent.getBooleanExtra(
-                            LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false);
-                    if (DEBUG) log("mUncActiveScreenEnabled=" + mUncActiveScreenEnabled);
-                    updateActiveScreenFeature();
-                }
-                if (intent.hasExtra(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE)) {
-                    mUncActiveScreenPocketModeEnabled = intent.getBooleanExtra(
-                            LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true);
-                    if (DEBUG) log("mUncActiveScreenPocketModeEnabled=" + mUncActiveScreenPocketModeEnabled);
-                }
-                if (intent.hasExtra(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS)) {
-                    mUncActiveScreenIgnoreQh = intent.getBooleanExtra(
-                            LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
-                    if (DEBUG) log("mUncActiveScreenIgnoreQh=" + mUncActiveScreenIgnoreQh);
-                }
-                if (intent.hasExtra(LedSettings.EXTRA_UNC_PACKAGE_NAME) &&
-                        intent.hasExtra(LedSettings.EXTRA_UNC_PACKAGE_SETTINGS)) {
-                    String pkgName = intent.getStringExtra(LedSettings.EXTRA_UNC_PACKAGE_NAME);
-                    mUncAppPrefs.put(pkgName, LedSettings.deserialize(pkgName,
-                            intent.getStringArrayListExtra(LedSettings.EXTRA_UNC_PACKAGE_SETTINGS)));
-                    if (DEBUG) log("Settings for " + pkgName + " updated");
-                }
-            } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
-                mQuietHours = new QuietHours(intent.getExtras());
-            } else if (action.equals(Intent.ACTION_USER_PRESENT)) {
-                if (DEBUG) log("User present");
-                mScreenOnDueToActiveScreen = false;
-            } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
-                mScreenOnDueToActiveScreen = false;
-            } else if (action.equals(ACTION_CLEAR_NOTIFICATIONS)) {
-                clearNotifications();
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
-                mProximityWakeUpEnabled = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false);
-            } else if (action.equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)) {
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        final String action = intent.getAction();
+        if (action.equals(LedSettings.ACTION_UNC_SETTINGS_CHANGED)) {
+            if (intent.hasExtra(LedSettings.PREF_KEY_LOCKED)) {
+                mUncLocked = intent.getBooleanExtra(LedSettings.PREF_KEY_LOCKED, false);
+                if (DEBUG) log("mUncLocked=" + mUncLocked);
+            }
+            if (intent.hasExtra(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED)) {
+                mUncActiveScreenEnabled = intent.getBooleanExtra(
+                        LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false);
+                if (DEBUG) log("mUncActiveScreenEnabled=" + mUncActiveScreenEnabled);
                 updateActiveScreenFeature();
             }
+            if (intent.hasExtra(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE)) {
+                mUncActiveScreenPocketModeEnabled = intent.getBooleanExtra(
+                        LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true);
+                if (DEBUG) log("mUncActiveScreenPocketModeEnabled=" + mUncActiveScreenPocketModeEnabled);
+            }
+            if (intent.hasExtra(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS)) {
+                mUncActiveScreenIgnoreQh = intent.getBooleanExtra(
+                        LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
+                if (DEBUG) log("mUncActiveScreenIgnoreQh=" + mUncActiveScreenIgnoreQh);
+            }
+            if (intent.hasExtra(LedSettings.EXTRA_UNC_PACKAGE_NAME) &&
+                    intent.hasExtra(LedSettings.EXTRA_UNC_PACKAGE_SETTINGS)) {
+                String pkgName = intent.getStringExtra(LedSettings.EXTRA_UNC_PACKAGE_NAME);
+                mUncAppPrefs.put(pkgName, LedSettings.deserialize(pkgName,
+                        intent.getStringArrayListExtra(LedSettings.EXTRA_UNC_PACKAGE_SETTINGS)));
+                if (DEBUG) log("Settings for " + pkgName + " updated");
+            }
+        } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+            mQuietHours = new QuietHours(intent.getExtras());
+        } else if (action.equals(Intent.ACTION_USER_PRESENT)) {
+            if (DEBUG) log("User present");
+            mScreenOnDueToActiveScreen = false;
+        } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
+            mScreenOnDueToActiveScreen = false;
+        } else if (action.equals(ACTION_CLEAR_NOTIFICATIONS)) {
+            clearNotifications();
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
+            mProximityWakeUpEnabled = intent.getBooleanExtra(
+                    GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false);
+        } else if (action.equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)) {
+            updateActiveScreenFeature();
         }
     };
 
@@ -213,15 +209,14 @@ public class ModLedControl {
                         mNotifManagerService = param.thisObject;
                         mContext = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
 
-                        IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction(LedSettings.ACTION_UNC_SETTINGS_CHANGED);
-                        intentFilter.addAction(Intent.ACTION_USER_PRESENT);
-                        intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
-                        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-                        intentFilter.addAction(ACTION_CLEAR_NOTIFICATIONS);
-                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
-                        intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
-                        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+                        FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                                LedSettings.ACTION_UNC_SETTINGS_CHANGED,
+                                Intent.ACTION_USER_PRESENT,
+                                QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED,
+                                Intent.ACTION_SCREEN_OFF,
+                                ACTION_CLEAR_NOTIFICATIONS,
+                                GravityBoxSettings.ACTION_PREF_POWER_CHANGED,
+                                Intent.ACTION_LOCKED_BOOT_COMPLETED);
 
                         updateUncTrialCountdown();
                         hookNotificationDelegate();
