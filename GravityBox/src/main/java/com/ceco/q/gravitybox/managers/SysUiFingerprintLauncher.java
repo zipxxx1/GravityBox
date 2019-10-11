@@ -47,7 +47,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 @SuppressWarnings("deprecation")
-public class SysUiFingerprintLauncher implements SysUiBroadcastReceiver.Receiver {
+public class SysUiFingerprintLauncher implements BroadcastMediator.Receiver {
     private static final String TAG = "GB:FingerprintLauncher";
     private static final boolean DEBUG = false;
     private static final String KEY_NAME = "gravitybox.fingeprint.launcher";
@@ -82,7 +82,7 @@ public class SysUiFingerprintLauncher implements SysUiBroadcastReceiver.Receiver
         initFingerprintManager();
         initFingerAppMap(prefs);
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 Intent.ACTION_SCREEN_OFF,
                 Intent.ACTION_USER_PRESENT,
                 GravityBoxSettings.ACTION_FPL_SETTINGS_CHANGED);

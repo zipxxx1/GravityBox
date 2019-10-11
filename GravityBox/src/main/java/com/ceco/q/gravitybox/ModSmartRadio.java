@@ -15,7 +15,7 @@
 
 package com.ceco.q.gravitybox;
 
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.shortcuts.AShortcut;
 
@@ -71,7 +71,7 @@ public class ModSmartRadio {
     private static boolean mIsPhoneIdle = true;
     private static int mAdaptiveDelayThreshold;
 
-    private static SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_SMART_RADIO_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_NORMAL_MODE)) {
                 setNewModeValue(State.NORMAL,
@@ -344,7 +344,7 @@ public class ModSmartRadio {
         }
     }
 
-    private static class NetworkModeChanger implements Runnable, SysUiBroadcastReceiver.Receiver {
+    private static class NetworkModeChanger implements Runnable, BroadcastMediator.Receiver {
         public static final String ACTION_CHANGE_MODE_ALARM = "gravitybox.smartradio.intent.action.CHANGE_MODE_ALARM";
 
         private Context mContext;
@@ -373,7 +373,7 @@ public class ModSmartRadio {
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GB:SmartRadio");
 
-            SysUiManagers.BroadcastReceiver.subscribe(this,
+            SysUiManagers.BroadcastMediator.subscribe(this,
                     ACTION_CHANGE_MODE_ALARM,
                     PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED);
         }
@@ -509,7 +509,7 @@ public class ModSmartRadio {
                         Settings.System.putString(mContext.getContentResolver(), 
                                 SETTING_SMART_RADIO_STATE, mCurrentState.toString());
 
-                        SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+                        SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
                                 GravityBoxSettings.ACTION_PREF_SMART_RADIO_CHANGED,
                                 ConnectivityManager.CONNECTIVITY_ACTION,
                                 Intent.ACTION_SCREEN_ON,

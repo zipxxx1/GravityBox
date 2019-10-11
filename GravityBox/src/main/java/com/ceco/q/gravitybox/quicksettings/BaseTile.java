@@ -23,7 +23,7 @@ import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.ModQsTiles;
 import com.ceco.q.gravitybox.Utils;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiKeyguardStateMonitor;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
@@ -42,7 +42,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public abstract class BaseTile implements QsEventListener, SysUiBroadcastReceiver.Receiver {
+public abstract class BaseTile implements QsEventListener, BroadcastMediator.Receiver {
     protected static String TAG = "GB:BaseTile";
     protected static final boolean DEBUG = ModQsTiles.DEBUG;
 
@@ -94,7 +94,7 @@ public abstract class BaseTile implements QsEventListener, SysUiBroadcastReceive
         initPreferences();
         setTile(tile);
 
-        SysUiManagers.BroadcastReceiver.subscribe(this, getBroadcastListenerActions());
+        SysUiManagers.BroadcastMediator.subscribe(this, getBroadcastListenerActions());
     }
 
     protected void initPreferences() {
@@ -195,7 +195,7 @@ public abstract class BaseTile implements QsEventListener, SysUiBroadcastReceive
     }
 
     public void handleDestroy() {
-        SysUiManagers.BroadcastReceiver.unsubscribe(this);
+        SysUiManagers.BroadcastMediator.unsubscribe(this);
         setListening(false);
         XposedHelpers.removeAdditionalInstanceField(mTile, BaseTile.TILE_KEY_NAME);
         mEventDistributor.unregisterListener(this);

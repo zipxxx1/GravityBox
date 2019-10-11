@@ -45,10 +45,10 @@ import android.view.View.OnAttachStateChangeListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
-public class StatusbarClock implements SysUiBroadcastReceiver.Receiver {
+public class StatusbarClock implements BroadcastMediator.Receiver {
     private static final String TAG = "GB:StatusbarClock";
     private static final boolean DEBUG = false;
 
@@ -97,7 +97,7 @@ public class StatusbarClock implements SysUiBroadcastReceiver.Receiver {
         mAmPmSize = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_AMPM_SIZE, 70) / 100f;
         mShowSeconds = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_SHOW_SECONDS, false);
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED,
                 Intent.ACTION_SCREEN_ON,
                 Intent.ACTION_SCREEN_OFF,
@@ -337,7 +337,7 @@ public class StatusbarClock implements SysUiBroadcastReceiver.Receiver {
     }
 
     public void destroy() {
-        SysUiManagers.BroadcastReceiver.unsubscribe(this);
+        SysUiManagers.BroadcastMediator.unsubscribe(this);
         if (mSecondsHandler != null) {
             mSecondsHandler.removeCallbacksAndMessages(null);
             mSecondsHandler = null;

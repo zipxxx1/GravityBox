@@ -39,7 +39,7 @@ import android.widget.RelativeLayout;
 import android.widget.Space;
 import android.widget.ImageView.ScaleType;
 
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -161,7 +161,7 @@ public class ModNavigationBar {
         }
     }
 
-    private static SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
         if (DEBUG) log("Broadcast received: " + intent.toString());
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_MENUKEY)) {
@@ -297,7 +297,7 @@ public class ModNavigationBar {
                             GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE, "SIX_DOT"));
 
                     mNavigationBarView = (View) param.thisObject;
-                    SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+                    SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
                             GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED,
                             GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED,
                             GravityBoxSettings.ACTION_PREF_PIE_CHANGED,

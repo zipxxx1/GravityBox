@@ -21,8 +21,8 @@ import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.ModLockscreen;
 import com.ceco.q.gravitybox.ModStatusBar.StatusBarStateChangedListener;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
 
@@ -46,7 +46,7 @@ import de.robv.android.xposed.XposedHelpers;
 
 public class VisualizerController implements StatusBarStateChangedListener,
                                              SysUiBatteryInfoManager.BatteryStatusListener,
-                                             SysUiBroadcastReceiver.Receiver,
+                                             BroadcastMediator.Receiver,
                                              Palette.PaletteAsyncListener,
                                              Visualizer.OnDataCaptureListener {
     private static final String TAG = "GB:VisualizerController";
@@ -150,7 +150,7 @@ public class VisualizerController implements StatusBarStateChangedListener,
         mOpacity = Math.round(255f * ((float)prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_OPACITY, 50)/100f));
         mCurrentColor = mDynamicColorEnabled ? Color.TRANSPARENT : mDefaultColor;
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 Intent.ACTION_SCREEN_ON,
                 Intent.ACTION_SCREEN_OFF,
                 GravityBoxSettings.ACTION_VISUALIZER_SETTINGS_CHANGED);

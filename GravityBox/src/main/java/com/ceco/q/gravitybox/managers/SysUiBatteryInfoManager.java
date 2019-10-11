@@ -36,7 +36,7 @@ import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 
-public class SysUiBatteryInfoManager implements SysUiBroadcastReceiver.Receiver {
+public class SysUiBatteryInfoManager implements BroadcastMediator.Receiver {
     private static final String TAG = "GB:BatteryInfoManager";
     private BatteryData mBatteryData;
     private final ArrayList<BatteryStatusListener> mListeners = new ArrayList<>();
@@ -137,7 +137,7 @@ public class SysUiBatteryInfoManager implements SysUiBroadcastReceiver.Receiver 
             mLowBatteryWarningPolicy = LowBatteryWarningPolicy.DEFAULT;
         }
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 Intent.ACTION_BATTERY_CHANGED,
                 ACTION_POWER_SAVE_MODE_CHANGING,
                 GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED,

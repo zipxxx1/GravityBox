@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import com.ceco.q.gravitybox.ProgressBarController.Mode;
 import com.ceco.q.gravitybox.ProgressBarController.ProgressInfo;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiStatusBarIconManager;
 import com.ceco.q.gravitybox.managers.SysUiStatusBarIconManager.ColorInfo;
 import com.ceco.q.gravitybox.managers.SysUiStatusBarIconManager.IconManagerListener;
@@ -49,7 +49,7 @@ import de.robv.android.xposed.XposedBridge;
 
 @SuppressLint("AppCompatCustomView")
 public abstract class TrafficMeterAbstract extends TextView
-                        implements SysUiBroadcastReceiver.Receiver, IconManagerListener,
+                        implements BroadcastMediator.Receiver, IconManagerListener,
                                    ProgressBarController.ProgressStateListener {
     protected static final String PACKAGE_NAME = "com.android.systemui";
     protected static final String TAG = "GB:NetworkTraffic";

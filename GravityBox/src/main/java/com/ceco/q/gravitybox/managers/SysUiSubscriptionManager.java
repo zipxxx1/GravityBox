@@ -45,7 +45,7 @@ import android.widget.Toast;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class SysUiSubscriptionManager implements SysUiBroadcastReceiver.Receiver {
+public class SysUiSubscriptionManager implements BroadcastMediator.Receiver {
     public static final String TAG="GB:SubscriptionManager";
     private static boolean DEBUG = false;
 
@@ -80,7 +80,7 @@ public class SysUiSubscriptionManager implements SysUiBroadcastReceiver.Receiver
         mHandler = new H();
         mSubMgr = android.telephony.SubscriptionManager.from(mContext);
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 ACTION_CHANGE_DEFAULT_SIM_SLOT,
                 ACTION_GET_DEFAULT_SIM_SLOT);
 

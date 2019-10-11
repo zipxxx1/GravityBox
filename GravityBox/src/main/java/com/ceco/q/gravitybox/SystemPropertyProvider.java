@@ -185,7 +185,7 @@ public class SystemPropertyProvider {
                 protected void afterHookedMethod(final MethodHookParam param) {
                     if (DEBUG) log("SystemUIService created. Registering BroadcastReceiver");
 
-                    SysUiManagers.BroadcastReceiver.subscribe((context, intent) -> {
+                    SysUiManagers.BroadcastMediator.subscribe((context, intent) -> {
                         final ContentResolver cr = context.getContentResolver();
                         if (DEBUG) log("Broadcast received: " + intent.toString());
                         if (intent.getAction().equals(ACTION_GET_SYSTEM_PROPERTIES)

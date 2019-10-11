@@ -20,8 +20,8 @@ import java.util.Set;
 import com.ceco.q.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.q.gravitybox.ledcontrol.QuietHours;
 import com.ceco.q.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiAppLauncher;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
 import com.ceco.q.gravitybox.managers.SysUiKeyguardStateMonitor;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
@@ -33,7 +33,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.MediaMetadata;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
@@ -108,7 +107,7 @@ public class ModLockscreen {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
         String action = intent.getAction();
         if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED)
              || action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED)) {
@@ -192,7 +191,7 @@ public class ModLockscreen {
                         });
                     }
 
-                    SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+                    SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
                             GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED,
                             KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED,
                             QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED,

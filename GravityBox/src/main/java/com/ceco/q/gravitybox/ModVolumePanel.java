@@ -23,7 +23,7 @@ import android.media.AudioManager;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -61,7 +61,7 @@ public class ModVolumePanel {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static SysUiBroadcastReceiver.Receiver mBrodcastListener = (context, intent) -> {
+    private static BroadcastMediator.Receiver mBrodcastListener = (context, intent) -> {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL)) {
                 mVolForceRingControl = intent.getBooleanExtra(
@@ -114,7 +114,7 @@ public class ModVolumePanel {
                     mVolumePanel = param.thisObject;
                     if (DEBUG) log("VolumePanel constructed; mVolumePanel set");
 
-                    SysUiManagers.BroadcastReceiver.subscribe(mBrodcastListener,
+                    SysUiManagers.BroadcastMediator.subscribe(mBrodcastListener,
                             GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED);
                 }
             });

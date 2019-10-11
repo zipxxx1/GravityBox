@@ -62,7 +62,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SysUiAppLauncher implements SysUiBroadcastReceiver.Receiver, SysUiConfigChangeMonitor.ConfigChangeListener {
+public class SysUiAppLauncher implements BroadcastMediator.Receiver, SysUiConfigChangeMonitor.ConfigChangeListener {
     private static final String TAG = "GB:AppLauncher";
     private static final boolean DEBUG = false;
 
@@ -137,7 +137,7 @@ public class SysUiAppLauncher implements SysUiBroadcastReceiver.Receiver, SysUiC
         intentFilter.addDataScheme("package");
         mContext.registerReceiver(mPackageRemoveReceiver, intentFilter);
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED,
                 ACTION_SHOW_APP_LAUCNHER);
     }

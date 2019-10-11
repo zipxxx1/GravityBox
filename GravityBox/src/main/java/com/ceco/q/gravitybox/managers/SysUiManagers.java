@@ -38,10 +38,10 @@ public class SysUiManagers {
     public static SysUiTunerManager TunerMgr;
     public static SysUiPackageManager PackageMgr;
     public static SysUiConfigChangeMonitor ConfigChangeMonitor;
-    public static SysUiBroadcastReceiver BroadcastReceiver;
+    public static BroadcastMediator BroadcastMediator;
 
     public static void init() {
-        BroadcastReceiver = new SysUiBroadcastReceiver();
+        BroadcastMediator = new BroadcastMediator();
     }
 
     public static void initContext(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs, XSharedPreferences tunerPrefs) {
@@ -50,7 +50,7 @@ public class SysUiManagers {
         if (prefs == null)
             throw new IllegalArgumentException("Prefs cannot be null");
 
-        BroadcastReceiver.setContext(context);
+        BroadcastMediator.setContext(context);
 
         try {
             ConfigChangeMonitor = new SysUiConfigChangeMonitor(context);

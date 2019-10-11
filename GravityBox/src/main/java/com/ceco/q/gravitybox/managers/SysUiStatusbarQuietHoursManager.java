@@ -27,7 +27,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import android.content.Context;
 import android.content.Intent;
 
-public class SysUiStatusbarQuietHoursManager implements SysUiBroadcastReceiver.Receiver {
+public class SysUiStatusbarQuietHoursManager implements BroadcastMediator.Receiver {
     private static final String TAG = "GB:StatusbarQuietHoursManager";
     private static final Object lock = new Object();
     private static SysUiStatusbarQuietHoursManager sManager;
@@ -55,7 +55,7 @@ public class SysUiStatusbarQuietHoursManager implements SysUiBroadcastReceiver.R
         mQuietHours = new QuietHours(qhPrefs);
         mListeners = new ArrayList<>();
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 Intent.ACTION_TIME_TICK,
                 Intent.ACTION_TIME_CHANGED,
                 Intent.ACTION_TIMEZONE_CHANGED,

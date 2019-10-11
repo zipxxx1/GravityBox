@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.q.gravitybox.ModStatusBar.ContainerType;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import android.content.Intent;
@@ -41,7 +41,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class BatteryStyleController implements SysUiBroadcastReceiver.Receiver {
+public class BatteryStyleController implements BroadcastMediator.Receiver {
     private static final String TAG = "GB:BatteryStyleController";
     public static final String PACKAGE_NAME = "com.android.systemui";
     public static final String CLASS_BATTERY_CONTROLLER = 
@@ -92,7 +92,7 @@ public class BatteryStyleController implements SysUiBroadcastReceiver.Receiver {
             updateBatteryStyle();
         }
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED,
                 GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED,
                 GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED,
@@ -100,7 +100,7 @@ public class BatteryStyleController implements SysUiBroadcastReceiver.Receiver {
     }
 
     public void destroy() {
-        SysUiManagers.BroadcastReceiver.unsubscribe(this);
+        SysUiManagers.BroadcastMediator.unsubscribe(this);
         for (Unhook hook : mHooks) {
             hook.unhook();
         }

@@ -18,7 +18,7 @@ package com.ceco.q.gravitybox.quicksettings;
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.GravityBoxResultReceiver;
 import com.ceco.q.gravitybox.TorchService;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -34,7 +34,7 @@ public class TorchTile extends QsTile {
     private boolean mIsReceiving;
     private GravityBoxResultReceiver mReceiver;
 
-    private SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+    private BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
         if (intent.getAction().equals(TorchService.ACTION_TORCH_STATUS_CHANGED) &&
                 intent.hasExtra(TorchService.EXTRA_TORCH_STATUS)) {
             mTorchStatus = intent.getIntExtra(TorchService.EXTRA_TORCH_STATUS,
@@ -60,7 +60,7 @@ public class TorchTile extends QsTile {
 
     private void registerReceiver() {
         if (!mIsReceiving) {
-            SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+            SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
                     TorchService.ACTION_TORCH_STATUS_CHANGED);
             mIsReceiving = true;
             if (DEBUG) log(getKey() + ": receiver registered");
@@ -69,7 +69,7 @@ public class TorchTile extends QsTile {
 
     private void unregisterReceiver() {
         if (mIsReceiving) {
-            SysUiManagers.BroadcastReceiver.unsubscribe(mBroadcastReceiver);
+            SysUiManagers.BroadcastMediator.unsubscribe(mBroadcastReceiver);
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": unreceiver registered");
         }

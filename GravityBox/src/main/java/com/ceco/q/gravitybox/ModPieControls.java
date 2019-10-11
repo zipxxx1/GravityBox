@@ -38,7 +38,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.pie.PieController;
 import com.ceco.q.gravitybox.pie.PieLayout;
@@ -91,7 +91,7 @@ public class ModPieControls {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
         if (DEBUG) log("Broadcast received: " + intent.toString());
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_ENABLE)) {
@@ -345,7 +345,7 @@ public class ModPieControls {
 
                     mPieController.attachTo(param.thisObject);
 
-                    SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+                    SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
                             GravityBoxSettings.ACTION_PREF_PIE_CHANGED,
                             GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED,
                             GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);

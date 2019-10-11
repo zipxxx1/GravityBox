@@ -32,7 +32,7 @@ import android.provider.Settings;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class SysUiGpsStatusMonitor implements SysUiBroadcastReceiver.Receiver {
+public class SysUiGpsStatusMonitor implements BroadcastMediator.Receiver {
     public static final String TAG="GB:GpsStatusMonitor";
     private static boolean DEBUG = false;
 
@@ -86,7 +86,7 @@ public class SysUiGpsStatusMonitor implements SysUiBroadcastReceiver.Receiver {
         mGpsEnabled = (mLocationMode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY ||
                 mLocationMode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY);
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 LocationManager.MODE_CHANGED_ACTION,
                 Intent.ACTION_LOCKED_BOOT_COMPLETED);
     }

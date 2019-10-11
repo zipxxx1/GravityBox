@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.q.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 import com.ceco.q.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.q.gravitybox.shortcuts.AShortcut;
@@ -153,7 +153,7 @@ public class ModStatusBar {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
         if (DEBUG) log("Broadcast received: " + intent.toString());
 
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED)) {
@@ -579,7 +579,7 @@ public class ModStatusBar {
                     prepareBrightnessControl();
                     prepareGestureDetector();
 
-                    SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+                    SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
                             GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED,
                             GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED,
                             GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED,
@@ -1160,7 +1160,7 @@ public class ModStatusBar {
 
         removeTrafficMeterView();
         if (mTrafficMeter != null) {
-            SysUiManagers.BroadcastReceiver.unsubscribe(mTrafficMeter);
+            SysUiManagers.BroadcastMediator.unsubscribe(mTrafficMeter);
             if (SysUiManagers.IconManager != null) {
                 SysUiManagers.IconManager.unregisterListener(mTrafficMeter);
             }
@@ -1180,7 +1180,7 @@ public class ModStatusBar {
             if (mProgressBarCtrl != null) {
                 mProgressBarCtrl.registerListener(mTrafficMeter);
             }
-            SysUiManagers.BroadcastReceiver.subscribe(mTrafficMeter,
+            SysUiManagers.BroadcastMediator.subscribe(mTrafficMeter,
                     GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED,
                     Intent.ACTION_SCREEN_ON);
         }

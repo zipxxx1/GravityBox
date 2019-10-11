@@ -33,7 +33,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 
-public class SysUiKeyguardStateMonitor implements SysUiBroadcastReceiver.Receiver {
+public class SysUiKeyguardStateMonitor implements BroadcastMediator.Receiver {
     public static final String TAG="GB:KeyguardStateMonitor";
     public static final String CLASS_KG_MONITOR_IMPL =
             "com.android.systemui.statusbar.policy.KeyguardMonitorImpl";
@@ -86,7 +86,7 @@ public class SysUiKeyguardStateMonitor implements SysUiBroadcastReceiver.Receive
 
         createHooks();
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 Intent.ACTION_SCREEN_ON,
                 Intent.ACTION_SCREEN_OFF,
                 GravityBoxSettings.ACTION_PREF_POWER_CHANGED,

@@ -18,7 +18,7 @@ package com.ceco.q.gravitybox.quicksettings;
 
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.GravityBox;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -49,7 +49,7 @@ public class UsbTetherTile extends QsTile {
         mCm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
-    private SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+    private BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
         if (DEBUG) log(getKey() + ": onReceive: " + intent);
         if (intent.getAction().equals(ACTION_USB_STATE)) {
             mUsbConnected = intent.getBooleanExtra(USB_CONNECTED, false);
@@ -60,7 +60,7 @@ public class UsbTetherTile extends QsTile {
 
     private void registerReceiver() {
         if (!mIsReceiving) {
-            SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+            SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
                     ACTION_TETHER_STATE_CHANGED,
                     ACTION_USB_STATE);
             mIsReceiving = true;
@@ -70,7 +70,7 @@ public class UsbTetherTile extends QsTile {
 
     private void unregisterReceiver() {
         if (mIsReceiving) {
-            SysUiManagers.BroadcastReceiver.unsubscribe(mBroadcastReceiver);
+            SysUiManagers.BroadcastMediator.unsubscribe(mBroadcastReceiver);
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": receiver unregistered");
         }

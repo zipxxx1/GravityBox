@@ -38,7 +38,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class SysUiTunerManager implements SysUiBroadcastReceiver.Receiver {
+public class SysUiTunerManager implements BroadcastMediator.Receiver {
     public static final String TAG="GB:TunerManager";
     private static boolean DEBUG = false;
 
@@ -62,7 +62,7 @@ public class SysUiTunerManager implements SysUiBroadcastReceiver.Receiver {
 
         updateTrialCountdown();
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 ACTION_GET_TUNEABLES);
 
         if (DEBUG) log("created");

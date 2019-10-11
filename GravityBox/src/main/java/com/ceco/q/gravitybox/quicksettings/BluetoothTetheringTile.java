@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.GravityBox;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import android.annotation.SuppressLint;
@@ -93,7 +93,7 @@ public class BluetoothTetheringTile extends QsTile {
         }
     };
 
-    private SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+    private BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
         if (intent.getAction().equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
             int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
                     BluetoothAdapter.ERROR);
@@ -117,7 +117,7 @@ public class BluetoothTetheringTile extends QsTile {
     private void registerListeners() {
         if (!mIsListening) {
             registerServiceListener();
-            SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+            SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
                     ACTION_TETHER_STATE_CHANGED,
                     BluetoothAdapter.ACTION_STATE_CHANGED);
             mIsListening = true;
@@ -128,7 +128,7 @@ public class BluetoothTetheringTile extends QsTile {
     private void unregisterListeners() {
         if (mIsListening) {
             unregisterServiceListener();
-            SysUiManagers.BroadcastReceiver.unsubscribe(mBroadcastReceiver);
+            SysUiManagers.BroadcastMediator.unsubscribe(mBroadcastReceiver);
             mIsListening = false;
             if (DEBUG) log("listeners unregistered");
         }

@@ -25,7 +25,7 @@ import java.util.Set;
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.Utils;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -65,7 +65,7 @@ public class RingerModeTile extends QsTile {
                 R.drawable.ic_qs_ring_off)
     };
 
-    private SysUiBroadcastReceiver.Receiver mBroadcastReceiver = (context, intent) -> {
+    private BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
         if (intent.getAction().equals(AudioManager.RINGER_MODE_CHANGED_ACTION)) {
             findCurrentState();
             refreshState();
@@ -193,7 +193,7 @@ public class RingerModeTile extends QsTile {
 
     private void registerReceiver() {
         if (!mIsReceiving) {
-            SysUiManagers.BroadcastReceiver.subscribe(mBroadcastReceiver,
+            SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
                     AudioManager.RINGER_MODE_CHANGED_ACTION);
             mSettingsObserver.observe();
             mIsReceiving = true;
@@ -203,7 +203,7 @@ public class RingerModeTile extends QsTile {
 
     private void unregisterReceiver() {
         if (mIsReceiving) {
-            SysUiManagers.BroadcastReceiver.unsubscribe(mBroadcastReceiver);
+            SysUiManagers.BroadcastMediator.unsubscribe(mBroadcastReceiver);
             mSettingsObserver.unobserve();
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": receiver unregistered");

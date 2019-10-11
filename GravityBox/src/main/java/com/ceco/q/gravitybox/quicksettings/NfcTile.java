@@ -18,7 +18,7 @@ package com.ceco.q.gravitybox.quicksettings;
 import com.ceco.q.gravitybox.R;
 import com.ceco.q.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.q.gravitybox.GravityBoxResultReceiver;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -40,7 +40,7 @@ public class NfcTile extends QsTile {
     private int mNfcState = ConnectivityServiceWrapper.NFC_STATE_UNKNOWN;
     private boolean mIsReceiving;
 
-    private SysUiBroadcastReceiver.Receiver mStateChangeReceiver = (context, intent) -> {
+    private BroadcastMediator.Receiver mStateChangeReceiver = (context, intent) -> {
         int newState = intent.getIntExtra(EXTRA_STATE,
                 ConnectivityServiceWrapper.NFC_STATE_UNKNOWN);
         if (mNfcState != newState) {
@@ -68,7 +68,7 @@ public class NfcTile extends QsTile {
 
     private void registerNfcReceiver() {
         if (!mIsReceiving) {
-            SysUiManagers.BroadcastReceiver.subscribe(mStateChangeReceiver,
+            SysUiManagers.BroadcastMediator.subscribe(mStateChangeReceiver,
                     ACTION_ADAPTER_STATE_CHANGED);
             mIsReceiving = true;
             getNfcState();
@@ -78,7 +78,7 @@ public class NfcTile extends QsTile {
 
     private void unregisterNfcReceiver() {
         if (mIsReceiving) {
-            SysUiManagers.BroadcastReceiver.unsubscribe(mStateChangeReceiver);
+            SysUiManagers.BroadcastMediator.unsubscribe(mStateChangeReceiver);
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": unregisterNfcReceiver");
         }

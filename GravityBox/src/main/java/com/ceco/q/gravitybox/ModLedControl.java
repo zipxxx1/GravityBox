@@ -31,7 +31,7 @@ import com.ceco.q.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.q.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.q.gravitybox.ledcontrol.LedSettings.Visibility;
 import com.ceco.q.gravitybox.ledcontrol.LedSettings.VisibilityLs;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import android.app.ActivityManager;
@@ -748,7 +748,7 @@ public class ModLedControl {
     private static XSharedPreferences mSysUiPrefs;
     private static XSharedPreferences mSysUiUncPrefs;
 
-    private static SysUiBroadcastReceiver.Receiver mSystemUiBroadcastReceiver = (context, intent) -> {
+    private static BroadcastMediator.Receiver mSystemUiBroadcastReceiver = (context, intent) -> {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_HEADS_UP_SETTINGS_CHANGED)) {
             mSysUiPrefs.reload();
         }
@@ -807,7 +807,7 @@ public class ModLedControl {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     mStatusBar = param.thisObject;
-                    SysUiManagers.BroadcastReceiver.subscribe(mSystemUiBroadcastReceiver,
+                    SysUiManagers.BroadcastMediator.subscribe(mSystemUiBroadcastReceiver,
                             GravityBoxSettings.ACTION_HEADS_UP_SETTINGS_CHANGED);
                 }
             });

@@ -20,7 +20,7 @@ import com.ceco.q.gravitybox.GravityBox;
 import com.ceco.q.gravitybox.GravityBoxResultReceiver;
 import com.ceco.q.gravitybox.GravityBoxSettings;
 import com.ceco.q.gravitybox.RecordingService;
-import com.ceco.q.gravitybox.managers.SysUiBroadcastReceiver;
+import com.ceco.q.gravitybox.managers.BroadcastMediator;
 import com.ceco.q.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -87,7 +87,7 @@ public class QuickRecordTile extends QsTile {
         });
     }
 
-    private SysUiBroadcastReceiver.Receiver mRecordingStatusReceiver = new SysUiBroadcastReceiver.Receiver() {
+    private BroadcastMediator.Receiver mRecordingStatusReceiver = new BroadcastMediator.Receiver() {
         @Override
         public void onBroadcastReceived(Context context, Intent intent) {
             int recordingStatus = intent.getIntExtra(
@@ -156,7 +156,7 @@ public class QuickRecordTile extends QsTile {
 
     private void registerRecordingStatusReceiver() {
         if (!mIsReceiving) {
-            SysUiManagers.BroadcastReceiver.subscribe(mRecordingStatusReceiver,
+            SysUiManagers.BroadcastMediator.subscribe(mRecordingStatusReceiver,
                     RecordingService.ACTION_RECORDING_STATUS_CHANGED);
             mIsReceiving = true;
             if (DEBUG) log(getKey() + ": registerRecrodingStatusReceiver");
@@ -165,7 +165,7 @@ public class QuickRecordTile extends QsTile {
 
     private void unregisterRecordingStatusReceiver() {
         if (mIsReceiving) {
-            SysUiManagers.BroadcastReceiver.unsubscribe(mRecordingStatusReceiver);
+            SysUiManagers.BroadcastMediator.unsubscribe(mRecordingStatusReceiver);
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": unregisterRecrodingStatusReceiver");
         }

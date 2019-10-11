@@ -22,7 +22,7 @@ import android.content.res.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SysUiConfigChangeMonitor implements SysUiBroadcastReceiver.Receiver {
+public class SysUiConfigChangeMonitor implements BroadcastMediator.Receiver {
 
     public interface ConfigChangeListener {
         void onDensityDpiChanged(Configuration config);
@@ -37,7 +37,7 @@ public class SysUiConfigChangeMonitor implements SysUiBroadcastReceiver.Receiver
         mConfiguration = new Configuration();
         mConfiguration.setTo(mContext.getResources().getConfiguration());
 
-        SysUiManagers.BroadcastReceiver.subscribe(this,
+        SysUiManagers.BroadcastMediator.subscribe(this,
                 Intent.ACTION_CONFIGURATION_CHANGED);
     }
 

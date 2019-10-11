@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
 
 import de.robv.android.xposed.XposedBridge;
 
-public class SysUiBroadcastReceiver {
-    public static final String TAG="GB:SysUiBroadcastReceiver";
+public class BroadcastMediator {
+    public static final String TAG="GB:BroadcastMediator";
     private static boolean DEBUG = false;
 
     private static void log(String msg) {
@@ -52,10 +52,10 @@ public class SysUiBroadcastReceiver {
     private final IntentFilter mIntentFilter;
     private boolean mInternalReceiverRegistered;
 
-    SysUiBroadcastReceiver() {
+    BroadcastMediator() {
         mSubscribers = new ArrayList<>();
         mIntentFilter = new IntentFilter();
-        if (DEBUG) log("SysUiBroadcastReceiver created");
+        if (DEBUG) log("BroadcastMediator created");
     }
 
     void setContext(Context context) {
