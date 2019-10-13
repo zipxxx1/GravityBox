@@ -1,4 +1,4 @@
-Changelog 10.0.0-beta-3 - 13/10/2019
+Changelog 10.0.0-beta-4 - 13/10/2019
 --------------------------------------
 - Lockscreen: added option for hiding media art
 - QS: RingerModeTile: synchronized with native ringer mode management
