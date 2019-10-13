@@ -19,6 +19,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -284,14 +285,14 @@ public class ModDisplay {
                         }
                     }
 
-                    List<String> actions = Arrays.asList(
+                    List<String> actions = new ArrayList<>(Arrays.asList(
                         ACTION_GET_AUTOBRIGHTNESS_CONFIG,
                         GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED,
                         GravityBoxSettings.ACTION_PREF_BUTTON_BACKLIGHT_CHANGED,
                         Intent.ACTION_SCREEN_ON,
                         Intent.ACTION_SCREEN_OFF,
                         GravityBoxSettings.ACTION_BATTERY_LED_CHANGED,
-                        Intent.ACTION_BATTERY_CHANGED);
+                        Intent.ACTION_BATTERY_CHANGED));
                     if (brightnessSettingsEnabled) {
                         actions.add(ACTION_SET_AUTOBRIGHTNESS_CONFIG);
                     }
