@@ -27,7 +27,7 @@ import com.ceco.pie.gravitybox.ModQsTiles;
 import com.ceco.pie.gravitybox.PhoneWrapper;
 import com.ceco.pie.gravitybox.Utils;
 import com.ceco.pie.gravitybox.managers.SysUiConfigChangeMonitor;
-import com.ceco.pie.gravitybox.managers.KeyguardStateMonitor;
+import com.ceco.pie.gravitybox.managers.SysUiKeyguardStateMonitor;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 
 import android.content.BroadcastReceiver;
@@ -41,7 +41,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class QsTileEventDistributor implements KeyguardStateMonitor.Listener,
+public class QsTileEventDistributor implements SysUiKeyguardStateMonitor.Listener,
                                                SysUiConfigChangeMonitor.ConfigChangeListener {
     private static final String TAG = "GB:QsTileEventDistributor";
     private static final boolean DEBUG = ModQsTiles.DEBUG;

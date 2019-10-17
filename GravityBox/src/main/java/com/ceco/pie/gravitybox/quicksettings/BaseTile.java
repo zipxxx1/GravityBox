@@ -24,7 +24,7 @@ import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.ModQsTiles;
 import com.ceco.pie.gravitybox.Utils;
-import com.ceco.pie.gravitybox.managers.KeyguardStateMonitor;
+import com.ceco.pie.gravitybox.managers.SysUiKeyguardStateMonitor;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 import com.ceco.pie.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
@@ -84,7 +84,7 @@ public abstract class BaseTile implements QsEventListener {
     protected boolean mProtected;
     protected boolean mHideOnChange;
     protected boolean mHapticFeedback;
-    protected KeyguardStateMonitor mKgMonitor;
+    protected SysUiKeyguardStateMonitor mKgMonitor;
     private StockLayout mStockLayout;
     private View mTileView;
 

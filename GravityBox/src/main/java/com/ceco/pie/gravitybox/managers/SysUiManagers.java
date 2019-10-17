@@ -35,7 +35,7 @@ public class SysUiManagers {
     public static SysUiStatusBarIconManager IconManager;
     public static SysUiStatusbarQuietHoursManager QuietHoursManager;
     public static SysUiAppLauncher AppLauncher;
-    public static KeyguardStateMonitor KeyguardMonitor;
+    public static SysUiKeyguardStateMonitor KeyguardMonitor;
     public static FingerprintLauncher FingerprintLauncher;
     public static NotificationDataMonitor NotifDataMonitor;
     public static GpsStatusMonitor GpsMonitor;
@@ -186,7 +186,7 @@ public class SysUiManagers {
     public static void createKeyguardMonitor(Context ctx, XSharedPreferences prefs) {
         if (KeyguardMonitor != null) return;
         try {
-            KeyguardMonitor = new KeyguardStateMonitor(ctx, prefs);
+            KeyguardMonitor = new SysUiKeyguardStateMonitor(ctx, prefs);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error creating KeyguardMonitor: ", t);
         }
