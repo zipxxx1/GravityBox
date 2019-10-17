@@ -24,7 +24,7 @@ import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigurationChangeMonitor implements BroadcastSubReceiver {
+public class SysUiConfigChangeMonitor implements BroadcastSubReceiver {
 
     public interface ConfigChangeListener {
         void onDensityDpiChanged(Configuration config);
@@ -34,7 +34,7 @@ public class ConfigurationChangeMonitor implements BroadcastSubReceiver {
     private final Configuration mConfiguration;
     private final List<ConfigChangeListener> mConfigChangeListeners = new ArrayList<>();
 
-    ConfigurationChangeMonitor(Context context) {
+    SysUiConfigChangeMonitor(Context context) {
         mContext = context;
         mConfiguration = new Configuration();
         mConfiguration.setTo(mContext.getResources().getConfiguration());

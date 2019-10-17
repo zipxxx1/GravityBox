@@ -63,7 +63,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SysUiAppLauncher implements BroadcastSubReceiver, ConfigurationChangeMonitor.ConfigChangeListener {
+public class SysUiAppLauncher implements BroadcastSubReceiver, SysUiConfigChangeMonitor.ConfigChangeListener {
     private static final String TAG = "GB:AppLauncher";
     private static final boolean DEBUG = false;
 
