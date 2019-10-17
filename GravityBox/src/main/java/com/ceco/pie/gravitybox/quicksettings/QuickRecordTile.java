@@ -20,12 +20,12 @@ import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxResultReceiver;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.RecordingService;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
+import com.ceco.pie.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -86,9 +86,9 @@ public class QuickRecordTile extends QsTile {
         });
     }
 
-    private BroadcastReceiver mRecordingStatusReceiver = new BroadcastReceiver() {
+    private BroadcastMediator.Receiver mRecordingStatusReceiver = new BroadcastMediator.Receiver() {
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onBroadcastReceived(Context context, Intent intent) {
             int recordingStatus = intent.getIntExtra(
                     RecordingService.EXTRA_RECORDING_STATUS, RecordingService.RECORDING_STATUS_IDLE);
             if (DEBUG) log(getKey() + ": Broadcast received: recordingStatus = " + recordingStatus);
@@ -153,9 +153,8 @@ public class QuickRecordTile extends QsTile {
 
     private void registerRecordingStatusReceiver() {
         if (!mIsReceiving) {
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(RecordingService.ACTION_RECORDING_STATUS_CHANGED);
-            mContext.registerReceiver(mRecordingStatusReceiver, intentFilter);
+            SysUiManagers.BroadcastMediator.subscribe(mRecordingStatusReceiver,
+                    RecordingService.ACTION_RECORDING_STATUS_CHANGED);
             mIsReceiving = true;
             if (DEBUG) log(getKey() + ": registerRecrodingStatusReceiver");
         }
@@ -163,7 +162,7 @@ public class QuickRecordTile extends QsTile {
 
     private void unregisterRecordingStatusReceiver() {
         if (mIsReceiving) {
-            mContext.unregisterReceiver(mRecordingStatusReceiver);
+            SysUiManagers.BroadcastMediator.unsubscribe(mRecordingStatusReceiver);
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": unregisterRecrodingStatusReceiver");
         }

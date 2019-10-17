@@ -18,12 +18,11 @@ package com.ceco.pie.gravitybox.quicksettings;
 import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.GravityBoxResultReceiver;
 import com.ceco.pie.gravitybox.TorchService;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
+import com.ceco.pie.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Handler;
 
 public class TorchTile extends QsTile {
@@ -35,15 +34,12 @@ public class TorchTile extends QsTile {
     private boolean mIsReceiving;
     private GravityBoxResultReceiver mReceiver;
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(TorchService.ACTION_TORCH_STATUS_CHANGED) &&
-                    intent.hasExtra(TorchService.EXTRA_TORCH_STATUS)) {
-                mTorchStatus = intent.getIntExtra(TorchService.EXTRA_TORCH_STATUS,
-                        TorchService.TORCH_STATUS_OFF);
-                refreshState();
-            }
+    private BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (intent.getAction().equals(TorchService.ACTION_TORCH_STATUS_CHANGED) &&
+                intent.hasExtra(TorchService.EXTRA_TORCH_STATUS)) {
+            mTorchStatus = intent.getIntExtra(TorchService.EXTRA_TORCH_STATUS,
+                    TorchService.TORCH_STATUS_OFF);
+            refreshState();
         }
     };
 
@@ -64,9 +60,8 @@ public class TorchTile extends QsTile {
 
     private void registerReceiver() {
         if (!mIsReceiving) {
-            IntentFilter intentFilter = new IntentFilter(
+            SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
                     TorchService.ACTION_TORCH_STATUS_CHANGED);
-            mContext.registerReceiver(mBroadcastReceiver, intentFilter);
             mIsReceiving = true;
             if (DEBUG) log(getKey() + ": receiver registered");
         }
@@ -74,7 +69,7 @@ public class TorchTile extends QsTile {
 
     private void unregisterReceiver() {
         if (mIsReceiving) {
-            mContext.unregisterReceiver(mBroadcastReceiver);
+            SysUiManagers.BroadcastMediator.unsubscribe(mBroadcastReceiver);
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": unreceiver registered");
         }
