@@ -16,7 +16,7 @@ package com.ceco.pie.gravitybox;
 
 import com.ceco.pie.gravitybox.ledcontrol.QuietHours;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
-import com.ceco.pie.gravitybox.managers.StatusbarQuietHoursManager.QuietHoursListener;
+import com.ceco.pie.gravitybox.managers.SysUiStatusbarQuietHoursManager.QuietHoursListener;
 
 public class StatusbarQuietHoursIcon implements  QuietHoursListener {
 
