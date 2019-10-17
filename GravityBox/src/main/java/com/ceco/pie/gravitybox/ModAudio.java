@@ -17,11 +17,10 @@ package com.ceco.pie.gravitybox;
 
 import com.ceco.pie.gravitybox.ledcontrol.QuietHours;
 import com.ceco.pie.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
+import com.ceco.pie.gravitybox.managers.FrameworkManagers;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.AudioManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -50,31 +49,28 @@ public class ModAudio {
 
     public enum StreamLink { DEFAULT, LINKED, UNLINKED }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("Broadcast received: " + intent.toString());
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL)) {
-                    mVolForceRingControl = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL, false);
-                    if (DEBUG) log("Force ring volume control set to: " + mVolForceRingControl);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_LINKED)) {
-                    mRingNotifVolumesLinked = StreamLink.valueOf(
-                            intent.getStringExtra(GravityBoxSettings.EXTRA_VOL_LINKED));
-                    if (DEBUG) log("mRingNotifVolumesLinked set to: " + mRingNotifVolumesLinked);
-                    updateStreamVolumeAlias();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_RINGER_SYSTEM_LINKED)) {
-                    mRingSystemVolumesLinked = StreamLink.valueOf(
-                            intent.getStringExtra(GravityBoxSettings.EXTRA_VOL_RINGER_SYSTEM_LINKED));
-                    if (DEBUG) log("mRingSystemVolumesLinked set to: " + mRingSystemVolumesLinked);
-                    updateStreamVolumeAlias();
-                }
-            } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
-                mQh = new QuietHours(intent.getExtras());
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (DEBUG) log("Broadcast received: " + intent.toString());
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL)) {
+                mVolForceRingControl = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_VOL_FORCE_RING_CONTROL, false);
+                if (DEBUG) log("Force ring volume control set to: " + mVolForceRingControl);
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_LINKED)) {
+                mRingNotifVolumesLinked = StreamLink.valueOf(
+                        intent.getStringExtra(GravityBoxSettings.EXTRA_VOL_LINKED));
+                if (DEBUG) log("mRingNotifVolumesLinked set to: " + mRingNotifVolumesLinked);
+                updateStreamVolumeAlias();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_VOL_RINGER_SYSTEM_LINKED)) {
+                mRingSystemVolumesLinked = StreamLink.valueOf(
+                        intent.getStringExtra(GravityBoxSettings.EXTRA_VOL_RINGER_SYSTEM_LINKED));
+                if (DEBUG) log("mRingSystemVolumesLinked set to: " + mRingSystemVolumesLinked);
+                updateStreamVolumeAlias();
+            }
+        } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+            mQh = new QuietHours(intent.getExtras());
         }
     };
 
@@ -94,13 +90,10 @@ public class ModAudio {
                 protected void afterHookedMethod(MethodHookParam param) {
                     mAudioService = param.thisObject;
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    if (mContext != null) {
-                        IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED);
-                        intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
-                        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
-                        if (DEBUG) log("AudioService constructed. Broadcast receiver registered");
-                    }
+                    FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                            GravityBoxSettings.ACTION_PREF_MEDIA_CONTROL_CHANGED,
+                            QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
+                    if (DEBUG) log("AudioService constructed. Broadcast receiver registered");
                 }
             });
 

@@ -14,17 +14,22 @@
  */
 package com.ceco.pie.gravitybox;
 
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
 import android.view.WindowManager;
+
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
+import com.ceco.pie.gravitybox.managers.FrameworkManagers;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -90,33 +95,30 @@ public class ModExpandedDesktop {
         }
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("Broadcast received: " + intent.toString());
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)
-                    && intent.hasExtra(GravityBoxSettings.EXTRA_ED_MODE)) {
-                mExpandedDesktopMode = intent.getIntExtra(
-                        GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
-                updateSettings();
-            } else if (intent.getAction().equals(ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE)) {
-                updateSettings();
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
-                    mNavbarHeightScaleFactor = 
-                            (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT, 100) / 100f;
-                    updateNavbarDimensions(true);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT_LANDSCAPE)) {
-                    mNavbarHeightLandscapeScaleFactor = (float)intent.getIntExtra(
-                                    GravityBoxSettings.EXTRA_NAVBAR_HEIGHT_LANDSCAPE,  100) / 100f;
-                    updateNavbarDimensions(true);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH)) {
-                    mNavbarWidthScaleFactor = 
-                            (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100) / 100f;
-                    updateNavbarDimensions(true);
-                }
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (DEBUG) log("Broadcast received: " + intent.toString());
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)
+                && intent.hasExtra(GravityBoxSettings.EXTRA_ED_MODE)) {
+            mExpandedDesktopMode = intent.getIntExtra(
+                    GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
+            updateSettings();
+        } else if (intent.getAction().equals(ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE)) {
+            updateSettings();
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
+                mNavbarHeightScaleFactor =
+                        (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT, 100) / 100f;
+                updateNavbarDimensions(true);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT_LANDSCAPE)) {
+                mNavbarHeightLandscapeScaleFactor = (float)intent.getIntExtra(
+                                GravityBoxSettings.EXTRA_NAVBAR_HEIGHT_LANDSCAPE,  100) / 100f;
+                updateNavbarDimensions(true);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH)) {
+                mNavbarWidthScaleFactor =
+                        (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100) / 100f;
+                updateNavbarDimensions(true);
             }
         }
     };
@@ -230,13 +232,13 @@ public class ModExpandedDesktop {
                         mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                         mPhoneWindowManager = param.thisObject;
 
-                        IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
-                        intentFilter.addAction(ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE);
+                        List<String> actions = new ArrayList<>(Arrays.asList(
+                                GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED,
+                                ModStatusBar.ACTION_PHONE_STATUSBAR_VIEW_MADE));
                         if (mNavbarOverride) {
-                            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
+                            actions.add(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
                         }
-                        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+                        FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver, actions);
 
                         mSettingsObserver = new SettingsObserver(
                                 (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler"));

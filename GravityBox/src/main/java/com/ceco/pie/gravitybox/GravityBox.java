@@ -19,6 +19,7 @@ import java.io.File;
 
 import android.os.Build;
 
+import com.ceco.pie.gravitybox.managers.FrameworkManagers;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 import com.ceco.pie.gravitybox.managers.SysUiTunerManager;
 
@@ -120,6 +121,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage
         if (lpparam.packageName.equals("android") &&
                 lpparam.processName.equals("android")) {
             XposedBridge.log("GB:Is AOSP forced: " + Utils.isAospForced());
+            FrameworkManagers.initAndroid(lpparam.classLoader);
             ModVolumeKeySkipTrack.initAndroid(prefs, lpparam.classLoader);
             ModHwKeys.initAndroid(prefs, lpparam.classLoader);
             ModExpandedDesktop.initAndroid(prefs, lpparam.classLoader);

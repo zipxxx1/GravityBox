@@ -17,10 +17,8 @@ package com.ceco.pie.gravitybox;
 import java.util.HashSet;
 import java.util.Set;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
+import com.ceco.pie.gravitybox.managers.FrameworkManagers;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -40,16 +38,13 @@ public class ModFingerprint {
 
     private static Set<String> mImprintVibeDisable;
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_IMPRINT_VIBE_DISABLE)) {
-                mImprintVibeDisable = new HashSet<>(intent.getStringArrayListExtra(
-                        GravityBoxSettings.EXTRA_IMPRINT_VIBE_DISABLE));
-                if (DEBUG) log("mImprintVibeDisable=" + mImprintVibeDisable);
-            }
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        String action = intent.getAction();
+        if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_IMPRINT_VIBE_DISABLE)) {
+            mImprintVibeDisable = new HashSet<>(intent.getStringArrayListExtra(
+                    GravityBoxSettings.EXTRA_IMPRINT_VIBE_DISABLE));
+            if (DEBUG) log("mImprintVibeDisable=" + mImprintVibeDisable);
         }
     };
 
@@ -63,10 +58,8 @@ public class ModFingerprint {
                     CLASS_FINGERPRINT_SERVICE, classLoader), new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) {
-                    Context ctx = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
-                    ctx.registerReceiver(mBroadcastReceiver, intentFilter);
+                    FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                            GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
                     if (DEBUG) log("Fingerprint service created");
                 }
             });

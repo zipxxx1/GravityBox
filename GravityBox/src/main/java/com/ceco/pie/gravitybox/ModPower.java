@@ -17,13 +17,12 @@ package com.ceco.pie.gravitybox;
 
 import com.ceco.pie.gravitybox.ledcontrol.QuietHours;
 import com.ceco.pie.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
+import com.ceco.pie.gravitybox.managers.FrameworkManagers;
 import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager;
 
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -73,35 +72,32 @@ public class ModPower {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
-                    toggleWakeUpWithProximityFeature(intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL)) {
-                    mIgnoreIncomingCall = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL, false);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_ADVANCED)) {
-                    mAdvancedPowerMenuEnabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_POWER_ADVANCED, false);
-                }
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED) &&
-                    intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1) == 
-                        SysUiBatteryInfoManager.SOUND_PLUGGED) {
-                updateIsChargingSoundCustom(intent.getStringExtra(
-                        GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
-                    mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
-                            GravityBoxSettings.HWKEY_TORCH_DISABLED);
-                }
-            } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
-                mQh = new QuietHours(intent.getExtras());
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
+                toggleWakeUpWithProximityFeature(intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false));
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL)) {
+                mIgnoreIncomingCall = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_ADVANCED)) {
+                mAdvancedPowerMenuEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_POWER_ADVANCED, false);
+            }
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED) &&
+                intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1) ==
+                    SysUiBatteryInfoManager.SOUND_PLUGGED) {
+            updateIsChargingSoundCustom(intent.getStringExtra(
+                    GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
+                mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
+                        GravityBoxSettings.HWKEY_TORCH_DISABLED);
+            }
+        } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+            mQh = new QuietHours(intent.getExtras());
         }
     };
 
@@ -134,11 +130,11 @@ public class ModPower {
                     toggleWakeUpWithProximityFeature(prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false));
 
-                    IntentFilter intentFilter = new IntentFilter(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
-                    intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
-                    mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+                    FrameworkManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                            GravityBoxSettings.ACTION_PREF_POWER_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED,
+                            QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                 }
             });
 
