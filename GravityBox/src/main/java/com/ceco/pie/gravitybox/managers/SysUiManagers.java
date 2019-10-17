@@ -36,7 +36,7 @@ public class SysUiManagers {
     public static SysUiStatusbarQuietHoursManager QuietHoursManager;
     public static SysUiAppLauncher AppLauncher;
     public static SysUiKeyguardStateMonitor KeyguardMonitor;
-    public static FingerprintLauncher FingerprintLauncher;
+    public static SysUiFingerprintLauncher FingerprintLauncher;
     public static NotificationDataMonitor NotifDataMonitor;
     public static GpsStatusMonitor GpsMonitor;
     public static SubscriptionManager SubscriptionMgr;
@@ -87,7 +87,7 @@ public class SysUiManagers {
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FINGERPRINT_LAUNCHER_ENABLE, false)) {
             try {
-                FingerprintLauncher = new FingerprintLauncher(context, prefs);
+                FingerprintLauncher = new SysUiFingerprintLauncher(context, prefs);
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error creating FingerprintLauncher: ", t);
             }
