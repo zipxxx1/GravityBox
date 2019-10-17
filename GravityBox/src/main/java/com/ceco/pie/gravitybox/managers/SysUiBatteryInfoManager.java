@@ -66,6 +66,7 @@ public class SysUiBatteryInfoManager implements BroadcastMediator.Receiver {
         public int voltage;
         public boolean isPowerSaving;
         public boolean fastCharging;
+        public int status;
 
         public float getTempCelsius() {
             return ((float)temperature/10f);
@@ -94,6 +95,7 @@ public class SysUiBatteryInfoManager implements BroadcastMediator.Receiver {
             bd.voltage = this.voltage;
             bd.isPowerSaving = this.isPowerSaving;
             bd.fastCharging = this.fastCharging;
+            bd.status = this.status;
             return bd;
         }
 
@@ -103,7 +105,8 @@ public class SysUiBatteryInfoManager implements BroadcastMediator.Receiver {
                     "; temperature="+this.temperature+
                     "; voltage="+this.voltage+
                     "; isPowerSaving="+this.isPowerSaving+
-                    "; fastCharging="+this.fastCharging;
+                    "; fastCharging="+this.fastCharging+
+                    "; status="+this.status;
                     
         }
     }
@@ -178,12 +181,15 @@ public class SysUiBatteryInfoManager implements BroadcastMediator.Receiver {
         int newTemp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0);
         int newVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
         boolean newFastCharging = intent.getIntExtra(EXTRA_FAST_CHARGE, 0) != 0;
+        int newStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS,
+                BatteryManager.BATTERY_STATUS_UNKNOWN);
 
         if (mBatteryData.level != newLevel || mBatteryData.charging != newCharging ||
                 mBatteryData.powerSource != newPowerSource ||
                 mBatteryData.temperature != newTemp || 
                 mBatteryData.voltage != newVoltage ||
-                mBatteryData.fastCharging != newFastCharging) {
+                mBatteryData.fastCharging != newFastCharging ||
+                mBatteryData.status != newStatus) {
             if (newLevel == 100 && mBatteryData.level < 100 && mBatteryData.level > 0) {
                 playSound(SOUND_CHARGED);
             }
@@ -202,6 +208,7 @@ public class SysUiBatteryInfoManager implements BroadcastMediator.Receiver {
             mBatteryData.temperature = newTemp;
             mBatteryData.voltage = newVoltage;
             mBatteryData.fastCharging = newFastCharging;
+            mBatteryData.status = newStatus;
 
             notifyListeners();
         }
