@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.pie.gravitybox.R;
-import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.Utils;
 
@@ -33,7 +32,7 @@ import android.provider.Settings;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class SysUiGpsStatusMonitor implements BroadcastSubReceiver {
+public class SysUiGpsStatusMonitor implements BroadcastMediator.Receiver {
     public static final String TAG="GB:GpsStatusMonitor";
     private static boolean DEBUG = false;
 
@@ -86,6 +85,10 @@ public class SysUiGpsStatusMonitor implements BroadcastSubReceiver {
         mLocationMode = getLocationModeFromSettings();
         mGpsEnabled = (mLocationMode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY ||
                 mLocationMode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY);
+
+        SysUiManagers.BroadcastMediator.subscribe(this,
+                LocationManager.MODE_CHANGED_ACTION,
+                Intent.ACTION_LOCKED_BOOT_COMPLETED);
     }
 
     @Override

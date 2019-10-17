@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.pie.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 import com.ceco.pie.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.pie.gravitybox.shortcuts.AShortcut;
@@ -28,11 +29,9 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.app.Notification;
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Canvas;
@@ -148,7 +147,6 @@ public class ModStatusBar {
     private static int mInitialTouchY;
     private static int BRIGHTNESS_ON = 255;
 
-    private static List<BroadcastSubReceiver> mBroadcastSubReceivers = new ArrayList<>();
     private static List<StatusBarStateChangedListener> mStateChangeListeners =
             new ArrayList<>();
 
@@ -156,88 +154,85 @@ public class ModStatusBar {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (DEBUG) log("Broadcast received: " + intent.toString());
 
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("Broadcast received: " + intent.toString());
-
-            for (BroadcastSubReceiver bsr : mBroadcastSubReceivers) {
-                bsr.onBroadcastReceived(context, intent);
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_POSITION)) {
+                setClockPosition(intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_POSITION));
+                updateTrafficMeterPosition();
             }
-
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_POSITION)) {
-                    setClockPosition(intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_POSITION));
-                    updateTrafficMeterPosition();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_POSITION_HEADER)) {
-                    setClockPositionHeader(intent.getStringExtra(
-                            GravityBoxSettings.EXTRA_CLOCK_POSITION_HEADER));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK)) {
-                    QuickStatusBarHeader.setClockLongpressLink(
-                        intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK));
-                }
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_BRIGHTNESS)) {
-                    mBrightnessControlEnabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_SB_BRIGHTNESS, false);
-                    if (mSettingsObserver != null) {
-                        mSettingsObserver.update();
-                    }
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_DISABLE_PEEK)) {
-                    mDisablePeek = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_DISABLE_PEEK, false);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_DT2S)) {
-                    mDt2sEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_DT2S, false);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_MAX_NOTIF_ICONS)) {
-                    mMaxNotifIconsEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_MAX_NOTIF_ICONS, false);
-                }
-            } else if (intent.getAction().equals(
-                    GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_ONGOING_NOTIF)) {
-                    mOngoingNotif = intent.getStringExtra(GravityBoxSettings.EXTRA_ONGOING_NOTIF);
-                    if (DEBUG) log("mOngoingNotif = " + mOngoingNotif);
-                } else if (intent.hasExtra(GravityBoxSettings.EXTRA_ONGOING_NOTIF_RESET)) {
-                    mOngoingNotif = "";
-                    Settings.Secure.putString(mContext.getContentResolver(),
-                            SETTING_ONGOING_NOTIFICATIONS, "");
-                    if (DEBUG) log("Ongoing notifications list reset");
-                }
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_MODE)) {
-                    try {
-                        TrafficMeterMode mode = TrafficMeterMode.valueOf(
-                            intent.getStringExtra(GravityBoxSettings.EXTRA_DT_MODE));
-                        setTrafficMeterMode(mode);
-                    } catch (Throwable t) {
-                        GravityBox.log(TAG, t);
-                    }
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_POSITION)) {
-                    updateTrafficMeterPosition();
-                }
-            } else if (intent.getAction().equals(ACTION_START_SEARCH_ASSIST)) {
-                startSearchAssist();
-            } else if (intent.getAction().equals(ACTION_EXPAND_NOTIFICATIONS)) {
-                setNotificationPanelState(intent);
-            } else if (intent.getAction().equals(ACTION_EXPAND_QUICKSETTINGS)) {
-                setNotificationPanelState(intent, true);
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
-                mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_POWER_CAMERA_VP)) {
-                setCameraVibratePattern(intent.getStringExtra(GravityBoxSettings.EXTRA_POWER_CAMERA_VP));
-            } else if (intent.getAction().equals(
-                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
-                    GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS.equals(intent.getStringExtra(
-                            GravityBoxSettings.EXTRA_HWKEY_KEY))) {
-                mHomeLongpressAction = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_POSITION_HEADER)) {
+                setClockPositionHeader(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_CLOCK_POSITION_HEADER));
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK)) {
+                QuickStatusBarHeader.setClockLongpressLink(
+                    intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK));
+            }
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_BRIGHTNESS)) {
+                mBrightnessControlEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_SB_BRIGHTNESS, false);
+                if (mSettingsObserver != null) {
+                    mSettingsObserver.update();
+                }
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_DISABLE_PEEK)) {
+                mDisablePeek = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_DISABLE_PEEK, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_DT2S)) {
+                mDt2sEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_DT2S, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_MAX_NOTIF_ICONS)) {
+                mMaxNotifIconsEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_MAX_NOTIF_ICONS, false);
+            }
+        } else if (intent.getAction().equals(
+                GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_ONGOING_NOTIF)) {
+                mOngoingNotif = intent.getStringExtra(GravityBoxSettings.EXTRA_ONGOING_NOTIF);
+                if (DEBUG) log("mOngoingNotif = " + mOngoingNotif);
+            } else if (intent.hasExtra(GravityBoxSettings.EXTRA_ONGOING_NOTIF_RESET)) {
+                mOngoingNotif = "";
+                Settings.Secure.putString(mContext.getContentResolver(),
+                        SETTING_ONGOING_NOTIFICATIONS, "");
+                if (DEBUG) log("Ongoing notifications list reset");
+            }
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_MODE)) {
+                try {
+                    TrafficMeterMode mode = TrafficMeterMode.valueOf(
+                        intent.getStringExtra(GravityBoxSettings.EXTRA_DT_MODE));
+                    setTrafficMeterMode(mode);
+                } catch (Throwable t) {
+                    GravityBox.log(TAG, t);
+                }
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_POSITION)) {
+                if (mTrafficMeter != null) {
+                    mTrafficMeter.setTrafficMeterPosition(intent.getIntExtra(
+                            GravityBoxSettings.EXTRA_DT_POSITION,
+                            GravityBoxSettings.DT_POSITION_AUTO));
+                }
+                updateTrafficMeterPosition();
+            }
+        } else if (intent.getAction().equals(ACTION_START_SEARCH_ASSIST)) {
+            startSearchAssist();
+        } else if (intent.getAction().equals(ACTION_EXPAND_NOTIFICATIONS)) {
+            setNotificationPanelState(intent);
+        } else if (intent.getAction().equals(ACTION_EXPAND_QUICKSETTINGS)) {
+            setNotificationPanelState(intent, true);
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
+            mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_POWER_CAMERA_VP)) {
+            setCameraVibratePattern(intent.getStringExtra(GravityBoxSettings.EXTRA_POWER_CAMERA_VP));
+        } else if (intent.getAction().equals(
+                GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
+                GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS.equals(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_HWKEY_KEY))) {
+            mHomeLongpressAction = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
         }
     };
 
@@ -300,7 +295,6 @@ public class ModStatusBar {
                 if (clock != null) {
                     mClock = new StatusbarClock(mPrefs);
                     mClock.setClock((ViewGroup)clock.getParent(), mLeftArea, mRightArea, mLayoutCenter, clock);
-                    mBroadcastSubReceivers.add(mClock);
                 }
                 setClockPosition(mPrefs.getString(
                         GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_POSITION, "DEFAULT"));
@@ -320,7 +314,6 @@ public class ModStatusBar {
             // destroy clock
             if (mClock != null) {
                 setClockPosition(StatusbarClock.ClockPosition.DEFAULT);
-                mBroadcastSubReceivers.remove(mClock);
                 mClock.destroy();
                 mClock = null;
                 if (DEBUG) log("destroyLayoutStatusBar: Clock destroyed");
@@ -407,13 +400,11 @@ public class ModStatusBar {
                         containerType, container, mPrefs);
                 if (containerType == ContainerType.STATUSBAR) {
                     if (mBatteryStyleCtrlSb != null) {
-                        mBroadcastSubReceivers.remove(mBatteryStyleCtrlSb);
                         mBatteryStyleCtrlSb.destroy();
                         if (DEBUG) log("prepareBatteryStyle: old BatteryStyleController destroyed");
                     }
                     mBatteryStyleCtrlSb = bsc;
                 }
-                mBroadcastSubReceivers.add(bsc);
             }
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
@@ -425,12 +416,10 @@ public class ModStatusBar {
             BatteryStyleController bsc = new BatteryStyleController(
                     ContainerType.HEADER, container, "quick_status_bar_system_icons", mPrefs);
             if (mBatteryStyleCtrlSbHeader != null) {
-                mBroadcastSubReceivers.remove(mBatteryStyleCtrlSbHeader);
                 mBatteryStyleCtrlSbHeader.destroy();
                 if (DEBUG) log("prepareBatteryStyleHeader: old BatteryStyleController destroyed");
             }
             mBatteryStyleCtrlSbHeader = bsc;
-            mBroadcastSubReceivers.add(bsc);
             if (DEBUG) log("prepareBatteryStyleHeader: BatteryStyleController crated");
         } catch (Throwable t) {
             GravityBox.log(TAG, t);
@@ -454,7 +443,6 @@ public class ModStatusBar {
                 BatteryBarView bbView = new BatteryBarView(containerType, container, mPrefs);
                 if (containerType == ContainerType.STATUSBAR) {
                     if (mBatteryBarViewSb != null) {
-                        mBroadcastSubReceivers.remove(mBatteryBarViewSb);
                         mProgressBarCtrl.unregisterListener(mBatteryBarViewSb);
                         mStateChangeListeners.remove(mBatteryBarViewSb);
                         mBatteryBarViewSb.destroy();
@@ -462,7 +450,6 @@ public class ModStatusBar {
                     }
                     mBatteryBarViewSb = bbView;
                 }
-                mBroadcastSubReceivers.add(bbView);
                 mProgressBarCtrl.registerListener(bbView);
                 mStateChangeListeners.add(bbView);
             }
@@ -545,7 +532,6 @@ public class ModStatusBar {
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ENABLE, false)) {
                 mVisualizerCtrl = new VisualizerController(classLoader, prefs);
                 mStateChangeListeners.add(mVisualizerCtrl);
-                mBroadcastSubReceivers.add(mVisualizerCtrl);
             }
 
             QuickStatusBarHeader.setClockLongpressLink(prefs.getString(
@@ -572,7 +558,6 @@ public class ModStatusBar {
                     mStatusBar = param.thisObject;
                     mContext = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
                     mProgressBarCtrl = new ProgressBarController(mContext, mPrefs);
-                    mBroadcastSubReceivers.add(mProgressBarCtrl);
                     QuickStatusBarHeader.setStatusBar(mStatusBar);
 
                     if (SysUiManagers.AppLauncher != null) {
@@ -588,35 +573,17 @@ public class ModStatusBar {
                     prepareBrightnessControl();
                     prepareGestureDetector();
 
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
-                    intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
-                    intentFilter.addAction(ACTION_EXPAND_NOTIFICATIONS);
-                    intentFilter.addAction(ACTION_EXPAND_QUICKSETTINGS);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SYSTEM_ICON_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_BAR_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
-                    intentFilter.addAction(Intent.ACTION_SCREEN_ON);
-                    intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
-                    intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
-                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VISUALIZER_ENABLE, false)) {
-                        intentFilter.addAction(GravityBoxSettings.ACTION_VISUALIZER_SETTINGS_CHANGED);
-                    }
-                    intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
-                    intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-
-                    mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+                    SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                            GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED,
+                            ACTION_START_SEARCH_ASSIST,
+                            ACTION_EXPAND_NOTIFICATIONS,
+                            ACTION_EXPAND_QUICKSETTINGS,
+                            GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_POWER_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
 
                     mSettingsObserver = new SettingsObserver(
                             (Handler) XposedHelpers.getObjectField(mStatusBar, "mHandler"));
@@ -798,7 +765,6 @@ public class ModStatusBar {
 
             // Status bar system icon policy
             mSystemIconController = new SystemIconController(classLoader, prefs);
-            mBroadcastSubReceivers.add(mSystemIconController);
 
             // status bar state change handling
             try {
@@ -1208,7 +1174,7 @@ public class ModStatusBar {
 
         removeTrafficMeterView();
         if (mTrafficMeter != null) {
-            mBroadcastSubReceivers.remove(mTrafficMeter);
+            SysUiManagers.BroadcastMediator.unsubscribe(mTrafficMeter);
             if (SysUiManagers.IconManager != null) {
                 SysUiManagers.IconManager.unregisterListener(mTrafficMeter);
             }
@@ -1228,7 +1194,9 @@ public class ModStatusBar {
             if (mProgressBarCtrl != null) {
                 mProgressBarCtrl.registerListener(mTrafficMeter);
             }
-            mBroadcastSubReceivers.add(mTrafficMeter);
+            SysUiManagers.BroadcastMediator.subscribe(mTrafficMeter,
+                    GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED,
+                    Intent.ACTION_SCREEN_ON);
         }
     }
 

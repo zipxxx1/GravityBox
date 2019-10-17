@@ -25,7 +25,6 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 import com.ceco.pie.gravitybox.R;
-import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.Utils;
@@ -48,7 +47,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 @SuppressWarnings("deprecation")
-public class SysUiFingerprintLauncher implements BroadcastSubReceiver {
+public class SysUiFingerprintLauncher implements BroadcastMediator.Receiver {
     private static final String TAG = "GB:FingerprintLauncher";
     private static final boolean DEBUG = false;
     private static final String KEY_NAME = "gravitybox.fingeprint.launcher";
@@ -82,6 +81,11 @@ public class SysUiFingerprintLauncher implements BroadcastSubReceiver {
 
         initFingerprintManager();
         initFingerAppMap(prefs);
+
+        SysUiManagers.BroadcastMediator.subscribe(this,
+                Intent.ACTION_SCREEN_OFF,
+                Intent.ACTION_USER_PRESENT,
+                GravityBoxSettings.ACTION_FPL_SETTINGS_CHANGED);
     }
 
     @SuppressLint("MissingPermission")

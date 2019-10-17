@@ -36,11 +36,15 @@ import android.os.Parcelable;
 import android.os.PowerManager;
 import android.service.notification.StatusBarNotification;
 import android.widget.RemoteViews;
+
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
+import com.ceco.pie.gravitybox.managers.SysUiManagers;
+
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class ProgressBarController implements BroadcastSubReceiver {
+public class ProgressBarController implements BroadcastMediator.Receiver {
     private static final String TAG = "GB:ProgressBarController";
     private static final boolean DEBUG = false;
 
@@ -134,6 +138,9 @@ public class ProgressBarController implements BroadcastSubReceiver {
 
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mHandler = new Handler();
+
+        SysUiManagers.BroadcastMediator.subscribe(this,
+                GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
     }
 
     public void registerListener(ProgressStateListener listener) {

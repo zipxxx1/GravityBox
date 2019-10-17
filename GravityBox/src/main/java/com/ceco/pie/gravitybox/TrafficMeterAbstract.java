@@ -23,6 +23,7 @@ import java.io.IOException;
 
 import com.ceco.pie.gravitybox.ProgressBarController.Mode;
 import com.ceco.pie.gravitybox.ProgressBarController.ProgressInfo;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
 import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager;
 import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager.ColorInfo;
 import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager.IconManagerListener;
@@ -48,7 +49,7 @@ import de.robv.android.xposed.XposedBridge;
 
 @SuppressLint("AppCompatCustomView")
 public abstract class TrafficMeterAbstract extends TextView
-                        implements BroadcastSubReceiver, IconManagerListener,
+                        implements BroadcastMediator.Receiver, IconManagerListener,
                                    ProgressBarController.ProgressStateListener {
     protected static final String PACKAGE_NAME = "com.android.systemui";
     protected static final String TAG = "GB:NetworkTraffic";
@@ -216,6 +217,10 @@ public abstract class TrafficMeterAbstract extends TextView
         return mPosition;
     }
 
+    public void setTrafficMeterPosition(int position) {
+        mPosition = position;
+    }
+
     public boolean isAllowedInLockscreen() {
         return mAllowInLockscreen;
     }
@@ -238,8 +243,7 @@ public abstract class TrafficMeterAbstract extends TextView
                 return;
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_POSITION)) {
-                mPosition = intent.getIntExtra(GravityBoxSettings.EXTRA_DT_POSITION,
-                        GravityBoxSettings.DT_POSITION_AUTO);
+                return;
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_SIZE)) {
                 mSize = intent.getIntExtra(GravityBoxSettings.EXTRA_DT_SIZE, 14);

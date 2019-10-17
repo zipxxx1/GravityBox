@@ -17,7 +17,6 @@ package com.ceco.pie.gravitybox.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxService;
 import com.ceco.pie.gravitybox.Utils;
@@ -28,7 +27,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import android.content.Context;
 import android.content.Intent;
 
-public class SysUiStatusbarQuietHoursManager implements BroadcastSubReceiver {
+public class SysUiStatusbarQuietHoursManager implements BroadcastMediator.Receiver {
     private static final String TAG = "GB:StatusbarQuietHoursManager";
     private static final Object lock = new Object();
     private static SysUiStatusbarQuietHoursManager sManager;
@@ -55,6 +54,12 @@ public class SysUiStatusbarQuietHoursManager implements BroadcastSubReceiver {
         mContext = context;
         mQuietHours = new QuietHours(qhPrefs);
         mListeners = new ArrayList<>();
+
+        SysUiManagers.BroadcastMediator.subscribe(this,
+                Intent.ACTION_TIME_TICK,
+                Intent.ACTION_TIME_CHANGED,
+                Intent.ACTION_TIMEZONE_CHANGED,
+                QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
     }
 
     @Override

@@ -16,10 +16,7 @@ package com.ceco.pie.gravitybox;
 
 import java.io.File;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -43,6 +40,10 @@ import android.widget.Space;
 import android.widget.ImageView.ScaleType;
 
 import androidx.core.widget.ImageViewCompat;
+
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
+import com.ceco.pie.gravitybox.managers.SysUiManagers;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -153,91 +154,88 @@ public class ModNavigationBar {
         }
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("Broadcast received: " + intent.toString());
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_MENUKEY)) {
-                    mAlwaysShowMenukey = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_MENUKEY, false);
-                    if (DEBUG) log("mAlwaysShowMenukey = " + mAlwaysShowMenukey);
-                    setMenuKeyVisibility();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ENABLE)) {
-                    mCustomKeyEnabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ENABLE, false);
-                    setCustomKeyVisibility();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_KEY_COLOR)) {
-                    mKeyColor = intent.getIntExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_KEY_COLOR, mKeyDefaultColor);
-                    setKeyColor();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_KEY_GLOW_COLOR)) {
-                    mKeyGlowColor = intent.getIntExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_KEY_GLOW_COLOR, mKeyDefaultGlowColor);
-                    setKeyColor();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_COLOR_ENABLE)) {
-                    mNavbarColorsEnabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_COLOR_ENABLE, false);
-                    setKeyColor();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CURSOR_CONTROL)) {
-                    mCursorControlEnabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_CURSOR_CONTROL, false);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_SWAP)) {
-                    mCustomKeySwapEnabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_SWAP, false);
-                    setCustomKeyVisibility();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON_STYLE)) {
-                    mCustomKeyIconStyle = CustomKeyIconStyle.valueOf(intent.getStringExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON_STYLE));
-                    updateCustomKeyIcon();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HIDE_IME)) {
-                    mHideImeSwitcher = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_HIDE_IME, false);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
-                    mNavbarHeight = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT, 100);
-                    updateIconScaleType();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH)) {
-                    mNavbarWidth = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100);
-                    updateIconScaleType();
-                }
-            } else if (intent.getAction().equals(
-                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
-                    GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP.equals(intent.getStringExtra(
-                            GravityBoxSettings.EXTRA_HWKEY_KEY))) {
-                mRecentsSingletapAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
-                mRecentsSingletapAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
-                updateRecentsKeyCode();
-            } else if (intent.getAction().equals(
-                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
-                    GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS.equals(intent.getStringExtra(
-                            GravityBoxSettings.EXTRA_HWKEY_KEY))) {
-                mRecentsLongpressAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
-                mRecentsLongpressAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
-                updateRecentsKeyCode();
-            } else if (intent.getAction().equals(
-                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
-                    GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP.equals(intent.getStringExtra(
-                            GravityBoxSettings.EXTRA_HWKEY_KEY))) {
-                mRecentsDoubletapAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
-                mRecentsDoubletapAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
-                updateRecentsKeyCode();
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE)) {
-                mHwKeysEnabled = !intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE, false);
-                updateRecentsKeyCode();
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_SWAP_KEYS)) {
-                swapBackAndRecents();
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        if (DEBUG) log("Broadcast received: " + intent.toString());
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_MENUKEY)) {
+                mAlwaysShowMenukey = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_NAVBAR_MENUKEY, false);
+                if (DEBUG) log("mAlwaysShowMenukey = " + mAlwaysShowMenukey);
+                setMenuKeyVisibility();
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ENABLE)) {
+                mCustomKeyEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ENABLE, false);
+                setCustomKeyVisibility();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_KEY_COLOR)) {
+                mKeyColor = intent.getIntExtra(
+                        GravityBoxSettings.EXTRA_NAVBAR_KEY_COLOR, mKeyDefaultColor);
+                setKeyColor();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_KEY_GLOW_COLOR)) {
+                mKeyGlowColor = intent.getIntExtra(
+                        GravityBoxSettings.EXTRA_NAVBAR_KEY_GLOW_COLOR, mKeyDefaultGlowColor);
+                setKeyColor();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_COLOR_ENABLE)) {
+                mNavbarColorsEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_NAVBAR_COLOR_ENABLE, false);
+                setKeyColor();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CURSOR_CONTROL)) {
+                mCursorControlEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_NAVBAR_CURSOR_CONTROL, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_SWAP)) {
+                mCustomKeySwapEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_SWAP, false);
+                setCustomKeyVisibility();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON_STYLE)) {
+                mCustomKeyIconStyle = CustomKeyIconStyle.valueOf(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON_STYLE));
+                updateCustomKeyIcon();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HIDE_IME)) {
+                mHideImeSwitcher = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_NAVBAR_HIDE_IME, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
+                mNavbarHeight = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT, 100);
+                updateIconScaleType();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH)) {
+                mNavbarWidth = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100);
+                updateIconScaleType();
+            }
+        } else if (intent.getAction().equals(
+                GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
+                GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP.equals(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_HWKEY_KEY))) {
+            mRecentsSingletapAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
+            mRecentsSingletapAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
+            updateRecentsKeyCode();
+        } else if (intent.getAction().equals(
+                GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
+                GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS.equals(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_HWKEY_KEY))) {
+            mRecentsLongpressAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
+            mRecentsLongpressAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
+            updateRecentsKeyCode();
+        } else if (intent.getAction().equals(
+                GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
+                GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP.equals(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_HWKEY_KEY))) {
+            mRecentsDoubletapAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
+            mRecentsDoubletapAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
+            updateRecentsKeyCode();
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE)) {
+            mHwKeysEnabled = !intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE, false);
+            updateRecentsKeyCode();
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_SWAP_KEYS)) {
+            swapBackAndRecents();
         }
     };
 
@@ -300,12 +298,11 @@ public class ModNavigationBar {
                             GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE, "SIX_DOT"));
 
                     mNavigationBarView = (View) param.thisObject;
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_PIE_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_SWAP_KEYS);
-                    context.registerReceiver(mBroadcastReceiver, intentFilter);
+                    SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                            GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_PIE_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_NAVBAR_SWAP_KEYS);
                     if (DEBUG) log("NavigationBarView constructed; Broadcast receiver registered");
                 }
             });

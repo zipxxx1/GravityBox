@@ -17,12 +17,12 @@ package com.ceco.pie.gravitybox.visualizer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.ModLockscreen;
 import com.ceco.pie.gravitybox.ModStatusBar;
 import com.ceco.pie.gravitybox.ModStatusBar.StatusBarStateChangedListener;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
 import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
@@ -47,7 +47,7 @@ import de.robv.android.xposed.XposedHelpers;
 
 public class VisualizerController implements StatusBarStateChangedListener,
                                              SysUiBatteryInfoManager.BatteryStatusListener,
-                                             BroadcastSubReceiver,
+                                             BroadcastMediator.Receiver,
                                              Palette.PaletteAsyncListener,
                                              Visualizer.OnDataCaptureListener {
     private static final String TAG = "GB:VisualizerController";
@@ -149,6 +149,11 @@ public class VisualizerController implements StatusBarStateChangedListener,
         mDefaultColor = prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_COLOR, Color.WHITE);
         mOpacity = Math.round(255f * ((float)prefs.getInt(GravityBoxSettings.PREF_KEY_VISUALIZER_OPACITY, 50)/100f));
         mCurrentColor = mDynamicColorEnabled ? Color.TRANSPARENT : mDefaultColor;
+
+        SysUiManagers.BroadcastMediator.subscribe(this,
+                Intent.ACTION_SCREEN_ON,
+                Intent.ACTION_SCREEN_OFF,
+                GravityBoxSettings.ACTION_VISUALIZER_SETTINGS_CHANGED);
 
         createHooks(cl);
     }

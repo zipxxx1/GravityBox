@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.provider.Settings;
 
-import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.ResourceProxy;
 import com.ceco.pie.gravitybox.tuner.TuneableItem;
@@ -39,7 +38,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class SysUiTunerManager implements BroadcastSubReceiver {
+public class SysUiTunerManager implements BroadcastMediator.Receiver {
     public static final String TAG="GB:TunerManager";
     private static boolean DEBUG = false;
 
@@ -62,6 +61,10 @@ public class SysUiTunerManager implements BroadcastSubReceiver {
         mContext = context;
 
         updateTrialCountdown();
+
+        SysUiManagers.BroadcastMediator.subscribe(this,
+                ACTION_GET_TUNEABLES);
+
         if (DEBUG) log("created");
     }
 

@@ -19,6 +19,7 @@ import java.io.File;
 
 import android.os.Build;
 
+import com.ceco.pie.gravitybox.managers.SysUiManagers;
 import com.ceco.pie.gravitybox.managers.SysUiTunerManager;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -141,6 +142,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage
             qhPrefs.reload();
             uncPrefs.reload();
             tunerPrefs.reload();
+            SysUiManagers.init();
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {

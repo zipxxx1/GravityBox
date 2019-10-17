@@ -19,12 +19,10 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 
-import com.ceco.pie.gravitybox.BroadcastSubReceiver;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class SysUiConfigChangeMonitor implements BroadcastSubReceiver {
+public class SysUiConfigChangeMonitor implements BroadcastMediator.Receiver {
 
     public interface ConfigChangeListener {
         void onDensityDpiChanged(Configuration config);
@@ -38,6 +36,9 @@ public class SysUiConfigChangeMonitor implements BroadcastSubReceiver {
         mContext = context;
         mConfiguration = new Configuration();
         mConfiguration.setTo(mContext.getResources().getConfiguration());
+
+        SysUiManagers.BroadcastMediator.subscribe(this,
+                Intent.ACTION_CONFIGURATION_CHANGED);
     }
 
     private void onConfigurationChanged(Configuration config) {

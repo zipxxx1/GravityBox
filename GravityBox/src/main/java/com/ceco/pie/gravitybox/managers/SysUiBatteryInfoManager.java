@@ -17,7 +17,6 @@ package com.ceco.pie.gravitybox.managers;
 
 import java.util.ArrayList;
 
-import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.Utils;
@@ -37,7 +36,7 @@ import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 
-public class SysUiBatteryInfoManager implements BroadcastSubReceiver {
+public class SysUiBatteryInfoManager implements BroadcastMediator.Receiver {
     private static final String TAG = "GB:BatteryInfoManager";
     private BatteryData mBatteryData;
     private final ArrayList<BatteryStatusListener> mListeners = new ArrayList<>();
@@ -134,6 +133,13 @@ public class SysUiBatteryInfoManager implements BroadcastSubReceiver {
         } catch (Throwable t) {
             mLowBatteryWarningPolicy = LowBatteryWarningPolicy.DEFAULT;
         }
+
+        SysUiManagers.BroadcastMediator.subscribe(this,
+                Intent.ACTION_BATTERY_CHANGED,
+                ACTION_POWER_SAVE_MODE_CHANGING,
+                GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED,
+                GravityBoxSettings.ACTION_PREF_LOW_BATTERY_WARNING_POLICY_CHANGED,
+                QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
     }
 
     public void registerListener(BatteryStatusListener listener) {

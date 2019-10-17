@@ -32,6 +32,8 @@ import com.ceco.pie.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.pie.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.pie.gravitybox.ledcontrol.LedSettings.Visibility;
 import com.ceco.pie.gravitybox.ledcontrol.LedSettings.VisibilityLs;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
+import com.ceco.pie.gravitybox.managers.SysUiManagers;
 
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
@@ -753,12 +755,9 @@ public class ModLedControl {
     private static XSharedPreferences mSysUiPrefs;
     private static XSharedPreferences mSysUiUncPrefs;
 
-    private static BroadcastReceiver mSystemUiBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_HEADS_UP_SETTINGS_CHANGED)) {
-                mSysUiPrefs.reload();
-            }
+    private static BroadcastMediator.Receiver mSystemUiBroadcastReceiver = (context, intent) -> {
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_HEADS_UP_SETTINGS_CHANGED)) {
+            mSysUiPrefs.reload();
         }
     };
 
@@ -815,10 +814,8 @@ public class ModLedControl {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) {
                     mStatusBar = param.thisObject;
-                    Context context = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(GravityBoxSettings.ACTION_HEADS_UP_SETTINGS_CHANGED);
-                    context.registerReceiver(mSystemUiBroadcastReceiver, intentFilter);
+                    SysUiManagers.BroadcastMediator.subscribe(mSystemUiBroadcastReceiver,
+                            GravityBoxSettings.ACTION_HEADS_UP_SETTINGS_CHANGED);
                 }
             });
 

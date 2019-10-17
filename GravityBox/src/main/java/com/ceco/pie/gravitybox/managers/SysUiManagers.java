@@ -19,14 +19,9 @@ import de.robv.android.xposed.XSharedPreferences;
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.PhoneWrapper;
-import com.ceco.pie.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.pie.gravitybox.tuner.TunerMainActivity;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.location.LocationManager;
 
 public class SysUiManagers {
     private static final String TAG = "GB:SysUiManagers";
@@ -43,12 +38,19 @@ public class SysUiManagers {
     public static SysUiTunerManager TunerMgr;
     public static SysUiPackageManager PackageMgr;
     public static SysUiConfigChangeMonitor ConfigChangeMonitor;
+    public static BroadcastMediator BroadcastMediator;
 
-    public static void init(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs, XSharedPreferences tunerPrefs) {
+    public static void init() {
+        BroadcastMediator = new BroadcastMediator();
+    }
+
+    public static void initContext(Context context, XSharedPreferences prefs, XSharedPreferences qhPrefs, XSharedPreferences tunerPrefs) {
         if (context == null)
             throw new IllegalArgumentException("Context cannot be null");
         if (prefs == null)
             throw new IllegalArgumentException("Prefs cannot be null");
+
+        BroadcastMediator.setContext(context);
 
         try {
             ConfigChangeMonitor = new SysUiConfigChangeMonitor(context);
@@ -129,58 +131,6 @@ public class SysUiManagers {
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error creating PackageManager: ", t);
         }
-
-        IntentFilter intentFilter = new IntentFilter();
-
-        // Configuration change monitor
-        intentFilter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
-
-        // battery info manager
-        intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED);
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOW_BATTERY_WARNING_POLICY_CHANGED);
-        intentFilter.addAction(SysUiBatteryInfoManager.ACTION_POWER_SAVE_MODE_CHANGING);
-
-        // quiet hours manager
-        intentFilter.addAction(Intent.ACTION_TIME_TICK);
-        intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
-        intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-        intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
-
-        // AppLauncher
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED);
-        intentFilter.addAction(SysUiAppLauncher.ACTION_SHOW_APP_LAUCNHER);
-
-        // KeyguardStateMonitor
-        intentFilter.addAction(Intent.ACTION_SCREEN_ON);
-        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
-        intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
-
-        // FingerprintLauncher
-        if (FingerprintLauncher != null) {
-            intentFilter.addAction(Intent.ACTION_USER_PRESENT);
-            intentFilter.addAction(GravityBoxSettings.ACTION_FPL_SETTINGS_CHANGED);
-        }
-
-        // GpsStatusMonitor
-        if (GpsMonitor != null) {
-            intentFilter.addAction(LocationManager.MODE_CHANGED_ACTION);
-            intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
-        }
-
-        // SubscriptionManager
-        if (SubscriptionMgr != null) {
-            intentFilter.addAction(SysUiSubscriptionManager.ACTION_CHANGE_DEFAULT_SIM_SLOT);
-            intentFilter.addAction(SysUiSubscriptionManager.ACTION_GET_DEFAULT_SIM_SLOT);
-        }
-
-        // TunerManager
-        if (TunerMgr != null) {
-            intentFilter.addAction(SysUiTunerManager.ACTION_GET_TUNEABLES);
-        }
-
-        context.registerReceiver(sBroadcastReceiver, intentFilter);
     }
 
     public static void createKeyguardMonitor(Context ctx, XSharedPreferences prefs) {
@@ -191,37 +141,4 @@ public class SysUiManagers {
             GravityBox.log(TAG, "Error creating KeyguardMonitor: ", t);
         }
     }
-
-    private static BroadcastReceiver sBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (ConfigChangeMonitor != null) {
-                ConfigChangeMonitor.onBroadcastReceived(context, intent);
-            }
-            if (BatteryInfoManager != null) {
-                BatteryInfoManager.onBroadcastReceived(context, intent);
-            }
-            if (QuietHoursManager != null) {
-                QuietHoursManager.onBroadcastReceived(context, intent);
-            }
-            if (AppLauncher != null) {
-                AppLauncher.onBroadcastReceived(context, intent);
-            }
-            if (KeyguardMonitor != null) {
-                KeyguardMonitor.onBroadcastReceived(context, intent);
-            }
-            if (FingerprintLauncher != null) {
-                FingerprintLauncher.onBroadcastReceived(context, intent);
-            }
-            if (GpsMonitor != null) {
-                GpsMonitor.onBroadcastReceived(context, intent);
-            }
-            if (SubscriptionMgr != null) {
-                SubscriptionMgr.onBroadcastReceived(context, intent);
-            }
-            if (TunerMgr != null) {
-                TunerMgr.onBroadcastReceived(context, intent);
-            }
-        }
-    };
 }

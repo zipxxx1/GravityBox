@@ -22,14 +22,13 @@ import java.util.Set;
 import com.ceco.pie.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.pie.gravitybox.ledcontrol.QuietHours;
 import com.ceco.pie.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
 import com.ceco.pie.gravitybox.managers.SysUiAppLauncher;
 import com.ceco.pie.gravitybox.managers.SysUiKeyguardStateMonitor;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -113,46 +112,43 @@ public class ModLockscreen {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED)
-                 || action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED)) {
-                mPrefs.reload();
-                prepareCustomBackground(true);
-                prepareBottomActions();
-                if (DEBUG) log("Settings reloaded");
-            } else if (action.equals(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED)) {
-                if (DEBUG_KIS) log("ACTION_KEYGUARD_IMAGE_UPDATED received");
-                setLastScreenBackground(true);
-            } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
-                mQuietHours = new QuietHours(intent.getExtras());
-                if (DEBUG) log("QuietHours settings reloaded");
-            } else if (action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED)) {
-                if (mAppBar != null) {
-                    if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_SLOT)) {
-                        mAppBar.updateAppSlot(intent.getIntExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_SLOT, 0),
-                            intent.getStringExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_VALUE));
-                    }
-                    if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SAFE_LAUNCH)) {
-                        mAppBar.setSafeLaunchEnabled(intent.getBooleanExtra(
-                                GravityBoxSettings.EXTRA_LS_SAFE_LAUNCH, false));
-                    }
-                    if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SHOW_BADGES)) {
-                        mAppBar.setShowBadges(intent.getBooleanExtra(
-                                GravityBoxSettings.EXTRA_LS_SHOW_BADGES, false));
-                    }
-                    if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SCALE)) {
-                        mAppBar.setScale(intent.getIntExtra(GravityBoxSettings.EXTRA_LS_SCALE, 0));
-                    }
+    private static BroadcastMediator.Receiver mBroadcastReceiver = (context, intent) -> {
+        String action = intent.getAction();
+        if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED)
+             || action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED)) {
+            mPrefs.reload();
+            prepareCustomBackground(true);
+            prepareBottomActions();
+            if (DEBUG) log("Settings reloaded");
+        } else if (action.equals(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED)) {
+            if (DEBUG_KIS) log("ACTION_KEYGUARD_IMAGE_UPDATED received");
+            setLastScreenBackground(true);
+        } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+            mQuietHours = new QuietHours(intent.getExtras());
+            if (DEBUG) log("QuietHours settings reloaded");
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED)) {
+            if (mAppBar != null) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_SLOT)) {
+                    mAppBar.updateAppSlot(intent.getIntExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_SLOT, 0),
+                        intent.getStringExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_VALUE));
                 }
-            } else if (action.equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)
-                        || action.equals(Intent.ACTION_USER_UNLOCKED)) {
-                if (mAppBar != null)
-                    mAppBar.initAppSlots();
-                prepareBottomActions();
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SAFE_LAUNCH)) {
+                    mAppBar.setSafeLaunchEnabled(intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_LS_SAFE_LAUNCH, false));
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SHOW_BADGES)) {
+                    mAppBar.setShowBadges(intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_LS_SHOW_BADGES, false));
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SCALE)) {
+                    mAppBar.setScale(intent.getIntExtra(GravityBoxSettings.EXTRA_LS_SCALE, 0));
+                }
             }
+        } else if (action.equals(Intent.ACTION_LOCKED_BOOT_COMPLETED)
+                    || action.equals(Intent.ACTION_USER_UNLOCKED)) {
+            if (mAppBar != null)
+                mAppBar.initAppSlots();
+            prepareBottomActions();
         }
     };
 
@@ -200,22 +196,16 @@ public class ModLockscreen {
                         });
                     }
 
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
-                    intentFilter.addAction(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED);
-                    intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
+                    SysUiManagers.BroadcastMediator.subscribe(mBroadcastReceiver,
+                            GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED,
+                            KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED,
+                            QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED,
+                            GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED,
+                            !Utils.isUserUnlocked(mContext) ?
+                                    Intent.ACTION_USER_UNLOCKED :
+                                    Intent.ACTION_LOCKED_BOOT_COMPLETED);
 
-                    if (!Utils.isUserUnlocked(mContext)) {
-                        if (DEBUG) log("File-based encryption enabled device. Using ACTION_USER_UNLOCKED intent to init appbar.");
-                        intentFilter.addAction(Intent.ACTION_USER_UNLOCKED);
-                    }
-                    else {
-                        intentFilter.addAction(Intent.ACTION_LOCKED_BOOT_COMPLETED);
-                    }
-
-                    mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("Keyguard mediator constructed");
                 }
             });

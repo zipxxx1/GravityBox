@@ -24,6 +24,7 @@ import com.ceco.pie.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.pie.gravitybox.ModStatusBar.StatusBarStateChangedListener;
 import com.ceco.pie.gravitybox.ProgressBarController.Mode;
 import com.ceco.pie.gravitybox.ProgressBarController.ProgressInfo;
+import com.ceco.pie.gravitybox.managers.BroadcastMediator;
 import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
@@ -49,7 +50,7 @@ import android.widget.RelativeLayout;
 
 @SuppressLint("ViewConstructor")
 public class BatteryBarView extends View implements IconManagerListener,
-                                                    BroadcastSubReceiver,
+                                                    BroadcastMediator.Receiver,
                                                     BatteryStatusListener,
                                                     ProgressBarController.ProgressStateListener,
                                                     StatusBarStateChangedListener {
@@ -117,10 +118,14 @@ public class BatteryBarView extends View implements IconManagerListener,
         setScaleX(0f);
         updatePosition();
         update();
+
+        SysUiManagers.BroadcastMediator.subscribe(this,
+                GravityBoxSettings.ACTION_PREF_BATTERY_BAR_CHANGED);
     }
 
     public void destroy() {
         stopAnimation();
+        SysUiManagers.BroadcastMediator.unsubscribe(this);
         mContainer.removeView(this);
         mContainer = null;
     }

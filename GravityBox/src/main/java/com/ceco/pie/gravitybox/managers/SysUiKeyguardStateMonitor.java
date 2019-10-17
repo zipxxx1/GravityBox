@@ -17,7 +17,6 @@ package com.ceco.pie.gravitybox.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.ModPower;
@@ -34,7 +33,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 
-public class SysUiKeyguardStateMonitor implements BroadcastSubReceiver {
+public class SysUiKeyguardStateMonitor implements BroadcastMediator.Receiver {
     public static final String TAG="GB:KeyguardStateMonitor";
     public static final String CLASS_KG_MONITOR_IMPL =
             "com.android.systemui.statusbar.policy.KeyguardMonitorImpl";
@@ -86,6 +85,12 @@ public class SysUiKeyguardStateMonitor implements BroadcastSubReceiver {
                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_IMPRINT_MODE, "DEFAULT"));
 
         createHooks();
+
+        SysUiManagers.BroadcastMediator.subscribe(this,
+                Intent.ACTION_SCREEN_ON,
+                Intent.ACTION_SCREEN_OFF,
+                GravityBoxSettings.ACTION_PREF_POWER_CHANGED,
+                GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
     }
 
     public void setMediator(Object mediator) {

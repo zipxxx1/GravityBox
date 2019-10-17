@@ -27,6 +27,9 @@ import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
 
+import java.util.Collections;
+import java.util.List;
+
 public class ExpandedDesktopTile extends QsTile {
     public static final class Service extends QsTileServiceBase {
         static final String KEY = ExpandedDesktopTile.class.getSimpleName()+"$Service";
@@ -81,6 +84,11 @@ public class ExpandedDesktopTile extends QsTile {
         } catch (NumberFormatException nfe) {
             log(getKey() + ": Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
         }
+    }
+
+    @Override
+    protected List<String> onProvideAdditionalBroadcastListenerActions() {
+        return Collections.singletonList(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
     }
 
     @Override
