@@ -16,7 +16,7 @@ package com.ceco.pie.gravitybox;
 
 import android.content.Context;
 
-import com.ceco.pie.gravitybox.managers.TunerManager;
+import com.ceco.pie.gravitybox.managers.SysUiTunerManager;
 import com.ceco.pie.gravitybox.tuner.TunerMainActivity;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ class SystemWideResources {
         // add overriden items from Advanced tuning if applicable
         if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
                 !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
-            TunerManager.addUserItemKeysToList(TunerManager.Category.FRAMEWORK, resourceNames);
+            SysUiTunerManager.addUserItemKeysToList(SysUiTunerManager.Category.FRAMEWORK, resourceNames);
         }
         sResourceProxy.addInterceptor(new ResourceProxy.Interceptor("android", resourceNames) {
             @Override
@@ -54,7 +54,7 @@ class SystemWideResources {
                 // Advanced tuning has priority
                 if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
                         !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
-                    if (TunerManager.onIntercept(resourceSpec)) {
+                    if (SysUiTunerManager.onIntercept(resourceSpec)) {
                         return true;
                     }
                 }
@@ -119,7 +119,7 @@ class SystemWideResources {
         // add overriden items from Advanced tuning if applicable
         if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
                 !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
-            TunerManager.addUserItemKeysToList(TunerManager.Category.SYSTEMUI, resourceNames);
+            SysUiTunerManager.addUserItemKeysToList(SysUiTunerManager.Category.SYSTEMUI, resourceNames);
         }
         sResourceProxy.addInterceptor(new ResourceProxy.Interceptor(
                 "com.android.systemui",
@@ -132,7 +132,7 @@ class SystemWideResources {
                 // Advanced tuning has priority
                 if (tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_ENABLED, false) &&
                         !tunerPrefs.getBoolean(TunerMainActivity.PREF_KEY_LOCKED, false)) {
-                    if (TunerManager.onIntercept(resourceSpec)) {
+                    if (SysUiTunerManager.onIntercept(resourceSpec)) {
                         return true;
                     }
                 }

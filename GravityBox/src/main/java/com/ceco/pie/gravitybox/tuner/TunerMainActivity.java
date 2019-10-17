@@ -30,7 +30,7 @@ import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.SettingsManager;
 import com.ceco.pie.gravitybox.Utils;
 import com.ceco.pie.gravitybox.WorldReadablePrefs;
-import com.ceco.pie.gravitybox.managers.TunerManager;
+import com.ceco.pie.gravitybox.managers.SysUiTunerManager;
 
 public class TunerMainActivity extends GravityBoxActivity {
     public static final String PREF_KEY_LOCKED = "tunerLocked";
@@ -108,11 +108,11 @@ public class TunerMainActivity extends GravityBoxActivity {
             final String key = pref.getKey();
             if (PREF_KEY_FRAMEWORK.equals(key)) {
                 Intent intent = new Intent(getActivity(), TunerCategoryActivity.class);
-                intent.putExtra(TunerManager.EXTRA_TUNER_CATEGORY, "FRAMEWORK");
+                intent.putExtra(SysUiTunerManager.EXTRA_TUNER_CATEGORY, "FRAMEWORK");
                 startActivity(intent);
             } else if (PREF_KEY_SYSTEMUI.equals(key)) {
                 Intent intent = new Intent(getActivity(), TunerCategoryActivity.class);
-                intent.putExtra(TunerManager.EXTRA_TUNER_CATEGORY, "SYSTEMUI");
+                intent.putExtra(SysUiTunerManager.EXTRA_TUNER_CATEGORY, "SYSTEMUI");
                 startActivity(intent);
             }
             return super.onPreferenceTreeClick(prefScreen, pref);

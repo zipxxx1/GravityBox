@@ -19,7 +19,7 @@ import java.io.File;
 
 import android.os.Build;
 
-import com.ceco.pie.gravitybox.managers.TunerManager;
+import com.ceco.pie.gravitybox.managers.SysUiTunerManager;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
@@ -101,7 +101,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookLoadPackage
             return;
         }
 
-        TunerManager.initUserItemsCache(tunerPrefs);
+        SysUiTunerManager.initUserItemsCache(tunerPrefs);
         SystemWideResources.initResources(prefs, tunerPrefs);
 
         // Common

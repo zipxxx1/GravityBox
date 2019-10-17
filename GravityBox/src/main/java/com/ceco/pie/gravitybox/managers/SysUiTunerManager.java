@@ -39,7 +39,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class TunerManager implements BroadcastSubReceiver {
+public class SysUiTunerManager implements BroadcastSubReceiver {
     public static final String TAG="GB:TunerManager";
     private static boolean DEBUG = false;
 
@@ -58,7 +58,7 @@ public class TunerManager implements BroadcastSubReceiver {
 
     private Context mContext;
 
-    TunerManager(Context context) {
+    SysUiTunerManager(Context context) {
         mContext = context;
 
         updateTrialCountdown();

@@ -1,6 +1,6 @@
 package com.ceco.pie.gravitybox.tuner;
 
-import com.ceco.pie.gravitybox.managers.TunerManager;
+import com.ceco.pie.gravitybox.managers.SysUiTunerManager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -120,7 +120,7 @@ public class TunerBlacklist {
             "watch_heap_limit"
     );
 
-    public static boolean isBlacklisted(TunerManager.Category category, String key) {
+    public static boolean isBlacklisted(SysUiTunerManager.Category category, String key) {
         switch (category) {
             case FRAMEWORK: return sFramework.contains(key);
             case SYSTEMUI: return sSystemUi.contains(key);

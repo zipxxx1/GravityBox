@@ -15,7 +15,7 @@
 package com.ceco.pie.gravitybox;
 
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
-import com.ceco.pie.gravitybox.managers.TunerManager;
+import com.ceco.pie.gravitybox.managers.SysUiTunerManager;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -220,7 +220,7 @@ public class SystemPropertyProvider {
                                     data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
                                             SETTING_UNC_TRIAL_COUNTDOWN, 100));
                                     data.putInt("tunerTrialCountdown", Settings.System.getInt(cr,
-                                            TunerManager.SETTING_TUNER_TRIAL_COUNTDOWN, 100));
+                                            SysUiTunerManager.SETTING_TUNER_TRIAL_COUNTDOWN, 100));
                                     data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
                                     data.putBoolean("supportsFingerprint", Utils.supportsFingerprint(context));
                                     if (SysUiManagers.FingerprintLauncher != null) {
