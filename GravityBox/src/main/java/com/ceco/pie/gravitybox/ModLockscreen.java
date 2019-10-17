@@ -22,7 +22,7 @@ import java.util.Set;
 import com.ceco.pie.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.pie.gravitybox.ledcontrol.QuietHours;
 import com.ceco.pie.gravitybox.ledcontrol.QuietHoursActivity;
-import com.ceco.pie.gravitybox.managers.AppLauncher;
+import com.ceco.pie.gravitybox.managers.SysUiAppLauncher;
 import com.ceco.pie.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 
@@ -101,8 +101,8 @@ public class ModLockscreen {
     private static List<TextView> mCarrierTextViews = new ArrayList<>();
     private static KeyguardStateMonitor mKgMonitor;
     private static LockscreenPinScrambler mPinScrambler;
-    private static AppLauncher.AppInfo mLeftAction;
-    private static AppLauncher.AppInfo mRightAction;
+    private static SysUiAppLauncher.AppInfo mLeftAction;
+    private static SysUiAppLauncher.AppInfo mRightAction;
     private static Drawable mLeftActionDrawableOrig;
     private static Drawable mRightActionDrawableOrig;
     private static boolean mLeftActionHidden;

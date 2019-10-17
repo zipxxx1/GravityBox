@@ -61,7 +61,7 @@ import android.view.ViewConfiguration;
 import android.widget.Toast;
 
 import com.ceco.pie.gravitybox.ledcontrol.QuietHoursActivity;
-import com.ceco.pie.gravitybox.managers.AppLauncher;
+import com.ceco.pie.gravitybox.managers.SysUiAppLauncher;
 import com.ceco.pie.gravitybox.shortcuts.AShortcut;
 import com.ceco.pie.gravitybox.shortcuts.RingerModeShortcut;
 import com.ceco.pie.gravitybox.shortcuts.ShortcutActivity;
@@ -1444,7 +1444,7 @@ public class ModHwKeys {
 
     private static void showAppLauncher() {
         try {
-            mContext.sendBroadcast(new Intent(AppLauncher.ACTION_SHOW_APP_LAUCNHER));
+            mContext.sendBroadcast(new Intent(SysUiAppLauncher.ACTION_SHOW_APP_LAUCNHER));
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error showing AppLauncher: ", t);
         }

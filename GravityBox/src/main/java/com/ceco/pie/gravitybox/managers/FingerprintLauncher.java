@@ -29,7 +29,7 @@ import com.ceco.pie.gravitybox.BroadcastSubReceiver;
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.Utils;
-import com.ceco.pie.gravitybox.managers.AppLauncher.AppInfo;
+import com.ceco.pie.gravitybox.managers.SysUiAppLauncher.AppInfo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

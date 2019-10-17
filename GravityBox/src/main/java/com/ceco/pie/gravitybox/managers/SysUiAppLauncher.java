@@ -63,7 +63,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AppLauncher implements BroadcastSubReceiver, ConfigurationChangeMonitor.ConfigChangeListener {
+public class SysUiAppLauncher implements BroadcastSubReceiver, ConfigurationChangeMonitor.ConfigChangeListener {
     private static final String TAG = "GB:AppLauncher";
     private static final boolean DEBUG = false;
 
@@ -108,7 +108,7 @@ public class AppLauncher implements BroadcastSubReceiver, ConfigurationChangeMon
         }
     };
 
-    public AppLauncher(Context context, XSharedPreferences prefs) throws Throwable {
+    public SysUiAppLauncher(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
         mResources = mContext.getResources();
         mPrefs = prefs;
