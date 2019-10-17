@@ -14,7 +14,7 @@
  */
 package com.ceco.pie.gravitybox.visualizer;
 
-import com.ceco.pie.gravitybox.managers.BatteryInfoManager.BatteryData;
+import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;

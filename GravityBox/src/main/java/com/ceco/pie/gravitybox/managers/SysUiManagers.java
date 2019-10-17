@@ -31,7 +31,7 @@ import android.location.LocationManager;
 public class SysUiManagers {
     private static final String TAG = "GB:SysUiManagers";
 
-    public static BatteryInfoManager BatteryInfoManager;
+    public static SysUiBatteryInfoManager BatteryInfoManager;
     public static StatusBarIconManager IconManager;
     public static StatusbarQuietHoursManager QuietHoursManager;
     public static AppLauncher AppLauncher;
@@ -59,7 +59,7 @@ public class SysUiManagers {
         createKeyguardMonitor(context, prefs);
 
         try {
-            BatteryInfoManager = new BatteryInfoManager(context, prefs, qhPrefs);
+            BatteryInfoManager = new SysUiBatteryInfoManager(context, prefs, qhPrefs);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error creating BatteryInfoManager: ", t);
         }
@@ -139,7 +139,7 @@ public class SysUiManagers {
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOW_BATTERY_WARNING_POLICY_CHANGED);
-        intentFilter.addAction(com.ceco.pie.gravitybox.managers.BatteryInfoManager.ACTION_POWER_SAVE_MODE_CHANGING);
+        intentFilter.addAction(SysUiBatteryInfoManager.ACTION_POWER_SAVE_MODE_CHANGING);
 
         // quiet hours manager
         intentFilter.addAction(Intent.ACTION_TIME_TICK);

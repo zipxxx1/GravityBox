@@ -19,8 +19,8 @@ package com.ceco.pie.gravitybox;
 import com.ceco.pie.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.pie.gravitybox.managers.StatusBarIconManager;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
-import com.ceco.pie.gravitybox.managers.BatteryInfoManager.BatteryData;
-import com.ceco.pie.gravitybox.managers.BatteryInfoManager.BatteryStatusListener;
+import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
+import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager.BatteryStatusListener;
 import com.ceco.pie.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.pie.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 

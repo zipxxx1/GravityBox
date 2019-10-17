@@ -23,9 +23,9 @@ import com.ceco.pie.gravitybox.GravityBoxSettings;
 import com.ceco.pie.gravitybox.ModLockscreen;
 import com.ceco.pie.gravitybox.ModStatusBar;
 import com.ceco.pie.gravitybox.ModStatusBar.StatusBarStateChangedListener;
-import com.ceco.pie.gravitybox.managers.BatteryInfoManager;
+import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
-import com.ceco.pie.gravitybox.managers.BatteryInfoManager.BatteryData;
+import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
 
 import android.content.Context;
 import android.content.Intent;
@@ -46,7 +46,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class VisualizerController implements StatusBarStateChangedListener,
-                                             BatteryInfoManager.BatteryStatusListener,
+                                             SysUiBatteryInfoManager.BatteryStatusListener,
                                              BroadcastSubReceiver,
                                              Palette.PaletteAsyncListener,
                                              Visualizer.OnDataCaptureListener {
