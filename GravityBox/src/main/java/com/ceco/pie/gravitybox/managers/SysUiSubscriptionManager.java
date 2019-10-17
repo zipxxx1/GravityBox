@@ -46,7 +46,7 @@ import android.widget.Toast;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class SubscriptionManager implements BroadcastSubReceiver {
+public class SysUiSubscriptionManager implements BroadcastSubReceiver {
     public static final String TAG="GB:SubscriptionManager";
     private static boolean DEBUG = false;
 
@@ -76,7 +76,7 @@ public class SubscriptionManager implements BroadcastSubReceiver {
     private H mHandler;
     private android.telephony.SubscriptionManager mSubMgr;
 
-    protected SubscriptionManager(Context context) {
+    protected SysUiSubscriptionManager(Context context) {
         mContext = context;
         mHandler = new H();
         mSubMgr = android.telephony.SubscriptionManager.from(mContext);

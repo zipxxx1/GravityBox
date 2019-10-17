@@ -39,7 +39,7 @@ public class SysUiManagers {
     public static SysUiFingerprintLauncher FingerprintLauncher;
     public static SysUiNotificationDataMonitor NotifDataMonitor;
     public static SysUiGpsStatusMonitor GpsMonitor;
-    public static SubscriptionManager SubscriptionMgr;
+    public static SysUiSubscriptionManager SubscriptionMgr;
     public static TunerManager TunerMgr;
     public static PackageManager PackageMgr;
     public static SysUiConfigChangeMonitor ConfigChangeMonitor;
@@ -109,7 +109,7 @@ public class SysUiManagers {
 
         if (PhoneWrapper.hasMsimSupport()) {
             try {
-                SubscriptionMgr = new SubscriptionManager(context);
+                SubscriptionMgr = new SysUiSubscriptionManager(context);
             } catch (Throwable t) {
                 GravityBox.log(TAG, "Error creating SubscriptionManager: ", t);
             }
@@ -171,8 +171,8 @@ public class SysUiManagers {
 
         // SubscriptionManager
         if (SubscriptionMgr != null) {
-            intentFilter.addAction(SubscriptionManager.ACTION_CHANGE_DEFAULT_SIM_SLOT);
-            intentFilter.addAction(SubscriptionManager.ACTION_GET_DEFAULT_SIM_SLOT);
+            intentFilter.addAction(SysUiSubscriptionManager.ACTION_CHANGE_DEFAULT_SIM_SLOT);
+            intentFilter.addAction(SysUiSubscriptionManager.ACTION_GET_DEFAULT_SIM_SLOT);
         }
 
         // TunerManager
