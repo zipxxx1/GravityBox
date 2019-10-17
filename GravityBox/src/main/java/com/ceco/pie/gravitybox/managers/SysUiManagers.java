@@ -32,7 +32,7 @@ public class SysUiManagers {
     private static final String TAG = "GB:SysUiManagers";
 
     public static SysUiBatteryInfoManager BatteryInfoManager;
-    public static StatusBarIconManager IconManager;
+    public static SysUiStatusBarIconManager IconManager;
     public static StatusbarQuietHoursManager QuietHoursManager;
     public static SysUiAppLauncher AppLauncher;
     public static KeyguardStateMonitor KeyguardMonitor;
@@ -65,7 +65,7 @@ public class SysUiManagers {
         }
 
         try {
-            IconManager = new StatusBarIconManager(context);
+            IconManager = new SysUiStatusBarIconManager(context);
         } catch (Throwable t) {
             GravityBox.log(TAG, "Error creating IconManager: ", t);
         }

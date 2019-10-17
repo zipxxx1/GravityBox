@@ -27,7 +27,7 @@ import android.provider.Settings;
 import com.ceco.pie.gravitybox.GravityBox;
 import com.ceco.pie.gravitybox.Utils;
 
-public class StatusBarIconManager {
+public class SysUiStatusBarIconManager {
     private static final String TAG = "GB:StatusBarIconManager";
     private static final boolean DEBUG = false;
 
@@ -57,7 +57,7 @@ public class StatusBarIconManager {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    protected StatusBarIconManager(Context context) {
+    protected SysUiStatusBarIconManager(Context context) {
         mContext = context;
         initColorInfo();
         mListeners = new ArrayList<>();

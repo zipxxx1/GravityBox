@@ -17,12 +17,12 @@
 package com.ceco.pie.gravitybox;
 
 import com.ceco.pie.gravitybox.ModStatusBar.ContainerType;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager;
+import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
 import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager.BatteryStatusListener;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager.ColorInfo;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager.IconManagerListener;
+import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager.ColorInfo;
+import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager.IconManagerListener;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -340,11 +340,11 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
 
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0 &&
+        if ((flags & SysUiStatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0 &&
                 mController.getContainerType() != ContainerType.HEADER) {
             setColor(colorInfo.iconTint);
         }
-        if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
+        if ((flags & SysUiStatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
             setAlpha(colorInfo.alphaTextAndBattery);
         }
     }

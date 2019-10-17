@@ -23,9 +23,9 @@ import java.io.IOException;
 
 import com.ceco.pie.gravitybox.ProgressBarController.Mode;
 import com.ceco.pie.gravitybox.ProgressBarController.ProgressInfo;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager.ColorInfo;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager.IconManagerListener;
+import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager;
+import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager.ColorInfo;
+import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager.IconManagerListener;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -268,13 +268,13 @@ public abstract class TrafficMeterAbstract extends TextView
 
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+        if ((flags & SysUiStatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
             setTextColor(colorInfo.iconTint);
         }
-        if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
+        if ((flags & SysUiStatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
             setAlpha(colorInfo.alphaSignalCluster);
         }
-        if ((flags & StatusBarIconManager.FLAG_HEADS_UP_VISIBILITY_CHANGED) != 0) {
+        if ((flags & SysUiStatusBarIconManager.FLAG_HEADS_UP_VISIBILITY_CHANGED) != 0) {
             setHiddenByHeadsUp(colorInfo.headsUpVisible &&
                     getTrafficMeterPosition() != GravityBoxSettings.DT_POSITION_RIGHT);
         }

@@ -24,12 +24,12 @@ import com.ceco.pie.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.pie.gravitybox.ModStatusBar.StatusBarStateChangedListener;
 import com.ceco.pie.gravitybox.ProgressBarController.Mode;
 import com.ceco.pie.gravitybox.ProgressBarController.ProgressInfo;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager;
+import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager.BatteryData;
 import com.ceco.pie.gravitybox.managers.SysUiBatteryInfoManager.BatteryStatusListener;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager.ColorInfo;
-import com.ceco.pie.gravitybox.managers.StatusBarIconManager.IconManagerListener;
+import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager.ColorInfo;
+import com.ceco.pie.gravitybox.managers.SysUiStatusBarIconManager.IconManagerListener;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -276,10 +276,10 @@ public class BatteryBarView extends View implements IconManagerListener,
 
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
+        if ((flags & SysUiStatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
             setAlpha(colorInfo.alphaTextAndBattery);
         }
-        if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+        if ((flags & SysUiStatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
             mTintColor = colorInfo.iconTint;
             update();
         }
