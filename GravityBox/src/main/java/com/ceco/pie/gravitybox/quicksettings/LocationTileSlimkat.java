@@ -30,12 +30,12 @@ import java.util.List;
 
 import com.ceco.pie.gravitybox.R;
 import com.ceco.pie.gravitybox.ModStatusBar;
-import com.ceco.pie.gravitybox.managers.GpsStatusMonitor;
+import com.ceco.pie.gravitybox.managers.SysUiGpsStatusMonitor;
 import com.ceco.pie.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
 
-public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.Listener {
+public class LocationTileSlimkat extends QsTile implements SysUiGpsStatusMonitor.Listener {
     public static final class Service extends QsTileServiceBase {
         static final String KEY = LocationTileSlimkat.class.getSimpleName()+"$Service";
     }
@@ -168,7 +168,7 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
                 mState.icon = iconFromResId(R.drawable.ic_qs_location_off);
                 break;
         }
-        mState.label = GpsStatusMonitor.getModeLabel(mContext, locationMode);
+        mState.label = SysUiGpsStatusMonitor.getModeLabel(mContext, locationMode);
 
         super.handleUpdateState(state, arg);
     }
@@ -243,12 +243,12 @@ public class LocationTileSlimkat extends QsTile implements GpsStatusMonitor.List
             mAdapter = new QsDetailItemsListAdapter<Integer>(context, mLocationList) {
                 @Override
                 protected CharSequence getListItemText(Integer item) {
-                    return GpsStatusMonitor.getModeLabel(context, item);
+                    return SysUiGpsStatusMonitor.getModeLabel(context, item);
                 }
             };
             mDetails = QsDetailItemsList.create(context, parent);
             mDetails.setEmptyState(R.drawable.ic_qs_location_off,
-                    GpsStatusMonitor.getModeLabel(context, Settings.Secure.LOCATION_MODE_OFF));
+                    SysUiGpsStatusMonitor.getModeLabel(context, Settings.Secure.LOCATION_MODE_OFF));
             mDetails.setAdapter(mAdapter);
 
             final ListView list = mDetails.getListView();

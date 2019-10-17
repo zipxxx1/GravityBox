@@ -33,7 +33,7 @@ import android.provider.Settings;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class GpsStatusMonitor implements BroadcastSubReceiver {
+public class SysUiGpsStatusMonitor implements BroadcastSubReceiver {
     public static final String TAG="GB:GpsStatusMonitor";
     private static boolean DEBUG = false;
 
@@ -76,7 +76,7 @@ public class GpsStatusMonitor implements BroadcastSubReceiver {
         }
     };
 
-    protected GpsStatusMonitor(Context context) {
+    protected SysUiGpsStatusMonitor(Context context) {
         if (context == null)
             throw new IllegalArgumentException("Context cannot be null");
 
