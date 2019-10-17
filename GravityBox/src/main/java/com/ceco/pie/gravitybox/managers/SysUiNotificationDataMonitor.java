@@ -28,7 +28,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class NotificationDataMonitor {
+public class SysUiNotificationDataMonitor {
     public static final String TAG="GB:NotificationDataMonitor";
     private static boolean DEBUG = false;
 
@@ -47,7 +47,7 @@ public class NotificationDataMonitor {
     private Object mNotifData;
     private final List<Listener> mListeners = new ArrayList<>();
 
-    protected NotificationDataMonitor(Context context) {
+    protected SysUiNotificationDataMonitor(Context context) {
         if (context == null)
             throw new IllegalArgumentException("Context cannot be null");
 
